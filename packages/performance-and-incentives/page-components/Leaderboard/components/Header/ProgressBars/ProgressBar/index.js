@@ -1,11 +1,9 @@
 import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
-import useGetUserProgress from './useGetUserProgress';
 
 const TARGET_WIDTH = 75;
 const INCENTIVE_WIDTH = 25;
@@ -31,32 +29,15 @@ const setUTCtoIST = (timestamp) => {
 	return dateIST;
 };
 
-function ProgreeBar() {
-	const { progressData } = useGetUserProgress();
-
-	const { start_date, end_date, end_point, date_range_points_achieved, date_points_achieved } = progressData || {};
+function ProgressBar({ progressData = {} }) {
+	const { start_date, end_date, end_point, score_achieved_till_now, score_achieved_today } = progressData || {};
 
 	const END_DATE = setUTCtoIST(end_date);
 
-	const progress = getProgress({ target: end_point, points: date_range_points_achieved });
-
-	if (isEmpty(progressData)) return null;
+	const progress = getProgress({ target: end_point, points: score_achieved_till_now });
 
 	return (
 		<div className={styles.container}>
-			<div>
-				<p className={styles.points_till_now}>
-					This Month:
-					{' '}
-					<b>{date_range_points_achieved}</b>
-				</p>
-
-				<div className={styles.today_points}>
-					Today:
-					{' '}
-					<b>{date_points_achieved}</b>
-				</div>
-			</div>
 
 			<div>
 				<div className={styles.progress_header}>
@@ -68,7 +49,12 @@ function ProgreeBar() {
 						}) : ''}
 					</div>
 
-					<div className={styles.heading}>Score</div>
+					<div className={styles.heading}>
+						Today:
+						{' '}
+						<b>{score_achieved_today}</b>
+
+					</div>
 
 					<div className={styles.date}>
 						{END_DATE ? formatDate({
@@ -84,7 +70,7 @@ function ProgreeBar() {
 						<p>
 							Provisional till now:
 							{' '}
-							<b>{date_range_points_achieved}</b>
+							<b>{Math.round(score_achieved_till_now)}</b>
 						</p>
 					)}
 					>
@@ -92,11 +78,11 @@ function ProgreeBar() {
 							className={styles.progress}
 							style={{
 								width      : `${progress}%`,
-								background : date_range_points_achieved >= end_point ? '#849e4c' : '#f68b21',
+								background : score_achieved_till_now >= end_point ? '#ABCD62' : '#f68b21',
 							}}
 						/>
 						<div className={styles.target_line} />
-						<div className={styles.target}>{end_point}</div>
+						<div className={styles.target}>{Math.round(end_point)}</div>
 					</Tooltip>
 				</div>
 			</div>
@@ -104,4 +90,4 @@ function ProgreeBar() {
 	);
 }
 
-export default React.memo(ProgreeBar);
+export default React.memo(ProgressBar);

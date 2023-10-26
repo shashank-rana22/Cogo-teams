@@ -31,13 +31,13 @@ function getFirstAndLastDateOfMonth({ incentiveMonth }) {
 	if (month === currentMonth.toString() && year === currentYear.toString()) {
 		return {
 			firstDate : new Date(currentYear, currentMonth, OFFSET),
-			lastDate  : new Date(),
+			lastDate  : undefined,
 		};
 	}
 
-	const firstDate = new Date(year, month, OFFSET);
+	const firstDate = new Date(Number(year), Number(month), OFFSET);
 
-	const nextMonth = new Date(year, month + OFFSET, OFFSET);
+	const nextMonth = new Date(Number(year), Number(month) + OFFSET, OFFSET);
 	const lastDate = new Date(nextMonth.getTime() - OFFSET);
 
 	return { firstDate, lastDate };
