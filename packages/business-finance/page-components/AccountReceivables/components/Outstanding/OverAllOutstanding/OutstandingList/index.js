@@ -298,14 +298,19 @@ function OutstandingList({
 									</Tooltip>
 								) : null
 						}
-						<div className={styles.download_icon_div}>
-							<IcMProvision
-								onClick={() => { apiTrigger(refetch); }}
-								height={16}
-								width={16}
-								fill="#FFA500"
-							/>
-						</div>
+						{
+							(entityCode !== '101_301')
+								? (
+									<div className={styles.download_icon_div}>
+										<IcMProvision
+											onClick={() => { apiTrigger(refetch); }}
+											height={16}
+											width={16}
+											fill="#FFA500"
+										/>
+									</div>
+								) : null
+						}
 						{
 							(item?.taggedState && entityCode !== '101_301')
 								? (<Pill size="md" color="green">{startCase(item?.taggedState)}</Pill>) : null

@@ -7183,7 +7183,7 @@ const partner = {
 			service_name : 'sage',
 		},
 		{
-			api         : 'payments/outstanding/update-account-taggings',
+			api         : 'update_payments_outstanding_account_tagging',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
@@ -9294,6 +9294,12 @@ const partner = {
 		},
 		{
 			api         : 'get_payments_outstanding_by_customer_v2',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'update_payments_outstanding_by_customer_v2',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',

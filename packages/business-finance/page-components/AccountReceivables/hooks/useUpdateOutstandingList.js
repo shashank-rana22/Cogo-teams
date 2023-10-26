@@ -4,9 +4,9 @@ import { useRequestBf } from '@cogoport/request';
 const useUpdateOutstandingList = ({ item = {} }) => {
 	const [{ loading }, trigger] = useRequestBf({
 
-		url    : 'payments/outstanding/customer-v2',
-		method : 'put',
-		// authKey : 'update_payments_outstanding_account_tagging',
+		url     : 'payments/outstanding/customer-v2',
+		method  : 'put',
+		authKey : 'update_payments_outstanding_by_customer_v2',
 	}, { manual: true });
 	const apiTrigger = async (refetch) => {
 		try {
