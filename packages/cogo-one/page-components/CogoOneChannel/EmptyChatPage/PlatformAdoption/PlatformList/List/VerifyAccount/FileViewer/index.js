@@ -5,6 +5,17 @@ import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
+const getFileType = (url) => {
+	if (url.endsWith('.pdf')) {
+		return 'application/pdf';
+	} if (url.endsWith('.csv')) {
+		return 'text/csv';
+	} if (url.endsWith('.xlsx')) {
+		return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+	}
+	return '';
+};
+
 function FileViewer({
 	verifyAccount = {}, documentOptions = [], selectDoc = {}, setSelectDoc = () => {},
 	hasDocument = false,
@@ -26,6 +37,8 @@ function FileViewer({
 			closable : true,
 		};
 	});
+
+	const fileType = getFileType(docUrl);
 
 	useEffect(() => {
 		if (!hasDocument) {
@@ -67,6 +80,7 @@ function FileViewer({
 						width={showAccountDetails ? 734 : 765}
 						height={showAccountDetails ? 460 : 408}
 						title="PDF document"
+						type={fileType}
 					/>
 				</div>
 			)}

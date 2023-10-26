@@ -35,7 +35,7 @@ function VerifyAccount({
 	const DOCUMENT_OPTIONS = useMemo(() => (accountData || []).map((itm) => ({
 		label : startCase(itm?.document_type),
 		value : itm?.document_type,
-		url   : itm?.document_url,
+		url   : itm?.image_url,
 	})), [accountData]);
 
 	const [selectDoc, setSelectDoc] = useState({

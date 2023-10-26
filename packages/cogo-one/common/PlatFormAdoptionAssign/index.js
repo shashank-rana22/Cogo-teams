@@ -84,7 +84,7 @@ function PlatFormAdoptionAssign({ data = {} }) {
 							params={{
 								filters: {
 									status     : 'active',
-									agent_type : ['supply', 'supply_support'],
+									agent_type : ['support', 'support_supply'],
 								},
 								sort_by: 'agent_type',
 							}}
