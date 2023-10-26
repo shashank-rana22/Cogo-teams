@@ -83,6 +83,7 @@ function PlatformAdoption({
 						setActiveTab={setActiveTab}
 						setVerifyAccount={setVerifyAccount}
 						verifyAccount={verifyAccount}
+						mailProps={mailProps}
 					/>
 				</>
 			)}

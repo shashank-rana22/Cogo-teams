@@ -10,7 +10,7 @@ import useVerificationDocument from '../../../../../../hooks/useVerificationDocu
 
 import AccountAllocateCard from './AccountAllocateCard';
 import CallDetails from './CallDetails';
-// import DemoCard from './DemoCard';
+import DemoCard from './DemoCard';
 import KycVerifyCard from './KycVerifyCard';
 import OrganicCustomer from './OrganicCustomer';
 import RejectAccount from './RejectModal';
@@ -22,7 +22,7 @@ import VerifyAccount from './VerifyAccount';
 const formatList = ({ list = [], type = '' }) => (list || []).filter((item) => type === item?.request_type);
 
 function List({
-	setActiveTab = () => {},
+	setActiveTab = () => {}, mailProps = {},
 	verifyAccount = {}, setVerifyAccount = () => {},
 	list = [], onboardingRequest = () => {},
 }) {
@@ -61,6 +61,7 @@ function List({
 	const organincList = formatList({ list, type: 'onboarded_customer' });
 	const missedList = formatList({ list, type: 'missed_call' });
 	const allocationList = formatList({ list, type: 'allocation_request' });
+	const demoList = formatList({ list, type: 'demo_request' });
 
 	const handlePlaceCall = ({ number, code, userName, leadUserId, pocId }) => {
 		if (!number) {
@@ -166,13 +167,21 @@ function List({
 				/>
 			) : null}
 
-			{/* <DemoCard
-				itm={itm}
-				mailProps={mailProps}
-				setScheduleDemo={setScheduleDemo}
-			/> */}
+			{!isEmpty(demoList) ? (
+				<DemoCard
+					list={demoList}
+					mailProps={mailProps}
+					setScheduleDemo={setScheduleDemo}
+				/>
 
-			<ScheduleDemo scheduleDemo={scheduleDemo} setScheduleDemo={setScheduleDemo} />
+			) : null}
+
+			<ScheduleDemo
+				scheduleDemo={scheduleDemo}
+				setScheduleDemo={setScheduleDemo}
+				demoList={demoList}
+				onboardingRequest={onboardingRequest}
+			/>
 			<VerifyAccount
 				setVerifyAccount={setVerifyAccount}
 				verifyAccount={verifyAccount}

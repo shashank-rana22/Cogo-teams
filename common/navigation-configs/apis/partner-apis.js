@@ -13315,6 +13315,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'assign_onboarding_agent',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_spot_searches',
 			access_type  : 'private',
 			feature      : 'rate_requests',

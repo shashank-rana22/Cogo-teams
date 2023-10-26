@@ -1,12 +1,11 @@
 import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import {
-	IcAJobCard,
-	IcMOverflowDot, IcMInfo, IcMDocument,
-} from '@cogoport/icons-react';
+import { IcAJobCard, IcMDocument } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
+
+import PlatFormAdoptionAssign from '../../../../../../../common/PlatFormAdoptionAssign';
 
 import RejectVerification from './RejectAccountModal';
 import styles from './styles.module.css';
@@ -17,8 +16,8 @@ function AccountAllocateCard({
 }) {
 	return (list || []).map((item) => {
 		const {
-			id = '', request_type = '', requesting_agent = {}, current_stakeholder = {},
-			created_at = '', last_transaction = {}, metadata = {}, organization = {},
+			id = '', request_type = '', requesting_agent = {}, current_stakeholder = {}, escalation_cycle = '',
+			created_at = '', last_transaction = {}, metadata = {}, organization = {}, serial_id = '',
 		} = item || {};
 		const { business_name = '' } = organization || {};
 		const { updated_at = '', documents = [] } = last_transaction || {};
@@ -31,27 +30,44 @@ function AccountAllocateCard({
 			<React.Fragment key={id}>
 				<div className={styles.card}>
 					<div className={styles.header_info}>
-						<div className={styles.user_info}>
-							<IcAJobCard />
-							<div className={styles.org_details}>
-								<Tooltip
-									content="Cogoport private logistix limited"
-									placement="top"
+						<div className={styles.cycle_section}>
+							<div className={styles.serail_id}>
+								ID :
+								{' '}
+								{serial_id}
+							</div>
+							{escalation_cycle ? (
+								<div className={cl`${styles.cycle} ${escalation_cycle === 'warning'
+									? styles.warning : styles.escalate}`}
 								>
-									<div className={styles.business_name}>
-										{startCase(request_type) || '-'}
-									</div>
-								</Tooltip>
-								<div className={styles.lower_section}>
-									<div className={styles.trade_name}>
-										{startCase(business_name) || '-'}
+									{startCase(escalation_cycle)}
+								</div>
+							) : null}
+						</div>
+						<div className={styles.wrap}>
+							<div className={styles.user_info}>
+								<IcAJobCard />
+								<div className={styles.org_details}>
+									<Tooltip
+										content="Cogoport private logistix limited"
+										placement="top"
+									>
+										<div className={styles.business_name}>
+											{startCase(request_type) || '-'}
+										</div>
+									</Tooltip>
+									<div className={styles.lower_section}>
+										<div className={styles.trade_name}>
+											{startCase(business_name) || '-'}
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div className={styles.action}>
-							<IcMInfo />
-							<IcMOverflowDot />
+							<PlatFormAdoptionAssign data={item} type="allocation_request" />
+							{/* <div className={styles.action}>
+								<IcMInfo />
+								<IcMOverflowDot />
+							</div> */}
 						</div>
 					</div>
 					<div className={styles.body_info}>

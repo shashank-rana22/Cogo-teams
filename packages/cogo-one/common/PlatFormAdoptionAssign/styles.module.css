@@ -1,0 +1,38 @@
+.action {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 15%;
+}
+
+.info_icon {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}
+
+.dot {
+	display: flex;
+	align-items: center;
+}
+
+.dot_icon {
+	width: 18px;
+	height: 18px;
+	margin-left: 4px;
+	cursor: pointer;
+}
+
+.agent_label {
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.lower_label {
+	font-size: 12px;
+	color: #838080;
+}
+
+.async_select {
+	width: 65%;
+}

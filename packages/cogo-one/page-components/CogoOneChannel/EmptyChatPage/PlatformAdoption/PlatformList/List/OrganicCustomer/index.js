@@ -1,15 +1,19 @@
-import { Tooltip, Button } from '@cogoport/components';
-import { IcMOverflowDot, IcMFtick, IcMCrossInCircle, IcMCalendar, IcMCall } from '@cogoport/icons-react';
+import { Tooltip, Button, cl } from '@cogoport/components';
+import { IcMFtick, IcMCrossInCircle, IcMCalendar, IcMCall } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import AgentAvatar from '../../../../../../../common/AgentAvatar';
+import PlatFormAdoptionAssign from '../../../../../../../common/PlatFormAdoptionAssign';
 import { formatAccountType } from '../../../../../../../utils/platformAdoption';
 
 import styles from './styles.module.css';
 
 function OrganicCustomer({ list = [], setScheduleDemo = () => {}, handlePlaceCall = () => {} }) {
 	return (list || []).map((item) => {
-		const { request_type = '', id = '', user = {}, organization = {}, intro_call = {} } = item || {};
+		const {
+			request_type = '', id = '', user = {}, organization = {}, intro_call = {},
+			serial_id = '', escalation_cycle = '',
+		} = item || {};
 		const {
 			name = '', mobile_country_code = '', mobile_number = '', lead_user_id = '',
 			id: pocId = '',
@@ -23,29 +27,46 @@ function OrganicCustomer({ list = [], setScheduleDemo = () => {}, handlePlaceCal
 		return (
 			<div className={styles.card} key={id}>
 				<div className={styles.header_info}>
-					<div className={styles.user_info}>
-						<AgentAvatar text={business_name || '#'} />
-						<div className={styles.org_details}>
-							<Tooltip
-								content="Cogoport private logistix limited"
-								placement="top"
+					<div className={styles.cycle_section}>
+						<div className={styles.serail_id}>
+							ID :
+							{' '}
+							{serial_id}
+						</div>
+						{escalation_cycle ? (
+							<div className={cl`${styles.cycle} ${escalation_cycle === 'warning'
+								? styles.warning : styles.escalate}`}
 							>
-								<div className={styles.business_name}>
-									{startCase(request_type) || '-'}
-								</div>
-							</Tooltip>
-							<div className={styles.lower_section}>
-								<div className={styles.trade_name}>
-									{startCase(name) || '-'}
-								</div>
-								<div className={styles.account_type}>
-									{formatAccountType({ tags })?.[account_type]?.shortName}
+								{startCase(escalation_cycle)}
+							</div>
+						) : null}
+					</div>
+					<div className={styles.wrap}>
+						<div className={styles.user_info}>
+							<AgentAvatar text={business_name || '#'} />
+							<div className={styles.org_details}>
+								<Tooltip
+									content="Cogoport private logistix limited"
+									placement="top"
+								>
+									<div className={styles.business_name}>
+										{startCase(request_type) || '-'}
+									</div>
+								</Tooltip>
+								<div className={styles.lower_section}>
+									<div className={styles.trade_name}>
+										{startCase(name) || '-'}
+									</div>
+									<div className={styles.account_type}>
+										{formatAccountType({ tags })?.[account_type]?.shortName}
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div className={styles.action}>
-						<IcMOverflowDot className={styles.dot_icon} />
+						<PlatFormAdoptionAssign data={item} type="onboarded_customer" />
+						{/* <div className={styles.action}>
+							<IcMOverflowDot className={styles.dot_icon} />
+						</div> */}
 					</div>
 				</div>
 				<div className={styles.body_info}>

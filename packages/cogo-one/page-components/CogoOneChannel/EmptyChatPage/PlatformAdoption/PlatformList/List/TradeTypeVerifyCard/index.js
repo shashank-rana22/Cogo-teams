@@ -1,55 +1,74 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import {
-	IcAHelpingHand011,
-	IcMOverflowDot, IcMInfo, IcMDocument, IcMTimer, IcMFtick,
+	IcAHelpingHand011, IcMDocument, IcMFtick,
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import PlatFormAdoptionAssign from '../../../../../../../common/PlatFormAdoptionAssign';
 import { formatAccountType } from '../../../../../../../utils/platformAdoption';
 
 import styles from './styles.module.css';
 
 function TradeTypeVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 	return (list || []).map((item) => {
-		const { trade_party = {}, request_type = '', id = '', organization = {}, requesting_user = {} } = item || {};
+		const {
+			trade_party = {}, request_type = '', id = '', organization = {}, requesting_user = {},
+			serial_id = '', documents = [], escalation_cycle = '',
+		} = item || {};
 		const {
 			business_name: orgName = '', account_type = '',
 			tags = [],
 		} = organization || {};
-		const { business_name = '', trade_party_type = '', updated_at = '', documents = [] } = trade_party || {};
-		const { data: { name = '' } = {} } = requesting_user || {};
+		const { business_name = '', trade_party_type = '', updated_at = '' } = trade_party || {};
+		const { name = '' } = requesting_user || {};
 
 		return (
 			<div className={styles.card} key={id}>
 				<div className={styles.header_info}>
-					<div className={styles.user_info}>
-						<IcAHelpingHand011 />
-						<div className={styles.org_details}>
-							<Tooltip
-								content={startCase(orgName)}
-								placement="top"
+					<div className={styles.cycle_section}>
+						<div className={styles.serail_id}>
+							ID :
+							{' '}
+							{serial_id}
+						</div>
+						{escalation_cycle ? (
+							<div className={cl`${styles.cycle} ${escalation_cycle === 'warning'
+								? styles.warning : styles.escalate}`}
 							>
-								<div className={styles.business_name}>
-									{startCase(request_type) || '-'}
-								</div>
-							</Tooltip>
-							<div className={styles.lower_section}>
-								<div className={styles.trade_name}>
-									{startCase(orgName) || '-'}
-								</div>
-								<div className={styles.account_type}>
-									{formatAccountType({ tags })?.[account_type]?.shortName}
+								{startCase(escalation_cycle)}
+							</div>
+						) : null}
+					</div>
+					<div className={styles.wrap}>
+						<div className={styles.user_info}>
+							<IcAHelpingHand011 />
+							<div className={styles.org_details}>
+								<Tooltip
+									content={startCase(orgName)}
+									placement="top"
+								>
+									<div className={styles.business_name}>
+										{startCase(request_type) || '-'}
+									</div>
+								</Tooltip>
+								<div className={styles.lower_section}>
+									<div className={styles.trade_name}>
+										{startCase(orgName) || '-'}
+									</div>
+									<div className={styles.account_type}>
+										{formatAccountType({ tags })?.[account_type]?.shortName}
+									</div>
 								</div>
 							</div>
 						</div>
+						<PlatFormAdoptionAssign data={item} type="trade_party_verification" />
+						{/* <div className={styles.action}>
+							<IcMInfo className={styles.info_icon} />
+							<IcMOverflowDot className={styles.dot_icon} />
+						</div> */}
 					</div>
-					<div className={styles.action}>
-						<IcMInfo className={styles.info_icon} />
-						<IcMOverflowDot className={styles.dot_icon} />
-					</div>
-
 				</div>
 				<div className={styles.body_info}>
 					<div className={styles.each_row}>
@@ -99,10 +118,10 @@ function TradeTypeVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 				</div>
 				<div className={styles.line_break} />
 				<div className={styles.footer_info}>
-					<div className={styles.time_left}>
+					{/* <div className={styles.time_left}>
 						<IcMTimer width={20} height={20} fill="#F37166" />
 						10:09 m left
-					</div>
+					</div> */}
 					<div
 						className={styles.verify_button}
 						role="presentation"

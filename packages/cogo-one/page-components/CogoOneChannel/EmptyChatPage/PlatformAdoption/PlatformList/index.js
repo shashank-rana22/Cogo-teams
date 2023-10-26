@@ -4,7 +4,7 @@ import List from './List';
 
 function PlatformList({
 	loading = false, list = [], onboardingRequest = () => {}, setActiveTab = () => {},
-	setVerifyAccount = () => {}, verifyAccount = {},
+	setVerifyAccount = () => {}, verifyAccount = {}, mailProps = {},
 }) {
 	return loading ? <Loader /> : (
 		<List
@@ -13,6 +13,7 @@ function PlatformList({
 			verifyAccount={verifyAccount}
 			list={list}
 			onboardingRequest={onboardingRequest}
+			mailProps={mailProps}
 		/>
 	);
 }

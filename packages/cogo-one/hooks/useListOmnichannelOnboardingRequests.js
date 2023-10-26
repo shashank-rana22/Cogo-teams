@@ -1,5 +1,6 @@
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
+import { useSelector, useDispatch } from '@cogoport/store';
+import { setProfileState } from '@cogoport/store/reducers/profile';
 import { useCallback, useEffect } from 'react';
 
 const DEFAULT_PAGE_LIMIT = 6;
@@ -15,9 +16,12 @@ const getParams = ({ agentId = '', showHistory = false }) => ({
 });
 
 const useListOmnichannelOnboardingRequests = ({ showHistory = false }) => {
-	const { agentId = '' } = useSelector(({ profile }) => ({
-		agentId: profile?.user?.id,
+	const { agentId = '', requestApi = false } = useSelector(({ profile }) => ({
+		agentId    : profile?.user?.id,
+		requestApi : profile?.refetchRequestApi,
 	}));
+
+	const dispatch = useDispatch();
 
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_omnichannel_onboarding_requests',
@@ -31,12 +35,18 @@ const useListOmnichannelOnboardingRequests = ({ showHistory = false }) => {
 			});
 		} catch (error) {
 			console.error('error:', error);
+		} finally {
+			dispatch(
+				setProfileState({
+					refetchDemoApi: false,
+				}),
+			);
 		}
-	}, [trigger, agentId, showHistory]);
+	}, [trigger, agentId, showHistory, dispatch]);
 
 	useEffect(() => {
 		onboardingRequest();
-	}, [onboardingRequest]);
+	}, [onboardingRequest, requestApi]);
 
 	return {
 		loading,
