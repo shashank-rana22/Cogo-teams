@@ -8,8 +8,8 @@ const COUNT_IN_CASE_OF_MULTICONTAINER = 1;
 const DEFAULT_FREE_DAYS_VALUE = 0;
 
 const SCHEDULE_TYPE_MAPPING = {
-	transhipment : 'Trans-shipment',
-	direct       : 'Direct-shipment',
+	transshipment : 'Trans-shipment',
+	direct        : 'Direct-shipment',
 };
 
 const STATIC_COMPARISON_KEY = {

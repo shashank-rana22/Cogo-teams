@@ -9,24 +9,24 @@ import getControls from './getControls';
 import styles from './styles.module.css';
 
 const checkIfFiltersChanged = (defaultValues, finalValues) => {
-	let isApplied = false;
+	let count = 0;
 
 	Object.entries(defaultValues).forEach(([key, value]) => {
 		if (['shipping_line_id', 'airline_id'].includes(key)) {
 			if (!isEmpty(finalValues[key])) {
-				isApplied = true;
+				count += 1;
 			}
 		} else if (key === 'cargo_readiness_date') {
 			if (value && finalValues[key] && !isSameDay(value, finalValues[key])) {
-				isApplied = true;
+				count += 1;
 			}
 		} else if (key in finalValues && (value !== finalValues[key])
 		&& JSON.stringify(value) !== JSON.stringify(finalValues[key])) {
-			isApplied = true;
+			count += 1;
 		}
 	});
 
-	return isApplied;
+	return count;
 };
 
 function Filters({
@@ -60,7 +60,7 @@ function Filters({
 		// transitTime,
 	});
 
-	const filtersApplied = checkIfFiltersChanged(defaultValues, filters);
+	const filtersAppliedCount = checkIfFiltersChanged(defaultValues, filters);
 
 	const onClickButton = () => {
 		setShowFilterModal(true);
@@ -85,8 +85,16 @@ function Filters({
 					style={{ marginRight: 12 }}
 				/>
 				Filters
-				{filtersApplied ? <IcMFtick className={styles.tick_icon} /> : null}
+				{filtersAppliedCount ? <IcMFtick className={styles.tick_icon} /> : null}
 			</Button>
+
+			{filtersAppliedCount ? (
+				<span className={styles.count}>
+					{filtersAppliedCount}
+					{' '}
+					filters applied
+				</span>
+			) : null}
 
 			{showFilterModal ? (
 				<FilterModal

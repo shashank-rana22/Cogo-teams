@@ -1,4 +1,6 @@
 .container {
+	position: relative;
+
 	:global {
 		.ui_button_container.ui_disabled {
 			color: var(--color-secondary-greyscale-4) !important;
@@ -23,4 +25,13 @@
 	height: 20px;
 	margin-left: 2px;
 	color: #ee3425;
+}
+
+.count {
+	position: absolute;
+	top: 80%;
+	left: 38%;
+	font-size: 10px;
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-3);
 }
