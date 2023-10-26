@@ -34,7 +34,7 @@ function PayRunModal({ showPayrunModal = false, setShowPayrunModal = () => { }, 
 	};
 
 	const {
-		getPayrunId = '',
+		getPayrunId = () => {},
 		loading = false,
 	} = useGetPayrunId({
 		activeEntity,
