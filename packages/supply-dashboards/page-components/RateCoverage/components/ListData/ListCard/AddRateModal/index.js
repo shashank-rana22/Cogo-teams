@@ -35,6 +35,7 @@ function AddRateModal({
 	setServiceIdPresent = () => {},
 	spot_data = {},
 	getData = () => {},
+	triggeredFrom = '',
 }) {
 	const [chargeCodes, setChargeCodes] = useState(null);
 	const [activeTab, setActiveTab] = useState('main_freight');
@@ -101,7 +102,7 @@ function AddRateModal({
 	};
 
 	const handleSubmitData = async (formData) => {
-		const rate_id = await createRate(formData, data);
+		const rate_id = await createRate(formData, data, triggeredFrom);
 		if (addLocalServices) {
 			setPayload(formData);
 		}
@@ -255,6 +256,8 @@ function AddRateModal({
 			spot_data={spot_data}
 			dependentMainFreight={dependentMainFreight}
 			filter={filter}
+			getStats={getStats}
+			triggeredFrom={triggeredFrom}
 		/>
 	);
 }

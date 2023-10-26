@@ -16,6 +16,7 @@ function AdditionalCharges({
 	filter = {},
 	data = {},
 	source = '',
+	triggeredFrom = '',
 }) {
 	const {
 		fields,
@@ -27,6 +28,7 @@ function AdditionalCharges({
 		control,
 		showElements,
 	} = useCreateAdditionalRates({
+		triggeredFrom,
 		payload,
 		charge,
 		setAdditionalCharge,

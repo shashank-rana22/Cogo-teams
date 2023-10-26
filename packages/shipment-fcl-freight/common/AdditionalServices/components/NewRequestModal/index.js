@@ -17,14 +17,14 @@ import styles from './styles.module.css';
 const ONE_OPTION = 1;
 const BANK_VERIFICATION_STATUS = ['pending', 'verified'];
 
-const getCollectionPartyParams = (organization_id = '') => ({
+const getCollectionPartyParams = (orgIdList = []) => ({
 	documents_data_required         : true,
 	other_addresses_data_required   : true,
 	poc_data_required               : true,
 	billing_addresses_data_required : true,
 	filters                         : {
-		organization_id,
-		trade_party_type: ['collection_party', 'self'],
+		organization_id  : orgIdList,
+		trade_party_type : ['collection_party', 'self'],
 	},
 });
 
@@ -32,6 +32,7 @@ function NewRequestModal({
 	showRequestModal = false,
 	setShowRequestModal = () => {},
 	getShipmentRefetch = () => {},
+	collectionPartyList = [],
 }) {
 	const { partner, user } = useSelector(({ profile }) => profile);
 
@@ -44,13 +45,13 @@ function NewRequestModal({
 	const { listEntities = {} } = useGetEntities();
 
 	const {
-		primary_service = {},
 		shipment_data: { serial_id = '', shipment_type = '' },
 	} = useContext(ShipmentDetailContext);
 
-	const organization_id = primary_service?.service_provider?.id || '';
 	const { handleModifiedOptions = () => {} } = getCollectionPartyDetails();
-	const cpParams = getCollectionPartyParams(organization_id);
+
+	const orgIdList = collectionPartyList?.map((item) => item?.service_provider_id);
+	const cpParams = getCollectionPartyParams(orgIdList);
 
 	const [billingParty, setBillingParty] = useState({});
 	const [billingPartyAddress, setBillingPartyAddress] = useState({});

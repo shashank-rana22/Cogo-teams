@@ -90,7 +90,7 @@
 }
 
 .details_content {
-	padding: 16px;
+	padding: 4px 16px;
 }
 
 .pill {
@@ -104,4 +104,15 @@
 	display: flex;
 	justify-content: end;
 	margin-right: 40px;
+}
+
+.revert {
+	text-align: end;
+
+	:global {
+		.ui_pill_container {
+			margin: 0;
+			line-height: 1.4;
+		}
+	}
 }
