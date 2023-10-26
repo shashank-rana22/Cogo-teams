@@ -2,6 +2,7 @@ import { Table, Pill, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useMemo } from 'react';
 
 import getDetails from './getDetails';
 import LineItem from './LineItem';
@@ -11,7 +12,12 @@ const SUBSIDIARY_SERVICES = ['EDE', 'EDT', 'DET', 'DEA'];
 
 const POSITIVE_VALUE = 1;
 const NEGATIVE_VALUE = -1;
-const ZERO = 0;
+const DEFAULT_VALUE = 0;
+
+const TRADE_TYPE_MAPPING = {
+	export : 'Origin',
+	import : 'Destination',
+};
 
 const getPriceBreakUpColumn = [
 	{
@@ -68,27 +74,27 @@ const getPriceBreakUpColumn = [
 ];
 
 const handleServicesNames = (item) => {
-	const serviceObj = { ...item };
-	const tradeType = serviceObj?.trade_type;
-	const service = serviceObj?.service_type;
-	const isSubsidiaryService = serviceObj?.code;
-	const isDnd = SUBSIDIARY_SERVICES.includes(serviceObj?.code);
+	const { trade_type = '', service_type = '', code = '', service_name = '' } = item || {};
 
-	const TRADE_TYPE_MAPPING = {
-		export : 'Origin',
-		import : 'Destination',
-	};
+	const isDnd = SUBSIDIARY_SERVICES.includes(code);
 
-	const formattedTradeType = TRADE_TYPE_MAPPING[tradeType] || '';
-	const formattedService = startCase(service);
-	const formattedSubsidiaryServiceName = startCase(serviceObj?.service_name);
+	const formattedTradeType = TRADE_TYPE_MAPPING[trade_type] || '';
+	const formattedService = startCase(service_type);
+	const formattedSubsidiaryServiceName = startCase(service_name);
 
 	if (isDnd) {
 		return formattedSubsidiaryServiceName;
 	}
 
-	return isSubsidiaryService ? `${formattedTradeType} ${formattedSubsidiaryServiceName}`
-		: `${formattedTradeType} ${formattedService}`;
+	if (['cargo_insurance', 'warehouse'].includes(service_type)) {
+		return formattedService;
+	}
+
+	if (code) {
+		return `${formattedTradeType} ${formattedSubsidiaryServiceName}`;
+	}
+
+	return `${formattedTradeType} ${formattedService}`;
 };
 
 function IndividualPriceBreakup({ service = {}, restServiceDetail = {} }) {
@@ -115,16 +121,15 @@ function IndividualPriceBreakup({ service = {}, restServiceDetail = {} }) {
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<span className={styles.service}>{handleServicesNames(service)}</span>
 
-					{service?.service_type === 'cargo_insurance' ? null : (
-						containerDetail || []).map((item) => (
-							<Pill
-								key={item}
-								size="md"
-								style={{ border: '1px solid #24C7D9', background: '#ffffff' }}
-								className={styles.service_info_pill}
-							>
-								{item}
-							</Pill>
+					{containerDetail.map((item) => (
+						<Pill
+							key={item}
+							size="md"
+							style={{ border: '1px solid #24C7D9', background: '#ffffff' }}
+							className={styles.service_info_pill}
+						>
+							{item}
+						</Pill>
 					))}
 
 					{!isRateAvailabe ? (
@@ -163,38 +168,65 @@ function PriceBreakup({ rateCardData = {}, detail = {} }) {
 	const { service_rates, total_price_discounted = 0, total_price_currency = '' } = rateCardData;
 	const { service_details, service_type } = detail;
 
-	const updatedServiceRates = Object.entries(service_rates)
-		.map(([key, value]) => ({ ...value, key }))
-		.sort(
-			(
-				{ trade_type: firstElementTradeType = '', service_type:firstElementServiceType },
-				{ trade_type: secondElementTradeType = '', service_type:secondElementServiceType },
-			) => {
-				const tradeTypeOrder = ['export', 'main', 'import'];
+	const updatedServiceRates = useMemo(
+		() => Object.entries(service_rates || {})
+			.map(([key, value]) => ({ ...value, key }))
+			.sort(
+				(
+					{
+						trade_type: firstElementTradeType = '',
+						service_type: firstElementServiceType,
+					},
+					{
+						trade_type: secondElementTradeType = '',
+						service_type: secondElementServiceType,
+					},
+				) => {
+					const tradeTypeOrder = ['export', 'main', 'import', 'other'];
 
-				const firstElementFinalTradeType = firstElementServiceType === service_type
-					? 'main' : firstElementTradeType;
+					let firstElementFinalTradeType = firstElementServiceType === service_type
+						? 'main'
+						: firstElementTradeType;
 
-				const secondElementFinalTradeType =	secondElementServiceType === service_type
-					? 'main' : secondElementTradeType;
+					let secondElementFinalTradeType = secondElementServiceType === service_type
+						? 'main'
+						: secondElementTradeType;
 
-				if (
-					tradeTypeOrder.findIndex((item) => firstElementFinalTradeType === item)
-				> tradeTypeOrder.findIndex((item) => secondElementFinalTradeType === item)
-				) {
-					return POSITIVE_VALUE;
-				}
+					if (['subsidiary', 'cargo_insurance', 'warehouse'].includes(firstElementServiceType)) {
+						firstElementFinalTradeType = 'other';
+					}
 
-				if (
-					tradeTypeOrder.findIndex((item) => firstElementFinalTradeType === item)
-				< tradeTypeOrder.findIndex((item) => secondElementFinalTradeType === item)
-				) {
-					return NEGATIVE_VALUE;
-				}
+					if (['subsidiary', 'cargo_insurance', 'warehouse'].includes(secondElementServiceType)) {
+						secondElementFinalTradeType = 'other';
+					}
 
-				return ZERO;
-			},
-		);
+					if (
+						tradeTypeOrder.findIndex(
+							(item) => firstElementFinalTradeType === item,
+						)
+							> tradeTypeOrder.findIndex(
+								(item) => secondElementFinalTradeType === item,
+							)
+					) {
+						return POSITIVE_VALUE;
+					}
+
+					if (
+						tradeTypeOrder.findIndex(
+							(item) => firstElementFinalTradeType === item,
+						)
+							< tradeTypeOrder.findIndex(
+								(item) => secondElementFinalTradeType === item,
+							)
+					) {
+						return NEGATIVE_VALUE;
+					}
+
+					return DEFAULT_VALUE;
+				},
+			),
+		[service_type, service_rates],
+	);
 
 	return (
 		<div className={styles.container}>

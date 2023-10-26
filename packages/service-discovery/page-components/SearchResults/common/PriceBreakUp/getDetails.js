@@ -13,6 +13,8 @@ const getDetails = ({ item, service = '' }) => {
 		trucks_count,
 		truck_type,
 		container_type,
+		cargo_value_currency,
+		cargo_value,
 	} = item || {};
 
 	const commonContainerDetails = [`${['20', '40'].includes(container_size) ? `${container_size}ft.`
@@ -69,6 +71,9 @@ const getDetails = ({ item, service = '' }) => {
 		transportation    : [truck_type ? startCase(truck_type) : commonContainerDetails],
 		subsidiary        : SUBSIDIARY_CONTENT_MAPPING[item?.service],
 		haulage_freight   : commonContainerDetails,
+		cargo_insurance   : [
+			`${commodity}`, `Cargo Value: ${cargo_value_currency} ${cargo_value}`,
+		],
 	};
 
 	return MAPPING[service] || [];
