@@ -19,7 +19,7 @@ function useEditProfile({
 	}));
 
 	const cityOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['city'] } },
+		params: { filters: { type: ['pincode'] } },
 	}));
 
 	const fields = getControls({
@@ -43,7 +43,7 @@ function useEditProfile({
 		method : 'post',
 	}, { manual: true });
 
-	const newFields = [];
+	const NEWFIELDS = [];
 
 	fields.forEach((field) => {
 		let newFieldItem = { ...field };
@@ -66,7 +66,7 @@ function useEditProfile({
 			};
 		}
 
-		newFields.push(newFieldItem);
+		NEWFIELDS.push(newFieldItem);
 	});
 
 	const onSubmit = async () => {
@@ -102,12 +102,12 @@ function useEditProfile({
 	}, [setValue, vendor_details, showEditProfileModal]);
 
 	return {
-		newFields,
+		newFields          : NEWFIELDS,
 		control,
 		handleSubmit,
 		onSubmit,
 		errors,
-		editProfileLoading: loading,
+		editProfileLoading : loading,
 	};
 }
 
