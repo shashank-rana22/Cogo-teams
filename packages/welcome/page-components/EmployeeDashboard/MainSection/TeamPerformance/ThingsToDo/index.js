@@ -65,7 +65,7 @@ function ThingsToDo({ data = {} }) {
 								<div className={styles.listed_item_left_heading}>{item?.type}</div>
 
 								<div className={styles.listed_item_left_subheading}>
-									{task_list?.[item.key]}
+									{task_list?.[item.key] || '0'}
 									{' '}
 									pending
 								</div>
