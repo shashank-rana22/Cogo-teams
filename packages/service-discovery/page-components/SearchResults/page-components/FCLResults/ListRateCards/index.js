@@ -162,6 +162,7 @@ function ListRateCards({
 				setScheduleLoading={setScheduleLoading}
 				setSelectedSchedule={setSelectedSchedule}
 				selectedSchedule={selectedSchedule}
+				isMobile={isMobile}
 			/>
 
 			<AppliedFilters

@@ -1,5 +1,9 @@
 .container {
 	margin: 20px;
+
+	@media (max-width: 768px) {
+		overflow: scroll;
+	}
 }
 
 .line_name {
@@ -10,7 +14,11 @@
 .table {
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
+
+	@media (max-width: 768px) {
+		width: max-content;
+		overflow: scroll;
+	}
 }
 
 .table_header {

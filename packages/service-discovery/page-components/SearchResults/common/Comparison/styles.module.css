@@ -19,22 +19,39 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .heading {
 	margin-left: 20px;
 	font-size: 20px;
 	font-weight: 600;
+
+	@media (max-width: 768px) {
+		margin-left: 0;
+	}
 }
 
 .buttons_container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-top: 12px;
+	}
 }
 
 .button {
 	margin-right: 12px;
+
+	@media (max-width: 768px) {
+		margin-right: 0;
+	}
 }
 
 .book_buttons {
@@ -51,6 +68,10 @@
 	justify-content: center;
 	width: 100%;
 	animation: center-animation 0.4s ease-in-out;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 @keyframes center-animation {
@@ -67,4 +88,9 @@
 	margin-right: 20px;
 	font-size: 30px;
 	font-weight: 600;
+
+	@media (max-width: 768px) {
+		margin-right: 0;
+		margin-bottom: 12px;
+	}
 }
