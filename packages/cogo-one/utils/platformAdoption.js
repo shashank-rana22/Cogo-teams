@@ -19,20 +19,20 @@ export const getOrgId = ({ orgData = {} }) => ({
 });
 
 export const getCpSpPayload = ({ orgId = '', type = '', accountType = '', rejectReason = '' }) => ({
-	id                   : orgId,
+	id                   : orgId || undefined,
 	kyc_status           : type,
 	account_type         : ACCOUNT_TYPE?.[accountType],
 	kyc_rejection_reason : rejectReason || undefined,
 });
 
 export const getIePayload = ({ orgId = '', type = '', rejectReason = '' }) => ({
-	id                   : orgId,
+	id                   : orgId || undefined,
 	kyc_status           : type,
 	kyc_rejection_reason : rejectReason || undefined,
 });
 
 export const getTradePartyPayload = ({ orgId = '', type = '', rejectReason = '' }) => ({
-	id                  : orgId,
+	id                  : orgId || undefined,
 	verification_status : type,
 	rejection_reason    : rejectReason || undefined,
 });

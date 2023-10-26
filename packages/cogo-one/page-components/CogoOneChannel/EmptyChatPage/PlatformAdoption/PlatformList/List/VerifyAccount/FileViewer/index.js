@@ -6,11 +6,11 @@ import { useEffect } from 'react';
 import styles from './styles.module.css';
 
 const getFileType = (url) => {
-	if (url.endsWith('.pdf')) {
+	if (url?.endsWith('.pdf')) {
 		return 'application/pdf';
-	} if (url.endsWith('.csv')) {
+	} if (url?.endsWith('.csv')) {
 		return 'text/csv';
-	} if (url.endsWith('.xlsx')) {
+	} if (url?.endsWith('.xlsx')) {
 		return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 	}
 	return '';
