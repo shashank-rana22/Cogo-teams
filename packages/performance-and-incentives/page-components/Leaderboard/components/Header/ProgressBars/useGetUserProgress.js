@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 function useGetUserProgress() {
 	const { user, partner } = useSelector(({ profile }) => profile);
 
-	const [{ data }] = useAllocationRequest({
+	const [{ data : { kam_progress = {}, manager_progress = {} } = {} }] = useAllocationRequest({
 		url     : 'user_progress',
 		method  : 'GET',
 		authkey : 'get_agent_scoring_user_progress',
@@ -15,7 +15,8 @@ function useGetUserProgress() {
 	}, { manual: false });
 
 	return {
-		progressData: data?.target,
+		kam_progress,
+		manager_progress,
 	};
 }
 
