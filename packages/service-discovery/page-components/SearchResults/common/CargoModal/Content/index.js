@@ -6,6 +6,7 @@ function Content({
 	setCargoModal = () => {},
 	setShowForm = () => {},
 	goToCheckout = () => {},
+	isMobile = false,
 }) {
 	const onClose = () => {
 		setCargoModal('success');
@@ -24,6 +25,7 @@ function Content({
 			onClose={onClose}
 			showCloseIcon={false}
 			closeOnOuterClick={false}
+			placement={isMobile ? 'bottom' : 'center'}
 		>
 			<Modal.Header title="Do you want to add Cargo Insurance?" />
 

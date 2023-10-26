@@ -85,6 +85,7 @@ function FCLResults({
 			setScreen,
 			cogoAssuredRates,
 			setRouterLoading,
+			isMobile,
 		},
 	};
 

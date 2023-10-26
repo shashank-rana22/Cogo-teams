@@ -23,6 +23,7 @@ function RenderRate({
 	serviceItem = {},
 	rateCardData = {},
 	handleDelete = () => {},
+	source = '',
 }) {
 	const { isSelected = false } = serviceItem || {};
 
@@ -55,18 +56,17 @@ function RenderRate({
 
 	const { rateData = [], source:rateCardSource = '' } = serviceItem;
 
-	const ratesAvailableArray = rateData.reduce((acc, curr) => {
-		const { total_price_discounted, is_rate_available } = curr;
-		if (total_price_discounted || total_price_discounted === 0 || is_rate_available) {
-			return [...acc, true];
-		}
-		return [...acc, false];
-	}, []);
+	let availableRatesCount = 0;
+	let notAvailableRatesCount = 0;
 
-	const availableRatesCount = ratesAvailableArray.filter((value) => value).length;
-	const notAvailableRatesCount = ratesAvailableArray.length - availableRatesCount;
+	(rateData || []).forEach((rate) => {
+		const { total_price_discounted, is_rate_available } = rate;
+		if (total_price_discounted || (total_price_discounted === 0 && source !== 'checkout') || is_rate_available) {
+			availableRatesCount += 1;
+		} else notAvailableRatesCount += 1;
+	});
 
-	if (notAvailableRatesCount === ratesAvailableArray.length) {
+	if (notAvailableRatesCount === rateData.length) {
 		let text = 'No Rates';
 
 		if (['fcl_freight_local', 'air_freight_local'].includes(serviceItem.service_type)) {
@@ -105,9 +105,10 @@ function RenderRate({
 
 	const formattedAmount = formatPrice(currency, totalPrice);
 
-	if (availableRatesCount === ratesAvailableArray.length) {
+	if (availableRatesCount === rateData.length) {
 		return formattedAmount;
-	} return (
+	}
+	return (
 		<div className={styles.rate_not_available_for_all}>
 			<span>{formattedAmount}</span>
 

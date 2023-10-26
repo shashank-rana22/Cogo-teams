@@ -16,6 +16,14 @@
 	float: left;
 	height: 60px;
 	border-radius: 4px;
+
+	@media (max-width: 768px) {
+		max-width: 65%;
+
+		&.not_active {
+			max-width: 100%;
+		}
+	}
 }
 
 .service_text {
@@ -31,6 +39,10 @@
 		font-size: 12px;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+
+		&.not_active {
+			max-width: 200px;
+		}
 	}
 }
 
@@ -46,6 +58,10 @@
 	margin-right: 25px;
 	color: #ee3425;
 	cursor: pointer;
+
+	@media (max-width: 768px) {
+		margin-right: 12px;
+	}
 }
 
 .rate {
@@ -64,6 +80,11 @@
 .icon {
 	margin-right: 16px;
 	margin-left: 20px;
+
+	@media (max-width: 768px) {
+		margin-right: 6px;
+		margin-left: 8px;
+	}
 }
 
 .add_icon {
@@ -72,6 +93,10 @@
 	background: #fff;
 	border: 1.5px solid #221f20;
 	border-radius: 50%;
+
+	@media (max-width: 768px) {
+		margin-right: 12px;
+	}
 }
 
 .rate_not_available_for_all {

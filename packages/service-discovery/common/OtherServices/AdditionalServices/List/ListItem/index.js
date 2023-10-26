@@ -108,12 +108,12 @@ function ListItem({
 		<div
 			key={name}
 			disabled={loading}
-			className={cl`${styles.service} ${isSelected ? styles.active : null}`}
+			className={cl`${styles.service} ${isSelected && styles.active}`}
 		>
-			<div className={styles.service_div}>
+			<div className={cl`${styles.service_div} ${!isSelected && styles.not_active}`}>
 				<span className={styles.icon}>{ICONS_MAPPING[service_type]}</span>
 
-				<span className={styles.service_text}>{title}</span>
+				<span className={cl`${styles.service_text} ${!isSelected && styles.not_active}`}>{title}</span>
 			</div>
 
 			<div className={styles.icn_container}>
@@ -124,6 +124,7 @@ function ListItem({
 						handleDelete={handleDelete}
 						startingPrices={startingPrices}
 						startingPriceLoading={startingPriceLoading}
+						source={source}
 					/>
 				</strong>
 

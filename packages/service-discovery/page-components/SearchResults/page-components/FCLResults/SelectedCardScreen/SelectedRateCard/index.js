@@ -21,6 +21,7 @@ function SelectedRateCard({
 	// showShippingLineModal = false,
 	// setShowShippingLineModal = () => {},  // will be used in future
 	setRouterLoading = () => {},
+	isMobile = false,
 }) {
 	const [cargoModal, setCargoModal] = useState('pending'); // pending,progress,success
 
@@ -82,6 +83,7 @@ function SelectedRateCard({
 					setCargoModal={setCargoModal}
 					detail={detail}
 					goToCheckout={handleBook}
+					isMobile={isMobile}
 				/>
 			) : null}
 
