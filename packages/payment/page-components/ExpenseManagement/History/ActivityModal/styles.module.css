@@ -1,0 +1,12 @@
+.column1 {
+	width: 300px;
+	margin: 8px 0;
+	font-size: 16px;
+	font-weight: 500;
+	border-bottom: 1px solid black;
+}
+
+.section {
+	display: flex;
+	align-items: center;
+}
