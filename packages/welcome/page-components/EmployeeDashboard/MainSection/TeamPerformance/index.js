@@ -1,8 +1,8 @@
-import { Select } from '@cogoport/components';
+// import { Select } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import React from 'react';
 
-import CompanyLeaderBoard from './CompanyLeaderBoard';
+// import CompanyLeaderBoard from './CompanyLeaderBoard';
 import IndividualActivity from './IndividualActivity';
 import styles from './styles.module.css';
 import TeamLeaderBoard from './TeamLeaderBoard';
@@ -10,11 +10,11 @@ import ThingsToDo from './ThingsToDo';
 // import WorkingHrs from './WorkingHrs';
 
 // https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rectangle_126.svg
-const OPTIONS = [
-	{ label: 'March 2023', value: 'march' },
-];
+// const OPTIONS = [
+// 	{ label: 'March 2023', value: 'march' },
+// ];
 
-function TeamPerformance() {
+function TeamPerformance({ data = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex}>
@@ -33,7 +33,7 @@ function TeamPerformance() {
 							</div>
 							Believer
 						</div> */}
-					<Select options={OPTIONS} value={OPTIONS.label} />
+					{/* <Select options={OPTIONS} value={OPTIONS.label} /> */}
 				</div>
 			</div>
 			<div className={styles.kpi_flex}>
@@ -83,12 +83,12 @@ function TeamPerformance() {
 			<div className={styles.leaderboard_container}>
 				<div className={styles.leaderboard_data}>
 					<div className={styles.leaderboard}>
-						<TeamLeaderBoard />
+						<TeamLeaderBoard data={data} />
 					</div>
 				</div>
 				<div className={styles.leaderboard_data}>
 					<div className={styles.leaderboard}>
-						<IndividualActivity />
+						<IndividualActivity data={data} />
 					</div>
 				</div>
 
@@ -97,12 +97,12 @@ function TeamPerformance() {
 			<div className={styles.leaderboard_container}>
 				<div className={styles.leaderboard_data}>
 					<div className={styles.leaderboard}>
-						<ThingsToDo />
+						<ThingsToDo data={data} />
 					</div>
 				</div>
 				<div className={styles.leaderboard_data}>
 					<div className={styles.leaderboard}>
-						<CompanyLeaderBoard />
+						{/* <CompanyLeaderBoard /> */}
 					</div>
 				</div>
 			</div>
