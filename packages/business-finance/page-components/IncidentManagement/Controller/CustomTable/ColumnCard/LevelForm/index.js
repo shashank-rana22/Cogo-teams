@@ -58,6 +58,7 @@ function LevelForm({ background = '#f3fafa', item = {}, level = '' }, ref) {
 		}
 	}, [level, remove, fields]);
 	const getLevelsConfigData = getLevelsConfig(t);
+
 	return (
 		<div className={styles.container} style={{ backgroundColor: background }}>
 			<Header config={getLevelsConfigData} />

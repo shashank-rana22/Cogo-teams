@@ -76,7 +76,7 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 				:	<BookingParamsMapping bookingParams={bookingParams} />,
 		},
 	];
-	const feedbacksData = feedbacks.map((item, index) => `${index + 1}. ${item}`);
+	const feedbacksData = feedbacks.map((item) => item);
 
 	const contentValuesMapping = [
 		{
@@ -166,6 +166,15 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 		preferred_airlines,
 		booking_params,
 		transitTime,
+		commodity_description,
+		bl_type,
+		cargo_readiness_date,
+		free_days_detention_destination,
+		schedule_departure,
+		cargo_weight_per_container,
+		inco_term,
+		trade_type,
+		bookingParams,
 	};
 }
 
