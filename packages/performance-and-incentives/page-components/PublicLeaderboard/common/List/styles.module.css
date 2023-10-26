@@ -93,7 +93,6 @@
 
 .inner_container {
 	position: relative;
-	top: 50px;
 	animation: scroll 30s linear infinite;
 	animation-direction: reverse;
 }

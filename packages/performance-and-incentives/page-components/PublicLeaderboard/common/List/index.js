@@ -1,4 +1,7 @@
+import { useRef, useState, useEffect } from 'react';
+
 import TEXT_MAPPING from '../../configurations/header-text-mapping';
+import getAnimationDuration from '../../utils/getAnimationDuration';
 
 import getListColumnMapping from './get-list-column-mapping';
 import styles from './styles.module.css';
@@ -9,6 +12,21 @@ function List(props) {
 	const { tableList = [], view, totalReportCount } = props;
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({ view });
+
+	const divRef = useRef(null);
+	const [isOverflowed, setIsOverflowed] = useState(false);
+
+	useEffect(() => {
+		const divElement = divRef.current;
+
+		if (divElement) {
+			if (divElement.clientHeight < divElement.scrollHeight) {
+				setIsOverflowed(true);
+			} else {
+				setIsOverflowed(false);
+			}
+		}
+	}, []);
 
 	return (
 		<div className={styles.list_container}>
@@ -24,8 +42,16 @@ function List(props) {
 
 			<div
 				className={styles.list_body_container}
+				style={{ top: isOverflowed ? '' : '50px' }}
+				ref={divRef}
 			>
-				<div className={styles.inner_container}>
+				<div
+					className={styles.inner_container}
+					style={{
+						animationDuration: isOverflowed
+							? getAnimationDuration({ listLength: tableList.length }) : '0s',
+					}}
+				>
 					{tableList.map((listItem) => (
 						<div key={listItem.id} className={styles.list_row}>
 							{LIST_COLUMN_MAPPING.map((columnItem) => {

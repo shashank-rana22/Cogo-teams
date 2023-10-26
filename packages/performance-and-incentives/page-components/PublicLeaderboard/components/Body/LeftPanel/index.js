@@ -45,7 +45,13 @@ function LeftPanel(props) {
 			<TopUsers topList={topList} view={view} />
 
 			{isEmpty(tableList) ? <p className={styles.empty_list}>No more standings...</p>
-				: <List tableList={tableList} view={view} totalReportCount={totalReportCount} />}
+				: (
+					<List
+						tableList={tableList}
+						view={view}
+						totalReportCount={totalReportCount}
+					/>
+				)}
 
 		</div>
 	);
