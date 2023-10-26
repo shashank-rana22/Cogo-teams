@@ -1,5 +1,7 @@
 // import { isEmpty } from '@cogoport/utils';
 
+import { useEffect } from 'react';
+
 import useGetCollectionParty from '../hooks/useGetCollectionPartylist';
 // import useGetShipmentCrossEntityInvoice from '../hooks/useGetShipmentCrossEntityInvoice';
 
@@ -7,7 +9,12 @@ import CollectionPartyDetails from './CollectionPartyDetails';
 import Loader from './CollectionPartyDetails/Loader';
 // import Invoices from './Invoices';
 
-function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = () => {} }) {
+function PurchaseInvoicing({
+	shipmentData = {},
+	servicesData = [],
+	AddService = () => {},
+	setCollectionPartyData = () => {},
+}) {
 	const {
 		collectionPartyList, collectionPartyLoading,
 		refetch,
@@ -24,6 +31,13 @@ function PurchaseInvoicing({ shipmentData = {}, servicesData = [], AddService = 
 	// 	loading:loadingCE,
 	// 	refetch:purchaseInvoicesRefetch,
 	// } = useGetShipmentCrossEntityInvoice({ shipment_id: shipmentData?.id });
+
+	useEffect(() => {
+		if (!collectionPartyLoading) {
+			setCollectionPartyData(collectionPartyList);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [collectionPartyLoading, JSON.stringify(collectionPartyList), setCollectionPartyData]);
 
 	if (collectionPartyLoading) {
 		return <Loader />;
