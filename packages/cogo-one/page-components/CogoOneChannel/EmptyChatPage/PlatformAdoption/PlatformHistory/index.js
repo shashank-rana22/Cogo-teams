@@ -35,14 +35,14 @@ const COLUMNS = [
 		accessor : (item) => <div className={styles.label}>{startCase(item?.request_type)}</div>,
 	},
 	{
+		id       : 'assign_to',
+		Header   : 'ASSIGN TO',
+		accessor : (item) => <div className={styles.label}>{startCase(item?.request_assigned_to?.name)}</div>,
+	},
+	{
 		id       : 'completed_by',
 		Header   : 'COMPLETED BY',
 		accessor : (item) => <div className={styles.label}>{startCase(item?.request_completed_by?.name) || '-'}</div>,
-	},
-	{
-		id       : 'escalation_cycle',
-		Header   : 'Escalation',
-		accessor : (item) => <div className={styles.label}>{startCase(item?.escalation_cycle)}</div>,
 	},
 	{
 		id       : 'request_on',
@@ -74,7 +74,16 @@ const COLUMNS = [
 				<div className={cl`${styles.circle} 
 				${item?.request_status === 'completed' ? styles.complete : styles.pending}`}
 				/>
-				<div className={styles.title}>{startCase(item?.request_status)}</div>
+				<div className={styles.status_escalate}>
+					<div className={styles.title}>{startCase(item?.request_status)}</div>
+					{item?.escalation_cycle ? (
+						<div className={cl`${styles.esaclate} 
+					${item?.escalation_cycle === 'warning' ? styles.warning : styles.escalated}`}
+						>
+							{startCase(item?.escalation_cycle)}
+						</div>
+					) : null}
+				</div>
 			</div>
 		),
 	},

@@ -45,6 +45,10 @@
 	height: calc(100% - 65px);
 	padding: 0 16px;
 	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .empty_container {
@@ -101,4 +105,28 @@
 .date_content {
 	display: flex;
 	flex-direction: column;
+}
+
+.status_escalate {
+	display: flex;
+	flex-direction: column;
+}
+
+.esaclate {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
+	height: 18px;
+	padding: 0 2px;
+	font-size: 10px;
+	border-radius: 4px;
+}
+
+.warning {
+	background: #fef199;
+}
+
+.escalated {
+	background: #f8aea8;
 }
