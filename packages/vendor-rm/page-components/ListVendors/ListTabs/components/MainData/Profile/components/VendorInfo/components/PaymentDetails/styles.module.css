@@ -2,10 +2,13 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	padding-top: 16px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.padding {
+	padding-top: 16px;
 }
 
 .bank_details_container {
@@ -19,7 +22,7 @@
 
 .box_info {
 	min-width: 250px;
-	margin-bottom: 14px;
+	margin: 0 4px 14px 0;
 }
 
 .label {
@@ -56,4 +59,17 @@
 	display: flex;
 	align-items: center;
 	color: #f68b21 !important;
+}
+
+.status_container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 4px;
+
+	:global {
+		.ui_pill_container {
+			margin-left: 0;
+		}
+	}
 }
