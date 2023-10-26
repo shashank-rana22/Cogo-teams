@@ -36,7 +36,7 @@ export const HEADER_NAV = [
 	{
 		label : 'Payroll',
 		icon  : IcMAppPayment,
-		route : '/payroll/payroll',
+		route : '/payroll',
 	},
 	{
 		label : 'Policies',
