@@ -168,6 +168,7 @@ function ConvenienceDetails({
 									value={price}
 									size="sm"
 									onChange={(val) => onChange({ value: val, itemKey: 'price' })}
+									type="number"
 									disabled={!shouldEditConvenienceFee || loading}
 								/>
 							</div>

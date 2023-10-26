@@ -56,11 +56,11 @@
 		}
 
 		.ui_table_body_cell:first-child {
-			width: 40%;
+			width: 35%;
 		}
 
 		.ui_table_body_cell:nth-child(2) {
-			width: 28%;
+			width: 33%;
 		}
 
 		.ui_table_body_row {
