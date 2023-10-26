@@ -1,8 +1,8 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
 
 const copyToClipboard = async (text, item) => {
-	const modifiedText = text?.replace(GLOBAL_CONSTANTS.regex_patterns.hyphen_characters, '');
+	const modifiedText = startCase(text);
 
 	try {
 		await navigator.clipboard.writeText(modifiedText);

@@ -256,6 +256,7 @@ function AddRateModal({
 			spot_data={spot_data}
 			dependentMainFreight={dependentMainFreight}
 			filter={filter}
+			getStats={getStats}
 			triggeredFrom={triggeredFrom}
 		/>
 	);
