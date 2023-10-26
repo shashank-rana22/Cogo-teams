@@ -22,6 +22,11 @@ const COMPONENT_MAPPING = {
 		title     : 'APPROVAL PENDING',
 		component : Details,
 	},
+	multi_entity_margin: {
+		name  : 'multi_entity_margin',
+		title : 'MultiEntity Margin',
+		// component : Details,
+	},
 };
 
 export default COMPONENT_MAPPING;

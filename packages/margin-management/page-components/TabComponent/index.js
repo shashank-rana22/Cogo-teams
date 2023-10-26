@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useMemo, useCallback, useState } from 'react';
 
 import EmptyState from '../../common/EmptyStateMargins';
+// import SERVICE_NAME_MAPPING from '../../helpers/service-name-mapping';
 import conditions from '../../utils/condition-constants';
 import Search from '../Search';
 
@@ -11,8 +12,10 @@ import Search from '../Search';
 import Details from './Details';
 import ListPagination from './ListPagination';
 import COMPONENT_MAPPING from './marginTypeComponentMapping';
+import MultiEntityMargin from './MultiEntityMargin';
 import SERVICE_TYPE_MAPPING from './service-name-mapping';
 import TransactionFunnelData from './TransactionFunnelData';
+// import SegmentedControlHeader from './SegmentedControlHeader';
 
 function TabComponent({
 	marginBreakupData = {},
@@ -38,9 +41,9 @@ function TabComponent({
 			[...conditions.SEE_ALL_MARGINS, ...conditions.SEE_SUPPLY_MARGIN],
 			'or',
 		),
-		cogoport         : isConditionMatches(conditions.SEE_ALL_MARGINS, 'or'),
-		approval_pending : isConditionMatches(conditions.SEE_PENDING_APPROVAL, 'or'),
-
+		cogoport            : isConditionMatches(conditions.SEE_ALL_MARGINS, 'or'),
+		approval_pending    : isConditionMatches(conditions.SEE_PENDING_APPROVAL, 'or'),
+		multi_entity_margin : true,
 	}), [isConditionMatches]);
 
 	const condition = useMemo(() => checkConditions(), [checkConditions]);
@@ -79,7 +82,7 @@ function TabComponent({
 				/>
 			</div>
 
-			{activeTab !== 'approval_pending' ? (
+			{!['approval_pending', 'multi_entity_margin'].includes(activeTab) ? (
 				<div style={{ display: 'flex', gap: '4px', margin: '12px 0' }}>
 					<Tabs
 						themeType="tertiary"
@@ -103,7 +106,7 @@ function TabComponent({
 				</div>
 			) : null}
 
-			{activeTab !== 'approval_pending' ? (
+			{!['approval_pending', 'multi_entity_margin'].includes(activeTab) ? (
 				<div>
 					{isEmpty(data?.list) ? <EmptyState /> : (
 						<div>
@@ -118,35 +121,49 @@ function TabComponent({
 									refetch={refetch}
 								/>
 							))}
+							<ListPagination
+								paginationProps={{
+									data,
+									filterParams,
+									setFilterParams,
+								}}
+							/>
 						</div>
 					)}
 				</div>
 			) : (
 				<div>
-					{isEmpty(data?.list) ? <EmptyState /> : (
+					{activeTab !== 'multi_entity_margin' ? (
 						<div>
-							{(data?.list || []).map((service) => (
-								<Details
-									marginBreakupData={marginBreakupData}
-									setMarginBreakupData={setMarginBreakupData}
-									key={service?.id}
-									data={service}
-									activeTab={activeTab}
-									refetch={refetch}
-								/>
-							))}
+							{isEmpty(data?.list) ? <EmptyState /> : (
+								<div>
+									{(data?.list || []).map((service) => (
+										<Details
+											marginBreakupData={marginBreakupData}
+											setMarginBreakupData={setMarginBreakupData}
+											key={service?.id}
+											data={service}
+											activeTab={activeTab}
+											refetch={refetch}
+										/>
+									))}
+									<ListPagination
+										paginationProps={{
+											data,
+											filterParams,
+											setFilterParams,
+										}}
+									/>
+								</div>
+							)}
 						</div>
-					)}
+					) : null}
 				</div>
 			)}
 
-			<ListPagination
-				paginationProps={{
-					data,
-					filterParams,
-					setFilterParams,
-				}}
-			/>
+			{activeTab === 'multi_entity_margin' ? (
+				<MultiEntityMargin />
+			) : null}
 
 			{showFunnelModal ? (
 				<Modal
@@ -155,7 +172,7 @@ function TabComponent({
 					onClose={() => setShowFunnelModal(false)}
 					size="lg"
 				>
-					<Modal.Header title="Transaction data" />
+					<Modal.Header title="Transaction Details" />
 					<Modal.Body>
 						<TransactionFunnelData activeService={activeService} />
 					</Modal.Body>
