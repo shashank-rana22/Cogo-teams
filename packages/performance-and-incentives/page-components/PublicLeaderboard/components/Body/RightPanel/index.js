@@ -41,7 +41,7 @@ function RightPanel(props) {
 						setDateRange : setTopDateRange,
 						setDuration  : setTopSelect,
 					})}
-					size="sm"
+					size={window.innerWidth >= 2560 ? 'md' : 'sm'}
 					options={durationOptions}
 					className={styles.period_selector}
 				/>
@@ -56,7 +56,7 @@ function RightPanel(props) {
 						setDateRange : setBottomDateRange,
 						setDuration  : setBottomSelect,
 					})}
-					size="sm"
+					size={window.innerWidth >= 2560 ? 'md' : 'sm'}
 					options={durationOptions}
 					className={styles.period_selector}
 				/>
