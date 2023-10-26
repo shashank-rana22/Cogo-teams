@@ -55,7 +55,7 @@ function OrganicCustomer({ list = [], setScheduleDemo = () => {}, handlePlaceCal
 								</Tooltip>
 								<div className={styles.lower_section}>
 									<div className={styles.trade_name}>
-										{startCase(name) || '-'}
+										{startCase(business_name) || '-'}
 									</div>
 									<div className={styles.account_type}>
 										{formatAccountType({ tags })?.[account_type]?.shortName}
