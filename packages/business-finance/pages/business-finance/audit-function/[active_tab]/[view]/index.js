@@ -1,6 +1,7 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export { default } from '@cogoport/business-finance/page-components/COEFinance/All_Invoices/ViewInvoices';
+// eslint-disable-next-line import/no-unresolved
+export { default } from '@cogoport/business-finance/page-components/COEFinance';
 
 export async function getServerSideProps({ locale }) {
 	return {

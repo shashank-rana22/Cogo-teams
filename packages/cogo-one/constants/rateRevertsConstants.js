@@ -37,3 +37,17 @@ export const defaultRateJobFilters = ({ viewType = '' }) => ({
 	serial_id   : '',
 	relevant_to : ADMIN_VIEW_REQUIRED_FOR.includes(viewType) ? 'all' : '',
 });
+
+export const INCO_TERM_MAPPING = {
+	cif : 'export',
+	cfr : 'export',
+	cpt : 'export',
+	cip : 'export',
+	dat : 'export',
+	dap : 'export',
+	ddp : 'export',
+	fob : 'import',
+	exw : 'import',
+	fca : 'import',
+	fas : 'import',
+};

@@ -860,11 +860,11 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'business_finance-audit_function',
 					title         : t('common:audit_function'),
-					href          : '/v2/business-finance/coe-finance/[active_tab]',
-					as            : '/v2/business-finance/coe-finance/dashboard',
+					href          : '/v2/business-finance/audit-function/[active_tab]',
+					as            : '/v2/business-finance/audit-function/dashboard',
 					icon          : IcMProductCodeMapping,
 					main_apis     : [],
-					possible_apis : [...business_finance.coeFinance],
+					possible_apis : [...business_finance.shipmentAuditFunction],
 				},
 				{
 					key           : 'business_finance-account_payables',

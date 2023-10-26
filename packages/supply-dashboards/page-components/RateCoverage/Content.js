@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 import ListData from './components/ListData';
 import TasksOverview from './components/TasksOverview';
+import { USER_SERVICES } from './configurations/helpers/constants';
 import useGetCoverageStats from './hooks/useGetCoverageStats';
 import useGetListCoverage from './hooks/useGetListCoverages';
 import styles from './styles.module.css';
@@ -14,7 +15,10 @@ function RateCoverageContent() {
 	const { user_data } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
-	const { user: { name: user_name = '' } = {} } = user_data;
+
+	const { user: { name: user_name = '', id: user_id } = {} } = user_data;
+
+	const userService = USER_SERVICES[user_id] || ['fcl_freight'];
 
 	const [showWeekData, setShowWeekData] = useState(false);
 
@@ -28,7 +32,7 @@ function RateCoverageContent() {
 		setPage = () => {},
 		filter = {},
 		setFilter = () => {},
-	} = useGetListCoverage();
+	} = useGetListCoverage({ userService });
 
 	const { loading:statsLoading, data:statsData, getStats } = useGetCoverageStats(filter);
 
@@ -112,6 +116,7 @@ function RateCoverageContent() {
 				setFilter={setFilter}
 				getStats={getStats}
 				setShowWeekData={setShowWeekData}
+				userService={userService}
 			/>
 		</div>
 	);

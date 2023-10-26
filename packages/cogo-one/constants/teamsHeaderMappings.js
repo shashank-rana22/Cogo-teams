@@ -1,13 +1,13 @@
 import { IcMCall, IcMVideoCall } from '@cogoport/icons-react';
 
-const getButtonGroups = ({ onClickFun = () => {} }) => [{
+const getButtonGroups = ({ onClickFunc = () => {} }) => [{
 	children: (<IcMCall
 		width={18}
 		height={18}
 		fill="#777"
 	/>
 	),
-	onClick: onClickFun,
+	onClick: () => onClickFunc({ isVideoOn: false }),
 
 }, {
 	children: (<IcMVideoCall
@@ -16,7 +16,7 @@ const getButtonGroups = ({ onClickFun = () => {} }) => [{
 		fill="#777"
 	/>
 	),
-	onClick: onClickFun,
+	onClick: () => onClickFunc({ isVideoOn: true }),
 }];
 
 export { getButtonGroups };

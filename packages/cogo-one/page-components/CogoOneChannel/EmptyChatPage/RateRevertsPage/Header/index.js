@@ -20,6 +20,7 @@ function Header({
 }) {
 	const { query: { partner_id = '' } = {} } = useRouter();
 	const [showFilters, setShowFilters] = useState(false);
+	const [filtersData, setFiltersData] = useState({});
 
 	const handleItemsChange = (val) => setParams(
 		(prev) => ({
@@ -41,6 +42,7 @@ function Header({
 		filterValues,
 		dynamicStatistics : dynamic_statistics,
 		viewType,
+		filtersData,
 	});
 
 	const sourceOptions = useMemo(
@@ -133,6 +135,7 @@ function Header({
 								setParams={setParams}
 								setShowFilters={setShowFilters}
 								viewType={viewType}
+								setFiltersData={setFiltersData}
 							/>
 						) : null
 					)}

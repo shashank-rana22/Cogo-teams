@@ -2,7 +2,8 @@ import { Button, Placeholder, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete } from '@cogoport/icons-react';
-import React, { useState, useEffect } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import List from '../../../../commons/List/index';
 import useDeletePayrunInvoice from '../../hooks/useDeletePayrunInvoice';
@@ -22,7 +23,7 @@ const SUBSTRING_CONDITON_MAX = 15;
 const SUBSTRING_CONDITON_MIN = 0;
 const TAGGED_DOC_CONDITION = 4;
 
-function MergeDocuments({ setActive = () => {} }) {
+function MergeDocuments({ setActive = () => {}, allowed = true, setAllowed = () => {}, setBLData = () => {} }) {
 	const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 	const [selectBankShow, setSelectBankShow] = useState(false);
 
@@ -56,13 +57,27 @@ function MergeDocuments({ setActive = () => {} }) {
 	const handelMergeInvoices = () => {
 		setShowConfirmationModal(false);
 		mergeInvoices();
-		setSelectBankShow(true);
 	};
 
+	const changeBlData = useCallback(() => {
+		if (!isEmpty(data)) {
+			setBLData(data);
+		}
+	}, [data, setBLData]);
+
 	useEffect(() => {
+		changeBlData();
+	}, [changeBlData]);
+
+	const allowedCheck = useCallback(() => {
 		const isTagged = checkShipmentPdfUrl && billPdfUrl;
 		setSelectBankShow(isTagged);
-	}, [data, checkShipmentPdfUrl, billPdfUrl]);
+		setAllowed(!isTagged);
+	}, [checkShipmentPdfUrl, billPdfUrl, setAllowed]);
+
+	useEffect(() => {
+		allowedCheck();
+	}, [allowedCheck]);
 
 	const FUNCTIONS = {
 		renderTrashInvoice: (itemData) => {
@@ -164,8 +179,26 @@ function MergeDocuments({ setActive = () => {} }) {
 
 				<div className={styles.right}>
 					<div className={styles.header}>
-						Merged Documents
-						<div className={styles.dash} />
+						<div>
+							Merged Documents
+							<div className={styles.dash} />
+						</div>
+						<div>
+							{!allowed
+								? (
+									<IcMDelete
+										width={24}
+										height={24}
+										className={styles.delete}
+										onClick={() => {
+											deleteTaggedDocuments();
+											setSelectBankShow(false);
+											setAllowed(true);
+										}}
+									/>
+								)
+								: null}
+						</div>
 					</div>
 
 					<div className={styles.merged_doc}>
@@ -179,8 +212,6 @@ function MergeDocuments({ setActive = () => {} }) {
 									documents={documents}
 									documentsList={documentsList}
 									getDate={getDate}
-									deleteTaggedDocuments={deleteTaggedDocuments}
-									setSelectBankShow={setSelectBankShow}
 								/>
 							)}
 					</div>
@@ -193,6 +224,7 @@ function MergeDocuments({ setActive = () => {} }) {
 					setShowConfirmationModal={setShowConfirmationModal}
 					handelMergeInvoices={handelMergeInvoices}
 					data={data}
+					setAllowed={setAllowed}
 				/>
 			) : null}
 
