@@ -13,10 +13,9 @@ const formatedDate = (date) => formatDate({
 	separator  : 'T',
 });
 
-const useListExpenseConfig = ({ expenseFilters, sort }) => {
+const useListExpenseConfig = ({ expenseFilters, sort, subActiveTab }) => {
 	const { createdDateSortBy, amountSortBy } = sort || {};
 	const {
-		paymentStatus = '',
 		expenseCategory = '',
 		repeatsEvery = '',
 		searchValue = '',
@@ -44,7 +43,6 @@ const useListExpenseConfig = ({ expenseFilters, sort }) => {
 			await trigger({
 				params: {
 					repeatFrequency    : repeatsEvery || undefined,
-					paymentStatus      : paymentStatus || undefined,
 					category           : expenseCategory || undefined,
 					q                  : searchValue || undefined,
 					createdDateSortBy  : createdDateSortBy || undefined,
@@ -58,6 +56,7 @@ const useListExpenseConfig = ({ expenseFilters, sort }) => {
 					fromBillDate       : fromBillDate ? formatedDate(fromBillDate) : undefined,
 					toBillDate         : toBillDate ? formatedDate(toBillDate) : undefined,
 					cogoEntityId       : entity,
+					status             : subActiveTab === 'ALL_EXPENSE_CONFIGURATION' ? undefined : subActiveTab,
 				},
 			});
 		} catch (err) {
@@ -66,7 +65,6 @@ const useListExpenseConfig = ({ expenseFilters, sort }) => {
 	}, [
 		trigger,
 		repeatsEvery,
-		paymentStatus,
 		expenseCategory,
 		searchValue,
 		pageIndex,
@@ -80,6 +78,7 @@ const useListExpenseConfig = ({ expenseFilters, sort }) => {
 		fromBillDate,
 		toBillDate,
 		entity,
+		subActiveTab,
 	]);
 
 	return {

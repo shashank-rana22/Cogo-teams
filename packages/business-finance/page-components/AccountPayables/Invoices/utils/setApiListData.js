@@ -23,7 +23,7 @@ const setApiListData = ({ itemData = {}, value = '', key = '', checked = false, 
 		let lessTdsValueCrossed = false;
 		let maxTdsValueCrossed = false;
 
-		if (key === 'payableAmount') {
+		if (key === 'inputAmount') {
 			maxValueCrossed = +value > +payableValue;
 			lessValueCrossed = Number.parseInt(value, 10) <= MIN_AMOUNT;
 			maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;

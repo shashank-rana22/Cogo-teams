@@ -51,6 +51,7 @@ function RaiseTicketModal({
 		additionalInfo,
 		updateBillsTicketId,
 		shipmentData,
+		source: 'cost_advocate',
 	});
 
 	const { data:configData = {} } = useGetConfigurationCategory(shipmentData);
