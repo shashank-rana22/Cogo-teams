@@ -1,4 +1,5 @@
 import { Pill, Tooltip } from '@cogoport/components';
+import { COMMODITY_NAME_MAPPING } from '@cogoport/globalization/constants/commodities';
 import { isEmpty, startCase, upperCase } from '@cogoport/utils';
 
 import getLoadArray from '../../../../../../../../SearchResults/utils/getLoadArray';
@@ -18,6 +19,9 @@ function LoadDetails({ data = {}, item = {} }) {
 		total_weight = 0,
 		commodity = '',
 		cargo_handling_type = '',
+		packages_count = 0,
+		weight = 0,
+		volume = 0,
 	} = data;
 
 	return (
@@ -46,18 +50,33 @@ function LoadDetails({ data = {}, item = {} }) {
 				</Pill>
 			) : null}
 
+			{packages_count ? (
+				<Pill size="md" color="#F9F9F9">
+					{`${packages_count} ${packages_count <= ONE_COUNT ? 'Package' : 'Packages'}`}
+				</Pill>
+			) : null}
+
 			{total_volume ? (
 				<Pill size="md" color="#F9F9F9">{`${total_volume} CBM`}</Pill>
+			) : null}
+
+			{volume ? (
+				<Pill size="md" color="#F9F9F9">{`${volume} CBM`}</Pill>
 			) : null}
 
 			{total_weight ? (
 				<Pill size="md" color="#F9F9F9">{`${total_weight} KG`}</Pill>
 			) : null}
 
-			{(container_type || container_size || containers_count || total_volume || total_quantity) && <br />}
+			{weight ? (
+				<Pill size="md" color="#F9F9F9">{`${weight} KG`}</Pill>
+			) : null}
+
+			{(container_type || container_size || containers_count || total_volume || total_quantity
+				|| weight || volume) && <br />}
 
 			<Pill size="md" color="#F9F9F9">
-				{startCase(commodity) || 'All Commodities'}
+				{COMMODITY_NAME_MAPPING[commodity]?.name || startCase(commodity) || 'All Commodities'}
 			</Pill>
 
 			{cargo_handling_type ? (

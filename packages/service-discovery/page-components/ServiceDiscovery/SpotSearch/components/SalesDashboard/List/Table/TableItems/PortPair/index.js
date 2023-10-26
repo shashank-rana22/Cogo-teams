@@ -1,4 +1,4 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPortArrow } from '@cogoport/icons-react';
 
@@ -26,6 +26,8 @@ const onlySingleLocation = [
 	'destination_fcl_cfs',
 	'fcl_locals',
 	'fcl_freight_local',
+	'lcl_freight_local',
+	'air_freight_local',
 ];
 
 const SUFFIX_MAPPING = {
@@ -120,7 +122,11 @@ function PortPair({ item = {}, field = {} }) {
 	const originPortName = origin_display_name?.split(',')?.[GLOBAL_CONSTANTS.zeroth_index];
 	const destinationPortName = destination_display_name?.split(',')?.[GLOBAL_CONSTANTS.zeroth_index];
 
-	const { port = {} } = item || {};
+	const { port, airport, location	} = item || {};
+
+	const singleLocationPort = port || airport || location || {};
+
+	const moreWidth = showPortsName || isSingleLocation;
 
 	return (
 		<div className={styles.container}>
@@ -130,8 +136,12 @@ function PortPair({ item = {}, field = {} }) {
 			</span>
 
 			{ isSingleLocation ? (
-				<Tooltip content={<div className={styles.tooltip_content}>{port?.display_name}</div>}>
-					<div className={styles.location_name}>{port?.name}</div>
+				<Tooltip content={<div className={styles.tooltip_content}>{singleLocationPort?.display_name}</div>}>
+					<div
+						className={cl`${styles.location_name} ${moreWidth && styles.more_width}`}
+					>
+						{singleLocationPort?.name}
+					</div>
 				</Tooltip>
 			) : (
 				<Tooltip
@@ -157,14 +167,14 @@ function PortPair({ item = {}, field = {} }) {
 					>
 						{(origin || origin_display_name)?.length && (
 							<>
-								<div className={styles.location_name}>
+								<div className={cl`${styles.location_name} ${moreWidth && styles.more_width}`}>
 									{showPortsName ? originPortName : origin || origin_display_name}
 								</div>
 								{' '}
 								<IcMPortArrow height={24} width={24} style={{ margin: '0px 12px' }} />
 							</>
 						)}
-						<div className={styles.location_name}>
+						<div className={cl`${styles.location_name} ${moreWidth && styles.more_width}`}>
 							{showPortsName ? destinationPortName : destination || destination_display_name}
 						</div>
 					</div>
