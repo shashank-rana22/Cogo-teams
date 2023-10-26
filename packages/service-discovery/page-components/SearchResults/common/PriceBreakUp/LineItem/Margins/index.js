@@ -36,12 +36,12 @@ function Margins({ margins = [] }) {
 		if (!isEmpty(item)) {
 			const value = item[GLOBAL_CONSTANTS.zeroth_index];
 
-			const { value: marginValue = 0, margin_value = 0 } = value || {};
+			const { value: marginValue = 0, margin_value = 0, currency = '' } = value || {};
 
 			if (value?.type === 'percentage') {
-				margin = `${margin_value} ${label}`;
+				margin = `${currency}${margin_value} (${marginValue}%) ${label}`;
 			} else {
-				margin = `${(marginValue).toFixed(ROUND_OFF_VALUE)}${label}`;
+				margin = `${currency}${(marginValue).toFixed(ROUND_OFF_VALUE)} ${label}`;
 			}
 		} else {
 			margin = `0 ${label}`;
