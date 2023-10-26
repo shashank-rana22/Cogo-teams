@@ -5,10 +5,8 @@ const getAnimationDuration = ({ listLength = 0 }) => {
 		return '18s';
 	} if (listLength <= 40) {
 		return '28s';
-	} if (listLength > 40) {
-		return '35s';
 	}
-	return '50s';
+	return '35s';
 };
 
 export default getAnimationDuration;
