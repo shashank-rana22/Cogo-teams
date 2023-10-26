@@ -38,6 +38,7 @@ function DetailsCard({
 		}
 
 		if (['ended_at', 'date_of_birth'].includes(value)) {
+			console.log('test', getByKey(getMapping[key], value), value);
 			return getByKey(getMapping[key], value) ? formatDate({
 				date       : getByKey(getMapping[key], value),
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -48,6 +49,7 @@ function DetailsCard({
 	};
 
 	const labelValue = (value, key, isStartCase) => {
+		console.log('value', value);
 		if (Array.isArray(value)) {
 			let str = '';
 			value.forEach((Value) => {

@@ -42,8 +42,8 @@ const getEducationalQualificationsPayload = (data, detail) => {
 		(item) => ({
 			...item,
 			degree_proof : item?.degree_proof?.finalUrl ? item?.degree_proof?.finalUrl : item?.degree_proof,
-			started_at   : String(item.started_at),
-			ended_at     : String(item.ended_at),
+			started_at   : item.started_at,
+			ended_at     : item.ended_at,
 		}),
 	);
 
@@ -56,8 +56,8 @@ const getEducationalQualificationsPayload = (data, detail) => {
 const getEmploymentHistoryPayload = ({ data, offerLetter, paySlip, detail }) => {
 	const employee_experience_details = (data?.employment_history || []).map((item) => ({
 		...item,
-		started_at   : String(item.started_at),
-		ended_at     : String(item.ended_at),
+		started_at   : item.started_at,
+		ended_at     : item.ended_at,
 		offer_letter : offerLetter?.finalUrl,
 		payslip      : paySlip?.finalUrl,
 	}));
@@ -84,9 +84,6 @@ function useUpdateEmployeeDetails({
 	);
 
 	const updateEmployeeDetails = async ({ data, formType, content }) => {
-		console.log('🚀 ~ file: useUpdateEmployeeDetailsAdmin.js:87 ~ updateEmployeeDetails ~ content:', content);
-		console.log('🚀 ~ file: useUpdateEmployeeDetailsAdmin.js:87 ~ updateEmployeeDetails ~ formType:', formType);
-		console.log('🚀 ~ file: useUpdateEmployeeDetailsAdmin.js:87 ~ updateEmployeeDetails ~ data:', data);
 		try {
 			const { detail } = content || {};
 			// console.log('🚀 ~ file: useUpdateEmployeeDetailsAdmin.js:91 ~ updateEmployeeDetails ~ content:', content);
@@ -96,7 +93,7 @@ function useUpdateEmployeeDetails({
 				educational_qualification : getEducationalQualificationsPayload(data, detail),
 				employment_history        : getEmploymentHistoryPayload({ data, offerLetter, paySlip, detail }),
 			};
-
+			console.log('payload', GET_PAYLOAD_MAPPING?.educational_qualification);
 			await trigger({
 				data: {
 					id,

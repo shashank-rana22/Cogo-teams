@@ -36,7 +36,7 @@ function EducationalQualification({ getEmployeeDetails, data }) {
 
 	const onSubmit = (values) => {
 		updateEmployeeDetails({
-			data     : { educational_qualification: [...employee_education_details, values] },
+			data     : { educational_qualification: [employee_education_details, values] },
 			formType : FORM_TYPE_EDUCATIONAL_QUALIFICATION,
 			content  : employee_education_details,
 		});
