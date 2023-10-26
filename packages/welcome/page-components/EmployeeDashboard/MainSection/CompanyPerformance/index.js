@@ -1,8 +1,10 @@
 import { Select } from '@cogoport/components';
-import { IcCGreenCircle, IcMArrowRight } from '@cogoport/icons-react';
+import { IcCGreenCircle } from '@cogoport/icons-react';
 import React from 'react';
 
-import DepartmentHappyIndex from './DepartmentHappyIndex';
+// import DepartmentHappyIndex from './DepartmentHappyIndex';
+import useGetAbsenteeInsight from '../../../../hooks/useGetAbsenteeInsight';
+
 import DepartmentTracking from './DepartmentTracking';
 import EmployeeStatusDetails from './EmployeeStatusDetails';
 import styles from './styles.module.css';
@@ -13,7 +15,20 @@ const options = [
 	{ label: 'Harper Lee', value: 'To Kill a Mockingbird' },
 ];
 
-function CompanyPerformance() {
+function CompanyPerformance({
+	// data = {},
+	// feedRefetch = {},
+	// setFilters = {},
+	summaryData = {},
+}) {
+	console.log('data-details', summaryData);
+
+	const { absentee_list, employees_list, task_list } = summaryData || {};
+
+	const present_list = ((employees_list || []).length) - ((absentee_list || []).length);
+
+	const { data:absentData } = useGetAbsenteeInsight();
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex}>
@@ -35,20 +50,22 @@ function CompanyPerformance() {
 				<div className={styles.employee_data}>
 					<div className={styles.employee_abs}>
 						<div className={styles.employee_abs_title}>
-							Total Employees (Dept)
+							Total Employees
 						</div>
 						<div className={styles.employee_tot_count}>
-							350
+							{(employees_list || []).length}
 						</div>
 						<div className={styles.present_count}>
 							<IcCGreenCircle style={{ marginRight: '4px' }} />
-							323 Present today
+							{present_list}
+							{' '}
+							Present today
 						</div>
-						<div className={styles.view_abs_flex}>
+						{/* <div className={styles.view_abs_flex}>
 							View Absents
 							{' '}
 							<IcMArrowRight width={12} height={12} style={{ marginLeft: 2 }} />
-						</div>
+						</div> */}
 						<div className={styles.employee_abs_img}>
 							<img
 								alt="kpi-img"
@@ -57,11 +74,11 @@ function CompanyPerformance() {
 						</div>
 					</div>
 				</div>
-				<div className={styles.department_data}>
+				{/* <div className={styles.department_data}>
 					<DepartmentHappyIndex />
-				</div>
+				</div> */}
 			</div>
-			<EmployeeStatusDetails />
+			<EmployeeStatusDetails task_list={task_list} summaryData={summaryData} absentData={absentData} />
 			<DepartmentTracking />
 		</div>
 	);

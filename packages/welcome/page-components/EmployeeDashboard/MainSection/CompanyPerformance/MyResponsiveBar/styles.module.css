@@ -4,3 +4,8 @@
 	height: 350px;
 	padding-top: 10px;
 }
+
+.bar_chart .bar-container {
+	overflow: hidden;
+	border-radius: 8px 8px 0 0;
+}
