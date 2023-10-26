@@ -46,7 +46,7 @@ function CompanyPerformance({
 				<div className={styles.performance_company}>
 					<Toggle
 						name="a1"
-						size="md"
+						size="sm"
 						checked={isEmployeeDashboardActive}
 						onChange={(e) => setIsEmployeeDashboardActive(e.target.checked)}
 						onLabel="Company"

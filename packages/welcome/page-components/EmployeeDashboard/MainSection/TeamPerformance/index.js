@@ -16,6 +16,9 @@ import ThingsToDo from './ThingsToDo';
 // ];
 
 function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDashboardActive }) {
+	const { rating_list } = data || {};
+	const { avg_rating } = rating_list || {};
+	console.log('🚀 ~ file: index.js:19 ~ TeamPerformance ~ data:', data);
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex}>
@@ -26,7 +29,7 @@ function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDa
 				<div className={styles.performance_achievement}>
 					<Toggle
 						name="a1"
-						size="md"
+						size="sm"
 						checked={isEmployeeDashboardActive}
 						onChange={(e) => setIsEmployeeDashboardActive(e.target.checked)}
 						onLabel="Company"
@@ -49,7 +52,7 @@ function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDa
 				<div className={styles.kpi_data}>
 					<div className={styles.kpi_okr}>
 						<div className={styles.kpi_okr_title}>Team Rating</div>
-						<div className={styles.kpi_okr_count}>3.2</div>
+						<div className={styles.kpi_okr_count}>{avg_rating || '0'}</div>
 						<div className={styles.view_okr_flex}>
 							View Team KPI
 							{' '}

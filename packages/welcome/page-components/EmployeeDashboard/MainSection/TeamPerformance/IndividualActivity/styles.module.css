@@ -47,8 +47,9 @@
 
 .progress_flex_2 {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: space-between;
 	margin-top: 16px;
 	color: #4f4f4f;
 }
@@ -61,7 +62,6 @@
 
 .dot_2 {
 	display: flex;
-	flex-basis: 34%;
 	flex-direction: column;
 }
 
