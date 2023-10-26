@@ -23,38 +23,36 @@ function TeamLeaderBoard({ data = {} }) {
 
 				</Button>
 			</div>
+			{(ratingList || []).map((item) => (
+				<div className={styles.progress_flex} key={item}>
+					<div className={styles.achieved_target}>
+						<IcMArrowUp
+							width={14}
+							height={20}
+							style={{ marginLeft: 2, marginRight: '8', color: '#00821D' }}
+						/>
+						{' '}
 
-			<div className={styles.progress_flex}>
-				{(ratingList || []).map((item) => (
-					<>
-						<div className={styles.achieved_target} key={item}>
-							<IcMArrowUp
-								width={14}
-								height={20}
-								style={{ marginLeft: 2, marginRight: '8', color: '#00821D' }}
-							/>
+						<div className={styles.avatar}>
+							{item.image ? (
+								<div className={styles.profile_photo}>
+									<img src={item.image} alt="Profile" />
+								</div>
+							) : <Avatar personName={item.name} />}
 							{' '}
+							{item.name}
 
-							<div className={styles.avatar}>
-								{item.image ? (
-									<div className={styles.profile_photo}>
-										<img src={item.image} alt="Profile" />
-									</div>
-								) : <Avatar personName={item.name} />}
-								{' '}
-								{item.name}
-
-							</div>
 						</div>
-						<span className={styles.points}>
-							{' '}
-							{item.final_rating}
-							{' '}
-							pts
-						</span>
-					</>
-				))}
-			</div>
+					</div>
+					<span className={styles.points}>
+						{' '}
+						{item.final_rating || '0'}
+						{' '}
+						pts
+					</span>
+
+				</div>
+			))}
 			{/* <div className={styles.progress_flex}>
 				<div className={styles.achieved_target}>
 					<IcMArrowUp
