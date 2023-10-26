@@ -163,9 +163,9 @@ function VendorList(props) {
 			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
 		renderTds: (itemData = {}) => {
-			const { payableTds = 0, billCurrency = '' } = itemData || {};
+			const { tdsAmount, billCurrency = '' } = itemData || {};
 			const amount = formatAmount({
-				amount   : payableTds,
+				amount   : tdsAmount,
 				currency : billCurrency,
 				options  : {
 					style           : 'currency',

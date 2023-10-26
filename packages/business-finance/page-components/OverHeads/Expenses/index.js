@@ -549,9 +549,9 @@ function ExpenseComponent() {
 			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
 		renderTds: (itemData) => {
-			const { payableTds, billCurrency = '' } = itemData || {};
+			const { tdsAmount, billCurrency = '' } = itemData || {};
 			const amount = formatAmount({
-				amount   : payableTds,
+				amount   : tdsAmount,
 				currency : billCurrency,
 				options  : {
 					style           : 'currency',
