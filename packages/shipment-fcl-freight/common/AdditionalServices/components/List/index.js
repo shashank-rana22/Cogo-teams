@@ -151,7 +151,7 @@ function List({
 						className={styles.request_button}
 						disabled={is_job_closed_financially}
 					>
-						Request CSDm
+						Request CSD
 
 					</Button>
 				) : null}
