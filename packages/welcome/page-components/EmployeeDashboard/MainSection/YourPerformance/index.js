@@ -1,21 +1,24 @@
-// import { cl } from '@cogoport/components';
-// import { IcCStarfull, IcMArrowRight } from '@cogoport/icons-react';
+import { cl } from '@cogoport/components';
+import { IcCStarfull, IcMArrowRight } from '@cogoport/icons-react';
 import React from 'react';
 
+import CompanyPerformance from '../CompanyPerformance';
 import Feed from '../Feed';
+import TeamPerformance from '../TeamPerformance';
 
-// import Leaderboard from './Leaderboard';
-
-// import StoryPoints from './StoryPoints';
+import Leaderboard from './Leaderboard';
+import StoryPoints from './StoryPoints';
 import styles from './styles.module.css';
-// import WorkingHrs from './WorkingHrs';
-
-// https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rectangle_126.svg
+import WorkingHrs from './WorkingHrs';
 
 function YourPerformance({ data, feedRefetch, setFilters, summaryData }) {
+	console.log('summaryData', summaryData);
+
+	const { graph_detail } = summaryData || {};
+
 	return (
 		<>
-			{/* <div className={styles.container}>
+			<div className={styles.container}>
 				<div className={styles.flex}>
 					<div>
 						<div className={styles.title}>Your Performance</div>
@@ -59,16 +62,18 @@ function YourPerformance({ data, feedRefetch, setFilters, summaryData }) {
 					<div className={styles.story_points_data}>
 						<StoryPoints />
 					</div>
-				</div> */}
-			{/* <div className={styles.leaderboard_data}>
+				</div>
+				<div className={styles.leaderboard_data}>
 					<div className={styles.leaderboard}>
 						<Leaderboard />
 					</div>
 					<div className={styles.working_hrs}>
-						<WorkingHrs />
+						<WorkingHrs graph_detail={graph_detail} />
 					</div>
-				</div> */}
-			{/* </div> */}
+				</div>
+			</div>
+			<CompanyPerformance />
+			<TeamPerformance />
 			<div className={styles.company_feed}>
 				<div className={styles.company_feed_title}>Company Feed</div>
 				<div className={styles.sub_title}>Updates, announcements and more</div>
