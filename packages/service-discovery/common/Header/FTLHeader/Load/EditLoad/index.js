@@ -88,6 +88,7 @@ function EditLoad({
 	touch_points = {},
 	createLoading = false,
 	createSearch = () => {},
+	isMobile = false,
 }) {
 	const router = useRouter();
 
@@ -180,7 +181,7 @@ function EditLoad({
 			size="md"
 			show={show}
 			onClose={() => setShow(false)}
-			placement="right"
+			placement={isMobile ? 'bottom' : 'right'}
 			className={styles.modal}
 		>
 			<Modal.Body>

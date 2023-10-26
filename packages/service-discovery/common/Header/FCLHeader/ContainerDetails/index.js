@@ -20,6 +20,7 @@ function ContainerDetails({
 	isGuideViewed = false,
 	createLoading = false,
 	createSearch = () => {},
+	isMobile = false,
 }) {
 	const [showModal, setShowModal] = useState(false);
 
@@ -95,6 +96,7 @@ function ContainerDetails({
 					setRouterLoading={setRouterLoading}
 					createLoading={createLoading}
 					createSearch={createSearch}
+					isMobile={isMobile}
 				/>
 			) : null}
 		</div>

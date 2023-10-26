@@ -15,7 +15,7 @@ const LABEL_MAPPING = {
 function ListHeader({ type = '', currency = '', totalPrice = 0 }) {
 	return (
 		<div className={styles.header}>
-			<span>{LABEL_MAPPING[type] || startCase(type)}</span>
+			<span className={styles.type_label}>{LABEL_MAPPING[type] || startCase(type)}</span>
 
 			{type !== 'main_service' ? (
 				<div className={styles.total_price}>

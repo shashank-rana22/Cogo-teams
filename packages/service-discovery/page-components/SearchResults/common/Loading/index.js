@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 const BUNDLES_LOADING_COUNT = 2;
 const SERVICES_LOADING_COUNT = 6;
 
-function LoadingState() {
+function LoadingState({ isMobile = false }) {
 	return (
 		<div className={styles.container}>
 			<Placeholder
@@ -38,9 +38,9 @@ function LoadingState() {
 					{[...Array(SERVICES_LOADING_COUNT).keys()].map((item) => (
 						<div key={item} className={styles.loading_service_item}>
 							<Placeholder
-								height="50%"
-								width="25%"
-								margin="0px 0px 0px 40px"
+								height={isMobile ? '40%' : '50%'}
+								width={isMobile ? '50%' : '25%'}
+								margin={isMobile ? '0px 0px 0px 24px' : '0px 0px 0px 40px'}
 							/>
 
 							<IcMPlus

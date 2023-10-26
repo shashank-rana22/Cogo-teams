@@ -78,7 +78,7 @@ function LocationItem({ location = {}, service_type = '' }) {
 					placement="top"
 					className={styles.tooltip}
 					content={(
-						<div className={styles.location_country_text}>
+						<div className={styles.tooltip_content}>
 							{postal_code && SHOW_PINCODES.includes(service_type) ? `${postal_code}, ` : null}
 							{port_code ? `${port_code}, ` : null}
 							{SHOW_PINCODES.includes(service_type) && !port_code ? city_name : country_code}
@@ -148,7 +148,7 @@ function LocationDetails({
 							className={styles.icon}
 						/>
 
-						{isEmpty(touch_points) ? null : (
+						{isEmpty(enroute) ? null : (
 							<TouchPoints touchPoints={enroute} />
 						)}
 					</div>

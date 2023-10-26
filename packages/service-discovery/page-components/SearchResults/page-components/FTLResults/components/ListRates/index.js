@@ -22,6 +22,7 @@ function ListRates({
 	paginationProps = {},
 	contract_detail = {},
 	setRouterLoading = () => {},
+	isMobile = false,
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
@@ -39,6 +40,7 @@ function ListRates({
 				setShowFilterModal={setShowFilterModal}
 				setOpenAccordian={setOpenAccordian}
 				openAccordian={openAccordian}
+				isMobile={isMobile}
 			/>
 		);
 	}
@@ -59,6 +61,7 @@ function ListRates({
 						openAccordian={openAccordian}
 						setOpenAccordian={setOpenAccordian}
 						setRouterLoading={setRouterLoading}
+						isMobile={isMobile}
 					/>
 				</div>
 			</div>
@@ -75,6 +78,7 @@ function ListRates({
 				loading={loading}
 				importerExporterId={detail.importer_exporter_id}
 				contractDetail={contract_detail}
+				isMobile={isMobile}
 				style={{ marginBottom: 40 }}
 			/>
 
@@ -86,6 +90,7 @@ function ListRates({
 					detail={detail}
 					index={index}
 					setRouterLoading={setRouterLoading}
+					isMobile={isMobile}
 				/>
 			))}
 
@@ -112,7 +117,7 @@ function ListRates({
 
 			{loading ? null : (
 				<div className={styles.request_rate}>
-					<RequestRate details={detail} />
+					<RequestRate details={detail} isMobile={isMobile} />
 				</div>
 			)}
 		</div>

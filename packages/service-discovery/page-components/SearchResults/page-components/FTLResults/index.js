@@ -14,6 +14,7 @@ function FTLResults({
 	loading = false,
 	screen = 'listRateCard',
 	setRouterLoading = () => {},
+	isMobile = false,
 }) {
 	const SCREENS_MAPPING = {
 		listRateCard: {
@@ -30,12 +31,14 @@ function FTLResults({
 				loading,
 				refetch,
 				setRouterLoading,
+				isMobile,
 			},
 		},
 		selectedCardScreen: {
 			component : SelectedRateCard,
 			props     : {
 				setRouterLoading,
+				isMobile,
 			},
 		},
 	};

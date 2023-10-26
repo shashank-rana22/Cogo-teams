@@ -21,6 +21,7 @@ function Load({
 	touch_points = {},
 	createLoading = false,
 	createSearch = () => {},
+	isMobile = false,
 }) {
 	const [showModal, setShowModal] = useState(false);
 
@@ -100,6 +101,7 @@ function Load({
 					touch_points={touch_points}
 					createLoading={createLoading}
 					createSearch={createSearch}
+					isMobile={isMobile}
 				/>
 			) : null}
 		</div>

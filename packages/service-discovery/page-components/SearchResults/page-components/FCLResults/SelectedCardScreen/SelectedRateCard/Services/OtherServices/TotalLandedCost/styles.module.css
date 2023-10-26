@@ -13,3 +13,9 @@
 		margin-bottom: 12px;
 	}
 }
+
+.proceed_button {
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}

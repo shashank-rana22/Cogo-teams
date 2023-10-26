@@ -23,7 +23,7 @@ function FTLHeader({
 	createSearch = () => {},
 	isMobile = false,
 }) {
-	const [show, setShow] = useState(!isMobile);
+	const [show, setShow] = useState(false);
 
 	const isAllowedToEdit = activePage === 'search_results';
 
@@ -64,6 +64,7 @@ function FTLHeader({
 						touch_points={touch_points}
 						createLoading={createLoading}
 						createSearch={createSearch}
+						isMobile={isMobile}
 					/>
 
 					<Wallet
