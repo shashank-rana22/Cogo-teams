@@ -39,6 +39,7 @@ function RateCardTopSection({
 	selectedCogoAssuredCard = {},
 	showGuide = false,
 	cogoAssuredRates = [],
+	isMobile = false,
 }) {
 	return (
 		<div className={styles.top}>
@@ -56,6 +57,7 @@ function RateCardTopSection({
 				selectedCogoAssuredCard={selectedCogoAssuredCard}
 				showGuide={showGuide}
 				cogoAssuredRates={cogoAssuredRates}
+				isMobile={isMobile}
 			/>
 		</div>
 	);
@@ -176,6 +178,7 @@ function FclCard({
 	showGuide = false,
 	cogoAssuredRates = [],
 	setRouterLoading = () => {},
+	isMobile = false,
 }) {
 	const {
 		service_rates = {},
@@ -264,6 +267,7 @@ function FclCard({
 				selectedCogoAssuredCard={selectedCogoAssuredCard}
 				showGuide={showGuide}
 				cogoAssuredRates={cogoAssuredRates}
+				isMobile={isMobile}
 			/>
 
 			<MiddleSection

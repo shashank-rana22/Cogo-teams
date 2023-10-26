@@ -20,6 +20,7 @@ function Header({
 	setShowFilterModal = () => {},
 	airlines = [],
 	setScheduleLoading = () => {},
+	isMobile = false,
 }) {
 	return (
 		<div className={styles.container}>
@@ -39,6 +40,7 @@ function Header({
 					setOpenAccordian={setOpenAccordian}
 					airlines={airlines}
 					setScheduleLoading={setScheduleLoading}
+					isMobile={isMobile}
 				/>
 
 				<RefreshRate refetch={refetch} details={details} />

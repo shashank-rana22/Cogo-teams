@@ -14,6 +14,7 @@ function DislikeModal({
 	setLikeState = () => {},
 	setShowSuccessModal = () => {},
 	likeState = {},
+	isMobile = false,
 }) {
 	const { control, formState:{ errors }, handleSubmit, watch, setValue } = useForm();
 
@@ -45,7 +46,7 @@ function DislikeModal({
 	];
 
 	return (
-		<Modal size="md" show={show} onClose={onClose} placement="right">
+		<Modal size="md" show={show} onClose={onClose} placement={isMobile ? 'bottom' : 'right'}>
 			<Modal.Header title="Reason for dislike" />
 
 			<Modal.Body>

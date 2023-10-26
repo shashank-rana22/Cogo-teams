@@ -35,6 +35,7 @@ function ListRates({
 	scheduleLoading = false,
 	setSelectedSchedule = () => {},
 	selectedSchedule = () => {},
+	isMobile = false,
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
@@ -60,6 +61,7 @@ function ListRates({
 				setOpenAccordian={setOpenAccordian}
 				openAccordian={openAccordian}
 				airlines={airlines}
+				isMobile={isMobile}
 			/>
 		);
 	}
@@ -82,6 +84,7 @@ function ListRates({
 						setRouterLoading={setRouterLoading}
 						airlines={airlines}
 						setScheduleLoading={setScheduleLoading}
+						isMobile={isMobile}
 					/>
 
 					{showComparison ? (
@@ -102,6 +105,7 @@ function ListRates({
 				setScheduleLoading={setScheduleLoading}
 				setSelectedSchedule={setSelectedSchedule}
 				selectedSchedule={selectedSchedule}
+				isMobile={isMobile}
 			/>
 
 			<AppliedFilters
@@ -126,6 +130,7 @@ function ListRates({
 						infoBanner={infoBanner}
 						setInfoBanner={setInfoBanner}
 						setRouterLoading={setRouterLoading}
+						isMobile={isMobile}
 					/>
 
 					{index === GLOBAL_CONSTANTS.zeroth_index ? (
@@ -133,6 +138,7 @@ function ListRates({
 							loading={loading}
 							importerExporterId={detail.importer_exporter_id}
 							contractDetail={contract_detail}
+							isMobile={isMobile}
 							style={{ marginTop: 40 }}
 						/>
 					) : null}
@@ -162,7 +168,7 @@ function ListRates({
 
 			{loading ? null : (
 				<div className={styles.request_rate}>
-					<RequestRate details={detail} />
+					<RequestRate details={detail} isMobile={isMobile} />
 				</div>
 			)}
 		</div>

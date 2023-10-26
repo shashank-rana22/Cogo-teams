@@ -32,6 +32,7 @@ function RateCard({
 	showGuide = false,
 	cogoAssuredRates = [],
 	setRouterLoading = () => {},
+	isMobile = false,
 }) {
 	return (
 		<FclCard
@@ -48,6 +49,7 @@ function RateCard({
 			showGuide={showGuide}
 			cogoAssuredRates={cogoAssuredRates}
 			setRouterLoading={setRouterLoading}
+			isMobile={isMobile}
 		/>
 	);
 }
@@ -117,6 +119,7 @@ function ListRateCards({
 				setShowFilterModal={setShowFilterModal}
 				setOpenAccordian={setOpenAccordian}
 				openAccordian={openAccordian}
+				isMobile={isMobile}
 				// transitTime={transitTime}
 			/>
 		);
@@ -187,6 +190,7 @@ function ListRateCards({
 					setInfoBanner={setInfoBanner}
 					isGuideViewed={isGuideViewed}
 					setRouterLoading={setRouterLoading}
+					isMobile={isMobile}
 				/>
 			)}
 
@@ -195,6 +199,7 @@ function ListRateCards({
 					loading={loading}
 					importerExporterId={detail.importer_exporter_id}
 					contractDetail={contract_detail}
+					isMobile={isMobile}
 					style={{ marginBottom: 40 }}
 				/>
 			)}
@@ -216,12 +221,14 @@ function ListRateCards({
 						showGuide={isEmpty(cogoAssuredRates) && !index && !isGuideViewed}
 						cogoAssuredRates={cogoAssuredRates}
 						setRouterLoading={setRouterLoading}
+						isMobile={isMobile}
 					/>
 					{index === GLOBAL_CONSTANTS.zeroth_index && isEmpty(cogoAssuredRates) ? (
 						<ContractAd
 							loading={loading}
 							importerExporterId={detail.importer_exporter_id}
 							contractDetail={contract_detail}
+							isMobile={isMobile}
 							style={{ marginTop: 40 }}
 						/>
 					) : null}
@@ -254,6 +261,7 @@ function ListRateCards({
 					<RequestRate
 						details={detail}
 						rates={rates}
+						isMobile={isMobile}
 					/>
 				</div>
 			)}

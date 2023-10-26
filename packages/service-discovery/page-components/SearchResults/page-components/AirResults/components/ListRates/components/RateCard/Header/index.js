@@ -26,6 +26,7 @@ function Header({
 	infoBanner = {},
 	showGuide = false,
 	setInfoBanner = () => {},
+	isMobile = false,
 }) {
 	const {
 		airline = {},
@@ -126,7 +127,7 @@ function Header({
 			</div>
 
 			<div className={styles.right_section}>
-				<LikeDislike rateCardData={rate} detail={detail} />
+				<LikeDislike rateCardData={rate} detail={detail} isMobile={isMobile} />
 			</div>
 		</div>
 	);
