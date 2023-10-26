@@ -79,15 +79,13 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 										{' '}
 									</div>
 									<div className={invoiceType
-									&& invoiceObject.LedgerAmount <= DEFAULT_AMOUNT
+									&& invoiceObject?.LedgerAmount <= DEFAULT_AMOUNT
 										? styles.amount_open : styles.amount_close}
 									>
 										{formatAmount({
 											amount:
-												invoiceObject.LedgerAmount || DEFAULT_AMOUNT,
-											currency:
-												invoiceObject.LedgerAmount
-													?.ledgerCurrency || currency,
+												invoiceObject?.LedgerAmount || DEFAULT_AMOUNT,
+											currency,
 											options: {
 												style                 : 'currency',
 												currencyDisplay       : 'code',
@@ -96,7 +94,7 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 										})}
 										<div className={styles.count_open}>
 											(
-											{invoiceObject.ledgerCount}
+											{invoiceObject?.ledgerCount}
 											)
 										</div>
 									</div>
@@ -147,9 +145,9 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 							${styles.common_totaloutstanding}`}
 							>
 								{formatAmount({
-									amount: totalOutstanding || DEFAULT_AMOUNT,
-
-									options: {
+									amount  : totalOutstanding || DEFAULT_AMOUNT,
+									currency,
+									options : {
 										style                 : 'currency',
 										currencyDisplay       : 'code',
 										maximumFractionDigits : DEFAULT_AMOUNT,
