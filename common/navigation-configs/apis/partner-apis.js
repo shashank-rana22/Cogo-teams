@@ -5368,6 +5368,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'margin',
 		},
+		{
+			api          : 'list_entity_margins',
+			access_type  : 'private',
+			service_name : 'margin',
+		},
 	],
 	rate_sheet: [
 		{

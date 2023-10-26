@@ -1,9 +1,10 @@
-import { Button, Modal, TabPanel, Tabs } from '@cogoport/components';
+import { Button, Loader, Modal, TabPanel, Tabs } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useRef, useState } from 'react';
+import React from 'react';
 
+import EmptyState from '../../../common/EmptyState';
 import useGetMultiEntityMargin from '../../../hooks/useGetMultiEntityMargin';
 
 import MarginForm from './MarginForm';
@@ -31,46 +32,35 @@ function TableHead() {
 }
 
 function MultiEntityMargin() {
-	const formRef = useRef(null);
-
-	const [activeEntities, setActiveEntities] = useState([]);
-
 	const {
 		activeService = '',
 		setActiveService = () => {},
-		// control = {},
 		showModal = {},
 		setShowModal = () => {},
-		// formValues = {},
 		options = [],
+		submitSlabDetails = () => {},
+		showHighlighted = () => {},
+		setActiveEntities = () => { },
 		cogoEntitiesList = [],
-		// handleSubmit = () => {},
-		// onSubmit = () => {},
+		loadingListCogoEntities = false,
+		newCogoEntitiesList = [],
+		formRef,
+		entityMarginsList = [],
+		getButtonLabel = () => { },
+		triggerListEntityMargins = () => { },
 	} = useGetMultiEntityMargin();
 
-	const newCogoEntitiesList = cogoEntitiesList.map((item) => {
-		const arr = cogoEntitiesList.map((i) => [item, i]);
-		arr.unshift(item);
-		return arr;
-	});
+	if (loadingListCogoEntities) {
+		return (
+			<div className={styles.loader_container}>
+				<Loader themeType="primary" />
+			</div>
+		);
+	}
 
-	const entityNames = (cogoEntitiesList || []).map((i) => i.business_name);
-
-	entityNames.unshift('--');
-
-	newCogoEntitiesList.unshift(entityNames);
-
-	const submitSlabDetails = () => formRef?.current?.submitFun();
-
-	const showHighlighted = (rI, cI, ri, ci) => {
-		if ((activeEntities[GLOBAL_CONSTANTS.zeroth_index]?.business_name
-			=== cI.business_name
-			|| activeEntities[1]?.business_name === rI?.[ci])
-			&& (!isEmpty(activeEntities))) {
-			return true;
-		}
-		return false;
-	};
+	if (isEmpty(cogoEntitiesList)) {
+		return <EmptyState />;
+	}
 
 	return (
 		<div>
@@ -106,40 +96,37 @@ function MultiEntityMargin() {
 									<TableHead />
 								) : (
 									<div>
-										{!rowIdx ? (
-											<div className={styles.name}>
-												{rowItem?.[colIdx]}
-											</div>
-										) : (
-											<div>
-												{!colIdx ? (
-													<div className={styles.name}>
-														{colItem.business_name}
-													</div>
-												) : (
-													<div className={styles.btn_wrapper}>
-														{colItem?.[GLOBAL_CONSTANTS.zeroth_index]?.id
+										{!rowIdx ? (<div className={styles.name}>{rowItem?.[colIdx]}</div>)
+											: (
+												<div>
+													{!colIdx ? (
+														<div className={styles.name}>
+															{colItem.business_name}
+														</div>
+													) : (
+														<div className={styles.btn_wrapper}>
+															{colItem?.[GLOBAL_CONSTANTS.zeroth_index]?.id
 																		=== colItem?.[1]?.id ? (
-																null
-															) : (
-																<div
-																	role="presentation"
-																	onClick={() => setShowModal({
-																		entities       : colItem,
-																		action         : 'view',
-																		activeService,
-																		setActiveService,
-																		serviceOptions : options,
-																	})}
-																	className={styles.view_btn}
-																>
-																	View/Edit Margins
-																</div>
-															)}
-													</div>
-												)}
-											</div>
-										)}
+																	null
+																) : (
+																	<div
+																		role="presentation"
+																		onClick={() => setShowModal({
+																			entities       : colItem,
+																			action         : 'view',
+																			activeService,
+																			setActiveService,
+																			serviceOptions : options,
+																		})}
+																		className={styles.view_btn}
+																	>
+																		{getButtonLabel(entityMarginsList, colItem)}
+																	</div>
+																)}
+														</div>
+													)}
+												</div>
+											)}
 									</div>
 								)}
 							</div>
@@ -152,7 +139,10 @@ function MultiEntityMargin() {
 				<Modal
 					size="xl"
 					show={!isEmpty(showModal?.entities)}
-					onClose={() => setShowModal({})}
+					onClose={() => {
+						triggerListEntityMargins();
+						setShowModal({});
+					}}
 				>
 					<Modal.Header title="View/Add Slabs" />
 					<Modal.Body style={{ minHeight: '300px' }}>
