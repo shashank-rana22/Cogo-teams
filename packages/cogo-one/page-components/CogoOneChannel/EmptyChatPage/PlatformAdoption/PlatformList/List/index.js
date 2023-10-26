@@ -33,6 +33,7 @@ function List({
 	const [scheduleDemo, setScheduleDemo] = useState({
 		isScheduleDemo : false,
 		scheduleData   : null,
+		scheduleType   : '',
 	});
 	const [rejectData, setRejectData] = useState({
 		showRejectModal : false,
@@ -121,7 +122,7 @@ function List({
 	if (isEmpty(list)) {
 		return (
 			<div className={styles.empty_container}>
-				<Image src={GLOBAL_CONSTANTS.image_url.list_empty} width={300} height={300} />
+				<Image src={GLOBAL_CONSTANTS.image_url.list_empty} width={380} height={300} />
 			</div>
 		);
 	}

@@ -24,7 +24,7 @@ const useUpdateRequestStatus = ({ setRejectData = () => {}, onboardingRequest = 
 				showRejectModal : false,
 				reason          : [],
 			}));
-			onboardingRequest();
+			onboardingRequest({ page: 1 });
 			Toast.success('Account updated successfully');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));

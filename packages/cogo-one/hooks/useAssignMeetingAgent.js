@@ -36,8 +36,8 @@ const useAssignMeetingAgent = ({ setScheduleDemo = () => {}, onboardingRequest =
 			});
 
 			Toast.success('Scheduled demo approved !!');
-			setScheduleDemo(() => ({ isScheduleDemo: false, scheduleData: {} }));
-			onboardingRequest();
+			setScheduleDemo(() => ({ isScheduleDemo: false, scheduleData: {}, scheduleType: '' }));
+			onboardingRequest({ page: 1 });
 
 			dispatch(
 				setProfileState({

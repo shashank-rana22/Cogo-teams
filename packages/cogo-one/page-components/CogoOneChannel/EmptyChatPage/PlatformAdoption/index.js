@@ -94,6 +94,7 @@ function PlatformAdoption({
 						currentPage={page}
 						totalItems={total_count}
 						pageSize={page_limit}
+						onPageChange={(val) => onboardingRequest({ page: val })}
 					/>
 				</div>
 			) : null}

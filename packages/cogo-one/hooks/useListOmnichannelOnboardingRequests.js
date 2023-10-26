@@ -6,13 +6,14 @@ import { useCallback, useEffect } from 'react';
 const DEFAULT_PAGE_LIMIT = 6;
 const LIST_PAGE_LIMIT = 10;
 
-const getParams = ({ agentId = '', showHistory = false }) => ({
+const getParams = ({ agentId = '', showHistory = false, page = 1 }) => ({
 	page_limit : !showHistory ? DEFAULT_PAGE_LIMIT : LIST_PAGE_LIMIT,
 	filters    : {
 		agent_id       : agentId,
 		status         : !showHistory ? 'active' : undefined,
 		request_status : !showHistory ? 'pending' : undefined,
 	},
+	page,
 });
 
 const useListOmnichannelOnboardingRequests = ({ showHistory = false }) => {
@@ -28,10 +29,10 @@ const useListOmnichannelOnboardingRequests = ({ showHistory = false }) => {
 		method : 'get',
 	}, { manual: true });
 
-	const onboardingRequest = useCallback(() => {
+	const onboardingRequest = useCallback(({ page = 1 }) => {
 		try {
 			trigger({
-				params: getParams({ agentId, showHistory }),
+				params: getParams({ agentId, showHistory, page }),
 			});
 		} catch (error) {
 			console.error('error:', error);
@@ -45,7 +46,7 @@ const useListOmnichannelOnboardingRequests = ({ showHistory = false }) => {
 	}, [trigger, agentId, showHistory, dispatch]);
 
 	useEffect(() => {
-		onboardingRequest();
+		onboardingRequest({ page: 1 });
 	}, [onboardingRequest, requestApi]);
 
 	return {

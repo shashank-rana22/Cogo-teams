@@ -166,8 +166,9 @@ function DemoCard({ list = [], mailProps = {}, setScheduleDemo = () => {} }) {
 						themeType="secondary"
 						onClick={() => setScheduleDemo((prev) => ({
 							...prev,
-							isScheduleDemo : true,
+							scheduleType   : 'demo',
 							scheduleData   : item,
+							isScheduleDemo : true,
 						}))}
 					>
 						<IcMCalendar fill="grey" className={styles.schedule_demo_icon} />

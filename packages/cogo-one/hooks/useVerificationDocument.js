@@ -51,7 +51,7 @@ const useVerificationDocument = ({
 				verifyType         : '',
 				accountType        : '',
 			});
-			onboardingRequest();
+			onboardingRequest({ page: 1 });
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
