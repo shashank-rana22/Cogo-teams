@@ -27,6 +27,7 @@ const ELEMENT_MAPPING = {
 	text                   : InputController,
 	'mobile-number-select' : MobileNumberController,
 	SingleDateRange        : DatepickerController,
+	'date-select'          : DatepickerController,
 	fileUpload             : UploadController,
 	email                  : InputController,
 	asyncSelect            : AsyncSelectController,

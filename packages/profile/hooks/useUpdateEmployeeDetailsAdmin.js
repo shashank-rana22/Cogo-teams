@@ -8,34 +8,34 @@ const getUpdatedKeysInPayload = (newValue, oldValue) => {
 	return newValue;
 };
 
-const getPersonalInfoPayload = (data, detail) => {
-	const NEW_DATA = {};
-	(Object.keys(data) || []).forEach((element) => {
-		NEW_DATA[element] = getUpdatedKeysInPayload(data[element], detail?.[element]);
-	});
+// const getPersonalInfoPayload = (data, detail) => {
+// 	const NEW_DATA = {};
+// 	(Object.keys(data) || []).forEach((element) => {
+// 		NEW_DATA[element] = getUpdatedKeysInPayload(data[element], detail?.[element]);
+// 	});
 
-	const emergency_contact_details = [
-		{
-			mobile_number       : data?.emergency_contact_details?.number,
-			mobile_country_code : data?.emergency_contact_details?.country_code,
-		},
-	];
+// 	const emergency_contact_details = [
+// 		{
+// 			mobile_number       : data?.emergency_contact_details?.number,
+// 			mobile_country_code : data?.emergency_contact_details?.country_code,
+// 		},
+// 	];
 
-	return {
-		...NEW_DATA,
-		passport_size_photo_url:
-				getUpdatedKeysInPayload(
-					data?.passport_size_photo_url?.finalUrl || data?.passport_size_photo_url,
-					detail?.passport_size_photo_url,
-				),
-		mobile_number: getUpdatedKeysInPayload(data?.mobile_number?.number, detail?.mobile_number),
-		mobile_country_code:
-				getUpdatedKeysInPayload(data?.mobile_number?.country_code, detail?.mobile_country_code),
-		date_of_birth: String(data?.date_of_birth),
-		emergency_contact_details:
-				getUpdatedKeysInPayload(emergency_contact_details, detail?.emergency_contact_details),
-	};
-};
+// 	return {
+// 		...NEW_DATA,
+// 		passport_size_photo_url:
+// 				getUpdatedKeysInPayload(
+// 					data?.passport_size_photo_url?.finalUrl || data?.passport_size_photo_url,
+// 					detail?.passport_size_photo_url,
+// 				),
+// 		mobile_number: getUpdatedKeysInPayload(data?.mobile_number?.number, detail?.mobile_number),
+// 		mobile_country_code:
+// 				getUpdatedKeysInPayload(data?.mobile_number?.country_code, detail?.mobile_country_code),
+// 		date_of_birth: String(data?.date_of_birth),
+// 		emergency_contact_details:
+// 				getUpdatedKeysInPayload(emergency_contact_details, detail?.emergency_contact_details),
+// 	};
+// };
 
 const getEducationalQualificationsPayload = (data, detail) => {
 	const employee_education_details = (data?.educational_qualification || []).map(
@@ -47,26 +47,28 @@ const getEducationalQualificationsPayload = (data, detail) => {
 		}),
 	);
 
+	console.log('employee_education_details', employee_education_details);
+
 	return {
 		employee_education_details:
 				getUpdatedKeysInPayload(employee_education_details, detail?.employee_education_details),
 	};
 };
 
-const getEmploymentHistoryPayload = ({ data, offerLetter, paySlip, detail }) => {
-	const employee_experience_details = (data?.employment_history || []).map((item) => ({
-		...item,
-		started_at   : item.started_at,
-		ended_at     : item.ended_at,
-		offer_letter : offerLetter?.finalUrl,
-		payslip      : paySlip?.finalUrl,
-	}));
+// const getEmploymentHistoryPayload = ({ data, offerLetter, paySlip, detail }) => {
+// 	const employee_experience_details = (data?.employment_history || []).map((item) => ({
+// 		...item,
+// 		started_at   : item.started_at,
+// 		ended_at     : item.ended_at,
+// 		offer_letter : offerLetter?.finalUrl,
+// 		payslip      : paySlip?.finalUrl,
+// 	}));
 
-	return {
-		employee_experience_details:
-				getUpdatedKeysInPayload(employee_experience_details, detail?.employee_experience_details),
-	};
-};
+// 	return {
+// 		employee_experience_details:
+// 				getUpdatedKeysInPayload(employee_experience_details, detail?.employee_experience_details),
+// 	};
+// };
 
 function useUpdateEmployeeDetails({
 	id,
@@ -83,21 +85,22 @@ function useUpdateEmployeeDetails({
 		{ manual: true },
 	);
 
-	const updateEmployeeDetails = async ({ data, formType, content }) => {
+	const updateEmployeeDetails = async (values = {}) => {
 		try {
-			const { detail } = content || {};
+			// const { detail } = content || {};
 			// console.log('🚀 ~ file: useUpdateEmployeeDetailsAdmin.js:91 ~ updateEmployeeDetails ~ content:', content);
 			console.log('yes printing');
-			const GET_PAYLOAD_MAPPING = {
-				personal_info             : getPersonalInfoPayload(data, detail),
-				educational_qualification : getEducationalQualificationsPayload(data, detail),
-				employment_history        : getEmploymentHistoryPayload({ data, offerLetter, paySlip, detail }),
-			};
-			console.log('payload', GET_PAYLOAD_MAPPING?.educational_qualification);
+
+			// console.log('payload', GET_PAYLOAD_MAPPING?.educational_qualification);
 			await trigger({
 				data: {
 					id,
-					...GET_PAYLOAD_MAPPING?.[formType],
+					// ...(getEducationalQualificationsPayload(data,) || []),
+					employee_education_details: [{
+						...values,
+						degree_proof: values?.degree_proof?.finalUrl || values?.degree_proof,
+					}],
+
 				},
 			});
 

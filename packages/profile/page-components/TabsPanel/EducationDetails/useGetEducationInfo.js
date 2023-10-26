@@ -4,6 +4,7 @@ const MAPPING = {
 	graduate_degree       : 'GRADUATE DEGREE',
 	master_degree         : 'MASTERS DEGREE',
 	post_graduates_degree : 'POST GRADUATES DEGREE',
+	doctorate_degree      : 'Doctorate Degree',
 };
 
 const useGetEducationInfo = (employee_education_details = []) => ((employee_education_details || []).map((detail) => ({
