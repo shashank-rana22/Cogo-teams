@@ -25,9 +25,8 @@ function AddressModal({
 
 	const changeSelectedAdd = (info) => {
 		setAddressData((prev) => ({
-			mainAddress      : [info, prev.mainAddress[GLOBAL_CONSTANTS.zeroth_index]],
-			remainingAddress : [prev.mainAddress[GLOBAL_CONSTANTS.one],
-				...prev.remainingAddress.filter((ele) => ele?.id !== info?.id)],
+			...prev,
+			mainAddress: [info, prev.mainAddress[GLOBAL_CONSTANTS.zeroth_index]],
 		}));
 		setSelectedAddress(info);
 		closeModalHandler();

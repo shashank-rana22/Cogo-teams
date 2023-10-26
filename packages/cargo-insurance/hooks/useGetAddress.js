@@ -10,8 +10,8 @@ const MAX = 2;
 
 function useAddress({ billingType, orgId = '', preSelectedAddress = {}, setSelectedAddress }) {
 	const [addressData, setAddressData] = useState({
-		remainingAddress : [],
-		mainAddress      : [],
+		allAddress  : [],
+		mainAddress : [],
 	});
 
 	const [{ loading, data: addressList }, trigger] = useRequest({
@@ -29,8 +29,8 @@ function useAddress({ billingType, orgId = '', preSelectedAddress = {}, setSelec
 			});
 			const { data } = resp || {};
 			setAddressData({
-				mainAddress      : data.slice(START_INDEX, MAX),
-				remainingAddress : data.slice(MAX),
+				mainAddress : data.slice(START_INDEX, MAX),
+				allAddress  : data,
 			});
 		} catch (error) {
 			if (error?.code !== 'ERR_CANCELED') Toast.error(getApiErrorString(error?.response?.data));
@@ -54,8 +54,8 @@ function useAddress({ billingType, orgId = '', preSelectedAddress = {}, setSelec
 			addressList[GLOBAL_CONSTANTS.zeroth_index] = preSelectedAddress;
 
 			setAddressData({
-				mainAddress      : addressList.slice(START_INDEX, MAX),
-				remainingAddress : addressList.slice(MAX),
+				mainAddress : addressList.slice(START_INDEX, MAX),
+				allAddress  : addressList,
 			});
 		}
 	}, [addressList, preSelectedAddress, setSelectedAddress]);

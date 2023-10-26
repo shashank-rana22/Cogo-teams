@@ -25,7 +25,7 @@ function Address({ billingType, setBillingType, orgId = '', preSelectedAddress =
 		loading, getBillingAddress,
 	} = useGetAddress({ billingType, setSelectedAddress, orgId, preSelectedAddress });
 
-	const { mainAddress = [], remainingAddress = [] } = addressData || {};
+	const { mainAddress = [], allAddress = [] } = addressData || {};
 	const addressList = loading ? [...Array(2).keys()] : mainAddress;
 
 	useImperativeHandle(ref, () => () => selectedAddress, [selectedAddress]);
@@ -59,7 +59,7 @@ function Address({ billingType, setBillingType, orgId = '', preSelectedAddress =
 						<span className={styles.btn_text}>{t('cargoInsurance:create_address')}</span>
 					</Button>
 
-					{!isEmpty(remainingAddress) ? (
+					{allAddress.length > 2 ? (
 						<Button
 							themeType="linkUi"
 							onClick={() => setAddressModal({
@@ -99,7 +99,7 @@ function Address({ billingType, setBillingType, orgId = '', preSelectedAddress =
 			{addressModal.openModal ? (
 				<AddressModal
 					orgId={orgId}
-					data={remainingAddress}
+					data={allAddress}
 					setAddressData={setAddressData}
 					addressModal={addressModal}
 					setAddressModal={setAddressModal}
