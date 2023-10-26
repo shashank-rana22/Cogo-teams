@@ -42,7 +42,7 @@ function List(props) {
 
 			<div
 				className={styles.list_body_container}
-				style={{ top: isOverflowed ? '' : '50px' }}
+				style={{ top: isOverflowed ? '50px' : '' }}
 				ref={divRef}
 			>
 				<div
