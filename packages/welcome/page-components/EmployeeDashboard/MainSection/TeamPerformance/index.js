@@ -26,7 +26,7 @@ function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDa
 				<div className={styles.performance_achievement}>
 					<Toggle
 						name="a1"
-						size="md"
+						size="sm"
 						checked={isEmployeeDashboardActive}
 						onChange={(e) => setIsEmployeeDashboardActive(e.target.checked)}
 						onLabel="Company"

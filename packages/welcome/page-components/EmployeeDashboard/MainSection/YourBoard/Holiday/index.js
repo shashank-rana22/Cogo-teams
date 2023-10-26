@@ -28,8 +28,6 @@ function Holiday({ data = {}, loading = false }) {
 
 	const { data : holidayData } = useGetHolidayList();
 
-	console.log('holidayData', holidayData);
-
 	const getDate = (format) => formatDate({
 		date       : holiday_date,
 		dateFormat : GLOBAL_CONSTANTS.formats.date[format],
@@ -84,7 +82,7 @@ function Holiday({ data = {}, loading = false }) {
 				>
 					<Modal.Header title="Holidays" />
 					<Modal.Body>
-						<Table columns={columns} data={holidayData} />
+						<Table columns={columns} data={holidayData || []} />
 					</Modal.Body>
 				</Modal>
 			) }
