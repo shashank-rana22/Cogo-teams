@@ -25,7 +25,7 @@ function PublicDashboard() {
 				updatedAt={updatedAt}
 			/>
 
-			<Body view={view} dateRange={dateRange} setUpdatedAt={setUpdatedAt} />
+			<Body view={view} dateRange={dateRange} updatedAt={updatedAt} setUpdatedAt={setUpdatedAt} />
 		</div>
 	);
 }

@@ -1,6 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import LoadingState from '../../../../../common/LoadingState';
 import List from '../../../common/List';
@@ -10,14 +11,31 @@ import styles from './styles.module.css';
 import TopUsers from './TopUsers';
 
 function LeftPanel(props) {
-	const { view, dateRange, setUpdatedAt } = props;
+	const { view, dateRange, updatedAt, setUpdatedAt } = props;
 
-	const { list, loading, total_report_count: totalReportCount } = useGetLeaderbordList({
+	const { list, loading, total_report_count: totalReportCount, trigger } = useGetLeaderbordList({
 		view,
 		dateRange,
 		pageLimit: 50,
 		setUpdatedAt,
 	});
+
+	useEffect(() => {
+		const startTime = new Date(updatedAt);
+		const targetTime = new Date(startTime.getTime() + 35 * 60 * 1000);
+
+		const currentTime = new Date();
+		const timeToWait = targetTime - currentTime;
+
+		if (timeToWait > 0) {
+			const timerId = setTimeout(() => {
+				trigger();
+			}, timeToWait);
+			return () => clearTimeout(timerId);
+		}
+
+		return () => {};
+	}, [trigger, updatedAt]);
 
 	const [firstUser, secondUser, thirdUser, ...tableList] = list;
 

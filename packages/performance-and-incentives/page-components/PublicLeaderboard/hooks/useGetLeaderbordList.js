@@ -18,7 +18,7 @@ function useGetLeaderbordList(props) {
 		},
 	});
 
-	const [{ data, loading }] = useAllocationRequest({
+	const [{ data, loading }, trigger] = useAllocationRequest({
 		url     : '/reports',
 		method  : 'GET',
 		authkey : 'get_agent_scoring_reports',
@@ -49,6 +49,7 @@ function useGetLeaderbordList(props) {
 	return {
 		list,
 		loading,
+		trigger,
 		total_report_count,
 	};
 }

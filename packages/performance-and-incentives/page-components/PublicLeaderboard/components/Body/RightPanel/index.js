@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 const durationOptions = DURATION_OPTIONS.filter((item) => item.value !== 'custom');
 
 function RightPanel(props) {
-	const { view } = props;
+	const { view, updatedAt } = props;
 
 	const { startDate, endDate } = getLastMonthStartAndEndDates();
 
@@ -45,7 +45,7 @@ function RightPanel(props) {
 					options={durationOptions}
 					className={styles.period_selector}
 				/>
-				<LeaderBoard view={view} dateRange={topDateRange} />
+				<LeaderBoard view={view} dateRange={topDateRange} updatedAt={updatedAt} />
 			</div>
 
 			<div className={styles.inner_container}>
@@ -60,7 +60,7 @@ function RightPanel(props) {
 					options={durationOptions}
 					className={styles.period_selector}
 				/>
-				<LeaderBoard view={view} dateRange={bottomDateRange} />
+				<LeaderBoard view={view} dateRange={bottomDateRange} updatedAt={updatedAt} />
 			</div>
 		</div>
 	);
