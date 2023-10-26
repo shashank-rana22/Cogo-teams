@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { cl, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPlusInCircle, IcMCancel } from '@cogoport/icons-react';
@@ -123,10 +123,7 @@ function Events({
 				/>
 
 				<div className={styles.footer}>
-					{addEvents ? <IcMPlusInCircle fill="#034AFD" /> : <IcMCancel fill="#034AFD" />}
-					<div
-						className={styles.text}
-						role="presentation"
+					<Button
 						onClick={() => {
 							setEventDetails((prevEventDetails) => ({
 								...prevEventDetails,
@@ -137,9 +134,17 @@ function Events({
 							handleClose();
 							setActiveTab('schedules');
 						}}
+						themeType={addEvents ? 'primary' : 'secondary'}
+						size="md"
 					>
-						{addEvents ? 'Add Reminder' : 'Cancel'}
-					</div>
+						{addEvents ? <IcMPlusInCircle fill="#fff" /> : <IcMCancel fill="#4f4f4f" />}
+						<div
+							className={styles.text}
+							style={{ color: addEvents ? '#fff' : '#4f4f4f' }}
+						>
+							{addEvents ? 'Add Reminder' : 'Cancel'}
+						</div>
+					</Button>
 				</div>
 			</div>
 		</>
