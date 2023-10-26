@@ -148,7 +148,7 @@ function LocationDetails({
 							className={styles.icon}
 						/>
 
-						{isEmpty(touch_points) ? null : (
+						{isEmpty(enroute) ? null : (
 							<TouchPoints touchPoints={enroute} />
 						)}
 					</div>
