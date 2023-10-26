@@ -2,7 +2,8 @@ import { Table, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRight, IcMHome } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { Image } from '@cogoport/next';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -68,9 +69,16 @@ function PlatformHistory({ setShowHistory = () => {}, list = [], loading = false
 				<IcMArrowRight className={styles.side_arrow} />
 				<div className={styles.title}>Task History</div>
 			</div>
-			<div className={styles.content}>
-				<Table columns={COLUMNS} data={list} loading={loading} />
-			</div>
+			{!isEmpty(list) ? (
+				<div className={styles.content}>
+					<Table columns={COLUMNS} data={list} loading={loading} />
+				</div>
+
+			) : (
+				<div className={styles.empty_container}>
+					<Image src={GLOBAL_CONSTANTS.image_url.list_empty} width={300} height={300} />
+				</div>
+			)}
 		</div>
 	);
 }
