@@ -36,7 +36,7 @@ function YourPerformance({ data, feedRefetch, setFilters, summaryData }) {
 							{user_role !== 'employee' && (
 								<Toggle
 									name="a1"
-									size="md"
+									size="sm"
 									checked={isEmployeeDashboardActive}
 									onChange={(e) => setIsEmployeeDashboardActive(e.target.checked)}
 									onLabel="Company"
