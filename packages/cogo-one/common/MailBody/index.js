@@ -11,6 +11,7 @@ import useGetSignature from '../../hooks/useGetSignature';
 import MailActions from './mailActions';
 import MailAttachments from './MailAttachments';
 import MailHeader from './MailHeader';
+import MessageDetails from './MessageDetails';
 import styles from './styles.module.css';
 
 const getEmailText = ({
@@ -58,10 +59,12 @@ function MailBody({
 	isTheFirstMessageId = '',
 	firestore = {},
 	roomId = '',
+	activeMessageCard = {},
 }) {
 	const [initialLoad, setInitialLoad] = useState(true);
 	const [expandedState, setExpandedState] = useState(false);
 	const [draftQuillBody, setDraftQuillBody] = useState({});
+	const [modalData, setModalData] = useState(null);
 
 	const { source = '' } = formattedData || {};
 	const { viewType } = mailProps;
@@ -171,6 +174,10 @@ function MailBody({
 					handleExpandClick={handleExpandClick}
 					isDraft={isDraft}
 					emailStatus={emailStatus}
+					setModalData={setModalData}
+					modalData={modalData}
+					activeMessageCard={activeMessageCard}
+					viewType={viewType}
 				/>
 
 				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
@@ -208,6 +215,15 @@ function MailBody({
 					</div>
 				</div>
 			</div>
+
+			{isEmpty(modalData)
+				? null
+				: (
+					<MessageDetails
+						modalData={modalData}
+						setModalData={setModalData}
+					/>
+				)}
 		</div>
 	);
 }
