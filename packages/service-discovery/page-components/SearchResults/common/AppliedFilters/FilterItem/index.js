@@ -8,6 +8,11 @@ import getControls from '../../Filters/getControls';
 
 import styles from './styles.module.css';
 
+const SCHEDULE_TYPE_MAPPING = {
+	transshipment : 'Trans-shipment',
+	direct        : 'Direct-shipment',
+};
+
 const formattedDate = (date = '', format = 'dd-MMM-yy') => formatDate({
 	date,
 	dateFormat : GLOBAL_CONSTANTS.formats.date[format],
@@ -23,14 +28,14 @@ const getLabel = (key, value) => {
 		return `Transit Time - ${value?.[GLOBAL_CONSTANTS.zeroth_index]} to ${value?.[GLOBAL_CONSTANTS.one]} days`;
 	}
 
+	if (key === 'schedule_type') {
+		return SCHEDULE_TYPE_MAPPING[value];
+	}
+
 	const formattedValue = startCase(value);
 
 	if (!formattedValue) {
 		return '';
-	}
-
-	if (key === 'schedule_type') {
-		return `${formattedValue}-Shipment`;
 	}
 
 	if (key === 'offers') {
