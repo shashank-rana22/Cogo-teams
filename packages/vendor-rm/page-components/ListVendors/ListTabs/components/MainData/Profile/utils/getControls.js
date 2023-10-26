@@ -45,7 +45,7 @@ export const getControls = ({ countryOptions = {}, cityOptions = {} }) => [
 		type        : 'select',
 		style       : { flexBasis: '44%' },
 		placeholder : 'Select a city',
-		condition   : { type: ['pincode'] },
+		condition   : { type: ['city'] },
 		rules       : { required: 'City is Required' },
 	},
 ];

@@ -19,7 +19,7 @@ function useEditProfile({
 	}));
 
 	const cityOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params: { filters: { type: ['pincode'] } },
+		params: { filters: { type: ['city'] } },
 	}));
 
 	const fields = getControls({
