@@ -38,6 +38,9 @@ const getFormatedNotPreferenceData = ({ ratesDataNotPrefered, singleServiceData 
 			api                               : 'showed_rates',
 			total_price_in_preferred_currency : validities?.total_price_in_preferred_currency,
 			preferred_currency                : validities?.preferred_currency,
+			updated_at                        : element?.updated_at,
+			validity_end                      : element?.validity_end || validities?.validity_end,
+			schedule_type                     : validities?.schedule_type,
 		};
 
 		let allocation_ratio = null;
