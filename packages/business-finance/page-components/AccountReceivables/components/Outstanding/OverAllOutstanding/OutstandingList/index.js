@@ -4,7 +4,7 @@ import {
 } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMActivePlans, IcMDownload, IcMOverflowLine } from '@cogoport/icons-react';
+import { IcMActivePlans, IcMDownload, IcMOverflowLine, IcMProvision } from '@cogoport/icons-react';
 import useGetPermission from '@cogoport/request/hooks/useGetPermission';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -12,6 +12,7 @@ import React, { useState } from 'react';
 import { getTaxLabels } from '../../../../constants/index';
 import useOpenInvoicesReport from '../../../../hooks/useOpenInvoicesReport';
 import useUpdateAccountTagging from '../../../../hooks/useUpdateAccountTagging';
+import useUpdateOutstandingList from '../../../../hooks/useUpdateOutstandingList';
 import checkPermission from '../../../../Utils/checkPermission';
 
 import DownloadLedgerModal from './DownloadLedgerModal';
@@ -88,6 +89,7 @@ function OutstandingList({
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 
 	const { isDownloading = false, downloadAROustanding = () => {} } = useOpenInvoicesReport({ organizationId });
+	const { apiTrigger } = useUpdateOutstandingList({ item });
 
 	const handleActiveTabs = (val) => {
 		if (val === activeTab) {
@@ -283,28 +285,41 @@ function OutstandingList({
 								</div>
 							</Tooltip>
 						)}
-						<Tooltip content="Ledger Download" placement="top">
-							<div className={styles.download_icon_div}>
-								<IcMDownload
-									fill="black"
-									onClick={() => setShowLedgerModal(true)}
-								/>
-							</div>
-						</Tooltip>
 						{
-							(item?.taggedState)
+							(entityCode !== '101_301')
+								? (
+									<Tooltip content="Ledger Download" placement="top">
+										<div className={styles.download_icon_div}>
+											<IcMDownload
+												fill="black"
+												onClick={() => setShowLedgerModal(true)}
+											/>
+										</div>
+									</Tooltip>
+								) : null
+						}
+						<div className={styles.download_icon_div}>
+							<IcMProvision
+								onClick={() => { apiTrigger(refetch); }}
+								height={16}
+								width={16}
+								fill="#FFA500"
+							/>
+						</div>
+						{
+							(item?.taggedState && entityCode !== '101_301')
 								? (<Pill size="md" color="green">{startCase(item?.taggedState)}</Pill>) : null
 						}
-
-						<div className={styles.download_icon_div}>
-
-							<Popover placement="left" render={<ChangeStatus item={item} refetch={refetch} />}>
-
-								<IcMOverflowLine />
-
-							</Popover>
-
-						</div>
+						{
+							(entityCode !== '101_301')
+								? (
+									<Popover placement="left" render={<ChangeStatus item={item} refetch={refetch} />}>
+										<div className={styles.download_icon_div}>
+											<IcMOverflowLine />
+										</div>
+									</Popover>
+								) : null
+						}
 
 						{!showElement && (
 							<Button

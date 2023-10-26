@@ -53,7 +53,7 @@ function AccountReceivables() {
 		entityOptions.push(
 			{ label: 'COGO FREIGHT PVT LTD_COGOPORT PRIVATE LIMITED(101_301)', value: '101_301' },
 		);
-	} else if (entityCode === '101_301') setEntityCode('301');
+	} else if (entityCode === '101_301') setEntityCode(getDefaultEntityCode(partnerId));
 
 	return (
 		<div>
