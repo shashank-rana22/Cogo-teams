@@ -12,11 +12,13 @@ import FormatShipperDetails from './FormatShipperDetails';
 import PackageDetails from './PackageDetails';
 import PrintTruckTypes from './PrintTruckTypes';
 
+// eslint-disable-next-line max-lines-per-function
 export const renderValue = (label, detail) => {
 	const { packages = [] } = detail || [{}];
-	const isAir = detail?.service_type === 'air_freight_service'
-		|| detail?.service_type === 'domestic_air_freight_service';
-	const isLTL = detail?.service_type === 'ltl_freight_service'
+	const isAir = detail?.shipment_type === 'air_freight'
+		|| detail?.shipment_type === 'domestic_air_freight'
+		|| detail?.services?.includes('air_freight_service');
+	const isLTL = detail?.shipment_type === 'ltl_freight'
 		|| detail?.services?.includes('ltl_freight_service');
 
 	const commodityDataDetails = detail?.commodity_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};

@@ -13,7 +13,7 @@ const useMergedPdf = ({ generateInvoice = () => {} }) => {
 			method  : 'post',
 			authKey : 'post_purchase_payrun_merged_pdf',
 		},
-		{ manual: false },
+		{ manual: true },
 	);
 
 	const mergeInvoices = async () => {

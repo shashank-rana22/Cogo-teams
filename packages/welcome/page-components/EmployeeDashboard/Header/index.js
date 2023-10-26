@@ -83,7 +83,7 @@ function Header({ summaryData }) {
 	const profileData = useSelector(({ profile }) => profile);
 	const userName = profileData?.user.name;
 
-	// const { rectangle } = GLOBAL_CONSTANTS.image_url;
+	const { rectangle } = GLOBAL_CONSTANTS.image_url;
 
 	const handleShowInbox = () => {
 		router.push('/attendance-leave-management?showInbox=true&back=welcome');
@@ -174,7 +174,7 @@ function Header({ summaryData }) {
 				</div>
 			</div>
 
-			{/* <div className={styles.rectangle1}>
+			<div className={styles.rectangle1}>
 				<img src={rectangle} alt="img" />
 			</div>
 			<div className={styles.rectangle2}>
@@ -185,7 +185,7 @@ function Header({ summaryData }) {
 			</div>
 			<div className={styles.rectangle4}>
 				<img src={rectangle} alt="img" />
-			</div> */}
+			</div>
 
 			{ openPolicies && (
 				<Modal

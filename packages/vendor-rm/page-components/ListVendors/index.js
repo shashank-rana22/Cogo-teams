@@ -1,7 +1,7 @@
 import { Popover, Input, Pagination, Button, Toggle } from '@cogoport/components';
+import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import { IcMFilter } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { isEmpty, upperCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -16,21 +16,19 @@ import TabularSection from './TabularSection';
 
 function ListVendors() {
 	const router = useRouter();
-	const profile = useSelector((state) => state);
-	const {
-		profile: { partner },
-	} = profile || {};
-	const { id: partnerId } = partner || {};
+
 	const { entityLoading, entityData = [] } = useListCogoEntities();
 	const entityDataCount = entityData.length;
 
-	const [activeEntity, setActiveEntity] = useState(partnerId);
+	const defaultEntity = ENTITY_MAPPING[301].id;
+
+	const [activeEntity, setActiveEntity] = useState(defaultEntity);
 	const [active, setActive] = useState(true);
 	const {
 		loading,
 		data = {},
 		params = {},
-		setParams = () => { },
+		setParams = () => {},
 		columns,
 		showFilter,
 		setShowFilter,
@@ -41,7 +39,7 @@ function ListVendors() {
 
 	const {
 		data: dataStats,
-	} = useVendorStats();
+	} = useVendorStats({ activeEntity });
 
 	const { total_count, page_limit: pageLimit } = data || {};
 

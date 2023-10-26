@@ -1,5 +1,6 @@
 .container {
 	padding: 40px 24px 75px;
+	overflow: hidden;
 	color: #fff;
 	background: #21212c;
 	border-radius: 4px;
@@ -7,6 +8,8 @@
 
 .data_container {
 	position: relative;
+	z-index: 2;
+	overflow: hidden;
 }
 
 .header_flex {
@@ -128,11 +131,11 @@
 	}
 }
 
-/* .rectangle1 {
+.rectangle1 {
 	position: absolute;
-	top: 20%;
+	top: 14%;
 	left: 50%;
-	transform: translate(-85%, -50%);
+	transform: translate(-88%, -50%);
 }
 
 .rectangle2 {
@@ -144,15 +147,13 @@
 
 .rectangle3 {
 	position: absolute;
-	top: 32%;
-	left: 50%;
-	transform: translate(45%, -50%);
+	top: 15%;
+	right: 22%;
 }
 
 .rectangle4 {
 	position: absolute;
-	top: 15%;
-	left: 50%;
-	width: 150px;
-	transform: translate(225%, -50%);
-} */
+	top: 3%;
+	right: 0;
+	overflow: hidden;
+}
