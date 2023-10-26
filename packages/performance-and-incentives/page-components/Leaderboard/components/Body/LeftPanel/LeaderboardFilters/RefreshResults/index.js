@@ -2,12 +2,13 @@ import { Button, Toast } from '@cogoport/components';
 import { IcMRefresh } from '@cogoport/icons-react';
 
 function RefreshResults(props) {
-	const { listLoading, listRefetch, refetchStats, statsLoading } = props;
+	const { listLoading, listRefetch, refetchStats, statsLoading, getUserProgress } = props;
 
 	const fetchData = () => {
 		try {
 			listRefetch();
 			refetchStats();
+			getUserProgress();
 		} catch {
 			Toast.error('Something went wrong!');
 		}

@@ -35,7 +35,10 @@ const GET_START_DATE_FUNCTION_MAPPING = {
 const previousEntries = [LAST_MONTH, LAST_QUARTER];
 
 function Header(props) {
-	const { dateRange, setDateRange, entity, setEntity } = props;
+	const {
+		dateRange, setDateRange, entity, setEntity, kam_progress,
+		manager_progress,
+	} = props;
 
 	const { push } = useRouter();
 
@@ -108,7 +111,12 @@ function Header(props) {
 
 				</div>
 
-				{[MANAGER, AGENT].includes(incentive_leaderboard_viewtype) && (<ProgressBars />)}
+				{[MANAGER, AGENT].includes(incentive_leaderboard_viewtype) && (
+					<ProgressBars
+						kam_progress={kam_progress}
+						manager_progress={manager_progress}
+					/>
+				)}
 
 				{incentive_leaderboard_viewtype === ADMIN && (
 					<Button

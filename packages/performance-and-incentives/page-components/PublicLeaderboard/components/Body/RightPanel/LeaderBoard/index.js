@@ -3,21 +3,19 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import LoadingState from '../../../../../common/LoadingState';
-import List from '../../../common/List';
-import useGetLeaderbordList from '../../../hooks/useGetLeaderbordList';
+import LoadingState from '../../../../common/LoadingState';
+import useGetLeaderbordList from '../../../../hooks/useGetLeaderbordList';
+import List from '../List';
 
 import styles from './styles.module.css';
-import TopUsers from './TopUsers';
 
-function LeftPanel(props) {
-	const { view, dateRange, updatedAt, setUpdatedAt } = props;
+function LeaderBoard(props) {
+	const { view, updatedAt, dateRange } = props;
 
-	const { list, loading, total_report_count: totalReportCount, trigger } = useGetLeaderbordList({
+	const { list, loading, trigger } = useGetLeaderbordList({
 		view,
 		dateRange,
-		pageLimit: 50,
-		setUpdatedAt,
+		pageLimit: 3,
 	});
 
 	useEffect(() => {
@@ -33,15 +31,10 @@ function LeftPanel(props) {
 			}, timeToWait);
 			return () => clearTimeout(timerId);
 		}
-
 		return () => {};
 	}, [trigger, updatedAt]);
 
-	const [firstUser, secondUser, thirdUser, ...tableList] = list;
-
-	const topList = [secondUser, firstUser, thirdUser].filter((item) => !isEmpty(item));
-
-	if (loading) return <div className={styles.container}><LoadingState /></div>;
+	if (loading) return <LoadingState items={3} />;
 
 	if (isEmpty(list)) {
 		return (
@@ -60,19 +53,11 @@ function LeftPanel(props) {
 	return (
 		<div className={styles.container}>
 
-			<TopUsers topList={topList} view={view} />
-
-			{isEmpty(tableList) ? <p className={styles.empty_list}>No more standings...</p>
-				: (
-					<List
-						tableList={tableList}
-						view={view}
-						totalReportCount={totalReportCount}
-					/>
-				)}
+			{isEmpty(list) ? <p className={styles.empty_list}>No standings...</p>
+				: <List tableList={list} view={view} />}
 
 		</div>
 	);
 }
 
-export default LeftPanel;
+export default LeaderBoard;
