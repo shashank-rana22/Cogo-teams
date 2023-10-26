@@ -86,7 +86,7 @@ function PlatformAdoption({
 					/>
 				</>
 			)}
-			{page > 1 ? (
+			{page >= 1 ? (
 				<div className={styles.pagination_info}>
 					<Pagination
 						type="number"

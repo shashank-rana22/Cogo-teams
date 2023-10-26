@@ -1,4 +1,4 @@
-import { Pagination, Table, cl } from '@cogoport/components';
+import { Table, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRight, IcMHome } from '@cogoport/icons-react';
@@ -57,9 +57,7 @@ const COLUMNS = [
 	},
 ];
 
-function PlatformHistory({ setShowHistory = () => {}, rest = {}, list = [], loading = false }) {
-	const { page, page_limit, total_count } = rest || {};
-
+function PlatformHistory({ setShowHistory = () => {}, list = [], loading = false }) {
 	return (
 		<div className={styles.history_container}>
 			<div className={styles.header_section}>
@@ -73,16 +71,6 @@ function PlatformHistory({ setShowHistory = () => {}, rest = {}, list = [], load
 			<div className={styles.content}>
 				<Table columns={COLUMNS} data={list} loading={loading} />
 			</div>
-			{page >= 1 ? (
-				<div className={styles.pagination_info}>
-					<Pagination
-						type="table"
-						currentPage={page}
-						totalItems={total_count}
-						pageSize={page_limit}
-					/>
-				</div>
-			) : null}
 		</div>
 	);
 }
