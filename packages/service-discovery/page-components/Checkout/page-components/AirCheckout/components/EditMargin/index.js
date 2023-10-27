@@ -36,7 +36,7 @@ function EditMargin({ state = '' }) {
 
 			{noRatesPresent ? (
 				<div className={styles.error}>
-					** REMOVE SERVICES WITH (NO RATES) TAG TO SEND QUOTATION.
+					** Services with No Rates will be removed.
 				</div>
 			) : null}
 

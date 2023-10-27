@@ -247,6 +247,8 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 			isAssistedBookingNotAllowed,
 			handleUnlockLatestRate,
 			createSearchLoading,
+			setIsLoadingStateRequired,
+			isLoadingStateRequired,
 		}),
 		[
 			primaryService,
@@ -277,6 +279,8 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 			isAssistedBookingNotAllowed,
 			handleUnlockLatestRate,
 			createSearchLoading,
+			setIsLoadingStateRequired,
+			isLoadingStateRequired,
 		],
 	);
 

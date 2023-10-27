@@ -88,7 +88,7 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 			id    : 'coupon_code',
 			label : !discount ? 'Have a Coupon Code?' : (
 				<div style={{ color: '#849e4c' }}>
-					Coupon Applied -
+					Coupon Applied:
 					{' '}
 					{localedDiscount}
 				</div>

@@ -5,6 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import Header from '../../../common/Header';
 import { LoadingState } from '../../../common/LoadingState';
+import CustomLoadingState from '../../../common/LoadingState/CustomLoadingState';
 import DotLoader from '../../../common/LoadingState/DotLoader';
 import { CheckoutContext } from '../context';
 import getRedirectionDetails from '../utils/getRedirectionDetails';
@@ -37,7 +38,7 @@ function Checkout({ checkout_type = '' }) {
 		setIsLoadingStateRequired = () => {},
 	} = useCheckout({ query, partner_id, checkout_type });
 
-	if ((loading && isEmpty(data)) || isLoadingStateRequired) {
+	if ((loading && isEmpty(data))) {
 		return <LoadingState />;
 	}
 
@@ -91,7 +92,9 @@ function Checkout({ checkout_type = '' }) {
 
 	return (
 		<CheckoutContext.Provider value={checkoutData}>
-			<div className={styles.container}>
+			<div className={cl`${styles.container} ${isLoadingStateRequired ? styles.disabled : null}`}>
+				{isLoadingStateRequired ? <CustomLoadingState /> : null}
+
 				<Header
 					data={detail}
 					service_key="primary_service"
