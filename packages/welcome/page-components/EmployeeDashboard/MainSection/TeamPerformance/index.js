@@ -1,6 +1,7 @@
 // import { Select } from '@cogoport/components';
 import { Toggle } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 // import CompanyLeaderBoard from './CompanyLeaderBoard';
@@ -18,6 +19,7 @@ import ThingsToDo from './ThingsToDo';
 function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDashboardActive }) {
 	const { rating_list } = data || {};
 	const { avg_rating } = rating_list || {};
+	const { push } = useRouter();
 	console.log('🚀 ~ file: index.js:19 ~ TeamPerformance ~ data:', data);
 	return (
 		<div className={styles.container}>
@@ -52,8 +54,13 @@ function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDa
 				<div className={styles.kpi_data}>
 					<div className={styles.kpi_okr}>
 						<div className={styles.kpi_okr_title}>Team Rating</div>
-						<div className={styles.kpi_okr_count}>{avg_rating || '0'}</div>
-						<div className={styles.view_okr_flex}>
+						<div className={styles.kpi_okr_count}>{(avg_rating || 0)?.toFixed(2) || 0}</div>
+						<div
+							className={styles.view_okr_flex}
+							onClick={() => push('/performance-management/rating-review')}
+							aria-hidden
+							style={{ cursor: 'pointer' }}
+						>
 							View Team KPI
 							{' '}
 							<IcMArrowRight
