@@ -47,7 +47,7 @@ function List(props) {
 				<div
 					className={styles.inner_container}
 					style={{
-						animationDuration: !isOverflowed
+						animationDuration: isOverflowed
 							? getAnimationDuration({ listLength: tableList.length }) : '0s',
 						top: isOverflowed ? '50px' : '',
 					}}
