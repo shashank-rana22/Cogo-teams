@@ -127,7 +127,7 @@ const getColumnsManager = ({ setItem, setShow, handleUpdate }) => {
 					<Button
 						size="md"
 						themeType="secondary"
-						style={{ color: '#849E4C', background: '#F7FAEF', marginRight: '8px' }}
+						style={{ color: '#C26D1A', background: '#FEF3E9', marginRight: '8px' }}
 						onClick={() => handleUpdate(item?.id, 'rejected')}
 					>
 						Reject
@@ -135,7 +135,7 @@ const getColumnsManager = ({ setItem, setShow, handleUpdate }) => {
 					</Button>
 					<Button
 						size="md"
-						style={{ color: '#C26D1A', background: '#FEF3E9' }}
+						style={{ color: '#849E4C', background: '#F7FAEF' }}
 						themeType="secondary"
 						onClick={() => handleUpdate(item?.id, 'approved')}
 					>

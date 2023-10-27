@@ -11,7 +11,10 @@ const useUpdateReimbursements = () => {
 	const updateReiembursement = async ({ payload, action, refetchlist }) => {
 		try {
 			await trigger({
-				data:	{ metadata: payload, action },
+				params: {
+					id: payload?.id,
+					action,
+				},
 			});
 			refetchlist();
 			Toast.success('succesfully');
