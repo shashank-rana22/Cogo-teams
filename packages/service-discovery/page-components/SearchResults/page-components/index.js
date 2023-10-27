@@ -124,9 +124,9 @@ function SearchResults() {
 	return (
 		<div className={cl`${styles.container} ${
 			(showAdditionalHeader || (infoBanner.current === 'edit_button' && !isGuideViewed))
-				? styles.backdrop : {}} ${(routerLoading || scheduleLoading) && styles.disabled}`}
+				? styles.backdrop : null} ${(routerLoading || scheduleLoading) && styles.disabled}`}
 		>
-			{routerLoading || scheduleLoading ? <CustomLoadingState loadingText="Loading Rates" /> : null}
+			{routerLoading || scheduleLoading ? <CustomLoadingState /> : null}
 
 			<Header
 				data={detail}
