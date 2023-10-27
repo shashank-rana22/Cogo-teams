@@ -13,6 +13,7 @@ function Layout(
 		showElements = {},
 		formValues = {},
 		customFieldArrayControls = {},
+		setValue = () => { },
 	},
 ) {
 	const finalControls = controls.filter((c) => {
@@ -29,6 +30,7 @@ function Layout(
 					type = '', label = '', span = 6, removeLabelMargin = false,
 					handleFieldArrayAddCheck = () => true, ...restCtrl
 				} = ctrl || {};
+
 				if (type === 'fieldArray') {
 					return (
 						<FieldArray
@@ -39,6 +41,7 @@ function Layout(
 							formValues={formValues}
 							handleFieldArrayAddCheck={handleFieldArrayAddCheck}
 							customFieldArrayControls={customFieldArrayControls}
+							setValue={setValue}
 						/>
 					);
 				}

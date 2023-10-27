@@ -3,7 +3,7 @@ import { Toast } from '@cogoport/components';
 const ONE = 1;
 const FIRST_ELEM_INDEX = 0;
 
-const excludeKeys = ['minimum_fee_value', 'maximum_fee_value'];
+const EXCLUDE_KEYS = [];
 
 const handleFieldArrayAddCheck = ({ currentIndex, formValues, name }) => {
 	if (currentIndex <= FIRST_ELEM_INDEX) return true;
@@ -11,7 +11,7 @@ const handleFieldArrayAddCheck = ({ currentIndex, formValues, name }) => {
 	const prevSlab = formValues?.[name]?.[currentIndex - ONE] || {};
 
 	const isPrevSlabFilled = Object.keys(prevSlab || {})
-		.filter((k) => !excludeKeys.includes(k))
+		.filter((k) => !EXCLUDE_KEYS.includes(k))
 		.every((k) => prevSlab[k]);
 
 	const { minimum_fee_value, maximum_fee_value, fee_value, slab_lower_limit, slab_upper_limit } = prevSlab || {};

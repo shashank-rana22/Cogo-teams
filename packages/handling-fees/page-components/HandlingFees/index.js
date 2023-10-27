@@ -3,10 +3,13 @@ import React, { useState } from 'react';
 
 import SERVICE_TABS_MAPPING from '../../utils/service-tabs-mapping';
 
+import ListHandlingFees from './ListHandlingFees';
 import styles from './styles.module.css';
 
 function HandlingFees() {
 	const [activeService, setActiveService] = useState('fcl_freight');
+
+	const [listType, setListType] = useState('active');
 
 	return (
 		<div className={styles.service_tab}>
@@ -21,8 +24,13 @@ function HandlingFees() {
 					const { label = '', value = '' } = item;
 					return 	<TabPanel themeType="primary" key={value} name={value} title={label} />;
 				})}
-
 			</Tabs>
+
+			<ListHandlingFees
+				activeService={activeService}
+				listType={listType}
+				setListType={setListType}
+			/>
 		</div>
 	);
 }

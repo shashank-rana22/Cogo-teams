@@ -1,6 +1,7 @@
 import { ButtonIcon } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import FormElement from '../FormElement';
 import getCustomOptions from '../getCustomOptions';
@@ -12,6 +13,7 @@ import styles from './styles.module.css';
 const NO_OF_ELEMENTS_TO_BE_REMOVED = 1;
 const INCREMENT_BY_ONE = 1;
 const TOTAL_SPAN = 12;
+const ONE = 1;
 
 function Child({
 	controls = [],
@@ -26,8 +28,26 @@ function Child({
 	formValues = {},
 	showHeading = true,
 	customField = {},
+	setValue = () => { },
+	fields = [],
 }) {
 	const total_fields = getTotalFields({ controls });
+
+	const { slab_details = [] } = formValues;
+
+	useEffect(() => {
+		if (!isEmpty(slab_details)) {
+			if (index > 0) {
+				setValue(`slab_details.${index}.slab_unit`, slab_details[index - ONE].slab_unit);
+				setValue(
+					`slab_details.${index}.slab_lower_limit`,
+					Number(slab_details[index - ONE].slab_upper_limit) + ONE,
+				);
+				setValue(`slab_details.${index}.fee_unit`, slab_details[index - ONE].fee_unit);
+				setValue(`slab_details.${index}.fee_currency`, slab_details[index - ONE].fee_currency);
+			}
+		}
+	}, [index, name, setValue, slab_details]);
 
 	return (
 		<div key={field.id} className={styles.child}>
@@ -57,28 +77,35 @@ function Child({
 								});
 							}
 
+							let newProps = { ...controlItem };
+							if (ctrlItemName === 'slab_upper_limit' && index !== fields.length - 1) {
+								newProps = {
+									...controlItem,
+									disabled: true,
+								};
+							}
+
 							return (
 								<div className={styles.element} style={{ width: `${flex}%` }} key={ctrlItemName}>
 									{index === 0 ? (
 										<h4 className={styles.label}>
-											{controlItem?.label}
+											{newProps?.label}
 										</h4>
 									) : null}
 
 									<FormElement
-										{...controlItem}
+										{...newProps}
 										{...(customField?.[ctrlItemName] || {})}
 										key={element_name}
 										name={element_name}
 										control={control}
-										type={controlItem.type}
-										{...controlItem?.options_key ? { options } : {}}
-
+										type={newProps.type}
+										{...newProps?.options_key ? { options } : {}}
 									/>
 
-									{error?.[ctrlItemName]?.message ? (
+									{error?.[newProps]?.message ? (
 										<p className={styles.error}>
-											{error?.[ctrlItemName]?.message || ''}
+											{error?.[newProps]?.message || ''}
 										</p>
 									) : null}
 								</div>
@@ -87,12 +114,18 @@ function Child({
 						})}
 
 					</div>
+
 				))}
-				{showDeleteButton && index >= noDeleteButtonTill ? (
-					<div className={styles.delete_icon}>
-						<ButtonIcon icon={<IcMDelete />} onClick={() => remove(index, NO_OF_ELEMENTS_TO_BE_REMOVED)} />
-					</div>
-				) : null}
+				<div>
+					{showDeleteButton && index >= noDeleteButtonTill && index === fields.length - 1 ? (
+						<div className={styles.delete_icon}>
+							<ButtonIcon
+								icon={<IcMDelete />}
+								onClick={() => remove(index, NO_OF_ELEMENTS_TO_BE_REMOVED)}
+							/>
+						</div>
+					) : null}
+				</div>
 
 			</div>
 		</div>

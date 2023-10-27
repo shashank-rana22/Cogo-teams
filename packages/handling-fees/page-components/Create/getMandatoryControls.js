@@ -1,8 +1,10 @@
+import { isEmpty } from '@cogoport/utils';
+
 import FEE_UNIT_MAPPING from '../../configs/FEE_UNIT_MAPPING.json';
 import SLAB_UNIT_MAPPING from '../../configs/SLAB_UNIT_MAPPING.json';
 import handleFieldArrayAddCheck from '../../helpers/checkFeeConfiguration';
 
-import getFilteredSlabDetails from './getFilteredSlabDetails';
+// import getFilteredSlabDetails from './getFilteredSlabDetails';
 
 const MAX_MIN_FEE_VAL = 1;
 const MIN_NUMBER = 0;
@@ -17,19 +19,21 @@ const EMPTY_FIELD_ARRAY = [
 ];
 
 const getMandatoryControls = ({
-	activeService, service, data = {}, control_name = '',
+	activeService, service, data = {},
 	isAddFieldArrayCheck = false,
 }) => {
-	const { slab_details = [] } = data || {};
+	const { slab_details = [] } = data?.data || {};
 
-	const newSlabDetails = getFilteredSlabDetails({
-		slab_details,
-		control_name,
-	});
+	// const newSlabDetails = getFilteredSlabDetails({
+	// 	slab_details,
+	// 	control_name,
+	// });
+
+	const newSlabDetails = slab_details;
 
 	return [
 		{
-			name               : control_name,
+			name               : 'slab_details',
 			type               : 'fieldArray',
 			showButtons        : true,
 			noDeleteButtonTill : 1,
@@ -37,7 +41,7 @@ const getMandatoryControls = ({
 			rules              : { required: true },
 			showHeading        : false,
 			initialCall        : true,
-			value              : newSlabDetails.length ? newSlabDetails : EMPTY_FIELD_ARRAY,
+			value              : !isEmpty(newSlabDetails) ? newSlabDetails : EMPTY_FIELD_ARRAY,
 			...(isAddFieldArrayCheck ? { handleFieldArrayAddCheck } : {}),
 			controls           : [
 				{

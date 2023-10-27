@@ -7,7 +7,7 @@ import Child from './Child';
 import styles from './styles.module.css';
 
 function FieldArray({
-	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {},
+	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {}, setValue = () => { },
 	handleFieldArrayAddCheck = () => true, customFieldArrayControls = {},
 }) {
 	const { controls = [], name, showHeading = true } = ctrl || {};
@@ -47,6 +47,8 @@ function FieldArray({
 					formValues={formValues}
 					showHeading={showHeading}
 					customField={currentFieldArrayCustomField?.[index] || {}}
+					setValue={setValue}
+					fields={fields}
 				/>
 			))}
 
