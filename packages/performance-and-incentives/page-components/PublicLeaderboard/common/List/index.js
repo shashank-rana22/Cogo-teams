@@ -49,7 +49,7 @@ function List(props) {
 					style={{
 						animationDuration: isOverflowed
 							? getAnimationDuration({ listLength: tableList.length }) : '0s',
-						top: isOverflowed ? '50px' : '',
+						top: isOverflowed ? '70px' : '',
 					}}
 				>
 					{tableList.map((listItem) => (
