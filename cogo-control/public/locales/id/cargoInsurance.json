@@ -132,5 +132,13 @@
     "address_control_mobile_placeholder":"Masukkan nomor telepon",
     "address_control_include_tax":"Sertakan nomor pajak",
     "add_poc":"Tambahkan sedikit",
-    "remove_poc":"Hapus POC"
+    "remove_poc":"Hapus POC",
+    "verify_recipient":"Harap verifikasi informasi penerima",
+    "user_confirm":"Pengguna berikut diharuskan untuk mengonfirmasi dan menyelesaikan pembayaran dari tautan yang disediakan dalam email untuk menyelesaikan pembelian",
+    "pay_link_1":"Selain itu, Anda juga dapat mengirim tautan pembayaran ke pengguna melalui",
+    "pay_link_2":"ada apa.",
+    "copy_link":"Salin tautan",
+    "pay_link_copy":"Tautan pembayaran yang disalin ke clipboard",
+    "send":"Mengirim",
+    "confirm_and_send":"Konfirmasi dan kirim"
 }

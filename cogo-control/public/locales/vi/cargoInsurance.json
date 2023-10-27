@@ -132,5 +132,13 @@
     "address_control_mobile_placeholder":"Nhập số điện thoại",
     "address_control_include_tax":"Bao gồm số thuế",
     "add_poc":"Thêm ít",
-    "remove_poc":"Loại bỏ POC"
+    "remove_poc":"Loại bỏ POC",
+    "verify_recipient":"Vui lòng xác minh thông tin của người nhận",
+    "user_confirm":"Người dùng sau được yêu cầu xác nhận và hoàn thành thanh toán từ liên kết được cung cấp trong email để hoàn thành việc mua hàng",
+    "pay_link_1":"Ngoài ra, bạn cũng có thể gửi liên kết thanh toán đến người dùng thông qua",
+    "pay_link_2":"WhatsApp.",
+    "copy_link":"Sao chép đường dẫn",
+    "pay_link_copy":"Liên kết thanh toán được sao chép vào bảng tạm",
+    "send":"Gửi",
+    "confirm_and_send":"Xác nhận và gửi"
 }

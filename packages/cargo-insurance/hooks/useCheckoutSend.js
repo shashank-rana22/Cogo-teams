@@ -99,10 +99,12 @@ const useCheckoutSend = ({ setConfirmSuccess, draftData = {}, billingType, formR
 	const confirmSendInsurance = async ({ formData, selectedAddress }) => {
 		const payload = getPayload({ formData, draftData, performedBy: user?.id, selectedAddress, billingType, query });
 		try {
-			await trigger({
+			const resp = await trigger({
 				data: payload,
 			});
-			setConfirmSuccess({ isOpen: true, isSuccess: true });
+			const { data } = resp || {};
+
+			setConfirmSuccess({ isOpen: true, isSuccess: true, paymentLink: data?.paymentLink });
 		} catch (err) {
 			Toast.error(err.response?.data?.message);
 		}

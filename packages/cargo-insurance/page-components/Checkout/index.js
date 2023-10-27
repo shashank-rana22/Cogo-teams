@@ -43,6 +43,7 @@ function Checkout() {
 	const { loading, submitHandler } = useCheckoutSend({ setConfirmSuccess, draftData, billingType, formRef });
 
 	const { metadata = {} } = draftData || {};
+
 	const controls = getRegistrationControls({ billingType, t });
 
 	return (
@@ -89,7 +90,7 @@ function Checkout() {
 						disabled={saveDraftLoading}
 						onClick={handleSubmit(() => setConfirmSuccess({ isOpen: true, isConfirm: true }))}
 					>
-						{t('cargoInsurance:confirm_purchase')}
+						{t('cargoInsurance:confirm_and_send')}
 					</Button>
 				</div>
 			</div>
@@ -98,6 +99,7 @@ function Checkout() {
 				confirmSuccess={confirmSuccess}
 				setConfirmSuccess={setConfirmSuccess}
 				loading={loading}
+				pocDetails={draftData?.pocDetails}
 				handleSubmit={handleSubmit}
 				submitHandler={submitHandler}
 			/>

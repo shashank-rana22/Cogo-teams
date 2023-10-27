@@ -132,5 +132,13 @@
     "address_control_mobile_placeholder":"输入电话号码",
     "address_control_include_tax":"包括税号",
     "add_poc":"少一点",
-    "remove_poc":"删除POC"
+    "remove_poc":"删除POC",
+    "verify_recipient":"请验证收件人的信息",
+    "user_confirm":"需要以下用户确认并完成电子邮件中提供的链接以完成购买的链接",
+    "pay_link_1":"此外，您还可以通过",
+    "pay_link_2":"WhatsApp。",
+    "copy_link":"复制链接",
+    "pay_link_copy":"复制到剪贴板的付款链接",
+    "send":"发送",
+    "confirm_and_send":"确认并发送"
 }

@@ -73,6 +73,22 @@ const getInsuranceControls = ({ incotermResponse = {}, t }) => {
 			},
 		},
 		{
+			name        : 'riskCoverage',
+			label       : t('cargoInsurance:insurance_control_risk'),
+			placeholder : t('cargoInsurance:insurance_control_risk_placeholder'),
+			size        : 'sm',
+			type        : 'select',
+			options     : [
+				{ label: t('cargoInsurance:insurance_control_risk_opt1'), value: 'ALL_RISK' },
+				{ label: t('cargoInsurance:insurance_control_risk_opt2'), value: 'BASIC_RISK' },
+			],
+			rules: {
+				required: true,
+			},
+			disabled: true,
+
+		},
+		{
 			name        : 'coverageFrom',
 			label       : t('cargoInsurance:insruance_control_coverage_frm'),
 			placeholder : t('cargoInsurance:insruance_control_coverage_frm_placeholder'),
@@ -92,22 +108,6 @@ const getInsuranceControls = ({ incotermResponse = {}, t }) => {
 			rules       : {
 				required: true,
 			},
-
-		},
-		{
-			name        : 'riskCoverage',
-			label       : t('cargoInsurance:insurance_control_risk'),
-			placeholder : t('cargoInsurance:insurance_control_risk_placeholder'),
-			size        : 'sm',
-			type        : 'select',
-			options     : [
-				{ label: t('cargoInsurance:insurance_control_risk_opt1'), value: 'ALL_RISK' },
-				{ label: t('cargoInsurance:insurance_control_risk_opt2'), value: 'BASIC_RISK' },
-			],
-			rules: {
-				required: true,
-			},
-			disabled: true,
 
 		},
 		{

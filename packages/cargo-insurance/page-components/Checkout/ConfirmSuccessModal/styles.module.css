@@ -6,12 +6,16 @@
 .footer {
 	display: flex;
 	justify-content: center;
-	padding: 8px 16px;
+	padding: 12px 16px;
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
 }
 
 .cancel_btn {
 	margin-right: 12px;
+}
+
+.modal_body {
+	padding: 8px 20px 20px;
 }
 
 .body {
@@ -23,12 +27,45 @@
 }
 
 .header {
+	padding: 12px 16px;
+	border-bottom: 1px solid #d3d3d3;
+
+	>h3 {
+		margin: 0;
+	}
+}
+
+.success_header {
 	margin: 20px 0;
 }
 
-.sub_header {
-	margin: 0 20px 25px;
-	font-size: 16px;
-	font-weight: 500;
+.footer_text {
 	color: #828282;
+}
+
+.user_container {
+	display: flex;
+	margin: 10px 0 14px;
+
+	.row {
+		display: flex;
+		align-items: center;
+
+		> p {
+			margin: 0;
+		}
+	}
+
+	svg {
+		margin-right: 4px;
+	}
+}
+
+.sub_text {
+	font-size: 12px;
+	color: #636363;
+
+	> svg {
+		vertical-align: middle;
+	}
 }

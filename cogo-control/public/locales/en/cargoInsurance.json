@@ -132,5 +132,13 @@
     "address_control_mobile_placeholder":"Enter Phone Number",
     "address_control_include_tax":"Include Tax Number",
     "add_poc":"Add POC",
-    "remove_poc":"Remove POC"
+    "remove_poc":"Remove POC",
+    "verify_recipient":"Please verify the recipient's information",
+    "user_confirm":"The following user is required to confirm and complete the payment from the link  provided in the email in order to complete the purchase",
+    "pay_link_1":"Additonally, you can also send payment link to user via",
+    "pay_link_2":"whatsapp.",
+    "copy_link":"Copy Link",
+    "pay_link_copy":"Payment Link Copied to clipboard",
+    "send":"Send",
+    "confirm_and_send":"Confirm and Send"
 }
