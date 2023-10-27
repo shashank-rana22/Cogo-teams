@@ -46,9 +46,17 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+
+	@media (max-width: 768px) {
+		justify-content: space-between;
+	}
 }
 
 .label {
 	margin-right: 8px;
 	font-weight: 600;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 }

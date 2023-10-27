@@ -1,4 +1,5 @@
-import { Popover } from '@cogoport/components';
+import { Popover, Tooltip } from '@cogoport/components';
+import { COMMODITY_NAME_MAPPING } from '@cogoport/globalization/constants/commodities';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMEdit } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -15,36 +16,88 @@ function PackageItem({
 	popoverComponentData = {},
 	setShowModal = () => {},
 	setInfoBanner = () => {},
+	chargeable_weight = 0,
 }) {
 	const { commodity = '', commodity_details = [], total_volume = 1, total_weight = 1, total_quantity = 1 } = loadItem;
 
-	const { commodity_type = '' } = commodity_details[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const { commodity_type = '', commodity_subtype = '' } = commodity_details[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	return (
 		<div className={styles.load_item}>
-			<span className={styles.text}>
-				count:
-				{' '}
-				<strong>{total_quantity}</strong>
-				{', '}
-				volume:
-				{' '}
-				<strong>
-					{total_volume}
+			<Tooltip content={(
+				<span className={styles.tooltip_content}>
+					Packages Count:
 					{' '}
-					CBM
-				</strong>
-				{', '}
-				weight:
-				{' '}
-				<strong>
-					{total_weight}
+					<strong>{total_quantity}</strong>
+					<br />
+					Volume:
 					{' '}
-					KG
-				</strong>
-				{', '}
-				<strong>{startCase(commodity === 'general' ? commodity : commodity_type)}</strong>
-			</span>
+					<strong>
+						{total_volume}
+						{' '}
+						CBM
+					</strong>
+					<br />
+					Weight:
+					{' '}
+					<strong>
+						{total_weight}
+						{' '}
+						KG
+					</strong>
+					<br />
+					Chargeable weight:
+					{' '}
+					<strong>
+						{chargeable_weight}
+						{' '}
+						KG
+					</strong>
+					<br />
+					{' '}
+					Commodity:
+					{' '}
+					<strong>{startCase(commodity === 'general' ? commodity : commodity_type)}</strong>
+					<br />
+					{' '}
+					Commodity Subtype:
+					{' '}
+					<strong>{COMMODITY_NAME_MAPPING[commodity_subtype] || startCase(commodity_subtype)}</strong>
+				</span>
+			)}
+			>
+				<span className={styles.text}>
+					Count:
+					{' '}
+					<strong>{total_quantity}</strong>
+					{', '}
+					Volume:
+					{' '}
+					<strong>
+						{total_volume}
+						{' '}
+						CBM
+					</strong>
+					{', '}
+					Weight:
+					{' '}
+					<strong>
+						{total_weight}
+						{' '}
+						KG
+					</strong>
+					{', '}
+					CW:
+					{' '}
+					<strong>
+						{chargeable_weight}
+						{' '}
+						KG
+					</strong>
+					{', '}
+					<strong>{startCase(commodity === 'general' ? commodity : commodity_type)}</strong>
+				</span>
+			</Tooltip>
 
 			{isAllowedToEdit ? (
 				<Popover
