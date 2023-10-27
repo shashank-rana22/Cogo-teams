@@ -63,3 +63,10 @@ export const HEADER_MAPPING = {
 		color : '#F3FAFA',
 	},
 };
+
+export const COLORS_MAPPING = {
+	call_customer  : '#F37166',
+	send_quotation : '#88CAD1',
+	other          : '#FCEEDF',
+	default        : '#88CAD1',
+};

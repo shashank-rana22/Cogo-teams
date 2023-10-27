@@ -2,16 +2,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { HEADER_MAPPING } from '../../../../../../constants/calenderConstants';
+import { HEADER_MAPPING, COLORS_MAPPING } from '../../../../../../constants/calenderConstants';
 
 import styles from './styles.module.css';
-
-const COLORS_MAPPING = {
-	call_customer  : '#F37166',
-	send_quotation : '#88CAD1',
-	other          : '#FCEEDF',
-	default        : '#88CAD1',
-};
 
 const MORE_THEN = 2;
 
