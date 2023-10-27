@@ -2,7 +2,7 @@
 import { Pill, Placeholder, Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMCopy } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { DEFAULT_VALUE, INCO_TERM_MAPPING, LOADER_COUNT } from '../../../../../configurations/helpers/constants';
@@ -42,7 +42,7 @@ function ServiceDetailsContent({
 		preferred_freight_rate_currency,
 		preferred_airlines, booking_params, transitTime, commodity_description, bl_type,
 		cargo_readiness_date, free_days_detention_destination, schedule_departure, cargo_weight_per_container,
-		inco_term:inco_term_trade_type, trade_type, bookingParams,
+		inco_term:inco_term_trade_type, trade_type, bookingParams, dislike_rates_inco,
 	} = contentMapping({
 		requestData,
 		feedbackData,
@@ -72,7 +72,6 @@ function ServiceDetailsContent({
 			feedbacks,
 			closing_remarks,
 			serial_id,
-			created_at,
 			payment_term,
 			price_type,
 			packages_count,
@@ -85,6 +84,8 @@ function ServiceDetailsContent({
 		const formatLine = (label, value) => (value ? `${label} ${startCase(value)}\n` : '');
 
 		let textToCopy = '';
+		textToCopy += formatLine('ORIGIN:', originName);
+		textToCopy += formatLine('DESTINATION:', destinationName);
 		textToCopy += formatLine('COMMODITY:', commodity_category || commodity);
 		textToCopy += formatLine('CONTAINER SIZE:', container_size);
 		textToCopy += formatLine('CONTAINER TYPE:', container_type);
@@ -99,7 +100,6 @@ function ServiceDetailsContent({
 		textToCopy += formatLine('FEEDBACKS:', feedbacks);
 		textToCopy += formatLine('CLOSING REMARKS:', closing_remarks);
 		textToCopy += formatLine('SERIAL ID:', serial_id);
-		textToCopy += formatLine('CREATED AT:', created_at);
 		textToCopy += formatLine('INCO:', inco_term);
 		textToCopy += formatLine('PAYMENT TERM:', payment_term);
 		textToCopy += formatLine('PRICE TYPE:', price_type);
@@ -107,14 +107,12 @@ function ServiceDetailsContent({
 		textToCopy += formatLine('PREFFERED SHIPPING LINE:', shippinlineName);
 		textToCopy += formatLine('PREFFERED AIRLINE NAME:', airLineName);
 		textToCopy += formatLine('TRANSIT TIME:', transitTime);
-		textToCopy += formatLine('ORIGIN:', originName);
-		textToCopy += formatLine('DESTINATION:', destinationName);
-		textToCopy += formatLine('CUSTOMER:', summary?.importer_exporter?.business_name);
 		textToCopy += formatLine('CARGO WEIGHT:', cargo_weight_per_container);
 		textToCopy += formatLine('TRADE TYPE:', tradeType);
 		textToCopy += formatLine('OPERATION TYPE:', operation_type);
 		textToCopy += formatLine('VOLUME:', volume);
-		textToCopy += formatLine('Packages:', (bookingParams || []).map((item) => {
+		textToCopy += formatLine('INCO:', dislike_rates_inco);
+		textToCopy += formatLine('Packages:', !isEmpty(bookingParams) ? (bookingParams || []).map((item) => {
 			const { length = 0, width = 0, height = 0 } = item || {};
 			const dimension = length
 				? `${length}cm X ${width}cm X ${height}cm,`
@@ -124,7 +122,7 @@ function ServiceDetailsContent({
 				${dimension ? `(${dimension}) ` : ''}
 				${startCase(item.packing_type || '')},`
 				: '';
-		}));
+		}) : '');
 		textToCopy += formatLine(
 			'Dislike Rates:',
 			rate_card?.line_items[0]?.buy_price,
@@ -278,7 +276,6 @@ function ServiceDetailsContent({
 																maximumFractionDigits : 0,
 															},
 														})}
-
 													</div>
 													{' '}
 													{' '}

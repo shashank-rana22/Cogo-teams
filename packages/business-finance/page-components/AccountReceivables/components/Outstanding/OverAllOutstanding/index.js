@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Pagination, cl } from '@cogoport/components';
 import { startCase, isEmpty, startOfMonth } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
@@ -8,7 +9,6 @@ import {
 	serviceWiseList,
 	ccWiseList,
 } from '../../../configs/dummy-graph-stats';
-import useGetCallPriority from '../../../hooks/useGetCallPriority';
 import useGetCcCommunicationStats from '../../../hooks/useGetCcCommunicationStats';
 import useGetCcWiseOutstandingStats from '../../../hooks/useGetCcWiseOutstandingStats';
 import useGetKamWiseOutstandingsStats from '../../../hooks/useGetKamWiseOutstandingsStats';
@@ -17,6 +17,8 @@ import useGetSageArOutstandingsStats from '../../../hooks/useGetSageArOustanding
 import useGetServiceWiseOutstandingsStats from '../../../hooks/useGetServiceWiseOutstandingsStats';
 
 import CcCallList from './CcCallList';
+import Filters from './Filters';
+import overAllOutstandingcontrols from './Filters/overAllOutstandingcontrols';
 import OutstandingFilter from './OutstandingFilter';
 import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
@@ -48,6 +50,8 @@ function OverAllOutstanding({
 		setOrderBy,
 		queryKey,
 		refetch,
+		filters,
+		setFilters,
 	} = useGetOrgOutstanding({ entityCode });
 
 	const [dateFilter, setDateFilter] = useState({
@@ -55,7 +59,6 @@ function OverAllOutstanding({
 		endDate   : new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
 	});
 	const [range, setRange] = useState('this_month');
-	const { callPriorityData, callPriorityLoading } = useGetCallPriority({ entityCode });
 	const { statsData, statsLoading } = useGetSageArOutstandingsStats({
 		entityCode,
 	});
@@ -71,7 +74,7 @@ function OverAllOutstanding({
 		viewGraphStats,
 	});
 	const { page, pageLimit } = outStandingFilters || {};
-	const { totalRecords, list = [] } = outStandingData || {};
+	const { totalRecords, list = [], byCallPriority = {} } = outStandingData || {};
 
 	const handleChange = (val) => {
 		setoutStandingFilters({ ...outStandingFilters, search: val });
@@ -152,9 +155,18 @@ function OverAllOutstanding({
 			},
 		},
 	};
-
+	const controls = overAllOutstandingcontrols();
 	return (
 		<>
+			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				<Filters
+					controls={controls}
+					filters={filters}
+					setFilters={setFilters}
+					clearFilter={clearFilter}
+				/>
+
+			</div>
 			<OverallOutstandingStats item={statsData} statsLoading={statsLoading} />
 			<div className={`${styles.overlay_container} overlay_section`}>
 				{viewGraphStats && (
@@ -235,8 +247,8 @@ function OverAllOutstanding({
 				queryKey={queryKey}
 				entityCode={entityCode}
 				refetch={refetch}
-				callPriorityData={callPriorityData}
-				callPriorityLoading={callPriorityLoading}
+				callPriorityData={byCallPriority}
+				callPriorityLoading={outstandingLoading}
 			/>
 			{outstandingLoading ? (
 				<div>
@@ -249,6 +261,7 @@ function OverAllOutstanding({
 					{list?.map((item) => (
 						<OutstandingList
 							item={item}
+							refetch={refetch}
 							entityCode={entityCode}
 							key={item?.serialId}
 							showElement={false}

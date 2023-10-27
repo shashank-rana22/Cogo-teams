@@ -1,6 +1,5 @@
 import { Input, Placeholder, Popover } from '@cogoport/components';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMArrowRotateUp,
 	IcMArrowRotateDown,
@@ -68,7 +67,7 @@ function Filters({
 
 	let placeholder;
 	if (queryKey === 'q') {
-		placeholder = ENTITY_FEATURE_MAPPING[entityCode].placeholder.tax_number;
+		placeholder = ENTITY_FEATURE_MAPPING[entityCode]?.placeholder.tax_number;
 	} else if (queryKey === 'tradePartySerialId') {
 		placeholder = 'Search By Trade Party';
 	} else if (queryKey === 'sageId') {
@@ -145,7 +144,7 @@ function Filters({
 								{callPriorityLoading ? (
 									<Placeholder width="60px" />
 								) : (
-									callPriorityData?.list?.[GLOBAL_CONSTANTS.zeroth_index]
+									callPriorityData
 										?.businessName
 								)}
 							</div>
@@ -177,7 +176,7 @@ function Filters({
 				<CallPriorityModal
 					showCallPriority={showCallPriority}
 					setShowCallPriority={setShowCallPriority}
-					data={callPriorityData?.list?.[GLOBAL_CONSTANTS.zeroth_index]}
+					data={callPriorityData}
 				/>
 			) : null}
 		</div>
