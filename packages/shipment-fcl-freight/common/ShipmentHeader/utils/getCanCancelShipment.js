@@ -31,8 +31,12 @@ const SERVICE_CANCELLATION_STATES = [
 ];
 
 export default function getCanCancelShipment({
-	shipment_data, primary_service, user_data, role_ids,
-	activeStakeholder, stakeholderConfig,
+	shipment_data = {},
+	primary_service = {},
+	user_data = {},
+	role_ids = [],
+	activeStakeholder = '',
+	stakeholderConfig = {},
 }) {
 	const { cancel_shipment : { can_cancel = false } = {} } = stakeholderConfig || {};
 	const { state } = shipment_data || {};

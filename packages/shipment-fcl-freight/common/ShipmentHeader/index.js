@@ -42,7 +42,7 @@ function CfsDetails({ showPocDetails = true, primary_service = {} }) {
 }
 
 function ShipmentHeader() {
-	const { role_ids, user_data } = useSelector(({ profile }) => ({
+	const { role_ids = [], user_data = {} } = useSelector(({ profile }) => ({
 		role_ids  : profile?.partner?.user_role_ids,
 		user_data : profile?.user,
 	}));
