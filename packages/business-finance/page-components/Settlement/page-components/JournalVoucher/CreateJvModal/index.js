@@ -41,7 +41,7 @@ function CreateJvModal({
 	const exchangeDate = formValues?.accountingDate;
 	const entity = formValues?.entityCode;
 
-	const { getExchangeRate } = useGetExchangeRate({
+	const { getExchangeRate = () => {} } = useGetExchangeRate({
 		from_cur      : fromCurrency,
 		to_cur        : toCurrency,
 		exchange_date : exchangeDate,

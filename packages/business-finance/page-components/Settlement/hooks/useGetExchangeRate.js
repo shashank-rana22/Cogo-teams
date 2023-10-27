@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 
 import { transactionDates } from './helper';
 
-const useGetExchangeRate = ({ setValue, from_cur, to_cur, exchange_date }) => {
+const useGetExchangeRate = ({ setValue = () => {}, from_cur = '', to_cur = '', exchange_date = '' }) => {
 	const [{ loading:exchangeLoading }, exRateTrigger] = useRequestBf(
 		{
 			url     : 'payments/invoice/exchange-rates',
