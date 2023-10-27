@@ -5,7 +5,20 @@
 	"main": "index.js",
 	"sideEffects": false,
  
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	
+	"dependencies": {
+		"@cogoport/components": "^1.0.423",
+		"@cogoport/forms": "workspace:0.1.0",
+		"@cogoport/icons-react": "^1.0.80",
+		"@cogoport/next": "workspace:0.1.0",
+		"@cogoport/request": "workspace:0.1.0",
+		"@cogoport/store": "workspace:0.1.0",
+		"@cogoport/utils": "^1.2.6",
+		"@cogoport/globalization": "workspace:^0.0.1",
+		"@cogoport/scope-select": "workspace:^0.1.0",
+		"react": "18.2.0"
+	}
 }
