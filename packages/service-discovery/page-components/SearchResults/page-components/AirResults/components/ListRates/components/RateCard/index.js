@@ -22,9 +22,16 @@ function RateCard({
 	setInfoBanner = () => {},
 	isMobile = false,
 }) {
+	const selectedCardIDs = Object.keys(comparisonRates);
+
+	const selectedForComparison = selectedCardIDs.includes(rate?.id);
+
 	return (
 		<div
-			className={cl`${styles.container} ${isSelectedCard && styles.selected_card}`}
+			className={cl`
+				${styles.container} 
+				${isSelectedCard && styles.selected_card} 
+				${selectedForComparison && styles.compared_rate}`}
 			style={{
 				marginTop: index === GLOBAL_CONSTANTS.zeroth_index ? '0px' : '40px',
 			}}
@@ -32,7 +39,7 @@ function RateCard({
 			<Header
 				detail={detail}
 				rate={rate}
-				comparisonRates={comparisonRates}
+				selectedCardIDs={selectedCardIDs}
 				setComparisonRates={setComparisonRates}
 				isSelectedCard={isSelectedCard}
 				infoBanner={infoBanner}

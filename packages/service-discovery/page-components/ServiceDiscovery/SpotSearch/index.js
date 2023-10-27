@@ -57,7 +57,7 @@ function SpotSearch() {
 						<div className={styles.label}>Select Scope: </div>
 						<ScopeSelect size="md" />
 
-						<Wallet style={{ background: '#fff' }} />
+						<Wallet style={{ background: '#fff', marginLeft: 24 }} />
 					</div>
 
 					<Header
