@@ -53,8 +53,14 @@
 .last_updated_at {
 	margin-top: 8px;
 	color: #828282;
+	text-align: right;
 
 	@media (min-width: 2560px) {
 		font-size: 30px;
 	}
+}
+
+.timer_container {
+	display: flex;
+	align-items: center;
 }

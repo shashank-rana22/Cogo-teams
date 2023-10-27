@@ -1,0 +1,20 @@
+.container {
+	padding: 8px 12px;
+	margin-left: 10px;
+	background-color: #fffce6;
+	border-radius: 8px;
+}
+
+.timer,
+.digit {
+	margin-left: 4px;
+	font-size: 16px;
+	color: #034afd;
+}
+
+.digit {
+	padding: 2px 6px;
+	font-weight: bold;
+	background: #fff;
+	border-radius: 8px;
+}
