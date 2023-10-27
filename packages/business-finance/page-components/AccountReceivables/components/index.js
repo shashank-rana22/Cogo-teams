@@ -25,7 +25,6 @@ function AccountReceivables() {
 	const [receivables, setReceivables] = useState(
 		query.active_tab || 'dashboard',
 	);
-
 	const entity = getDefaultEntityCode(partnerId);
 
 	const [entityCode, setEntityCode] = useState(entity);
@@ -40,7 +39,6 @@ function AccountReceivables() {
 	const { loading, entityData = [] } = useListCogoEntities();
 
 	const entityDataCount = entityData.length;
-
 	const entityOptions = (entityData || []).map((item) => {
 		const {
 			business_name: companyName = '',
@@ -51,6 +49,11 @@ function AccountReceivables() {
 			value : listEntityCode,
 		};
 	});
+	if (receivables === 'outstanding') {
+		entityOptions.push(
+			{ label: 'COGO FREIGHT PVT LTD_COGOPORT PRIVATE LIMITED(101_301)', value: '101_301' },
+		);
+	} else if (entityCode === '101_301') setEntityCode(getDefaultEntityCode(partnerId));
 
 	return (
 		<div>

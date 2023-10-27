@@ -15,7 +15,7 @@ function Body({
 }) {
 	const {
 		document_number = '', trade_party = '', document_date = '', document_status = '',
-		grand_total = '', quotation_state = '', id = '', line_items = [],
+		grand_total = '', quotation_state = '', id = '', line_items = {},
 	} = data || {};
 
 	const key = `${type}_${source}_${id}`;
@@ -102,7 +102,7 @@ function Body({
 							)}
 					</div>
 					<div className={`${!isOpen ? styles.nothing : styles.content}`}>
-						<LineItemsSection lineItems={line_items} />
+						<LineItemsSection lineItems={line_items?.line_items} />
 					</div>
 				</div>
 			)}

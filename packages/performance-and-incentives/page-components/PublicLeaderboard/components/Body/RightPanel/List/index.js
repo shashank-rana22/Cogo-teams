@@ -1,12 +1,15 @@
-import TEXT_MAPPING from '../../../../configurations/header-text-mapping';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import getListColumnMapping from './get-list-column-mapping';
 import styles from './styles.module.css';
 
-const MAX_LIST_ITEMS = 8;
+function conditionalWrapper({ condition, title, wrapper, children }) {
+	return condition ? wrapper(children)
+		: <div style={title === 'rank' ? { marginLeft: '38px' } : {}}>{children}</div>;
+}
 
 function List(props) {
-	const { tableList, view, totalReportCount } = props;
+	const { tableList, view } = props;
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({ view });
 
@@ -34,24 +37,28 @@ function List(props) {
 									style={{ flex }}
 									className={styles.list_column}
 								>
-									{accessor(listItem)}
+									{conditionalWrapper({
+										condition : listItem.rank === GLOBAL_CONSTANTS.one && key === 'rank',
+										title     : key,
+										wrapper   : (children) => (
+											<div className={styles.rank_container}>
+												<img
+													src={GLOBAL_CONSTANTS.image_url
+														.performance_leaderboard_ranking_badge}
+													alt="Badge"
+													className={styles.badge_icon}
+												/>
+												{children}
+											</div>
+										),
+										children: accessor(listItem),
+									})}
 								</div>
 							);
 						})}
 					</div>
 				))}
 			</div>
-
-			{ totalReportCount > MAX_LIST_ITEMS ? (
-				<p className={styles.info_text}>
-					+
-					{totalReportCount - MAX_LIST_ITEMS}
-					{' '}
-					More
-					{' '}
-					{TEXT_MAPPING[view]}
-				</p>
-			) : null}
 
 		</div>
 	);

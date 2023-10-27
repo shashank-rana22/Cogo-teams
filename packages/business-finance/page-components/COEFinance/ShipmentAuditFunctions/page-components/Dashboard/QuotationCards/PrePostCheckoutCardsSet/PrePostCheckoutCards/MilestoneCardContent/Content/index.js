@@ -73,7 +73,7 @@ export default function Content({
 						<div className={styles.table}>
 							<Table
 								columns={getServiceColumns({ currentKey, item })}
-								data={item?.lineItems || []}
+								data={item?.lineItems?.lineItems || []}
 							/>
 						</div>
 

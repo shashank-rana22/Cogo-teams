@@ -15,7 +15,9 @@
 
 .sub_div {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
+	justify-content: center;
 	width: 16%;
 	border-right: 2px solid red;
 }
