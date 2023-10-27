@@ -16,7 +16,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 
 	const [queryKey, setQueryKey] = useState('q');
 	const [orderBy, setOrderBy] = useState({
-		key   : 'totalOutstandingLedgerAmount',
+		key   : 'totalOutstanding',
 		order : 'Desc',
 		label : 'Total Outstanding Amount',
 	});
@@ -31,12 +31,17 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 	} = outStandingFilters || {};
 
 	const { order, key } = orderBy || {};
+	const [filters, setFilters] = useState({});
+	const {
+		salesAgentId = '', portfolioManagerId = '', portfolioManagerRmId = '',
+		salesAgentRmId = '', kamId = '', creditControllerId = '', companyType = '',
+	} = filters || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : '/payments/outstanding/by-customer',
+			url     : '/payments/outstanding/by-customer-v2',
 			method  : 'get',
-			authKey : 'get_payments_outstanding_by_customer',
+			authKey : 'get_payments_outstanding_by_customer_v2',
 		},
 		{ manual: true },
 	);
@@ -47,19 +52,29 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 	}, [search, debounceQuery]);
 
 	const refetch = useCallback(
-		(formFilter) => {
+		async () => {
 			try {
-				trigger({
+				await trigger({
 					params: {
 						sortBy       : key || undefined,
 						sortType     : order || undefined,
 						page,
 						pageLimit,
-						salesAgentId : formFilter?.salesAgentId || undefined,
+						salesAgentId : salesAgentId || undefined,
+
+						portfolioManagerId: portfolioManagerId || undefined,
+
+						portfolioManagerRmId: portfolioManagerRmId || undefined,
+
+						salesAgentRmId: salesAgentRmId || undefined,
+
 						creditControllerId:
-							formFilter?.creditControllerId || undefined,
-						kamId                : selectedAgentId || formFilter?.kamId || undefined,
-						companyType          : formFilter?.companyType || undefined,
+
+                            creditControllerId || undefined,
+
+						kamId: selectedAgentId || kamId || undefined,
+
+						companyType          : companyType || undefined,
 						entityCode           : entityCode || undefined,
 						organizationSerialId : organizationSerialId || undefined,
 						sageId               : sageId || undefined,
@@ -71,19 +86,10 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 				Toast.error(e?.message);
 			}
 		},
-		[
-			entityCode,
-			key,
-			order,
-			organizationSerialId,
-			page,
-			pageLimit,
-			q,
-			sageId,
-			tradePartySerialId,
-			trigger,
-			selectedAgentId,
-		],
+		[trigger, key, order, page, pageLimit,
+			salesAgentId, portfolioManagerId, portfolioManagerRmId,
+			salesAgentRmId, creditControllerId, selectedAgentId, kamId, companyType,
+			entityCode, organizationSerialId, sageId, tradePartySerialId, q],
 	);
 
 	useEffect(() => {
@@ -99,6 +105,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 		q,
 		key,
 		order,
+		filters,
 		authorizationparameters,
 		refetch,
 	]);
@@ -134,6 +141,8 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 		orderBy,
 		setOrderBy,
 		setQueryKey,
+		filters,
+		setFilters,
 		queryKey,
 		refetch,
 	};
