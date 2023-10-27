@@ -14,10 +14,15 @@ const DO_NOT_STARTCASE = ['bank_document_url', 'tax_document_url', 'address'];
 
 function PaymentDetails({
 	data = {},
+	refetchVendorInfo = () => {},
 }) {
 	const [showModal, setShowModal] = useState('');
+	const [accountStatus, setAccountStatus] = useState('inactive');
 
-	const { accountLoading = false, handleActivation = () => {} } = useActivateAccount({ setShowModal });
+	const {
+		accountLoading = false,
+		handleActivation = () => {},
+	} = useActivateAccount({ setShowModal, refetchVendorInfo });
 
 	const FIELDS_TO_SHOW = fieldsInPaymentDetails();
 	function GetDisplayValue({ bankDetail, key }) {
@@ -53,7 +58,7 @@ function PaymentDetails({
 	return (
 		<>
 			{(data.bank_details || []).map((bankDetail, index) => {
-				const { status = '', id = '', bank_document_id = '' } = bankDetail || {};
+				const { status = '', id = '' } = bankDetail || {};
 
 				return (
 					<div
@@ -75,7 +80,7 @@ function PaymentDetails({
 								loading={accountLoading}
 								disabled={accountLoading}
 								size="sm"
-								onClick={() => setShowModal(bank_document_id)}
+								onClick={() => { setShowModal(id); setAccountStatus(status); }}
 							>
 								{status === 'active' ? 'De-Activate' : 'Activate'}
 							</Button>
@@ -135,7 +140,7 @@ function PaymentDetails({
 						<Button
 							type="submit"
 							size="md"
-							onClick={() => handleActivation({ showModal, setShowModal })}
+							onClick={() => handleActivation({ showModal, accountStatus })}
 						>
 							Submit
 						</Button>

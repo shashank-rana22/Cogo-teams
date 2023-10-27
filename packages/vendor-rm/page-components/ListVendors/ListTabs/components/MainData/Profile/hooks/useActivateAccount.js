@@ -2,28 +2,29 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-function useActivateAccount() {
+function useActivateAccount({
+	setShowModal = () => {}, refetchVendorInfo = () => {},
+}) {
 	const [{ loading = false }, trigger] = useRequest({
-		url    : '/', // Todo: add the URL
-		method : 'post',
+		url    : '/update_vendor_bank_detail_status',
+		method : 'POST',
 	}, { manual: true });
 
-	const handleActivation = async ({ showModal = '', setShowModal = () => {} }) => {
+	const handleActivation = async ({ showModal, accountStatus }) => {
 		try {
-			console.log('in try ');
-
 			await trigger({
-				payload: {
-					bank_document_id: showModal,
+				data: {
+					vendor_bank_detail_id : showModal,
+					status                : accountStatus === 'active' ? 'inactive' : 'active',
 				},
 			});
 
+			refetchVendorInfo();
 			setShowModal('');
 
 			Toast.success('Updated successfully');
 		} catch (e) {
-			console.log('in catch');
-			Toast.error(getApiErrorString(e.response?.data));
+			Toast.error(getApiErrorString(e.response?.data) || 'Something went wrong!');
 		}
 	};
 

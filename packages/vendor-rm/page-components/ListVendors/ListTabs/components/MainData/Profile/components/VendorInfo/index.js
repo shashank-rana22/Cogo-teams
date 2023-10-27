@@ -47,7 +47,7 @@ function VendorInfo({
 			<span className={styles.heading}>
 				Payment Details
 			</span>
-			<PaymentDetails data={data} />
+			<PaymentDetails data={data} refetchVendorInfo={refetchVendorInfo} />
 
 			<hr className={styles.hr} />
 
