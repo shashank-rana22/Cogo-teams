@@ -65,7 +65,7 @@ function EmployeeStatusDetails({ task_list = {}, summaryData = {}, absentData = 
 			'https://cogoport-testing.sgp1.digitaloceanspaces.com/1a9f21c2f03f299fdc0161416530ed14/Calendar-3.svg',
 			type           : 'Reimbursements',
 			employee_count : `${reimbursements?.pending_count} pending`,
-			target         : '/attendance-leave-management?showInbox=true',
+			target         : '/payment',
 		},
 	];
 	return (

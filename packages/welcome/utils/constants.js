@@ -29,9 +29,9 @@ export const HEADER_NAV = [
 	// 	icon  : IcMUpwardGraph,
 	// },
 	{
-		label : 'Payslip',
+		label : 'Payments',
 		icon  : IcMAppInvoiceSubmission,
-		route : '/welcome?is_payslip=payslip',
+		route : '/payment',
 	},
 	{
 		label : 'Payroll',
