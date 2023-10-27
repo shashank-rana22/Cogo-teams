@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import { HEADER_MAPPING } from '../../../../../../constants/CALENDAR_CONSTANTS';
+import { HEADER_MAPPING } from '../../../../../../constants/calenderConstants';
 
 import styles from './styles.module.css';
 

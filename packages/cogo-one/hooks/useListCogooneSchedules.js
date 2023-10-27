@@ -19,10 +19,10 @@ const useListCogooneSchedules = () => {
 		url    : '/list_cogoone_schedules',
 	}, { manual: true });
 
-	const getEvents = useCallback(async ({ startDate = new Date(), endDate = new Date() }) => {
+	const getEvents = useCallback(({ startDate = new Date(), endDate = new Date() } = {}) => {
 		try {
 			const payload = getPayload({ startDate, endDate });
-			await trigger({ params: payload });
+			trigger({ params: payload });
 		} catch (error) {
 			console.error(error);
 		}

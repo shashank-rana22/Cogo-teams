@@ -8,7 +8,7 @@ function SelectableAgentsUserCard({ item = {} }) {
 	return (
 		<div className={styles.user_list_container}>
 			<Avatar
-				personName={item.name}
+				personName={item?.name}
 				alt="img"
 				disabled={false}
 				size="35px"
@@ -17,7 +17,7 @@ function SelectableAgentsUserCard({ item = {} }) {
 
 			<div className={styles.child_wrapper}>
 				<div className={cl`${styles.agent_label} ${styles.over_text}`}>
-					{startCase(item.name)}
+					{startCase(item?.name)}
 				</div>
 				<div className={cl`${styles.lower_label} ${styles.over_text}`}>
 					{item?.agent_data?.email}

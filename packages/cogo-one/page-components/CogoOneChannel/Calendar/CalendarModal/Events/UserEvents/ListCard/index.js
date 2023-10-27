@@ -5,7 +5,7 @@ import { Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
-import { ICON_MAPPING } from '../../../../../../../constants/CALENDAR_CONSTANTS';
+import { ICON_MAPPING } from '../../../../../../../constants/calenderConstants';
 
 import styles from './styles.module.css';
 

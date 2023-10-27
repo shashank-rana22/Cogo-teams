@@ -99,7 +99,7 @@ export async function createDraftRoom({
 		new_message_sent_at       : Date.now(),
 		self_has_unread_messages  : false,
 		is_group                  : isGroup,
-		search_name               : category === 'meeting' ? groupName.toUpperCase() : searchName?.toUpperCase(),
+		search_name               : category === 'meeting' ? groupName?.toUpperCase() : searchName?.toUpperCase(),
 		group_members_hash_string : groupMembersHashString,
 		category,
 	};

@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 
-import { LABEL, TABS } from '../../../../../../../constants/CALENDAR_CONSTANTS';
+import { LABEL, TABS } from '../../../../../../../constants/calenderConstants';
 
 import styles from './styles.module.css';
 

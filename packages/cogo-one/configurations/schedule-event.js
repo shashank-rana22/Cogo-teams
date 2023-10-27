@@ -3,9 +3,6 @@ import { addDays } from '@cogoport/utils';
 
 import SelectableAgentsUserCard from '../common/SelectableAgentsUserCard';
 
-const ADD_DAY = 1;
-const NEW_DATE = new Date();
-
 const scheduleEvents = ({ orgId = '', startDateField = {}, watch = () => {} }) => {
 	const { start_date, end_date, end_time, start_time } = watch();
 
@@ -13,7 +10,7 @@ const scheduleEvents = ({ orgId = '', startDateField = {}, watch = () => {} }) =
 		start_date: {
 			name        : 'start_date',
 			isClearable : true,
-			minDate     : NEW_DATE,
+			minDate     : new Date(),
 			placeholder : 'Start Date',
 			dateFormat  : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			rules       : {
@@ -28,12 +25,20 @@ const scheduleEvents = ({ orgId = '', startDateField = {}, watch = () => {} }) =
 			name                  : 'end_date',
 			placeholder           : 'End Date',
 			minDate               : startDateField,
-			maxDate               : addDays(new Date(startDateField), ADD_DAY),
+			maxDate               : addDays(new Date(startDateField), 1),
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			isPreviousDaysAllowed : true,
 			rules                 : {
-				validate: (value) => (((value.getDate() === start_date.getDate() && end_time < start_time))
-					? 'Cannot be less than start time' : true),
+				validate: (value) => (
+					(
+						(
+							value
+						&& (value?.getDate() === start_date?.getDate())
+						&& end_time < start_time
+						)
+					)
+						? 'Cannot be less than start time'
+						: true),
 			},
 		},
 		end_time: {

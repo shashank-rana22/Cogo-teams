@@ -4,14 +4,15 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPlusInCircle, IcMCancel } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 
-import { LABEL } from '../../../../../constants/CALENDAR_CONSTANTS';
+import { LABEL } from '../../../../../constants/calenderConstants';
 
 import CreateEvent from './CreateEvent';
 import styles from './styles.module.css';
 import UserEvents from './UserEvents';
 
 function Events({
-	addEvents = true, setAddEvents = () => {},
+	addEvents = true,
+	setAddEvents = () => {},
 	getEvents = () => {},
 	month = '',
 	setActiveTab = () => {},
@@ -57,12 +58,7 @@ function Events({
 		separator  : ',',
 	});
 
-	const ACTIVE_COMPONENT = {
-		true  : UserEvents,
-		false : CreateEvent,
-	};
-
-	const ActiveComponent = ACTIVE_COMPONENT[addEvents] || ACTIVE_COMPONENT.true;
+	const ActiveComponent = addEvents ? UserEvents : CreateEvent;
 
 	const handleClose = () => {
 		setActionModal((prevEventDetails) => ({

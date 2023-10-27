@@ -17,6 +17,7 @@ function FormLayout({
 				const Element = getFieldController(controlType);
 
 				const show = !(name in showElements) || showElements[name];
+
 				if (!Element || !show) {
 					return null;
 				}

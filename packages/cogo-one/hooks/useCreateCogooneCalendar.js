@@ -50,18 +50,21 @@ const useCreateCogooneCalendar = ({
 			await trigger({
 				data,
 			});
+
 			setEventDetails({
 				category   : 'event',
 				event_type : 'call_customer',
 			});
+
 			setMonth(new Date(values?.start_date || eventData?.start_date));
 			setMyEvents({ start: (values?.start_date || eventData?.start_date) });
+
 			setAddEvents(true);
 			Toast.success(`${startCase(eventDetails?.category)} Scheduled Successfully`);
 			reset();
 			getEvents({ startDate, endDate });
 		} catch (err) {
-			Toast.error(getApiErrorString(err?.response?.data));
+			Toast.error(getApiErrorString(err?.response?.data) || 'Something Went Wrong');
 		}
 	};
 

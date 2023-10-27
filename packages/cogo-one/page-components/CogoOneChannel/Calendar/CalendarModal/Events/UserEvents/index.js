@@ -4,7 +4,6 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useListCogooneCalendars from '../../../../../../hooks/useListCogooneCalendars';
-import getMonthStartAndEnd from '../../../../../../utils/getMonthStartAndEnd';
 import ActionModal from '../ActionModal';
 import EmptyList from '../EmptyList';
 import LoadingState from '../LoadingState';
@@ -24,12 +23,11 @@ function UserEvents({
 }) {
 	const [searchValue, setSearchValue] = useState('');
 
-	const { startDate, endDate } = getMonthStartAndEnd({ month });
 	const {
 		calendersLoading = false,
 		calendersData = {},
 		getListCalenders = () => {},
-	} = useListCogooneCalendars({ startDate, endDate, searchValue, month });
+	} = useListCogooneCalendars({ searchValue, month });
 
 	const { list: calendarList = [], total_count = 0 } = calendersData || {};
 
@@ -37,14 +35,15 @@ function UserEvents({
 
 	const eventsCount = markedEvents?.length || ZERO_COUNT;
 
-	const TABS = [{
-		title : 'schedules',
-		count : eventsCount,
-	},
-	{
-		title : 'calendars',
-		count : total_count,
-	},
+	const TABS = [
+		{
+			title : 'schedules',
+			count : eventsCount,
+		},
+		{
+			title : 'calendars',
+			count : total_count,
+		},
 	];
 
 	const handleSelect = ({ singleEvent = {}, key = '' }) => {
@@ -100,7 +99,7 @@ function UserEvents({
 			<div className={styles.tabs}>
 				{(TABS || []).map((itm) => (
 					<div
-						key={itm}
+						key={itm?.title}
 						className={cl`${styles.tab} ${activeTab === itm?.title ? styles.active_tab : ''}`}
 						onClick={() => setActiveTab(itm?.title)}
 						role="presentation"

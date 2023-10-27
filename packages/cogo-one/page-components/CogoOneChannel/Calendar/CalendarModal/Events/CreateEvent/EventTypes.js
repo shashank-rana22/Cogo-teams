@@ -2,7 +2,7 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 
-import { EVENT_TYPES } from '../../../../../../constants/CALENDAR_CONSTANTS';
+import { EVENT_TYPES } from '../../../../../../constants/calenderConstants';
 
 import styles from './styles.module.css';
 
