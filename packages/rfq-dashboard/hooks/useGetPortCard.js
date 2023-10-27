@@ -44,7 +44,7 @@ const useGetPortCard = ({ props }) => {
 
 	const {
 		detail = {}, freight_price_currency = '', freight_price_discounted = '',
-		total_price_discounted = '', id = '', stats = {}, rfq_search: { search_params },
+		total_price_discounted = '', id = '', stats = {}, rfq_search: { search_params = {}, at_actuals = false },
 	} = data;
 
 	const {
@@ -125,6 +125,7 @@ const useGetPortCard = ({ props }) => {
 		margin_limit,
 		rfq_state,
 		iconText,
+		at_actuals,
 	};
 };
 

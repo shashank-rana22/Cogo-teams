@@ -21,7 +21,7 @@ function PortsCard(props) {
 		total_price_discounted, priceBreakDown, setPriceBreakDown, id, rfq_card_loading, rate_card_details_data,
 		rate, rate_card_details, currency_conversion, editedMargins, setEditedMargins, primaryService,
 		convenienceDetails, setConvenienceDetails, updateMargin, refetchRateCards, getRfqsForApproval,
-		margin_limit, rfq_state, iconText,
+		margin_limit, rfq_state, iconText, at_actuals,
 	} = useGetPortCard({ props });
 
 	const isSinglePort = SINGLE_PORT_SERVICES.includes(service_type);
@@ -57,6 +57,7 @@ function PortsCard(props) {
 										freight_price_currency={freight_price_currency}
 										freight_price_discounted={freight_price_discounted}
 										total_price_discounted={total_price_discounted}
+										at_actuals={at_actuals && isSinglePort}
 									/>
 								</div>
 							</>

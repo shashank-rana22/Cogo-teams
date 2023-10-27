@@ -7,6 +7,7 @@ function PriceFreightCtr({
 	freight_price_discounted = '',
 	total_price_discounted = '',
 	total_price_currency,
+	at_actuals = false,
 }) {
 	const data = [
 		{
@@ -23,7 +24,7 @@ function PriceFreightCtr({
 		},
 		{
 			label  : 'Freight : ',
-			amount : formatAmount({
+			amount : at_actuals ? '*At Actuals' : formatAmount({
 				amount   : freight_price_discounted,
 				currency : freight_price_currency,
 				options  : {
