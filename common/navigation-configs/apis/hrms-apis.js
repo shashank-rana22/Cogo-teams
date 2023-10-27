@@ -850,6 +850,16 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'list_payslip',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_payslip_year',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 
