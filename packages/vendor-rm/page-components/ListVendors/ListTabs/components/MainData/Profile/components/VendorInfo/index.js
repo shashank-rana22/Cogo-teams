@@ -68,7 +68,7 @@ function VendorInfo({
 					size="lg"
 					onClose={() => setShowAddbankModal(false)}
 				>
-					<Modal.Header title="Edit Profile" />
+					<Modal.Header title="Add Bank Account" />
 
 					<Modal.Body>
 						<section>

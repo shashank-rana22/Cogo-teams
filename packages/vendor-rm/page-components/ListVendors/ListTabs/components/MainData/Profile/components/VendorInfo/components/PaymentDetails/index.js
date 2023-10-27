@@ -1,7 +1,7 @@
 import { Button, Modal, Pill, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import fieldsInPaymentDetails from '../../../../../../../../../utils/fieldsInPaymentDetails';
@@ -15,10 +15,7 @@ const DO_NOT_STARTCASE = ['bank_document_url', 'tax_document_url', 'address'];
 function PaymentDetails({
 	data = {},
 }) {
-	// Todo: need to fetch this from backend instead of showing it as a state, from the list itself....
-	const [activate, setActivate] = useState('active');
-
-	const [showModal, setShowModal] = useState(false);
+	const [showModal, setShowModal] = useState('');
 
 	const { accountLoading = false, handleActivation = () => {} } = useActivateAccount({ setShowModal });
 
@@ -53,65 +50,68 @@ function PaymentDetails({
 		return startCase(val);
 	}
 
-	// Todo : as this is a list, also send the id
 	return (
 		<>
-			{(data.bank_details || []).map((bankDetail, index) => (
-				<div
-					className={cl`${styles.main_container} ${
-						index !== 0 ? styles.padding : null
-					}`}
-					key={bankDetail.id}
-					style={{ borderTop: index > GLOBAL_CONSTANTS.zeroth_index ? '1px dashed #707070' : '' }}
-				>
+			{(data.bank_details || []).map((bankDetail, index) => {
+				const { status = '', id = '', bank_document_id = '' } = bankDetail || {};
 
-					<div className={styles.status_container}>
-						<Pill color={activate === 'active' ? '#c4dc91' : '#abb0de'}>
-							Status :
-							{' '}
-							<strong>{startCase(activate)}</strong>
-						</Pill>
+				return (
+					<div
+						className={cl`${styles.main_container} ${
+							index !== 0 ? styles.padding : null
+						}`}
+						key={id}
+						style={{ borderTop: index > GLOBAL_CONSTANTS.zeroth_index ? '1px dashed #707070' : '' }}
+					>
 
-						<Button
-							loading={accountLoading}
-							disabled={accountLoading}
-							size="sm"
-							onClick={() => setShowModal(true)}
-						>
-							{startCase(activate)}
-						</Button>
-					</div>
+						<div className={styles.status_container}>
+							<Pill color={status === 'active' ? '#c4dc91' : '#ced1ed'}>
+								Status:
+								{' '}
+								<strong>{startCase(status)}</strong>
+							</Pill>
 
-					<div className={styles.bank_details_container}>
-						{Object.keys(FIELDS_TO_SHOW).map((bankDetailsKey) => {
-							const label = FIELDS_TO_SHOW[bankDetailsKey];
+							<Button
+								loading={accountLoading}
+								disabled={accountLoading}
+								size="sm"
+								onClick={() => setShowModal(bank_document_id)}
+							>
+								{status === 'active' ? 'De-Activate' : 'Activate'}
+							</Button>
+						</div>
 
-							if (!bankDetail?.[bankDetailsKey]) return null;
+						<div className={styles.bank_details_container}>
+							{Object.keys(FIELDS_TO_SHOW).map((bankDetailsKey) => {
+								const label = FIELDS_TO_SHOW[bankDetailsKey];
 
-							return (
-								<div
-									key={bankDetailsKey}
-									className={styles.box_info}
-								>
-									<div className={styles.label}>
-										{label}
+								if (!bankDetail?.[bankDetailsKey]) return null;
+
+								return (
+									<div
+										key={bankDetailsKey}
+										className={styles.box_info}
+									>
+										<div className={styles.label}>
+											{label}
+										</div>
+
+										<div className={styles.value}>
+											{GetDisplayValue({ bankDetail, key: bankDetailsKey })}
+										</div>
 									</div>
-
-									<div className={styles.value}>
-										{GetDisplayValue({ bankDetail, key: bankDetailsKey })}
-									</div>
-								</div>
-							);
-						})}
+								);
+							})}
+						</div>
 					</div>
-				</div>
-			))}
+				);
+			})}
 
-			{showModal ? (
+			{!isEmpty(showModal) ? (
 				<Modal
-					show={showModal}
+					show={!isEmpty(showModal)}
 					size="lg"
-					onClose={() => setShowModal(false)}
+					onClose={() => setShowModal('')}
 				>
 					<Modal.Header title="Confirmation" />
 
@@ -126,7 +126,7 @@ function PaymentDetails({
 							style={{ marginRight: 10 }}
 							themeType="secondary"
 							onClick={() => {
-								setShowModal(false);
+								setShowModal('');
 							}}
 						>
 							Cancel
@@ -135,8 +135,7 @@ function PaymentDetails({
 						<Button
 							type="submit"
 							size="md"
-							// Todo: also send the id of the list item of the button
-							onClick={() => handleActivation({ setShowModal, setActivate })}
+							onClick={() => handleActivation({ showModal, setShowModal })}
 						>
 							Submit
 						</Button>

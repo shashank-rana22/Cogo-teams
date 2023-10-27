@@ -8,16 +8,17 @@ function useActivateAccount() {
 		method : 'post',
 	}, { manual: true });
 
-	// Todo : remove setActivate from here
-	// Todo : add async in the function
-	const handleActivation = async ({ setShowModal = () => {}, setActivate = () => {} }) => {
+	const handleActivation = async ({ showModal = '', setShowModal = () => {} }) => {
 		try {
 			console.log('in try ');
-			await trigger();
 
-			setActivate((pv) => (pv === 'active' ? 'inactive' : 'active'));
+			await trigger({
+				payload: {
+					bank_document_id: showModal,
+				},
+			});
 
-			setShowModal(false);
+			setShowModal('');
 
 			Toast.success('Updated successfully');
 		} catch (e) {
