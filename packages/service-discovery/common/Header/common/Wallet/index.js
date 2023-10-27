@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 import SuccessModal from './SuccessModal';
 import WalletModal from './WalletModal';
 
-function Wallet({ data = {}, service_key = 'search_type', isMobile = false }) {
+function Wallet({ data = {}, service_key = 'search_type', isMobile = false, style = {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showSuccesModal, setShowSuccessModal] = useState(false);
 
@@ -56,6 +56,7 @@ function Wallet({ data = {}, service_key = 'search_type', isMobile = false }) {
 				role="presentation"
 				className={styles.container}
 				onClick={() => setShowModal(true)}
+				style={{ ...style }}
 			>
 				<span className={styles.heading}>Wallet Balance:</span>
 

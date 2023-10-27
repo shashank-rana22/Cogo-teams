@@ -134,6 +134,7 @@ export const getGrossControls = () => {
 			label        : 'Packing List',
 			showOptional : true,
 			accept       : 'image/*,.pdf,.csv,.xlsx,.doc,.docx',
+			uploaderType : 'input',
 		},
 	];
 

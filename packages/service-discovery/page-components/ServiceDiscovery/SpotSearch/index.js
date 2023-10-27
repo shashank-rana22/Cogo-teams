@@ -4,6 +4,7 @@ import ScopeSelect from '@cogoport/scope-select';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
+import Wallet from '../../../common/Header/common/Wallet';
 import CustomLoadingState from '../../../common/LoadingState/CustomLoadingState';
 
 import Header from './components/Header';
@@ -55,6 +56,8 @@ function SpotSearch() {
 					<div className={styles.scope_select}>
 						<div className={styles.label}>Select Scope: </div>
 						<ScopeSelect size="md" />
+
+						<Wallet style={{ background: '#fff' }} />
 					</div>
 
 					<Header

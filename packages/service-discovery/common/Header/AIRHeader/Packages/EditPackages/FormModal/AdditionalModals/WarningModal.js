@@ -6,6 +6,8 @@ import styles from './styles.module.css';
 function WarningModal({
 	show = '', // suggestion,warning
 	setShow = () => {},
+	handleSubmit = () => {},
+	handleApply = () => {},
 }) {
 	const onClose = () => {
 		setShow('');
@@ -13,6 +15,7 @@ function WarningModal({
 
 	const onProceed = () => {
 		setShow('proceed');
+		handleSubmit(handleApply)();
 	};
 
 	return (

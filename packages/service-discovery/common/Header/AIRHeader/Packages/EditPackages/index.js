@@ -83,15 +83,10 @@ function EditPackages({
 		watch,
 		handleSubmit,
 		setValue,
+		getValues,
 	} = useForm();
 
 	const handleApply = async (finalValues) => {
-		if ((Number(finalValues?.total_weight) / Number(finalValues?.total_quantity) > MAX_WEIGHT_ALLOWED
-		&& showModal !== 'proceed')) {
-			setShowModal('warning');
-			return;
-		}
-
 		const { origin = {}, destination = {} } = getLocationInfo(data, {}, SERVICE_KEY);
 
 		const requiredParams = {
@@ -120,6 +115,18 @@ function EditPackages({
 			);
 			setShow(false);
 		}
+	};
+
+	const onSubmit = () => {
+		const formValues = getValues();
+
+		if ((Number(formValues?.total_weight) / Number(formValues?.total_quantity) > MAX_WEIGHT_ALLOWED
+		&& showModal !== 'proceed')) {
+			setShowModal('warning');
+			return;
+		}
+
+		handleSubmit(handleApply)();
 	};
 
 	useEffect(() => {
@@ -220,7 +227,7 @@ function EditPackages({
 					className={styles.button}
 					loading={createLoading}
 					disabled={createLoading}
-					onClick={handleSubmit(handleApply)}
+					onClick={onSubmit}
 				>
 					Create Search
 				</Button>
