@@ -23,7 +23,7 @@ const MONTHS = [
 function ActivityModal({ item, onClose, show }) {
 	return (
 		<div className={styles.whole_container}>
-			<Modal size="md" show={show} onClose={onClose} placement="center">
+			<Modal size="xl" show={show} onClose={onClose} placement="center">
 				<Modal.Header title="Activity log" />
 				<Modal.Body>
 					<div className={styles.container}>
@@ -42,7 +42,12 @@ function ActivityModal({ item, onClose, show }) {
 						</div>
 						<div className={styles.section}>
 							<span className={styles.column1}>Approved by L1 Date </span>
-							<span className={styles.column2}>{item?.level1_approved_on || '-'}</span>
+							<span className={styles.column2}>
+								{item?.level1_approved_on
+									? `${MONTHS[getMonth(new Date(item?.level1_approved_on))]} 
+								${getDate(new Date(item?.level1_approved_on))}` : '-'}
+
+							</span>
 						</div>
 						<div className={styles.section}>
 							<span className={styles.column1}>Approved by L2 </span>
@@ -50,7 +55,12 @@ function ActivityModal({ item, onClose, show }) {
 						</div>
 						<div className={styles.section}>
 							<span className={styles.column1}>Approved by L2 Date </span>
-							<span className={styles.column2}>{item?.level2_approved_on || '-'}</span>
+							<span className={styles.column2}>
+								{item?.level2_approved_on
+									? `${MONTHS[getMonth(new Date(item?.level2_approved_on))]} 
+								${getDate(new Date(item?.level2_approved_on))}` : '-'}
+
+							</span>
 						</div>
 						<div className={styles.section}>
 							<span className={styles.column1}>Attachment</span>
@@ -70,6 +80,7 @@ function ActivityModal({ item, onClose, show }) {
 						<Button
 							size="md"
 							type="button"
+							onClick={onClose}
 						>
 							OK
 						</Button>

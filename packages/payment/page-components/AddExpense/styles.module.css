@@ -29,6 +29,10 @@
 	color: #4f4f4f;
 }
 
+.input {
+	width: 100%;
+}
+
 .error_msg {
 	margin: 0;
 	font-size: 12px;

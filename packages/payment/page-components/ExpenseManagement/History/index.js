@@ -2,6 +2,7 @@ import { Table, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import EmptyState from '../../../common/EmptyState';
 import useListReimbursements from '../../../hooks/useListReimbursements';
 import useUpdateReimbursements from '../../../hooks/useUpdateReimbursements';
 
@@ -53,7 +54,7 @@ function ExpenseHistory({ toggleValue }) {
 						</div>
 
 					)
-					:	null
+					:	<EmptyState />
 			}
 			<ActivityModal show={show} item={item} onClose={handleClose} />
 			<Pagination

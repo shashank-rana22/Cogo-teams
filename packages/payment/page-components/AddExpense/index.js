@@ -21,7 +21,7 @@ const ELEMENT_MAPPING = {
 };
 
 function AddNewExpense({ onClose, show }) {
-	const { handleSubmit, control, formState: { errors } } = useForm();
+	const { handleSubmit, control, formState: { errors }, reset } = useForm();
 	const { createReimbursement } = useCreateReimbursement();
 
 	const controls = getControls();
@@ -35,6 +35,7 @@ function AddNewExpense({ onClose, show }) {
 		};
 		// console.log('values', payload);
 		createReimbursement({ payload });
+		reset();
 		onClose();
 	};
 	return (
@@ -57,6 +58,7 @@ function AddNewExpense({ onClose, show }) {
 										<Element
 											control={control}
 											{...controlItem}
+											className={styles.input}
 										/>
 
 										<div className={styles.error_message}>

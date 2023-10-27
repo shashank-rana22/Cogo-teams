@@ -5,8 +5,8 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const statusmap = {
-	level1_approved : { label: 'L1 Approved', color: '#BF291E', background: '#FDEBE9' },
-	level2_approved : { label: 'L2 Approved', color: '#BF291E', background: '#FDEBE9' },
+	level1_approved : { label: 'L1 Approved', color: '#849E4C', background: '#F7FAEF' },
+	level2_approved : { label: 'L2 Approved', color: '#849E4C', background: '#F7FAEF' },
 	processed       : { label: 'Processed', color: '#849E4C', background: '#F7FAEF' },
 	rejected        : { label: 'Rejected', color: '#C26D1A', background: '#FEF3E9' },
 	pending         : { label: 'Pending', color: '#C26D1A', background: '#FEF3E9' },
