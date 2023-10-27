@@ -11,10 +11,22 @@ export const BASIC_CONTROLS = [
 		placeholder : 'First Name',
 	},
 	{
+		label       : 'Middle Name',
+		name        : 'middle_name',
+		controlType : 'text',
+		placeholder : 'Middle Name',
+	},
+	{
 		label       : 'Last Name',
 		name        : 'last_name',
 		controlType : 'text',
 		placeholder : 'Last Name',
+	},
+	{
+		label       : 'Legal Name',
+		name        : 'legal_name',
+		controlType : 'text',
+		placeholder : 'Legal Name',
 	},
 	{
 		label       : 'Email',
@@ -39,6 +51,12 @@ export const BASIC_CONTROLS = [
 		name        : 'alternate_mobile_number',
 		controlType : 'mobile',
 		placeholder : 'Alternate Mobile Number',
+	},
+	{
+		label       : 'Emergency Contact Number',
+		name        : 'emergency_contact_number',
+		controlType : 'mobile',
+		placeholder : 'Emergency Contact Number',
 	},
 	{
 		name        : 'gender',
@@ -103,6 +121,45 @@ export const BASIC_CONTROLS = [
 		name        : 'allergies',
 		controlType : 'text',
 		placeholder : 'Allergies',
+	},
+];
+
+export const MEDIA_CONTROLS = [
+	{
+		label       : 'Linkedin',
+		name        : 'linkedin',
+		controlType : 'text',
+		placeholder : 'Linkedin Profile Link',
+	},
+	{
+		label       : 'Github',
+		name        : 'github',
+		controlType : 'text',
+		placeholder : 'Github Profile Link',
+	},
+	{
+		label       : 'Instagram',
+		name        : 'instagram',
+		controlType : 'text',
+		placeholder : 'Instagram Profile Link',
+	},
+	{
+		label       : 'Twitter',
+		name        : 'twitter',
+		controlType : 'text',
+		placeholder : 'Twitter Profile Link',
+	},
+	{
+		label       : 'Figma',
+		name        : 'figma',
+		controlType : 'text',
+		placeholder : 'Figma Profile Link',
+	},
+	{
+		label       : 'Facebook',
+		name        : 'facebook',
+		controlType : 'text',
+		placeholder : 'Facebook Profile Link',
 	},
 ];
 

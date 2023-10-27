@@ -4,8 +4,11 @@ export const personalInfo = [
 		key     : 'basic',
 		details : [
 			{ label: 'First Name', key: 'processed', value: 'first_name', inputtype: 'input' },
+			{ label: 'Middle Name', key: 'processed', value: 'middle_name', inputtype: 'input' },
 			{ label: 'Last Name', key: 'processed', value: 'last_name', inputtype: 'input' },
+			{ label: 'Legal Name', key: 'personal', value: 'legal_name', inputtype: 'input' },
 			{ label: 'Email', key: 'details', value: 'cogoport_email', inputtype: 'input' },
+
 			{
 				label     : 'Phone Number',
 				key       : 'details',
@@ -17,6 +20,13 @@ export const personalInfo = [
 				label     : 'Alternate Number',
 				key       : 'personal',
 				value     : ['alternate_mobile_country_code', 'alternate_mobile_number'],
+				inputtype : 'mobile',
+
+			},
+			{
+				label     : 'Emergency Contact Number',
+				key       : 'details',
+				value     : ['emergency_contact_details.country_code', 'emergency_contact_details.number'],
 				inputtype : 'mobile',
 
 			},
@@ -77,6 +87,18 @@ export const personalInfo = [
 		],
 	},
 	{
+		heading : 'SOCIAL MEDIA LINKS',
+		key     : 'personal',
+		details : [
+			{ label: 'Linkedin', key: 'personal', value: 'social_media_links.linkedin' },
+			{ label: 'Instagram', key: 'personal', value: 'social_media_links.instagram' },
+			{ label: 'Github', key: 'personal', value: 'social_media_links.github' },
+			{ label: 'Facebook', key: 'personal', value: 'social_media_links.facebook' },
+			{ label: 'Figma', key: 'personal', value: 'social_media_links.figma' },
+			{ label: 'Twitter', key: 'personal', value: 'social_media_links.twitter' },
+		],
+	},
+	{
 		heading : 'ADDRESS INFORMATION',
 		key     : 'address',
 		details : [
@@ -110,6 +132,21 @@ export const employmentInfo = [
 			{ label: 'HRBP', key: 'details', value: 'hrbp_name' },
 			{ label: 'Job Segment', key: 'details', value: 'job_segment' },
 			{ label: 'PMS', key: 'details', value: 'Set C' },
+		],
+	},
+	{
+		heading : 'PREVIOUS JOB  INFORMATION',
+		details : [
+			{ label: 'Company Name', key: 'details', value: 'company_name' },
+			{ label: 'Role', key: 'details', value: 'role' },
+			{
+				label   : 'Type',
+				value   : 'role_type',
+				type    : 'select',
+				options : [{ label: 'Intern', value: 'intern' }, { label: 'Full-Time', value: 'fulltime' },
+					{ label: 'Part-Time', value: 'parttime' },
+					{ label: 'Contract', value: 'contract' }],
+			},
 		],
 	},
 	{

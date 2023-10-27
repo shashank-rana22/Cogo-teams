@@ -11,9 +11,10 @@ function DetailsCard({
 	heading = '', details = [], isGrid = true, data = {},
 	loading = false, handleClickDetails, keyMapping, keyEdu, statutoryDetails,
 }) {
+	console.log('🚀 ~ file: index.js:14 ~ isGrid:', isGrid);
 	const {
 		employee_detail, modified_employee_detail,
-		processed_employee_detail, personal_details, employee_squads,
+		processed_employee_detail, personal_details, employee_squads, emergency_contact_details,
 	} = data || {};
 
 	const { present_address, employee_education_details } = employee_detail || {};
@@ -36,6 +37,8 @@ function DetailsCard({
 				getMapping[detail.education_level] = detail;
 			});
 		}
+
+		console.log(employee_education_details, 'dets');
 
 		if (['ended_at', 'date_of_birth'].includes(value)) {
 			console.log('test', getByKey(getMapping[key], value), value);
