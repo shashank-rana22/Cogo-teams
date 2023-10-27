@@ -121,7 +121,11 @@ function PaymentDetails({
 					<Modal.Header title="Confirmation" />
 
 					<Modal.Body>
-						Are you sure, you want to activate this account?
+						Are you sure, you want to
+						{' '}
+						{accountStatus === 'active' ? 'de-activate' : 'activate'}
+						{' '}
+						this account?
 					</Modal.Body>
 
 					<Modal.Footer>
