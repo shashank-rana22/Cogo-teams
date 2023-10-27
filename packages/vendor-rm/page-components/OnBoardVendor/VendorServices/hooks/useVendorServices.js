@@ -29,11 +29,13 @@ function useVendorServices({
 		...rest
 	} = useForm();
 
+	const { country_id = '' } = watch();
+
 	const { vendor_services = {}, vendor_details = {} } = vendorInformation || {};
 
 	const entityCode = Object.values(ENTITY_MAPPING).find((val) => vendor_details?.cogo_entity_id === val?.id)?.code;
 
-	const getControls = useMemo(() => controls({ entityCode }), [entityCode]);
+	const getControls = useMemo(() => controls({ entityCode, country_id }), [country_id, entityCode]);
 
 	const { partner_id = '', vendor_id } = query;
 
