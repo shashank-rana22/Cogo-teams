@@ -15,22 +15,26 @@ const INVOICE_TYPE_LIST = ['ON ACCOUNT PAYMENTS',
 
 function StatsOutstanding({ item = {}, showOutStanding = true }) {
 	const {
-		openInvoice = {},
-		totalOutstanding = {},
-		creditNote = {},
+		totalOutstanding = 0,
+		creditNoteAmount = 0,
 		openInvoiceAgeingBucket = {},
 		creditNoteAgeingBucket = {},
-		onAccount = {},
+		onAccount = 0,
 		onAccountAgeingBucket = {},
 		entityCode = '',
+		openInvoiceAmount = 0,
+		openInvoiceCount = 0,
+		onAccountCount = 0,
+		creditNoteCount = 0,
 	} = item || {};
 
-	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
+	const { currency = '' } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
 	const invoiceContainer = [
 		{
 			name         : 'OPEN INVOICES',
-			LedgerAmount : openInvoice,
+			LedgerAmount : openInvoiceAmount,
+			ledgerCount  : openInvoiceCount,
 			ageingBucket : openInvoiceAgeingBucket,
 			statsKey     : StatsKeyMapping,
 		},
@@ -38,12 +42,14 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 			name         : 'ON ACCOUNT PAYMENTS',
 			LedgerAmount : onAccount,
 			ageingBucket : onAccountAgeingBucket,
+			ledgerCount  : onAccountCount,
 			statsKey     : StatsKeyMappingPayment,
 		},
 		{
 			name         : 'CREDIT NOTES',
-			LedgerAmount : creditNote,
+			LedgerAmount : creditNoteAmount,
 			ageingBucket : creditNoteAgeingBucket,
+			ledgerCount  : creditNoteCount,
 			statsKey     : StatsKeyMapping,
 		},
 	];
@@ -73,16 +79,13 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 										{' '}
 									</div>
 									<div className={invoiceType
-									&& invoiceObject.LedgerAmount?.ledgerAmount <= DEFAULT_AMOUNT
+									&& invoiceObject?.LedgerAmount <= DEFAULT_AMOUNT
 										? styles.amount_open : styles.amount_close}
 									>
 										{formatAmount({
 											amount:
-												invoiceObject.LedgerAmount
-													?.ledgerAmount || DEFAULT_AMOUNT,
-											currency:
-												invoiceObject.LedgerAmount
-													?.ledgerCurrency || currency,
+												invoiceObject?.LedgerAmount || DEFAULT_AMOUNT,
+											currency,
 											options: {
 												style                 : 'currency',
 												currencyDisplay       : 'code',
@@ -91,7 +94,7 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 										})}
 										<div className={styles.count_open}>
 											(
-											{invoiceObject.LedgerAmount?.ledgerCount}
+											{invoiceObject?.ledgerCount}
 											)
 										</div>
 									</div>
@@ -137,15 +140,14 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 					!showOutStanding ? (
 						<div className={styles.outstanding}>
 							<div className={styles.headings}>Total Outstanding</div>
-							<div className={cl`${totalOutstanding.ledgerAmount
+							<div className={cl`${totalOutstanding
 							> DEFAULT_AMOUNT ? styles.totaloutstanding : styles.negative_totaloutstanding} 
 							${styles.common_totaloutstanding}`}
 							>
 								{formatAmount({
-									amount: totalOutstanding.ledgerAmount || DEFAULT_AMOUNT,
-									currency:
-										totalOutstanding.ledgerCurrency || currency,
-									options: {
+									amount  : totalOutstanding || DEFAULT_AMOUNT,
+									currency,
+									options : {
 										style                 : 'currency',
 										currencyDisplay       : 'code',
 										maximumFractionDigits : DEFAULT_AMOUNT,
@@ -165,15 +167,14 @@ function StatsOutstanding({ item = {}, showOutStanding = true }) {
 					>
 						<div className={styles.flex_column}>
 							<div className={styles.label_outstanding}>Total Outstanding</div>
-							<div className={cl`${totalOutstanding.ledgerAmount
+							<div className={cl`${totalOutstanding
 							> DEFAULT_AMOUNT ? styles.amountout
 								: styles.negative_amountout} ${styles.common_amountout}`}
 							>
 								{formatAmount({
-									amount: totalOutstanding.ledgerAmount || DEFAULT_AMOUNT,
-									currency:
-										totalOutstanding.ledgerCurrency || currency,
-									options: {
+									amount  : totalOutstanding || DEFAULT_AMOUNT,
+									currency,
+									options : {
 										style                 : 'currency',
 										currencyDisplay       : 'code',
 										maximumFractionDigits : DEFAULT_AMOUNT,
