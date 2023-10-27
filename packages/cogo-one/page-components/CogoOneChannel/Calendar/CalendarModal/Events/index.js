@@ -1,4 +1,4 @@
-import { cl, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPlusInCircle, IcMCancel } from '@cogoport/icons-react';
@@ -35,9 +35,9 @@ function Events({
 		actionStatus : '',
 	});
 
-	const setDefaultDate = new Date(month).getMonth() === new Date().getMonth();
+	const isSameMonth = new Date(month).getMonth() === new Date().getMonth();
 
-	const { start : startEvent = setDefaultDate ? new Date() : '' } = events || {};
+	const { start : startEvent = isSameMonth ? new Date() : '' } = events || {};
 
 	const selectedEventData = (formatedEventsList || []).find(
 		(item) => (item?.start?.getDate() === startEvent?.getDate?.())
@@ -78,27 +78,13 @@ function Events({
 
 	return (
 		<>
-			{addEvents ? (
-				<div className={styles.header}>
-					Calendar
+			<div className={styles.header}>
+				{addEvents ? 'Calendar' : `Schedule ${LABEL[eventDetails?.category]}`}
+			</div>
+			<div className={styles.container}>
+				<div className={styles.selectable_date}>
+					{addEvents && (activeTab === 'schedules' ? date : activeMonth)}
 				</div>
-			) : null}
-
-			<div className={cl`${styles.container} ${!addEvents ? styles.cancel_events : styles.add_events}`}>
-				{addEvents ? (
-					<div className={cl`${styles.selectable_date} ${!date && activeTab === 'schedules'
-						? styles.no_selected_date : ''}`}
-					>
-						{activeTab === 'schedules' ? date : activeMonth}
-					</div>
-				) : (
-					<div className={styles.sedual_event}>
-						Schedule
-						{' '}
-						{LABEL[eventDetails?.category]}
-					</div>
-				)}
-
 				<ActiveComponent
 					selectedEventData={selectedEventData}
 					getEvents={getEvents}
@@ -117,7 +103,6 @@ function Events({
 					setMyEvents={setMyEvents}
 					firestore={firestore}
 				/>
-
 				<div className={styles.footer}>
 					<Button
 						onClick={() => {

@@ -17,7 +17,7 @@ function ListCard({
 	const { userId = '' } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
 
 	return (
-		<div>
+		<>
 			{(finalList || []).map((singleEvent) => {
 				const {
 					subject = '',
@@ -35,11 +35,16 @@ function ListCard({
 					schedule_end = '',
 					schedule_start = '',
 				} = singleEvent || {};
+
 				const meetLink = invite_link;
 				const isOwner = userId === performed_by_id;
+
 				const checkStatus = activeTab === 'schedules' ? main_status : status;
+
 				const { organization_data = {}, user_data = {} } = metadata || {};
+
 				const ACTIONS = actions({ category });
+
 				const USER_CONTACT_DETAILS = [user_data?.name, user_data?.email];
 
 				const startTime = formatDate({
@@ -189,7 +194,7 @@ function ListCard({
 					</div>
 				);
 			})}
-		</div>
+		</>
 	);
 }
 

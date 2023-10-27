@@ -1,5 +1,7 @@
 .container {
-	height: 100%;
+	display: flex;
+	flex-direction: column;
+	height: calc(100% - 36px);
 
 	:global {
 		.ui_datepicker_container {
@@ -25,25 +27,18 @@
 	}
 }
 
-.add_events {
-	margin: 24px 20px 20px 10px;
-}
-
-.cancel_events {
-	margin: 10px 20px 20px 10px;
-}
-
 .header {
-	display: flex;
-	align-items: center;
-	margin: 0 0 0 30px;
+	height: 36px;
+	margin-left: 40px;
 	font-size: 18px;
-	font-size: 600;
+	font-weight: 600;
 	color: #000;
 }
 
 .selectable_date {
-	padding-bottom: 12px;
+	height: 32px;
+	padding-bottom: 8px;
+	margin: 0 20px;
 	font-size: 12px;
 	color: #828282;
 	text-align: center;
@@ -74,8 +69,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding-top: 10px;
+	height: fit-content;
+	padding: 10px 0;
 	cursor: pointer;
+	border-top: 1px solid #e0e0e0;
 }
 
 .text {

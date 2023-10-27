@@ -1,16 +1,12 @@
 .container {
 	display: flex;
+	flex: 1;
 	flex-direction: column;
-	height: 420px;
 	overflow-y: auto;
 
 	&::-webkit-scrollbar {
 		display: none;
 	}
-}
-
-.is_calendar {
-	height: 390px;
 }
 
 .empty_container {
@@ -24,7 +20,8 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	margin: 6px 0;
+	height: 37px;
+	margin-bottom: 4px;
 	background: #fff;
 	border: none;
 	box-shadow: rgb(0 0 0 / 10%) 0 4px 12px;
@@ -59,4 +56,12 @@
 .active_tab {
 	color: var(--color-primary-error-red-2);
 	background-color: var(--color-primary-error-red-5);
+}
+
+.wrapper {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: 4px 10px 0;
+	overflow: hidden;
 }

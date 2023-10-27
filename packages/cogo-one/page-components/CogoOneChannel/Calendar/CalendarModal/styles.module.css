@@ -3,46 +3,27 @@
 }
 
 .modal_container {
-	top: 94% !important;
-	left: 97.8% !important;
-	width: 66% !important;
 	padding: 0;
 	border: unset;
-
-	:global {
-		.ui_modal_header_container {
-			padding: 10px;
-		}
-	}
-}
-
-.modal_body {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	max-height: unset !important;
-	padding: 0;
-	margin: 0;
-	border-bottom: unset !important;
 }
 
 .container {
 	display: flex;
 	width: 100%;
+	height: 100%;
 }
 
 .event_list {
 	width: 32%;
+	height: 100%;
+	border-right: 1px solid #e0e0e0;
 }
 
 .calendar {
 	position: relative;
 	width: 68%;
+	height: 100%;
 	transition: 0.3s ease;
-}
-
-.calendar_container {
-	padding: 14px 14px 14px 0;
 }
 
 .right_arrow {
@@ -61,7 +42,7 @@
 	padding: 4px 8px;
 	cursor: pointer;
 	background-color: #5a88fb;
-	border-radius: 0 20px  20px 0;
+	border-radius: 0 20px 20px 0;
 	transition: 0.3s ease;
 
 	&:hover {

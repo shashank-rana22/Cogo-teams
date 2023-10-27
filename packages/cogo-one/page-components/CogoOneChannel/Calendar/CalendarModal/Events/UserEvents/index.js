@@ -96,58 +96,58 @@ function UserEvents({
 
 	return (
 		<>
-			<div className={styles.tabs}>
-				{(TABS || []).map((itm) => (
-					<div
-						key={itm?.title}
-						className={cl`${styles.tab} ${activeTab === itm?.title ? styles.active_tab : ''}`}
-						onClick={() => setActiveTab(itm?.title)}
-						role="presentation"
-					>
-						<div className={styles.tab_content}>
-							{startCase(itm?.title)}
-							{' '}
+			<div className={styles.wrapper}>
+				<div className={styles.tabs}>
+					{(TABS || []).map((itm) => (
+						<div
+							key={itm?.title}
+							className={cl`${styles.tab} ${activeTab === itm?.title ? styles.active_tab : ''}`}
+							onClick={() => setActiveTab(itm?.title)}
+							role="presentation"
+						>
+							<div className={styles.tab_content}>
+								{startCase(itm?.title)}
+								{' '}
 
-							{itm.count > ZERO_COUNT
-								? (
-									<span className={styles.count}>
-										{itm?.count}
-									</span>
-								) : ''}
+								{itm.count > ZERO_COUNT
+									? (
+										<span className={styles.count}>
+											{itm?.count}
+										</span>
+									) : ''}
+							</div>
+
 						</div>
+					))}
+				</div>
 
-					</div>
-				))}
-			</div>
-
-			{activeTab === 'calendars' ? (
-				<Input
-					size="sm"
-					prefix={<IcMSearchlight width={18} height={18} />}
-					placeholder="Search here..."
-					value={searchValue}
-					onChange={(val) => setSearchValue(val)}
-				/>
-			) : null}
-			<div className={cl`${styles.container} ${activeTab === 'calendars' ? styles.is_calendar : ''}`}>
-
-				{(calendersLoading || schedulesLoading) ? <LoadingState /> : null}
-
-				{!calendersLoading && isEmpty(finalList) ? (
-					<div className={styles.empty_container}>
-						<EmptyList />
-					</div>
-				) : null}
-
-				{!calendersLoading && !isEmpty(finalList) ? (
-					<ListCard
-						finalList={finalList}
-						activeTab={activeTab}
-						actions={actions}
+				{activeTab === 'calendars' ? (
+					<Input
+						size="sm"
+						prefix={<IcMSearchlight width={18} height={18} />}
+						placeholder="Search here..."
+						value={searchValue}
+						onChange={setSearchValue}
 					/>
 				) : null}
-			</div>
+				<div className={styles.container}>
+					{(calendersLoading || schedulesLoading) ? <LoadingState /> : null}
 
+					{!calendersLoading && isEmpty(finalList) ? (
+						<div className={styles.empty_container}>
+							<EmptyList />
+						</div>
+					) : null}
+
+					{!calendersLoading && !isEmpty(finalList) ? (
+						<ListCard
+							finalList={finalList}
+							activeTab={activeTab}
+							actions={actions}
+						/>
+					) : null}
+				</div>
+			</div>
 			<ActionModal
 				actionModal={actionModal}
 				getEvents={getEvents}

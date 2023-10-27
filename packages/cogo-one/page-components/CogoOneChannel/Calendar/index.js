@@ -33,7 +33,6 @@ function Calendar({ firestore = {} }) {
 			{eventClender
 				? (
 					<CalendarModal
-						eventClender={eventClender}
 						setEventCalendar={setEventCalendar}
 						firestore={firestore}
 					/>
