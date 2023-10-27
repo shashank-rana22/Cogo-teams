@@ -10,7 +10,7 @@ const getMarginControls = (nameKey = '') => [
 			{
 				name    : 'type',
 				type    : 'select',
-				span    : 4,
+				span    : 3.8,
 				caret   : true,
 				options : [
 					{
@@ -30,7 +30,7 @@ const getMarginControls = (nameKey = '') => [
 			{
 				name           : 'currency',
 				type           : 'select',
-				span           : 4,
+				span           : 3.8,
 				placeholder    : 'currency',
 				watch          : true,
 				rules          : { required: 'Required' },
@@ -52,7 +52,7 @@ const getMarginControls = (nameKey = '') => [
 				name        : 'value',
 				type        : 'number',
 				placeholder : 'Value',
-				span        : 4,
+				span        : 3.8,
 				watch       : true,
 				rules       : { required: 'Required' },
 			},
