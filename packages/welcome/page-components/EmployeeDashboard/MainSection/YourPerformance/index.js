@@ -8,21 +8,16 @@ import Feed from '../Feed';
 import TeamPerformance from '../TeamPerformance';
 
 import Leaderboard from './Leaderboard';
-import StoryPoints from './StoryPoints';
+// import StoryPoints from './StoryPoints';
 import styles from './styles.module.css';
 import WorkingHrs from './WorkingHrs';
 
 function YourPerformance({ data, feedRefetch, setFilters, summaryData }) {
-	console.log('summaryData', summaryData);
-
-	const { graph_detail, clap_recieved, rating_list, user_role } = summaryData || {};
+	const { graph_detail, clap_recieved, rating_list, user_role, rating_chart_details } = summaryData || {};
 
 	const { self_rating } = rating_list || {};
 
 	const [isEmployeeDashboardActive, setIsEmployeeDashboardActive] = useState(true);
-
-	console.log('isEmployeeDashboardActive', isEmployeeDashboardActive);
-	console.log(user_role, 'user_role');
 
 	return (
 		<>
@@ -75,7 +70,8 @@ function YourPerformance({ data, feedRefetch, setFilters, summaryData }) {
 							</div>
 						</div>
 						<div className={styles.story_points_data}>
-							<StoryPoints />
+							{/* <StoryPoints /> */}
+							<WorkingHrs title="Performance Analysis" graph_detail={rating_chart_details} />
 						</div>
 					</div>
 					<div className={styles.leaderboard_data}>
@@ -83,7 +79,7 @@ function YourPerformance({ data, feedRefetch, setFilters, summaryData }) {
 							<Leaderboard rating_list={rating_list?.rating_list} />
 						</div>
 						<div className={styles.working_hrs}>
-							<WorkingHrs graph_detail={graph_detail} />
+							<WorkingHrs title="Working Hours" graph_detail={graph_detail} />
 						</div>
 					</div>
 				</div>

@@ -6,8 +6,7 @@ import styles from './styles.module.css';
 
 const ZERO = 0;
 function NotInOffice({ data = {} }) {
-	const { absentee_list, department } = data || {};
-	console.log('🚀 ~ file: index.js:9 ~ NotInOffice ~ absentee_list:', absentee_list);
+	const { absentee_list } = data || {};
 	const MAX_VISIBLE = 5; // Maximum number of absentees to display directly
 
 	const visibleAbsentees = (absentee_list || []).slice(0, MAX_VISIBLE);
@@ -52,7 +51,7 @@ function NotInOffice({ data = {} }) {
 				{' '}
 				employees from
 				{' '}
-				{department}
+				your team
 				{' '}
 				are not present today
 			</div>

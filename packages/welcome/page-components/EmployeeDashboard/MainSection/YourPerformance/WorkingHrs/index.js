@@ -4,11 +4,11 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function WorkingHrs({ graph_detail }) {
+function WorkingHrs({ title, graph_detail }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_title}>
-				Working Hours
+				{title}
 			</div>
 			<div className={styles.line}>
 				<ResponsiveLine
