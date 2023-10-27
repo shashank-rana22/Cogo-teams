@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 import Wallet from '../../../common/Header/common/Wallet';
 import CustomLoadingState from '../../../common/LoadingState/CustomLoadingState';
+import useGetIsMobile from '../../../helpers/useGetIsMobile';
 
 import Header from './components/Header';
 import ModeSelection from './components/ModeSelection';
@@ -34,6 +35,8 @@ function SpotSearch() {
 	const [errors, setErrors] = useState({});
 	const [routerLoading, setRouterLoading] = useState(false);
 
+	const isMobile = useGetIsMobile();
+
 	const { createSearch = () => {}, loading = false } = useCreateSearch();
 
 	useEffect(() => {
@@ -57,7 +60,7 @@ function SpotSearch() {
 						<div className={styles.label}>Select Scope: </div>
 						<ScopeSelect size="md" />
 
-						<Wallet style={{ background: '#fff', marginLeft: 24 }} />
+						<Wallet style={{ background: '#fff', marginLeft: 24 }} isMobile={isMobile} />
 					</div>
 
 					<Header
