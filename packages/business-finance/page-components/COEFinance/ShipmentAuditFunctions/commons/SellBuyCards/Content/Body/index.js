@@ -102,7 +102,7 @@ function Body({
 							)}
 					</div>
 					<div className={`${!isOpen ? styles.nothing : styles.content}`}>
-						<LineItemsSection lineItems={line_items?.line_items} />
+						<LineItemsSection lineItems={line_items} />
 					</div>
 				</div>
 			)}

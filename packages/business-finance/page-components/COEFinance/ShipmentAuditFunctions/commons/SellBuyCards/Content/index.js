@@ -46,7 +46,9 @@ function Content({
 		<div className={styles.overall_container}>
 			<div className={styles.stats_container}>
 				<div className={styles.individual_stat_container}>
-					<div className={styles.regular}>Income</div>
+					<div className={styles.regular}>
+						{type === 'buy' ? 'Expense: ' : 'Income: '}
+					</div>
 					<div>
 						{formatAmount({
 							amount  : income,

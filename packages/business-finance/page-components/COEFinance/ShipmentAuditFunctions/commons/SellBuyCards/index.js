@@ -31,7 +31,7 @@ function SellBuyCards({
 	let grandTotal = 0;
 
 	data?.forEach((i) => {
-		profitabilityData += i.profitability;
+		profitabilityData = i.profitability;
 		grandTotal += i.grand_total;
 	});
 

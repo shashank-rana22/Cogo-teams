@@ -1,4 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcMArrowRotateDown,
@@ -8,13 +7,10 @@ import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 
 import useGetShipmentSummary from '../../../../hook/useGetShipmentSummary';
-import useGetWallet from '../../../../hook/useGetWallet';
 import GetPill from '../../../commons/getPill';
 
 import Details from './Details';
 import styles from './styles.module.css';
-
-const DEFAULT_AMOUNT = 0;
 
 function DetailsCard({
 	onTabClick = () => {},
@@ -39,14 +35,6 @@ function DetailsCard({
 	} = summary || {};
 
 	const pointsAndPromocode = cogopointUtilizationAmount + organizationPromocodesAmount;
-
-	const { data: dataWallet = {} } = useGetWallet(shipmentId);
-	const {
-		agent_data: agentData = {},
-		agent_role_data: agentRoleData = {},
-		amount = '',
-		amount_currency: amountCurrency = '',
-	} = dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { source = '', trade_type: tradeType = '' } = dataList;
 
@@ -133,23 +121,6 @@ function DetailsCard({
 
 					</div>
 
-					{dataWallet?.list?.[GLOBAL_CONSTANTS.zeroth_index] && (
-						<div className={styles.data}>
-							<div className={styles.kam_data}>KAM -</div>
-							<div>
-								{agentData?.name || ''}
-								(
-								{agentRoleData?.name || ''}
-								)
-							</div>
-							<div className={styles.kam_data}>Wallet Usage - </div>
-							<div>
-								{amountCurrency || ''}
-
-								{amount || DEFAULT_AMOUNT}
-							</div>
-						</div>
-					)}
 				</div>
 				<div
 					className={styles.caret}
