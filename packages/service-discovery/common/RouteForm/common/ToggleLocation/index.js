@@ -10,6 +10,7 @@ const TIMEOUT_TIME = 800;
 function ToggleLocation({
 	formValues = {},
 	setFormValues = () => {},
+	style = {},
 }) {
 	const [active, setActive] = useState(false);
 
@@ -30,7 +31,7 @@ function ToggleLocation({
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={{ ...(style || {}) }}>
 			<ButtonIcon
 				className={cl`${styles.button} ${active ? styles.active : {}}`}
 				size="sm"
