@@ -6,7 +6,6 @@ import { useState } from 'react';
 import DURATION_CONSTANTS from '../../../../constants/duration-constants';
 import DURATION_OPTIONS from '../../../Leaderboard/configurations/get-duration-filter-options';
 import TEXT_MAPPING from '../../configurations/header-text-mapping';
-import VIEW_OPTIONS from '../../configurations/view-type-options';
 import onChangeDuration from '../../utils/changeDuration';
 
 import CountDownTimer from './CountDownTimer';
@@ -15,7 +14,7 @@ import styles from './styles.module.css';
 const { CUSTOM } = DURATION_CONSTANTS;
 
 function Header(props) {
-	const { view, setView, dateRange, setDateRange, updatedAt } = props;
+	const { view, dateRange, setDateRange, updatedAt, countdown } = props;
 
 	const [duration, setDuration] = useState('today');
 
@@ -64,9 +63,10 @@ function Header(props) {
 			<div>
 
 				<div className={styles.timer_container}>
-					<Select value={view} onChange={setView} options={VIEW_OPTIONS} className={styles.view_selector} />
+					{/* <Select value={view} onChange={setView}
+					options={VIEW_OPTIONS} className={styles.view_selector} /> */}
 
-					<CountDownTimer updatedAt={updatedAt} />
+					<CountDownTimer updatedAt={updatedAt} countdown={countdown} />
 				</div>
 
 				{updatedAt && (

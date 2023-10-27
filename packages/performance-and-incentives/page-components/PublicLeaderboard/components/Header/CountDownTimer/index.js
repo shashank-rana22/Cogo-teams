@@ -1,42 +1,27 @@
-import { useState, useEffect } from 'react';
+import useCountDown from '../../../hooks/useCountDown';
 
 import styles from './styles.module.css';
 
 function CountDownTimer({ updatedAt = '' }) {
-	const inputDate = new Date(updatedAt);
-
-	const addedDate = new Date(inputDate.getTime() + 35 * 60000);
-
-	const currentDate = new Date();
-	const timeDifferenceInMinutes = Math.floor((addedDate - currentDate) / 60000);
-
-	const [countdown, setCountdown] = useState(timeDifferenceInMinutes);
-
-	useEffect(() => {
-		setCountdown(timeDifferenceInMinutes);
-	}, [timeDifferenceInMinutes]);
-
-	useEffect(() => {
-		if (countdown > 0) {
-			const intervalId = setInterval(() => {
-				setCountdown(countdown - 1);
-			}, 60000);
-
-			return () => clearInterval(intervalId);
-		}
-
-		return () => {};
-	}, [countdown]);
+	const { countdown } = useCountDown({ updatedAt });
 
 	if (countdown < 0 || Number.isNaN(countdown)) return null;
 
+	const minutes = Math.floor(countdown / 60);
+	const seconds = countdown % 60;
+
 	return (
 		<div className={styles.container}>
-			Next Update in
-			{' '}
-			<span className={styles.digit}>{Math.floor(countdown / 10)}</span>
-			<span className={styles.digit}>{countdown % 10}</span>
-			<span className={styles.timer}>mins</span>
+			<div> Next Update in</div>
+
+			<div className={styles.timer_container}>
+				<div className={styles.digit}>{String(minutes).padStart(2, '0')}</div>
+
+				<strong className={styles.divider}>:</strong>
+
+				<div className={styles.digit}>{String(seconds).padStart(2, '0')}</div>
+			</div>
+
 		</div>
 	);
 }
