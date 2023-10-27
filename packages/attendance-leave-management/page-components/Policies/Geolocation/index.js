@@ -46,7 +46,7 @@ function Geolocation({ handlePolicy = () => {} }) {
 				</div>
 				{isEmpty(selectedLocation) && (
 					<div className={styles.container}>
-						<div className={styles.above_text}>Temporaray Access</div>
+						<div className={styles.above_text}>Temporary Access</div>
 						{ tempaccess.map((item) => (
 							<div key={item.id} className={styles.card}>
 								<div className={styles.card_container}>

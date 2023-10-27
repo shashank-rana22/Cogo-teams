@@ -2,7 +2,6 @@ import { Toggle } from '@cogoport/components';
 import { IcCGreenCircle } from '@cogoport/icons-react';
 import React from 'react';
 
-// import DepartmentHappyIndex from './DepartmentHappyIndex';
 import useGetAbsenteeInsight from '../../../../hooks/useGetAbsenteeInsight';
 import useGetDepartmentWise from '../../../../hooks/useGetDepartmentWise';
 

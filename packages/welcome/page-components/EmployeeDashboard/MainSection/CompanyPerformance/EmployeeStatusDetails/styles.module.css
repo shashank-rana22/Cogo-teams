@@ -1,6 +1,6 @@
 .employee_status_details {
 	display: flex;
-	margin: 12px;
+	margin: 12px 0;
 }
 
 .employee_status_card {
@@ -43,6 +43,7 @@
 	flex-direction: column;
 	align-items: flex-start;
 	align-self: stretch;
+	height: 384px;
 	padding: 16px 12px;
 	background: #fff;
 	border-radius: 8px;
