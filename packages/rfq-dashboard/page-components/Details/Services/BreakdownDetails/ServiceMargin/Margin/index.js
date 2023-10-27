@@ -1,4 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import { displayMarginValue } from '../../../../../../utils/dynamicValues';
@@ -6,6 +8,8 @@ import { displayMarginValue } from '../../../../../../utils/dynamicValues';
 import styles from './styles.module.css';
 
 function CodeMargin({ item, editedDemandMargin = {} }) {
+	const { quantity = 1, unit = '' } = item || {};
+
 	const oldDemandMargin =		(item.margins || []).find(
 		(marginObj) => marginObj?.margin_type === 'demand',
 	)?.total_margin_value || 0;
@@ -25,11 +29,22 @@ function CodeMargin({ item, editedDemandMargin = {} }) {
 		options  : {
 			style                 : 'currency',
 			currencyDisplay       : 'code',
-			maximumFractionDigits : 0,
+			maximumFractionDigits : 2,
+			minimumFractionDigits : 2,
 		},
 	});
 
-	return <div className={styles.total_text}>{total}</div>;
+	return (
+		<div>
+			<div className={styles.total_text}>{total}</div>
+			<div className={styles.per_container_value}>
+				{`${(total_sell_price / quantity).toFixed(4)} ${
+					GLOBAL_CONSTANTS.freight_unit_mapping[unit]
+				|| `/${startCase(unit || 'Ctr')}`
+				}`}
+			</div>
+		</div>
+	);
 }
 
 export default CodeMargin;
