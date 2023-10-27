@@ -173,6 +173,7 @@ export default {
 		prod_kam_cp             : 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
 		prod_es_sales           : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 		entity_manager_id       : '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
+		lcl_so2_executive       : '12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)
 		service_ops1_role_ids   : [
 			'5b5ee698-ec53-47fe-9584-737c9a174f8c', // Prod_SO1
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
