@@ -17,6 +17,10 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 35%;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }
 
 .tabs {
@@ -36,6 +40,10 @@
 
 	@media (max-width: 1080px) {
 		width: fit-content;
+	}
+	@media (max-width: 768px) {
+		justify-content: space-between;
+		margin-right: 0;
 	}
 }
 

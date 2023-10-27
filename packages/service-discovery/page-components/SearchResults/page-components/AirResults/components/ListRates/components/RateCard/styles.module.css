@@ -11,4 +11,12 @@
 		background: #f5ffff;
 		border: 1px solid #e6f3f3;
 	}
+
+	&.compared_rate {
+		border: 1px solid #88cad1;
+	}
+}
+
+.promo_codes {
+	margin: 20px -16px -20px;
 }

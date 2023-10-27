@@ -3,11 +3,12 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import FreightPriceDetail from '../../../common/BasicFreightDetail';
+import PromoCode from '../../../common/Promocode';
+import getPromotion from '../../../utils/getPromotion';
 
 import DetailFooter from './DetailFooter';
 import HaulageText from './HaulageText';
 import IcdRoute from './IcdRoute';
-import PromoCode from './Promocode';
 import QuotationDetails from './QuotationDetails';
 import RateCardTop from './RateCardTop';
 import Route from './Route';
@@ -15,15 +16,6 @@ import SailingWeek from './SailingWeek';
 import styles from './styles.module.css';
 
 const ONE = 1;
-
-const getPromotion = ({ promocodes = [] }) => {
-	const promotion = promocodes.find((promocode) => {
-		const { is_applicable, is_eligible } = promocode.eligibility_checks || {};
-		return is_applicable && is_eligible;
-	}) || {};
-
-	return promotion;
-};
 
 function RateCardTopSection({
 	rateCardData = {},

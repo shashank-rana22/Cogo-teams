@@ -23,6 +23,7 @@
 }
 
 .label {
+	width: max-content;
 	font-size: 10px;
 	line-height: 150%;
 	color: #000;

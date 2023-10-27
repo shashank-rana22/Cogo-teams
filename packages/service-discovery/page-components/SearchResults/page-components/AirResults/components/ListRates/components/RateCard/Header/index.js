@@ -20,7 +20,7 @@ const RATE_SOURCE_MAPPING = {
 function Header({
 	rate = {},
 	detail = {},
-	comparisonRates = {},
+	selectedCardIDs = [],
 	setComparisonRates = () => {},
 	isSelectedCard = false,
 	infoBanner = {},
@@ -36,8 +36,6 @@ function Header({
 		is_minimum_threshold_rate = false,
 		price_type = '',
 	} = rate;
-
-	const selectedCardIDs = Object.keys(comparisonRates);
 
 	const handleCheckbox = () => {
 		if (!selectedCardIDs.includes(card_id)) {
