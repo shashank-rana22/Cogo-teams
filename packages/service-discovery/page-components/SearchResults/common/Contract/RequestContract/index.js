@@ -1,12 +1,13 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { addDays } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import LocationDetails from '../../../../../common/LocationDetails';
 import getElementController from '../../../../../configs/getElementController';
 import getErrorMessage from '../../../../../configs/getErrorMessage';
 import useCreateContract from '../../../hooks/useCreateContract';
+import useGetPlatformConfigConstant from '../../../hooks/useGetPlatformConfigConstant';
 import LoadDetails from '../common/LoadDetails';
 
 import createContracts from './controls';
@@ -26,7 +27,18 @@ function RequestContract({
 	setContractData = () => {},
 	isMobile = false,
 }) {
-	const controls = createContracts({ isMobile });
+	const [minCargoValues, setMinCargoValues] = useState({
+		fcl_freight : { min: 1 },
+		lcl_freight : { min: 1 },
+		air_freight : { min: 1 },
+	});
+
+	const controls = createContracts({ isMobile, minCargoValues });
+
+	const {
+		loadingConfigConsants = false,
+		getPlatformConfigConstant = () => {},
+	} = useGetPlatformConfigConstant({ setMinCargoValues });
 
 	const {
 		control,
@@ -57,6 +69,10 @@ function RequestContract({
 	useEffect(() => {
 		setValue('validity_end', null);
 	}, [setValue, startDate]);
+
+	useEffect(() => {
+		getPlatformConfigConstant();
+	}, [getPlatformConfigConstant]);
 
 	return (
 		<div className={styles.container}>
@@ -154,6 +170,7 @@ function RequestContract({
 						themeType="accent"
 						onClick={handleSubmit(onSubmit)}
 						loading={loading}
+						disabled={loading || loadingConfigConsants}
 					>
 						Next
 					</Button>
