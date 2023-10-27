@@ -1,6 +1,5 @@
 import { Modal, Button, Textarea } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
 import { getOrgId } from '../../../../../../../utils/platformAdoption';
@@ -10,11 +9,11 @@ import styles from './styles.module.css';
 function RejectAccount({
 	rejectAccount = '', setRejectAccount = () => {},
 	verifyAccount = {}, setVerifyAccount = () => {},
-	verifyKyc = () => {}, loading = false, updateDocument = () => {},
+	verifyKyc = () => {}, loading = false,
 }) {
 	const { show = false, rejectReason = '' } = rejectAccount || {};
 	const { accountType = '', orgData = {}, verifyType = '' } = verifyAccount || {};
-	const { documents = [], id = '' } = orgData || {};
+	const { id = '' } = orgData || {};
 
 	const handleClose = () => {
 		setRejectAccount(() => ({
@@ -28,17 +27,13 @@ function RejectAccount({
 	};
 
 	const handleReject = (status) => {
-		if (verifyType === 'trade_party') {
-			updateDocument({ val: documents?.[GLOBAL_CONSTANTS.zeroth_index] || {}, status, rejectReason });
-		} else {
-			verifyKyc({
-				orgId         : getOrgId({ orgData })?.[accountType],
-				type          : status,
-				rejectReason,
-				requestId     : id,
-				requestStatus : 'processing',
-			});
-		}
+		verifyKyc({
+			orgId         : getOrgId({ orgData })?.[accountType],
+			type          : status,
+			rejectReason,
+			requestId     : id,
+			requestStatus : 'processing',
+		});
 	};
 
 	if (!show) {

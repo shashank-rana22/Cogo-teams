@@ -207,8 +207,7 @@ function List({
 				setVerifyAccount={setVerifyAccount}
 				verifyAccount={verifyAccount}
 				verifyKyc={verifyKyc}
-				loading={loading || updateLoading}
-				updateDocument={updateDocument}
+				loading={loading}
 			/>
 		</div>
 	);

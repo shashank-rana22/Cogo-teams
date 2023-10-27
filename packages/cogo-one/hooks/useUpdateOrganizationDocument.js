@@ -9,7 +9,7 @@ const getPayload = ({
 	id,
 	verification_status : status,
 	organization_trade_party_id,
-	rejection_reason    : rejectReason,
+	rejection_reason    : rejectReason || undefined,
 });
 
 const useUpdateOrganizationDocument = ({

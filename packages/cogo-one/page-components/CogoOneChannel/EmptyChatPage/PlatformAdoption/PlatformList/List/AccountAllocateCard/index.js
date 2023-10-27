@@ -23,7 +23,7 @@ function AccountAllocateCard({
 		const { agent = {} } = current_stakeholder || {};
 		const { name: requestName } = agent || {};
 		const { name = '' } = requesting_agent || {};
-		const { id: requestId = '' } = metadata || {};
+		const { id: allocationRequestId = '' } = metadata || {};
 
 		return (
 			<React.Fragment key={id}>
@@ -117,7 +117,8 @@ function AccountAllocateCard({
 					rejectData={rejectData}
 					loadingUpdate={loadingUpdate}
 					onStatusUpdate={onStatusUpdate}
-					requestId={requestId}
+					allocationRequestId={allocationRequestId}
+					id={id}
 				/>
 			</React.Fragment>
 		);

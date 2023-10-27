@@ -51,7 +51,7 @@ const useAssignOnboardingAgent = ({ setAssignModal }) => {
 					metadata,
 				}),
 			});
-			Toast.success('Successfully Assigne !!');
+			Toast.success('Successfully Assigned !!');
 			setAssignModal({
 				show       : false,
 				assignData : null,

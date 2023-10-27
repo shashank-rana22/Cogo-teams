@@ -57,6 +57,15 @@ function VerifyAccount({
 		}
 	};
 
+	const handleReject = () => {
+		if (verifyType === 'trade_party' && !showAccountDetails) {
+			updateDocument({ val: documents?.[GLOBAL_CONSTANTS.zeroth_index] || {}, status: 'rejected' });
+		} else {
+			setVerifyAccount((prev) => ({ ...prev, show: false }));
+			setRejectAccount(() => ({ show: true }));
+		}
+	};
+
 	if (!show) {
 		return null;
 	}
@@ -100,10 +109,7 @@ function VerifyAccount({
 							<Button
 								className={styles.cancel_button}
 								themeType="secondary"
-								onClick={() => {
-									setVerifyAccount((prev) => ({ ...prev, show: false }));
-									setRejectAccount(() => ({ show: true }));
-								}}
+								onClick={() => handleReject()}
 								disabled={loading}
 							>
 								Reject

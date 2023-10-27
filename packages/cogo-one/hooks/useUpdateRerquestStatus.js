@@ -4,8 +4,8 @@ import { useAllocationRequest } from '@cogoport/request';
 
 import useUpdateOnboardingRequest from './useUpdateOnboardingRequest';
 
-const getPayload = ({ requestId = '', type = '', reason = [] }) => ({
-	allocation_request_id : requestId,
+const getPayload = ({ allocationRequestId = '', type = '', reason = [] }) => ({
+	allocation_request_id : allocationRequestId,
 	status                : type,
 	rejection_reasons     : type === 'approved' ? undefined : reason,
 });
@@ -19,14 +19,17 @@ const useUpdateRequestStatus = ({ setRejectData = () => {}, onboardingRequest = 
 
 	const { requestLoader = false, updateRequest = () => {} } = useUpdateOnboardingRequest();
 
-	const onStatusUpdate = async ({ requestId = '', type = '', reason = [], requestStatus }) => {
+	const onStatusUpdate = async ({
+		allocationRequestId = '', type = '', reason = [],
+		requestStatus = '', id = '',
+	}) => {
 		try {
 			const res = await trigger({
-				data: getPayload({ requestId, type, reason }),
+				data: getPayload({ allocationRequestId, type, reason }),
 			});
 
 			if (res?.data?.id) {
-				await updateRequest({ requestId, requestStatus });
+				await updateRequest({ requestId: id, requestStatus });
 			}
 			setRejectData(() => ({
 				showRejectModal : false,

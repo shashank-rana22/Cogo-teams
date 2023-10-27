@@ -9,11 +9,12 @@ function RejectVerification({
 	setRejectData = () => {}, rejectData = {},
 	loadingUpdate = false,
 	onStatusUpdate = () => {},
-	requestId = '',
+	allocationRequestId = '',
+	id = '',
 }) {
 	const { showRejectModal = false, reason = [], type = '' } = rejectData || {};
 
-	const hancleClose = () => {
+	const handleClose = () => {
 		setRejectData(() => ({
 			reason          : [],
 			type            : '',
@@ -22,15 +23,15 @@ function RejectVerification({
 	};
 
 	const handleAllocate = () => {
-		onStatusUpdate({ requestId, type, reason, requestStatus: 'processing' });
+		onStatusUpdate({ allocationRequestId, type, reason, requestStatus: 'processing', id });
 	};
 
 	return (
 		<Modal
 			show={showRejectModal}
-			onClose={hancleClose}
+			onClose={handleClose}
 			size="sm"
-			closeOnOuterClick={hancleClose}
+			closeOnOuterClick={handleClose}
 			placement="top"
 			scroll={false}
 		>
@@ -62,7 +63,7 @@ function RejectVerification({
 				<Button
 					className={styles.cancel_button}
 					themeType="secondary"
-					onClick={hancleClose}
+					onClick={handleClose}
 					disabled={loadingUpdate}
 				>
 					{type === 'approved' ? 'No' : 'Cancel'}
