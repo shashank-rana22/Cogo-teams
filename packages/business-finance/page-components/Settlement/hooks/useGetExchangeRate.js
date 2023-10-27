@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 import { transactionDates } from './helper';
 
 const useGetExchangeRate = ({ setValue = () => {}, from_cur = '', to_cur = '', exchange_date = '' }) => {
-	const [{ loading:exchangeLoading }, exRateTrigger] = useRequestBf(
+	const [{ loading:exchangeLoading = false }, exRateTrigger] = useRequestBf(
 		{
 			url     : 'payments/invoice/exchange-rates',
 			method  : 'post',
@@ -21,7 +21,7 @@ const useGetExchangeRate = ({ setValue = () => {}, from_cur = '', to_cur = '', e
 	const getExchangeRate = useCallback(async () => {
 		try {
 			const exData = await exRateTrigger({});
-			setValue('exchangeRate', exData?.data?.exchange_rate.toFixed(4));
+			setValue('exchangeRate', exData?.data?.exchange_rate?.toFixed(4));
 		} catch (error) {
 			Toast.error(error?.data?.response?.message || 'Something went wrong');
 		}
