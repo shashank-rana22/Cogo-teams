@@ -1,11 +1,12 @@
 import { cl } from '@cogoport/components';
-import { IcMArrowRight } from '@cogoport/icons-react';
+// import { IcMArrowRight } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function SalaryUpdate({ data }) {
 	const { payable_days, payroll_status } = data || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -25,7 +26,7 @@ function SalaryUpdate({ data }) {
 					Payroll Status
 				</div>
 			</div>
-			<div className={styles.footer}>
+			{/* <div className={styles.footer}>
 				<div>
 					{' '}
 				</div>
@@ -34,7 +35,7 @@ function SalaryUpdate({ data }) {
 					{' '}
 					<IcMArrowRight style={{ marginLeft: 8 }} />
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 }
