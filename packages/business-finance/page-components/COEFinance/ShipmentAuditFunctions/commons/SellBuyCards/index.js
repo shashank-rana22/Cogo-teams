@@ -32,7 +32,7 @@ function SellBuyCards({
 
 	data?.forEach((i) => {
 		profitabilityData = i.profitability;
-		grandTotal += i.grand_total;
+		grandTotal += (i.grand_total * i.exchange_rate);
 	});
 
 	return (
