@@ -20,6 +20,7 @@ function PersonalDetails({ data = {}, loading = false, getEmployeeDetails }) {
 	// console.log('🚀 ~ file: index.js:26 ~ PersonalDetails ~ family_details:', family_details);
 	// const { control } = useForm();
 	const info = personalInfo;
+	console.log('🚀 ~ file: index.js:23 ~ PersonalDetails ~ info:', info);
 	const otherInfo = otherPersonalInfo;
 
 	const handleModal = () => {

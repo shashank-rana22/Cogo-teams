@@ -163,6 +163,30 @@ export const MEDIA_CONTROLS = [
 	},
 ];
 
+export const PREVIOUS_JOB_HISTORY = [
+	{
+		label       : 'Company Name',
+		name        : 'company_name',
+		controlType : 'text',
+		placeholder : 'Previous Company name',
+	},
+	{
+		label       : 'Role',
+		name        : 'role',
+		controlType : 'text',
+		placeholder : 'Enter role at previous company',
+	},
+	{
+		label       : 'Type',
+		name        : 'type',
+		controlType : 'select',
+		options     : [{ label: 'Intern', value: 'intern' }, { label: 'Full-Time', value: 'fulltime' },
+			{ label: 'Part-Time', value: 'parttime' },
+			{ label: 'Contract', value: 'contract' }],
+		placeholder: 'Enter Employment type',
+	},
+];
+
 export const FAMILY_CONTROLS = [
 	{
 		label       : 'Father Name',

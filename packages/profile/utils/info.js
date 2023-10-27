@@ -136,17 +136,12 @@ export const employmentInfo = [
 	},
 	{
 		heading : 'PREVIOUS JOB  INFORMATION',
+		key     : 'job_history',
 		details : [
-			{ label: 'Company Name', key: 'details', value: 'company_name' },
-			{ label: 'Role', key: 'details', value: 'role' },
-			{
-				label   : 'Type',
-				value   : 'role_type',
-				type    : 'select',
-				options : [{ label: 'Intern', value: 'intern' }, { label: 'Full-Time', value: 'fulltime' },
-					{ label: 'Part-Time', value: 'parttime' },
-					{ label: 'Contract', value: 'contract' }],
-			},
+			{ label: 'Company Name', key: 'job_history', value: 'company_name' },
+			{ label: 'Role', key: 'job_history', value: 'role' },
+			{ label: 'Type', key: 'job_history', value: 'type' },
+
 		],
 	},
 	{

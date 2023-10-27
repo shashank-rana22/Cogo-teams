@@ -18,7 +18,7 @@ function DetailsCard({
 	} = data || {};
 
 	const { present_address, employee_education_details } = employee_detail || {};
-	const { family_details } = personal_details || {};
+	const { family_details, previous_job_detail	} = personal_details || {};
 
 	const mapping = (key, value) => {
 		const getMapping = {
@@ -30,7 +30,10 @@ function DetailsCard({
 			family         : family_details,
 			employee_squad : employee_squads,
 			statutory      : statutoryDetails,
+			job_history    : previous_job_detail,
 		};
+
+		console.log('key', key);
 
 		if (employee_education_details) {
 			employee_education_details.forEach((detail) => {
@@ -69,7 +72,7 @@ function DetailsCard({
 			{isGrid ? (
 				<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 					<span className={styles.info_heading}>{heading}</span>
-					{(keyMapping || keyEdu) && (
+					{ (keyMapping || keyEdu) && (
 						<Button
 							className={styles.info_button}
 							size="md"

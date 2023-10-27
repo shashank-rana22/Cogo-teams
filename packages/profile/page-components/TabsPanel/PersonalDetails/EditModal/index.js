@@ -10,16 +10,19 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import React, { useEffect, useCallback } from 'react';
 
 import useUpdateEmployee from '../../../../hooks/useUpdateEmployee';
-import { CONTROL_MAPPING, BASIC_CONTROLS, FAMILY_CONTROLS, ADDRESS_CONTROLS, MEDIA_CONTROLS } from '../../../../utils/configs/personalDetailsControls';
+import { CONTROL_MAPPING, BASIC_CONTROLS, FAMILY_CONTROLS, ADDRESS_CONTROLS, MEDIA_CONTROLS, PREVIOUS_JOB_HISTORY } from '../../../../utils/configs/personalDetailsControls';
 
 import styles from './styles.module.css';
 
+console.log(PREVIOUS_JOB_HISTORY, 'hist');
 const controlMapping = {
-	basic    : BASIC_CONTROLS,
-	family   : FAMILY_CONTROLS,
-	address  : ADDRESS_CONTROLS,
-	personal : MEDIA_CONTROLS,
+	basic       : BASIC_CONTROLS,
+	family      : FAMILY_CONTROLS,
+	address     : ADDRESS_CONTROLS,
+	personal    : MEDIA_CONTROLS,
+	job_history : PREVIOUS_JOB_HISTORY,
 };
+console.log('🚀 ~ file: index.js:25 ~ controlMapping:', controlMapping);
 
 function EditModal({ show = false, handleModal = () => {}, data, mappingKey, getEmployeeDetails }) {
 	const { control, handleSubmit, setValue } = useForm();
@@ -27,9 +30,10 @@ function EditModal({ show = false, handleModal = () => {}, data, mappingKey, get
 
 	const { processed_employee_detail, employee_detail, personal_details } = data || {};
 
-	const { family_details } = personal_details || {};
+	const { family_details, previous_job_detail } = personal_details || {};
 
 	const controllerData = controlMapping[mappingKey];
+	console.log('🚀 ~ file: index.js:36 ~ EditModal ~ controllerData:', controllerData);
 
 	const setValues = useCallback(
 		(valObject = {}) => {
@@ -102,6 +106,13 @@ function EditModal({ show = false, handleModal = () => {}, data, mappingKey, get
 				},
 			});
 		}
+		if (mappingKey === 'job_history') {
+			setValues({
+				company_name : previous_job_detail?.company_name,
+				type         : previous_job_detail?.type,
+				role         : previous_job_detail?.role,
+			});
+		}
 
 		if (mappingKey === 'address') {
 			setValues({
@@ -112,7 +123,7 @@ function EditModal({ show = false, handleModal = () => {}, data, mappingKey, get
 				state   : employee_detail?.present_address?.state,
 			});
 		}
-	}, [employee_detail.cogoport_email, employee_detail?.date_of_birth, employee_detail.gender, employee_detail?.mobile_country_code, employee_detail?.mobile_number, employee_detail.personal_email, mappingKey, personal_details.allergies, personal_details?.alternate_mobile_country_code, personal_details?.alternate_mobile_number, personal_details.disability_level, processed_employee_detail.first_name, processed_employee_detail.last_name, setValues, personal_details?.marital_status, personal_details?.blood_group, family_details?.father_mobile_country_code, family_details, employee_detail?.present_address?.address, employee_detail?.present_address?.city, employee_detail?.present_address?.country, employee_detail?.present_address?.pincode, employee_detail?.present_address?.state, processed_employee_detail.middle_name, processed_employee_detail.legal_name, personal_details.emergency_contact_country_code, personal_details.emergency_contact_number, personal_details.linkedin, personal_details.github, personal_details.twitter, personal_details.instagram, personal_details.figma, personal_details.facebook, personal_details?.social_media_links?.linkedin, personal_details?.social_media_links?.github, personal_details?.social_media_links?.twitter, personal_details?.social_media_links?.instagram, personal_details?.social_media_links?.figma, personal_details?.social_media_links?.facebook, personal_details.legal_name, employee_detail?.emergency_contact_details.emergency_contact_country_code, employee_detail?.emergency_contact_details.emergency_contact_number, employee_detail?.emergency_contact_details.country_code, employee_detail?.emergency_contact_details.number]);
+	}, [employee_detail.cogoport_email, employee_detail?.date_of_birth, employee_detail.gender, employee_detail?.mobile_country_code, employee_detail?.mobile_number, employee_detail.personal_email, mappingKey, personal_details.allergies, personal_details?.alternate_mobile_country_code, personal_details?.alternate_mobile_number, personal_details.disability_level, processed_employee_detail.first_name, processed_employee_detail.last_name, setValues, personal_details?.marital_status, personal_details?.blood_group, family_details?.father_mobile_country_code, family_details, employee_detail?.present_address?.address, employee_detail?.present_address?.city, employee_detail?.present_address?.country, employee_detail?.present_address?.pincode, employee_detail?.present_address?.state, processed_employee_detail.middle_name, processed_employee_detail.legal_name, personal_details.emergency_contact_country_code, personal_details.emergency_contact_number, personal_details.linkedin, personal_details.github, personal_details.twitter, personal_details.instagram, personal_details.figma, personal_details.facebook, personal_details?.social_media_links?.linkedin, personal_details?.social_media_links?.github, personal_details?.social_media_links?.twitter, personal_details?.social_media_links?.instagram, personal_details?.social_media_links?.figma, personal_details?.social_media_links?.facebook, personal_details.legal_name, employee_detail?.emergency_contact_details.emergency_contact_country_code, employee_detail?.emergency_contact_details.emergency_contact_number, employee_detail?.emergency_contact_details.country_code, employee_detail?.emergency_contact_details.number, previous_job_detail?.company_name, previous_job_detail?.type, previous_job_detail?.role]);
 
 	const onSubmit = (values) => {
 		const valuesMapping = {
@@ -150,6 +161,9 @@ function EditModal({ show = false, handleModal = () => {}, data, mappingKey, get
 			personal: {
 				...values,
 			},
+			job_history: {
+				...values,
+			},
 		};
 
 		const finalData = valuesMapping[mappingKey];
@@ -157,10 +171,12 @@ function EditModal({ show = false, handleModal = () => {}, data, mappingKey, get
 		console.log('finalData', finalData);
 
 		const keyObjMapping = {
-			basic    : 'personal_details',
-			family   : 'family_information',
-			address  : 'address_information',
-			personal : 'social_media_links',
+			basic       : 'personal_details',
+			family      : 'family_information',
+			address     : 'address_information',
+			personal    : 'social_media_links',
+			job_history : 'previous_job_detail',
+
 		};
 
 		const nestedKeyMapping = {
@@ -168,7 +184,7 @@ function EditModal({ show = false, handleModal = () => {}, data, mappingKey, get
 			address : 'present_address',
 		};
 
-		const finalValuesData = { [keyObjMapping[mappingKey]]: ['basic', 'personal'].includes(mappingKey) ? finalData : { [nestedKeyMapping[mappingKey]]: finalData } };
+		const finalValuesData = { [keyObjMapping[mappingKey]]: ['basic', 'personal', 'job_history'].includes(mappingKey) ? finalData : { [nestedKeyMapping[mappingKey]]: finalData } };
 
 		console.log('finalValuesData', finalValuesData);
 
