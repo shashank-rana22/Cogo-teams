@@ -1818,6 +1818,13 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/controlled-booking',
 					possible_apis : apis.controlled_booking,
 				},
+				{
+					key           : 'transaction_setting-handling_fees',
+					title         : t('common:handling_fees_configuration'),
+					href          : '/v2/handling-fees',
+					as            : '/v2/handling-fees',
+					possible_apis : [],
+				},
 			],
 			module_type: 'dashboards',
 		},

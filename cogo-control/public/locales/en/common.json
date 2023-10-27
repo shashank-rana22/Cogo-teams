@@ -198,6 +198,7 @@
     "payment_modes_and_methods": "Payment Modes and Methods",
     "cogo_fx": "Cogo FX",
     "controlled_booking_desk": "Controlled Booking Desk",
+	"handling_fees_configuration": "Handling Fees Configuration",
     "weight_slabs": "Weight Slabs",
     "commodity_cluster": "Commodity Cluster",
     "fcl_freight_rate_extension": "Fcl Freight Rate Extension",

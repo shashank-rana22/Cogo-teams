@@ -106,6 +106,7 @@ importers:
       '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/governance-manager': workspace:0.1.0
       '@cogoport/ground-ops': workspace:0.1.0
+      '@cogoport/handling-fees': workspace:0.1.0
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/igm-desk': workspace:0.1.0
       '@cogoport/ihls': workspace:0.1.0
@@ -224,6 +225,7 @@ importers:
       '@cogoport/globalization': link:../common/globalization
       '@cogoport/governance-manager': link:../packages/governance-manager
       '@cogoport/ground-ops': link:../packages/ground-ops
+      '@cogoport/handling-fees': link:../packages/handling-fees
       '@cogoport/icons-react': 1.0.102_biqbaboplfbrettd7655fr4n2y
       '@cogoport/igm-desk': link:../packages/igm-desk
       '@cogoport/ihls': link:../packages/ihls
@@ -881,10 +883,10 @@ importers:
       cookies-next: ^2.1.1
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.447_xuo6qmldnjtr7r4mbulb7lqrq4
+      '@cogoport/components': 1.0.447_gysxxj2k3uk5hle7nzdouwdzoi
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.102_biqbaboplfbrettd7655fr4n2y
+      '@cogoport/icons-react': 1.0.102_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
@@ -1769,6 +1771,9 @@ importers:
       jspdf: 2.5.1
       react: 18.2.0
       uuid: 9.0.1
+
+  packages/handling-fees:
+    specifiers: {}
 
   packages/igm-desk:
     specifiers:

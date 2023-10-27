@@ -1,0 +1,11 @@
+{
+	"name": "@cogoport/handling-fees",
+	"description": "Controlled Booking Desk",
+	"version": "0.1.0",
+	"main": "index.js",
+	"sideEffects": false,
+ 
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
