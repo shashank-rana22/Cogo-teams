@@ -1,5 +1,5 @@
 import { Pagination } from '@cogoport/components';
-import { IcMPlansExpiring } from '@cogoport/icons-react';
+import { IcMPlansExpiring, IcMRefresh } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useGetUnreadMailsCount from '../../../../hooks/useGetUnreadMailsCount';
@@ -17,7 +17,6 @@ function PlatformAdoption({
 }) {
 	const { userSharedMails = [] } = mailProps || {};
 
-	const [platformTab, setPlatformTab] = useState('chat_pending');
 	const [verifyAccount, setVerifyAccount] = useState({
 		show               : false,
 		showAccountDetails : false,
@@ -63,8 +62,16 @@ function PlatformAdoption({
 			) : (
 				<>
 					<div className={styles.top_section}>
-						<div className={styles.title}>Task for the Day</div>
-						<div role="presentation" className={styles.history_title} onClick={() => setShowHistory(true)}>
+						<div className={styles.title}>
+							Task for the Day
+							{' '}
+							<IcMRefresh className={styles.refresh} onClick={() => onboardingRequest({ page: 1 })} />
+						</div>
+						<div
+							role="presentation"
+							className={styles.history_title}
+							onClick={() => setShowHistory((p) => !p)}
+						>
 							<IcMPlansExpiring fill="#034afd" />
 							View History
 						</div>
@@ -73,8 +80,6 @@ function PlatformAdoption({
 						unReadChatsCount={unReadChatsCount}
 						unReadMailsCount={unReadMailsCount}
 						setActiveTab={setActiveTab}
-						platformTab={platformTab}
-						setPlatformTab={setPlatformTab}
 					/>
 					<PlatformList
 						list={list}

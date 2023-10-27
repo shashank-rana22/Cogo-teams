@@ -31,7 +31,14 @@ function ScheduleDemo({ scheduleDemo = {}, setScheduleDemo = () => {}, onboardin
 		setValue,
 		watch,
 		reset,
-	} = useForm();
+	} = useForm({
+		defaultValues: {
+			start_date : new Date(),
+			start_time : new Date(),
+			end_date   : new Date(),
+			end_time   : new Date(),
+		},
+	});
 
 	const controls = getScheduleControls({ scheduleType, watch });
 

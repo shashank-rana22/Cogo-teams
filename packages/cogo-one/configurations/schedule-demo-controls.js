@@ -40,7 +40,6 @@ const getScheduleControls = ({ scheduleType = '', watch = () => {} }) => {
 			name                  : 'start_date',
 			label                 : 'Start Date',
 			isClearable           : true,
-			minDate               : new Date(),
 			placeholder           : 'Start Date',
 			showTimeSelect        : false,
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],

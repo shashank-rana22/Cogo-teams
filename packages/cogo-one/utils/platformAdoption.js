@@ -66,7 +66,7 @@ export const getPayload = ({
 });
 
 export const getOnboardPayload = ({
-	requestType = '', metadata = {}, source = '', sourceId = '',
+	requestType = '', source = '', sourceId = '',
 	requestStatus = '', requestId = '',
 }) => ({
 	request_type   : requestType,
@@ -74,5 +74,5 @@ export const getOnboardPayload = ({
 	source_id      : sourceId,
 	request_status : requestStatus,
 	request_id     : requestId,
-	metadata,
+	platform       : 'cogoone',
 });

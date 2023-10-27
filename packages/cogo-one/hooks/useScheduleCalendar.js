@@ -12,7 +12,7 @@ const useScheduleCalendar = ({ reset = () => {}, setScheduleDemo = () => {}, onb
 
 	const [{ loading: onboardLoading }, onboardTrigger] = useRequest({
 		method : 'post',
-		url    : '/complete_onboarding_requests',
+		url    : '/update_onboarding_requests',
 	}, { manual: true });
 
 	const createMeeting = async ({
@@ -47,7 +47,7 @@ const useScheduleCalendar = ({ reset = () => {}, setScheduleDemo = () => {}, onb
 			if (res?.data?.id) {
 				await onboardTrigger({
 					data: getOnboardPayload({
-						requestId, requestStatus, requestType, source, sourceId, metadata,
+						requestId, requestStatus, requestType, source, sourceId,
 					}),
 				});
 			}

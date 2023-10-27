@@ -15,8 +15,17 @@
 }
 
 .title {
+	display: flex;
+	align-items: center;
 	font-size: 18px;
 	font-weight: 600;
+}
+
+.refresh {
+	width: 14px;
+	height: 14px;
+	margin-left: 6px;
+	cursor: pointer;
 }
 
 .history_title {

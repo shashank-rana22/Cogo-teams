@@ -31,14 +31,17 @@ function CallDetails({ list = [], handlePlaceCall = () => {}, handleOpenMessage 
 	return (list || []).map((item) => {
 		const {
 			id = '', missed_agent_data = {}, request_type = '', customer = {}, voice_call_data = {},
-			serial_id = '', escalation_cycle = '',
+			serial_id = '', escalation_cycle = '', metadata = {}, request_assigned_to = '',
 		} = item || {};
 		const { name = '' } = missed_agent_data || {};
+		const { name: requestName = '' } = request_assigned_to || {};
 		const {
 			name: pocName = '', lead_user_id = '', mobile_country_code = '', mobile_number = '',
 			id: pocId = '', whatsapp_country_code = '', email = '', whatsapp_number = '',
 		} = customer || {};
-		const { reason = '', start_time_of_call = '' } = voice_call_data || {};
+		const { start_time_of_call = '' } = voice_call_data || {};
+		const { last_comm_log = {} } = metadata || {};
+		const { communication_summary = '' } = last_comm_log || {};
 
 		const formattedTime = getTimeDuration(start_time_of_call);
 
@@ -51,13 +54,15 @@ function CallDetails({ list = [], handlePlaceCall = () => {}, handleOpenMessage 
 					escalationCycle={escalation_cycle}
 					requestType={request_type}
 					businessName={pocName}
-					// tags={tags}
-					// accountType={account_type}
 				/>
 				<div className={styles.body_info}>
 					<div className={styles.each_row}>
 						<div className={styles.title}>Agent Missed by : </div>
 						<div className={styles.agent_name}>{startCase(name)}</div>
+					</div>
+					<div className={styles.each_row}>
+						<div className={styles.title}>Request Agent : </div>
+						<div className={styles.agent_name}>{startCase(requestName)}</div>
 					</div>
 					<div className={styles.each_row}>
 						<div className={styles.title}>Missed call at : </div>
@@ -66,7 +71,7 @@ function CallDetails({ list = [], handlePlaceCall = () => {}, handleOpenMessage 
 					<div className={styles.each_row}>
 						<div className={styles.title}>Comments : </div>
 						<div className={styles.comment}>
-							{reason || '-'}
+							{communication_summary || '-'}
 						</div>
 					</div>
 				</div>

@@ -41,7 +41,7 @@ const useUpdateOrganizationDocument = ({
 				verifyType         : '',
 				accountType        : '',
 			});
-			Toast.success('Document Deleted Successfully');
+			Toast.success('Document Verify Successfully');
 			onboardingRequest({ page: 1 });
 		} catch (e) {
 			Toast.error(getApiErrorString(e?.response?.data) || 'something went wrong');

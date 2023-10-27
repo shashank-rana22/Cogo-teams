@@ -77,9 +77,7 @@ const COLUMNS = [
 				<div className={styles.status_escalate}>
 					<div className={styles.title}>{startCase(item?.request_status)}</div>
 					{item?.escalation_cycle ? (
-						<div className={cl`${styles.esaclate} 
-					${item?.escalation_cycle === 'warning' ? styles.warning : styles.escalated}`}
-						>
+						<div className={cl`${styles.cycle} ${styles[item?.escalation_cycle]}`}>
 							{startCase(item?.escalation_cycle)}
 						</div>
 					) : null}
@@ -93,7 +91,7 @@ function PlatformHistory({ setShowHistory = () => {}, list = [], loading = false
 	return (
 		<div className={styles.history_container}>
 			<div className={styles.header_section}>
-				<div role="presentation" className={styles.back} onClick={() => setShowHistory(false)}>
+				<div role="presentation" className={styles.back} onClick={() => setShowHistory((p) => !p)}>
 					<IcMHome fill="#034AFD" width={20} height={20} />
 					<div className={styles.back_title}>Home</div>
 				</div>
@@ -102,9 +100,8 @@ function PlatformHistory({ setShowHistory = () => {}, list = [], loading = false
 			</div>
 			{!isEmpty(list) ? (
 				<div className={styles.content}>
-					<Table columns={COLUMNS} data={list} loading={loading} />
+					<Table columns={COLUMNS} data={list} loading={loading} loadingRowsCount={10} />
 				</div>
-
 			) : (
 				<div className={styles.empty_container}>
 					<Image src={GLOBAL_CONSTANTS.image_url.list_empty} width={300} height={300} />

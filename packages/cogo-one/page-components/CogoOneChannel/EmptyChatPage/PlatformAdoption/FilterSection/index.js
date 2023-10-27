@@ -1,4 +1,3 @@
-import { cl } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
 
 import { ACTIVITY_MAPPING } from '../../../../../constants/PLATFORM_ADOPTION_CONSTANTS';
@@ -7,7 +6,7 @@ import styles from './styles.module.css';
 
 function FilterSection({
 	unReadChatsCount = 0, setActiveTab = () => {},
-	unReadMailsCount = 0, platformTab = '', setPlatformTab = () => {},
+	unReadMailsCount = 0,
 }) {
 	const COUNT_MAPPING = {
 		chat_pending: {
@@ -20,6 +19,24 @@ function FilterSection({
 		},
 	};
 
+	const getTabStyles = (count) => {
+		if (count > 12) {
+			return {
+				backgroundColor : '#FDEBE9',
+				borderColor     : '#F37166',
+			};
+		} if (count > 8) {
+			return {
+				backgroundColor : '#FBD1A6',
+				borderColor     : '#F9AE64',
+			};
+		}
+		return {
+			backgroundColor : '#FEF199',
+			borderColor     : '#FCDC00',
+		};
+	};
+
 	return (
 		<div className={styles.stats_section}>
 			<div className={styles.tabs}>
@@ -30,19 +47,26 @@ function FilterSection({
 						<div
 							role="presentation"
 							key={name}
-							className={cl`${styles.each_tab} ${platformTab === name ? styles.active_tab : ''}`}
+							className={styles.each_tab}
 							onClick={() => {
-								setPlatformTab(name);
 								setActiveTab((prev) => ({
 									...prev,
 									hasNoFireBaseRoom : true,
 									subTab            : 'all',
-									// data              : chatData,
 									tab               : COUNT_MAPPING?.[name]?.tab,
 								}));
 							}}
+							style={getTabStyles?.(COUNT_MAPPING?.[name]?.count)}
 						>
-							{isDot ? <div className={styles.red_dot} /> : null}
+							{isDot ? (
+								<div
+									className={styles.red_dot}
+									style={{
+										backgroundColor:
+										getTabStyles(COUNT_MAPPING?.[name]?.count)?.borderColor,
+									}}
+								/>
+							) : null}
 							<div className={styles.label}>
 								{label}
 								{' '}

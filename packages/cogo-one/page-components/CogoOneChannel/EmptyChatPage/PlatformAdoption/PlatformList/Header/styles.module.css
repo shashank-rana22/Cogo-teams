@@ -38,6 +38,18 @@
 	background: #f8aea8;
 }
 
+.assigned {
+	background: #ddebc0;
+}
+
+.auto_assigned {
+	background: #fbd1a6;
+}
+
+.auto_escalated {
+	background: #f3fafa;
+}
+
 .wrap {
 	display: flex;
 	align-items: center;

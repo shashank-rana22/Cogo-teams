@@ -33,6 +33,8 @@ function VerifyAccount({
 		accountType = '',
 	} = verifyAccount || {};
 
+	const [checked, setChecked] = useState(false);
+
 	const { documents = [] } = orgData || {};
 
 	const DOCUMENT_OPTIONS = useMemo(() => (accountData || []).map((itm) => ({
@@ -61,7 +63,7 @@ function VerifyAccount({
 	};
 
 	const handleApprove = (status) => {
-		if (verifyType === 'trade_party') {
+		if (verifyType === 'trade_party' && !showAccountDetails) {
 			updateDocument({ val: documents?.[GLOBAL_CONSTANTS.zeroth_index] || {}, status });
 		} else {
 			verifyDocument({
@@ -101,6 +103,8 @@ function VerifyAccount({
 							hasDocument={hasDocument}
 							orgData={orgData}
 							verifyType={verifyType}
+							setChecked={setChecked}
+							checked={checked}
 						/>
 					) : null}
 				</div>
@@ -124,6 +128,7 @@ function VerifyAccount({
 								themeType="accent"
 								onClick={() => handleApprove('verified')}
 								loading={loading}
+								disabled={!checked && showAccountDetails}
 							>
 								Aprove
 							</Button>

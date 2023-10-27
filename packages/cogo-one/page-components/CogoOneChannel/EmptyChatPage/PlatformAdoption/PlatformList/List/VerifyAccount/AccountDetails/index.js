@@ -12,7 +12,10 @@ const DATA_MAPPING = {
 	onboard_customer : formatOnboardData,
 };
 
-function AccountDetails({ hasDocument = false, orgData = {}, verifyType = '' }) {
+function AccountDetails({
+	hasDocument = false, orgData = {}, verifyType = '', checked = false,
+	setChecked = () => {},
+}) {
 	const detailsMapping = DATA_MAPPING?.[verifyType]?.({ orgData });
 
 	const {
@@ -77,7 +80,11 @@ function AccountDetails({ hasDocument = false, orgData = {}, verifyType = '' }) 
 					<div className={styles.code}>{taxNumber}</div>
 				</div>
 				<div className={styles.approve}>
-					<Checkbox label="I have reviewed all the KYC details thoroughly." value="a1" />
+					<Checkbox
+						label="I have reviewed all the KYC details thoroughly."
+						value={checked}
+						onChange={() => setChecked((p) => !p)}
+					/>
 				</div>
 			</div>
 		</div>

@@ -13339,7 +13339,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'complete_onboarding_requests',
+			api          : 'update_onboarding_requests',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

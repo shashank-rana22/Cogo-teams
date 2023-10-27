@@ -19,9 +19,7 @@ function Header({
 					{serialId}
 				</div>
 				{escalationCycle ? (
-					<div className={cl`${styles.cycle} ${escalationCycle === 'warning'
-						? styles.warning : styles.escalate}`}
-					>
+					<div className={cl`${styles.cycle} ${styles[escalationCycle]}`}>
 						{startCase(escalationCycle)}
 					</div>
 				) : null}
