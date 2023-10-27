@@ -1,6 +1,9 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import PromoCode from '../../../../../../common/Promocode';
+import getPromotion from '../../../../../../utils/getPromotion';
+
 import Body from './Body';
 import Footer from './Footer';
 import Header from './Header';
@@ -44,6 +47,10 @@ function RateCard({
 				isSelectedCard={isSelectedCard}
 				setRouterLoading={setRouterLoading}
 			/>
+
+			<div className={styles.promo_codes}>
+				<PromoCode promotion={getPromotion({ promocodes: rate?.promocode })} />
+			</div>
 
 			<Footer
 				detail={detail}
