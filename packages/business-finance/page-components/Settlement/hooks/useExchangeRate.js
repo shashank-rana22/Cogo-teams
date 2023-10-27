@@ -23,7 +23,7 @@ const useExchangeRate = ({ paymentDateValue, fromCur, toCur, setValue }) => {
 			const exData = await exRateTrigger({});
 			setValue('exchangeRate', exData?.data?.exchange_rate.toFixed(4));
 		} catch (error) {
-			Toast.error(error?.data?.response?.message || 'Something went wrong');
+			Toast.error(error?.response?.data?.message || 'Something went wrong');
 		}
 	}, [exRateTrigger, setValue]);
 
