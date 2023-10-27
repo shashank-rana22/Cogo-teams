@@ -22,7 +22,7 @@ function RejectVerification({
 	};
 
 	const handleAllocate = () => {
-		onStatusUpdate({ requestId, type, reason });
+		onStatusUpdate({ requestId, type, reason, requestStatus: 'processing' });
 	};
 
 	return (

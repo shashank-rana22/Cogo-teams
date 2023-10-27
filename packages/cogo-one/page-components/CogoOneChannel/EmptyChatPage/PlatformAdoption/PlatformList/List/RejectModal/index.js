@@ -10,11 +10,11 @@ import styles from './styles.module.css';
 function RejectAccount({
 	rejectAccount = '', setRejectAccount = () => {},
 	verifyAccount = {}, setVerifyAccount = () => {},
-	verifyDocument = () => {}, loading = false, updateDocument = () => {},
+	verifyKyc = () => {}, loading = false, updateDocument = () => {},
 }) {
 	const { show = false, rejectReason = '' } = rejectAccount || {};
 	const { accountType = '', orgData = {}, verifyType = '' } = verifyAccount || {};
-	const { documents = [] } = orgData || {};
+	const { documents = [], id = '' } = orgData || {};
 
 	const handleClose = () => {
 		setRejectAccount(() => ({
@@ -31,10 +31,12 @@ function RejectAccount({
 		if (verifyType === 'trade_party') {
 			updateDocument({ val: documents?.[GLOBAL_CONSTANTS.zeroth_index] || {}, status, rejectReason });
 		} else {
-			verifyDocument({
-				orgId : getOrgId({ orgData })?.[accountType],
-				type  : status,
+			verifyKyc({
+				orgId         : getOrgId({ orgData })?.[accountType],
+				type          : status,
 				rejectReason,
+				requestId     : id,
+				requestStatus : 'processing',
 			});
 		}
 	};

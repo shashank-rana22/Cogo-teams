@@ -64,15 +64,3 @@ export const getPayload = ({
 	end_time,
 
 });
-
-export const getOnboardPayload = ({
-	requestType = '', source = '', sourceId = '',
-	requestStatus = '', requestId = '',
-}) => ({
-	request_type   : requestType,
-	source,
-	source_id      : sourceId,
-	request_status : requestStatus,
-	request_id     : requestId,
-	platform       : 'cogoone',
-});

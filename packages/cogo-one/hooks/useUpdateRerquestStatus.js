@@ -2,6 +2,8 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
+import useUpdateOnboardingRequest from './useUpdateOnboardingRequest';
+
 const getPayload = ({ requestId = '', type = '', reason = [] }) => ({
 	allocation_request_id : requestId,
 	status                : type,
@@ -15,11 +17,17 @@ const useUpdateRequestStatus = ({ setRejectData = () => {}, onboardingRequest = 
 		authkey : 'post_allocation_request_status',
 	}, { manual: true });
 
-	const onStatusUpdate = async ({ requestId = '', type = '', reason = [] }) => {
+	const { requestLoader = false, updateRequest = () => {} } = useUpdateOnboardingRequest();
+
+	const onStatusUpdate = async ({ requestId = '', type = '', reason = [], requestStatus }) => {
 		try {
-			await trigger({
+			const res = await trigger({
 				data: getPayload({ requestId, type, reason }),
 			});
+
+			if (res?.data?.id) {
+				await updateRequest({ requestId, requestStatus });
+			}
 			setRejectData(() => ({
 				showRejectModal : false,
 				reason          : [],
@@ -33,7 +41,7 @@ const useUpdateRequestStatus = ({ setRejectData = () => {}, onboardingRequest = 
 
 	return {
 		onStatusUpdate,
-		loadingUpdate: loading,
+		loadingUpdate: loading || requestLoader,
 	};
 };
 

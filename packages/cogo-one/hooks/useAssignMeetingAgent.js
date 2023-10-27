@@ -4,6 +4,8 @@ import { useRequest } from '@cogoport/request';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 
+import useUpdateOnboardingRequest from './useUpdateOnboardingRequest';
+
 const getPayload = ({ calendarId = '', isEmail = false, communicationId = '', agentId = '', scheduleId = '' }) => ({
 	cogoone_calendar_id : calendarId,
 	cogoone_schedule_id : scheduleId,
@@ -18,22 +20,26 @@ const getPayload = ({ calendarId = '', isEmail = false, communicationId = '', ag
 const useAssignMeetingAgent = ({ setScheduleDemo = () => {}, onboardingRequest = () => {} }) => {
 	const dispatch = useDispatch();
 
-	const [{ loading: modalLoading }, triggerParticipant] = useRequest({
+	const [{ loading: modalLoading }, trigger] = useRequest({
 		url    : '/assign_meeting_agent',
 		method : 'post',
 	}, { manual: true });
 
+	const { requestLoader = false, updateRequest = () => {} } = useUpdateOnboardingRequest();
+
 	const meetingAgent = async ({
-		agentId = '',
-		calendarId = '',
-		isEmail = false,
-		scheduleId = '',
-		communicationId = '',
+		agentId = '', calendarId = '',
+		isEmail = false, scheduleId = '', communicationId = '',
+		requestId = '', requestStatus = '',
 	}) => {
 		try {
-			await triggerParticipant({
+			const res = await trigger({
 				data: getPayload({ agentId, calendarId, scheduleId, isEmail, communicationId }),
 			});
+
+			if (res?.data?.cogoone_calendar_id) {
+				await updateRequest({ requestId, requestStatus });
+			}
 
 			Toast.success('Scheduled demo approved !!');
 			setScheduleDemo(() => ({ isScheduleDemo: false, scheduleData: {}, scheduleType: '' }));
@@ -51,7 +57,7 @@ const useAssignMeetingAgent = ({ setScheduleDemo = () => {}, onboardingRequest =
 
 	return {
 		meetingAgent,
-		updateLoader: modalLoading,
+		updateLoader: modalLoading || requestLoader,
 	};
 };
 

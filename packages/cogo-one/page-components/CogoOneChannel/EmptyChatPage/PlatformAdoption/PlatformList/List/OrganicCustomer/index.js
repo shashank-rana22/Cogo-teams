@@ -10,13 +10,13 @@ import styles from './styles.module.css';
 function OrganicCustomer({ list = [], setScheduleDemo = () => {}, handlePlaceCall = () => {} }) {
 	return (list || []).map((item) => {
 		const {
-			request_type = '', id = '', user = {}, organization = {}, intro_call = {},
+			request_type = '', id = '', customer = {}, organization = {}, intro_call = {},
 			serial_id = '', escalation_cycle = '',
 		} = item || {};
 		const {
 			name = '', mobile_country_code = '', mobile_number = '', lead_user_id = '',
 			id: pocId = '',
-		} = user || {};
+		} = customer || {};
 		const {
 			account_type = '', tags = [], city = {},
 			preferred_languages = [], business_name = '', demo_requested = false,

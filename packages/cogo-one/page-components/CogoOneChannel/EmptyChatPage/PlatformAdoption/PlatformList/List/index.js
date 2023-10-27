@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { useDispatch } from '@cogoport/store';
@@ -7,7 +8,7 @@ import React, { useState } from 'react';
 
 import useUpdateOrganizationDocument from '../../../../../../hooks/useUpdateOrganizationDocument';
 import useUpdateRequestStatus from '../../../../../../hooks/useUpdateRerquestStatus';
-import useVerificationDocument from '../../../../../../hooks/useVerificationDocument';
+import useVerificationKyc from '../../../../../../hooks/useVerificationKyc';
 
 import AccountAllocateCard from './AccountAllocateCard';
 import CallDetails from './CallDetails';
@@ -51,7 +52,7 @@ function List({
 		onboardingRequest,
 	});
 
-	const { verifyDocument = () => {}, loading = false } = useVerificationDocument({
+	const { verifyKyc = () => {}, loading = false } = useVerificationKyc({
 		setRejectAccount,
 		setVerifyAccount,
 		onboardingRequest,
@@ -74,6 +75,7 @@ function List({
 
 	const handlePlaceCall = ({ number, code, userName, leadUserId, pocId }) => {
 		if (!number) {
+			Toast.error('Mobile number is invalid');
 			return;
 		}
 
@@ -195,7 +197,7 @@ function List({
 				setVerifyAccount={setVerifyAccount}
 				verifyAccount={verifyAccount}
 				setRejectAccount={setRejectAccount}
-				verifyDocument={verifyDocument}
+				verifyKyc={verifyKyc}
 				loading={loading || updateLoading}
 				updateDocument={updateDocument}
 			/>
@@ -204,7 +206,7 @@ function List({
 				rejectAccount={rejectAccount}
 				setVerifyAccount={setVerifyAccount}
 				verifyAccount={verifyAccount}
-				verifyDocument={verifyDocument}
+				verifyKyc={verifyKyc}
 				loading={loading || updateLoading}
 				updateDocument={updateDocument}
 			/>

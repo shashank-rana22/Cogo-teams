@@ -93,19 +93,21 @@ function CallDetails({ list = [], handlePlaceCall = () => {}, handleOpenMessage 
 					>
 						<IcCSendWhatsapp width={20} height={20} />
 					</div>
-					<div
-						role="presentation"
-						className={styles.button}
-						onClick={() => handlePlaceCall({
-							userName   : pocName,
-							code       : mobile_country_code,
-							number     : mobile_number,
-							pocId,
-							leadUserId : lead_user_id,
-						})}
-					>
-						<IcMCall width={20} height={20} />
-					</div>
+					{mobile_number ? (
+						<div
+							role="presentation"
+							className={styles.button}
+							onClick={() => handlePlaceCall({
+								userName   : pocName,
+								code       : mobile_country_code,
+								number     : mobile_number,
+								pocId,
+								leadUserId : lead_user_id,
+							})}
+						>
+							<IcMCall width={20} height={20} />
+						</div>
+					) : null}
 				</div>
 			</div>
 

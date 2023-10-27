@@ -58,9 +58,9 @@ export const formatTradePartyData = ({ orgData = {} }) => {
 };
 
 export const formatOnboardData = ({ orgData = {} }) => {
-	const { user = {}, organization = {} } = orgData || {};
+	const { customer = {}, organization = {} } = orgData || {};
 	const { business_name: orgName = '', billing_addresses = [], registration_number = '' } = organization || {};
-	const { name = '', email = '', mobile_country_code = '', mobile_number = '' } = user || {};
+	const { name = '', email = '', mobile_country_code = '', mobile_number = '' } = customer || {};
 	const {
 		address = '', pincode = '',
 		taxNumber = '',

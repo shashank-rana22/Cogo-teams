@@ -92,19 +92,21 @@ function KycVerifyCard({ list = [], setVerifyAccount = () => {}, handlePlaceCall
 						<IcMFtick className={styles.ftick_icon} />
 						Verify
 					</div>
-					<div
-						role="presentation"
-						className={styles.call_icon}
-						onClick={() => handlePlaceCall({
-							userName   : pocName,
-							code       : mobile_country_code,
-							number     : mobile_number,
-							pocId,
-							leadUserId : lead_user_id,
-						})}
-					>
-						<IcMCall width={18} height={18} fill="#fff" />
-					</div>
+					{mobile_number ? (
+						<div
+							role="presentation"
+							className={styles.call_icon}
+							onClick={() => handlePlaceCall({
+								userName   : pocName,
+								code       : mobile_country_code,
+								number     : mobile_number,
+								pocId,
+								leadUserId : lead_user_id,
+							})}
+						>
+							<IcMCall width={18} height={18} fill="#fff" />
+						</div>
+					) : null}
 				</div>
 			</div>
 		);

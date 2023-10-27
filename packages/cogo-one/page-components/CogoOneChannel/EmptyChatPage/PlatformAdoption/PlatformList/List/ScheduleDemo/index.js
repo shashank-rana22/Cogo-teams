@@ -15,8 +15,7 @@ function ScheduleDemo({ scheduleDemo = {}, setScheduleDemo = () => {}, onboardin
 	const { isScheduleDemo = false, scheduleData = {}, scheduleType = '' } = scheduleDemo || {};
 
 	const {
-		metadata = {}, request_type = '', source = '',
-		source_id = '', id: requestId = '',
+		metadata = {}, id: requestId = '',
 	} = scheduleData || {};
 	const { description = '', subject = '', schedule = {} } = metadata || {};
 	const { schedule_start = '', calendar_id = '', id = '' } = schedule || {};
@@ -47,7 +46,7 @@ function ScheduleDemo({ scheduleDemo = {}, setScheduleDemo = () => {}, onboardin
 		onboardingRequest,
 	});
 
-	const { loading = false, createMeeting = () => {}, onboardLoading = false } = useScheduleCalendar({
+	const { loading = false, createMeeting = () => {} } = useScheduleCalendar({
 		reset,
 		setScheduleDemo,
 		onboardingRequest,
@@ -59,17 +58,16 @@ function ScheduleDemo({ scheduleDemo = {}, setScheduleDemo = () => {}, onboardin
 				val,
 				metadata,
 				requestId,
-				requestStatus : 'completed',
-				requestType   : request_type,
-				source,
-				sourceId      : source_id,
+				requestStatus: 'completed',
 			});
 		} else {
 			meetingAgent({
-				agentId    : performedById,
-				calendarId : calendar_id,
-				scheduleId : id,
-				isEmail    : false,
+				agentId       : performedById,
+				calendarId    : calendar_id,
+				scheduleId    : id,
+				isEmail       : false,
+				requestId,
+				requestStatus : 'processing',
 			});
 		}
 	};
@@ -125,7 +123,7 @@ function ScheduleDemo({ scheduleDemo = {}, setScheduleDemo = () => {}, onboardin
 					themeType="secondary"
 					className={styles.cancel_cta}
 					onClick={handleClose}
-					disabled={loading || onboardLoading || updateLoader}
+					disabled={loading || updateLoader}
 				>
 					Cancel
 				</Button>
@@ -133,7 +131,7 @@ function ScheduleDemo({ scheduleDemo = {}, setScheduleDemo = () => {}, onboardin
 					size="md"
 					themeType="primary"
 					onClick={handleSubmit(onSubmit)}
-					loading={loading || onboardLoading || updateLoader}
+					loading={loading || updateLoader}
 				>
 					Approve
 				</Button>

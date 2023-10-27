@@ -4,6 +4,8 @@ import { useRequest } from '@cogoport/request';
 
 import { getCpSpPayload, getIePayload, getTradePartyPayload } from '../utils/platformAdoption';
 
+import useUpdateOnboardingRequest from './useUpdateOnboardingRequest';
+
 const API_MAPPING = {
 	SP          : 'verify_channel_partner_kyc',
 	CP          : 'verify_channel_partner_kyc',
@@ -23,7 +25,7 @@ const getPaylaod = ({
 	orgId = '', rejectReason = '',
 }) => PAYLOAD_MAPPING[accountType]?.({ accountType, type, orgId, rejectReason });
 
-const useVerificationDocument = ({
+const useVerificationKyc = ({
 	setRejectAccount = () => {},
 	setVerifyAccount = () => {},
 	onboardingRequest = () => {},
@@ -34,11 +36,17 @@ const useVerificationDocument = ({
 		method : 'post',
 	}, { manual: true });
 
-	const verifyDocument = async ({ type = '', orgId = '', rejectReason = '' }) => {
+	const { requestLoader = false, updateRequest = () => {} } = useUpdateOnboardingRequest();
+
+	const verifyKyc = async ({ type = '', orgId = '', rejectReason = '', requestId, requestStatus }) => {
 		try {
-			await trigger({
+			const res = await trigger({
 				data: getPaylaod({ type, orgId, accountType, rejectReason }),
 			});
+
+			if (res?.data?.id) {
+				await updateRequest({ requestId, requestStatus });
+			}
 			setRejectAccount({
 				show         : false,
 				rejectReason : '',
@@ -59,9 +67,9 @@ const useVerificationDocument = ({
 	};
 
 	return {
-		loading,
-		verifyDocument,
+		loading: loading || requestLoader,
+		verifyKyc,
 	};
 };
 
-export default useVerificationDocument;
+export default useVerificationKyc;

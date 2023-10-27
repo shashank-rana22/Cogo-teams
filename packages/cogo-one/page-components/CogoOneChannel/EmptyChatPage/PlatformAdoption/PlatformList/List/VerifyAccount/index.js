@@ -9,20 +9,9 @@ import AccountDetails from './AccountDetails';
 import FileViewer from './FileViewer';
 import styles from './styles.module.css';
 
-// const DUMMY_PDF = [{
-// 	id            : '5667e89d-1d32-44f9-a482-f7fb7edc7fc3',
-// 	document_type : 'booking_proof',
-// 	state         : 'document_accepted',
-// 	document_url  : 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-// 	data          : null,
-// 	created_at    : '2022-10-12T09:59:48.237Z',
-// 	updated_at    : '2022-10-12T09:59:48.379Z',
-// 	source        : null,
-// }];
-
 function VerifyAccount({
 	verifyAccount = {}, setVerifyAccount = () => {}, setRejectAccount = () => {},
-	verifyDocument = () => {}, loading = false, updateDocument = () => {},
+	verifyKyc = () => {}, loading = false, updateDocument = () => {},
 }) {
 	const {
 		show = false,
@@ -35,7 +24,7 @@ function VerifyAccount({
 
 	const [checked, setChecked] = useState(false);
 
-	const { documents = [] } = orgData || {};
+	const { documents = [], id = '' } = orgData || {};
 
 	const DOCUMENT_OPTIONS = useMemo(() => (accountData || []).map((itm) => ({
 		label : startCase(itm?.document_type),
@@ -48,14 +37,7 @@ function VerifyAccount({
 		docUrl  : '',
 	});
 
-	// const hasDocument = isEmpty(DUMMY_PDF);
 	const hasDocument = isEmpty(accountData);
-
-	// const DOCUMENT_OPTIONS = useMemo(() => (DUMMY_PDF || []).map((itm) => ({
-	// 	label : startCase(itm?.document_type),
-	// 	value : itm?.document_type,
-	// 	url   : itm?.document_url,
-	// })), []);
 
 	const handleClose = () => {
 		setSelectDoc({ docType: null, docUrl: null });
@@ -66,9 +48,11 @@ function VerifyAccount({
 		if (verifyType === 'trade_party' && !showAccountDetails) {
 			updateDocument({ val: documents?.[GLOBAL_CONSTANTS.zeroth_index] || {}, status });
 		} else {
-			verifyDocument({
-				orgId : getOrgId({ orgData })?.[accountType],
-				type  : status,
+			verifyKyc({
+				orgId         : getOrgId({ orgData })?.[accountType],
+				type          : status,
+				requestId     : id,
+				requestStatus : 'processing',
 			});
 		}
 	};

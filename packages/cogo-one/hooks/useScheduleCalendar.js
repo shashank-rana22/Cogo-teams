@@ -2,7 +2,9 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-import { getOnboardPayload, getPayload } from '../utils/platformAdoption';
+import { getPayload } from '../utils/platformAdoption';
+
+import useUpdateOnboardingRequest from './useUpdateOnboardingRequest';
 
 const useScheduleCalendar = ({ reset = () => {}, setScheduleDemo = () => {}, onboardingRequest = () => {} }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -10,15 +12,9 @@ const useScheduleCalendar = ({ reset = () => {}, setScheduleDemo = () => {}, onb
 		url    : '/create_cogoone_calendar',
 	}, { manual: true });
 
-	const [{ loading: onboardLoading }, onboardTrigger] = useRequest({
-		method : 'post',
-		url    : '/update_onboarding_requests',
-	}, { manual: true });
+	const { requestLoader = false, updateRequest = () => {} } = useUpdateOnboardingRequest();
 
-	const createMeeting = async ({
-		val = {}, metadata = {}, requestId = '', requestStatus = '',
-		requestType = '', source = '', sourceId = '',
-	}) => {
+	const createMeeting = async ({ val = {}, metadata = {}, requestId = '', requestStatus = '' }) => {
 		const {
 			lead_organization_id = '', customer = {}, user_id = '', organization_id = '',
 		} = metadata || {};
@@ -45,11 +41,7 @@ const useScheduleCalendar = ({ reset = () => {}, setScheduleDemo = () => {}, onb
 			});
 
 			if (res?.data?.id) {
-				await onboardTrigger({
-					data: getOnboardPayload({
-						requestId, requestStatus, requestType, source, sourceId,
-					}),
-				});
+				await updateRequest({ requestId, requestStatus });
 			}
 
 			reset();
@@ -62,9 +54,8 @@ const useScheduleCalendar = ({ reset = () => {}, setScheduleDemo = () => {}, onb
 	};
 
 	return {
-		loading,
+		loading: loading || requestLoader,
 		createMeeting,
-		onboardLoading,
 	};
 };
 
