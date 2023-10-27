@@ -155,7 +155,7 @@ function Header({ summaryData }) {
 						{HEADER_NAV.map((val) => {
 							const ICON = val.icon;
 
-							if (val.label === 'Payroll' && user_role !== 'hr_admin') {
+							if (val.label === 'Payroll' && user_role !== 'hrbp') {
 								return null;
 							}
 

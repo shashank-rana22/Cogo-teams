@@ -1,18 +1,18 @@
-import { cl, Table, Modal } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowRight } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+// import { IcMArrowRight } from '@cogoport/icons-react';
+import React from 'react';
 
 import styles from './styles.module.css';
 
-const columns = [
-	{ Header: 'Rank', accessor: (_, index) => index + 1 },
-	{ Header: 'Name', accessor: 'name' },
-	{ Header: 'Rating', accessor: 'final_rating' },
-];
+// const columns = [
+// 	{ Header: 'Rank', accessor: (_, index) => index + 1 },
+// 	{ Header: 'Name', accessor: 'name' },
+// 	{ Header: 'Rating', accessor: 'final_rating' },
+// ];
 
 function Leaderboard({ rating_list }) {
-	const [openViewAll, setOpenViewAll] = useState(false);
+	// const [openViewAll, setOpenViewAll] = useState(false);
 
 	const [first, second, third] = rating_list || [];
 
@@ -20,15 +20,15 @@ function Leaderboard({ rating_list }) {
 		<div className={styles.container}>
 			<div className={styles.header_flex}>
 				<div>
-					Story Points Leaderboard
+					Performance Leaderboard
 				</div>
-				{(rating_list || []).length > 3 && (
+				{/* {(rating_list || []).length > 3 && (
 					<div className={styles.view_all} onClick={() => setOpenViewAll(true)} aria-hidden>
 						View All
 						{' '}
 						<IcMArrowRight style={{ marginLeft: 4 }} />
 					</div>
-				)}
+				)} */}
 			</div>
 			<div className={cl`${styles.leaderboard_users} ${!second ? styles.one_item : null}`}>
 				{second && (
@@ -74,7 +74,7 @@ function Leaderboard({ rating_list }) {
 					</div>
 				)}
 			</div>
-			{openViewAll && (
+			{/* {openViewAll && (
 				<Modal
 					size="lg"
 					show={openViewAll}
@@ -86,7 +86,7 @@ function Leaderboard({ rating_list }) {
 						<Table columns={columns} data={rating_list || []} />
 					</Modal.Body>
 				</Modal>
-			)}
+			)} */}
 		</div>
 	);
 }

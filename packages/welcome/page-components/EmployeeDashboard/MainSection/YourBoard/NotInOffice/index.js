@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 const ZERO = 0;
 function NotInOffice({ data = {} }) {
-	const { absentee_list } = data || {};
+	const { absentee_list, department } = data || {};
 	console.log('🚀 ~ file: index.js:9 ~ NotInOffice ~ absentee_list:', absentee_list);
 	const MAX_VISIBLE = 5; // Maximum number of absentees to display directly
 
@@ -47,11 +47,15 @@ function NotInOffice({ data = {} }) {
 					)}
 				</Popover>
 			</div>
-			{/* <div className={styles.absent_deps}>
+			<div className={styles.absent_deps}>
 				{absentee_list?.length}
 				{' '}
-				employees from Product Department are not present today
-			</div> */}
+				employees from
+				{' '}
+				{department}
+				{' '}
+				are not present today
+			</div>
 		</div>
 	);
 }

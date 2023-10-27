@@ -1,5 +1,5 @@
 import { Button, Avatar, Modal } from '@cogoport/components';
-import { IcMArrowUp, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMArrowRight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -22,12 +22,12 @@ function TeamLeaderBoard({ data = {} }) {
 			{(ratingList || []).slice(0, 5).map((item) => (
 				<div className={styles.progress_flex} key={item}>
 					<div className={styles.achieved_target}>
-						<IcMArrowUp
+						{/* <IcMArrowUp
 							width={14}
 							height={20}
 							style={{ marginLeft: 2, marginRight: '8', color: '#00821D' }}
 						/>
-						{' '}
+						{' '} */}
 						<div className={styles.avatar}>
 							{item.image ? (
 								<div className={styles.profile_photo}>
@@ -41,8 +41,6 @@ function TeamLeaderBoard({ data = {} }) {
 					<span className={styles.points}>
 						{' '}
 						{item.final_rating || '0'}
-						{' '}
-						pts
 					</span>
 				</div>
 			))}
@@ -66,12 +64,12 @@ function TeamLeaderBoard({ data = {} }) {
 						{ratingList.map((item) => (
 							<div className={styles.progress_flex} key={item}>
 								<div className={styles.achieved_target}>
-									<IcMArrowUp
+									{/* <IcMArrowUp
 										width={14}
 										height={20}
 										style={{ marginLeft: 2, marginRight: '8', color: '#00821D' }}
 									/>
-									{' '}
+									{' '} */}
 									<div className={styles.avatar}>
 										{item.image ? (
 											<div className={styles.profile_photo}>

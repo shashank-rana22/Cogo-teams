@@ -1,7 +1,7 @@
 import { IcMArrowNext, IcMArrowRight } from '@cogoport/icons-react';
 // import { useRouter } from '@cogoport/next';
 // import { isEmpty } from '@cogoport/utils';
-import { useRouter } from 'next/router';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';

@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback, useState } from 'react';
 
 const useGetDepartmentWise = () => {
@@ -14,16 +15,18 @@ const useGetDepartmentWise = () => {
 	const getDepartmentWise = useCallback(
 		() => {
 			const { department_id } = filters;
-			try {
-				trigger({
-					params: {
-						filters: {
-							department_id,
+			if (isEmpty(department_id)) {
+				try {
+					trigger({
+						params: {
+							filters: {
+								department_id,
+							},
 						},
-					},
-				});
-			} catch (error) {
-				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+					});
+				} catch (error) {
+					Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+				}
 			}
 		},
 		[trigger, filters],

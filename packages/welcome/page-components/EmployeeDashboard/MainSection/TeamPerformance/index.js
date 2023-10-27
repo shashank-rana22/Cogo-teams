@@ -70,9 +70,11 @@ function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDa
 						</div>
 					</div>
 				</div>
+
 				<div className={styles.kpi_data}>
-					<div className={styles.happiness_index}>
-						<div className={styles.kpi_okr_title}>Team Happiness Index</div>
+					{/* <div className={styles.happiness_index}> */}
+					<IndividualActivity data={data} />
+					{/* <div className={styles.kpi_okr_title}>Team Happiness Index</div>
 						<div className={styles.kpi_okr_count}>Happy</div>
 						<div className={styles.view_okr_flex}>
 							View details
@@ -88,8 +90,8 @@ function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDa
 								alt="kpi-img"
 								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Face.svg"
 							/>
-						</div>
-					</div>
+						</div> */}
+					{/* </div> */}
 				</div>
 			</div>
 			<div className={styles.leaderboard_container}>
@@ -100,13 +102,13 @@ function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDa
 				</div>
 				<div className={styles.leaderboard_data}>
 					<div className={styles.leaderboard}>
-						<IndividualActivity data={data} />
+						{/* <IndividualActivity data={data} /> */}
+						<ThingsToDo data={data} />
 					</div>
 				</div>
-
 			</div>
 
-			<div className={styles.leaderboard_container}>
+			{/* <div className={styles.leaderboard_container}>
 				<div className={styles.leaderboard_data}>
 					<div className={styles.leaderboard}>
 						<ThingsToDo data={data} />
@@ -114,10 +116,10 @@ function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDa
 				</div>
 				<div className={styles.leaderboard_data}>
 					<div className={styles.leaderboard}>
-						{/* <CompanyLeaderBoard /> */}
+						<CompanyLeaderBoard />
 					</div>
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 }

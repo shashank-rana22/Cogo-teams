@@ -4,7 +4,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function SalaryUpdate() {
+function SalaryUpdate({ data }) {
+	const { payable_days, payroll_status } = data || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -13,20 +14,20 @@ function SalaryUpdate() {
 			<div className={styles.summary}>
 				<div className={cl`${styles.avg_data} ${styles.mr_30}`}>
 					<div className={styles.avg_summary}>
-						23
+						{payable_days}
 					</div>
 					Payable Days
 				</div>
 				<div className={styles.avg_data}>
 					<div className={styles.avg_summary}>
-						Disbursed
+						{payroll_status}
 					</div>
 					Payroll Status
 				</div>
 			</div>
 			<div className={styles.footer}>
 				<div>
-					Aug 2023
+					{' '}
 				</div>
 				<div className={styles.view_payslip}>
 					View Payslip

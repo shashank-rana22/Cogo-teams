@@ -50,6 +50,7 @@ function Post({ feedRefetch }) {
 			}] : [],
 			action_name: 'create',
 		};
+
 		await createCompanyFeed({ PAYLOAD });
 		setDraftMessages('');
 		setDraftUploadedFiles('');
@@ -211,7 +212,12 @@ function Post({ feedRefetch }) {
 							{' '}
 							{clapsActive && <IcMCross style={{ marginLeft: 8 }} />}
 						</div>
-						<Button themeType="accent" size="lg" onClick={handleCreatePost}>
+						<Button
+							themeType="accent"
+							size="lg"
+							onClick={handleCreatePost}
+							disabled={isEmpty(draftMessages)}
+						>
 							Post
 							{' '}
 							<IcMSend width={16} height={16} style={{ marginLeft: 4 }} />

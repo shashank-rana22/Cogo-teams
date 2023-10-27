@@ -1,7 +1,7 @@
 import { Avatar, Popover } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useEffect, useState } from 'react';
+import { startCase } from '@cogoport/utils';
+import React, { useState, useEffect } from 'react';
 
 import useGetIndividualUserActivity from '../../../../../hooks/useGetIndividualUserActivity';
 
@@ -9,10 +9,14 @@ import styles from './styles.module.css';
 
 function IndividualActivity({ data = {} }) {
 	// const { data:dataObj } = data || {};
-	console.log(data, 'printk');
 	const { employees_list } = data || {};
-	const [selectedUser, setSelectedUser] = useState(employees_list?.[0]?.user_id);
-	const { data:userData, getIndividualUserActivity } = useGetIndividualUserActivity();
+	const [selectedUser, setSelectedUser] = useState('');
+	const { data:userData } = useGetIndividualUserActivity(selectedUser);
+
+	useEffect(() => {
+		setSelectedUser(employees_list?.[0]?.user_id);
+	}, [employees_list]);
+
 	function EmployeeList() {
 		return (
 
@@ -22,7 +26,7 @@ function IndividualActivity({ data = {} }) {
 						key={item?.name}
 						className={styles.list}
 						aria-hidden
-						onClick={() => { getIndividualUserActivity(item?.user_id); setSelectedUser(item?.id); }}
+						onClick={() => setSelectedUser(item?.user_id)}
 					>
 						{item?.name}
 					</div>
@@ -31,16 +35,16 @@ function IndividualActivity({ data = {} }) {
 		);
 	}
 
-	useEffect(() => {
-		if (isEmpty(employees_list)) {
-			return;
-		}
-		setSelectedUser(employees_list?.[0]?.id);
-	}, [employees_list]);
+	// useEffect(() => {
+	// 	if (isEmpty(employees_list)) {
+	// 		return;
+	// 	}
+	// 	setSelectedUser(employees_list?.[0]?.id);
+	// }, [employees_list]);
 
 	console.log('employees_list', employees_list);
 
-	const activeUser = employees_list?.find(({ id }) => id === selectedUser);
+	const activeUser = employees_list?.find(({ user_id }) => user_id === selectedUser);
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_flex}>

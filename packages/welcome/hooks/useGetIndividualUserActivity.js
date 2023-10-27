@@ -1,7 +1,7 @@
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetIndividualUserActivity = () => {
+const useGetIndividualUserActivity = (selectedUser) => {
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/get_individual_user_activity',
@@ -9,14 +9,16 @@ const useGetIndividualUserActivity = () => {
 
 	const getIndividualUserActivity = useCallback(
 		(id) => {
-			console.log(id, 'id');
-			trigger({
-				params: {
-					employee_user_id: id,
-				},
-			});
+			console.log(id, 'id', selectedUser);
+			if (id || selectedUser) {
+				trigger({
+					params: {
+						employee_user_id: id || selectedUser,
+					},
+				});
+			}
 		},
-		[trigger],
+		[trigger, selectedUser],
 	);
 
 	useEffect(() => {

@@ -7,7 +7,7 @@ import Loader from '../../../../../common/Loader';
 
 import styles from './styles.module.css';
 
-function AttendanceStats({ self_working_stats = {}, loading }) {
+function AttendanceStats({ self_working_stats = {}, loading, last_leave_taken }) {
 	const { avg_work_hrs, on_time_arrival } = self_working_stats || {};
 
 	if (loading) {
@@ -41,7 +41,9 @@ function AttendanceStats({ self_working_stats = {}, loading }) {
 				</div>
 			</div>
 			<div className={styles.avg_data}>
-				The last leave you took was 16 days back, we appreciate your efforts 🙌
+				{ last_leave_taken
+					? `The last leave you took was ${last_leave_taken || 0} days back, we appreciate your efforts 🙌`
+					: 'No leaves taken yet' }
 			</div>
 		</div>
 	);
