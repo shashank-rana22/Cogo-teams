@@ -1,7 +1,7 @@
 import { useHarbourRequest } from '@cogoport/request';
 import { useState, useCallback, useEffect } from 'react';
 
-const useListReimbursements = () => {
+const useListReimbursements = ({ toggleValue }) => {
 	const [filters, setFilters] = useState({
 		page_limit : 10,
 		page       : 1,
@@ -22,17 +22,18 @@ const useListReimbursements = () => {
 					},
 					page_limit,
 					page,
+					employee_view: toggleValue,
 				},
 			});
 		},
-		[filters, trigger],
+		[filters, toggleValue, trigger],
 	);
 
 	useEffect(() => {
 		listReimbursements();
 	}, [listReimbursements, filters]);
 
-	return { loading, data, filters, setFilters };
+	return { loading, data, filters, setFilters, refetchlist: listReimbursements };
 };
 
 export default useListReimbursements;

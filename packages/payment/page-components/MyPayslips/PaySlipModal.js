@@ -2,7 +2,7 @@ import { Modal } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function PaySlipModal({ showModal, documentType, setShowModal, modalUrl }) {
+function PaySlipModal({ showModal, documentType, setShowModal, modalUrl, openUrl }) {
 	const { earnings, deductions, variable_earnings } = modalUrl || {};
 	// console.log('modalurl', modalUrl);
 
@@ -21,7 +21,7 @@ function PaySlipModal({ showModal, documentType, setShowModal, modalUrl }) {
 			<Modal.Header title={documentType} />
 			<Modal.Body>
 				<div className={styles.pdf_container}>
-					{Object.entries(formattedData).map(([category, items]) => (
+					{/* {Object.entries(formattedData).map(([category, items]) => (
 						<div className={styles.table} key={category}>
 							<div className={styles.head_row}>
 								<span className={styles.head_left}>{category}</span>
@@ -36,9 +36,9 @@ function PaySlipModal({ showModal, documentType, setShowModal, modalUrl }) {
 							))}
 
 						</div>
-					))}
-					{/* <iframe
-						src={modalUrl}
+					))} */}
+					<iframe
+						src={openUrl}
 						type="application/pdf"
 						width="100%"
 						height="100%"
@@ -50,7 +50,7 @@ function PaySlipModal({ showModal, documentType, setShowModal, modalUrl }) {
 							{' '}
 							<a href={modalUrl}>click here to download the PDF file.</a>
 						</p>
-					</iframe> */}
+					</iframe>
 				</div>
 			</Modal.Body>
 		</Modal>

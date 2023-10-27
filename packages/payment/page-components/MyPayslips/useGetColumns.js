@@ -8,14 +8,20 @@ import styles from './styles.module.css';
 const ZERO = GLOBAL_CONSTANTS.zeroth_index;
 const ONE = GLOBAL_CONSTANTS.one;
 
-const useGetColumns = (setShowModal = () => {}, setModalUrl = () => {}, setDocumentType = () => {}) => {
+const useGetColumns = (
+	setShowModal = () => {},
+	setModalUrl = () => {},
+	setDocumentType = () => {},
+	setOpenUrl = () => {},
+) => {
 	const handleDownload = (url) => {
 		window.open(url, '_self');
 	};
 
 	const handleShow = (url) => {
 		console.log(url);
-		setModalUrl(url);
+		setOpenUrl(url);
+		setModalUrl({});
 		setShowModal(true);
 	};
 
@@ -47,7 +53,7 @@ const useGetColumns = (setShowModal = () => {}, setModalUrl = () => {}, setDocum
 					<ButtonIcon
 						size="md"
 						icon={<IcMEyeopen />}
-						onClick={() => { handleShow(item?.payslip); setDocumentType('Pay slip'); }}
+						onClick={() => { handleShow(item?.payslip_link); setDocumentType('Pay slip'); }}
 						themeType="primary"
 					/>
 					<ButtonIcon
@@ -87,14 +93,14 @@ const useGetColumns = (setShowModal = () => {}, setModalUrl = () => {}, setDocum
 					<ButtonIcon
 						size="md"
 						icon={<IcMEyeopen />}
-						onClick={() => { handleShow(item?.detailedpayslip_link); setDocumentType('Detailed slip'); }}
+						onClick={() => { handleShow(item?.detailed_payslip_link); setDocumentType('Detailed slip'); }}
 						themeType="primary"
 					/>
 					<ButtonIcon
 						size="md"
 						icon={<IcMDownload />}
 						onClick={
-							() => { handleDownload(item?.detailedpayslip_link); setDocumentType('Detailed slip'); }
+							() => { handleDownload(item?.detailed_payslip_link); setDocumentType('Detailed slip'); }
 }
 						themeType="primary"
 					/>

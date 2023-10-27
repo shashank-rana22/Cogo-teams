@@ -1,4 +1,4 @@
-import { Select } from '@cogoport/components';
+import { Select, Toggle } from '@cogoport/components';
 import { useState } from 'react';
 
 import useGetExpenseData from '../../../hooks/useGetExpenseData';
@@ -6,10 +6,11 @@ import useGetExpenseData from '../../../hooks/useGetExpenseData';
 import styles from './styles.module.css';
 
 const OPTIONS = [
-	{ label: '2022-2023', value: '2023' },
-	{ label: '2021-2022', value: '2022' },
-	{ label: '2020-2021', value: '2021' },
-	{ label: '2019-2020', value: '2020' },
+	{ label: '2023-2024', value: '2023-2024' },
+	{ label: '2022-2023', value: '2022-2023' },
+	{ label: '2021-2022', value: '2021-2022' },
+	{ label: '2020-2021', value: '2020-2021' },
+	{ label: '2019-2020', value: '2019-2020' },
 ];
 
 const CARDDATA = [
@@ -20,13 +21,34 @@ const CARDDATA = [
 
 ];
 
-function Expense() {
-	const [value, setValue] = useState('2023');
-	const { loading, data } = useGetExpenseData();
+function Expense({ toggleValue, handleSetToggle }) {
+	const [value, setValue] = useState('2023-2024');
+	const { loading, data } = useGetExpenseData({ toggleValue, value });
+	const { hr_view } = data || '-';
 	return (
 		<div className={styles.sub_container}>
 			<div className={styles.head_section}>
-				<span className={styles.heading}> Expense Management </span>
+				<div className={styles.toggle}>
+					<span className={styles.heading}>Expense Management </span>
+					<span>
+						{
+						hr_view
+							? (
+								<Toggle
+									name="a1"
+									size="sm"
+									checked={toggleValue}
+									onChange={(e) => handleSetToggle(e)}
+									offLabel="Team"
+									onLabel="Employee"
+								/>
+							)
+							: null
+					}
+					</span>
+
+				</div>
+
 				<Select
 					value={value}
 					onChange={(val) => setValue(val)}

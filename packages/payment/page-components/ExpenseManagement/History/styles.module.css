@@ -12,6 +12,7 @@
 
 .top_bold_text {
 	font-weight: 600;
+	line-height: 150%; /* 21px */
 	color: #221f20;
 	text-transform: uppercase;
 }
@@ -65,6 +66,7 @@
 .container {
 	width: 100%;
 	padding-bottom: 4px;
+	margin: 16px 0 0;
 	overflow: auto;
 
 	@media (max-width: 1010px) {

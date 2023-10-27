@@ -1,6 +1,6 @@
 import { Select, ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowRight, IcMArrowBack } from '@cogoport/icons-react';
+import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 
@@ -15,10 +15,11 @@ import useGetColumns from './useGetColumns';
 function MyPayslips() {
 	const [showModal, setShowModal] = useState(false);
 	const [modalUrl, setModalUrl] = useState({});
+	const [openUrl, setOpenUrl] = useState('');
 	const [documentType, setDocumentType] = useState('');
 	const router = useRouter();
 
-	const columns = useGetColumns(setShowModal, setModalUrl, setDocumentType);
+	const columns = useGetColumns(setShowModal, setModalUrl, setDocumentType, setOpenUrl);
 
 	const { data: payslipYearData, year, setYear } = useGetPayslipYears();
 	const yearOptions = payslipYearData?.map(
@@ -33,7 +34,7 @@ function MyPayslips() {
 	const { loading, data: payslipData } = useGetListPayslip(parseInt(year, 10));
 
 	const rightForms = [
-		{ heading: 'Form 16s', subheading: 'View and download form 16s' },
+		// { heading: 'Form 16s', subheading: 'View and download form 16s' },
 		// { heading: 'Salary Advance', subheading: 'Request an salary advance' },
 		{ heading: 'Raise Dispute', subheading: 'Have issues with the salary credited?' },
 	];
@@ -69,7 +70,12 @@ function MyPayslips() {
 				<div className={styles.white_container}>
 					{
 						rightForms.map(({ heading, subheading }) => (
-							<div className={styles.white_subcontainer} key={heading}>
+							<div
+								className={styles.white_subcontainer}
+								key={heading}
+								aria-hidden
+								onClick={() => router.push('/ticket-management/my-tickets')}
+							>
 								<div className={styles.right}>
 									<span className={styles.heading}>{heading}</span>
 									<span className={styles.subheading}>{subheading}</span>
@@ -94,6 +100,7 @@ function MyPayslips() {
 							modalUrl={modalUrl}
 							documentType={documentType}
 							setShowModal={setShowModal}
+							openUrl={openUrl}
 						/>
 					)
 

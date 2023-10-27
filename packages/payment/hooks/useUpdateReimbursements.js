@@ -8,11 +8,12 @@ const useUpdateReimbursements = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const updateReiembursement = async ({ payload, action }) => {
+	const updateReiembursement = async ({ payload, action, refetchlist }) => {
 		try {
 			await trigger({
 				data:	{ metadata: payload, action },
 			});
+			refetchlist();
 			Toast.success('succesfully');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');

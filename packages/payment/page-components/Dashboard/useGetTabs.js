@@ -1,5 +1,5 @@
 import ExpenseManagement from '../ExpenseManagement';
-// import MyPayslips from '../MyPayslips';
+import MyPayslips from '../MyPayslips';
 
 const tabs = [
 	{
@@ -7,11 +7,11 @@ const tabs = [
 		title     : 'Expense Management',
 		Component : <ExpenseManagement />,
 	},
-	// {
-	// 	name      : 'payslips',
-	// 	title     : 'My Payslips',
-	// 	Component : <MyPayslips />,
-	// },
+	{
+		name      : 'payslips',
+		title     : 'My Payslips',
+		Component : <MyPayslips />,
+	},
 	// {
 	// 	name      : 'people',
 	// 	title     : 'People',

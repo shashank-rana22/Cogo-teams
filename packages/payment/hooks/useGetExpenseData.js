@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useGetExpenseData = () => {
+const useGetExpenseData = ({ toggleValue, value }) => {
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/get_expense_data',
@@ -12,10 +12,15 @@ const useGetExpenseData = () => {
 	const getExpenseData = useCallback(
 		async () => {
 			await trigger({
+				params: {
+					employee_view : toggleValue,
+					date_range    : value,
+				},
 			});
 		},
-		[trigger],
+		[toggleValue, trigger, value],
 	);
+
 	useEffect(() => {
 		try {
 			getExpenseData();
@@ -25,7 +30,7 @@ const useGetExpenseData = () => {
 	}, [getExpenseData,
 	]);
 
-	return { loading, data, getExpenseData };
+	return { loading, data, refetchexpense: getExpenseData };
 };
 
 export default useGetExpenseData;
