@@ -39,7 +39,7 @@ const useListOmnichannelOnboardingRequests = ({ showHistory = false }) => {
 		} finally {
 			dispatch(
 				setProfileState({
-					refetchDemoApi: false,
+					refetchRequestApi: false,
 				}),
 			);
 		}

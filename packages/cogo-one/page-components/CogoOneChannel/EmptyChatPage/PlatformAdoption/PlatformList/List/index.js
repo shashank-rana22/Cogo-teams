@@ -5,6 +5,7 @@ import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useUpdateOrganizationDocument from '../../../../../../hooks/useUpdateOrganizationDocument';
 import useUpdateRequestStatus from '../../../../../../hooks/useUpdateRerquestStatus';
 import useVerificationDocument from '../../../../../../hooks/useVerificationDocument';
 
@@ -51,6 +52,13 @@ function List({
 	});
 
 	const { verifyDocument = () => {}, loading = false } = useVerificationDocument({
+		setRejectAccount,
+		setVerifyAccount,
+		onboardingRequest,
+		accountType,
+	});
+
+	const { updateDocument = () => {}, updateLoading = false } = useUpdateOrganizationDocument({
 		setRejectAccount,
 		setVerifyAccount,
 		onboardingRequest,
@@ -188,7 +196,8 @@ function List({
 				verifyAccount={verifyAccount}
 				setRejectAccount={setRejectAccount}
 				verifyDocument={verifyDocument}
-				loading={loading}
+				loading={loading || updateLoading}
+				updateDocument={updateDocument}
 			/>
 			<RejectAccount
 				setRejectAccount={setRejectAccount}
@@ -196,7 +205,8 @@ function List({
 				setVerifyAccount={setVerifyAccount}
 				verifyAccount={verifyAccount}
 				verifyDocument={verifyDocument}
-				loading={loading}
+				loading={loading || updateLoading}
+				updateDocument={updateDocument}
 			/>
 		</div>
 	);

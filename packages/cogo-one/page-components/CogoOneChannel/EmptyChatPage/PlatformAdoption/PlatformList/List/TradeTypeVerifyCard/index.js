@@ -32,6 +32,7 @@ function TradeTypeVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 					businessName={orgName}
 					tags={tags}
 					accountType={account_type}
+					item={item}
 				/>
 				<div className={styles.body_info}>
 					<div className={styles.each_row}>
@@ -68,9 +69,9 @@ function TradeTypeVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 									show               : true,
 									showAccountDetails : false,
 									accountData        : documents,
-									orgData            : {},
-									verifyType         : '',
-									accountType        : '',
+									orgData            : item,
+									verifyType         : 'trade_party',
+									accountType        : 'trade_party',
 								}));
 							}}
 						>
@@ -81,10 +82,6 @@ function TradeTypeVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 				</div>
 				<div className={styles.line_break} />
 				<div className={styles.footer_info}>
-					{/* <div className={styles.time_left}>
-						<IcMTimer width={20} height={20} fill="#F37166" />
-						10:09 m left
-					</div> */}
 					<div
 						className={styles.verify_button}
 						role="presentation"

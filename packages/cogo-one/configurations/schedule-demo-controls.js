@@ -2,7 +2,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { addDays } from '@cogoport/utils';
 
 const ADD_DAY = 1;
-const NEW_DATE = new Date();
 
 const getScheduleControls = ({ scheduleType = '', watch = () => {} }) => {
 	const { start_date, end_date, end_time, start_time } = watch();
@@ -41,7 +40,7 @@ const getScheduleControls = ({ scheduleType = '', watch = () => {} }) => {
 			name                  : 'start_date',
 			label                 : 'Start Date',
 			isClearable           : true,
-			minDate               : NEW_DATE,
+			minDate               : new Date(),
 			placeholder           : 'Start Date',
 			showTimeSelect        : false,
 			dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],

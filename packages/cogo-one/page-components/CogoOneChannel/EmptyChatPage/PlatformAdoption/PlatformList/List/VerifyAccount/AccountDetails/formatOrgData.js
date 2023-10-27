@@ -8,12 +8,13 @@ const getOrgAddress = (item) => ({
 
 export const formatKycOrgData = ({ orgData = {} }) => {
 	const { organization = {}, requesting_user = {}, customer = {} } = orgData || {};
-	const { business_name = '', billing_addresses = [] } = organization || {};
+	const { business_name = '', billing_addresses = [], registration_number = '' } = organization || {};
 	const { name: requestUserName = '' } = requesting_user || {};
 	const { email = '', mobile_country_code = '', mobile_number = '' } = customer || {};
 
 	const {
-		address = '', pincode = '', taxNumber = '',
+		address = '', pincode = '',
+		taxNumber = '',
 	} = getOrgAddress(billing_addresses?.[GLOBAL_CONSTANTS.zeroth_index]) || {};
 
 	return {
@@ -21,7 +22,7 @@ export const formatKycOrgData = ({ orgData = {} }) => {
 		pocName      : requestUserName,
 		mobileNumber : mobile_number,
 		mobileCode   : mobile_country_code,
-		pan          : '',
+		pan          : registration_number,
 		email,
 		address,
 		pincode,
@@ -30,16 +31,17 @@ export const formatKycOrgData = ({ orgData = {} }) => {
 };
 
 export const formatTradePartyData = ({ orgData = {} }) => {
-	const { organization = {}, requesting_user = {}, organization_pocs = [] } = orgData || {};
-	const { business_name: orgName = '', billing_addresses = [] } = organization || {};
-	const { data: { name = '' } = {} } = requesting_user || {};
+	const { organization = {}, requesting_user = {}, customer = {} } = orgData || {};
+	const { business_name: orgName = '', billing_addresses = [], registration_number = '' } = organization || {};
+	const { name = '' } = requesting_user || {};
 	const {
 		email = '', mobile_country_code = '',
 		mobile_number = '',
-	} = organization_pocs?.[GLOBAL_CONSTANTS.zeroth_index] || [];
+	} = customer || {};
 
 	const {
-		address = '', pincode = '', taxNumber = '',
+		address = '', pincode = '',
+		taxNumber = '',
 	} = getOrgAddress(billing_addresses?.[GLOBAL_CONSTANTS.zeroth_index]) || {};
 
 	return {
@@ -47,7 +49,7 @@ export const formatTradePartyData = ({ orgData = {} }) => {
 		pocName      : name,
 		mobileCode   : mobile_country_code,
 		mobileNumber : mobile_number,
-		pan          : '',
+		pan          : registration_number,
 		email,
 		address,
 		pincode,
@@ -57,10 +59,11 @@ export const formatTradePartyData = ({ orgData = {} }) => {
 
 export const formatOnboardData = ({ orgData = {} }) => {
 	const { user = {}, organization = {} } = orgData || {};
-	const { business_name: orgName = '', billing_addresses = [] } = organization || {};
+	const { business_name: orgName = '', billing_addresses = [], registration_number = '' } = organization || {};
 	const { name = '', email = '', mobile_country_code = '', mobile_number = '' } = user || {};
 	const {
-		address = '', pincode = '', taxNumber = '',
+		address = '', pincode = '',
+		taxNumber = '',
 	} = getOrgAddress(billing_addresses?.[GLOBAL_CONSTANTS.zeroth_index]) || {};
 
 	return {
@@ -69,7 +72,7 @@ export const formatOnboardData = ({ orgData = {} }) => {
 		email,
 		mobileNumber : mobile_number,
 		mobileCode   : mobile_country_code,
-		pan          : '',
+		pan          : registration_number,
 		address,
 		pincode,
 		taxNumber,

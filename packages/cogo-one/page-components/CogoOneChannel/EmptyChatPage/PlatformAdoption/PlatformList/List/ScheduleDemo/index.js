@@ -14,13 +14,12 @@ import styles from './styles.module.css';
 function ScheduleDemo({ scheduleDemo = {}, setScheduleDemo = () => {}, onboardingRequest = () => {} }) {
 	const { isScheduleDemo = false, scheduleData = {}, scheduleType = '' } = scheduleDemo || {};
 
-	const { metadata = {} } = scheduleData || {};
 	const {
-		description = '', subject = '', schedule = {}, lead_organization_id = '', organization_id = '',
-		user_id = '', customer = {},
-	} = metadata || {};
+		metadata = {}, request_type = '', source = '',
+		source_id = '', id: requestId = '',
+	} = scheduleData || {};
+	const { description = '', subject = '', schedule = {} } = metadata || {};
 	const { schedule_start = '', calendar_id = '', id = '' } = schedule || {};
-	const { lead_user_id = '' } = customer || {};
 
 	const { performedById = '' } = useSelector(({ profile }) => ({
 		performedById: profile?.user?.id || {},
@@ -41,7 +40,7 @@ function ScheduleDemo({ scheduleDemo = {}, setScheduleDemo = () => {}, onboardin
 		onboardingRequest,
 	});
 
-	const { loading = false, createMeeting = () => {} } = useScheduleCalendar({
+	const { loading = false, createMeeting = () => {}, onboardLoading = false } = useScheduleCalendar({
 		reset,
 		setScheduleDemo,
 		onboardingRequest,
@@ -49,7 +48,15 @@ function ScheduleDemo({ scheduleDemo = {}, setScheduleDemo = () => {}, onboardin
 
 	const onSubmit = (val) => {
 		if (scheduleType === 'organic') {
-			createMeeting({ val, lead_organization_id, lead_user_id, user_id, organization_id });
+			createMeeting({
+				val,
+				metadata,
+				requestId,
+				requestStatus : 'completed',
+				requestType   : request_type,
+				source,
+				sourceId      : source_id,
+			});
 		} else {
 			meetingAgent({
 				agentId    : performedById,
@@ -82,6 +89,10 @@ function ScheduleDemo({ scheduleDemo = {}, setScheduleDemo = () => {}, onboardin
 		}
 	}, [description, scheduleData, schedule_start, setValue, subject, scheduleType]);
 
+	if (!isScheduleDemo) {
+		return null;
+	}
+
 	return (
 		<Modal
 			show={isScheduleDemo}
@@ -107,7 +118,7 @@ function ScheduleDemo({ scheduleDemo = {}, setScheduleDemo = () => {}, onboardin
 					themeType="secondary"
 					className={styles.cancel_cta}
 					onClick={handleClose}
-					disabled={loading || updateLoader}
+					disabled={loading || onboardLoading || updateLoader}
 				>
 					Cancel
 				</Button>
@@ -115,7 +126,7 @@ function ScheduleDemo({ scheduleDemo = {}, setScheduleDemo = () => {}, onboardin
 					size="md"
 					themeType="primary"
 					onClick={handleSubmit(onSubmit)}
-					loading={loading || updateLoader}
+					loading={loading || onboardLoading || updateLoader}
 				>
 					Approve
 				</Button>

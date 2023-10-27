@@ -12,9 +12,9 @@ export const formatAccountType = ({ tags = [] }) => ({
 });
 
 export const getOrgId = ({ orgData = {} }) => ({
-	IE          : orgData?.organization_id,
-	CP          : orgData?.organization_id,
-	SP          : orgData?.organization_id,
+	IE          : orgData?.organization?.id,
+	CP          : orgData?.organization?.id,
+	SP          : orgData?.organization?.id,
 	trade_party : orgData?.trade_party?.id,
 });
 
@@ -35,4 +35,44 @@ export const getTradePartyPayload = ({ orgId = '', type = '', rejectReason = '' 
 	id                  : orgId || undefined,
 	verification_status : type,
 	rejection_reason    : rejectReason || undefined,
+});
+
+export const getPayload = ({
+	description = '', end_date = '', end_time = '', start_date = '',
+	start_time = '', subject = '', lead_organization_id = '',
+	lead_user_id = '', user_id = '', organization_id = '',
+}) => ({
+	subject,
+	description,
+	category : 'meeting',
+	metadat  : {
+		lead_user_id,
+		user_id,
+		lead_organization_id,
+		organization_id,
+	},
+	frequency       : 'daily',
+	tags            : ['demo_request'],
+	recurrence_rule : {
+		type         : 'normal',
+		repeat_after : 1,
+		unit         : 'day',
+	},
+	validity_start : start_date,
+	start_time,
+	validity_end   : end_date,
+	end_time,
+
+});
+
+export const getOnboardPayload = ({
+	requestType = '', metadata = {}, source = '', sourceId = '',
+	requestStatus = '', requestId = '',
+}) => ({
+	request_type   : requestType,
+	source,
+	source_id      : sourceId,
+	request_status : requestStatus,
+	request_id     : requestId,
+	metadata,
 });

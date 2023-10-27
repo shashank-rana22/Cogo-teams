@@ -33,6 +33,7 @@ function OrganicCustomer({ list = [], setScheduleDemo = () => {}, handlePlaceCal
 					businessName={business_name}
 					tags={tags}
 					accountType={account_type}
+					item={item}
 				/>
 				<div className={styles.body_info}>
 					<div className={styles.status_row}>
@@ -73,7 +74,7 @@ function OrganicCustomer({ list = [], setScheduleDemo = () => {}, handlePlaceCal
 								onClick={() => setScheduleDemo((prev) => ({
 									...prev,
 									scheduleType   : 'organic',
-									scheduleData   : {},
+									scheduleData   : item,
 									isScheduleDemo : true,
 								}))}
 							>

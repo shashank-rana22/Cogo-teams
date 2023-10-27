@@ -2,33 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const getPayload = ({
-	description = '', end_date = '', end_time = '', start_date = '',
-	start_time = '', subject = '', lead_organization_id = '',
-	lead_user_id = '', user_id = '', organization_id = '',
-}) => ({
-	subject,
-	description,
-	category : 'meeting',
-	metadat  : {
-		lead_user_id,
-		user_id,
-		lead_organization_id,
-		organization_id,
-	},
-	frequency       : 'daily',
-	tags            : ['demo_request'],
-	recurrence_rule : {
-		type         : 'normal',
-		repeat_after : 1,
-		unit         : 'day',
-	},
-	validity_start : start_date,
-	start_time,
-	validity_end   : end_date,
-	end_time,
-
-});
+import { getOnboardPayload, getPayload } from '../utils/platformAdoption';
 
 const useScheduleCalendar = ({ reset = () => {}, setScheduleDemo = () => {}, onboardingRequest = () => {} }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -36,16 +10,26 @@ const useScheduleCalendar = ({ reset = () => {}, setScheduleDemo = () => {}, onb
 		url    : '/create_cogoone_calendar',
 	}, { manual: true });
 
+	const [{ loading: onboardLoading }, onboardTrigger] = useRequest({
+		method : 'post',
+		url    : '/complete_onboarding_requests',
+	}, { manual: true });
+
 	const createMeeting = async ({
-		val = {}, lead_organization_id = '',
-		lead_user_id = '', user_id = '', organization_id = '',
+		val = {}, metadata = {}, requestId = '', requestStatus = '',
+		requestType = '', source = '', sourceId = '',
 	}) => {
+		const {
+			lead_organization_id = '', customer = {}, user_id = '', organization_id = '',
+		} = metadata || {};
+		const { lead_user_id = '' } = customer || {};
 		const {
 			description = '', end_date = '', end_time = '', start_date = '',
 			start_time = '', subject = '',
 		} = val || {};
+
 		try {
-			await trigger({
+			const res = await trigger({
 				data: getPayload({
 					description,
 					start_date,
@@ -60,6 +44,14 @@ const useScheduleCalendar = ({ reset = () => {}, setScheduleDemo = () => {}, onb
 				}),
 			});
 
+			if (res?.data?.id) {
+				await onboardTrigger({
+					data: getOnboardPayload({
+						requestId, requestStatus, requestType, source, sourceId, metadata,
+					}),
+				});
+			}
+
 			reset();
 			setScheduleDemo(() => ({ isScheduleDemo: false, scheduleData: {}, scheduleType: '' }));
 			Toast.success('Scheduled Successfully');
@@ -72,6 +64,7 @@ const useScheduleCalendar = ({ reset = () => {}, setScheduleDemo = () => {}, onb
 	return {
 		loading,
 		createMeeting,
+		onboardLoading,
 	};
 };
 

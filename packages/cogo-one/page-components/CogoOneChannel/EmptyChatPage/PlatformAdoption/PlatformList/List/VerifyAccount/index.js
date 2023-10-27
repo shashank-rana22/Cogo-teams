@@ -1,4 +1,5 @@
 import { Modal, Button, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useMemo, useState } from 'react';
 
@@ -21,7 +22,7 @@ import styles from './styles.module.css';
 
 function VerifyAccount({
 	verifyAccount = {}, setVerifyAccount = () => {}, setRejectAccount = () => {},
-	verifyDocument = () => {}, loading = false,
+	verifyDocument = () => {}, loading = false, updateDocument = () => {},
 }) {
 	const {
 		show = false,
@@ -31,6 +32,8 @@ function VerifyAccount({
 		verifyType = '',
 		accountType = '',
 	} = verifyAccount || {};
+
+	const { documents = [] } = orgData || {};
 
 	const DOCUMENT_OPTIONS = useMemo(() => (accountData || []).map((itm) => ({
 		label : startCase(itm?.document_type),
@@ -58,10 +61,14 @@ function VerifyAccount({
 	};
 
 	const handleApprove = (status) => {
-		verifyDocument({
-			orgId : getOrgId({ orgData })?.[accountType],
-			type  : status,
-		});
+		if (verifyType === 'trade_party') {
+			updateDocument({ val: documents?.[GLOBAL_CONSTANTS.zeroth_index] || {}, status });
+		} else {
+			verifyDocument({
+				orgId : getOrgId({ orgData })?.[accountType],
+				type  : status,
+			});
+		}
 	};
 
 	if (!show) {
@@ -99,28 +106,29 @@ function VerifyAccount({
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
-				{!showAccountDetails ? <Button themeType="accent" onClick={handleClose}>Close</Button> : (
-					<>
-						<Button
-							className={styles.cancel_button}
-							themeType="secondary"
-							onClick={() => {
-								setVerifyAccount((prev) => ({ ...prev, show: false }));
-								setRejectAccount(() => ({ show: true }));
-							}}
-							disabled={loading}
-						>
-							Reject
-						</Button>
-						<Button
-							themeType="accent"
-							onClick={() => handleApprove('verified')}
-							loading={loading}
-						>
-							Aprove
-						</Button>
-					</>
-				)}
+				{!showAccountDetails && verifyType !== 'trade_party'
+					? <Button themeType="accent" onClick={handleClose}>Close</Button> : (
+						<>
+							<Button
+								className={styles.cancel_button}
+								themeType="secondary"
+								onClick={() => {
+									setVerifyAccount((prev) => ({ ...prev, show: false }));
+									setRejectAccount(() => ({ show: true }));
+								}}
+								disabled={loading}
+							>
+								Reject
+							</Button>
+							<Button
+								themeType="accent"
+								onClick={() => handleApprove('verified')}
+								loading={loading}
+							>
+								Aprove
+							</Button>
+						</>
+					)}
 			</Modal.Footer>
 		</Modal>
 	);

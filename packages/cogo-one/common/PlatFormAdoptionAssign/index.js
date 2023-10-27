@@ -40,7 +40,7 @@ function PlatFormAdoptionAssign({ data = {} }) {
 			<div className={styles.action}>
 				<IcMInfo className={styles.info_icon} />
 				<Popover
-					placement="left"
+					placement="bottom"
 					render={(
 						<Button
 							themeType="secondary"
@@ -71,6 +71,7 @@ function PlatFormAdoptionAssign({ data = {} }) {
 						assignData : null,
 						show       : false,
 					}))}
+					placement="top"
 				>
 					<Modal.Header title="Assign To Agent" />
 					<Modal.Body>

@@ -31,6 +31,7 @@ function KycVerifyCard({ list = [], setVerifyAccount = () => {}, handlePlaceCall
 					businessName={business_name}
 					tags={tags}
 					accountType={account_type}
+					item={item}
 				/>
 				<div className={styles.body_info}>
 					<div className={styles.each_row}>

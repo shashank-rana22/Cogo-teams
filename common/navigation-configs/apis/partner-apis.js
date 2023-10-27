@@ -13315,6 +13315,16 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'update_organization_document',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'complete_onboarding_requests',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'assign_onboarding_agent',
 			access_type  : 'private',
 			service_name : 'communication',

@@ -1,5 +1,6 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, Textarea } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
 import { getOrgId } from '../../../../../../../utils/platformAdoption';
@@ -9,10 +10,11 @@ import styles from './styles.module.css';
 function RejectAccount({
 	rejectAccount = '', setRejectAccount = () => {},
 	verifyAccount = {}, setVerifyAccount = () => {},
-	verifyDocument = () => {}, loading = false,
+	verifyDocument = () => {}, loading = false, updateDocument = () => {},
 }) {
 	const { show = false, rejectReason = '' } = rejectAccount || {};
-	const { accountType = '', orgData = {} } = verifyAccount || {};
+	const { accountType = '', orgData = {}, verifyType = '' } = verifyAccount || {};
+	const { documents = [] } = orgData || {};
 
 	const handleClose = () => {
 		setRejectAccount(() => ({
@@ -26,12 +28,20 @@ function RejectAccount({
 	};
 
 	const handleReject = (status) => {
-		verifyDocument({
-			orgId : getOrgId({ orgData })?.[accountType],
-			type  : status,
-			rejectReason,
-		});
+		if (verifyType === 'trade_party') {
+			updateDocument({ val: documents?.[GLOBAL_CONSTANTS.zeroth_index] || {}, status, rejectReason });
+		} else {
+			verifyDocument({
+				orgId : getOrgId({ orgData })?.[accountType],
+				type  : status,
+				rejectReason,
+			});
+		}
 	};
+
+	if (!show) {
+		return null;
+	}
 
 	return (
 		<Modal size="sm" scroll={false} show={show} onClose={handleClose}>
@@ -41,16 +51,24 @@ function RejectAccount({
 					<div className={styles.title}>
 						Please provide rejection details
 					</div>
-					<AsyncSelect
-						asyncKey="allocation_rejection_type"
-						// multiple
-						placeholder="Select reasons"
-						isClearable
-						value={rejectReason}
-						onChange={(val) => setRejectAccount((prev) => ({ ...prev, rejectReason: val }))}
-						initialCall
-						renderLabel={(item) => <>{startCase(item?.reason)}</>}
-					/>
+					{verifyType === 'trade_party' ? (
+						<Textarea
+							size="md"
+							placeholder="Enter remark here"
+							value={rejectReason}
+							onChange={(val) => setRejectAccount((prev) => ({ ...prev, rejectReason: val }))}
+						/>
+					) : (
+						<AsyncSelect
+							asyncKey="allocation_rejection_type"
+							placeholder="Select reasons"
+							isClearable
+							value={rejectReason}
+							onChange={(val) => setRejectAccount((prev) => ({ ...prev, rejectReason: val }))}
+							initialCall
+							renderLabel={(item) => <>{startCase(item?.reason)}</>}
+						/>
+					)}
 				</div>
 			</Modal.Body>
 			<Modal.Footer>

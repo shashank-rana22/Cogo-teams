@@ -77,12 +77,6 @@
 	padding: 10px 16px;
 }
 
-.time_left {
-	display: flex;
-	align-items: center;
-	color: #f37166;
-}
-
 .verify_button {
 	display: flex;
 	align-items: center;

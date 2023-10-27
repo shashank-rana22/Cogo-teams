@@ -36,7 +36,7 @@ const COLUMNS = [
 	},
 	{
 		id       : 'assign_to',
-		Header   : 'ASSIGN TO',
+		Header   : 'ASSIGNED TO',
 		accessor : (item) => <div className={styles.label}>{startCase(item?.request_assigned_to?.name)}</div>,
 	},
 	{
