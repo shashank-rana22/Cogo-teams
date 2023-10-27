@@ -62,12 +62,7 @@ function Header(props) {
 
 			<div>
 
-				<div className={styles.timer_container}>
-					{/* <Select value={view} onChange={setView}
-					options={VIEW_OPTIONS} className={styles.view_selector} /> */}
-
-					<CountDownTimer updatedAt={updatedAt} countdown={countdown} />
-				</div>
+				<CountDownTimer updatedAt={updatedAt} countdown={countdown} />
 
 				{updatedAt && (
 					<p className={styles.last_updated_at}>
