@@ -17,6 +17,10 @@ const NO_PADDING_LAYOUT_MAPPING = [
 	'/[partner_id]/performance-and-incentives/public-leaderboard',
 ];
 
+const HIDE_FAQ_CHAT = [
+	'/[partner_id]/performance-and-incentives/public-leaderboard',
+];
+
 function Layout({ children, layout }) {
 	const router = useRouter();
 
@@ -55,7 +59,8 @@ function Layout({ children, layout }) {
 			<div style={NO_PADDING_LAYOUT_MAPPING.includes(pathname)
 				? { margin: 0, padding: 0 } : { margin: 0, padding: '24px 20px' }}
 			>
-				{!role_functions.some((r) => FAQ_BUBBLE_EXCLUSION_LIST.includes(r)) && (
+				{!role_functions.some((r) => FAQ_BUBBLE_EXCLUSION_LIST.includes(r))
+				&& !HIDE_FAQ_CHAT.includes(pathname) && (
 					<ChatFAQs
 						faqNotificationData={faqData}
 						faqNotificationApiLoading={faqNotificationApiLoading}

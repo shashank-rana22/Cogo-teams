@@ -79,6 +79,7 @@ const useCreateAdditionalRates = ({
 	filter,
 	data,
 	source,
+	triggeredFrom = '',
 }) => {
 	const [errors, setErrors] = useState({});
 
@@ -155,7 +156,8 @@ const useCreateAdditionalRates = ({
 			const res = await trigger({
 				data: {
 					...payloadRequired,
-					procured_by_id: user_profile?.user?.id,
+					source         : triggeredFrom || undefined,
+					procured_by_id : user_profile?.user?.id,
 				},
 			});
 			if (res?.hasError) {

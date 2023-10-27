@@ -22,6 +22,7 @@ function Charge({
 	filter = {},
 	data = {},
 	source = '',
+	triggeredFrom = '',
 }) {
 	const [messageToShow, setMessageToShow] = useState('');
 
@@ -68,6 +69,7 @@ function Charge({
 					filter={filter}
 					data={data}
 					source={source}
+					triggeredFrom={triggeredFrom}
 				/>
 			)}
 		</div>

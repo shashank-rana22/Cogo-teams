@@ -2,6 +2,7 @@ import EmptyState from './common/EmptyState';
 import FetchingLeaderboard from './common/FetchingLeaderboard';
 import Body from './components/Body';
 import Header from './components/Header';
+import useGetUserProgress from './hooks/useGetUserProgress';
 import useGetLeaderboardView from './useGetLeaderboardView';
 
 function Leaderboard() {
@@ -13,6 +14,8 @@ function Leaderboard() {
 		dateRange,
 		setDateRange,
 	} = useGetLeaderboardView();
+
+	const { kam_progress, manager_progress, getUserProgress } = useGetUserProgress();
 
 	if (loading) {
 		return <FetchingLeaderboard />;
@@ -32,9 +35,16 @@ function Leaderboard() {
 
 	return (
 		<>
-			<Header dateRange={dateRange} setDateRange={setDateRange} entity={entity} setEntity={setEntity} />
+			<Header
+				dateRange={dateRange}
+				setDateRange={setDateRange}
+				entity={entity}
+				setEntity={setEntity}
+				kam_progress={kam_progress}
+				manager_progress={manager_progress}
+			/>
 
-			<Body dateRange={dateRange} entity={entity} />
+			<Body dateRange={dateRange} entity={entity} getUserProgress={getUserProgress} />
 		</>
 	);
 }

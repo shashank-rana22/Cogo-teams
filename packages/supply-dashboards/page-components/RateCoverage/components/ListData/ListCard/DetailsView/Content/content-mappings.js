@@ -23,7 +23,7 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 		chargeable_weight, trade_type,
 	} = primary_service_detail || feedbackData || requestData || {};
 
-	const { cargo_weight_per_container } = booking_params || {};
+	const { cargo_weight_per_container, inco_term: dislike_rates_inco } = booking_params || {};
 
 	const transitTime =	filter?.service === 'ftl_freight'
 		? shipment_data?.transit_time : differenceInDays(
@@ -46,7 +46,7 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 		{ label: container_size && `${container_size}ft` },
 		{ label: container_type && startCase(container_type) },
 		{ label: containers_count && `${containers_count} Containers` },
-		{ label: inco_term && startCase(inco_term) },
+		{ label: (inco_term || dislike_rates_inco) && startCase(inco_term || dislike_rates_inco) },
 		{ label: (inco_term && startCase(INCO_TERM_MAPPING[inco_term])) || startCase(trade_type) },
 		{ label: payment_term && startCase(payment_term) },
 		{ label: operation_type && startCase(operation_type) },
@@ -76,7 +76,7 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 				:	<BookingParamsMapping bookingParams={bookingParams} />,
 		},
 	];
-	const feedbacksData = feedbacks.map((item, index) => `${index + 1}. ${item}`);
+	const feedbacksData = feedbacks.map((item) => item);
 
 	const contentValuesMapping = [
 		{
@@ -166,6 +166,16 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 		preferred_airlines,
 		booking_params,
 		transitTime,
+		commodity_description,
+		bl_type,
+		cargo_readiness_date,
+		free_days_detention_destination,
+		schedule_departure,
+		cargo_weight_per_container,
+		inco_term,
+		trade_type,
+		bookingParams,
+		dislike_rates_inco,
 	};
 }
 

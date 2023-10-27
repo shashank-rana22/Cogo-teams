@@ -204,7 +204,7 @@ const haulageControls = ({
 					type        : 'select',
 					options     : currencyOptions,
 					span        : 2,
-					placeholder : 'Curr...',
+					placeholder : 'Currency',
 					rules       : { required: 'currency is required' },
 				},
 				{

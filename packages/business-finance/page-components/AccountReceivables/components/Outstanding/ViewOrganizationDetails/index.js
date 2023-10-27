@@ -1,16 +1,11 @@
 import { Button } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import OutstandingList from '../OverAllOutstanding/OutstandingList';
 
 import styles from './styles.module.css';
 
-function ViewOrganizationDetails({ selectedOrgId = {}, setSelectedOrgId = () => {} }) {
-	const router = useRouter();
-
-	const { entityCode = '' } = router.query || {};
-
+function ViewOrganizationDetails({ selectedOrgId = {}, setSelectedOrgId = () => {}, entityCode = '' }) {
 	return (
 		<div>
 			<div className={styles.button_div}>
