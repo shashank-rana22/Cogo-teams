@@ -17,8 +17,8 @@ const THINGS_TO_DO = [
 		src            : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/1a9f21c2f03f299fdc0161416530ed14/Calendar-3.svg',
 		type           : 'Expenses',
 		employee_count : '322 employees not paid',
-		key            : 'reimbursements',
-		link           : '',
+		key            : 'expenses',
+		link           : '/payment',
 	},
 	{
 		src            : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/ce7894a168aed5c5b6b42e5ba1ab4b60/Calendar.svg',
