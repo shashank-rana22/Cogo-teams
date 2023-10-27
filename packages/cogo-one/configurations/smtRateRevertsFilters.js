@@ -4,7 +4,7 @@ import SHIPMENT_TYPE_OPTIONS from '../constants/shipmentTypes';
 const smtRateRevertsFilters = ({
 	triggeredFrom = '',
 	viewType = '',
-	formValues = {},
+	serviceType = '',
 	setFiltersData = () => {},
 }) => [
 	...(ADMIN_VIEW_REQUIRED_FOR.includes(viewType)
@@ -77,6 +77,7 @@ const smtRateRevertsFilters = ({
 					size        : 'sm',
 					asyncKey    : 'organizations',
 					initialCall : true,
+					isClearable : true,
 					onChange    : (_, obj) => setFiltersData(
 						(prev) => ({
 							...prev,
@@ -88,7 +89,7 @@ const smtRateRevertsFilters = ({
 							account_type : 'service_provider',
 							status       : 'active',
 							kyc_status   : 'verified',
-							service_type : formValues?.service,
+							service_type : serviceType || undefined,
 						},
 					},
 				},

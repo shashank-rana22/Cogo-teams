@@ -161,5 +161,10 @@ export const expenseNonRecurringConfig = () => ({
 			func  : 'renderView',
 			span  : 1,
 		},
+		{
+			label : '',
+			func  : 'refresh',
+			span  : 0.8,
+		},
 	],
 });

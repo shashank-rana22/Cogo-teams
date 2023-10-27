@@ -52,24 +52,40 @@ function Details({
 	const { importer_exporter: importerExporter = {} } = dataList || {};
 	const { push = () => {} } = useRouter();
 
-	const { shipment_type:shipmentType = '' } = dataList || {};
+	const { shipment_type:shipmentType = '', serial_id = '' } = dataList || {};
 
 	return (
 		<div>
 			<div className={styles.container}>
 				<div className={styles.sub_div}>
-					<Tooltip
-						interactive
-						content={(
-							<div className={styles.name}>
+					<div>
+						<Tooltip
+							interactive
+							content={(
+								<div className={styles.name}>
+									{`Shipment ID: #${serial_id}` || '-'}
+								</div>
+							)}
+						>
+							<div className={styles.organization_name}>
+								{`Shipment ID: #${serial_id}` || '-'}
+							</div>
+						</Tooltip>
+					</div>
+					<div>
+						<Tooltip
+							interactive
+							content={(
+								<div className={styles.name}>
+									{importerExporter?.business_name || '-'}
+								</div>
+							)}
+						>
+							<div className={styles.organization_name}>
 								{importerExporter?.business_name || '-'}
 							</div>
-						)}
-					>
-						<div className={styles.orgnization_name}>
-							{importerExporter?.business_name || '-'}
-						</div>
-					</Tooltip>
+						</Tooltip>
+					</div>
 				</div>
 
 				<div className={styles.flex}>
