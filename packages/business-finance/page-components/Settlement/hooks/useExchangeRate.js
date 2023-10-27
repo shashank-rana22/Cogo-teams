@@ -21,7 +21,7 @@ const useExchangeRate = ({ paymentDateValue, fromCur, toCur, setValue }) => {
 	const exchangeApi = useCallback(async () => {
 		try {
 			const exData = await exRateTrigger({});
-			setValue('exchangeRate', exData?.data?.exchange_rate.toFixed(4));
+			setValue('exchangeRate', exData?.exchange_rate.toFixed(4));
 		} catch (error) {
 			Toast.error(error?.response?.data?.message || 'Something went wrong');
 		}
