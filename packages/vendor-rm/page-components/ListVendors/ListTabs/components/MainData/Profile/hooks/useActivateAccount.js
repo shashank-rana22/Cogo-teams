@@ -7,7 +7,7 @@ function useActivateAccount({
 }) {
 	const [{ loading = false }, trigger] = useRequest({
 		url    : '/update_vendor_bank_detail_status',
-		method : 'POST',
+		method : 'PUT',
 	}, { manual: true });
 
 	const handleActivation = async ({ showModal, accountStatus }) => {
