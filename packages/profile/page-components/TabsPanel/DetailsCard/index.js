@@ -14,7 +14,7 @@ function DetailsCard({
 	console.log('🚀 ~ file: index.js:14 ~ isGrid:', isGrid);
 	const {
 		employee_detail, modified_employee_detail,
-		processed_employee_detail, personal_details, employee_squads, emergency_contact_details,
+		processed_employee_detail, personal_details, employee_squads,
 	} = data || {};
 
 	const { present_address, employee_education_details } = employee_detail || {};
