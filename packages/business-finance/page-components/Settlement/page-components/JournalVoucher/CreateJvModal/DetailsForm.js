@@ -11,7 +11,6 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function DetailsForm({ errors, control, handleEntityChange }) {
-	console.log(errors, control, handleEntityChange, 'kkkkkkkk');
 	return (
 		<>
 			<div className={styles.flex}>
