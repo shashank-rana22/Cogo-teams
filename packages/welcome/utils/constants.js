@@ -2,6 +2,7 @@ import {
 	IcMCalendar,
 	// IcMTimer, IcMUpwardGraph,
 	IcMCart,
+	IcMBadges,
 	IcMAppInvoiceSubmission,
 	IcMProfile,
 	IcMAppPayment,
@@ -18,6 +19,11 @@ export const HEADER_NAV = [
 		label : 'Cogomerch',
 		icon  : IcMCart,
 		route : '/cogo-store',
+	},
+	{
+		label : 'PMS',
+		icon  : IcMBadges,
+		route : '/performance-management/rating-review',
 	},
 
 	// {

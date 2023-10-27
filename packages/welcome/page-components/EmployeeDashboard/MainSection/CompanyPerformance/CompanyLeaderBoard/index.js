@@ -1,5 +1,5 @@
 import { Button, Avatar } from '@cogoport/components';
-import { IcMArrowDown, IcMArrowUp, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMArrowRight } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -22,41 +22,58 @@ function CompanyLeaderBoard() {
 
 			<div className={styles.progress_flex}>
 				<div className={styles.achieved_target}>
-					<IcMArrowUp
-						width={14}
-						height={20}
-						style={{ marginLeft: 2, marginRight: '8', color: '#00821D' }}
-					/>
-					{' '}
-					1
 					<div className={styles.avatar}>
-						<Avatar personName="Akshay Sawant" />
+						<Avatar personName="Technology" />
 						{' '}
-						Akshay Bro
-
+						Technology
 					</div>
 				</div>
 				{' '}
-				<span className={styles.points}> 100 pts</span>
+				<span className={styles.points}>5</span>
 			</div>
 			<div className={styles.progress_flex}>
 				<div className={styles.achieved_target}>
-					<IcMArrowUp
-						width={14}
-						height={20}
-						style={{ marginLeft: 2, marginRight: '8', color: '#00821D' }}
-					/>
-					{' '}
-					1
 					<div className={styles.avatar}>
-						<Avatar personName="Akshay Sawant" />
+						<Avatar personName="Product" />
 						{' '}
-						Akshay Bro
-
+						Product
 					</div>
 				</div>
 				{' '}
-				<span className={styles.points}> 100 pts</span>
+				<span className={styles.points}> 4</span>
+			</div>
+			<div className={styles.progress_flex}>
+				<div className={styles.achieved_target}>
+					<div className={styles.avatar}>
+						<Avatar personName="Design" />
+						{' '}
+						Design
+					</div>
+				</div>
+				{' '}
+				<span className={styles.points}> 4</span>
+			</div>
+			<div className={styles.progress_flex}>
+				<div className={styles.achieved_target}>
+					<div className={styles.avatar}>
+						<Avatar personName="Sales" />
+						{' '}
+						Sales
+					</div>
+				</div>
+				{' '}
+				<span className={styles.points}> 4</span>
+			</div>
+			<div className={styles.progress_flex}>
+				<div className={styles.achieved_target}>
+					<div className={styles.avatar}>
+						<Avatar personName="Supply" />
+						{' '}
+						Supply
+					</div>
+				</div>
+				{' '}
+				<span className={styles.points}> 4</span>
 			</div>
 			<Button themeType="tertiary" className={styles.sub_text}>
 				View All
@@ -66,7 +83,6 @@ function CompanyLeaderBoard() {
 					height={12}
 					style={{ marginLeft: 2 }}
 				/>
-
 			</Button>
 		</div>
 	);

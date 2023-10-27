@@ -4,8 +4,9 @@ import React from 'react';
 
 import useGetAbsenteeInsight from '../../../../hooks/useGetAbsenteeInsight';
 import useGetDepartmentWise from '../../../../hooks/useGetDepartmentWise';
+import TeamLeaderBoard from '../TeamPerformance/TeamLeaderBoard';
 
-// import CompanyLeaderBoard from './CompanyLeaderBoard';
+import CompanyLeaderBoard from './CompanyLeaderBoard';
 import DepartmentTracking from './DepartmentTracking';
 import EmployeeStatusDetails from './EmployeeStatusDetails';
 import IndividualActivity from './IndividualActivity';
@@ -97,10 +98,12 @@ function CompanyPerformance({
 				setFilters={setFilters}
 				filters={filters}
 			/>
-			{/* <div className={styles.bottom_bar_data}>
+			<div className={styles.bottom_bar_data}>
 				<CompanyLeaderBoard />
-				<IndividualActivity data={summaryData} />
-			</div> */}
+				<div style={{ width: '50%' }}>
+					<TeamLeaderBoard data={summaryData} />
+				</div>
+			</div>
 		</div>
 	);
 }
