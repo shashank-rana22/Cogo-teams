@@ -76,7 +76,7 @@ function TableBody({ keys = {}, values = {}, mode = '' }) {
 
 		return (
 			<div key={key} className={cl`${styles.row} ${rowClass}`}>
-				<div className={cl`${styles.column} ${HIGHLIGHTED_FIELDS.includes(key) ? styles.bold : {}}`}>
+				<div className={cl`${styles.column} ${HIGHLIGHTED_FIELDS.includes(key) ? styles.bold : null}`}>
 					<div style={{ display: 'flex', flexDirection: 'column' }}>
 						<div>{value.name}</div>
 

@@ -50,7 +50,7 @@ function Footer({
 								role="presentation"
 								key={item}
 								className={cl`${styles.other_details_tag} 
-								${activeTab === item ? styles.selected : {}}`}
+								${activeTab === item ? styles.selected : null}`}
 								onClick={() => {
 									if (activeTab === item) {
 										setActiveTab('');

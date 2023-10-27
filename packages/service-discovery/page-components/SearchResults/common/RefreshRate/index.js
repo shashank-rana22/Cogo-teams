@@ -27,7 +27,7 @@ function RefreshRate({ refetch = () => {} }) {
 		<IcMRefresh
 			cursor="pointer"
 			disabled={loading}
-			className={loading ? styles.rotate : {}}
+			className={loading ? styles.rotate : null}
 			onClick={refresh}
 			width={16}
 			height={16}

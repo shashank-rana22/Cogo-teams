@@ -48,7 +48,7 @@ function ServiceItem({
 	return (
 		<div
 			key={service}
-			className={cl`${styles.container} ${isSelected ? styles.selected_service : {}}`}
+			className={cl`${styles.container} ${isSelected ? styles.selected_service : null}`}
 		>
 			<div className={styles.icns_container}>
 				<Icon width={32} height={32} />

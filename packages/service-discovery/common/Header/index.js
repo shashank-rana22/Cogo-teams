@@ -37,7 +37,7 @@ function Header(props = {}) {
 	return (
 		<div
 			id="search_to_checkout_main_header"
-			className={cl`${styles.container} ${showAdditionalHeader ? styles.show : {}}`}
+			className={cl`${styles.container} ${showAdditionalHeader ? styles.show : null}`}
 		>
 			<ActiveHeader {...props} />
 

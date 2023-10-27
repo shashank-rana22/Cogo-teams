@@ -49,7 +49,7 @@ function ScheduleItem({
 
 			<span
 				className={cl`${styles.week} ${
-					getKey(selectedWeek) === getKey(data) ? styles.selected_week : {}
+					getKey(selectedWeek) === getKey(data) ? styles.selected_week : null
 				}`}
 			>
 				{formatDate({
