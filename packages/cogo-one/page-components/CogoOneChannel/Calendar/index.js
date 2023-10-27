@@ -1,9 +1,10 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Image } from '@cogoport/next';
+import { Image, dynamic } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import CalendarModal from './CalendarModal';
 import styles from './styles.module.css';
+
+const CalendarModal = dynamic(() => import('./CalendarModal'));
 
 function Calendar({ firestore = {} }) {
 	const [eventClender, setEventCalendar] = useState(false);

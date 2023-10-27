@@ -139,115 +139,116 @@ function CreateEvent({
 	}, [id, setEventDetails, updateCategory, subject]);
 
 	return (
-		<div className={styles.container}>
-			<Header
-				setEventDetails={setEventDetails}
-				id={id}
-				setEventOccurence={setEventOccurence}
-				category={category}
-			/>
-			<div className={styles.form}>
-				<EventTypes
-					eventType={eventType}
+		<>
+			<div className={styles.container}>
+				<Header
 					setEventDetails={setEventDetails}
+					id={id}
+					setEventOccurence={setEventOccurence}
 					category={category}
-					title={title}
-					control={control}
-					errors={errors}
 				/>
-
-				<div className={styles.form_container}>
-					<CommonDatePicker
-						startDate={start_date}
-						startTime={start_time}
+				<div className={styles.form}>
+					<EventTypes
+						eventType={eventType}
+						setEventDetails={setEventDetails}
+						category={category}
+						title={title}
 						control={control}
-						endDate={end_date}
-						endTime={end_time}
 						errors={errors}
 					/>
-					{category === 'meeting' ? (
+
+					<div className={styles.form_container}>
+						<CommonDatePicker
+							startDate={start_date}
+							startTime={start_time}
+							control={control}
+							endDate={end_date}
+							endTime={end_time}
+							errors={errors}
+						/>
+						{category === 'meeting' ? (
+							<div className={styles.error_container}>
+								<div className={styles.label}>{participants_users?.label}</div>
+								<AsyncSelectController
+									{...participants_users}
+									control={control}
+									onChange={(val) => handleChange(val)}
+								/>
+								<div className={styles.error_text}>
+									{errors?.participants_users?.message}
+								</div>
+								<div className={styles.label}>{occurence_event?.label}</div>
+								<SelectController
+									{...occurence_event}
+									control={control}
+									onChange={(val) => setEventOccurence((pre) => ({
+										...pre,
+										showModal     : true,
+										frequencyType : val,
+									}))}
+								/>
+								<div className={styles.error_text}>
+									{errors?.occurence_event?.message}
+								</div>
+							</div>
+						) : null}
+
+						{category === 'event' ? (
+							<>
+								<div className={styles.error_container}>
+									<div className={styles.label}>{organization?.label}</div>
+									<AsyncSelectController
+										{...organization}
+										control={control}
+									/>
+									<div className={styles.error_text}>
+										{errors?.organization_id?.message}
+									</div>
+								</div>
+
+								<div className={styles.error_container}>
+									<div className={styles.label}>{organization_user?.label}</div>
+									<AsyncSelectController
+										{...organization_user}
+										control={control}
+									/>
+									<div className={styles.error_text}>
+										{errors?.organization_user_id?.message}
+									</div>
+								</div>
+							</>
+						) : null}
+
 						<div className={styles.error_container}>
-							<div className={styles.label}>{participants_users?.label}</div>
-							<AsyncSelectController
-								{...participants_users}
+							<div className={styles.label}>{remarks?.label}</div>
+							<TextAreaController
+								{...remarks}
 								control={control}
-								onChange={(val) => handleChange(val)}
 							/>
 							<div className={styles.error_text}>
-								{errors?.participants_users?.message}
+								{errors?.remarks?.message}
 							</div>
-							<div className={styles.label}>{occurence_event?.label}</div>
-							<SelectController
-								{...occurence_event}
+						</div>
+						<div className={styles.error_container}>
+							<CheckboxController
+								{...mark_important_event}
 								control={control}
-								onChange={(val) => setEventOccurence((pre) => ({
-									...pre,
-									showModal     : true,
-									frequencyType : val,
-								}))}
 							/>
-							<div className={styles.error_text}>
-								{errors?.occurence_event?.message}
-							</div>
-						</div>
-					) : null}
-
-					{category === 'event' ? (
-						<>
-							<div className={styles.error_container}>
-								<div className={styles.label}>{organization?.label}</div>
-								<AsyncSelectController
-									{...organization}
-									control={control}
-								/>
-								<div className={styles.error_text}>
-									{errors?.organization_id?.message}
-								</div>
-							</div>
-
-							<div className={styles.error_container}>
-								<div className={styles.label}>{organization_user?.label}</div>
-								<AsyncSelectController
-									{...organization_user}
-									control={control}
-								/>
-								<div className={styles.error_text}>
-									{errors?.organization_user_id?.message}
-								</div>
-							</div>
-						</>
-					) : null}
-
-					<div className={styles.error_container}>
-						<div className={styles.label}>{remarks?.label}</div>
-						<TextAreaController
-							{...remarks}
-							control={control}
-						/>
-						<div className={styles.error_text}>
-							{errors?.remarks?.message}
 						</div>
 					</div>
-					<div className={styles.error_container}>
-						<CheckboxController
-							{...mark_important_event}
-							control={control}
-						/>
-					</div>
-				</div>
 
-				<div className={styles.button_styles}>
-					<Button
-						size="sm"
-						themeType="primary"
-						onClick={handleSubmit(handleEvents)}
-						loading={loading}
-					>
-						{id ? 'Update' : 'Save'}
-					</Button>
+					<div className={styles.button_styles}>
+						<Button
+							size="sm"
+							themeType="primary"
+							onClick={handleSubmit(handleEvents)}
+							loading={loading}
+						>
+							{id ? 'Update' : 'Save'}
+						</Button>
+					</div>
 				</div>
 			</div>
-
 			{((showModal && (!frequencyType || frequencyType === 'one_time'))) ? null : (
 				<EventOccurence
 					eventOccurence={eventOccurence}
@@ -259,7 +260,7 @@ function CreateEvent({
 					recurrence_rule={recurrence_rule}
 				/>
 			)}
-		</div>
+		</>
 	);
 }
 

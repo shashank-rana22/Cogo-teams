@@ -37,7 +37,6 @@ function CalendarModal({ setEventCalendar = () => {}, firestore = {} }) {
 		<Modal
 			scroll={false}
 			show
-			size="fullscreen"
 			onClose={() => setEventCalendar(false)}
 			showCloseIcon={false}
 			placement="bottom-right"
@@ -48,7 +47,10 @@ function CalendarModal({ setEventCalendar = () => {}, firestore = {} }) {
 				className={styles.close_calender}
 				onClick={() => setEventCalendar(false)}
 			>
-				<IcMArrowRight className={styles.right_arrow} fill="#fff" />
+				<IcMArrowRight
+					className={styles.right_arrow}
+					fill="#fff"
+				/>
 			</div>
 			<div
 				role="presentation"

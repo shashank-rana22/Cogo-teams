@@ -3,8 +3,12 @@
 }
 
 .modal_container {
+	top: 94% !important;
+	left: 98% !important;
+	width: 76% !important;
+	height: 76% !important;
 	padding: 0;
-	border: unset;
+	border-radius: 0 !important;
 }
 
 .container {

@@ -82,7 +82,10 @@ function Events({
 				{addEvents ? 'Calendar' : `Schedule ${LABEL[eventDetails?.category]}`}
 			</div>
 			<div className={styles.container}>
-				<div className={styles.selectable_date}>
+				<div
+					className={styles.selectable_date}
+					style={{ borderBottom: addEvents ? '1px solid #e0e0e0' : '' }}
+				>
 					{addEvents && (activeTab === 'schedules' ? date : activeMonth)}
 				</div>
 				<ActiveComponent
