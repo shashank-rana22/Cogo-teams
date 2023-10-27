@@ -38,19 +38,21 @@ function CreateJvModal({
 	const fromCurrency = formValues?.currency;
 	const toCurrency = formValues?.ledCurrency;
 	const lineItems = formValues?.line_items;
+	const exchangeDate = formValues?.accountingDate;
 	const entity = formValues?.entityCode;
 
 	const { getExchangeRate } = useGetExchangeRate({
-		from_cur : fromCurrency,
-		to_cur   : toCurrency,
+		from_cur      : fromCurrency,
+		to_cur        : toCurrency,
+		exchange_date : exchangeDate,
 		setValue,
 	});
 
 	useEffect(() => {
-		if (formValues?.currency) {
+		if ((formValues?.currency && formValues?.ledCurrency) && exchangeDate != null) {
 			getExchangeRate();
 		}
-	}, [formValues?.currency, getExchangeRate]);
+	}, [exchangeDate, formValues?.currency, formValues?.ledCurrency, getExchangeRate]);
 
 	const { getGlCode } = useGetGlCode();
 
