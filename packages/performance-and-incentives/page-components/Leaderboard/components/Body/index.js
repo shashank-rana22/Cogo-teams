@@ -9,7 +9,7 @@ import useGetAgentScoringReportStats from './useGetAgentScoringReportStats';
 import useScoringReports from './useScoringReports';
 
 function Body(props) {
-	const { dateRange, entity } = props;
+	const { dateRange, entity, getUserProgress } = props;
 
 	const { incentive_leaderboard_viewtype: viewType } = useSelector(({ profile }) => profile);
 
@@ -69,6 +69,7 @@ function Body(props) {
 				levelStack={levelStack}
 				setLevelStack={setLevelStack}
 				lastUpdatedAt={lastUpdatedAt}
+				getUserProgress={getUserProgress}
 			/>
 
 			<RightPanel

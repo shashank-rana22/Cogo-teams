@@ -9286,6 +9286,25 @@ const partner = {
 			feature     : 'outstanding',
 		},
 		{
+			api         : 'get_payments_outstanding_by_customer_v2',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'put_payments_outstanding_customer_v2',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'put_payments_outstanding_update_account_taggings',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+
+		},
+		{
 			api         : 'get_sales_outstanding_invoice_list',
 			access_type : 'private',
 			module      : 'outstanding',

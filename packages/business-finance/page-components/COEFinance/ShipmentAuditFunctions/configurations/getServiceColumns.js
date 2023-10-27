@@ -127,9 +127,9 @@ const getServiceColumns = ({ currentKey = '', item = {} }) => {
 			),
 			accessor: (row) => (
 				<div className={changes?.includes(row?.code) && isModified
-				&& row?.tax_total_price ? styles.changed : ''}
+				&& row?.tax_price ? styles.changed : ''}
 				>
-					{row?.tax_total_price?.toFixed(TRUNCATED_UPTO) || '-'}
+					{row?.tax_price?.toFixed(TRUNCATED_UPTO) || '-'}
 				</div>
 			),
 		},
@@ -140,9 +140,11 @@ const getServiceColumns = ({ currentKey = '', item = {} }) => {
 			),
 			accessor: (row) => (
 				<div className={changes?.includes(row?.code) && isModified
-				&& row?.tax_total_price_discounted ? styles.changed : ''}
+				&& (row?.tax_total_price_discounted || row?.tax_total_price
+				) ? styles.changed : ''}
 				>
-					{row?.tax_total_price_discounted?.toFixed(TRUNCATED_UPTO) || '-'}
+					{(row?.tax_total_price_discounted || row?.tax_total_price
+					)?.toFixed(TRUNCATED_UPTO) || '-'}
 				</div>
 			),
 		},

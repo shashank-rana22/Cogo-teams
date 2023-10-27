@@ -62,7 +62,7 @@ const useGetCoverageStats = (filter) => {
 			}
 		});
 
-		const isTodayDateRequired = ['pending', 'completed'].includes(filter?.status);
+		const isTodayDateRequired = filter?.status === 'completed';
 
 		const DATE_PARAMS = {};
 

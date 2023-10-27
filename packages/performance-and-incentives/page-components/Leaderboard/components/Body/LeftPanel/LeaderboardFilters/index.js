@@ -27,6 +27,7 @@ function LeaderboardFilters(props) {
 		listRefetch,
 		refetchStats,
 		statsLoading,
+		getUserProgress,
 	} = props;
 
 	const { incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
@@ -75,6 +76,7 @@ function LeaderboardFilters(props) {
 					listRefetch={listRefetch}
 					refetchStats={refetchStats}
 					statsLoading={statsLoading}
+					getUserProgress={getUserProgress}
 				/>
 
 				<div className={styles.search_container}>
