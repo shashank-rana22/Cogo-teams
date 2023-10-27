@@ -74,7 +74,7 @@ const getScheduleControls = ({ scheduleType = '', watch = () => {} }) => {
 			type                  : ['organic'],
 			controlType           : 'datePicker',
 			shouldCloseOnSelect   : true,
-			isPreviousDaysAllowed : false,
+			isPreviousDaysAllowed : true,
 			rules                 : {
 				validate: (value) => (((value.getDate() === start_date.getDate() && end_time < start_time))
 					? 'Cannot be less than start time' : true),
