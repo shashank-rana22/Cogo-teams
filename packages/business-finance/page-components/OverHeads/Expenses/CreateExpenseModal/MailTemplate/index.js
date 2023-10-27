@@ -1,10 +1,12 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMFileUploader } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import useCreateExpense from '../../hooks/useCreateExpense';
 import useCreateExpenseConfig from '../../hooks/useCreateExpenseConfig';
+import useGetVendorTradeParties from '../../hooks/useGetVendorTradeParties';
 
 import Details from './Details';
 import styles from './styles.module.css';
@@ -21,12 +23,21 @@ function MailTemplate({
 		vendorName = '-',
 		stakeholderEmail,
 		categoryName = '-',
+		vendorID = '',
 	} = mailData || {};
 
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
 	const filename = splitArray[splitArray.length - 1];
 
+	const {
+		vendorTradePartyDataLoading = false,
+		vendorTradePartyList: { bank_details = [] } = {},
+	} = useGetVendorTradeParties({ organization_id: vendorID });
+
+	const taxNumber = bank_details?.[GLOBAL_CONSTANTS.zeroth_index]?.tax_number;
+
 	const { submitData, loading } = useCreateExpense({
+		taxNumber,
 		formData: mailData,
 		setShowModal,
 		getList,
@@ -97,7 +108,7 @@ function MailTemplate({
 				<div className={styles.button}>
 					<Button
 						onClick={() => handleClick()}
-						disabled={loading || recurringLoading}
+						disabled={loading || recurringLoading || vendorTradePartyDataLoading}
 					>
 						{loading || recurringLoading
 							? 'Sending...'

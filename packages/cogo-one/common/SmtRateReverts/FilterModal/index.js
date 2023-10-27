@@ -22,8 +22,8 @@ function FilterModal({
 		watch = () => {},
 	} = useForm({ defaultValues: filterValues });
 
-	const formValues = watch();
-	const controls = smtRateRevertsFilters({ triggeredFrom, viewType, setFiltersData, formValues });
+	const serviceType = watch('service');
+	const controls = smtRateRevertsFilters({ triggeredFrom, viewType, setFiltersData, serviceType });
 
 	const onSubmit = (val) => {
 		setShowFilters(false);

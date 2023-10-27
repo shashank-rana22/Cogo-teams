@@ -52,6 +52,7 @@ function RaiseTicketModal({
 		additionalInfo,
 		shipmentData,
 		service,
+		source: 'audit_function',
 	});
 
 	const { data:configData = {} } = useGetConfigurationCategory(shipmentData);

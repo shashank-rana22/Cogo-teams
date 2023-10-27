@@ -3,11 +3,11 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
 function useGetLeaderbordList(props) {
-	const { view, dateRange } = props;
+	const { view, dateRange, pageLimit, setUpdatedAt = () => {} } = props;
 
 	const [params, setParams] = useState({
 		page                     : 1,
-		page_limit               : 8,
+		page_limit               : pageLimit,
 		user_data_required       : true,
 		role_data_required       : true,
 		add_user_kam_report_data : ['owner_wise', 'manager_wise'].includes(view),
@@ -18,14 +18,14 @@ function useGetLeaderbordList(props) {
 		},
 	});
 
-	const [{ data, loading }] = useAllocationRequest({
+	const [{ data, loading }, trigger] = useAllocationRequest({
 		url     : '/reports',
 		method  : 'GET',
 		authkey : 'get_agent_scoring_reports',
 		params,
 	}, { manual: false });
 
-	const { list = [], total_report_count } = data || {};
+	const { list = [], total_report_count = 0, report_synced_at = '' } = data || {};
 
 	useEffect(() => {
 		setParams((previousParams) => ({
@@ -42,9 +42,14 @@ function useGetLeaderbordList(props) {
 		}));
 	}, [view, dateRange]);
 
+	useEffect(() => {
+		setUpdatedAt(report_synced_at);
+	}, [report_synced_at, setUpdatedAt]);
+
 	return {
 		list,
 		loading,
+		trigger,
 		total_report_count,
 	};
 }
