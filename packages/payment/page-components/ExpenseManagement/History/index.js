@@ -26,6 +26,7 @@ function ExpenseHistory({ toggleValue, hr_view }) {
 		await updateReiembursement(payload?.id, payload?.action, remark_text, refetchlist);
 		setShow1(false);
 		setPayload({});
+		setRemarkText('');
 	};
 	const handleUpdate = async (id, action) => {
 		setPayload({ id, action });
