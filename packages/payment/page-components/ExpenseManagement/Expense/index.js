@@ -30,7 +30,7 @@ function Expense({ toggleValue, handleSetToggle, data, loading }) {
 					<span className={styles.heading}>Expense Management </span>
 					<span>
 						{
-						hr_view === 'manager'
+						hr_view === 'manager' || hr_view === 'hr'
 							? (
 								<Toggle
 									name="a1"

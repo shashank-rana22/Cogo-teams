@@ -22,7 +22,7 @@ function GetStatus(name) {
 	);
 }
 
-const getColumnsManager = ({ setItem, setShow, handleUpdate }) => {
+const getColumnsManager = ({ setItem, setShow, handleUpdate, hr_view }) => {
 	const columns = [
 		{
 			Header   : <div className={styles.header}>Name</div>,
@@ -159,7 +159,8 @@ const getColumnsManager = ({ setItem, setShow, handleUpdate }) => {
 			Header   : <div className={styles.header}>Actions</div>,
 			accessor : (item) => (
 
-				item?.reimbursement_status === 'pending'
+				(hr_view === 'manager' && item?.reimbursement_status === 'pending')
+				|| (hr_view === 'hr' && item?.reimbursement_status === 'level1_approved')
 					? (
 						<div
 							className={styles.data}
