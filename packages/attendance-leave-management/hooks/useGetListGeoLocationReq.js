@@ -6,23 +6,29 @@ import { useEffect, useCallback, useState } from 'react';
 
 const useGetListGeoLocationReq = () => {
 	const [filters, setFilters] = useState({
-		page_limit : 20,
+		page_limit : 4,
 		page       : 1,
 	});
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const [{ loading, geoLocationData }, trigger] = useHarbourRequest({
+	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/list_geo_location_requests',
 	}, { manual: true });
 
 	const getListGeoLocationReq = useCallback(
 		() => {
-			const { page_limit, page, ...rest } = filters;
-			trigger();
+			const { page_limit, page } = filters;
+			trigger({
+				params: {
+					filters: { q: query },
+					page_limit,
+					page,
+				},
+			});
 		},
-		[trigger, filters],
+		[trigger, query, filters],
 	);
 
 	useEffect(() => {
@@ -33,7 +39,7 @@ const useGetListGeoLocationReq = () => {
 		}
 	}, [getListGeoLocationReq]);
 
-	return { loading, geoLocationData, query, debounceQuery, setFilters, filters };
+	return { loading, data, query, debounceQuery, setFilters, filters, getListGeoLocationReq };
 };
 
 export default useGetListGeoLocationReq;

@@ -821,6 +821,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'create_geo_location_request',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	profile: [
 		{

@@ -1,4 +1,7 @@
-import { Pill } from '@cogoport/components';
+import { Button, Pill } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMDownload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -23,24 +26,89 @@ const useGetLocationColumn = ({
 	const columns = [
 		{
 			Header   : <div className={styles.table_header}>NAME</div>,
-			accessor : (item) => <div className={styles.item_data}>{item?.name}</div>,
-			id       : 'name',
+			accessor : (item) => (
+				<div className={styles.item_data}>
+					{`${startCase(item.name)}(${item.employee_code})` || '-'}
+				</div>
+			),
+			id: 'name',
 		},
 		{
-			Header   : <div className={styles.table_header}>COGOPORT Email</div>,
-			accessor : (item) => <div className={styles.item_data}>{item?.cogoport_email}</div>,
-			id       : 'cogoport_email',
+			Header   : <div className={styles.table_header}>FROM DATE</div>,
+			accessor : (item) => (
+				<div className={styles.item_data}>
+					{ formatDate({
+						date       : item?.permission_from_date,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType : 'date',
+					}) || '--'}
+				</div>
+			),
+			id: 'permission_from_date',
 		},
 		{
-			Header   : <div className={styles.table_header}>EMPLOYEE CODE</div>,
-			accessor : (item) => <div className={styles.item_data}>{startCase(item?.employee_code) || '--'}</div>,
-			id       : 'employee_code',
+			Header   : <div className={styles.table_header}>TO DATE</div>,
+			accessor : (item) => (
+				<div className={styles.item_data}>
+					{ formatDate({
+						date       : item?.permission_to_date,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType : 'date',
+					}) || '--'}
+				</div>
+			),
+			id: 'permission_to_date',
 		},
 		// {
-		// 	Header   : <div className={styles.table_header}>EMPLOYEE CODE</div>,
-		// 	accessor : (item) => <div className={styles.item_data}>{startCase(item?.employee_code) || '--'}</div>,
-		// 	id       : 'employee_code',
+		// 	Header   : <div className={styles.table_header}>REJECTION REASON</div>,
+		// 	accessor : (item) => (
+		// 		<div className={styles.item_data}>
+		// 			{item?.rejection_reason}
+		// 		</div>
+		// 	),
+		// 	id: 'rejection_reason',
 		// },
+		{
+			Header   : <div className={styles.table_header}>REMARKS</div>,
+			accessor : (item) => (
+				<div className={styles.item_data}>
+					{item?.remarks}
+				</div>
+			),
+			id: 'remarks',
+		},
+		{
+			Header   : <div className={styles.table_header}>ATTACHMENT</div>,
+			accessor : (item) => (
+				<div className={styles.item_data}>
+					{item?.attachment_url
+						? (
+							<Button
+								size="md"
+								themeType="secondary"
+								onClick={() => (window.open(item?.attachment_url, '_blank'))}
+							>
+								<span>Download</span>
+								<IcMDownload style={{ marginLeft: '4px' }} width={14} height={14} />
+							</Button>
+						)
+
+						: null}
+					{' '}
+
+				</div>
+			),
+			id: 'attachments',
+		},
+		{
+			Header   : <div className={styles.table_header}>REASON</div>,
+			accessor : (item) => (
+				<div className={styles.item_data}>
+					{item?.rejection_reason}
+				</div>
+			),
+			id: 'rejection_reason',
+		},
 		{
 			Header   : <div className={styles.table_header}>STATUS</div>,
 			accessor : (item) => (
@@ -54,7 +122,7 @@ const useGetLocationColumn = ({
 					</Pill>
 				</div>
 			),
-			id: 'active',
+			id: 'status',
 		},
 	];
 	return columns;

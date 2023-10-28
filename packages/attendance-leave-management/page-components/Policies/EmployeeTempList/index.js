@@ -1,45 +1,32 @@
-import { Input } from '@cogoport/components';
+import { Button, Input, Pagination } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import useGetListGeoLocationReq from '../../../hooks/useGetListGeoLocationReq';
 
 import EmployeeTempTable from './EmployeeTempTable';
+import GiveAccess from './GiveAccess';
 import styles from './styles.module.css';
 
-const geolocation = [{
-	name                 : 'Hrishikesh  Kulkarni',
-	cogoport_email       : 'hk@cogoport.com',
-	employee_code        : 'COGO-0563',
-	status               : 'approved',
-	remarks              : '',
-	created_at           : '2023-10-26T15:33:13.247Z',
-	updated_at           : '2023-10-26T15:33:13.247Z',
-	permission_from_date : '2023-10-27T15:33:13.000Z',
-	permission_to_date   : '2023-10-30T15:33:13.000Z',
-	approved_on          : '2023-10-26T15:33:13.235Z',
-	approved_by_id       : 'dfca5d91-8906-d146-2970-202eace33a66',
-	rejection_reason     : '',
-	is_active            : true,
-
-}];
-
 function EmployeeTempList() {
-	// const { geoLocationData } = useGetListGeoLocationReq();
-	console.log('dataItems::');
-	// const [searchQuery, setSearchQuery] = useState('');
+	const [searchQuery, setSearchQuery] = useState('');
+	const [openLeaveModal, setOpenLeaveModal] = useState(false);
 
 	const {
 		loading,
-		geoLocationData,
+		data,
 		setFilters, filters,
+		getListGeoLocationReq,
 		debounceQuery,
 	} = useGetListGeoLocationReq();
 
-	// const handleSearch = (val) => {
-	// 	debounceQuery(val);
-	// 	setSearchQuery(val);
-	// };
+	const { list, page, page_limit, total_count } = data || {};
+
+	const handleSearch = (val) => {
+		debounceQuery(val);
+		setFilters((prev) => ({ ...prev, search: val, page: 1 }));
+		setSearchQuery(val);
+	};
 
 	return (
 		<div className={styles.card}>
@@ -53,19 +40,39 @@ function EmployeeTempList() {
 						size="md"
 						prefix={<IcMSearchlight />}
 						placeholder="Search"
-						// onChange={(e) => handleSearch(e)}
-						// value={searchQuery}
+						onChange={(e) => handleSearch(e)}
+						value={searchQuery}
 					/>
+					<Button size="md" themeType="accent" onClick={() => setOpenLeaveModal(true)}>
+						Give Access
+					</Button>
+					{ openLeaveModal && (
+						<GiveAccess
+							show={openLeaveModal}
+							onClose={() => setOpenLeaveModal(false)}
+							list={list}
+							getListGeoLocationReq={getListGeoLocationReq}
+						/>
+					) }
 				</div>
 			</div>
 			<EmployeeTempTable
-				data={geolocation}
-				// setFilters={setFilters}
-				// loading={loading}
-				// filters={filters}
+				data={list}
+				setFilters={setFilters}
+				loading={loading}
+				filters={filters}
+				getListGeoLocationReq={getListGeoLocationReq}
 				// searchQuery={searchQuery}
 				// selectedLocation={selectedLocation}
 				// refetch={refetch}
+			/>
+			<Pagination
+				className="md"
+				totalItems={total_count}
+				type="table"
+				currentPage={page}
+				pageSize={page_limit}
+				onPageChange={(val) => setFilters((prev) => ({ ...prev, page: val }))}
 			/>
 		</div>
 	);
