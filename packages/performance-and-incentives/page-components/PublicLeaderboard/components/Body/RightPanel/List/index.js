@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import getListColumnMapping from './get-list-column-mapping';
@@ -27,7 +28,11 @@ function List(props) {
 
 			<div className={styles.list_body_container}>
 				{tableList.map((listItem) => (
-					<div key={listItem.id} className={styles.list_row}>
+					<div
+						key={listItem.id}
+						className={cl`${styles.list_row} 
+						${listItem.rank === 1 ? styles.highlight : ''}`}
+					>
 						{LIST_COLUMN_MAPPING.map((columnItem) => {
 							const { key, flex, accessor } = columnItem;
 
@@ -43,8 +48,7 @@ function List(props) {
 										wrapper   : (children) => (
 											<div className={styles.rank_container}>
 												<img
-													src={GLOBAL_CONSTANTS.image_url
-														.performance_leaderboard_ranking_badge}
+													src={GLOBAL_CONSTANTS.image_url.public_leaderboard_ranking_badge}
 													alt="Badge"
 													className={styles.badge_icon}
 												/>
