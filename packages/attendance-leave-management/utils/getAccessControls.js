@@ -11,14 +11,14 @@ import {
 export const LEAVE_CONTROLS = [
 	{
 		name         : 'employee_id',
-		controlLabel : 'Select Employee Id',
+		controlLabel : 'Select Employee',
 		controlType  : 'asyncSelect',
 		placeholder  : 'Select Employee',
 		asyncKey     : 'list_employees',
 		params       : {
 			filters                       : { status: 'active' },
 			page_limit                    : 100,
-			required_keys                 : ['id', 'name'],
+			required_keys                 : ['id', 'employee_code', 'name'],
 			service_objects_data_required : false,
 			mappings_data_required        : true,
 		},

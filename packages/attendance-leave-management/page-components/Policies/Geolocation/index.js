@@ -73,10 +73,10 @@ function Geolocation({ handlePolicy = () => {} }) {
 											</div>
 											<div className={styles.arrow_section}>
 												<div className={styles.below_text}>
-													<IcMTeam />
-													<span>{item.num_people}</span>
-													<IcMLocation />
-													<span>{item.location}</span>
+													{/* <IcMTeam /> */}
+													{/* <span>{item.num_people}</span> */}
+													{/* <IcMLocation /> */}
+													{/* <span>{item.location}</span> */}
 												</div>
 												<div><IcMArrowRight width={20} height={20} /></div>
 											</div>

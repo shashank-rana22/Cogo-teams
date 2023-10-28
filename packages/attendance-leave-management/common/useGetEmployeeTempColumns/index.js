@@ -100,15 +100,7 @@ const useGetLocationColumn = ({
 			),
 			id: 'attachments',
 		},
-		{
-			Header   : <div className={styles.table_header}>REASON</div>,
-			accessor : (item) => (
-				<div className={styles.item_data}>
-					{item?.rejection_reason}
-				</div>
-			),
-			id: 'rejection_reason',
-		},
+
 		{
 			Header   : <div className={styles.table_header}>STATUS</div>,
 			accessor : (item) => (
