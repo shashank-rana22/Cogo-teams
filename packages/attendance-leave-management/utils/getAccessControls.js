@@ -18,12 +18,12 @@ export const LEAVE_CONTROLS = [
 		params       : {
 			filters                       : { status: 'active' },
 			page_limit                    : 100,
-			required_keys                 : ['id'],
+			required_keys                 : ['id', 'name'],
 			service_objects_data_required : false,
 			mappings_data_required        : true,
 		},
 		isClearable : true,
-		labelKey    : 'employee_code',
+		labelKey    : 'name',
 		valueKey    : 'id',
 		initialCall : true,
 		rules       : {
