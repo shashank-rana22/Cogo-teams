@@ -19,8 +19,7 @@ const EMPTY_FIELD_ARRAY = [
 ];
 
 const getMandatoryControls = ({
-	activeService, service, data = {},
-	isAddFieldArrayCheck = false,
+	activeService, service, data = {}, control_name = '', isAddFieldArrayCheck = false,
 }) => {
 	const { slab_details = [] } = data?.data || {};
 
@@ -33,7 +32,7 @@ const getMandatoryControls = ({
 
 	return [
 		{
-			name               : 'slab_details',
+			name               : control_name,
 			type               : 'fieldArray',
 			showButtons        : true,
 			noDeleteButtonTill : 1,

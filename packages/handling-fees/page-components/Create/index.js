@@ -39,7 +39,8 @@ function Create({ data = {}, type = 'create' }) {
 	const mandatoryControls = getMandatoryControls({
 		activeService,
 		data,
-		isAddFieldArrayCheck: true,
+		control_name         : 'slab_details',
+		isAddFieldArrayCheck : true,
 	});
 
 	const optionalControls = getOptionalControls({ activeService, data, formValues, setValue });
