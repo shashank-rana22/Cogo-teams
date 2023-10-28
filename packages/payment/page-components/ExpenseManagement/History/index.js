@@ -23,7 +23,7 @@ function ExpenseHistory({ toggleValue, hr_view }) {
 
 	const handleUpdateReimbursement = async () => {
 		// console.log('payload', payload);
-		await updateReiembursement(payload?.id, payload?.id, remark_text, refetchlist);
+		await updateReiembursement(payload?.id, payload?.action, remark_text, refetchlist);
 		setShow1(false);
 		setPayload({});
 	};
