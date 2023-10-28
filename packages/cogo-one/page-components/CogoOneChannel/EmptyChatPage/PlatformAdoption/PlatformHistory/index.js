@@ -1,4 +1,4 @@
-import { Table, cl } from '@cogoport/components';
+import { Pagination, Table, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRight, IcMHome } from '@cogoport/icons-react';
@@ -87,27 +87,45 @@ const COLUMNS = [
 	},
 ];
 
-function PlatformHistory({ setShowHistory = () => {}, list = [], loading = false }) {
+function PlatformHistory({
+	setShowHistory = () => {}, list = [], loading = false, rest = {},
+	onboardingRequest = () => {},
+}) {
+	const { page, page_limit, total_count } = rest || {};
+
 	return (
-		<div className={styles.history_container}>
-			<div className={styles.header_section}>
-				<div role="presentation" className={styles.back} onClick={() => setShowHistory((p) => !p)}>
-					<IcMHome fill="#034AFD" width={20} height={20} />
-					<div className={styles.back_title}>Home</div>
+		<>
+			<div className={styles.history_container}>
+				<div className={styles.header_section}>
+					<div role="presentation" className={styles.back} onClick={() => setShowHistory((p) => !p)}>
+						<IcMHome fill="#034AFD" width={20} height={20} />
+						<div className={styles.back_title}>Home</div>
+					</div>
+					<IcMArrowRight className={styles.side_arrow} />
+					<div className={styles.title}>Task History</div>
 				</div>
-				<IcMArrowRight className={styles.side_arrow} />
-				<div className={styles.title}>Task History</div>
+				{isEmpty(list) && !loading ? (
+					<div className={styles.empty_container}>
+						<Image src={GLOBAL_CONSTANTS.image_url.list_empty} width={320} height={300} />
+					</div>
+				) : (
+					<div className={styles.content}>
+						<Table columns={COLUMNS} data={list} loading={loading} loadingRowsCount={15} />
+					</div>
+				)}
 			</div>
-			{!isEmpty(list) ? (
-				<div className={styles.content}>
-					<Table columns={COLUMNS} data={list} loading={loading} loadingRowsCount={10} />
+			{page >= 1 ? (
+				<div className={styles.pagination_info}>
+					<Pagination
+						type="table"
+						currentPage={page}
+						totalItems={total_count}
+						pageSize={page_limit}
+						onPageChange={(val) => onboardingRequest({ page: val })}
+					/>
 				</div>
-			) : (
-				<div className={styles.empty_container}>
-					<Image src={GLOBAL_CONSTANTS.image_url.list_empty} width={300} height={300} />
-				</div>
-			)}
-		</div>
+			) : null}
+		</>
 	);
 }
 

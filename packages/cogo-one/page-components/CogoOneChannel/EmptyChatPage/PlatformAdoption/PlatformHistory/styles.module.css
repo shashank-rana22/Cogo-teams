@@ -42,7 +42,9 @@
 .content {
 	display: flex;
 	width: 100%;
-	height: calc(100% - 65px);
+
+	/* min-height: 100%;
+	max-height: 100%; */
 	padding: 0 16px;
 	overflow-y: auto;
 
@@ -56,7 +58,9 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	height: calc(100% - 120px);
+	height: 50%;
+
+	/* min-height: calc(50% - 235px); */
 }
 
 .label {
@@ -132,4 +136,13 @@
 
 .auto_escalated {
 	background: #f3fafa;
+}
+
+.pagination_info {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+	height: 45px;
+	padding-right: 22px;
 }

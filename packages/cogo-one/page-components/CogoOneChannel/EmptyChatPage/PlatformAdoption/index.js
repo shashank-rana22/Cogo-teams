@@ -58,6 +58,7 @@ function PlatformAdoption({
 					rest={rest}
 					list={list}
 					loading={loading}
+					onboardingRequest={onboardingRequest}
 				/>
 			) : (
 				<>
@@ -90,19 +91,19 @@ function PlatformAdoption({
 						verifyAccount={verifyAccount}
 						mailProps={mailProps}
 					/>
+					{page >= 1 ? (
+						<div className={styles.pagination_info}>
+							<Pagination
+								type="table"
+								currentPage={page}
+								totalItems={total_count}
+								pageSize={page_limit}
+								onPageChange={(val) => onboardingRequest({ page: val })}
+							/>
+						</div>
+					) : null}
 				</>
 			)}
-			{page >= 1 ? (
-				<div className={styles.pagination_info}>
-					<Pagination
-						type="number"
-						currentPage={page}
-						totalItems={total_count}
-						pageSize={page_limit}
-						onPageChange={(val) => onboardingRequest({ page: val })}
-					/>
-				</div>
-			) : null}
 		</div>
 	);
 }
