@@ -2722,6 +2722,17 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.profile,
 			icon          : IcMAppProfile,
 		},
+		finance_payroll: {
+			key           : 'finance_payroll',
+			title         : 'Finance Payroll',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			href          : '/v2/finance-payroll',
+			as            : '/v2/finance-payroll',
+			possible_apis : apis.finance_payroll,
+			icon          : IcMMoney,
+		},
 	};
 
 	return navigationMappingAdmin;

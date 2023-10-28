@@ -824,6 +824,34 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 	],
+
+	finance_payroll: [
+		{
+			api          : 'get_employee_directory',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_next_payroll_cycle',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_payroll_finance_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_payroll',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_payroll',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+	],
 };
 
 export default HRMS;
