@@ -47,7 +47,7 @@ function SuggestedActions({ formattedData = {}, viewType = '', mailProps = {} })
 	const code = userMobileNumber?.slice(COUNTRY_CODE_START, COUNTRY_CODE_END);
 	const number = userMobileNumber?.slice(COUNTRY_CODE_END);
 
-	const { userData = {} } = useGetUser({ userId: user_id, lead_user_id, customerId: id });
+	const { userData = {} } = useGetUser({ userId: user_id, leadUserId: lead_user_id, customerId: id });
 
 	const handleCall = () => {
 		if (userMobileNumber && hasVoiceCallAccess) {

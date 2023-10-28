@@ -80,7 +80,7 @@ function BreakdownDetails({
 		conversions,
 	);
 
-	const save_card_margins = async () => {
+	const saveCardMargins = async () => {
 		try {
 			await updateMargin({
 				editedMargins,
@@ -156,6 +156,10 @@ function BreakdownDetails({
 								key={isEmpty(convenienceDetails)}
 								convenienceDetails={convenienceDetails}
 								convenience_line_item={convenience_line_item}
+								convenienceRateOptions={
+									detail?.convenience_rate_configurations
+										?.convenience_rate_options
+								}
 							/>
 						</div>
 						<div className={styles.col} style={{ width: getWidth(2.1) }}>
@@ -225,7 +229,7 @@ function BreakdownDetails({
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={save_card_margins}
+					onClick={saveCardMargins}
 					disabled={rfq_state === 'approved'}
 				>
 					Save Changes
