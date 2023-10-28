@@ -1,8 +1,6 @@
 import { Select, Toggle } from '@cogoport/components';
 import { useState } from 'react';
 
-import useGetExpenseData from '../../../hooks/useGetExpenseData';
-
 import styles from './styles.module.css';
 
 const OPTIONS = [
@@ -21,9 +19,9 @@ const CARDDATA = [
 
 ];
 
-function Expense({ toggleValue, handleSetToggle }) {
+function Expense({ toggleValue, handleSetToggle, data, loading }) {
 	const [value, setValue] = useState('2023-2024');
-	const { loading, data } = useGetExpenseData({ toggleValue, value });
+
 	const { hr_view } = data || '-';
 	return (
 		<div className={styles.sub_container}>
@@ -32,7 +30,7 @@ function Expense({ toggleValue, handleSetToggle }) {
 					<span className={styles.heading}>Expense Management </span>
 					<span>
 						{
-						hr_view
+						hr_view === 'manager'
 							? (
 								<Toggle
 									name="a1"

@@ -8,12 +8,13 @@ const useUpdateReimbursements = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const updateReiembursement = async ({ payload, action, refetchlist }) => {
+	const updateReiembursement = async (id, action, remark_text, refetchlist) => {
 		try {
 			await trigger({
-				params: {
-					id: payload?.id,
-					action,
+				data: {
+					reimbursement_id     : id,
+					reimbursement_action : action,
+					remarks              : remark_text || '-',
 				},
 			});
 			refetchlist();

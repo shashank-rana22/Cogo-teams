@@ -97,7 +97,7 @@
 
 		.ui_table_head_cell {
 			padding: 16px 12px;
-			background-color: #f8f2e7;
+			background-color: #f3fafa;
 		}
 
 		.ui_table_body_row {
@@ -159,4 +159,13 @@
 .head {
 	display: flex;
 	justify-content: space-between;
+}
+
+.tooltip_data {
+	max-width: none;
+	word-break: normal;
+}
+
+.tooltip {
+	max-width: none !important;
 }

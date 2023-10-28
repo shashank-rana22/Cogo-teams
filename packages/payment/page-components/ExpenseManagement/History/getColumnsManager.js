@@ -1,5 +1,5 @@
 // import { IcMInfo } from '@cogoport/icons-react';
-import { ButtonIcon, Button } from '@cogoport/components';
+import { ButtonIcon, Button, Tooltip } from '@cogoport/components';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -56,6 +56,43 @@ const getColumnsManager = ({ setItem, setShow, handleUpdate }) => {
 				</div>
 			),
 			id: 'description',
+		},
+		{
+			Header   : <div className={styles.header}>L1 Remarks</div>,
+			accessor : (item) => (
+
+				<Tooltip
+					interactive
+					placement="top"
+					className={styles.tooltip}
+					content={<div className={styles.tooltip_data}>{`${item.level1_remarks}`}</div>}
+				>
+					<div
+						className={styles.data}
+					>
+						{item?.level1_remarks || '-'}
+					</div>
+				</Tooltip>
+			),
+			id: 'level1_remarks',
+		},
+		{
+			Header   : <div className={styles.header}>L2 Remarks</div>,
+			accessor : (item) => (
+				<Tooltip
+					interactive
+					placement="top"
+					className={styles.tooltip}
+					content={<div className={styles.tooltip_data}>{`${item.level2_remarks}`}</div>}
+				>
+					<div
+						className={styles.data}
+					>
+						{item?.level2_remarks || '-'}
+					</div>
+				</Tooltip>
+			),
+			id: 'level2_remarks',
 		},
 		{
 			Header   : <div className={styles.header}>Amount</div>,
@@ -121,28 +158,34 @@ const getColumnsManager = ({ setItem, setShow, handleUpdate }) => {
 		{
 			Header   : <div className={styles.header}>Actions</div>,
 			accessor : (item) => (
-				<div
-					className={styles.data}
-				>
-					<Button
-						size="md"
-						themeType="secondary"
-						style={{ color: '#C26D1A', background: '#FEF3E9', marginRight: '8px' }}
-						onClick={() => handleUpdate(item?.id, 'rejected')}
-					>
-						Reject
 
-					</Button>
-					<Button
-						size="md"
-						style={{ color: '#849E4C', background: '#F7FAEF' }}
-						themeType="secondary"
-						onClick={() => handleUpdate(item?.id, 'approved')}
-					>
-						Approve
+				item?.reimbursement_status === 'pending'
+					? (
+						<div
+							className={styles.data}
+						>
+							<Button
+								size="md"
+								themeType="secondary"
+								style={{ color: '#C26D1A', background: '#FEF3E9', marginRight: '8px' }}
+								onClick={() => handleUpdate(item?.id, 'rejected')}
+							>
+								Reject
 
-					</Button>
-				</div>
+							</Button>
+							<Button
+								size="md"
+								style={{ color: '#849E4C', background: '#F7FAEF' }}
+								themeType="secondary"
+								onClick={() => handleUpdate(item?.id, 'approved')}
+							>
+								Approve
+
+							</Button>
+						</div>
+					)
+					:				null
+
 			),
 			id: 'attachments',
 		},

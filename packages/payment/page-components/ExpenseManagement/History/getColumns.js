@@ -1,5 +1,5 @@
 // import { IcMInfo } from '@cogoport/icons-react';
-import { ButtonIcon } from '@cogoport/components';
+import { ButtonIcon, Tooltip } from '@cogoport/components';
 // import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 // import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete } from '@cogoport/icons-react';
@@ -48,6 +48,43 @@ const getColumns = ({ setItem, setShow, handleUpdate }) => {
 				</div>
 			),
 			id: 'description',
+		},
+		{
+			Header   : <div className={styles.header}>L1 Remarks</div>,
+			accessor : (item) => (
+
+				<Tooltip
+					interactive
+					placement="top"
+					className={styles.tooltip}
+					content={<div className={styles.tooltip_data}>{`${item.level1_remarks}`}</div>}
+				>
+					<div
+						className={styles.data}
+					>
+						{item?.level1_remarks || '-'}
+					</div>
+				</Tooltip>
+			),
+			id: 'level1_remarks',
+		},
+		{
+			Header   : <div className={styles.header}>L2 Remarks</div>,
+			accessor : (item) => (
+				<Tooltip
+					interactive
+					placement="top"
+					className={styles.tooltip}
+					content={<div className={styles.tooltip_data}>{`${item.level2_remarks}`}</div>}
+				>
+					<div
+						className={styles.data}
+					>
+						{item?.level2_remarks || '-'}
+					</div>
+				</Tooltip>
+			),
+			id: 'level2_remarks',
 		},
 		{
 			Header   : <div className={styles.header}>Amount</div>,
@@ -113,14 +150,18 @@ const getColumns = ({ setItem, setShow, handleUpdate }) => {
 		{
 			Header   : <div className={styles.header}>Actions</div>,
 			accessor : (item) => (
-				<div
-					className={styles.data}
-					aria-hidden
-					onClick={() => handleUpdate(item?.id, 'delete')}
-				>
-					<ButtonIcon size="md" icon={<IcMDelete />} themeType="primary" />
-					{/* <ButtonIcon size="md" icon={<IcMEdit />} themeType="primary" /> */}
-				</div>
+				item?.reimbursement_status === 'pending'
+					? (
+						<div
+							className={styles.data}
+							aria-hidden
+							onClick={() => handleUpdate(item?.id, 'delete')}
+						>
+							<ButtonIcon size="md" icon={<IcMDelete />} themeType="primary" />
+							{/* <ButtonIcon size="md" icon={<IcMEdit />} themeType="primary" /> */}
+						</div>
+					)
+					: null
 			),
 			id: 'attachments',
 		},
