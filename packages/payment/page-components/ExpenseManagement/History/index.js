@@ -30,11 +30,11 @@ function ExpenseHistory({ toggleValue, hr_view }) {
 	const handleUpdate = async (id, action) => {
 		setPayload({ id, action });
 		if (action === 'delete') {
-			await updateReiembursement(payload?.id, payload?.id, remark_text, refetchlist);
+			await updateReiembursement(id, action, remark_text, refetchlist);
+			setPayload({});
 		} else {
 			setShow1(true);
 		}
-
 		// updateReiembursement({ payload, action, refetchlist });
 	};
 
