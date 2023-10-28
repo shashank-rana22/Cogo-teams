@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function useCountDown({ updatedAt = '', trigger = () => {} }) {
+function useCountDown({ updatedAt = '' }) {
 	const inputDate = new Date(updatedAt);
 
 	const addedDate = new Date(inputDate.getTime() + 35 * 60000);
@@ -23,12 +23,8 @@ function useCountDown({ updatedAt = '', trigger = () => {} }) {
 			return () => clearInterval(intervalId);
 		}
 
-		if (countdown === 0) {
-			trigger();
-		}
-
 		return () => {};
-	}, [countdown, trigger]);
+	}, [countdown]);
 
 	return {
 		countdown,

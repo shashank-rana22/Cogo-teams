@@ -4,16 +4,24 @@ import { isEmpty } from '@cogoport/utils';
 
 import LoadingState from '../../../../../common/LoadingState';
 import List from '../../../common/List';
+import useGetLeaderbordList from '../../../hooks/useGetLeaderbordList';
 
 import styles from './styles.module.css';
 import TopUsers from './TopUsers';
 
 function LeftPanel(props) {
 	const {
-		view = '', list = [],
-		loading = false,
-		totalReportCount = 0,
+		view = '',
+		dateRange = {},
+		setUpdatedAt = () => {},
 	} = props;
+
+	const { list, loading, total_report_count: totalReportCount } = useGetLeaderbordList({
+		view,
+		dateRange,
+		pageLimit: 50,
+		setUpdatedAt,
+	});
 
 	const [firstUser, secondUser, thirdUser, ...tableList] = list;
 

@@ -4,9 +4,7 @@ import styles from './styles.module.css';
 
 function Body(props) {
 	const {
-		view, dateRange, updatedAt, setUpdatedAt, list,
-		loading,
-		totalReportCount,
+		view, dateRange, updatedAt, setUpdatedAt,
 	} = props;
 
 	return (
@@ -16,9 +14,6 @@ function Body(props) {
 				dateRange={dateRange}
 				updatedAt={updatedAt}
 				setUpdatedAt={setUpdatedAt}
-				list={list}
-				loading={loading}
-				totalReportCount={totalReportCount}
 			/>
 
 			<RightPanel view={view} updatedAt={updatedAt} />
