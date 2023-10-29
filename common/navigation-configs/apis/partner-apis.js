@@ -5791,6 +5791,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'handling_fee',
 		},
+		{
+			api          : 'create_handling_fee_custom_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'update_handling_fee_custom_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	condition: [
 		{

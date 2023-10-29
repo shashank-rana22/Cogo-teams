@@ -8,14 +8,23 @@ import Create from '../Create';
 function Edit() {
 	const { query } = useSelector(({ general }) => general);
 
-	const { data = {}, loading = false } = useGetHandlingFee({ id: query?.id });
+	const {
+		data = {},
+		loading = false,
+		refetchGetHandlingFeeData = () => { },
+	} = useGetHandlingFee({ id: query?.id });
 
 	if (loading) {
 		return <Loader />;
 	}
 
 	return (
-		<Create key={loading} type="edit" data={data} />
+		<Create
+			key={loading}
+			type="edit"
+			data={data}
+			refetchGetHandlingFeeData={refetchGetHandlingFeeData}
+		/>
 	);
 }
 

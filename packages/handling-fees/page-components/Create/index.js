@@ -10,6 +10,7 @@ import handleFieldArrayAddCheck from '../../helpers/checkFeeConfiguration';
 import useCreateHandlingFeeConfig from '../../hooks/useCreateHandlingFeeConfig';
 import SERVICE_TABS_MAPPING from '../../utils/service-tabs-mapping';
 
+import CustomConfig from './CustomConfig';
 import getMandatoryControls from './getMandatoryControls';
 import getOptionalControls from './getOptionalControls';
 
@@ -134,6 +135,10 @@ function Create({ data = {}, type = 'create' }) {
 					SUBMIT
 				</Button>
 			</div>
+
+			{type === 'edit' ? (
+				<CustomConfig />
+			) : null}
 		</>
 	);
 }

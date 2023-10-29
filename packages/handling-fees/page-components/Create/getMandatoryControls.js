@@ -4,7 +4,7 @@ import FEE_UNIT_MAPPING from '../../configs/FEE_UNIT_MAPPING.json';
 import SLAB_UNIT_MAPPING from '../../configs/SLAB_UNIT_MAPPING.json';
 import handleFieldArrayAddCheck from '../../helpers/checkFeeConfiguration';
 
-// import getFilteredSlabDetails from './getFilteredSlabDetails';
+import getFilteredSlabDetails from './getFilteredSlabDetails';
 
 const MAX_MIN_FEE_VAL = 1;
 const MIN_NUMBER = 0;
@@ -21,14 +21,13 @@ const EMPTY_FIELD_ARRAY = [
 const getMandatoryControls = ({
 	activeService, service, data = {}, control_name = '', isAddFieldArrayCheck = false,
 }) => {
-	const { slab_details = [] } = data?.data || {};
+	const { slab_details = [] } = control_name === 'slab_details'
+		? data?.data || {} : data || {};
 
-	// const newSlabDetails = getFilteredSlabDetails({
-	// 	slab_details,
-	// 	control_name,
-	// });
-
-	const newSlabDetails = slab_details;
+	const newSlabDetails = getFilteredSlabDetails({
+		slab_details,
+		control_name,
+	});
 
 	return [
 		{
