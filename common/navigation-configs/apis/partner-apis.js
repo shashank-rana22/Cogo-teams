@@ -8757,7 +8757,7 @@ const partner = {
 	],
 	overheads: [
 		{
-			api         : 'post_purchase_expense_send_email',
+			api         : 'post_incident_management_incident_send_overhead_mail',
 			access_type : 'private',
 			module      : 'Expenses',
 			feature     : 'Expenses',
