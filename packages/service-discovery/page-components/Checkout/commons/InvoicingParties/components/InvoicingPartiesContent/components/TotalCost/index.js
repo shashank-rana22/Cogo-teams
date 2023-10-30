@@ -1,8 +1,9 @@
+import { Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
+import getCurrencyOptions from '../../../../../../../../helpers/getCurrencyOptions';
 import { convertCurrencyValue } from '../../../../../../helpers/dynamic-values';
-import StyledSelect from '../../../../../StyledSelect';
 
 import styles from './styles.module.css';
 
@@ -11,15 +12,6 @@ const MAX_PERCENT_VALUE = 100;
 const DELTA_VALUE = 1;
 
 const ROUND_OFF_VALUE = 2;
-
-const CURRENCY_OPTIONS = [
-	GLOBAL_CONSTANTS.currency_code.USD,
-	GLOBAL_CONSTANTS.currency_code.INR,
-	GLOBAL_CONSTANTS.currency_code.VND,
-].map((currencyCode) => ({
-	value : currencyCode,
-	label : currencyCode,
-}));
 
 function PriceComponent({
 	isEditMode = false,
@@ -40,18 +32,23 @@ function PriceComponent({
 			conversions,
 		);
 
+		const ALLOWED_CURRENCY = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
+			.common.services.invoicing_parties_checkout.allowed_currency;
+
+		const CURRENCY_OPTIONS = getCurrencyOptions({ ALLOWED_CURRENCY });
+
 		return (
 			<div className={styles.flex}>
-				<StyledSelect
-					defaultValue={invoice_currency}
-					onChange={({ selectedValue }) => {
+				<Select
+					value={invoice_currency}
+					onChange={(value) => {
 						setEditInvoiceDetails((prev) => ({
 							...prev,
-							invoice_currency: selectedValue,
+							invoice_currency: value,
 						}));
 					}}
 					options={CURRENCY_OPTIONS}
-					size="lg"
+					size="md"
 				/>
 
 				<div className={styles.value}>{finalConvertedValue.toFixed(ROUND_OFF_VALUE)}</div>
