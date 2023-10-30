@@ -1,3 +1,10 @@
 .container {
 	margin-top: 16px;
 }
+
+.loader_container {
+	padding: 16px;
+	margin-top: 12px;
+	background-color: #fff;
+	border-radius: 16px;
+}

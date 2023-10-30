@@ -19,14 +19,18 @@
 @media (max-width: 767px) {
 	.container {
 		flex-direction: column-reverse;
+		flex-wrap: wrap;
 		gap: 12px;
+		padding: 16px 8px;
 	}
 
 	.left_section {
+		width: 100%;
 		padding-right: 0;
 	}
 
 	.right_section {
+		width: 100%;
 		padding-left: 0;
 	}
 }

@@ -1,15 +1,14 @@
 import { IcMArrowNext, IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-// import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
+const result = (number = 0) => parseFloat(number?.toFixed(2));
+
 function EmployeeStatusDetails({ task_list = {}, summaryData = {}, absentData = {} }) {
 	const { leave_requests, offboarding_requests, payroll, reimbursements } = task_list || {};
-	console.log('sumarryData', task_list);
 	const { monthly_insights } = summaryData || {};
-	// const { push } = useRouter();
 
 	const { age, offboardings, tenure } = monthly_insights || {};
 
@@ -17,31 +16,30 @@ function EmployeeStatusDetails({ task_list = {}, summaryData = {}, absentData = 
 
 	const COMPARE_GROWTH = [
 		{
-			percentage : `${Math.round((absentData?.curr_month_absent || 0) * 100) / 100}%`,
-			growth     : `${Math.round((absentData?.growth || 0) * 100) / 100}%`,
+			percentage : `${result(absentData?.curr_month_absent)}`,
+			growth     : `${result(absentData?.growth) || 0}%`,
 			text       : 'Absents per month',
 		},
 		{
-			percentage : `${Math.round((offboardings?.curr_month_offboardings || 0) * 100) / 100}%`,
-			growth     : `${Math.round((offboardings?.growth || 0) * 100) / 100}%`,
-			text       : 'Total Offboardings',
+			percentage : `${result(offboardings?.curr_month_offboardings)}`,
+			growth     : `${offboardings?.growth || 0}%`,
+			text       : 'Attrition rate',
 		},
 		{
-			percentage : `${Math.round((tenure?.curr_month || 0) * 100) / 100}%`,
-			growth     : `${Math.round((tenure?.growth || 0) * 100) / 100}%`,
+			percentage : `${result(tenure?.curr_month)}`,
+			growth     : `${result(tenure?.growth || 0)}%`,
 			text       : 'Avg Tenure',
 		},
 		{
-			percentage : `${Math.round((age?.curr_month || 0) * 100) / 100}%`,
-			growth     : `${Math.round((offboardings?.growth || 0) * 100) / 100}%`,
+			percentage : `${result(age?.curr_month)}`,
+			growth     : `${result(age.growth || 0)}%`,
 			text       : 'Avg Employee Age',
 		},
 	];
 
 	const THINGS_TO_DO = [
 		{
-			src:
-			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/moneyDollar.svg',
+			src            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/moneyDollar.svg',
 			type           : 'Payroll',
 			employee_count : `${payroll} employees not paid`,
 			target         : '/payroll',
@@ -97,8 +95,8 @@ function EmployeeStatusDetails({ task_list = {}, summaryData = {}, absentData = 
 						</div>
 					</div>
 				))}
-
 			</div>
+
 			<div className={styles.employee_to_do}>
 				<div className={styles.employee_things_to_do}>
 					<span>Things to do</span>

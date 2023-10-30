@@ -17,14 +17,6 @@ function MyResponsiveBar({ depDetails = [] }) {
 				padding={0.3}
 				valueScale={{ type: 'linear' }}
 				indexScale={{ type: 'band', round: true }}
-				// colors={({ id }) => {
-				// 	if (id === 'working_hours') {
-				// 		return '#ACDADF';
-				// 	} if (id === 'Others') {
-				// 		return '#4F4F4F';
-				// 	}
-				// 	return 'gray';
-				// }}
 				colors={['#ACDADF', '#4F4F4F']}
 				enableLabel={false}
 				enableGridY={false}

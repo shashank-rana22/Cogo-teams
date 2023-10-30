@@ -1,26 +1,18 @@
-// import { Select } from '@cogoport/components';
 import { Toggle } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
-// import CompanyLeaderBoard from './CompanyLeaderBoard';
 import IndividualActivity from './IndividualActivity';
 import styles from './styles.module.css';
 import TeamLeaderBoard from './TeamLeaderBoard';
 import ThingsToDo from './ThingsToDo';
-// import WorkingHrs from './WorkingHrs';
-
-// https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rectangle_126.svg
-// const OPTIONS = [
-// 	{ label: 'March 2023', value: 'march' },
-// ];
 
 function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDashboardActive }) {
 	const { rating_list } = data || {};
 	const { avg_rating } = rating_list || {};
 	const { push } = useRouter();
-	console.log('🚀 ~ file: index.js:19 ~ TeamPerformance ~ data:', data);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex}>
@@ -37,17 +29,6 @@ function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDa
 						onLabel="Company"
 						offLabel="Employee"
 					/>
-					{/* <div className={cl`${styles.claps_flex} ${styles.mr_12}`}>
-							<div className={styles.claps}>👏</div>
-							32 Claps Recieved
-						</div>
-						<div className={styles.claps_flex}>
-							<div className={styles.claps}>
-								<IcCStarfull width={16} height={16} />
-							</div>
-							Believer
-						</div> */}
-					{/* <Select options={OPTIONS} value={OPTIONS.label} /> */}
 				</div>
 			</div>
 			<div className={styles.kpi_flex}>
@@ -79,26 +60,7 @@ function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDa
 				</div>
 
 				<div className={styles.kpi_data}>
-					{/* <div className={styles.happiness_index}> */}
 					<IndividualActivity data={data} />
-					{/* <div className={styles.kpi_okr_title}>Team Happiness Index</div>
-						<div className={styles.kpi_okr_count}>Happy</div>
-						<div className={styles.view_okr_flex}>
-							View details
-							{' '}
-							<IcMArrowRight
-								width={12}
-								height={12}
-								style={{ marginLeft: 2 }}
-							/>
-						</div>
-						<div className={styles.kpi_img_2}>
-							<img
-								alt="kpi-img"
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Face.svg"
-							/>
-						</div> */}
-					{/* </div> */}
 				</div>
 			</div>
 			<div className={styles.leaderboard_container}>
@@ -109,24 +71,10 @@ function TeamPerformance({ data = {}, setIsEmployeeDashboardActive, isEmployeeDa
 				</div>
 				<div className={styles.leaderboard_data}>
 					<div className={styles.leaderboard}>
-						{/* <IndividualActivity data={data} /> */}
 						<ThingsToDo data={data} />
 					</div>
 				</div>
 			</div>
-
-			{/* <div className={styles.leaderboard_container}>
-				<div className={styles.leaderboard_data}>
-					<div className={styles.leaderboard}>
-						<ThingsToDo data={data} />
-					</div>
-				</div>
-				<div className={styles.leaderboard_data}>
-					<div className={styles.leaderboard}>
-						<CompanyLeaderBoard />
-					</div>
-				</div>
-			</div> */}
 		</div>
 	);
 }

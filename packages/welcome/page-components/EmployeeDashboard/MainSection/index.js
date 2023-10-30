@@ -4,8 +4,11 @@ import styles from './styles.module.css';
 import YourBoard from './YourBoard';
 import YourPerformance from './YourPerformance';
 
-function MainSection({ data, summaryData, loading, feedRefetch, setFilters }) {
-	console.log('data', data);
+function MainSection({
+	data, summaryData, loading, feedRefetch, setFilters,
+	isEmployeeDashboardActive,
+	setIsEmployeeDashboardActive, feedLoading,
+}) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_section}>
@@ -14,6 +17,9 @@ function MainSection({ data, summaryData, loading, feedRefetch, setFilters }) {
 					feedRefetch={feedRefetch}
 					setFilters={setFilters}
 					summaryData={summaryData}
+					isEmployeeDashboardActive={isEmployeeDashboardActive}
+					setIsEmployeeDashboardActive={setIsEmployeeDashboardActive}
+					feedLoading={feedLoading}
 				/>
 			</div>
 			<div className={styles.right_section}>

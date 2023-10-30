@@ -7,31 +7,27 @@ import styles from './styles.module.css';
 
 const THINGS_TO_DO = [
 	{
-		src            : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/b4501a1989c19715142a2095d65b777e/Calendar-2.svg',
-		type           : 'Offboarding Requests',
-		employee_count : '321 employees not paid',
-		link           : '/attendance-leave-management?showInbox=true ',
-		key            : 'offboarding_requests',
+		src  : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/b4501a1989c19715142a2095d65b777e/Calendar-2.svg',
+		type : 'Offboarding Requests',
+		link : '/attendance-leave-management?showInbox=true ',
+		key  : 'offboarding_requests',
 	},
 	{
-		src            : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/1a9f21c2f03f299fdc0161416530ed14/Calendar-3.svg',
-		type           : 'Expenses',
-		employee_count : '322 employees not paid',
-		key            : 'expenses',
-		link           : '/payment',
+		src  : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/1a9f21c2f03f299fdc0161416530ed14/Calendar-3.svg',
+		type : 'Expenses',
+		key  : 'expenses',
+		link : '/payment',
 	},
 	{
-		src            : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/ce7894a168aed5c5b6b42e5ba1ab4b60/Calendar.svg',
-		type           : 'Leave Requests',
-		employee_count : '322 employees not paid',
-		link           : '/attendance-leave-management?showInbox=true ',
-		key            : 'leave_requests',
+		src  : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/ce7894a168aed5c5b6b42e5ba1ab4b60/Calendar.svg',
+		type : 'Leave Requests',
+		link : '/attendance-leave-management?showInbox=true ',
+		key  : 'leave_requests',
 	},
 ];
 function ThingsToDo({ data = {} }) {
 	const { push } = useRouter();
 	const { task_list } = data || {};
-	console.log('🚀 ~ file: index.js:27 ~ ThingsToDo ~ task_list:', task_list);
 	return (
 		<div className={styles.employee_to_do}>
 

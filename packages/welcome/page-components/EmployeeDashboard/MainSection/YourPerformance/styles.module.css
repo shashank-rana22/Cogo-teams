@@ -136,3 +136,42 @@
 	color: #221f20;
 	text-transform: uppercase;
 }
+
+@media (max-width: 768px) {
+	.flex {
+		flex-wrap: wrap;
+	}
+
+	.performance_achievement {
+		flex-wrap: wrap;
+	}
+
+	.kpi_flex {
+		flex-wrap: wrap;
+	}
+
+	.kpi_data {
+		flex: 1 0 100%;
+		margin-bottom: 12px;
+	}
+
+	.story_points_data {
+		flex: 1 0 100%;
+		padding: 0;
+	}
+
+	.leaderboard_data {
+		flex-wrap: wrap;
+	}
+
+	.leaderboard {
+		flex: 1 0 100%;
+		padding: 0;
+		margin-bottom: 12px;
+	}
+
+	.working_hrs {
+		flex: 1 0 100%;
+		padding: 0;
+	}
+}

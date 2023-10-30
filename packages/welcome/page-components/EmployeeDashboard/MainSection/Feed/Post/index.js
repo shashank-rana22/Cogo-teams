@@ -1,11 +1,11 @@
 import { Popover, cl, Button, Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMHappy, IcMCross, IcMSend } from '@cogoport/icons-react';
+import { IcMHappy, IcMCross, IcMSend, IcMAttach } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { MentionsInput, Mention } from 'react-mentions';
 
-// import CustomFileUploader from '../../../../../common/CustomFileUploader';
+import CustomFileUploader from '../../../../../common/CustomFileUploader';
 import useCreateCompanyFeed from '../../../../../hooks/useCreateCompanyFeed';
 import useGetEmojiList from '../../../../../hooks/useGetEmojis';
 import useGetEmployeeList from '../../../../../hooks/useGetEmployeeList';
@@ -14,11 +14,11 @@ import { formatFileAttributes } from '../../../../../utils/getFileAttributes';
 import defaultStyles from './defaultStyles';
 import EmojisBody from './EmojisBody';
 import styles from './styles.module.css';
-// import UploadedFiles from './UploadedFiles';
+import UploadedFiles from './UploadedFiles';
 
 function Post({ feedRefetch }) {
-	// const uploaderRef = useRef(null);
-	// const [uploading, setUploading] = useState(false);
+	const uploaderRef = useRef(null);
+	const [uploading, setUploading] = useState(false);
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState('');
 	const [draftMessages, setDraftMessages] = useState('');
 	const [clapsActive, setClapsActive] = useState(false);
@@ -30,9 +30,9 @@ function Post({ feedRefetch }) {
 
 	const fileMetaData = formatFileAttributes({ uploadedFiles: draftUploadedFiles })?.[GLOBAL_CONSTANTS.zeroth_index];
 
-	// const handleProgress = (val) => {
-	// 	setUploading(val);
-	// };
+	const handleProgress = (val) => {
+		setUploading(val);
+	};
 
 	const handleCreatePost = async () => {
 		const {
@@ -89,7 +89,7 @@ function Post({ feedRefetch }) {
 		);
 	};
 
-	// const hasUploadedFiles = !isEmpty(draftUploadedFiles);
+	const hasUploadedFiles = !isEmpty(draftUploadedFiles);
 
 	const handleClaps = () => {
 		setClapsActive(!clapsActive);
@@ -102,26 +102,18 @@ function Post({ feedRefetch }) {
 		<>
 			<div className={styles.container}>
 				<div className={styles.feed_type}>
-					{
-						clapsActive
-							? (
-								<div className={cl`${styles.circle} ${styles.circle1_bg}`}>
-									👏
-								</div>
-							)
-							: null
-}
-					{
-	taggedPeople.length > 0
-		? taggedPeople?.map((item) => (
-			<div className={cl`${styles.circle} ${styles.circle2_bg}`} key={item}>
-				{item}
-			</div>
-		))
+					{clapsActive ? (
+						<div className={cl`${styles.circle} ${styles.circle1_bg}`}>
+							👏
+						</div>
+					) : null}
 
-		: null
-}
-					{/*  */}
+					{!isEmpty(taggedPeople) ? taggedPeople?.map((item) => (
+						<div className={cl`${styles.circle} ${styles.circle2_bg}`} key={item}>
+							{item}
+						</div>
+					)) : null}
+
 				</div>
 				<MentionsInput
 					value={draftMessages}
@@ -139,9 +131,6 @@ function Post({ feedRefetch }) {
 					/>
 				</MentionsInput>
 				<div className={styles.public_tag}>
-					{/* <IcMFsea style={{ marginRight: 4 }} />
-					{' '}
-					Public */}
 					<Select
 						value={postType}
 						onChange={setPostType}
@@ -157,7 +146,7 @@ function Post({ feedRefetch }) {
 				</div>
 				<div className={styles.footer_flex}>
 					<div className={styles.left_flex}>
-						{/* <CustomFileUploader
+						<CustomFileUploader
 							handleProgress={handleProgress}
 							showProgress={false}
 							draggable
@@ -176,7 +165,7 @@ function Post({ feedRefetch }) {
 								setDraftUploadedFiles(val);
 							}}
 							ref={uploaderRef}
-						/> */}
+						/>
 
 						<Popover
 							placement="top"
@@ -226,7 +215,7 @@ function Post({ feedRefetch }) {
 					</div>
 				</div>
 			</div>
-			{/* <div className={styles.img_container}>
+			<div className={styles.img_container}>
 				{(hasUploadedFiles) && !uploading ? (
 					<UploadedFiles
 						setDraftUploadedFiles={setDraftUploadedFiles}
@@ -239,7 +228,7 @@ function Post({ feedRefetch }) {
 						uploading.....
 					</div>
 				) : null}
-			</div> */}
+			</div>
 		</>
 	);
 }

@@ -1,74 +1,9 @@
-/* eslint-disable no-magic-numbers */
-/* eslint-disable max-len */
 import { Avatar } from '@cogoport/components';
 import { IcMSend } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import CommentList from './CommentList';
 import styles from './styles.module.css';
-
-const comments = [
-	{
-		user_name       : 'User1',
-		comment         : 'I recently read a fascinating book about astrophysics that discussed the mind-bending concepts of black holes and the expansion of the universe. It was mind-blowing!',
-		likes           : 25,
-		nested_comments : [
-			{
-				user_name       : 'User2',
-				comment         : "Wow, that sounds like an incredible book! I've always been interested in astrophysics. Can you share the title and author?",
-				likes           : 15,
-				nested_comments : [],
-				time_ago        : '2 hours ago',
-			},
-			{
-				user_name       : 'User3',
-				comment         : "I've also read that book, and it completely changed my perspective on the universe. The way it explains complex concepts is commendable.",
-				likes           : 20,
-				nested_comments : [
-					{
-						user_name       : 'User4',
-						comment         : "I'm a physics enthusiast as well, and this book sounds like a must-read. Can you recommend any other similar books?",
-						likes           : 10,
-						nested_comments : [],
-						time_ago        : '1 hour ago',
-					},
-				],
-				time_ago: '3 hours ago',
-			},
-		],
-		time_ago: '4 hours ago',
-	},
-	{
-		user_name       : 'User5',
-		comment         : "I've been studying quantum mechanics lately, and it's mind-boggling how particles behave at the quantum level. The famous double-slit experiment is so intriguing!",
-		likes           : 30,
-		nested_comments : [
-			{
-				user_name       : 'User6',
-				comment         : 'Absolutely, quantum mechanics is both fascinating and perplexing. Have you tried conducting any quantum experiments yourself?',
-				likes           : 18,
-				nested_comments : [],
-				time_ago        : '2 hours ago',
-			},
-			{
-				user_name       : 'User7',
-				comment         : "I'm currently pursuing a PhD in quantum physics, and the more I learn, the more I'm amazed by the mysteries of the quantum world.",
-				likes           : 25,
-				nested_comments : [
-					{
-						user_name       : 'User8',
-						comment         : "User7, that's impressive! Can you share some insights into your research?",
-						likes           : 12,
-						nested_comments : [],
-						time_ago        : '1 hour ago',
-					},
-				],
-				time_ago: '3 hours ago',
-			},
-		],
-		time_ago: '4 hours ago',
-	},
-];
 
 function CommentBox() {
 	const [text, setText] = useState('');
@@ -102,7 +37,7 @@ function CommentBox() {
 					</div>
 				</div>
 			</div>
-			<CommentList comments={comments} />
+			<CommentList comments={[]} />
 		</div>
 	);
 }

@@ -4,7 +4,6 @@ import styles from './styles.module.css';
 
 function PaySlipModal({ showModal, documentType, setShowModal, modalUrl }) {
 	const { earnings, deductions, variable_earnings } = modalUrl || {};
-	// console.log('modalurl', modalUrl);
 
 	const formattedData = {
 		Earnings: earnings ? Object.entries(earnings).map(([key, value]) => ({ category: key, amount: value })) : [],
@@ -15,7 +14,6 @@ function PaySlipModal({ showModal, documentType, setShowModal, modalUrl }) {
 			? Object.entries(variable_earnings).map(([key, value]) => ({ category: key, amount: value })) : [],
 	};
 
-	console.log('formate', formattedData);
 	return (
 		<Modal
 			size="lg"
@@ -43,20 +41,6 @@ function PaySlipModal({ showModal, documentType, setShowModal, modalUrl }) {
 
 						</div>
 					))}
-					{/* <iframe
-						src={modalUrl}
-						type="application/pdf"
-						width="100%"
-						height="100%"
-						title="Document"
-						style={{ border: 'none' }}
-					>
-						<p>
-							It seems you don&apos;t have a PDF plugin for this browser. No biggie... you can
-							{' '}
-							<a href={modalUrl}>click here to download the PDF file.</a>
-						</p>
-					</iframe> */}
 				</div>
 			</Modal.Body>
 		</Modal>

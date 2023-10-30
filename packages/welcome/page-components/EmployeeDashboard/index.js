@@ -1,5 +1,5 @@
 import { useRouter } from '@cogoport/next';
-import React from 'react';
+import React, { useState } from 'react';
 
 import useGetDashboardSummary from '../../hooks/useGetDashboardSummary';
 import useListAllFeed from '../../hooks/useListAllFeed';
@@ -10,9 +10,12 @@ import MainSection from './MainSection';
 import styles from './styles.module.css';
 
 function HrmsEmployeeDashboard() {
-	const { data, refetch, setFilters } = useListAllFeed();
-	const { data: summaryData, loading } = useGetDashboardSummary();
 	const router = useRouter();
+
+	const [isEmployeeDashboardActive, setIsEmployeeDashboardActive] = useState(true);
+
+	const { data, refetch, setFilters, loading : feedLoading } = useListAllFeed();
+	const { data: summaryData, loading } = useGetDashboardSummary(isEmployeeDashboardActive);
 
 	const handleBack = () => {
 		router.push('/welcome');
@@ -36,6 +39,9 @@ function HrmsEmployeeDashboard() {
 				loading={loading}
 				feedRefetch={refetch}
 				setFilters={setFilters}
+				isEmployeeDashboardActive={isEmployeeDashboardActive}
+				setIsEmployeeDashboardActive={setIsEmployeeDashboardActive}
+				feedLoading={feedLoading}
 			/>
 		</div>
 	);

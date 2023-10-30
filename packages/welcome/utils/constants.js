@@ -35,7 +35,7 @@ export const HEADER_NAV = [
 	// 	icon  : IcMUpwardGraph,
 	// },
 	{
-		label : 'Payments',
+		label : 'Finances',
 		icon  : IcMAppInvoiceSubmission,
 		route : '/payment',
 	},

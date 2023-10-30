@@ -97,8 +97,6 @@ function Header({ summaryData }) {
 		}
 	};
 
-	console.log('setOpenPolicies', openPolicies);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.data_container}>
@@ -107,12 +105,6 @@ function Header({ summaryData }) {
 						HRMS Dashboard
 					</div>
 					<div className={styles.header_right_flex}>
-						{/* <Button themeType="secondary">
-						<span className={styles.header_right_flex}>
-							New Request
-							<IcMPlus width={12} height={12} style={{ marginLeft: 4 }} />
-						</span>
-					</Button> */}
 						<Button themeType="secondary" onClick={() => router.push('/ticket-management/my-tickets')}>
 							<span className={styles.header_right_flex}>
 								My Tickets

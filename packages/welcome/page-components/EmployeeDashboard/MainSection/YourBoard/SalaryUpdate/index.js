@@ -1,5 +1,4 @@
 import { cl } from '@cogoport/components';
-// import { IcMArrowRight } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -26,16 +25,6 @@ function SalaryUpdate({ data }) {
 					Payroll Status
 				</div>
 			</div>
-			{/* <div className={styles.footer}>
-				<div>
-					{' '}
-				</div>
-				<div className={styles.view_payslip}>
-					View Payslip
-					{' '}
-					<IcMArrowRight style={{ marginLeft: 8 }} />
-				</div>
-			</div> */}
 		</div>
 	);
 }

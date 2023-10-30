@@ -1,16 +1,35 @@
 import { Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
-const ZERO = 0;
 function NotInOffice({ data = {} }) {
 	const { absentee_list } = data || {};
-	const MAX_VISIBLE = 5; // Maximum number of absentees to display directly
 
-	const visibleAbsentees = (absentee_list || []).slice(0, MAX_VISIBLE);
-	const remainingAbsentees = (absentee_list || []).slice(MAX_VISIBLE);
+	const [maxVisible, setMaxVisible] = useState(5);
+
+	useEffect(() => {
+		// Function to update the isMobile state based on viewport width
+		function handleResize() {
+			const isLess = window.innerWidth < 767;
+			setMaxVisible(isLess ? 4 : 5);
+		}
+
+		handleResize();
+
+		// Add a resize event listener
+		window.addEventListener('resize', handleResize);
+
+		// Remove the event listener when the component unmounts
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
+
+	const visibleAbsentees = (absentee_list || []).slice(0, maxVisible);
+	const remainingAbsentees = (absentee_list || []).slice(maxVisible);
 
 	function AbsentList() {
 		return (
@@ -20,7 +39,7 @@ function NotInOffice({ data = {} }) {
 						key={name}
 						className={styles.list}
 					>
-						{name[ZERO]}
+						{name[GLOBAL_CONSTANTS.zeroth_index]}
 					</div>
 				))}
 			</div>

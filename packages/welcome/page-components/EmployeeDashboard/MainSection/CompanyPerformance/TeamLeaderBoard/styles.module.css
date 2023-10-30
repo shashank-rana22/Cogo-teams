@@ -1,5 +1,4 @@
 .container {
-	flex-basis: 48%;
 	padding: 16px;
 	background-color: #fff;
 	border-radius: 16px;
@@ -64,7 +63,20 @@
 .avatar {
 	display: flex;
 	align-items: center;
-	margin-left: 8px;
+
+	/* margin-left: 8px; */
+
+	:global {
+		.ui_avatar_container {
+			margin-right: 4px;
+			background: #abcd62;
+			border-radius: 16px !important;
+		}
+
+		.ui_avatar_text {
+			background: #abcd62;
+		}
+	}
 }
 
 .points {
@@ -73,9 +85,17 @@
 	color: #4f4f4f;
 }
 
-@media (max-width: 768px) {
-	.container {
-		flex-basis: 100%;
-		margin-bottom: 12px;
-	}
+.profile_photo {
+	width: 40px;
+	height: 40px;
+	margin-right: 4px;
+	overflow: hidden;
+	border: 2px solid #fff;
+	border-radius: 50%;
+}
+
+.profile_photo img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }

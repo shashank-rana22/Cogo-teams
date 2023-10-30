@@ -13,9 +13,6 @@ function Poster() {
 				<div className={styles.sub_title}>
 					Thank your colleagues for their amazing work
 				</div>
-				{/* <div className={styles.try_btn}>
-					Try it out now
-				</div> */}
 			</div>
 			<img alt="img" src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/appr.png" />
 		</div>

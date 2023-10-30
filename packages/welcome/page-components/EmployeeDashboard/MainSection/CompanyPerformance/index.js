@@ -3,33 +3,32 @@ import { IcCGreenCircle } from '@cogoport/icons-react';
 import React from 'react';
 
 import useGetAbsenteeInsight from '../../../../hooks/useGetAbsenteeInsight';
+import useGetDepartmentRatings from '../../../../hooks/useGetDepartmentRatings';
 import useGetDepartmentWise from '../../../../hooks/useGetDepartmentWise';
-import TeamLeaderBoard from '../TeamPerformance/TeamLeaderBoard';
 
 import CompanyLeaderBoard from './CompanyLeaderBoard';
 import DepartmentTracking from './DepartmentTracking';
 import EmployeeStatusDetails from './EmployeeStatusDetails';
 import IndividualActivity from './IndividualActivity';
 import styles from './styles.module.css';
-// import WorkingHrs from './WorkingHrs';
-
-// https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rectangle_126.svg
+import TeamLeaderBoard from './TeamLeaderBoard';
 
 function CompanyPerformance({
 	summaryData = {},
 	setIsEmployeeDashboardActive,
 	isEmployeeDashboardActive,
 }) {
-	console.log('data-details', summaryData);
+	const { data } = useGetDepartmentRatings();
 
 	const { absentee_list, employees_list, task_list } = summaryData || {};
+
+	console.log('depData', data);
 
 	const present_list = ((employees_list || []).length) - ((absentee_list || []).length);
 
 	const { data:absentData } = useGetAbsenteeInsight();
 
 	const { data:depDetails, getDepartmentWise, setFilters, filters } = useGetDepartmentWise();
-	console.log(typeof (depDetails), 'newDetails');
 
 	return (
 		<div className={styles.container}>
@@ -52,9 +51,6 @@ function CompanyPerformance({
 						onLabel="Company"
 						offLabel="Employee"
 					/>
-					{/* <div style={{ padding: 16, width: 'fit-content' }}>
-						<Select placeholder="Select value" options={options} />
-					</div> */}
 				</div>
 			</div>
 			<div className={styles.employee_flex}>
@@ -72,11 +68,6 @@ function CompanyPerformance({
 							{' '}
 							Present today
 						</div>
-						{/* <div className={styles.view_abs_flex}>
-							View Absents
-							{' '}
-							<IcMArrowRight width={12} height={12} style={{ marginLeft: 2 }} />
-						</div> */}
 						<div className={styles.employee_abs_img}>
 							<img
 								alt="kpi-img"
@@ -86,7 +77,6 @@ function CompanyPerformance({
 					</div>
 				</div>
 				<div className={styles.department_data}>
-					{/* <DepartmentHappyIndex /> */}
 					<IndividualActivity data={summaryData} />
 				</div>
 			</div>
@@ -99,9 +89,9 @@ function CompanyPerformance({
 				filters={filters}
 			/>
 			<div className={styles.bottom_bar_data}>
-				<CompanyLeaderBoard />
-				<div style={{ width: '50%' }}>
-					<TeamLeaderBoard data={summaryData} />
+				<CompanyLeaderBoard data={data?.department_wise || []} />
+				<div className={styles.team_leaderboard}>
+					<TeamLeaderBoard data={data?.squad_wise || []} />
 				</div>
 			</div>
 		</div>

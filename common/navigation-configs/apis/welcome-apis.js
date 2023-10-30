@@ -109,6 +109,11 @@ const welcome = [
 		access_type  : 'private',
 		service_name : 'hrms',
 	},
+	{
+		api          : 'get_squad_wise_rating',
+		access_type  : 'private',
+		service_name : 'hrms',
+	},
 ];
 
 export default welcome;

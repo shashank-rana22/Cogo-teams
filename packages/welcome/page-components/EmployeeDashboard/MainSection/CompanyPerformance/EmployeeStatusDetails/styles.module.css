@@ -102,3 +102,13 @@
 	padding: 8px;
 	cursor: pointer;
 }
+
+@media (max-width: 768px) {
+	.employee_status_details {
+		flex-wrap: wrap;
+	}
+
+	.employee_status_compare {
+		width: 100%;
+	}
+}

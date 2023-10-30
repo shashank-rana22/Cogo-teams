@@ -1,7 +1,7 @@
-/* eslint-disable no-magic-numbers */
 /* eslint-disable import/no-cycle */
 import { Avatar } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import CommentList from '../CommentList';
@@ -28,12 +28,11 @@ function Comment({ user_name, comment, nested_comments, time_ago }) {
 					<div className={styles.comment_text}>
 						{comment}
 					</div>
-					{/* {showReplyComment && <CommentForm />} */}
 				</div>
 			</div>
 			<div className={styles.footer}>
 				<div className={styles.like_comment_container}>
-					{nested_comments.length > 0 && (
+					{!isEmpty(nested_comments) && (
 						<div className={styles.icon_container}>
 							{showNestedComments
 								? (
@@ -67,7 +66,7 @@ function Comment({ user_name, comment, nested_comments, time_ago }) {
 					</div>
 				</div>
 				<div className={styles.reply_data}>
-					{nested_comments.length > 0 && (
+					{!isEmpty(nested_comments) && (
 						<div className={styles.reply_text} style={{ marginRight: 12 }}>
 							{nested_comments.length}
 							{' '}
@@ -80,7 +79,7 @@ function Comment({ user_name, comment, nested_comments, time_ago }) {
 				</div>
 			</div>
 			{showReplyComment && <CommentForm handleSubmit={handleCommentonChange} />}
-			{showNestedComments && nested_comments.length > 0 && (
+			{showNestedComments && !isEmpty(nested_comments) && (
 				<div className={styles.child_comments}>
 					<CommentList comments={nested_comments} />
 				</div>

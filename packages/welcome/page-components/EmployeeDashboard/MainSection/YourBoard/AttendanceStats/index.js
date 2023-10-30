@@ -1,8 +1,6 @@
 import { cl } from '@cogoport/components';
 import React from 'react';
 
-// import useGetLeaveStats from '../../../../../hooks/useGetLeaveBalances';
-
 import Loader from '../../../../../common/Loader';
 
 import styles from './styles.module.css';

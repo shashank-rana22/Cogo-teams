@@ -6,6 +6,7 @@
 
 .flex {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: space-between;
 }
@@ -153,6 +154,21 @@
 
 .leaderboard_container {
 	display: flex;
+}
+
+@media (max-width: 768px) {
+	.kpi_flex {
+		flex-wrap: wrap;
+	}
+
+	.kpi_data {
+		flex: 1 0 100%;
+		margin-bottom: 12px;
+	}
+
+	.leaderboard_container {
+		flex-wrap: wrap;
+	}
 }
 
 /* new addition */

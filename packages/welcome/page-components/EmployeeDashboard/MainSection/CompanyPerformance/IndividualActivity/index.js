@@ -8,7 +8,6 @@ import useGetIndividualUserActivity from '../../../../../hooks/useGetIndividualU
 import styles from './styles.module.css';
 
 function IndividualActivity({ data = {} }) {
-	// const { data:dataObj } = data || {};
 	const { employees_list } = data || {};
 	const [selectedUser, setSelectedUser] = useState('');
 	const { data:userData } = useGetIndividualUserActivity(selectedUser);
@@ -34,15 +33,6 @@ function IndividualActivity({ data = {} }) {
 			</div>
 		);
 	}
-
-	// useEffect(() => {
-	// 	if (isEmpty(employees_list)) {
-	// 		return;
-	// 	}
-	// 	setSelectedUser(employees_list?.[0]?.id);
-	// }, [employees_list]);
-
-	console.log('employees_list', employees_list);
 
 	const activeUser = employees_list?.find(({ user_id }) => user_id === selectedUser);
 	return (
@@ -126,12 +116,6 @@ function IndividualActivity({ data = {} }) {
 							</div>
 						</div>
 					</div>
-					{/* <div className="progress-bar">
-						<div className="progress-bar-inner" id="progress1" style={{ width: '50%' }}>50%</div>
-						<div className="progress-bar-inner" id="progress2" style={{ width: '30%' }}>30%</div>
-						<div className="progress-bar-inner" id="progress3" style={{ width: '20%' }}>20%</div>
-					</div> */}
-
 				</>
 			)
 				: null}

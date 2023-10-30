@@ -1,7 +1,7 @@
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetDashboardSummary = () => {
+const useGetDashboardSummary = (isEmployeeDashboardActive) => {
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/get_dashboard_summary',
@@ -9,9 +9,13 @@ const useGetDashboardSummary = () => {
 
 	const getDashboardSummary = useCallback(
 		() => {
-			trigger();
+			trigger({
+				params: {
+					dashboard_view: isEmployeeDashboardActive === false ? 'employee' : undefined,
+				},
+			});
 		},
-		[trigger],
+		[isEmployeeDashboardActive, trigger],
 	);
 
 	useEffect(() => {
