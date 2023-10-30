@@ -90,8 +90,9 @@ function QuotationCards({
 				{!invoicesLoading && (
 					<OperationClosedCardsSet
 						shipment_id={shipmentId}
-						invoicesMap={invoicesMap}
 						job_id={job_id}
+						billsMap={billsMap}
+						invoicesMap={invoicesMap}
 						setQuotationsData={setQuotationsData}
 					/>
 				)}
@@ -99,6 +100,7 @@ function QuotationCards({
 				{active_tab === 'financial_close' && !billsLoading && (
 					<FinanceClosedCardsSet
 						shipment_id={shipmentId}
+						invoicesMap={invoicesMap}
 						billsMap={billsMap}
 						job_id={job_id}
 						setQuotationsData={setQuotationsData}

@@ -9,6 +9,7 @@ function FinanceClosedCardsSet({
 	job_id = '',
 	shipment_id = '',
 	billsMap = {},
+	invoicesMap = {},
 	setQuotationsData = () => {},
 }) {
 	const {
@@ -28,8 +29,9 @@ function FinanceClosedCardsSet({
 				data={taskData?.SELL}
 				type="sell"
 				loading={taskDataLoading}
-				billsMap={billsMap}
 				getClosedTasks={getClosedTasks}
+				billsMap={billsMap}
+				invoicesMap={invoicesMap}
 				shipment_id={shipment_id}
 				jobId={job_id}
 			/>
@@ -38,8 +40,9 @@ function FinanceClosedCardsSet({
 				jobId={job_id}
 				data={taskData?.BUY}
 				type="buy"
-				billsMap={billsMap}
 				loading={taskDataLoading}
+				billsMap={billsMap}
+				invoicesMap={invoicesMap}
 				shipment_id={shipment_id}
 				getClosedTasks={getClosedTasks}
 			/>
