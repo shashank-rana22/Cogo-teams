@@ -5,7 +5,7 @@ import toastApiError from '../../commons/toastApiError';
 
 const getBillsMapping = (billsList) => {
 	const billsMap = billsList.reduce((result, bill) => (
-		{ ...result, [bill.billNumber]: bill.billDocumentUrl }), {});
+		{ ...result, [bill?.billNumber]: bill?.billDocumentUrl }), {});
 	return billsMap;
 };
 
