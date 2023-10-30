@@ -86,6 +86,7 @@ const useGetCoverageStats = (filter) => {
 					filters: {
 						...FINAL_FILTERS,
 						user_id        : releventToMeValue ? user_id : FINAL_FILTERS.user_id,
+						status         : filter?.status === 'completed' ? ['completed', 'aborted'] : filter?.status,
 						cogo_entity_id : filter?.cogo_entity_id === 'cogo_entity_id'
 							? user_data?.partner?.id : undefined,
 						daily_stats,

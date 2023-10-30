@@ -1,4 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { startCase } from '@cogoport/utils';
 
 import getWidth from '../../../../../utils/getWidth';
 
@@ -36,25 +38,35 @@ function RenderLineItem({
 		(m) => m?.code === lineItem?.code,
 	);
 
-	let buy_price =	(lineItem?.total_price_discounted || 0)
-		- ((lineItem.margins || []).find(
+	const buy_price = (lineItem?.total_price_discounted || 0)
+		- ((lineItem?.margins || []).find(
 			(marginObj) => marginObj?.margin_type === 'demand',
 		)?.total_margin_value || 0);
 
-	buy_price = formatAmount({
+	const displayBuyPrice = formatAmount({
 		amount   : Number(buy_price),
 		currency : lineItem?.currency,
 		options  : {
 			style                 : 'currency',
 			currencyDisplay       : 'code',
-			maximumFractionDigits : 0,
+			maximumFractionDigits : 2,
+			minimumFractionDigits : 2,
 		},
 	});
 
 	return (
 		<div className={styles.row}>
 			<div className={styles.col} style={{ width: getWidth(2.5) }}>{lineItem?.name}</div>
-			<div className={styles.col} style={{ width: getWidth(2.0) }}>{buy_price}</div>
+
+			<div style={{ display: 'flex', flex: 2, flexDirection: 'column', width: getWidth(2.0) }}>
+				<div style={{ alignSelf: 'flex-start' }}>{displayBuyPrice}</div>
+				<div style={{ fontSize: '10px', color: '#ee3425' }}>
+					{`${(Number(buy_price) / (lineItem?.quantity || 1)).toFixed(4)} ${
+						GLOBAL_CONSTANTS.freight_unit_mapping[lineItem?.unit]
+						|| `/${startCase(lineItem?.unit || '')}`
+					}`}
+				</div>
+			</div>
 			<div className={styles.col} style={{ width: getWidth(5.5) }}>
 				<Form
 					onChange={handleChangeOnEditMargin}
@@ -64,7 +76,7 @@ function RenderLineItem({
 				/>
 			</div>
 			<div className={styles.col} style={{ width: getWidth(2), paddingLeft: '6px' }}>
-				<div className={styles.container} style={{ width: getWidth(2.0) }}>
+				<div className={styles.container}>
 					<Margin
 						item={lineItem}
 						editedDemandMargin={editedMargins?.[serviceKey]?.[codeIndex] || {}}
