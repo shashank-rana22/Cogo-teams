@@ -1,6 +1,9 @@
 /* eslint-disable max-lines-per-function */
 import { Select, Modal, RadioGroup, Input, DateRangepicker } from '@cogoport/components';
-import { asyncFieldsLocations, asyncFieldsOperators, useGetAsyncOptions } from '@cogoport/forms';
+import {
+	asyncFieldsLocations, asyncFieldsOperators, asyncFieldsOrganization,
+	useGetAsyncOptions,
+} from '@cogoport/forms';
 import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 import { merge, startCase } from '@cogoport/utils';
 
@@ -39,6 +42,23 @@ function Filter({
 		asyncFieldsOperators(),
 		{ params: { filters: { operator_type: lineOptions?.[filter?.service] || 'shipping_line' } } },
 	));
+
+	const serviceProviders = useGetAsyncOptions(
+		merge(
+			asyncFieldsOrganization(),
+			{
+				params: {
+					filters: {
+						status       : 'active',
+						kyc_status   : 'verified',
+						account_type : 'service_provider',
+						service      : `${filter?.service}${['haulage',
+							'trailer'].includes(filter.service) ? '_freight' : ''}`,
+					},
+				},
+			},
+		),
+	);
 
 	const FCL_COMMODITY_OPTIONS = [];
 	(Object.keys(FREIGHT_CONTAINER_COMMODITY_MAPPINGS) || []).forEach((containerType) => {
@@ -103,6 +123,21 @@ function Filter({
 										assign_to_id      : '',
 									});
 									setShowWeekData(false);
+								}}
+							/>
+						</div>
+					</div>
+					<div className={styles.details}>
+						<div>
+							<p>Service Provider</p>
+							<Select
+								placeholder="Select Service Provider"
+								{...serviceProviders}
+								value={filter?.service_provider_id}
+								style={{ width: '250px' }}
+								isClearable
+								onChange={(val) => {
+									setFilter((prevFilters) => ({ ...prevFilters, service_provider_id: val, page: 1 }));
 								}}
 							/>
 						</div>

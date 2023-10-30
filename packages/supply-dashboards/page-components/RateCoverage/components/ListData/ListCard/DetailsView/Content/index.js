@@ -279,7 +279,8 @@ function ServiceDetailsContent({
 													</div>
 													{' '}
 													{' '}
-													Per Kg
+													{['air_freight', 'air_customs']?.includes(filter?.service)
+													&& 'Per Kg' }
 												</div>
 											</div>
 										)}

@@ -42,7 +42,10 @@ function CfsDetails({ showPocDetails = true, primary_service = {} }) {
 }
 
 function ShipmentHeader() {
-	const user_data = useSelector((({ profile }) => profile?.user));
+	const { role_ids = [], user_data = {} } = useSelector(({ profile }) => ({
+		role_ids  : profile?.partner?.user_role_ids,
+		user_data : profile?.user,
+	}));
 
 	const {
 		shipment_data, primary_service,
@@ -66,6 +69,7 @@ function ShipmentHeader() {
 		shipment_data,
 		primary_service,
 		user_data,
+		role_ids,
 		activeStakeholder,
 		stakeholderConfig,
 	});

@@ -1,6 +1,12 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
 
-const getControls = () => {
+const getControls = ({ convenienceRateOptions }) => {
+	const options = convenienceRateOptions.map((option) => ({
+		label : startCase(option.unit),
+		value : option.unit,
+	}));
+
 	const controls = {
 		name             : 'convenience_fee',
 		type             : 'fieldArray',
@@ -10,9 +16,10 @@ const getControls = () => {
 		controls         : [
 			{
 				name        : 'unit',
-				type        : 'text',
+				type        : 'select',
 				label       : '',
 				span        : 3.8,
+				options,
 				className   : 'primary sm',
 				placeholder : 'Value',
 				rules       : { required: 'Required' },
