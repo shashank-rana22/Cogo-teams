@@ -1,5 +1,5 @@
 import { Select, Toggle } from '@cogoport/components';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -19,9 +19,7 @@ const CARDDATA = [
 
 ];
 
-function Expense({ toggleValue, handleSetToggle, data, loading }) {
-	const [value, setValue] = useState('2023-2024');
-
+function Expense({ toggleValue, handleSetToggle, data, loading, value, setValue }) {
 	const { hr_view } = data || '-';
 	return (
 		<div className={styles.sub_container}>

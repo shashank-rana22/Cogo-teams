@@ -1,8 +1,9 @@
-import { Table, Pagination, Modal, Button, Textarea } from '@cogoport/components';
+import { Table, Pagination, Modal, Button, Textarea, Select, Input } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../common/EmptyState';
+import useGetReimbursementStatus from '../../../hooks/useGetReimbursementStatus';
 import useListReimbursements from '../../../hooks/useListReimbursements';
 import useUpdateReimbursements from '../../../hooks/useUpdateReimbursements';
 
@@ -11,16 +12,41 @@ import getColumns from './getColumns';
 import getColumnsManager from './getColumnsManager';
 import styles from './styles.module.css';
 
-function ExpenseHistory({ toggleValue, hr_view }) {
-	const { loading, data, setFilters, refetchlist } = useListReimbursements({ toggleValue });
+const MONTHS = [
+	{ label: 'January', value: 1 },
+	{ label: 'February', value: 2 },
+	{ label: 'March', value: 3 },
+	{ label: 'April', value: 4 },
+	{ label: 'May', value: 5 },
+	{ label: 'June', value: 6 },
+	{ label: 'July', value: 7 },
+	{ label: 'August', value: 8 },
+	{ label: 'September', value: 9 },
+	{ label: 'October', value: 10 },
+	{ label: 'November', value: 11 },
+	{ label: 'December', value: 12 },
+];
+
+function ExpenseHistory({ toggleValue, hr_view, value }) {
+	const {
+		loading, data, filters,
+		setFilters, refetchlist, debounceQuery,
+	} = useListReimbursements({ toggleValue, value });
 	const { updateReiembursement } = useUpdateReimbursements();
+	const { loading : loading1, data: status_data } = useGetReimbursementStatus();
 	const { list, page, total_count, page_limit } = data || {};
 	const [show, setShow] = useState(false);
 	const [show1, setShow1] = useState(false);
 	const [item, setItem] = useState({});
 	const [remark_text, setRemarkText] = useState('');
 	const [payload, setPayload] = useState({});
+	const [search, setSearch] = useState('');
 
+	// useEffect(()=>{
+	// 	if(!loading1){
+
+	// 	}
+	// }, []);
 	const handleUpdateReimbursement = async () => {
 		// console.log('payload', payload);
 		await updateReiembursement(payload?.id, payload?.action, remark_text, refetchlist);
@@ -58,38 +84,85 @@ function ExpenseHistory({ toggleValue, hr_view }) {
 			<div className={styles.head}>
 				<div className={styles.top_text_container}>
 
-					<span className={styles.top_bold_text}>My expense history</span>
+					<span className={styles.top_bold_text}>Expense history</span>
 					<span className={styles.top_grey_text}>View all you expenses</span>
 
 				</div>
 				<div className={styles.header_input}>
-					{/* <div className={styles.input_filters}>
+					<div className={styles.input_filters}>
 						<Select
 							size="md"
-							placeholder="Status"
+							placeholder="Month"
 							className={styles.select_input}
-									// name="payroll_status"
-									// control={control}
-							value={status}
-							options={OPTION_STATUS}
+							value={filters?.month}
+							options={MONTHS}
 							isClearable
 							onChange={(e) => {
-								setStatus(e);
-								setFilters((prev) => ({ ...prev, payroll_status: e, page: 1 }));
+								setFilters((prev) => ({ ...prev, month: e, page: 1 }));
 							}}
 						/>
 					</div>
-					<div>
-						<Input
-							size="md"
-							className={styles.input_search}
+					{
+						!loading1
+							? (
+								<>
+									<div className={styles.input_filters}>
+										<Select
+											size="md"
+											placeholder="Category"
+											className={styles.select_input}
+									// name="payroll_status"
+									// control={control}
+											value={filters?.category}
+											options={status_data?.expense_category}
+											isClearable
+											onChange={(e) => {
+												setFilters((prev) => ({ ...prev, category: e, page: 1 }));
+											}}
+										/>
+									</div>
+									<div className={styles.input_filters}>
+										<Select
+											size="md"
+											placeholder="Status"
+											className={styles.select_input}
+									// name="payroll_status"
+									// control={control}
+											value={filters?.reimbursement_status}
+											options={status_data?.expense_status}
+											isClearable
+											onChange={(e) => {
+												setFilters((prev) => ({ ...prev, reimbursement_status: e, page: 1 }));
+											}}
+										/>
+									</div>
+								</>
+
+							)
+							: null
+					}
+					<div className={styles.input_filters}>
+						{
+							(hr_view === 'manager' || hr_view === 'hr') && !toggleValue
+								? (
+									<Input
+										size="md"
+										className={styles.select_input}
 									// prefix={<IcMAppSearch className={styles.search_icon} width={20} height={20} />}
-							placeholder="Search"
-							onChange={(e) => handleSearch(e)}
-							name="search_payroll"
-							value={searchQuery}
-						/>
-					</div> */}
+										placeholder="Search"
+										onChange={(val) => {
+											setSearch(val);
+											debounceQuery(val);
+											setFilters((prev) => ({ ...prev, page: 1 }));
+										}}
+										name="search_payroll"
+										value={search}
+									/>
+								)
+								:						null
+						}
+
+					</div>
 				</div>
 			</div>
 			{

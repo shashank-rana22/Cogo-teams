@@ -1,9 +1,12 @@
 // import { IcMInfo } from '@cogoport/icons-react';
-import { ButtonIcon, Tooltip } from '@cogoport/components';
+import { ButtonIcon } from '@cogoport/components';
 // import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 // import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete } from '@cogoport/icons-react';
+import { getMonth, getDate } from '@cogoport/utils';
 import React from 'react';
+
+import { MONTHS } from '../../../Constants/contants';
 
 import styles from './styles.module.css';
 
@@ -50,41 +53,19 @@ const getColumns = ({ setItem, setShow, handleUpdate }) => {
 			id: 'description',
 		},
 		{
-			Header   : <div className={styles.header}>L1 Remarks</div>,
+			Header   : <div className={styles.header}>Submitted On</div>,
 			accessor : (item) => (
 
-				<Tooltip
-					interactive
-					placement="top"
-					className={styles.tooltip}
-					content={<div className={styles.tooltip_data}>{`${item.level1_remarks}`}</div>}
+				<div
+					className={styles.data}
 				>
-					<div
-						className={styles.data}
-					>
-						{item?.level1_remarks || '-'}
-					</div>
-				</Tooltip>
+					{
+								`${MONTHS[getMonth(new Date(item?.submitted_on))]}
+								${getDate(new Date(item?.submitted_on))}` || '-'
+}
+				</div>
 			),
-			id: 'level1_remarks',
-		},
-		{
-			Header   : <div className={styles.header}>L2 Remarks</div>,
-			accessor : (item) => (
-				<Tooltip
-					interactive
-					placement="top"
-					className={styles.tooltip}
-					content={<div className={styles.tooltip_data}>{`${item.level2_remarks}`}</div>}
-				>
-					<div
-						className={styles.data}
-					>
-						{item?.level2_remarks || '-'}
-					</div>
-				</Tooltip>
-			),
-			id: 'level2_remarks',
+			id: 'submitted_on',
 		},
 		{
 			Header   : <div className={styles.header}>Amount</div>,

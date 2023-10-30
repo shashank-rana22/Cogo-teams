@@ -3,22 +3,9 @@ import { IcMDownload } from '@cogoport/icons-react';
 import { getMonth, getDate } from '@cogoport/utils';
 import React from 'react';
 
-import styles from './styles.module.css';
+import { MONTHS } from '../../../../Constants/contants';
 
-const MONTHS = [
-	'January',
-	'February',
-	'March',
-	'April',
-	'May',
-	'June',
-	'July',
-	'August',
-	'September',
-	'October',
-	'November',
-	'December',
-];
+import styles from './styles.module.css';
 
 function ActivityModal({ item, onClose, show }) {
 	return (
@@ -27,15 +14,15 @@ function ActivityModal({ item, onClose, show }) {
 				<Modal.Header title="Activity log" />
 				<Modal.Body>
 					<div className={styles.container}>
-						<div className={styles.section}>
+						{/* <div className={styles.section}>
 							<span className={styles.column1}>Submitted On</span>
 							<span className={styles.column2}>
 								{
-								`${MONTHS[getMonth(new Date(item?.submitted_on))]} 
+								`${MONTHS[getMonth(new Date(item?.submitted_on))]}
 								${getDate(new Date(item?.submitted_on))}` || '-'
 }
 							</span>
-						</div>
+						</div> */}
 						<div className={styles.section}>
 							<span className={styles.column1}>Approved by L1 </span>
 							<span className={styles.column2}>{item?.level1_approved_by || '-'}</span>
@@ -61,6 +48,14 @@ function ActivityModal({ item, onClose, show }) {
 								${getDate(new Date(item?.level2_approved_on))}` : '-'}
 
 							</span>
+						</div>
+						<div className={styles.section}>
+							<span className={styles.column1}>L1 Remarks </span>
+							<span className={styles.column2}>{item?.level1_remarks || '-'}</span>
+						</div>
+						<div className={styles.section}>
+							<span className={styles.column1}>L2 Remarks </span>
+							<span className={styles.column2}>{item?.level2_remarks || '-'}</span>
 						</div>
 						<div className={styles.section}>
 							<span className={styles.column1}>Attachment</span>
