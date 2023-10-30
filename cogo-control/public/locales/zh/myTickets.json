@@ -57,7 +57,7 @@
     "has_reassigned_this_ticket_to": "已重新分配此工单给",
     "this_ticket_has_been_assigned_to": "此工单已分配给",
     "this_ticket_has_been_rejected_by": "此工单已被拒绝 by",
-    "this_ticket_has_been_resolved_by": "此工单已由解决",
+    "this_ticket_has_been_closed_by": "这张票已关闭",
     "has_initiated_resolution_request": "已发起解决请求",
     "has_closed_resolution_request": "已关闭解决请求",
     "ticket_has_been_created": "工单已创建",
@@ -172,5 +172,6 @@
     "enter_serial_id": "输入序列ID",
     "apply": "申请",
     "reset": "重置",
-    "serial_id": "串行ID"
+    "serial_id": "串行ID",
+    "id_creator": "ID创建者"
 }
