@@ -2,6 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
+import useListBfSalesInvoices from '../../../../hook/useListBfSalesInvoices';
 import useListShipment from '../../../../hook/useListShipment';
 import DetailsCard from '../DetailsCard';
 import DocumentsCard from '../DocumentsCard';
@@ -20,6 +21,8 @@ function QuotationCards({
 	const { data: shipmentData = {}, loading: loadingShipment = false } = useListShipment(job_number);
 	const dataList = shipmentData?.list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const shipmentId = dataList?.id || '';
+
+	const { invoicesMap = {}, invoicesLoading = false } = useListBfSalesInvoices({ jobNumber: job_number });
 
 	const [tab, setTab] = useState({
 		shipmentDetailsTab : true,
@@ -81,15 +84,19 @@ function QuotationCards({
 					ref={getPrePostShipmentQuoteRef}
 				/>
 
-				<OperationClosedCardsSet
-					shipment_id={shipmentId}
-					job_id={job_id}
-					setQuotationsData={setQuotationsData}
-				/>
+				{!invoicesLoading && (
+					<OperationClosedCardsSet
+						shipment_id={shipmentId}
+						invoicesMap={invoicesMap}
+						job_id={job_id}
+						setQuotationsData={setQuotationsData}
+					/>
+				)}
 
-				{active_tab === 'financial_close' && (
+				{active_tab === 'financial_close' && !invoicesLoading && (
 					<FinanceClosedCardsSet
 						shipment_id={shipmentId}
+						invoicesMap={invoicesMap}
 						job_id={job_id}
 						setQuotationsData={setQuotationsData}
 					/>

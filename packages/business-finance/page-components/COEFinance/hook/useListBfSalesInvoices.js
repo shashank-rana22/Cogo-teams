@@ -3,24 +3,26 @@ import { useEffect, useCallback } from 'react';
 
 import toastApiError from '../../commons/toastApiError';
 
-const useListBfSalesInvoices = ({ serial_id }) => {
-	const [
-		{ loading: apiLoading, data },
-		trigger,
-	] = useRequestBf(
+const getInvoiceMapping = (invoicesList) => {
+	const invoiceMap = invoicesList.reduce((result, invoice) => (
+		{ ...result, [invoice.invoiceNumber]: invoice.invoicePdfUrl }), {});
+	return invoiceMap;
+};
+
+const useListBfSalesInvoices = ({ jobNumber }) => {
+	const [{ loading = false, data = {} }, trigger] = useRequestBf(
 		{
 			url     : '/sales/invoice/shipment/list',
 			method  : 'GET',
 			authKey : 'get_sales_invoice_shipment_list',
 		},
-		{ autoCancel: false },
 	);
 
 	const listApi = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
-					jobNumber : serial_id || undefined,
+					jobNumber : jobNumber || undefined,
 					jobSource : 'LOGISTICS',
 					jobType   : 'SHIPMENT',
 					pageSize  : 10,
@@ -30,16 +32,16 @@ const useListBfSalesInvoices = ({ serial_id }) => {
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [serial_id, trigger]);
+	}, [jobNumber, trigger]);
 
 	useEffect(() => {
 		listApi();
 	}, [listApi]);
 
 	return {
-		salesList    : data?.list || [],
-		salesLoading : apiLoading,
-		refetch      : listApi,
+		invoicesMap     : getInvoiceMapping(data?.list || []),
+		invoicesLoading : loading,
+		refetch         : listApi,
 	};
 };
 
