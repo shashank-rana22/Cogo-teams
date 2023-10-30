@@ -12,6 +12,7 @@ function Body({
 	source = 'FIN',
 	type = '',
 	invoicesMap = {},
+	billsMap = {},
 	setLineItemSectionOpen = () => {},
 	lineItemSectionOpen = {},
 }) {
@@ -23,6 +24,14 @@ function Body({
 	const key = `${type}_${source}_${id}`;
 	const isOpen = lineItemSectionOpen?.[key];
 
+	const openDocument = () => {
+		if (type === 'sell') {
+			window.open(invoicesMap?.[document_number], '_blank');
+		} else {
+			window.open(billsMap?.[document_number], '_blank');
+		}
+	};
+
 	return (
 		<div className={cl`${!isOpen ? styles.custom_accordion : styles.custom_accordion_open}`}>
 			{loading ? <Placeholder /> : (
@@ -32,7 +41,7 @@ function Body({
 							<div
 								className={cl`${styles.regular} ${styles.invoice_url}`}
 								role="presentation"
-								onClick={() => window.open(invoicesMap?.[document_number], '_blank')}
+								onClick={() => openDocument()}
 							>
 								{document_number}
 							</div>
@@ -109,23 +118,23 @@ function Body({
 									</div>
 								</Tooltip>
 							</div>
-						</div>
-						{isOpen ? (
-							<IcMArrowRotateUp
-								style={{ cursor: 'pointer' }}
-								onClick={() => {
-									setLineItemSectionOpen((prev) => ({ ...prev, [key]: !(prev?.[key]) }));
-								}}
-							/>
-						)
-							: (
-								<IcMArrowRotateDown
+							{isOpen ? (
+								<IcMArrowRotateUp
 									style={{ cursor: 'pointer' }}
 									onClick={() => {
 										setLineItemSectionOpen((prev) => ({ ...prev, [key]: !(prev?.[key]) }));
 									}}
 								/>
-							)}
+							)
+								: (
+									<IcMArrowRotateDown
+										style={{ cursor: 'pointer' }}
+										onClick={() => {
+											setLineItemSectionOpen((prev) => ({ ...prev, [key]: !(prev?.[key]) }));
+										}}
+									/>
+								)}
+						</div>
 					</div>
 					<div className={`${!isOpen ? styles.nothing : styles.content}`}>
 						<LineItemsSection lineItems={line_items?.lineItems} />
