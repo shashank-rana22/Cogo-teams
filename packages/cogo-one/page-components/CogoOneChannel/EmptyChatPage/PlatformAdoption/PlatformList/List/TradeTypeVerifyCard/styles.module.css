@@ -37,6 +37,10 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	@media (max-width: 1280px) {
+		width: 56%;
+	}
 }
 
 .source {
