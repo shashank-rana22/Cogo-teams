@@ -5,7 +5,6 @@ import React from 'react';
 import CommonLoader from '../../../common/CommonLoader';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 
-import PlatformAdoption from './PlatformAdoption';
 import styles from './styles.module.css';
 
 const LeadVoiceCalls = dynamic(() => import('./LeadVoiceCalls'), {
@@ -17,6 +16,10 @@ const ShipmentsHomePage = dynamic(() => import('./ShipmentsHomePage'), {
 });
 
 const RateRevertsPage = dynamic(() => import('./RateRevertsPage'), {
+	loading: () => <div className={styles.container}><CommonLoader /></div>,
+});
+
+const PlatformAdoption = dynamic(() => import('./PlatformAdoption'), {
 	loading: () => <div className={styles.container}><CommonLoader /></div>,
 });
 

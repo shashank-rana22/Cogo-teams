@@ -24,7 +24,7 @@ function DemoCard({ list = [], mailProps = {}, setScheduleDemo = () => {} }) {
 		performedById: profile.user.id || {},
 	}));
 
-	const handleSendEmail = ({ email = '', calendar_id = '', scheduleId = '' }) => {
+	const handleSendEmail = ({ email = '', calendar_id = '', scheduleId = '', id = '' }) => {
 		if (buttonType) {
 			Toast.warn('Email compose is already in progress');
 			return;
@@ -46,6 +46,7 @@ function DemoCard({ list = [], mailProps = {}, setScheduleDemo = () => {} }) {
 					isEmail    : true,
 					scheduleId,
 					source     : 'email_demo',
+					requestId  : id,
 				},
 			}),
 		);
@@ -116,7 +117,7 @@ function DemoCard({ list = [], mailProps = {}, setScheduleDemo = () => {} }) {
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => handleSendEmail({ email, scheduleId, calendar_id })}
+						onClick={() => handleSendEmail({ email, scheduleId, calendar_id, id })}
 					>
 						<IcMPlatformDemo
 							fill="grey"

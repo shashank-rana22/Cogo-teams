@@ -87,6 +87,7 @@ function useReplyMail(mailProps) {
 		isEmail = false,
 		scheduleId = '',
 		source = '',
+		requestId = '',
 	} = emailDemoData || {};
 
 	const {
@@ -129,7 +130,9 @@ function useReplyMail(mailProps) {
 					agentId,
 					calendarId,
 					scheduleId,
-					communicationId: res?.data?.id,
+					communicationId : res?.data?.id,
+					requestId,
+					requestStatus   : 'processing',
 				});
 			}
 
