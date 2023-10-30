@@ -39,6 +39,7 @@ function EmptyChatPage({
 	isBotSession = false,
 	firestore = {},
 	userId = '',
+	initialViewType = '',
 }) {
 	const displayMessage = MESSAGE_MAPPING[activeTab?.tab] || activeTab?.tab;
 
@@ -77,6 +78,7 @@ function EmptyChatPage({
 				viewType={viewType}
 				userId={userId}
 				setActiveTab={setActiveTab}
+				initialViewType={initialViewType}
 			/>
 		);
 	}

@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 function PlatformAdoption({
 	mailProps = {}, firestore = {}, viewType = '', userId = '',
-	isBotSession = false, setActiveTab = () => {},
+	isBotSession = false, setActiveTab = () => {}, initialViewType = '',
 }) {
 	const { userSharedMails = [] } = mailProps || {};
 
@@ -45,7 +45,7 @@ function PlatformAdoption({
 	const {
 		loading = false, data = {},
 		onboardingRequest = () => {},
-	} = useListOmnichannelOnboardingRequests({ showHistory });
+	} = useListOmnichannelOnboardingRequests({ showHistory, initialViewType });
 
 	const { list, ...rest } = data || {};
 	const { page, page_limit, total_count } = rest || {};

@@ -199,6 +199,7 @@ function CogoOne() {
 								isBotSession={isBotSession}
 								firestore={firestore}
 								userId={userId}
+								initialViewType={initialViewType}
 							/>
 						</div>
 					) : (
