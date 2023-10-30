@@ -1,9 +1,13 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+
+import PublicLeaderBoardContext from '../context/PublicLeaderBoardContext';
 
 function useGetLeaderbordList(props) {
 	const { view, dateRange, pageLimit, setUpdatedAt = () => {} } = props;
+
+	const { countdown } = useContext(PublicLeaderBoardContext);
 
 	const [params, setParams] = useState({
 		page                     : 1,
@@ -45,6 +49,12 @@ function useGetLeaderbordList(props) {
 	useEffect(() => {
 		setUpdatedAt(report_synced_at);
 	}, [report_synced_at, setUpdatedAt]);
+
+	useEffect(() => {
+		if (countdown === 0) {
+			trigger();
+		}
+	}, [countdown, trigger]);
 
 	return {
 		list,

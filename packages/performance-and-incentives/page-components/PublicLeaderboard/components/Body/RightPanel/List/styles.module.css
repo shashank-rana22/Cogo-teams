@@ -18,13 +18,17 @@
 	align-items: center;
 	padding: 12px;
 	background-color: #fff;
-	border: 1px solid #f2f2f2;
+	border: 1px solid #ebebeb;
 	border-radius: 4px;
 
 	@media (min-width: 2560px) {
 		padding: 20px;
 		border-radius: 16px;
 	}
+}
+
+.highlight {
+	border: 1px solid #f5b02e;
 }
 
 .list_column {
@@ -92,9 +96,21 @@
 	width: 30px;
 	height: 30px;
 	margin-right: 8px;
+	animation: bounce 2s linear infinite;
 
 	@media (min-width: 2560px) {
 		width: 60px;
 		height: 60px;
+	}
+}
+
+@keyframes bounce {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.2);
 	}
 }
