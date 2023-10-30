@@ -101,10 +101,11 @@
 	cursor: pointer;
 	border-radius: 6px;
 
-	&.pending {
+	&.paid {
 		width: fit-content;
 		padding: 4px;
-		background: #f9f9f9;
+		color: #849e4c;
+		background: #f7faef;
 	}
 
 	&.processed {
@@ -132,6 +133,11 @@
 .popover_content {
 	display: flex;
 	flex-direction: column;
+}
+
+.table_container {
+	width: 100%;
+	margin-top: 12px;
 }
 
 .popover_item {

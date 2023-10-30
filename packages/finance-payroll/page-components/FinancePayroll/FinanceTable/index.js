@@ -1,8 +1,12 @@
 import { Select, Table, Pagination } from '@cogoport/components';
-import React from 'react';
+import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState } from 'react';
 
+import EmptyState from '../../../common/EmptyState';
 import useGetDownloadDetails from '../../../hooks/useGetDownloadDetails';
 import useUpdatePayroll from '../../../hooks/useUpdatePayroll';
+import useUploadFinanceDocuments from '../../../hooks/useUploadFinanceDocuments';
 
 import getFinanceColumns from './getFinanceColumns';
 import styles from './styles.module.css';
@@ -11,7 +15,6 @@ const STATUS_OPTIONS = [
 	{ label: 'Paid', value: 'paid' },
 	{ label: 'Processed', value: 'processed' },
 	{ label: 'Failed', value: 'failed' },
-	{ label: 'Pending', value: 'pending' },
 	{ label: 'Approved', value: 'approved' },
 ];
 
@@ -27,10 +30,13 @@ const STATUS_OPTIONS = [
 // 	},
 // ];
 
+const MAX_LIMIT = 10;
 function FinanceTable({ data = {}, loading = false, filters, setFilters, refetch }) {
+	const [show, setShow] = useState('');
 	const { list, page, page_limit, total_count } = data || {};
+	const { control, handleSubmit } = useForm();
 	console.log('🚀 ~ file: index.js:29 ~ FinanceTable ~ list:', list);
-
+	const { uploadDocument } = useUploadFinanceDocuments();
 	const onPageChange = (pageNumber) => {
 		console.log('page');
 		setFilters((prev) => ({
@@ -43,7 +49,16 @@ function FinanceTable({ data = {}, loading = false, filters, setFilters, refetch
 
 	const { createDownload } = useGetDownloadDetails();
 	const { updatePayroll } = useUpdatePayroll({ refetch });
-	const columns = getFinanceColumns({ STATUS_OPTIONS, updatePayroll, createDownload });
+	const columns = getFinanceColumns({
+		STATUS_OPTIONS,
+		updatePayroll,
+		createDownload,
+		control,
+		show,
+		setShow,
+		handleSubmit,
+		uploadDocument,
+	});
 
 	return (
 		<div className={styles.main_container}>
@@ -93,18 +108,20 @@ function FinanceTable({ data = {}, loading = false, filters, setFilters, refetch
 				</div>
 
 				<div className={styles.table_container}>
-					<Table columns={columns} data={list || []} loading={loading} />
+					{!isEmpty(list) ? <Table columns={columns} data={list || []} loading={loading} /> : <EmptyState />}
 				</div>
 
-				<div className={styles.pagination}>
-					<Pagination
-						type="table"
-						currentPage={page}
-						totalItems={total_count}
-						pageSize={page_limit}
-						onPageChange={onPageChange}
-					/>
-				</div>
+				{total_count >= MAX_LIMIT && !isEmpty(list) ?	(
+					<div className={styles.pagination}>
+						<Pagination
+							type="table"
+							currentPage={page}
+							totalItems={total_count}
+							pageSize={page_limit}
+							onPageChange={onPageChange}
+						/>
+					</div>
+				) : null}
 			</div>
 		</div>
 	);

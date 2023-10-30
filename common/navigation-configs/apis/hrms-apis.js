@@ -856,6 +856,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'upload_payroll_finance_documents',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

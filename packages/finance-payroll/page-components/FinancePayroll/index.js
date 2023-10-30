@@ -1,9 +1,11 @@
-import { Button } from '@cogoport/components';
+import { Button, Placeholder } from '@cogoport/components';
 import { useForm, SelectController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowNext, IcMPlus, IcMTaskCompleted } from '@cogoport/icons-react';
+import { IcMArrowNext, IcMTaskCompleted } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { isNumber } from '@cogoport/utils';
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useGetNextPayroll from '../../hooks/useGetNextPayroll';
 import useGetPayrollFinanceDetails from '../../hooks/useGetPayrollFinanceDetails';
@@ -31,6 +33,8 @@ const TWO = GLOBAL_CONSTANTS.two;
 
 // const list = ['march', 'april'];
 function FinancePayroll() {
+	const { push } = useRouter();
+	const { name:user = '' } = useSelector((state) => state?.profile?.user);
 	const { data :list } = useGetNextPayroll({ return_list: true });
 
 	const { data, getNextPayrollDashboard, loading } = useGetPayrollFinanceDetails();
@@ -45,12 +49,12 @@ function FinancePayroll() {
 	const monthString = MONTH_NAMES[month];
 	const year = new Date().getFullYear();
 
-	const MONTH_OBJS = useMemo(() => {
-		if (list) {
-			return list.map((name) => ({ label: name, value: name }));
-		}
-		return [];
-	}, [list]);
+	// const MONTH_OBJS = useMemo(() => {
+	// 	if (list) {
+	// 		return list.map((name) => ({ label: name, value: name }));
+	// 	}
+	// 	return [];
+	// }, [list]);
 	// useEffect(() => {
 	// 	setSelectedMonth(list?.[GLOBAL_CONSTANTS.zeroth_index] || ''); // Set initial value
 	// }, [list]);
@@ -72,13 +76,11 @@ function FinancePayroll() {
 			<div className={styles.head_flex}>
 				<span className={styles.heading}>Finance(Payroll)</span>
 				<div className={styles.buttons}>
-					<Button size="md" themeType="secondary">
-						<div className={styles.button_text_container}>
-							<span className={styles.button_text}>New request</span>
-							<IcMPlus width={18} height={18} />
-						</div>
-					</Button>
-					<Button size="md" themeType="primary">
+					<Button
+						size="md"
+						themeType="primary"
+						onClick={() => push('/attendance-leave-management?showInbox=true')}
+					>
 						<div className={styles.button_text_container}>
 							<span className={styles.button_text}>My Inbox</span>
 							<IcMTaskCompleted width={18} height={18} />
@@ -90,20 +92,28 @@ function FinancePayroll() {
 			<div className={styles.container}>
 				<div className={styles.header}>
 					<div>
-						<div className={styles.heading}>Welcome back, Suchita!</div>
+						<div className={styles.heading}>
+							Welcome back,
+							{' '}
+							{loading ? <Placeholder height="20px" width="100px" style={{ marginLeft: '10px' }} />
+								: user}
+						</div>
 						<div className={styles.lower_text}>Your payroll dashboard</div>
 					</div>
-					<div className={styles.buttons_div}>
-						<SelectController
-							name="month_year"
-							size="md"
-							control={control}
-							options={list
-								? list.map((name) => ({ label: name, value: name }))
-								: []}
-							onChange={handleMonthChange}
-						/>
-					</div>
+					{loading ? <Placeholder height="40px" width="140px" />
+						:	(
+							<div className={styles.buttons_div}>
+								<SelectController
+									name="month_year"
+									size="md"
+									control={control}
+									options={list
+										? list.map((name) => ({ label: name, value: name }))
+										: []}
+									onChange={handleMonthChange}
+								/>
+							</div>
+						)}
 				</div>
 				{/* <Select options={options} /> */}
 
@@ -120,8 +130,8 @@ function FinancePayroll() {
 					<div className={styles.card_section}>
 						{ CARDDATA.map((item) => (
 							<div className={styles.expense_card} key={item.label}>
-								{console.log(data?.[item.value], 'test')}
-								<span className={styles.card_value}>{data?.[item.value]?.current_value}</span>
+								{loading ? <Placeholder height="20px" width="100px" margin="0px 0px 20px 0px" />
+									: <span className={styles.card_value}>{data?.[item.value]?.current_value}</span>}
 								<span className={styles.card_label}>{item.label}</span>
 								{parseFloat(data?.[item.value]?.growth)
 					< GLOBAL_CONSTANTS.zeroth_index ? (

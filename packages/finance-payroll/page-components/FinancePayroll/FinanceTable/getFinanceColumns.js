@@ -1,13 +1,19 @@
-import { Button, cl, Popover } from '@cogoport/components';
+import { Button, cl, Popover, Modal } from '@cogoport/components';
+import { UploadController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMArrowDown } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMDownload, IcMCloudUpload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-const getFinanceColumns = ({ STATUS_OPTIONS = [], updatePayroll = () => {}, createDownload = () => {} }) => {
+const getFinanceColumns = ({
+	STATUS_OPTIONS = [],
+	updatePayroll = () => {}, createDownload = () => {},
+	control, show, setShow, handleSubmit,
+	uploadDocument,
+}) => {
 	console.log('hi');
 	return ([
 		// {
@@ -100,7 +106,7 @@ const getFinanceColumns = ({ STATUS_OPTIONS = [], updatePayroll = () => {}, crea
 							onClick={() => handleDownload(item.id)}
 						>
 							<span>Download</span>
-							<IcMArrowDown
+							<IcMDownload
 								style={{ marginLeft: '4px' }}
 								width={14}
 								height={14}
@@ -110,6 +116,56 @@ const getFinanceColumns = ({ STATUS_OPTIONS = [], updatePayroll = () => {}, crea
 				);
 			},
 			id: 'actions',
+		},
+
+		{
+			Header   : 'UPLOAD RECORD',
+			accessor : (item = {}) => {
+				// const handleDownload = (id) => {
+				// 	createDownload({ id });
+				// };
+				const onSubmit = (values) => {
+					const payload = {
+						payroll_id   : item.id,
+						document_url : values?.[`payroll_number_document_url_${item.id}`].finalUrl,
+					};
+					uploadDocument({ payload });
+				};
+				console.log(item, 'item');
+				return (
+					<div className={styles.download}>
+						<Button
+							size="md"
+							themeType="secondary"
+							style={{ marginLeft: '6px' }}
+							aria-hidden
+							onClick={() => setShow(item.id)}
+						>
+							<span>Upload</span>
+							<IcMCloudUpload
+								style={{ marginLeft: '4px' }}
+								width={14}
+								height={14}
+							/>
+						</Button>
+
+						<Modal size="md" show={show === item.id} onClose={() => setShow(false)} placement="center">
+							<Modal.Header title="Are you sure?" />
+							<Modal.Body>
+								<UploadController
+									className="payroll_document"
+									name={`payroll_number_document_url_${item.id}`}
+									control={control}
+								/>
+							</Modal.Body>
+							<Modal.Footer>
+								<Button onClick={handleSubmit(onSubmit)}>OK</Button>
+							</Modal.Footer>
+						</Modal>
+					</div>
+				);
+			},
+			id: 'upload',
 		},
 		{
 			Header   : 'STATUS',
@@ -147,10 +203,21 @@ const getFinanceColumns = ({ STATUS_OPTIONS = [], updatePayroll = () => {}, crea
 				}
 				return (
 					<div className={cl`${styles.statuses} ${styles[item.status]}`}>
-						<Popover placement="bottom" render={<PopoverContent />}>
-							{	startCase(
-								item.status,
-							)}
+						<Popover
+							placement="bottom"
+							render={<PopoverContent />}
+						>
+							<div className={styles.statuses}>
+								{	startCase(
+									item.status,
+								)}
+								<IcMArrowDown
+									style={{ marginLeft: '4px' }}
+									width={14}
+									height={14}
+								/>
+
+							</div>
 						</Popover>
 					</div>
 				);
