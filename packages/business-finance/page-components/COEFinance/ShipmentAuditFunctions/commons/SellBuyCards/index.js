@@ -21,6 +21,7 @@ function SellBuyCards({
 	type = '',
 	data = [],
 	loading = false,
+	invoicesMap = {},
 	shipment_id = '',
 	getClosedTasks = () => {},
 }) {
@@ -31,8 +32,8 @@ function SellBuyCards({
 	let grandTotal = 0;
 
 	data?.forEach((i) => {
-		profitabilityData += i.profitability;
-		grandTotal += i.grand_total;
+		profitabilityData = i.profitability;
+		grandTotal += (i.grand_total * i.exchange_rate);
 	});
 
 	return (
@@ -89,6 +90,7 @@ function SellBuyCards({
 							income={grandTotal}
 							source={source}
 							type={type}
+							invoicesMap={invoicesMap}
 							shipment_id={shipment_id}
 							profitability={profitabilityData}
 							getClosedTasks={getClosedTasks}

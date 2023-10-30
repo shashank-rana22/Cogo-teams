@@ -1,4 +1,5 @@
 import { Pill, Placeholder, Tooltip, cl } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -10,6 +11,7 @@ function Body({
 	loading = false,
 	source = 'FIN',
 	type = '',
+	invoicesMap = {},
 	setLineItemSectionOpen = () => {},
 	lineItemSectionOpen = {},
 }) {
@@ -27,7 +29,13 @@ function Body({
 				<div>
 					<div className={styles.accord_body}>
 						<div className={styles.accord_row_content}>
-							<div className={styles.regular}>{document_number}</div>
+							<div
+								className={cl`${styles.regular} ${styles.invoice_url}`}
+								role="presentation"
+								onClick={() => window.open(invoicesMap?.[document_number], '_blank')}
+							>
+								{document_number}
+							</div>
 							<div className={styles.trade_party_container}>
 								{trade_party ? (
 									<Tooltip
@@ -58,11 +66,29 @@ function Body({
 								{grand_total ? (
 									<Tooltip
 										content={(
-											<div>{grand_total}</div>
+											<div>
+												{formatAmount({
+													amount   : grand_total,
+													currency : data?.currency,
+													options  : {
+														currencyDisplay : 'code',
+														style           : 'currency',
+													},
+												})}
+											</div>
 										)}
 										placement="top"
 									>
-										<div className={styles.date_content}>{grand_total}</div>
+										<div>
+											{formatAmount({
+												amount   : grand_total,
+												currency : data?.currency,
+												options  : {
+													currencyDisplay : 'code',
+													style           : 'currency',
+												},
+											})}
+										</div>
 									</Tooltip>
 								) : '-'}
 							</div>
@@ -102,7 +128,7 @@ function Body({
 							)}
 					</div>
 					<div className={`${!isOpen ? styles.nothing : styles.content}`}>
-						<LineItemsSection lineItems={line_items?.line_items} />
+						<LineItemsSection lineItems={line_items?.lineItems} />
 					</div>
 				</div>
 			)}
