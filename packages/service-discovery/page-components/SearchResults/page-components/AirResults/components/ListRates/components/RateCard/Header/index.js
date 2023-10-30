@@ -108,19 +108,20 @@ function Header({
 
 					<div className={styles.airline_name}>{rate?.airline?.short_name}</div>
 
-					<Tooltip
-						placement="top"
-						content={`Basic freight is ${
-							price_type === 'all_in' ? 'inclusive' : 'exclusive'
-						} of surcharges`}
-
-					>
-						{price_type === 'all_in' ? (
-							<span className={styles.pill}>All Inclusive</span>
-						) : (
-							<span className={styles.pill}>Net - Net</span>
-						)}
-					</Tooltip>
+					<div className={styles.tooltip}>
+						<Tooltip
+							placement="top"
+							content={`Basic freight is ${
+								price_type === 'all_in' ? 'inclusive' : 'exclusive'
+							} of surcharges`}
+						>
+							{price_type === 'all_in' ? (
+								<span className={styles.pill}>All Inclusive</span>
+							) : (
+								<span className={styles.pill}>Net - Net</span>
+							)}
+						</Tooltip>
+					</div>
 				</div>
 			</div>
 

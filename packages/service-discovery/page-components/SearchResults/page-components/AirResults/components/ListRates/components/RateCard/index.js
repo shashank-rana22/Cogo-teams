@@ -55,9 +55,11 @@ function RateCard({
 				setRouterLoading={setRouterLoading}
 			/>
 
-			<div className={styles.promo_codes}>
-				<PromoCode promotion={getPromotion({ promocodes: rate?.promocode })} />
-			</div>
+			{rate?.promocode ? (
+				<div className={styles.promo_codes}>
+					<PromoCode promotion={getPromotion({ promocodes: rate?.promocode })} />
+				</div>
+			) : null}
 
 			<Footer
 				detail={detail}

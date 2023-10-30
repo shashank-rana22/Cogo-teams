@@ -120,3 +120,7 @@
 	border: 1px solid #fcdc00;
 	border-radius: 8px;
 }
+
+.tooltip {
+	min-width: max-content;
+}

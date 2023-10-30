@@ -15,6 +15,10 @@
 .count {
 	font-size: 24px;
 	color: #000;
+
+	@media (max-width: 768px) {
+		font-size: 18px;
+	}
 }
 
 .filters_container {
