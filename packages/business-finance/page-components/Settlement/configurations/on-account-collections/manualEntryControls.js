@@ -105,7 +105,7 @@ const controls = [
 		value       : 1,
 		span        : 4,
 		placeholder : 'Enter Exchange Rate',
-		rules       : { required: 'Amount  is required', min: 1 },
+		rules       : { required: 'Amount  is required' },
 	},
 	{
 		name        : 'ledCurrency',
