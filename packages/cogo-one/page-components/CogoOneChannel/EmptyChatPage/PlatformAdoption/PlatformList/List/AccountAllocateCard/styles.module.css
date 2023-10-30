@@ -27,10 +27,34 @@
 	font-size: 12px;
 }
 
-.label {
+.wrap {
 	display: flex;
 	flex-direction: column;
+	width: 54%;
+
+	@media (max-width: 1280px) {
+		width: 47%;
+	}
+}
+
+.label {
+	width: 53%;
+	overflow: hidden;
 	font-size: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	@media (max-width: 1280px) {
+		width: 47%;
+	}
+}
+
+.requestName {
+	width: 95%;
+	overflow: hidden;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .docs {

@@ -41,8 +41,8 @@ function AccountAllocateCard({
 					<div className={styles.body_info}>
 						<div className={styles.each_row}>
 							<div className={styles.title}>Requesting Agent : </div>
-							<div className={styles.label}>
-								{name || '-'}
+							<div className={styles.wrap}>
+								<div className={styles.requestName}>{name || '-'}</div>
 								<div className={styles.date}>
 									{formatDate({
 										date       : created_at,

@@ -76,7 +76,7 @@ function VerifyAccount({
 			scroll={false}
 			onClose={handleClose}
 			className={cl`${!showAccountDetails || hasDocument ? styles.only_docs : styles.with_docs}`}
-			placement="top"
+			placement="fullscreen"
 			closeOnOuterClick={handleClose}
 		>
 			<Modal.Header title="KYC Documents Verification" />

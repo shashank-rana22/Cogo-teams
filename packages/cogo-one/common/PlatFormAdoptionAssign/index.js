@@ -42,13 +42,30 @@ function PlatFormAdoptionAssign({ data = {} }) {
 				<Popover
 					placement="bottom"
 					render={(
-						<Button
-							themeType="secondary"
-							size="sm"
-							onClick={() => setAssignModal((prev) => ({ ...prev, show: true }))}
-						>
-							Assign to agent
-						</Button>
+						<div className={styles.button_container}>
+							<Button
+								themeType="secondary"
+								size="sm"
+								onClick={() => setAssignModal((prev) => ({ ...prev, show: true }))}
+							>
+								Assign to agent
+							</Button>
+							<Button
+								themeType="secondary"
+								size="sm"
+								onClick={() => onboardingAgent({
+									source,
+									sourceId       : source_id,
+									requestType    : request_type,
+									requestedAt    : created_at,
+									previousAgents : agent_id,
+									metadata,
+								})}
+								className={styles.auto_button}
+							>
+								Auto Assign
+							</Button>
+						</div>
 					)}
 					interactive
 				>

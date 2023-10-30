@@ -14,10 +14,10 @@ const getPayload = ({
 	metadata = {},
 }) => ({
 	source,
-	source_id                : sourceId,
-	agent_id                 : agentId,
-	request_type             : requestType,
-	requested_at             : requestedAt,
+	source_id                : sourceId || undefined,
+	agent_id                 : agentId || undefined,
+	request_type             : requestType || undefined,
+	requested_at             : requestedAt || undefined,
 	previous_assigned_agents : [previousAgents],
 	metadata,
 });
