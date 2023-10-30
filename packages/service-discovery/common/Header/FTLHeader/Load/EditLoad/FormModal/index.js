@@ -21,6 +21,8 @@ function FormModal({
 	commodity_type = '',
 	loadType = '',
 	data = {},
+	onClose = () => {},
+	isMobile = false,
 }) {
 	const radioOptions = useMemo(() => [
 		{ name: 'cargo_per_package', value: 'cargo_per_package', label: 'Per Package' },
@@ -41,6 +43,8 @@ function FormModal({
 			<Header
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
+				onClose={onClose}
+				isMobile={isMobile}
 			/>
 
 			{activeTab === 'cargo' ? (

@@ -1,5 +1,6 @@
 .modal {
 	max-width: 440px;
+	max-height: 100vh;
 
 	:global {
 		.ui_modal_body_container {

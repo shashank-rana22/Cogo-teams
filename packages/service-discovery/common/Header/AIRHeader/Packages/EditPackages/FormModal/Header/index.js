@@ -1,4 +1,5 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import { IcMCross } from '@cogoport/icons-react';
 import { useRef, useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -15,6 +16,8 @@ const TAB_PANELS_MAPPING = {
 function Header({
 	activeTab = '',
 	setActiveTab = () => {},
+	onClose = () => {},
+	isMobile = false,
 }) {
 	const headerRef = useRef(null);
 
@@ -32,7 +35,13 @@ function Header({
 
 	return (
 		<div ref={headerRef} className={styles.container}>
-			<div className={styles.heading}>Cargo Details</div>
+			<div className={styles.header}>
+				<div className={styles.heading}>Cargo Details</div>
+
+				{isMobile ? (
+					<IcMCross onClick={onClose} />
+				) : null}
+			</div>
 
 			<div className={styles.tabs}>
 				<Tabs

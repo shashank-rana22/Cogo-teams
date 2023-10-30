@@ -1,3 +1,5 @@
+import { IcMCross } from '@cogoport/icons-react';
+
 import Layout from '../../../../../Layout';
 
 import styles from './styles.module.css';
@@ -8,11 +10,19 @@ function Form({
 	watch = () => {},
 	handleSubmit = () => {},
 	setValue = () => {},
+	onClose = () => {},
 	errors = {},
+	isMobile = false,
 }) {
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>Container Details</div>
+			<div className={styles.header}>
+				<div className={styles.heading}>Container Details</div>
+
+				{isMobile ? (
+					<IcMCross onClick={onClose} />
+				) : null}
+			</div>
 
 			<Layout
 				control={control}

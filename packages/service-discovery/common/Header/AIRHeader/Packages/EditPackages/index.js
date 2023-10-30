@@ -196,12 +196,14 @@ function EditPackages({
 		});
 	}, [activeTab, defaultValues, setValue]);
 
+	const onClose = () => setShow(false);
+
 	return (
 		<Modal
 			animate
 			size="md"
 			show={show}
-			onClose={() => setShow(false)}
+			onClose={onClose}
 			placement={isMobile ? 'bottom' : 'right'}
 			className={styles.modal}
 		>
@@ -217,6 +219,8 @@ function EditPackages({
 					handleApply={handleApply}
 					activeTab={activeTab}
 					setActiveTab={setActiveTab}
+					onClose={onClose}
+					isMobile={isMobile}
 				/>
 			</Modal.Body>
 

@@ -175,12 +175,14 @@ function EditLoad({
 		});
 	}, [defaultValues, loadType, load_selection_type, setValue]);
 
+	const onClose = () => setShow(false);
+
 	return (
 		<Modal
 			animate
 			size="md"
 			show={show}
-			onClose={() => setShow(false)}
+			onClose={onClose}
 			placement={isMobile ? 'bottom' : 'right'}
 			className={styles.modal}
 		>
@@ -198,6 +200,8 @@ function EditLoad({
 					commodity_type={data?.commodity_type}
 					loadType={loadType}
 					data={{ origin_country_id: data?.origin_country_id }}
+					onClose={onClose}
+					isMobile={isMobile}
 				/>
 			</Modal.Body>
 

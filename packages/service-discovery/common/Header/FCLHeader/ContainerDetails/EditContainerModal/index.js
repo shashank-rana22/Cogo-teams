@@ -70,12 +70,14 @@ function EditContainerModal({
 		setShow(false);
 	};
 
+	const onClose = () => setShow(false);
+
 	return (
 		<Modal
 			animate
 			size="md"
 			show={show}
-			onClose={() => setShow(false)}
+			onClose={onClose}
 			placement={isMobile ? 'bottom' : 'right'}
 			className={styles.modal}
 		>
@@ -87,6 +89,8 @@ function EditContainerModal({
 					errors={errors}
 					watch={watch}
 					setValue={setValue}
+					onClose={onClose}
+					isMobile={isMobile}
 				/>
 			</Modal.Body>
 

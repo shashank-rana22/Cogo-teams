@@ -54,6 +54,7 @@ function Packages({
 				popoverComponentData={popoverComponentData}
 				setShowModal={setShowModal}
 				chargeable_weight={chargeable_weight}
+				isMobile={isMobile}
 			/>
 
 			{showModal ? (

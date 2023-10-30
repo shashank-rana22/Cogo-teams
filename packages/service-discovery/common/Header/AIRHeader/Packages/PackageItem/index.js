@@ -17,6 +17,7 @@ function PackageItem({
 	setShowModal = () => {},
 	setInfoBanner = () => {},
 	chargeable_weight = 0,
+	isMobile = false,
 }) {
 	const { commodity = '', commodity_details = [], total_volume = 1, total_weight = 1, total_quantity = 1 } = loadItem;
 
@@ -68,37 +69,55 @@ function PackageItem({
 				</span>
 			)}
 			>
-				<span className={styles.text}>
-					Count:
-					{' '}
-					<strong>{total_quantity}</strong>
-					{', '}
-					Volume:
-					{' '}
-					<strong>
-						{total_volume}
+				{isMobile ? (
+					<span className={styles.text}>
+						<strong>{total_quantity}</strong>
+						{' X '}
+						<strong>
+							{total_volume}
+							{' '}
+							CBM
+						</strong>
+						{', '}
+						<strong>
+							{total_weight}
+							{' '}
+							KG
+						</strong>
+					</span>
+				) : (
+					<span className={styles.text}>
+						Count:
 						{' '}
-						CBM
-					</strong>
-					{', '}
-					Weight:
-					{' '}
-					<strong>
-						{total_weight}
+						<strong>{total_quantity}</strong>
+						{', '}
+						Volume:
 						{' '}
-						KG
-					</strong>
-					{', '}
-					CW:
-					{' '}
-					<strong>
-						{chargeable_weight}
+						<strong>
+							{total_volume}
+							{' '}
+							CBM
+						</strong>
+						{', '}
+						Weight:
 						{' '}
-						KG
-					</strong>
-					{', '}
-					<strong>{startCase(commodity === 'general' ? commodity : commodity_type)}</strong>
-				</span>
+						<strong>
+							{total_weight}
+							{' '}
+							KG
+						</strong>
+						{', '}
+						CW:
+						{' '}
+						<strong>
+							{chargeable_weight}
+							{' '}
+							KG
+						</strong>
+						{', '}
+						<strong>{startCase(commodity === 'general' ? commodity : commodity_type)}</strong>
+					</span>
+				)}
 			</Tooltip>
 
 			{isAllowedToEdit ? (
