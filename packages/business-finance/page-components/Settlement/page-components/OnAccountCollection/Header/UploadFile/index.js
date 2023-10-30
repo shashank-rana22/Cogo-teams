@@ -26,7 +26,7 @@ function UploadFile({ showModal, setShowModal, refetch }) {
 
 	const {
 		successFileUrl = '',
-		errorFileUrl = 0,
+		errorFileUrl = '',
 	} = data || {};
 
 	return (
