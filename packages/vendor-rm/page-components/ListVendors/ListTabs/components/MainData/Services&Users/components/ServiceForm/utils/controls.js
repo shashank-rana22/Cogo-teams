@@ -1,9 +1,8 @@
 import { startCase } from '@cogoport/utils';
 
-import officeLocations from '../../../../../../../../../utils/office-locations.json';
 import { EXCLUDE_CATEGORIES } from '../../../../../../../constants';
 
-const getControls = ({ pocOptions }) => [
+const getControls = ({ pocOptions, country_id = '' }) => [
 	{
 		name               : 'category',
 		label              : 'Select Category',
@@ -19,11 +18,26 @@ const getControls = ({ pocOptions }) => [
 		rules              : { required: 'Category is required' },
 	},
 	{
+
+		name        : 'country_id',
+		label       : 'Country of Registration',
+		type        : 'asyncSelect',
+		params      : { filters: { type: ['country'] } },
+		asyncKey    : 'list_locations',
+		placeholder : 'Select a Country',
+		style       : { flexBasis: '46%' },
+		condition   : { type: ['country'] },
+		rules       : { required: 'Country is required' },
+	},
+	{
 		name        : 'cogoport_office_id',
 		label       : 'Select Cogoport Office',
-		type        : 'select',
+		type        : 'asyncSelect',
+		params      : { filters: { type: ['city'], country_id } },
+		renderLabel : (item) => `${item?.name}`,
+		asyncKey    : 'list_locations',
 		placeholder : 'Select Location',
-		options     : officeLocations,
+		condition   : { type: ['city'] },
 		style       : { flexBasis: '46%', marginRight: '20px' },
 		rules       : { required: 'Office Location is required' },
 	},
