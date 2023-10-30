@@ -61,7 +61,7 @@ function Child({
 				{Object.keys(total_fields).map((rowFields) => (
 					<div className={styles.row} key={rowFields}>
 						{total_fields[rowFields].map((controlItem) => {
-							const { span, name:ctrlItemName } = controlItem || {};
+							const { span, name:ctrlItemName, rules = {} } = controlItem || {};
 
 							const flex = getWidthPercent(span || TOTAL_SPAN);
 							const element_name = `${name}.${index}.${ctrlItemName}`;
@@ -90,7 +90,19 @@ function Child({
 									{index === 0 ? (
 										<h4 className={styles.label}>
 											{newProps?.label}
+
+											{rules?.required ? (
+												<sup style={{
+													marginLeft : '4px',
+													color      : '#f00',
+												}}
+												>
+													*
+												</sup>
+											) : null}
+
 										</h4>
+
 									) : null}
 
 									<FormElement

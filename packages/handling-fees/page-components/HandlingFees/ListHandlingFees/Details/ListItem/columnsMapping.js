@@ -27,7 +27,7 @@ const columnsMapping = [
 		key      : 'custom_org_config_count',
 		label    : 'Custom configuration Organizations',
 		getValue : (data) => (
-			<div className={styles.flexColumnsMapping}>
+			<div className={styles.custom_config}>
 				{startCase(data?.custom_org_config_count) || DEFAULT_CUSTOM_ORG}
 			</div>
 		),

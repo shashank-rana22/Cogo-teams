@@ -6,6 +6,7 @@ import useGetHandlingFee from '../../../hooks/useGetHandlingFee';
 
 import CustomConfigForm from './CustomConfigForm';
 import CustomHandlingFeesList from './CustomHandlingFeesList';
+import styles from './styles.module.css';
 
 const OPTIONS = [
 	{ label: 'Active', value: 'active' },
@@ -33,11 +34,16 @@ function CustomConfig() {
 
 	const [selectedCustomConfig, setSelectedCustomConfig] = useState({});
 
+	const handleCloseConfigForm = () => {
+		setShowCustomConfigForm(false);
+		setSelectedCustomConfig({});
+	};
+
 	return (
-		<>
+		<div className={styles.container}>
 			<h3>Custom Configuration</h3>
 
-			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+			<div className={styles.header}>
 				<Tabs
 					themeType="primary"
 					activeTab={listType}
@@ -73,9 +79,10 @@ function CustomConfig() {
 					organizationDetails={organizationDetails}
 					itemValue={selectedCustomConfig}
 					listType={listType}
-					onClosingForm={() => setShowCustomConfigForm(false)}
+					onClosingForm={handleCloseConfigForm}
 					defaultConfigFeeUnit={data?.data?.fee_currency}
 					refetchGetHandlingFeeData={refetchGetHandlingFeeData}
+					setSelectedCustomConfig={setSelectedCustomConfig}
 				/>
 			) : (
 				<CustomHandlingFeesList
@@ -86,7 +93,7 @@ function CustomConfig() {
 					setSelectedCustomConfig={setSelectedCustomConfig}
 				/>
 			)}
-		</>
+		</div>
 	);
 }
 

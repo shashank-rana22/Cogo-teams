@@ -4,15 +4,15 @@ const ONE = 1;
 const FIRST_ELEM_INDEX = 0;
 
 const EXCLUDE_KEYS = [];
+const FIELDS_TO_CHECK = ['slab_unit', 'slab_lower_limit',
+	'slab_upper_limit', 'fee_unit', 'fee_currency', 'fee_value'];
 
 const handleFieldArrayAddCheck = ({ currentIndex, formValues, name }) => {
 	if (currentIndex <= FIRST_ELEM_INDEX) return true;
 
 	const prevSlab = formValues?.[name]?.[currentIndex - ONE] || {};
 
-	const isPrevSlabFilled = Object.keys(prevSlab || {})
-		.filter((k) => !EXCLUDE_KEYS.includes(k))
-		.every((k) => prevSlab[k]);
+	const isPrevSlabFilled = FIELDS_TO_CHECK.filter((k) => !EXCLUDE_KEYS.includes(k)).every((k) => prevSlab[k]);
 
 	const { minimum_fee_value, maximum_fee_value, fee_value, slab_lower_limit, slab_upper_limit } = prevSlab || {};
 

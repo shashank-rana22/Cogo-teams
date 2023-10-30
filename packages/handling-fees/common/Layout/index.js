@@ -28,7 +28,7 @@ function Layout(
 			{finalControls.map((ctrl) => {
 				const {
 					type = '', label = '', span = 6, removeLabelMargin = false,
-					handleFieldArrayAddCheck = () => true, ...restCtrl
+					handleFieldArrayAddCheck = () => true, rules = {}, ...restCtrl
 				} = ctrl || {};
 
 				if (type === 'fieldArray') {
@@ -59,7 +59,18 @@ function Layout(
 								className={cl`${styles.label} ${removeLabelMargin ? styles.removeLabelMargin : ''}`}
 							>
 								{label}
+
+								{rules?.required ? (
+									<sup style={{
+										marginLeft : '4px',
+										color      : '#f00',
+									}}
+									>
+										*
+									</sup>
+								) : null}
 							</div>
+
 						) : null}
 
 						{type ? <FormElement control={control} {...restCtrl} type={type} /> : null}

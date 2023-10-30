@@ -86,9 +86,10 @@ function CustomConfigForm({
 	}, [setValue, service]);
 
 	useEffect(() => {
-		setValue('custom_config_slab', slab_details);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [slab_details]);
+		if (!isEmpty(slab_details)) {
+			setValue('custom_config_slab', slab_details);
+		}
+	}, [setValue, slab_details]);
 
 	return (
 		<div className={styles.container}>

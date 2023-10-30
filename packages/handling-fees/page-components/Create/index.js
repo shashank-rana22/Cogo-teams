@@ -13,6 +13,7 @@ import SERVICE_TABS_MAPPING from '../../utils/service-tabs-mapping';
 import CustomConfig from './CustomConfig';
 import getMandatoryControls from './getMandatoryControls';
 import getOptionalControls from './getOptionalControls';
+import styles from './styles.module.css';
 
 const ZERO = 0;
 
@@ -80,8 +81,7 @@ function Create({ data = {}, type = 'create' }) {
 
 	return (
 		<>
-
-			<div style={{ display: 'flex', alignItems: 'center' }}>
+			<div className={styles.heading}>
 				<Button
 					themeType="tertiary"
 					onClick={() => {
@@ -100,6 +100,7 @@ function Create({ data = {}, type = 'create' }) {
 					onChange={(val) => {
 						setActiveService(val);
 					}}
+					className={styles.service_tabs}
 				>
 					{(SERVICE_TABS_MAPPING).map((item) => {
 						const { label = '', value = '' } = item;
@@ -108,32 +109,34 @@ function Create({ data = {}, type = 'create' }) {
 				</Tabs>
 			) : null}
 
-			<Layout
-				control={control}
-				controls={optionalControls}
-				errors={errors}
-				handleFieldArrayAddCheck={handleFieldArrayAddCheck}
-				customFieldArrayControls={customFieldArrayControls}
-				formValues={formValues}
-				showElements={showElements}
-				setValue={setValue}
-			/>
+			<div className={styles.global_config}>
+				<Layout
+					control={control}
+					controls={optionalControls}
+					errors={errors}
+					handleFieldArrayAddCheck={handleFieldArrayAddCheck}
+					customFieldArrayControls={customFieldArrayControls}
+					formValues={formValues}
+					showElements={showElements}
+					setValue={setValue}
+				/>
 
-			<Layout
-				control={control}
-				controls={mandatoryControls}
-				errors={errors}
-				handleFieldArrayAddCheck={handleFieldArrayAddCheck}
-				customFieldArrayControls={customFieldArrayControls}
-				formValues={formValues}
-				showElements={showElements}
-				setValue={setValue}
-			/>
+				<Layout
+					control={control}
+					controls={mandatoryControls}
+					errors={errors}
+					handleFieldArrayAddCheck={handleFieldArrayAddCheck}
+					customFieldArrayControls={customFieldArrayControls}
+					formValues={formValues}
+					showElements={showElements}
+					setValue={setValue}
+				/>
 
-			<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '24px' }}>
-				<Button size="lg" onClick={handleSubmit(onCreate)}>
-					SUBMIT
-				</Button>
+				<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '24px' }}>
+					<Button size="md" onClick={handleSubmit(onCreate)}>
+						SAVE
+					</Button>
+				</div>
 			</div>
 
 			{type === 'edit' ? (

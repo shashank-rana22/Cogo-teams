@@ -65,6 +65,7 @@ function useUpdateHandlingFeeCustomConfig({
 				} successfully`,
 			);
 			onClosingForm();
+			refetchGetHandlingFeeData();
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(error?.response?.data);

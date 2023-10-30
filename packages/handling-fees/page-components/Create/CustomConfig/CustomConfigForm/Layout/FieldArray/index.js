@@ -58,7 +58,7 @@ function FieldArray({
 						size="md"
 						themeType="secondary"
 						onClick={handleAppend}
-						style={{ marginLeft: '4px' }}
+						style={{ marginTop: '6px', marginLeft: '4px' }}
 					>
 						<IcMPlusInCircle
 							width={14}

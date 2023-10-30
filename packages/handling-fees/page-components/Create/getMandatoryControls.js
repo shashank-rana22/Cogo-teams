@@ -19,7 +19,7 @@ const EMPTY_FIELD_ARRAY = [
 ];
 
 const getMandatoryControls = ({
-	activeService, service, data = {}, control_name = '', isAddFieldArrayCheck = false,
+	activeService = '', service, data = {}, control_name = '', isAddFieldArrayCheck = false,
 }) => {
 	const { slab_details = [] } = control_name === 'slab_details'
 		? data?.data || {} : data || {};
@@ -103,11 +103,11 @@ const getMandatoryControls = ({
 				},
 				{
 					name        : 'fee_value',
-					label       : 'Convenience Fees',
+					label       : 'Handling Fees',
 					type        : 'number',
 					placeholder : 'Value',
 					rules       : {
-						required : 'Convenience Fees is Required.',
+						required : 'Handling Fees is Required.',
 						min      : 0,
 						validate : (value) => (value >= MIN_NUMBER ? undefined : 'Invalid Price Value'),
 					},

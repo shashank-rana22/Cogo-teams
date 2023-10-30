@@ -47,7 +47,7 @@ const getOptionalControls = ({
 	} = data?.data || {};
 
 	// eslint-disable-next-line max-len
-	const organizationSubTypeOptions =		ORGANIZATION_SUBTYPES_MAPPING[formValues?.organization_type || 'importer_exporter'];
+	const organizationSubTypeOptions = ORGANIZATION_SUBTYPES_MAPPING[formValues?.organization_type || 'importer_exporter'];
 
 	return [
 		{
