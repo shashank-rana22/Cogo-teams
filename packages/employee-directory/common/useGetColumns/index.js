@@ -1,6 +1,8 @@
-import { Checkbox, Pill, Tooltip } from '@cogoport/components';
+import { Checkbox, Pill, Tooltip, ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { getByKey, startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -8,7 +10,7 @@ import { EMPLOYEE_STATUS } from '../../page-components/utils/constants';
 
 import styles from './styles.module.css';
 
-const getStatus = (employeeStatus) => {
+function GetStatus({ employeeStatus = '' }) {
 	if (employeeStatus === null) {
 		return '-';
 	}
@@ -16,12 +18,14 @@ const getStatus = (employeeStatus) => {
 	const pillData = EMPLOYEE_STATUS[employeeStatus.toLowerCase()] || {};
 
 	return <Pill {...pillData} size="md">{pillData?.label}</Pill>;
-};
+}
 
-const useGetColumns = ({
+function useGetColumns({
 	bulkEdit, handleAllSelect, handleSelectId, selectedIds,
 	dataArr, handleEmployeeId,
-}) => {
+}) {
+	const router = useRouter();
+
 	const columns = [
 		{
 			Header   : 'Employee Name',
@@ -100,11 +104,11 @@ const useGetColumns = ({
 		{
 			Header   : 'Date of Joining',
 			accessor : (item) => (
-				formatDate({
+				item.date_of_joining ? formatDate({
 					date       : item.date_of_joining || '-',
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 					formatType : 'date',
-				})
+				}) : '-'
 			),
 			id: 'chapter',
 		},
@@ -160,10 +164,32 @@ const useGetColumns = ({
 						>
 							Notice
 						</Pill>
-					) : getStatus(item.employee_status) }
+					) : <GetStatus employeeStatus={item.employee_status} /> }
 				</div>
 			),
 			id: 'status',
+		},
+		{
+			Header   : '',
+			accessor : (item) => (
+				<div className={styles.button_container}>
+					<ButtonIcon
+						size="md"
+						icon={<IcMEdit />}
+						themeType="primary"
+						onClick={() => handleEmployeeId(item)}
+					/>
+					<ButtonIcon
+						size="md"
+						icon={<IcMEyeopen />}
+						themeType="primary"
+						onClick={() => {
+							router.push(`/profile?employee_id=${item.user_id}`);
+						}}
+					/>
+				</div>
+			),
+			id: 'view',
 		},
 	];
 
@@ -184,6 +210,6 @@ const useGetColumns = ({
 	];
 
 	return bulkEdit ? [...checkBoxColumn, ...columns] : columns;
-};
+}
 
 export default useGetColumns;

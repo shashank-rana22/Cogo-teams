@@ -1,4 +1,4 @@
-import { Modal, Button, Toggle, Toast } from '@cogoport/components';
+import { Modal, Button, Toggle } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -27,7 +27,6 @@ function StepTwo({
 	partyId = '',
 	closeModal = () => { },
 	formValues = {},
-	jobClosed = false,
 }) {
 	const [globalSelected, setGlobalSelected] = useState({});
 	const [knockOffMode, setknockOffMode] = useState(false);
@@ -50,8 +49,6 @@ function StepTwo({
 
 	const iseditable = !['coe_approved', 'locked'].includes(editData?.status);
 
-	const cantBeEdited = editData?.status === 'init' && jobClosed;
-
 	const context = knockOffMode ? <span className={styles.headingmodal}>STEP 2b - Locked Items / Services</span>
 		: contentText;
 
@@ -61,7 +58,7 @@ function StepTwo({
 				<Button
 					themeType="secondary"
 					onClick={
-						(iseditable && !cantBeEdited)
+						iseditable
 							? () => setStep(STEP_ONE)
 							: closeModal
 					}
@@ -141,10 +138,6 @@ function StepTwo({
 							className={styles.marginleft}
 							disabled={loading || isEmpty(currentSelected?.buy)}
 							onClick={() => {
-								if (cantBeEdited) {
-									Toast.error('Initiated Bill Cannot be Locked When Job is Closed');
-									return;
-								}
 								setExchangeRateModal(true);
 							}}
 						>

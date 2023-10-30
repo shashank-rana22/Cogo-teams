@@ -2,19 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin: 20px 0;
-}
-
-.filter_button {
-	display: flex;
-	align-items: center;
-	width: fit-content;
-	padding: 4px 12px;
-	margin-left: 12px;
-	cursor: pointer;
-	background: #fff;
-	border: 1px solid #e0e0e0;
-	border-radius: 6px;
+	margin: 15px 0;
 }
 
 .filter_container {
@@ -23,14 +11,12 @@
 }
 
 .greeting_text {
-	font-size: 19px;
-	font-style: normal;
-	font-weight: 500;
-	line-height: normal;
+	font-size: 18px;
+	font-weight: 700;
 	color: #221f20;
 }
 
-.assigned_input {
-	width: 16%;
-	margin-left: 40%;
+.filter_text {
+	font-size: 14px;
+	font-weight: 500;
 }

@@ -6,6 +6,7 @@ import { setProfileState } from '@cogoport/store/reducers/profile';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 import getEachUserFormatedData from '../../../utils/getPocUserFormattedData';
+import hideDetails from '../../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
@@ -193,20 +194,26 @@ function PocUser({
 
 									) : null}
 
-									{hasVoiceCallAccess && (
-										<IcMCall
-											className={cl`${styles.call_icon_styles}
+									{hasVoiceCallAccess ? (
+										<Tooltip
+											content={hideDetails({ data: mobileNumber, countryCode, type: 'number' })}
+											theme="light"
+											placement="bottom"
+										>
+											<IcMCall
+												className={cl`${styles.call_icon_styles}
 											${isCustomer ? styles.customer_icons : ''}
 											${isTradePartner ? styles.trade_partners_icons : ''}`}
-											onClick={() => handleVoiceCall({
-												mobileNumber,
-												userId,
-												name,
-												countryCode,
-												dispatch,
-											})}
-										/>
-									)}
+												onClick={() => handleVoiceCall({
+													mobileNumber,
+													userId,
+													name,
+													countryCode,
+													dispatch,
+												})}
+											/>
+										</Tooltip>
+									) : null}
 
 									<IcMEmail
 										className={cl`${styles.email_icon_styles}

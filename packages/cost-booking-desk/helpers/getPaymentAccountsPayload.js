@@ -33,7 +33,7 @@ const getPaymentAccountsPayload = ({
 		paymentDate       : date,
 		currency,
 		ledCurrency       : ledger_currency,
-		amount            : (amount && exchangeRateApiData) ? amount * exchangeRateApiData : '',
+		amount,
 		exchangeRate      : exchangeRateApiData,
 		payMode           : payment_mode,
 		remarks,

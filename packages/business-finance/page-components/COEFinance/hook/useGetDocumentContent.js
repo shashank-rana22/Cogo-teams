@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-import toastApiError from '../../commons/toastApiError.ts';
+import toastApiError from '../../commons/toastApiError';
 import getSupplierMappedName from '../utils/getSupplierMappedName';
 
 const useGetDocumentContent = ({ data }) => {

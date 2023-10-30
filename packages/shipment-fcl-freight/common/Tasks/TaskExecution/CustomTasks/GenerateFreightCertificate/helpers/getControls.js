@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const getControls = () => {
 	const controls = [
 		{
@@ -34,7 +36,8 @@ const getControls = () => {
 					placeholder  : 'Enter rate',
 					rules        : {
 						required : { value: true, message: 'Freight rate required' },
-						validate : (value) => (value < 0 ? 'Freight rate cannot be negative' : true),
+						validate : (value) => (value < GLOBAL_CONSTANTS.zeroth_index
+							? 'Freight rate cannot be negative' : true),
 					},
 					span: 2.5,
 				},
@@ -46,7 +49,8 @@ const getControls = () => {
 					placeholder  : 'Enter rate',
 					rules        : {
 						required : { value: true, message: 'Exwork required' },
-						validate : (value) => (value < 0 ? 'Exwork cannot be negative' : true),
+						validate : (value) => (value < GLOBAL_CONSTANTS.zeroth_index
+							? 'Exwork cannot be negative' : true),
 					},
 					span: 1.5,
 				},

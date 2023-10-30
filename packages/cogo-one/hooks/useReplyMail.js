@@ -13,7 +13,14 @@ const getOmniChannelLink = ({ id, channel_type }) => {
 	return `${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`;
 };
 
-const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', userSharedMails = [], roomId = '' }) => ({
+const getCommunicationPayload = ({
+	payload = {},
+	userId = '',
+	userName = '',
+	userSharedMails = [],
+	roomId = '',
+	bodyPreview,
+}) => ({
 	type             : 'rpa_email',
 	recipient        : payload?.toUserEmail?.[GLOBAL_CONSTANTS.zeroth_index],
 	message_metadata : {
@@ -22,6 +29,7 @@ const getCommunicationPayload = ({ payload = {}, userId = '', userName = '', use
 		send_to_omnichannel : !!userSharedMails?.includes(payload?.sender),
 		sender_user_id      : userId,
 		send_by             : userName,
+		body_preview        : bodyPreview,
 		draft_url           : getOmniChannelLink({ id: roomId, channel_type: 'email' }),
 	},
 	sender_user_id  : userId,
@@ -80,7 +88,7 @@ function useReplyMail(mailProps) {
 		method : 'POST',
 	}, { manual: true }) || [];
 
-	const replyMailApi = async (payload) => {
+	const replyMailApi = async ({ payload = {}, bodyPreview = '' }) => {
 		try {
 			let draftRoomData = {};
 
@@ -91,7 +99,7 @@ function useReplyMail(mailProps) {
 			const { roomId = '', messageId = '' } = draftRoomData || {};
 
 			const res = await trigger({
-				data: getPayload({ payload, userId, userName, userSharedMails, roomId }),
+				data: getPayload({ payload, userId, userName, userSharedMails, roomId, bodyPreview }),
 			});
 			if (buttonType === 'send_mail') {
 				await saveDraft({

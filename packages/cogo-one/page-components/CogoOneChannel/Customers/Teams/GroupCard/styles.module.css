@@ -1,0 +1,139 @@
+.container {
+	position: relative;
+	width: 100%;
+	height: 70px;
+	padding: 10px;
+	cursor: pointer;
+
+	&:hover {
+		background: #fdfbf6;
+	}
+
+	:global {
+		.ui_avatar_text {
+			background: none;
+		}
+	}
+}
+
+.active_card {
+	background: #fbf7ec;
+	border: 1px solid #fcdc00;
+	border-radius: 4px;
+}
+
+.info {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+	height: 100%;
+	margin-left: 10px;
+}
+
+.group {
+	display: flex;
+	align-items: center;
+}
+
+.type {
+	width: calc(100% - 66px);
+	margin-left: 6px;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.description {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: fit-content;
+	max-height: 40%;
+	overflow: hidden;
+}
+
+.label {
+	max-width: calc(100% - 60px);
+	height: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 500;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.activity_duration {
+	width: 60px;
+	margin-right: 4px;
+	font-size: 10px;
+	font-weight: 500;
+	color: #4f4f4f;
+	text-align: right;
+	white-space: nowrap;
+}
+
+.styled_avatar {
+	background: #ffd761;
+	border-radius: 50% !important;
+}
+
+.draft_styles {
+	font-style: oblique;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.new_message_count {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	margin-right: 20px;
+	font-size: 10px;
+	color: #fff;
+	background: #ef0a1a;
+	border-radius: 50%;
+}
+
+.content {
+	max-width: 90%;
+	height: 18px;
+	margin-left: 3px;
+	overflow: hidden;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	:global {
+		img {
+			display: none;
+		}
+
+		p {
+			width: 100%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		div {
+			display: none;
+		}
+	}
+}
+
+.content_div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 5px;
+}
+
+.popover_styles {
+	width: 25px;
+	height: 25px;
+}

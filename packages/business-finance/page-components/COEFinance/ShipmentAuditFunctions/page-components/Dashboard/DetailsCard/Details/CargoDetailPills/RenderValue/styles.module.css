@@ -1,0 +1,41 @@
+.mawb_container {
+	display: flex;
+
+	:global {
+		.core-ui-button-root {
+			padding: 0;
+			margin: 0 4px;
+			background: transparent;
+			border: none;
+		}
+	}
+}
+
+.certificate_container {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	a {
+		display: flex;
+		align-items: center;
+		font-size: 14px;
+		font-weight: 400;
+		color: #a8acce;
+
+		svg {
+			margin-left: 4px;
+		}
+	}
+}
+
+.truck_type_count {
+	margin-left: 3px;
+	color: #5936f0;
+	border-bottom: 1px solid #5936f0;
+}
+
+.commodity_container {
+	font-size: 10px;
+	border-radius: 8px;
+}

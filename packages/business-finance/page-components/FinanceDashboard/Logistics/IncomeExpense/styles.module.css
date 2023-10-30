@@ -44,11 +44,6 @@
 	justify-content: center;
 }
 
-.years_styles {
-	margin-top: 150px;
-	margin-left: 20px;
-}
-
 .text_filters_gap {
 	display: flex;
 	margin-bottom: -54px;
@@ -73,30 +68,6 @@
 	height: 2px;
 	margin: 4px 0 0 2px;
 	background: #ed3726;
-	border-radius: 4px;
-}
-
-.data_styles {
-	padding: 6px;
-	font-size: 12px;
-	cursor: pointer;
-}
-
-.borders {
-	width: 100px;
-	height: 2px;
-	margin: 4px 0 0 2px;
-	cursor: pointer;
-	background: #edd7a9;
-	border-radius: 4px;
-}
-
-.year_bottom_border {
-	width: 100px;
-	height: 1px;
-	margin: 4px 0 0 2px;
-	cursor: pointer;
-	background: #edd7a9;
 	border-radius: 4px;
 }
 

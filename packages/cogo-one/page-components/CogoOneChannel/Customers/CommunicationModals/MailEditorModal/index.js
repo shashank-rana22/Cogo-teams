@@ -1,6 +1,7 @@
 import { Modal, Pagination } from '@cogoport/components';
 import { IcMExpand } from '@cogoport/icons-react';
-import { useState, useRef } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useRef, useMemo } from 'react';
 
 import { HEADER_MAPPING } from '../../../../../constants/mailConstants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../constants/viewTypeMapping';
@@ -12,6 +13,8 @@ import ComposeEmailBody from './ComposeEmailBody';
 import EmailTemplateList from './EmailTemplateList';
 import RenderHeader from './RenderHeader';
 import styles from './styles.module.css';
+
+const HIDE_FROM_MAIL = 1;
 
 function MailEditorModal({
 	mailProps = {},
@@ -27,6 +30,9 @@ function MailEditorModal({
 		resetEmailState = () => {},
 		setMailAttachments = () => {},
 		mailAttachments = [],
+		emailState = {},
+		userSharedMails = [],
+		activeMailAddress = '',
 	} = mailProps;
 
 	const uploaderRef = useRef(null);
@@ -78,6 +84,24 @@ function MailEditorModal({
 
 	const showOrgSpecificMail = buttonType === 'send_mail' && restrictMailToOrganizations;
 
+	const activeFromMail = emailState?.from_mail || activeMailAddress;
+
+	const userActiveMails = useMemo(
+		() => (
+			[...new Set([
+				...(userSharedMails || []),
+				...(activeFromMail ? [activeFromMail] : []),
+			])]
+		),
+		[activeFromMail, userSharedMails],
+	);
+
+	const hideFromMail = (
+		isEmpty(userActiveMails)
+		|| userActiveMails.length === HIDE_FROM_MAIL
+		|| buttonType !== 'send_mail'
+	);
+
 	const {
 		handleSend = () => {},
 		replyLoading = false,
@@ -122,7 +146,7 @@ function MailEditorModal({
 			scroll
 			animate={false}
 			showCloseIcon={false}
-			closeOnOuterClick={false}
+			closeOnOuterClick={isEmpty(userActiveMails)}
 		>
 			<Modal.Header
 				title={(
@@ -144,6 +168,9 @@ function MailEditorModal({
 						resetEmailState={resetEmailState}
 						sendLoading={sendLoading}
 						showOrgSpecificMail={showOrgSpecificMail}
+						hideFromMail={hideFromMail}
+						userActiveMails={userActiveMails}
+						activeMailAddress={activeFromMail}
 					/>
 				)}
 				className={styles.modal_header}
@@ -152,6 +179,8 @@ function MailEditorModal({
 				{!isTemplateView ? (
 					<ComposeEmailBody
 						{...mailProps}
+						userActiveMails={userActiveMails}
+						hideFromMail={hideFromMail}
 						handleKeyPress={handleKeyPress}
 						handleEdit={handleEdit}
 						handleChange={handleChange}

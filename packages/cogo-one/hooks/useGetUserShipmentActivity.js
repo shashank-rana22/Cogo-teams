@@ -53,7 +53,7 @@ const useGetUserShipmentActivity = ({
 	}, [searchValue]);
 
 	useEffect(() => {
-		if (organizationId) {
+		if (organizationId && organizationId !== 'lead_users') {
 			fetchActivityLogs({ orgId: organizationId });
 		}
 	}, [fetchActivityLogs, organizationId]);

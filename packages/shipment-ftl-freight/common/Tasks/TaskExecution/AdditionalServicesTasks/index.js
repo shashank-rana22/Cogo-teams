@@ -1,5 +1,6 @@
 import { Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState, useContext } from 'react';
 
 import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
@@ -11,7 +12,7 @@ function AdditionsServicesTasks({
 	onCancel = () => {},
 	refetch = () => {},
 }) {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data, refetchServices = () => {} } = useContext(ShipmentDetailContext);
 
 	const [addRate, setAddRate] = useState(null);
 
@@ -22,7 +23,7 @@ function AdditionsServicesTasks({
 	});
 
 	const serviceListItem = {
-		...(list[0] || {}),
+		...(list[GLOBAL_CONSTANTS.zeroth_index] || {}),
 	};
 
 	return loading ? (
@@ -36,7 +37,10 @@ function AdditionsServicesTasks({
 			setAddRate={setAddRate}
 			showLabel={false}
 			onCancel={onCancel}
-			refetch={refetch}
+			refetch={() => {
+				refetchServices();
+				refetch();
+			}}
 			source="task"
 			task={task}
 		/>

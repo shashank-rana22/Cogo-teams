@@ -159,6 +159,7 @@ function MessageConversations({
 						mailProps={mailProps}
 						latestMessagesAtTop={latestMessagesAtTop}
 						deleteMessage={deleteMessage}
+						roomId={id}
 					/>
 				)}
 			</div>

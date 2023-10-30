@@ -2,11 +2,13 @@ import { Button, Placeholder, Popover } from '@cogoport/components';
 import {
 	IcMArrowBack,
 	IcMArrowDown,
+	IcMArrowRight,
 } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React from 'react';
 
+import EmptyState from '../../common/EmptyState';
 import useGetEmployeeDetails from '../../hooks/useGetEmployeeData';
 import { getEmployeeData } from '../../utils/constants';
 import TabsPanel from '../TabsPanel';
@@ -14,24 +16,47 @@ import TabsPanel from '../TabsPanel';
 import styles from './styles.module.css';
 
 function EmployeeProfile() {
+	const router = useRouter();
+	const employee_id = router.query?.employee_id;
+
 	const { profile: { user } } = useSelector((state) => ({
 		profile: state?.profile,
 	}));
-	const { loading, data } = useGetEmployeeDetails(user.id);
+
+	const user_id = employee_id || user.id;
+
+	const { loading, data } = useGetEmployeeDetails(user_id);
 
 	const { employee_detail } = data || {};
 	const employeeData = getEmployeeData(employee_detail);
-	const router = useRouter();
+
 	return (
 		<div className={styles.main_container}>
-			{(data || loading) && (
+			{!loading && employee_id ? (
+				<div className={styles.back_container}>
+					<div className={styles.top_text}>
+						<span className={styles.back}>Employee Directory</span>
+						<IcMArrowRight width={16} height={16} />
+						<span className={styles.arrow}>{employee_detail?.name}</span>
+					</div>
+					<div className={styles.dark_heading}>
+						<div aria-hidden onClick={() => router.back()} className={styles.icon_container}>
+							<IcMArrowBack
+								width={20}
+								height={20}
+							/>
+						</div>
+						<span className={styles.employee_profile}>Employee Directory</span>
+					</div>
+				</div>
+			) : null}
+			{(data || loading) ? (
 				<div className={styles.profile_container}>
 					<div className={styles.profile_flex}>
 						<div className={styles.left_image} />
 						<div className={styles.cover}>
 							<div className={styles.flex}>
 								<div className={styles.left_text}>
-									<IcMArrowBack width={16} height={16} />
 									<div className={styles.name_designation}>
 										<span className={styles.name}>
 											{loading
@@ -61,8 +86,7 @@ function EmployeeProfile() {
 									}
 									</span>
 									<div className={styles.buttons_flex}>
-										{
-										loading ? <Placeholder width="50px" height="33px" />
+										{loading ? <Placeholder width="50px" height="33px" />
 											: (
 												<div>
 													{(employee_detail?.status === 'active')
@@ -77,13 +101,23 @@ function EmployeeProfile() {
 															</div>
 														)}
 												</div>
-											)
-									}
+											)}
 										<Popover
 											placement="left"
 											render={(
-												<Button onClick={() => router.push('/apply-resignation')}>
-													Apply for Resignation
+												<Button
+													onClick={() => {
+														if (employee_id) {
+															router.push(
+																`/apply-resignation?employee_id=
+																${employee_id}`,
+															);
+														} else {
+															router.push('/apply-resignation');
+														}
+													}}
+												>
+													{employee_id ? 'Initiate Separation' : 'Apply for Resignation'}
 												</Button>
 											)}
 										>
@@ -111,7 +145,7 @@ function EmployeeProfile() {
 					</div>
 					<TabsPanel data={data} loading={loading} />
 				</div>
-			)}
+			) : (<EmptyState height={250} width={450} />)}
 		</div>
 	);
 }

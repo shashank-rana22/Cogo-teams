@@ -3,9 +3,8 @@ import { isEmpty } from '@cogoport/utils';
 
 import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../../../../constants/leaderboard-reporttype-constants';
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../../constants/leaderboard-viewtype-constants';
-import getListColumnMapping from '../get-list-column-mapping';
 
-const { ADMIN, AGENT } = LEADERBOARD_VIEWTYPE_CONSTANTS;
+const { ADMIN, OWNER, MANAGER, AGENT } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 const { ADMIN_REPORT, OWNER_REPORT, AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 
 const getLocationOrChannel = ({ listItem, isChannel, prevLevel }) => {
@@ -28,15 +27,39 @@ const getCurrLevelUserRmIds = ({ listItem, prevLevel, levelStack }) => {
 	return [actualPrevLevel.user?.id, ...(actualPrevLevel.user_rm_ids || [])];
 };
 
+const getIsAllowed = ({ levelStack, currLevel, viewType, user, listItem }) => {
+	switch (viewType) {
+		case ADMIN:
+			return true;
+		case OWNER:
+			if (isEmpty(levelStack)) {
+				return user.id === listItem.user?.id;
+			}
+			if (currLevel.isExpanded) {
+				return levelStack.length !== 1;
+			}
+			return true;
+		case MANAGER:
+			if (isEmpty(levelStack)) {
+				return user.id === listItem.user?.id;
+			}
+			if (currLevel.isExpanded) {
+				return levelStack.length !== 1;
+			}
+			return true;
+		case AGENT:
+			return false;
+		default:
+			return false;
+	}
+};
+
 const useListItem = (props) => {
 	const {
 		listItem = {}, user, viewType, currLevel, setCurrLevel, isChannel, levelStack, setLevelStack,
 	} = props;
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping();
-
-	const isAllowed = !isEmpty(levelStack)
-		|| (user.id === listItem.user?.id && viewType !== AGENT) || viewType === ADMIN;
+	const isAllowed = getIsAllowed({ levelStack, currLevel, viewType, user, listItem });
 
 	const handleClick = () => {
 		if (isAllowed) {
@@ -55,7 +78,6 @@ const useListItem = (props) => {
 	};
 
 	return {
-		LIST_COLUMN_MAPPING,
 		isAllowed,
 		handleClick,
 	};

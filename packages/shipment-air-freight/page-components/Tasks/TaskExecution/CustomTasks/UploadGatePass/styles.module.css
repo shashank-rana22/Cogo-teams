@@ -1,0 +1,86 @@
+.main_container {
+	padding: 10px 20px;
+}
+
+.heading {
+	margin-bottom: 10px;
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+	color: #666a90;
+}
+
+.doc_card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 15px;
+	margin: 20px 0;
+	font-size: var(--font-size-xl);
+	font-weight: 500;
+	box-shadow: rgb(0 0 0 / 16%) 0 1px 4px;
+
+	:global {
+		.upload_controller_documents {
+			width: 40%;
+
+			div {
+				display: flex;
+			}
+
+			.ui_upload_droparea_subheading {
+				display: none;
+			}
+		}
+
+		.ui_upload_droparea_container {
+			flex-direction: row;
+			align-items: center;
+			justify-content: flex-start;
+			width: fit-content;
+			min-height: 20px;
+			padding: 0 10px;
+			margin: 0 10px 0 15px;
+			border: none;
+		}
+
+		.ui_upload_droparea_heading {
+			margin-left: 5px;
+			font-size: var(--font-size-md);
+			font-weight: 600;
+		}
+
+		.ui_upload_filesuccess_container {
+			max-width: 48%;
+			overflow: hidden;
+			font-size: var(--font-size-md);
+			text-overflow: ellipsis;
+			white-space: nowrap;
+
+			span {
+				max-width: 28%;
+			}
+
+			div {
+				overflow: hidden;
+			}
+		}
+
+		.ui_upload_container {
+			margin-left: 20px;
+		}
+	}
+}
+
+.vehicle_name {
+	width: 40%;
+}
+
+.submit_button {
+	display: flex;
+	justify-content: flex-end;
+	margin: 15px 0;
+}
+
+.submit {
+	margin-left: 15px;
+}

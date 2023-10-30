@@ -15,7 +15,7 @@ const STEPPER_ITEMS = [
 
 function CreateNewTradeParty({
 	orgResponse = {},
-	showComponent,
+	showComponent = '',
 	setShowComponent = () => {},
 	fetchOrganizationTradeParties = () => {},
 }) {

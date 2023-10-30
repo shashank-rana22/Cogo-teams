@@ -2,9 +2,10 @@ import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
-import toastApiError from '../../commons/toastApiError.ts';
+import toastApiError from '../../commons/toastApiError';
 import { getFormatDates } from '../utils/getFormatDate';
 
 const INITIAL_BAL = 0;
@@ -12,7 +13,7 @@ const useGetDocumentList = ({
 	filters = {}, sorting = {},
 	setMatchModalShow = () => {},
 	setSelectedData = () => {},
-	t = () => {},
+	t = () => {}, setFromCreateJv = () => {},
 }) => {
 	const { profile } = useSelector((state) => state || {});
 
@@ -74,33 +75,46 @@ const useGetDocumentList = ({
 			}
 		})();
 	}, [accMode, balanceTrigger, endDate, entityCode, page, pageLimit, startDate, tradeParty]);
-	const refetch = useCallback(() => {
+	const refetch = useCallback((jvSearch = '') => {
 		(async () => {
 			try {
 				if (tradeParty && entityCode) {
-					await trigger({
-						params: {
-							page,
-							pageLimit,
-							orgId                 : tradeParty,
-							accModes              : accMode || undefined,
-							documentPaymentStatus : status || undefined,
-							startDate             : (startDate && getFormatDates(startDate)) || undefined,
-							endDate               : (endDate && getFormatDates(endDate)) || undefined,
-							docType               : docType || undefined,
-							query                 : query || undefined,
-							sortBy                : sortBy || undefined,
-							sortType              : sortType || undefined,
-							entityCode,
-						},
-					});
+					if (!isEmpty(jvSearch)) {
+						await trigger({
+							params: {
+								page      : 1,
+								pageLimit : 10,
+								orgId     : tradeParty,
+								query     : jvSearch || query || undefined,
+								entityCode,
+							},
+						});
+						setFromCreateJv(true);
+					} else {
+						await trigger({
+							params: {
+								page,
+								pageLimit,
+								orgId                 : tradeParty,
+								accModes              : accMode || undefined,
+								documentPaymentStatus : status || undefined,
+								startDate             : (startDate && getFormatDates(startDate)) || undefined,
+								endDate               : (endDate && getFormatDates(endDate)) || undefined,
+								docType               : docType || undefined,
+								query                 : query || undefined,
+								sortBy                : sortBy || undefined,
+								sortType              : sortType || undefined,
+								entityCode,
+							},
+						});
+					}
 				}
 			} catch (error) {
 				toastApiError(error);
 			}
 		})();
-	}, [accMode, docType, endDate, entityCode, page, pageLimit,
-		query, sortBy, sortType, startDate, status, tradeParty, trigger]);
+	}, [accMode, docType, endDate, entityCode, page, pageLimit, query,
+		setFromCreateJv, sortBy, sortType, startDate, status, tradeParty, trigger]);
 	const submitSettleMatch = async ({
 		updatedData = [], date:settleDate = '',
 		fileValue = {}, setSettleConfirmation = () => {},

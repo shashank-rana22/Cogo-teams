@@ -37,3 +37,8 @@
 	padding: 50px;
 	font-size: var(--font-size-xl);
 }
+
+.saas {
+	padding: 12px 24px;
+	background-color: #fff;
+}

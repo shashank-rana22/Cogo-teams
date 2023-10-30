@@ -114,3 +114,11 @@
 	word-break: break-word;
 	word-wrap: break-word;
 }
+
+.date_filter {
+	:global {
+		.ui_select_display_container {
+			width: 140px;
+		}
+	}
+}

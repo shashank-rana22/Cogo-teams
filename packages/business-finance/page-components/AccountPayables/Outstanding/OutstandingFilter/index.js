@@ -121,7 +121,7 @@ function Filters({
 			</div>
 			<div className={styles.flex_wrap}>
 				<Input
-					placeholder="BusinessName/Pan/Organization ID/Sage ID"
+					placeholder="BusinessName/Pan/Organization ID"
 					value={search}
 					onChange={(e) => handleChange(e)}
 					suffix={(

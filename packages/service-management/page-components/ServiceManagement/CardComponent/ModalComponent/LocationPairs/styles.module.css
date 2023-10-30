@@ -9,7 +9,6 @@
 
 .port {
 	display: flex;
-	display: box;
 	align-items: center;
 	width: 40%;
 	overflow: hidden;

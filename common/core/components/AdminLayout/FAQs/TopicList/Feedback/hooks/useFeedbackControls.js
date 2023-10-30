@@ -45,6 +45,8 @@ const useFeedbackControls = ({ watchCategory }) => {
 			controllerType : 'textarea',
 			placeholder    : 'Enter Comments',
 			rules          : { required: true },
+			maxLength      : 350,
+			rows           : 4,
 		},
 		{
 			label          : 'Upload Supporting Document',

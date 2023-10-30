@@ -17,32 +17,32 @@ const useEditQuotations = ({
 	servicesList = [], shipment_data = {}, onCancel, task,
 	taskListRefetch = () => {},
 }) => {
-	const service_ids = [];
+	const SERVICE_IDS = [];
 	let notMainService = false;
 
 	(servicesList || []).forEach((serviceObj) => {
 		if (serviceObj.service_type === 'ftl_freight_service') {
 			notMainService = true;
-			service_ids.push(serviceObj.id);
+			SERVICE_IDS.push(serviceObj.id);
 		}
 	});
 
 	(servicesList || []).forEach((serviceObj) => {
 		if (!notMainService) {
-			service_ids.push(serviceObj.id);
+			SERVICE_IDS.push(serviceObj.id);
 		}
 	});
 
 	const { data:servicesQuotation, loading:serviceQuotationLoading } = useGetServicesQuotation({
 		defaultParams: {
 			shipment_id             : shipment_data?.id,
-			service_ids,
+			service_ids             : SERVICE_IDS,
 			service_detail_required : true,
 		},
 	});
-	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateBuyQuotations({});
+	const { apiTrigger:updateBuyQuotationTrigger, loading } = useUpdateBuyQuotations({});
 
-	const { apiTrigger:updateTask } = useUpdateTask({
+	const { apiTrigger:updateTask, loading: taskLoading } = useUpdateTask({
 		refetch: () => {
 			onCancel();
 			taskListRefetch();
@@ -79,10 +79,10 @@ const useEditQuotations = ({
 		handleChange,
 
 	}));
-	const defaultValues = {};
+	const DEFAULT_VALUES = {};
 
 	service_charges.forEach((service_charge) => {
-		defaultValues[service_charge?.id] = service_charge?.line_items?.map((line_item) => ({
+		DEFAULT_VALUES[service_charge?.id] = service_charge?.line_items?.map((line_item) => ({
 			code     : line_item?.code,
 			currency : line_item?.currency,
 			price    : line_item?.price,
@@ -93,7 +93,7 @@ const useEditQuotations = ({
 	});
 
 	const onSubmit = async (values) => {
-		const quotations = [];
+		const QUOTATIONS = [];
 
 		Object.keys(values).forEach((key) => {
 			const items = values[key];
@@ -112,18 +112,18 @@ const useEditQuotations = ({
 				})),
 			};
 
-			quotations.push(newQuote);
+			QUOTATIONS.push(newQuote);
 		});
 
-		const checkSum = checkLineItemsSum(quotations);
+		const checkSum = checkLineItemsSum(QUOTATIONS);
 
 		if (!checkSum.check) {
 			Toast.error(checkSum.message.join(','));
 		} else {
 			try {
-				const res = await updateBuyQuotationTrigger({ quotations });
+				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS });
 
-				if (res?.status === 200) {
+				if (!res?.hasError) {
 					await updateTask({ id: task?.id });
 				}
 			} catch (err) {
@@ -138,7 +138,8 @@ const useEditQuotations = ({
 		finalControls,
 		onSubmit,
 		serviceQuotationLoading,
-		defaultValues,
+		defaultValues : DEFAULT_VALUES,
+		loading       : loading || taskLoading,
 	};
 };
 

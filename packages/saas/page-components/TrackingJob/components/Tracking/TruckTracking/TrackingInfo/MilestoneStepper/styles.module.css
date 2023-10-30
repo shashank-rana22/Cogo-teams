@@ -1,0 +1,57 @@
+.container {
+	max-height: 58vh;
+	overflow-y: scroll;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.milestone {
+	display: flex;
+	justify-content: space-between;
+}
+
+.stepper {
+	padding: 20px 10px 0;
+
+	.dot {
+		width: 12px;
+		height: 12px;
+		margin: 0 auto 4px;
+		background-color: #e0e0e0;
+		border-radius: 50%;
+	}
+
+	.line {
+		width: 1px;
+		height: 100%;
+		margin: 0 auto;
+		border-left: 2px dashed #e0e0e0;
+	}
+}
+
+.finish_milestone {
+	.dot {
+		background-color: #abcd62;
+	}
+
+	.line {
+		border-left: 1.5px solid #abcd62;
+	}
+}
+
+.curr_milestone {
+	.dot {
+		background-color: #ee3425;
+	}
+
+	.line {
+		border-left: 2px dashed #e0e0e0;
+	}
+}
+
+.card_container {
+	width: 92%;
+	margin-bottom: 35px;
+}

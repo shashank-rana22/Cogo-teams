@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 
 const useOverSeasHeader = ({ organizationId:organization_id = '' }) => {
 	const [{ data, loading }, trigger] = useRequestBf(

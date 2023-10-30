@@ -1,5 +1,6 @@
 import { IcMDelete } from '@cogoport/icons-react';
 
+import getWidth from '../../../../../../utils/getWidth';
 import { getController } from '../../getController';
 
 import styles from './styles.module.css';
@@ -25,7 +26,7 @@ function Child(props) {
 				if (!Element) return null;
 
 				return (
-					<div className={styles.list} key={controlItem.name}>
+					<div className={styles.list} key={controlItem.name} style={{ width: getWidth(controlItem.span) }}>
 						<div className={styles.label}>{controlItem.label}</div>
 
 						<Element

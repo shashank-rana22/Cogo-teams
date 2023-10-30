@@ -27,8 +27,8 @@ const useFetchFirebaseRoom = ({
 		agentRoomSnapshot.current = onSnapshot(userDetailsDocRef, (roomDocument) => {
 			const roomData = roomDocument.data();
 
-			const { call_details = {} } = roomData || {};
-			setCallDetails(call_details);
+			const { call_details = {}, feedback_form_status = '' } = roomData || {};
+			setCallDetails({ ...call_details, feedback_form_status });
 		});
 	}, [agentId, firestore]);
 

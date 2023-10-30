@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import getServiceNameforTableColumn from '../../../helpers/getServiceNameforTableColumn';
@@ -19,7 +20,7 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		{
 			label  : 'Rate',
 			render : (item) => formatAmount({
-				amount   : item?.price_discounted || 0,
+				amount   : item?.price_discounted || GLOBAL_CONSTANTS.zeroth_index,
 				currency : item?.currency,
 				options  : {
 					style                 : 'decimal',
@@ -30,13 +31,13 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		},
 		{
 			label  : 'Quantity',
-			render : (item) => item?.quantity || 0,
+			render : (item) => item?.quantity || GLOBAL_CONSTANTS.zeroth_index,
 			span   : 1.2,
 		},
 		{
 			label  : 'Discount',
 			render : (item) => formatAmount({
-				amount   : item?.discount_price || 0,
+				amount   : item?.discount_price || GLOBAL_CONSTANTS.zeroth_index,
 				currency : item?.currency,
 				options  : {
 					style                 : 'decimal',
@@ -49,7 +50,7 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		{
 			label  : 'Exc. Rate',
 			render : (item) => formatAmount({
-				amount   : item?.exchange_rate || 0,
+				amount   : item?.exchange_rate || GLOBAL_CONSTANTS.zeroth_index,
 				currency : item?.currency,
 				options  : {
 					style                 : 'decimal',
@@ -61,21 +62,21 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		{
 			label  : 'Tax Amt.',
 			render : (item) => `${formatAmount({
-				amount   : item?.tax_price_discounted || 0,
+				amount   : item?.tax_price_discounted || GLOBAL_CONSTANTS.zeroth_index,
 				currency : item?.currency,
 				options  : {
 					style                 : 'currency',
 					currencyDisplay       : 'code',
 					maximumFractionDigits : 2,
 				},
-			})} (${item?.tax_percent || 0}%)`,
+			})} (${item?.tax_percent || GLOBAL_CONSTANTS.zeroth_index}%)`,
 
 			span: 1.5,
 		},
 		{
 			label  : 'Amt. with Tax',
 			render : (item) => formatAmount({
-				amount   : item?.tax_total_price_discounted || 0,
+				amount   : item?.tax_total_price_discounted || GLOBAL_CONSTANTS.zeroth_index,
 				currency : item?.currency,
 				options  : {
 					style                 : 'currency',

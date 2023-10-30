@@ -129,8 +129,9 @@ export default {
 			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
 			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
 			'dc5e8695-c30e-4350-9de9-8218ed1abfc4', // CCS Manager - Enterprise
-
 		],
+		supply_relations_head_role_id    : '0a623fc0-bd23-4990-b2ec-0115d3f1095b',
+		fin_ops_manager_role_id          : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
 		cp_program_manager               : '122c2266-6c55-4b97-9f61-1056f87b53a7',
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
@@ -173,18 +174,18 @@ export default {
 		prod_kam_cp             : 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
 		prod_es_sales           : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 		entity_manager_id       : '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
+		lcl_so2_executive       : '12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)
 		service_ops1_role_ids   : [
 			'348bc262-64c3-4667-a23c-908ceca80233', // SO1 + Revenue Desk
 			'5b5ee698-ec53-47fe-9584-737c9a174f8c', // Prod_SO1
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
-			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO1
 			'e18774d7-54b3-41e8-af04-3b44bd3a3fe2', // SO1 Executive
 			'582391da-3d9b-423f-a5af-df1da84b1c5a',
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 		],
 		service_ops2_role_id: [
 			'017856dc-b424-4145-9181-5680732cb33b',
-			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
+			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)
 			'8b04b2b9-baa1-4913-bf4c-b11effecef0b', // SO2 Executive
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 			'123951fe-78aa-4ad1-b2da-fa6191e3a876', // SO2

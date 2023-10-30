@@ -42,6 +42,11 @@
 		.ql-tooltip {
 			left: 0 !important;
 		}
+
+		.se-toolbar,
+		.se-wrapper {
+			z-index: unset !important;
+		}
 	}
 }
 
@@ -115,4 +120,19 @@
 
 .preview_body {
 	margin-top: 2px;
+}
+
+.empty_view {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 80%;
+	font-size: 18px;
+	font-weight: 500;
+}
+
+.no_permission_text {
+	margin-top: 20px;
 }

@@ -47,8 +47,7 @@ function UploadUTR({
 							offLabel="Normal"
 						/>
 					</div>
-
-					<Checkbox label="CSD" value={isCSD} onChange={setIsCSD} />
+					{advancePayment ? <Checkbox label="CSD" value={isCSD} onChange={setIsCSD} /> : null}
 
 					<FileUploader
 						value={fileValue}

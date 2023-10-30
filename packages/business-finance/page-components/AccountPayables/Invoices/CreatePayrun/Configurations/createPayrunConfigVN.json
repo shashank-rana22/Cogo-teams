@@ -33,9 +33,10 @@
 		{
 			"label": "Invoice Number",
 			"key": "invoice_number",
-			"func": "renderFieldPair",
+			"func": "renderInvoiceNumber",
 			"span": 1,
 			"topKey": {
+				"maxLength": 8,
 				"key": "invoiceNumber",
 				"type": "href",
 				"redirectKey": "documentUrl"

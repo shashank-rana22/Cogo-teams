@@ -5,10 +5,10 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import InvoiceTable from '../../../../../commons/InvoiceTable';
-import useGetPartnerRmMapping from '../../../../../hooks/useGetPartnerRmMapping.ts';
+import useGetPartnerRmMapping from '../../../../../hooks/useGetPartnerRmMapping';
 import Communication from '../../../OutstandingList/Communication';
-import OrganizationUsers from '../../OutstandingList/OrganizationUsers/index.tsx';
-import PopoverTags from '../../OutstandingList/PopoverTags/index.tsx';
+import OrganizationUsers from '../../OutstandingList/OrganizationUsers/index';
+import PopoverTags from '../../OutstandingList/PopoverTags/index';
 import StatsOutstanding from '../../OutstandingList/StatsOutstanding';
 
 import styles from './styles.module.css';

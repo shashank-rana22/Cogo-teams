@@ -10,7 +10,7 @@ function MessageBody({
 
 	const hasProfanity = profanity_check === 'nudity';
 
-	const fileExtension = media_url?.split('.')?.pop();
+	const fileExtension = typeof media_url === 'string' ? media_url?.split('.')?.pop() : '';
 
 	const Component = MESSAGE_TYPE_WISE_MAPPING[message_type] || MESSAGE_TYPE_WISE_MAPPING.default;
 

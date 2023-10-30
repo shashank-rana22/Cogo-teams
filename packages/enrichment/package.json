@@ -4,7 +4,6 @@
     "description": "Enrichment for Third Parties",
     "private": true,
     "main": "./index.js",
-    "types": "./index.js",
     "dependencies": {
       "@cogoport/components": "^1.0.319",
       "@cogoport/forms": "workspace:0.1.0",

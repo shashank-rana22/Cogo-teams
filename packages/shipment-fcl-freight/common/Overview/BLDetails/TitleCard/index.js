@@ -1,4 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useContext } from 'react';
 
@@ -16,16 +17,16 @@ function TitleCard({
 					<div className={styles.title_container}>
 						<div className={styles.document_type}>
 							{item?.bl_document_type === 'draft_bill_of_lading' ? 'MBL' : 'HBL'}
-							&nbsp;
+							{' '}
 							{startCase(item?.status)}
-							{ containerDetails?.length !== 0 ? ':' : null }
+							{ containerDetails?.length !== GLOBAL_CONSTANTS.zeroth_index ? ':' : null }
 						</div>
 
-						{containerDetails?.length !== 0
+						{containerDetails?.length !== GLOBAL_CONSTANTS.zeroth_index
 							? (
 								<div className={styles.ontrack}>
 									{`${startCase(containerDetails?.length)} ${
-										containerDetails?.length === 1 ? 'container' : 'containers'
+										containerDetails?.length === GLOBAL_CONSTANTS.one ? 'container' : 'containers'
 									} on track`}
 								</div>
 							)
@@ -35,9 +36,9 @@ function TitleCard({
 						{item?.containers_rolled_over ? (
 							<div className={styles.roll_over}>
 								,
-								&nbsp;
+								{' '}
 								{startCase(item?.containers_rolled_over)}
-								&nbsp;
+								{' '}
 								rolled over
 							</div>
 						) : null}
@@ -47,13 +48,14 @@ function TitleCard({
 					&& item?.collection_mode ? (
 						<div>
 							MBL Collection Mode:
-							&nbsp;
+							{' '}
 							{startCase(item?.collection_mode?.replace(/_/g, ' '))}
 						</div>
 					) : null}
 
 				<div className={styles.bl_number}>
-					BL Number:&nbsp;
+					BL Number:
+					{' '}
 					<b>
 						{item?.bl_number}
 					</b>

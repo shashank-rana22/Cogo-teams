@@ -18,7 +18,8 @@ const MIN_TICKET_COUNT = 1;
 const WINDOW_VIEW = 20;
 
 const getPayload = ({
-	performerId, pageIndex, agent, searchQuery, category, spectatorType, startDate, endDate,
+	performerId, pageIndex, agent, searchQuery, category, spectatorType, startDate, endDate, sortType = '',
+	sortOrder = '', idType = '', serialId = '',
 }) => ({
 	PerformedByID : performerId,
 	size          : 10,
@@ -27,6 +28,8 @@ const getPayload = ({
 	QFilter       : searchQuery || undefined,
 	Type          : category || undefined,
 	SpectatorType : spectatorType || undefined,
+	SortBy        : sortType || undefined,
+	SortType      : sortOrder || undefined,
 	StartDate     : formatDate({
 		date       : startDate,
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
@@ -37,6 +40,8 @@ const getPayload = ({
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 		formatType : 'date',
 	}) || undefined,
+	SerialID : serialId || undefined,
+	IDType   : idType || undefined,
 });
 
 const useListTickets = ({
@@ -49,9 +54,17 @@ const useListTickets = ({
 	setRefreshList,
 	isUpdated,
 	setIsUpdated,
+	sortBy,
+	idFilters = {},
+	setIdFilters = () => {},
 }) => {
 	const { startDate, endDate } = date || {};
 	const { agent, category } = searchParams || {};
+	const { sortOrder = '', sortType = '' } = sortBy || {};
+	const {
+		idType = '',
+		serialId = '',
+	} = idFilters || {};
 
 	const { id : performerId = '' } = useSelector((state) => state?.profile?.user);
 
@@ -69,10 +82,22 @@ const useListTickets = ({
 
 	const formattedPayload = useCallback((pageIndex) => {
 		const payload = getPayload({
-			performerId, pageIndex, agent, searchQuery, category, spectatorType, startDate, endDate,
+			performerId,
+			pageIndex,
+			agent,
+			searchQuery,
+			category,
+			spectatorType,
+			startDate,
+			endDate,
+			sortType,
+			sortOrder,
+			idType,
+			serialId,
 		});
 		return { ...payload, ...(TICKET_SECTION_MAPPING?.[status] || {}) };
-	}, [performerId, agent, searchQuery, category, spectatorType, startDate, endDate, status]);
+	}, [performerId, agent, searchQuery, category, spectatorType, startDate, endDate,
+		status, sortType, sortOrder, idType, serialId]);
 
 	const fetchTickets = useCallback(async (pageIndex) => {
 		try {
@@ -88,10 +113,11 @@ const useListTickets = ({
 				}));
 			}
 			setPagination(pageIndex + PAGE_INCREMENT);
+			setIdFilters((prev) => ({ ...prev, show: false }));
 		} catch (error) {
 			console.error('error:', error);
 		}
-	}, [formattedPayload, trigger]);
+	}, [formattedPayload, setIdFilters, trigger]);
 
 	useEffect(() => {
 		setTickets({ list: [], total: 0 });

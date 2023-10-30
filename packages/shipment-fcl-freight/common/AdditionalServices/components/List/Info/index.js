@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function Info() {
 	const items = Object.values(STATUS_ITEMS || {}).map((item) => (
-		<Item {...item} />
+		<Item key={item?.status} {...item} />
 	));
 
 	return (

@@ -1,0 +1,22 @@
+.container {
+	width: 75%;
+	padding-bottom: 20px;
+	margin-top: 12px;
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+	margin-bottom: 1.5rem;
+}
+
+.title {
+	margin-bottom: 0;
+	margin-left: 8px;
+}
+
+.arrow_back {
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}

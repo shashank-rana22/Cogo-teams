@@ -22,6 +22,8 @@ const COGOONE_CONSTANTS = '/cogoone_constants';
 
 const EMAIL = '/customer_chat/email/rooms';
 
+const INTERNAL_ROOMS = 'internal/cogo_one/internal_chats';
+
 export const FIRESTORE_PATH = {
 	whatsapp          : WHATSAPP,
 	platform_chat     : PLATFORM_CHAT,
@@ -30,5 +32,5 @@ export const FIRESTORE_PATH = {
 	agent_data        : AGENT_DATA,
 	cogoone_constants : COGOONE_CONSTANTS,
 	email             : EMAIL,
-
+	internal_rooms    : INTERNAL_ROOMS,
 };

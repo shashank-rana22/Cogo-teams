@@ -1,12 +1,36 @@
-import { SelectController, UploadController, InputNumberController } from '@cogoport/forms';
+import { Toast } from '@cogoport/components';
+import { SelectController, UploadController, InputNumberController, useDebounceQuery } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import { useEffect, useCallback } from 'react';
 
 import options from '../../../../common/currencies';
 import { PAYMENT_TYPE, IS_INVOICE_INCEDENTAL, REMARKS_FOR_CN } from '../../../../constants';
+import { checkHighAdvancePaymentProof } from '../../../../helpers/createAdvancePaymentDoc';
 import styles from '../styles.module.css';
 
-function FtlAdditionalDetails({ control = {}, formValues = {} }) {
+function FtlAdditionalDetails({ control = {}, formValues = {}, calculatedValues = {} }) {
 	const geo = getGeoConstants();
+	const { query, debounceQuery } = useDebounceQuery();
+
+	const isHighAdvancePaymentProof = checkHighAdvancePaymentProof(formValues, calculatedValues);
+
+	const handleInputChange = useCallback(() => {
+		const isHighAdvanced = checkHighAdvancePaymentProof({
+			advanced_amount : query,
+			payment_type    : formValues?.payment_type,
+		}, calculatedValues);
+
+		if (isHighAdvanced) {
+			// eslint-disable-next-line max-len
+			Toast.info('Post completing the cost booking, upload High Advance Payment Proof by completing Upload High Advance Payment Proof task');
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [query]);
+
+	useEffect(() => {
+		handleInputChange();
+	}, [handleInputChange]);
+
 	return (
 		<>
 
@@ -36,6 +60,7 @@ function FtlAdditionalDetails({ control = {}, formValues = {} }) {
 				control={control}
 				name="advanced_amount"
 				placeholder="Advance Amount"
+				onChange={(val) => debounceQuery(val)}
 			/>
 
 		</div>
@@ -84,6 +109,17 @@ function FtlAdditionalDetails({ control = {}, formValues = {} }) {
 					control={control}
 				/>
 			</div>
+			{
+			isHighAdvancePaymentProof ? (
+				<div className={styles.upload_container}>
+					<label className={styles.label}>Advance Payment Proof :</label>
+					<UploadController
+						name="advance_payment_proof"
+						control={control}
+					/>
+				</div>
+			) : null
+			}
 
 			{['credit_note'].includes(formValues.invoice_type)
             && (

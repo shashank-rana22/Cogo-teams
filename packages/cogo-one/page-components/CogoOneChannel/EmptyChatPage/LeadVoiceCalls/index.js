@@ -189,11 +189,14 @@ function LeadVoiceCalls({ setActiveTab = () => {} }) {
 					/>
 				) : null}
 			</div>
-			<CreateLeadAccount
-				createLeadModal={createLeadModal}
-				setCreateLeadModal={setCreateLeadModal}
-				getOrganizationUsers={getOrganizationUsers}
-			/>
+
+			{createLeadModal ? (
+				<CreateLeadAccount
+					createLeadModal={createLeadModal}
+					setCreateLeadModal={setCreateLeadModal}
+					getOrganizationUsers={getOrganizationUsers}
+				/>
+			) : null}
 
 		</div>
 	);

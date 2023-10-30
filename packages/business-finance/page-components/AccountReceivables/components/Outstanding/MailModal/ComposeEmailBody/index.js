@@ -1,10 +1,18 @@
-import { RTEditor, Input, Select } from '@cogoport/components';
+/* eslint-disable import/no-unresolved */
+import { Input, Select } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
+import dynamic from 'next/dynamic';
 
 import RTE_TOOL_BAR_CONFIG from '../mailConstants/rteToolBarConfig';
 
+// eslint-disable-next-line custom-eslint/import-from-react
+import 'suneditor/dist/css/suneditor.min.css';
 import Recipients from './Recipients';
 import styles from './styles.module.css';
+
+const SunEditor = dynamic(() => import('suneditor-react'), {
+	ssr: false,
+});
 
 function ComposeEmailBody(props) {
 	const {
@@ -78,11 +86,17 @@ function ComposeEmailBody(props) {
 			</div>
 
 			<div className={styles.rte_container}>
-				<RTEditor
+				<SunEditor
+					autoFocus={false}
+					plugin=""
 					value={emailState?.body}
 					onChange={(val) => setEmailState((p) => ({ ...p, body: val }))}
-					className={styles.styled_editor}
-					modules={{ toolbar: RTE_TOOL_BAR_CONFIG }}
+					setOptions={{
+						buttonList    : RTE_TOOL_BAR_CONFIG,
+						defaultTag    : 'div',
+						minHeight     : '300px',
+						showPathLabel : false,
+					}}
 				/>
 
 				<div className={styles.attachments_scroll}>

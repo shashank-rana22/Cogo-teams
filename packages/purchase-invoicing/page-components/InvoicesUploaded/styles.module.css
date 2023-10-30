@@ -11,7 +11,7 @@
 
 .tablecontainer {
 	margin-top: 16px;
-	overflow: auto;
+	overflow: visible;
 }
 
 .value {

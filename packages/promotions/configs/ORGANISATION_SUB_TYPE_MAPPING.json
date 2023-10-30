@@ -1,0 +1,22 @@
+[
+	{
+		"label": "Long Tail",
+		"value": "long_tail"
+	},
+	{
+		"label": "Mid Size",
+		"value": "mid_size"
+	},
+	{
+		"label": "Enterprise",
+		"value": "enterprise"
+	},
+	{
+		"label": "Overseas CP",
+		"value": "overseas_cp"
+	},
+	{
+		"label": "Domestic CP",
+		"value": "domestic_cp"
+	}
+]

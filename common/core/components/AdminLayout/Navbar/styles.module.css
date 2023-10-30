@@ -323,3 +323,16 @@
 .line {
 	margin-bottom: 8px;
 }
+
+.hide {
+	display: none;
+}
+
+.count {
+	width: fit-content;
+	height: 20px;
+	padding: 0 4px;
+	color: #fff;
+	background: #ee3425;
+	border-radius: 6px;
+}

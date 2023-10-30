@@ -1,6 +1,5 @@
 .port {
 	display: flex;
-	display: box;
 	align-items: center;
 	width: 50%;
 	overflow: hidden;

@@ -1,0 +1,30 @@
+.table {
+	:global {
+		padding: 24px 0;
+		margin-bottom: 0 !important;
+		background-color: #ffff;
+
+		.ui_table_container {
+			border: none;
+		}
+
+		.ui_table_head_cell {
+			border-bottom: 1px solid #f68b21;
+		}
+
+		.ui_table_body_row {
+			position: relative;
+		}
+	}
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

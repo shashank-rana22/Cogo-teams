@@ -1,11 +1,16 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
 import { addDoc, updateDoc, doc, collection } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import updateEmailState from '../helpers/updateEmailState';
+import { splitStringIntoChunks } from '../utils/chunkUtils';
+
+import useSaveChunks from './useSaveChunks';
 
 const INCREASE_MESSAGE_COUNT_BY_ONE = 1;
+const LIMIT_FOR_BODY_PREVIEW = 200;
 
 const formatMailDraftMessage = ({
 	communication_id = '',
@@ -15,37 +20,48 @@ const formatMailDraftMessage = ({
 	roomId = '',
 	emailState = {},
 	showOrgSpecificMail = false,
-}) => ({
-	agent_type           : 'bot',
-	conversation_type    : 'received',
-	last_draft_saved_on  : Date.now(),
-	updated_at           : Date.now(),
-	message_type         : 'text',
-	is_draft             : true,
-	communication_id     : communication_id || '',
-	room_id              : roomId,
-	draft_type           : buttonType,
-	parent_email_message : parentEmailMessage || {},
-	response             : {
-		attachments       : payload?.attachments || [],
-		bcc_mails         : payload?.bccrecipients || [],
-		body              : payload?.content || '',
-		cc_mails          : payload?.ccrecipients || [],
-		message_id        : payload?.msgId || '',
-		sender            : payload?.sender || '',
-		subject           : payload?.subject || '',
-		to_mails          : payload?.toUserEmail || [],
-		draft_type        : buttonType,
-		draftQuillMessage : {
-			rteContent : emailState?.rteContent || '',
-			body       : emailState?.body || '',
+}) => {
+	const updateParentMessage = {
+		...parentEmailMessage,
+		response: {
+			...parentEmailMessage?.response,
+			body: '',
 		},
-		...(showOrgSpecificMail ? {
-			custom_subject : emailState?.customSubject || '',
-			org_id         : emailState?.orgId || '',
-		} : {}),
-	},
-});
+	};
+
+	return {
+		agent_type           : 'bot',
+		conversation_type    : 'received',
+		last_draft_saved_on  : Date.now(),
+		updated_at           : Date.now(),
+		message_type         : 'text',
+		is_draft             : true,
+		communication_id     : communication_id || '',
+		room_id              : roomId,
+		draft_type           : buttonType,
+		parent_email_message : updateParentMessage || {},
+		response             : {
+			attachments  : payload?.attachments || [],
+			bcc_mails    : payload?.bccrecipients || [],
+			body         : '',
+			body_preview : emailState?.rawRTEContent?.slice(
+				GLOBAL_CONSTANTS.zeroth_index,
+				LIMIT_FOR_BODY_PREVIEW,
+			) || '',
+			cc_mails   : payload?.ccrecipients || [],
+			message_id : payload?.msgId || '',
+			sender     : payload?.sender || '',
+			subject    : payload?.subject || '',
+			to_mails   : payload?.toUserEmail || [],
+			draft_type : buttonType,
+			user_ids   : emailState?.user_ids,
+			...(showOrgSpecificMail ? {
+				custom_subject : emailState?.customSubject || '',
+				orgData        : emailState?.orgData || {},
+			} : {}),
+		},
+	};
+};
 
 const createDraftRoom = async ({
 	agentId = '',
@@ -60,26 +76,36 @@ const createDraftRoom = async ({
 		`${FIRESTORE_PATH.email}`,
 	);
 
+	const msgDocument = formatMailDraftMessage({
+		communication_id,
+		buttonType,
+		payload   : rteEditorPayload,
+		roomId    : '',
+		emailState,
+		roomLevel : true,
+	});
+
 	const newDraftRoomPayload = {
-		agent_type          : 'bot',
-		channel_type        : 'email',
-		created_at          : Date.now(),
-		show_in_drafts      : true,
-		session_type        : 'admin',
-		new_message_sent_at : Date.now(),
-		updated_at          : Date.now(),
-		no_of_drafts        : 1,
-		support_agent_id    : agentId,
-		last_draft_document : formatMailDraftMessage({
-			communication_id,
-			buttonType,
-			payload : rteEditorPayload,
-			roomId  : '',
-			emailState,
-		}),
+		agent_type            : 'bot',
+		channel_type          : 'email',
+		created_at            : Date.now(),
+		show_in_drafts        : true,
+		session_type          : 'admin',
+		new_message_sent_at   : Date.now(),
+		updated_at            : Date.now(),
+		last_message_document : msgDocument,
+		no_of_drafts          : 1,
+		support_agent_id      : agentId,
+		last_draft_document   : msgDocument,
 	};
 
-	const res = await addDoc(emailCollection, newDraftRoomPayload);
+	let res = {};
+
+	try {
+		res = await addDoc(emailCollection, newDraftRoomPayload);
+	} catch (e) {
+		console.error(e);
+	}
 
 	return res?.id;
 };
@@ -101,7 +127,12 @@ const updateMessage = async ({
 	setSendLoading = () => {},
 	emailState = {},
 	showOrgSpecificMail = false,
+	saveChunks = () => {},
+	deleteChunks = () => {},
 }) => {
+	const messageChunks = splitStringIntoChunks({ content: emailState?.body });
+	const rteContentChunks = splitStringIntoChunks({ content: emailState?.rteContent });
+
 	const updatePayload = formatMailDraftMessage({
 		communication_id,
 		payload,
@@ -114,12 +145,13 @@ const updateMessage = async ({
 
 	if (!isNewRoomCreated) {
 		const updateRoomPayload = {
-			show_in_drafts      : true,
-			new_message_sent_at : Date.now(),
-			no_of_drafts        : no_of_drafts + INCREASE_MESSAGE_COUNT_BY_ONE,
-			last_draft_document : updatePayload,
-			updated_at          : Date.now(),
-			session_type        : 'admin',
+			show_in_drafts        : true,
+			new_message_sent_at   : Date.now(),
+			no_of_drafts          : no_of_drafts + INCREASE_MESSAGE_COUNT_BY_ONE,
+			last_draft_document   : updatePayload,
+			last_message_document : updatePayload,
+			updated_at            : Date.now(),
+			session_type          : 'admin',
 		};
 
 		const roomDoc = doc(
@@ -127,7 +159,11 @@ const updateMessage = async ({
 			`${FIRESTORE_PATH[channel_type]}/${roomId}`,
 		);
 
-		await updateDoc(roomDoc, updateRoomPayload);
+		try {
+			await updateDoc(roomDoc, updateRoomPayload);
+		} catch (err) {
+			console.error(err);
+		}
 	}
 
 	if (!is_draft) {
@@ -135,18 +171,43 @@ const updateMessage = async ({
 			firestore,
 			`${FIRESTORE_PATH[channel_type]}/${roomId}/messages`,
 		);
+		let res = {};
 
-		const res = await addDoc(
-			activeChatCollection,
-			merge(
-				updatePayload,
-				{
-					created_at: Date.now(),
-				},
-			),
-		);
-		if (isMinimize) {
-			await updateEmailState({ roomId, messageId: res?.id, firestore, setEmailState });
+		try {
+			res = await addDoc(
+				activeChatCollection,
+				merge(
+					updatePayload,
+					{
+						created_at: Date.now(),
+					},
+				),
+			);
+
+			await saveChunks({
+				roomId,
+				messageId   : res?.id,
+				messageChunks,
+				messageType : 'body',
+			});
+
+			await saveChunks({
+				roomId,
+				messageId     : res?.id,
+				messageChunks : rteContentChunks,
+				messageType   : 'rte_content',
+			});
+
+			if (isMinimize) {
+				await updateEmailState({
+					roomId,
+					messageId: res?.id,
+					firestore,
+					setEmailState,
+				});
+			}
+		} catch (err) {
+			console.error(err);
 		}
 
 		setSendLoading(false);
@@ -159,10 +220,42 @@ const updateMessage = async ({
 		`${FIRESTORE_PATH[channel_type]}/${roomId}/messages/${messageId}`,
 	);
 
-	await updateDoc(
-		messageDoc,
-		updatePayload,
-	);
+	try {
+		await updateDoc(
+			messageDoc,
+			updatePayload,
+		);
+
+		await deleteChunks({
+			roomId,
+			messageId,
+			chunkIds    : emailState?.draftQuillBody?.body?.ids,
+			messageType : 'body',
+		});
+
+		await deleteChunks({
+			roomId,
+			messageId,
+			chunkIds    : emailState?.draftQuillBody?.rte_content?.ids,
+			messageType : 'rte_content',
+		});
+
+		await saveChunks({
+			roomId,
+			messageId,
+			messageChunks,
+			messageType: 'body',
+		});
+
+		await saveChunks({
+			roomId,
+			messageId,
+			messageChunks : rteContentChunks,
+			messageType   : 'rte_content',
+		});
+	} catch (err) {
+		console.error(err);
+	}
 
 	if (isMinimize) {
 		await updateEmailState({
@@ -192,6 +285,11 @@ const useSaveDraft = ({
 }) => {
 	const agentId = useSelector((state) => state.profile?.user?.id);
 
+	const { saveChunks, deleteChunks } = useSaveChunks({
+		firestore,
+		channel_type: 'email',
+	});
+
 	const saveDraft = async ({
 		communication_id = '',
 		newComposeRoomId = '',
@@ -199,6 +297,7 @@ const useSaveDraft = ({
 		isMinimize = false,
 	} = {}) => {
 		setSendLoading(true);
+
 		const { id: roomId, no_of_drafts = 0 } = roomData || {};
 
 		const { is_draft = false, id = '' } = draftMessageData || {};
@@ -214,6 +313,11 @@ const useSaveDraft = ({
 				buttonType,
 				emailState,
 			});
+		}
+
+		if (!roomIdNew) {
+			setSendLoading(false);
+			return null;
 		}
 
 		return updateMessage({
@@ -234,6 +338,8 @@ const useSaveDraft = ({
 			setSendLoading,
 			emailState,
 			showOrgSpecificMail,
+			saveChunks,
+			deleteChunks,
 		});
 	};
 
@@ -241,4 +347,5 @@ const useSaveDraft = ({
 		saveDraft,
 	};
 };
+
 export default useSaveDraft;

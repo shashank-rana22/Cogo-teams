@@ -744,7 +744,6 @@
         "can_view": [
             "notifying_party",
             "invoicing_party",
-            "service_provider",
             "pocs",
             "collection_party",
             "shipper",

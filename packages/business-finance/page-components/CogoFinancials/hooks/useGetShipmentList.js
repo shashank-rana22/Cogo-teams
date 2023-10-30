@@ -4,7 +4,7 @@ import { useRequestBf } from '@cogoport/request';
 import { upperCase } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-import toastApiError from '../../commons/toastApiError.ts';
+import toastApiError from '../../commons/toastApiError';
 import getDuration from '../utils/getDuration';
 import getFormattedDate from '../utils/getFormattedDate';
 

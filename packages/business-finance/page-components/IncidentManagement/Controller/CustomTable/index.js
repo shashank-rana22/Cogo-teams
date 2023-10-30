@@ -2,7 +2,7 @@ import { Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
-import EmptyState from '../../common/EmptyState/index.tsx';
+import EmptyState from '../../common/EmptyState/index';
 
 import ColumnCard from './ColumnCard';
 import { getControllerConfig } from './Config/controller-config';

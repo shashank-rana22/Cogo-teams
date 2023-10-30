@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { subtractDays, format } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-import toastApiError from '../../commons/toastApiError.ts';
+import toastApiError from '../../commons/toastApiError';
 
 const NUMBER_OF_DAYS = 7;
 

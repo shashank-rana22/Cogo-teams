@@ -4,7 +4,6 @@
   "description": "Vendors of Cogoport",
   "private": true,
   "main": "./index.js",
-  "types": "./index.js",
   "dependencies": {
     "@cogoport/components": "^1.0.316",
     "@cogoport/forms": "workspace:*",

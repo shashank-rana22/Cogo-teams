@@ -28,7 +28,10 @@ export const COGOVERSE_AGENT_MAPPINGS = {
 	sales_admin               : ['sales_admin'],
 	shipment_specialist_admin : ['shipment_specialist_admin'],
 	cogoone_admin             : ['tech_support'],
-	credit_controller         : ['credit_controller'],
+	finance                   : ['finance', 'credit_controller'],
+	service_ops               : ['service_ops', 'service_ops_admin'],
+	hr                        : ['hr', 'hr_admin'],
+	admin                     : ['admin'],
 };
 
 const DEFAULT_VIEW_TYPE = 'default';

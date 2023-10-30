@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 function CreateRequest({
 	controls = [],
 	setLevel = () => {},
+	editData = () => {},
 }, ref) {
 	return (
 		<section className={styles.section} id="create_form">
@@ -14,6 +15,7 @@ function CreateRequest({
 				controls={controls}
 				setLevel={setLevel}
 				ref={ref}
+				editData={editData}
 			/>
 		</section>
 	);

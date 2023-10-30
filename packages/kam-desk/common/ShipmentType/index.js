@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useContext } from 'react';
 
 import shipmentControls from '../../config/CONTROLS_CONFIG.json';
@@ -30,13 +31,13 @@ function ShipmentType() {
 			if (stepperTabs?.length) {
 				tempStepperTab = findValueInArray({ arr: stepperTabs, value: stepperTab })
 					? stepperTab
-					: stepperTabs?.[0]?.value || '';
+					: stepperTabs?.[GLOBAL_CONSTANTS.zeroth_index]?.value || '';
 
 				const tabs = shipmentTabMapping?.[val]?.[tempStepperTab]?.tabs;
 
 				tempActiveTab = findValueInArray({ arr: tabs, value: activeTab })
 					? activeTab
-					: tabs?.[0]?.value || '';
+					: tabs?.[GLOBAL_CONSTANTS.zeroth_index]?.value || '';
 			}
 
 			setStepperTab(tempStepperTab);

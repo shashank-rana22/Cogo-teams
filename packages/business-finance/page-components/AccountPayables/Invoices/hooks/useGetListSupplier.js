@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 
 function useGetListSupplier() {
 	const { query: urlQuery = {} } = useSelector(({ general }) => ({

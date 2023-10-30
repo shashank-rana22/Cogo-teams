@@ -1,8 +1,9 @@
 import { IcMSettings } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { dynamic } from '@cogoport/next';
 
-import ConfigModal from './ConfigModal';
 import styles from './styles.module.css';
+
+const ConfigModal = dynamic(() => import('./ConfigModal'));
 
 function AgentConfig({
 	firestore = {},
@@ -10,20 +11,17 @@ function AgentConfig({
 	viewType = '',
 	configurationsToBeShown = [],
 	setViewType = () => {},
+	activeCard = '',
+	setActiveCard = () => {},
 }) {
-	const [showAgentDetails, setShowAgentDetails] = useState(false);
-	const [activeCard, setActiveCard] = useState('');
-
 	return (
 		<>
 			<IcMSettings
 				className={styles.settings_icon}
-				onClick={() => setShowAgentDetails(true)}
+				onClick={() => setActiveCard('config_modal')}
 			/>
 			<ConfigModal
 				key={activeCard}
-				showAgentDetails={showAgentDetails}
-				setShowAgentDetails={setShowAgentDetails}
 				firestore={firestore}
 				configurationsToBeShown={configurationsToBeShown}
 				initialViewType={initialViewType}

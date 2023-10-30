@@ -22,7 +22,7 @@ function List(props) {
 
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
 
-	const LIST_COLUMN_MAPPING = getListColumnMapping();
+	const LIST_COLUMN_MAPPING = getListColumnMapping({ levelStack });
 
 	if (listLoading) {
 		return <LoadingState />;
@@ -66,6 +66,7 @@ function List(props) {
 						isChannel={isChannel}
 						levelStack={levelStack}
 						setLevelStack={setLevelStack}
+						LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
 					/>
 				))}
 
@@ -84,6 +85,7 @@ function List(props) {
 							isChannel={isChannel}
 							levelStack={levelStack}
 							setLevelStack={setLevelStack}
+							LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
 						/>
 					</>
 				) : null}

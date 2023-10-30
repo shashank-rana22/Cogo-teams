@@ -1,3 +1,5 @@
+const ROUTER_COMPONENTS_LENGTH_DEFAULT = 2;
+
 const booking_list_priority_array = [
 	{ name: 'coe-shipments' },
 	{ name: 'coe-booking_note_desk' },
@@ -15,7 +17,7 @@ export const backAllowed = (routerComponents) => {
 	const prev_nav_restricted = window.sessionStorage.getItem('prev_nav_restricted');
 	const prev_nav = window.sessionStorage.getItem('prev_nav');
 	const just_refreshed = prev_nav === window.location.href;
-	const isDirect = Object.keys(routerComponents || {}).length <= 2;
+	const isDirect = Object.keys(routerComponents || {}).length <= ROUTER_COMPONENTS_LENGTH_DEFAULT;
 
 	let isBackAllowed = !isDirect || just_refreshed;
 	if (typeof prev_nav_restricted === 'string') {
@@ -24,7 +26,7 @@ export const backAllowed = (routerComponents) => {
 	return isBackAllowed;
 };
 
-export const getRedirectNavMapping = (allNavs) => {
+export const getRedirectNavMapping = (allNavs, navigation = '') => {
 	const coe_navs = (allNavs || []).find((nav) => nav.key === 'coe')?.options || [];
 
 	let navToRedirect = false;
@@ -37,6 +39,10 @@ export const getRedirectNavMapping = (allNavs) => {
 
 	if (navToRedirect === false) {
 		return { navToRedirect: { href: '/', as: '/' }, version: 'v1' };
+	}
+
+	if (navigation !== '') {
+		navToRedirect = coe_navs.find((nav) => nav.key === navigation) || {};
 	}
 	const version = (navToRedirect.href || '').includes('v2') ? 'v2' : 'v1';
 

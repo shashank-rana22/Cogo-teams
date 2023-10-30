@@ -51,7 +51,8 @@ const useHandleQuotationModal = ({
 		: selected?.organization_id;
 
 	const orgUsersParams = {
-		page_limit : 100,
+		page_limit : 1000,
+		status     : 'active',
 		filters    : {
 			organization_id: org_id,
 		},

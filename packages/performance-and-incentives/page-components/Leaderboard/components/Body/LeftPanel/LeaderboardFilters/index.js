@@ -27,6 +27,7 @@ function LeaderboardFilters(props) {
 		listRefetch,
 		refetchStats,
 		statsLoading,
+		getUserProgress,
 	} = props;
 
 	const { incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
@@ -59,8 +60,8 @@ function LeaderboardFilters(props) {
 				) : null}
 
 				{!isEmpty(levelStack) && !currLevel.isExpanded ? (
-					<div className={styles.back}>
-						<IcMArrowBack style={{ marginRight: '6px', cursor: 'pointer' }} onClick={handleBack} />
+					<div className={styles.back} role="presentation" onClick={handleBack}>
+						<IcMArrowBack style={{ marginRight: '6px', cursor: 'pointer' }} />
 						<div>
 							Back
 						</div>
@@ -75,6 +76,7 @@ function LeaderboardFilters(props) {
 					listRefetch={listRefetch}
 					refetchStats={refetchStats}
 					statsLoading={statsLoading}
+					getUserProgress={getUserProgress}
 				/>
 
 				<div className={styles.search_container}>

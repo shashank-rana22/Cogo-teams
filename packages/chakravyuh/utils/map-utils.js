@@ -1,9 +1,20 @@
 import { COLORS } from '../constants/map_constants';
 
 const INCREMENT = 1;
+const MULTIPLIER = 2;
 const DENOMINATOR = 40;
 
-export const getPolygonStyleProps = (accuracy = 0) => COLORS[Math.ceil(accuracy / DENOMINATOR)];
+export const getPolygonStyleProps = (accuracy = 0) => {
+	let idx = 0;
+	if (accuracy > DENOMINATOR * MULTIPLIER) {
+		idx = MULTIPLIER + INCREMENT;
+	} else if (accuracy > DENOMINATOR) {
+		idx = MULTIPLIER;
+	} else if (accuracy) {
+		idx = INCREMENT;
+	}
+	return COLORS[idx];
+};
 
 export function isPointInsidePoly(coords, poly) {
 	let isInside = false;

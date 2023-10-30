@@ -57,6 +57,7 @@ function HandleRaiseContainer({
 
 function DefaultView() {
 	const router = useRouter();
+	const { navigation = '' } = router.query;
 	const {
 		shipment_data = {}, stakeholderConfig = {},
 		getShipmentStatusCode = 0, isGettingShipment = false,
@@ -77,10 +78,12 @@ function DefaultView() {
 
 	const { data: alarmData = {} } = useGetShipmentFaultAlarmDescription(alarmId, reload);
 	const handleVersionChange = useCallback(() => {
-		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data.id}`;
+		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data.id}${
+			navigation ? `?navigation=${navigation}` : ''
+		}`;
 		window.location.replace(newHref);
 		window.sessionStorage.setItem('prev_nav', newHref);
-	}, [router?.query?.partner_id, shipment_data.id]);
+	}, [router?.query?.partner_id, shipment_data.id, navigation]);
 
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
@@ -137,12 +140,11 @@ function DefaultView() {
 			<div className={styles.top_header}>
 				<ShipmentInfo />
 				<div className={styles.toggle_chat}>
-					{shipment_data?.is_job_closed && (
-						<JobStatus
-							shipment_data={shipment_data}
-							isJobOpenAllowed={job_open_request}
-						/>
-					)}
+
+					<JobStatus
+						shipment_data={shipment_data}
+						isJobOpenAllowed={job_open_request}
+					/>
 
 					<HandleRaiseContainer
 						shipment_data={shipment_data}

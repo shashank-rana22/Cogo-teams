@@ -1,4 +1,4 @@
-import { Loader } from '@cogoport/components';
+import { Loader, Pill } from '@cogoport/components';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -47,7 +47,9 @@ function ServiceWiseOutstanding({
 				const key = JSON.stringify(item?.buckets);
 				return (
 					<div className={styles.card} key={key}>
-						<div className={styles.custom_tag}>{startCase(item.shipment_type) || '-'}</div>
+						<div className={styles.custom_tag}>
+							<Pill size="lg" color="#d9eafd">{startCase(item.shipment_type) || '-'}</Pill>
+						</div>
 						<StatsCard item={getFinalObj} />
 					</div>
 				);

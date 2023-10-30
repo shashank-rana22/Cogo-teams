@@ -6,7 +6,7 @@ import { useEffect, useCallback } from 'react';
 
 import { FIREBASE_TABS } from '../constants';
 
-import useGetOrgUsers from './useGetOrgUsers';
+import useGetOrganizationUsersList from './useGetOrganizationUsersList';
 
 const getParams = ({ orgId = '' }) => ({
 	id                 : orgId,
@@ -80,7 +80,7 @@ const useCheckChannelPartner = ({
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 	const userId = formattedMessageData?.user_id;
 
-	const { orgLoading = false, isOrgUserIdPresent = false } = useGetOrgUsers({ orgId, userId });
+	const { orgLoading = false, isOrgUserIdPresent = false } = useGetOrganizationUsersList({ orgId, userId });
 
 	const isSendUserIdInPath = !isEmpty(orgId) && !isEmpty(userId) && isOrgUserIdPresent && !orgLoading;
 

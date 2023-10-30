@@ -4,14 +4,14 @@ export default function checkValuesChanged({ formRefs }) {
 	const isValuesChanged = (formRefs.current || []).some(({ defaultValues, getValues }) => {
 		const { service_id, service_type, ...restFormValues } = getValues();
 
-		const newFormValues = {};
+		const NEW_FORM_VALUES = {};
 
 		Object.entries(restFormValues).forEach(([key, val]) => {
-			newFormValues[key] = Number(val);
+			NEW_FORM_VALUES[key] = Number(val);
 		});
 
-		return Object.keys(newFormValues).some(
-			(key) => newFormValues[key] !== defaultValues[key],
+		return Object.keys(NEW_FORM_VALUES).some(
+			(key) => NEW_FORM_VALUES[key] !== defaultValues[key],
 		);
 	});
 

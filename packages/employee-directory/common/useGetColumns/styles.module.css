@@ -24,3 +24,7 @@
 .tooltip {
 	max-width: none !important;
 }
+
+.button_container > :first-child {
+	margin-right: 4px;
+}

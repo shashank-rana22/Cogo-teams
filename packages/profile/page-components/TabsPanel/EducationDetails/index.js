@@ -1,5 +1,7 @@
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import EmptyState from '../../../common/EmptyState';
 import { otherEducationInfo } from '../../../utils/otherInfo';
 import DetailsCard from '../DetailsCard';
 import RightGlance from '../RightGlance';
@@ -23,11 +25,21 @@ function EducationDetails({ data = {}, loading = false }) {
 						<span className={styles.detail}>View and manage educational details</span>
 					</div>
 				</div>
-				<div className={styles.info_container}>
-					{info.map(({ heading, details }) => (
-						<DetailsCard heading={heading} details={details} data={data} key={heading} loading={loading} />
-					))}
-				</div>
+				{
+					!isEmpty(employee_education_details) ? (
+						<div className={styles.info_container}>
+							{info?.map(({ heading, details }) => (
+								<DetailsCard
+									heading={heading}
+									details={details}
+									data={data}
+									key={heading}
+									loading={loading}
+								/>
+							))}
+						</div>
+					) : (<EmptyState />)
+				}
 			</div>
 			<RightGlance otherInfo={otherInfo} data={data} loading={loading} />
 		</div>

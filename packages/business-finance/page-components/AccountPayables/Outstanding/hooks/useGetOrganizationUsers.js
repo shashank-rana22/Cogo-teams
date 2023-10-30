@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 
 const useGetOrganizationUsers = ({ organizationId, showElement = false }) => {
 	const [param, setParam] = useState({ page: 1, page_limit: 10 });

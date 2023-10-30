@@ -1,20 +1,11 @@
-import { AIR_COMMODITIES, MODE_OPTIONS } from '../constants/air_commodities_mapping';
-import { SERVICE_TYPE_OPTIONS } from '../constants/dashboard_filter_controls';
+import { AIR_COMMODITIES, SOURCE_OPTIONS } from '../constants/air_commodities_mapping';
 
 const controls = [
 	{
-		name    : 'service_type',
-		options : SERVICE_TYPE_OPTIONS,
-		type    : 'select',
-		span    : 12,
-		size    : 'md',
-		label   : 'Service Type',
-	},
-	{
-		name      : 'mode',
+		name      : 'source',
 		type      : 'pills',
 		label     : 'Rate Source',
-		options   : MODE_OPTIONS,
+		options   : SOURCE_OPTIONS,
 		span      : 12,
 		className : 'filter-row-flex md',
 	},
@@ -44,7 +35,7 @@ const controls = [
 				label : '500-1000',
 			},
 			{
-				value : '1000_plus',
+				value : '1000_100000',
 				label : '1000+',
 			},
 		],
@@ -52,7 +43,7 @@ const controls = [
 		className : 'filter-row-flex md',
 	},
 	{
-		name     : 'airline',
+		name     : 'airline_id',
 		label    : 'Airline',
 		type     : 'async-select',
 		asyncKey : 'list_operators',

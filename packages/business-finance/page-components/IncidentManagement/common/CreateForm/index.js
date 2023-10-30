@@ -1,4 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import React, { useState, useRef } from 'react';
 
@@ -11,9 +12,11 @@ import styles from './styles.module.css';
 
 function CreateLevelModal({
 	refetch = () => {},
+	editData = {},
+	onCancelEdit = () => {},
 }) {
 	const { t } = useTranslation(['incidentManagement']);
-	const [showCreateModal, setShowCreateModal] = useState(false);
+	const [showCreateModal, setShowCreateModal] = useState(!isEmpty(editData));
 	const [level, setLevel] = useState(null);
 	const ref = useRef();
 
@@ -21,7 +24,7 @@ function CreateLevelModal({
 
 	const {
 		controls, onSubmit, loading, onCancel, updating,
-	} = useCreateRequest({ refetch, setShowCreateModal, ref, lineItemsRef });
+	} = useCreateRequest({ refetch, setShowCreateModal, ref, lineItemsRef, onCancelEdit, editData });
 
 	return (
 		<>
@@ -36,7 +39,9 @@ function CreateLevelModal({
 				<Modal.Header
 					title={(
 						<Heading
-							title={t('incidentManagement:create_level_title')}
+							title={!isEmpty(editData)
+								? t('incidentManagement:update_level_title')
+								: t('incidentManagement:create_level_title')}
 						/>
 					)}
 				/>
@@ -47,8 +52,9 @@ function CreateLevelModal({
 							ref={ref}
 							controls={controls}
 							setLevel={setLevel}
+							editData={editData}
 						/>
-						<LevelForm ref={lineItemsRef} background="#fff" level={level} />
+						<LevelForm ref={lineItemsRef} background="#fff" level={level} item={editData || {}} />
 
 					</Modal.Body>
 				) : null}
@@ -66,7 +72,7 @@ function CreateLevelModal({
 						loading={loading || updating}
 						onClick={onSubmit}
 					>
-						{t('incidentManagement:create_btn')}
+						{isEmpty(editData) ? t('incidentManagement:confirm_btn') : t('incidentManagement:create_btn')}
 					</Button>
 				</Modal.Footer>
 			</Modal>

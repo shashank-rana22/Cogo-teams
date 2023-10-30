@@ -57,6 +57,12 @@ const chakravyuh = {
 			service_name : 'fcl_freight_rate',
 		},
 		{
+			api          : 'get_air_freight_rate_trends',
+			access_type  : 'private',
+			feature      : 'pricing_accuracy_dashboard',
+			service_name : 'fcl_freight_rate',
+		},
+		{
 			api          : 'get_fcl_freight_rate_distribution',
 			access_type  : 'private',
 			feature      : 'pricing_accuracy_dashboard',
@@ -91,6 +97,18 @@ const chakravyuh = {
 			access_type  : 'private',
 			feature      : 'pricing_accuracy_dashboard',
 			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'get_air_freight_rate_world',
+			access_type  : 'private',
+			feature      : 'pricing_accuracy_dashboard',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'get_user_interactions',
+			access_type  : 'private',
+			feature      : 'pricing_accuracy_dashboard',
+			service_name : 'location',
 		},
 	],
 };

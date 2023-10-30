@@ -3,8 +3,10 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 import { controls } from '../../Controller/Config/create-level-config';
+
+import useUpdateLevel from './useUpdateLevel';
 
 const DEFAULT_VALUE = 1;
 
@@ -13,6 +15,8 @@ const useCreateLevel = ({
 	setShowCreateModal = () => { },
 	lineItemsRef,
 	ref,
+	onCancelEdit = () => { },
+	editData = {},
 }) => {
 	const {
 		profile: profileData = {},
@@ -28,6 +32,7 @@ const useCreateLevel = ({
 
 	const onCancel = () => {
 		setShowCreateModal(false);
+		onCancelEdit();
 	};
 
 	const create = async (payload) => {
@@ -40,7 +45,15 @@ const useCreateLevel = ({
 			toastApiError(e);
 		}
 	};
+	const {
+		id: updateId = '',
+		referenceId = '',
+		createdBy = {},
+	} = editData || {};
 
+	const { update = {} } = useUpdateLevel({
+		refetch, setShow: onCancelEdit, createdBy, referenceId, id: updateId,
+	});
 	const getData = (lineItemLevels) => {
 		const { approvalLevelConditions } = lineItemLevels || {};
 		const formatLineItems = approvalLevelConditions.map((item, index) => ({
@@ -49,8 +62,17 @@ const useCreateLevel = ({
 		}));
 		const formData = ref.current.watch();
 
-		if (
-			!isEmpty(formData?.incidentType)
+		if (!isEmpty(editData)) {
+			const payload = {
+				...(formData || {}),
+				approvalLevelConditions : formatLineItems,
+				createdBy               : { userId: id, userName: name, userEmail: email },
+			};
+			update(payload);
+		}
+
+		if (isEmpty(editData)
+			&& !isEmpty(formData?.incidentType)
 			&& !isEmpty(formData?.incidentSubtype)
 			&& !isEmpty(formData?.approvalType)
 			&& !isEmpty(formData?.entityCode)) {

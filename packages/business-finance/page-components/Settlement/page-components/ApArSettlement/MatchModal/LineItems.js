@@ -6,7 +6,7 @@ export default function getLineItems({ filters, updateBal }) {
 			glCode       : '',
 			tradePartyId : filters?.tradeParty || '',
 			type         : 'CREDIT',
-			amount       : updateBal || '',
+			amount       : Math.abs(updateBal) || '',
 		},
 		{
 			entityCode   : filters?.entityCode || '',
@@ -14,7 +14,7 @@ export default function getLineItems({ filters, updateBal }) {
 			glCode       : '',
 			tradePartyId : '',
 			type         : 'DEBIT',
-			amount       : updateBal || '',
+			amount       : Math.abs(updateBal) || '',
 		}]
 	);
 }

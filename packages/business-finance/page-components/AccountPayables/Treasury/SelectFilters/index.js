@@ -2,7 +2,7 @@ import { Input, Select, SingleDateRange } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 
-import SegmentedControl from '../../../commons/SegmentedControl/index.tsx';
+import SegmentedControl from '../../../commons/SegmentedControl/index';
 import {
 	ALL_REQUEST,
 	VIEW_BY,

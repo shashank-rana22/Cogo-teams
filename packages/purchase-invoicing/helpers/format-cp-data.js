@@ -361,7 +361,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			collectionPartyId : partyId || undefined,
 			urgencyTag        : formValues?.urgency_tag || undefined,
 			advanceBill:
-			formValues?.advance_bill === 'advance_bill' ? 'true' : undefined,
+			formValues?.advance_bill ? 'true' : undefined,
 			exchangeRateDocument : uploadProof || undefined,
 			isDeviationAccepted  : data?.is_deviation_accepted || undefined,
 			serviceProviderType  : 'freight_forwarder',

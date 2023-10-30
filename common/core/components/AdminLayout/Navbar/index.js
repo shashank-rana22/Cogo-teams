@@ -25,8 +25,8 @@ function Navbar({
 	setPinnedNavKeys = () => {},
 	mobileShow = false,
 	inCall = false,
-	userId = '',
-	firestore = {},
+	ticketCount = 0,
+	unReadChatsCount = 0,
 }) {
 	const ref = useRef(null);
 	const navRef = useRef(null);
@@ -125,9 +125,8 @@ function Navbar({
 						setNotificationPopover={setNotificationPopover}
 						timeLeft={timeLeft}
 						refetch={refetch}
-						userId={userId}
-						firestore={firestore}
 						mobileShow={mobileShow}
+						unReadChatsCount={unReadChatsCount}
 					/>
 
 					<div className={styles.search_container}>
@@ -153,6 +152,7 @@ function Navbar({
 									setPinnedNavKeys={setPinnedNavKeys}
 									showPin={showPin}
 									inCall={inCall}
+									ticketCount={ticketCount}
 								/>
 							))}
 						</div>
@@ -167,6 +167,7 @@ function Navbar({
 									setPinnedNavKeys={setPinnedNavKeys}
 									showPin={showPin}
 									inCall={inCall}
+									ticketCount={ticketCount}
 								/>
 							))}
 						</div>

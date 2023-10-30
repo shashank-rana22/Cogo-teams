@@ -126,7 +126,7 @@ function AmendDraftBl({
 		>
 			<div className={styles.text}>
 				Remarks:
-				&nbsp;
+				{' '}
 				{uploadedDocs?.list?.[GLOBAL_CONSTANTS.zeroth_index]?.remarks}
 			</div>
 			<HBLCreate

@@ -12,6 +12,7 @@ const updateRoom = ({ agentId = '', firestore = {} }) => {
 			call_details            : {},
 			last_activity_timestamp : Date.now(),
 			last_activity           : 'call_end',
+			feedback_form_status    : 'pending',
 		},
 		{ merge: true },
 	);

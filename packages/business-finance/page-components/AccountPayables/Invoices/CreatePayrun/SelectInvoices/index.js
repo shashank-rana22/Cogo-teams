@@ -3,8 +3,8 @@ import { IcMSearchdark } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
 import React, { useImperativeHandle, forwardRef } from 'react';
 
-import Filter from '../../../../commons/Filters/index.tsx';
-import List from '../../../../commons/List/index.tsx';
+import Filter from '../../../../commons/Filters/index';
+import List from '../../../../commons/List/index';
 import { invoiceFilters } from '../../configurations';
 import useGetPayrunInvoices from '../../hooks/useGetPayrunInvoices';
 import FilterModal from '../../MoreFilters';
@@ -54,8 +54,8 @@ const calculateErrorStatus = ({
 	let lessTdsValueCrossed = false;
 	let maxTdsValueCrossed = false;
 
-	if (key === 'payableAmount') {
-		maxValueCrossed = +value > +payableValue;
+	if (key === 'inputAmount') {
+		maxValueCrossed = +value > +payableAmount;
 		lessValueCrossed = Number.parseInt(value, 10) <= MIN_AMOUNT;
 		maxTdsValueCrossed = +tdsAmount + +tdsDeducted > +checkAmount;
 		lessTdsValueCrossed = Number.parseInt(tdsAmount, 10) < MIN_AMOUNT;

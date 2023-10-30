@@ -26,14 +26,14 @@ function CargoInsurance({
 	refetch = () => {},
 	primary_service = {},
 }) {
+	const { user = {} } = useSelector((state) => state?.profile);
+	const { id: userId = '' } = user || {};
+
 	const [commodity, setCommodity] = useState('');
 	const [premiumData, setPremiumData] = useState({});
 	const [currentCargoInsurance, setCurrentCargoInsurance] = useState('');
 
 	const { query = '', debounceQuery } = useDebounceQuery();
-
-	const { user } = useSelector((state) => state?.profile);
-	const { id: userId } = user || {};
 
 	const refetchAfterApiCall = () => {
 		setShowModal(false);

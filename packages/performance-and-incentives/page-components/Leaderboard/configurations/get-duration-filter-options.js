@@ -14,20 +14,20 @@ const DURATION_OPTIONS = [
 		value : TODAY,
 	},
 	{
-		label : `Last Month (${lastMonth})`,
-		value : LAST_MONTH,
-	},
-	{
 		label : `This Month (${currMonth})`,
 		value : THIS_MONTH,
 	},
 	{
-		label : `Last Quarter (${lastQuarterStartMonth}-${lastQuarterEndMonth})`,
-		value : LAST_QUARTER,
+		label : `Last Month (${lastMonth})`,
+		value : LAST_MONTH,
 	},
 	{
 		label : `This Quarter (${quarterStartMonth}-${quarterEndMonth})`,
 		value : THIS_QUARTER,
+	},
+	{
+		label : `Last Quarter (${lastQuarterStartMonth}-${lastQuarterEndMonth})`,
+		value : LAST_QUARTER,
 	},
 	{
 		label : `This Year (${currentYear})`,

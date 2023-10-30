@@ -1,0 +1,26 @@
+.tooltip_text {
+	width: max-content;
+	padding: 5px;
+	font-size: var(--font-size-sm);
+	font-weight: 700;
+
+	.tool_tip_content {
+		font-size: var(--font-size-md);
+		color: #000;
+	}
+}
+
+.tooltip_item {
+	color: red;
+}
+
+.deviated_data {
+	margin-top: 4px;
+	font-size: var(--font-size-sm);
+	color: #f00;
+}
+
+.tooltip_content {
+	font-size: var(--font-size-md);
+	color: #000;
+}

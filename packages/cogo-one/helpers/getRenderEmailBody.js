@@ -25,6 +25,10 @@ function getRenderEmailBody({ html = '' }) {
 			return `style="${inlineStyles}"`;
 		},
 	);
+	updatedHtml = html?.replace(
+		GLOBAL_CONSTANTS.regex_patterns.html_td_regex,
+		() => "<td style='outline: 1px double #000'",
+	);
 
 	updatedHtml = updatedHtml?.replaceAll('<p>', "<p style='margin: 0'>");
 

@@ -1,0 +1,10 @@
+[
+	{
+		"label": "Cogo Assured",
+		"value": "cogo_assured_rate"
+	},
+	{
+		"label": "Market Place",
+		"value": "spot_rates"
+	}
+]

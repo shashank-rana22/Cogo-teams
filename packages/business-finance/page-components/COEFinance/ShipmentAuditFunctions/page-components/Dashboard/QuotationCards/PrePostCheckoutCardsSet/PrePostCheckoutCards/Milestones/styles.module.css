@@ -1,0 +1,26 @@
+.vertical_timeline {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 16px;
+	margin-right: 4px;
+}
+
+.vertical_rule {
+	width: 2px;
+	height: 100%;
+	margin-top: 6px;
+	margin-bottom: -10px;
+}
+
+.red {
+	background: #ee3425;
+}
+
+.black {
+	background: #000;
+}
+
+.grey {
+	background: #808080;
+}

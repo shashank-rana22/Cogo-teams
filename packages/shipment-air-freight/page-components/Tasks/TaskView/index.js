@@ -19,6 +19,9 @@ const DISABLE_TASK = [
 	'upload_hawb_freight_certificate',
 ];
 
+const UPLOAD_GATE_PASS_REQ_TASKS = ['request_carting_order', 'upload_carting_order', 'upload_carting_order_approval'];
+const CARTING_APPROVAL_REQ_TASKS = ['request_carting_order', 'upload_carting_order'];
+
 function TaskView() {
 	const {
 		shipment_data = {},
@@ -87,6 +90,33 @@ function TaskView() {
 					(task) => task?.task === 'confirm_service_provider'
 							&& task?.status === 'pending'
 							&& task?.service_type === 'air_freight_service',
+				);
+			}
+			if (
+				element?.task === 'request_carting_order'
+				&& tradeType === 'export'
+			) {
+				element.disabled = (tasksList || []).some(
+					(task) => task?.task === 'upload_carting_order'
+					&& task?.status === 'pending',
+				);
+			}
+			if (
+				element?.task === 'upload_carting_order_approval'
+				&& tradeType === 'export'
+			) {
+				element.disabled = (tasksList || []).some(
+					(task) => CARTING_APPROVAL_REQ_TASKS.includes(task?.task)
+					&& task?.status === 'pending',
+				);
+			}
+			if (
+				element?.task === 'upload_gate_pass'
+				&& tradeType === 'export'
+			) {
+				element.disabled = (tasksList || []).some(
+					(task) => UPLOAD_GATE_PASS_REQ_TASKS.includes(task?.task)
+					&& task?.status === 'pending',
 				);
 			}
 		}

@@ -881,5 +881,7 @@
     "validity_enrichment_request_success_toast": "Diperbarui dengan Sukses",
     "validity_enrichment_request_actions": "Aksi",
     "validity_enrichment_status_valid": "Valid",
-    "validity_enrichment_status_invalid": "Tidak Valid"
+    "validity_enrichment_status_invalid": "Tidak Valid",
+    "validity_status_placeholder": "Status validitas",
+    "org_created_at": "Diangkat Di"
 }

@@ -69,6 +69,7 @@ function SubFiltersModal({
 					? STRING_BOOL_MAPPINGS[is_user_enriched] : undefined,
 				lead_source       : lead_source || undefined,
 				objective_filters : {
+					...previousParams?.filters?.objective_filters,
 					min_lead_score: min_lead_score || undefined,
 				},
 				users_filters: {
@@ -87,6 +88,7 @@ function SubFiltersModal({
 					contact_count: contact_count || undefined,
 				},
 				shipment_filters: {
+					...previousParams?.filters?.shipment_filters,
 					shipment_count: shipment_count || undefined,
 				},
 			},

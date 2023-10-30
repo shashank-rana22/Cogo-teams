@@ -21,10 +21,10 @@ export const CUSTOM_THEME = {
 
 const EXPLORED_VIEW_DATA = [
 	{
-		key          : 'shipment_confirmed_by_service_provider_count',
+		key          : 'shipment_confirmed_by_importer_exporter_count',
 		id           : 'Confirmed Booking',
 		label        : 'Confirmed Booking',
-		cancellation : 'shipment_confirmed_by_service_provider_percentage',
+		cancellation : 'shipment_confirmed_by_importer_exporter_percentage',
 	},
 	{
 		key          : 'shipment_cancelled_count',
@@ -51,6 +51,10 @@ export const COLOR_MAPPINGS = {
 	supply            : ['#63BEC8', '#B1DFE4', '#8ACED6', '#59ABB4'],
 	rate_extension    : ['#9BA0CB', '#CDD0E5', '#B4B8D8', '#8C90B7'],
 	cluster_extension : ['#f37166', '#F9B8B3', '#F5867D', '#CF6057'],
+	cargo_ai          : ['#00b300'],
+	freight_look      : ['#63BEC8'],
+	manual            : ['#ffb01e'],
+	rate_sheet        : ['#f37166'],
 };
 
 export const usePieChartConfigs = (type, data) => {

@@ -1,5 +1,5 @@
-import { Button, Select } from '@cogoport/components';
-import { InputController } from '@cogoport/forms';
+import { Button } from '@cogoport/components';
+import { InputController, MultiselectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
@@ -8,8 +8,10 @@ import React, { forwardRef } from 'react';
 import services from '../../../../../../../configurations/service-options';
 import useShipmentCapacities from '../../../../../../../hooks/useShipmentCapacities';
 
+import DEFAULT_RELEASE_TRIGGER_OPTION from './constants/default-trigger-option';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
+import getReleaseTriggerOptions from './utils/get-release-trigger-options';
 
 const SLAB_UPPER_LIMIT_MAX = 99999;
 
@@ -93,61 +95,71 @@ function ShipmentCapacities(props, ref) {
 							</div>
 						</div>
 
-						<div className={styles.trigger}>Release Trigger</div>
+						<div className={styles.trigger}>Release Triggers</div>
 
 					</div>
 
-					{services.map((service) => (
-						<div className={styles.service_item} key={service.value}>
+					{services.map((service) => {
+						const releaseTriggerOptions = [...getReleaseTriggerOptions({ service }),
+							DEFAULT_RELEASE_TRIGGER_OPTION];
 
-							<div className={styles.label}>{service.label}</div>
+						return (
+							<div className={styles.service_item} key={service.value}>
 
-							<div className={styles.capacity_container} key={agentExperienceSlabs}>
+								<div className={styles.label}>{service.label}</div>
 
-								{[...Array(agentExperienceSlabs.length).keys()].map((key) => (
+								<div className={styles.capacity_container} key={agentExperienceSlabs}>
 
-									<div
-										key={`${service.value}${key}`}
-										className={styles.capacity_input}
-									>
-										<InputController
-											name={`${key}-${service.value}`}
-											control={control}
-											type="number"
-											rules={{
-												required: 'Required',
-											}}
-										/>
+									{[...Array(agentExperienceSlabs.length).keys()].map((key) => (
 
-										{errors?.[`${key}-${service.value}`]?.message
-											? (
-												<p className={styles.err_msg}>
-													{errors?.[`${key}-${service.value}`]?.message}
-												</p>
-											) : null}
+										<div
+											key={`${service.value}${key}`}
+											className={styles.capacity_input}
+										>
+											<InputController
+												name={`${key}-${service.value}`}
+												control={control}
+												type="number"
+												rules={{
+													required: 'Required',
+												}}
+											/>
 
-									</div>
+											{errors?.[`${key}-${service.value}`]?.message
+												? (
+													<p className={styles.err_msg}>
+														{errors?.[`${key}-${service.value}`]?.message}
+													</p>
+												) : null}
 
-								))}
+										</div>
+
+									))}
+
+								</div>
+
+								<div className={styles.trigger}>
+									<MultiselectController
+										name={`${service.value}-release_triggers`}
+										control={control}
+										options={releaseTriggerOptions}
+										rules={{
+											required: 'Required',
+										}}
+									/>
+
+									{errors?.[`${service.value}-release_triggers`]?.message
+										? (
+											<p className={styles.err_msg}>
+												{errors?.[`${service.value}-release_triggers`]?.message}
+											</p>
+										) : null}
+
+								</div>
 
 							</div>
-
-							<div className={styles.trigger}>
-								<Select
-									name={`${service.value}trigger`}
-									options={[
-										{
-											label : 'Mark shipment as complete',
-											value : 'trigger',
-										},
-									]}
-									value="trigger"
-									disabled
-								/>
-							</div>
-
-						</div>
-					))}
+						);
+					})}
 
 					<div className={styles.btn_container}>
 						<Button

@@ -6,7 +6,7 @@ import { useContext } from 'react';
 
 import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed-sales-invoices';
 
-import IsAllServicesTaken from './IsAllServicesTaken';
+import isAllServicesTaken from './IsAllServicesTaken';
 
 const useUpdateInvoiceCombination = ({
 	refetch = () => {},
@@ -30,7 +30,7 @@ const useUpdateInvoiceCombination = ({
 
 	const handleEditPreferences = async () => {
 		try {
-			const { isAllMainServicesTaken } = IsAllServicesTaken(
+			const { isAllMainServicesTaken } = isAllServicesTaken(
 				servicesList,
 				selectedParties,
 				shipment_data,
@@ -38,7 +38,7 @@ const useUpdateInvoiceCombination = ({
 			);
 
 			if (!isAllMainServicesTaken) {
-				Toast.error('You have not added all taken services');
+				Toast.error('You have not added all taken main services');
 				return;
 			}
 			const filteredParties = selectedParties.filter(

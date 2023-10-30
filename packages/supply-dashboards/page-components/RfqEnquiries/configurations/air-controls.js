@@ -38,6 +38,22 @@ const airFields =	[
 		span        : 4,
 		rules       : { required: 'This is required' },
 	},
+	{
+		name    : 'operation_type',
+		type    : 'select',
+		label   : 'Operation Type',
+		span    : 4,
+		options : [{
+			label : 'Passenger',
+			value : 'passenger',
+		}, {
+			label : 'Freighter',
+			value : 'freighter',
+		}, {
+			label : 'Charter',
+			value : 'charter',
+		}],
+	},
 	airChildControlsFunc({ heading: '', charge_code_name: 'freights_charge_codes' }),
 	{
 		type             : 'fieldArray',

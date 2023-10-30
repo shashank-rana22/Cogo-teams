@@ -6,7 +6,7 @@ import { COGOVERSE_AGENT_MAPPINGS } from '../../../utils/getViewTypeFromWorkPref
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SHIPMENT_SPECIALIST_ADMIN = {
-	chat_tabs_to_be_shown : ['message', 'voice', 'firebase_emails'],
+	chat_tabs_to_be_shown : ['message', 'voice', 'firebase_emails', 'teams'],
 	all_chats_base_query  : ({ userSharedEmails, agentId }) => (isEmpty(userSharedEmails)
 		? [where('support_agent_id', '==', agentId)]
 		: [where('source', 'in', userSharedEmails)]),

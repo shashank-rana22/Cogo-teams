@@ -2,7 +2,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 
 const useListTaggedInvoices = () => {
 	const { query = {} } = useSelector(({ general }) => ({ query: general.query }));
@@ -11,6 +11,8 @@ const useListTaggedInvoices = () => {
 		pageIndex : 1,
 		pageSize  : 10,
 	});
+
+	const { pageSize = 10, pageIndex = 1 } = params || {};
 
 	const { payrun = '' } = query || {};
 
@@ -27,15 +29,15 @@ const useListTaggedInvoices = () => {
 		try {
 			trigger({
 				params: {
-					payrunId  : payrun,
-					pageSize  : 10,
-					pageIndex : 1,
+					payrunId: payrun,
+					pageSize,
+					pageIndex,
 				},
 			});
 		} catch (e) {
 			toastApiError(e || 'Failed to Fetch Data');
 		}
-	}, [payrun, trigger]);
+	}, [payrun, trigger, pageSize, pageIndex]);
 
 	useEffect(() => {
 		generateInvoice();

@@ -21,7 +21,7 @@ function UploadDocument({
 	shipment_data = {},
 	activeStakeholder = '',
 	formValues = {},
-	control,
+	control = {},
 	errors = {},
 	orgId = '',
 	setOrgId = () => {},

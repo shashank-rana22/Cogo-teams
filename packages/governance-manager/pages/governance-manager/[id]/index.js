@@ -5,7 +5,7 @@ export { default } from '@cogoport/governance-manager/page-components/Supplier';
 export async function getServerSideProps({ locale }) {
 	return {
 		props: {
-			...(await serverSideTranslations(locale, ['governanceManager'])),
+			...(await serverSideTranslations(locale, ['common', 'governanceManager'])),
 
 		},
 	};

@@ -1,4 +1,4 @@
-import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMArrowLeft } from '@cogoport/icons-react';
 import React from 'react';
 
 import OverviewContent from './OverviewContent';
@@ -12,7 +12,6 @@ function TasksOverview({
 	setShowWeekData = () => {},
 	filter = {},
 	setFilter = () => {},
-	setSource = () => {},
 }) {
 	const handleClick = () => {
 		setFilter((prevFilters) => ({ ...prevFilters, daily_stats: !prevFilters.daily_stats }));
@@ -33,12 +32,8 @@ function TasksOverview({
 							statsLoading={statsLoading}
 							filter={filter}
 							setFilter={setFilter}
-							setSource={setSource}
 						/>
 					)}
-			</div>
-			<div className={styles.swipe_button}>
-				<IcMArrowRight onClick={handleClick} />
 			</div>
 		</div>
 	);

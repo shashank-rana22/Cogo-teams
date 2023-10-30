@@ -22,7 +22,7 @@ const formarAmountData = (amount) => formatAmount({
 	},
 });
 
-function GetPremiumLineItem({ amount, item, key }) {
+function GetPremiumLineItem({ amount = '', item = '', key = '' }) {
 	return (
 		<div className={styles.premium_line_item} key={key}>
 			<div className={styles.text}>

@@ -1,0 +1,10 @@
+[
+	{
+		"label": "Flat",
+		"value": "flat"
+	},
+	{
+		"label": "Percentage",
+		"value": "percentage"
+	}
+]

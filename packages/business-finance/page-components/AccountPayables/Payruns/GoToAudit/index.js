@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import List from '../../../commons/List/index.tsx';
+import List from '../../../commons/List/index';
 import useGetAudit from '../hooks/useGetAudit';
 
 import AuditHeader from './AuditHeader';

@@ -72,14 +72,14 @@ export const renderLineItemFunctions = {
 			) : null}
 		</div>
 	),
-	truck_number: ({ control, index, errors, serviceProvider }) => (
+	truck_number: ({ control, index, errors, serviceProvider, options:  otherOptions }) => (
 		<div className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}>
 			<SelectController
 				control={control}
-				name="truck_number"
+				name={`line_items.${index}.truck_number`}
 				placeholder="Enter"
 				initialCall
-				options={getTruckNumberOptions({ serviceProvider })}
+				options={isEmpty(otherOptions) ? getTruckNumberOptions({ serviceProvider }) : otherOptions}
 				rules={{ required: true }}
 			/>
 			{errors?.line_items?.[index]?.truck_number ? (

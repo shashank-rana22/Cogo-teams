@@ -1,0 +1,26 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-weight: 600;
+
+	@media screen and (max-width: 767px) {
+		justify-content: center;
+
+		.or_text {
+			margin: 0 15px;
+		}
+	}
+}
+
+.line {
+	width: 14px;
+	height: 0;
+	border-top: 1.7px solid #000;
+
+	@media screen and (max-width: 767px) {
+		.line {
+			width: 20px;
+		}
+	}
+}

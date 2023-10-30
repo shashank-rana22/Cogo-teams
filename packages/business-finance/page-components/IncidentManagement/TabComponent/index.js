@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import Filters from '../common/Filters/index.tsx';
+import Filters from '../common/Filters/index';
 import getColumns from '../Configuration/newColumn';
 import StyledTable from '../StyleTable';
 

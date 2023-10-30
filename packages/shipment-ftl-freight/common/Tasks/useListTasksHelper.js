@@ -10,7 +10,10 @@ function useListTasksHelper() {
 	const [selectedMail, setSelectedMail] = useState([]);
 	const [filters] = useState({});
 
-	const { shipment_data, isGettingShipment, activeStakeholder = '' } = useContext(ShipmentDetailContext);
+	const {
+		shipment_data, isGettingShipment, activeStakeholder = '',
+		refetchServices = () => {},
+	} = useContext(ShipmentDetailContext);
 
 	const { id: shipment_id } = shipment_data || '';
 
@@ -60,6 +63,7 @@ function useListTasksHelper() {
 		taskListRefetch,
 		selectedMail,
 		setSelectedMail,
+		refetchServices,
 	};
 }
 export default useListTasksHelper;

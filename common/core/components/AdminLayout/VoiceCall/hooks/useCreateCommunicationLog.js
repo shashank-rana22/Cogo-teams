@@ -3,6 +3,8 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+import { updateRoom } from '../helpers/updateFireBase';
+
 const getPayload = ({
 	receiverUserDetails = {},
 	extraPayload = {},
@@ -46,6 +48,7 @@ function useCreateCommunicationLog({
 	callStartAt = '',
 	callEndAt = '',
 	callRecordId = '',
+	firestore = {},
 }) {
 	const partnerId = useSelector((state) => state?.profile?.partner?.id);
 
@@ -69,6 +72,7 @@ function useCreateCommunicationLog({
 			});
 			Toast.success('Saved Successfully');
 			unmountVoiceCall();
+			updateRoom({ firestore, agentId: loggedInAgentId });
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'something went wrong');
 		}

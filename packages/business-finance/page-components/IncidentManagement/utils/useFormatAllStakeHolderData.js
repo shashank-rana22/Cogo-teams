@@ -58,7 +58,7 @@ const useStakeHolderTimeLineData = ({
 	}
 	const UPDATED_BY = {
 		level       : 0,
-		status      : 'APPROVED',
+		status,
 		stakeholder : { userEmail: updatedBy.email, userName: updatedBy.name },
 		remarks     : financeRemark,
 	};

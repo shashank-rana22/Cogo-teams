@@ -18,7 +18,7 @@ export const tabPanelMappings = [
 	},
 	{
 		name      : 'rate_density',
-		title     : 'Rate Density',
+		title     : 'Price TaskBoard',
 		component : <RateCoverageContent />,
 	},
 	{

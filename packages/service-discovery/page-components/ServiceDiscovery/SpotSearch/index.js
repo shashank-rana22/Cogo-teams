@@ -3,8 +3,6 @@ import ScopeSelect from '@cogoport/scope-select';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import TryOldBanner from '../../../common/TryOldBanner';
-
 import Header from './components/Header';
 import ModeSelection from './components/ModeSelection';
 import OtherServices from './components/OtherServices';
@@ -33,15 +31,13 @@ function SpotSearch() {
 	const [selectedService, setSelectedService] = useState({});
 	const [location, setLocation] = useState({});
 	const [errors, setErrors] = useState({});
-	const [isBannerVisible, setIsBannerVisible] = useState(true);
 
 	const { createSearch, loading } = useCreateSearch();
 
 	return (
 		<div className={styles.container}>
-			<TryOldBanner setIsBannerVisible={setIsBannerVisible} />
 
-			<div className={styles.header} style={{ marginTop: isBannerVisible ? '24px' : '0px' }}>
+			<div className={styles.header}>
 				<div className={styles.scope_select}>
 					<div className={styles.label}>Select Scope: </div>
 					<ScopeSelect size="md" />

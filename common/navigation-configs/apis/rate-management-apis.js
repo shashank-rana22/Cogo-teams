@@ -498,6 +498,11 @@ const rms = [
 		service_name : 'air_customs_rate',
 	},
 	{
+		api          : 'create_ftl_freight_rate_sheet',
+		access_type  : 'private',
+		service_name : 'ftl_freight_rate',
+	},
+	{
 		api          : 'list_rate_sheets',
 		access_type  : 'private',
 		service_name : 'rate_sheet',
@@ -533,6 +538,16 @@ const rms = [
 		service_name : 'air_customs_rate',
 	},
 	{
+		api          : 'list_ftl_freight_rate_sheets',
+		access_type  : 'private',
+		service_name : 'ftl_freight_rate',
+	},
+	{
+		api          : 'list_ftl_freight_rate_sheet_stats',
+		access_type  : 'private',
+		service_name : 'ftl_freight_rate',
+	},
+	{
 		api          : 'update_rate_sheet',
 		access_type  : 'private',
 		service_name : 'rate_sheet',
@@ -556,6 +571,11 @@ const rms = [
 		api          : 'update_air_customs_rate_sheet',
 		access_type  : 'private',
 		service_name : 'air_customs_rate',
+	},
+	{
+		api          : 'update_ftl_freight_rate_sheet',
+		access_type  : 'private',
+		service_name : 'ftl_freight_rate',
 	},
 	{
 		api          : 'list_rate_charge_codes',

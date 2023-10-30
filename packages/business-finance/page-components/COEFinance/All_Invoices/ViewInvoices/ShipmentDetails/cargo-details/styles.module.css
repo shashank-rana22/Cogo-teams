@@ -32,3 +32,9 @@
 	display: flex;
 	flex-flow: wrap;
 }
+
+.cargo_details_info {
+	margin-left: 2px;
+	color: #5936f0;
+	border-bottom: 1px solid #5936f0;
+}

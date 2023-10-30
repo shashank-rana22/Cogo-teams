@@ -24,6 +24,10 @@
 	border-radius: 4px;
 }
 
+.is_loading {
+	cursor: not-allowed;
+}
+
 .custom_tag_margin {
 	display: flex;
 	padding: 4px 8px;
@@ -127,8 +131,7 @@
 .popover_wrapper {
 	display: flex;
 	justify-content: flex-end;
-	width: 72%;
-	padding-right: 50px;
+	padding-right: 340px;
 	margin-top: -23px;
 }
 

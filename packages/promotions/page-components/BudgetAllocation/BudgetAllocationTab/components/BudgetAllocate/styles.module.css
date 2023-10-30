@@ -1,0 +1,11 @@
+.container {
+	margin-top: 16px;
+	background: #fff;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	padding-bottom: 16px;
+	background: #fff;
+}

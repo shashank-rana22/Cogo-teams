@@ -10,7 +10,7 @@ const useGetFclFreightDistribution = ({ filters }) => {
 		method : 'GET',
 	}, { manual: true });
 
-	const { parent_mode, ...rest } = filters;
+	const { parent_mode, chart_type, ...rest } = filters;
 
 	const getStats = useCallback(
 		async (params) => {
@@ -24,8 +24,11 @@ const useGetFclFreightDistribution = ({ filters }) => {
 	);
 
 	useEffect(() => {
-		const params = getFormattedPayload(rest);
-		getStats(params);
+		const { service_type } = rest;
+		if (service_type === 'fcl') {
+			const params = getFormattedPayload(rest);
+			getStats(params);
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [(JSON.stringify(rest)), getStats]);
 

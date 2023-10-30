@@ -5,7 +5,14 @@ import { doc, updateDoc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../constants/firebase-constants';
 
+import getStaticPath from './getStaticPath';
+
 const CLOSE_NOTIFY_DURATION = 3000;
+
+let audio = null;
+if (typeof window !== 'undefined') {
+	audio = new Audio(getStaticPath({ path: '/mp3/chat-notification.mp3' }));
+}
 
 const sendNotification = async ({ resultList = {}, firestore = {} }) => {
 	if (isEmpty(resultList)) {
@@ -59,6 +66,8 @@ const sendNotification = async ({ resultList = {}, firestore = {} }) => {
 					icon : GLOBAL_CONSTANTS.image_url.cogoport_logo,
 				});
 
+				audio.play();
+
 				notification.onclick = async () => {
 					const messageDoc = createMessageDoc();
 					await updateDoc(messageDoc, {
@@ -78,7 +87,7 @@ const sendNotification = async ({ resultList = {}, firestore = {} }) => {
 				};
 
 				autoCloseNotify();
-			} if (notifyPermissions === 'denied') {
+			} else if (notifyPermissions === 'denied') {
 				Toast.error('Notifications are blocked by the user.');
 			} else {
 				Toast.error('Notification permission not granted.');

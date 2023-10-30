@@ -1,4 +1,6 @@
 export default function getControls({ service }) {
+	const ONE = 1;
+
 	const { id, service_type, containers_count, cargo_weight_per_container } = service || {};
 
 	const controls = [
@@ -27,8 +29,8 @@ export default function getControls({ service }) {
 	const defaultValues = {
 		service_id                 : id,
 		service_type,
-		containers_count           : Number(containers_count || 1),
-		cargo_weight_per_container : Number(cargo_weight_per_container || 1),
+		containers_count           : Number(containers_count || ONE),
+		cargo_weight_per_container : Number(cargo_weight_per_container || ONE),
 	};
 
 	return { controls, defaultValues };

@@ -56,11 +56,18 @@
 }
 
 .cursor {
+	display: flex;
+	hyphens: auto;
+	line-height: 16px;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
 	cursor: pointer;
 }
 
 .tool_tip {
 	font-size: 12px;
+	line-height: 16px;
 }
 
 .styled_pills {
@@ -159,4 +166,8 @@
 			color: #fff;
 		}
 	}
+}
+
+.column_height {
+	line-height: 16px;
 }

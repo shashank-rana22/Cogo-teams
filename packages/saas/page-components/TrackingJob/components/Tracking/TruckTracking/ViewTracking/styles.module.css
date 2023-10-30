@@ -1,0 +1,9 @@
+.details {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.truck_no {
+	display: flex;
+}

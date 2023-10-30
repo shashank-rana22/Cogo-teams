@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -20,6 +21,7 @@ function useVendorServices({
 	const {
 		general: { query = {} },
 	} = useSelector((state) => state);
+
 	const {
 		handleSubmit,
 		control,
@@ -29,11 +31,14 @@ function useVendorServices({
 		...rest
 	} = useForm();
 
+	const { services : control_services = [] } = watch();
+	const { country_id = '' } = control_services?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
 	const { vendor_services = {}, vendor_details = {} } = vendorInformation || {};
 
 	const entityCode = Object.values(ENTITY_MAPPING).find((val) => vendor_details?.cogo_entity_id === val?.id)?.code;
 
-	const getControls = useMemo(() => controls({ entityCode }), [entityCode]);
+	const getControls = useMemo(() => controls({ entityCode, country_id }), [country_id, entityCode]);
 
 	const { partner_id = '', vendor_id } = query;
 
@@ -79,7 +84,8 @@ function useVendorServices({
 		getControls.forEach((item) => {
 			setValue(`${item.name}`, vendor_services?.[item.name] || reformattedDataFromApi[item.name]);
 		});
-	}, [setValue, vendorInformation, vendor_services, getControls]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [setValue, vendorInformation, vendor_services]);
 
 	return {
 		controls: getControls,

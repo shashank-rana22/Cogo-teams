@@ -1,25 +1,21 @@
 const RTE_TOOL_BAR_CONFIG = [
+	['undo', 'redo'],
+	['font', 'fontSize'],
 	[
-		{ font: [] },
+		'bold',
+		'underline',
+		'italic',
+		'strike',
+		'subscript',
+		'superscript',
 	],
-	[{
-		size: ['small', false, 'large', 'huge'],
-	}],
-	[
-		{ align: [] },
-	],
-	['bold', 'italic', 'underline', 'strike'],
-	['blockquote', 'code-block'],
-	[
-		{ list: 'ordered' },
-		{ list: 'bullet' },
-	],
-	[
-		{ color: [] },
-		{ background: [] },
-	],
-	['clean'],
-	['link', 'image'],
+	['fontColor', 'hiliteColor'],
+	['align', 'list', 'lineHeight'],
+	['outdent', 'indent'],
+
+	['table', 'horizontalRule', 'link', 'image', 'video'],
+	['preview', 'print'],
+	['removeFormat'],
 ];
 
 export default RTE_TOOL_BAR_CONFIG;

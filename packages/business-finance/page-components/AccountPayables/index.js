@@ -5,9 +5,9 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty, upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import AdvancePayment from './AdvancePayment/index.tsx';
-import useListCogoEntities from './Dashboard/hooks/useListCogoEntities.ts';
-import Dashboard from './Dashboard/index.tsx';
+import AdvancePayment from './AdvancePayment/index';
+import useListCogoEntities from './Dashboard/hooks/useListCogoEntities';
+import Dashboard from './Dashboard/index';
 import Invoices from './Invoices';
 import Outstanding from './Outstanding';
 import Payruns from './Payruns';

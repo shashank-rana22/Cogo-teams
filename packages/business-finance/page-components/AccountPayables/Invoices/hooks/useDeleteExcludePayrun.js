@@ -3,7 +3,7 @@ import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 
 const useDeleteExcludePayrun = ({ apiData = {}, type = '' }) => {
 	const { push } = useRouter();

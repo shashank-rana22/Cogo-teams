@@ -881,5 +881,7 @@
     "validity_enrichment_request_success_toast": "อัพเดทสำเร็จ",
     "validity_enrichment_request_actions": "การดำเนินการ",
     "validity_enrichment_status_valid": "ถูกต้อง",
-    "validity_enrichment_status_invalid": "ไม่ถูกต้อง"
+    "validity_enrichment_status_invalid": "ไม่ถูกต้อง",
+    "validity_status_placeholder": "สถานะความถูกต้อง",
+    "org_created_at": "ออนบอร์ดแล้วที่"
 }

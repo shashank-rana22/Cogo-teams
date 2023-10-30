@@ -1,2 +1,11 @@
 .git
+.github
+.husky
+.vscode
+**/node_modules
+**/.next
+**/.turbo
+.dockerignore
+Dockerfile
+node_modules
 cogo-control/.next/cache

@@ -1,0 +1,9 @@
+.container {
+	width: 100%;
+
+	:global {
+		.ui_tabs_container {
+			width: 100%;
+		}
+	}
+}

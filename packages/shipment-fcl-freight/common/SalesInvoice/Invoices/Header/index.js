@@ -54,11 +54,11 @@ function Header({
 				{!isCustomer ? (
 					<div className={styles.reviwed_stats}>
 						{reviewed_invoices}
-						&nbsp;
+						{' '}
 						of
-						&nbsp;
+						{' '}
 						{invoicing_parties?.length}
-						&nbsp;
+						{' '}
 						reviewed
 					</div>
 				) : null}

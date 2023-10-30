@@ -34,7 +34,7 @@ const useCloseVoiceCall = ({
 		);
 	}, [dispatch, setCallState]);
 
-	const openFeedbackform = useCallback(() => {
+	const openFeedbackform = useCallback(({ showFeedbackForm = false }) => {
 		dispatch(
 			setProfileState({
 				voice_call_recipient_data : {},
@@ -44,7 +44,7 @@ const useCloseVoiceCall = ({
 
 		setCallState((p) => ({
 			...p,
-			showCallModalType : 'feedbackModal',
+			showCallModalType : showFeedbackForm ? 'feedbackModal' : '',
 			status            : 'completed',
 			callEndAt         : new Date(),
 		}));

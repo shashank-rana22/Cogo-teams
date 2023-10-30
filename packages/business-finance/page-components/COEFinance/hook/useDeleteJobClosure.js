@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-import toastApiError from '../../commons/toastApiError.ts';
+import toastApiError from '../../commons/toastApiError';
 
 const useDeleteJobClosure = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequestBf({

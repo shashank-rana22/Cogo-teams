@@ -147,6 +147,16 @@
 }
 
 .utrval {
-	font-size: var(--font-size-lg);
+	font-size: var(--font-size-md);
 	font-weight: 600;
+}
+
+.contentutr {
+	height: 80px;
+	overflow-y: scroll;
+	font-size: var(--font-size-md);
+}
+
+.singleutr {
+	margin-bottom: 12px;
 }

@@ -881,5 +881,7 @@
     "validity_enrichment_request_success_toast": "Cập nhật thành công",
     "validity_enrichment_request_actions": "Hành động",
     "validity_enrichment_status_valid": "Hợp lệ",
-    "validity_enrichment_status_invalid": "Không hợp lệ"
+    "validity_enrichment_status_invalid": "Không hợp lệ",
+    "validity_status_placeholder": "Trạng thái hiệu lực",
+    "org_created_at": "Tham gia tại"
 }

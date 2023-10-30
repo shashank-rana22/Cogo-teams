@@ -13,11 +13,12 @@ const isProd = process.env.NODE_ENV === 'production';
 const { i18n } = require('./next-i18next.config');
 
 // eslint-disable-next-line
-const fs = require('fs-extra');
+const fs = require("fs-extra");
 
 const loadCogoModules = () => {
 	const rootDirectory = path.join(__dirname, './node_modules/@cogoport');
-	const cogoModules = fs.readdirSync(rootDirectory)
+	const cogoModules = fs
+		.readdirSync(rootDirectory)
 		.map((file) => `@cogoport/${file}`);
 	return cogoModules;
 };
@@ -46,6 +47,10 @@ module.exports = withBundleAnalyzer({
 				protocol : 'https',
 				hostname : 'cdn.cogoport.io',
 			},
+			{
+				protocol : 'https',
+				hostname : 'prod-cogoport.s3.ap-south-1.amazonaws.com',
+			},
 		],
 	},
 	webpack: (config, { isServer }) => {
@@ -73,5 +78,10 @@ module.exports = withBundleAnalyzer({
 	},
 	compiler: {
 		removeConsole: isProd ? removeConsole : false,
+	},
+	output       : 'standalone',
+	experimental : {
+		outputFileTracingRoot : path.join(__dirname, '../'), // specify seearch path for packages
+		externalDir           : true,
 	},
 });

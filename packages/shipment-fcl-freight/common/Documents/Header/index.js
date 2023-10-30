@@ -21,7 +21,10 @@ function Header({
 	setOrgDocService = () => {},
 	orgDocService = '',
 }) {
-	const { shipment_data: shipmentData, activeStakeholder, stakeholderConfig } = useContext(ShipmentDetailContext);
+	const {
+		shipment_data: shipmentData,
+		primary_service: primaryService, activeStakeholder, stakeholderConfig,
+	} = useContext(ShipmentDetailContext);
 
 	const [showModal, setShowModal] = useState(false);
 	const SourceOptions = Array.isArray(data)
@@ -111,6 +114,7 @@ function Header({
 
 			{showModal && can_edit_documents ? (
 				<GenericUpload
+					primaryService={primaryService}
 					showModal={showModal}
 					setShowModal={setShowModal}
 					data={data}

@@ -43,9 +43,10 @@ function InvoiceFormLayout({
 	collectionParty = {},
 	setCollectionParty = () => {},
 	purchaseInvoiceValues = {},
-	billId,
+	billId = '',
 	editData = {},
 }, ref) {
+	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
 	const [codes, setCodes] = useState(purchaseInvoiceValues?.codes || {});
 
 	const [showTaggings, setShowTaggings] = useState(false);
@@ -53,7 +54,7 @@ function InvoiceFormLayout({
 	const [selectedProforma, setSelectedProforma] = useState([]);
 	const [showCollectionParty, setShowCollectionParty] = useState(false);
 	const [showBankform, setShowBankForm] = useState(false);
-	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
+
 	const isJobClosed = shipment_data?.is_job_closed;
 	const { billing_addresses: billingAddresses = [], other_addresses: otherAddresses = [] } = collectionParty || {};
 	const allAddresses = [...billingAddresses, ...otherAddresses];
@@ -80,7 +81,8 @@ function InvoiceFormLayout({
 			exchange_rate : purchaseInvoiceValues?.exchange_rate || [
 				{ from_currency: 'INR', to_currency: 'INR', rate: '1' },
 			],
-			line_items: isEmpty(defaultLineItems) ? [EMPTY_LINE_ITEMS] : defaultLineItems,
+			line_items   : isEmpty(defaultLineItems) ? [EMPTY_LINE_ITEMS] : defaultLineItems,
+			advance_bill : null,
 		},
 	});
 
@@ -158,6 +160,7 @@ function InvoiceFormLayout({
 		codes,
 		shipment_data,
 		activeTab       : billCatogory,
+		calculatedValues,
 	}));
 
 	const isTagDissable = () => {
@@ -200,7 +203,13 @@ function InvoiceFormLayout({
 			</div>
 			<div className={styles.formlayout}>
 				<div className={styles.select}>
-					<SelectController name="urgency_tag" control={control} options={urgencyTagOptions} isClearable />
+					<SelectController
+						name="urgency_tag"
+						control={control}
+						options={urgencyTagOptions}
+						isClearable
+						placeholder="Urgency"
+					/>
 				</div>
 
 				<AccordianView title="Select Invoice Type" fullwidth open={isEdit || isJobClosed}>
@@ -313,6 +322,7 @@ function InvoiceFormLayout({
 					primary_service={primary_service}
 					serviceProvider={serviceProvider}
 					formValues={formValues}
+					calculatedValues={calculatedValues}
 				/>
 				<Taggings
 					showTagings={showTaggings}

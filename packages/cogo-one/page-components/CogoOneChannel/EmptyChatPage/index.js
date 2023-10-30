@@ -1,18 +1,30 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Image } from '@cogoport/next';
+import { Image, dynamic } from '@cogoport/next';
 import React from 'react';
 
+import CommonLoader from '../../../common/CommonLoader';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 
-import LeadVoiceCalls from './LeadVoiceCalls';
-import ShipmentsHomePage from './ShipmentsHomePage';
 import styles from './styles.module.css';
+
+const LeadVoiceCalls = dynamic(() => import('./LeadVoiceCalls'), {
+	loading: () => <div className={styles.container}><CommonLoader /></div>,
+});
+
+const ShipmentsHomePage = dynamic(() => import('./ShipmentsHomePage'), {
+	loading: () => <div className={styles.container}><CommonLoader /></div>,
+});
+
+const RateRevertsPage = dynamic(() => import('./RateRevertsPage'), {
+	loading: () => <div className={styles.container}><CommonLoader /></div>,
+});
 
 const MESSAGE_MAPPING = {
 	message         : 'chat',
 	voice           : 'call log',
 	outlook         : 'mail',
 	firebase_emails : 'mail',
+	teams           : 'Teams',
 };
 
 function EmptyChatPage({
@@ -23,9 +35,11 @@ function EmptyChatPage({
 }) {
 	const displayMessage = MESSAGE_MAPPING[activeTab?.tab] || activeTab?.tab;
 
-	const showShipments = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page;
+	const showShipments = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_shipments_home_page || false;
 
-	const showLeadVoiceCalls = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_lead_voice_calls;
+	const showLeadVoiceCalls = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_lead_voice_calls || false;
+
+	const showRateReverts = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_rate_reverts_page || false;
 
 	if (showShipments) {
 		return (
@@ -40,6 +54,15 @@ function EmptyChatPage({
 	if (showLeadVoiceCalls) {
 		return (
 			<LeadVoiceCalls
+				setActiveTab={setActiveTab}
+			/>
+		);
+	}
+
+	if (showRateReverts) {
+		return (
+			<RateRevertsPage
+				mailProps={mailProps}
 				setActiveTab={setActiveTab}
 			/>
 		);

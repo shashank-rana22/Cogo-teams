@@ -78,7 +78,7 @@
 	margin-top: 2px;
 	font-size: 12px;
 	font-weight: 600;
-	color: var(--color-primary-error-red-3);
+	color: #29cc6a;
 	word-break: break-all;
 }
 
@@ -100,13 +100,12 @@
 	word-break: break-all;
 }
 
-.amountout {
+.common_amountout {
 	display: flex;
 	margin-top: 2px;
 	margin-left: 12px;
 	font-size: 12px;
 	font-weight: 600;
-	color: var(--color-primary-error-red-3);
 	word-break: break-all;
 }
 
@@ -165,8 +164,32 @@
 	background-color: #fdebe9;
 }
 
-.totaloutstanding {
+.common_totaloutstanding {
+	color: #fc5555;
+}
+
+.amount_close {
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--color-primary-error-red-3);
+	word-break: break-all;
+}
+
+.negative_totaloutstanding {
 	font-size: 14px;
 	font-weight: 600;
+	color: #29cc6a;
+}
+
+.negative_amountout {
+	color: #29cc6a;
+}
+
+.amountout {
+	color: var(--color-primary-error-red-3);
+}
+
+.totaloutstanding {
 	color: #fc5555;
 }

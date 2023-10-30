@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import roleBasedView from '@cogoport/ocean-modules/components/Poc/config/role_base_view.json';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -7,18 +8,20 @@ import Details from '../Details';
 
 import styles from './styles.module.css';
 
-function Header({ serviceData = {} }) {
+function Header({ serviceData = {}, activeStakeholder = '' }) {
+	const [showDetails, setShowDetails] = useState({});
 	const {
 		state = '', service_provider = '',
 		payment_term = '', service_type = '',
 	} = serviceData || {};
 
-	const [showDetails, setShowDetails] = useState({});
-
 	let statusText = startCase(state);
 	if (state === 'init') {
 		statusText = 'Not Allocated';
 	}
+
+	const rolesPermission = roleBasedView[activeStakeholder] || {};
+	const rolesViewPermission = rolesPermission?.can_view || [];
 
 	return (
 		<div className={cl`${styles[state]} ${styles.main_container}`}>
@@ -27,12 +30,14 @@ function Header({ serviceData = {} }) {
 					<div className={styles.service_name}>
 						{startCase(service_type)}
 					</div>
-
-					<div className={styles.service_provider}>
-						{service_provider?.business_name}
-					</div>
+					{
+						rolesViewPermission?.includes('service_provider') ? (
+							<div className={styles.service_provider}>
+								{service_provider?.business_name}
+							</div>
+						) : null
+					}
 				</div>
-
 				<div className={styles.secondary_details}>
 					<div>
 						{payment_term ? (

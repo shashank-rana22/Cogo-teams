@@ -1,0 +1,136 @@
+.space_between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.container {
+	padding: 24px 36px;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.journey {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.tooltip {
+	word-break: break-word;
+	word-wrap: break-word;
+}
+
+.border {
+	width: 50%;
+	margin-top: 4px;
+	border: 1.5px solid #ed3726;
+}
+
+.sub_container {
+	display: flex;
+	padding-top: 24px;
+	padding-bottom: 36px;
+}
+
+.line {
+	width: 80px;
+	height: 2px;
+	background: #88cad1;
+}
+
+.percent {
+	position: absolute;
+	left: 30px;
+	color: #ed3726;
+}
+
+.span {
+	padding-left: 4px;
+	color: #ed3726;
+}
+
+.mainline {
+	position: relative;
+}
+
+.containerblock {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin-top: 24px;
+}
+
+.middlecenter {
+	display: flex;
+	flex-direction: column;
+	align-items: space-between;
+	border-left: 2px solid #88cad1;
+}
+
+.pill {
+	display: flex;
+	min-width: 185px;
+	height: 40px;
+	padding: 10px 24px;
+	background-color: #f3fafa;
+	border: 1px solid #88cad1;
+	border-radius: 4px;
+}
+
+.labelpill {
+	width: 104px;
+}
+
+.visibletop {
+	position: absolute;
+	top: -26px;
+	left: -10px;
+	width: 20px;
+	height: 45px;
+	background-color: #fff;
+}
+
+.visiblebottom {
+	position: absolute;
+	bottom: -1px;
+	left: -10px;
+	width: 20px;
+	height: 20px;
+	background-color: #fff;
+}
+
+.text {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 145px;
+}
+
+.input {
+	margin-right: 12px;
+}
+
+.date_filter {
+	margin-left: 12px;
+}
+
+.selects {
+	display: flex;
+
+	:global {
+		.ui_select_container {
+			width: 200px;
+		}
+	}
+}

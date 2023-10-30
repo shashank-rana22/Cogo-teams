@@ -3,7 +3,7 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import Filter from '../../commons/Filters/index.tsx';
+import Filter from '../../commons/Filters/index';
 import CreateLevelModal from '../common/CreateForm';
 import useGetLevels from '../common/hooks/useGetLevels';
 

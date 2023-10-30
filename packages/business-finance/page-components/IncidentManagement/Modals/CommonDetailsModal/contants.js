@@ -4,6 +4,7 @@ import BankAccountDetails from '../BankAccountDetails/Details';
 import ConcorDetails from '../ConcorPDADetails/Details';
 import JobOpenDetailsModal from '../JobOpen/JobOpenDetailsModal';
 import NonRecuring from '../NonRecuringDetails/Details';
+import PaymentApproval from '../PaymentApproval';
 import PaymentDetails from '../PaymentDetails/Details';
 import RecuringDetails from '../RecuringDetails/Details';
 import RequestCNDetails from '../RequestCNDetails/Details';
@@ -25,6 +26,7 @@ export const TYPE_COMPONENT_MAPPING = {
 	JOB_OPEN                        : JobOpenDetailsModal,
 	CONSOLIDATED_CREDIT_NOTE        : RequestCNDetails,
 	PAYMENT_CONFIRMATION_APPROVAL   : PaymentDetails,
+	SAAS                            : PaymentApproval,
 };
 
 export const HEADER_MAPPING = {
@@ -41,6 +43,7 @@ export const HEADER_MAPPING = {
 	JOB_OPEN                        : 'Job Open',
 	CONSOLIDATED_CREDIT_NOTE        : 'Request Consolidated Credit Note',
 	PAYMENT_CONFIRMATION_APPROVAL   : 'Payment Confirmation Approval',
+	SAAS                            : 'Payment/Subscription Approval',
 };
 
 export const REQUEST_MAPPING = {
@@ -57,6 +60,7 @@ export const REQUEST_MAPPING = {
 	JOB_OPEN                        : 'jobOpenRequest',
 	CONSOLIDATED_CREDIT_NOTE        : 'consolidatedCreditNoteRequest',
 	PAYMENT_CONFIRMATION_APPROVAL   : 'paymentConfirmationRequest',
+	SAAS                            : 'PaymentApproval',
 };
 
 export const DOCUMENT_MAPPING = {

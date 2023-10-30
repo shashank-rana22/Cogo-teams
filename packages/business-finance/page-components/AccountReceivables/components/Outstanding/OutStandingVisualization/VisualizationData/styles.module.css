@@ -71,13 +71,7 @@
 }
 
 .arrow_container_disabled {
-	cursor: not-allowed;
-
-	:global {
-		.cursor-event {
-			pointer-events: none;
-		}
-	}
+	display: none;
 }
 
 .arrow_container {

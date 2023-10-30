@@ -1,4 +1,4 @@
-import { isEmpty } from '@cogoport/utils';
+import { camelCase, isEmpty, startCase } from '@cogoport/utils';
 
 export const controls = ({ t = () => {}, incidentType = '', setValue = () => {} }) => [
 	{
@@ -17,6 +17,7 @@ export const controls = ({ t = () => {}, incidentType = '', setValue = () => {} 
 			{ value: 'SETTLEMENT_APPROVAL', label: t('incidentManagement:settlement_label') },
 			{ value: 'JOURNAL_VOUCHER_APPROVAL', label: t('incidentManagement:journal_voucher_label') },
 			{ value: 'ISSUE_CREDIT_NOTE', label: t('incidentManagement:credit_note_request') },
+			{ value: 'SAAS', label: 'SAAS' },
 			{
 				value : 'CONSOLIDATED_CREDIT_NOTE',
 				label : t('incidentManagement:consolidated_credit_note_request'),
@@ -68,6 +69,7 @@ export const controls = ({ t = () => {}, incidentType = '', setValue = () => {} 
 		span        : 5.5,
 		initialCall : true,
 		placeholder : t('incidentManagement:incident_sub_type_label'),
+		renderLabel : (item) => startCase(camelCase(item?.incidentSubtype)) || '',
 		disabled    : isEmpty(incidentType),
 		params      : { incidentType: incidentType || undefined },
 		rules       : { required: t('incidentManagement:incident_sub_type_required_message') },

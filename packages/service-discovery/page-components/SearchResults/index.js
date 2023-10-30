@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 
 import Header from '../../common/Header';
 import DotLoader from '../../common/LoadingState/DotLoader';
-import TryOldBanner from '../../common/TryOldBanner';
 
 import getRedirectionDetails from './getRedirectionDetails';
 import useGetSpotSearch from './hooks/useGetSpotSearch';
@@ -171,7 +170,6 @@ function SearchResults() {
 				}
 				className={styles.children}
 			>
-				<TryOldBanner />
 
 				<FCLResults
 					rates={rates}

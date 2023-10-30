@@ -14,6 +14,7 @@ const BookingDesk = dynamic(() => import('./StakeholdersView/BookingDesk'), { ss
 const CostBookingDesk = dynamic(() => import('./StakeholdersView/CostBookingDesk'), { ssr: false });
 const LastMileDesk = dynamic(() => import('./StakeholdersView/LastMileDesk'), { ssr: false });
 const DocumentDesk = dynamic(() => import('./StakeholdersView/DocumentDesk'), { ssr: false });
+const DocumentDeskManager = dynamic(() => import('./StakeholdersView/DocumentDeskManager'), { ssr: false });
 const So1So2Ops = dynamic(() => import('./StakeholdersView/So1So2Ops'), { ssr: false });
 const BookingDeskManager = dynamic(() => import('./StakeholdersView/BookingDeskManager'), { ssr: false });
 const LastMileDeskManager = dynamic(() => import('./StakeholdersView/LastMileDeskManager'), { ssr: false });
@@ -50,7 +51,7 @@ function ShipmentDetails() {
 		document_desk_manager    : DocumentDesk,
 		document_control_manager : DocumentDesk,
 		document_control_lead    : DocumentDesk,
-		supplier_relations_head  : DocumentDesk,
+		supplier_relations_head  : DocumentDeskManager,
 		so1_so2_ops              : So1So2Ops,
 		admin                    : Superadmin,
 		superadmin               : Superadmin,

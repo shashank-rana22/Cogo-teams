@@ -16,6 +16,7 @@ import CustomFileUploader from '../../../../../common/CustomFileUploader';
 import styles from './styles.module.css';
 
 const URL_ARRAY_LAST_ELEMENT = 1;
+const MIN_CHARACTER_COUNT = 0;
 
 function FooterChat({
 	setMessage = () => {},
@@ -86,7 +87,7 @@ function FooterChat({
 					)}
 				</div>
 			)}
-
+			<div className={styles.word_count}>{`${message?.length || MIN_CHARACTER_COUNT} / 350 characters`}</div>
 			<div className={styles.bot_footer}>
 				<CustomFileUploader
 					handleProgress={handleProgress}
@@ -109,6 +110,7 @@ function FooterChat({
 					onChange={(val) => setMessage(val)}
 					onKeyDown={(e) => handleKeyPress(e)}
 					value={message}
+					maxLength={350}
 				/>
 				<div className={styles.loader}>
 					{createLoading ? (<Loader themeType="primary" />)

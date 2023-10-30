@@ -13,6 +13,8 @@ import {
 	InputGroupController,
 	CreatableSelectController,
 	RadioGroupController,
+	TimepickerController,
+	DateRangePickerController,
 } from '@cogoport/forms';
 
 const getElementController = (type) => {
@@ -39,6 +41,15 @@ const getElementController = (type) => {
 		case 'date_picker':
 		case 'datepicker':
 			return DatepickerController;
+
+		case 'time_picker':
+		case 'timepicker':
+			return TimepickerController;
+
+		case 'daterangepicker':
+		case 'date_range_picker':
+		case 'daterange_picker':
+			return DateRangePickerController;
 
 		case 'textArea':
 		case 'textarea':

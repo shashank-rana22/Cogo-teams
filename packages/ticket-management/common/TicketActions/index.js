@@ -9,7 +9,6 @@ import { getTicketActionLabel } from '../../constants';
 import ActionConfirmation from './ActionConfirmation';
 import styles from './styles.module.css';
 
-const OPEN_TICKETS_CHECK = ['escalated', 'unresolved'];
 const OPEN_TICKETS_VALUES = ['resolve', 'reassign', 'escalate'];
 const AUTHORISER_TICKETS_VALUES = ['resolve_request', 'reassign', 'escalate'];
 
@@ -17,22 +16,28 @@ const PENDING_TICKETS_CHECK = ['pending', 'resolve_requested'];
 const PENDING_TICKETS_VALUES = ['approve', 'reject', 'reassign', 'escalate'];
 
 const CLOSED_TICKETS_VALUES = ['reopen'];
-
+const TICKET_STATUS_REOPEN = ['closed', 'overdue'];
 const MODAL_ACTIONS = ['reassign', 'escalate'];
 
 function getActionType({ ticketStatus, isClosureAuthorizer }) {
-	if (OPEN_TICKETS_CHECK.includes(ticketStatus)) {
+	if (ticketStatus === 'unresolved') {
 		if (isClosureAuthorizer) {
 			return OPEN_TICKETS_VALUES;
 		}
 		return AUTHORISER_TICKETS_VALUES;
+	}
+	if (ticketStatus === 'escalated') {
+		if (isClosureAuthorizer) {
+			return OPEN_TICKETS_VALUES;
+		}
+		return MODAL_ACTIONS;
 	}
 
 	if ((PENDING_TICKETS_CHECK.includes(ticketStatus) && isClosureAuthorizer)) {
 		return PENDING_TICKETS_VALUES;
 	}
 
-	if (ticketStatus === 'closed') {
+	if (TICKET_STATUS_REOPEN.includes(ticketStatus)) {
 		return	CLOSED_TICKETS_VALUES;
 	}
 
@@ -42,11 +47,12 @@ function getActionType({ ticketStatus, isClosureAuthorizer }) {
 function RenderContent({
 	filteredActions = [], isModal = false, isCurrentReviewer = false, handleAction = () => {},
 	updateLoading = false, actionLoading = '', setConfirmationConfig = () => {},
+	layerAction = false,
 }) {
 	const { t } = useTranslation(['myTickets']);
 
 	const handleConfirmation = ({ e, item }) => {
-		if (isModal) {
+		if (isModal || layerAction) {
 			handleAction(e, item);
 		} else {
 			setConfirmationConfig({ show: true, actionType: item });
@@ -80,25 +86,27 @@ function TicketActions({
 	id = '',
 	ticketStatus = '',
 	isModal = false,
+	layerAction = false,
 	updateLoading = false,
 	handleTicket = () => {},
 	setShowReassign = () => {},
 	setShowEscalate = () => {},
 	isClosureAuthorizer = false,
 	isCurrentReviewer = false,
+	setShowResolveRequest = () => {},
 }) {
 	const [actionLoading, setActionLoading] = useState('');
 	const [confirmationConfig, setConfirmationConfig] = useState({ show: false, actionType: '' });
 	const { show, actionType } = confirmationConfig || {};
 
 	const actionMappings = getActionType({ ticketStatus, isClosureAuthorizer });
-
 	const filteredActions = isModal ? actionMappings : actionMappings.filter((item) => !MODAL_ACTIONS.includes(item));
 
 	const handleAction = (e, item) => {
 		const HANDLE_ACTION_MAPPING = {
-			reassign : { action: setShowReassign, args: true },
-			escalate : { action: setShowEscalate, args: true },
+			reassign        : { action: setShowReassign, args: true },
+			escalate        : { action: setShowEscalate, args: true },
+			resolve_request : { action: setShowResolveRequest, args: true },
 		};
 
 		const { action, args } = HANDLE_ACTION_MAPPING[item] || {};
@@ -141,6 +149,7 @@ function TicketActions({
 						isModal={isModal}
 						handleAction={handleAction}
 						updateLoading={updateLoading}
+						layerAction={layerAction}
 						actionLoading={actionLoading}
 						filteredActions={filteredActions}
 						setActionLoading={setActionLoading}

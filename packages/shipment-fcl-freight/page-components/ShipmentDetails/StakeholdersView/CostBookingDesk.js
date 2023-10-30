@@ -62,11 +62,9 @@ function CostBookingDesk({ get = {}, activeStakeholder = '' }) {
 				<div className={styles.top_header}>
 					<ShipmentInfo />
 
-					{shipment_data?.is_job_closed && (
-						<JobStatus
-							shipment_data={shipment_data}
-						/>
-					)}
+					<JobStatus
+						shipment_data={shipment_data}
+					/>
 
 					<RolloverDetails />
 

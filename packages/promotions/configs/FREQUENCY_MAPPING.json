@@ -1,0 +1,18 @@
+[
+	{
+		"label": "Weekly",
+		"value": "week"
+	},
+	{
+		"label": "Monthly",
+		"value": "month"
+	},
+	{
+		"label": "Quaterly",
+		"value": "quater"
+	},
+	{
+		"label": "Yearly",
+		"value": "year"
+	}
+]

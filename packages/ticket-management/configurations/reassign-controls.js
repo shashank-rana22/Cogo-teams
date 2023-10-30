@@ -5,10 +5,30 @@ import {
 	useGetAsyncOptionsMicroservice,
 } from '@cogoport/forms';
 
+import StakeholderCustomOption from '../common/ReassignTicket/StakeholderCustomOption';
+
+const getShipmentTypeOption = ({ t = () => {}, requestType = '' }) => {
+	const options = [
+		{ label: t('myTickets:role'), value: 'partner-roles' },
+		{ label: t('myTickets:user'), value: 'partner-users' },
+		{ label: t('myTickets:credit_controller'), value: 'credit_controller' },
+		{ label: t('myTickets:sales_agent'), value: 'sales_agent' },
+		{ label: t('myTickets:kam_owner'), value: 'kam_owner' },
+		{ label: t('myTickets:stakeholders'), value: 'stakeholders' },
+	];
+
+	if (requestType !== 'shipment') {
+		return options?.filter((option) => option?.value !== 'stakeholders');
+	}
+	return options;
+};
+
 export const useReassignTicketsControls = ({
 	t = () => {},
 	watchType = '',
 	setUserData = () => {},
+	stakeHoldersData = [],
+	requestType = '',
 }) => {
 	const rolesOptions = useGetAsyncOptionsMicroservice({
 		...{
@@ -23,9 +43,18 @@ export const useReassignTicketsControls = ({
 
 	const usersOptions = useGetAsyncOptions({ ...asyncFieldsPartnerUsers() });
 
+	const stakeholdersOptions = (stakeHoldersData || []).map((itm) => ({
+		label  : itm?.user?.name,
+		value  : itm.user?.id,
+		roleId : itm?.role_id,
+		userId : itm.user?.id,
+		data   : itm,
+	}));
+
 	const ASYNC_OPTION_MAPPING = {
 		'partner-roles' : rolesOptions,
 		'partner-users' : usersOptions,
+		stakeholders    : stakeholdersOptions,
 	};
 
 	const assignToOptions = ASYNC_OPTION_MAPPING[watchType];
@@ -36,13 +65,7 @@ export const useReassignTicketsControls = ({
 			label          : t('myTickets:type'),
 			controllerType : 'select',
 			value          : 'partner-roles',
-			options        : [
-				{ label: t('myTickets:role'), value: 'partner-roles' },
-				{ label: t('myTickets:user'), value: 'partner-users' },
-				{ label: t('myTickets:credit_controller'), value: 'credit_controller' },
-				{ label: t('myTickets:sales_agent'), value: 'sales_agent' },
-				{ label: t('myTickets:kam_owner'), value: 'kam_owner' },
-			],
+			options        : getShipmentTypeOption({ t, requestType }),
 		},
 		{
 			...(assignToOptions || {}),
@@ -53,6 +76,16 @@ export const useReassignTicketsControls = ({
 			placeholder    : t('myTickets:search_by_name'),
 			onChange       : (_, obj) => setUserData(obj),
 			rules          : { required: true },
+		},
+		{
+			label          : t('myTickets:assign_to'),
+			name           : 'stakeholder',
+			controllerType : 'select',
+			options        : stakeholdersOptions,
+			placeholder    : t('myTickets:search_by_name'),
+			onChange       : (_, obj) => setUserData(obj),
+			rules          : { required: true },
+			renderLabel    : (item) => <StakeholderCustomOption optionsLabel={item} />,
 		},
 		{
 			name           : 'comment',

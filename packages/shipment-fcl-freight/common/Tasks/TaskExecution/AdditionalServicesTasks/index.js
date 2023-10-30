@@ -1,5 +1,6 @@
 import { Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState, useContext } from 'react';
 
 import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
@@ -20,7 +21,7 @@ function AdditionsServicesTasks({
 	});
 
 	const serviceListItem = {
-		...(list[0] || {}),
+		...(list[GLOBAL_CONSTANTS.zeroth_index] || {}),
 	};
 
 	return loading ? (

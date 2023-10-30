@@ -1,5 +1,5 @@
-import List from '../../../../commons/List/index.tsx';
-import showOverflowingNumber from '../../../../commons/showOverflowingNumber.tsx';
+import List from '../../../../commons/List/index';
+import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import { STATE_INVOICE_CONFIG } from '../../InvoiceTable/tableconfigurations/stateInvoiceconfig';
 
 const MAX_LENGTH = 10;

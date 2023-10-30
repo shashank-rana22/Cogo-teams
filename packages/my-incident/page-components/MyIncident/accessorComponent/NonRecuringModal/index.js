@@ -4,11 +4,11 @@ import { IcMEyeopen } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import StyledTable from '../../Table/index.tsx';
+import StyledTable from '../../Table/index';
 import { toTitleCase } from '../../utils';
-import ApproveAndRejectHeader from '../ApproveAndRejectHeader/index.tsx';
+import ApproveAndRejectHeader from '../ApproveAndRejectHeader/index';
 
-import { overheadsConfig } from './overheadsConfig.ts';
+import { overheadsConfig } from './overheadsConfig';
 import styles from './style.module.css';
 
 const DEFAULT_REMARK_LEN = 40;

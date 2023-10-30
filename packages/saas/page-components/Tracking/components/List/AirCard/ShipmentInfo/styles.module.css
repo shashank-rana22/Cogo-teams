@@ -1,0 +1,43 @@
+.container {
+	padding: 20px 30px;
+	border-radius: 20px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+}
+
+.title {
+	margin: 0;
+}
+
+.flex_box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.info_container {
+	margin-top: 16px;
+}
+
+.line {
+	width: 30%;
+	height: 3px;
+	margin-top: 3px;
+	background-color: #fbd1a6;
+}
+
+.row {
+	align-items: flex-start;
+	margin-bottom: 5px;
+}
+
+.col {
+	&.label {
+		width: 45%;
+		font-weight: 300;
+	}
+
+	&.value {
+		width: 45%;
+		text-align: right;
+	}
+}

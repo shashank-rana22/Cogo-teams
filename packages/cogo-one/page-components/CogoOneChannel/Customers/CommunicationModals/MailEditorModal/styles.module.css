@@ -2,7 +2,7 @@
 	top: 30px !important;
 	display: flex;
 	flex-direction: column;
-	height: 82vh;
+	height: 88vh;
 	border-top: none !important;
 
 	:global {

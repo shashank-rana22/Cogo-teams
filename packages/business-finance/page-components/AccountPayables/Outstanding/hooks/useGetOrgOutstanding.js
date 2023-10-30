@@ -2,7 +2,7 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 
 const useGetOrgOutstanding = ({ entityCode = '' }) => {
 	const [outStandingFilters, setoutStandingFilters] = useState({

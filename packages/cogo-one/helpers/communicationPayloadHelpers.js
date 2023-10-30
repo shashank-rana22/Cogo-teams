@@ -10,6 +10,8 @@ export const ENDPOINT_MAPPING = {
 	send_mail : '/send_mail',
 };
 
+const LIMIT_FOR_BODY_PREVIEW = 200;
+
 const getOmniChannelLink = ({ id, channel_type }) => {
 	const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
 	return `${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`;
@@ -36,7 +38,13 @@ export const getCommunicationPayload = ({
 
 	const { conversation_id = '', user_id = '', lead_user_id = '', id = '' } = formattedData || {};
 
-	const { ccrecipients = [], bccrecipients = [], subject = '', toUserEmail = [] } = emailState || {};
+	const {
+		ccrecipients = [],
+		bccrecipients = [],
+		subject = '',
+		toUserEmail = [],
+		rawRTEContent = '',
+	} = emailState || {};
 
 	const payload = {
 		sender            : source,
@@ -64,6 +72,10 @@ export const getCommunicationPayload = ({
 			send_by             : name,
 			sender_user_id      : userId,
 			draft_url           : getOmniChannelLink({ id, channel_type: 'email' }) || '',
+			body_preview        : rawRTEContent?.slice(
+				GLOBAL_CONSTANTS.zeroth_index,
+				LIMIT_FOR_BODY_PREVIEW,
+			) || '',
 		},
 		sender_user_id  : userId,
 		service         : 'user',

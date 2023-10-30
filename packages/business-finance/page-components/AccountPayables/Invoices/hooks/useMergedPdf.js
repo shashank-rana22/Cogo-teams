@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 
 const useMergedPdf = ({ generateInvoice = () => {} }) => {
 	const { query = {} } = useSelector(({ general }) => ({ query: general.query }));
@@ -13,7 +13,7 @@ const useMergedPdf = ({ generateInvoice = () => {} }) => {
 			method  : 'post',
 			authKey : 'post_purchase_payrun_merged_pdf',
 		},
-		{ manual: false },
+		{ manual: true },
 	);
 
 	const mergeInvoices = async () => {

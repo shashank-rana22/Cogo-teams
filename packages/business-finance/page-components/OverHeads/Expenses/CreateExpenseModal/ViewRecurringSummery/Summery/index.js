@@ -3,7 +3,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import showOverflowingNumber from '../../../../../commons/showOverflowingNumber.tsx';
+import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
 import stakeHolderTimeLineData from '../../../../../IncidentManagement/utils/formatStakeHolderData';
 import useGetStakeholder from '../../../hooks/useGetStakeholder';
 import StakeHolderTimeline from '../../StakeHolderTimeline';
@@ -197,43 +197,16 @@ const summaryDataFourth = ({ paidTds, payableTds, billCurrency, tdsAmount, payme
 	},
 ];
 
-const summaryDataFifth = ({ billCurrency, subTotalAmount, taxTotalAmount }) => [
-	{
-		title : 'Sub Total Amount',
-		value : formatAmount({
-			amount   : subTotalAmount,
-			currency : billCurrency,
-			options  : {
-				style           : 'currency',
-				currencyDisplay : 'code',
-			},
-		}),
-	},
-	{
-		title : 'Tax Total Amount',
-		value : formatAmount({
-			amount   : taxTotalAmount,
-			currency : billCurrency,
-			options  : {
-				style           : 'currency',
-				currencyDisplay : 'code',
-			},
-		}),
-	},
-];
-
 const summeryMappings = ({
 	summaryDataFirst,
 	summaryDataSecond,
 	summaryDataThird,
 	summaryDataFour,
-	summaryDataFifth,
 }) => [
 	{ key: '1', val: summaryDataFirst },
 	{ key: '2', val: summaryDataSecond },
 	{ key: '3', val: summaryDataThird },
 	{ key: '4', val: summaryDataFour },
-	{ key: '5', val: summaryDataFifth },
 ];
 
 function Summery({
@@ -257,10 +230,7 @@ function Summery({
 		paidAmount,
 		paidTds = 0,
 		payableTds,
-		tdsAmount, 
-		paymentStatus,
-		subTotalAmount,
-		taxTotalAmount
+		tdsAmount, paymentStatus,
 	} = itemData || {};
 	const { stakeholders } = useGetStakeholder({ billId });
 
@@ -292,24 +262,12 @@ function Summery({
 		paidAmount,
 		grandTotal,
 	});
-	const summaryDataFour = summaryDataFourth({ 
-		paidTds, 
-		payableTds,
-		billCurrency, 
-		tdsAmount,
-		paymentStatus,
-	});
-	const summaryDataFive = summaryDataFifth({ 
-		billCurrency, 
-		subTotalAmount, 
-		taxTotalAmount
-	});
+	const summaryDataFour = summaryDataFourth({ paidTds, payableTds, billCurrency, tdsAmount, paymentStatus });
 	const summeryMapping = summeryMappings({
 		summaryDataFirst,
 		summaryDataSecond,
 		summaryDataThird,
 		summaryDataFour,
-		summaryDataFifth,
 	});
 	return (
 		<div className={styles.container}>
@@ -321,13 +279,10 @@ function Summery({
 			{(isEmpty(level1) && isEmpty(level2) && isEmpty(level3)) ? (
 				null
 			) : (
-				<div>
-					<div className={styles.title}>To be Approved by</div>
-					<div className={styles.steeper}>
-						<StakeHolderTimeline
-							timeline={stakeHolderTimeLineData({ level1, level2, level3 })}
-						/>
-					</div>
+				<div className={styles.timeline}>
+					<StakeHolderTimeline
+						timeline={stakeHolderTimeLineData({ level1, level2, level3 })}
+					/>
 				</div>
 			)}
 		</div>

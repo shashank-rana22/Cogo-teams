@@ -7,8 +7,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 12px;
-	margin-right: 16px;
+	padding: 8px;
 	background: #fff;
 	border: 1px solid transparent;
 	border-radius: 8px;
@@ -16,8 +15,9 @@
 
 .container {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
-	max-width: 65%;
+	width: 68%;
 }
 
 .stat_loader {

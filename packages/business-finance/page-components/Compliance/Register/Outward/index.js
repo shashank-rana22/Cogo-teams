@@ -1,6 +1,6 @@
 import { Pagination } from '@cogoport/components';
 
-import StyledTable from '../../../commons/StyledTable/index.tsx';
+import StyledTable from '../../../commons/StyledTable/index';
 import useGetStatus from '../../hooks/useGetStatus';
 import useOutwardFileList from '../../hooks/useOutwardFileList';
 import useRefreshData from '../../hooks/useRefreshData';

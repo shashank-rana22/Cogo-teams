@@ -1,7 +1,7 @@
 import { cl } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcALocationwhite, IcCSwitch, IcMOrigin } from '@cogoport/icons-react';
+import { IcALocationwhite, IcMRoundtrip, IcMOrigin } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -76,13 +76,14 @@ function GeoCoder({
 						onChange={(val, obj) => handleChange(key, val, obj)}
 						onOptionsChange={(options) => handleOptionsChange(key, options)}
 						isClearable={!!idx}
+						labelKey="display_name"
 						params={getLocationParams(service_type)}
 					/>
 				))}
 			</div>
 			{locationFilters?.destination?.id && (
 				<div className={cl`${styles.col} ${styles.col_last}`}>
-					<IcCSwitch className={styles.switch_icon} onClick={handleSwap} />
+					<IcMRoundtrip className={styles.switch_icon} onClick={handleSwap} />
 				</div>
 			)}
 		</div>

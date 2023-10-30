@@ -2,7 +2,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-import toastApiError from '../../commons/toastApiError.ts';
+import toastApiError from '../../commons/toastApiError';
 
 const PAGE = 1;
 const useViewDataList = ({ id, docType, irnStatus, tradePartyGst, setShowDeleteModal, isModalOnetime }) => {

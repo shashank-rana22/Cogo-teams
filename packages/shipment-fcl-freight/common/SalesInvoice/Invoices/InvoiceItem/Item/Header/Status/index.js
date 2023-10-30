@@ -28,6 +28,7 @@ function Status({
 	isIRNGenerated = false,
 	setAskNullify = () => {},
 	isCrossEntity = false,
+	creditNoteList = [],
 }) {
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	const isAuthorized = [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
@@ -65,11 +66,15 @@ function Status({
 
 	const geo = getGeoConstants();
 
+	const isCNApproved = (creditNoteList || []).some((creditNote) => creditNote?.invoice_combination_id === invoice?.id
+	&& creditNote?.status === 'approved');
+
 	const showRequestCN = showCN
 	&& !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice?.status)
 	&& (serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized)
-		&& geo.others.navigations.partner.bookings.invoicing.request_credit_note
-		&& !invoice?.processing;
+	&& geo.others.navigations.partner.bookings.invoicing.request_credit_note
+	&& !invoice?.processing
+	&& !isCNApproved;
 
 	if (isCrossEntity) {
 		return (

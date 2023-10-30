@@ -1,6 +1,7 @@
-import { asyncFieldsPartnerUsers } from '@cogoport/forms';
+import { asyncFieldsListAgents } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { IcMCallbarge, IcMCallwhisper, IcMCallmonitor, IcMCalltransfer } from '@cogoport/icons-react';
+import { merge } from '@cogoport/utils';
 
 export const ICON_MAPPING = {
 	monitor  : IcMCallmonitor,
@@ -10,9 +11,14 @@ export const ICON_MAPPING = {
 };
 
 export const useGetControls = () => {
-	const servetelAgentOptions = useGetAsyncOptions({
-		...asyncFieldsPartnerUsers(), valueKey: 'user_id',
-	});
+	const servetelAgentOptions = useGetAsyncOptions(
+		merge(asyncFieldsListAgents(), {
+			params: {
+				status_not: 'inactive',
+			},
+		}),
+
+	);
 
 	const controls = {
 		agent: {

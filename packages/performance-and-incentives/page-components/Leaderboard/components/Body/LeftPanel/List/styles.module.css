@@ -42,3 +42,8 @@
 	margin: 0 auto;
 	margin-top: 50px;
 }
+
+.inactive {
+	font-size: var(--font-size-sm);
+	color: #f00;
+}

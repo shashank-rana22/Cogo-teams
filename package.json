@@ -17,7 +17,7 @@
     "pre-build": "NODE_ENV=production node scripts/build-pages && node scripts/pre-build",
     "dev": "npx husky install && node scripts/build-pages && node scripts/pre-build && turbo run dev",
     "start": "turbo run start",
-    "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+    "eslint": "eslint \"**/*.{js,jsx}\"",
     "eslint_file": "eslint",
     "stylelint": "stylelint \"**/*.css\"",
     "clean": "turbo run clean",
@@ -25,7 +25,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{js,jsx}": [
       "eslint --fix",
       "git add"
     ]
@@ -42,7 +42,7 @@
     "react-i18next": "^12.1.4"
   },
   "devDependencies": {
-    "@cogoport/eslint-config": "2.0.9",
+    "@cogoport/eslint-config": "2.0.10",
     "@cogoport/stylelint-config": "^1.0.3",
     "@svgr/webpack": "^6.5.1",
     "dotenv": "^16.0.3",

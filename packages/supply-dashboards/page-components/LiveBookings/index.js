@@ -20,7 +20,7 @@ function LiveBookingsView() {
 				<TabPanel name="rfq_enquiries" title="RFQ Enquiries">
 					--
 				</TabPanel>
-				<TabPanel name="rate_density" title="Rate Density">
+				<TabPanel name="rate_density" title="Price TaskBoard">
 					--
 				</TabPanel>
 			</Tabs>

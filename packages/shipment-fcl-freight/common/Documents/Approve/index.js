@@ -3,9 +3,9 @@ import { Button, Modal, Checkbox } from '@cogoport/components';
 import styles from './styles.module.css';
 
 function Approve({
-	showApproved,
+	showApproved = {},
 	setAddToWallet = () => {},
-	addToWallet,
+	addToWallet = true,
 	handleApprove = () => {},
 	setShowApproved = () => {},
 	setShowDoc = () => {},

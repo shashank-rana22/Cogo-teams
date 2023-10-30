@@ -6,6 +6,7 @@ import InvoicesTable from '../../common/InvoicesTable';
 import TagMap from '../../common/Taggings/TagMap';
 import invoiceconfiguration from '../../configurations/invoicetableconfig';
 import useGetTaggingBills from '../../hooks/useGetMappings';
+import useGetUtrDetails from '../../hooks/useGetUtrDetails';
 
 import styles from './styles.module.css';
 
@@ -14,8 +15,8 @@ const STEP = 2;
 function InvoicesUploaded({
 	invoicesdata = {},
 	collectionParty = {},
-	setOpenComparision = () => {},
-	setStep = () => {},
+	setOpenComparision = () => { },
+	setStep = () => { },
 }) {
 	const [activeTab, setActiveTab] = useState('uploaded_invoices');
 
@@ -40,6 +41,10 @@ function InvoicesUploaded({
 		shipmentId: collectionParty?.shipment_id, serviceProviderId: collectionParty?.service_provider_id,
 	});
 
+	const invoices_bill_ids = invoicesdata.map((invoice) => (invoice?.finance_job_number || invoice?.billId));
+
+	const { utrData = [], loading: utrLoading } = useGetUtrDetails({ billIds: invoices_bill_ids });
+
 	return (
 		<div className={styles.invoicescontainer}>
 			<span className={styles.headings}>Invoices Uploaded</span>
@@ -53,7 +58,7 @@ function InvoicesUploaded({
 						<TabPanel name="uploaded_invoices" title="Uploaded Invoices">
 							<div className={styles.tablecontainer}>
 								<InvoicesTable
-									columns={[...invoiceconfiguration, viewDetails]}
+									columns={[...(invoiceconfiguration({ utrData, utrLoading })), viewDetails]}
 									data={invoicesdata}
 									showPagination={false}
 								/>

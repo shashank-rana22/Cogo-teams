@@ -3,11 +3,11 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-import ExcludeList from '../../../../commons/ExcludeList/index.tsx';
-import useManageExceptionList from '../../../../hooks/useManageExceptionList.ts';
+import ExcludeList from '../../../../commons/ExcludeList/index';
+import useManageExceptionList from '../../../../hooks/useManageExceptionList';
 import styles from '../styles.module.css';
 
-import { config } from './config.tsx';
+import { config } from './config';
 
 function ManageExceptionsModal({
 	showCycleExceptions = false,

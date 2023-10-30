@@ -5,7 +5,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 import CREATE_PAYRUN_CONFIG from '../CreatePayrun/Configurations/createPayrunConfig.json';
 import CREATE_PAYRUN_CONFIG_VN from '../CreatePayrun/Configurations/createPayrunConfigVN.json';
 import changeTimeDateFormat from '../utils/changeTimeDateFormat';

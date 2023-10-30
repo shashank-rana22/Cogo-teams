@@ -49,7 +49,8 @@ function RightSideNav({
 	const ICON_MAPPING = getIconMapping({
 		viewType,
 		expandSideBar,
-		channelType: formattedMessageData?.channel_type,
+		channelType : formattedMessageData?.channel_type,
+		isTeams     : activeTab === 'teams',
 	}) || [];
 
 	const check = () => {
@@ -84,15 +85,14 @@ function RightSideNav({
 					expandSideBar: !prev?.expandSideBar,
 				};
 			});
+		} else if (activeTab === 'teams') {
+			setActiveSelect((prev) => (((prev === val) && expandSideBar) ? '' : val));
+			setActiveTab((prev) => ({
+				...prev,
+				expandSideBar: !prev?.expandSideBar,
+			}));
 		} else {
 			setActiveSelect(val);
-
-			if (!expandSideBar) {
-				setActiveTab((prev) => ({
-					...prev,
-					expandSideBar: true,
-				}));
-			}
 		}
 	};
 
@@ -100,12 +100,12 @@ function RightSideNav({
 		<>
 			<div className={styles.right_container}>
 				{ICON_MAPPING.map((item) => {
-					const { icon, name, content } = item;
+					const { icon, name, content } = item || {};
 
 					const showDocumentCount = activeSelect !== 'documents' && name === 'documents'
 				&& !!documentsCount && !checkConditions;
 
-					const showquotationSentData = orgId && activeSelect !== 'organization'
+					const showQuotationSentData = orgId && activeSelect !== 'organization'
 				&& name === 'organization' && !!quotationEmailSentAt;
 
 					return (
@@ -129,7 +129,7 @@ function RightSideNav({
 									)}
 								</div>
 							)}
-							{showquotationSentData && (
+							{showQuotationSentData && (
 								<div className={styles.quotation} />
 							)}
 							<div title={content}>

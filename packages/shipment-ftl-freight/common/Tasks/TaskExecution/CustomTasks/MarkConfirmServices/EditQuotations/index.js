@@ -4,13 +4,15 @@ import { Layout } from '@cogoport/surface-modules';
 
 import styles from './styles.module.css';
 
-function EditQuotations({ data, shipment_id, onCancel }) {
+const DEFAULT_VALUE = 0;
+
+function EditQuotations({ data = {}, shipment_id = '', onCancel = () => {} }) {
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 
 	const formProps = useForm({ defaultValues });
 	const { control, handleSubmit, formState:{ errors = {} } = {}, watch } = formProps || {};
 
-	const customValues = {};
+	const CUSTOM_VALUES = {};
 	const formValues = watch();
 
 	const prepareFormValues = () => {
@@ -19,7 +21,7 @@ function EditQuotations({ data, shipment_id, onCancel }) {
 			if (key && formValues[key]) {
 				allFormValues[key] = (allFormValues[key] || []).map((value) => ({
 					...value,
-					total    : (value.price || 0) * (value.quantity || 0),
+					total    : (value.price || DEFAULT_VALUE) * (value.quantity || DEFAULT_VALUE),
 					currency : 'INR',
 				}));
 			}
@@ -31,7 +33,7 @@ function EditQuotations({ data, shipment_id, onCancel }) {
 	const newFormValues = prepareFormValues();
 
 	Object.keys(formValues).forEach((key) => {
-		customValues[key] = {
+		CUSTOM_VALUES[key] = {
 			formValues : newFormValues[key],
 			id         : key,
 		};
@@ -43,14 +45,14 @@ function EditQuotations({ data, shipment_id, onCancel }) {
 				control={control}
 				fields={finalControls}
 				errors={errors}
-				customValues={customValues}
+				customValues={CUSTOM_VALUES}
 				shipment_id={shipment_id}
 			/>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={() => onCancel()}>Back</Button>
+				<Button themeType="secondary" disabled={data?.loading} onClick={() => onCancel()}>Back</Button>
 
-				<Button themeType="primary" onClick={handleSubmit(onSubmit)}>Submit</Button>
+				<Button themeType="primary" disabled={data?.loading} onClick={handleSubmit(onSubmit)}>Submit</Button>
 			</div>
 		</div>
 	);

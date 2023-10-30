@@ -1,0 +1,63 @@
+.container {
+	padding: 8px;
+	margin: 16px 0;
+	background: white;
+	border: #e0e0e0 1px solid;
+	border-radius: 4px;
+}
+
+.close_btn {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
+.head {
+	display: flex;
+	justify-content: space-between;
+	margin: 40px 0 16px;
+}
+
+.heading {
+	margin-bottom: 8px;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.fees {
+	font-size: 14px;
+	font-style: italic;
+	font-weight: bold !important;
+}
+
+.layout_container {
+	padding: 10px 16px 16px;
+	margin-bottom: 32px;
+	border: #e0e0e0 1px solid;
+}
+
+.layout_container:hover {
+	box-shadow: rgb(169 188 218 / 65%) 0 1px 6px;
+}
+
+.alt_config {
+	display: flex;
+	justify-content: space-between;
+}
+
+.alt_config_text {
+	font-size: 14px;
+	font-style: italic;
+	font-weight: 500;
+}
+
+.btn_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 24px;
+}
+
+.btn {
+	margin-right: 12px;
+	font-weight: 600 !important;
+}

@@ -1,0 +1,49 @@
+.container {
+	position: relative;
+
+	:global {
+		.leaflet-tile {
+			filter: hue-rotate(45deg) !important;
+		}
+	}
+}
+
+.blur_screen {
+	filter: blur(5px);
+}
+
+.empty_state {
+	position: absolute;
+	top: 35%;
+	left: 5%;
+	z-index: 900;
+	align-self: center;
+	width: 90%;
+	color: #4f4f60;
+	text-align: center;
+}
+
+.loader_container {
+	position: absolute;
+	top: 0;
+	z-index: 1000;
+	width: 100%;
+	height: 100%;
+}
+
+.modal {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgb(255 255 255 / 50%);
+	backdrop-filter: blur(6px);
+}
+
+.loading_content {
+	position: absolute;
+	top: 40%;
+	z-index: 10;
+	width: 100%;
+	text-align: center;
+}

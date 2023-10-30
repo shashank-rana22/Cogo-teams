@@ -1,3 +1,31 @@
+export const SERVICE_API_MAPPING = {
+	missing_id: {
+		fcl_freight     : 'list_fcl_freight_rate_requests',
+		lcl_freight     : 'list_lcl_freight_rate_requests',
+		air_freight     : 'list_air_freight_rate_requests',
+		ftl_freight     : 'list_ftl_freight_rate_requests',
+		ltl_freight     : 'list_ltl_freight_rate_requests',
+		fcl_customs     : 'list_fcl_customs_rate_requests',
+		lcl_customs     : 'list_lcl_customs_rate_requests',
+		fcl_cfs         : 'list_fcl_cfs_rate_requests',
+		trailer_freight : 'list_trailer_freight_rate_requests',
+		haulage_freight : 'list_haulage_freight_rate_requests',
+		air_customs     : 'list_air_customs_rate_requests',
+	},
+	dislike_id: {
+		fcl_freight     : 'list_fcl_freight_rate_feedbacks',
+		lcl_freight     : 'list_lcl_freight_rate_feedbacks',
+		air_freight     : 'list_air_freight_rate_feedbacks',
+		ftl_freight     : 'list_ftl_freight_rate_feedbacks',
+		ltl_freight     : 'list_ltl_freight_rate_feedbacks',
+		fcl_customs     : 'list_fcl_customs_rate_feedbacks',
+		lcl_customs     : 'list_lcl_customs_rate_feedbacks',
+		trailer_freight : 'list_trailer_freight_rate_feedbacks',
+		haulage_freight : 'list_haulage_freight_rate_feedbacks',
+		air_customs     : 'list_air_customs_rate_feedbacks',
+	},
+};
+
 export const STATUS_MAPPING = {
 	pending           : 'pending',
 	reject_requested  : 'pending',
@@ -95,13 +123,14 @@ export const PRIORITY_MAPPING = {
 	low    : 'low',
 };
 
-export const REQUIRED_ROLES = ['partner-roles', 'partner-users'];
+export const REQUIRED_ROLES = ['partner-roles', 'partner-users', 'stakeholders'];
 
 export const getSpectatorTypeOptions = ({ t }) => [
 	{ label: t('myTickets:spectator_type_1'), value: 'reviewer' },
 	{ label: t('myTickets:spectator_type_2'), value: 'agent' },
 	{ label: t('myTickets:spectator_type_3'), value: 'closure_authorizer' },
 	{ label: t('myTickets:spectator_type_4'), value: 'configuration_owner' },
+	{ label: t('myTickets:spectator_type_5'), value: 'user_manager' },
 ];
 
 export const getTicketActionLabel = ({ t, type }) => {
@@ -122,18 +151,102 @@ export const getTicketActionLabel = ({ t, type }) => {
 	return ACTIONS[type];
 };
 
-export const REQUEST_TYPE_OPTIONS = [
-	{ label: 'Shipment', value: 'shipment' },
-	{ label: 'Rate', value: 'rate' },
-	{ label: 'Finance', value: 'finance' },
-	{ label: 'Platform Issue', value: 'platform_issue' },
+export const getRequestTypeOptions = ({ t = () => {} }) => [
+	{ label: t('myTickets:shipment'), value: 'shipment' },
+	{ label: t('myTickets:rate'), value: 'rate' },
+	{ label: t('myTickets:finance'), value: 'finance' },
+	{ label: t('myTickets:platform_issue'), value: 'platform_issue' },
 ];
 
 export const SHIPMENT_RATE_KEYS = ['request_type', 'organization_id', 'user_id',
 	'serial_id', 'service', 'trade_type', 'category', 'sub_category', 'issue_type',
 	'additional_information', 'priority', 'file_url', 'notify_customer', 'raised_by_desk',
-	'toggle_value', 'raised_to_desk'];
+	'raised_to_desk'];
 
 export const FINANCE_PLATFORM_KEYS = ['request_type', 'category', 'sub_category', 'issue_type',
 	'additional_information', 'priority',
 	'file_url', 'notify_customer'];
+
+export const RATE_KEYS = ['request_type', 'organization_id', 'user_id', 'id_type',
+	'serial_id', 'service_type', 'service', 'trade_type', 'category', 'sub_category', 'raised_by_desk',
+	'raised_to_desk', 'issue_type', 'additional_information', 'priority', 'file_url', 'notify_customer'];
+
+export const getRateShipmentServices = ({ t = () => {}, watchIdType = '' }) => {
+	const options = [
+		{
+			label : t('myTickets:fcl'),
+			value : 'fcl_freight',
+		},
+		{
+			label : t('myTickets:lcl'),
+			value : 'lcl_freight',
+		},
+		{
+			label : t('myTickets:air'),
+			value : 'air_freight',
+		},
+		{
+			label : t('myTickets:ftl'),
+			value : 'ftl_freight',
+		},
+		{
+			label : t('myTickets:ltl'),
+			value : 'ltl_freight',
+		},
+		{
+			label : t('myTickets:fcl_customs'),
+			value : 'fcl_customs',
+		},
+		{
+			label : t('myTickets:lcl_customs'),
+			value : 'lcl_customs',
+		},
+		{
+			label : t('myTickets:fcl_cfs'),
+			value : 'fcl_cfs',
+		},
+		{
+			label : t('myTickets:trailer'),
+			value : 'trailer_freight',
+		},
+		{
+			label : t('myTickets:haulage'),
+			value : 'haulage_freight',
+		},
+		{
+			label : t('myTickets:air_customs'),
+			value : 'air_customs',
+		},
+	];
+
+	if (watchIdType === 'dislike_id') {
+		return options?.filter((option) => option?.value !== 'fcl_cfs');
+	}
+
+	return options;
+};
+
+export const SINGLE_LOCATIONS = [
+	'fcl_customs',
+	'lcl_customs',
+	'air_customs',
+	'origin_fcl_customs',
+	'destination_fcl_customs',
+	'origin_lcl_customs',
+	'destination_lcl_customs',
+	'origin_air_customs',
+	'destination_air_customs',
+	'fcl_cfs',
+	'fcl_freight_local',
+	'air_freight_local',
+	'lcl_freight_local',
+];
+
+export const sortByOptions = ({ t }) => [
+	{ label: t('myTickets:created_at'), value: 'created_at' },
+	{ label: t('myTickets:updated_at'), value: 'updated_at' },
+];
+
+export const DISABLE_STATUS_KEY = ['dislike_id', 'missing_id'];
+
+export const CLOSED_TICKET_STATUS = ['closed', 'overdue'];

@@ -1,63 +1,66 @@
 import { Button, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import Layout from '../../../../common/Layout';
 import airControls from '../../../../configurations/air-freight-filters';
 import fclControls from '../../../../configurations/fcl-freight-filters';
+import getDefaultValues from '../../../../utils/getDefaultValues';
 import mutateFields from '../../../../utils/mutate-fields';
 
 import styles from './styles.module.css';
 
 function FilterContainer({
 	globalFilters = {}, setGlobalFilters = () => {}, showText = true,
-	setVisible = () => {}, view = '',
+	setVisible = () => {},
 }) {
-	const { service_type = 'fcl', parent_mode = null } = globalFilters;
+	const { service_type = 'fcl' } = globalFilters;
+	const controls = service_type === 'air' ? airControls : fclControls;
+
+	const { defaultValues, fields } = getDefaultValues(controls);
 
 	const {
 		control,
-		formState: { errors },
+		formState: { errors, dirtyFields },
 		reset,
 		watch,
 		setValue,
 		handleSubmit,
-	} = useForm({ defaultValues: { service_type: 'fcl' } });
-
-	const controls = service_type === 'air' ? airControls : fclControls;
+	} = useForm({ defaultValues });
 
 	const values = watch();
 
 	const { newFields } = mutateFields({
-		controls,
+		fields,
 		containerType: values?.container_type,
 		setGlobalFilters,
 		globalFilters,
 	});
 
 	useEffect(() => {
-		setValue('commodity', []);
-	}, [values?.container_type, setValue]);
+		if (dirtyFields?.container_type) {
+			setValue('commodity', []);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [values?.container_type]);
 
-	useEffect(() => {
-		setValue(
-			'parent_mode',
-			parent_mode,
-		);
-	}, [parent_mode, setValue]);
+	const onReset = useCallback(() => {
+		const obj = Object.keys(values).reduce((acc, key) => {
+			acc[key] = null;
+			return acc;
+		}, {});
 
-	const onReset = () => {
-		setGlobalFilters((prev) => ({ ...prev, parent_mode: undefined }));
-		reset();
-	};
+		reset(obj);
+	}, [reset, values]);
 
 	const onSumbit = () => {
-		setGlobalFilters((prev) => ({ ...prev, ...values, parent_mode: values?.parent_mode }));
+		setGlobalFilters((prev) => ({
+			...prev,
+			...values,
+			service_type,
+			parent_mode: values?.source || values?.parent_mode,
+		}));
 		setVisible(false);
-	};
-
-	const showElements = {
-		service_type: view === 'map_view',
 	};
 
 	return (
@@ -74,7 +77,6 @@ function FilterContainer({
 				fields={newFields}
 				errors={errors}
 				control={control}
-				showElements={showElements}
 			/>
 		</div>
 	);

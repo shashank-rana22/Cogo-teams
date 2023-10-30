@@ -1,4 +1,4 @@
-export const HIERARCHY_MAPPING = { port_id: 0, region_id: 1, country_id: 2, continent_id: 3 };
+export const HIERARCHY_MAPPING = { port_id: 0, country_id: 1, continent_id: 2 };
 const hierarcyArray = Object.keys(HIERARCHY_MAPPING);
 const INCREMENT = 1;
 

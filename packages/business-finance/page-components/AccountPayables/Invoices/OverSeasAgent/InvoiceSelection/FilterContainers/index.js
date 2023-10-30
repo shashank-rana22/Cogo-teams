@@ -2,7 +2,7 @@ import { Button, Input } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import React from 'react';
 
-import Filter from '../../../../../commons/Filters/index.tsx';
+import Filter from '../../../../../commons/Filters/index';
 import { invoiceFilters } from '../../../configurations/index';
 import FilterModal from '../../../MoreFilters/index';
 

@@ -8,7 +8,7 @@ import {
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SUPPLY = {
-	chat_tabs_to_be_shown     : ['message', 'voice', 'firebase_emails'],
+	chat_tabs_to_be_shown     : ['message', 'voice', 'firebase_emails', 'teams'],
 	all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 	teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
@@ -63,6 +63,7 @@ const SUPPLY = {
 		hide_personal_mail                          : true,
 		show_services                               : true,
 		show_rm_agent_details                       : false,
+		show_rate_reverts_page                      : true,
 	},
 };
 

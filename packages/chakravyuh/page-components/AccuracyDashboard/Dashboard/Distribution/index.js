@@ -1,34 +1,40 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { Button, Placeholder, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useState, useEffect } from 'react';
 
 import NoDataState from '../../../../common/NoDataState';
 import { CUSTOM_THEME, usePieChartConfigs } from '../../../../constants/pie_chart_config';
 import useGetFclFreightDistribution from '../../../../hooks/useGetFclFreightRateDistribution';
 import { formatBigNumbers } from '../../../../utils/formatBigNumbers';
-import { section_header, section_container } from '../styles.module.css';
+import { section_header, section_container, bottom_label } from '../styles.module.css';
 
 import styles from './styles.module.css';
 
 const LOADING_COUNT = 5;
-function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
+function Distribution({ globalFilters = {}, dateString = '' }) {
 	const { parent_mode = null } = globalFilters;
+	const [parentMode, setParentMode] = useState(null);
 	const {
 		data = {},
 		loading = false,
 	} = useGetFclFreightDistribution({ filters: globalFilters });
 
-	const { pieChartData, pieColors } = usePieChartConfigs(parent_mode, data);
+	const { pieChartData, pieColors } = usePieChartConfigs(parentMode, data);
 
 	const handlePieClick = (event) => {
-		if (!parent_mode) {
-			setGlobalFilters((prev) => ({ ...prev, parent_mode: event?.data?.key }));
+		if (!parentMode) {
+			setParentMode(event?.data?.key);
 		}
 	};
 
 	const defaultView = () => {
-		setGlobalFilters((prev) => ({ ...prev, parent_mode: null }));
+		setParentMode(null);
 	};
+
+	useEffect(() => {
+		setParentMode(parent_mode);
+	}, [parent_mode]);
 
 	return (
 		<div className={cl`${styles.container} ${section_container}`}>
@@ -91,9 +97,18 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 										<p className={styles.pie_center_text}>Active Rates</p>
 									</Tooltip>
 									<p className={styles.pie_center_count}>
-										{formatBigNumbers(data?.total_rate_count || GLOBAL_CONSTANTS.zeroth_index)}
+										<Tooltip
+											content={(
+												<span>
+													{data?.total_rate_count || GLOBAL_CONSTANTS.zeroth_index}
+												</span>
+											)}
+											placement="bottom"
+										>
+											{formatBigNumbers(data?.total_rate_count || GLOBAL_CONSTANTS.zeroth_index)}
+										</Tooltip>
 									</p>
-									{ parent_mode
+									{ parentMode
 					&& (
 						<Button
 							themeType="linkUi"
@@ -125,11 +140,20 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 									/>
 									<div className={styles.legend_text_row}>
 										<p className={styles.legend_name}>{label}</p>
-										{ !parent_mode
-										&& <p className={styles.legend_rate}>{`(${formatBigNumbers(value)} Rates)`}</p>}
+										{ !parentMode
+										&& (
+											<p className={styles.legend_rate}>
+												<Tooltip
+													content={<span>{value || GLOBAL_CONSTANTS.zeroth_index}</span>}
+													placement="bottom"
+												>
+													{`(${formatBigNumbers(value)} Rates)`}
+												</Tooltip>
+											</p>
+										)}
 									</div>
 								</div>
-								{ !parent_mode
+								{ !parentMode
 									? (
 										<p className={styles.legend_percentage}>
 											{`${cancellation} % Cancellation`}
@@ -137,7 +161,13 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 									)
 									: (
 										<p className={styles.legend_percentage_dark}>
-											{`${formatBigNumbers(value)} Rates (${cancellation}%)`}
+											<Tooltip
+												content={<span>{value || GLOBAL_CONSTANTS.zeroth_index}</span>}
+												placement="left"
+											>
+												{`${formatBigNumbers(value)} Rates (
+													${cancellation || GLOBAL_CONSTANTS.zeroth_index}%)`}
+											</Tooltip>
 										</p>
 									)}
 							</div>
@@ -149,6 +179,7 @@ function Distribution({ globalFilters = {}, setGlobalFilters = () => {} }) {
 					)
 					: <NoDataState flow="column" visible={!loading} />
 			}
+			<h5 className={cl`${styles.bottom_label} ${bottom_label}`}>{dateString}</h5>
 		</div>
 	);
 }

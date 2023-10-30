@@ -28,10 +28,10 @@ const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
 		return '100%';
 	}
 	if (isEmpty(file) && !uploading) {
-		return 'calc(100% - 40px)';
+		return 'calc(100% - 65px)';
 	}
 
-	return 'calc(100% - 67px)';
+	return 'calc(100% - 97px)';
 };
 
 function TicketChat({

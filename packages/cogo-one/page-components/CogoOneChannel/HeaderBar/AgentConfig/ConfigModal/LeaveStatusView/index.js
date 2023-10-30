@@ -59,7 +59,7 @@ function LeaveAgentModal({
 				<div className={styles.back_section}>
 					<IcMArrowBack
 						className={styles.arrow_back}
-						onClick={() => setActiveCard('')}
+						onClick={() => setActiveCard('config_modal')}
 					/>
 					Back
 				</div>

@@ -1,3 +1,9 @@
 .flex {
 	display: flex;
+	align-items: center;
+	margin-bottom: 2px;
+}
+
+.release_button {
+	margin-left: 4px;
 }

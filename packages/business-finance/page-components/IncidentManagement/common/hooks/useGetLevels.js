@@ -2,7 +2,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 
 const LEVEL_KEY_MAP = {
 	1 : 'onlyLevel1IncidentApproval',

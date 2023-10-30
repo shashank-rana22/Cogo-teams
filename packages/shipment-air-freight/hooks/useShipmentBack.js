@@ -13,15 +13,18 @@ export default function useShipmentBack() {
 	const { permissions_navigations = {}, email = '' } = profileData;
 
 	const [isBackAllowed, setIsBackAllowed] = useState();
+
 	const router = useRouter();
+
+	const { navigation = '' } = router.query;
 
 	const { navToRedirect, version } = useMemo(() => {
 		const { nav_items: { partner: allSideBarNavs } } = getSideBarConfigs({
 			userData: { permissions_navigations, email },
 		});
 
-		return getRedirectNavMapping(allSideBarNavs);
-	}, [permissions_navigations, email]);
+		return getRedirectNavMapping(allSideBarNavs, navigation);
+	}, [permissions_navigations, email, navigation]);
 
 	useEffect(() => {
 		setIsBackAllowed(() => {

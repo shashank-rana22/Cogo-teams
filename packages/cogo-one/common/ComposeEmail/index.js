@@ -3,7 +3,7 @@ import { IcMCross, IcMAttach } from '@cogoport/icons-react';
 import { useState, useRef } from 'react';
 
 import { TOOLBARCONFIG } from '../../constants';
-import getFormatedEmailBody from '../../helpers/getFormatedEmailBody';
+import getFormattedEmailBody from '../../helpers/getFormattedEmailBody';
 import { getFileAttributes } from '../../utils/getFileAttributes';
 import hideDetails from '../../utils/hideDetails';
 import CustomFileUploader from '../CustomFileUploader';
@@ -34,7 +34,7 @@ function ComposeEmail({
 	const uploaderRef = useRef(null);
 
 	const handleSend = () => {
-		const isEmptyMail = getFormatedEmailBody({ emailState });
+		const isEmptyMail = getFormattedEmailBody({ emailState });
 
 		if (isEmptyMail || !emailState?.subject) {
 			Toast.error('Both Subject and Body are Required');

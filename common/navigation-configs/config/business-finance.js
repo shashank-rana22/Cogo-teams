@@ -1,16 +1,19 @@
 const businessFinance = {
-	'/[partner_id]/business-finance/coe-finance/[active_tab]': {
-		navigation : 'business_finance-coe_finance',
+	'/[partner_id]/business-finance/audit-function/[active_tab]': {
+		navigation : 'business_finance-audit_function',
 		isMainNav  : true,
 	},
-	'/[partner_id]/business-finance/coe-finance/[active_tab]/view-invoices': {
-		navigation: 'business_finance-coe_finance',
+	'/[partner_id]/business-finance/audit-function/[active_tab]/view-invoices': {
+		navigation: 'business_finance-audit_function',
 	},
-	'/[partner_id]/business-finance/coe-finance/[active_tab]/[view]': {
-		navigation: 'business_finance-coe_finance',
+	'/[partner_id]/business-finance/audit-function/[active_tab]/[view]': {
+		navigation: 'business_finance-audit_function',
 	},
-	'/[partner_id]/business-finance/coe-finance/cost-sheet': {
-		navigation: 'business_finance-coe_finance',
+	'/[partner_id]/business-finance/audit-function/[active_tab]/audit': {
+		navigation: 'business_finance-audit_function',
+	},
+	'/[partner_id]/business-finance/audit-function/cost-sheet': {
+		navigation: 'business_finance-audit_function',
 	},
 	'/[partner_id]/business-finance/compliance/[active_tab]': {
 		navigation : 'business_finance-compliance',
@@ -76,6 +79,10 @@ const businessFinance = {
 	},
 	'/[partner_id]/business-finance/account-payables/[active_tab]/create-new-payrun': {
 		navigation: 'business_finance-account_payables',
+	},
+	'/[partner_id]/business-finance/account-payables/audit/[payrun_id]': {
+		navigation : 'business_finance-account_payables',
+		isMainNav  : true,
 	},
 	'/[partner_id]/business-finance/overheads': {
 		navigation : 'business_finance-overheads',

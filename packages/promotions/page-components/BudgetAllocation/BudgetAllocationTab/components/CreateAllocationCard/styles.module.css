@@ -1,0 +1,22 @@
+.top_container {
+	display: flex;
+	flex-direction: column;
+	padding: 20px 24px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+	background-color: #fff;
+	border: 1px solid #cbcff5;
+	border-radius: 4px;
+}
+
+.icon {
+	display: flex;
+	justify-content: flex-end;
+	height: fit-content;
+	cursor: pointer;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+}

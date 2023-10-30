@@ -1,7 +1,7 @@
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
-import List from '../../commons/List/index.tsx';
+import List from '../../commons/List/index';
 
 import RenderPaidAccordian from './DropDownItem/RenderPaidAccordian';
 import Header from './Header';

@@ -36,7 +36,7 @@ const useListTickets = ({ userId = '', activeTab = '', fetchTicketsStats = () =>
 				params: getParams({ filter, userId, pagination, performedById }),
 			});
 		} catch (error) {
-			console.log('error:', error);
+			console.error('error:', error);
 		}
 		return null;
 	}, [activeTab, userId, trigger, filter, pagination, performedById]);

@@ -1,3 +1,17 @@
+.expand_icon {
+	position: absolute;
+	top: 64px;
+	right: 38px;
+	z-index: 1;
+	transition: all 0.3s ease;
+	scale: 1.5;
+
+	&:hover {
+		scale: 1.7;
+		cursor: pointer;
+	}
+}
+
 .container {
 	position: relative;
 	display: flex;
@@ -17,10 +31,21 @@
 	:global .ui_tab_list_container {
 		margin-left: auto;
 	}
+
+	&.expand_icon_hidden {
+		.expand_icon {
+			display: none;
+		}
+	}
+
+	:global .ui_select_container {
+		margin-right: 74px;
+		margin-left: auto;
+	}
 }
 
 .rate_accuracy_chart_container {
-	height: 258px;
+	height: 248px;
 	transition: all 0.1s ease;
 
 	&.highlighted_container {
@@ -30,27 +55,13 @@
 
 .chart_container {
 	position: relative;
-	width: 100%;
+	width: 99%;
 	height: calc(100% - 40px);
 	transition: all 0.1s ease;
 	transition-delay: 0.2s;
 
 	&.blur {
 		filter: blur(4px);
-	}
-}
-
-.expand_icon {
-	position: absolute;
-	top: 60px;
-	right: 38px;
-	z-index: 1;
-	transition: all 0.3s ease;
-	scale: 1.3;
-
-	&:hover {
-		scale: 1.5;
-		cursor: pointer;
 	}
 }
 
@@ -92,4 +103,10 @@
 	left: 24px;
 	font-size: 16px;
 	font-weight: 600;
+}
+
+.bottom_label {
+	width: fit-content;
+	margin: -12px auto 0;
+	font-size: 10px;
 }

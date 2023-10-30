@@ -26,7 +26,7 @@ export const backAllowed = (routerComponents) => {
 	return isBackAllowed;
 };
 
-export const getRedirectNavMapping = (allNavs) => {
+export const getRedirectNavMapping = (allNavs = [], navigation = '') => {
 	const coe_navs = (allNavs || []).find((nav) => nav.key === 'coe')?.options || [];
 
 	let navToRedirect = false;
@@ -40,6 +40,11 @@ export const getRedirectNavMapping = (allNavs) => {
 	if (navToRedirect === false) {
 		return { navToRedirect: { href: '/', as: '/' }, version: 'v1' };
 	}
+
+	if (navigation !== '') {
+		navToRedirect = coe_navs.find((nav) => nav.key === navigation) || {};
+	}
+
 	const version = (navToRedirect.href || '').includes('v2') ? 'v2' : 'v1';
 
 	return { navToRedirect, version };

@@ -3,7 +3,12 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function BillToCustomer({ updateResponse, onCancel, onBillToCustomer }) {
+function BillToCustomer({
+	updateResponse = {},
+	onCancel = () => {},
+	onBillToCustomer = () => {},
+	loading = false,
+}) {
 	const [modeOfReview, setModeOfReview] = useState('bill');
 	const { updateBillingInfo } = updateResponse || {};
 	const options = [
@@ -31,10 +36,10 @@ function BillToCustomer({ updateResponse, onCancel, onBillToCustomer }) {
 						if (modeOfReview === 'bill') {
 							onBillToCustomer(true);
 						} else {
-							updateBillingInfo(modeOfReview);
-							onCancel();
+							updateBillingInfo(modeOfReview, onCancel);
 						}
 					}}
+					disabled={modeOfReview === 'bill' ? false : loading}
 				>
 					{modeOfReview === 'bill' ? 'Add Sell Price' : 'Submit'}
 				</Button>

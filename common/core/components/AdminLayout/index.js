@@ -1,5 +1,6 @@
 import { cl } from '@cogoport/components';
 import getSideBarConfigs from '@cogoport/navigation-configs/side-bar';
+import { useGetPermission } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
@@ -10,6 +11,8 @@ import React, { useState } from 'react';
 import useGetUnreadMails from '../../helpers/useGetUnreadMails';
 
 import AnnouncementModal from './Announcements/AnnouncementModal';
+import GroupCall from './GroupCall';
+import useGetUnreadMessagesCount from './helpers/useGetUnreadMessageCount';
 import LeadFeedBackVoiceCallForm from './LeadFeedBackVoiceCallForm';
 import { LockScreen } from './LockScreen';
 import { FIREBASE_CONFIG } from './LockScreen/configurations/firebase-config';
@@ -18,6 +21,7 @@ import TnC from './newTnC';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
 import useFetchPinnedNavs from './useFetchPinnedNavs';
+import useGetUnreadTicketCount from './useGetUnreadTicketCount';
 import VideoCall from './VideoCall';
 import VoiceCall from './VoiceCall';
 
@@ -67,6 +71,13 @@ function AdminLayout({
 		pinListLoading = false,
 	} = useFetchPinnedNavs({ user_id, partner_id, setPinnedNavKeys, setAnnouncements });
 
+	const { permissions_navigations } = useGetPermission();
+
+	const allPermissions = Object.keys(permissions_navigations || {});
+	const isTicketAllowed = allPermissions.includes('ticket_management-my_tickets');
+
+	const { data = 0 } = useGetUnreadTicketCount({ isTicketAllowed });
+
 	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
 	const firestore = getFirestore(app);
 
@@ -80,6 +91,11 @@ function AdminLayout({
 									&& is_joining_tnc_accepted === false;
 
 	useGetUnreadMails({ firestore, agentId: user_id });
+
+	const { unReadChatsCount = 0 } = useGetUnreadMessagesCount({
+		firestore,
+		userId: user_id,
+	});
 
 	return (
 		<div className={cl`
@@ -110,8 +126,8 @@ function AdminLayout({
 					pinnedNavs={pinnedNavs}
 					mobileShow={showMobileNavbar}
 					inCall={inCall}
-					userId={user_id}
-					firestore={firestore}
+					ticketCount={data}
+					unReadChatsCount={unReadChatsCount}
 				/>
 			) : null}
 			<VoiceCall
@@ -133,6 +149,7 @@ function AdminLayout({
 				inCall={inCall}
 			/>
 			<LeadFeedBackVoiceCallForm />
+			<GroupCall agentId={user_id} firestore={firestore} />
 		</div>
 	);
 }

@@ -1,48 +1,54 @@
-.parent {
-	width: 100%;
-	margin: 16px 0;
-	background-color: #fff;
-	border-radius: 6px;
-}
-
-.heading {
-	padding: 20px 16px;
-	color: #000;
-	border-bottom: 1px solid #e0e0e0;
-}
-
-.filter_container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	width: 100%;
-	padding: 24px 16px;
-}
-
-.filter_container > * {
-	font-size: 12px;
-	font-weight: 400;
-	color: #4f4f4f;
-}
-
-.apply_filters {
+.title {
 	font-size: 16px;
 	font-weight: 700;
+	color: #221f20;
 }
 
-.clear_all_filters {
-	float: right;
-	padding-bottom: 16px;
-	font-weight: 600;
-	color: #828282;
+.desc {
+	margin-top: 4px;
+	font-size: 12px;
+	color: #221f20;
 }
 
-.filter_option_width {
-	width: 170px;
-	font-family: Poppins, sans-serif;
+.button {
+	margin-top: 10px;
 }
 
-.date_range_filter_width input {
-	width: 220px;
-	height: 40px !important;
+.details {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+
+	:global {
+		.ui_select_container {
+			width: 250px;
+		}
+	}
+}
+
+.radio {
+	:global {
+		.ui_radiogroup_container {
+			padding: 0;
+		}
+	}
+}
+
+.body {
+	:global {
+		.ui_modal_body_container {
+			max-height: fit-content;
+			overflow-x: visible;
+		}
+	}
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.header {
+	display: flex;
+	flex-direction: column;
 }

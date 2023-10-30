@@ -24,6 +24,10 @@
 
 .SearchBySerialId {
 	width: 23%;
+
+	:global .ui_select_input_control {
+		font-size: 13px !important;
+	}
 }
 
 .SearchByName {

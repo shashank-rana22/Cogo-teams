@@ -1,4 +1,4 @@
-import { MultiSelect, Select } from '@cogoport/components';
+import { MultiSelect, Select, CreatableMultiSelect, CreatableSelect } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
@@ -78,10 +78,32 @@ import {
 	asyncListSpotSearchRateCardOperators,
 	asyncListLocationClusters,
 	asyncListFclFreightCommodityClusters,
+	asyncListShippingLineEvents,
 	asyncListSaasPlan,
 	asyncListEnrichmentSources,
 	asyncListIncidentTypes,
 	asyncAllocationEligibleRoles,
+	asyncListFclFreightRate,
+	asyncListLclFreightRate,
+	asyncListAirFreightRate,
+	asyncListFtlFreightRate,
+	asyncListLtlFreightRate,
+	asyncListFclCfsRate,
+	asyncListHaulageFreightRate,
+	asyncListFclCustomsRate,
+	asyncListLclCustomsRate,
+	asyncListAirCustomsRate,
+	asyncListTrailerFreightRate,
+	asyncListFclRateFeedback,
+	asyncListLclRateFeedback,
+	asyncListAirRateFeedback,
+	asyncListFtlRateFeedback,
+	asyncListLtlRateFeedback,
+	asyncListFclCustomFeedback,
+	asyncListLclCustomFeedback,
+	asyncListTrailerRateFeedback,
+	asyncListHaulageRateFeedback,
+	asyncListAirCustomFeedback,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -155,7 +177,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_employee_roles                  : asyncListRoles,
 	list_employee_departments            : asyncListDepartment,
 	default_types                        : asyncFieldsTicketTypes,
-	insurance_commodities              	 : asyncInsuranceCommoditiesList,
+	insurance_commodities                : asyncInsuranceCommoditiesList,
 	list_dunning_templates               : asyncListDunningTemplates,
 	list_organization_stakeholders       : asyncListOrganizationStakeholders,
 	list_expense_category                : asyncListExpenseCategories,
@@ -178,13 +200,51 @@ const keyAsyncFieldsParamsMapping = {
 	list_organizations_on_call           : asyncFieldsOrganizationOnCall,
 	list_saas_hs_codes                   : asyncListSaasHsCodes,
 	list_spot_search_operators           : asyncListSpotSearchRateCardOperators,
+	list_shipping_line_events            : asyncListShippingLineEvents,
 	list_saas_plan                       : asyncListSaasPlan,
 	list_enrichment_sources              : asyncListEnrichmentSources,
 	list_incident_types                  : asyncListIncidentTypes,
 	agent_scoring_eligible_roles         : asyncAllocationEligibleRoles,
+	list_fcl_freight_rate_requests       : asyncListFclFreightRate,
+	list_lcl_freight_rate_requests       : asyncListLclFreightRate,
+	list_air_freight_rate_requests       : asyncListAirFreightRate,
+	list_ftl_freight_rate_requests       : asyncListFtlFreightRate,
+	list_ltl_freight_rate_requests       : asyncListLtlFreightRate,
+	list_fcl_cfs_rate_requests           : asyncListFclCfsRate,
+	list_haulage_freight_rate_requests   : asyncListHaulageFreightRate,
+	list_fcl_customs_rate_requests       : asyncListFclCustomsRate,
+	list_lcl_customs_rate_requests       : asyncListLclCustomsRate,
+	list_air_customs_rate_requests       : asyncListAirCustomsRate,
+	list_trailer_freight_rate_requests   : asyncListTrailerFreightRate,
+	list_fcl_freight_rate_feedbacks      : asyncListFclRateFeedback,
+	list_lcl_freight_rate_feedbacks      : asyncListLclRateFeedback,
+	list_air_freight_rate_feedbacks      : asyncListAirRateFeedback,
+	list_ftl_freight_rate_feedbacks      : asyncListFtlRateFeedback,
+	list_ltl_freight_rate_feedbacks      : asyncListLtlRateFeedback,
+	list_fcl_customs_rate_feedbacks      : asyncListFclCustomFeedback,
+	list_lcl_customs_rate_feedbacks      : asyncListLclCustomFeedback,
+	list_trailer_freight_rate_feedbacks  : asyncListTrailerRateFeedback,
+	list_haulage_freight_rate_feedbacks  : asyncListHaulageRateFeedback,
+	list_air_customs_rate_feedbacks      : asyncListAirCustomFeedback,
 };
 
 const SINGLE_ENTITY = 1;
+
+const getElement = ({ type = '', multiple = false }) => {
+	if (type === 'async_create_select' && multiple) {
+		return CreatableMultiSelect;
+	}
+
+	if (type === 'async_create_select') {
+		return CreatableSelect;
+	}
+
+	if (multiple) {
+		return MultiSelect;
+	}
+
+	return Select;
+};
 
 function AsyncSelect(props) {
 	const {
@@ -197,12 +257,13 @@ function AsyncSelect(props) {
 		microService = '',
 		onOptionsChange,
 		isSingleEntity,
+		type,
 		...rest
 	} = props;
 
 	const defaultParams = keyAsyncFieldsParamsMapping[asyncKey]?.() || {};
 
-	const asyncOptionsHook = (microService || defaultParams.microService)
+	const asyncOptionsHook = microService || defaultParams.microService
 		? useGetAsyncOptionsMicroservice
 		: useGetAsyncOptions;
 
@@ -217,8 +278,9 @@ function AsyncSelect(props) {
 		microService : microService || defaultParams.microService,
 	});
 
-	const disabled = isSingleEntity && asyncKey === 'list_cogo_entity'
-	&& getAsyncOptionsProps?.options?.length <= SINGLE_ENTITY;
+	const disabled = isSingleEntity
+    && asyncKey === 'list_cogo_entity'
+    && getAsyncOptionsProps?.options?.length <= SINGLE_ENTITY;
 
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
@@ -229,22 +291,16 @@ function AsyncSelect(props) {
 		}
 
 		const selectedOption = getAsyncOptionsProps.options.filter(
-			(option) => option[rest.valueKey || defaultParams.valueKey || 'id'] === selectedValue,
+			(option) => option[rest.valueKey || defaultParams.valueKey || 'id']
+        === selectedValue,
 		);
 
 		getSelectedOption(selectedOption[GLOBAL_CONSTANTS.zeroth_index]);
 	}
 
-	const Element = multiple ? MultiSelect : Select;
+	const Element = getElement({ type, multiple });
 
-	return (
-		<Element
-			disabled={disabled}
-			{...getAsyncOptionsProps}
-			{...rest}
-
-		/>
-	);
+	return <Element disabled={disabled} {...getAsyncOptionsProps} {...rest} />;
 }
 
 export default AsyncSelect;

@@ -67,6 +67,10 @@
 		.ui_modal_header_title {
 			display: flex;
 			align-items: center;
+
+			>div {
+				font-weight: 600;
+			}
 		}
 	}
 }

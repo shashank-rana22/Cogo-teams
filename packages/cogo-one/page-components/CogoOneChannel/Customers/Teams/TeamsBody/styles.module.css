@@ -1,0 +1,41 @@
+.pinned_chat_flex {
+	display: flex;
+	align-items: center;
+	padding: 0 3px 10px 0;
+	cursor: pointer;
+	user-select: none;
+}
+
+.pin_text {
+	margin-left: 5px;
+	font-size: 10px;
+	font-weight: 600;
+	color: #828282;
+}
+
+.empty_state {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	font-size: 16px;
+	color: #828282;
+}
+
+.recent_text {
+	font-size: 10px;
+	font-weight: 600;
+	color: #828282;
+	user-select: none;
+}
+
+.icon {
+	width: 10px;
+	height: 10px;
+	fill: #828282;
+}
+
+.pop_styles {
+	width: 10px;
+	height: 10px;
+}

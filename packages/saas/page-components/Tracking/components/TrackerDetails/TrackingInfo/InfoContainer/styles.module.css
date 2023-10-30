@@ -1,0 +1,82 @@
+.container {
+	position: relative;
+	padding: 10px 20px;
+	background-color: #fdfbf6;
+	border: 1px solid  #f2e3c3;
+	border-radius: 8px;
+}
+
+.title_container {
+	.title {
+		margin-bottom: 1px;
+	}
+
+	.line {
+		width: 12%;
+		border-top: 3px solid #f9ae64;
+	}
+}
+
+.info {
+	position: absolute;
+	top: 1px;
+	right: 1px;
+	padding: 5px 12px;
+	font-size: 12px;
+	background-color: #f8f2e7;
+	border-bottom-left-radius: 7px;
+
+	.info_text {
+		margin: 0 4px;
+	}
+
+	.pill_text {
+		width: 100%;
+		padding: 6px 12px;
+		font-size: 15px;
+		font-weight: 500;
+	}
+
+	&.info_field {
+		min-width: 195px;
+	}
+
+	&.without_info_field {
+		padding-bottom: 10px;
+
+		.info_text {
+			margin-bottom: 5px;
+		}
+	}
+
+	.select_field {
+		width: 170px;
+	}
+}
+
+.data_container {
+	margin: 15px 0;
+
+	.data_text {
+		margin-left: 20px;
+	}
+
+	.data_seperator {
+		margin: 0 5px;
+	}
+}
+
+.row {
+	display: flex;
+	align-items: flex-start;
+}
+
+.image_row {
+	display: flex;
+	align-items: center;
+}
+
+.footer {
+	padding-top: 5px;
+	border-top: 1px dashed #bdbdbd;
+}

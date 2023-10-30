@@ -1,4 +1,5 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useContext } from 'react';
 
 import shipmentStepperTabs from '../../config/SHIPMENT_STEPPER_TABS.json';
@@ -24,7 +25,8 @@ function StepperTabs() {
 		if (val !== stepperTab) {
 			const tabs = shipmentConfig?.[val]?.tabs;
 
-			const tempActiveTab = findValueInArray({ value: activeTab, arr: tabs }) ? activeTab : tabs?.[0]?.value;
+			const tempActiveTab = findValueInArray({ value: activeTab, arr: tabs })
+				? activeTab : tabs?.[GLOBAL_CONSTANTS.zeroth_index]?.value;
 
 			const isCriticalVisible = !!CRITICAL_TABS?.[shipmentType]?.[stepperTab]?.[activeTab];
 

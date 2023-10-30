@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function Layout({
 	control = {}, fields = [], showElements = {}, errors = {}, customValues = {}, formValues = {},
-	disabledProps = false,
+	disabledProps = false, isSeawayAndMarkConfirm = false,
 }) {
 	const { TOTAL_FIELDS = [] } = getTotalFields({ fields, showElements });
 
@@ -56,6 +56,28 @@ function Layout({
 										{...field}
 									/>
 								</section>
+							);
+						}
+
+						if (isSeawayAndMarkConfirm && name === 'bl_type' && type === 'pills') {
+							const mutatedOptions = [
+								...(field?.options || []),
+								{
+									label : 'Seaway',
+									value : 'seaway',
+								},
+							];
+
+							return (
+								<Item
+									{...field}
+									key={field?.name}
+									control={control}
+									error={errors?.[name]}
+									formValues={formValues}
+									disabled
+									options={mutatedOptions}
+								/>
 							);
 						}
 

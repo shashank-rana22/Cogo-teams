@@ -1,1 +1,1 @@
-export { default as Locations } from './page-components';
+export { default as Locations } from './page-components/Locations';

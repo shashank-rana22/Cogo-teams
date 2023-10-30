@@ -8,7 +8,7 @@ const useGetPartnerRmMapping = () => {
 
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_partner_user_rm_mapping',
-		method : 'GET',
+		method : 'get',
 	}, { manual: true });
 
 	const getPartnerMappingData = async (id) => {
@@ -20,14 +20,14 @@ const useGetPartnerRmMapping = () => {
 				},
 			});
 		} catch (err) {
-			console.error(err);
+			console.log(err?.message);
 		}
 	};
 
 	return {
-		loading,
-		data: data || {},
 		getPartnerMappingData,
+		data: data || {},
+		loading,
 	};
 };
 

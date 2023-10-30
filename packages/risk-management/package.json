@@ -4,7 +4,6 @@
   "private": true,
   "description": "Package for Risk Management",
   "main": "index.js",
-  "types": "./index.js",
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
     "@cogoport/components": "^1.0.366",

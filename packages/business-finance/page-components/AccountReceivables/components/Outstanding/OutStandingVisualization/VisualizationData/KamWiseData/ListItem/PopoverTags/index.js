@@ -2,7 +2,7 @@ import { Pill, cl, Popover } from '@cogoport/components';
 import { IcMLcl } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import PopoverContent from '../../../../../OverAllOutstanding/OutstandingList/PopoverContent/index.tsx';
+import PopoverContent from '../../../../../OverAllOutstanding/OutstandingList/PopoverContent/index';
 
 import styles from './styles.module.css';
 

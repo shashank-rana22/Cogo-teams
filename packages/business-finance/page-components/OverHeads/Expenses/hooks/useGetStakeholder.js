@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useContext, useEffect } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 import { EntityContext } from '../../commons/Contexts';
 
 const useGetStakeholder = ({ billId }) => {
@@ -10,7 +10,7 @@ const useGetStakeholder = ({ billId }) => {
 		{
 			url     : '/purchase/expense',
 			method  : 'get',
-			authKey : 'get_purchase_expense_by_id',
+			authKey : 'get_purchase_expense',
 		},
 		{ manual: true },
 	);

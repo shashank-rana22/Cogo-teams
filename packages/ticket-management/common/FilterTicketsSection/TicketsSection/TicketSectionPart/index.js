@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 function TicketsSectionPart({
 	label = '', status = '', searchParams = {}, spectatorType = '', refreshList = {}, setRefreshList = () => {},
 	isAdmin = false, setModalData = () => {}, isUpdated = false, setIsUpdated = () => {}, date = {},
+	sortBy = {}, idFilters = {}, setIdFilters = () => {},
 }) {
 	const { t } = useTranslation(['myTickets']);
 
@@ -25,6 +26,7 @@ function TicketsSectionPart({
 		listLoading = false,
 		handleScroll = () => {}, fetchTickets = () => {}, reachedBottom = false,
 	} = useListTickets({
+		sortBy,
 		searchParams,
 		spectatorType,
 		status,
@@ -34,6 +36,8 @@ function TicketsSectionPart({
 		setRefreshList,
 		isUpdated,
 		setIsUpdated,
+		idFilters,
+		setIdFilters,
 	});
 
 	const { list, total = 0 } = tickets || {};
@@ -48,7 +52,10 @@ function TicketsSectionPart({
 		});
 	};
 
-	const { updateTicketActivity } = useUpdateTicketActivity({
+	const {
+		updateTicketActivity = () => {},
+		updateLoading = false,
+	} = useUpdateTicketActivity({
 		refreshTickets,
 		fetchTickets,
 	});
@@ -65,6 +72,7 @@ function TicketsSectionPart({
 				listLoading={listLoading}
 				setModalData={setModalData}
 				handleScroll={handleScroll}
+				updateLoading={updateLoading}
 				updateTicketActivity={updateTicketActivity}
 				reachedBottom={reachedBottom}
 			/>

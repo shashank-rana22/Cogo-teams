@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { upperCase, format } from '@cogoport/utils';
 import { useCallback } from 'react';
 
-import toastApiError from '../../commons/toastApiError.ts';
+import toastApiError from '../../commons/toastApiError';
 
 const REJECTION_CATEGORY_MAPPING = {
 	coe_rejected : 'COE_REJECTED',

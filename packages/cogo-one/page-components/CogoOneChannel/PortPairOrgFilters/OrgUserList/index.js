@@ -168,6 +168,7 @@ function OrgUsersList({
 						const {
 							user_id,
 							userName,
+							business_name,
 						} = eachUser || {};
 
 						if (loading) {
@@ -194,8 +195,13 @@ function OrgUsersList({
 								>
 									<div className={styles.all_user_select}>
 										<UserAvatar type="whatsapp" />
-										<div className={styles.name}>{startCase(userName)}</div>
+										<div className={styles.user_select}>
+											<div className={styles.name}>{startCase(userName)}</div>
+											<div className={styles.business_name}>{startCase(business_name)}</div>
+										</div>
+
 									</div>
+
 									<IcMArrowNext className={styles.arrow_icon} />
 								</div>
 							</div>

@@ -114,12 +114,22 @@
 	max-height: calc(100vh - 78px);
 	padding: 20px 24px 78px;
 	overflow-y: auto;
+
+	:global .ui_select_options_container {
+		max-height: 200px;
+		padding: 4px;
+
+		.ui_select_option_item {
+			font-size: 12px;
+		}
+	}
 }
 
 .list_header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	font-size: 16px;
 }
 
 .card {
@@ -129,8 +139,9 @@
 	width: 100%;
 	padding: 18px;
 	margin: 16px 0;
+	cursor: default !important;
 	background: #fdfbf7;
-	border: 1px solid transparent;
+	border: 1px solid #f9efe0;
 	border-radius: 6px;
 
 	&:hover {
@@ -143,22 +154,25 @@
 		width: 80px;
 		margin: 0;
 		font-size: 14px;
-		color: #000;
+		color: #221f20;
 
 		>p {
 			margin: 0 0 8px;
 		}
 
 		h4 {
+			width: 100%;
 			margin: 0;
-			font-size: 24px;
-			color: #ee3425;
+			overflow: hidden;
+			font-size: 18px;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 		}
 	}
 
 	.left {
 		width: calc(100% - 80px);
-		border-right: 1px dotted #f2e3c3;
+		border-right: 1px solid #f2e3c3;
 
 		>p {
 			margin: 12px 0 0;
@@ -172,9 +186,9 @@
 			align-items: flex-start;
 
 			>div {
-				max-width: 50%;
+				max-width: calc(50% - 25px);
 				overflow: hidden;
-				font-size: 16px;
+				font-size: 15px;
 				font-weight: 600;
 				color: #221f20;
 				text-overflow: ellipsis;
@@ -193,4 +207,11 @@
 .has_more {
 	margin: 24px 0 12px;
 	text-align: center;
+}
+
+.mini_loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 50px;
 }

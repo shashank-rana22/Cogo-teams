@@ -26,20 +26,20 @@ function JobStatus({ shipment_data = {} }) {
 		incidentStatusData = {},
 		incidentStatusLoading = false,
 		incidentStatusRefetch = () => { },
-	} = useCheckIncidentStatus({ defaultParams });
+	} = useCheckIncidentStatus({ defaultParams, isJobClosed: shipment_data?.is_job_closed });
 
 	const isNotIncident = isEmpty(incidentStatusData);
 
 	if (is_job_closed_financially) {
 		return (
 			<div className={styles.job_closed_container}>
-				<Pill className={styles.job_closed_pill} size="lg">Financially Closed</Pill>
-
 				<ReOpenShipment
 					finJobOpenConfirmation={finJobOpenConfirmation}
 					setFinJobOpenConfirmation={setFinJobOpenConfirmation}
 					shipment_id={shipment_id}
 				/>
+
+				<Pill className={styles.job_closed_pill} size="lg">Financially Closed</Pill>
 			</div>
 		);
 	}
@@ -52,50 +52,52 @@ function JobStatus({ shipment_data = {} }) {
 		);
 	}
 
-	return (
-		<div className={styles.job_closed_container}>
-			{!isNotIncident ? (
-				<Tooltip
-					content={`Incident ID: ${incidentStatusData?.incidentId || '--'}`}
-					placement="bottom"
-					interactive
-					disabled={!incidentStatusData?.incidentId}
-				>
-					<Pill className={styles.tooltip}>Job Open Requested</Pill>
-				</Tooltip>
-			) : null}
+	if (shipment_data?.is_job_closed) {
+		return (
+			<div className={styles.job_closed_container}>
+				{!isNotIncident ? (
+					<Tooltip
+						content={`Incident ID: ${incidentStatusData?.incidentId || '--'}`}
+						placement="bottom"
+						interactive
+						disabled={!incidentStatusData?.incidentId}
+					>
+						<Pill className={styles.tooltip}>Job Open Requested</Pill>
+					</Tooltip>
+				) : null}
 
-			{is_job_closed_financially && (
 				<ReOpenShipment
 					finJobOpenConfirmation={finJobOpenConfirmation}
 					setFinJobOpenConfirmation={setFinJobOpenConfirmation}
 					shipment_id={shipment_id}
 				/>
-			)}
 
-			<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
+				<Pill className={styles.job_closed_pill} size="lg">Operationally Closed</Pill>
 
-			{isNotIncident ? (
-				<Button
-					className={styles.job_reopen_button}
-					themeType="link"
-					size="md"
-					onClick={() => setShowModal(true)}
-				>
-					Re-open
-				</Button>
-			) : null}
+				{isNotIncident ? (
+					<Button
+						className={styles.job_reopen_button}
+						themeType="link"
+						size="md"
+						onClick={() => setShowModal(true)}
+					>
+						Re-open
+					</Button>
+				) : null}
 
-			{showModal ? (
-				<ReOpenJob
-					shipmentData={shipment_data}
-					showModal={showModal}
-					setShowModal={setShowModal}
-					incidentStatusRefetch={incidentStatusRefetch}
-				/>
-			) : null}
-		</div>
-	);
+				{showModal ? (
+					<ReOpenJob
+						shipmentData={shipment_data}
+						showModal={showModal}
+						setShowModal={setShowModal}
+						incidentStatusRefetch={incidentStatusRefetch}
+					/>
+				) : null}
+			</div>
+		);
+	}
+
+	return null;
 }
 
 export default JobStatus;

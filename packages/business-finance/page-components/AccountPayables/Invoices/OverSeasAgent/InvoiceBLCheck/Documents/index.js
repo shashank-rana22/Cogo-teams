@@ -8,6 +8,42 @@ import { OPTIONS, OPTION_AIR } from '../../../Constants';
 import { ShowDocument } from './ShowDocument';
 import styles from './styles.module.css';
 
+const getDoc = ({ radioValue, documentData }) => {
+	let docLink = '';
+	documentData?.forEach((itemData) => {
+		switch (radioValue) {
+			case 'mawb':
+				if (itemData?.document_type === 'airway_bill') {
+					docLink = itemData?.document_url;
+				}
+				break;
+			case 'hawb':
+				if (itemData?.document_type === 'house_airway_bill') {
+					docLink = itemData?.document_url;
+				}
+				break;
+			case 'do':
+				if (itemData?.document_type === 'delivery_order') {
+					docLink = itemData?.document_url;
+				}
+				break;
+			case 'mbl':
+				if (itemData?.document_type === 'bill_of_lading') {
+					docLink = itemData?.document_url;
+				}
+				break;
+			case 'hbl':
+				if (itemData?.document_type === 'house_bill_of_lading') {
+					docLink = itemData?.document_url;
+				}
+				break;
+			default:
+				break;
+		}
+	});
+	return docLink;
+};
+
 function Documents({
 	id = '',
 	documentUrl = '',
@@ -22,11 +58,14 @@ function Documents({
 }) {
 	const [radioSet, setRadioSet] = useState('mbl');
 	const [radioAir, setRadioAir] = useState('mawb');
-	const taggedDocument = documentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_url;
 
 	const checkedCondition = loadingList
-	|| ['APPROVED', 'REJECTED'].includes(payrunBillStatus)
-	|| ['Reject', 'Tagged'].includes(showCheckInvoices[id]);
+		|| ['APPROVED', 'REJECTED'].includes(payrunBillStatus)
+		|| ['Reject', 'Tagged'].includes(showCheckInvoices[id]);
+
+	const isNotAir = ['house_bill_of_lading', 'bill_of_lading'].includes(
+		documentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_type,
+	);
 
 	return (
 		<div className={styles.container}>
@@ -43,9 +82,7 @@ function Documents({
 					</div>
 				) : (
 					<div className={styles.right}>
-						{['house_bill_of_lading', 'bill_of_lading'].includes(
-							documentData?.[GLOBAL_CONSTANTS.zeroth_index]?.document_type,
-						) ? (
+						{isNotAir ? (
 							<>
 								<div className={styles.radiobtn}>
 									<RadioGroup
@@ -56,18 +93,18 @@ function Documents({
 								</div>
 								<ShowDocument radioValue={radioSet} documentData={documentData} />
 							</>
-							) : (
-								<>
-									<div className={styles.radiobtn}>
-										<RadioGroup
-											options={OPTION_AIR || [{}]}
-											value={radioAir || ''}
-											onChange={(item) => setRadioAir(item)}
-										/>
-									</div>
-									<ShowDocument radioValue={radioAir} documentData={documentData} />
-								</>
-							)}
+						) : (
+							<>
+								<div className={styles.radiobtn}>
+									<RadioGroup
+										options={OPTION_AIR || [{}]}
+										value={radioAir || ''}
+										onChange={(item) => setRadioAir(item)}
+									/>
+								</div>
+								<ShowDocument radioValue={radioAir} documentData={documentData} />
+							</>
+						)}
 					</div>
 				)}
 			</div>
@@ -81,7 +118,7 @@ function Documents({
 						onAprrovalOrRejection(
 							id,
 							'REJECTED',
-							taggedDocument,
+							getDoc({ radioValue: isNotAir ? radioSet : radioAir, documentData }),
 							handleDropdown,
 							setShowCheckInvoices,
 						);
@@ -99,7 +136,7 @@ function Documents({
 						onAprrovalOrRejection(
 							id,
 							'APPROVED',
-							taggedDocument,
+							getDoc({ radioValue: isNotAir ? radioSet : radioAir, documentData }),
 							handleDropdown,
 							setShowCheckInvoices,
 						);

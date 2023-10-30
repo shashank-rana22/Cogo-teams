@@ -29,7 +29,7 @@
 .switch_icon {
 	transition: scale 0.3s ease;
 	transform: rotate(90deg);
-	scale: 1.5;
+	scale: 1.3;
 
 	:global {
 		.ic-c-switch_svg__ic_c_switch:first-of-type {
@@ -39,7 +39,7 @@
 
 	&:hover {
 		cursor: pointer;
-		scale: 1.7;
+		scale: 1.5;
 	}
 }
 

@@ -4,9 +4,9 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import OutStandingVisualization from './OutStandingVisualization';
-import OverAllOutstanding from './OverAllOutstanding/index.tsx';
+import OverAllOutstanding from './OverAllOutstanding/index';
 import styles from './styles.module.css';
-import ViewOrganizationDetails from './ViewOrganizationDetails/index.tsx';
+import ViewOrganizationDetails from './ViewOrganizationDetails/index';
 
 function Outstanding({
 	entityCode = '',
@@ -19,7 +19,13 @@ function Outstanding({
 
 		<div className={styles.container}>
 			{!isEmpty(selectedOrgId)
-				? <ViewOrganizationDetails selectedOrgId={selectedOrgId} setSelectedOrgId={setSelectedOrgId} />
+				? (
+					<ViewOrganizationDetails
+						entityCode={entityCode}
+						selectedOrgId={selectedOrgId}
+						setSelectedOrgId={setSelectedOrgId}
+					/>
+				)
 				: (
 					<>
 						<div className={styles.select}>

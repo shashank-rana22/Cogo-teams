@@ -25,7 +25,7 @@ function ScoringGraph(props) {
 
 	return (
 		<div className={styles.scoring_container}>
-			<h3 className={styles.heading}>Scoring</h3>
+			<h3>Scoring</h3>
 
 			<div className={styles.graph_container}>
 				<ResponsiveLine

@@ -47,6 +47,7 @@ export const useStakeholderCheck = () => {
 		},
 		{
 			role_ids: [geo.uuid.coe_finance_head,
+				geo.uuid.credit_controller_id,
 				geo.uuid.prod_settlement_executive, ...geo.uuid.service_ops3_role_ids],
 			stakeholder: 'credit_control',
 		},

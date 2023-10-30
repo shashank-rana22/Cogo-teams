@@ -1,6 +1,6 @@
 import geoConstants from '@cogoport/globalization/constants/geo';
 
-import getFormattedPrice from '../../../../../../commons/utils/getFormattedPrice.ts';
+import getFormattedPrice from '../../../../../../commons/utils/getFormattedPrice';
 import { DETAILS } from '../../../../Constants';
 import styles from '../styles.module.css';
 

@@ -1,0 +1,19 @@
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 8px;
+
+	button:first-child {
+		margin-right: 8px;
+	}
+}
+
+.container_class {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+
+	>div {
+		flex-wrap: nowrap;
+	}
+}

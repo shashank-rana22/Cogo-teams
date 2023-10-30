@@ -92,7 +92,8 @@
 }
 
 .icon {
-	margin-top: 4px;
+	display: flex;
+	align-items: center;
 	margin-left: 4px;
 }
 

@@ -16,6 +16,7 @@ function InvoiceItem({
 	salesInvoicesRefetch = () => {},
 	refetchCN = () => {},
 	isCrossEntity = false,
+	creditNoteList = [],
 }) {
 	const outStanding = formatAmount({
 		amount   : org_outstanding?.total_outstanding_amount || DEFAULT_AMOUNT,
@@ -71,6 +72,7 @@ function InvoiceItem({
 						salesInvoicesRefetch={salesInvoicesRefetch}
 						refetchCN={refetchCN}
 						isCrossEntity={isCrossEntity}
+						creditNoteList={creditNoteList}
 					/>
 				))}
 			</div>

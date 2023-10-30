@@ -50,6 +50,7 @@
 .col {
 	display: flex;
 	flex: var(--span);
+	align-items: center;
 	padding: 10px;
 }
 
@@ -75,12 +76,14 @@
 	align-items: center;
 	width: 0;
 	margin-left: 8px;
+	cursor: pointer;
 }
 
 .centers {
 	align-items: center;
 	margin-top: 10px;
 	margin-bottom: -10px;
+	cursor: pointer;
 }
 
 .tablelabel {
@@ -111,4 +114,20 @@
 	align-items: center;
 	min-height: 40px;
 	padding-left: 10px;
+}
+
+.icon_style {
+	width: 16px;
+	height: 16px;
+	margin: 3px 0 0 4px;
+}
+
+.div_flex {
+	display: flex;
+	align-items: center;
+	margin: 8px;
+}
+
+.margin_span {
+	margin-left: 8px;
 }

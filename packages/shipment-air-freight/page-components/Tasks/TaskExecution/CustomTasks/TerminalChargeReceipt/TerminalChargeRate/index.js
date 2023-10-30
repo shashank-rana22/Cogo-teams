@@ -101,7 +101,7 @@ function TerminalChargeRate({
 
 				<Button
 					onClick={handleSubmit(handleUpload)}
-					disabled={terminalServiceLoading}
+					disabled={terminalServiceLoading || Object.values(terminalChargeState).includes('fetching_data')}
 				>
 					Submit
 				</Button>

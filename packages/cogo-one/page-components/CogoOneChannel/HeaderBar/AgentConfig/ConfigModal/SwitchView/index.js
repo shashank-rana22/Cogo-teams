@@ -29,7 +29,7 @@ function SwitchView({
 				<IcMArrowBack
 					className={styles.arrow_back}
 					onClick={() => {
-						setActiveCard('');
+						setActiveCard('config_modal');
 						setSwitchViewType(viewType);
 					}}
 				/>

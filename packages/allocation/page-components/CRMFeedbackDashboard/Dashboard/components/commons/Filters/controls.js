@@ -211,6 +211,20 @@ export const controlsFeedbacks = (
 		],
 
 	},
+	{
+		name        : 'is_valid_feedback',
+		placeholder : t('allocation:validity_status_placeholder'),
+		isClearable : true,
+		options     : [{
+			label : 'Valid',
+			value : 'true',
+		},
+		{
+			label : 'Invalid',
+			value : 'false',
+		},
+		],
+	},
 ];
 
 export const controlsRequests = (organizationOptions, leadOrganizationOptions, t = () => {}) => [

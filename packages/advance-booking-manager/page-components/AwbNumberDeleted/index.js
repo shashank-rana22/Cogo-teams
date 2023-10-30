@@ -98,7 +98,7 @@ function AwbNumberDeleted({
 		<div className={styles.awbnumber_container}>
 			<List
 				fields={fields}
-				data={data}
+				list={data?.list}
 				loading={loading}
 				functions={allFunctions}
 				page={page}

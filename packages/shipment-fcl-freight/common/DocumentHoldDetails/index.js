@@ -42,7 +42,8 @@ export default function DocumentHoldDetails() {
 				</h2>
 
 				<h4>
-					Reason:&nbsp;
+					Reason:
+					{' '}
 					{startCase(mostRecentHoldReason?.comment || '')}
 				</h4>
 			</div>

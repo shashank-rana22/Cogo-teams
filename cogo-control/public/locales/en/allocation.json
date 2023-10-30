@@ -881,5 +881,7 @@
     "validity_enrichment_request_success_toast": "Updated Successfully",
     "validity_enrichment_request_actions": "Actions",
     "validity_enrichment_status_valid": "Valid",
-    "validity_enrichment_status_invalid": "Invalid"
+    "validity_enrichment_status_invalid": "Invalid",
+    "validity_status_placeholder": "Validity Status",
+    "org_created_at": "Onboarded At"
 }

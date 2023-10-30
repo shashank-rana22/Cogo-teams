@@ -6,6 +6,7 @@ function GetTableBodyCheckbox({
 	itemData = {},
 	onChangeTableBodyCheckbox = () => {},
 	apiData = {}, setApiData = () => {},
+	allowed = true,
 }) {
 	const { id = '' } = itemData || {};
 	const { list = [] } = apiData || {};
@@ -15,7 +16,11 @@ function GetTableBodyCheckbox({
 	return (
 		<div className={styles.checkbox_style}>
 			{ visible ? null : (
-				<Checkbox checked={isChecked} onChange={() => onChangeTableBodyCheckbox({ itemData, setApiData })} />
+				<Checkbox
+					checked={isChecked}
+					disabled={!allowed}
+					onChange={() => onChangeTableBodyCheckbox({ itemData, setApiData })}
+				/>
 			)}
 		</div>
 	);

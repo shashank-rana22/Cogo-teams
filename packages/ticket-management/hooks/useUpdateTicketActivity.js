@@ -4,6 +4,8 @@ import { useSelector } from '@cogoport/store';
 
 import { STATUS_TYPE_MAPPING } from '../constants';
 
+const ACTION_TYPES = ['escalate', 'resolve_request'];
+
 const getPayload = ({ profile, actionType, id, description }) => {
 	const escalationPayload = {
 		Description: description || undefined,
@@ -14,7 +16,7 @@ const getPayload = ({ profile, actionType, id, description }) => {
 		PerformedByID : profile?.user?.id,
 		TicketID      : [Number(id)],
 		...(STATUS_TYPE_MAPPING[actionType]),
-		...(actionType === 'escalate' ? escalationPayload : {}),
+		...(ACTION_TYPES.includes(actionType) ? escalationPayload : {}),
 	};
 };
 

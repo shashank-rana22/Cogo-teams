@@ -129,7 +129,7 @@ function AddRate({
 			{SHOW_REMARKS_STATUS.includes(status?.status) ? (
 				<p className={styles.mt_8}>
 					<strong> Comment:</strong>
-					&nbsp;
+					{' '}
 					{item?.remarks[GLOBAL_CONSTANTS.zeroth_index]}
 				</p>
 			) : null}

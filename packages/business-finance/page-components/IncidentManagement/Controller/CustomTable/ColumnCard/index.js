@@ -1,12 +1,10 @@
-import { Button, Placeholder, cl } from '@cogoport/components';
+import { Placeholder, cl } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
-import { useTranslation } from 'next-i18next';
-import React, { useState, useRef } from 'react';
+import { isEmpty, startCase, camelCase } from '@cogoport/utils';
+import React, { useState } from 'react';
 
-import useUpdateLevel from '../../../common/hooks/useUpdateLevel';
+import CreateLevelModal from '../../../common/CreateForm';
 
-import LevelForm from './LevelForm';
 import styles from './styles.module.css';
 
 const DEFAULT_SPAN = 1;
@@ -15,37 +13,12 @@ const HUNDERED_PERCENT = 100;
 
 const TOTAL_SPAN = 12;
 
-const DEFAULT_VALUE = 1;
-
 function ColumnCard({ config = {}, item = {}, incidentLoading = false, refetch = () => { } }) {
-	const { t } = useTranslation(['incidentManagement']);
 	const [show, setShow] = useState(false);
 	const { fields = [] } = config;
-	const {
-		id = '',
-		referenceId = '',
-		createdBy = {},
-	} = item || {};
-	const { update, createApi } = useUpdateLevel({ refetch, setShow, createdBy, referenceId, id });
-
-	const { loading } = createApi;
-	const ref = useRef();
 
 	const onShow = () => {
 		setShow(true);
-	};
-
-	const getData = (data) => {
-		const { approvalLevelConditions = [] } = data || {};
-		const formatLineItems = approvalLevelConditions.map((val, index) => ({
-			...val,
-			level: index + DEFAULT_VALUE,
-		}));
-		update(formatLineItems);
-	};
-
-	const onUpdate = () => {
-		ref.current.handleSubmit(getData)();
 	};
 
 	const getLevel = () => {
@@ -69,25 +42,15 @@ function ColumnCard({ config = {}, item = {}, incidentLoading = false, refetch =
 
 	const formData = {
 		referenceId     : item?.id || '_',
-		incidentType    : startCase(item?.incidentType || '-'),
-		incidentSubType : startCase(item?.incidentSubType || '_'),
+		incidentType    : startCase(camelCase(item?.incidentType || '-')),
+		incidentSubType : startCase(camelCase(item?.incidentSubType || '_')),
 		entityCode      : item?.entityCode || '-',
 		levels          : getLevel(),
 		users           : getUsers(),
 		edit            : (
 			<div className={styles.flex}>
 				{!show ? <IcMEdit className={styles.edit} height={25} width={25} onClick={onShow} /> : (
-					<>
-						<Button
-							onClick={() => setShow(false)}
-							className={styles.cancel}
-							themeType="secondary"
-							disabled={loading}
-						>
-							{t('incidentManagement:cancel_btn')}
-						</Button>
-						<Button onClick={onUpdate} disabled={loading}>{t('incidentManagement:confirm_btn')}</Button>
-					</>
+					<CreateLevelModal refetch={refetch} editData={item} onCancelEdit={() => setShow(false)} />
 				)}
 			</div>
 		),
@@ -111,7 +74,6 @@ function ColumnCard({ config = {}, item = {}, incidentLoading = false, refetch =
 					</div>
 				))}
 			</div>
-			{show ? <LevelForm ref={ref} item={item} /> : null}
 		</div>
 	);
 }

@@ -21,6 +21,12 @@
 	}
 }
 
+.count {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 12px;
+}
+
 .nomargin {
 	margin-bottom: 0;
 }

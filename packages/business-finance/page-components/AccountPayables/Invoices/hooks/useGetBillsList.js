@@ -4,7 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-import toastApiError from '../../../commons/toastApiError.ts';
+import toastApiError from '../../../commons/toastApiError';
 
 const COE_ACCEPTED_INVOICES = 'coe_accepted';
 
@@ -79,7 +79,7 @@ function useGetBillsList({
 						endDate            : endDate ? formatToTimeStamp(endDate) : undefined,
 						fromBillDate       : fromBillDate ? formatToTimeStamp(fromBillDate) : undefined,
 						toBillDate         : toBillDate ? formatToTimeStamp(toBillDate) : undefined,
-						fromUploadBillDate : toBillDate ? formatToTimeStamp(fromUploadBillDate) : undefined,
+						fromUploadBillDate : fromUploadBillDate ? formatToTimeStamp(fromUploadBillDate) : undefined,
 						toUploadBillDate   : toUploadBillDate ? formatToTimeStamp(toUploadBillDate) : undefined,
 						organizationId     : organizationId || undefined,
 					},
@@ -118,6 +118,7 @@ function useGetBillsList({
 		setBillsFilters,
 		orderBy,
 		setOrderBy,
+		refetch,
 	};
 }
 

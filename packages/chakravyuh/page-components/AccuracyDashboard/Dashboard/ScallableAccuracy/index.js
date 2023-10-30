@@ -2,27 +2,35 @@ import { cl, Tabs, TabPanel } from '@cogoport/components';
 import { IcMCross, IcMExpand } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 
-import { section_container } from '../styles.module.css';
+import { section_container, bottom_label } from '../styles.module.css';
 
-import RateAccuracyChart from './RateAccuracyChart';
+import Deviation from './Deviation';
+import RateAccuracy from './RateAccuracy';
 import styles from './styles.module.css';
-import TrendChart from './TrendChart';
+import Trend from './Trend';
 
 const TIME_LIMIT = 200;
 
-const TABS_LIST = [
+const ALL_TABS_LIST = [
+	{
+		key       : 'deviation',
+		name      : 'deviation',
+		title     : 'Deviation',
+		Component : Deviation,
+		heading   : 'Rate Deviation with Price (USD)',
+	},
 	{
 		key       : 'trend',
 		name      : 'trend',
 		title     : 'Trend',
-		Component : TrendChart,
+		Component : Trend,
 		heading   : 'Rate Trend with Time (USD)',
 	},
 	{
 		key       : 'accuracy',
 		name      : 'accuracy',
 		title     : 'Accuracy',
-		Component : RateAccuracyChart,
+		Component : RateAccuracy,
 		heading   : 'Rate Accuracy with Time',
 	},
 ];
@@ -33,12 +41,13 @@ function ScallableAccuracy(props) {
 		isHighlighted = false,
 		globalFilters = {},
 		setGlobalFilters = () => {},
+		dateString = '',
 	} = props;
-	const { chartType = 'trend' } = globalFilters;
+	const { chart_type = 'trend', service_type } = globalFilters;
 	const [isAnimating, setIsAnimating] = useState(false);
 
 	const onChange = (val) => {
-		setGlobalFilters((prev) => ({ ...prev, chartType: val }));
+		setGlobalFilters((prev) => ({ ...prev, chart_type: val }));
 	};
 
 	useEffect(() => {
@@ -52,8 +61,12 @@ function ScallableAccuracy(props) {
 		};
 	}, [isHighlighted]);
 
+	const TABS_LIST = service_type === 'fcl' ? ALL_TABS_LIST : ALL_TABS_LIST.filter(({ key }) => key === 'trend');
+
 	return (
-		<div className={cl`${styles.container} ${section_container} `}>
+		<div className={cl`${section_container} ${styles.container} 
+		${service_type === 'air' ? styles.expand_icon_hidden : ''}`}
+		>
 			{isHighlighted ? (
 				<IcMCross
 					className={styles.expand_icon}
@@ -66,7 +79,7 @@ function ScallableAccuracy(props) {
 				/>
 			)}
 			<Tabs
-				activeTab={chartType}
+				activeTab={chart_type}
 				themeType="primary"
 				onChange={onChange}
 				size="sm"
@@ -78,6 +91,9 @@ function ScallableAccuracy(props) {
 							<TabPanel key={key} name={name} title={title}>
 								<h2 className={styles.tab_title}>{heading}</h2>
 								<Component {...props} isAnimating={isAnimating} isHighlighted={isHighlighted} />
+								<h5 className={cl`${styles.bottom_label} ${bottom_label}`}>
+									{dateString}
+								</h5>
 							</TabPanel>
 						);
 					}
@@ -87,7 +103,6 @@ function ScallableAccuracy(props) {
 						</TabPanel>
 					);
 				})}
-
 			</Tabs>
 
 		</div>

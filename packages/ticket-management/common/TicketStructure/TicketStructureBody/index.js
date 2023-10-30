@@ -2,8 +2,10 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
+import React, { useState } from 'react';
 
 import { STATUS_MAPPING, getStatusLabelMapping } from '../../../constants';
+import ResolveRequest from '../../ResolveRequest';
 import TicketActions from '../../TicketActions';
 
 import styles from './styles.module.css';
@@ -12,6 +14,7 @@ const DESCRIPTION_LAST_ELEMENT = 100;
 
 function TicketStructureBody({
 	data = {},
+	updateLoading = false,
 	updateTicketActivity = () => {},
 	setModalData = () => {},
 }) {
@@ -28,6 +31,8 @@ function TicketStructureBody({
 	} = data;
 
 	const { t } = useTranslation(['myTickets']);
+
+	const [showResolveRequest, setShowResolveRequest] = useState(false);
 
 	const { color: textColor, label } =	getStatusLabelMapping({ t })?.[STATUS_MAPPING[ticketStatus]] || {};
 
@@ -54,10 +59,12 @@ function TicketStructureBody({
 
 					<TicketActions
 						id={id}
+						layerAction
 						isModal={false}
 						ticketStatus={ticketStatus}
 						handleTicket={handleTicket}
 						isClosureAuthorizer={isClosureAuthorizer}
+						setShowResolveRequest={setShowResolveRequest}
 					/>
 				</div>
 			</div>
@@ -103,6 +110,16 @@ function TicketStructureBody({
 					</div>
 				</div>
 			</div>
+
+			{showResolveRequest && (
+				<ResolveRequest
+					ticketId={id}
+					updateLoading={updateLoading}
+					showResolveRequest={showResolveRequest}
+					setShowResolveRequest={setShowResolveRequest}
+					updateTicketActivity={updateTicketActivity}
+				/>
+			)}
 		</div>
 	);
 }

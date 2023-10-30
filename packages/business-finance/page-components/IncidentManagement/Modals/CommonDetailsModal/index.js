@@ -9,7 +9,9 @@ import allStakeHolderTimeLineData from '../../utils/useFormatAllStakeHolderData'
 import { DOCUMENT_MAPPING, HEADER_MAPPING, REQUEST_MAPPING, TYPE_COMPONENT_MAPPING } from './contants';
 import styles from './styles.module.css';
 
-function CommonPage({ row = {}, setDetailsModal = () => {}, refetch = () => {}, header = '' }) {
+const NO_PDF_VIEWS = ['ADVANCE_SECURITY_DEPOSIT', 'SAAS'];
+
+function CommonPage({ row = {}, setDetailsModal = () => { }, refetch = () => { }, header = '' }) {
 	const {
 		level3 = {}, level2 = {}, level1 = {}, createdBy = {},
 		remark = '', status = '', updatedBy = {}, financeRemark = '',
@@ -54,8 +56,8 @@ function CommonPage({ row = {}, setDetailsModal = () => {}, refetch = () => {}, 
 				<div className={styles.red_line} />
 
 			</div>
-			<div className={styles.container_view}>
-				{header !== 'ADVANCE_SECURITY_DEPOSIT' &&	<ViewPdf docUrl={docUrl} /> }
+			<div className={header === 'SAAS' ? styles.saas : styles.container_view}>
+				{!NO_PDF_VIEWS.includes(header) && <ViewPdf docUrl={docUrl} />}
 				<Component
 					row={row}
 					setDetailsModal={setDetailsModal}

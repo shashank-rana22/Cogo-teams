@@ -102,7 +102,7 @@ function MessageCardData({
 						${styles.card_container} 
 						${autoAssignChats ? '' : styles.card_with_checkbox}
 						${checkActiveCard ? styles.active_card : ''} 
-						${isFlashMessages ? styles.flash_messages_padding : ''} 
+						${isFlashMessages ? styles.flash_messages_padding : ''}
 					`}
 			>
 				<div className={styles.card}>

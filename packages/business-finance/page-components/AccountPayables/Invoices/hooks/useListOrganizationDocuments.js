@@ -13,13 +13,15 @@ const useListOrganizationDocuments = ({ tradePartyMappingId = '', serviceProvide
 		try {
 			await trigger({
 				params: {
-					page                        : 1,
-					page_limit                  : 20,
-					organization_trade_party_id : tradePartyMappingId,
-					organization_id             : serviceProviderId,
-					status                      : 'active',
-					verification_status         : 'verified',
-					document_type               : 'bank_account_details',
+					page       : 1,
+					page_limit : 20,
+					filters    : {
+						organization_trade_party_id : tradePartyMappingId,
+						organization_id             : serviceProviderId,
+						status                      : 'active',
+						verification_status         : 'verified',
+						document_type               : 'bank_account_details',
+					},
 				},
 			});
 		} catch (error) {

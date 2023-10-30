@@ -13,7 +13,7 @@ const useGetEmployeeDetails = (user_id = '') => {
 		trigger({
 			params: { user_id },
 		});
-	}, [user_id, trigger]);
+	}, [trigger, user_id]);
 
 	useEffect(() => {
 		if (user_id) {

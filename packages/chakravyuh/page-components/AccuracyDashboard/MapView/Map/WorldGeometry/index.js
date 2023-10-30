@@ -1,16 +1,15 @@
-import { Loader } from '@cogoport/components';
-import { FeatureGroup, GeoJSON, L, useMapEvents } from '@cogoport/maps';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { FeatureGroup, GeoJSON, L } from '@cogoport/maps';
 import { isEmpty } from '@cogoport/utils';
 import React, { useRef, useEffect } from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import MapTooltip from '../../../../../common/MapTooltip';
-import useListNearestLocations from '../../../../../hooks/useListNearestLocations';
+import { formatBigNumbers } from '../../../../../utils/formatBigNumbers';
 import { getPolygonStyleProps } from '../../../../../utils/map-utils';
-import styles from '../styles.module.css';
+import { COLORS } from '../../../Heading/BirdsEyeView';
 
 const ONE = 1;
-const TIME_LIMIT = 300;
 
 const WorldGeometry = React.forwardRef(({
 	hierarchy = {},
@@ -21,28 +20,39 @@ const WorldGeometry = React.forwardRef(({
 	setActiveList = () => {},
 	setLocationFilters = () => {},
 	setBounds = () => {},
+	filterBy = '',
+	minCount = 0,
+	maxCount = 0,
+	range = 1,
 }, ref) => {
-	const timerRef = useRef(null);
 	const activeCountryRef = useRef(null);
 
 	const filteredData = isEmpty(hierarchy) ? data
 		: data.filter(({ id }) => Object.values(hierarchy).includes(id));
 	const activeId = hierarchy?.country_id;
 
-	const { getNearestLocations, loading } = useListNearestLocations({
-		setLocationFilters,
-		setHierarchy,
-		setActiveList,
-		activeId,
-	});
-
 	const onEachFeature = (feature, layer, id, name) => {
-		const styleProps = getPolygonStyleProps(accuracyMapping[id]);
+		const fillColor = !accuracyMapping[id]
+			? 'transparent'
+			: COLORS[Object.keys(accuracyMapping).length === 1 || minCount === maxCount
+				? COLORS.length - 1
+				: Math.floor((accuracyMapping[id] - minCount) / range)];
+
+		const styleProps = filterBy.includes('accuracy') ? getPolygonStyleProps(accuracyMapping[id]) : {
+			weight      : 0.5,
+			fillOpacity : 1,
+			opacity     : 1,
+			fillColor   : fillColor || '#FFF',
+			color       : '#828282',
+		};
+		const value = filterBy.includes('accuracy')
+			? (accuracyMapping[id] || GLOBAL_CONSTANTS.zeroth_index).toFixed(ONE + ONE)
+			: formatBigNumbers(accuracyMapping[id]);
 
 		const activeProps = activeId === id ? {
 			fillOpacity : 0,
 			fillColor   : 'transparent',
-			color       : '#f37166',
+			color       : '#E6A400',
 			weight      : 1.5,
 		} : {};
 
@@ -58,35 +68,15 @@ const WorldGeometry = React.forwardRef(({
 			ReactDOMServer.renderToString(
 				<MapTooltip
 					display_name={name}
-					color={styleProps.color}
-					value={accuracyMapping[id]}
+					color={filterBy.includes('accuracy') ? styleProps?.color : fillColor}
+					value={value}
 					value_key=""
+					value_suffix={filterBy.includes('accuracy') ? '%' : ''}
 				/>,
 			),
 			{ sticky: true, direction: 'top' },
 		);
 	};
-
-	const handleMapClick = (e) => {
-		L.DomEvent.stopPropagation(e);
-		const latitude = e.latlng.lat;
-		const longitude = e.latlng.lng;
-
-		getNearestLocations({ filters: { latitude, longitude, type: ['country'] } });
-	};
-
-	useMapEvents({
-		click(e) {
-			clearTimeout(timerRef.current);
-
-			timerRef.current = setTimeout(() => {
-				handleMapClick(e);
-			}, TIME_LIMIT);
-		},
-		dblclick() {
-			clearTimeout(timerRef.current);
-		},
-	});
 
 	useEffect(() => {
 		const cachedRef = activeCountryRef.current;
@@ -96,7 +86,7 @@ const WorldGeometry = React.forwardRef(({
 	}, [filteredData.length, setBounds, hierarchy]);
 
 	return (
-		<FeatureGroup key={activeId}>
+		<FeatureGroup key={`${filterBy} ${minCount} ${maxCount} ${activeId}`}>
 			{filteredData.map((item) => {
 				const currentRef = item.id === currentId ? ref : null;
 				const isActive = item.id === activeId;
@@ -128,12 +118,6 @@ const WorldGeometry = React.forwardRef(({
 					/>
 				);
 			})}
-
-			{loading && (
-				<div className={styles.loader_container}>
-					<Loader className={styles.loader} />
-				</div>
-			)}
 		</FeatureGroup>
 	);
 });

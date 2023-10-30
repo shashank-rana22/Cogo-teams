@@ -20,6 +20,7 @@ const getDownloadFiles = async ({ imgUrl = '' }) => {
 		URL.revokeObjectURL(blobUrl);
 	} catch (error) {
 		console.error('error', error);
+		window.open(imgUrl, '_blank');
 	}
 };
 

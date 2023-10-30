@@ -1,5 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import { useContext, useState } from 'react';
 
 import Step0 from './components/Step0';
@@ -11,6 +12,7 @@ import useGetStep0Data from './helpers/useGetStep0Data';
 import useGetStep1Data from './helpers/useGetStep1Data';
 import useGetStep2Data from './helpers/useGetStep2Data';
 import useGetStep3Data from './helpers/useGetStep3Data';
+import styles from './styles.module.css';
 
 function UploadBookingNote({
 	task = {},
@@ -39,8 +41,10 @@ function UploadBookingNote({
 	const step0_data = useGetStep0Data({ shipment_data, task, servicesList });
 	let selectedRate = step0_data.selectedServiceProvider || undefined;
 
+	const { listBookingPreferences = [] } = step0_data || {};
+
 	if (initialStep === THREE) {
-		const selected_priorities = (step0_data.listBookingPreferences || [])
+		const selected_priorities = (listBookingPreferences || [])
 			.filter((item) => item.priority === item.selected_priority);
 		selectedRate = selected_priorities;
 	}
@@ -77,45 +81,47 @@ function UploadBookingNote({
 
 	return (
 		<div>
-			{step === GLOBAL_CONSTANTS.zeroth_index ? (
-				<Step0
-					data={step0_data}
-					onCancel={onCancel}
-					setStep={setStep}
-					servicesList={servicesList}
-					task={task}
-					step={step}
-				/>
-			) : null}
+			{isEmpty(listBookingPreferences) ? (
+				<div className={styles.revert_rates}>Please wait for RD to revert rates.</div>
+			) : (
+				<>
+					{step === GLOBAL_CONSTANTS.zeroth_index ? (
+						<Step0
+							data={step0_data}
+							onCancel={onCancel}
+							setStep={setStep}
+							servicesList={servicesList}
+							task={task}
+							step={step}
+						/>
+					) : null}
 
-			{step === ONE ? (
-				<Step1
-					data={step1_data}
-					skipStep0={skipStep0}
-					setStep={setStep}
-				/>
-			) : null}
+					{step === ONE ? (
+						<Step1
+							data={step1_data}
+							skipStep0={skipStep0}
+							setStep={setStep}
+						/>
+					) : null}
 
-			{
-				step === TWO ? (
-					<Step2
-						data={step2_data}
-						setStep={setStep}
-						step1_data={step1_data}
-					/>
-				) : null
-			}
+					{step === TWO ? (
+						<Step2
+							data={step2_data}
+							setStep={setStep}
+							step1_data={step1_data}
+						/>
+					) : null}
 
-			{
-				step === THREE && !serviceQuotationLoading ? (
-					<Step3
-						data={step3_data}
-						setStep={setStep}
-						shipment_id={task?.shipment_id}
-						loading={loading}
-					/>
-				) : null
-			}
+					{step === THREE && !serviceQuotationLoading ? (
+						<Step3
+							data={step3_data}
+							setStep={setStep}
+							shipment_id={task?.shipment_id}
+							loading={loading}
+						/>
+					) : null}
+				</>
+			)}
 		</div>
 	);
 }

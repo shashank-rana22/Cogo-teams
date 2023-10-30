@@ -72,6 +72,7 @@
 }
 
 .shipment_type_container {
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -109,4 +110,15 @@
 	text-align: center;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.shipment_tag {
+	position: absolute;
+	right: 0;
+	bottom: -2px;
+	padding: 3px 8px;
+	font-size: 10px;
+	font-weight: 300;
+	background-color: #c4dc91;
+	border-radius: 10px 1px 1px 5px;
 }

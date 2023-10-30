@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import React from 'react';
 
-import StyledTable from '../../../../../../../commons/StyledTable/index.tsx';
+import StyledTable from '../../../../../../../commons/StyledTable/index';
 import AllotedConfig from '../../../../../Configuration/AllotedConfig';
 import RequestedConfig from '../../../../../Configuration/RequestedConfig';
 

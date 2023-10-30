@@ -11,6 +11,8 @@ import ChooseService from './ChooseService';
 import styles from './styles.module.css';
 import ViewPrice from './ViewPrice';
 
+const EXCLUDE_CODE = ['THC', 'THCV'];
+
 function AddService({
 	shipmentId: shipment_id = '',
 	services = '',
@@ -39,7 +41,7 @@ function AddService({
 		}));
 
 	if (tradeType === 'export') {
-		finalList = finalList.filter((item) => item.code !== 'THC');
+		finalList = finalList.filter((item) => !EXCLUDE_CODE.includes(item.code));
 	}
 
 	if (filters.name) {

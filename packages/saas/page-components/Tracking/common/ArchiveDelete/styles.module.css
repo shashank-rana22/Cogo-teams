@@ -1,0 +1,20 @@
+.flex_box {
+	display: flex;
+	align-items: center;
+	box-shadow: 0 0 8px rgb(43 61 79 / 20%);
+}
+
+.main_body {
+	min-height: 14vh;
+	padding: 16px;
+	font-size: 16px;
+}
+
+.footer {
+	justify-content: flex-end;
+	padding: 10px 16px;
+}
+
+.submit {
+	margin-left: 12px;
+}

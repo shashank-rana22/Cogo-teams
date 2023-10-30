@@ -15,7 +15,10 @@ import isSingleLocation from '../../../utils/checkSingleLocation';
 import styles from './styles.module.css';
 
 const SHIPMENT_TYPE = {
-	fcl_freight: 'fcl',
+	fcl_freight : 'fcl',
+	air_freight : 'air-freight',
+	ftl_freight : 'ftl',
+
 };
 
 function Card({ data = {} }) {

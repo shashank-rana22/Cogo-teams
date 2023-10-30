@@ -19,6 +19,7 @@ export default function ListData({
 	checkLoading = false,
 	setUpdateBal = () => {},
 	setCanSettle = () => {},
+	loading = () => {},
 }) {
 	const handleDragStart = (e, index) => {
 		e?.dataTransfer?.setData('text/plain', index.toString());
@@ -42,7 +43,7 @@ export default function ListData({
 		<div>
 			<CardHeader />
 			{
-				checkLoading
+				checkLoading || loading
 					? (
 						<div>
 							{TIMES_TO_RENDER?.map((item) => (

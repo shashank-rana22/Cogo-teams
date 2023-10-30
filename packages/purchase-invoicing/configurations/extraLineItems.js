@@ -1,7 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 
-export const extraLineItems = ({ serviceProvider = {} }) => {
-	const { shipment_type = '' } = serviceProvider || {};
+export const extraLineItems = ({ serviceProvider = {}, shipment_data = {} }) => {
+	const { shipment_type = '' } = shipment_data || {};
 	const truckList = (serviceProvider?.service_charges || []).reduce((acc, item) => {
 		if (item?.service_type === 'ftl_freight_service') {
 			acc.push({
@@ -25,8 +25,9 @@ export const extraLineItems = ({ serviceProvider = {} }) => {
 		return [
 			{
 				name        : 'truck_number',
+				key         : 'truck_number',
 				type        : 'select',
-				span        : 1.5,
+				span        : 3.6,
 				rules       : { required: 'Truck Number is Required' },
 				options     : truckList,
 				placeholder : 'Enter',

@@ -1,0 +1,58 @@
+.header_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 44px;
+	padding: 4px 10px;
+	border-bottom: 1px solid #eee;
+}
+
+.filter_icon {
+	cursor: pointer;
+	fill: #757575;
+}
+
+.edit_icon {
+	cursor: pointer;
+}
+
+.search_field {
+	display: flex;
+	align-items: center;
+	width: calc(100% - 50px);
+
+	:global {
+		.ui_input_container {
+			border: none;
+		}
+
+		.ui_input_prefix {
+			padding: 0;
+		}
+	}
+}
+
+.styled_popover {
+	display: flex;
+	padding: 0;
+
+	>div {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding-top: 2px;
+		font-size: 21px;
+	}
+
+	:global {
+		.tippy-content {
+			width: 260px;
+			height: 190px;
+			padding: 0;
+
+			>div {
+				height: 100%;
+			}
+		}
+	}
+}

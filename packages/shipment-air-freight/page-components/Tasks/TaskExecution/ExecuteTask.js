@@ -5,50 +5,45 @@ import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import LoadingState from '../LoadingState';
 
 import {
-	MarkConfirmServices,
-	GenerateMawb,
-	ConfirmBookingWithAirline,
+	MarkConfirmServices, GenerateMawb, ConfirmBookingWithAirline, CartingRequest, CartingDetails, CartingApproval,
 	ConfirmSellPrice, ConfirmCargoAir, TerminalChargeReceipt, UploadChecklist, UploadShippingBill, UploadLeo,
+	UploadGatePass,
 } from './CustomTasks';
 import UpdateCargoAir from './CustomTasks/UpdateCargoAir';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
+const exportTradeTypeTasks = {
+	upload_carting_order          : CartingDetails,
+	request_carting_order         : CartingRequest,
+	upload_carting_order_approval : CartingApproval,
+	upload_shipping_bill          : UploadShippingBill,
+	upload_leo                    : UploadLeo,
+	upload_checklist              : UploadChecklist,
+	upload_gate_pass              : UploadGatePass,
+};
+
 const DEFAULT_STEP_VALUE = 1;
 function ExecuteTask({
-	task = {},
-	onCancel = () => {},
-	taskListRefetch = () => {},
-	selectedMail = [],
-	services = [],
-	shipment_data = {},
-	primary_service = {},
-	getShipmentTimeline = () => {},
-	servicesLoading = false,
+	task = {}, onCancel = () => {}, taskListRefetch = () => {}, selectedMail = [], services = [],
+	shipment_data = {}, primary_service = {}, getShipmentTimeline = () => {}, servicesLoading = false,
 
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
-
 	const incoTerm = shipment_data?.inco_term;
-
 	const tradeType = incoTermArray.find((x) => x.value === incoTerm)?.tradeType
 		|| primary_service.trade_type;
-
-	const awbExecutionDate =		(shipment_data.documents || []).find(
+	const awbExecutionDate = (shipment_data?.documents || []).find(
 		(item) => item?.document_type === 'draft_airway_bill'
 				&& item?.state === 'document_accepted',
 	) || {};
-
 	const service_names = (services || []).map((serviceObj) => (serviceObj?.trade_type === 'export'
 		? `origin_${serviceObj?.service_type}`
 		: `destination_${serviceObj?.service_type}`));
-
 	(services || []).forEach((serviceObj) => {
 		service_names.push(serviceObj.service_type);
 	});
-
 	const { serial_id, commodity_category, shipment_type } = shipment_data;
-
 	const modifiedDataForConfig = {
 		...(primary_service || {}),
 		trade_type: tradeType,
@@ -64,7 +59,6 @@ function ExecuteTask({
 		commodity_category,
 		shipment_type,
 	};
-
 	const {
 		steps = [],
 		currentStep = {},
@@ -80,8 +74,9 @@ function ExecuteTask({
 			refetch        : taskListRefetch,
 		},
 	);
-
 	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - DEFAULT_STEP_VALUE] : {};
+
+	const Component = exportTradeTypeTasks?.[task?.task];
 
 	if (loading || servicesLoading) {
 		return <div><LoadingState /></div>;
@@ -110,6 +105,7 @@ function ExecuteTask({
 			/>
 		);
 	}
+
 	if (task?.task === 'upload_mawb_freight_certificate') {
 		return (
 			<GenerateMawb
@@ -124,10 +120,8 @@ function ExecuteTask({
 
 		);
 	}
-	if (
-		task?.task === 'confirm_service_provider'
-		&& task?.service_type === 'air_freight_service'
-	) {
+
+	if (task?.task === 'confirm_service_provider' && task?.service_type === 'air_freight_service') {
 		return (
 			<ConfirmBookingWithAirline
 				task={task}
@@ -139,10 +133,8 @@ function ExecuteTask({
 
 		);
 	}
-	if (
-		task?.task === 'approve_sell_price'
-		&& task?.shipment_type === 'air_freight'
-	) {
+
+	if (task?.task === 'approve_sell_price' && task?.shipment_type === 'air_freight') {
 		return (
 			<ConfirmSellPrice
 				shipmentData={shipment_data}
@@ -152,9 +144,9 @@ function ExecuteTask({
 			/>
 		);
 	}
-	if (
-		task.task === 'update_flight_details'
-		&& task.shipment_type === 'air_freight'
+
+	if (task?.task === 'update_flight_details'
+		&& task?.shipment_type === 'air_freight'
 		&& tradeType === 'import'
 	) {
 		return (
@@ -169,8 +161,9 @@ function ExecuteTask({
 			/>
 		);
 	}
+
 	if (
-		task.task === 'update_flight_departure_and_flight_arrival'
+		task?.task === 'update_flight_departure_and_flight_arrival'
 		&& tradeType === 'import'
 	) {
 		return (
@@ -185,43 +178,8 @@ function ExecuteTask({
 			/>
 		);
 	}
-	if (
-		task.task === 'upload_checklist' && tradeType === 'export'
-	) {
-		return (
-			<UploadChecklist
-				shipmentData={shipment_data}
-				task={task}
-				refetch={taskListRefetch}
-				onCancel={onCancel}
-			/>
-		);
-	}
-	if (
-		task.task === 'upload_leo' && tradeType === 'export'
-	) {
-		return (
-			<UploadLeo
-				shipmentData={shipment_data}
-				task={task}
-				refetch={taskListRefetch}
-				onCancel={onCancel}
-			/>
-		);
-	}
-	if (
-		task.task === 'upload_shipping_bill' && tradeType === 'export'
-	) {
-		return (
-			<UploadShippingBill
-				shipmentData={shipment_data}
-				task={task}
-				refetch={taskListRefetch}
-				onCancel={onCancel}
-			/>
-		);
-	}
-	if (task.task === 'upload_terminal_handling_charge_receipt') {
+
+	if (task?.task === 'upload_terminal_handling_charge_receipt') {
 		return (
 			<TerminalChargeReceipt
 				shipmentData={shipment_data}
@@ -232,6 +190,7 @@ function ExecuteTask({
 			/>
 		);
 	}
+
 	if (task?.task === 'upload_gate_pass_charge_receipt') {
 		return (
 			<TerminalChargeReceipt
@@ -240,6 +199,18 @@ function ExecuteTask({
 				refetch={taskListRefetch}
 				onCancel={onCancel}
 				type="gatepass"
+			/>
+		);
+	}
+
+	if (tradeType === 'export' && Component) {
+		return (
+			<Component
+				primaryService={primary_service}
+				shipmentData={shipment_data}
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
 			/>
 		);
 	}

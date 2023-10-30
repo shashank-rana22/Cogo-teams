@@ -1,5 +1,6 @@
-import { Tooltip, Pill } from '@cogoport/components';
+import { Tooltip, Pill, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMInformation } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
@@ -9,7 +10,7 @@ import { PURCHASE_TYPE_LIST } from '../constants';
 
 import styles from './styles.module.css';
 
-export const invoiceconfig = [
+export const invoiceconfig = ({ utrData = [], utrLoading = false }) => [
 	{
 		Header   : 'Invoice No.',
 		accessor : (row) => <RenderLink text={row?.invoice_no} url={row?.invoice_url || row?.invoice_url} />,
@@ -18,7 +19,7 @@ export const invoiceconfig = [
 	{
 		Header   : 'Services - Line Item',
 		accessor : (row) => {
-			const handleLineItemsMapping = (services) => {
+			function HandleLineItemsMapping({ services = {} }) {
 				const SERVICE_LINE_ITEMS_MAPPING = {};
 				(services?.mappings || []).forEach((item) => {
 					(item?.buy_line_items || []).map((lineItem) => {
@@ -61,9 +62,9 @@ export const invoiceconfig = [
 						</div>
 					</Tooltip>
 				);
-			};
+			}
 
-			return <div className={styles.value}>{handleLineItemsMapping(row)}</div>;
+			return <div className={styles.value}><HandleLineItemsMapping services={row} /></div>;
 		},
 		id: 'services_line_item',
 	},
@@ -113,21 +114,57 @@ export const invoiceconfig = [
 	},
 	{
 		Header   : 'UTR',
-		accessor : ({ utr_nos = [] }) => (
-			<Tooltip
-				theme="light"
-				interactive
-				content={(
-					<div>
-						{(utr_nos || []).map((number) => (
-							<div key={number} className={styles.utrval}>{number}</div>
-						))}
-					</div>
-				)}
-			>
-				<div className={styles.utr}>{utr_nos?.[GLOBAL_CONSTANTS.zeroth_index]}</div>
-			</Tooltip>
-		),
+		accessor : ({ utr_nos = [], finance_job_number }) => {
+			const utrDetailsBills = utrData.filter((utr) => (utr?.billId === finance_job_number));
+
+			return (
+				utrLoading ? <Placeholder /> : (
+					<Tooltip
+						theme="light"
+						interactive
+						placement="left"
+						content={(
+							<div className={styles.contentutr}>
+								{!isEmpty(utrDetailsBills) ? (utrDetailsBills || []).map(({
+									transactionRef, createdAt, billId,
+								}) => (
+									<div key={billId} className={styles.singleutr}>
+										<div className={styles.utrval}>{transactionRef}</div>
+										{utrDetailsBills?.[GLOBAL_CONSTANTS.zeroth_index]?.createdAt
+											? formatDate({
+												date       : createdAt,
+												dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+												formatType : 'date',
+											}) : '-'}
+									</div>
+
+								)) : (utr_nos || []).map((number) => (
+									<div
+										key={number}
+										className={styles.utrval}
+									>
+										{number}
+									</div>
+								))}
+							</div>
+						)}
+					>
+						<div className={styles.utr}>
+							{utrDetailsBills?.[GLOBAL_CONSTANTS.zeroth_index]?.transactionRef
+								|| utr_nos?.[GLOBAL_CONSTANTS.zeroth_index]}
+						</div>
+						<div className={styles.utr}>
+							{utrDetailsBills?.[GLOBAL_CONSTANTS.zeroth_index]?.createdAt
+								? formatDate({
+									date       : utrDetailsBills?.[GLOBAL_CONSTANTS.zeroth_index]?.createdAt,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+								}) : '-'}
+						</div>
+					</Tooltip>
+				)
+			);
+		},
 		id: 'utr',
 	},
 	{
@@ -156,7 +193,12 @@ export const invoiceconfig = [
 						<Tooltip
 							theme="light"
 							interactive
-							content={<p>{(row?.remarks || []).join(' , ')}</p>}
+							content={(
+								<p>
+									{' '}
+									{(row?.remarks || []).filter((item) => (item !== ''))?.join(' , ')}
+								</p>
+							)}
 						>
 							<Pill size="sm" color="#FEF1DF">
 								{purchaseType(row)}

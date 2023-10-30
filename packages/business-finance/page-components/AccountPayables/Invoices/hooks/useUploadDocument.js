@@ -13,7 +13,7 @@ const useUploadDocuments = ({ fileUploader = {} }) => {
 			method  : 'post',
 			authKey : 'post_purchase_payrun_upload_documents',
 		},
-		{ manual: false },
+		{ manual: true },
 	);
 
 	const onUpload = async (setActive = () => {}) => {

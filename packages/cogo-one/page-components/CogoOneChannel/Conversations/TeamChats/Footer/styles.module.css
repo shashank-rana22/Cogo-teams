@@ -1,0 +1,63 @@
+.text_area {
+	width: 100%;
+	overflow: auto;
+	resize: none;
+	border: none !important;
+	outline: none;
+
+	>div {
+		border: none !important;
+	}
+
+	&:focus {
+		outline: none !important;
+	}
+
+	&:focus-visible {
+		outline: none !important;
+	}
+}
+
+.text_area_div {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	width: 100%;
+	height: fit-content;
+	padding: 0 10px;
+	background: #fff;
+	border-radius: 4px;
+
+	textarea {
+		font-family: Poppins, sans-serif;
+		font-size: 12px !important;
+	}
+}
+
+.flex_space_between {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	img,
+	svg {
+		width: 20px;
+		height: 20px;
+		margin: 5px 5px 12px;
+		cursor: pointer;
+	}
+}
+
+.disabled {
+	pointer-events: none;
+}
+
+.overlay_div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgb(255 255 255 / 10%);
+	backdrop-filter: blur(0.8px);
+}

@@ -14,6 +14,7 @@ function FeedbackModal({
 	callEndAt = '',
 	callRecordId = '',
 	agentType = '',
+	firestore = {},
 }) {
 	const { mobile_number = '', mobile_country_code = '' } = receiverUserDetails || {};
 	const { handleSubmit, control, formState: { errors }, watch } = useForm();
@@ -28,6 +29,7 @@ function FeedbackModal({
 		callStartAt,
 		callEndAt,
 		callRecordId,
+		firestore,
 	});
 
 	const formValues = watch();

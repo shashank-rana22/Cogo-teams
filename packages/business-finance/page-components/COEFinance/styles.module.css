@@ -9,6 +9,10 @@
 	}
 }
 
+.input {
+	width: 284px;
+}
+
 .spacebetween {
 	display: flex;
 	justify-content: space-between;
@@ -66,5 +70,7 @@
 }
 
 .header {
+	display: flex;
+	justify-content: space-between;
 	padding-bottom: 16px;
 }

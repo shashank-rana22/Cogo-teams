@@ -1,51 +1,20 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/ocean-modules';
-import UNIT_VALUE_MAPPING from '@cogoport/ocean-modules/constants/UNIT_VALUE_MAPPING';
-import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
 const DEFAULT_PRICE_VALUE = 0;
 const DEFAULT_QUANTITY_VALUE = 0;
 const STEP_ON_BACK = 2;
-const QUANTITY_ONE = 1;
 
 function StepThree({ data = {}, setStep = () => {}, shipment_id = '', updateServiceFunc = () => {}, loading = false }) {
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 
 	const formProps = useForm({ defaultValues });
 
-	const { service_charges_with_trade = [] } = data || {};
-
-	const { control, handleSubmit, formState:{ errors = {} } = {}, watch, setValue } = formProps || {};
+	const { control, handleSubmit, formState:{ errors = {} } = {}, watch } = formProps || {};
 	const formValues = watch();
-
-	useEffect(() => {
-		const subscription = watch((value, { name }) => {
-			const [service_id, index, unit] = name.split('.');
-			if (unit === 'unit') {
-				const finalValue = value[service_id]?.map((val, idx) => {
-					if (idx === +index) {
-						const { service_detail = [] } = (service_charges_with_trade || [])
-							.find((element) => element.service_id === service_id);
-						const prefillKey = UNIT_VALUE_MAPPING?.[val?.unit];
-						const prefillValue = service_detail[GLOBAL_CONSTANTS.zeroth_index]?.[prefillKey]
-						|| (val?.unit === 'per_shipment' ? QUANTITY_ONE : '');
-						return {
-							...val,
-							quantity: prefillValue,
-						};
-					}
-					return val;
-				});
-				setValue(service_id, finalValue);
-			}
-		});
-		return () => subscription.unsubscribe();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [watch]);
 
 	const prepareFormValues = () => {
 		const allFormValues = { ...formValues };

@@ -4,9 +4,8 @@ import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import React, { useState, useEffect } from 'react';
 
-import useGetJVList from '../../../hooks/useGetJvsList';
 import usePaymentsSettlementCheck from '../../../hooks/usePaymentsSettlementCheck';
-import CreateJvModal from '../../JournalVoucher/CreateJvModal/index.tsx';
+import CreateJvModal from '../../JournalVoucher/CreateJvModal/index';
 
 import Header from './Header';
 import getLineItems from './LineItems';
@@ -19,9 +18,11 @@ const ZERO_VALUE = 0;
 export default function MatchModal({
 	matchModalShow = false, setMatchModalShow = () => {},
 	selectedData = [], filters = {}, setSelectedData = () => {},
+	loading = false,
 	isDelete = false, setIsDelete = () => {},
 	reRender = false, setReRender = () => {},
 	matchBal = 0, submitSettleMatch = () => {}, settleLoading = true,
+	refetch = () => {}, setJvSearch = '',
 }) {
 	const { t = () => {} } = useTranslation(['settlement']);
 	const [updateBal, setUpdateBal] = useState(matchBal);
@@ -41,9 +42,6 @@ export default function MatchModal({
 	const [canSettle, setCanSettle] = useState(checkData?.canSettle || false);
 	const [checkedData, setCheckedData] = useState(checkData?.stackDetails || []);
 	const dryRunData = (dryRun ? (checkData?.stackDetails) : []);
-	const {
-		jvListRefetch,
-	} = useGetJVList({ filters });
 	function onClose() {
 		setMatchModalShow(false);
 		setUpdatedData(JSON.parse(JSON.stringify(selectedData)));
@@ -128,6 +126,7 @@ export default function MatchModal({
 						checkLoading={checkLoading}
 						setUpdateBal={setUpdateBal}
 						setCanSettle={setCanSettle}
+						loading={loading}
 					/>
 				</Modal.Body>
 				<Modal.Footer>
@@ -150,6 +149,7 @@ export default function MatchModal({
 									settleLoading={settleLoading}
 									setMatchModalShow={setMatchModalShow}
 									t={t}
+									setJvSearch={setJvSearch}
 								/>
 							) : null
 					}
@@ -160,10 +160,12 @@ export default function MatchModal({
 					show={showJV}
 					setShow={setShowJV}
 					onClose={() => setShowJV(false)}
-					refetch={jvListRefetch}
+					refetch={refetch}
 					Entity={filters?.entityCode}
 					selectedData={updatedData}
 					line_items={LINE_ITEMS}
+					setJvSearch={setJvSearch}
+					setDryRun={setDryRun}
 				/>
 			) : null}
 		</div>

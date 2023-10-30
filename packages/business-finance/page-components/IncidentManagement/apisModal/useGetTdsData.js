@@ -17,9 +17,24 @@ const useGetTdsData = ({
 	level2 = {},
 	t,
 }) => {
-	const { user_id:userId } = useSelector(({ profile }) => ({
+	const { user_id: userId } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
 	}));
+
+	const getDateFormat = ({ date = '' }) => {
+		const [d, month, year] = date.split('-');
+		return `${year}-${month}-${d}`;
+	};
+
+	const formattedData = row.type === 'TDS_APPROVAL' ? {
+		...(data || {}),
+		tdsRequest: {
+			...(data?.tdsRequest || {}),
+			validFrom : getDateFormat({ date: data?.tdsRequest?.validFrom }),
+			validTo   : getDateFormat({ date: data?.tdsRequest?.validTo }),
+		},
+
+	} : data;
 
 	const { CNType, CNValues, remarks } = cNCategoryValues || {};
 
@@ -42,7 +57,7 @@ const useGetTdsData = ({
 	);
 
 	const useOnAction = async ({ status }) => {
-		const payload =	row.type !== 'TDS_APPROVAL'
+		const payload = row.type !== 'TDS_APPROVAL'
 			? {
 				data: {
 					[payloadKey]: {
@@ -64,7 +79,7 @@ const useGetTdsData = ({
 			try {
 				const apiResponse = await trigger({
 					data: {
-						data,
+						data      : formattedData,
 						remark    : remark || 'Approved',
 						status,
 						updatedBy : userId,

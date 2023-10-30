@@ -204,6 +204,10 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api         : 'post_purchase_bills_utr_details',
+		access_type : 'private',
+	},
+	{
 		api          : 'create_shipment_collection_party',
 		access_type  : 'private',
 		service_name : 'shipment',

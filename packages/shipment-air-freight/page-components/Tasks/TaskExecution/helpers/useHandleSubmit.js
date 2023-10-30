@@ -11,6 +11,7 @@ import formatRawValues from '../utils/format-raw-payload';
 import formFieldsCheck from '../utils/formFieldCheck';
 import formatForPayload from '../utils/fromat-payload';
 import getRpaMappings from '../utils/get-rpa-mappings';
+import updateShipmentServiceTask from '../utils/updateShipmentServiceTask';
 
 const REFETCH_SHIPMENT = [
 	'confirm_booking',
@@ -45,6 +46,11 @@ function useHandleSubmit({
 
 	const [{ loading: loadingTask }, triggerTask] = useRequest({
 		url    : 'update_shipment_pending_task',
+		method : 'POST',
+	}, { manual: true });
+
+	const [{ loading: updateShipmentServiceLoading }, updateShipmentServiceTaskTrigger] = useRequest({
+		url    : 'update_shipment_service',
 		method : 'POST',
 	}, { manual: true });
 
@@ -153,6 +159,24 @@ function useHandleSubmit({
 				});
 			}
 
+			if (task?.task === 'update_flight_details') {
+				const mainAirFreight = services.find(
+					(service) => service?.service_type === 'air_freight_service',
+				);
+
+				const hasError = await updateShipmentServiceTask({
+					rawValues,
+					mainAirFreight,
+					task,
+					updateShipmentServiceTaskTrigger,
+				});
+
+				if (hasError) {
+					setIsLoading(false);
+					return;
+				}
+			}
+
 			const res = await trigger({ data: finalPayload });
 
 			if (!res.hasError) {
@@ -207,7 +231,8 @@ function useHandleSubmit({
 
 	return {
 		onSubmit,
-		loading: loading || loadingTask || isLoading || awbLoading || warehouseScheduleLoading,
+		loading: loading || loadingTask || isLoading
+		|| awbLoading || warehouseScheduleLoading || updateShipmentServiceLoading,
 	};
 }
 export default useHandleSubmit;

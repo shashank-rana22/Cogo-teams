@@ -1,12 +1,15 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import useReplyMail from '../hooks/useReplyMail';
 import useSaveDraft from '../hooks/useSaveDraft';
 import useSendOmnichannelMail from '../hooks/useSendOmnichannelMail';
 
-import getFormattedEmailBody from './getFormatedEmailBody';
+import getFormattedEmailBody from './getFormattedEmailBody';
 import getRenderEmailBody from './getRenderEmailBody';
+
+const LIMIT_FOR_BODY_PREVIEW = 200;
 
 function useMailEditorFunctions({
 	uploading = false,
@@ -42,6 +45,7 @@ function useMailEditorFunctions({
 		draftMessageData = {},
 		customSubject = {},
 		rteContent = '',
+		rawRTEContent = '',
 	} = emailState || {};
 
 	let subjectToSend = subject;
@@ -116,10 +120,10 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		const isEmptyMail = getFormattedEmailBody({ emailState });
+		// const isEmptyMail = getFormattedEmailBody({ emailState });
 
-		if (isEmptyMail || !subjectToSend) {
-			Toast.error('Both Subject and Body are Required');
+		if (!subjectToSend) {
+			Toast.error('Subject is Required.');
 			return;
 		}
 
@@ -138,7 +142,13 @@ function useMailEditorFunctions({
 			});
 			return;
 		}
-		replyMailApi(payload);
+		replyMailApi({
+			payload,
+			bodyPreview: rawRTEContent?.slice(
+				GLOBAL_CONSTANTS.zeroth_index,
+				LIMIT_FOR_BODY_PREVIEW,
+			) || '',
+		});
 	};
 
 	const handleSaveDraft = async ({ isMinimize = false } = {}) => {

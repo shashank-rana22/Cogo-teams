@@ -6,9 +6,9 @@ import React from 'react';
 
 import ShowOverflowingNumber from '../../commons/utils/showOverflowingNumber';
 import RenderRemarks from '../common/RenderRemarks';
-import { toTitleCase } from '../utils/titleCase.ts';
+import { toTitleCase } from '../utils/titleCase';
 
-import SortIcon from './SortIcon/index.tsx';
+import SortIcon from './SortIcon/index';
 import styles from './styles.module.css';
 
 const SIXTH_SPLICE_INDEX = 8;
@@ -176,20 +176,24 @@ function getColumns({
 				</div>
 			),
 			accessor: (row) => {
-				const { createdAt } = row || {};
+				const { createdAt = '' } = row || {};
+				const [date, time] = createdAt?.split(' ') || [];
+				const [day, month, year] = date.split('-');
+				const reversedDate = `${year}-${month}-${day} ${time}`;
+
 				return (
 					<>
 						<div className={styles.time}>
-							{createdAt ? formatDate({
-								date: createdAt,
+							{date ? formatDate({
+								date: reversedDate,
 								dateFormat:
 									GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 								formatType: 'date',
 							}) : '_'}
 						</div>
 						<div>
-							{createdAt ? formatDate({
-								date       : createdAt,
+							{time ? formatDate({
+								date       : reversedDate,
 								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 								formatType : 'time',
 							}) : '_'}
@@ -235,8 +239,8 @@ function getColumns({
 							{deadlineTag === 'RED' && (
 								<div
 									className={
-											deadlineTag === 'RED' && styles.ribbon_red
-										}
+										deadlineTag === 'RED' && styles.ribbon_red
+									}
 								>
 									{t('incidentManagement:urgent')}
 								</div>
@@ -244,9 +248,9 @@ function getColumns({
 							{deadlineTag === 'ORANGE' && (
 								<div
 									className={
-											deadlineTag === 'ORANGE'
-											&& styles.ribbon_orange
-										}
+										deadlineTag === 'ORANGE'
+										&& styles.ribbon_orange
+									}
 								>
 									{t('incidentManagement:urgent')}
 								</div>

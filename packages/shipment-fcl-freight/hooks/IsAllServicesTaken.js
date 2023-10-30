@@ -1,11 +1,9 @@
-const IsAllServicesTaken = (
+const isAllServicesTaken = (
 	servicesList,
 	selectedParties,
 	shipment_data,
 	allServiceLineitemsCount,
 ) => {
-	const shipmentMainService = `${shipment_data?.shipment_type}_service`;
-
 	let allServicesTaken = [];
 	selectedParties.forEach((party) => {
 		allServicesTaken.push(...(party.services || []));
@@ -14,11 +12,7 @@ const IsAllServicesTaken = (
 	allServicesTaken = allServicesTaken.map((service) => service.service_id);
 
 	let mainServices = [];
-	if (shipment_data?.state === 'cancelled') {
-		mainServices = servicesList?.filter(
-			(service) => service?.service_type === shipmentMainService,
-		);
-	} else {
+	if (shipment_data?.state !== 'cancelled') {
 		mainServices = servicesList?.filter(
 			(service) => service?.service_type !== 'subsidiary_service',
 		);
@@ -40,4 +34,4 @@ const IsAllServicesTaken = (
 	return { isAllMainServicesTaken, notTaken: NOT_TAKEN };
 };
 
-export default IsAllServicesTaken;
+export default isAllServicesTaken;

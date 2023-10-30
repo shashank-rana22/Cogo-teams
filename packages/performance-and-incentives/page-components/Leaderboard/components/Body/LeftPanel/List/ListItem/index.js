@@ -30,10 +30,9 @@ function conditionalWrapper({ condition, title, wrapper, children }) {
 }
 
 function ListItem(props) {
-	const { listItem, user, currLevel } = props;
+	const { listItem, user, currLevel, LIST_COLUMN_MAPPING } = props;
 
 	const {
-		LIST_COLUMN_MAPPING,
 		isAllowed,
 		handleClick,
 	} = useListItem(props);

@@ -10,7 +10,9 @@ import InvoiceFormLayout from '../InvoiceFormLayout';
 
 import styles from './styles.module.css';
 
-function Step1({
+const STEP_TWO = 2;
+
+function StepOne({
 	contentText = '',
 	uploadInvoiceUrl = '',
 	serviceProvider = {},
@@ -36,7 +38,7 @@ function Step1({
 	const [confirmation, setConfirmation] = useState(null);
 
 	const { createCp, updateCp, loading, serviceProviderOrg } = useCreateColletctionParty({
-		onCreate          : () => setStep(2),
+		onCreate          : () => setStep(STEP_TWO),
 		setCollectionPartyId,
 		serviceProviderId : serviceProvider?.service_provider_id,
 	});
@@ -74,6 +76,7 @@ function Step1({
 			codes,
 			taggedProformas,
 			activeTab,
+			calculatedValues,
 		} = ref.current || {};
 
 		handleErrors({
@@ -98,6 +101,7 @@ function Step1({
 				partyId,
 				invoiceStatus      : purchaseInvoiceValues?.status || 'init',
 				serviceProviderOrg,
+				calculatedValues,
 			}),
 			onError,
 		)();
@@ -158,7 +162,7 @@ function Step1({
 				</div>
 			</Modal.Footer>
 
-			{(confirmation && hasError?.length === 0) ? (
+			{(confirmation && isEmpty(hasError)) ? (
 				<ConfirmationModal
 					setConfirmation={setConfirmation}
 					handleFinalSubmit={handleFinalSave}
@@ -169,4 +173,4 @@ function Step1({
 	);
 }
 
-export default Step1;
+export default StepOne;

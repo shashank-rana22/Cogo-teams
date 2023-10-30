@@ -28,6 +28,9 @@ function ApArSettlement() {
 		status     : '',
 	});
 
+	const [fromCreateJv, setFromCreateJv] = useState(false);
+
+	const [jvSearch, setJvSearch] = useState('');
 	const [sorting, setSorting] = useState({
 		sortType: 'Asc',
 	});
@@ -45,7 +48,7 @@ function ApArSettlement() {
 
 	const {
 		data = [], loading = false, accountData = [], accountLoading = false,
-		submitSettleMatch = () => {},
+		submitSettleMatch = () => {}, refetch = () => {},
 		settleLoading = false,
 	} = useGetDocumentList({
 		filters,
@@ -53,6 +56,7 @@ function ApArSettlement() {
 		setMatchModalShow,
 		setSelectedData,
 		t,
+		setFromCreateJv,
 	});
 
 	const handleFilterChange = (filterName, value) => {
@@ -94,6 +98,14 @@ function ApArSettlement() {
 		setMatchBal(TOTAL);
 	}, [selectedData, pageCheckedRowsStringfy]);
 
+	useEffect(() => {
+		if (fromCreateJv) {
+			const updatedSelectedData = [...(selectedData || []), ...(data.list || [])];
+			setSelectedData(updatedSelectedData);
+			setFromCreateJv(false);
+		}
+	}, [data?.list, fromCreateJv, selectedData]);
+
 	return (
 		<div>
 			<Filters
@@ -105,7 +117,8 @@ function ApArSettlement() {
 				filters={filters}
 				onFiltersChange={handleFilterChange}
 				loading={loading}
-
+				jvSearch={jvSearch}
+				setJvSearch={setJvSearch}
 			/>
 			{
 				(isEmpty(data?.list) && !loading)
@@ -161,6 +174,8 @@ function ApArSettlement() {
 					setMatchBal={setMatchBal}
 					submitSettleMatch={submitSettleMatch}
 					settleLoading={settleLoading}
+					refetch={refetch}
+					setJvSearch={setJvSearch}
 				/>
 			) : null}
 		</div>
