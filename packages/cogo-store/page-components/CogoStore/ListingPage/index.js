@@ -24,9 +24,10 @@ function ListingPage() {
 	const [selectedImage, setSelectedImage] = useState(null);
 	const [addedToCart, setAddedToCart] = useState(false);
 	let dataArray = [];
-	const { data } = useGetListProductDetail();
+	const { data, loading:productDetailLoading = false } = useGetListProductDetail();
+	console.log('datadata', data);
 
-	const { data: productData } = useGetProductFilterDetail();
+	const { data: productData, loading:productFilterLoading = false } = useGetProductFilterDetail();
 	console.log(productData, 'listProduce');
 
 	const [applyCoupon, setApplyCoupon] = useState(getCookie('apply_coupon') === 'true');
@@ -36,14 +37,30 @@ function ListingPage() {
 		data: productDataDetails,
 		filtersVariation = {},
 		setFiltersVariation = () => { },
+		loading:productVariationLoading = false,
 	} = useGetListProductVariationDetails();
 
 	const { product_id } = productDataDetails || {};
 
 	const product = (productList || []).find((prod) => prod.id === product_id);
 
+	console.log('productList', productList);
+
 	const { available_colors, available_sizes } = product || {};
+	// const { availableColors, availableSizes } = (productList || []).reduce(
+	// 	(acc, curr) => {
+	// 		const { available_colors, available_sizes } = curr;
+
+	// 		acc.availableColors = Array.from(new Set([...acc.availableColors, ...(available_colors || [])]));
+	// 		acc.availableSizes = Array.from(new Set([...acc.availableSizes, ...(available_sizes || [])]));
+
+	// 		return acc;
+	// 	},
+	// 	{ availableSizes: [], availableColors: [] },
+	// );
+
 	const { color, user_details, currency_code } = productData || {};
+
 	const { office_location } = user_details || {};
 
 	const selectedColors = (available_colors || []).map((colorId) => {
@@ -156,6 +173,7 @@ function ListingPage() {
 				handleApplyClick={handleApplyClick}
 				handleImageClick={handleImageClick}
 				currency_code={currency_code}
+				loading={productVariationLoading || productFilterLoading || productDetailLoading}
 			/>
 		</div>
 	);

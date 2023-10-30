@@ -16,8 +16,8 @@ const useGetListProductDetail = () => {
 	const getListProductDetail = useCallback(
 		async () => {
 			try {
-				const { page, page_limit, category_id, ...rest } = filters;
-				console.log(rest, '::rest');
+				const { page, page_limit, category_id } = filters;
+				// console.log(rest, '::rest');
 				await trigger({
 					params: {
 						filters: {

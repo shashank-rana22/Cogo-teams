@@ -14,9 +14,15 @@ function ProductDetails({
 	after_coupon_price = '', ADD_TO_CART = '', SYNCHRONIZE_CART = '',
 	handleBuyNow = () => {}, addedToCart = false, handleAddToCart = () => {}, selectedImage = '',
 	TICK_ICON = '', colorValuePairs = [], handleVariationColor = () => {},
-	handleImageClick = () => {}, office_location = '', currency_code = '',
+	handleImageClick = () => {}, office_location = '', currency_code = '', merchSize = '', merchColor = '',
+	loading = false,
 }) {
+	console.log('merchColor', sizeValuePairs);
+	if (loading) {
+		return null;
+	}
 	return (
+
 		<div className={styles.main_container}>
 			<div className={styles.header}>
 				<div className={styles.product_image}>
@@ -78,7 +84,7 @@ function ProductDetails({
 						<div className={styles.product_filter_item}>
 							<span>Color</span>
 							<Select
-								value={filtersVariation?.color_id}
+								value={merchColor || filtersVariation?.color_id}
 								className={styles.select_filters}
 								onChange={(e) => handleVariationColor(e)}
 								placeholder="Select Color"
@@ -88,7 +94,7 @@ function ProductDetails({
 						<div className={styles.product_filter_item}>
 							<span>Size</span>
 							<Select
-								value={filtersVariation?.size}
+								value={merchSize || filtersVariation?.size}
 								onChange={(e) => setFiltersVariation((prev) => ({
 									...prev,
 									size: e,
