@@ -21,6 +21,7 @@
 	display: flex;
 	gap: 10px;
 	align-items: center;
+	width: 100%;
 	padding: 8px 16px;
 }
 
@@ -78,5 +79,9 @@
 }
 
 .details {
+	width: 100%;
+}
+
+.cost_sheet {
 	width: 100%;
 }

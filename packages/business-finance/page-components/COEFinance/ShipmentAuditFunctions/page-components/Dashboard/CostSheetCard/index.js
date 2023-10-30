@@ -33,7 +33,7 @@ function CostSheetCard({
 				</div>
 			</div>
 			{tab.costSheetTab && <div className={styles.hr} />}
-			<div className={styles.documents}>
+			<div className={styles.cost_sheet}>
 				{tab.costSheetTab && <CostSheetData quotationsData={quotationsData} />}
 				{' '}
 			</div>
