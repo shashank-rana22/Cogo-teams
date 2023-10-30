@@ -17,7 +17,6 @@ function AdminView() {
 			<Header />
 			<OverView data={data} refetch={refetch} />
 			<OrderTable data={data} filters={filters} setFilters={setFilters} dateArray={dateArray} refetch={refetch} />
-
 		</div>
 	);
 }

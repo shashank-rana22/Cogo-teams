@@ -70,17 +70,17 @@ function Header() {
 					<img src={CART} alt="" height="14px" style={{ marginRight: '4px' }} />
 					My Cart
 				</span>
+				{is_hr_admin ? (
+					<div
+						aria-hidden
+						onClick={() => push('/cogo-store/admin-view')}
+						style={{ marginLeft: '18px', cursor: 'pointer', fontWeight: '600' }}
+					>
+						Admin View
+						<IcMArrowNext style={{ marginLeft: '3px', cursor: 'pointer' }} />
+					</div>
+				) : null}
 			</div>
-			{is_hr_admin ? (
-				<div
-					aria-hidden
-					onClick={() => push('/cogo-store/admin-view')}
-					style={{ marginLeft: '18px', cursor: 'pointer', fontWeight: '600' }}
-				>
-					Admin View
-					<IcMArrowNext style={{ marginLeft: '3px', cursor: 'pointer' }} />
-				</div>
-			) : null}
 		</div>
 	);
 }
