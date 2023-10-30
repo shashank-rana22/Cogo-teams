@@ -12,6 +12,7 @@ function FinancialClosedCards({
 	data = [],
 	loading = false,
 	shipment_id = '',
+	invoicesMap = {},
 	getClosedTasks = () => {},
 }) {
 	const finalStatus = data?.every((i) => i?.quotation_state === 'APPROVED');
@@ -44,6 +45,7 @@ function FinancialClosedCards({
 										source="FIN"
 										type={type}
 										shipment_id={shipment_id}
+										invoicesMap={invoicesMap}
 										data={data}
 										loading={loading}
 										getClosedTasks={getClosedTasks}
