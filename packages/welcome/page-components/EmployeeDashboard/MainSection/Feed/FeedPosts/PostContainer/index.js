@@ -9,6 +9,7 @@ import { isEmpty } from '@cogoport/utils';
 import { formatDistanceToNow } from 'date-fns';
 import React, { useState, useEffect } from 'react';
 
+import makeShortName from '../../../../../../common/MakeShortName';
 import useCreateCompanyFeed from '../../../../../../hooks/useCreateCompanyFeed';
 import useCreateEmployeeReaction from '../../../../../../hooks/useCreateEmployeeReaction';
 
@@ -77,15 +78,6 @@ function PopoverContent({ handleIconSelect = () => {} }) {
 		</div>
 	);
 }
-const makeShortName = (name) => {
-	const words = name.split(' ');
-	let shortName = '';
-	words.forEach((word) => {
-		shortName += word.slice(0, 1);
-	});
-	return shortName;
-};
-
 function PostContainer({ item = {}, bypass, feedRefetch }) {
 	const [reactionData, setReactionData] = useState({
 		reaction_count : item.no_of_reactions || 0,
@@ -96,7 +88,7 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 	const { createCompanyFeed } = useCreateCompanyFeed(feedRefetch, 'deleted');
 
 	const [selectedIcon, setSelectedIcon] = useState('appLike');
-	const [taggedPeople, setTaggedPeople] = useState([]);
+	// const [taggedPeople, setTaggedPeople] = useState([]);
 
 	useEffect(() => {
 		if (reactionsObject) {
@@ -104,20 +96,20 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 		}
 	}, [reactionsObject]);
 
-	useEffect(() => {
-		if (['appreciation', 'work_anniversary', 'birthday'].includes(item?.feed_type)) {
-			const initials = item?.tagged_employee_names?.map((name) => {
-				const words = name?.split(' ');
-				const firstInitial = words?.[0][0]?.toUpperCase();
-				const lastInitial = words?.[words.length - 1][GLOBAL_CONSTANTS.zeroth_index]?.toUpperCase();
-				return firstInitial + lastInitial;
-			});
+	// useEffect(() => {
+	// 	if (['appreciation', 'work_anniversary', 'birthday'].includes(item?.feed_type)) {
+	// 		const initials = item?.tagged_employee_names?.map((name) => {
+	// 			const words = name?.split(' ');
+	// 			const firstInitial = words?.[0][0]?.toUpperCase();
+	// 			const lastInitial = words?.[words.length - 1][GLOBAL_CONSTANTS.zeroth_index]?.toUpperCase();
+	// 			return firstInitial + lastInitial;
+	// 		});
 
-			const filteredArray = initials.filter(Boolean);
+	// 		const filteredArray = initials.filter(Boolean);
 
-			setTaggedPeople(filteredArray);
-		}
-	}, [item.feed_content, item?.feed_type, item?.tagged_employee_names]);
+	// 		setTaggedPeople(filteredArray);
+	// 	}
+	// }, [item.feed_content, item?.feed_type, item?.tagged_employee_names]);
 
 	useEffect(() => {
 		if (Array.isArray(item?.my_reaction)) {
@@ -170,9 +162,21 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 		<div key={item.id} className={styles.container}>
 			<div className={styles.header_flex}>
 				<div className={styles.user_data}>
-					<div className={styles.name_avatar}>
-						{makeShortName(item.name || '-')}
-					</div>
+					{
+							item?.passport_size_photo_url
+								? (
+									<img
+										className={styles.name_avatar}
+										src={item?.passport_size_photo_url}
+										alt="profile"
+									/>
+								)
+								:						 (
+									<div className={cl`${styles.circle} ${styles.circle2_bg}`}>
+										{makeShortName(item?.name)}
+									</div>
+								)
+						}
 					<div className={styles.user_name}>
 						{item.name || '-'}
 						<div className={styles.designation}>
@@ -214,11 +218,24 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 						<div className={cl`${styles.circle} ${styles.circle1_bg}`}>
 							{feedTypeMapping[item.feed_type]}
 						</div>
-						{taggedPeople?.length > 0
-							? taggedPeople?.map((val) => (
-								<div className={cl`${styles.circle} ${styles.circle2_bg}`} key={val}>
-									{val}
-								</div>
+						{item?.tagged_employee_info?.length > 0
+							? item?.tagged_employee_info?.map((val) => (
+
+								val.photo
+									? (
+										<img
+											className={cl`${styles.circle} ${styles.circle_profile}`}
+											src={val?.photo}
+											alt="profile"
+											key={val?.name}
+										/>
+									)
+									: (
+										<div className={cl`${styles.circle} ${styles.circle2_bg}`} key={val?.name}>
+											{makeShortName(val?.name)}
+										</div>
+									)
+
 							))
 							: null}
 					</div>

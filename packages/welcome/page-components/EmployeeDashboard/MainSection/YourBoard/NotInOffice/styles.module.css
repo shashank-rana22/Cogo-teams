@@ -24,13 +24,17 @@
 	font-size: 12px;
 }
 
-.user_avatar {
+.user_avatar_photo {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: 30px;
 	height: 30px;
 	margin-bottom: 4px;
+	border-radius: 100px;
+}
+
+.user_avatar {
 	color: #fff;
 	background: #f68b21;
 	border-radius: 100px;

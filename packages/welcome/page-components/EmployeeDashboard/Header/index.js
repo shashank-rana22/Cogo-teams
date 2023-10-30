@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { Button, Modal, Table } from '@cogoport/components';
+import { Button, Modal, Table, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMRaiseTicket, IcMEmail, IcMDownload } from '@cogoport/icons-react';
@@ -121,9 +121,21 @@ function Header({ summaryData }) {
 				</div>
 				<div className={styles.header_data_flex}>
 					<div className={styles.user_left_flex}>
-						<div className={styles.name_avatar}>
-							HK
-						</div>
+						{
+							summaryData?.my_photo
+								? (
+									<img
+										className={styles.name_avatar_photo}
+										src={summaryData?.my_photo}
+										alt="profile"
+									/>
+								)
+								: (
+									<div className={cl`${styles.name_avatar_photo} ${styles.name_avatar}`}>
+										{userName}
+									</div>
+								)
+						}
 						<div className={styles.greetings}>
 							<div className={styles.user_name_text}>
 								Good

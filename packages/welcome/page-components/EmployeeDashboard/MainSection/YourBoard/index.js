@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 import TimeSummary from './TimeSummary';
 
 function YourBoard({ data, loading }) {
-	const { manager_name, hrbp_name, next_holiday_detail, self_working_stats, last_leave_taken } = data || {};
+	const { manager_detail, hrbp_detail, next_holiday_detail, self_working_stats, last_leave_taken } = data || {};
 
 	return (
 		<div className={styles.container}>
@@ -20,7 +20,7 @@ function YourBoard({ data, loading }) {
 			<div className={styles.sub_heading}>
 				At a glance view of important stuff
 			</div>
-			<OrgData manager_name={manager_name} hrbp_name={hrbp_name} loading={loading} />
+			<OrgData manager_detail={manager_detail} hrbp_detail={hrbp_detail} loading={loading} />
 			<TimeSummary />
 			<NotInOffice data={data} loading={loading} />
 			<LeaveBalance />

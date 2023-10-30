@@ -22,18 +22,20 @@
 }
 
 .avg_data {
+	display: flex;
+	align-items: center;
 	font-size: 12px;
 	color: #828282;
 }
 
 .avg_summary {
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 600;
 	color: #221f20;
 }
 
 .mr_30 {
-	margin-right: 40px;
+	margin-right: 10px;
 }
 
 .footer {
@@ -50,4 +52,18 @@
 	color: #221f20;
 	text-transform: capitalize;
 	cursor: pointer;
+}
+
+.name_avatar_photo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+
+.name_avatar {
+	color: #fff;
+	background: #f68b21;
 }

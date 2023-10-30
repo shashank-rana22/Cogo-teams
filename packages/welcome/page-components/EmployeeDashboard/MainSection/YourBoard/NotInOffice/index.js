@@ -1,7 +1,9 @@
-import { Popover } from '@cogoport/components';
+import { Popover, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
+
+import makeShortName from '../../../../../common/MakeShortName';
 
 import styles from './styles.module.css';
 
@@ -52,8 +54,16 @@ function NotInOffice({ data = {} }) {
 			<div className={styles.user_data}>
 				{visibleAbsentees.map((item) => (
 					<div className={styles.user_detail} key={item}>
-						<div className={styles.user_avatar}>RD</div>
-						<span className={styles.ellipse}>{item}</span>
+						{
+							item[1]
+								? <img className={styles.user_avatar_photo} src={item[1]} alt="profile" />
+								:							(
+									<div className={cl`${styles.user_avatar_photo} ${styles.user_avatar}`}>
+										{makeShortName(item[0])}
+									</div>
+								)
+						}
+						<span className={styles.ellipse}>{item[0]}</span>
 					</div>
 				))}
 				<Popover placement="bottom" trigger="mouseenter" render={<AbsentList />}>
