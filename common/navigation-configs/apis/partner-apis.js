@@ -9803,6 +9803,12 @@ const partner = {
 			feature     : 'settlement',
 		},
 		{
+			api         : 'post_payments_accounts_bulk_upload_payments',
+			access_type : 'private',
+			module      : 'settlement',
+			feature     : 'settlement',
+		},
+		{
 			api         : 'get_payments_settlement_documents',
 			access_type : 'private',
 			module      : 'settlement',
