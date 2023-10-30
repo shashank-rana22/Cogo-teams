@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 function FinanceClosedCardsSet({
 	job_id = '',
 	shipment_id = '',
-	invoicesMap = {},
+	billsMap = {},
 	setQuotationsData = () => {},
 }) {
 	const {
@@ -28,7 +28,7 @@ function FinanceClosedCardsSet({
 				data={taskData?.SELL}
 				type="sell"
 				loading={taskDataLoading}
-				invoicesMap={invoicesMap}
+				billsMap={billsMap}
 				getClosedTasks={getClosedTasks}
 				shipment_id={shipment_id}
 				jobId={job_id}
@@ -38,7 +38,7 @@ function FinanceClosedCardsSet({
 				jobId={job_id}
 				data={taskData?.BUY}
 				type="buy"
-				invoicesMap={invoicesMap}
+				billsMap={billsMap}
 				loading={taskDataLoading}
 				shipment_id={shipment_id}
 				getClosedTasks={getClosedTasks}
