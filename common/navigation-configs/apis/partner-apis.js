@@ -5145,6 +5145,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'bookings',
 		},
+		{
+			api          : 'list_chat_agents',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 
 	operations_dashboard: [
