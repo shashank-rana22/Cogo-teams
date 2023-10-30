@@ -28,7 +28,8 @@ const useListBfPurchaseBills = ({ jobNumbers = [] }) => {
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [jobNumbers, trigger]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(jobNumbers), trigger]);
 
 	useEffect(() => {
 		listApi();
