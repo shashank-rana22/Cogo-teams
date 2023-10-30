@@ -1,8 +1,6 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-const SORT_BY = 'created_at';
-const SORT_TYPE = 'asc';
 const PAGE_LIMIT = 10;
 
 function useListHandlingFees({
@@ -31,8 +29,6 @@ function useListHandlingFees({
 				...restFilters,
 			},
 			page_limit               : PAGE_LIMIT,
-			sort_by                  : SORT_BY,
-			sort_type                : SORT_TYPE,
 			pagination_data_required : true,
 			page,
 			...(defaultParams || {}),

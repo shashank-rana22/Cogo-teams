@@ -17,6 +17,7 @@ const controls = ({ activeService }) => [
 		placeholder : 'Select Cogo Entity',
 		asyncKey    : 'list_cogo_entity',
 		initialCall : true,
+		valueKey    : 'id',
 		labelKey    : 'business_name',
 		renderLabel : (item) => `${item?.entity_code} ${item?.business_name}`,
 		span        : 6,

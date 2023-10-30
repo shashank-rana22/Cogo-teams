@@ -22,6 +22,10 @@ const tagsMapping = [
 		getValue : (data) => startCase(data?.organization_sub_type),
 	},
 	{
+		key      : 'trade_type',
+		getValue : (data) => startCase(data?.trade_type),
+	},
+	{
 		key      : 'performed_by',
 		getValue : (data) => startCase(data?.performed_by),
 	},

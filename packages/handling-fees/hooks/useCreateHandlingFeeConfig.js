@@ -4,6 +4,7 @@ import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
 import getPayload from '../helpers/getPayload';
+import { validateSlabs } from '../helpers/validateSlabs';
 
 function useCreateHandlingFeeConfig({
 	activeService = '',
@@ -31,19 +32,25 @@ function useCreateHandlingFeeConfig({
 				handling_fee_id : data?.data?.id || undefined,
 			});
 
-			if (type === 'edit') {
-				await triggerUpdate({
-					data: payload,
-				});
-			} else {
-				await trigger({
-					data: payload,
-				});
+			if (validateSlabs({ slabs: payload.slab_details })) {
+				if (type === 'edit') {
+					await triggerUpdate({
+						data: payload,
+					});
+				} else {
+					await trigger({
+						data: payload,
+					});
+				}
+
+				Toast.success(
+					`${
+						type === 'edit' ? 'Updated' : 'Created'
+					} Successfully`,
+				);
+
+				router.push('/handling-fees');
 			}
-
-			Toast.success('Created Successfully');
-
-			router.push('/handling-fees');
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(error.response?.data);
@@ -55,8 +62,9 @@ function useCreateHandlingFeeConfig({
 		try {
 			await triggerUpdate({
 				data: {
-					id     : data?.data?.id,
-					status : data?.data?.status === 'active' ? 'inactive' : 'active',
+					id           : data?.data?.id,
+					status       : data?.data?.status === 'active' ? 'inactive' : 'active',
+					slab_details : data?.data?.slab_details,
 				},
 			});
 

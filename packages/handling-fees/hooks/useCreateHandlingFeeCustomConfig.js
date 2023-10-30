@@ -4,6 +4,7 @@ import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
 import getPayloadCustomConfigs from '../helpers/getPayloadCustomConfgis';
+import { validateSlabs } from '../helpers/validateSlabs';
 
 function useCreateHandlingFeeCustomConfig({
 	defaultConfigFeeUnit = '',
@@ -27,15 +28,17 @@ function useCreateHandlingFeeCustomConfig({
 				defaultConfigFeeUnit,
 			});
 
-			await trigger({
-				data: payload,
-			});
+			if (validateSlabs({ slabs: payload.slab_details })) {
+				await trigger({
+					data: payload,
+				});
 
-			Toast.success('Custom rate created sucessfully');
+				Toast.success('Custom rate created sucessfully');
 
-			onClosingForm();
+				onClosingForm();
 
-			refetchGetHandlingFeeData();
+				refetchGetHandlingFeeData();
+			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}

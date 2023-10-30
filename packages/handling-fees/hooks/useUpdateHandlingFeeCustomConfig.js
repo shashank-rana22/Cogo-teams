@@ -3,6 +3,7 @@ import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
 import getPayloadCustomConfigs from '../helpers/getPayloadCustomConfgis';
+import { validateSlabs } from '../helpers/validateSlabs';
 
 function useUpdateHandlingFeeCustomConfig({
 	itemValue = {},
@@ -26,15 +27,17 @@ function useUpdateHandlingFeeCustomConfig({
 				values, handling_fee_id: id, defaultConfigFeeUnit, activeList, item_id: itemValue?.id,
 			});
 
-			await trigger({
-				data: payload,
-			});
+			if (validateSlabs({ slabs: payload.slab_details })) {
+				await trigger({
+					data: payload,
+				});
 
-			Toast.success('Custom rate updated sucessfully');
+				Toast.success('Custom rate updated sucessfully');
 
-			onClosingForm();
+				onClosingForm();
 
-			refetchGetHandlingFeeData();
+				refetchGetHandlingFeeData();
+			}
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(error?.response?.data);
@@ -44,19 +47,12 @@ function useUpdateHandlingFeeCustomConfig({
 
 	const onClickDeactivate = async () => {
 		try {
-			const deleted_organization_ids = (itemValue?.organization_ids || []).filter(
-				(orgId) => !(itemValue?.organization_ids || []).includes(orgId),
-			);
 			await trigger({
 				data: {
-					id                                : itemValue?.id,
-					convenience_rate_configuration_id : id,
-					organization_ids                  : itemValue?.organization_ids,
-					deleted_organization_ids,
-					...(itemValue?.status === 'inactive'
-						? { slab_details: itemValue?.slab_details }
-						: {}),
-					status: itemValue?.status === 'active' ? 'inactive' : 'active',
+					id               : itemValue?.id,
+					organization_ids : itemValue?.organization_ids,
+					slab_details     : itemValue?.slab_details,
+					status           : itemValue?.status === 'active' ? 'inactive' : 'active',
 				},
 			});
 			Toast.success(
