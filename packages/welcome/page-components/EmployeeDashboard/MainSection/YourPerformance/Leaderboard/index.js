@@ -17,9 +17,19 @@ function Leaderboard({ rating_list }) {
 			<div className={cl`${styles.leaderboard_users} ${!second ? styles.one_item : null}`}>
 				{second && (
 					<div className={styles.rank_user}>
-						<div className={styles.rank_2}>
-							{second?.name?.[0] || ''}
-						</div>
+						{second?.image
+							? (
+								<img
+									className={styles.rank_2}
+									src={second?.image}
+									alt="profile"
+								/>
+							)
+							: (
+								<div className={styles.rank_2}>
+									{second?.name?.[0] || ''}
+								</div>
+							)}
 						<div className={styles.rank_2_count}>
 							2
 						</div>
@@ -31,9 +41,19 @@ function Leaderboard({ rating_list }) {
 				)}
 				{first && (
 					<div className={styles.rank_user}>
-						<div className={styles.rank_1}>
-							{first?.name?.[0] || ''}
-						</div>
+						{first?.image
+							? (
+								<img
+									className={styles.rank_1}
+									src={first?.image}
+									alt="profile"
+								/>
+							)
+							: (
+								<div className={styles.rank_1}>
+									{first?.name?.[0] || ''}
+								</div>
+							)}
 						<div className={styles.rank_1_count}>
 							1
 						</div>
@@ -45,9 +65,19 @@ function Leaderboard({ rating_list }) {
 				)}
 				{third && (
 					<div className={styles.rank_user}>
-						<div className={styles.rank_3}>
-							{third?.name?.[0] || ''}
-						</div>
+						{third?.image
+							? (
+								<img
+									className={styles.rank_3}
+									src={third?.image}
+									alt="profile"
+								/>
+							)
+							: (
+								<div className={styles.rank_3}>
+									{third?.name?.[0] || ''}
+								</div>
+							)}
 						<div className={styles.rank_3_count}>
 							3
 						</div>

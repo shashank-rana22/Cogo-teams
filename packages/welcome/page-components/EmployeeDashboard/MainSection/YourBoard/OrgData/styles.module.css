@@ -60,10 +60,13 @@
 	justify-content: center;
 	width: 30px;
 	height: 30px;
+	margin: 0 4px 0 0;
 	border-radius: 50%;
+	object-fit: fill;
 }
 
 .name_avatar {
+	margin: 0 4px 0 0;
 	color: #fff;
 	background: #f68b21;
 }
