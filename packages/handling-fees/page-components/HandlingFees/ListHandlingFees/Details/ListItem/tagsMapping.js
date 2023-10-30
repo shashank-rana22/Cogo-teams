@@ -2,16 +2,20 @@ import { startCase } from '@cogoport/utils';
 
 const tagsMapping = [
 	{
+		key      : 'cogo_entity_name',
+		getValue : (data) => data?.cogo_entity_name,
+	},
+	{
+		key      : 'serviceable_country',
+		getValue : (data) => data?.serviceable_country,
+	},
+	{
 		key      : 'booking_source',
 		getValue : (data) => startCase(data?.booking_source),
 	},
 	{
 		key      : 'rate_source',
 		getValue : (data) => startCase(data?.rate_source),
-	},
-	{
-		key      : 'cogo_entity_name',
-		getValue : (data) => data?.cogo_entity_name,
 	},
 	{
 		key      : 'organization_type',

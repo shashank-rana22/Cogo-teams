@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function ListFilters({
 	setFilters = () => { },
 	activeService = '',
-	setShowPopover = () => { },
+	setShowPopover = () => {},
 }) {
 	const DEFAULT_VALUES = {};
 
