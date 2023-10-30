@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import FEE_UNIT_MAPPING from '../../configs/FEE_UNIT_MAPPING.json';
 import SLAB_UNIT_MAPPING from '../../configs/SLAB_UNIT_MAPPING.json';
 import handleFieldArrayAddCheck from '../../helpers/checkFeeConfiguration';
+import getCurrencyOptions from '../../helpers/getCurrencyOptions';
 
 import getFilteredSlabDetails from './getFilteredSlabDetails';
 
@@ -91,9 +92,8 @@ const getMandatoryControls = ({
 				{
 					name        : 'fee_currency',
 					label       : 'Fees Currency',
-					type        : 'async_select',
-					asyncKey    : 'list_exchange_rate_currencies',
-					initialCall : true,
+					type        : 'select',
+					options     : getCurrencyOptions(),
 					placeholder : 'Value',
 					rules       : {
 						required: 'Fee Currency is Required.',
@@ -103,11 +103,11 @@ const getMandatoryControls = ({
 				},
 				{
 					name        : 'fee_value',
-					label       : 'Handling Fees',
+					label       : 'Handling Fee',
 					type        : 'number',
 					placeholder : 'Value',
 					rules       : {
-						required : 'Handling Fees is Required.',
+						required : 'Handling Fee is Required.',
 						min      : 0,
 						validate : (value) => (value >= MIN_NUMBER ? undefined : 'Invalid Price Value'),
 					},

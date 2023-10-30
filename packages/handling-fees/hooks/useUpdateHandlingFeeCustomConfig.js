@@ -39,9 +39,7 @@ function useUpdateHandlingFeeCustomConfig({
 				refetchGetHandlingFeeData();
 			}
 		} catch (error) {
-			if (error?.response) {
-				Toast.error(error?.response?.data);
-			}
+			Toast.error(error?.response?.data);
 		}
 	};
 
@@ -63,9 +61,7 @@ function useUpdateHandlingFeeCustomConfig({
 			onClosingForm();
 			refetchGetHandlingFeeData();
 		} catch (error) {
-			if (error?.response) {
-				Toast.error(error?.response?.data);
-			}
+			Toast.error(error?.response?.data);
 		}
 	};
 

@@ -19,7 +19,6 @@ const controls = ({ activeService }) => [
 		initialCall : true,
 		valueKey    : 'id',
 		labelKey    : 'business_name',
-		renderLabel : (item) => `${item?.entity_code} ${item?.business_name}`,
 		span        : 6,
 	},
 	{

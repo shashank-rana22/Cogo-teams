@@ -45,7 +45,9 @@ const getOptionalControls = ({
 		organization_type,
 		rate_source,
 		trade_type,
+		serviceable_country_id,
 	} = data?.data || {};
+
 	const organizationSubTypeOptions = ORGANIZATION_SUBTYPES_MAPPING[formValues
 		?.organization_type || 'importer_exporter'];
 
@@ -59,7 +61,6 @@ const getOptionalControls = ({
 			asyncKey       : 'list_cogo_entity',
 			initialCall    : true,
 			labelKey       : 'business_name',
-			renderLabel    : (item) => `${item?.business_name}`,
 			isClearable    : true,
 			value          : cogo_entity_id,
 			defaultOptions : true,
@@ -77,10 +78,12 @@ const getOptionalControls = ({
 			params      : {
 				filters: { type: ['country'] },
 			},
-			placeholder : 'Select Country',
-			span        : 2,
-			disabled    : isUpdatable,
-			size        : 'sm',
+			defaultOptions : true,
+			value          : serviceable_country_id,
+			placeholder    : 'Select Country',
+			span           : 2,
+			disabled       : isUpdatable,
+			size           : 'sm',
 		},
 		{
 			name        : 'booking_source',

@@ -52,9 +52,7 @@ function useCreateHandlingFeeConfig({
 				router.push('/handling-fees');
 			}
 		} catch (error) {
-			if (error?.response) {
-				Toast.error(error.response?.data);
-			}
+			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 
@@ -79,7 +77,7 @@ function useCreateHandlingFeeConfig({
 				`/handling-fees?service=${activeService}`,
 			);
 		} catch (error) {
-			Toast.error(getApiErrorString(error.data));
+			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 
