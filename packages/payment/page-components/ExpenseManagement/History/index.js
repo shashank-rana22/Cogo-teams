@@ -62,6 +62,35 @@ function ExpenseHistory({ toggleValue, hr_view }) {
 					<span className={styles.top_grey_text}>View all you expenses</span>
 
 				</div>
+				<div className={styles.header_input}>
+					{/* <div className={styles.input_filters}>
+						<Select
+							size="md"
+							placeholder="Status"
+							className={styles.select_input}
+									// name="payroll_status"
+									// control={control}
+							value={status}
+							options={OPTION_STATUS}
+							isClearable
+							onChange={(e) => {
+								setStatus(e);
+								setFilters((prev) => ({ ...prev, payroll_status: e, page: 1 }));
+							}}
+						/>
+					</div>
+					<div>
+						<Input
+							size="md"
+							className={styles.input_search}
+									// prefix={<IcMAppSearch className={styles.search_icon} width={20} height={20} />}
+							placeholder="Search"
+							onChange={(e) => handleSearch(e)}
+							name="search_payroll"
+							value={searchQuery}
+						/>
+					</div> */}
+				</div>
 			</div>
 			{
 				!isEmpty(list) || loading

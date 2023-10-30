@@ -860,6 +860,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'get_reimbursement_statuses',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 
