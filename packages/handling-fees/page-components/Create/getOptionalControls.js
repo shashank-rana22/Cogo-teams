@@ -67,7 +67,7 @@ const getOptionalControls = ({
 			disabled       : isUpdatable,
 			span           : 2,
 			size           : 'sm',
-			rules          : !isUpdatable && { required: 'Cogo Entity is Required.' },
+			rules          : { required: 'Cogo Entity is Required.' },
 		},
 		{
 			name        : 'serviceable_country_id',

@@ -72,7 +72,7 @@ function Layout(
 							</div>
 						) : null}
 
-						{type ? <FormElement control={control} {...restCtrl} type={type} /> : null}
+						{type ? <FormElement control={control} rules={rules} {...restCtrl} type={type} /> : null}
 
 						{errors?.[restCtrl.name]
 							? <div className={styles.errors}>{errors[restCtrl.name]?.message}</div>

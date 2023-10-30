@@ -34,11 +34,11 @@ const handleFieldArrayAddCheck = ({ currentIndex, formValues, name }) => {
 		return true;
 	}
 	if (Number(fee_value) < Number(minimum_fee_value)) {
-		Toast.error('Check for Proper Minimum Value Input');
+		Toast.error('Minimum Value should be less than Handling Fee');
 		return false;
 	}
 	if (Number(fee_value) > Number(maximum_fee_value)) {
-		Toast.error('Check for Proper Maximum Value Input');
+		Toast.error('Maximum Value should be greater than Handling Fee');
 		return false;
 	}
 

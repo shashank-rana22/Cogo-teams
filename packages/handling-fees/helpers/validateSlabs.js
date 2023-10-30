@@ -48,11 +48,11 @@ export const validateSlabs = ({ slabs = [] }) => {
 		const { fee_value, minimum_fee_value, maximum_fee_value } = slabs[i] || {};
 
 		if (Number(fee_value) < Number(minimum_fee_value)) {
-			Toast.error('Check for Proper Minimum Value Input');
+			Toast.error('Minimum Value should be less than Handling Fee');
 			return false;
 		}
 		if (Number(fee_value) > Number(maximum_fee_value)) {
-			Toast.error('Check for Proper Maximum Value Input');
+			Toast.error('Maximum Value should be greater than Handling Fee');
 			return false;
 		}
 	}
