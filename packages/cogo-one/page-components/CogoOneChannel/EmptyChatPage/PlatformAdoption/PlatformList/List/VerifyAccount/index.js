@@ -22,20 +22,19 @@ function VerifyAccount({
 		accountType = '',
 	} = verifyAccount || {};
 
-	const [checked, setChecked] = useState(false);
-
 	const { documents = [], id = '' } = orgData || {};
 
-	const DOCUMENT_OPTIONS = useMemo(() => (accountData || []).map((itm) => ({
-		label : startCase(itm?.document_type),
-		value : itm?.document_type,
-		url   : itm?.image_url,
-	})), [accountData]);
-
+	const [checked, setChecked] = useState(false);
 	const [selectDoc, setSelectDoc] = useState({
 		docType : '',
 		docUrl  : '',
 	});
+
+	const documentOptions = useMemo(() => (accountData || []).map((itm) => ({
+		label : startCase(itm?.document_type),
+		value : itm?.document_type,
+		url   : itm?.image_url,
+	})), [accountData]);
 
 	const hasDocument = isEmpty(accountData);
 
@@ -85,7 +84,7 @@ function VerifyAccount({
 				<div className={styles.container}>
 					<FileViewer
 						verifyAccount={verifyAccount}
-						documentOptions={DOCUMENT_OPTIONS}
+						documentOptions={documentOptions}
 						selectDoc={selectDoc}
 						setSelectDoc={setSelectDoc}
 						hasDocument={hasDocument}

@@ -1,6 +1,6 @@
 import { IcMArrowNext } from '@cogoport/icons-react';
 
-import { ACTIVITY_MAPPING } from '../../../../../constants/PLATFORM_ADOPTION_CONSTANTS';
+import { ACTIVITY_MAPPING } from '../../../../../constants/platformAdoptionConstant';
 
 import styles from './styles.module.css';
 
