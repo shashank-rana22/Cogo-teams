@@ -9551,7 +9551,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_purchase_expense_expense_configuration_by_id',
+			api         : 'get_purchase_expense_expense_configuration',
 			access_type : 'private',
 		},
 		{
