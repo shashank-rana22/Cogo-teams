@@ -111,7 +111,7 @@ function DetailsCard({
 						</div>
 
 						<div className={styles.specific_wallet_container}>
-							<div>Points & Promocde</div>
+							<div>Points & Promocode</div>
 							<GetPill
 								color="green"
 								loading={summaryLoading}
