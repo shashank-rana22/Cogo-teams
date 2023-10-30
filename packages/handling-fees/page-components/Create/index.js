@@ -28,9 +28,15 @@ const BOOKING_SOURCES_WITH_RATE_TYPES = [
 function Create({ data = {}, type = 'create' }) {
 	const router = useRouter();
 
-	const [activeService, setActiveService] = useState('fcl_freight');
+	const { service } = router.query || {};
 
-	const { onCreate = () => {} } = useCreateHandlingFeeConfig({ activeService, data, type });
+	const [activeService, setActiveService] = useState(service || 'fcl_freight');
+
+	const {
+		onCreate = () => {},
+		updationLoading = false,
+		onClickUpdateStatus = () => {},
+	} = useCreateHandlingFeeConfig({ activeService, data, type });
 
 	const { control, formState:{ errors = {} } = {}, watch, setValue, handleSubmit } = useForm({
 		defaultValues: {},
@@ -90,7 +96,7 @@ function Create({ data = {}, type = 'create' }) {
 				>
 					<IcMArrowBack height={20} width={20} fill="#221f20" />
 				</Button>
-				<div style={{ fontSize: '20px', fontWeight: '600' }}>Create Handling fees Configuration</div>
+				<div style={{ fontSize: '20px', fontWeight: '600' }}>Create Handling Fees Configuration</div>
 			</div>
 
 			{type === 'create' ? (
@@ -110,6 +116,18 @@ function Create({ data = {}, type = 'create' }) {
 			) : null}
 
 			<div className={styles.global_config}>
+
+				{type === 'edit' && data?.data?.config_type !== 'default' ? (
+					<Button
+						themeType="secondary"
+						onClick={onClickUpdateStatus}
+						style={{ fontWeight: '600', marginLeft: 'auto', marginBottom: '24px' }}
+						disabled={updationLoading}
+					>
+						{data?.data?.status === 'active' ? 'Deactivate' : 'Activate'}
+					</Button>
+				) : null}
+
 				<Layout
 					control={control}
 					controls={optionalControls}

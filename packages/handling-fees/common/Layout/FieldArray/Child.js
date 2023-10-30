@@ -115,9 +115,9 @@ function Child({
 										{...newProps?.options_key ? { options } : {}}
 									/>
 
-									{error?.[newProps]?.message ? (
+									{error?.[ctrlItemName]?.message ? (
 										<p className={styles.error}>
-											{error?.[newProps]?.message || ''}
+											{error?.[ctrlItemName]?.message || ''}
 										</p>
 									) : null}
 								</div>

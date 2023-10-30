@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
@@ -16,7 +17,7 @@ function useCreateHandlingFeeConfig({
 		method : 'POST',
 	}, { manual: true });
 
-	const [{ loading: loadingUpdation }, triggerUpdate] = useRequest({
+	const [{ loading: updationLoading }, triggerUpdate] = useRequest({
 		url    : './update_handling_fee_configuration',
 		method : 'POST',
 	}, { manual: true });
@@ -40,7 +41,7 @@ function useCreateHandlingFeeConfig({
 				});
 			}
 
-			Toast.success('Convenience rate created sucessfully');
+			Toast.success('Created Successfully');
 
 			router.push('/handling-fees');
 		} catch (error) {
@@ -50,11 +51,36 @@ function useCreateHandlingFeeConfig({
 		}
 	};
 
+	const onClickUpdateStatus = async () => {
+		try {
+			await triggerUpdate({
+				data: {
+					id     : data?.data?.id,
+					status : data?.data?.status === 'active' ? 'inactive' : 'active',
+				},
+			});
+
+			Toast.success(
+				`Handling fee configuration ${
+					data?.data?.status === 'active' ? 'deactivated' : 'activated'
+				} successfully`,
+			);
+
+			router.push(
+				`/handling-fees?service=${activeService}`,
+				`/handling-fees?service=${activeService}`,
+			);
+		} catch (error) {
+			Toast.error(getApiErrorString(error.data));
+		}
+	};
+
 	return {
 		loading,
 		onCreate,
-		loadingUpdation,
+		updationLoading,
 		triggerUpdate,
+		onClickUpdateStatus,
 	};
 }
 

@@ -62,7 +62,7 @@ function ListHeader({
 								onClick={() => setShowPopover(!showPopover)}
 							>
 								{!isEmpty(filters) ? <span className={styles.filter_applied} /> : null}
-								<IcMFilter style={{ marginRight: 4 }} />
+								<IcMFilter style={{ marginRight: 4 }} width={18} height={18} />
 								Filters
 							</Button>
 						</div>

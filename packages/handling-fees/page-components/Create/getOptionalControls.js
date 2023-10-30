@@ -44,10 +44,10 @@ const getOptionalControls = ({
 		booking_source,
 		organization_type,
 		rate_source,
+		trade_type,
 	} = data?.data || {};
-
-	// eslint-disable-next-line max-len
-	const organizationSubTypeOptions = ORGANIZATION_SUBTYPES_MAPPING[formValues?.organization_type || 'importer_exporter'];
+	const organizationSubTypeOptions = ORGANIZATION_SUBTYPES_MAPPING[formValues
+		?.organization_type || 'importer_exporter'];
 
 	return [
 		{
@@ -69,7 +69,7 @@ const getOptionalControls = ({
 			rules          : !isUpdatable && { required: 'Cogo Entity is Required.' },
 		},
 		{
-			name        : 'country_id',
+			name        : 'serviceable_country_id',
 			label       : 'Country',
 			type        : 'async_select',
 			initialCall : true,
@@ -140,16 +140,16 @@ const getOptionalControls = ({
 			name        : 'trade_type',
 			label       : 'Trade Type',
 			type        : 'select',
-			placeholder : 'Select Org Sub Type',
+			placeholder : 'Select Trade Type',
 			span        : 2,
 			options     : [
 				{ label: 'Import', value: 'import' },
 				{ label: 'Export', value: 'export' },
 				{ label: 'Domestic', value: 'domestic' },
-				{ label: 'Cross country', value: 'cross-country' },
+				{ label: 'Cross country', value: 'cross_country' },
 			],
 			isClearable : true,
-			value       : organization_sub_type,
+			value       : trade_type,
 			disabled    : isUpdatable,
 			size        : 'sm',
 		},

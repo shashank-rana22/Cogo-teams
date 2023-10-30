@@ -6,9 +6,7 @@ import SERVICE_TABS_MAPPING from '../../utils/service-tabs-mapping';
 import ListHandlingFees from './ListHandlingFees';
 import styles from './styles.module.css';
 
-function HandlingFees() {
-	const [activeService, setActiveService] = useState('fcl_freight');
-
+function HandlingFees({ activeService = '', setActiveService = () => {} }) {
 	const [listType, setListType] = useState('active');
 
 	return (

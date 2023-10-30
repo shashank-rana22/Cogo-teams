@@ -60,7 +60,7 @@ function useUpdateHandlingFeeCustomConfig({
 				},
 			});
 			Toast.success(
-				`Convenience fee configuration ${
+				`Handling fee configuration ${
 					itemValue?.status === 'active' ? 'deactivated' : 'activated'
 				} successfully`,
 			);
