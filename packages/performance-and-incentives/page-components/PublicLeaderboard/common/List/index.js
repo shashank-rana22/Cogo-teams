@@ -42,7 +42,6 @@ function List(props) {
 
 			<div
 				className={styles.list_body_container}
-				style={{ top: isOverflowed ? '50px' : '' }}
 				ref={divRef}
 			>
 				<div
@@ -50,6 +49,7 @@ function List(props) {
 					style={{
 						animationDuration: isOverflowed
 							? getAnimationDuration({ listLength: tableList.length }) : '0s',
+						top: isOverflowed ? '70px' : '',
 					}}
 				>
 					{tableList.map((listItem) => (

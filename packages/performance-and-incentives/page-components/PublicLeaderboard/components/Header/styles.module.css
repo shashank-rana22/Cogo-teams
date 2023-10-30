@@ -52,7 +52,9 @@
 
 .last_updated_at {
 	margin-top: 8px;
+	font-size: 12px;
 	color: #828282;
+	text-align: right;
 
 	@media (min-width: 2560px) {
 		font-size: 30px;

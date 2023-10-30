@@ -1,4 +1,7 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+const geo = getGeoConstants();
 
 const SHIPMENT_CANCELLATION_STATES = [
 	'shipment_received',
@@ -28,8 +31,12 @@ const SERVICE_CANCELLATION_STATES = [
 ];
 
 export default function getCanCancelShipment({
-	shipment_data, primary_service, user_data,
-	activeStakeholder, stakeholderConfig,
+	shipment_data = {},
+	primary_service = {},
+	user_data = {},
+	role_ids = [],
+	activeStakeholder = '',
+	stakeholderConfig = {},
 }) {
 	const { cancel_shipment : { can_cancel = false } = {} } = stakeholderConfig || {};
 	const { state } = shipment_data || {};
@@ -42,6 +49,8 @@ export default function getCanCancelShipment({
 
 	const allowedEmail = user_data?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
+	const isLclSo2Executive = role_ids?.includes(geo.uuid.lcl_so2_executive);
+
 	return isShipmentInCancellationState && isServiceInCancellationState
-	&& (isStakeholderAllowed || allowedEmail || can_cancel);
+	&& (isStakeholderAllowed || allowedEmail || can_cancel || isLclSo2Executive);
 }
