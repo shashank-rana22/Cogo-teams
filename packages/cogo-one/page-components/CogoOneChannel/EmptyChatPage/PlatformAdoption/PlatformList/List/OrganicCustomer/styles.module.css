@@ -60,15 +60,11 @@
 	flex-wrap: wrap;
 	width: 45%;
 	max-height: 62px;
-
-	/* border: 1px solid #bdb; */
 }
 
 .lang {
 	display: flex;
 	margin-right: 4px;
-
-	/* color: #4f4f4f; */
 
 	&:last-child {
 		margin-right: 0;

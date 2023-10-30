@@ -3,9 +3,6 @@
 	flex-wrap: wrap;
 	width: 100%;
 	height: calc(100% - 135px);
-
-	/* border: 1px solid #bdb; */
-
 	padding-left: 10px;
 	overflow-y: auto;
 

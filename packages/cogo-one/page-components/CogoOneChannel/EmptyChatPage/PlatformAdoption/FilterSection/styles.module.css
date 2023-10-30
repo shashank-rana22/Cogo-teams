@@ -24,15 +24,6 @@
 	border: 1px solid;
 	border-radius: 26px;
 	box-shadow: 0 0 4px 0 rgb(98 127 172 / 20%);
-
-	/* &:hover { */
-
-	/* box-shadow: 0 8px 16px rgb(57 63 112 / 25%); */
-
-	/* transition: 0.3s ease-in-out;
-		transform: scale(1); */
-
-	/* } */
 }
 
 .label {

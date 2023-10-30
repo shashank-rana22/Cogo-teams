@@ -9,10 +9,6 @@ import Header from '../../Header';
 
 import styles from './styles.module.css';
 
-// const YOUTUBE_LINK = `<video controls>
-//   	<source src="https://www.youtube.com/embed/MNjRdcPuweY?si=19bno9T8O8QraUe5" type="video/webm">
-//   </video>`;
-
 const YOUTUBE_LINK = `<a
 	href="https://www.youtube.com/watch?v=MNjRdcPuweY&ab_channel=Cogoport"
 	rel="noopener noreferrer" target="_blank">Demo Tutorial Link</a>`;
