@@ -9,9 +9,11 @@ function MainCard({ data = {}, statsLoading = false }) {
 	const { completed = 0, total = 0, completed_percentage = 0 } = data;
 
 	const STATUS = [{
+		id    : 1,
 		label : 'Completed',
 		value : completed,
 	}, {
+		id    : 2,
 		label : 'Total',
 		value : total,
 	}];
@@ -22,7 +24,7 @@ function MainCard({ data = {}, statsLoading = false }) {
 			{!statsLoading && (
 				<div className={styles.sub_container}>
 					{STATUS?.map((item) => (
-						<div className={styles.column} key={item?.value}>
+						<div className={styles.column} key={item?.id}>
 							<div>{item?.label}</div>
 							<div className={styles.bold_font}>
 								{item?.value}

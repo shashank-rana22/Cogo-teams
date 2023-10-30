@@ -40,21 +40,21 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 	};
 
 	const pillMapping = [
-		{ label: summary?.serial_id && `Id: ${summary?.serial_id}` },
-		{ label: serial_id && `Id: ${serial_id}` },
-		{ label: commodity && startCase(commodity) },
-		{ label: container_size && `${container_size}ft` },
-		{ label: container_type && startCase(container_type) },
-		{ label: containers_count && `${containers_count} Containers` },
-		{ label: (inco_term || dislike_rates_inco) && startCase(inco_term || dislike_rates_inco) },
-		{ label: (inco_term && startCase(INCO_TERM_MAPPING[inco_term])) || startCase(trade_type) },
-		{ label: payment_term && startCase(payment_term) },
-		{ label: operation_type && startCase(operation_type) },
-		{ label: commodity_type && startCase(commodity_type) },
-		{ label: price_type && startCase(`Price Type : ${price_type}`) },
-		{ label: cargo_weight_per_container && `${cargo_weight_per_container} MT` },
-		{ label: !isEmpty(volume) && `${volume} cbm` },
-		{ label: chargeable_weight && `Chargeable Weight: ${chargeable_weight || '-'}` },
+		{ id: 1, label: summary?.serial_id && `Id: ${summary?.serial_id}` },
+		{ id: 2, label: serial_id && `Id: ${serial_id}` },
+		{ id: 3, label: commodity && startCase(commodity) },
+		{ id: 4, label: container_size && `${container_size}ft` },
+		{ id: 5, label: container_type && startCase(container_type) },
+		{ id: 6, label: containers_count && `${containers_count} Containers` },
+		{ id: 7, label: (inco_term || dislike_rates_inco) && startCase(inco_term || dislike_rates_inco) },
+		{ id: 8, label: (inco_term && startCase(INCO_TERM_MAPPING[inco_term])) || startCase(trade_type) },
+		{ id: 9, label: payment_term && startCase(payment_term) },
+		{ id: 10, label: operation_type && startCase(operation_type) },
+		{ id: 11, label: commodity_type && startCase(commodity_type) },
+		{ id: 12, label: price_type && startCase(`Price Type : ${price_type}`) },
+		{ id: 13, label: cargo_weight_per_container && `${cargo_weight_per_container} MT` },
+		{ id: 14, label: !isEmpty(volume) && `${volume} cbm` },
+		{ id: 15, label: chargeable_weight && `Chargeable Weight: ${chargeable_weight || '-'}` },
 
 		!isEmpty(bookingLength) && {
 			label: bookingLength > 1
@@ -76,7 +76,7 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 				:	<BookingParamsMapping bookingParams={bookingParams} />,
 		},
 	];
-	const feedbacksData = feedbacks.map((item) => item);
+	const feedbacksData = feedbacks?.map((item) => item);
 
 	const contentValuesMapping = [
 		{
