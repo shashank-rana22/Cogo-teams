@@ -68,6 +68,7 @@ function EditPackages({
 	data = {},
 	createLoading = false,
 	createSearch = () => {},
+	isMobile = false,
 }) {
 	const router = useRouter();
 
@@ -201,7 +202,7 @@ function EditPackages({
 			size="md"
 			show={show}
 			onClose={() => setShow(false)}
-			placement="right"
+			placement={isMobile ? 'bottom' : 'right'}
 			className={styles.modal}
 		>
 			<Modal.Body>

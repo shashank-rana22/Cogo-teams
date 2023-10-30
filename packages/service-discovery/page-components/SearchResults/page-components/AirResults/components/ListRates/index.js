@@ -92,6 +92,7 @@ function ListRates({
 							comparisonRates={comparisonRates}
 							setComparisonRates={setComparisonRates}
 							setScreen={setScreen}
+							isMobile={isMobile}
 						/>
 					) : null}
 				</div>

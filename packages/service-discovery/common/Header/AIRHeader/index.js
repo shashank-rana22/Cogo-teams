@@ -62,6 +62,7 @@ function AIRHeader({
 						setRouterLoading={setRouterLoading}
 						createLoading={createLoading}
 						createSearch={createSearch}
+						isMobile={isMobile}
 					/>
 
 					<Wallet

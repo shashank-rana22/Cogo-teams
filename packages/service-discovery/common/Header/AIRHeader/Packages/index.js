@@ -20,6 +20,7 @@ function Packages({
 	isGuideViewed = false,
 	createLoading = false,
 	createSearch = () => {},
+	isMobile = false,
 }) {
 	const [showModal, setShowModal] = useState(false);
 
@@ -63,6 +64,7 @@ function Packages({
 					setRouterLoading={setRouterLoading}
 					createLoading={createLoading}
 					createSearch={createSearch}
+					isMobile={isMobile}
 				/>
 			) : null}
 		</div>
