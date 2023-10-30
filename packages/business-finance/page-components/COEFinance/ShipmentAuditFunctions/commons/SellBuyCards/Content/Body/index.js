@@ -118,23 +118,23 @@ function Body({
 									</div>
 								</Tooltip>
 							</div>
-						</div>
-						{isOpen ? (
-							<IcMArrowRotateUp
-								style={{ cursor: 'pointer' }}
-								onClick={() => {
-									setLineItemSectionOpen((prev) => ({ ...prev, [key]: !(prev?.[key]) }));
-								}}
-							/>
-						)
-							: (
-								<IcMArrowRotateDown
+							{isOpen ? (
+								<IcMArrowRotateUp
 									style={{ cursor: 'pointer' }}
 									onClick={() => {
 										setLineItemSectionOpen((prev) => ({ ...prev, [key]: !(prev?.[key]) }));
 									}}
 								/>
-							)}
+							)
+								: (
+									<IcMArrowRotateDown
+										style={{ cursor: 'pointer' }}
+										onClick={() => {
+											setLineItemSectionOpen((prev) => ({ ...prev, [key]: !(prev?.[key]) }));
+										}}
+									/>
+								)}
+						</div>
 					</div>
 					<div className={`${!isOpen ? styles.nothing : styles.content}`}>
 						<LineItemsSection lineItems={line_items?.lineItems} />
