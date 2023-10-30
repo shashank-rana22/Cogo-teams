@@ -12,28 +12,28 @@ const SHOW_PINCODES = ['ftl_freight', 'ltl_freight'];
 const LAST_INDEX = -1;
 const THIRD_TO_LAST_INDEX = -3;
 
-function TouchPoints({ touchPoints = [] }) {
-	function Content() {
-		return (touchPoints || []).map((touchPoint, idx) => (
-			<div className={styles.touchpoint_container} key={touchPoint.id}>
-				<div className={styles.circle} />
+function Content({ touchPoints = [] }) {
+	return touchPoints.map((touchPoint, idx) => (
+		<div className={styles.touchpoint_container} key={touchPoint.id}>
+			<div className={styles.circle} />
 
-				{idx < touchPoints.length - GLOBAL_CONSTANTS.one && <div className={styles.line} />}
+			{idx < touchPoints.length - GLOBAL_CONSTANTS.one && <div className={styles.line} />}
 
-				<div className={styles.label}>
-					{' '}
-					Touch Point
-					{' '}
-					{idx + GLOBAL_CONSTANTS.one}
-				</div>
-
-				<div className={styles.name}>
-					{touchPoint.display_name?.split(',', GLOBAL_CONSTANTS.one)}
-				</div>
+			<div className={styles.label}>
+				{' '}
+				Touch Point
+				{' '}
+				{idx + GLOBAL_CONSTANTS.one}
 			</div>
-		));
-	}
 
+			<div className={styles.name}>
+				{touchPoint.display_name?.split(',', GLOBAL_CONSTANTS.one)}
+			</div>
+		</div>
+	));
+}
+
+function TouchPoints({ touchPoints = [] }) {
 	return (
 		<div className={styles.touch_points}>
 			<div className={styles.first_touch_point}>
