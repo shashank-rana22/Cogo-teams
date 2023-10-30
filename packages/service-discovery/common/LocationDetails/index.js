@@ -7,7 +7,7 @@ import getLocationInfo from '../../page-components/SearchResults/utils/locations
 import LoadingState from './loading-state';
 import styles from './styles.module.css';
 
-const SHOW_PINCODES = ['ftl_freight'];
+const SHOW_PINCODES = ['ftl_freight', 'ltl_freight'];
 
 const LAST_INDEX = -1;
 const THIRD_TO_LAST_INDEX = -3;

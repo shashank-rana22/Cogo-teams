@@ -93,9 +93,18 @@ function AdditionalServicesForm({
 					{controls.map((controlItem) => {
 						let newControl = { ...controlItem };
 
-						const { condition = {}, name = '', style = {} } = newControl;
+						const {
+							condition = {},
+							name = '',
+							style = {},
+							type = '',
+							optionsListKey = '',
+							label = '',
+							rules = {},
+							showOptional = false,
+						} = newControl;
 
-						const Element = getElementController(newControl.type);
+						const Element = getElementController(type);
 
 						let flag = true;
 
@@ -115,24 +124,24 @@ function AdditionalServicesForm({
 							return null;
 						}
 
-						const value = commonControls.includes(newControl.name) ? findKey(detail, newControl.name) : '';
+						const value = commonControls.includes(name) ? findKey(detail, name) : '';
 
-						if (newControl.optionsListKey) {
-							const finalOptions = getOptions(newControl.optionsListKey, {});
+						if (optionsListKey) {
+							const finalOptions = getOptions(optionsListKey, {});
 
 							newControl = { ...newControl, options: finalOptions };
 						}
 
 						return (
-							<div key={newControl.name} className={styles.control_style}>
+							<div key={name} className={styles.control_style}>
 								<div className={styles.label}>
-									{newControl.label}
+									{label}
 
-									{newControl?.rules?.required && newControl.label ? (
+									{rules?.required && label ? (
 										<div className={styles.required_mark}>*</div>
 									) : null}
 
-									{newControl?.showOptional && newControl.label ? (
+									{showOptional && label ? (
 										<div className={styles.optional_text}>(Optional)</div>
 									) : null}
 								</div>

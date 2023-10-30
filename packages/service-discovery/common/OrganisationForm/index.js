@@ -93,8 +93,8 @@ function OrganisationForm({
 		const { list = [] } = userData || {};
 
 		const finalOptions = list.map((item) => ({
-			label : item.name || '',
-			value : item.user_id,
+			label : item?.name || '',
+			value : item?.user_id || '',
 		}));
 
 		return finalOptions;
