@@ -30,10 +30,11 @@ function Form({
 	const { currency } = lineItem;
 
 	const marginControls = getMarginControls(nameKey);
+
 	const { control, watch } = useForm({
 		values: {
 			[nameKey]: [{
-				type  : 'absolute_total',
+				type  : type === 'percentage' ? 'absolute_total' : type || 'absolute_unit',
 				currency,
 				value : marginValue,
 			}],
