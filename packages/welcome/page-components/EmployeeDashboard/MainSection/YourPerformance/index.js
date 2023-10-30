@@ -42,7 +42,7 @@ function YourPerformance({
 								<div className={styles.claps}>👏</div>
 								{clap_recieved}
 								{' '}
-								Claps Recieved
+								Claps Received
 							</div>
 						</div>
 					</div>
