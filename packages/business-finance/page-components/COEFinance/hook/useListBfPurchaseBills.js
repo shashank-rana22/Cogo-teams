@@ -21,7 +21,7 @@ const useListBfPurchaseBills = ({ jobNumbers = [] }) => {
 	const listApi = useCallback(async () => {
 		try {
 			await trigger({
-				body: {
+				data: {
 					jobNumbers,
 				},
 			});
