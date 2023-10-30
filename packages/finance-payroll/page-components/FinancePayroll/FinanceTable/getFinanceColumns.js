@@ -7,7 +7,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const getFinanceColumns = ({ STATUS_OPTIONS = [], updatePayroll = () => {}, push }) => {
+const getFinanceColumns = ({ STATUS_OPTIONS = [], updatePayroll = () => {}, createDownload = () => {} }) => {
 	console.log('hi');
 	return ([
 		// {
@@ -78,6 +78,9 @@ const getFinanceColumns = ({ STATUS_OPTIONS = [], updatePayroll = () => {}, push
 				// const handleButtonClick = () => {
 				// 	window.open('https://tinyurl.com/5n76dcrd', '_blank');
 				// };
+				const handleDownload = (id) => {
+					createDownload({ id });
+				};
 				console.log(item, 'item');
 				return (
 					<div className={styles.download}>
@@ -94,7 +97,7 @@ const getFinanceColumns = ({ STATUS_OPTIONS = [], updatePayroll = () => {}, push
 							themeType="secondary"
 							style={{ marginLeft: '6px' }}
 							aria-hidden
-							onClick={() => { console.log('xxx'); push(`/cogo-store/order-details?id=${item.id}`); }}
+							onClick={() => handleDownload(item.id)}
 						>
 							<span>Download</span>
 							<IcMArrowDown

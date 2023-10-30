@@ -32,15 +32,18 @@ const TWO = GLOBAL_CONSTANTS.two;
 // const list = ['march', 'april'];
 function FinancePayroll() {
 	const { data :list } = useGetNextPayroll({ return_list: true });
+
 	const { data, getNextPayrollDashboard, loading } = useGetPayrollFinanceDetails();
+
 	console.log('🚀 ~ file: index.js:32 ~ FinancePayroll ~ data:', data);
-	const { data:datalist, refetch, filters, setFilters } = useListPayroll();
+
+	const [selectedMonth, setSelectedMonth] = useState('');
+
+	const { data:datalist, refetch, filters, setFilters } = useListPayroll({ selectedMonth });
 	console.log('🚀 ~ file: index.js:38 ~ FinancePayroll ~ datalist:', datalist);
 	const month = new Date().getMonth();
 	const monthString = MONTH_NAMES[month];
 	const year = new Date().getFullYear();
-
-	const [selectedMonth, setSelectedMonth] = useState('');
 
 	const MONTH_OBJS = useMemo(() => {
 		if (list) {
@@ -57,8 +60,6 @@ function FinancePayroll() {
 	const handleMonthChange = (selectedValue) => {
 		setSelectedMonth(selectedValue);
 		getNextPayrollDashboard({ selectedValue });
-		refetch({ selectedValue });
-		// getEmployeePayrollOverview({ payload: selectedValue });
 	};
 
 	useEffect(() => {
@@ -122,7 +123,7 @@ function FinancePayroll() {
 								{console.log(data?.[item.value], 'test')}
 								<span className={styles.card_value}>{data?.[item.value]?.current_value}</span>
 								<span className={styles.card_label}>{item.label}</span>
-								{parseFloat(1)
+								{parseFloat(data?.[item.value]?.growth)
 					< GLOBAL_CONSTANTS.zeroth_index ? (
 						<div className={styles.icon_arrow_down}>
 							<IcMArrowNext className={styles.arrow_icon_down} />

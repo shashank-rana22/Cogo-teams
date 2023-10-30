@@ -4,7 +4,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
-const useListPayroll = () => {
+const useListPayroll = ({ selectedMonth = '' } = {}) => {
 	const [filters, setFilters] = useState({
 		page_limit : 10,
 		page       : 1,
@@ -16,7 +16,7 @@ const useListPayroll = () => {
 	}, { manual: true });
 
 	const listPayroll = useCallback(
-		async ({ selectedValue = '' }) => {
+		async () => {
 			try {
 				const { page_limit, page, status, ...rest } = filters;
 				// console.log(typeof new Date(date[GLOBAL_CONSTANTS.zeroeth_index]), 'hi');
@@ -26,7 +26,7 @@ const useListPayroll = () => {
 							...rest,
 							status,
 						},
-						payroll_month   : String(selectedValue),
+						payroll_month   : String(selectedMonth),
 						is_finance_view : true,
 						page_limit,
 						page,
@@ -38,7 +38,7 @@ const useListPayroll = () => {
 				}
 			}
 		},
-		[filters, trigger],
+		[filters, trigger, selectedMonth],
 	);
 
 	useEffect(() => {

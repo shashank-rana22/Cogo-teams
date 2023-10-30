@@ -1,6 +1,7 @@
 import { Select, Table, Pagination } from '@cogoport/components';
 import React from 'react';
 
+import useGetDownloadDetails from '../../../hooks/useGetDownloadDetails';
 import useUpdatePayroll from '../../../hooks/useUpdatePayroll';
 
 import getFinanceColumns from './getFinanceColumns';
@@ -38,8 +39,11 @@ function FinanceTable({ data = {}, loading = false, filters, setFilters, refetch
 		}));
 	};
 
+	console.log('filters', filters);
+
+	const { createDownload } = useGetDownloadDetails();
 	const { updatePayroll } = useUpdatePayroll({ refetch });
-	const columns = getFinanceColumns({ STATUS_OPTIONS, updatePayroll });
+	const columns = getFinanceColumns({ STATUS_OPTIONS, updatePayroll, createDownload });
 
 	return (
 		<div className={styles.main_container}>

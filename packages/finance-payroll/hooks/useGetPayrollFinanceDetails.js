@@ -7,11 +7,14 @@ const useGetPayrollFinanceDetails = () => {
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/get_payroll_finance_details',
-	}, { manual: true });
+	}, { manual: false });
 
 	const getNextPayrollDashboard = useCallback(
-		async ({ selectedValue = '' }) => {
+		async ({ selectedValue = '' } = {}) => {
 			console.log('s2', selectedValue);
+			if (!selectedValue) {
+				return;
+			}
 			try {
 				await trigger({
 					params: {
