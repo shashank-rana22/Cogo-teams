@@ -13,7 +13,7 @@ const useGetUploadFile = ({
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/payments/accounts/bulk-upload-payments',
-			authKey : 'post_payments_accounts_ap_bulk_upload',
+			authKey : 'post_payments_accounts_bulk_upload_payments',
 			method  : 'post',
 		},
 		{ manual: true },

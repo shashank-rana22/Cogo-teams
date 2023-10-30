@@ -510,7 +510,7 @@ const GLOBAL_CONSTANTS = {
 		+ 'JVBulkUploadSampleExcel.xlsx',
 		csd_sample: 'https://cogoport-production.sgp1.digitaloceanspaces.com/9b60f34ea9aeb09a2dff0bd02c38174e/'
 		+ 'SampleJvUploadForCSD.xlsx',
-		others_sample: 'https://cogoport-production.sgp1.digitaloceanspaces.com/a1f9c04aeccb92aac0bde7402b6bf2b9/'
+		others_sample: 'https://cogoport-production.sgp1.digitaloceanspaces.com/1374e265882bf79899b72c75025c8b5e/'
 		+ 'SampleJVUploadForOtherAccmode.xlsx',
 	},
 

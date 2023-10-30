@@ -28,8 +28,8 @@ function BulkJvUpload({ showBulkJV = false, setShowBulkJV = () => {} }) {
 					<Toggle
 						name="view"
 						size="md"
-						onLabel="csd"
-						offLabel="others"
+						onLabel="CSD"
+						offLabel="Others"
 						onChange={(event) => setLabelVal(event?.target?.checked)}
 						disabled={false}
 					/>
