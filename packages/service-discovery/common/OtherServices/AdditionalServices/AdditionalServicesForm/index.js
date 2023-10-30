@@ -109,14 +109,10 @@ function AdditionalServicesForm({
 						let flag = true;
 
 						Object.keys(condition).forEach((condItem) => {
-							if (WATCH_MAP?.[condItem] !== undefined) {
-								if (
-									!condition?.[condItem].includes(
-										WATCH_MAP?.[condItem],
-									)
-								) {
-									flag = false;
-								}
+							if (WATCH_MAP?.[condItem] && !condition?.[condItem].includes(
+								WATCH_MAP?.[condItem],
+							)) {
+								flag = false;
 							}
 						});
 

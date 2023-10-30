@@ -88,9 +88,13 @@ function RemoveServicesModal({
 
 			<Modal.Body>
 				<div>
-					We currently don&apos;t have rates for the following service(s).
-					As a result to proceed we need to remove the services.
-					If you wish to modify please click cancel and modify.
+					We do not have rate available for the following service(s).
+					To proceed, we must remove these services. If you&apos;d like to make any changes,
+					please click
+					{' '}
+					<strong>Cancel</strong>
+					{' '}
+					and modify your selections.
 				</div>
 
 				<div className={cl`${styles.service_type}`}>
@@ -116,7 +120,7 @@ function RemoveServicesModal({
 					style={{ marginRight: '12px' }}
 					themeType="secondary"
 				>
-					Don&apos;t Change
+					Cancel
 				</Button>
 
 				<Button
