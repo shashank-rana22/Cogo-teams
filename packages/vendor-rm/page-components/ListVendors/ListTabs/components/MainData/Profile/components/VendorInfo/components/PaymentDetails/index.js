@@ -58,7 +58,7 @@ function PaymentDetails({
 	return (
 		<>
 			{(data.bank_details || []).map((bankDetail, index) => {
-				const { status = '', id = '' } = bankDetail || {};
+				const { status = '', id = '', bank_document_status = '' } = bankDetail || {};
 
 				return (
 					<div
@@ -70,15 +70,25 @@ function PaymentDetails({
 					>
 
 						<div className={styles.status_container}>
-							<Pill color={status === 'active' ? '#c4dc91' : '#ced1ed'}>
-								Status:
-								{' '}
-								<strong>{startCase(status)}</strong>
-							</Pill>
+							<div>
+								<Pill color={status === 'active' ? '#c4dc91' : '#ced1ed'}>
+									Status:
+									{' '}
+									<strong>{startCase(status)}</strong>
+								</Pill>
+
+								{bank_document_status === 'rejected' ? (
+									<Pill color="#fbd1a6">
+										Bank Document Status:
+										{' '}
+										<strong>Rejected</strong>
+									</Pill>
+								) : null}
+							</div>
 
 							<Button
 								loading={accountLoading}
-								disabled={accountLoading}
+								disabled={bank_document_status === 'rejected' || accountLoading}
 								size="sm"
 								onClick={() => { setShowModal(id); setAccountStatus(status); }}
 							>
