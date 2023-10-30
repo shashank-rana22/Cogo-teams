@@ -165,7 +165,6 @@ function RecurringSummery({
 		categoryName,
 		businessName,
 		proofDocuments,
-		currentLevel,
 		id,
 	} = itemData || {};
 	const { stakeholders } = useGetExpenseConfig({ id });
@@ -203,14 +202,10 @@ function RecurringSummery({
 			{(isEmpty(level1) && isEmpty(level2) && isEmpty(level3)) ? (
 				null
 			) : (
-				<div>
-					<div className={styles.title}>To be Approved by</div>
-					<div className={styles.steeper}>
-						<StakeHolderTimeline
-							timeline={stakeHolderTimeLineData({ level1, level2, level3 })}
-							currentLevel={currentLevel}
-						/>
-					</div>
+				<div className={styles.timeline}>
+					<StakeHolderTimeline
+						timeline={stakeHolderTimeLineData({ level1, level2, level3 })}
+					/>
 				</div>
 			)}
 		</div>
