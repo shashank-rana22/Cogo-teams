@@ -35,7 +35,7 @@ function useGetListVendorPocServices() {
 	const { services_pocs = [] } = data || {};
 
 	const allServicesAndPocs = useMemo(() => (services_pocs || []).map((servicePoc) => {
-		const { vendor_pocs = [] } = servicePoc || {};
+		const { vendor_pocs = [], city :{ name : office_name = '' } = {} } = servicePoc || {};
 
 		const details = (vendor_pocs || []).map((poc) => {
 			const {
@@ -62,6 +62,7 @@ function useGetListVendorPocServices() {
 			sub_category       : servicePoc?.sub_category,
 			cogoport_office_id : servicePoc?.cogoport_office_id,
 			poc_details        : details,
+			office_name,
 		};
 
 		return finalData;
