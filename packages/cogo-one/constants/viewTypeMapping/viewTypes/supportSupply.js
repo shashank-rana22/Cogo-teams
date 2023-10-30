@@ -6,11 +6,11 @@ import {
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SUPPORT_SUPPLY = {
-	chat_tabs_to_be_shown     : ['message', 'voice', 'teams'],
+	chat_tabs_to_be_shown     : ['message', 'voice', 'firebase_emails', 'teams'],
 	all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 	session_type_query        : ({ sessionType }) => [where('session_type', '==', sessionType)],
-	chat_sub_tabs_access      : ['all', 'observer'],
+	chat_sub_tabs_access      : ['all', 'observer', 'groups'],
 	default_side_nav          : 'profile',
 	accesible_filters         : {
 		observer : ['closed_session'],
