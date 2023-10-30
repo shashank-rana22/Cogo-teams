@@ -493,6 +493,8 @@ const GLOBAL_CONSTANTS = {
 		performance_leaderboard_confetti:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti_svg.svg',
 		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
+		public_leaderboard_ranking_badge:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/performance-leaderboard.svg',
 		airline_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png',
 		wider_arrow: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/wide-arrow',
