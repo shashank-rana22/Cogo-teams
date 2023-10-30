@@ -63,12 +63,12 @@ function Details({
 							interactive
 							content={(
 								<div className={styles.name}>
-									{`Shipment ID: #${serial_id}` || '-'}
+									{`Shipment ID: #${serial_id || '-'}`}
 								</div>
 							)}
 						>
 							<div className={styles.organization_name}>
-								{`Shipment ID: #${serial_id}` || '-'}
+								{`Shipment ID: #${serial_id || '-'}`}
 							</div>
 						</Tooltip>
 					</div>

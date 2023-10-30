@@ -1,7 +1,7 @@
 import { Button, Modal, Pill, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import fieldsInPaymentDetails from '../../../../../../../../../utils/fieldsInPaymentDetails';
@@ -112,9 +112,9 @@ function PaymentDetails({
 				);
 			})}
 
-			{!isEmpty(showModal) ? (
+			{showModal ? (
 				<Modal
-					show={!isEmpty(showModal)}
+					show={showModal}
 					size="lg"
 					onClose={() => setShowModal('')}
 				>
