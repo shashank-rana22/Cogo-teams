@@ -12,6 +12,14 @@ import styles from './styles.module.css';
 
 const DO_NOT_STARTCASE = ['bank_document_url', 'tax_document_url', 'address'];
 
+const COLOR_MAPPING = {
+	rejected : '#f8aea8',
+	pending  : '#fbd1a6',
+	verified : '#ddebc0',
+	inactive : '#f8aea8',
+	active   : '#ddebc0',
+};
+
 function PaymentDetails({
 	data = {},
 	refetchVendorInfo = () => {},
@@ -71,24 +79,22 @@ function PaymentDetails({
 
 						<div className={styles.status_container}>
 							<div>
-								<Pill color={status === 'active' ? '#c4dc91' : '#ced1ed'}>
+								<Pill color={COLOR_MAPPING?.[status]}>
 									Status:
 									{' '}
 									<strong>{startCase(status)}</strong>
 								</Pill>
 
-								{bank_document_status === 'rejected' ? (
-									<Pill color="#fbd1a6">
-										Bank Document Status:
-										{' '}
-										<strong>Rejected</strong>
-									</Pill>
-								) : null}
+								<Pill color={COLOR_MAPPING?.[bank_document_status]}>
+									Bank Document Status:
+									{' '}
+									<strong>{startCase(bank_document_status)}</strong>
+								</Pill>
 							</div>
 
 							<Button
 								loading={accountLoading}
-								disabled={bank_document_status === 'rejected' || accountLoading}
+								disabled={bank_document_status !== 'verified' || accountLoading}
 								size="sm"
 								onClick={() => { setShowModal(id); setAccountStatus(status); }}
 							>
