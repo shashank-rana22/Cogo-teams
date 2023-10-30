@@ -15123,6 +15123,9 @@ const partner = {
 			service_name : 'partner',
 		},
 	],
+	cogo_one_sme_dashboard: [
+
+	],
 };
 
 export default partner;
