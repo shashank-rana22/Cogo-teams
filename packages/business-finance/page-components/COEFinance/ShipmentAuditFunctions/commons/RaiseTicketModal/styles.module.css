@@ -8,6 +8,7 @@
 
 .pill_container {
 	display: flex;
+	align-items: center;
 }
 
 .pill {

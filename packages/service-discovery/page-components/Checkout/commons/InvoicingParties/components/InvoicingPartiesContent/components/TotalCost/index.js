@@ -50,6 +50,7 @@ function PriceComponent({
 						}));
 					}}
 					options={CURRENCY_OPTIONS}
+					size="md"
 				/>
 
 				<div className={styles.value}>{finalConvertedValue.toFixed(ROUND_OFF_VALUE)}</div>
