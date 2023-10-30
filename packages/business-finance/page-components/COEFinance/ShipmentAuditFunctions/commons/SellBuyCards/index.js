@@ -22,6 +22,7 @@ function SellBuyCards({
 	data = [],
 	loading = false,
 	invoicesMap = {},
+	billsMap = {},
 	shipment_id = '',
 	getClosedTasks = () => {},
 }) {
@@ -91,6 +92,7 @@ function SellBuyCards({
 							source={source}
 							type={type}
 							invoicesMap={invoicesMap}
+							billsMap={billsMap}
 							shipment_id={shipment_id}
 							profitability={profitabilityData}
 							getClosedTasks={getClosedTasks}

@@ -60,19 +60,6 @@
 	font-weight: 600;
 }
 
-.timeline {
-	display: flex;
-	width: 540px;
-	height: 114px;
-	padding: 12px 20px;
-	margin-bottom: 30px;
-	overflow-x: scroll;
-	white-space: nowrap;
-	background-color: #f3fafa;
-	border: 1px solid #f3fafa;
-	border-radius: 6px;
-}
-
 .horizontal_rule {
 	width: 200px;
 	height: 2px;
