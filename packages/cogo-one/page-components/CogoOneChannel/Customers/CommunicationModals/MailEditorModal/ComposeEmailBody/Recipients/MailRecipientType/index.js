@@ -1,9 +1,10 @@
-import { Popover, Input, ButtonIcon } from '@cogoport/components';
+import { Popover, Input, ButtonIcon, Select } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useGetListEmailSuggestions from '../../hooks/useGetListEmailSuggestions';
+import useGetListEmailSuggestions from '../../../../../../../../hooks/useGetListEmailSuggestions';
+import { RenderLabel } from '../OrgSpecificRecipients/orgSpecificFunctions';
 
 import EmailCustomTag from './EmailCustomTag';
 import ListEmails from './ListEmails';
@@ -19,6 +20,9 @@ function MailRecipientType({
 	handleKeyPress = () => {},
 	handleCancel = () => {},
 	handleEdit = () => {},
+	restrictMailToOrganizations = false,
+	restrictMailToSingle = false,
+	internalEmails = [],
 }) {
 	const [newEmailInput, setNewEmailInput] = useState('');
 
@@ -32,6 +36,10 @@ function MailRecipientType({
 
 	const showPopover = newEmailInput && !isEmpty(emailSuggestions) && !loading;
 
+	const filteredInternalMails = internalEmails?.filter(
+		(itm) => !emailRecipientType.includes(itm?.value),
+	);
+
 	return (
 		<div className={styles.tags_div}>
 			{(emailRecipientType || []).map(
@@ -41,6 +49,7 @@ function MailRecipientType({
 						email={data}
 						handleDelete={handleDelete}
 						type={type}
+						restrictMailToSingle={restrictMailToSingle}
 					/>
 				),
 			)}
@@ -95,13 +104,32 @@ function MailRecipientType({
 				</Popover>
 			)}
 
-			<div
-				className={styles.add_icon}
-				onClick={() => handleEdit({ type, setNewEmailInput })}
-				role="presentation"
-			>
-				+
-			</div>
+			{(!restrictMailToOrganizations && (!restrictMailToSingle || !emailRecipientType.length)) ? (
+				<div
+					className={styles.add_icon}
+					onClick={() => handleEdit({ type, setNewEmailInput })}
+					role="presentation"
+				>
+					+
+				</div>
+			) : null}
+
+			{
+				restrictMailToOrganizations && !isEmpty(filteredInternalMails) && type !== 'toUserEmail' ? (
+					<Select
+						size="xs"
+						options={filteredInternalMails}
+						placeholder="select internal mails"
+						className={styles.select_container}
+						renderLabel={(item) => <RenderLabel item={item} />}
+						onChange={(val) => handleKeyPress({
+							type,
+							email: val,
+							setNewEmailInput,
+						})}
+					/>
+				) : null
+			}
 		</div>
 	);
 }

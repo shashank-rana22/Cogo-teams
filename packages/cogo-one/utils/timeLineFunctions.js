@@ -1,3 +1,23 @@
+const SIGN_MAPPING = {
+	'-' : 'PLUS',
+	'+' : 'MINUS',
+};
+
+export function getTimeZone() {
+	const timeZone = `${(new Date()).getTimezoneOffset()}`;
+
+	const sign = timeZone.slice(0, 1) || '+';
+	let time = +timeZone;
+	if (sign === '-') {
+		time = +timeZone.slice(1);
+	}
+
+	const hours = `0${Math.floor(time / 60)}`.slice(-2);
+	const minutes = `0${time % 60}`.slice(-2);
+
+	return `UTC_${SIGN_MAPPING[sign] || 'MINUS'}_${hours}${minutes}`;
+}
+
 function timeLineFunctions() {
 	const callStatus = (call_status = '', callType = '') => {
 		let status = '';
