@@ -18,6 +18,12 @@ const SIZE_MAPPING = {
 	},
 };
 
+const RANK_COLOR_MAPPING = {
+	1 : '#F5B02E',
+	2 : '#D5D5D5',
+	3 : '#c59d54',
+};
+
 const getInitials = (name) => {
 	const parts = name?.split(' ');
 	let initials = '';
@@ -36,12 +42,14 @@ function Avatar(props) {
 
 	const SIZE_STYLE = SIZE_MAPPING[size];
 
+	const COLOR = RANK_COLOR_MAPPING[rank];
+
 	const PERSONA = getInitials(name);
 
 	return (
 
 		<div className={styles.image_container} style={SIZE_STYLE}>
-			<div className={styles.rank}><b>{rank}</b></div>
+			<div className={styles.rank} style={{ backgroundColor: COLOR }}><b>{rank}</b></div>
 
 			{picture ? (
 				<img
@@ -49,7 +57,7 @@ function Avatar(props) {
 					src={picture}
 					alt="profile"
 				/>
-			) : <div className={styles.persona}>{PERSONA}</div>}
+			) : <div className={styles.persona} style={{ borderColor: COLOR }}>{PERSONA}</div>}
 		</div>
 
 	);
