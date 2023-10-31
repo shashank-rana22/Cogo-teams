@@ -27,6 +27,7 @@ const formatPortPair = ({ item }) => {
 					containers_count : data?.max_containers_count,
 					weight           : data?.max_weight,
 					volume           : data?.max_volume,
+					at_actuals       : data?.at_actuals,
 				},
 			);
 		});
@@ -59,6 +60,7 @@ const formatPortPair = ({ item }) => {
 		containers_count       : val?.containers_count,
 		weight                 : val?.weight,
 		volume                 : val?.volume,
+		at_actuals             : val?.at_actuals,
 	}));
 
 	return formattedData;

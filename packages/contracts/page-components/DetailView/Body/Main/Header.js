@@ -59,6 +59,16 @@ function Header({ activePair, handleUpdateContract, stats }) {
 			</div>
 
 			<div className={styles.pills}>
+				{activePair?.at_actuals && (
+					<div key="at_actuals">
+						<Pill
+							size="md"
+							color="#DFE1EF"
+						>
+							At Actuals
+						</Pill>
+					</div>
+				)}
 				{keys.map((item) => {
 					const content = item === 'weight' ? `${activePair[item]} 
 					${keysToMap[item][activePair?.service_type]}`

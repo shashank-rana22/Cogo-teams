@@ -9,6 +9,12 @@ const UNIT_MAPPING = {
 };
 
 function Footer({ statsData, index, portPair }) {
+	let rateValue;
+	if (statsData?.port_pairs_data?.[index]?.price) {
+		rateValue = `$ ${statsData?.port_pairs_data?.[index]?.price.toFixed(2)}/ 
+    ${UNIT_MAPPING[portPair?.service_type]} `;
+	} else if (portPair?.at_actuals) rateValue = '*At Actuals';
+
 	return (
 		<div className={styles.footer}>
 			<div className={styles.agent}>
@@ -29,9 +35,7 @@ function Footer({ statsData, index, portPair }) {
 			<div className={styles.sub_container}>
 				<div className={styles.label}>Rate</div>
 				<div className={styles.value}>
-					{statsData?.port_pairs_data?.[index]?.price
-						? `$ ${statsData?.port_pairs_data?.[index]?.price.toFixed(2)}/ 
-						${UNIT_MAPPING[portPair?.service_type]} ` : '-'}
+					{rateValue || '-'}
 				</div>
 			</div>
 			<div className={styles.sub_container}>
