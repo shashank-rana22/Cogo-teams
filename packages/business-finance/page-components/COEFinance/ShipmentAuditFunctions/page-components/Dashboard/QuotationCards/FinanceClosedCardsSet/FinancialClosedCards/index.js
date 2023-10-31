@@ -11,6 +11,8 @@ function FinancialClosedCards({
 	type = '',
 	data = [],
 	loading = false,
+	invoicesMap = {},
+	billsMap = {},
 	shipment_id = '',
 	getClosedTasks = () => {},
 }) {
@@ -45,6 +47,8 @@ function FinancialClosedCards({
 										type={type}
 										shipment_id={shipment_id}
 										data={data}
+										invoicesMap={invoicesMap}
+										billsMap={billsMap}
 										loading={loading}
 										getClosedTasks={getClosedTasks}
 									/>

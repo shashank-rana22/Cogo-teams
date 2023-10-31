@@ -48,7 +48,7 @@ function CommunicationModals({
 				return;
 			}
 			setButtonType('send_mail');
-			resetEmailState();
+			resetEmailState({ mailView: 'orgSpecific' });
 		},
 		global_contacts : () => setOpenKamContacts(true),
 		sp_contacts     : () => {

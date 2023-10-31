@@ -1,9 +1,10 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import MailRecipientType from '../../../../../../../common/MailRecipientType';
+import { cogoportMails } from '../../../../../../../utils/getAllowedEmailsList';
 
+import MailRecipientType from './MailRecipientType';
 import OrgSpecificRecipients from './OrgSpecificRecipients';
 import styles from './styles.module.css';
 
@@ -36,11 +37,17 @@ function Recipients({
 	showOrgSpecificMail = false,
 	hideFromMail = false,
 	viewType = '',
+	restrictMailToSingle = false,
+	restrictMailToOrganizations = false,
+	buttonType = '',
+	firestore = {},
 }) {
 	const [enabledRecipients, setEnabledRecipients] = useState({
 		ccrecipients  : !isEmpty(emailState?.ccrecipients),
 		bccrecipients : !isEmpty(emailState?.bccrecipients),
 	});
+
+	const [internalEmails, setInternalEmails] = useState([]);
 
 	const handleRemove = (itm) => {
 		setEnabledRecipients((prev) => (
@@ -49,6 +56,17 @@ function Recipients({
 		setEmailState((prev) => ({ ...prev, [itm.value]: [] }));
 	};
 
+	const restrictForward = restrictMailToOrganizations && buttonType === 'forward';
+
+	useEffect(() => {
+		(async () => {
+			const mails = await cogoportMails({ firestore, viewType }) || [];
+			const modifiedData = mails?.map((itm) => ({ ...itm, tag: 'internal' })) || [];
+
+			setInternalEmails(modifiedData);
+		})();
+	}, [firestore, viewType]);
+
 	return (
 		<div className={styles.container}>
 			{EMAIL_RECIPIENTS.map((itm) => {
@@ -56,7 +74,10 @@ function Recipients({
 					return null;
 				}
 
-				const ActiveRecipientComp = ACTIVE_RECIPIENTS_COMP?.[showOrgSpecificMail ? 'specific' : 'default'];
+				const ActiveRecipientComp = ACTIVE_RECIPIENTS_COMP?.[
+					(showOrgSpecificMail || (restrictMailToSingle && itm.value !== 'toUserEmail') || restrictForward)
+						? 'specific' : 'default'
+				];
 
 				return (
 					<div
@@ -72,6 +93,7 @@ function Recipients({
 								{itm.label}
 								:
 							</div>
+
 							<ActiveRecipientComp
 								emailRecipientType={emailState?.[itm.value]}
 								handleDelete={handleDelete}
@@ -86,6 +108,10 @@ function Recipients({
 								setEmailState={setEmailState}
 								recipientTypes={EMAIL_RECIPIENTS}
 								viewType={viewType}
+								restrictMailToSingle={restrictMailToSingle}
+								restrictMailToOrganizations={restrictMailToOrganizations}
+								restrictForward={restrictForward}
+								internalEmails={internalEmails}
 							/>
 						</div>
 

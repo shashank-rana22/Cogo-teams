@@ -1,8 +1,13 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useEffect, useMemo, useState } from 'react';
+
+const getApiErrorString = (messages) => Object.keys(messages || {})
+	.map((_) => `${startCase(_)} ${messages[_]}`)
+	.join(', ');
 
 const getControls = (t) => [
 	{
@@ -90,7 +95,7 @@ const useMobileNoVerification = ({ selectedUser = {}, type = '' }) => {
 				window.location.reload();
 			}
 		} catch (error) {
-			Toast.error(t('profile:otp_is_invalid'));
+			Toast.error(getApiErrorString(error.response?.data) || t('profile:otp_is_invalid'));
 		}
 	};
 

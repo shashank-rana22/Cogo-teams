@@ -6,8 +6,6 @@ const CHECK_ONE_OR_MORE_ELEMENTS = 1;
 const NULL_SUBJECT_LENGTH = 0;
 const MAXIMUM_ALLOWED_SUBJECT_LENGTH = 250;
 
-const CREATE_DRAFT_FOR = ['reply', 'reply_all'];
-
 const EMAIL_SUBJECT_PREFIX_MAPPING = {
 	reply     : 'RE',
 	reply_all : 'RE',
@@ -64,16 +62,6 @@ const getReplyAllMails = ({
 	};
 };
 
-const getDraftPayload = ({ mailData, subject, activeMailAddress, msgId, signature }) => ({
-	sender        : activeMailAddress,
-	toUserEmail   : mailData?.toUserEmail || [],
-	ccrecipients  : mailData?.ccrecipients || [],
-	bccrecipients : mailData?.bccrecipients || [],
-	msgId,
-	subject,
-	signature,
-});
-
 export function getRecipientData({
 	mailProps = {},
 	senderAddress = '',
@@ -87,8 +75,6 @@ export function getRecipientData({
 	formattedData = {},
 	eachMessage = {},
 	deleteMessage = () => {},
-	createReplyDraft = () => {},
-	createReplyAllDraft = () => {},
 	signature = '',
 	draftQuillBody = {},
 }) {
@@ -108,7 +94,7 @@ export function getRecipientData({
 		to_mails = [],
 		cc_mails = [],
 		bcc_mails = [],
-		message_id = '',
+		mailView = '',
 		attachments = [],
 		custom_subject = {},
 		org_id = '',
@@ -142,6 +128,7 @@ export function getRecipientData({
 				(prev) => ({
 					...prev,
 					emailVia,
+					mailView,
 					rteContent       : draftQuillBody?.rte_content?.content || '',
 					body             : draftQuillBody?.body?.content || '',
 					from_mail        : sender || '',
@@ -191,9 +178,8 @@ export function getRecipientData({
 			(prev) => ({
 				...prev,
 				emailVia,
-				rteContent: '',
-				body:
-				emailVia === 'firebase_emails' && !CREATE_DRAFT_FOR.includes(newButtonType) ? signature : '',
+				rteContent       : '',
+				body             : emailVia === 'firebase_emails' ? signature : '',
 				from_mail        : activeMailAddress,
 				subject          : newSubject || subject,
 				toUserEmail      : mailData?.toUserEmail || [],
@@ -204,28 +190,6 @@ export function getRecipientData({
 				draftMessageData : {},
 			}),
 		);
-
-		if (CREATE_DRAFT_FOR.includes(newButtonType) && emailVia === 'firebase_emails') {
-			const payload = getDraftPayload({
-				mailData,
-				subject : newSubject || subject,
-				activeMailAddress,
-				msgId   : message_id,
-				signature,
-			});
-
-			const callbackFunc = ({ content }) => {
-				setEmailState(
-					(prev) => ({
-						...prev,
-						body: content,
-					}),
-				);
-			};
-			const draftFunc = newButtonType === 'reply' ? createReplyDraft : createReplyAllDraft;
-
-			draftFunc({ payload, callbackFunc });
-		}
 	};
 
 	return { handleClick, filteredCcData, filteredBccData, filteredRecipientData };
