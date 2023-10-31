@@ -33,7 +33,7 @@ function MonthlyRating({ props = {} }) {
 			<div className={styles.inner_container}>
 				<div className={styles.header}>
 					<div>
-						<div className={styles.title}>SEPTEMBER RATINGS</div>
+						<div className={styles.title}>OCTOBER RATINGS</div>
 						<div className={styles.sub_title}>Please rate your employees as you see fit</div>
 					</div>
 					<div className={styles.rating_container}>

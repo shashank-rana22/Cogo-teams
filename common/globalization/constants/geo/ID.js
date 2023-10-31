@@ -45,7 +45,7 @@ export default {
 	uuid             : {
 		tech_super_admin_id              : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
 		super_admin_id                   : '8aeb7cd5-e3d3-44a4-b445-c778f58dbdcb',
-		admin_id                         : '28b1e3de-ff6b-4453-94f6-baffdad84b02',
+		admin_id                         : '12ea1c91-f695-473f-9c9f-bc8f6d6199da',
 		parent_entity_id                 : 'ef9a7145-b1b6-46ff-8de7-a348de635574',
 		cogoverse_shipment_specialist_id : '1b1c5648-ddf4-4472-b177-c11a53a505aa',
 		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
@@ -173,6 +173,7 @@ export default {
 		prod_kam_cp             : 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
 		prod_es_sales           : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 		entity_manager_id       : '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
+		lcl_so2_executive       : '12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)
 		service_ops1_role_ids   : [
 			'348bc262-64c3-4667-a23c-908ceca80233', // SO1 + Revenue Desk
 			'5b5ee698-ec53-47fe-9584-737c9a174f8c', // Prod_SO1

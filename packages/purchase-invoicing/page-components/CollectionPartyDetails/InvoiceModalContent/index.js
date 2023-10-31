@@ -19,6 +19,7 @@ import styles from './styles.module.css';
 const INVOICE_TYPE_OPTIONS = [
 	{ name: 'purchase_invoice', label: 'Purchase Invoice', value: 'Purchase' },
 	{ name: 'proforma_invoice', label: 'Proforma Invoice', value: 'Proforma' },
+	{ name: 'credit_note', label: 'Credit Note', value: 'Credit' },
 ];
 
 function IndexModalContent({

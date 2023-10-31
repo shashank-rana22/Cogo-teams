@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback } from 'react';
@@ -17,19 +18,20 @@ const useVender = ({ setVenderDataValue, tpId, accountMode }) => {
 	);
 	const vender = useCallback(async () => {
 		try {
-			const resp = await venderApiTrigger({
+			const response = await venderApiTrigger({
 				params: {
 					filters: {
 						organization_trade_party_detail_id : tpId,
 						trade_party_type                   : PARTY_TYPE[accountMode],
+						object_type                        : ['vendor', 'organization'],
 					},
 				},
 			});
 
-			if (isEmpty(resp.data.list[0])) {
+			if (isEmpty(response?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index])) {
 				Toast.warn('No TradeParty Exists for the Selected Organization');
 			}
-			setVenderDataValue(resp.data.list[0]);
+			setVenderDataValue(response?.data?.list?.[GLOBAL_CONSTANTS.zeroth_index]);
 		} catch (error) {
 			Toast.error(error?.response?.data?.message || 'Something went wrong');
 		}

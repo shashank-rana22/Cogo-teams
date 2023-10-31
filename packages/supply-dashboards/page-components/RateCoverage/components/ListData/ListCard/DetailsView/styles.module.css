@@ -1,0 +1,70 @@
+.container {
+	padding: 6px;
+	font-size: 14px;
+	font-weight: 500;
+	text-align: center;
+	cursor: pointer;
+	background: #fdfbf6;
+	border-radius: 0 0 4px 4px;
+}
+
+.content_container {
+	padding: 6px;
+	background: #f9f9f9;
+}
+
+.pill {
+	display: flex;
+	flex-wrap: wrap;
+	width: 84%;
+}
+
+.label {
+	display: flex;
+	margin-top: 4px;
+	color: #828282;
+}
+
+.name {
+	margin-top: 4px;
+}
+
+.content {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 6px;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+.head {
+	margin-top: 6px;
+}
+
+.pill_head {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 6px;
+}
+
+.price {
+	display: flex;
+	margin-top: 2px;
+}
+
+.price_value {
+	margin: 0 6px;
+	color: #00ff;
+}
+
+.copy_button {
+	margin: 0 8px;
+}
+
+.wrap {
+	display: flex;
+	flex-wrap: wrap;
+}

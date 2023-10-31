@@ -17,8 +17,8 @@ const useCreateManualEntry = ({
 	refetch,
 	itemData,
 }) => {
-	const [errors, setErrors] = useState({});
 	const profile = useSelector((state) => state.profile || {});
+	const [errors, setErrors] = useState({});
 	const { id:profileId = '', name:profileName = '' } = profile?.user || {};
 	const [editMode, setEditMode] = useState(false);
 	const [showBprNumber, setShowBprNumber] = useState({ sage_organization_id: '' });
@@ -238,8 +238,10 @@ const useCreateManualEntry = ({
 	}, [docTypeValue, accountMode, controls, data]);
 
 	useEffect(() => {
-		if (editMode) exchangeApi();
-	}, [fromCur, toCur, paymentDateValue, editMode, exchangeApi]);
+		if (editMode && paymentDateValue !== null) {
+			exchangeApi();
+		}
+	}, [fromCur, toCur, paymentDateValue, editMode, exchangeApi, setValue]);
 
 	return {
 		controls : processedControls,

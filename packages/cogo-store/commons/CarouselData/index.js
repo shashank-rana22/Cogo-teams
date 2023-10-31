@@ -77,7 +77,7 @@ const CarouselData = [
 					<br />
 					COLLECTION
 				</span>
-				<span className={styles.home_text_season}>SPRING/SUMMER2021</span>
+				<span className={styles.home_text_season}>SHOP NOW !</span>
 
 			</div>
 		),

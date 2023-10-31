@@ -248,3 +248,5 @@ export const sortByOptions = ({ t }) => [
 ];
 
 export const DISABLE_STATUS_KEY = ['dislike_id', 'missing_id'];
+
+export const CLOSED_TICKET_STATUS = ['closed', 'overdue'];

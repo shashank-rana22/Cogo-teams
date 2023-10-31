@@ -2,6 +2,7 @@ import { Button, Pagination, Pill, cl } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -46,8 +47,10 @@ function Details({
 	onPageChange = () => {},
 	source = '',
 }) {
+	const { id = '' } = useSelector((state) => state?.profile?.user);
 	const [showDeleteConfirmationModal, setShowDeleteConfirmationModal] = useState(false);
 	const { notPostedSettlementIds = [], ledCurrency = '' } = item || {};
+	const allowableIds = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id, GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id];
 
 	const { loading: bulkPostToSageLoading, bulkPostToSageAction } = usePostSettlementToSage({ refetch });
 	const { deleteHistory, deleteHistoryLoading } = 	useDeleteHistorySettlement(
@@ -77,7 +80,8 @@ function Details({
 					<div className={styles.margin_left}>
 						<Button
 							size="sm"
-							disabled={!isEmpty(disabledStatusPosted)}
+							disabled={!isEmpty(disabledStatusPosted)
+								&& !allowableIds.includes(id)}
 							onClick={() => { setShowDeleteConfirmationModal(true); }}
 						>
 							Delete
@@ -99,7 +103,7 @@ function Details({
 				<LineItemsHeader />
 				{list.map((singleitem, index) => (
 					<div
-						className={`${styles.col} ${listTotal - 1 === index ? styles.islast : ''}`}
+						className={cl`${styles.col} ${listTotal - 1 === index ? styles.islast : ''}`}
 						key={singleitem?.id}
 					>
 						<div className={styles.doc_number}>{singleitem?.documentValue}</div>

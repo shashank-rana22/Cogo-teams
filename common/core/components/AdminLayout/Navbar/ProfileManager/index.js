@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 import useGetAllActions from '../../../../hooks/useGetAllActions';
 import useRemoveUserSessions from '../../../../hooks/useRemoveUserSessions';
 
-import useGetUnreadMessagesCount from './helpers/useGetUnreadMessageCount';
 import Items from './Items';
 import styles from './styles.module.css';
 
@@ -25,9 +24,8 @@ function ProfileManager({
 	refetch = () => {},
 	loading = false,
 	checkIfSessionExpiring = false,
-	userId = '',
-	firestore = {},
 	mobileShow = false,
+	unReadChatsCount = 0,
 }) {
 	const router = useRouter();
 	const { t } = useTranslation(['common', 'notifications']);
@@ -41,11 +39,6 @@ function ProfileManager({
 
 		audio = new Audio(url.replace(GLOBAL_CONSTANTS.regex_patterns.static_url, '$1'));
 	}
-
-	const { unReadChatsCount = 0 } = useGetUnreadMessagesCount({
-		firestore,
-		userId,
-	});
 
 	const [currentNotSeen, setCurrentNotSeen] = useState(unReadChatsCount);
 

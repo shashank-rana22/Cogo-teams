@@ -1,0 +1,144 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 10px 0;
+	cursor: pointer;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.shipping_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.service_type {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 75px;
+}
+
+.sidebar_service_type {
+	flex-direction: row;
+	justify-content: center;
+	width: 100%;
+	padding-bottom: 4px;
+}
+
+.icon_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	background: #fef3e9;
+	border-radius: 100%;
+
+	svg {
+		width: 20px;
+		height: 20px;
+		fill: #f68b21;
+	}
+}
+
+.service_label {
+	overflow: hidden;
+	font-size: 10px;
+	font-weight: 600;
+	color: #f68b21;
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.side_bar_service {
+	padding-left: 6px;
+	font-size: 16px;
+}
+
+.shipping_line {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: calc(100% - 80px);
+}
+
+.side_bar_shipping {
+	width: 100%;
+}
+
+.shipping_service {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 32%;
+	padding-right: 10px;
+
+	>div[aria-label="tooltip"] {
+		width: 100%;
+	}
+}
+
+.full_service {
+	width: calc(50% - 20px);
+}
+
+.port_icon {
+	margin: 0 10px;
+}
+
+.port_name {
+	display: flex;
+	align-items: flex-end;
+	width: 100%;
+	height: 30px;
+	overflow: hidden;
+	font-weight: 600;
+	color: #221f20;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.country_name {
+	width: 100%;
+	padding-top: 4px;
+	overflow: hidden;
+	font-size: 12px;
+	color: #828282;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.service_provider {
+	width: 100%;
+	padding: 0 4px;
+	overflow: hidden;
+	font-size: 12px;
+	color: #4f4f4f;
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	border-top: 1px dashed #828282;
+}
+
+.commodity_details {
+	display: flex;
+	justify-content: flex-start;
+	width: 100%;
+	padding: 0 10px;
+	overflow-x: auto;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	:global {
+		.ui_pill_container {
+			white-space: nowrap;
+		}
+	}
+}

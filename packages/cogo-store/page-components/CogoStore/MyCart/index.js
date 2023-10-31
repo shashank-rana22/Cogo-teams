@@ -116,7 +116,7 @@ function MyCart() {
 									<span className={styles.grey}>Sub-total</span>
 									<span className={styles.black}>
 										{currency_code}
-										{card_totals?.card_sub_total_amount}
+										{card_totals?.card_total_amount}
 									</span>
 								</div>
 								<div className={styles.total_item}>
@@ -238,7 +238,7 @@ function MyCart() {
 											}}
 										/>
 										<span>{item.size}</span>
-										<span style={{ marginLeft: '4px' }}>{` x${item.quantity}`}</span>
+										<span style={{ marginLeft: '4px' }}>{` x ${item.quantity}`}</span>
 									</div>
 								</div>
 							</div>

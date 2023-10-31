@@ -1,0 +1,19 @@
+.sub_content {
+	display: flex;
+	flex-direction: column;
+	margin-right: 15px;
+	overflow: hidden;
+	font-size: 12px;
+}
+
+.light {
+	margin-bottom: 10px;
+	font-weight: 100;
+	color: gray;
+}
+
+.actual_content {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

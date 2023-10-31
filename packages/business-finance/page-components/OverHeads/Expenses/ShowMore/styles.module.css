@@ -16,7 +16,7 @@
 
 .data_div {
 	display: flex;
-	margin: 8px;
+	margin: 8px 16px;
 	border: 1px solid #c1e8ec;
 	border-radius: 8px;
 }
@@ -82,4 +82,31 @@
 	display: flex;
 	align-items: center;
 	margin-right: 12px;
+}
+
+.segmented_control {
+	display: flex;
+	align-items: center;
+}
+
+.filtercont {
+	margin-left: 16px;
+
+	.react-datepicker__input-container {
+		height: 34px !important;
+	}
+
+	.react-datepicker-wrapper {
+		height: 34px !important;
+	}
+
+	input {
+		height: 34px !important;
+		font-size: 10px !important;
+	}
+}
+
+.stats_container {
+	display: flex;
+	margin: 12px 0 4px 16px;
 }

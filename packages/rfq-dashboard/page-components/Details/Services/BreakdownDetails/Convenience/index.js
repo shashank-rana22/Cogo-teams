@@ -1,5 +1,4 @@
 import { useForm } from '@cogoport/forms';
-import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import FieldArray from '../FieldArray';
@@ -8,15 +7,16 @@ import { getController } from '../getController';
 import getControls from './getControls';
 
 function Convenience({
-	convenienceDetails,
+	convenienceDetails = {},
+	convenienceRateOptions = [],
 }) {
-	const controls = getControls();
+	const controls = getControls({ convenienceRateOptions });
 	const { convenience_rate = {} } = convenienceDetails || {};
 
 	const { control } = useForm({
 		values: {
 			convenience_fee: [{
-				unit            : startCase(convenience_rate?.unit),
+				unit            : convenience_rate?.unit,
 				currency        : convenience_rate?.currency,
 				convenience_fee : convenience_rate?.price,
 			}],

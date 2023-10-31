@@ -105,7 +105,7 @@ function RightSideNav({
 					const showDocumentCount = activeSelect !== 'documents' && name === 'documents'
 				&& !!documentsCount && !checkConditions;
 
-					const showquotationSentData = orgId && activeSelect !== 'organization'
+					const showQuotationSentData = orgId && activeSelect !== 'organization'
 				&& name === 'organization' && !!quotationEmailSentAt;
 
 					return (
@@ -129,7 +129,7 @@ function RightSideNav({
 									)}
 								</div>
 							)}
-							{showquotationSentData && (
+							{showQuotationSentData && (
 								<div className={styles.quotation} />
 							)}
 							<div title={content}>

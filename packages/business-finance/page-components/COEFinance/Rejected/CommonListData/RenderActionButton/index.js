@@ -26,7 +26,7 @@ function RenderActionButton({ itemData = {}, refetch = () => {} }) {
 
 	const onClickViewInvoice = () => {
 		router.push(
-			`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}
+			`/business-finance/audit-function/${router.query.active_tab}/view-invoices?billId=${itemData?.billId}
 				&billNumber=${itemData?.billNumber}&orgId=${itemData?.organizationId}&jobNumber=${itemData?.jobNumber}
 				&status=${itemData?.status}&billType=${itemData?.billType}
 				&isProforma=${itemData?.isProforma}&jobType=${itemData?.jobType}&view=${query?.view}`,

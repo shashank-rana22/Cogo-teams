@@ -19,7 +19,7 @@ const useGetAudit = () => {
 	const [{ loading: updateLoading }, updateTrigger] = useRequestBf({
 		url     : '/purchase/payrun-bill',
 		method  : 'put',
-		authKey : 'put_purchase_payrun-bill',
+		authKey : 'put_purchase_payrun_bill',
 	}, { manual: true, autoCancel: false });
 
 	const { query, debounceQuery } = useDebounceQuery();

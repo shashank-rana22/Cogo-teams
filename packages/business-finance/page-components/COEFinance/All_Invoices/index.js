@@ -23,7 +23,7 @@ const tabsKeyComponentMapping = {
 	'shipment-view' : ShipmentIdView,
 };
 
-function AllInvoices({ statsData }) {
+function AllInvoices({ statsData = {} }) {
 	const { push, query } = useRouter();
 	const [filters, setFilters] = useState({});
 	const getQueryView = () => {
@@ -49,8 +49,8 @@ function AllInvoices({ statsData }) {
 
 	useEffect(() => {
 		push(
-			'/business-finance/coe-finance/[active_tab]/[view]',
-			`/business-finance/coe-finance/all_invoices/${subActiveTab || query.view}  `,
+			'/business-finance/audit-function/[active_tab]/[view]',
+			`/business-finance/audit-function/all_invoices/${subActiveTab || query.view}  `,
 		);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [subActiveTab]);

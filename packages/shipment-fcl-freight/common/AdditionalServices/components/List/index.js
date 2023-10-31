@@ -1,5 +1,7 @@
 import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useContext } from 'react';
@@ -25,19 +27,26 @@ const SHOW_MORE_PAGE_LIMIT = 16;
 const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent', 'booking_agent_manager',
 	'superadmin', 'admin', 'prod_process_owner'];
 
-function List({ isSeller = false, source = '' }) {
+function List({
+	isSeller = false,
+	source = '',
+	collectionPartyList = [],
+}) {
 	const {
 		servicesList = [], refetchServices = () => {},
 		shipment_data = {}, activeStakeholder = '', primary_service = {}, stakeholderConfig,
 		showRequestCSD, refetch: getShipmentRefetch = () => {},
 	} = useContext(ShipmentDetailContext);
 
+	const { id = '', is_job_closed = false, is_job_closed_financially = false, entity_id = '' } = shipment_data || {};
 	const { trade_type = '', security_dd_type = '' } = primary_service || {};
 
-	const { id = '', is_job_closed = false, is_job_closed_financially = false } = shipment_data || {};
+	const isEntityIndia = Object.values(ENTITY_MAPPING).filter(
+		(item) => item?.id === entity_id,
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.code === '301';
 
-	const isAdditionalServiceAllowed = primary_service?.trade_type === 'import'
-		? ALLOWED_STAKEHOLDERS.includes(activeStakeholder) : true;
+	const isAdditionalServiceAllowed = !(primary_service?.trade_type === 'import'
+	&& isEntityIndia && !ALLOWED_STAKEHOLDERS.includes(activeStakeholder));
 
 	const canEditCancelService = !!stakeholderConfig?.overview?.can_edit_cancel_service;
 
@@ -235,6 +244,7 @@ function List({ isSeller = false, source = '' }) {
 				<NewRequestModal
 					showRequestModal={showRequestModal}
 					setShowRequestModal={setShowRequestModal}
+					collectionPartyList={collectionPartyList}
 					getShipmentRefetch={getShipmentRefetch}
 				/>
 			) : null}

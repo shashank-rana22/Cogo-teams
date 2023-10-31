@@ -1,5 +1,6 @@
 .products {
 	display: flex;
+	width: 700px;
 }
 
 .products img {
@@ -43,6 +44,11 @@
 	align-items: center;
 	margin-bottom: -4px;
 	margin-left: 4px;
+}
+
+.dot_list span {
+	text-overflow: ellipsis;
+	white-space: wrap;
 }
 
 .quantity_control {

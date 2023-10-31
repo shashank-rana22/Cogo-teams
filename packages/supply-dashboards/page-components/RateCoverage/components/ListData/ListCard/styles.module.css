@@ -1,36 +1,44 @@
-.header {
+.head {
+	display: flex;
+	justify-content: space-between;
+	color: #4f4f4f;
+}
+
+.body {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin-bottom: 24px;
+	margin-top: 6px;
+}
+
+.top_left_details {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.service_icon {
+	display: flex;
+	align-items: center;
+}
+
+.service_name {
+	margin-right: 10px;
+	font-size: 16px;
+	color: #4f4f4f;
 }
 
 .footer {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-}
-
-.port_details {
-	display: flex;
-	align-items: center;
-	width: 45%;
-}
-
-.shipment_details {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 40%;
-
-	:global(.ui_button_childeren) {
-		width: max-content;
-	}
+	margin-top: 6px;
 }
 
 .row {
 	display: flex;
 	align-items: center;
+	width: 44%;
 }
 
 .column {
@@ -56,20 +64,14 @@
 }
 
 .container {
-	padding: 16px;
 	margin-bottom: 20px;
 	background: #fff;
 	border-radius: 6px;
+	box-shadow: 1px 1px 8px 1px #e0e0e0;
 
 	&:hover {
 		box-shadow: 0 0 8px #eee;
 	}
-}
-
-.top_left_details {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 }
 
 .port_code_color {
@@ -83,20 +85,34 @@
 
 .tags_container {
 	display: flex;
-	width: 100%;
+	flex-wrap: wrap;
 	margin-bottom: 8px;
 }
 
-.service_icon {
-	display: flex;
-	align-items: center;
+.details_content {
+	padding: 4px 16px;
 }
 
 .pill {
-	margin-right: 20px;
+	padding: 0 4px;
+	margin-right: 10px;
+	background: #f9f9f9;
+	border-radius: 6px;
 }
 
-.pill_container {
+.services {
 	display: flex;
-	align-items: center;
+	justify-content: end;
+	margin-right: 40px;
+}
+
+.revert {
+	text-align: end;
+
+	:global {
+		.ui_pill_container {
+			margin: 0;
+			line-height: 1.4;
+		}
+	}
 }

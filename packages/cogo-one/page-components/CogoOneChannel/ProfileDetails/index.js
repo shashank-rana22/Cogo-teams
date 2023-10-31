@@ -6,7 +6,6 @@ import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useCheckChannelPartner from '../../../hooks/useCheckChannelPartner';
 import useCheckCustomerCheckoutQuotationConflict from '../../../hooks/useCheckCustomerCheckoutQuotationConflict';
-import useGetUser from '../../../hooks/useGetUser';
 import useListOmnichannelDocuments from '../../../hooks/useListOmnichannelDocuments';
 
 import RightSideNav from './RightSideNav';
@@ -36,18 +35,12 @@ function ProfileDetails({
 }) {
 	const customerId = (FIREBASE_TABS.includes(activeTab) ? activeMessageCard : activeVoiceCard)?.id;
 
-	const customerUserId = FIREBASE_TABS.includes(activeTab)
-		? formattedMessageData?.user_id : activeVoiceCard?.user_data?.id;
-
 	const [activeSelect, setActiveSelect] = useState(
-		activeTab === 'teams' ? 'teams_profile' : VIEW_TYPE_GLOBAL_MAPPING[viewType]?.default_side_nav || 'profile',
+		activeTab === 'teams' ? 'teams_profile'
+			: activeMessageCard?.defaultSideNav || VIEW_TYPE_GLOBAL_MAPPING[viewType]?.default_side_nav || 'profile',
 	);
 
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
-
-	const { lead_user_id: leadUserId } = formattedMessageData || {};
-
-	const { userData, loading : getUserLoading } = useGetUser({ userId: customerUserId, leadUserId, customerId });
 
 	const {
 		organizationData = {},
@@ -110,8 +103,6 @@ function ProfileDetails({
 							userId={userId}
 							setActiveTab={setActiveTab}
 							mailProps={mailProps}
-							userData={(getUserLoading || !customerUserId) ? {} : userData}
-							getUserLoading={getUserLoading}
 							organizationData={organizationData}
 							membersList={membersList}
 							chatsConfig={chatsConfig}
