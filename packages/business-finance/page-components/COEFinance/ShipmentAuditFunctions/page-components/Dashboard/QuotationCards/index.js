@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import useListBfPurchaseBills from '../../../../hook/useListBfPurchaseBills';
 import useListBfSalesInvoices from '../../../../hook/useListBfSalesInvoices';
 import useListShipment from '../../../../hook/useListShipment';
+import CostSheetCard from '../CostSheetCard';
 import DetailsCard from '../DetailsCard';
 import DocumentsCard from '../DocumentsCard';
 import TicketsCard from '../TicketsCard/index';
@@ -16,6 +17,7 @@ import styles from './styles.module.css';
 
 function QuotationCards({
 	getPrePostShipmentQuoteRef = {},
+	quotationsData = {},
 	setQuotationsData = () => {},
 }) {
 	const { query: { active_tab = '', job_id = '', job_number = '' } } = useRouter();
@@ -31,12 +33,14 @@ function QuotationCards({
 		shipmentDetailsTab : true,
 		documentsTab       : false,
 		ticketsTab         : false,
+		costSheetTab       : false,
 	});
 
 	const [checkItem, setCheckItem] = useState({
 		shipmentDetailCheck  : false,
 		documentDetailsCheck : false,
 		ticketDetailsCheck   : false,
+		costSheetCheck       : false,
 	});
 
 	const onTabClick = ({ tabName = '' }) => {
@@ -76,6 +80,11 @@ function QuotationCards({
 				shipmentId={shipmentId}
 				onTabClick={onTabClick}
 				loadingShipment={loadingShipment}
+				tab={tab}
+			/>
+			<CostSheetCard
+				quotationsData={quotationsData}
+				onTabClick={onTabClick}
 				tab={tab}
 			/>
 

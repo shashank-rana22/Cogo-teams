@@ -77,6 +77,7 @@ function Dashboard() {
 
 			<QuotationCards
 				getPrePostShipmentQuoteRef={getPrePostShipmentQuoteRef}
+				quotationsData={quotationsData}
 				setQuotationsData={setQuotationsData}
 			/>
 
