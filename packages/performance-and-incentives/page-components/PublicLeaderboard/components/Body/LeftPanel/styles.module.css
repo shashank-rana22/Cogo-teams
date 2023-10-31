@@ -10,6 +10,10 @@
 	}
 }
 
+.rank_two_container {
+	background: unset;
+}
+
 .empty_img {
 	display: block;
 	margin: 0 auto;

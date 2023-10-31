@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import LEADERBOARD_LOCATIONS from '../../utils/leaderboard-locations';
 
 import LeftPanel from './LeftPanel';
@@ -8,6 +10,8 @@ function Body(props) {
 	const {
 		screen, view, dateRange, updatedAt, setUpdatedAt, setDateRange, duration, setDuration,
 	} = props;
+
+	const [score, setScore] = useState({});
 
 	return (
 		<div className={styles.container}>
@@ -21,6 +25,8 @@ function Body(props) {
 				duration={duration}
 				setDuration={setDuration}
 				setDateRange={setDateRange}
+				score={score}
+				setScore={setScore}
 			/>
 
 			{screen === 'overall' ? <RightPanel view={view} updatedAt={updatedAt} /> : (
@@ -31,6 +37,8 @@ function Body(props) {
 					updatedAt={updatedAt}
 					setUpdatedAt={setUpdatedAt}
 					location={LEADERBOARD_LOCATIONS?.gurgaon}
+					score={score}
+					setScore={setScore}
 				/>
 			)}
 		</div>

@@ -7,11 +7,11 @@ import styles from './styles.module.css';
 const LOCATION_STATS_KEYS = { total_score: 'Total', average_score: 'Average', total_agent: 'Agents' };
 
 function LocationStats({
-	location = {}, is_winner = true, additional_stats = {},
+	location = {}, rank = 2, additional_stats = {},
 }) {
 	return (
 		<div className={styles.container}>
-			{is_winner
+			{rank === 1
 				? (
 					<div className={styles.icon_div}>
 						<Image
@@ -28,7 +28,7 @@ function LocationStats({
 					{' '}
 					{location?.label}
 				</div>
-				<div className={cl`${styles.location__data_stats} ${is_winner && styles.location__data_stats_winner}`}>
+				<div className={cl`${styles.location__data_stats} ${rank === 1 && styles.location__data_stats_winner}`}>
 					{Object.keys(LOCATION_STATS_KEYS).map((key) => (
 						<div key={key}>
 							{LOCATION_STATS_KEYS[key]}

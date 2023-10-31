@@ -2,10 +2,19 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
+import getRankFromScore from '../configurations/getRankFromScore';
 import PublicLeaderBoardContext from '../context/PublicLeaderBoardContext';
 
 function useGetLeaderbordList(props) {
-	const { view, dateRange, pageLimit, setUpdatedAt = () => {}, office_location_id = null } = props;
+	const {
+		view,
+		dateRange,
+		pageLimit,
+		setUpdatedAt = () => {},
+		office_location_id = null,
+		score = {},
+		setScore = () => {},
+	} = props;
 
 	const { countdown } = useContext(PublicLeaderBoardContext);
 
@@ -48,9 +57,12 @@ function useGetLeaderbordList(props) {
 		}));
 	}, [view, dateRange]);
 
+	const rankData = getRankFromScore({ score });
+
 	useEffect(() => {
 		setUpdatedAt(report_synced_at);
-	}, [report_synced_at, setUpdatedAt]);
+		setScore((p) => ({ ...p, [office_location_id]: additional_stats?.total_score }));
+	}, [report_synced_at, setUpdatedAt, additional_stats, setScore, office_location_id]);
 
 	useEffect(() => {
 		if (countdown === 0) {
@@ -64,6 +76,7 @@ function useGetLeaderbordList(props) {
 		trigger,
 		total_report_count,
 		additional_stats,
+		rank: rankData[office_location_id]?.rank || 2,
 	};
 }
 

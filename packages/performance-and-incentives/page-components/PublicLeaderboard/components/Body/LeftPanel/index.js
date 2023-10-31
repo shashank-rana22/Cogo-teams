@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
@@ -21,14 +22,18 @@ function LeftPanel(props) {
 		setDuration = () => {},
 		setDateRange = () => {},
 		location = {},
+		score = {},
+		setScore = () => {},
 	} = props;
 
-	const { list, loading, total_report_count: totalReportCount, additional_stats } = useGetLeaderbordList({
+	const { list, loading, total_report_count: totalReportCount, additional_stats, rank } = useGetLeaderbordList({
 		view,
 		dateRange,
 		pageLimit          : 50,
 		setUpdatedAt,
 		office_location_id : location?.value,
+		score,
+		setScore,
 	});
 
 	const [firstUser, secondUser, thirdUser, ...tableList] = list;
@@ -52,9 +57,15 @@ function LeftPanel(props) {
 	}
 
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${rank !== 1 && styles.rank_two_container}`}>
 
-			{screen === 'comparison' ? <LocationStats location={location} additional_stats={additional_stats} />
+			{screen === 'comparison' ? (
+				<LocationStats
+					rank={rank}
+					location={location}
+					additional_stats={additional_stats}
+				/>
+			)
 				: (
 					<DateFilter
 						dateRange={dateRange}
