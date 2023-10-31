@@ -108,6 +108,7 @@ const useRaiseTicketcontrols = ({
 		setDefaultTypeId,
 		isOperation,
 		watchIdType,
+		watchRequestType,
 	});
 
 	return controls.filter((itm) => itm?.visible);

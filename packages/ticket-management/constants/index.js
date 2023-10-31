@@ -167,6 +167,9 @@ export const FINANCE_PLATFORM_KEYS = ['request_type', 'category', 'sub_category'
 	'additional_information', 'priority',
 	'file_url', 'notify_customer'];
 
+export const PLATFORM_KEYS = ['request_type', 'category', 'serial_id', 'service', 'trade_type',
+	'issue_type', 'additional_information', 'priority', 'file_url', 'notify_customer'];
+
 export const RATE_KEYS = ['request_type', 'organization_id', 'user_id', 'id_type',
 	'serial_id', 'service_type', 'service', 'trade_type', 'category', 'sub_category', 'raised_by_desk',
 	'raised_to_desk', 'issue_type', 'additional_information', 'priority', 'file_url', 'notify_customer'];

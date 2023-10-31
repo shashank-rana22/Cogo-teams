@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { useState, useRef, useEffect } from 'react';
 
 import useRaiseTicketcontrols from '../../../../configurations/filter-controls';
-import { FINANCE_PLATFORM_KEYS, RATE_KEYS, SHIPMENT_RATE_KEYS } from '../../../../constants';
+import { FINANCE_PLATFORM_KEYS, PLATFORM_KEYS, RATE_KEYS, SHIPMENT_RATE_KEYS } from '../../../../constants';
 import { getFieldController } from '../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
@@ -16,7 +16,7 @@ const CONTROLS_MAPPING = {
 	shipment       : SHIPMENT_RATE_KEYS,
 	rate           : RATE_KEYS,
 	finance        : FINANCE_PLATFORM_KEYS,
-	platform_issue : FINANCE_PLATFORM_KEYS,
+	platform_issue : PLATFORM_KEYS,
 };
 
 function RaiseTicketsForm({
@@ -95,6 +95,7 @@ function RaiseTicketsForm({
 		.filter((val) => CONTROLS_MAPPING[watchRequestType || 'shipment']?.includes(val.name));
 
 	const controls = filteredControls?.concat(additionalControls);
+	console.log(filteredControls, 'controls:', controls);
 
 	useEffect(() => {
 		if (!isEmpty(watchIssueType) && REQUEST_TYPES.includes(watchRequestType)) {

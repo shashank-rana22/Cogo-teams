@@ -13,22 +13,11 @@ function RenderLabel({ label = '' }) {
 }
 
 const getCreateControls = ({
-	t,
-	checkRequest,
-	ticketTypeOptions = {},
-	organizationUserOptions = {},
-	organizationOptions = {},
-	categoryDeskOptions = {},
-	resetField = () => {},
-	setAdditionalInfo = () => {},
-	setValue = () => {},
-	formattedSubCategories = [],
-	setRaiseToDesk = () => {},
-	setSubCategories = () => {},
-	formatRaiseToDeskOptions = [],
-	setDefaultTypeId = () => {},
-	isOperation = false,
-	watchIdType = '',
+	t, checkRequest, ticketTypeOptions = {}, organizationUserOptions = {},
+	organizationOptions = {}, categoryDeskOptions = {}, resetField = () => {},
+	setAdditionalInfo = () => {}, setValue = () => {}, formattedSubCategories = [],
+	setRaiseToDesk = () => {}, setSubCategories = () => {}, formatRaiseToDeskOptions = [],
+	setDefaultTypeId = () => {}, isOperation = false, watchIdType = '', watchRequestType = '',
 }) => {
 	let controls = [];
 
@@ -90,6 +79,20 @@ const getCreateControls = ({
 			onChange       : () => {
 				setValue('serial_id', '');
 			},
+		},
+		{
+			...(categoryDeskOptions || {}),
+			label          : t('myTickets:select_category'),
+			name           : 'category',
+			controllerType : 'select',
+			placeholder    : t('myTickets:select_category'),
+			isClearable    : true,
+			defaultOptions : true,
+			onChange       : (_, val) => {
+				setSubCategories(val?.subcategories);
+				resetField('sub_category');
+			},
+			visible: !isOperation,
 		},
 		{
 			...(checkRequest || {}),
@@ -231,10 +234,13 @@ const getCreateControls = ({
 			visible   : true,
 		},
 		{
-			label          : t('myTickets:upload_supporting_document'),
+			label: watchRequestType === 'platform_issue'
+				? <RenderLabel label={t('myTickets:upload_supporting_document')} />
+				: t('myTickets:upload_supporting_document'),
 			name           : 'file_url',
 			controllerType : 'uploader',
 			visible        : true,
+			rules          : { required: watchRequestType === 'platform_issue' },
 		},
 		{
 			label          : t('myTickets:notify_customer'),
