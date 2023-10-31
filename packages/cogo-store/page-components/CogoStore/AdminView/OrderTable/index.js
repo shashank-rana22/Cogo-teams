@@ -15,7 +15,7 @@ import { STATUS_OPTIONS } from '../../../../utils/constants';
 import getOrderColumns from './getOrderColumns';
 import styles from './styles.module.css';
 
-function OrderTable({ data, filters, setFilters, dateArray, refetch }) {
+function OrderTable({ data, filters, setFilters, dateArray, refetch, loading }) {
 	const { push } = useRouter();
 	const [selectedMonth, setSelectedMonth] = useState('');
 	const { data: productData } = useGetProductFilterDetail();
@@ -98,7 +98,7 @@ function OrderTable({ data, filters, setFilters, dateArray, refetch }) {
 					</div>
 				</div>
 				<div className={styles.table_container}>
-					<Table columns={columns} data={list || []} />
+					<Table columns={columns} data={list || []} loading={loading} />
 				</div>
 				<div className={styles.pagination}>
 					<Pagination

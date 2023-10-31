@@ -10,13 +10,20 @@ import styles from './styles.module.css';
 
 function AdminView() {
 	const { data: dateArray } = useGetOrderDates();
-	const { data, filters, setFilters, refetch } = useListAllOrders({ dateArray });
+	const { data, filters, setFilters, refetch, loading } = useListAllOrders({ dateArray });
 
 	return (
 		<div className={styles.container}>
 			<Header />
 			<OverView data={data} refetch={refetch} />
-			<OrderTable data={data} filters={filters} setFilters={setFilters} dateArray={dateArray} refetch={refetch} />
+			<OrderTable
+				data={data}
+				filters={filters}
+				setFilters={setFilters}
+				dateArray={dateArray}
+				refetch={refetch}
+				loading={loading}
+			/>
 		</div>
 	);
 }
