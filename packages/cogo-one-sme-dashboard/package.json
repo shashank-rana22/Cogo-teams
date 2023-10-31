@@ -6,6 +6,7 @@
   "main": "./index.js",
   "sideEffects": false,
   "dependencies": {
+    "@amcharts/amcharts5": "^5.4.1",
     "@cogoport/charts": "^1.0.1",
     "@cogoport/components": "^1.0.441",
     "@cogoport/constants": "workspace:^0.1.0",
