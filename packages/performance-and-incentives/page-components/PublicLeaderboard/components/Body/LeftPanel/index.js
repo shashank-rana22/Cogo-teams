@@ -20,13 +20,15 @@ function LeftPanel(props) {
 		duration = 'today',
 		setDuration = () => {},
 		setDateRange = () => {},
+		location = {},
 	} = props;
 
-	const { list, loading, total_report_count: totalReportCount } = useGetLeaderbordList({
+	const { list, loading, total_report_count: totalReportCount, additional_stats } = useGetLeaderbordList({
 		view,
 		dateRange,
-		pageLimit: 50,
+		pageLimit          : 50,
 		setUpdatedAt,
+		office_location_id : location?.value,
 	});
 
 	const [firstUser, secondUser, thirdUser, ...tableList] = list;
@@ -52,7 +54,7 @@ function LeftPanel(props) {
 	return (
 		<div className={styles.container}>
 
-			{screen === 'comparison' ? <LocationStats />
+			{screen === 'comparison' ? <LocationStats location={location} additional_stats={additional_stats} />
 				: (
 					<DateFilter
 						dateRange={dateRange}

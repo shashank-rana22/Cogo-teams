@@ -4,14 +4,10 @@ import { Image } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-const LOCATION_STATS_KEYS = { total: 'Total', average: 'Average', agents: 'Agents' };
+const LOCATION_STATS_KEYS = { total_score: 'Total', average_score: 'Average', total_agent: 'Agents' };
 
 function LocationStats({
-	location_name = 'Mumbai', is_winner = true, location_score_stats = {
-		total   : 25000,
-		average : 2000,
-		agents  : 114,
-	},
+	location = {}, is_winner = true, additional_stats = {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -29,7 +25,8 @@ function LocationStats({
 			<div className={styles.location__data}>
 				<div className={styles.location__data_heading}>
 					Cogoport
-					{location_name}
+					{' '}
+					{location?.label}
 				</div>
 				<div className={cl`${styles.location__data_stats} ${is_winner && styles.location__data_stats_winner}`}>
 					{Object.keys(LOCATION_STATS_KEYS).map((key) => (
@@ -37,7 +34,7 @@ function LocationStats({
 							{LOCATION_STATS_KEYS[key]}
 							:
 							{' '}
-							<span className={styles.location__data_stats_count}>{location_score_stats?.[key]}</span>
+							<span className={styles.location__data_stats_count}>{additional_stats?.[key]}</span>
 						</div>
 					))}
 				</div>

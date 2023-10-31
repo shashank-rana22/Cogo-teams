@@ -1,3 +1,5 @@
+import LEADERBOARD_LOCATIONS from '../../utils/leaderboard-locations';
+
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import styles from './styles.module.css';
@@ -15,7 +17,7 @@ function Body(props) {
 				dateRange={dateRange}
 				updatedAt={updatedAt}
 				setUpdatedAt={setUpdatedAt}
-				location={screen === 'comparison' ? 'mumbai' : null}
+				location={screen === 'comparison' ? LEADERBOARD_LOCATIONS?.mumbai : null}
 				duration={duration}
 				setDuration={setDuration}
 				setDateRange={setDateRange}
@@ -28,7 +30,7 @@ function Body(props) {
 					dateRange={dateRange}
 					updatedAt={updatedAt}
 					setUpdatedAt={setUpdatedAt}
-					location="gurgaon"
+					location={LEADERBOARD_LOCATIONS?.gurgaon}
 				/>
 			)}
 		</div>
