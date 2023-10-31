@@ -24,7 +24,6 @@
 	display: flex;
 	gap: 8px;
 	align-items: center;
-	margin-top: 14px;
 	font-size: var(--font-size-lg);
 }
 
@@ -36,7 +35,8 @@
 }
 
 .url_container {
-	color: #3471ae;
+	margin-left: 26px;
+	color: #008000;
 	text-decoration: underline;
 	cursor: pointer;
 }
@@ -51,6 +51,13 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.error_url_container {
+	margin-left: 26px;
+	color: #f00;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .flex_value {

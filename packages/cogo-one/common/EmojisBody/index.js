@@ -4,11 +4,16 @@ import styles from './styles.module.css';
 
 const EMOJI_NAME_INDEX = 2;
 
-function PopBody({
+function EmojisBody({
 	emojisList = {},
 	updateMessage = () => {},
 	setOnClicked = () => {},
+	onClicked = false,
 }) {
+	if (!onClicked) {
+		return null;
+	}
+
 	return (
 		<div className={styles.container}>
 			{Object.values(emojisList).map(
@@ -54,4 +59,4 @@ function PopBody({
 	);
 }
 
-export default PopBody;
+export default EmojisBody;

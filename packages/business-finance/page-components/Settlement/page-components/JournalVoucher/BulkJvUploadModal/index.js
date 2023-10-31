@@ -1,4 +1,4 @@
-import { Button, Modal, cl } from '@cogoport/components';
+import { Button, Modal, Toggle, cl } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload } from '@cogoport/icons-react';
@@ -8,9 +8,13 @@ import useBulkJvUpload from '../../../hooks/useBulkJvUpload';
 
 import styles from './styles.module.css';
 
-const SAMPLE_BULK_JV_PDF_URL = GLOBAL_CONSTANTS.pdf_url.bulk_jv_sample_url;
+const CSD_SAMPLE = GLOBAL_CONSTANTS.pdf_url.csd_sample;
+
+const OTHERS_SAMPLE = GLOBAL_CONSTANTS.pdf_url.others_sample;
+
 function BulkJvUpload({ showBulkJV = false, setShowBulkJV = () => {} }) {
 	const [fileValue, setFileValue] = useState('');
+	const [labelVal, setLabelVal] = useState(false);
 
 	const {
 		getUploadApi = () => {}, bulkJvLoading = false,
@@ -19,7 +23,19 @@ function BulkJvUpload({ showBulkJV = false, setShowBulkJV = () => {} }) {
 
 	return (
 		<Modal size="md" show={showBulkJV} onClose={() => setShowBulkJV(false)} placement="center">
-			<Modal.Header title="Bulk JV Upload" />
+			<Modal.Header title={(
+				<div>
+					<Toggle
+						name="view"
+						size="md"
+						onLabel="CSD"
+						offLabel="Others"
+						onChange={(event) => setLabelVal(event?.target?.checked)}
+						disabled={false}
+					/>
+				</div>
+			)}
+			/>
 			<Modal.Body>
 				<div>
 					<FileUploader
@@ -45,7 +61,7 @@ function BulkJvUpload({ showBulkJV = false, setShowBulkJV = () => {} }) {
 							width={16}
 							height={16}
 							cursor="pointer"
-							onClick={() => window.open(SAMPLE_BULK_JV_PDF_URL, '_self')}
+							onClick={() => window.open(labelVal ? CSD_SAMPLE : OTHERS_SAMPLE, '_self')}
 						/>
 					</div>
 				</div>

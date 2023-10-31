@@ -82,7 +82,11 @@ function MailEditorModal({
 		VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.permissions?.restrict_mail_to_organizations || false
 	);
 
-	const showOrgSpecificMail = buttonType === 'send_mail' && restrictMailToOrganizations;
+	const showOrgSpecificMail = (
+		buttonType === 'send_mail'
+			&& restrictMailToOrganizations
+			&& emailState?.mailView === 'orgSpecific'
+	);
 
 	const activeFromMail = emailState?.from_mail || activeMailAddress;
 
@@ -167,7 +171,6 @@ function MailEditorModal({
 						setMinimizeModal={setMinimizeModal}
 						resetEmailState={resetEmailState}
 						sendLoading={sendLoading}
-						showOrgSpecificMail={showOrgSpecificMail}
 						hideFromMail={hideFromMail}
 						userActiveMails={userActiveMails}
 						activeMailAddress={activeFromMail}
@@ -193,7 +196,9 @@ function MailEditorModal({
 						showControl={showControl}
 						uploading={uploading}
 						mailProps={mailProps}
+						firestore={firestore}
 						showOrgSpecificMail={showOrgSpecificMail}
+						restrictMailToOrganizations={restrictMailToOrganizations}
 					/>
 				) : (
 					<EmailTemplateList
