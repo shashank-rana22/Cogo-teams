@@ -12,6 +12,7 @@
 .price_item {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	margin-right: 2rem;
 
 	&.total {
@@ -22,6 +23,7 @@
 }
 
 .label {
+	width: max-content;
 	font-size: 10px;
 	line-height: 150%;
 	color: #000;

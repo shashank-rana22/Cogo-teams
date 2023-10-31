@@ -9,6 +9,8 @@ function FreightPrice({ rate = {}, isContract = false }) {
 		total_price_currency = 'INR',
 		freight_price_discounted = 0,
 		freight_price_currency = 'INR',
+		total_shipment_value_currency = 'INR',
+		total_shipment_value = 0,
 	} = rate || {};
 
 	return (
@@ -32,7 +34,8 @@ function FreightPrice({ rate = {}, isContract = false }) {
 				<PricePerPackage
 					price={total_price_discounted}
 					price_currency={total_price_currency}
-					isTotalPrice
+					total_price={total_shipment_value}
+					total_price_currency={total_shipment_value_currency}
 				/>
 			</div>
 		</div>
