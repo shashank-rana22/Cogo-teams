@@ -10,7 +10,7 @@ function PriceFreightCtr({
 	at_actuals = false,
 }) {
 	const data = [
-		{
+		(!at_actuals && {
 			label  : 'Price : ',
 			amount : formatAmount({
 				amount   : total_price_discounted,
@@ -21,7 +21,7 @@ function PriceFreightCtr({
 					maximumFractionDigits : 0,
 				},
 			}),
-		},
+		}),
 		{
 			label  : 'Freight : ',
 			amount : at_actuals ? '*At Actuals' : formatAmount({
