@@ -15,14 +15,10 @@ const AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO = 166.67;
 
 export const renderValue = (label, detail = {}) => {
 	const {
-		chargeable_weight, volume, weight, commodity, airline = {}, packages_count, trade_type, source,
+		packages = [], chargeable_weight, volume, weight, commodity, airline = {}, packages_count, trade_type, source,
 		payment_term, inco_term, price_type, service_type, cargo_readiness_date, awb_execution_date, bl_category,
 		master_airway_bill_number, house_airway_bill_number, commodity_details, commodity_type, commodity_sub_type,
 	} = detail;
-	let { packages = [] } = detail;
-	if (typeof packages === 'string') {
-		packages = JSON.parse(packages);
-	}
 
 	const commodityDataDetails = commodity_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
