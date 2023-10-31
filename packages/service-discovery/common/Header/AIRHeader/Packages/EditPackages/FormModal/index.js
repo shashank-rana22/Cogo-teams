@@ -24,6 +24,8 @@ function FormModal({
 	handleApply = () => {},
 	activeTab = '',
 	setActiveTab = () => {},
+	onClose = () => {},
+	isMobile = false,
 }) {
 	const { commodity_type = '' } = watch();
 
@@ -72,6 +74,8 @@ function FormModal({
 			<Header
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}
+				onClose={onClose}
+				isMobile={isMobile}
 			/>
 
 			{activeTab === 'cargo_per_package' ? (
