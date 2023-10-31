@@ -13,15 +13,6 @@ const InputController = dynamic(
 	() => import('@cogoport/forms').then((module) => module.InputController),
 	{ ssr: false },
 );
-const DateRangePickerController = dynamic(
-	() => import('@cogoport/forms').then((module) => module.DateRangePickerController),
-	{ ssr: false },
-);
-
-const ChipsController = dynamic(
-	() => import('@cogoport/forms').then((module) => module.ChipsController),
-	{ ssr: false },
-);
 
 const MultiSelectController = dynamic(
 	() => import('@cogoport/forms').then((module) => module.MultiselectController),
@@ -32,10 +23,6 @@ function FormElement({ type = '', ...rest }) {
 	if (type === 'select') return <SelectController {...rest} />;
 
 	if (type === 'async_select') return <AsyncSelectController {...rest} />;
-
-	if (type === 'date_range_picker') return <DateRangePickerController {...rest} />;
-
-	if (type === 'chips') return <ChipsController {...rest} />;
 
 	if (type === 'multi_select') return <MultiSelectController {...rest} />;
 

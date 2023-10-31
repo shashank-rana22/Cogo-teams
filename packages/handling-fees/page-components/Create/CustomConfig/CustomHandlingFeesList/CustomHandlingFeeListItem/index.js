@@ -61,8 +61,8 @@ const columnsWithValue = ({ data, list }) => {
 };
 
 function CustomHandlingFeeListItem({
-	data = {}, setShowCustomConfigForm = () => { }, setOrganizationDetails = () => { },
-	setSelectedCustomConfig = () => { },
+	data = {}, setShowCustomConfigForm = () => {}, setOrganizationDetails = () => {},
+	setSelectedCustomConfig = () => {},
 }) {
 	const columnsList = columnsWithValue({ data, list: columnsMapping });
 

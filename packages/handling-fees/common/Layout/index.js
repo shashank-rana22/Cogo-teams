@@ -56,7 +56,7 @@ function Layout(
 					>
 						{label ? (
 							<div
-								className={cl`${styles.label} ${removeLabelMargin ? styles.removeLabelMargin : ''}`}
+								className={cl`${styles.label} ${removeLabelMargin ? styles.remove_margin : ''}`}
 							>
 								{label}
 

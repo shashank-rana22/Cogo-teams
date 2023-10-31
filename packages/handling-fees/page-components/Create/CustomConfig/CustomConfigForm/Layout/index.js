@@ -13,7 +13,7 @@ function Layout(
 		showElements = {},
 		formValues = {},
 		customFieldArrayControls = {},
-		setValue = () => { },
+		setValue = () => {},
 	},
 ) {
 	const finalControls = controls.filter((c) => {

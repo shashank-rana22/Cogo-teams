@@ -2,7 +2,9 @@ import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { getByKey } from '@cogoport/utils';
 
 const OFFSET_LAST_INDEX = 1;
-const getCustomOptions = ({ options_key = '', name = '', formValues = {}, isFieldArray = false, ...rest }) => {
+const getCustomOptions = (props) => {
+	const { options_key = '', name = '', formValues = {}, isFieldArray = false, ...rest } = props;
+
 	if (!options_key) return [];
 
 	let formKeyName = rest.form_key;

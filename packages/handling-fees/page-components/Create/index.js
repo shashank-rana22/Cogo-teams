@@ -57,7 +57,7 @@ function Create({ data = {}, type = 'create' }) {
 
 	const customFieldArrayControls = { alternate_slab_details: {}, slab_details: {} };
 
-	slab_details?.forEach((_o, index) => {
+	slab_details?.forEach((_, index) => {
 		customFieldArrayControls.slab_details[GLOBAL_CONSTANTS.zeroth_index] = {
 			slab_lower_limit: { disabled: true },
 		};
@@ -82,8 +82,7 @@ function Create({ data = {}, type = 'create' }) {
 
 	useEffect(() => {
 		setValue('slab_details', data?.data?.slab_details);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [data?.data?.slab_details]);
+	}, [data?.data?.slab_details, setValue]);
 
 	return (
 		<>

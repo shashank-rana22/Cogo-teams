@@ -2,7 +2,7 @@
   "air_freight": [
     {
       "label": "KG (Chargeable Weight)",
-      "value": "kg_charagable_weight"
+      "value": "kg_chargeable_weight"
     }
   ],
   "ftl_freight": [
@@ -14,7 +14,7 @@
   "ltl_freight": [
     {
       "label": "KG (Chargeable Weight)",
-      "value": "kg_charagable_weight"
+      "value": "kg_chargeable_weight"
     }
   ],
   "fcl_freight_local": [
@@ -26,7 +26,7 @@
   "air_freight_local": [
     {
       "label": "KG (Chargeable Weight)",
-      "value": "kg_charagable_weight"
+      "value": "kg_chargeable_weight"
     }
   ],
   "trailer_freight": [
@@ -68,7 +68,7 @@
   "air_customs": [
     {
       "label": "KG (Chargeable Weight)",
-      "value": "kg_charagable_weight"
+      "value": "kg_chargeable_weight"
     }
   ],
   "rail_domestic_freight": [

@@ -13,7 +13,7 @@ const OPTIONS = [
 
 function ListHeader({
 	listType = '',
-	setListType = () => { },
+	setListType = () => {},
 	filters = {},
 	setFilters = () => {},
 	activeService = '',

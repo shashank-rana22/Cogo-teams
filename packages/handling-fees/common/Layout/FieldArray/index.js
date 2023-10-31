@@ -6,10 +6,12 @@ import { isEmpty } from '@cogoport/utils';
 import Child from './Child';
 import styles from './styles.module.css';
 
-function FieldArray({
-	ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {}, setValue = () => { },
-	handleFieldArrayAddCheck = () => true, customFieldArrayControls = {},
-}) {
+function FieldArray(props) {
+	const {
+		ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {}, setValue = () => {},
+		handleFieldArrayAddCheck = () => true, customFieldArrayControls = {},
+	} = props;
+
 	const { controls = [], name, showHeading = true } = ctrl || {};
 
 	const { fields, append, remove } = useFieldArray({ control, name });

@@ -14,12 +14,12 @@ function useCreateHandlingFeeConfig({
 	const router = useRouter();
 
 	const [{ loading }, trigger] = useRequest({
-		url    : './create_handling_fee_configuration',
+		url    : '/create_handling_fee_configuration',
 		method : 'POST',
 	}, { manual: true });
 
 	const [{ loading: updationLoading }, triggerUpdate] = useRequest({
-		url    : './update_handling_fee_configuration',
+		url    : '/update_handling_fee_configuration',
 		method : 'POST',
 	}, { manual: true });
 
@@ -73,7 +73,6 @@ function useCreateHandlingFeeConfig({
 			);
 
 			router.push(
-				`/handling-fees?service=${activeService}`,
 				`/handling-fees?service=${activeService}`,
 			);
 		} catch (error) {

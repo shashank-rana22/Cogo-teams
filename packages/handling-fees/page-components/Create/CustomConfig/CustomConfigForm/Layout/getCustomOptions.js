@@ -10,7 +10,7 @@ const getCustomOptions = ({ options_key = '', name = '', formValues = {}, isFiel
 	if (isFieldArray) {
 		const splitArr = name.split('.');
 		splitArr[splitArr.length - OFFSET_LAST_INDEX] = rest.form_key;
-		formKeyName = splitArr.join('.');
+		formKeyName = (splitArr || []).join('.');
 	}
 
 	switch (options_key) {

@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -22,9 +24,7 @@ function useGetHandlingFee({ id = '' }) {
 				},
 			});
 		} catch (error) {
-			// if (error?.response) {
-			// 	Toast.error(getApiErrorString(error?.response?.data));
-			// }
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	}, [id, listType, trigger]);
 
