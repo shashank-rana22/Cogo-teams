@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import DURATION_CONSTANTS from '../../../../constants/duration-constants';
 import DURATION_OPTIONS from '../../../Leaderboard/configurations/get-duration-filter-options';
+import USER_OPTIONS from '../../configurations/get-user-filter-options';
 import TEXT_MAPPING from '../../configurations/header-text-mapping';
 import onChangeDuration from '../../utils/changeDuration';
 
@@ -14,7 +15,7 @@ import styles from './styles.module.css';
 const { CUSTOM } = DURATION_CONSTANTS;
 
 function Header(props) {
-	const { view, dateRange, setDateRange, updatedAt, countdown } = props;
+	const { view, setView, dateRange, setDateRange, updatedAt, countdown } = props;
 
 	const [duration, setDuration] = useState('today');
 
@@ -60,23 +61,31 @@ function Header(props) {
 				</div>
 			</div>
 
-			<div>
+			<div className={styles.end_side}>
+				<Select
+					value={view}
+					onChange={(selectedView) => setView(selectedView)}
+					options={USER_OPTIONS}
+					className={styles.user_selector}
+				/>
 
-				<CountDownTimer updatedAt={updatedAt} countdown={countdown} />
+				<div>
+					<CountDownTimer updatedAt={updatedAt} countdown={countdown} />
 
-				{updatedAt && (
-					<p className={styles.last_updated_at}>
-						Last updated:
-						{' '}
-						{formatDate({
-							date       : updatedAt,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-							formatType : 'dateTime',
-							separator  : '; ',
-						})}
-					</p>
-				)}
+					{updatedAt && (
+						<p className={styles.last_updated_at}>
+							Last updated:
+							{' '}
+							{formatDate({
+								date       : updatedAt,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+								formatType : 'dateTime',
+								separator  : '; ',
+							})}
+						</p>
+					)}
+				</div>
 			</div>
 
 		</div>

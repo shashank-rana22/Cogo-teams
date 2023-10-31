@@ -60,3 +60,18 @@
 		font-size: 30px;
 	}
 }
+
+.end_side {
+	display: flex;
+	gap: 8px;
+}
+
+.user_selector {
+	width: 100px;
+
+	:global {
+		.ui_select_option_item span {
+			width: 100%;
+		}
+	}
+}
