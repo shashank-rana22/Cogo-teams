@@ -38,6 +38,12 @@
 		padding-left: 10px;
 		border-right: unset;
 	}
+
+	:global {
+		.ui_percentage_view {
+			font-size: 11px;
+		}
+	}
 }
 
 .row_container {

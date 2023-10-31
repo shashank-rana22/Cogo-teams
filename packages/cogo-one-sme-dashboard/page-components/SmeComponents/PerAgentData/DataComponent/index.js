@@ -37,7 +37,7 @@ function DataComponent({
 
 			<div
 				className={styles.total_value}
-				style={{ fontSize: segregated ? '12px' : '26px' }}
+				style={{ fontSize: segregated ? '13px' : '26px' }}
 			>
 				{dataValue?.toFixed(2)}
 			</div>
