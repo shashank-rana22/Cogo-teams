@@ -12,7 +12,7 @@ function ListHandlingFees({
 }) {
 	const defaultFilters = { listType, activeService };
 
-	const { data, loading, filters, setFilters } = useListHandlingFees({
+	const { data, loading, filters, setFilters, page, setPage } = useListHandlingFees({
 		defaultFilters,
 	});
 
@@ -24,12 +24,13 @@ function ListHandlingFees({
 				activeService={activeService}
 				listType={listType}
 				setListType={setListType}
+				setPage={setPage}
 			/>
 			<Details
 				data={data}
 				loading={loading}
-				filters={filters}
-				setFilters={setFilters}
+				page={page}
+				setPage={setPage}
 				activeService={activeService}
 			/>
 		</>

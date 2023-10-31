@@ -10,13 +10,12 @@ function useListHandlingFees({
 	const [data, setData] = useState({});
 
 	const [filters, setFilters] = useState({});
+	const [page, setPage] = useState(1);
 
 	const {
 		listType: status = '',
 		activeService: service_type = '',
 	} = defaultFilters || {};
-
-	const { page = 1, ...restFilters } = filters || {};
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/list_handling_fee_configurations',
@@ -26,7 +25,7 @@ function useListHandlingFees({
 				service_type,
 				status,
 				...(defaultFilters || {}),
-				...restFilters,
+				...filters,
 			},
 			page_limit               : PAGE_LIMIT,
 			pagination_data_required : true,
@@ -55,6 +54,8 @@ function useListHandlingFees({
 		setFilters,
 		data,
 		loading,
+		page,
+		setPage,
 	};
 }
 

@@ -11,6 +11,7 @@ function ListFilters({
 	setFilters = () => { },
 	activeService = '',
 	setShowPopover = () => {},
+	setPage = () => {},
 }) {
 	const DEFAULT_VALUES = {};
 
@@ -25,7 +26,8 @@ function ListFilters({
 		setShowPopover(false);
 		setFilters({});
 		reset();
-	}, [setFilters, setShowPopover, reset]);
+		setPage(1);
+	}, [setFilters, setShowPopover, reset, setPage]);
 
 	const onSave = (values) => {
 		const filter = Object.fromEntries(
@@ -33,6 +35,7 @@ function ListFilters({
 		);
 
 		setFilters({ ...filter });
+		setPage(1);
 		setShowPopover(false);
 	};
 

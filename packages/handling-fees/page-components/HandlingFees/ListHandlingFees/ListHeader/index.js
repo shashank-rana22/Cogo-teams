@@ -17,6 +17,7 @@ function ListHeader({
 	filters = {},
 	setFilters = () => {},
 	activeService = '',
+	setPage = () => {},
 }) {
 	const [showPopover, setShowPopover] = useState(false);
 
@@ -52,6 +53,7 @@ function ListHeader({
 								setFilters={setFilters}
 								activeService={activeService}
 								setShowPopover={setShowPopover}
+								setPage={setPage}
 							/>
 						)}
 					>

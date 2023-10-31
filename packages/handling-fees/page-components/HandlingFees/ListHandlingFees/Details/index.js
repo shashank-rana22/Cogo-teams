@@ -13,19 +13,13 @@ const LAST_INDEX = 1;
 function Details({
 	data = {},
 	loading = {},
-	filters = {},
-	setFilters = () => { },
+	page = 1,
+	setPage = () => {},
 	activeService = '',
 }) {
 	const router = useRouter();
 
 	const { list, page_limit = 10, total_count = 1 } = data || {};
-
-	const { page, ...restFilters } = filters || {};
-
-	const onPageClick = (currentPage) => {
-		setFilters({ ...restFilters, page: currentPage });
-	};
 
 	if (loading) {
 		return (
@@ -63,7 +57,7 @@ function Details({
 					pageSize={page_limit}
 					totalItems={total_count || ZERO_PAGES}
 					currentPage={page}
-					onPageChange={onPageClick}
+					onPageChange={setPage}
 				/>
 			</div>
 		</div>
