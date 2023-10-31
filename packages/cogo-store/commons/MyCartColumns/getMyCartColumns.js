@@ -46,7 +46,6 @@ const getMyCartColumns = ({
 		Header   : 'PRICE',
 		accessor : (item = {}) => (
 			<div className={styles.dot_list}>
-				{/* <div className={styles.grey}>{`₹${item?.price}`}</div> */}
 				<div className={styles.amt_black}>
 					{currency_code}
 					{item?.after_coupon_price}

@@ -19,7 +19,6 @@ const useListAllOrders = ({ dateArray = [] }) => {
 		async () => {
 			try {
 				const { page_limit, page, order_status, date_sort, ...rest } = filters;
-				// console.log(typeof new Date(date[GLOBAL_CONSTANTS.zeroeth_index]), 'hi');
 				await trigger({
 					params: {
 						filters: {

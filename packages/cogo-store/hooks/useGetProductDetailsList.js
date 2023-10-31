@@ -3,27 +3,23 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-const useGetListProductDetail = () => {
+const useGetProductDetailsList = () => {
 	const [filters, setFilters] = useState({
-		page_limit : 6,
-		page       : 1,
 	});
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/list_products',
 	}, { manual: true });
 
-	const getListProductDetail = useCallback(
+	const getProductDetailsList = useCallback(
 		async () => {
 			try {
-				const { page, page_limit, category_id } = filters;
+				const { category_id } = filters;
 				await trigger({
 					params: {
 						filters: {
 							category_id: category_id || null,
 						},
-						page_limit,
-						page,
 					},
 				});
 			} catch (error) {
@@ -36,10 +32,10 @@ const useGetListProductDetail = () => {
 	);
 
 	useEffect(() => {
-		getListProductDetail();
-	}, [getListProductDetail]);
+		getProductDetailsList();
+	}, [getProductDetailsList]);
 
-	return { loading, data, getListProductDetail, filters, setFilters };
+	return { loading, data, getProductDetailsList, filters, setFilters };
 };
 
-export default useGetListProductDetail;
+export default useGetProductDetailsList;

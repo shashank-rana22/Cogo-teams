@@ -7,10 +7,6 @@ const getOrderColumns = ({ currency_code = '' }) => ([
 	{
 		Header   : 'PRODUCTS',
 		accessor : (item = {}) => {
-			// const getColorFromCode = (colorId) => {
-			// 	const colorName = color.find((col) => col.id === colorId);
-			// 	return colorName ? colorName.hexcode : '';
-			// };
 			console.log(item, 'item');
 			return (
 				<div className={styles.products}>

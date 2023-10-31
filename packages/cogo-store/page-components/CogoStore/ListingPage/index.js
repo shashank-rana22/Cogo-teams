@@ -1,10 +1,10 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { setCookie, getCookie } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
-import useGetListProductDetail from '../../../hooks/useGetListProductDetail';
 import useGetListProductVariationDetails from '../../../hooks/useGetListProductVariationDetails';
+import useGetProductDetailsList from '../../../hooks/useGetProductDetailsList';
 import useGetProductFilterDetail from '../../../hooks/useGetProductFilterDetail';
 import useUpdateCart from '../../../hooks/useUpdateCart';
 import Header from '../Header';
@@ -12,23 +12,18 @@ import Header from '../Header';
 import ProductDetails from './ProductDetails';
 import styles from './styles.module.css';
 
-const TICK_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Ok.svg';
-const ADD_TO_CART = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/AddCart';
-const SYNCHRONIZE_CART = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Synchronize.svg';
-const COUPON_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/percentageCoupon.svg';
 const STAR_RATING = 5;
 const PERCENTAGE_HUNDRED = 100;
 
 function ListingPage() {
+	const { ADD_TO_CART, TICK_ICON, SYNCHRONIZE_CART, COUPON_ICON } = GLOBAL_CONSTANTS.image_url;
 	const { push } = useRouter();
 	const [selectedImage, setSelectedImage] = useState(null);
 	const [addedToCart, setAddedToCart] = useState(false);
 	let dataArray = [];
-	const { data, loading:productDetailLoading = false } = useGetListProductDetail();
-	console.log('datadata', data);
+	const { data, loading:productDetailLoading = false } = useGetProductDetailsList();
 
 	const { data: productData, loading:productFilterLoading = false } = useGetProductFilterDetail();
-	console.log(productData, 'listProduce');
 
 	const [applyCoupon, setApplyCoupon] = useState(getCookie('apply_coupon') === 'true');
 	const { list: productList } = data || {};
@@ -44,41 +39,27 @@ function ListingPage() {
 
 	const product = (productList || []).find((prod) => prod.id === product_id);
 
-	console.log('productList', productList);
-
 	const { available_colors, available_sizes } = product || {};
-	// const { availableColors, availableSizes } = (productList || []).reduce(
-	// 	(acc, curr) => {
-	// 		const { available_colors, available_sizes } = curr;
-
-	// 		acc.availableColors = Array.from(new Set([...acc.availableColors, ...(available_colors || [])]));
-	// 		acc.availableSizes = Array.from(new Set([...acc.availableSizes, ...(available_sizes || [])]));
-
-	// 		return acc;
-	// 	},
-	// 	{ availableSizes: [], availableColors: [] },
-	// );
 
 	const { color, user_details, currency_code } = productData || {};
 
 	const { office_location } = user_details || {};
 
-	const selectedColors = (available_colors || []).map((colorId) => {
+	const selectedColors = useMemo(() => (available_colors || []).map((colorId) => {
 		const colorData = (color || []).find((c) => c.id === colorId);
 		return colorData ? { name: colorData.name, hexcode: colorData.hexcode, id: colorData.id } : null;
-	});
+	}), [available_colors, color]);
 
-	const colorValuePairs = (selectedColors || []).map((colorTheme) => ({
+	const colorValuePairs = useMemo(() => (selectedColors || []).map((colorTheme) => ({
 		label : colorTheme?.name,
 		value : colorTheme?.id,
-	}));
+	})), [selectedColors]);
 
-	const sizeValuePairs = (available_sizes || []).map((sizeAvail) => ({
+	const sizeValuePairs = useMemo(() => (available_sizes || []).map((sizeAvail) => ({
 		label : sizeAvail,
 		value : sizeAvail,
-	}));
+	})), [available_sizes]);
 
-	console.log(colorValuePairs, 'valPairSize');
 	const { updateCart } = useUpdateCart();
 
 	const {
@@ -159,7 +140,7 @@ function ListingPage() {
 				price={price}
 				discount_percentage={discount_percentage}
 				ADD_TO_CART={ADD_TO_CART}
-				SYNCHRONIZE_CART={SYNCHRONIZE_CART}
+				synchronizeCart={SYNCHRONIZE_CART}
 				handleBuyNow={handleBuyNow}
 				addedToCart={addedToCart}
 				handleAddToCart={handleAddToCart}

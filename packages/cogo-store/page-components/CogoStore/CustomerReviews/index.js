@@ -1,28 +1,11 @@
 import { ProgressBar, RatingComponent } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import { RATING_COUNT } from '../../../utils/constants';
+
 import styles from './styles.module.css';
 
 const RATING = 4;
-
-const RATING_COUNT = [
-	{
-		starRating : '5 star',
-		progress   : '30',
-	},
-	{
-		starRating : '4 star',
-		progress   : '40',
-	},
-	{
-		starRating : '3 star',
-		progress   : '50',
-	},
-	{
-		starRating : '2 star',
-		progress   : '60',
-	},
-];
 
 function CustomerReviews() {
 	const [starRating, setStarRating] = useState(RATING);

@@ -8,36 +8,10 @@ import React from 'react';
 
 import useGetOrderHistory from '../../../hooks/useGetOrderHistory';
 import useGetProductFilterDetail from '../../../hooks/useGetProductFilterDetail';
+import { ORDER_STATUS, ORDER_IN, MONTHS } from '../../../utils/constants';
 import Header from '../Header';
 
 import styles from './styles.module.css';
-
-const ORDER_STATUS = [
-	{ label: 'Placed', value: 'placed' },
-	{ label: 'Out for delivery', value: 'out_for_delivery' },
-	{ label: 'Delivered', value: 'delivered' },
-	{ label: 'Cancelled', value: 'cancelled' },
-	{ label: 'Returned', value: 'returned' },
-];
-const ORDER_IN = [
-	{ name: '30', label: 'Last 30 Days', value: '30' },
-	{ name: '365', label: 'Last 1 year', value: '365' },
-];
-
-const MONTHS = [
-	'Jan',
-	'Feb',
-	'Mar',
-	'Apr',
-	'May',
-	'Jun',
-	'Jul',
-	'Aug',
-	'Sep',
-	'Oct',
-	'Nov',
-	'Dec',
-];
 
 function OrderHistory() {
 	const { push } = useRouter();
@@ -45,8 +19,6 @@ function OrderHistory() {
 	const { data:orderHistoryData, setFiltersHistory = () => {} } = useGetOrderHistory();
 	const { data:productData } = useGetProductFilterDetail();
 	const { currency_code } = productData || {};
-	// const { list } = orderHistoryData || {};
-	console.log('🚀 ~ file: index.js:42 ~ OrderHistory ~ orderHistoryData:', orderHistoryData);
 	const { list, page, page_limit, total_count } = orderHistoryData || {};
 
 	let quantityNames = [];

@@ -7,7 +7,6 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function OrderConfirmation({ data = {}, office_location = '' }) {
-	console.log('order_conf', data);
 	const { push } = useRouter();
 	const { id } = data || {};
 	return (

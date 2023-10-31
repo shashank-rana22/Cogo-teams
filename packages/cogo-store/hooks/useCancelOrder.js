@@ -14,10 +14,10 @@ const useCancelOrder = (getOrderDetails = () => {}) => {
 				data: payload,
 			});
 			Toast.success('Order Successfully Cancelled!');
+			getOrderDetails();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
-		getOrderDetails();
 	};
 
 	return {

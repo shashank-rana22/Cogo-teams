@@ -10,17 +10,10 @@ import React, { useEffect, useState	} from 'react';
 
 import useGetProductFilterDetail from '../../../../hooks/useGetProductFilterDetail';
 import useUpdateStatus from '../../../../hooks/useUpdateStatus';
+import { STATUS_OPTIONS } from '../../../../utils/constants';
 
 import getOrderColumns from './getOrderColumns';
 import styles from './styles.module.css';
-
-const STATUS_OPTIONS = [
-	{ label: 'Placed', value: 'placed' },
-	{ label: 'Delivered', value: 'delivered' },
-	{ label: 'Returned', value: 'returned' },
-	{ label: 'Cancelled', value: 'cancelled' },
-	{ label: 'Out for Delivery', value: 'out_for_delivery' },
-];
 
 function OrderTable({ data, filters, setFilters, dateArray, refetch }) {
 	const { push } = useRouter();
@@ -93,9 +86,9 @@ function OrderTable({ data, filters, setFilters, dateArray, refetch }) {
 									placeholder="Status"
 									name="order_status"
 									options={STATUS_OPTIONS}
-									onChange={(e) => {
-										setFilters((prev) => ({ ...prev, order_status: e, page: 1 }));
-									}}
+									onChange={(e) => (
+										setFilters((prev) => ({ ...prev, order_status: e, page: 1 }))
+									)}
 									value={filters.order_status}
 									isClearable
 								/>

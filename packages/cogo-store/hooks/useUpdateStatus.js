@@ -14,10 +14,10 @@ const 	useUpdateStatus = ({ refetch = () => {} }) => {
 				data: payload,
 			});
 			Toast.success('Order Status Changed');
+			refetch();
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
-		refetch();
 	};
 
 	return {

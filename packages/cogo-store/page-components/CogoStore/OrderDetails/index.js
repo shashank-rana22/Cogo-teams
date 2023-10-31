@@ -13,34 +13,9 @@ import useGetOrderDetails from '../../../hooks/useGetOrderDetails';
 import useGetProductFilterDetail from '../../../hooks/useGetProductFilterDetail';
 import usePlaceOrder from '../../../hooks/usePlaceOrder';
 import useUpdateStatus from '../../../hooks/useUpdateStatus';
+import { MONTHS, STATUS_OPTIONS } from '../../../utils/constants';
 
 import styles from './styles.module.css';
-
-const MONTHS = [
-	'Jan',
-	'Feb',
-	'Mar',
-	'Apr',
-	'May',
-	'Jun',
-	'Jul',
-	'Aug',
-	'Sep',
-	'Oct',
-	'Nov',
-	'Dec',
-];
-
-const STATUS_OPTIONS = [
-	{ label: 'Placed', value: 'placed' },
-	{ label: 'Delivered', value: 'delivered' },
-	{ label: 'Returned', value: 'returned' },
-	{ label: 'Cancelled', value: 'cancelled' },
-	{ label: 'Out for Delivery', value: 'out_for_delivery' },
-];
-// const handleButtonClick = () => {
-// 	window.open('https://tinyurl.com/5n76dcrd', '_blank');
-// };
 
 function OrderDetails() {
 	const { query, push } = useRouter();
@@ -184,15 +159,6 @@ function OrderDetails() {
 
 								</Button>
 							) : null}
-							{/* <Button
-								size="md"
-								themeType="secondary"
-								onClick={handleButtonClick}
-							>
-								{' '}
-								Download Invoice
-								<IcMDownload />
-							</Button> */}
 						</div>
 					</div>
 					{is_hr_admin ? (

@@ -11,13 +11,12 @@ import styles from './styles.module.css';
 function ProductDetails({
 	product_images = {}, product_name = '', description = '',
 	dataArray = [], filtersVariation = {}, setFiltersVariation = () => {}, sizeValuePairs = [],
-	after_coupon_price = '', ADD_TO_CART = '', SYNCHRONIZE_CART = '',
+	after_coupon_price = '', ADD_TO_CART = '', synchronizeCart = '',
 	handleBuyNow = () => {}, addedToCart = false, handleAddToCart = () => {}, selectedImage = '',
 	TICK_ICON = '', colorValuePairs = [], handleVariationColor = () => {},
 	handleImageClick = () => {}, office_location = '', currency_code = '', merchSize = '', merchColor = '',
 	loading = false,
 }) {
-	console.log('merchColor', sizeValuePairs);
 	if (loading) {
 		return null;
 	}
@@ -106,54 +105,12 @@ function ProductDetails({
 						</div>
 					</div>
 					<div className={styles.price_section}>
-						{/* {!discounted_price ? ''
-							: ( */}
 						<span className={styles.discounted_price}>
 							{currency_code}
 							{' '}
 							{ after_coupon_price }
 
 						</span>
-						{/* <span className={styles.actual_price}>
-							₹
-							{' '}
-							{price}
-						</span> */}
-
-						{/* {!applyCoupon && ( */}
-						{/* <Pill size="md" color="orange">
-							-
-							{discount_percentage}
-							% OFF
-							{' '}
-						</Pill> */}
-						{/* )} */}
-						{/* )} */}
-					</div>
-					<div className={styles.add_coupon_section}>
-						{/* <img src={COUPON_ICON} alt="coupon-icon" />
-						<span className={styles.add_coupon_text}>
-							Get this for
-							{' '}
-							<span className={styles.add_coupon_bold}>
-								₹
-								{' '}
-								{after_coupon_price}
-
-							</span>
-							{' '}
-							with coupon code
-							{' '}
-							<span className={styles.add_coupon_bold}>EMPLOYEE DISCOUNT</span>
-							{' '}
-						</span> */}
-						{/* <span
-							className={styles.apply_coupon}
-							onClick={() => { handleApplyClick(); }}
-							role="presentation"
-						>
-							{applyCoupon ? 'Remove' : 'Apply Coupon'}
-						</span> */}
 					</div>
 					<div className={styles.selected_address}>
 						<div className={styles.delivery_to_payment}>
@@ -198,7 +155,7 @@ function ProductDetails({
 						<div className={styles.functionality_cart_wrap}>
 							<img
 								className={styles.functionality_cart_img}
-								src={SYNCHRONIZE_CART}
+								src={synchronizeCart}
 								alt="schronize_icon"
 							/>
 						</div>

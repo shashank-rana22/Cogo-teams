@@ -9,9 +9,6 @@ const MAX_PAGE_LIMIT = 2;
 function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters = () => {} }) {
 	const { push } = useRouter();
 	const { list = [], page, page_limit, total_count } = data || {};
-	// const { list, page, page_limit, total_count } = data || {};
-	// const { is_hr_admin } = productData || {};
-	// const [starRating, setStarRating] = useState(GLOBAL_CONSTANTS.zeroth_index);
 
 	const { categories, color, currency_code } = productData || {};
 
@@ -107,20 +104,7 @@ function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters
 									{currency_code}
 									{item.after_coupon_price}
 								</span>
-								{/* <span className={styles.cost_shown}>
-									{`${item.price} ₹`}
-								</span> */}
 							</div>
-							{/* <div className={styles.stars}>
-								<RatingComponent
-									type="star"
-									totalStars={5}
-									value={starRating}
-									size="xs"
-									onChange={setStarRating}
-								/>
-							</div> */}
-
 						</div>
 					</div>
 				))}

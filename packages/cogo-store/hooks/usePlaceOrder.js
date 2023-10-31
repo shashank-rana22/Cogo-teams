@@ -9,7 +9,6 @@ const usePlaceOrder = () => {
 	}, { manual: true });
 
 	const placeOrder = async ({ payload, total }) => {
-		console.log('🚀 ~ file: usePlaceOrder.js:12 ~ placeOrder ~ total:', total);
 		try {
 			await trigger({
 				data: {

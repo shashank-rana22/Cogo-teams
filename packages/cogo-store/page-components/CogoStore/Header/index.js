@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcALocation, IcMArrowNext, IcMClock } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
@@ -6,17 +7,13 @@ import useGetProductFilterDetail from '../../../hooks/useGetProductFilterDetail'
 
 import styles from './styles.module.css';
 
-const COGO_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_name.svg';
-const COPYRIGHT_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/copyright.svg';
-const CART = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Cart.svg';
-
 function Header() {
 	const { push } = useRouter();
 	const { data: productData } = useGetProductFilterDetail();
-	console.log(productData, 'product-details');
 	const { user_details } = productData || {};
 	const { name, office_location } = user_details || {};
 	const { is_hr_admin } = productData || {};
+	const { COGO_ICON, COPYRIGHT_ICON, CART } = GLOBAL_CONSTANTS.image_url;
 
 	return (
 		<div className={styles.heading}>

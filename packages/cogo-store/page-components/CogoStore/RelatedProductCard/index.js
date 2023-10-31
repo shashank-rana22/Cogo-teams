@@ -4,7 +4,6 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function RelatedProductCard({
-	SHOES_MERCH,
 	relatedTopics,
 	starRating,
 	setStarRating,
@@ -13,7 +12,7 @@ function RelatedProductCard({
 		relatedTopics.map((item) => (
 			<div className={styles.list_card} key={item.id}>
 				<div className={styles.img_section}>
-					<img src={SHOES_MERCH} alt="text" />
+					<img src="" alt="text" />
 				</div>
 				<div className={styles.text_section}>
 					<div className={styles.grey}><span>BRAND / TYPE</span></div>

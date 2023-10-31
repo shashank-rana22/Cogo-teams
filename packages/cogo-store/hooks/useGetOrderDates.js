@@ -6,8 +6,6 @@ const useGetOrderDates = () => {
 		url    : '/get_order_dates',
 	}, { manual: false });
 
-	console.log('data', data);
-
 	return { loading, data };
 };
 

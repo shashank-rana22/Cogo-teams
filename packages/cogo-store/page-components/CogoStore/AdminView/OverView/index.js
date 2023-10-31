@@ -1,22 +1,13 @@
-/* eslint-disable no-magic-numbers */
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-const ARROW_RIGHT_TOP = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/arrow-top-right.svg';
-const ORDERS_PLACED = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Subtract_icon.svg';
-// const CALENDAR = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Frame_1564.svg'
-
-const TRUCK = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/truck_blue.svg';
-const HOURGLASS = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hourglass.svg';
-const NOTE_BLUE = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/note_blue.svg';
-const PROFIT = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Profit.svg';
 const TWO = GLOBAL_CONSTANTS.two;
 
 function OverView({ data = {} }) {
-	console.log('🚀 ~ file: index.js:19 ~ OverView ~ data:', data);
+	const { ARROW_RIGHT_TOP, ORDERS_PLACED, TRUCK, HOURGLASS, NOTE_BLUE, PROFIT } = GLOBAL_CONSTANTS.image_url;
 	const { orders_delivered, orders_placed, orders_returned, profit, sales } = data || {};
 
 	return (

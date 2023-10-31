@@ -1,6 +1,6 @@
-import { Table, Button, Modal } from '@cogoport/components';
+import { Table, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMTick, IcMError } from '@cogoport/icons-react';
+import { IcMTick } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { getCookie, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -14,11 +14,11 @@ import useUpdateCart from '../../../hooks/useUpdateCart';
 import Header from '../Header';
 import OrderConfirmation from '../OrderConfirmation';
 
+import ModalMyCart from './ModalMyCart';
 import styles from './styles.module.css';
 
 function MyCart() {
 	const { push } = useRouter();
-	// const coupon_applied = window.sessionStorage.getItem('apply_coupon');
 	const coupon_applied = (getCookie('apply_coupon') === 'true');
 
 	const { data: productData } = useGetProductFilterDetail();
@@ -59,16 +59,11 @@ function MyCart() {
 		return <OrderConfirmation data={orderData} office_location={office_location} />;
 	}
 
-	// const handleRemoveCoupon = () => {
-	// 	setCookie('apply_coupon', false);
-	// 	setCouponApplied(false);
-	// };
-
 	const getColorFromCode = (colorId) => {
 		const colorName = (color || []).find((col) => col.id === colorId);
 		return colorName ? colorName.hexcode : '';
 	};
-	console.log(couponApplied, 'appliedCoupon');
+
 	return (
 		<div className={styles.cart_page}>
 			<Header />
@@ -123,10 +118,6 @@ function MyCart() {
 									<span className={styles.grey}>Shipping</span>
 									<span className={styles.black}>Free</span>
 								</div>
-								{/* <div className={styles.total_item}>
-									<span className={styles.grey}>Discount</span>
-									<span className={styles.black}>{`₹${card_totals?.card_total_discount}`}</span>
-								</div> */}
 								<div className={styles.total_item} style={{ paddingBottom: '8px' }}>
 									<span className={styles.grey}>Tax</span>
 									<span className={styles.black}>
@@ -157,105 +148,17 @@ function MyCart() {
 										Confirm Order
 									</span>
 								</Button>
-
 							</div>
-
 						</div>
-
-						{/* <div className={styles.totals}>
-
-							<h3 className={styles.heading_total}>Coupon Code</h3>
-
-							<div className={styles.coupon}>
-
-								<div className={styles.coupon_left}>
-									{couponApplied
-
-										? (
-											<>
-												<IcCFtick with={16} height={16} style={{ margin: '0px 4px' }} />
-												<span>EMPLOYEE DISCOUNT</span>
-												{' '}
-											</>
-										)
-										: (<span />)}
-
-								</div>
-								{couponApplied
-									&& (
-										<Button
-											themeType="tertiary"
-											onClick={handleRemoveCoupon}
-										>
-											Remove
-										</Button>
-									)}
-							</div>
-							{!couponApplied
-								&& (
-									<Button
-										themeType="accent"
-										className={styles.apply_coupon}
-										onClick={() => {
-											setCookie('apply_coupon', true);
-											setCouponApplied(true);
-										}}
-									>
-										Apply Coupon
-
-								</Button>
-							)}
-						</div> */}
-
 					</div>
 				</div>
-				<Modal size="md" show={show} onClose={onClose} placement="center">
-					<Modal.Body>
-						<IcMError
-							className={styles.error_icon}
-							height={60}
-							width={60}
-						/>
-
-						<div className={styles.modal_q}>Are you sure you want to place your order?</div>
-						{(list || []).map((item) => (
-							<div className={styles.products} key={item.id}>
-								<img
-									src={item?.product_images[GLOBAL_CONSTANTS.zeroth_index]}
-									alt=""
-									height="80px"
-									width="80px"
-								/>
-								<div className={styles.products_right}>
-									<div className={styles.black}>{item.product_name}</div>
-									<div className={styles.dot_list}>
-										<span>Colour</span>
-										<div
-											className={styles.color_dot}
-											style={{
-												backgroundColor : `${getColorFromCode(item.color_id)}`,
-												border          : '1px solid black',
-											}}
-										/>
-										<span>{item.size}</span>
-										<span style={{ marginLeft: '4px' }}>{` x ${item.quantity}`}</span>
-									</div>
-								</div>
-							</div>
-						))}
-					</Modal.Body>
-					<Modal.Footer>
-						<Button
-							themeType="secondary"
-							onClick={() => setShow(false)}
-							className={styles.cancel_btn}
-						>
-							Cancel
-
-						</Button>
-						<Button themeType="accent" onClick={onClose}>Yes,Proceed</Button>
-					</Modal.Footer>
-				</Modal>
+				<ModalMyCart
+					list={list}
+					show={show}
+					setShow={setShow}
+					onClose={onClose}
+					getColorFromCode={getColorFromCode}
+				/>
 			</div>
 		</div>
 	);
