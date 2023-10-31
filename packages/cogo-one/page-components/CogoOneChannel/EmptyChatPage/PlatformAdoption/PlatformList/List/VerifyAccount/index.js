@@ -11,7 +11,8 @@ import styles from './styles.module.css';
 
 function VerifyAccount({
 	verifyAccount = {}, setVerifyAccount = () => {}, setRejectAccount = () => {},
-	verifyKyc = () => {}, loading = false, updateDocument = () => {},
+	verifyKyc = () => {}, loading = false, updateDocument = () => {}, updateCpDocument = () => {},
+	selectDoc = {}, setSelectDoc = () => {},
 }) {
 	const {
 		show = false,
@@ -25,28 +26,28 @@ function VerifyAccount({
 	const { documents = [], id = '' } = orgData || {};
 
 	const [checked, setChecked] = useState(false);
-	const [selectDoc, setSelectDoc] = useState({
-		docType : '',
-		docUrl  : '',
-	});
 
 	const documentOptions = useMemo(() => (accountData || []).map((itm) => ({
-		label : startCase(itm?.document_type),
-		value : itm?.document_type,
-		url   : itm?.image_url,
+		label  : startCase(itm?.document_type),
+		value  : itm?.document_type,
+		url    : itm?.image_url,
+		id     : itm?.id,
+		status : itm?.verification_status,
 	})), [accountData]);
 
 	const hasDocument = isEmpty(accountData);
 
 	const handleClose = () => {
-		setSelectDoc({ docType: null, docUrl: null });
+		setSelectDoc({ docType: null, docUrl: null, docId: null });
 		setChecked(false);
 		setVerifyAccount({ show: false, accountData: [], showAccountDetails: false });
 	};
 
 	const handleApprove = (status) => {
-		if (verifyType === 'trade_party' && !showAccountDetails) {
+		if (accountType === 'trade_party' && !showAccountDetails) {
 			updateDocument({ val: documents?.[GLOBAL_CONSTANTS.zeroth_index] || {}, status });
+		} else if (['CP', 'SP'].includes(accountType) && !showAccountDetails) {
+			updateCpDocument({ id: selectDoc?.docId, status, partnerId: getOrgId({ orgData })?.[accountType] });
 		} else {
 			verifyKyc({
 				orgId         : getOrgId({ orgData })?.[accountType],
@@ -58,7 +59,7 @@ function VerifyAccount({
 	};
 
 	const handleReject = () => {
-		if (verifyType === 'trade_party' && !showAccountDetails) {
+		if (accountType === 'trade_party' && !showAccountDetails) {
 			updateDocument({ val: documents?.[GLOBAL_CONSTANTS.zeroth_index] || {}, status: 'rejected' });
 		} else {
 			setVerifyAccount((prev) => ({ ...prev, show: false }));
@@ -103,7 +104,7 @@ function VerifyAccount({
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
-				{!showAccountDetails && verifyType !== 'trade_party'
+				{!['SP', 'CP', 'trade_party'].includes(accountType) && !showAccountDetails
 					? <Button themeType="accent" onClick={handleClose}>Close</Button> : (
 						<>
 							<Button

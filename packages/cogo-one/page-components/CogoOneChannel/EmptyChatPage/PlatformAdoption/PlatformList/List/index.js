@@ -6,6 +6,7 @@ import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useUpdateChannelPartnerDocument from '../../../../../../hooks/useUpdateChannelPartnerDocument';
 import useUpdateOrganizationDocument from '../../../../../../hooks/useUpdateOrganizationDocument';
 import useUpdateRequestStatus from '../../../../../../hooks/useUpdateRerquestStatus';
 import useVerificationKyc from '../../../../../../hooks/useVerificationKyc';
@@ -46,6 +47,11 @@ function List({
 		show         : false,
 		rejectReason : '',
 	});
+	const [selectDoc, setSelectDoc] = useState({
+		docType : '',
+		docUrl  : '',
+		docId   : '',
+	});
 
 	const { onStatusUpdate = () => {}, loadingUpdate = false } = useUpdateRequestStatus({
 		setRejectData,
@@ -63,7 +69,12 @@ function List({
 		setRejectAccount,
 		setVerifyAccount,
 		onboardingRequest,
-		accountType,
+	});
+
+	const { updateCpDocument = () => {}, cpLoading = false } = useUpdateChannelPartnerDocument({
+		setRejectAccount,
+		setVerifyAccount,
+		onboardingRequest,
 	});
 
 	const kycList = formatList({ list, type: 'kyc_verification' });
@@ -198,8 +209,11 @@ function List({
 				verifyAccount={verifyAccount}
 				setRejectAccount={setRejectAccount}
 				verifyKyc={verifyKyc}
-				loading={loading || updateLoading}
+				loading={loading || updateLoading || cpLoading}
 				updateDocument={updateDocument}
+				updateCpDocument={updateCpDocument}
+				selectDoc={selectDoc}
+				setSelectDoc={setSelectDoc}
 			/>
 			<RejectAccount
 				setRejectAccount={setRejectAccount}
@@ -207,7 +221,9 @@ function List({
 				setVerifyAccount={setVerifyAccount}
 				verifyAccount={verifyAccount}
 				verifyKyc={verifyKyc}
-				loading={loading}
+				loading={loading || cpLoading}
+				selectDoc={selectDoc}
+				updateCpDocument={updateCpDocument}
 			/>
 		</div>
 	);

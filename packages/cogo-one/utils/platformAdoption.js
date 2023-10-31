@@ -13,8 +13,8 @@ export const formatAccountType = ({ tags = [] }) => ({
 
 export const getOrgId = ({ orgData = {} }) => ({
 	IE          : orgData?.organization?.id,
-	CP          : orgData?.organization?.id,
-	SP          : orgData?.organization?.id,
+	CP          : orgData?.partner_user?.partner_id,
+	SP          : orgData?.partner_user?.partner_id,
 	trade_party : orgData?.trade_party?.id,
 });
 

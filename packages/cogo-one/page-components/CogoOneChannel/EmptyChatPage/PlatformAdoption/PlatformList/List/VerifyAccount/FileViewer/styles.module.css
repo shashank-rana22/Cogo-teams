@@ -88,6 +88,8 @@
 }
 
 .children {
+	display: flex;
+	align-items: center;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -96,4 +98,8 @@
 .all_children {
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.stauts_icon {
+	margin-left: 4px;
 }

@@ -1,6 +1,6 @@
 import { cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMTick } from '@cogoport/icons-react';
+import { IcCFcrossInCircle, IcCFtick, IcMHourglass, IcMTick } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useEffect } from 'react';
 
@@ -17,6 +17,12 @@ const getFileType = (url) => {
 	return '';
 };
 
+const DOC_STATUS_MAPPING = {
+	verified : <IcCFtick width={12} height={12} className={styles.stauts_icon} />,
+	pending  : <IcMHourglass width={12} height={12} fill="#fbd1a6" className={styles.stauts_icon} />,
+	rejected : <IcCFcrossInCircle width={12} height={12} className={styles.stauts_icon} />,
+};
+
 function FileViewer({
 	verifyAccount = {}, documentOptions = [], selectDoc = {}, setSelectDoc = () => {},
 	hasDocument = false,
@@ -28,7 +34,7 @@ function FileViewer({
 	const { docUrl = '', docType = '' } = selectDoc || {};
 
 	const fileOptions = (documentOptions || []).map((item) => {
-		const { value = '', label = '', url = '' } = item || {};
+		const { value = '', label = '', url = '', id = '', status = '' } = item || {};
 
 		return {
 			key      : value,
@@ -37,6 +43,8 @@ function FileViewer({
 			tooltip  : false,
 			closable : true,
 			url,
+			id,
+			status,
 		};
 	});
 
@@ -47,6 +55,7 @@ function FileViewer({
 			setSelectDoc({
 				docType : documentOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
 				docUrl  : documentOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.url,
+				docId   : documentOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.id,
 			});
 		}
 	}, [documentOptions, hasDocument, setSelectDoc]);
@@ -60,7 +69,7 @@ function FileViewer({
 			<div className={cl`${styles.selected_sources} ${documentOptions?.length > 4 ? styles.wrap : ''}`}>
 				<div className={styles.chips_container}>
 					{fileOptions.map((itm) => {
-						const { key = '', url = '', children = '' } = itm || {};
+						const { key = '', url = '', children = '', id = '', status = '' } = itm || {};
 
 						return (
 							<button
@@ -69,7 +78,7 @@ function FileViewer({
 								className={cl`${styles.ui_chip_container} 
                         		${docType === key ? styles.active_chip : ''}`}
 								onClick={() => {
-									setSelectDoc(() => ({ docType: key, docUrl: url }));
+									setSelectDoc(() => ({ docType: key, docUrl: url, docId: id }));
 								}}
 							>
 								{docType === key ? (
@@ -81,6 +90,7 @@ function FileViewer({
 									<Tooltip content={children} placement="bottom">
 										<div className={styles.children}>
 											{children}
+											{DOC_STATUS_MAPPING?.[status]}
 										</div>
 									</Tooltip>
 								</div>

@@ -45,9 +45,9 @@ function KycVerifyCard({ list = [], setVerifyAccount = () => {}, handlePlaceCall
 									show               : true,
 									showAccountDetails : false,
 									accountData        : documents,
-									orgData            : {},
+									orgData            : item,
 									verifyType         : '',
-									accountType        : '',
+									accountType        : formatAccountType({ tags })?.[account_type]?.shortName,
 								}));
 							}}
 						>

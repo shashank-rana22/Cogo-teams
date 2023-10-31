@@ -13345,6 +13345,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'update_channel_partner_document',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'update_organization_document',
 			access_type  : 'private',
 			service_name : 'organization',

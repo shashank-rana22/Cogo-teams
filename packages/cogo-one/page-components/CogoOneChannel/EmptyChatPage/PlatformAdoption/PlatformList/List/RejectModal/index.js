@@ -8,11 +8,11 @@ import styles from './styles.module.css';
 
 function RejectAccount({
 	rejectAccount = '', setRejectAccount = () => {},
-	verifyAccount = {}, setVerifyAccount = () => {},
-	verifyKyc = () => {}, loading = false,
+	verifyAccount = {}, setVerifyAccount = () => {}, selectDoc = {},
+	verifyKyc = () => {}, loading = false, updateCpDocument = () => {},
 }) {
 	const { show = false, rejectReason = '' } = rejectAccount || {};
-	const { accountType = '', orgData = {}, verifyType = '' } = verifyAccount || {};
+	const { accountType = '', orgData = {}, showAccountDetails = false } = verifyAccount || {};
 	const { id = '' } = orgData || {};
 
 	const handleClose = () => {
@@ -27,13 +27,22 @@ function RejectAccount({
 	};
 
 	const handleReject = (status) => {
-		verifyKyc({
-			orgId         : getOrgId({ orgData })?.[accountType],
-			type          : status,
-			rejectReason,
-			requestId     : id,
-			requestStatus : 'processing',
-		});
+		if (['CP', 'SP'].includes(accountType) && !showAccountDetails) {
+			updateCpDocument({
+				id        : selectDoc?.docId,
+				status,
+				partnerId : getOrgId({ orgData })?.[accountType],
+				rejectReason,
+			});
+		} else {
+			verifyKyc({
+				orgId         : getOrgId({ orgData })?.[accountType],
+				type          : status,
+				rejectReason,
+				requestId     : id,
+				requestStatus : 'processing',
+			});
+		}
 	};
 
 	if (!show) {
@@ -48,7 +57,7 @@ function RejectAccount({
 					<div className={styles.title}>
 						Please provide rejection details
 					</div>
-					{verifyType === 'trade_party' ? (
+					{['CP', 'SP', 'trade_party'].includes(accountType) ? (
 						<Textarea
 							size="md"
 							placeholder="Enter remark here"
