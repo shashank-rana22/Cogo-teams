@@ -1,6 +1,115 @@
 .container {
+	display: flex;
 	width: 49%;
-	height: auto;
+	height: 220px;
+	padding: 20px;
 	margin: 10px 0;
 	background: #f9f9f9;
+}
+
+.container_left_body {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+}
+
+.title {
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.data_container_left {
+	display: flex;
+	width: 100%;
+	padding: 14px;
+}
+
+.icon_container {
+	width: 64px;
+	height: 64px;
+	padding: 15px;
+	background: #dde7ff;
+	border-radius: 50%;
+}
+
+.dollar_icon {
+	width: 34px;
+	height: 34px;
+	padding: 6px;
+	border: 1px solid #034afd;
+	border-radius: 100%;
+	fill: #034afd;
+}
+
+.transaction_container {
+	padding: 0 20px;
+}
+
+.total_gain {
+	display: flex;
+	align-items: center;
+	font-size: 32px;
+	font-weight: 500;
+	color: #212121;
+}
+
+.label_transaction {
+	display: flex;
+	align-items: center;
+	font-size: 18px;
+	font-weight: 400;
+	color: #4f4f4f;
+
+	>div[aria-label="tooltip"] {
+		display: flex;
+		align-items: center;
+		padding-left: 6px;
+	}
+}
+
+.total_transactions {
+	display: flex;
+	align-items: center;
+	font-size: 22px;
+	font-weight: 500;
+	color: #212121;
+}
+
+.data_container {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+}
+
+.organic_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 14px;
+	margin: 0 20px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.inorganic_label {
+	font-size: 16px;
+	color: #4f4f4f;
+}
+
+.inorganic_container {
+	margin: 10px 20px;
+}
+
+.inorganic_body {
+	display: flex;
+	justify-content: space-between;
+	padding-top: 6px;
+}
+
+.allocated_body {
+	width: 48%;
+	border-right: 1px solid #e0e0e0;
+
+	&:last-child {
+		border-right: unset;
+	}
 }

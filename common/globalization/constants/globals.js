@@ -345,6 +345,7 @@ const GLOBAL_CONSTANTS = {
 		checkout_failed      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/checkout_failed.png',
 		email_clicked        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email_clicked.png',
 		abandon_shipmemts    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/abandon_shipmemts.png',
+		graph_representation : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/graph_representation.png',
 		cargo_insurance_loader:
 			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/loading-cargo-insurance.svg',
 		seller_address_svg : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/sellerAddress.svg',
@@ -490,6 +491,7 @@ const GLOBAL_CONSTANTS = {
 		new_conversation        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/new-message.png',
 		teams                   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/teams.png',
 		groups                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/group.png',
+
 		performance_leaderboard_confetti:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti_svg.svg',
 		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
