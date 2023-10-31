@@ -13,7 +13,7 @@ function PublicDashboard() {
 	const [screen, setScreen] = useState('overall');
 	const [view, setView] = useState('kam_wise');
 	const [updatedAt, setUpdatedAt] = useState('');
-	const [nextReloadAt, setNextReloadAt] = useState('');
+	const [nextReloadAt, setNextReloadAt] = useState(100);
 	const [duration, setDuration] = useState('today');
 
 	const [dateRange, setDateRange] = useState({
@@ -28,7 +28,7 @@ function PublicDashboard() {
 
 	const { countdown } = useCountDown({ updatedAt });
 
-	const { nextReload } = useReloadCounter({ seconds: nextReloadAt, functionToCall: switchScreen });
+	const { reloadCounter } = useReloadCounter({ seconds: nextReloadAt, functionToCall: switchScreen });
 
 	const contextValues = useMemo(() => ({
 		countdown,
@@ -47,7 +47,8 @@ function PublicDashboard() {
 					countdown={countdown}
 					duration={duration}
 					setDuration={setDuration}
-					nextReload={nextReload}
+					reloadCounter={reloadCounter}
+					nextReloadAt={nextReloadAt}
 					switchScreen={switchScreen}
 				/>
 

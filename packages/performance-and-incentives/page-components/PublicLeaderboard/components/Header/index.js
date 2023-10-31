@@ -1,8 +1,8 @@
 import { Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMInfo } from '@cogoport/icons-react';
 
+import Counter from '../../common/Counter';
 import DateFilter from '../../common/DateFilter';
 import USER_OPTIONS from '../../configurations/get-user-filter-options';
 import TEXT_MAPPING from '../../configurations/header-text-mapping';
@@ -13,6 +13,7 @@ import styles from './styles.module.css';
 function Header(props) {
 	const {
 		screen, view, setView, dateRange, setDateRange, updatedAt, countdown, duration, setDuration, switchScreen,
+		reloadCounter, nextReloadAt,
 	} = props;
 
 	return (
@@ -24,7 +25,10 @@ function Header(props) {
 					onClick={switchScreen}
 					role="presentation"
 				>
-					<IcMInfo className={styles.info_icon} />
+					<Counter
+						reloadCounter={reloadCounter}
+						nextReloadAt={nextReloadAt}
+					/>
 				</div>
 				<h2 className={styles.heading}>
 					Leaderboards
