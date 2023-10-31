@@ -50,7 +50,8 @@ function RateCoverageContent() {
 	const assignToUsers = useGetAsyncOptions(merge(asyncFieldsPartnerUsers(), {
 		params: {
 			filters: {
-				status: 'active',
+				status   : 'active',
+				role_ids : ['ae80297f-e30d-45fb-845c-61c302523476', 'dcdcb3d8-4dca-42c2-ba87-1a54bc4ad7fb'],
 			},
 		},
 	}));

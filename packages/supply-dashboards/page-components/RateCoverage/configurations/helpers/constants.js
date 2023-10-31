@@ -215,18 +215,10 @@ export const rateTypeOptions = [
 ];
 
 export const airRateTypeOptions = [
-	{
-		label : 'Market place',
-		value : 'market_place',
-	},
-	{
-		label : 'Promotional',
-		value : 'promotional',
-	},
-	{
-		label : 'Consolidation',
-		value : 'consolidated',
-	},
+	{ label: 'Market place', value: 'market_place' },
+	{ label: 'Promotional', value: 'promotional' },
+	{ label: 'Consolidation', value: 'consolidated' },
+	{ label: 'Non Tarrif Rates', value: 'non_tariff_rates' },
 ];
 
 export const flighOperationTypeOptions = [
