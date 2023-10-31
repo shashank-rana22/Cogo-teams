@@ -4,8 +4,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import Counter from '../../common/Counter';
 import DateFilter from '../../common/DateFilter';
-import USER_OPTIONS from '../../configurations/get-user-filter-options';
 import TEXT_MAPPING from '../../configurations/header-text-mapping';
+import VIEW_OPTIONS from '../../configurations/view-type-options';
 
 import CountDownTimer from './CountDownTimer';
 import styles from './styles.module.css';
@@ -62,7 +62,7 @@ function Header(props) {
 				<Select
 					value={view}
 					onChange={(selectedView) => setView(selectedView)}
-					options={USER_OPTIONS}
+					options={VIEW_OPTIONS}
 					className={styles.user_selector}
 				/>
 

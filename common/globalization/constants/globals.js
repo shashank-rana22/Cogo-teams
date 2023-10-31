@@ -914,6 +914,10 @@ const GLOBAL_CONSTANTS = {
 	default_preferred_language : 'english',
 	supplier_entity_mapping    : supplierEntityMapping.shippingCompanies,
 	cogoport_care_user_id      : '413eb04c-037b-44cd-b68c-ce4fc277c156',
+	office_location_ids        : {
+		gurgaon : '9cf87c31-f991-4351-976d-3abd7eff374d',
+		mumbai  : '48a489eb-76d3-419a-bffc-dac6715056d3',
+	},
 };
 
 export default GLOBAL_CONSTANTS;

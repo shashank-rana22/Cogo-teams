@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { getTodayStartDate } from '../../utils/start-date-functions';
 
@@ -21,10 +21,10 @@ function PublicDashboard() {
 		endDate   : new Date(),
 	});
 
-	const switchScreen = () => {
+	const switchScreen = useCallback(() => {
 		if (screen === 'overall') setScreen('comparison');
 		else setScreen('overall');
-	};
+	}, [screen, setScreen]);
 
 	const { countdown } = useCountDown({ updatedAt });
 
