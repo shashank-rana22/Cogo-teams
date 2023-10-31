@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
@@ -19,9 +20,9 @@ const SIZE_MAPPING = {
 };
 
 const RANK_COLOR_MAPPING = {
-	1 : '#F5B02E',
-	2 : '#D5D5D5',
-	3 : '#c59d54',
+	1 : styles.rank_one,
+	2 : styles.rank_two,
+	3 : styles.rank_three,
 };
 
 const getInitials = (name) => {
@@ -49,16 +50,17 @@ function Avatar(props) {
 	return (
 
 		<div className={styles.image_container} style={SIZE_STYLE}>
-			<div className={styles.rank} style={{ backgroundColor: COLOR }}><b>{rank}</b></div>
+			<div className={cl`${styles.rank} ${COLOR}`}><b>{rank}</b></div>
 
-			{picture ? (
-				<img
-					className={styles.image}
-					style={{ borderColor: COLOR }}
-					src={picture}
-					alt="profile"
-				/>
-			) : <div className={styles.persona} style={{ borderColor: COLOR }}>{PERSONA}</div>}
+			<div className={cl`${styles.avatar_wrap} ${COLOR}`}>
+				{picture ? (
+					<img
+						className={styles.image}
+						src={picture}
+						alt="profile"
+					/>
+				) : <div className={styles.persona} style={{ borderColor: COLOR }}>{PERSONA}</div>}
+			</div>
 		</div>
 
 	);
