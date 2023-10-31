@@ -137,7 +137,7 @@ const getPayload = ({
 					exchangeRate    : null,
 					ledgerCurrency,
 					billDocumentUrl : uploadedInvoice,
-					billNumber      : invoiceNumber,
+					billNumber      : invoiceNumber?.trim(),
 				},
 				sellerDetail: {
 					// tradeParty
