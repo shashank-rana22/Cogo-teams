@@ -1,3 +1,7 @@
+.container {
+	display: none;
+}
+
 .circle_background,
 .circle_progress {
 	fill: none;

@@ -51,7 +51,7 @@ function Counter(props) {
 	const { reloadCounter, nextReloadAt } = props;
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<CircularProgressBar
 				strokeWidth={4}
 				sqSize={50}

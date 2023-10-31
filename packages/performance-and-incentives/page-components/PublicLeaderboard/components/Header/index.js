@@ -1,6 +1,7 @@
 import { Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMRefresh } from '@cogoport/icons-react';
 
 import Counter from '../../common/Counter';
 import DateFilter from '../../common/DateFilter';
@@ -25,6 +26,7 @@ function Header(props) {
 					onClick={switchScreen}
 					role="presentation"
 				>
+					<IcMRefresh className={styles.swicth_icon} />
 					<Counter
 						reloadCounter={reloadCounter}
 						nextReloadAt={nextReloadAt}
