@@ -1,6 +1,6 @@
-/* eslint-disable max-len */
+/* eslint-disable max-lines-per-function */
 import { Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+import { CheckboxController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack, IcMDelete } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
@@ -12,7 +12,6 @@ import { useState, useEffect, useMemo } from 'react';
 import Layout from '../../common/Layout';
 import getModifiedControls from '../../helpers/getModifiedControls';
 import getShowElements from '../../helpers/getShowElements';
-// import ORGANIZATION_SUBTYPE_OPTIONS from '../../helpers/organization-subtype-oprions';
 import useCreateMargin from '../../hooks/useCreateMargin';
 import useGetActiveSubscription from '../../hooks/useGetActiveSubscription';
 import useUpdateMargin from '../../hooks/useUpdateMargin';
@@ -87,7 +86,10 @@ function Create({ type = 'create', item = {} }) {
 		return result;
 	}, [type, formValues?.service]);
 
-	const controls = useMemo(() => [...(initialControls || []), ...(extraControls || [])], [initialControls, extraControls]);
+	const controls = useMemo(
+		() => [...(initialControls || []), ...(extraControls || [])],
+		[initialControls, extraControls],
+	);
 
 	const newControls = getModifiedControls({ controls, formValues });
 
@@ -207,16 +209,39 @@ function Create({ type = 'create', item = {} }) {
 						showElements={showElements}
 						// customFieldArrayControls={customFieldArrayControls}
 					/>
+
 					{showAdvancedForm ? (
-						<Layout
-							controls={extraControls}
-							control={control}
-							fields={fields}
-							errors={errors}
-							showElements={showElements}
-							// customFieldArrayControls={customFieldArrayControls}
-						/>
+						<>
+							<Layout
+								controls={extraControls}
+								control={control}
+								fields={fields}
+								errors={errors}
+								showElements={showElements}
+							/>
+							{formValues?.margin_type === 'cogoport' ? (
+								<div style={{ display: 'flex' }}>
+									<CheckboxController
+										control={control}
+										name="is_sales_discount_allowed"
+										label="Is Sales Discount Allowed"
+										disabled={type === 'edit'}
+										value
+										rules={{ required: 'Required' }}
+									/>
+									<CheckboxController
+										control={control}
+										name="is_marketing_discount_allowed"
+										label="Is Marketing Discount Allowed"
+										disabled={type === 'edit'}
+										value
+										rules={{ required: 'Required' }}
+									/>
+								</div>
+							) : null}
+						</>
 					) : null}
+
 					<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '12px' }}>
 						<Button
 							onClick={() => setShowAdvancedForm(!showAdvancedForm)}

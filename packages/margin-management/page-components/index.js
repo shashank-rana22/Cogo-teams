@@ -13,7 +13,7 @@ import TabComponent from './TabComponent';
 function MarginManagement() {
 	const {
 		data = {},
-		// loading = false,
+		loading = false,
 		filterParams = {},
 		setFilterParams = () => { },
 		apiTrigger: refetch = () => { },
@@ -50,6 +50,7 @@ function MarginManagement() {
 				activeService={activeService}
 				setActiveService={setActiveService}
 				refetch={refetch}
+				loading={loading}
 			/>
 		</div>
 	);

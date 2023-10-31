@@ -12,6 +12,8 @@ const getFormatterValues = ({ values = {} }) => {
 		rate_type,
 		margin_slabs,
 		margin_applied_on,
+		is_sales_discount_allowed,
+		is_marketing_discount_allowed,
 		...rest
 	} = values;
 
@@ -67,6 +69,8 @@ const getFormatterValues = ({ values = {} }) => {
 		margin_slabs    : MARGINS_ARR,
 		margin_applied_on,
 		filters         : { ...allFilters, rate_type: rateType },
+		is_sales_discount_allowed,
+		is_marketing_discount_allowed,
 	};
 };
 

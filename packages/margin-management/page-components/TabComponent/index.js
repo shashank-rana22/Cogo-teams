@@ -4,22 +4,19 @@ import { isEmpty } from '@cogoport/utils';
 import { useMemo, useCallback, useState } from 'react';
 
 import EmptyState from '../../common/EmptyStateMargins';
-// import SERVICE_NAME_MAPPING from '../../helpers/service-name-mapping';
 import conditions from '../../utils/condition-constants';
 import Search from '../Search';
 
-// import CardComponent from './CardComponent';
 import Details from './Details';
 import ListPagination from './ListPagination';
 import COMPONENT_MAPPING from './marginTypeComponentMapping';
 import MultiEntityMargin from './MultiEntityMargin';
 import SERVICE_TYPE_MAPPING from './service-name-mapping';
 import TransactionFunnelData from './TransactionFunnelData';
-// import SegmentedControlHeader from './SegmentedControlHeader';
 
 function TabComponent({
 	marginBreakupData = {},
-	filterParams = {},
+	filterParams = {}, loading = false,
 	setFilterParams = () => { }, data = {}, setMarginBreakupData = () => { }, activeTab = '',
 	setActivetab = () => { }, refetch = () => { },
 	activeService = '', setActiveService = () => { },
@@ -37,12 +34,12 @@ function TabComponent({
 			],
 			'or',
 		),
-		supply: isConditionMatches(
-			[...conditions.SEE_ALL_MARGINS, ...conditions.SEE_SUPPLY_MARGIN],
-			'or',
-		),
+		// supply: isConditionMatches(
+		// 	[...conditions.SEE_ALL_MARGINS, ...conditions.SEE_SUPPLY_MARGIN],
+		// 	'or',
+		// ),
 		cogoport            : isConditionMatches(conditions.SEE_ALL_MARGINS, 'or'),
-		approval_pending    : isConditionMatches(conditions.SEE_PENDING_APPROVAL, 'or'),
+		// approval_pending    : isConditionMatches(conditions.SEE_PENDING_APPROVAL, 'or'),
 		multi_entity_margin : true,
 	}), [isConditionMatches]);
 
@@ -108,7 +105,7 @@ function TabComponent({
 
 			{!['approval_pending', 'multi_entity_margin'].includes(activeTab) ? (
 				<div>
-					{isEmpty(data?.list) ? <EmptyState /> : (
+					{!loading && isEmpty(data?.list) ? <EmptyState /> : (
 						<div>
 							{(data?.list || []).map((item) => (
 								<Details
@@ -135,7 +132,7 @@ function TabComponent({
 				<div>
 					{activeTab !== 'multi_entity_margin' ? (
 						<div>
-							{isEmpty(data?.list) ? <EmptyState /> : (
+							{!loading && isEmpty(data?.list) ? <EmptyState /> : (
 								<div>
 									{(data?.list || []).map((service) => (
 										<Details
@@ -167,7 +164,7 @@ function TabComponent({
 
 			{showFunnelModal ? (
 				<Modal
-					className="primary xl"
+					className="primary lg"
 					show={showFunnelModal}
 					onClose={() => setShowFunnelModal(false)}
 					size="lg"
@@ -177,7 +174,13 @@ function TabComponent({
 						<TransactionFunnelData activeService={activeService} />
 					</Modal.Body>
 					<Modal.Footer>
-						Close
+						<Button
+							size="md"
+							themeType="secondary"
+							onClick={() => setShowFunnelModal(false)}
+						>
+							Close
+						</Button>
 					</Modal.Footer>
 				</Modal>
 			) : null}

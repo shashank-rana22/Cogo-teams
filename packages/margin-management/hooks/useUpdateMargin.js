@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useUpdateMargin = () => {
+const useUpdateMargin = ({ onSuccess } = {}) => {
 	const router = useRouter();
 
 	const [{ loading }, trigger] = useRequest(
@@ -16,23 +16,32 @@ const useUpdateMargin = () => {
 		},
 		{ manual: true },
 	);
+
 	const onSubmit = useCallback(async ({ params = {}, data = {} }) => {
 		try {
 			if (isEmpty(params)) {
 				await trigger({ data });
+
 				Toast.success('Margin has been edited sucessfully');
-				router.push('/margins');
+
+				if (typeof onSuccess === 'function') {
+					onSuccess();
+				} else {
+					router.push('/margins');
+				}
 			} else {
 				await trigger({ params });
+
 				Toast.success('Margin has been deactivated.');
 			}
 
 			return true;
 		} catch (err) {
 			toastApiError(err);
+
 			return false;
 		}
-	}, [router, trigger]);
+	}, [onSuccess, router, trigger]);
 
 	return {
 		loading,

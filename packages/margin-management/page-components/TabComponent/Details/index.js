@@ -10,6 +10,7 @@ import { useState } from 'react';
 import MarginValues from '../../MarginValues';
 import DeactiveModal from '../../MarginValues/Buttons/DeactivateModal';
 import StatusUpdateModal from '../../MarginValues/Buttons/StatusUpdateModal';
+import UpdateDicountSetting from '../../MarginValues/Buttons/UpdateDicountSetting';
 
 import ActionButtons from './ActionButtons';
 import Info from './Info';
@@ -59,6 +60,8 @@ function Details({
 	const [openUpdateModal, setOpenUpdateModal] = useState(false);
 
 	const [showMarginDetails, setShowMarginDetails] = useState('');
+
+	const [updateDiscountSetting, setUpdateDiscountSetting] = useState(false);
 
 	// const { origin } = getOriginMarginType({ origin_location, location });
 
@@ -203,6 +206,7 @@ function Details({
 									activeTab={activeTab}
 									setOpenUpdateModal={setOpenUpdateModal}
 									handleDeactivateModal={handleDeactivateModal}
+									setUpdateDiscountSetting={setUpdateDiscountSetting}
 								/>
 							)}
 						>
@@ -213,6 +217,7 @@ function Details({
 					</div>
 				</div>
 			</div>
+
 			{showMarginDetails === marginBreakupData?.id ? (
 				<MarginValues
 					data={marginBreakupData}
@@ -244,7 +249,7 @@ function Details({
 					setMarginBreakupData={setMarginBreakupData}
 					openModal={openModal}
 				/>
-			) }
+			)}
 
 			{openUpdateModal && (
 				<StatusUpdateModal
@@ -254,7 +259,17 @@ function Details({
 					refetch={refetch}
 					setMarginBreakupData={setMarginBreakupData}
 				/>
-			) }
+			)}
+
+			{updateDiscountSetting ? (
+				<UpdateDicountSetting
+					id={data?.id}
+					show={updateDiscountSetting}
+					setShow={setUpdateDiscountSetting}
+					marginBreakupData={marginBreakupData}
+					refetch={refetch}
+				/>
+			) : null}
 		</div>
 
 	);

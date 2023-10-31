@@ -4,7 +4,7 @@ import { IcMArrowNext } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import EmptyState from '../../../common/EmptyState';
+import EmptyState from '../../../common/EmptyStateMargins';
 import useGetMultiEntityMargin from '../../../hooks/useGetMultiEntityMargin';
 
 import MarginForm from './MarginForm';
@@ -59,7 +59,7 @@ function MultiEntityMargin() {
 	}
 
 	if (isEmpty(cogoEntitiesList)) {
-		return <EmptyState />;
+		return <EmptyState emptyDataText="No Record Found" />;
 	}
 
 	return (

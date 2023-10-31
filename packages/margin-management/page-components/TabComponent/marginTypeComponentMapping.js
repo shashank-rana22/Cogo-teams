@@ -1,5 +1,4 @@
 import CardComponent from './CardComponent';
-import Details from './Details';
 
 const COMPONENT_MAPPING = {
 	demand: {
@@ -7,21 +6,21 @@ const COMPONENT_MAPPING = {
 		title     : 'SALES',
 		component : CardComponent,
 	},
-	supply: {
-		name      : 'supply',
-		title     : 'SUPPLY',
-		component : CardComponent,
-	},
+	// supply: {
+	// 	name      : 'supply',
+	// 	title     : 'SUPPLY',
+	// 	component : CardComponent,
+	// },
 	cogoport: {
 		name      : 'cogoport',
 		title     : 'COGOPORT',
 		component : CardComponent,
 	},
-	approval_pending: {
-		name      : 'approval_pending',
-		title     : 'APPROVAL PENDING',
-		component : Details,
-	},
+	// approval_pending: {
+	// 	name      : 'approval_pending',
+	// 	title     : 'APPROVAL PENDING',
+	// 	component : Details,
+	// },
 	multi_entity_margin: {
 		name  : 'multi_entity_margin',
 		title : 'MultiEntity Margin',

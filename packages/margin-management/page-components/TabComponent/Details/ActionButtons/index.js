@@ -6,42 +6,59 @@ import styles from './styles.module.css';
 
 function ActionButtons({
 	handleEdit = () => {},
-	// setOpenModal = () => {},
 	activeTab = '',
 	setOpenUpdateModal = () => {},
-	handleDeactivateModal = () => {},
+	handleDeactivateModal = () => { },
+	setUpdateDiscountSetting = () => { },
 }) {
 	return (
 		<div className={styles.container}>
 			<Button
-				style={{ alignItems: 'center', display: 'flex' }}
+				themeType="secondary"
+				className={styles.btn}
 				onClick={() => handleEdit()}
+				size="sm"
 			>
+				Edit Margin
 				<IcMEdit
-					style={{ width: '1.5em', height: '1.5em', marginRight: '2px' }}
+					style={{ width: '1em', height: '1em', marginRight: '2px' }}
 				/>
-				edit
 			</Button>
 
 			<Button
-				style={{ alignItems: 'center', display: 'flex' }}
+				themeType="secondary"
+				className={styles.btn}
 				onClick={handleDeactivateModal}
+				size="sm"
 			>
+				{activeTab === 'approval_pending' ? 'Reject' : 'Deactivate'}
 				<IcMDelete
 					style={{ width: '1em', height: '1em', marginRight: '4px' }}
 				/>
-				{activeTab === 'approval_pending' ? 'reject' : 'deactivate'}
 			</Button>
 
 			{activeTab === 'approval_pending' ? (
 				<Button
-					style={{
-						alignItems : 'center',
-						display    : 'flex',
-					}}
+					className={styles.btn}
+					themeType="secondary"
 					onClick={() => setOpenUpdateModal(true)}
+					size="sm"
 				>
 					{activeTab === 'approval_pending' ? 'approve' : 'update status'}
+				</Button>
+			) : null}
+
+			{activeTab === 'cogoport' ? (
+				<Button
+					className={styles.btn}
+					themeType="secondary"
+					onClick={() => setUpdateDiscountSetting(true)}
+					size="sm"
+				>
+					Edit discount settings
+					<IcMEdit
+						style={{ width: '1em', height: '1em', marginRight: '2px' }}
+					/>
 				</Button>
 			) : null}
 		</div>
