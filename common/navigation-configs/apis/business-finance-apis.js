@@ -392,9 +392,9 @@ const business_finance = {
 			service_name : 'tickets',
 		},
 		{
-			api         : 'get_sales_invoice_shipment_list',
-			access_type : 'private',
-			feature     : 'shipmentAuditFunction',
+			api          : 'post_purchase_bills_list',
+			access_type  : 'private',
+			service_name : 'shipmentAuditFunction',
 		},
 		{
 

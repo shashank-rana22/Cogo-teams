@@ -8762,7 +8762,7 @@ const partner = {
 	],
 	overheads: [
 		{
-			api         : 'post_purchase_expense_send_email',
+			api         : 'post_incident_management_incident_send_overhead_mail',
 			access_type : 'private',
 			module      : 'Expenses',
 			feature     : 'Expenses',
@@ -9556,7 +9556,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_purchase_expense_expense_configuration_by_id',
+			api         : 'get_purchase_expense_expense_configuration',
 			access_type : 'private',
 		},
 		{
@@ -9803,6 +9803,12 @@ const partner = {
 		},
 		{
 			api         : 'post_payments_accounts_ap_bulk_upload',
+			access_type : 'private',
+			module      : 'settlement',
+			feature     : 'settlement',
+		},
+		{
+			api         : 'post_payments_accounts_bulk_upload_payments',
 			access_type : 'private',
 			module      : 'settlement',
 			feature     : 'settlement',

@@ -5,7 +5,7 @@ import toastApiError from '../../commons/toastApiError';
 
 const getInvoiceMapping = (invoicesList) => {
 	const invoiceMap = invoicesList.reduce((result, invoice) => (
-		{ ...result, [invoice.invoiceNumber]: invoice.invoicePdfUrl }), {});
+		{ ...result, [invoice?.invoiceNumber]: invoice?.invoicePdfUrl }), {});
 	return invoiceMap;
 };
 

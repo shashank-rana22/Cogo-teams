@@ -19,6 +19,7 @@ function Content({
 	shipment_id = '',
 	income = '',
 	invoicesMap = {},
+	billsMap = {},
 	profitability = '',
 	source = '',
 	type = '',
@@ -77,6 +78,7 @@ function Content({
 							setLineItemSectionOpen={setLineItemSectionOpen}
 							data={item}
 							invoicesMap={invoicesMap}
+							billsMap={billsMap}
 							loading={loading}
 							source={source}
 							type={type}
