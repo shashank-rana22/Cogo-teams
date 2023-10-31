@@ -1,5 +1,7 @@
 import { Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import React from 'react';
 
 import IRNCancel from '../IRNCancel';
@@ -20,6 +22,7 @@ const REFETCH_STATUS = ['IRN_GENERATED', 'IRN_CANCELLED'];
 function RenderIRNGenerated({
 	itemData = { invoiceStatus: '' },
 	refetch = () => {},
+	entityCode = '',
 }) {
 	const statusComponentMap = [
 		{
@@ -38,27 +41,39 @@ function RenderIRNGenerated({
 
 	const showoverflow = statusComponentMap.some((item) => item.status.includes(itemData?.invoiceStatus));
 
+	const { user_id } = useSelector(({ profile }) => ({
+		user_id: profile?.user?.id,
+	}));
+
+	const showPopover = ['101', '301', '501']?.includes(entityCode)
+	|| (!['101', '301', '501']?.includes(entityCode)
+	&& [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id, GLOBAL_CONSTANTS.uuid.hk_user_id].includes(user_id));
+
 	return (
-		<Popover
-			placement="left"
-			render={(
-				<Content
-					statusComponentMap={statusComponentMap}
-					itemData={itemData}
-					refetch={refetch}
-				/>
-			)}
-		>
-			{showoverflow
-				? (
-					<IcMOverflowDot
-						cursor="pointer"
-						width="16px"
-						height="16px"
-					/>
-				)
-				: null}
-		</Popover>
+		<div>
+			{showPopover ? (
+				<Popover
+					placement="left"
+					render={(
+						<Content
+							statusComponentMap={statusComponentMap}
+							itemData={itemData}
+							refetch={refetch}
+						/>
+					)}
+				>
+					{showoverflow
+						? (
+							<IcMOverflowDot
+								cursor="pointer"
+								width="16px"
+								height="16px"
+							/>
+						)
+						: null}
+				</Popover>
+			) : null}
+		</div>
 	);
 }
 

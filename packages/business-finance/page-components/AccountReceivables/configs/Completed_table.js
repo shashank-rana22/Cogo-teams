@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Pill, Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
@@ -523,6 +524,7 @@ const completedColumn = ({
 				<RenderIRNGenerated
 					itemData={row}
 					refetch={refetch}
+					entityCode={entityCode}
 				/>
 			</div>
 		),
