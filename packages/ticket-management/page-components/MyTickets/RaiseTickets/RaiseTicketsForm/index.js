@@ -92,7 +92,6 @@ function RaiseTicketsForm({
 		watchIdType,
 		watchPlatformCategory,
 	});
-	console.log('watchPlatformCategory:', watchPlatformCategory);
 
 	const filteredControls = defaultControls
 		.filter((val) => CONTROLS_MAPPING[watchRequestType || 'shipment']?.includes(val.name));
@@ -125,7 +124,7 @@ function RaiseTicketsForm({
 				const checkUserId = name === 'user_id' && isEmpty(watchOrgId);
 				const checkServiceType = name === 'service_type' && (isEmpty(watchIdType) || watchIdType === 'sid');
 				const checkService = name === 'service' && watchRequestType !== 'shipment' && watchIdType !== 'sid'
-				&& (!watchPlatformCategory || watchPlatformCategory !== 'shipment');
+				&& watchPlatformCategory !== 'shipment';
 
 				const checkPlatforSid = name === 'serial_id' && !['shipment', 'rate']?.includes(watchRequestType)
 				&& (!watchPlatformCategory || watchPlatformCategory !== 'shipment');

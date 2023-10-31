@@ -32,6 +32,13 @@ const getCreateControls = ({
 			options        : getRequestTypeOptions({ t }),
 			isClearable    : true,
 			visible        : true,
+			onChange       : (val) => {
+				if (val === 'rate') {
+					setValue('id_type', 'sid');
+					return;
+				}
+				setValue('id_type', '');
+			},
 		},
 		{
 			...(organizationOptions || {}),
