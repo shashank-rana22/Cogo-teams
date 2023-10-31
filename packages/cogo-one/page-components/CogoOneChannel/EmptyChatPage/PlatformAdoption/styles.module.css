@@ -19,6 +19,12 @@
 	align-items: center;
 	font-size: 18px;
 	font-weight: 600;
+
+	span {
+		margin: 0 4px;
+		font-size: 16px;
+		font-weight: 500;
+	}
 }
 
 .refresh {

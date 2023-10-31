@@ -5,6 +5,7 @@ import {
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import { TradeInfoContent } from '../../../../../../../constants/platformAdoptionConstant';
 import Header from '../../Header';
 
 import styles from './styles.module.css';
@@ -33,6 +34,7 @@ function TradeTypeVerifyCard({ list = [], setVerifyAccount = () => {} }) {
 					tags={tags}
 					accountType={account_type}
 					item={item}
+					content={<TradeInfoContent />}
 				/>
 				<div className={styles.body_info}>
 					<div className={styles.each_row}>

@@ -1,4 +1,4 @@
-import { Button, Modal, Popover } from '@cogoport/components';
+import { Button, Modal, Popover, Tooltip } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { IcMInfo, IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -8,7 +8,7 @@ import useAssignOnboardingAgent from '../../hooks/useAssignOnboardingAgent';
 
 import styles from './styles.module.css';
 
-function PlatFormAdoptionAssign({ data = {} }) {
+function PlatFormAdoptionAssign({ data = {}, content = null }) {
 	const {
 		request_type = '', source = '', source_id = '', created_at = '', metadata = {},
 		agent_id = '',
@@ -38,7 +38,13 @@ function PlatFormAdoptionAssign({ data = {} }) {
 	return (
 		<>
 			<div className={styles.action}>
-				<IcMInfo className={styles.info_icon} />
+				<Tooltip
+					content={content}
+					placement="left"
+					interactive
+				>
+					<IcMInfo className={styles.info_icon} />
+				</Tooltip>
 				<Popover
 					placement="bottom"
 					render={(

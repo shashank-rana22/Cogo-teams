@@ -9,7 +9,6 @@
 .tabs {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 	width: 45%;
 }
 
@@ -18,8 +17,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 48%;
+	width: 43%;
 	padding: 6px 16px;
+	margin-right: 8px;
 	cursor: pointer;
 	border: 1px solid;
 	border-radius: 26px;

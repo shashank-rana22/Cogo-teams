@@ -90,6 +90,7 @@ function RejectAccount({
 					themeType="primary"
 					onClick={() => handleReject('rejected')}
 					loading={loading}
+					disabled={!rejectReason}
 				>
 					Submit
 				</Button>

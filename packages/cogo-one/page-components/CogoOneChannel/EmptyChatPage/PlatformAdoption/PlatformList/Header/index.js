@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function Header({
 	item = {}, escalationCycle = '', serialId = '', requestType = '', businessName = '', icon = null,
-	tags = [], accountType = '',
+	tags = [], accountType = '', content = null,
 }) {
 	return (
 		<div className={styles.header_info}>
@@ -46,7 +46,7 @@ function Header({
 						</div>
 					</div>
 				</div>
-				<PlatFormAdoptionAssign data={item} />
+				<PlatFormAdoptionAssign data={item} content={content} />
 			</div>
 		</div>
 	);

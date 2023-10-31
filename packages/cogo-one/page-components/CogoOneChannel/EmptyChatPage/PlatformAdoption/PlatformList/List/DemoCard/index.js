@@ -5,6 +5,7 @@ import { IcAWatchDemo, IcMPlatformDemo, IcMCalendar, IcMClock } from '@cogoport/
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
+import { DemoInfoContent } from '../../../../../../../constants/platformAdoptionConstant';
 import Header from '../../Header';
 
 import styles from './styles.module.css';
@@ -69,6 +70,7 @@ function DemoCard({ list = [], mailProps = {}, setScheduleDemo = () => {} }) {
 					tags={tags}
 					accountType={account_type}
 					item={item}
+					content={<DemoInfoContent />}
 				/>
 				<div className={styles.body_info}>
 					<div className={styles.each_row}>

@@ -4,6 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcAJobCard, IcMDocument } from '@cogoport/icons-react';
 import React from 'react';
 
+import { AccountInfoContent } from '../../../../../../../constants/platformAdoptionConstant';
 import Header from '../../Header';
 
 import RejectVerification from './RejectAccountModal';
@@ -37,6 +38,7 @@ function AccountAllocateCard({
 						icon={<IcAJobCard width={25} height={25} />}
 						tags={tags}
 						accountType={account_type}
+						content={<AccountInfoContent />}
 					/>
 					<div className={styles.body_info}>
 						<div className={styles.each_row}>

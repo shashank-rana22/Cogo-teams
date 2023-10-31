@@ -1,6 +1,7 @@
 import { IcMMissedcall, IcCSendWhatsapp, IcMCall } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import { CallInfoContent } from '../../../../../../../constants/platformAdoptionConstant';
 import Header from '../../Header';
 
 import styles from './styles.module.css';
@@ -54,6 +55,7 @@ function CallDetails({ list = [], handlePlaceCall = () => {}, handleOpenMessage 
 					escalationCycle={escalation_cycle}
 					requestType={request_type}
 					businessName={pocName}
+					content={<CallInfoContent />}
 				/>
 				<div className={styles.body_info}>
 					<div className={styles.each_row}>

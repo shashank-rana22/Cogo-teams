@@ -66,6 +66,8 @@ function PlatformAdoption({
 						<div className={styles.title}>
 							Task for the Day
 							{' '}
+							<span>{`(${total_count})`}</span>
+							{' '}
 							<IcMRefresh className={styles.refresh} onClick={() => onboardingRequest({ page: 1 })} />
 						</div>
 						<div

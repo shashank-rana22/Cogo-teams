@@ -88,7 +88,7 @@
 .footer_container {
 	display: flex;
 	align-items: stretch;
-	justify-content: space-between;
+	justify-content: flex-end;
 	padding: 10px 16px;
 }
 
@@ -103,6 +103,7 @@
 	width: 48px;
 	height: 32px;
 	padding: 8px;
+	margin-left: 8px;
 	cursor: pointer;
 	background: #c4dc91;
 	border: 1px solid #e0e0e0;

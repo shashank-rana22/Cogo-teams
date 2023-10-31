@@ -75,7 +75,7 @@
 .footer_container {
 	display: flex;
 	align-items: stretch;
-	justify-content: space-between;
+	justify-content: flex-end;
 	padding: 10px 16px;
 }
 

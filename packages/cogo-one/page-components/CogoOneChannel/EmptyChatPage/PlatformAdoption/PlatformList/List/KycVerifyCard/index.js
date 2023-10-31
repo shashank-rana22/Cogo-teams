@@ -3,6 +3,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcAIncoterms, IcMDocument, IcMFtick, IcMCall } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import { KycInfocontent } from '../../../../../../../constants/platformAdoptionConstant';
 import { formatAccountType } from '../../../../../../../utils/platformAdoption';
 import Header from '../../Header';
 
@@ -32,6 +33,7 @@ function KycVerifyCard({ list = [], setVerifyAccount = () => {}, handlePlaceCall
 					tags={tags}
 					accountType={account_type}
 					item={item}
+					content={<KycInfocontent />}
 				/>
 				<div className={styles.body_info}>
 					<div className={styles.each_row}>

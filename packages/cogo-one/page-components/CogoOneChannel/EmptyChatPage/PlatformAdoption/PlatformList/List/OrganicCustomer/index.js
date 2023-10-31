@@ -3,6 +3,7 @@ import { IcMFtick, IcMCrossInCircle, IcMCalendar, IcMCall } from '@cogoport/icon
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import AgentAvatar from '../../../../../../../common/AgentAvatar';
+import { OrganicInfoContent } from '../../../../../../../constants/platformAdoptionConstant';
 import Header from '../../Header';
 
 import styles from './styles.module.css';
@@ -34,6 +35,7 @@ function OrganicCustomer({ list = [], setScheduleDemo = () => {}, handlePlaceCal
 					tags={tags}
 					accountType={account_type}
 					item={item}
+					content={<OrganicInfoContent />}
 				/>
 				<div className={styles.body_info}>
 					<div className={styles.status_row}>
