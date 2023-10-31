@@ -18,6 +18,8 @@ const IS_CANCELLABLE_CHECK = [
 	'IRN_CANCELLED',
 ];
 const REFETCH_STATUS = ['IRN_GENERATED', 'IRN_CANCELLED'];
+const USER_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id, GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id];
+const ENTITY_CODES = ['101', '301', '501'];
 
 function RenderIRNGenerated({
 	itemData = { invoiceStatus: '' },
@@ -45,9 +47,8 @@ function RenderIRNGenerated({
 		user_id: profile?.user?.id,
 	}));
 
-	const showPopover = ['101', '301', '501']?.includes(entityCode)
-	|| (!['101', '301', '501']?.includes(entityCode)
-	&& [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id, GLOBAL_CONSTANTS.uuid.hk_user_id].includes(user_id));
+	const showPopover = ENTITY_CODES.includes(entityCode)
+	|| (!ENTITY_CODES.includes(entityCode) && USER_IDS.includes(user_id));
 
 	return (
 		<div>
