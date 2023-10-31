@@ -4,19 +4,32 @@ import styles from './styles.module.css';
 
 function Body(props) {
 	const {
-		view, dateRange, updatedAt, setUpdatedAt,
+		screen, view, dateRange, updatedAt, setUpdatedAt,
 	} = props;
 
 	return (
 		<div className={styles.container}>
 			<LeftPanel
+				screen={screen}
 				view={view}
 				dateRange={dateRange}
 				updatedAt={updatedAt}
 				setUpdatedAt={setUpdatedAt}
+				location={screen === 'comparison' ? 'mumbai' : null}
 			/>
 
-			<RightPanel view={view} updatedAt={updatedAt} />
+			{screen === 'overall'
+
+				? <RightPanel view={view} updatedAt={updatedAt} /> : (
+					<LeftPanel
+						screen={screen}
+						view={view}
+						dateRange={dateRange}
+						updatedAt={updatedAt}
+						setUpdatedAt={setUpdatedAt}
+						location="gurgaon"
+					/>
+				)}
 		</div>
 	);
 }

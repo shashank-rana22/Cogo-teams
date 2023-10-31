@@ -495,6 +495,7 @@ const GLOBAL_CONSTANTS = {
 		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
 		public_leaderboard_ranking_badge:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/performance-leaderboard.svg',
+		public_leaderboard_winner_icon: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/winner_icon.svg',
 	},
 
 	video_call_ring_tone_url:

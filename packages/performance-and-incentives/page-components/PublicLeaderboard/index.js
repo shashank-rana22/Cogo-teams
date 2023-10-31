@@ -9,6 +9,7 @@ import useCountDown from './hooks/useCountDown';
 import styles from './styles.module.css';
 
 function PublicDashboard() {
+	const [screen, setScreen] = useState('comparison');
 	const [view, setView] = useState('kam_wise');
 	const [updatedAt, setUpdatedAt] = useState('');
 
@@ -27,6 +28,8 @@ function PublicDashboard() {
 		<PublicLeaderBoardContext.Provider value={contextValues}>
 			<div className={styles.container}>
 				<Header
+					screen={screen}
+					setScreen={setScreen}
 					view={view}
 					setView={setView}
 					dateRange={dateRange}
@@ -36,6 +39,7 @@ function PublicDashboard() {
 				/>
 
 				<Body
+					screen={screen}
 					view={view}
 					dateRange={dateRange}
 					updatedAt={updatedAt}

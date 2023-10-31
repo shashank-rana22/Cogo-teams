@@ -6,11 +6,13 @@ import LoadingState from '../../../../../common/LoadingState';
 import List from '../../../common/List';
 import useGetLeaderbordList from '../../../hooks/useGetLeaderbordList';
 
+import LocationStats from './LocationStats';
 import styles from './styles.module.css';
 import TopUsers from './TopUsers';
 
 function LeftPanel(props) {
 	const {
+		screen = 'overall',
 		view = '',
 		dateRange = {},
 		setUpdatedAt = () => {},
@@ -45,6 +47,8 @@ function LeftPanel(props) {
 
 	return (
 		<div className={styles.container}>
+
+			{screen === 'comparison' ? <LocationStats /> : null }
 
 			<TopUsers topList={topList} view={view} />
 
