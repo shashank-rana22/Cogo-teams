@@ -54,6 +54,7 @@ function Avatar(props) {
 			{picture ? (
 				<img
 					className={styles.image}
+					style={{ borderColor: COLOR }}
 					src={picture}
 					alt="profile"
 				/>
