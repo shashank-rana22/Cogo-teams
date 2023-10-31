@@ -16,6 +16,16 @@
 
 .flex {
 	display: flex;
+
+	:global {
+		.ui_select_container {
+			width: 88px;
+		}
+
+		.ui_select_options_container {
+			z-index: 9;
+		}
+	}
 }
 
 .value {

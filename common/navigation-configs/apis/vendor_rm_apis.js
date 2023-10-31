@@ -117,6 +117,12 @@ const apis = [
 		access_type : 'private',
 		feature     : 'vendor',
 	},
+	{
+		api          : 'update_vendor_bank_detail_status',
+		access_type  : 'private',
+		feature      : 'vendor',
+		service_name : 'vendor',
+	},
 ];
 
 export default apis;
