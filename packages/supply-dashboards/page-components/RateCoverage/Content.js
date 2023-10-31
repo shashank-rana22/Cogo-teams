@@ -1,5 +1,6 @@
 import { Select, Toggle } from '@cogoport/components';
 import { asyncFieldsPartnerUsers, useGetAsyncOptions } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
 import { useState } from 'react';
@@ -51,7 +52,7 @@ function RateCoverageContent() {
 		params: {
 			filters: {
 				status   : 'active',
-				role_ids : ['ae80297f-e30d-45fb-845c-61c302523476', 'dcdcb3d8-4dca-42c2-ba87-1a54bc4ad7fb'],
+				role_ids : GLOBAL_CONSTANTS.uuid.smt_allotted_users_role_ids,
 			},
 		},
 	}));
