@@ -131,6 +131,8 @@ export const getSpectatorTypeOptions = ({ t }) => [
 	{ label: t('myTickets:spectator_type_3'), value: 'closure_authorizer' },
 	{ label: t('myTickets:spectator_type_4'), value: 'configuration_owner' },
 	{ label: t('myTickets:spectator_type_5'), value: 'user_manager' },
+	{ label: t('myTickets:spectator_type_6'), value: 'assigned_to_my_team' },
+	{ label: t('myTickets:spectator_type_7'), value: 'raised_by_my_team' },
 ];
 
 export const getTicketActionLabel = ({ t, type }) => {
@@ -167,7 +169,7 @@ export const FINANCE_PLATFORM_KEYS = ['request_type', 'category', 'sub_category'
 	'additional_information', 'priority',
 	'file_url', 'notify_customer'];
 
-export const PLATFORM_KEYS = ['request_type', 'category', 'serial_id', 'service', 'trade_type',
+export const PLATFORM_KEYS = ['request_type', 'platform_category', 'serial_id', 'service', 'trade_type',
 	'issue_type', 'additional_information', 'priority', 'file_url', 'notify_customer'];
 
 export const RATE_KEYS = ['request_type', 'organization_id', 'user_id', 'id_type',

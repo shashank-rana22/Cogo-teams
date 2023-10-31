@@ -49,6 +49,7 @@ function RaiseTicketsForm({
 	const watchRaisedByDesk = watch('raised_by_desk');
 	const watchIdType = watch('id_type');
 	const watchServiceType = watch('service_type');
+	const watchPlatformCategory = watch('platform_category');
 
 	const additionalControls = (additionalInfo || []).map((item) => ({
 		label          : item,
@@ -89,13 +90,14 @@ function RaiseTicketsForm({
 		watchRaisedByDesk,
 		watchServiceType,
 		watchIdType,
+		watchPlatformCategory,
 	});
+	console.log('watchPlatformCategory:', watchPlatformCategory);
 
 	const filteredControls = defaultControls
 		.filter((val) => CONTROLS_MAPPING[watchRequestType || 'shipment']?.includes(val.name));
 
 	const controls = filteredControls?.concat(additionalControls);
-	console.log(filteredControls, 'controls:', controls);
 
 	useEffect(() => {
 		if (!isEmpty(watchIssueType) && REQUEST_TYPES.includes(watchRequestType)) {
@@ -105,6 +107,10 @@ function RaiseTicketsForm({
 
 	useEffect(() => {
 		SHIPMENT_RATE_KEYS.forEach((element) => {
+			if (element !== 'request_type') { resetField(element); }
+		});
+
+		PLATFORM_KEYS.forEach((element) => {
 			if (element !== 'request_type') { resetField(element); }
 		});
 	}, [resetField, watchRequestType]);
@@ -118,9 +124,16 @@ function RaiseTicketsForm({
 
 				const checkUserId = name === 'user_id' && isEmpty(watchOrgId);
 				const checkServiceType = name === 'service_type' && (isEmpty(watchIdType) || watchIdType === 'sid');
-				const checkService = name === 'service' && watchRequestType !== 'shipment' && watchIdType !== 'sid';
+				const checkService = name === 'service' && watchRequestType !== 'shipment' && watchIdType !== 'sid'
+				&& (!watchPlatformCategory || watchPlatformCategory !== 'shipment');
 
-				if (checkServiceType || checkService || checkUserId) {
+				const checkPlatforSid = name === 'serial_id' && !['shipment', 'rate']?.includes(watchRequestType)
+				&& (!watchPlatformCategory || watchPlatformCategory !== 'shipment');
+
+				const checkPlatforTrade = name === 'trade_type' && !['shipment', 'rate']?.includes(watchRequestType)
+				&& (!watchPlatformCategory || watchPlatformCategory !== 'shipment');
+
+				if (checkServiceType || checkService || checkUserId || checkPlatforSid || checkPlatforTrade) {
 					return null;
 				}
 

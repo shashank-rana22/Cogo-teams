@@ -82,17 +82,19 @@ const getCreateControls = ({
 		},
 		{
 			...(categoryDeskOptions || {}),
-			label          : t('myTickets:select_category'),
-			name           : 'category',
+			label          : <RenderLabel label={t('myTickets:select_category')} />,
+			name           : 'platform_category',
 			controllerType : 'select',
 			placeholder    : t('myTickets:select_category'),
 			isClearable    : true,
 			defaultOptions : true,
 			onChange       : (_, val) => {
 				setSubCategories(val?.subcategories);
-				resetField('sub_category');
+				resetField('serial_id');
+				resetField('service');
+				resetField('trade_type');
 			},
-			visible: !isOperation,
+			visible: true,
 		},
 		{
 			...(checkRequest || {}),
@@ -119,7 +121,7 @@ const getCreateControls = ({
 			name           : 'service',
 			controllerType : 'select',
 			placeholder    : t('myTickets:select_service'),
-			rules          : { required: true },
+			rules          : { required: watchRequestType !== 'platform_issue' },
 			options        : GLOBAL_CONSTANTS.shipment_types,
 			isClearable    : true,
 			disabled       : true,
@@ -130,7 +132,7 @@ const getCreateControls = ({
 			name           : 'trade_type',
 			controllerType : 'select',
 			placeholder    : t('myTickets:select_trade_type'),
-			rules          : { required: true },
+			rules          : { required: watchRequestType !== 'platform_issue' },
 			disabled       : true,
 			options        : GLOBAL_CONSTANTS.trade_types,
 			isClearable    : true,
