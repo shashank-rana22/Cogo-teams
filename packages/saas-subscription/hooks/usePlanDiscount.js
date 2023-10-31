@@ -62,23 +62,26 @@ const usePlanDiscount = ({ discountModal = {}, setFeatureModal, setDiscountModal
 			setFeatureModal({ apiCall: true });
 			setDiscountModal({ open: false });
 		} catch (err) {
-			console.log(err, 'err');
+			Toast.error(err?.response?.data?.message);
 		}
 	};
 
 	const submitHandler = (data) => {
-		const { metadata, value, is_active } = data || {};
+		const { metadata, conditions, value, is_active } = data || {};
 		const { service_name = '', config_type = '', id = '' } = info || {};
 
 		const extraInfo = { id, unit, config_type, service_name };
 
 		try {
-			const validaMetadata = JSON.parse(metadata);
+			const validMetadata = metadata ? JSON.parse(metadata) : null;
+			const validConditions = conditions ? JSON.parse(conditions) : null;
+
 			const payload = {
 				...data,
-				is_active : is_active === 'active',
-				value     : +value,
-				metadata  : validaMetadata,
+				is_active  : is_active === 'active',
+				value      : +value,
+				metadata   : validMetadata,
+				conditions : validConditions,
 				...(!isCreate ? extraInfo : { saas_plan_id: planId, unit: 'percentage' }),
 			};
 

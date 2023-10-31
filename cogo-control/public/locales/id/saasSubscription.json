@@ -140,7 +140,7 @@
     "discount_control_conditions_placeholder":"Memasuki kondisi",
     "discount_control_status":"status",
     "discount_success_toast":"Diskon rencana yang diperbarui",
-    "discount_invalid_metadata":"Harap masukkan metadata JSON yang valid",
+    "discount_invalid_metadata":"Please Enter valid JSON metadata or conditions",
     "edit_btn":"edit",
     "discount_create_success_toast":"Diskon rencana yang dibuat",
     "status_active":"Aktif",

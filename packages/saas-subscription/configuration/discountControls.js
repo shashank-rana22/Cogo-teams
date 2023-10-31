@@ -55,7 +55,7 @@ const getDiscountControls = ({ isCreate = false, watchConfig = '', unit = '', t 
 			rows        : 3,
 		},
 		{
-			name        : 'condition',
+			name        : 'conditions',
 			label       : t('saasSubscription:discount_control_conditions'),
 			placeholder : t('saasSubscription:discount_control_conditions_placeholder'),
 			size        : 'sm',
