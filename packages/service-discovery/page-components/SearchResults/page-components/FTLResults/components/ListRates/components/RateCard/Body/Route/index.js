@@ -1,4 +1,3 @@
-import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import getLocationInfo from '../../../../../../../../utils/locations-search';
@@ -40,13 +39,13 @@ function Route({ detail = {}, rate = {} }) {
 			</div>
 
 			<div className={styles.schedule_container}>
-				<span className={cl`${styles.schedule_item} ${origin.port_code && styles.overflow_hidden}`}>
+				<span className={styles.schedule_item}>
 					{origin.name}
 				</span>
 
 				<JourneyLine scheduleData={scheduleData} />
 
-				<span className={cl`${styles.schedule_item} ${destination.port_code && styles.overflow_hidden}`}>
+				<span className={styles.schedule_item}>
 					{destination.name}
 				</span>
 			</div>

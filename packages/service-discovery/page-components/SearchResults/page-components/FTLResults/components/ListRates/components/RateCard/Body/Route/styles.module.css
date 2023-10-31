@@ -24,6 +24,11 @@
 	color: #000;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	@media (max-width: 768px) {
+		font-size: 10px;
+		font-weight: 500;
+	}
 }
 
 .schedule_container {
@@ -34,28 +39,16 @@
 }
 
 .schedule_item {
-	min-width: max-content;
+	max-width: 33%;
 	padding: 4px 0 0;
+	overflow: hidden;
 	font-size: 20px;
 	color: #000;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 
 	@media (max-width: 768px) {
-		width: 50%;
-		min-width: auto;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-
-	&.overflow_hidden {
-		width: 60%;
-		min-width: auto;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-
-	@media (max-width: 768px) {
-		font-size: 15px;
+		max-width: 30%;
+		font-size: 14px;
 	}
 }

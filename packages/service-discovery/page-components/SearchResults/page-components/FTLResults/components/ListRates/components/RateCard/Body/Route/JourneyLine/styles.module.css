@@ -14,8 +14,8 @@
 
 .journey_line {
 	display: flex;
+	flex: auto;
 	align-items: center;
-	width: 100%;
 	margin: 2px 8px;
 }
 
