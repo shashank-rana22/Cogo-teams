@@ -19,17 +19,15 @@ function useGetLeaderbordList(props) {
 	const { countdown } = useContext(PublicLeaderBoardContext);
 
 	const [params, setParams] = useState({
-		page                      : 1,
-		page_limit                : pageLimit,
-		user_data_required        : true,
-		role_data_required        : true,
-		add_user_kam_report_data  : ['owner_wise', 'manager_wise'].includes(view),
-		additional_stats_required : !!office_location_id,
-		filters                   : {
+		page                     : 1,
+		page_limit               : pageLimit,
+		user_data_required       : true,
+		role_data_required       : true,
+		add_user_kam_report_data : ['owner_wise', 'manager_wise'].includes(view),
+		filters                  : {
 			report_view_type        : view,
 			created_at_greater_than : dateRange?.startDate || undefined,
 			created_at_less_than    : dateRange?.endDate || undefined,
-			office_location_id      : office_location_id || undefined,
 		},
 	});
 
@@ -45,23 +43,25 @@ function useGetLeaderbordList(props) {
 	useEffect(() => {
 		setParams((previousParams) => ({
 			...previousParams,
-			add_user_kam_report_data : ['owner_wise', 'manager_wise'].includes(view),
-			filters                  : {
+			add_user_kam_report_data  : ['owner_wise', 'manager_wise'].includes(view),
+			additional_stats_required : !!office_location_id,
+			filters                   : {
 				...(previousParams.filters || {}),
 				report_view_type : view || undefined,
 				report_type      : ['owner_wise', 'manager_wise', 'kam_wise'].includes(view)
 					? `${view.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]}_report` : undefined,
 				created_at_greater_than : dateRange?.startDate || undefined,
 				created_at_less_than    : dateRange?.endDate || undefined,
+				office_location_id      : office_location_id || undefined,
 			},
 		}));
-	}, [view, dateRange]);
+	}, [view, dateRange, office_location_id]);
 
 	const rankData = getRankFromScore({ score });
 
 	useEffect(() => {
 		setUpdatedAt(report_synced_at);
-		setScore((p) => ({ ...p, [office_location_id]: additional_stats?.total_score }));
+		if (office_location_id) setScore((p) => ({ ...p, [office_location_id]: additional_stats?.total_score }));
 	}, [report_synced_at, setUpdatedAt, additional_stats, setScore, office_location_id]);
 
 	useEffect(() => {

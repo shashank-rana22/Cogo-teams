@@ -31,7 +31,7 @@ function LeftPanel(props) {
 		dateRange,
 		pageLimit          : 50,
 		setUpdatedAt,
-		office_location_id : location?.value,
+		office_location_id : screen === 'comparison' ? location?.value : null,
 		score,
 		setScore,
 	});
@@ -57,7 +57,9 @@ function LeftPanel(props) {
 	}
 
 	return (
-		<div className={cl`${styles.container} ${rank !== 1 && styles.rank_two_container}`}>
+		<div className={cl`${styles.container} 
+		${(screen === 'comparison' && rank !== 1) && styles.rank_two_container}`}
+		>
 
 			{screen === 'comparison' ? (
 				<LocationStats

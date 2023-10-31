@@ -16,6 +16,16 @@
 	}
 }
 
+.info_icon_div {
+	cursor: pointer;
+}
+
+.info_icon {
+	width: 20px;
+	height: 32px;
+	margin-top: -4px;
+}
+
 .sub_container {
 	display: flex;
 	gap: 12px;

@@ -1,6 +1,7 @@
 import { Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMInfo } from '@cogoport/icons-react';
 
 import DateFilter from '../../common/DateFilter';
 import USER_OPTIONS from '../../configurations/get-user-filter-options';
@@ -11,14 +12,28 @@ import styles from './styles.module.css';
 
 function Header(props) {
 	const {
-		screen, view, setView, dateRange, setDateRange, updatedAt, countdown, duration, setDuration,
+		screen, setScreen, view, setView, dateRange, setDateRange, updatedAt, countdown, duration, setDuration,
 	} = props;
+
+	const onClickChangeScreen = () => {
+		if (screen === 'overall') setScreen('comparison');
+		else setScreen('overall');
+	};
 
 	return (
 		<div className={styles.container}>
 
 			<div className={styles.sub_container}>
-				<h2 className={styles.heading}>Leaderboards</h2>
+				<div
+					className={styles.info_icon_div}
+					onClick={onClickChangeScreen}
+					role="presentation"
+				>
+					<IcMInfo className={styles.info_icon} />
+				</div>
+				<h2 className={styles.heading}>
+					Leaderboards
+				</h2>
 				<p className={styles.sub_heading}>
 					for
 					{' '}
