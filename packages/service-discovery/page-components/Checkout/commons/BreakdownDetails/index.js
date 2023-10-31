@@ -73,7 +73,6 @@ function BreakdownDetails({
 				detailedServices={detail.services}
 				primary_service={primary_service}
 				source={source}
-				isMobile={isMobile}
 			/>
 
 			{rateDetails.map((item, index) => {
