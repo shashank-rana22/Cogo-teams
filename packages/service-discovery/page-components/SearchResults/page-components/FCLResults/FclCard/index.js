@@ -15,8 +15,6 @@ import Route from './Route';
 import SailingWeek from './SailingWeek';
 import styles from './styles.module.css';
 
-const ONE = 1;
-
 function RateCardTopSection({
 	rateCardData = {},
 	detail = {},
@@ -216,8 +214,6 @@ function FclCard({
 		schedule_type,
 	};
 
-	const isCogoAssured = rateCardData.source === 'cogo_assured_rate';
-
 	const isOriginHaulageRates = Object.values(service_rates).some(
 		(service) => service?.is_rate_available
 			&& service?.service_type === 'haulage_freight'
@@ -229,20 +225,20 @@ function FclCard({
 			&& service?.trade_type === 'import',
 	);
 
-	const isMultiContainer = primaryServiceRates.length > ONE;
+	const isCogoAssured = rateCardData.source === 'cogo_assured_rate';
 
-	let subStyleClassname = '';
+	const isMultiContainer = primaryServiceRates.length > GLOBAL_CONSTANTS.one;
 
-	if (isCogoAssured) {
-		subStyleClassname = 'cogo_assured';
-	}
-	if (isSelectedCard) {
-		subStyleClassname = 'selected_card';
-	}
+	const selectedForComparison = rateCardData?.id in comparisonRates;
 
 	return (
 		<div
-			className={cl`${styles.container} ${styles[subStyleClassname]}`}
+			className={cl`
+				${styles.container} 
+				${isCogoAssured && styles.cogo_assured}
+				${isSelectedCard && styles.selected_card}
+				${selectedForComparison && styles.compared_rate}
+			`}
 			style={(!index && !isSelectedCard) ? { marginTop: 0 } : {}}
 		>
 			<RateCardTopSection

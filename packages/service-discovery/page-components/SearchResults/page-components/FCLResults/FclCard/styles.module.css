@@ -40,6 +40,10 @@
 	&.cogo_assured {
 		background: #fff;
 	}
+
+	&.compared_rate {
+		border: 1px solid #88cad1;
+	}
 }
 
 .middle {

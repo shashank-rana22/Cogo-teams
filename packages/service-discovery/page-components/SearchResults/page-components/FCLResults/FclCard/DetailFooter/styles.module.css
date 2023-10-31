@@ -4,6 +4,7 @@
 	justify-content: space-between;
 	padding: 8px;
 	background-color: #f2f3fa;
+	border-radius: 0 0 8px 8px;
 
 	&.cogo_assured {
 		background: #fef3e9;

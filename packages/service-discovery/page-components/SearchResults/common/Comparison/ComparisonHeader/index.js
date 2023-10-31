@@ -1,13 +1,14 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
-import React from 'react';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const ONE = 1;
-
-const renderName = (name) => {
-	if (name.includes('COGO')) return 'COGO ASSURED';
+const renderName = (name, source = '') => {
+	if (source === 'cogo_assured_rate') {
+		return 'COGO ASSURED';
+	}
 	return name;
 };
 
@@ -26,10 +27,10 @@ function ComparisonHeader({
 	const handleDelete = (rate) => {
 		const { id: idOfCardToBeDeleted = '' } = rate;
 
-		setComparisonRates((pv) => {
-			const tempObj = { ...pv };
-			delete tempObj[idOfCardToBeDeleted];
-			return tempObj;
+		setComparisonRates((prevRates) => {
+			const { [idOfCardToBeDeleted]: _, ...restRates } = prevRates;
+
+			return restRates;
 		});
 	};
 
@@ -47,31 +48,34 @@ function ComparisonHeader({
 					<div className={styles.count_heading}>
 						{selectedCards.length}
 						{' '}
-						{selectedCardsCount === ONE ? 'Option' : 'Options'}
+						{selectedCardsCount === GLOBAL_CONSTANTS.one ? 'Option' : 'Options'}
 						{' '}
 						selected
 					</div>
 
-					{selectedCardsCount === ONE ? (
+					{selectedCardsCount === GLOBAL_CONSTANTS.one ? (
 						<div className={styles.add_more_text}>Add at least 1 more to Compare</div>
 					) : null}
 				</div>
 
 				<div className={styles.pills_container}>
 					{selectedCards.map((cardItem) => {
-						const { shipping_line = {}, source = '' } = cardItem;
-						const { short_name = '', id: shipping_line_id = '' } = shipping_line || {};
+						const { shipping_line, airline, source = '' } = cardItem;
+
+						const line = isEmpty(shipping_line) ? airline : shipping_line || {};
+
+						const { short_name = '', id: line_id = '' } = line || {};
 
 						return (
-							<div key={`${shipping_line_id}_${cardItem.id}`} className={styles.pill}>
-								{renderName(short_name)}
+							<div key={`${line_id}_${cardItem.id}`} className={styles.pill}>
+								{renderName(short_name, source)}
 
-								{source === 'cogo_assured_rate' ? null : (
+								{source !== 'cogo_assured_rate' ? (
 									<IcMCross
 										className={styles.cross_icon}
 										onClick={() => handleDelete(cardItem)}
 									/>
-								)}
+								) : null }
 							</div>
 						);
 					})}
@@ -94,7 +98,7 @@ function ComparisonHeader({
 					onClick={() => setScreen('comparison')}
 					size="md"
 					themeType="accent"
-					disabled={selectedCardsCount === ONE}
+					disabled={selectedCardsCount === GLOBAL_CONSTANTS.one}
 					style={{ padding: '20px 16px' }}
 				>
 					View Comparison
