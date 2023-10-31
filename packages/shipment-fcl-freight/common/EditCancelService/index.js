@@ -16,6 +16,10 @@ import { getSideEffectsServices } from './utils/getSideEffectsServices';
 
 function EditCancelService({ serviceData = {} }) {
 	const user_data = useSelector((({ profile }) => profile?.user));
+	const { role_ids } = useSelector(({ profile }) => ({
+		role_ids: profile?.partner?.user_role_ids,
+	}));
+
 	const { shipment_data, servicesList, activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const [showModal, setShowModal] = useState(false);
@@ -27,7 +31,7 @@ function EditCancelService({ serviceData = {} }) {
 		{
 			label : 'Edit',
 			value : 'supplier_reallocation',
-			show  : getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder }),
+			show  : getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder, role_ids }),
 		},
 		{
 			label : 'Edit Params',

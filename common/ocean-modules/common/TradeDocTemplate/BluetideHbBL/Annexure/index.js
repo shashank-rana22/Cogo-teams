@@ -89,15 +89,26 @@ function Annexure({
 						</thead>
 						<tbody>
 							{mode === MODE_READ
-								? (initialValues?.containers || []).map((container) => (
-									<tr key={container?.container_number}>
-										<td className={styles.table_data_read}>{container?.container_number}</td>
-										<td className={styles.table_data_read}>{container?.marks_and_number}</td>
-										<td className={styles.table_data_read}>{container?.package_description}</td>
-										<td className={styles.table_data_read}>{container?.gross_weight}</td>
-										<td className={styles.table_data_read}>{container?.measurement}</td>
-									</tr>
-								))
+								? (initialValues?.containers || []).map((container) => {
+									const containers = container?.container_number.split(' ');
+									const marksAndNumber = container?.marks_and_number.split(' ');
+									const grossWeight = container?.gross_weight.split(' ');
+									return (
+										<tr key={container?.container_number}>
+											<td className={styles.table_data_read}>
+												{(containers || []).map((item) => <div key={item}>{item}</div>)}
+											</td>
+											<td className={styles.table_data_read}>
+												{(marksAndNumber || []).map((item) => <div key={item}>{item}</div>)}
+											</td>
+											<td className={styles.table_data_read}>{container?.package_description}</td>
+											<td className={styles.table_data_read}>
+												{(grossWeight || []).map((item) => <div key={item}>{item}</div>)}
+											</td>
+											<td className={styles.table_data_read}>{container?.measurement}</td>
+										</tr>
+									);
+								})
 
 								: fields.map((field, index) => (
 									<tr key={field.id} style={{ position: 'relative' }}>
