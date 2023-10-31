@@ -27,6 +27,7 @@ function Header({ item }) {
 	const trade_type = item?.detail?.inco_term
 		? startCase(getIncoTermMapping[item?.detail?.inco_term])
 		: startCase(getTradeType(item?.detail?.service_details));
+	const atActuals = item?.at_actuals;
 	const Icon = SERVICE_MAPPING[service]?.icon;
 	return (
 		<div className={styles.heading}>
@@ -48,6 +49,7 @@ function Header({ item }) {
 				</div>
 			</div>
 			<div>
+				{atActuals && <Pill color="#FDE74D">At Actuals</Pill>}
 				<Pill color="blue">{trade_type}</Pill>
 			</div>
 		</div>

@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 function ContainerDetails({ selectedCard = {} }) {
 	const ZEROVALUE = 0;
 
-	const { search_params = {}, search_type: searchType = '' } = selectedCard || {};
+	const { search_params = {}, search_type: searchType = '', at_actuals: atActuals = false } = selectedCard || {};
 
 	const {
 		lcl_freight_services_attributes = {},
@@ -35,6 +35,11 @@ function ContainerDetails({ selectedCard = {} }) {
 			</div>
 
 			<div className={styles.shipment_specification}>
+				{atActuals && (
+					<span className={styles.tag}>
+						At Actuals
+					</span>
+				)}
 				{['fcl_freight', 'fcl_freight_local'].includes(search_type) && (
 					<>
 						<span className={styles.tag}>{CONTAINER_SIZE_MAPPING[container_size]}</span>

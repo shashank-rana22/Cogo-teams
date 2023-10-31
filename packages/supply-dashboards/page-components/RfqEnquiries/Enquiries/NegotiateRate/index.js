@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import Service from './Service';
@@ -18,8 +19,12 @@ function NegotiateRate({ selectedCard = {}, setRevertCounts = () => {} }) {
 			SERVICE.push(card);
 		}
 	});
+
+	const negotiableServices = SERVICE.filter((item) => !(item?.service === 'subsidiary'
+  && SINGLE_PORT_SERVICES.includes(selectedCard?.search_type)));
+
 	const [activeService, setActiveService] = useState(
-		SERVICE[ZERO_VALUE],
+		negotiableServices?.[ZERO_VALUE] || {},
 	);
 	const [submittedEnquiry, setSubmittedEnquiry] = useState([]);
 
@@ -27,22 +32,20 @@ function NegotiateRate({ selectedCard = {}, setRevertCounts = () => {} }) {
 		<div>
 			<div className={styles.heading}>Negotiate Rates</div>
 			<div className={styles.service}>
-				{(SERVICE || []).map((item) => (
-					item?.service === 'subsidiary' && SINGLE_PORT_SERVICES.includes(selectedCard?.search_type) ? null
-						: (
-							<Service
-								key={item?.id}
-								selectedCard={selectedCard}
-								service={item}
-								activeService={activeService}
-								setActiveService={setActiveService}
-								submittedEnquiry={submittedEnquiry}
-								setSubmittedEnquiry={setSubmittedEnquiry}
-								setRevertCounts={setRevertCounts}
-							/>
-						)
-
-				))}
+				{isEmpty(negotiableServices)
+					? <div className={styles.services_empty}>No negotiable services</div>
+					: (negotiableServices || []).map((item) => (
+						<Service
+							key={item?.id}
+							selectedCard={selectedCard}
+							service={item}
+							activeService={activeService}
+							setActiveService={setActiveService}
+							submittedEnquiry={submittedEnquiry}
+							setSubmittedEnquiry={setSubmittedEnquiry}
+							setRevertCounts={setRevertCounts}
+						/>
+					))}
 			</div>
 		</div>
 	);
