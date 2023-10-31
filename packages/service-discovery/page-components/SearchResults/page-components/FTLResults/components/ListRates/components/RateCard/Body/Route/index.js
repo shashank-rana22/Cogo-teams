@@ -8,6 +8,9 @@ import styles from './styles.module.css';
 const LAST_INDEX = -1;
 const THIRD_TO_LAST_INDEX = -3;
 
+const getCityName = (location = {}) => (location?.display_name?.split(',') || [])
+	.slice(THIRD_TO_LAST_INDEX, LAST_INDEX)?.[GLOBAL_CONSTANTS.zeroth_index];
+
 function Route({ detail = {}, rate = {} }) {
 	const { transit_time = 0, transit_time_unit } = rate;
 
@@ -18,11 +21,9 @@ function Route({ detail = {}, rate = {} }) {
 
 	const { origin = {}, destination = {} } = getLocationInfo(detail, {}, 'service_type');
 
-	const origin_city = (origin?.display_name?.split(',') || [])
-		.slice(THIRD_TO_LAST_INDEX, LAST_INDEX)?.[GLOBAL_CONSTANTS.zeroth_index];
+	const origin_city = getCityName(origin);
 
-	const destination_city = (destination?.display_name?.split(',') || [])
-		.slice(THIRD_TO_LAST_INDEX, LAST_INDEX)?.[GLOBAL_CONSTANTS.zeroth_index];
+	const destination_city = getCityName(destination);
 
 	return (
 		<div className={styles.container}>
