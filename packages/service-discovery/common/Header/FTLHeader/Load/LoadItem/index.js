@@ -18,14 +18,12 @@ function LoadItem({
 }) {
 	const { commodity = '', trucks_count = 0, truck_type = '', volume = 0, weight = 0 } = loadItem;
 
-	const toShowTruckDetails = truck_type;
-
 	const moreThanOne = !isAllowedToEdit;
 
 	return (
 		<div className={styles.container} style={{ margin }}>
 			<div className={styles.load_item}>
-				{(toShowTruckDetails) ? (
+				{truck_type ? (
 					<Tooltip
 						placement="bottom"
 						content={(
