@@ -4,7 +4,8 @@ import { publicRequest, request } from '@cogoport/request';
 import { useState } from 'react';
 
 const useImageUploader = () => {
-	const [disablRTE, setDisablRTE] = useState(false);
+	const [disableRTE, setDisableRTE] = useState(false);
+
 	const uploadFile = async ({ file, fileName }) => {
 		try {
 			const { data } = await request({
@@ -31,7 +32,7 @@ const useImageUploader = () => {
 
 			return finalUrl;
 		} catch (error) {
-			Toast.error(error.message);
+			Toast.error(error?.message || 'Error while uploading image.');
 		}
 		return null;
 	};
@@ -39,7 +40,7 @@ const useImageUploader = () => {
 	const onImageUploadBefore = (files, _info, uploadHandler) => {
 		try {
 			const file = files[GLOBAL_CONSTANTS.zeroth_index];
-			setDisablRTE(true);
+			setDisableRTE(true);
 			uploadFile({ file, fileName: file.name }).then((src) => {
 				const response = {
 					errorMessage : 'insert error message',
@@ -51,7 +52,7 @@ const useImageUploader = () => {
 						},
 					],
 				};
-				setDisablRTE(false);
+				setDisableRTE(false);
 				uploadHandler(response);
 			});
 		} catch (e) {
@@ -60,7 +61,7 @@ const useImageUploader = () => {
 		return undefined;
 	};
 
-	return { disablRTE, onImageUploadBefore };
+	return { disableRTE, onImageUploadBefore };
 };
 
 export default useImageUploader;

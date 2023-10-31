@@ -96,8 +96,6 @@ const useGetListCoverage = ({ userService }) => {
 		if (filter?.start_date) { DATE_PARAMS.start_date = filter?.start_date; }
 		if (filter?.end_date) { DATE_PARAMS.end_date = filter?.end_date; }
 
-		console.log(FINAL_FILTERS, filter, 'FINAL_FILTERS');
-
 		try {
 			let is_flash_booking_reverted;
 			if (filter?.is_flash_booking_reverted) {

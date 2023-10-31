@@ -46,6 +46,8 @@ function OrgSpecificRecipients({
 	recipientTypes = [],
 	emailState = {},
 	viewType = '',
+	restrictMailToSingle = false,
+	internalEmails = [],
 }) {
 	const [activeTab, setActiveTab] = useState('users');
 	const isLeadUser = emailState?.orgData?.orgId === 'lead_users';
@@ -100,6 +102,15 @@ function OrgSpecificRecipients({
 		}) || null,
 		[emailState?.orgData?.orgType, organizationData],
 	);
+
+	const userEmails = getAllowedEmailsList({
+		orgData,
+		searchQuery,
+		activeTab       : organizationType,
+		selectedOptions : emailState?.user_ids?.[type],
+		value           : emailRecipientType,
+		internalEmails,
+	}) || [];
 
 	const handleChangeTab = (tab) => {
 		setSearchQuery('');
@@ -165,24 +176,18 @@ function OrgSpecificRecipients({
 				placeholder="Search user"
 				isClearable
 				onSearch={handleSearch}
-				disabled={!(emailState?.orgData?.orgId || emailState?.orgId)}
+				disabled={!restrictMailToSingle && !(emailState?.orgData?.orgId || emailState?.orgId)}
 				size="sm"
 				multiple
 				selectType="multi"
 				selectedOptions={emailState?.user_ids?.[type] || []}
-				options={getAllowedEmailsList({
-					orgData,
-					searchQuery,
-					activeTab       : organizationType,
-					selectedOptions : emailState?.user_ids?.[type],
-					value           : emailRecipientType,
-				}) || []}
+				options={userEmails}
 				renderLabel={(item) => <RenderLabel item={item} activeTab={organizationType} />}
 				value={isLeadUser
 					? emailRecipientType?.[GLOBAL_CONSTANTS.zeroth_index] || ''
 					: emailRecipientType || []}
 				optionsHeader={(
-					emailState?.orgData?.orgType?.includes('lead')
+					(emailState?.orgData?.orgType?.includes('lead') || restrictMailToSingle)
 						? null
 						: (
 							<CustomSelectHeader
