@@ -13,6 +13,8 @@ function SmeComponents() {
 			<PerAgentData />
 			<Analytics />
 			<UserData />
+			<Analytics />
+			<UserData />
 		</div>
 	);
 }

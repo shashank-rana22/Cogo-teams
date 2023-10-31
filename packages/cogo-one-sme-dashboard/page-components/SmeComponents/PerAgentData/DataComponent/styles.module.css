@@ -1,0 +1,63 @@
+.label {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	color: #4f4f4f;
+
+	>div[aria-label="tooltip"] {
+		display: flex;
+		align-items: center;
+		padding-left: 6px;
+	}
+}
+
+.total_value {
+	font-size: 26px;
+	font-weight: 500;
+	color: #212121;
+}
+
+.component {
+	display: flex;
+	flex-direction: column;
+
+	:global {
+		.ui_percentage_view {
+			padding-left: unset;
+		}
+	}
+}
+
+.segregated_component {
+	width: 47%;
+	margin-top: 8px;
+	border-right: 1px solid #e0e0e0;
+
+	&:last-child {
+		width: 53%;
+		padding-left: 10px;
+		border-right: unset;
+	}
+}
+
+.row_container {
+	display: flex;
+	padding: 10px 0;
+	border-bottom: 1px solid #f8f2e7;
+
+	&:last-child {
+		border-bottom: unset;
+	}
+}
+
+.tooltip {
+	max-width: unset !important;
+}
+
+.tooltip_label {
+	width: 240px !important;
+}
+
+.tooltip_value {
+	font-weight: 600;
+}

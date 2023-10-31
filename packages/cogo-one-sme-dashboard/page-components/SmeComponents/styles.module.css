@@ -8,4 +8,8 @@
 	margin-top: 10px;
 	overflow-y: auto;
 	background: #fff;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
