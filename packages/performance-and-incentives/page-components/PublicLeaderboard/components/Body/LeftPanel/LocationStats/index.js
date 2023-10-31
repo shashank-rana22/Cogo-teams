@@ -1,6 +1,5 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Image } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
@@ -14,11 +13,10 @@ function LocationStats({
 			{rank === 1
 				? (
 					<div className={styles.icon_div}>
-						<Image
+						<img
 							src={GLOBAL_CONSTANTS.image_url.public_leaderboard_winner_icon}
 							alt="winner"
-							width={65}
-							height={65}
+							className={styles.icon}
 						/>
 					</div>
 				) : null}

@@ -12,13 +12,8 @@ import styles from './styles.module.css';
 
 function Header(props) {
 	const {
-		screen, setScreen, view, setView, dateRange, setDateRange, updatedAt, countdown, duration, setDuration,
+		screen, view, setView, dateRange, setDateRange, updatedAt, countdown, duration, setDuration, switchScreen,
 	} = props;
-
-	const onClickChangeScreen = () => {
-		if (screen === 'overall') setScreen('comparison');
-		else setScreen('overall');
-	};
 
 	return (
 		<div className={styles.container}>
@@ -26,7 +21,7 @@ function Header(props) {
 			<div className={styles.sub_container}>
 				<div
 					className={styles.info_icon_div}
-					onClick={onClickChangeScreen}
+					onClick={switchScreen}
 					role="presentation"
 				>
 					<IcMInfo className={styles.info_icon} />
@@ -70,7 +65,7 @@ function Header(props) {
 				<div>
 					<CountDownTimer updatedAt={updatedAt} countdown={countdown} />
 
-					{updatedAt && (
+					{updatedAt ? (
 						<p className={styles.last_updated_at}>
 							Last updated:
 							{' '}
@@ -82,7 +77,7 @@ function Header(props) {
 								separator  : '; ',
 							})}
 						</p>
-					)}
+					) : null}
 				</div>
 			</div>
 

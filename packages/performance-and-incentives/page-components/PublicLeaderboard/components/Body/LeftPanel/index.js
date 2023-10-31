@@ -24,6 +24,7 @@ function LeftPanel(props) {
 		location = {},
 		score = {},
 		setScore = () => {},
+		setNextReloadAt = () => {},
 	} = props;
 
 	const { list, loading, total_report_count: totalReportCount, additional_stats, rank } = useGetLeaderbordList({
@@ -31,6 +32,7 @@ function LeftPanel(props) {
 		dateRange,
 		pageLimit          : 50,
 		setUpdatedAt,
+		setNextReloadAt,
 		office_location_id : screen === 'comparison' ? location?.value : null,
 		score,
 		setScore,

@@ -65,6 +65,7 @@
 .end_side {
 	display: flex;
 	gap: 8px;
+	height: max-content;
 }
 
 .user_selector {

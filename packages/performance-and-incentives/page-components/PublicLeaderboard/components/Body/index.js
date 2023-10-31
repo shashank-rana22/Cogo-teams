@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function Body(props) {
 	const {
-		screen, view, dateRange, updatedAt, setUpdatedAt, setDateRange, duration, setDuration,
+		screen, view, dateRange, updatedAt, setUpdatedAt, setDateRange, duration, setDuration, setNextReloadAt,
 	} = props;
 
 	const [score, setScore] = useState({});
@@ -27,6 +27,7 @@ function Body(props) {
 				setDateRange={setDateRange}
 				score={score}
 				setScore={setScore}
+				setNextReloadAt={setNextReloadAt}
 			/>
 
 			{screen === 'overall' ? <RightPanel view={view} updatedAt={updatedAt} /> : (
@@ -39,6 +40,7 @@ function Body(props) {
 					location={LEADERBOARD_LOCATIONS?.gurgaon}
 					score={score}
 					setScore={setScore}
+					setNextReloadAt={setNextReloadAt}
 				/>
 			)}
 		</div>

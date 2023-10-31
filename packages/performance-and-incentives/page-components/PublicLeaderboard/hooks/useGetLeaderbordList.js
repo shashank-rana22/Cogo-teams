@@ -14,6 +14,7 @@ function useGetLeaderbordList(props) {
 		office_location_id = null,
 		score = {},
 		setScore = () => {},
+		setNextReloadAt = () => {},
 	} = props;
 
 	const { countdown } = useContext(PublicLeaderBoardContext);
@@ -38,7 +39,13 @@ function useGetLeaderbordList(props) {
 		params,
 	}, { manual: false });
 
-	const { list = [], total_report_count = 0, report_synced_at = '', additional_stats = {} } = data || {};
+	const {
+		list = [],
+		total_report_count = 0,
+		report_synced_at = '',
+		reload_duration = '',
+		additional_stats = {},
+	} = data || {};
 
 	useEffect(() => {
 		setParams((previousParams) => ({
@@ -61,8 +68,15 @@ function useGetLeaderbordList(props) {
 
 	useEffect(() => {
 		setUpdatedAt(report_synced_at);
+		setNextReloadAt(reload_duration);
 		if (office_location_id) setScore((p) => ({ ...p, [office_location_id]: additional_stats?.total_score }));
-	}, [report_synced_at, setUpdatedAt, additional_stats, setScore, office_location_id]);
+	}, [report_synced_at,
+		setUpdatedAt,
+		reload_duration,
+		setNextReloadAt,
+		additional_stats,
+		setScore,
+		office_location_id]);
 
 	useEffect(() => {
 		if (countdown === 0) {
