@@ -15,9 +15,9 @@ import getCanEditSupplier from './utils/getCanEditSupplier';
 import { getSideEffectsServices } from './utils/getSideEffectsServices';
 
 function EditCancelService({ serviceData = {} }) {
-	const user_data = useSelector((({ profile }) => profile?.user));
-	const { role_ids } = useSelector(({ profile }) => ({
-		role_ids: profile?.partner?.user_role_ids,
+	const { user_data, role_ids } = useSelector(({ profile }) => ({
+		user_data : profile?.user || {},
+		role_ids  : profile?.partner?.user_role_ids || [],
 	}));
 
 	const { shipment_data, servicesList, activeStakeholder } = useContext(ShipmentDetailContext);
