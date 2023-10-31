@@ -14,7 +14,7 @@ function KycVerifyCard({ list = [], setVerifyAccount = () => {}, handlePlaceCall
 			organization = {}, request_type = '', id = '', requesting_user = {}, performed_by_type = '',
 			updated_at = '', customer = {}, serial_id = '', escalation_cycle = null, documents = [],
 		} = item || {};
-		const { account_type = '', business_name = '', tags = [] } = organization || {};
+		const { account_type = '', business_name = '', tags = [], id: orgId = '' } = organization || {};
 		const { name = '' } = requesting_user || {};
 		const {
 			name:pocName = '', mobile_country_code = '', mobile_number = '', id: pocId = '',
@@ -97,11 +97,13 @@ function KycVerifyCard({ list = [], setVerifyAccount = () => {}, handlePlaceCall
 							role="presentation"
 							className={styles.call_icon}
 							onClick={() => handlePlaceCall({
-								userName   : pocName,
-								code       : mobile_country_code,
-								number     : mobile_number,
+								userName     : pocName,
+								code         : mobile_country_code,
+								number       : mobile_number,
 								pocId,
-								leadUserId : lead_user_id,
+								leadUserId   : lead_user_id,
+								orgId,
+								isUnkownUser : true,
 							})}
 						>
 							<IcMCall width={18} height={18} fill="#fff" />

@@ -98,11 +98,12 @@ function CallDetails({ list = [], handlePlaceCall = () => {}, handleOpenMessage 
 							role="presentation"
 							className={styles.button}
 							onClick={() => handlePlaceCall({
-								userName   : pocName,
-								code       : mobile_country_code,
-								number     : mobile_number,
+								userName     : pocName,
+								code         : mobile_country_code,
+								number       : mobile_number,
 								pocId,
-								leadUserId : lead_user_id,
+								leadUserId   : lead_user_id,
+								isUnkownUser : true,
 							})}
 						>
 							<IcMCall width={20} height={20} />

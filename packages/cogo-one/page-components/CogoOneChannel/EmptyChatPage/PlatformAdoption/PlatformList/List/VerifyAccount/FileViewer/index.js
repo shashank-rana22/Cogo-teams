@@ -1,5 +1,6 @@
-import { cl, Chips } from '@cogoport/components';
+import { cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMTick } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useEffect } from 'react';
 
@@ -27,7 +28,7 @@ function FileViewer({
 	const { docUrl = '', docType = '' } = selectDoc || {};
 
 	const fileOptions = (documentOptions || []).map((item) => {
-		const { value = '', label = '' } = item || {};
+		const { value = '', label = '', url = '' } = item || {};
 
 		return {
 			key      : value,
@@ -35,6 +36,7 @@ function FileViewer({
 			color    : 'green',
 			tooltip  : false,
 			closable : true,
+			url,
 		};
 	});
 
@@ -56,12 +58,36 @@ function FileViewer({
 	return (
 		<div className={cl`${!showAccountDetails ? styles.full_screen : styles.viewer}`}>
 			<div className={cl`${styles.selected_sources} ${documentOptions?.length > 4 ? styles.wrap : ''}`}>
-				<Chips
-					items={fileOptions}
-					selectedItems={docType}
-					onItemChange={(val, obj) => setSelectDoc(() => ({ docType: val, docUrl: obj?.url }))}
-					size="sm"
-				/>
+				<div className={styles.chips_container}>
+					{fileOptions.map((itm) => {
+						const { key = '', url = '', children = '' } = itm || {};
+
+						return (
+							<button
+								type="button"
+								key={key}
+								className={cl`${styles.ui_chip_container} 
+                        		${docType === key ? styles.active_chip : ''}`}
+								onClick={() => {
+									setSelectDoc(() => ({ docType: key, docUrl: url }));
+								}}
+							>
+								{docType === key ? (
+									<div className={styles.select}>
+										<IcMTick />
+									</div>
+								) : null}
+								<div className={styles.all_children}>
+									<Tooltip content={children} placement="bottom">
+										<div className={styles.children}>
+											{children}
+										</div>
+									</Tooltip>
+								</div>
+							</button>
+						);
+					})}
+				</div>
 			</div>
 			{!docType ? (
 				<div className={styles.empty}>

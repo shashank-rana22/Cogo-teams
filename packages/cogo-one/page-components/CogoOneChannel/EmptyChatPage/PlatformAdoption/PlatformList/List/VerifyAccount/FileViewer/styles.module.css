@@ -1,13 +1,6 @@
 .viewer {
 	width: 58%;
 	border-radius: 4px;
-
-	:global {
-		.ui_select_container {
-			width: 40%;
-			margin-bottom: 18px;
-		}
-	}
 }
 
 .full_screen {
@@ -19,18 +12,6 @@
 	display: flex;
 	width: calc(100% - 30px);
 	margin-bottom: 18px;
-
-	:global {
-		.ui_chips_container {
-			flex-wrap: wrap;
-			padding: 6px;
-			overflow: auto;
-
-			&::-webkit-scrollbar {
-				display: none;
-			}
-		}
-	}
 }
 
 .wrap {
@@ -50,4 +31,69 @@
 	justify-content: center;
 	width: 100%;
 	height: calc(100% - 90px);
+}
+
+.ui_chip_container {
+	min-width: 96px;
+	max-width: 200px;
+	height: 22px;
+	padding: 3px 8px;
+	overflow: hidden;
+	font-size: 12px;
+	color: var(--color-secondary-greyscale-2);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	background: var(--color-secondary-5);
+	border: 1px solid var(--color-secondary-greyscale-5);
+	border-radius: 4px;
+	transition: color 0.1s linear, background-color 0.1s linear, border-color 0.1s linear;
+	will-change: color, background-color, border-color;
+
+	&:hover {
+		cursor: pointer;
+		background-color: var(--color-tertiary-blue-5);
+		border: 1px solid var(--color-tertiary-blue-4);
+	}
+}
+
+.chips_container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	padding: 6px;
+	overflow: auto;
+}
+
+.active_chip {
+	display: flex;
+	font-weight: 500;
+	color: var(--color-secondary-greyscale-2);
+	background: var(--color-tertiary-blue-4);
+	border: 1px solid var(--color-tertiary-blue-3);
+
+	&:hover {
+		background-color: var(--color-tertiary-blue-2);
+		border: 1px solid var(--color-tertiary-blue-4);
+	}
+}
+
+.select {
+	padding-right: 4px;
+
+	svg {
+		display: block;
+		width: 16px;
+		height: 16px;
+	}
+}
+
+.children {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.all_children {
+	overflow: hidden;
+	text-overflow: ellipsis;
 }

@@ -40,6 +40,7 @@ function VerifyAccount({
 
 	const handleClose = () => {
 		setSelectDoc({ docType: null, docUrl: null });
+		setChecked(false);
 		setVerifyAccount({ show: false, accountData: [], showAccountDetails: false });
 	};
 

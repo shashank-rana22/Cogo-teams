@@ -18,7 +18,7 @@ function OrganicCustomer({ list = [], setScheduleDemo = () => {}, handlePlaceCal
 			id: pocId = '',
 		} = customer || {};
 		const {
-			account_type = '', tags = [], city = {},
+			account_type = '', tags = [], city = {}, id: orgId = '',
 			preferred_languages = [], business_name = '', demo_requested = false,
 		} = organization || {};
 		const { display_name = '' } = city || {};
@@ -87,11 +87,13 @@ function OrganicCustomer({ list = [], setScheduleDemo = () => {}, handlePlaceCal
 							role="presentation"
 							className={styles.call_icon}
 							onClick={() => handlePlaceCall({
-								userName   : name,
-								code       : mobile_country_code,
-								number     : mobile_number,
+								userName     : name,
+								code         : mobile_country_code,
+								number       : mobile_number,
 								pocId,
-								leadUserId : lead_user_id,
+								leadUserId   : lead_user_id,
+								orgId,
+								isUnkownUser : true,
 							})}
 						>
 							<IcMCall width={18} height={18} fill="#fff" />
