@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import Header from './Header';
+import SmeComponents from './SmeComponents';
 import styles from './styles.module.css';
 
 function SmeDashboard() {
@@ -12,6 +13,7 @@ function SmeDashboard() {
 				setFilterParams={setFilterParams}
 				filterParams={filterParams}
 			/>
+			<SmeComponents />
 		</div>
 	);
 }
