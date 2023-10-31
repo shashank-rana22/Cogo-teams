@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 const { CUSTOM } = DURATION_CONSTANTS;
 
 function DateFilter(props) {
-	const { duration = 'today', setDuration, dateRange, setDateRange, screen, width = '180px' } = props;
+	const { duration = 'today', setDuration, dateRange, setDateRange, screen = 'overall', width = '180px' } = props;
 	return (
 		<div className={cl`${styles.container} ${screen === 'comparison' && styles.container_header}`}>
 			<Select

@@ -21,18 +21,16 @@ function Body(props) {
 				setDateRange={setDateRange}
 			/>
 
-			{screen === 'overall'
-
-				? <RightPanel view={view} updatedAt={updatedAt} /> : (
-					<LeftPanel
-						screen={screen}
-						view={view}
-						dateRange={dateRange}
-						updatedAt={updatedAt}
-						setUpdatedAt={setUpdatedAt}
-						location="gurgaon"
-					/>
-				)}
+			{screen === 'overall' ? <RightPanel view={view} updatedAt={updatedAt} /> : (
+				<LeftPanel
+					screen={screen}
+					view={view}
+					dateRange={dateRange}
+					updatedAt={updatedAt}
+					setUpdatedAt={setUpdatedAt}
+					location="gurgaon"
+				/>
+			)}
 		</div>
 	);
 }

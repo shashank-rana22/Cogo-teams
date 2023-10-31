@@ -67,6 +67,7 @@ function LeftPanel(props) {
 			{isEmpty(tableList) ? <p className={styles.empty_list}>No more standings...</p>
 				: (
 					<List
+						screen={screen}
 						tableList={tableList}
 						view={view}
 						totalReportCount={totalReportCount}

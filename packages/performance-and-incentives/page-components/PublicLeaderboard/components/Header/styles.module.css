@@ -41,16 +41,6 @@
 	margin-left: auto;
 }
 
-.period_selector {
-	width: 220px;
-
-	:global {
-		.ui_select_option_item span {
-			width: 100%;
-		}
-	}
-}
-
 .last_updated_at {
 	margin-top: 8px;
 	font-size: 12px;
@@ -68,7 +58,7 @@
 }
 
 .user_selector {
-	width: 100px;
+	width: 120px;
 
 	:global {
 		.ui_select_option_item span {

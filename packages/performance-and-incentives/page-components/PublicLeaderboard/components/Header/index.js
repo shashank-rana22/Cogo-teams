@@ -49,7 +49,7 @@ function Header(props) {
 					value={view}
 					onChange={(selectedView) => setView(selectedView)}
 					options={USER_OPTIONS}
-					className={styles.period_selector}
+					className={styles.user_selector}
 				/>
 
 				<div>

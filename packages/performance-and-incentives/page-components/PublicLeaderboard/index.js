@@ -9,7 +9,7 @@ import useCountDown from './hooks/useCountDown';
 import styles from './styles.module.css';
 
 function PublicDashboard() {
-	const [screen, setScreen] = useState('overall');
+	const [screen, setScreen] = useState('comparison');
 	const [view, setView] = useState('kam_wise');
 	const [updatedAt, setUpdatedAt] = useState('');
 	const [duration, setDuration] = useState('today');
