@@ -25,6 +25,7 @@ const getCheckoutPayload = ({
 						detail,
 						service_name : 'haulage_freight',
 						tradeType    : service_name.includes('export') ? 'export' : 'import',
+						service      : service_name,
 					}),
 				}
 				: {
@@ -52,6 +53,7 @@ const getCheckoutPayload = ({
 						detail,
 						service_name : 'haulage_freight',
 						tradeType    : service_name.includes('export') ? 'export' : 'import',
+						service      : service_name,
 					}),
 				}
 				: {

@@ -22,8 +22,8 @@
 	border-right: 2px solid red;
 }
 
-.orgnization_name {
-	width: 150px;
+.organization_name {
+	width: 160px;
 	overflow: hidden;
 	font-weight: 600;
 	text-overflow: ellipsis;
