@@ -21,52 +21,49 @@ function Header(props) {
 
 	return (
 		<div className={styles.container}>
-			<div>
-				<h2 className={styles.heading}>Leaderboard</h2>
 
-				<div className={styles.sub_container}>
-					<p className={styles.sub_heading}>
-						for
+			<div className={styles.sub_container}>
+				<h2 className={styles.heading}>Leaderboards</h2>
+				<p className={styles.sub_heading}>
+					for
+					{' '}
+					<i>
+						<b>{TEXT_MAPPING[view]}</b>
+
 						{' '}
-						<i>
-							<b>{TEXT_MAPPING[view]}</b>
+						(
+						{view === 'kam_wise' ? 'Individual Contribution' : 'Team Contributions'}
+						)
 
-							{' '}
-							(
-							{view === 'kam_wise' ? 'Individual Contribution' : 'Team Contributions'}
-							)
+					</i>
+				</p>
 
-						</i>
-					</p>
-
-					<Select
-						value={duration}
-						onChange={(selectedDuration) => onChangeDuration({
-							selectedDuration,
-							setDateRange,
-							setDuration,
-						})}
-						options={DURATION_OPTIONS}
-						className={styles.period_selector}
-					/>
-
-					{duration === CUSTOM && (
-						<DateRangepicker
-							onChange={setDateRange}
-							value={dateRange}
-							maxDate={new Date()}
-							isPreviousDaysAllowed
-						/>
-					)}
-				</div>
 			</div>
 
 			<div className={styles.end_side}>
+				{duration === CUSTOM && (
+					<DateRangepicker
+						onChange={setDateRange}
+						value={dateRange}
+						maxDate={new Date()}
+						isPreviousDaysAllowed
+					/>
+				)}
+				<Select
+					value={duration}
+					onChange={(selectedDuration) => onChangeDuration({
+						selectedDuration,
+						setDateRange,
+						setDuration,
+					})}
+					options={DURATION_OPTIONS}
+					className={styles.period_selector}
+				/>
 				<Select
 					value={view}
 					onChange={(selectedView) => setView(selectedView)}
 					options={USER_OPTIONS}
-					className={styles.user_selector}
+					className={styles.period_selector}
 				/>
 
 				<div>
