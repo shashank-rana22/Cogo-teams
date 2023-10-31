@@ -36,7 +36,7 @@ function RequestContract({
 	const controls = createContracts({ isMobile, minCargoValues });
 
 	const {
-		loadingConfigConsants = false,
+		loading:loadingConfigConstants = false,
 		getPlatformConfigConstant = () => {},
 	} = useGetPlatformConfigConstant({ setMinCargoValues });
 
@@ -106,7 +106,7 @@ function RequestContract({
 						const Element = getElementController(type || 'text');
 						if (!Element) return null;
 
-						const errorOriginal = getErrorMessage({
+						const errorMessage = getErrorMessage({
 							error : errors?.[newControl.name],
 							rules : newControl?.rules,
 							label : newControl?.label,
@@ -146,7 +146,7 @@ function RequestContract({
 
 								{errors[name] && (
 									<div className={styles.error_message}>
-										{errorOriginal}
+										{errorMessage}
 									</div>
 								)}
 							</div>
@@ -170,7 +170,7 @@ function RequestContract({
 						themeType="accent"
 						onClick={handleSubmit(onSubmit)}
 						loading={loading}
-						disabled={loading || loadingConfigConsants}
+						disabled={loading || loadingConfigConstants}
 					>
 						Next
 					</Button>

@@ -15,7 +15,7 @@ function Submitted({ detail = {}, contractData = {}, isMobile = false }) {
 
 	const { max_containers_count = 0, max_weight = 0 } = contractData;
 
-	const { container_type, container_size, commodity = '', volume, weight, search_type = '' } = detail;
+	const { container_type, container_size, commodity = '', volume, weight } = detail;
 
 	const { origin, destination } = getLocationInfo(detail, 'search_type');
 
@@ -69,7 +69,7 @@ function Submitted({ detail = {}, contractData = {}, isMobile = false }) {
 					</div>
 
 					<div className={styles.right_section}>
-						{search_type === 'fcl_freight' ? (
+						{max_containers_count ? (
 							<div className={styles.requested_amount}>
 								Count:
 								{' '}
@@ -77,7 +77,7 @@ function Submitted({ detail = {}, contractData = {}, isMobile = false }) {
 							</div>
 						) : null}
 
-						{search_type === 'air_freight' ? (
+						{max_weight ? (
 							<div className={styles.requested_amount}>
 								Weight:
 								{' '}
