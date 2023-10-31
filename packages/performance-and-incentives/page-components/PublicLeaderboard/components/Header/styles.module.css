@@ -24,6 +24,8 @@
 	width: 20px;
 	height: 20px;
 	margin-bottom: 4px;
+	transition: transform 1s;
+	transform: rotate(0deg);
 
 	@media (min-width: 2560px) {
 		width: 40px;
@@ -31,6 +33,10 @@
 		margin-right: 10px;
 		margin-bottom: 16px;
 	}
+}
+
+.swicth_icon_active {
+	transform: rotate(360deg);
 }
 
 .sub_container {

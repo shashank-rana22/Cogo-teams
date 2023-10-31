@@ -1,4 +1,4 @@
-import { Select } from '@cogoport/components';
+import { Select, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMRefresh } from '@cogoport/icons-react';
@@ -26,7 +26,9 @@ function Header(props) {
 					onClick={switchScreen}
 					role="presentation"
 				>
-					<IcMRefresh className={styles.swicth_icon} />
+					<IcMRefresh
+						className={cl`${styles.swicth_icon} ${screen === 'overall' && styles.swicth_icon_active}`}
+					/>
 					<Counter
 						reloadCounter={reloadCounter}
 						nextReloadAt={nextReloadAt}
