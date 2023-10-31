@@ -3,6 +3,7 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import LoadingState from '../../../../../common/LoadingState';
+import DateFilter from '../../../common/DateFilter';
 import List from '../../../common/List';
 import useGetLeaderbordList from '../../../hooks/useGetLeaderbordList';
 
@@ -16,6 +17,9 @@ function LeftPanel(props) {
 		view = '',
 		dateRange = {},
 		setUpdatedAt = () => {},
+		duration = 'today',
+		setDuration = () => {},
+		setDateRange = () => {},
 	} = props;
 
 	const { list, loading, total_report_count: totalReportCount } = useGetLeaderbordList({
@@ -48,7 +52,15 @@ function LeftPanel(props) {
 	return (
 		<div className={styles.container}>
 
-			{screen === 'comparison' ? <LocationStats /> : null }
+			{screen === 'comparison' ? <LocationStats />
+				: (
+					<DateFilter
+						dateRange={dateRange}
+						duration={duration}
+						setDuration={setDuration}
+						setDateRange={setDateRange}
+					/>
+				) }
 
 			<TopUsers topList={topList} view={view} />
 

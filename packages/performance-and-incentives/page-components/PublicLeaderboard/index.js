@@ -9,9 +9,10 @@ import useCountDown from './hooks/useCountDown';
 import styles from './styles.module.css';
 
 function PublicDashboard() {
-	const [screen, setScreen] = useState('comparison');
+	const [screen, setScreen] = useState('overall');
 	const [view, setView] = useState('kam_wise');
 	const [updatedAt, setUpdatedAt] = useState('');
+	const [duration, setDuration] = useState('today');
 
 	const [dateRange, setDateRange] = useState({
 		startDate : getTodayStartDate(),
@@ -36,6 +37,8 @@ function PublicDashboard() {
 					setDateRange={setDateRange}
 					updatedAt={updatedAt}
 					countdown={countdown}
+					duration={duration}
+					setDuration={setDuration}
 				/>
 
 				<Body
@@ -44,6 +47,9 @@ function PublicDashboard() {
 					dateRange={dateRange}
 					updatedAt={updatedAt}
 					setUpdatedAt={setUpdatedAt}
+					setDateRange={setDateRange}
+					duration={duration}
+					setDuration={setDuration}
 				/>
 			</div>
 		</PublicLeaderBoardContext.Provider>

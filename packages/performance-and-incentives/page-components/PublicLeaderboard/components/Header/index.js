@@ -1,23 +1,18 @@
-import { Select, DateRangepicker } from '@cogoport/components';
+import { Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { useState } from 'react';
 
-import DURATION_CONSTANTS from '../../../../constants/duration-constants';
-import DURATION_OPTIONS from '../../../Leaderboard/configurations/get-duration-filter-options';
+import DateFilter from '../../common/DateFilter';
 import USER_OPTIONS from '../../configurations/get-user-filter-options';
 import TEXT_MAPPING from '../../configurations/header-text-mapping';
-import onChangeDuration from '../../utils/changeDuration';
 
 import CountDownTimer from './CountDownTimer';
 import styles from './styles.module.css';
 
-const { CUSTOM } = DURATION_CONSTANTS;
-
 function Header(props) {
-	const { view, setView, dateRange, setDateRange, updatedAt, countdown } = props;
-
-	const [duration, setDuration] = useState('today');
+	const {
+		screen, view, setView, dateRange, setDateRange, updatedAt, countdown, duration, setDuration,
+	} = props;
 
 	return (
 		<div className={styles.container}>
@@ -41,24 +36,15 @@ function Header(props) {
 			</div>
 
 			<div className={styles.end_side}>
-				{duration === CUSTOM && (
-					<DateRangepicker
-						onChange={setDateRange}
-						value={dateRange}
-						maxDate={new Date()}
-						isPreviousDaysAllowed
+				{screen === 'comparison' ? (
+					<DateFilter
+						screen={screen}
+						dateRange={dateRange}
+						duration={duration}
+						setDuration={setDuration}
+						setDateRange={setDateRange}
 					/>
-				)}
-				<Select
-					value={duration}
-					onChange={(selectedDuration) => onChangeDuration({
-						selectedDuration,
-						setDateRange,
-						setDuration,
-					})}
-					options={DURATION_OPTIONS}
-					className={styles.period_selector}
-				/>
+				) : null}
 				<Select
 					value={view}
 					onChange={(selectedView) => setView(selectedView)}

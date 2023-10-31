@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 function Body(props) {
 	const {
-		screen, view, dateRange, updatedAt, setUpdatedAt,
+		screen, view, dateRange, updatedAt, setUpdatedAt, setDateRange, duration, setDuration,
 	} = props;
 
 	return (
@@ -16,6 +16,9 @@ function Body(props) {
 				updatedAt={updatedAt}
 				setUpdatedAt={setUpdatedAt}
 				location={screen === 'comparison' ? 'mumbai' : null}
+				duration={duration}
+				setDuration={setDuration}
+				setDateRange={setDateRange}
 			/>
 
 			{screen === 'overall'
