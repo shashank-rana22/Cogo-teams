@@ -124,13 +124,13 @@ function RaiseTicketsForm({
 				const checkUserId = name === 'user_id' && isEmpty(watchOrgId);
 				const checkServiceType = name === 'service_type' && (isEmpty(watchIdType) || watchIdType === 'sid');
 				const checkService = name === 'service' && watchRequestType !== 'shipment' && watchIdType !== 'sid'
-				&& watchPlatformCategory !== 'shipment';
+				&& watchPlatformCategory !== 'Shipment Bookings';
 
 				const checkPlatforSid = name === 'serial_id' && !['shipment', 'rate']?.includes(watchRequestType)
-				&& (!watchPlatformCategory || watchPlatformCategory !== 'shipment');
+				&& (!watchPlatformCategory || watchPlatformCategory !== 'Shipment Bookings');
 
 				const checkPlatforTrade = name === 'trade_type' && !['shipment', 'rate']?.includes(watchRequestType)
-				&& (!watchPlatformCategory || watchPlatformCategory !== 'shipment');
+				&& (!watchPlatformCategory || watchPlatformCategory !== 'Shipment Bookings');
 
 				if (checkServiceType || checkService || checkUserId || checkPlatforSid || checkPlatforTrade) {
 					return null;
