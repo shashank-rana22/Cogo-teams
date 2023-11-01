@@ -55,6 +55,16 @@ function BulkJvUpload({ showBulkJV = false, setShowBulkJV = () => {} }) {
 							Download Error Document
 						</Button>
 					) : null}
+					{uploadData?.data?.successFileUrl ? (
+						<Button
+							size="md"
+							themeType="linkUi"
+							onClick={() => window.open(uploadData?.data?.successFileUrl, '_self')}
+							style={{ color: '#008000' }}
+						>
+							Download Success File Document
+						</Button>
+					) : null}
 					<div className={cl`${styles.upload_button} ${styles.download_container}`}>
 						<p className={styles.sample_text}>Sample</p>
 						<IcMDownload

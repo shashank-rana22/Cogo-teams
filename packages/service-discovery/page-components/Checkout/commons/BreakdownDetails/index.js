@@ -15,7 +15,7 @@ import EditLineItemModal from './components/EditLineItemModal';
 import Header from './components/Header';
 import LandingCost from './components/LandingCost';
 import ServiceBreakup from './components/ServiceBreakup';
-import renderServiceType from './renderServiceType';
+import RenderServiceType from './renderServiceType';
 import styles from './styles.module.css';
 import useHandleBreakdownDetails from './useHandleBreakdownDetails';
 
@@ -133,7 +133,7 @@ function BreakdownDetails({
 							<div className={styles.service_container}>
 								<div className={styles.service_details}>
 									<div className={styles.service_name}>
-										{renderServiceType(item, service_details)}
+										<RenderServiceType item={item} service_details={service_details} />
 									</div>
 
 									<ContainerDetails
