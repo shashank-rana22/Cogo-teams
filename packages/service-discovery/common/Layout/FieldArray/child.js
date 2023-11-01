@@ -41,11 +41,20 @@ function Child({
 	isSubControl = false,
 	fieldArrayValues = {},
 	data = {},
+	childLabel = '',
 }) {
 	return (
 		<div className={styles.form_container}>
+			{!isSubControl && childLabel ? (
+				<h3 className={styles.child_label}>
+					{childLabel}
+					{' '}
+					{index + 1}
+				</h3>
+			) : null}
+
 			<div className={styles.content}>
-				{controls.map((controlItem) => {
+				{controls.map((controlItem, childIndex) => {
 					let newControl = { ...controlItem };
 
 					const {
@@ -58,14 +67,19 @@ function Child({
 						controls: subControls,
 					} = newControl;
 
-					const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENTAGE_FACTOR - FLEX_OFFSET;
+					let flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENTAGE_FACTOR - FLEX_OFFSET;
+					flex = `${flex}%`;
+
+					if (childIndex === controls.length - 1 && !isSubControl) {
+						flex = `calc(${flex} - 50px)`;
+					}
 
 					if (subControls) {
 						return (
 							<div
 								key={name}
 								className={cl`${styles.form_item} ${isSubControl && styles.sub_control}`}
-								style={{ width: `${flex}%`, marginBottom: '12px' }}
+								style={{ width: flex, marginBottom: '12px' }}
 							>
 								{newControl?.showTopLabelOnly ? (
 									<div className={styles.heading}>
@@ -91,6 +105,7 @@ function Child({
 									showLabelOnce={showLabelOnce}
 									setValue={setValue}
 									isSubControl
+									childLabel={childLabel}
 								/>
 							</div>
 						);
@@ -131,7 +146,7 @@ function Child({
 					return (
 						<div
 							className={styles.form_item}
-							style={{ width: `${flex}%`, marginBottom: isSubControl ? '12px' : '24px' }}
+							style={{ width: flex, marginBottom: isSubControl ? '12px' : '24px' }}
 							key={`create_form_${newControl.name}_${index}`}
 						>
 							{(showLabelOnce && !index && !isSubControl)
@@ -171,21 +186,20 @@ function Child({
 						</div>
 					);
 				})}
-			</div>
 
-			{length >= MIN_ELEMENTS_TO_SHOW_DELETE && !disabled && !isSubControl ? (
-				<div className={styles.remove_button}>
-					<Button
-						size="md"
-						type="button"
-						themeType="tertiary"
-						onClick={() => remove(index, FIRST_INDEX)}
-					>
-						<IcMDelete className={styles.remove_icon} />
-						Delete
-					</Button>
-				</div>
-			) : null}
+				{length >= MIN_ELEMENTS_TO_SHOW_DELETE && !disabled && !isSubControl ? (
+					<div className={styles.remove_button}>
+						<Button
+							size="md"
+							type="button"
+							themeType="tertiary"
+							onClick={() => remove(index, FIRST_INDEX)}
+						>
+							<IcMDelete className={styles.remove_icon} />
+						</Button>
+					</div>
+				) : null}
+			</div>
 		</div>
 	);
 }

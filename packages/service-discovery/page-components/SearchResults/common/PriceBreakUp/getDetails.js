@@ -21,9 +21,18 @@ const getDetails = ({ item, service = '' }) => {
 		: container_size} ${startCase(container_type)} ${startCase(commodity)}`];
 
 	const commonPackageDetails = [
-		`${packages_count} Pkgs, ${volume} CBM Vol., ${weight} KG WT.`,
+		(volume || weight) && `${volume} CBM, ${weight} KG`,
+		packages_count && `${packages_count} Package${packages_count > 1 ? 's' : ''}`,
 		COMMODITY_NAME_MAPPING[commodity]?.name || startCase(commodity),
-	];
+	].filter(Boolean);
+
+	const commonFTLDetails = [
+		(volume || weight) && (volume && `${volume} CBM`, weight && `, ${weight} Tons`),
+		packages_count && `${packages_count} Package${packages_count > 1 ? 's' : ''}`,
+		trucks_count && `${trucks_count} truck`,
+		truck_type && `${startCase(truck_type)}`,
+		commodity && (COMMODITY_NAME_MAPPING[commodity]?.name || startCase(commodity)),
+	].filter(Boolean);
 
 	const SUBSIDIARY_CONTENT_MAPPING = {
 		fcl_freight       : commonContainerDetails,
@@ -33,6 +42,7 @@ const getDetails = ({ item, service = '' }) => {
 		air_freight       : commonPackageDetails,
 		air_freight_local : commonPackageDetails,
 		air_customs       : commonPackageDetails,
+		ftl_freight       : commonFTLDetails,
 	};
 
 	const MAPPING = {
@@ -52,11 +62,7 @@ const getDetails = ({ item, service = '' }) => {
 			`${container_size} FT`,
 			`${cargo_weight_per_container}MT`,
 		],
-		ftl_freight: [
-			`${trucks_count} truck`,
-			`${startCase(truck_type)}`,
-			`${commodity || 'General'}`,
-		],
+		ftl_freight : commonFTLDetails,
 		ltl_freight : [`${volume} cc`, `${weight} kg`, `${COMMODITY_NAME_MAPPING[commodity]?.name}`],
 		fcl_customs : commonContainerDetails,
 		fcl_cfs     : commonContainerDetails,

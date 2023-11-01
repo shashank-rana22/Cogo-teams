@@ -36,7 +36,7 @@ function ProceedButton({
 		<Button
 			onClick={handleSelectButtonClick}
 			size="md"
-			themeType="accent"
+			themeType={isSelectedCard ? 'secondary' : 'accent'}
 			className={styles.button}
 		>
 			{isSelectedCard ? 'Select Another' : `Select For ${formattedAmount}` }

@@ -58,7 +58,7 @@ function Buttons({
 			<Button
 				onClick={handleSelectButtonClick}
 				size="md"
-				themeType="accent"
+				themeType={isSelectedCard ? 'secondary' : 'accent'}
 				className={styles.primary_button}
 			>
 				{isSelectedCard ? 'Select Another' : `Select For ${formattedAmount}` }

@@ -60,7 +60,7 @@ function QuotationDetails({
 			<Button
 				onClick={handleSelectButtonClick}
 				size="md"
-				themeType="accent"
+				themeType={isSelectedCard ? 'secondary' : 'accent'}
 				className={styles.primary_button}
 			>
 				{!isSelectedCard ? `Select For ${formattedAmount}` : 'Select Another'}

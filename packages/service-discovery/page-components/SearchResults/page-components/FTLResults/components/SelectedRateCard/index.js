@@ -35,7 +35,7 @@ function SelectedRateCard({
 	});
 
 	if (loading && isEmpty(data)) {
-		return <LoadingState isMobile={isMobile} />;
+		return <LoadingState isMobile={isMobile} service="ftl_freight" />;
 	}
 
 	return (

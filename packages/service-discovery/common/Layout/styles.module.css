@@ -57,6 +57,11 @@
 			}
 		}
 
+		.ui_chip_container.ui_ps_size_sm {
+			min-width: 86px;
+			max-width: 160px;
+		}
+
 		.ui_select_input_control {
 			font-size: 12px !important;
 		}

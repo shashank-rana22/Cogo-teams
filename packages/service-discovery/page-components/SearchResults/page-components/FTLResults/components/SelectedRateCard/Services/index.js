@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Bundles from '../../../../../common/Bundles';
-
 import OtherServices from './OtherServices';
 import styles from './styles.module.css';
 
@@ -16,8 +14,6 @@ function Services({
 }) {
 	return (
 		<div className={styles.container}>
-			<Bundles />
-
 			<OtherServices
 				rateCardData={rateCardData}
 				detail={detail}

@@ -154,7 +154,7 @@ function AddTouchPointModal({
 
 							{value?.error ? (
 								<div className={cl`${styles.error_message} ${styles.default}`}>
-									Touchpoint must be different from origin and destination!!
+									Touchpoint must be different from origin and destination
 								</div>
 							) : null}
 						</div>

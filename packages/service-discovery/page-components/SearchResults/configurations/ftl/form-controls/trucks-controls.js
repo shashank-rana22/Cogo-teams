@@ -41,7 +41,7 @@ const getTrucksControls = ({ setValue = () => {} }) => {
 					name        : 'truck_type',
 					label       : 'Select Truck',
 					type        : 'select',
-					span        : 8,
+					span        : 7,
 					placeholder : 'Select truck',
 					rules       : { required: 'Truck Type is required' },
 
@@ -51,7 +51,7 @@ const getTrucksControls = ({ setValue = () => {} }) => {
 					label       : 'Truck Count',
 					placeholder : 'Enter count',
 					type        : 'input',
-					span        : 4,
+					span        : 5,
 					rules       : { required: true, validate: (val) => validate(val), min: 0 },
 				},
 			],

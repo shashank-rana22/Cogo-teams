@@ -6,6 +6,7 @@ const fclControls = ({ setValue = () => {} }) => {
 			name               : 'container',
 			type               : 'field-array',
 			buttonText         : 'Add Another Container',
+			childLabel         : 'Container',
 			noDeleteButtonTill : 1,
 			controls           : [
 				{

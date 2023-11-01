@@ -13,11 +13,13 @@ const getPerPackageControls = ({ formValues = {}, setValue = () => {} }) => {
 			type               : 'fieldArray',
 			buttonText         : 'Add More Packages',
 			noDeleteButtonTill : 1,
+			childLabel         : 'Package',
 			controls           : [
 				{
 					name    : 'packing_type',
 					type    : 'chips',
 					label   : 'Package Type',
+					size    : 'sm',
 					options : [
 						{
 							label : 'Pallet',

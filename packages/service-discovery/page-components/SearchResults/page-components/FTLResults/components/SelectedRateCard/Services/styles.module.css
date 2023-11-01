@@ -1,7 +1,11 @@
 .container {
 	display: flex;
 	justify-content: space-between;
-	padding: 20px 0;
+	padding: 20px;
+	margin-top: 32px;
+	background-color: #fdf3e9;
+	filter: drop-shadow(0 0 5px #edd7a9);
+	border-radius: 6px;
 
 	@media (max-width: 768px) {
 		flex-direction: column-reverse;

@@ -1,12 +1,5 @@
 .container {
-	width: 70%;
-
-	@media (max-width: 1080px) {
-		width: 65%;
-	}
-	@media (max-width: 768px) {
-		width: 100%;
-	}
+	width: 100%;
 }
 
 .subsidiary_services {

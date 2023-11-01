@@ -59,7 +59,7 @@ function FormModal({
 				</div>
 			) : null}
 
-			<div className={styles.form}>
+			<div style={{ paddingTop: activeTab === 'cargo' ? 12 : 24 }}>
 				<Layout
 					controls={controls}
 					control={control}
