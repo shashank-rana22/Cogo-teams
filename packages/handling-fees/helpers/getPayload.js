@@ -41,7 +41,7 @@ const getPayload = ({ values = {}, isUpdatable = false, activeService, handling_
 				organization_sub_type:
 				values?.organization_sub_type || undefined,
 				performed_by : values?.performed_by || undefined,
-				rate_type    : values?.rate_source || undefined,
+				rate_type    : values?.rate_type || undefined,
 			}),
 	};
 
