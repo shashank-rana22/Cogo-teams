@@ -25,7 +25,7 @@ function LeaderBoard(props) {
 				<Image
 					src={GLOBAL_CONSTANTS.image_url.empty_customer_card}
 					width={350}
-					height={400}
+					height={200}
 					alt="Empty List"
 					className={styles.empty_img}
 				/>
