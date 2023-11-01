@@ -264,6 +264,28 @@ const GLOBAL_CONSTANTS = {
 		'August', 'September', 'October', 'November', 'December'],
 
 	image_url: {
+		DARK_BG          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dark_bg.png',
+		TICK_ICON     			: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Ok.svg',
+		ADD_TO_CART    		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/AddCart',
+		SYNCHRONIZE_CART	: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Synchronize.svg',
+		COUPON_ICON    		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/percentageCoupon.svg',
+
+		ARROW_RIGHT_TOP       		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/arrow-top-right.svg',
+		ORDERS_PLACED         		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Subtract_icon.svg',
+		TRUCK                 		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/truck_blue.svg',
+		HOURGLASS             		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hourglass.svg',
+		NOTE_BLUE             		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/note_blue.svg',
+		PROFIT                		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Profit.svg',
+		CART                  		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Cart.svg',
+		JACKET                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Cogo_Jacket.png',
+		laptop_bag              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Laptop_bag.png',
+		COGO_ICON               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_name.svg',
+		COPYRIGHT_ICON          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/copyright.svg',
+		cogo_shoes              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Cogo_Shoes.png',
+		spring_collection       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/collection.png',
+		cart                    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Cart.svg',
+		led                     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/LED.png',
+		check_circle            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/CheckCircle.svg',
 		ship_icon               : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipIcon.jpg',
 		truck_icon              : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/truckIcon.png',
 		air_icon2               : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/airplane.png',
@@ -496,7 +518,8 @@ const GLOBAL_CONSTANTS = {
 		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
 		public_leaderboard_ranking_badge:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/performance-leaderboard.svg',
-		secure_now: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/secureNow.png',
+		public_leaderboard_winner_icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/winner_icon.svg',
+		secure_now                     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/secureNow.png',
 		airline_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png',
 		wider_arrow: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/wide-arrow',
@@ -924,6 +947,10 @@ const GLOBAL_CONSTANTS = {
 	default_preferred_language : 'english',
 	supplier_entity_mapping    : supplierEntityMapping.shippingCompanies,
 	cogoport_care_user_id      : '413eb04c-037b-44cd-b68c-ce4fc277c156',
+	office_location_ids        : {
+		gurgaon : '9cf87c31-f991-4351-976d-3abd7eff374d',
+		mumbai  : '48a489eb-76d3-419a-bffc-dac6715056d3',
+	},
 };
 
 export default GLOBAL_CONSTANTS;
