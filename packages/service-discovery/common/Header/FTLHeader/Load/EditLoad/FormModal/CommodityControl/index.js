@@ -92,7 +92,13 @@ const DEFAULT_VALUE = {
 	special_consideration : 'gases-2.1',
 };
 
-function CommodityControl({ control = () => {}, errors = {}, commodity_type = '', loadType = '' }) {
+function CommodityControl({
+	control = () => {},
+	errors = {},
+	commodity_type = '',
+	loadType = '',
+	setValue = () => {},
+}) {
 	const [activeCommodityType, setActiveCommodityType] = useState(commodity_type || 'general_cargo');
 
 	const COMMODITY_CONTROL = useMemo(() => [{
@@ -116,7 +122,10 @@ function CommodityControl({ control = () => {}, errors = {}, commodity_type = ''
 				<Tabs
 					activeTab={activeCommodityType}
 					themeType="tertiary"
-					onChange={setActiveCommodityType}
+					onChange={(val) => {
+						setActiveCommodityType(val);
+						setValue('commodity', '');
+					}}
 				>
 					<TabPanel name="general_cargo" title="General Cargo" />
 
