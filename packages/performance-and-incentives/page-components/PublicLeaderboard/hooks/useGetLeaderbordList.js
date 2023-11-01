@@ -2,10 +2,20 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
+import getRankFromScore from '../configurations/getRankFromScore';
 import PublicLeaderBoardContext from '../context/PublicLeaderBoardContext';
 
 function useGetLeaderbordList(props) {
-	const { view, dateRange, pageLimit, setUpdatedAt = () => {} } = props;
+	const {
+		view,
+		dateRange,
+		pageLimit,
+		setUpdatedAt = () => {},
+		office_location_id = null,
+		score = {},
+		setScore = () => {},
+		setNextReloadAt = () => {},
+	} = props;
 
 	const { countdown } = useContext(PublicLeaderBoardContext);
 
@@ -29,26 +39,44 @@ function useGetLeaderbordList(props) {
 		params,
 	}, { manual: false });
 
-	const { list = [], total_report_count = 0, report_synced_at = '' } = data || {};
+	const {
+		list = [],
+		total_report_count = 0,
+		report_synced_at = '',
+		reload_duration = '',
+		additional_stats = {},
+	} = data || {};
 
 	useEffect(() => {
 		setParams((previousParams) => ({
 			...previousParams,
-			add_user_kam_report_data : ['owner_wise', 'manager_wise'].includes(view),
-			filters                  : {
+			add_user_kam_report_data  : ['owner_wise', 'manager_wise'].includes(view),
+			additional_stats_required : !!office_location_id,
+			filters                   : {
 				...(previousParams.filters || {}),
 				report_view_type : view || undefined,
 				report_type      : ['owner_wise', 'manager_wise', 'kam_wise'].includes(view)
 					? `${view.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]}_report` : undefined,
 				created_at_greater_than : dateRange?.startDate || undefined,
 				created_at_less_than    : dateRange?.endDate || undefined,
+				office_location_id      : office_location_id || undefined,
 			},
 		}));
-	}, [view, dateRange]);
+	}, [view, dateRange, office_location_id]);
+
+	const rankData = getRankFromScore({ score });
 
 	useEffect(() => {
 		setUpdatedAt(report_synced_at);
-	}, [report_synced_at, setUpdatedAt]);
+		setNextReloadAt(reload_duration);
+		if (office_location_id) setScore((p) => ({ ...p, [office_location_id]: additional_stats?.total_score }));
+	}, [report_synced_at,
+		setUpdatedAt,
+		reload_duration,
+		setNextReloadAt,
+		additional_stats,
+		setScore,
+		office_location_id]);
 
 	useEffect(() => {
 		if (countdown === 0) {
@@ -61,6 +89,8 @@ function useGetLeaderbordList(props) {
 		loading,
 		trigger,
 		total_report_count,
+		additional_stats,
+		rank: rankData[office_location_id]?.rank || 2,
 	};
 }
 
