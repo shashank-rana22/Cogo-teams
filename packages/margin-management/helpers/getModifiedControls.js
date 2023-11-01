@@ -5,7 +5,7 @@ function getModifiedControls({ controls, formValues }) {
 		if (ctl.name === 'organization_sub_type') {
 			return {
 				...ctl,
-				options: ORGANIZATION_SUBTYPE_OPTIONS[formValues?.organization_type],
+				options: ORGANIZATION_SUBTYPE_OPTIONS?.[formValues?.organization_type] || [],
 			};
 		}
 		if (ctl.name === 'organization_id') {

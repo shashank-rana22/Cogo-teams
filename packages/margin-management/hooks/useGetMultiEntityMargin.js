@@ -12,10 +12,7 @@ import SERVICE_NAME_MAPPING from '../helpers/service-name-mapping';
 // 	value : val[item],
 // }));
 
-const options = Object.keys(SERVICE_NAME_MAPPING).map((key) => ({
-	label : SERVICE_NAME_MAPPING[key],
-	value : key,
-}));
+const options = Object.values(SERVICE_NAME_MAPPING);
 
 options.unshift({
 	label           : 'GLOBAL SETTING',
