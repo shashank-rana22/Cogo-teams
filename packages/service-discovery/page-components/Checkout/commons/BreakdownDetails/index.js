@@ -76,34 +76,34 @@ function BreakdownDetails({
 			/>
 
 			{rateDetails.map((item, index) => {
-				const { id = '', service_type = '' } = item || {};
+				const { id = '', service_type = '', line_items = [], tax_total_price_currency = '' } = item || {};
 
-				const fclLocalEmpty = !item?.line_items?.length
+				const fclLocalEmpty = !line_items?.length
 				&& [
 					'fcl_freight_local_service',
 					'fcl_freight_local',
 					'air_freight_local',
 				].includes(service_type);
 
-				const serviceEditedMargins = item?.line_items.map((lineItem) => lineItem.filteredMargins);
+				const serviceEditedMargins = line_items.map((lineItem) => lineItem.filteredMargins);
 
 				const totalDisplay = displayTotal(
-					item?.line_items || [],
+					line_items || [],
 					serviceEditedMargins,
 					conversions,
-					item?.tax_total_price_currency,
+					tax_total_price_currency,
 				);
 
 				total += convertCurrencyValue(
 					Number(totalDisplay.toFixed(ROUND_OFF_VALUE)),
-					item?.tax_total_price_currency,
+					tax_total_price_currency,
 					rate?.total_price_currency,
 					conversions,
 				);
 
 				let totalDisplayString = formatAmount({
 					amount   : totalDisplay,
-					currency : item.tax_total_price_currency,
+					currency : tax_total_price_currency,
 					options  : {
 						style                 : 'currency',
 						currencyDisplay       : 'code',
@@ -124,6 +124,8 @@ function BreakdownDetails({
 				}
 
 				const service_details = detail?.services?.[item?.id];
+
+				const addedLineItems = line_items.map(({ code }) => code);
 
 				return (
 					<Accordion
@@ -189,6 +191,7 @@ function BreakdownDetails({
 											service_type,
 											service_id : item?.id,
 											details    : detail.services[id] || {},
+											addedLineItems,
 										});
 									}}
 								>

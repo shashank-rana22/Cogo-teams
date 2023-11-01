@@ -18,7 +18,7 @@ function AddLineItemModal({
 }) {
 	const ref = useRef({});
 
-	const { service_type, service_id = '', details = {} } = addLineItemData || {};
+	const { service_type, service_id = '', details = {}, addedLineItems = [] } = addLineItemData || {};
 
 	const { CHARGE_CODE_DATA } = useListRateChargeCodes({ service_type });
 
@@ -61,6 +61,7 @@ function AddLineItemModal({
 					service_id={service_id}
 					ref={ref}
 					checkout_id={checkout_id}
+					addedLineItems={addedLineItems}
 				/>
 			</Modal.Body>
 

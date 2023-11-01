@@ -1,5 +1,6 @@
 import { Breadcrumb, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcCError, IcMArrowBack } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
@@ -36,6 +37,7 @@ function Checkout({ checkout_type = '' }) {
 		redirect_required,
 		isLoadingStateRequired = false,
 		setIsLoadingStateRequired = () => {},
+		error = {},
 	} = useCheckout({ query, partner_id, checkout_type });
 
 	if ((loading && isEmpty(data))) {
@@ -53,7 +55,7 @@ function Checkout({ checkout_type = '' }) {
 		|| (shipment_id && redirect_required === 'true')
 		|| (!tags.includes('version2') && redirect_required === 'true')
 	) {
-		const { url = '', message = '' } = getRedirectionDetails({
+		const { url = '', message = '', redirection = true, button_message = '' } = getRedirectionDetails({
 			isCheckoutApiSuccess,
 			partner_id,
 			tags,
@@ -61,13 +63,32 @@ function Checkout({ checkout_type = '' }) {
 			shipment_id,
 			redirect_required,
 			primary_service,
+			error,
 		});
 
-		window.location.replace(url);
+		if (redirection) {
+			window.location.replace(url);
+		}
 
 		return (
 			<div className={styles.spinner_container}>
-				<DotLoader />
+				{!redirection ? (
+					<div
+						role="presentation"
+						onClick={() => window.location.replace(url)}
+						className={styles.back_button}
+					>
+						<IcMArrowBack width={16} height={16} style={{ marginRight: '6px' }} />
+						{button_message}
+					</div>
+				) : null}
+
+				{redirection ? <DotLoader /> : (
+					<div className={styles.flex}>
+						<IcCError width={20} height={20} style={{ marginRight: '8px' }} />
+						Error
+					</div>
+				)}
 				<div className={styles.text}>{message}</div>
 			</div>
 		);

@@ -42,6 +42,7 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 		data = {},
 		loading,
 		getCheckout,
+		error = {},
 	} = useGetCheckout({ checkout_id, setIsLoadingStateRequired });
 
 	const {
@@ -313,6 +314,7 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 		redirect_required,
 		isLoadingStateRequired,
 		setIsLoadingStateRequired,
+		error,
 	};
 };
 
