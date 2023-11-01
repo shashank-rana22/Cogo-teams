@@ -1,4 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useContext } from 'react';
 
@@ -21,7 +23,12 @@ function Header({
 	} = invoiceData;
 
 	const { shipment_data } = useContext(ShipmentDetailContext) || {};
-	const showExchangeRate = !!shipment_data?.end_to_end_shipment?.is_possible;
+
+	const isAllowedEntity = ['701', '801'].includes(Object.values(ENTITY_MAPPING).filter(
+		(item) => item?.id === shipment_data?.entity_id,
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.code);
+
+	const showExchangeRate = !!shipment_data?.end_to_end_shipment?.is_possible && isAllowedEntity;
 
 	const refetch = () => {
 		bfInvoiceRefetch();
