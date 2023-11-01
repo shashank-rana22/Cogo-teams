@@ -9,19 +9,15 @@ function Services({
 	refetch = () => {},
 	loading = false,
 	possible_subsidiary_services = [],
-	createCheckoutLoading = false,
-	handleBook = () => {},
 }) {
 	return (
 		<div className={styles.container}>
 			<OtherServices
 				rateCardData={rateCardData}
 				detail={detail}
-				createCheckoutLoading={createCheckoutLoading}
 				refetch={refetch}
 				loading={loading}
 				possible_subsidiary_services={possible_subsidiary_services}
-				handleBook={handleBook}
 			/>
 		</div>
 	);

@@ -4,8 +4,8 @@ import React from 'react';
 import AdditionalServices from '../../../../../../../../common/OtherServices/AdditionalServices';
 import SubsidiaryServices from '../../../../../../../../common/OtherServices/SubsidiaryServices';
 
+import ProceedToCheckout from './ProceedToCheckout';
 import styles from './styles.module.css';
-import TotalLandedCost from './TotalLandedCost';
 
 function OtherServices({
 	rateCardData = {},
@@ -30,7 +30,7 @@ function OtherServices({
 				refetchLoading={loading}
 			/>
 
-			<TotalLandedCost
+			<ProceedToCheckout
 				rateCardData={rateCardData}
 				detail={detail}
 				createCheckoutLoading={createCheckoutLoading}
