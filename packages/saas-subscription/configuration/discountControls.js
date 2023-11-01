@@ -69,6 +69,16 @@ const getDiscountControls = ({ isCreate = false, watchConfig = '', unit = '', t 
 			options : [{ value: 'active', label: 'active' }, { value: 'inactive', label: 'inactive' }],
 			rules   : { required: true },
 		},
+		{
+			name         : 'to_all_subscribers',
+			label        : 'To All Subscribers',
+			type         : 'toggle',
+			onLabel      : 'Yes',
+			offLabel     : 'No',
+			size         : 'sm',
+			showOptional : false,
+			showEle      : isCreate,
+		},
 	];
 };
 

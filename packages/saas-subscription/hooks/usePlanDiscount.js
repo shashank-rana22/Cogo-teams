@@ -67,7 +67,8 @@ const usePlanDiscount = ({ discountModal = {}, setFeatureModal, setDiscountModal
 	};
 
 	const submitHandler = (data) => {
-		const { metadata, conditions, value, is_active } = data || {};
+		const { metadata, conditions, value, is_active, to_all_subscribers = false, ...rest } = data || {};
+
 		const { service_name = '', config_type = '', id = '' } = info || {};
 
 		const extraInfo = { id, unit, config_type, service_name };
@@ -77,12 +78,18 @@ const usePlanDiscount = ({ discountModal = {}, setFeatureModal, setDiscountModal
 			const validConditions = conditions ? JSON.parse(conditions) : null;
 
 			const payload = {
-				...data,
-				is_active  : is_active === 'active',
-				value      : +value,
-				metadata   : validMetadata,
-				conditions : validConditions,
-				...(!isCreate ? extraInfo : { saas_plan_id: planId, unit: 'percentage' }),
+				...rest,
+				is_active                        : is_active === 'active',
+				value                            : +value,
+				metadata                         : validMetadata,
+				conditions                       : validConditions,
+				refresh_for_existing_subscribers : isCreate ? to_all_subscribers : undefined,
+				...(!isCreate
+					? extraInfo
+					: {
+						unit         : 'percentage',
+						saas_plan_id : planId,
+					}),
 			};
 
 			createUpdatePlanDiscount(payload);
