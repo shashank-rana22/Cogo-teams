@@ -65,7 +65,7 @@ function Header(props) {
 				) : null}
 				<Select
 					value={view}
-					onChange={(selectedView) => setView(selectedView)}
+					onChange={setView}
 					options={VIEW_OPTIONS}
 					className={styles.user_selector}
 				/>

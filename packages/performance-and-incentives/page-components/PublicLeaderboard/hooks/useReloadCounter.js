@@ -15,10 +15,10 @@ const useReloadCounter = ({ seconds = '300', functionToCall = () => {} }) => {
 
 			return () => clearInterval(intervalId);
 		}
-		// if (reloadCounter === 0) {
-		// 	setNextReload(seconds);
-		// 	functionToCall();
-		// }
+		if (reloadCounter === 0) {
+			setNextReload(seconds);
+			functionToCall();
+		}
 
 		return () => {};
 	}, [reloadCounter, functionToCall, seconds]);

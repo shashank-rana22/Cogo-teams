@@ -11,11 +11,11 @@ import TopUsers from './TopUsers';
 function PanelBody(props) {
 	const { loading, view, topList, screen, tableList, totalReportCount } = props;
 
-	if (loading) return <div><LoadingState /></div>;
+	if (loading) return <LoadingState />;
 
 	if (isEmpty(topList)) {
 		return (
-			<div>
+			<div className={styles.empty_img}>
 				<Image
 					src={GLOBAL_CONSTANTS.image_url.empty_customer_card}
 					width={350}

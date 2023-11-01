@@ -4,3 +4,8 @@
 	color: #4f4f4f;
 	text-align: center;
 }
+
+.empty_img {
+	display: flex;
+	justify-content: center;
+}
