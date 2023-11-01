@@ -6,6 +6,7 @@ import useCreateCheckout from '../../../../hooks/useCreateCheckout';
 import useGetRateCard from '../../../../hooks/useGetRateCard';
 import RateCard from '../ListRates/components/RateCard';
 
+import ProceedToCheckout from './ProceedToCheckout';
 import Services from './Services';
 import styles from './styles.module.css';
 
@@ -56,6 +57,12 @@ function SelectedRateCard({
 				refetch={refetch}
 				loading={loading}
 				possible_subsidiary_services={possible_subsidiary_services}
+				handleBook={handleBook}
+			/>
+
+			<ProceedToCheckout
+				rate={selectedRate}
+				loading={createCheckoutLoading}
 				handleBook={handleBook}
 			/>
 		</div>

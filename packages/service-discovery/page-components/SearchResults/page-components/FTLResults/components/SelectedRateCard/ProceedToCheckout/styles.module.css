@@ -2,6 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	padding: 40px 0 20px;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -9,8 +10,18 @@
 }
 
 .proceed_button {
+	padding: 16px 20px;
+
 	@media (max-width: 768px) {
 		width: 100%;
 		margin-top: 12px;
+	}
+}
+
+.total_price {
+	font-size: 20px;
+
+	@media (max-width: 768px) {
+		font-size: 16px;
 	}
 }

@@ -5,18 +5,18 @@ import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
 
-function TotalLandedCost({
-	rateCardData = {},
-	createCheckoutLoading = false,
+function ProccedToCheckout({
+	rate = {},
+	loading = false,
 	handleBook = () => {},
 }) {
-	const { total_price_discounted = 0, total_price_currency = 'INR' } = rateCardData;
+	const { total_price_discounted = 0, total_price_currency = 'INR' } = rate;
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.total_price}>
 				Total landed Cost:
-				<span style={{ fontWeight: 600, fontSize: 16, marginLeft: 8 }}>
+				<span style={{ fontWeight: 600, marginLeft: 8 }}>
 					{formatAmount({
 						amount   : total_price_discounted || ZERO_VALUE,
 						currency : total_price_currency,
@@ -34,7 +34,7 @@ function TotalLandedCost({
 				size="lg"
 				themeType="accent"
 				className={styles.proceed_button}
-				loading={createCheckoutLoading}
+				loading={loading}
 			>
 				Proceed to Adjust Margins
 			</Button>
@@ -42,4 +42,4 @@ function TotalLandedCost({
 	);
 }
 
-export default TotalLandedCost;
+export default ProccedToCheckout;
