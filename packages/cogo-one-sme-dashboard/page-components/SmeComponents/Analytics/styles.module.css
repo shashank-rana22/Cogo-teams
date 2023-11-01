@@ -24,3 +24,27 @@
 	background: #fff;
 	border-radius: 6px;
 }
+
+.filter_container {
+	display: flex;
+}
+
+.filter_element {
+	padding: 0 20px;
+	border-right: 1px solid #83838380;
+
+	&:hover {
+		color: #6425fe;
+		text-decoration: underline;
+		cursor: pointer;
+	}
+
+	&:last-child {
+		border-right: unset;
+	}
+}
+
+.selected_filter_element {
+	color: #6425fe;
+	text-decoration: underline;
+}

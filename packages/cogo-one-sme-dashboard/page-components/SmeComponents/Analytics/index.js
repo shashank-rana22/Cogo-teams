@@ -1,20 +1,44 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
-import React from 'react';
+import { cl } from '@cogoport/components';
+import React, { useState } from 'react';
 
-import { DUMMY_DATA } from './graphData';
+import getGraphData from './getGraphData';
 import styles from './styles.module.css';
 
+const FILTER_CONTROLS = ['1D', '1W', '1M', '6M', '1Y'];
+
 function Analytics() {
+	const [selectedFilter, setSelectedFilter] = useState('1D');
+
+	const dummyData = getGraphData();
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.label}>
 					Analytics
 				</div>
+
+				<div className={styles.filter_container}>
+					{FILTER_CONTROLS.map(
+						(itm) => (
+							<div
+								key={itm}
+								role="presentation"
+								onClick={() => setSelectedFilter(itm)}
+								className={cl`${styles.filter_element} 
+									${selectedFilter === itm ? styles.selected_filter_element : ''}`}
+							>
+								{itm}
+							</div>
+						),
+					)}
+				</div>
 			</div>
+
 			<div className={styles.graph_container}>
 				<ResponsiveLine
-					data={DUMMY_DATA}
+					data={dummyData}
 					margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
 					xScale={{ type: 'point' }}
 					yScale={{
