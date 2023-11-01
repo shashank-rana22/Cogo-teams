@@ -1,6 +1,8 @@
 .contract {
+	position: relative;
 	display: flex;
 	align-items: center;
+	padding-top: 20px;
 	margin-bottom: 14px;
 	font-size: 14px;
 	font-weight: 600;
@@ -40,13 +42,16 @@
 }
 
 .rate_type_pill {
-	padding: 3px 8px;
-	margin-left: 20px;
+	position: absolute;
+	top: -20px;
+	left: -16px;
+	padding: 3px 6px;
 	font-size: 12px;
 	font-weight: 400;
-	background: #fffce6;
-	border: 1px solid #fef199;
-	border-radius: 6px;
+	background: #f9f9f9;
+	border-right: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+	border-radius: 8px 0;
 
 	@media (max-width: 768px) {
 		font-size: 10px;

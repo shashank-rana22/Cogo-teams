@@ -39,9 +39,7 @@ function Header({
 				</span>
 
 				<span className={styles.rate_type_pill}>
-					Rate Type:
-					{' '}
-					<strong>{startCase(rate_type)}</strong>
+					{startCase(rate_type)}
 				</span>
 			</div>
 
