@@ -81,6 +81,7 @@ export const getPackageControls = ({
 		name               : 'packages',
 		type               : 'field-array',
 		buttonText         : 'Add another Package',
+		childLabel         : 'Package',
 		noDeleteButtonTill : 1,
 		controls           : [
 			{
