@@ -45,7 +45,7 @@ export const getPayload = ({
 	subject,
 	description,
 	category : 'meeting',
-	metadat  : {
+	metadata : {
 		lead_user_id,
 		user_id,
 		lead_organization_id,
