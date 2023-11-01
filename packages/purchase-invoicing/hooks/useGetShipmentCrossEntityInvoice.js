@@ -15,7 +15,7 @@ const groupByRegistrationNum = (invoices) => {
 	return GROUP_BY_ORG_INVOICES;
 };
 
-const useGetShipmentCrossEntityInvoice = ({ shipment_id = {} }) => {
+const useGetShipmentCrossEntityInvoice = ({ shipment_id = '', shipment_type = '' }) => {
 	const [{ loading, data: invoiceData }, trigger] = useRequest({
 		url    : '/get_shipment_cross_entity_invoice',
 		method : 'GET',
@@ -38,8 +38,8 @@ const useGetShipmentCrossEntityInvoice = ({ shipment_id = {} }) => {
 	);
 
 	useEffect(() => {
-		getInvoiceInfo();
-	}, [getInvoiceInfo]);
+		if (shipment_type === 'fcl_freight') { getInvoiceInfo(); }
+	}, [getInvoiceInfo, shipment_type]);
 
 	return { loading, data: invoiceData || {}, refetch: getInvoiceInfo, groupedInvoices };
 };

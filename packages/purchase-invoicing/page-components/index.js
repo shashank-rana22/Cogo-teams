@@ -29,7 +29,10 @@ function PurchaseInvoicing({
 		groupedInvoices:groupedInvoicesCE,
 		loading:loadingCE,
 		refetch:purchaseInvoicesRefetch,
-	} = useGetShipmentCrossEntityInvoice({ shipment_id: shipmentData?.id });
+	} = useGetShipmentCrossEntityInvoice({
+		shipment_id   : shipmentData?.id,
+		shipment_type : shipmentData?.shipment_type,
+	});
 
 	useEffect(() => {
 		if (!collectionPartyLoading) {
