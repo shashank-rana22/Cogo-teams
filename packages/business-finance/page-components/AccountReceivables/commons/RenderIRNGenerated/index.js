@@ -2,7 +2,7 @@ import { Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
-import React from 'react';
+import React, { useState } from 'react';
 
 import IRNCancel from '../IRNCancel';
 import IRNGenerate from '../IRNGenerate';
@@ -47,33 +47,38 @@ function RenderIRNGenerated({
 		user_id: profile?.user?.id,
 	}));
 
-	const showPopover = ENTITY_CODES.includes(entityCode)
-	|| (!ENTITY_CODES.includes(entityCode) && USER_IDS.includes(user_id));
+	const [show, setShow] = useState(false);
+
+	const showPopover = (ENTITY_CODES.includes(entityCode) || (USER_IDS.includes(user_id)));
 
 	return (
-		<div>
-			{showPopover ? (
-				<Popover
-					placement="left"
-					render={(
-						<Content
-							statusComponentMap={statusComponentMap}
-							itemData={itemData}
-							refetch={refetch}
+		<div
+			role="presentation"
+			onClick={() => setShow(true)}
+		>
+			<Popover
+				placement="left"
+				interactive
+				visible={show}
+				onClickOutside={() => setShow(false)}
+				render={(
+					<Content
+						statusComponentMap={statusComponentMap}
+						itemData={itemData}
+						refetch={refetch}
+					/>
+				)}
+			>
+				{showoverflow && showPopover
+					? (
+						<IcMOverflowDot
+							cursor="pointer"
+							width="16px"
+							height="16px"
 						/>
-					)}
-				>
-					{showoverflow
-						? (
-							<IcMOverflowDot
-								cursor="pointer"
-								width="16px"
-								height="16px"
-							/>
-						)
-						: null}
-				</Popover>
-			) : null}
+					)
+					: null}
+			</Popover>
 		</div>
 	);
 }
