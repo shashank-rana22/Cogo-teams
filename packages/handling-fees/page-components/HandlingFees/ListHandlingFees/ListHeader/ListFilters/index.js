@@ -4,7 +4,7 @@ import React, { useEffect, useCallback } from 'react';
 
 import Layout from '../../../../../common/Layout';
 
-import getControls from './controls';
+import controls from './controls';
 import styles from './styles.module.css';
 
 function ListFilters({
@@ -14,8 +14,6 @@ function ListFilters({
 	setPage = () => {},
 }) {
 	const DEFAULT_VALUES = {};
-
-	const controls = getControls({ activeService });
 
 	const
 		{ control, formState: { errors = {} } = {}, handleSubmit, reset } = useForm({

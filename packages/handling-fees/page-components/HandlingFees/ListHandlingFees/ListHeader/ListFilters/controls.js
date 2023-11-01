@@ -1,7 +1,7 @@
 import BOOKING_SOURCE_MAPPING from '../../../../../configs/BOOKING_SOURCE_MAPPING.json';
-import RATE_TYPE_MAPPING from '../../../../../configs/RATE_TYPE_MAPPING.json';
+import rateTypeOptions from '../../../../../configs/rate-type-options';
 
-const controls = ({ activeService }) => [
+const controls = [
 	{
 		name        : 'booking_source',
 		label       : 'Booking Source',
@@ -22,11 +22,11 @@ const controls = ({ activeService }) => [
 		span        : 6,
 	},
 	{
-		label       : 'Rate Source',
-		name        : 'rate_source',
+		label       : 'Rate Type',
+		name        : 'rate_type',
 		type        : 'select',
 		placeholder : 'Select Rate Type',
-		options     : RATE_TYPE_MAPPING[activeService],
+		options     : rateTypeOptions,
 		span        : 6,
 	},
 	{

@@ -13,7 +13,7 @@ function useGetHandlingFee({ id = '' }) {
 			id,
 			status: listType,
 		},
-	}, { manual: false });
+	}, { manual: true });
 
 	const refetchGetHandlingFeeData = useCallback(async () => {
 		try {
@@ -24,13 +24,17 @@ function useGetHandlingFee({ id = '' }) {
 				},
 			});
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data));
+			}
 		}
 	}, [id, listType, trigger]);
 
 	useEffect(() => {
-		refetchGetHandlingFeeData();
-	}, [listType, refetchGetHandlingFeeData]);
+		if (id) {
+			refetchGetHandlingFeeData();
+		}
+	}, [listType, refetchGetHandlingFeeData, id]);
 
 	return {
 		data,

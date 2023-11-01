@@ -18,11 +18,10 @@ import styles from './styles.module.css';
 const ZERO = 0;
 
 const BOOKING_SOURCES_WITH_RATE_TYPES = [
-	'spot_search',
-	'spot_booking',
-	'shipment_rollover',
-	'quotation',
 	'quick_checkout',
+	'quotation',
+	'spot_booking',
+	'spot_line_booking',
 ];
 
 function Create({ data = {}, type = 'create' }) {
@@ -51,7 +50,7 @@ function Create({ data = {}, type = 'create' }) {
 		isAddFieldArrayCheck : true,
 	});
 
-	const optionalControls = getOptionalControls({ activeService, data, formValues, setValue });
+	const optionalControls = getOptionalControls({ data, formValues, setValue });
 
 	const { slab_details = [], booking_source = '' } = formValues;
 
@@ -73,7 +72,7 @@ function Create({ data = {}, type = 'create' }) {
 	});
 
 	const showElements = {
-		rate_source: BOOKING_SOURCES_WITH_RATE_TYPES.includes(booking_source),
+		rate_type: BOOKING_SOURCES_WITH_RATE_TYPES.includes(booking_source),
 	};
 
 	useEffect(() => {
