@@ -20,7 +20,7 @@ function IconComponent({
 		<IcMPlus
 			height={isMobile ? 16 : 22}
 			width={isMobile ? 16 : 22}
-			className={cl`${styles.add_icon} ${disabled ? styles.disabled : {}}`}
+			className={cl`${styles.add_icon} ${disabled && styles.disabled}`}
 			fill="black"
 			onClick={onClickAdd}
 		/>

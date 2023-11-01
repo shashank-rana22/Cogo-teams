@@ -60,7 +60,7 @@ function Layout({
 							style={{ width: `${flex}%`, marginBottom: '12px' }}
 						>
 							<div className={cl`${styles.label} layout_label 
-							${newControl?.boldLabel ? styles.bold_label : {}}`}
+							${newControl?.boldLabel && styles.bold_label}`}
 							>
 								{newControl?.boldLabel || label || ''}
 								{' '}
@@ -120,7 +120,7 @@ function Layout({
 					>
 						{isSubControl || type === 'checkbox' ? null : (
 							<div className={cl`${styles.label} layout_label 
-							${newControl?.boldLabel ? styles.bold_label : {}}`}
+							${newControl?.boldLabel && styles.bold_label}`}
 							>
 								{newControl?.boldLabel || label || ''}
 								{' '}

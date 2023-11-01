@@ -33,7 +33,7 @@ function ToggleLocation({
 	return (
 		<div className={styles.container} style={{ ...(style || {}) }}>
 			<ButtonIcon
-				className={cl`${styles.button} ${active ? styles.active : {}}`}
+				className={cl`${styles.button} ${active && styles.active}`}
 				size="sm"
 				icon={<IcMSort className={styles.arrow_icon} />}
 				themeType="primary"
