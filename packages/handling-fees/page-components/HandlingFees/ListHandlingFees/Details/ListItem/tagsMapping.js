@@ -14,10 +14,6 @@ const tagsMapping = [
 		getValue : (data) => startCase(data?.booking_source),
 	},
 	{
-		key      : 'rate_type',
-		getValue : (data) => startCase(data?.rate_type),
-	},
-	{
 		key      : 'organization_type',
 		getValue : (data) => startCase(data?.organization_type),
 	},

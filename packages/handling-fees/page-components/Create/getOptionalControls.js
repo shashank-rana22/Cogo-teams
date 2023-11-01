@@ -1,7 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
 import BOOKING_SOURCE_MAPPING from '../../configs/BOOKING_SOURCE_MAPPING.json';
-import rateTypeOptions from '../../configs/rate-type-options';
 
 const ORGANIZATION_SUBTYPES_MAPPING = {
 	importer_exporter: [
@@ -42,7 +41,6 @@ const getOptionalControls = ({
 		organization_sub_type,
 		booking_source,
 		organization_type,
-		rate_type,
 		trade_type,
 		serviceable_country_id,
 	} = data?.data || {};
@@ -95,18 +93,6 @@ const getOptionalControls = ({
 			span        : 2,
 			isClearable : true,
 			size        : 'sm',
-		},
-		{
-			label       : 'Rate Type',
-			name        : 'rate_type',
-			type        : 'select',
-			placeholder : 'Select Rate Type',
-			value       : rate_type,
-			size        : 'sm',
-			disabled    : isUpdatable,
-			options     : rateTypeOptions || [],
-			span        : 2,
-			isClearable : true,
 		},
 		{
 			name        : 'organization_type',

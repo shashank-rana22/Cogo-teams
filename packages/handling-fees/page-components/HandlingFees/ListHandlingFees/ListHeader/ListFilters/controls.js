@@ -1,5 +1,4 @@
 import BOOKING_SOURCE_MAPPING from '../../../../../configs/BOOKING_SOURCE_MAPPING.json';
-import rateTypeOptions from '../../../../../configs/rate-type-options';
 
 const controls = [
 	{
@@ -22,12 +21,17 @@ const controls = [
 		span        : 6,
 	},
 	{
-		label       : 'Rate Type',
-		name        : 'rate_type',
-		type        : 'select',
-		placeholder : 'Select Rate Type',
-		options     : rateTypeOptions,
-		span        : 6,
+		name        : 'serviceable_country_id',
+		label       : 'Country',
+		type        : 'async_select',
+		initialCall : true,
+		asyncKey    : 'list_locations',
+		params      : {
+			filters: { type: ['country'] },
+		},
+		defaultOptions : true,
+		placeholder    : 'Select Country',
+		span           : 6,
 	},
 	{
 		name        : 'organization_type',
@@ -37,6 +41,35 @@ const controls = [
 		options     : [
 			{ label: 'Importer Exporter', value: 'importer_exporter' },
 			{ label: 'Channel Partner', value: 'channel_partner' },
+		],
+		span: 6,
+	},
+	{
+		name        : 'organization_sub_type',
+		label       : 'Organisation Sub-Type',
+		type        : 'select',
+		placeholder : 'Select Org Sub Type',
+		options     : [
+			{
+				label : 'Long Tail',
+				value : 'long_tail',
+			},
+			{
+				label : 'Mid Size',
+				value : 'mid_size',
+			},
+			{
+				label : 'Enterprise',
+				value : 'enterprise',
+			},
+			{
+				label : 'Overseas CP',
+				value : 'overseas_cp',
+			},
+			{
+				label : 'Domestic CP',
+				value : 'domestic_cp',
+			},
 		],
 		span: 6,
 	},

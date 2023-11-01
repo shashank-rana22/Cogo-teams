@@ -40,8 +40,7 @@ const getPayload = ({ values = {}, isUpdatable = false, activeService, handling_
 				serviceable_country_id : values?.serviceable_country_id || undefined,
 				organization_sub_type:
 				values?.organization_sub_type || undefined,
-				performed_by : values?.performed_by || undefined,
-				rate_type    : values?.rate_type || undefined,
+				performed_by: values?.performed_by || undefined,
 			}),
 	};
 

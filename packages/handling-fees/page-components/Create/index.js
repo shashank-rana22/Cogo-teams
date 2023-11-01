@@ -17,13 +17,6 @@ import styles from './styles.module.css';
 
 const ZERO = 0;
 
-const BOOKING_SOURCES_WITH_RATE_TYPES = [
-	'quick_checkout',
-	'quotation',
-	'spot_booking',
-	'spot_line_booking',
-];
-
 function Create({ data = {}, type = 'create' }) {
 	const router = useRouter();
 
@@ -52,7 +45,7 @@ function Create({ data = {}, type = 'create' }) {
 
 	const optionalControls = getOptionalControls({ data, formValues, setValue });
 
-	const { slab_details = [], booking_source = '' } = formValues;
+	const { slab_details = [] } = formValues;
 
 	const customFieldArrayControls = { alternate_slab_details: {}, slab_details: {} };
 
@@ -70,10 +63,6 @@ function Create({ data = {}, type = 'create' }) {
 			};
 		}
 	});
-
-	const showElements = {
-		rate_type: BOOKING_SOURCES_WITH_RATE_TYPES.includes(booking_source),
-	};
 
 	useEffect(() => {
 		setValue('slab_details.0.slab_lower_limit', 1);
@@ -133,7 +122,6 @@ function Create({ data = {}, type = 'create' }) {
 					handleFieldArrayAddCheck={handleFieldArrayAddCheck}
 					customFieldArrayControls={customFieldArrayControls}
 					formValues={formValues}
-					showElements={showElements}
 					setValue={setValue}
 				/>
 
@@ -144,7 +132,6 @@ function Create({ data = {}, type = 'create' }) {
 					handleFieldArrayAddCheck={handleFieldArrayAddCheck}
 					customFieldArrayControls={customFieldArrayControls}
 					formValues={formValues}
-					showElements={showElements}
 					setValue={setValue}
 				/>
 
