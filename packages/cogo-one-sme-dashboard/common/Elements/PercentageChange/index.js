@@ -1,10 +1,30 @@
 import { cl } from '@cogoport/components';
+import { IcMArrowBack, IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
 
+function Growth({ showGrowth = false }) {
+	if (showGrowth) {
+		return (
+			<IcMArrowBack
+				className={cl`${styles.arrow_styles} ${cl.ns('arrow_styles')}`}
+				fill="#ABCD62"
+			/>
+		);
+	}
+
+	return (
+		<IcMArrowNext
+			className={cl`${styles.arrow_styles} ${cl.ns('arrow_styles')}`}
+			fill="#EE3425"
+		/>
+	);
+}
+
 function PercentageChange({
 	percentageChanged = 0,
+	showArrows = false,
 }) {
 	return (
 		<div
@@ -14,6 +34,8 @@ function PercentageChange({
 			{percentageChanged !== 0
 				? `${percentageChanged > 0 ? `+${percentageChanged}` : percentageChanged}%`
 				: ''}
+
+			{showArrows ? <Growth showGrowth={percentageChanged > 0} /> : null}
 		</div>
 	);
 }

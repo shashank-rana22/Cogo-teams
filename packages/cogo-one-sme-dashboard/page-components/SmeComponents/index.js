@@ -7,7 +7,7 @@ import RevenueContainer from './RevenueContainer';
 import styles from './styles.module.css';
 import UserData from './UserData';
 
-const CHANNELS = ['whatsapp', 'email'];
+const CHANNELS = ['email', 'whatsapp'];
 
 function SmeComponents() {
 	return (
@@ -16,6 +16,7 @@ function SmeComponents() {
 			<PerAgentData />
 			<Analytics />
 			<UserData />
+
 			{CHANNELS.map((itm) => (
 				<ChannelStats
 					channelType={itm}

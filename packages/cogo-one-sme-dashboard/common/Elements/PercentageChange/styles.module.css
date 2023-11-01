@@ -1,5 +1,14 @@
 .percentage_change {
+	display: flex;
+	align-items: center;
 	padding-left: 6px;
 	font-size: 14px;
 	font-weight: 600;
+}
+
+.arrow_styles {
+	width: 14px;
+	height: 14px;
+	margin-left: 6px;
+	transform: rotate(90deg);
 }

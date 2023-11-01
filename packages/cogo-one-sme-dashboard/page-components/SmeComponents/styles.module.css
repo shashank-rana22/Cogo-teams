@@ -3,10 +3,8 @@
 	flex-wrap: wrap;
 	justify-content: space-between;
 	width: 100%;
-	height: calc(100% - 46px);
 	padding: 10px 20px;
 	margin-top: 10px;
-	overflow-y: auto;
 	background: #fff;
 	border-radius: 6px;
 

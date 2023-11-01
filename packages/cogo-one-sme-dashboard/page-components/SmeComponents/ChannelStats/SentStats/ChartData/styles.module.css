@@ -1,0 +1,49 @@
+.chart_container {
+	width: 50%;
+	height: 150px;
+}
+
+.container {
+	display: flex;
+	width: 100%;
+}
+
+.legends_header {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+
+	span {
+		margin-left: 4px;
+		font-weight: 600;
+	}
+}
+
+.circle_dot {
+	width: 10px;
+	height: 10px;
+	margin-right: 6px;
+	border-radius: 10px;
+}
+
+.chart_labels {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	height: auto;
+}
+
+.percentage_view {
+	display: flex;
+	align-items: center;
+	padding-left: 20px;
+	margin-bottom: 10px;
+	font-size: 10px;
+
+	:global {
+		.ui_percentage_view {
+			font-size: 11px;
+		}
+	}
+}

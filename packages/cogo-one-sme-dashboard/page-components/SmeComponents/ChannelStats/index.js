@@ -8,7 +8,7 @@ function ChannelStats({ channelType = '' }) {
 	return (
 		<div className={styles.container}>
 			<SentStats channelType={channelType} />
-			<ReceivedStats />
+			<ReceivedStats channelType={channelType} />
 		</div>
 	);
 }
