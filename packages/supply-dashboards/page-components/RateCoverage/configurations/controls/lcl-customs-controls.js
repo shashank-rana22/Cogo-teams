@@ -97,7 +97,7 @@ const lclCustomsControls = ({
 			type               : 'fieldArray',
 			showButtons        : true,
 			buttonText         : 'Add Custom Line Items',
-			noDeleteButtonTill : 1,
+			noDeleteButtonTill : 0,
 			value              : [{
 				code         : '',
 				unit         : '',

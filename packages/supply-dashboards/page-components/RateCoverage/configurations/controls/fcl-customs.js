@@ -211,22 +211,11 @@ const fclCustomsControls = ({
 		{
 			label              : 'Add CFS Line Items',
 			name               : 'fcl_customs_cfs_line_items',
-			// name               : 'line_items',
 			type               : 'fieldArray',
 			showButtons        : true,
 			buttonText         : 'Add Custom CFS Items',
 			noDeleteButtonTill : 0,
 			controls           : [
-				// {
-				// 	name        : 'cfs_line_items',
-				// 	valueKey    : 'code',
-				// 	type        : 'async_select',
-				// 	span        : 2,
-				// 	asyncKey    : 'list_rate_charge_codes',
-				// 	params      : { service_name: 'fcl_cfs_charges' },
-				// 	initialCall : true,
-				// 	rules       : { required: 'Code is required' },
-				// },
 				{
 					name        : 'cfs_line_items',
 					type        : 'select',

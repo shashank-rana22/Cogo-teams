@@ -59,8 +59,8 @@ const useFieldMutation = ({
 					const chargeValues = values[control.name];
 
 					chargeValues?.forEach((item, i) => {
-						UNIT_OPTIONS[i] = (codeMapping.find((x) => x.code === (item.code
-								|| item?.fcl_customs_cfs_line_items))?.units || ['per_container']
+						UNIT_OPTIONS[i] = (codeMapping.find((x) => x?.code === (item?.code
+								|| item?.cfs_line_items))?.units || ['per_container']
 						).map((unit) => ({
 							label : startCase(unit),
 							value : unit,
