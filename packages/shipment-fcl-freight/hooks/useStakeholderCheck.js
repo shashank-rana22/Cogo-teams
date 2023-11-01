@@ -19,6 +19,7 @@ export const useStakeholderCheck = () => {
 				geo.uuid.cogo_one_kyc, geo.uuid.finance_branch_accounts],
 			stakeholder: 'booking_agent',
 		},
+		{ role_ids: geo.uuid.so2_executive, stakeholder: 'so2_executive' },
 		{ role_ids: geo.uuid.service_ops1_role_ids, stakeholder: 'booking_desk' },
 		{ role_ids: geo.uuid.so_1_manager, stakeholder: 'booking_desk_manager' },
 		{ role_ids: [...geo.uuid.service_ops2_role_id, geo.uuid.supply_fulfillment], stakeholder: 'document_desk' },

@@ -17,6 +17,7 @@ const useGetActiveStakeholder = () => {
 			],
 			stakeholder: 'booking_agent',
 		},
+		{ role_ids: geo.uuid.so2_executive, stakeholder: 'so2_executive' },
 		{ role_ids: geo.uuid.account_receivable_executive, stakeholder: 'account_receivable_executive' },
 		{ role_ids: [geo.uuid.so1_so2_ops_role_id, geo.uuid.so1_so2_role_id], stakeholder: 'so1_so2_ops' },
 		{ role_ids: geo.uuid.service_ops1_role_ids, stakeholder: 'booking_desk' },
