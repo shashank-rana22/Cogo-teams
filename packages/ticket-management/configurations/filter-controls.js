@@ -18,7 +18,7 @@ const useRaiseTicketcontrols = ({
 	formattedSubCategories = [], setSubCategories = () => {}, watchSubCategory = '',
 	t = () => {}, setRaiseToDesk = () => {}, formatRaiseToDeskOptions = [],
 	watchRaisedByDesk = '', watchRaisedToDesk = '', setDefaultTypeId = () => {},
-	watchServiceType = '',
+	watchServiceType = '', watchPlatformCategory = '',
 	watchIdType = '',
 }) => {
 	const { rolesArr } = useSelector(({ profile }) => ({ rolesArr: profile?.auth_role_data?.role_functions || [] }));
@@ -36,10 +36,10 @@ const useRaiseTicketcontrols = ({
 			Service          : watchServiceType || watchService || undefined,
 			TradeType        : watchTradeType || undefined,
 			RequestType      : watchRequestType || undefined,
-			CategoryDeskType : isOperation ? 'by_desk' : 'by_category',
+			CategoryDeskType : (isOperation && watchRequestType !== 'platform_issue') ? 'by_desk' : 'by_category',
 		},
-		valueKey : 'raised_by_desk',
-		labelKey : 'raised_by_desk',
+		valueKey : (isOperation && watchRequestType === 'platform_issue') ? 'category' : 'raised_by_desk',
+		labelKey : (isOperation && watchRequestType === 'platform_issue') ? 'category' : 'raised_by_desk',
 	});
 
 	const organizationUserOptions = useGetAsyncOptions({
@@ -54,13 +54,13 @@ const useRaiseTicketcontrols = ({
 		params: {
 			Audience         : 'cogoport_user',
 			RequestType      : watchRequestType || undefined,
-			Category         : watchCategory || undefined,
+			Category         : watchCategory || watchPlatformCategory || undefined,
 			Subcategory      : watchSubCategory || undefined,
 			Service          : watchServiceType || watchService || undefined,
 			TradeType        : watchTradeType || undefined,
 			RaisedByDesk     : watchRaisedByDesk || undefined,
 			RaisedToDesk     : watchRaisedToDesk || undefined,
-			CategoryDeskType : isOperation ? 'by_desk' : 'by_category',
+			CategoryDeskType : (isOperation && watchRequestType !== 'platform_issue') ? 'by_desk' : 'by_category',
 		},
 	});
 
@@ -108,6 +108,7 @@ const useRaiseTicketcontrols = ({
 		setDefaultTypeId,
 		isOperation,
 		watchIdType,
+		watchRequestType,
 	});
 
 	return controls.filter((itm) => itm?.visible);
