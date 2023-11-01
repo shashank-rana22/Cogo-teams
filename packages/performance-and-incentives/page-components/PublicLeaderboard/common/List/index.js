@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 const MAX_LIST_ITEMS = 9;
 
 function List(props) {
-	const { tableList = [], view, totalReportCount } = props;
+	const { tableList = [], view, totalReportCount, screen = 'overall' } = props;
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({ view });
 
@@ -73,7 +73,7 @@ function List(props) {
 
 			</div>
 
-			{ totalReportCount > MAX_LIST_ITEMS ? (
+			{ screen === 'overall' && totalReportCount > MAX_LIST_ITEMS ? (
 				<p className={styles.info_text}>
 					Total:
 					{' '}
