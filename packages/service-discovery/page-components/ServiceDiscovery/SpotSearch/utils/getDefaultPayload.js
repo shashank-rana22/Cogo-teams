@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { addDays } from '@cogoport/utils';
+import { addDays, isEmpty } from '@cogoport/utils';
 
 import getFormattedTouchPointDataPayload from './getFormattedTouchPointDataPayload';
 import getIncoterm from './getIncoterm';
@@ -26,6 +26,10 @@ const getPayload = ({ serviceType, origin = {}, destination = {}, ftlFormData = 
 			destination,
 		},
 	});
+
+	if (serviceType === 'ftl_freight' && isEmpty(ftl_touch_points)) {
+		return {};
+	}
 
 	const COMMON_PAYLOAD_MAPPING = {
 		fcl_freight: {
@@ -166,6 +170,10 @@ const getDefaultPayload = ({
 	const payloadObject = {
 		...getPayload({ serviceType: service_type, origin, destination, ftlFormData }),
 	};
+
+	if (isEmpty(payloadObject)) {
+		return {};
+	}
 
 	const payloadKey = [service_type, 'services_attributes'].join('_');
 

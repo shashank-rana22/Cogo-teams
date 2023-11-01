@@ -21,7 +21,7 @@ const getEditPayload = (serviceType, values) => {
 
 	const payload = getPayload(formValues, origin, destination);
 
-	return payload || [];
+	return payload || {};
 };
 
 export default getEditPayload;

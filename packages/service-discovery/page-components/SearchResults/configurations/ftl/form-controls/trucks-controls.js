@@ -8,9 +8,10 @@ const getTrucksControls = ({ setValue = () => {} }) => {
 			span               : 12,
 			buttonText         : 'Add More',
 			noDeleteButtonTill : 1,
+			childLabel         : 'Truck',
 			value              : [
 				{
-					truck        : 'open_body',
+					truck        : 'open',
 					trucks_count : '1',
 				},
 			],
@@ -20,18 +21,18 @@ const getTrucksControls = ({ setValue = () => {} }) => {
 					label       : 'Truck Type',
 					type        : 'chips',
 					placeholder : 'Select truck type',
-					value       : 'open_body',
+					value       : 'open',
 					onChange    : (val, obj, index) => {
 						setValue(`trucks[${index}].truck_type`, '');
 					},
 					options: [
 						{
 							label : 'Open Body',
-							value : 'open_body',
+							value : 'open',
 						},
 						{
 							label : 'Closed Body',
-							value : 'closed_body',
+							value : 'closed',
 						},
 					],
 					rules: { required: true },

@@ -1,5 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useState, useMemo, useEffect } from 'react';
 
@@ -30,7 +31,7 @@ const getTabWisePrefilledValues = (activeTab, values = {}) => {
 				...(trucksData || []).map(({ truck_type = '', trucks_count = 1 }) => ({
 					truck_type,
 					trucks_count,
-					truck: (truck_type.split('_') || []).slice(0, 2).join('_'),
+					truck: (truck_type.split('_') || [])[GLOBAL_CONSTANTS.zeroth_index],
 				})),
 			],
 		};

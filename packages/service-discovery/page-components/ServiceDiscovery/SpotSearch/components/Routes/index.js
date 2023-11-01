@@ -50,10 +50,6 @@ function Routes({
 	const onClickSearch = async () => {
 		const valuesToBeChecked = {
 			...organization,
-			...((ftlFormData.haltTime?.halt_time_value && !ftlFormData.haltTime?.halt_time_unit)
-				? { halt_time_unit: '' } : {}),
-			...((!ftlFormData.haltTime?.halt_time_value && ftlFormData.haltTime?.halt_time_unit)
-				? { halt_time_value: '' } : {}),
 		};
 
 		const isValid = isFormValid(valuesToBeChecked, setErrors);

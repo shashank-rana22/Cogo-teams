@@ -14,10 +14,6 @@ const useCreateSearch = ({ setRouterLoading = () => {}, setHeaderProps = () => {
 
 	const createSearch = async ({ action, values }) => {
 		try {
-			if (setRouterLoading) {
-				setRouterLoading(true);
-			}
-
 			let payload = {};
 
 			const {
@@ -52,6 +48,10 @@ const useCreateSearch = ({ setRouterLoading = () => {}, setHeaderProps = () => {
 
 			if (isEmpty(payload)) {
 				return false;
+			}
+
+			if (setRouterLoading) {
+				setRouterLoading(true);
 			}
 
 			payload = {

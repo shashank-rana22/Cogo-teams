@@ -1,10 +1,42 @@
+import { Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 const INCREMENT_BY_ONE = 1;
 
+const getErrorMessage = ({ location = {}, haltTime = {} }) => {
+	const { halt_time_unit, halt_time_value } = haltTime || {};
+
+	const { origin:{ id:originId = '' } = {}, destination : { id:destinationId = '' } = {} } = location || {};
+
+	let errorMessage = '';
+
+	if (!originId) {
+		errorMessage = 'Origin is required';
+	}
+	if (!destinationId) {
+		errorMessage = 'Destination is required';
+	}
+	if (halt_time_unit && !halt_time_value) {
+		errorMessage = 'Halt Time is required';
+	}
+	if (halt_time_value && !halt_time_unit) {
+		errorMessage = 'Halt Time Unit is required';
+	}
+
+	return errorMessage;
+};
+
 const getFormattedTouchPointDataPayload = (data = {}) => {
 	const { touchPoints = {}, haltTime = {}, location = {} } = data || {};
 	const { halt_time_unit, halt_time_value } = haltTime || {};
+
+	const error = getErrorMessage({ location, haltTime });
+
+	if (error) {
+		Toast.error(error);
+		return [];
+	}
+
 	const { one_way:oneWayTouchPoints = [], round:roundTouchPoints = [] } = touchPoints || {};
 
 	const NEW_TOUCH_POINTS = [];
