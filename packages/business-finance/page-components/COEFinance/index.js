@@ -21,8 +21,8 @@ function CoeFinance() {
 		setActiveTab(tab);
 		setFilters({});
 		push(
-			'/business-finance/coe-finance/[active_tab]',
-			`/business-finance/coe-finance/${tab}`,
+			'/business-finance/audit-function/[active_tab]',
+			`/business-finance/audit-function/${tab}`,
 		);
 	};
 

@@ -1,56 +1,22 @@
-import { Button, Select, DateRangepicker } from '@cogoport/components';
-import { IcMArrowLeft } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { Select, DateRangepicker } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useState } from 'react';
 
 import DURATION_CONSTANTS from '../../../../constants/duration-constants';
-import {
-	getThisAseessYearStartDate, getLastMonthStartAndEndDates, getThisMonthStartDate,
-	getThisQuarterStartDate, getTodayStartDate,
-	getLastQuarterStartAndEndDates,
-} from '../../../../utils/start-date-functions';
 import DURATION_OPTIONS from '../../../Leaderboard/configurations/get-duration-filter-options';
 import TEXT_MAPPING from '../../configurations/header-text-mapping';
-import VIEW_OPTIONS from '../../configurations/view-type-options';
+import onChangeDuration from '../../utils/changeDuration';
 
+import CountDownTimer from './CountDownTimer';
 import styles from './styles.module.css';
 
-const { TODAY, LAST_MONTH, THIS_MONTH, LAST_QUARTER, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
-
-const GET_START_DATE_FUNCTION_MAPPING = {
-	[TODAY]        : getTodayStartDate,
-	[LAST_MONTH]   : getLastMonthStartAndEndDates,
-	[THIS_MONTH]   : getThisMonthStartDate,
-	[LAST_QUARTER] : getLastQuarterStartAndEndDates,
-	[THIS_QUARTER] : getThisQuarterStartDate,
-	[THIS_YEAR]    : getThisAseessYearStartDate,
-};
-
-const previousEntries = [LAST_MONTH, LAST_QUARTER];
+const { CUSTOM } = DURATION_CONSTANTS;
 
 function Header(props) {
-	const { view, setView, dateRange, setDateRange } = props;
-
-	const router = useRouter();
+	const { view, dateRange, setDateRange, updatedAt, countdown } = props;
 
 	const [duration, setDuration] = useState('today');
-
-	const onChangeDuration = (selectedDuration) => {
-		if (typeof GET_START_DATE_FUNCTION_MAPPING[selectedDuration] === 'function') {
-			if (previousEntries.includes(selectedDuration)) {
-				const { startDate, endDate } = GET_START_DATE_FUNCTION_MAPPING[selectedDuration]();
-
-				setDateRange({ startDate, endDate });
-			} else {
-				setDateRange({
-					startDate : GET_START_DATE_FUNCTION_MAPPING[selectedDuration](),
-					endDate   : new Date(),
-				});
-			}
-		}
-
-		setDuration(selectedDuration);
-	};
 
 	return (
 		<div className={styles.container}>
@@ -74,7 +40,11 @@ function Header(props) {
 
 					<Select
 						value={duration}
-						onChange={onChangeDuration}
+						onChange={(selectedDuration) => onChangeDuration({
+							selectedDuration,
+							setDateRange,
+							setDuration,
+						})}
 						options={DURATION_OPTIONS}
 						className={styles.period_selector}
 					/>
@@ -90,20 +60,25 @@ function Header(props) {
 				</div>
 			</div>
 
-			<div className={styles.actions_container}>
-				<Select value={view} onChange={setView} options={VIEW_OPTIONS} className={styles.view_selector} />
+			<div>
 
-				<Button
-					type="button"
-					size="lg"
-					themeType="secondary"
-					onClick={() => router.back()}
-					style={{ marginLeft: '12px' }}
-				>
-					<IcMArrowLeft height={20} width={20} style={{ marginRight: '4px' }} />
-					Admin View
-				</Button>
+				<CountDownTimer updatedAt={updatedAt} countdown={countdown} />
+
+				{updatedAt && (
+					<p className={styles.last_updated_at}>
+						Last updated:
+						{' '}
+						{formatDate({
+							date       : updatedAt,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType : 'dateTime',
+							separator  : '; ',
+						})}
+					</p>
+				)}
 			</div>
+
 		</div>
 	);
 }

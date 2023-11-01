@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import FinalConfirmation from '../FinalConfirmation';
 import InvoiceBLCheck from '../InvoiceBLCheck';
 import InvoiceSelection from '../InvoiceSelection';
@@ -15,11 +17,13 @@ function RenderData({
 	setShowPayableAmount = () => {},
 
 }) {
+	const [allowed, setAllowed] = useState(true);
+
 	if (active === 'merge_documents') {
-		return <MergeDocuments setActive={setActive} />;
+		return <MergeDocuments setActive={setActive} allowed={allowed} setAllowed={setAllowed} setBLData={setBLData} />;
 	}
 	if (active === 'invoice_bl_check') {
-		return <InvoiceBLCheck setActive={setActive} bLData={bLData} />;
+		return <InvoiceBLCheck setActive={setActive} bLData={bLData} allowed={allowed} setAllowed={setAllowed} />;
 	}
 	if (active === 'final_confirmation') {
 		return (
@@ -41,6 +45,8 @@ function RenderData({
 			showHeader={showHeader}
 			setShowPayableAmount={setShowPayableAmount}
 			setShowSaveAsDraft={setShowSaveAsDraft}
+			allowed={allowed}
+			setAllowed={setAllowed}
 		/>
 	);
 }

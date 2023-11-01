@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import subCategoryOptions from '../../../../../../../../utils/sub-category-options';
 import getControls from '../utils/controls';
@@ -33,12 +33,15 @@ function useCreateVendorServicePOC({
 
 	const watchCategory = watch('category');
 	const watchPOC = watch('poc_id');
+	const country_id = watch('country_id');
 
 	const { pocs = [] } = getVendorData || {};
 
 	const { pocOptions = {} } = createPOCOptions({ pocs, watchPOC });
 
-	const controls = getControls({ watchCategory, pocOptions });
+	const controls = useMemo(() => getControls({
+		watchCategory, pocOptions, country_id,
+	}), [country_id, pocOptions, watchCategory]);
 
 	const [{ loading: createVendorServicePocLoading }, triggerCreateVendorServicePoc] = useRequest({
 		url    : '/create_vendor_service_poc',

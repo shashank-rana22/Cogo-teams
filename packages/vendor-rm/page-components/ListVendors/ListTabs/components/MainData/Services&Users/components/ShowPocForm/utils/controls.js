@@ -1,10 +1,9 @@
 import { startCase } from '@cogoport/utils';
 
-import officeLocations from '../../../../../../../../../utils/office-locations.json';
 import workScopes from '../../../../../../../../../utils/work-scopes.json';
 import { EXCLUDE_CATEGORIES } from '../../../../../../../constants';
 
-const controls = [
+const controls = ({ country_id = '' }) => [
 	{
 		name        : 'name',
 		label       : 'Name',
@@ -63,15 +62,29 @@ const controls = [
 
 	},
 	{
-		name        : 'cogoport_office_id',
-		label       : 'Select Branch',
-		type        : 'select',
-		placeholder : 'Select a city',
-		options    	: officeLocations,
-		style       : { flexBasis: '42%' },
-		rules       : { required: 'Branch is required' },
-	},
 
+		name        : 'country_id',
+		label       : 'Country of Registration',
+		type        : 'asyncSelect',
+		params      : { filters: { type: ['country'] } },
+		asyncKey    : 'list_locations',
+		placeholder : 'Select a Country',
+		style       : { flexBasis: '46%' },
+		condition   : { type: ['country'] },
+		rules       : { required: 'Country is required' },
+	},
+	{
+		name        : 'cogoport_office_id',
+		label       : 'Select Cogoport Office',
+		type        : 'asyncSelect',
+		params      : { filters: { type: ['city'], country_id } },
+		renderLabel : (item) => `${item?.name}`,
+		asyncKey    : 'list_locations',
+		placeholder : 'Select Location',
+		condition   : { type: ['city'] },
+		style       : { flexBasis: '46%', marginRight: '20px' },
+		rules       : { required: 'Office Location is required' },
+	},
 ];
 
 export default controls;

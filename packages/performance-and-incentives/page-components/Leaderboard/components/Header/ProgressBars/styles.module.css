@@ -1,0 +1,24 @@
+.container {
+	display: flex;
+	align-items: center;
+	padding: 0 12px;
+	padding-bottom: 8px;
+	background-color: #fff;
+	border-radius: 6px;
+}
+
+.bar_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.bar_container:not(:last-child) {
+	margin-right: 34px;
+}
+
+.title {
+	flex-basis: 30%;
+	margin: 14px 14px 0 0;
+	font-size: 12px;
+}

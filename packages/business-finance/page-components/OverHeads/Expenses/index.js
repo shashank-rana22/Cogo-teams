@@ -1,10 +1,11 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable max-len */
 import { Popover, Button, Input, Tooltip } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMInfo, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMInfo, IcMSearchlight, IcMProvision } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
@@ -12,6 +13,7 @@ import Filter from '../../commons/Filters';
 import SegmentedControl from '../../commons/SegmentedControl';
 import showOverflowingNumber from '../../commons/showOverflowingNumber';
 import List from '../commons/List';
+import TabStat from '../commons/TabStat';
 import {
 	nonRecurringFilters,
 	recurringFilters,
@@ -23,6 +25,7 @@ import ViewRecurringSummery from './CreateExpenseModal/ViewRecurringSummery';
 import useListExpense from './hooks/useListExpense';
 import useListExpenseConfig from './hooks/useListExpenseConfig';
 import useSendEmail from './hooks/useSendEmail';
+import useSendOverheadExpense from './hooks/useSendOverheadExpense';
 import ShowMore from './ShowMore';
 import styles from './styles.module.css';
 import {
@@ -35,9 +38,26 @@ const DEFAULT_COUNT = 1;
 
 const MIN_AMOUNT = 0;
 
+const RECURRING_TABS = [
+	{ label: 'ALL', value: 'ALL_EXPENSE_CONFIGURATION' },
+	{ label: 'INITIATED', value: 'INITIATED' },
+	{ label: 'ACCEPTED', value: 'ACCEPTED' },
+	{ label: 'REJECTED', value: 'REJECTED' },
+	{ label: 'EXPIRED', value: 'EXPIRED' },
+];
+
+const NON_RECURRING_TABS = [
+	{ label: 'All Invoices', value: 'ALL_INVOICES' },
+	{ label: 'IM Requested', value: 'LOCKED' },
+	{ label: 'Approved', value: 'FINANCE_ACCEPTED' },
+	{ label: 'IM Rejected', value: 'IM_REJECTED' },
+	{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
+];
+
 function ExpenseComponent() {
 	const [recurringState, setRecurringState] = useState('recurring');
 	const [createExpenseType, setCreateExpenseType] = useState('');
+	const [subActiveTab, setSubActiveTab] = useState('ALL_EXPENSE_CONFIGURATION');
 	const [showModal, setShowModal] = useState(false);
 	const [showWarning, setShowWarning] = useState(false);
 	const [showExpenseModal, setShowExpenseModal] = useState(false);
@@ -60,12 +80,24 @@ function ExpenseComponent() {
 
 	const geo = getGeoConstants();
 
-	const { getList, listData, listLoading } = useListExpense({
+	const {
+		getList = () => {},
+		listData = {},
+		listLoading = false,
+	} = useListExpense({
+		subActiveTab,
 		expenseFilters,
 		sort,
 	});
-	const { getRecurringList, recurringListData, recurringListLoading } =	useListExpenseConfig({ expenseFilters, sort });
+
+	const {
+		getRecurringList = () => {},
+		recurringListData = {},
+		recurringListLoading = false,
+	} = useListExpenseConfig({ expenseFilters, sort, subActiveTab });
+
 	const { sendMail, loading: mailLoading } = useSendEmail();
+	const { sendOverheadExpense } = useSendOverheadExpense();
 
 	useEffect(() => {
 		if (recurringState === 'nonRecurring') {
@@ -77,6 +109,12 @@ function ExpenseComponent() {
 	}, [getList, recurringState, expenseFilters, getRecurringList]);
 
 	useEffect(() => {
+		if (recurringState === 'recurring') {
+			setSubActiveTab('ALL_EXPENSE_CONFIGURATION');
+		} else if (recurringState === 'nonRecurring') {
+			setSubActiveTab('ALL_INVOICES');
+		}
+
 		setExpenseFilters((p) => ({
 			...p,
 			expenseCategory : null,
@@ -101,7 +139,8 @@ function ExpenseComponent() {
 	const handleChange = (e) => {
 		setExpenseFilters((previousState) => ({
 			...previousState,
-			searchValue: e,
+			searchValue : e,
+			pageIndex   : 1,
 		}));
 	};
 
@@ -174,6 +213,15 @@ function ExpenseComponent() {
 			>
 				Add Expense
 			</Button>
+		),
+		refresh: (itemData) => (
+			<IcMProvision
+				onClick={() => { sendOverheadExpense(itemData.billId); }}
+				style={{ cursor: 'pointer' }}
+				height={24}
+				width={24}
+				color="#F68B21"
+			/>
 		),
 		renderCategory: (itemData) => {
 			const { categoryName = '', category = '' } = itemData || {};
@@ -501,9 +549,9 @@ function ExpenseComponent() {
 			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
 		renderTds: (itemData) => {
-			const { payableTds, billCurrency = '' } = itemData || {};
+			const { tdsAmount, billCurrency = '' } = itemData || {};
 			const amount = formatAmount({
-				amount   : payableTds,
+				amount   : tdsAmount,
 				currency : billCurrency,
 				options  : {
 					style           : 'currency',
@@ -556,6 +604,7 @@ function ExpenseComponent() {
 					id={id}
 					showExpenseModal={showExpenseModal}
 					incidentId={incidentId}
+					TABS={NON_RECURRING_TABS}
 				/>
 			);
 		}
@@ -565,15 +614,21 @@ function ExpenseComponent() {
 	let listConfig;
 	let listItemData;
 	let loading;
+	let TABS;
+	let tabData;
 
 	if (recurringState === 'recurring') {
 		listConfig = expenseRecurringConfig;
 		listItemData = recurringListData;
 		loading = false;
+		TABS = RECURRING_TABS;
+		tabData = recurringListData?.stat || {};
 	} else if (recurringState === 'nonRecurring') {
 		listConfig = expenseNonRecurringConfig;
 		listItemData = listData;
 		loading = listLoading;
+		TABS = NON_RECURRING_TABS;
+		tabData = listData?.stat || {};
 	}
 
 	return (
@@ -586,6 +641,18 @@ function ExpenseComponent() {
 					color="#ED3726"
 					background="#FFFAEB"
 				/>
+			</div>
+			<div className={styles.stats_container}>
+				{TABS?.map(({ label, value }) => (
+					<TabStat
+						name={label}
+						isActive={subActiveTab === value}
+						key={value}
+						number={tabData?.[value] || 0}
+						value={value}
+						setSubActiveTab={setSubActiveTab}
+					/>
+				))}
 			</div>
 			<div className={styles.styled_div}>
 				{RenderHeaders()}

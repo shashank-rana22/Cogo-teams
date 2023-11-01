@@ -14,12 +14,13 @@ const formatedDate = (date) => formatDate({
 });
 
 const useListExpense = ({
-	expenseFilters,
-	id,
-	expenseType,
-	sort,
-	pageIndexVal,
-	pageSizeVal,
+	expenseFilters = {},
+	id = '',
+	expenseType = '',
+	sort = {},
+	subActiveTab = '',
+	pageIndexVal = '',
+	pageSizeVal = '',
 }) => {
 	const {
 		paymentStatus = '',
@@ -32,7 +33,7 @@ const useListExpense = ({
 		billDate,
 	} = expenseFilters || {};
 	const { startDate, endDate } = dueDate || {};
-	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } =		uploadDate || {};
+	const { startDate: fromUploadBillDate, endDate: toUploadBillDate } = uploadDate || {};
 	const { startDate: fromBillDate, endDate: toBillDate } = billDate || {};
 	const entity = useContext(EntityContext);
 	const {
@@ -59,6 +60,7 @@ const useListExpense = ({
 					category               : expenseCategory || undefined,
 					q                      : searchValue || undefined,
 					expenseConfigurationId : id || undefined,
+					status                 : subActiveTab === 'ALL_INVOICES' ? undefined : subActiveTab,
 					invoiceAmountSortType  : invoiceAmountSortType || undefined,
 					paidAmountSortType     : paidAmountSortType || undefined,
 					payableSortType        : payableSortType || undefined,
@@ -87,6 +89,7 @@ const useListExpense = ({
 		}
 	}, [
 		trigger,
+		subActiveTab,
 		expenseType,
 		paymentStatus,
 		expenseCategory,

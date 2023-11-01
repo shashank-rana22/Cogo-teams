@@ -1,9 +1,14 @@
+/* eslint-disable no-nested-ternary */
 import { Tooltip, cl } from '@cogoport/components';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import { formatDate } from '../../../../../../../../commons/utils/formatDate';
+import { getDepartureArrivalDate } from '../../../../../../../utils/getDepartureArrivalDate';
+import isMileStoneCompleted from '../../../../../../../utils/isMileStoneCompleted';
+
+import Content from './Content';
 import styles from './styles.module.css';
 
 const LAST_INDEX = 1;
@@ -15,44 +20,44 @@ function TimeLineItem({
 	timeLine = [],
 	index = '',
 	isCompleted = false,
-	isNextMain = false,
 }) {
 	const checkService = (shipmentData?.services || []).includes(
 		item?.service_type,
 	);
 	const checkIsLast = index === timeLine.length - LAST_INDEX ? !timeLine[index - LAST_INDEX]?.completed_on : false;
 
-	const isComplete = !!item?.completed_on && isCompleted;
-	const className = !isComplete || checkIsLast ? 'pending' : 'complete';
+	let displayCompletedDate = item?.completed_on;
 
-	const minWidthAllow = isNextMain && !item.is_sub;
-
-	function Content() {
-		return (
-			<>
-				<div className={styles.tool_tip_text}>
-					Milestone
-					<div className={styles.tool_tip_item}>{startCase(item?.milestone)}</div>
-				</div>
-
-				{item?.completed_on ? (
-					<div className={styles.tool_tip_text}>
-						{isComplete ? 'Completed On' : 'Expected'}
-
-						<div className={styles.tool_tip_item}>
-							{formatDate(item?.completed_on, 'dd-MMM-yy', {}, true)}
-						</div>
-					</div>
-				) : null}
-			</>
-		);
+	if (item?.milestone === 'Vessel Departed From Origin (ETD)' && !displayCompletedDate) {
+		displayCompletedDate = getDepartureArrivalDate({ shipmentData, key: 'departure' });
+	} else if (item?.milestone === 'Vessel Arrived At Destination (ETA)' && !displayCompletedDate) {
+		displayCompletedDate = getDepartureArrivalDate({ shipmentData, key: 'arrival' });
 	}
+
+	const isComplete = isMileStoneCompleted({
+		timelineItem: {
+			milestone    : item?.milestone,
+			completed_on : displayCompletedDate,
+		},
+		consecutivelyCompleted: isCompleted,
+	})?.isCompleted && isCompleted;
+
+	const className = !isComplete || checkIsLast ? 'pending' : 'complete';
 
 	return (
 
 		!item?.service_type && !checkService ? (
 			<div className={isLast ? styles.wrapper_last : styles.wrapper}>
-				<Tooltip placement="top" content={Content()}>
+				<Tooltip
+					placement="top"
+					content={(
+						<Content
+							item={item}
+							displayCompletedDate={displayCompletedDate}
+							isComplete={isComplete}
+						/>
+					)}
+				>
 					<div className={styles.flex}>
 						{(() => {
 							if ((!item?.is_sub || isLast) && className === 'complete'
@@ -66,20 +71,17 @@ function TimeLineItem({
 					</div>
 				</Tooltip>
 
-				{!isLast
-					&& minWidthAllow ? (
-						<div
-							className={cl`${styles.line} ${styles[className]} ${styles.min_width}`}
-						/>
-					) : (
-						<div className={cl`${styles.line} ${styles[className]}`} />
-					)}
+				{!isLast ? (
+					<div
+						className={cl`${styles.line} ${styles[className]}`}
+					/>
+				) : null}
 
 				{!item?.is_sub || isLast ? (
 					<div
-						className={
-                isLast ? `${styles.mile_stone_description} ${styles.last}` : `${styles.mile_stone_description}`
-              }
+						className={isLast
+							? `${styles.mile_stone_description} ${styles.last}`
+							: `${styles.mile_stone_description}`}
 					>
 						<div
 							className={

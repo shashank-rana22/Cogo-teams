@@ -72,10 +72,11 @@ const useGetRDShipmentList = () => {
 						sort_by   : undefined,
 						sort_type : undefined,
 					},
-					page               : requiredFilterChange?.page,
-					sort_by            : requiredFilterChange?.sort_by || undefined,
-					sort_type          : requiredFilterChange?.sort_type || undefined,
-					additional_methods : ['pagination'],
+					page                     : requiredFilterChange?.page,
+					sort_by                  : requiredFilterChange?.sort_by || undefined,
+					sort_type                : requiredFilterChange?.sort_type || undefined,
+					additional_methods       : ['pagination'],
+					discount_reason_required : true,
 				},
 			});
 			if (!resp.hasError) {

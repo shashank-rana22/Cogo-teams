@@ -4,6 +4,7 @@ import AddRateModal from '@cogoport/supply-dashboards/page-components/RateCovera
 import React, { useEffect, useState } from 'react';
 
 import useGetShipment from '../../../../hooks/useGetShipment';
+import useGetSpotSearches from '../../../../hooks/useGetSpotSearches';
 import useListFreightRateFeedBacks from '../../../../hooks/useListFreightRateFeedBacks';
 import useListFreightRateRequests from '../../../../hooks/useListFreightRateRequests';
 
@@ -63,6 +64,11 @@ function RateModal({
 		getFreightRateFeedback = () => {},
 	} = useListFreightRateFeedBacks({ sourceId, params });
 
+	const {
+		getData = () => {},
+		spot_data = {},
+	} = useGetSpotSearches({ feedbackData, requestData });
+
 	useEffect(
 		() => {
 			if (source === 'live_booking' || sources.includes('live_booking')) {
@@ -93,6 +99,9 @@ function RateModal({
 			feedback_loading={feedbackLoading}
 			serviceIdPresent={serviceIdPresent}
 			setServiceIdPresent={setServiceIdPresent}
+			spot_data={spot_data}
+			getData={getData}
+			triggeredFrom="cogoone"
 			setShowModal={() => setShowAddRateModal({
 				showModal : false,
 				cardData  : {},

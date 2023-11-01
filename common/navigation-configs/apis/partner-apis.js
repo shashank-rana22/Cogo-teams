@@ -5145,6 +5145,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'bookings',
 		},
+		{
+			api          : 'list_chat_agents',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 
 	operations_dashboard: [
@@ -8757,10 +8762,28 @@ const partner = {
 	],
 	overheads: [
 		{
-			api         : 'post_purchase_expense_send_email',
+			api         : 'post_incident_management_incident_send_overhead_mail',
 			access_type : 'private',
 			module      : 'Expenses',
 			feature     : 'Expenses',
+		},
+		{
+			api         : 'post_overhead_vendor_to_open_search',
+			access_type : 'private',
+			module      : 'Vendors',
+			feature     : 'Vendors',
+		},
+		{
+			api         : 'post_overhead_expense_to_open_search',
+			access_type : 'private',
+			module      : 'Expenses',
+			feature     : 'Expenses',
+		},
+		{
+			api         : 'get_vendor_trade_parties_data',
+			access_type : 'private',
+			module      : 'Vendors',
+			feature     : 'Vendors',
 		},
 		{
 			api         : 'get_purchase_expense_list_expense_configurations',
@@ -9268,6 +9291,25 @@ const partner = {
 			feature     : 'outstanding',
 		},
 		{
+			api         : 'get_payments_outstanding_by_customer_v2',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'put_payments_outstanding_customer_v2',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'put_payments_outstanding_update_account_taggings',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+
+		},
+		{
 			api         : 'get_sales_outstanding_invoice_list',
 			access_type : 'private',
 			module      : 'outstanding',
@@ -9514,7 +9556,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_purchase_expense_expense_configuration_by_id',
+			api         : 'get_purchase_expense_expense_configuration',
 			access_type : 'private',
 		},
 		{
@@ -9761,6 +9803,12 @@ const partner = {
 		},
 		{
 			api         : 'post_payments_accounts_ap_bulk_upload',
+			access_type : 'private',
+			module      : 'settlement',
+			feature     : 'settlement',
+		},
+		{
+			api         : 'post_payments_accounts_bulk_upload_payments',
 			access_type : 'private',
 			module      : 'settlement',
 			feature     : 'settlement',
@@ -13296,6 +13344,27 @@ const partner = {
 		},
 	],
 	cogo_one: [
+		{
+			api          : 'list_spot_searches',
+			access_type  : 'private',
+			feature      : 'rate_requests',
+			service_name : 'spot_search',
+		},
+		{
+			api          : 'update_video_conference_user_activity',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_video_conference_link',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_video_conference',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 		{
 			api          : 'get_shipment_quotation',
 			access_type  : 'private',

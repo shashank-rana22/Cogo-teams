@@ -67,6 +67,7 @@ const getControls = ({ country_id = '', entityOptions = [] }) => {
 			label       : 'Branch',
 			type        : 'asyncSelect',
 			params      : { filters: { type: ['city'], country_id } },
+			renderLabel : (item) => `${item?.name} (${item?.postal_code || '-'})`,
 			asyncKey    : 'list_locations',
 			style       : { flexBasis: '30%' },
 			placeholder : 'Select a city',

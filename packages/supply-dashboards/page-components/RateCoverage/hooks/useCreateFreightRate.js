@@ -77,13 +77,14 @@ const useCreateFreightRate = (service) => {
 		method : 'POST',
 	}, { manual: true });
 
-	const createRate = async (data, listData) => {
+	const createRate = async (data, listData, triggeredFrom) => {
 		const newPayload = getPayload(service, data, user_id, listData);
 
 		try {
 			const resp = await trigger({
 				data: {
 					...newPayload,
+					source: triggeredFrom || undefined,
 				},
 			});
 			if (resp?.data) { return resp?.data?.id; }

@@ -66,7 +66,7 @@ function ShipmentAuditFunction({
 		jobId = '', jobNumber = '', currency = '',
 	}) => {
 		push(
-			`/business-finance/coe-finance/${activeTab}/audit?job_id=${jobId}&job_number=${jobNumber}`,
+			`/business-finance/audit-function/${activeTab}/audit?job_id=${jobId}&job_number=${jobNumber}`,
 		);
 		window.sessionStorage.setItem('currency', currency);
 		window.sessionStorage.setItem('audit_status', subActiveTab);

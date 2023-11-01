@@ -3,16 +3,25 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import LoadingState from '../../../../../common/LoadingState';
+import List from '../../../common/List';
+import useGetLeaderbordList from '../../../hooks/useGetLeaderbordList';
 
-import List from './List';
 import styles from './styles.module.css';
 import TopUsers from './TopUsers';
-import useGetLeaderbordList from './useGetLeaderbordList';
 
 function LeftPanel(props) {
-	const { view, dateRange } = props;
+	const {
+		view = '',
+		dateRange = {},
+		setUpdatedAt = () => {},
+	} = props;
 
-	const { list, loading, total_report_count: totalReportCount } = useGetLeaderbordList({ view, dateRange });
+	const { list, loading, total_report_count: totalReportCount } = useGetLeaderbordList({
+		view,
+		dateRange,
+		pageLimit: 50,
+		setUpdatedAt,
+	});
 
 	const [firstUser, secondUser, thirdUser, ...tableList] = list;
 
@@ -40,7 +49,13 @@ function LeftPanel(props) {
 			<TopUsers topList={topList} view={view} />
 
 			{isEmpty(tableList) ? <p className={styles.empty_list}>No more standings...</p>
-				: <List tableList={tableList} view={view} totalReportCount={totalReportCount} />}
+				: (
+					<List
+						tableList={tableList}
+						view={view}
+						totalReportCount={totalReportCount}
+					/>
+				)}
 
 		</div>
 	);

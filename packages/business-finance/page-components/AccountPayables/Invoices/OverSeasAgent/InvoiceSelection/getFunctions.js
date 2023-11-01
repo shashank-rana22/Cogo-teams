@@ -12,7 +12,7 @@ import GetTableBodyCheckbox from './GetTableBodyCheckbox';
 
 const getFunctions = ({
 	onChangeTableBodyCheckbox = () => {}, setApiData = () => {},
-	setEditedValue = () => {}, refetch = () => {}, invoiceData = {},
+	setEditedValue = () => {}, refetch = () => {}, invoiceData = {}, allowed = true,
 }) => ({
 	renderCheckbox: (itemData) => (
 		<GetTableBodyCheckbox
@@ -20,6 +20,7 @@ const getFunctions = ({
 			onChangeTableBodyCheckbox={onChangeTableBodyCheckbox}
 			apiData={invoiceData}
 			setApiData={setApiData}
+			allowed={allowed}
 		/>
 	),
 	renderToolTip: (itemData, field) => (
@@ -64,7 +65,7 @@ const getFunctions = ({
 			setEditedValue={setEditedValue}
 		/>
 	),
-	renderDelete        : (itemData) => (<Delete itemData={itemData} refetch={refetch} />),
+	renderDelete        : (itemData) => (<Delete itemData={itemData} refetch={refetch} allowed={allowed} />),
 	renderInvoiceNumber : (itemData, field) => (
 		<RenderInvoiceNumber itemData={itemData} field={field} />
 	),

@@ -151,18 +151,18 @@ export const SORTBY_OPTION = [
 	},
 	{
 		label : 'Total Outstanding Amount',
-		value : 'totalOutstandingLedgerAmount',
-		name  : 'totalOutstandingLedgerAmount',
+		value : 'totalOutstanding',
+		name  : 'totalOutstanding',
 	},
 	{
 		label : 'Credit Note',
-		value : 'creditNoteLedgerAmount',
-		name  : 'creditNoteLedgerAmount',
+		value : 'creditNoteAmount',
+		name  : 'creditNote',
 	},
 	{
 		label : 'On Account Amount',
-		value : 'onAccountPaymentLedgerAmount',
-		name  : 'onAccountPaymentLedgerAmount',
+		value : 'onAccountAmount',
+		name  : 'onAccountPayment',
 	},
 	{
 		label : 'Call Priority',

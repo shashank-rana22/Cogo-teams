@@ -3,7 +3,8 @@
 }
 
 .box_info {
-	margin-bottom: 14px;
+	min-width: 250px;
+	margin: 0 4px 14px 0;
 }
 
 .top {
@@ -16,4 +17,9 @@
 	font-size: 14px;
 	font-weight: 500;
 	color: #333;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
 }
