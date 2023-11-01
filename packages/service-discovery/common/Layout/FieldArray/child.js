@@ -68,9 +68,12 @@ function Child({
 					} = newControl;
 
 					let flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENTAGE_FACTOR - FLEX_OFFSET;
+
 					flex = `${flex}%`;
 
-					if (childIndex === controls.length - 1 && !isSubControl) {
+					const deletable = length >= MIN_ELEMENTS_TO_SHOW_DELETE && !disabled && !isSubControl;
+
+					if (childIndex === controls.length - 1 && deletable) {
 						flex = `calc(${flex} - 50px)`;
 					}
 
