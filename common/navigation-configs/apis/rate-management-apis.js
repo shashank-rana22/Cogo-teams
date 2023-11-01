@@ -173,6 +173,11 @@ const rms = [
 		service_name : 'fcl_customs_rate',
 	},
 	{
+		api          : 'delete_air_customs_rate',
+		access_type  : 'private',
+		service_name : 'air_customs_rate',
+	},
+	{
 		api          : 'get_fcl_customs_rate',
 		access_type  : 'private',
 		service_name : 'fcl_customs_rate',

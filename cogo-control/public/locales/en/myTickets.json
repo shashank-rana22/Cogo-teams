@@ -58,7 +58,7 @@
     "has_reassigned_this_ticket_to": "has reassigned this ticket to",
     "this_ticket_has_been_assigned_to": "This ticket has been assigned to",
     "this_ticket_has_been_rejected_by": "This ticket has been rejected by ",
-    "this_ticket_has_been_resolved_by": "This ticket has been resolved by",
+    "this_ticket_has_been_closed_by": "This ticket has been closed by",
     "has_initiated_resolution_request": "has initiated resolution request.",
     "has_closed_resolution_request": "has closed resolution request.",
     "ticket_has_been_created": "Ticket has been created.",
@@ -113,7 +113,7 @@
     "describe_issue": "Describe Issue",
     "select_organization": "Select Organization",
     "select_user": "Select User",
-    "priority_label": "priority",
+    "priority_label": "Priority",
     "select_type": "Select Type",
     "medium": "Medium",
     "low": "Low",
@@ -173,5 +173,6 @@
     "enter_serial_id": "Enter Serial ID",
     "apply": "Apply",
     "reset": "Reset",
-    "serial_id": "Serial ID"
+    "serial_id": "Serial ID",
+    "id_creator": "ID creator"
 }
