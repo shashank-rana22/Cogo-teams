@@ -1,8 +1,11 @@
 import { cl, Pill, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMEdit } from '@cogoport/icons-react';
+import { IcMEdit, IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useState } from 'react';
+
+import SlabsTable from '../../../../HandlingFees/ListHandlingFees/Details/ListItem/SlabsTable';
 
 import styles from './styles.module.css';
 
@@ -64,46 +67,81 @@ function CustomHandlingFeeListItem({
 	data = {}, setShowCustomConfigForm = () => {}, setOrganizationDetails = () => {},
 	setSelectedCustomConfig = () => {},
 }) {
+	const [open, setOpen] = useState(false);
 	const columnsList = columnsWithValue({ data, list: columnsMapping });
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.tags_list}>
-				{(data?.organization_data || []).map((item) => (
-					<div key={item.updated_by} className={styles.tags_row}>
-						<Pill size="md" color="green">{item.organization_name}</Pill>
-					</div>
-				))}
-			</div>
-			<div className={styles.grid_row}>
-				{columnsList.map((columnDetails, index) => {
-					const { key } = columnDetails;
-					return (
-						<div key={key}>
-							<Content
-								key={key}
-								data={data}
-								columnDetails={columnDetails}
-								isLastItem={index === columnsList.length - LAST_INDEX}
-							/>
+			<div className={styles.upper}>
+				<div className={styles.tags_list}>
+					{(data?.organization_data || []).map((item) => (
+						<div key={item.updated_by} className={styles.tags_row}>
+							<Pill size="md" color="green">{item.organization_name}</Pill>
 						</div>
-					);
-				})}
-				<Button
-					style={{ marginRight: '200px' }}
-					themeType="teritiary"
-					onClick={() => {
-						setShowCustomConfigForm(true);
-						setSelectedCustomConfig(data);
-						setOrganizationDetails({
-							organization_type : data?.organization_type || '',
-							cogo_entity_id    : data?.cogo_entity_id || '',
-							organization_name : data?.organization_data || {},
-						});
-					}}
+					))}
+				</div>
+				<div className={styles.grid_row}>
+					{columnsList.map((columnDetails, index) => {
+						const { key } = columnDetails;
+						return (
+							<div key={key}>
+								<Content
+									key={key}
+									data={data}
+									columnDetails={columnDetails}
+									isLastItem={index === columnsList.length - LAST_INDEX}
+								/>
+							</div>
+						);
+					})}
+					<Button
+						style={{ marginRight: '200px' }}
+						themeType="teritiary"
+						onClick={() => {
+							setShowCustomConfigForm(true);
+							setSelectedCustomConfig(data);
+							setOrganizationDetails({
+								organization_type : data?.organization_type || '',
+								cogo_entity_id    : data?.cogo_entity_id || '',
+								organization_name : data?.organization_data || {},
+							});
+						}}
+					>
+						<IcMEdit />
+					</Button>
+				</div>
+			</div>
+
+			<div className={styles.lower}>
+				{open ? (
+					<div
+						className={styles.layout_container}
+						key={data.cogo_entity_id}
+					>
+						<div className={styles.heading}>
+							Slabs Details
+						</div>
+						<div className={styles.block}>
+							<SlabsTable slabsDetailData={data?.slab_details} />
+						</div>
+					</div>
+				) : null }
+				<button
+					className={styles.accordion_container}
+					onClick={() => setOpen(!open)}
 				>
-					<IcMEdit />
-				</Button>
+					{open ? (
+						<>
+							Hide Details
+							<IcMArrowRotateUp />
+						</>
+					) : (
+						<>
+							View Details
+							<IcMArrowRotateDown />
+						</>
+					)}
+				</button>
 			</div>
 
 		</div>
