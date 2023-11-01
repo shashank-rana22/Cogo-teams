@@ -15,13 +15,21 @@ function LoadItem({
 	setShowModal = () => {},
 	setInfoBanner = () => {},
 	margin = 0,
+	popoverContent = false,
 }) {
-	const { commodity = '', trucks_count = 0, truck_type = '', volume = 0, weight = 0 } = loadItem;
+	const {
+		commodity = '',
+		trucks_count = 0,
+		truck_type = '',
+		volume = 0,
+		weight = 0,
+		load_selection_type = '',
+	} = loadItem;
 
 	return (
 		<div className={styles.container} style={{ margin }}>
 			<div className={styles.load_item}>
-				{truck_type ? (
+				{load_selection_type === 'truck' ? (
 					<Tooltip
 						placement="bottom"
 						content={(
@@ -73,7 +81,7 @@ function LoadItem({
 				) : null}
 			</div>
 
-			{commodity ? (
+			{commodity && !popoverContent ? (
 				<div className={styles.load_item}>
 					<Tooltip
 						placement="bottom"

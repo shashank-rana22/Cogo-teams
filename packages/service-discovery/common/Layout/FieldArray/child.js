@@ -19,8 +19,8 @@ const getTruckOptions = (truck, country_id) => {
 	const countryData = getCountryConstants({ country_id });
 
 	const MAPPING = {
-		open_body   : countryData?.options?.open_truck || [],
-		closed_body : countryData?.options?.closed_truck || [],
+		open   : countryData?.options?.open_truck || [],
+		closed : countryData?.options?.closed_truck || [],
 	};
 
 	return MAPPING[truck] || [];

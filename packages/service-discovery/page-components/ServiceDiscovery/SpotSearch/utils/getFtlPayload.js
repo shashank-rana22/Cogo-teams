@@ -32,6 +32,10 @@ const getFtlPayload = (values, origin, destination) => {
 		},
 	});
 
+	if (isEmpty(ftl_touch_points)) {
+		return {};
+	}
+
 	const commonPayload = {
 		cargo_readiness_date,
 		commodity                                   : commodity === 'all' ? null : commodity,

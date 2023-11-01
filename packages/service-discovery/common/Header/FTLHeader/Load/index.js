@@ -82,6 +82,7 @@ function Load({
 										showPopover={showPopover}
 										popoverComponentData={popoverComponentData}
 										setShowModal={setShowModal}
+										popoverContent
 									/>
 								);
 							})}
