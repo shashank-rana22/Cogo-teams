@@ -27,9 +27,11 @@ const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
 			url    : '/list_margins',
 			params : {
 				filters: {
+					agent_id : selected_agent_id || undefined,
+					status   : 'active',
 					...(defaultFilters || {}),
 					...(restFilters || {}),
-					service: activeTab !== 'approval_pending' ? activeService : undefined,
+					service  : activeTab !== 'approval_pending' ? activeService : undefined,
 				},
 				...(defaultParams || {}),
 				page,
