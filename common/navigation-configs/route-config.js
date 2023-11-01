@@ -21,6 +21,7 @@ import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
 import cogoAssured from './config/cogo-assured';
 import cogoOne from './config/cogo-one';
+import cogoStore from './config/cogo-store';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import controlledBooking from './config/controlled-booking';
@@ -191,6 +192,7 @@ const routeConfig = {
 	...saas,
 	...serviceManagement,
 	...cargoInsurance,
+	...cogoStore,
 };
 
 export default routeConfig;

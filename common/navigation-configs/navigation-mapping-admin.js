@@ -2732,6 +2732,18 @@ const navigationMapping = ({ t = () => {} }) => {
 			main_apis     : [],
 			possible_apis : apis.cargo_insurance,
 		},
+		cogo_store: {
+			key           : 'cogo_store',
+			title         : 'Cogo Store',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			href          : '/v2/cogo-store',
+			as            : '/v2/cogo-store',
+			possible_apis : apis.cogo_store,
+			icon          : IcAWarehouse,
+		},
+
 	};
 
 	return navigationMappingAdmin;

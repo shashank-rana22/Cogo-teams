@@ -10,7 +10,7 @@ import VendorList from './VendorList';
 
 function ShowMore({ vendorId = '' }) {
 	const [moreData, setMoreData] = useState(false);
-	const [expenseType, setExpenseType] = useState('RECURRING');
+	const [expenseType, setExpenseType] = useState('NON_RECURRING');
 	const [filters, setFilters] = useState({});
 
 	const OPTIONS = [

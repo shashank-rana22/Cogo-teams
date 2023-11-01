@@ -11,6 +11,7 @@ const getPayload = ({
 	category = '',
 	finalUrl = '',
 	id,
+	subCatId = null,
 }) => ({
 	UserID        : id || undefined,
 	PerformedByID : id || undefined,
@@ -23,6 +24,7 @@ const getPayload = ({
 		RequestType      : 'feedback',
 		Attachment       : [finalUrl] || [],
 	},
+	TicketCategoryID    : subCatId || undefined,
 	Type                : issue_type || undefined,
 	TicketDefaultTypeID : defaultTypeId || undefined,
 	Description         : additional_information || undefined,
@@ -33,6 +35,7 @@ const useAddFeedback = ({
 	additionalInfo = [],
 	getFeedbacks = () => {},
 	setShowAddFeedback = () => {},
+	subCatId = null,
 }) => {
 	const { profile } = useSelector((state) => state);
 
@@ -68,6 +71,7 @@ const useAddFeedback = ({
 					issue_type,
 					category,
 					finalUrl,
+					subCatId,
 				}),
 			});
 
