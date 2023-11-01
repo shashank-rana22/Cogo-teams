@@ -1,6 +1,7 @@
 import React from 'react';
 
-import DataComponent from './DataComponent';
+import AccountTypeWise from '../../../common/Elements/AccountTypeWise';
+
 import styles from './styles.module.css';
 
 const DATA_TO_SHOW = {
@@ -65,21 +66,21 @@ function PerAgentData() {
 				{Object.entries(DATA_TO_SHOW).map(
 					([key, value]) => (
 						<div key={key} className={styles.child_body}>
-							<DataComponent
+							<AccountTypeWise
 								title={key}
 								label={value?.label}
 								dataValue={DATA?.[value?.total]}
 								change={DATA?.[value?.total_change]}
 							/>
 							<div className={styles.segregation}>
-								<DataComponent
+								<AccountTypeWise
 									segregated
 									label="Allocated"
 									dataValue={DATA?.[value?.allocated]}
 									change={DATA?.[value?.allocated_change]}
 								/>
 
-								<DataComponent
+								<AccountTypeWise
 									segregated
 									label="Non-allocated"
 									dataValue={DATA?.[value?.non_allocated]}

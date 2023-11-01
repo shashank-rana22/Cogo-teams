@@ -369,6 +369,10 @@ const GLOBAL_CONSTANTS = {
 		empty_data          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/userAvatar.svg',
 		empty_data_image    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		no_data_image       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty_no_data.svg',
+		call_answered       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call_recieved.png',
+		call_rejected       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call_rejected.png',
+		call_missed         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call_missed.png',
+		call_not_connected  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call_not_connected.png',
 		awb_docs_images     : {
 			original_3:
 			'https://cogoport-production.sgp1.digitaloceanspaces.com/1fcd0257b396ea304a7aebfeaceaee76/original_3.png',

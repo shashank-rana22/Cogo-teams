@@ -38,7 +38,6 @@ function ChartView({ channelType = '' }) {
 					labelsRadiusOffset={0.45}
 					legends={[]}
 				/>
-
 			</div>
 
 			<div className={styles.chart_labels}>

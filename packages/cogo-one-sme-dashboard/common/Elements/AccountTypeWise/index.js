@@ -2,25 +2,25 @@ import { Tooltip, cl } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
-import { PercentageChange } from '../../../../common/Elements';
+import { PercentageChange } from '..';
 
 import styles from './styles.module.css';
 import TooltipContent from './tooltipContent';
 
-function DataComponent({
+function AccountTypeWise({
 	label = '',
-	dataValue = '',
+	dataValue = 0,
 	change = 0,
 	segregated = false,
 	title = '',
+	decimalNotRequired = false,
 }) {
 	return (
 		<div
 			className={cl`${styles.component} ${segregated ? styles.segregated_component : ''}`}
 		>
 			<div
-				className={styles.label}
-				style={{ fontSize: segregated ? '11px' : '14px' }}
+				className={cl`${styles.label} ${cl.ns('label_type')}`}
 			>
 				{label || ''}
 
@@ -39,7 +39,7 @@ function DataComponent({
 				className={styles.total_value}
 				style={{ fontSize: segregated ? '13px' : '26px' }}
 			>
-				{dataValue?.toFixed(2)}
+				{decimalNotRequired ? dataValue : dataValue?.toFixed(2)}
 			</div>
 
 			<PercentageChange
@@ -49,4 +49,4 @@ function DataComponent({
 	);
 }
 
-export default DataComponent;
+export default AccountTypeWise;

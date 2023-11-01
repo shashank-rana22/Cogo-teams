@@ -7,7 +7,7 @@ import RevenueContainer from './RevenueContainer';
 import styles from './styles.module.css';
 import UserData from './UserData';
 
-const CHANNELS = ['email', 'whatsapp'];
+const CHANNELS = ['email', 'whatsapp', 'calls'];
 
 function SmeComponents() {
 	return (

@@ -31,4 +31,10 @@
 
 .segregation {
 	display: flex;
+
+	:global {
+		.ui_label_type {
+			font-size: 11px;
+		}
+	}
 }
