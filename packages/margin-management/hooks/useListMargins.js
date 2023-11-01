@@ -1,9 +1,15 @@
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
 const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
+	const { authParams, selected_agent_id } = useSelector(({ profile }) => ({
+		authParams        : profile?.authParams,
+		selected_agent_id : profile?.selected_agent_id,
+	}));
+
 	const [data, setData] = useState({});
 
 	const [filterParams, setFilterParams] = useState({ ...(defaultFilters || {}) });
@@ -44,7 +50,12 @@ const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
 
 	useEffect(() => {
 		apiTrigger();
-	}, [apiTrigger, filterParams]);
+	}, [
+		apiTrigger,
+		filterParams,
+		authParams,
+		selected_agent_id,
+	]);
 
 	useEffect(() => {
 		setFilterParams((pv) => ({

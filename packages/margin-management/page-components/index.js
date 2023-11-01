@@ -33,7 +33,7 @@ function MarginManagement() {
 			<div className={styles.flex}>
 				<h1 className={styles.heading}>
 					Margin Management
-					<ScopeSelect size="md" />
+					<ScopeSelect size="md" apisToConsider={['list_margins']} />
 				</h1>
 				<Link href="/margins/create" className={styles.button}>
 					<Button size="lg" themeType="primary">CREATE NEW MARGIN</Button>
