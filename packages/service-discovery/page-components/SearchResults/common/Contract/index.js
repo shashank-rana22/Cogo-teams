@@ -55,7 +55,7 @@ function Contract({
 
 	const onClose = () => setShow(false);
 
-	const { component: ActiveComponent, props = {}, closable = true } = COMPONENTS_MAPPING[screen];
+	const { component: ActiveComponent, props = {}, closable = true } = COMPONENTS_MAPPING[screen] || {};
 
 	if (!ActiveComponent) return null;
 
