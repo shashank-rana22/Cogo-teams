@@ -124,6 +124,7 @@ export const PRIORITY_MAPPING = {
 };
 
 export const REQUIRED_ROLES = ['partner-roles', 'partner-users', 'stakeholders'];
+export const HIDE_ASSIGN_FIELD = ['id_creator', 'stakeholders'];
 
 export const getSpectatorTypeOptions = ({ t }) => [
 	{ label: t('myTickets:spectator_type_1'), value: 'reviewer' },
