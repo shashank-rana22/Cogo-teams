@@ -1,5 +1,6 @@
 import React from 'react';
 
+import AgentsExceptionList from './AgentsExceptionList';
 import Analytics from './Analytics';
 import ChannelStats from './ChannelStats';
 import PerAgentData from './PerAgentData';
@@ -23,6 +24,8 @@ function SmeComponents() {
 					key={itm}
 				/>
 			))}
+
+			<AgentsExceptionList />
 		</div>
 	);
 }
