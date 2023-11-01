@@ -244,6 +244,7 @@ const GLOBAL_CONSTANTS = {
 			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8',		// Rishi's ID
 			'7f31a684-61dd-4a65-8ca7-f16bc9bcafd3',		// Akash's ID
 		],
+		smt_allotted_users_role_ids: ['ae80297f-e30d-45fb-845c-61c302523476', 'dcdcb3d8-4dca-42c2-ba87-1a54bc4ad7fb'],
 	},
 	view_key_mappings: {
 		sales_team_members_view          : 'sales_agent_id',
@@ -495,6 +496,7 @@ const GLOBAL_CONSTANTS = {
 		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
 		public_leaderboard_ranking_badge:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/performance-leaderboard.svg',
+		secure_now: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/secureNow.png',
 		airline_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png',
 		wider_arrow: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/wide-arrow',
