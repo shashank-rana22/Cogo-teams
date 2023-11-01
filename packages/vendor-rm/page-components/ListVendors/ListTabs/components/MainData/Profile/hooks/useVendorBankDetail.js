@@ -13,6 +13,20 @@ const API_MAPPING = {
 	swift : { api: '/get_organization_swift_code_details', code_name: 'swift_code' },
 };
 
+const getMutatedPincodeOptions = ({ options = [] }) => {
+	const modifiedOptions = (options || []).map((option) => {
+		const { name = '', postal_code = '' } = option || {};
+		const modifiedName = `${name} (${postal_code})`;
+
+		return {
+			...option,
+			name: modifiedName,
+		};
+	});
+
+	return modifiedOptions;
+};
+
 function useVendorBankDetail({
 	refetchVendorInfo = () => {},
 	data: vendorData,
@@ -59,7 +73,7 @@ function useVendorBankDetail({
 	}, { manual: true });
 
 	useEffect(() => {
-		const fetch_data = async () => {
+		const fetchData = async () => {
 			try {
 				const sessionData = await triggerGetBankDetails({
 					params: { [code_name]: codeType },
@@ -74,7 +88,7 @@ function useVendorBankDetail({
 		};
 
 		if (codeType) {
-			fetch_data();
+			fetchData();
 		}
 	}, [codeType, triggerGetBankDetails, setValue, code_name]);
 
@@ -104,7 +118,9 @@ function useVendorBankDetail({
 	};
 
 	const pincodeOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		initialCall: false, params: { filters: { type: ['pincode'] } },
+		initialCall        : false,
+		params             : { filters: { type: ['pincode'] } },
+		getModifiedOptions : getMutatedPincodeOptions,
 	}));
 
 	const newControls = (controls || []).map((controlItem) => {

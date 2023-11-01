@@ -17,7 +17,7 @@ const useGetOutstandingCard = ({ organizationId, entityCode_in_use:entityCode, l
 		page              : 1,
 		pageLimit         : limit,
 		orgId             : organizationId,
-		paymentStatusList : [],
+		paymentStatusList : ['unpaid', 'partial_paid'],
 	});
 
 	const [sort, setSort] = useState({

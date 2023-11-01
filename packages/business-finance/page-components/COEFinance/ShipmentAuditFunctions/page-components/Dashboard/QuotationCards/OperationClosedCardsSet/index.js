@@ -8,6 +8,8 @@ import styles from './styles.module.css';
 function OperationClosedCardsSet({
 	job_id = '',
 	shipment_id = '',
+	billsMap = {},
+	invoicesMap = {},
 	setQuotationsData = () => {},
 }) {
 	const {
@@ -29,6 +31,8 @@ function OperationClosedCardsSet({
 				shipment_id={shipment_id}
 				type="sell"
 				loading={taskDataLoading}
+				invoicesMap={invoicesMap}
+				billsMap={billsMap}
 				getClosedTasks={getClosedTasks}
 			/>
 
@@ -38,6 +42,8 @@ function OperationClosedCardsSet({
 				type="buy"
 				loading={taskDataLoading}
 				shipment_id={shipment_id}
+				invoicesMap={invoicesMap}
+				billsMap={billsMap}
 				getClosedTasks={getClosedTasks}
 			/>
 		</div>

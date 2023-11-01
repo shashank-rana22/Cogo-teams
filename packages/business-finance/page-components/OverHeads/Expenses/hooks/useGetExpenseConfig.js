@@ -10,7 +10,7 @@ const useGetExpenseConfig = ({ id }) => {
 		{
 			url     : '/purchase/expense/expense-configuration',
 			method  : 'get',
-			authKey : 'get_purchase_expense_expense_configuration_by_id',
+			authKey : 'get_purchase_expense_expense_configuration',
 		},
 		{ manual: true },
 	);

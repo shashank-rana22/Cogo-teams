@@ -17,6 +17,20 @@ const API_MAPPING = {
 	},
 };
 
+const getMutatedPincodeOptions = ({ options = [] }) => {
+	const modifiedOptions = (options || []).map((option) => {
+		const { name = '', postal_code = '' } = option || {};
+		const modifiedName = `${name} (${postal_code})`;
+
+		return {
+			...option,
+			name: modifiedName,
+		};
+	});
+
+	return modifiedOptions;
+};
+
 function useVendorBankDetail({
 	setActiveStepper = () => {},
 	vendorInformation = {},
@@ -62,7 +76,7 @@ function useVendorBankDetail({
 	}, { manual: true });
 
 	useEffect(() => {
-		const fetch_data = async () => {
+		const fetchData = async () => {
 			try {
 				const sessionData = await triggerGetBankDetails({
 					params: { [code_name]: codeType },
@@ -77,7 +91,7 @@ function useVendorBankDetail({
 		};
 
 		if (codeType) {
-			fetch_data();
+			fetchData();
 		}
 	}, [codeType, triggerGetBankDetails, code_name, setValue]);
 
@@ -112,7 +126,11 @@ function useVendorBankDetail({
 	};
 
 	const pincodeOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		initialCall: true, params: { filters: { type: ['pincode'], country_id } },
+		initialCall : true,
+		params      : {
+			filters: { type: ['pincode'], country_id },
+		},
+		getModifiedOptions: getMutatedPincodeOptions,
 	}));
 
 	const newControls = (controls || []).map((controlItem) => {
