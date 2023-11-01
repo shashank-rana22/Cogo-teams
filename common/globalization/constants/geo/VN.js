@@ -184,7 +184,6 @@ export default {
 		],
 		service_ops2_role_id: [
 			'017856dc-b424-4145-9181-5680732cb33b',
-			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)
 			'8b04b2b9-baa1-4913-bf4c-b11effecef0b', // SO2 Executive
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 			'123951fe-78aa-4ad1-b2da-fa6191e3a876', // SO2
@@ -294,6 +293,7 @@ export default {
 		service_ops3              : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
 		data_superadmin           : 'df340ea2-91b5-4cbc-80ab-d11cec21f040',
 		kam_admin                 : 'df6591f0-f41b-4283-9966-7d0225e1df00', // Kam Admin Vietnam
+		so2_executive             : '12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)'
 	},
 	options: {
 		registration_types: [

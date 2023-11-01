@@ -12,7 +12,7 @@ function getRenderHeader({
 		reviewer_reassigned              : `${name} ${t('myTickets:has_reassigned_this_ticket_to')} ${oldReviewerName}`,
 		reviewer_assigned                : `${t('myTickets:this_ticket_has_been_assigned_to')} ${name}`,
 		rejected                         : `${t('myTickets:this_ticket_has_been_rejected_by')} ${name}`,
-		mark_as_resolved                 : `${t('myTickets:this_ticket_has_been_resolved_by')} ${name}`,
+		mark_as_resolved                 : `${t('myTickets:this_ticket_has_been_closed_by')} ${name}`,
 		resolution_requested             : `${name} ${t('myTickets:has_initiated_resolution_request')}`,
 		resolution_rejected              : `${name} ${t('myTickets:has_closed_resolution_request')}`,
 		ticket_created                   : `${t('myTickets:ticket_has_been_created')}`,
