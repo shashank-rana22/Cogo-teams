@@ -263,6 +263,7 @@ function Create({ type = 'create', item = {} }) {
 					) : null}
 
 				<Margin
+					key={item.id}
 					idValues={idValues}
 					type={type}
 					service={formValues?.service}
