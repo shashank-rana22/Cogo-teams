@@ -1,4 +1,6 @@
+import currencyOptions from '@cogoport/forms/page-components/Business/PriceSelect/currencies';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMProductCodeMapping } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { addDays } from '@cogoport/utils';
 
@@ -39,6 +41,49 @@ const getRegistrationControls = ({ billingType = '' }) => ([
 const getInsuranceControls = ({ incotermResponse = {} }) => {
 	const { list = [], display = false } = incotermResponse || {};
 	return ([
+		{
+			name        : 'currency',
+			label       : 'Invoice Currency',
+			placeholder : 'Select Invoice Currency',
+			type        : 'select',
+			size        : 'sm',
+			options     : currencyOptions,
+			rules       : { required: true },
+		},
+		{
+			name        : 'cargoValue',
+			label       : 'Invoice Value',
+			placeholder : 'Select Invoice Value',
+			size        : 'sm',
+			type        : 'number',
+			rules       : { required: true },
+		},
+		{
+			name               : 'hsCode',
+			label              : 'HS Code',
+			placeholder        : 'Select HS Code',
+			prefix             : <IcMProductCodeMapping width={14} height={14} />,
+			type               : 'asyncSelect',
+			size               : 'sm',
+			asyncKey           : 'list_saas_hs_codes',
+			initialCall        : true,
+			rules              : { required: true },
+			params             : { codeType: 'FINAL' },
+			labelKey           : 'display_name',
+			valueKey           : 'hsCode',
+			getModifiedOptions : ({ options }) => options.map((opt) => ({
+				...opt,
+				display_name: (
+					<div>
+						{opt?.hsCode}
+						{' '}
+						-
+						{' '}
+						{opt?.description}
+
+					</div>),
+			})),
+		},
 		{
 			name        : 'cargoDescription',
 			label       : 'Cargo Description',

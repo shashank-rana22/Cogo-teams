@@ -14,7 +14,7 @@ import {
 	UploadSI,
 	MarkIgmShipmentConfirm,
 } from './CustomTasks';
-import CargoInsurance from './CustomTasks/CargoInsurance';
+import CargoInsurance from './CustomTasks/CargoInsuranceV2/components';
 import ConfirmFreightBooking from './CustomTasks/ConfirmFreightBooking';
 import ExecuteStep from './ExecuteStep';
 import getCustomTaskComponent from './getCustomTaskComponent';
@@ -46,6 +46,8 @@ function ExecuteTask({
 		stakeholderConfig = {},
 		refetch: getShipmentRefetch = () => {},
 	} = useContext(ShipmentDetailContext);
+
+	console.log(shipment_data, 'shipment_data', servicesList);
 
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });

@@ -489,7 +489,9 @@ const GLOBAL_CONSTANTS = {
 		groups                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/group.png',
 		performance_leaderboard_confetti:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti_svg.svg',
-		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
+		performance_leaderboard_ranking_badge:
+			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
+		upload_icon: 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/upload_icon.png',
 	},
 
 	video_call_ring_tone_url:
