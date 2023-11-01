@@ -8,7 +8,7 @@ import FilterModal from './FilterModal';
 import getControls from './getControls';
 import styles from './styles.module.css';
 
-const checkIfFiltersChanged = (defaultValues, finalValues) => {
+const getFiltersCount = (defaultValues, finalValues) => {
 	let count = 0;
 
 	Object.entries(defaultValues).forEach(([key, value]) => {
@@ -60,7 +60,7 @@ function Filters({
 		// transitTime,
 	});
 
-	const filtersAppliedCount = checkIfFiltersChanged(defaultValues, filters);
+	const filtersCount = getFiltersCount(defaultValues, filters);
 
 	const onClickButton = () => {
 		setShowFilterModal(true);
@@ -85,14 +85,17 @@ function Filters({
 					style={{ marginRight: 12 }}
 				/>
 				Filters
-				{filtersAppliedCount ? <IcMFtick className={styles.tick_icon} /> : null}
+				{filtersCount ? <IcMFtick className={styles.tick_icon} /> : null}
 			</Button>
 
-			{filtersAppliedCount ? (
+			{filtersCount ? (
 				<span className={styles.count}>
-					{filtersAppliedCount}
+					{filtersCount}
 					{' '}
-					filters applied
+					filter
+					{filtersCount > 1 ? 's' : ''}
+					{' '}
+					applied
 				</span>
 			) : null}
 
