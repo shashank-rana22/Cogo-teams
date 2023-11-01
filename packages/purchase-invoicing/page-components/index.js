@@ -1,13 +1,12 @@
-// import { isEmpty } from '@cogoport/utils';
-
+import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import useGetCollectionParty from '../hooks/useGetCollectionPartylist';
-// import useGetShipmentCrossEntityInvoice from '../hooks/useGetShipmentCrossEntityInvoice';
+import useGetShipmentCrossEntityInvoice from '../hooks/useGetShipmentCrossEntityInvoice';
 
 import CollectionPartyDetails from './CollectionPartyDetails';
 import Loader from './CollectionPartyDetails/Loader';
-// import Invoices from './Invoices';
+import Invoices from './Invoices';
 
 function PurchaseInvoicing({
 	shipmentData = {},
@@ -25,12 +24,12 @@ function PurchaseInvoicing({
 		shipment_type : shipmentData?.shipment_type,
 	});
 
-	// const {
-	// 	data: invoiceDataCE,
-	// 	groupedInvoices:groupedInvoicesCE,
-	// 	loading:loadingCE,
-	// 	refetch:purchaseInvoicesRefetch,
-	// } = useGetShipmentCrossEntityInvoice({ shipment_id: shipmentData?.id });
+	const {
+		data: invoiceDataCE,
+		groupedInvoices:groupedInvoicesCE,
+		loading:loadingCE,
+		refetch:purchaseInvoicesRefetch,
+	} = useGetShipmentCrossEntityInvoice({ shipment_id: shipmentData?.id });
 
 	useEffect(() => {
 		if (!collectionPartyLoading) {
@@ -39,7 +38,7 @@ function PurchaseInvoicing({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [collectionPartyLoading, JSON.stringify(collectionPartyList), setCollectionPartyData]);
 
-	if (collectionPartyLoading) {
+	if (collectionPartyLoading || loadingCE) {
 		return <Loader />;
 	}
 
@@ -57,7 +56,7 @@ function PurchaseInvoicing({
 				/>
 			))}
 
-			{/* {!loadingCE && !isEmpty(invoiceDataCE) && shipmentData?.shipment_type === 'fcl_freight' ? (
+			{!loadingCE && !isEmpty(invoiceDataCE) && shipmentData?.shipment_type === 'fcl_freight' ? (
 				<Invoices
 					invoiceDataCE={invoiceDataCE}
 					groupedInvoicesCE={groupedInvoicesCE}
@@ -65,7 +64,7 @@ function PurchaseInvoicing({
 					shipmentData={shipmentData}
 					purchaseInvoicesRefetch={purchaseInvoicesRefetch}
 				/>
-			) : null} */}
+			) : null}
 		</div>
 	);
 }
