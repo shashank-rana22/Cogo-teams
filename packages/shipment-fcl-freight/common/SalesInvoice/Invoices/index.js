@@ -4,11 +4,11 @@ import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import useGetCreditNotes from '../../../hooks/useGetCreditNotes';
-// import useGetCrossEntityCreditNotes from '../../../hooks/useGetCrossEntityCreditNotes';
+import useGetCrossEntityCreditNotes from '../../../hooks/useGetCrossEntityCreditNotes';
 import useListBfSalesInvoices from '../../../hooks/useListBfSalesInvoices';
 import useOrgOutStanding from '../../../hooks/useOrgOutStanding';
 import CreditNote from '../CreditNote';
-// import CrossEntityCreditNote from '../CrossEntityCreditNote';
+import CrossEntityCreditNote from '../CrossEntityCreditNote';
 import POST_REVIEWED_INVOICES from '../helpers/post-reviewed-sales-invoices';
 
 import Header from './Header';
@@ -65,7 +65,7 @@ function Invoices({
 
 	const { list = [], cnRefetch = () => {}, loading: cNLoading = false } = useGetCreditNotes({});
 
-	// const { listCrossEntityCreditNote = [], crossEntityCreditNoteLoading = false } = useGetCrossEntityCreditNotes();
+	const { listCrossEntityCreditNote = [], crossEntityCreditNoteLoading = false } = useGetCrossEntityCreditNotes();
 
 	return (
 		<main className={styles.container}>
@@ -128,7 +128,7 @@ function Invoices({
 					/>
 
 				) : null}
-			{/*
+
 			{!isEmpty(listCrossEntityCreditNote) ? (
 
 				<CrossEntityCreditNote
@@ -137,7 +137,7 @@ function Invoices({
 					invoicesList={invoicesList}
 				/>
 
-			) : null} */}
+			) : null}
 
 		</main>
 	);
