@@ -1,13 +1,7 @@
 import { useLensRequest } from '@cogoport/request';
-import {
-	query, getDocs, collection, orderBy,
-} from 'firebase/firestore';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
-import { FIRESTORE_PATH } from '../configurations/firebase-config';
-import { combineChunks } from '../utils/chunkUtils';
-
-const MESSAGE_TYPES = ['rte_content', 'body'];
+import getFirebaseDraftBody from '../helpers/getFirebaseDraftBody';
 
 const getParams = ({ messageId = '', source = '' }) => ({
 	email_address : source,
@@ -29,87 +23,43 @@ const formatBody = ({ mailResData = {}, attachmentResData = {} }) => {
 };
 
 function useGetMailContent({
-	messageId = '',
-	source = '',
-	setExpandedState = () => {},
-	isDraft = false,
-	channel_type = 'email',
 	firestore = {},
-	roomId = '',
-	messageRoomId = '',
-	setDraftQuillBody = () => {},
+	formattedData = {},
 }) {
-	const [message, setMessage] = useState('');
+	const [fullThread, setFullThread] = useState('');
+	const [expandedStateId, setExpandedStateId] = useState('');
 
-	const [{ loading }, trigger] = useLensRequest({
+	const [loading, setLoading] = useState(false);
+
+	const { source = '', roomId = '' } = formattedData || {};
+
+	const [, trigger] = useLensRequest({
 		url    : '/get_mail',
 		method : 'get',
 	}, { manual: true });
 
-	const [{ loading: attachmentLoading }, attachmentTrigger] = useLensRequest({
+	const [, attachmentTrigger] = useLensRequest({
 		url    : '/get_attachments',
 		method : 'get',
 	}, { manual: true });
 
-	const combinedLoading = loading || attachmentLoading;
-
-	const getFirebaseEmailBody = useCallback(async () => {
-		const messagesData = await Promise.all(
-			MESSAGE_TYPES.map(
-				async (itm) => {
-					const activeChatCollection = collection(
-						firestore,
-						`${FIRESTORE_PATH[channel_type]}/${roomId}/messages/${messageRoomId}/${itm}`,
-					);
-
-					const assignedChatsQuery = query(
-						activeChatCollection,
-						orderBy('serial_id', 'asc'),
-					);
-
-					const getAssignedChatsQuery = await getDocs(assignedChatsQuery);
-					return {
-						type : itm,
-						data : getAssignedChatsQuery,
-					};
-				},
-			),
-		);
-
-		return messagesData;
-	}, [channel_type, firestore, roomId, messageRoomId]);
-
-	const getEmailBody = useCallback(async () => {
-		if (combinedLoading || (!isDraft && message)) {
-			return;
-		}
+	const getEmailBody = useCallback(async ({ isDraft = false, messageId = '', messageRoomId = '' }) => {
+		setExpandedStateId(messageRoomId);
+		setLoading(true);
 
 		try {
 			if (isDraft) {
-				const messageDocs = await getFirebaseEmailBody();
+				const {
+					newContent,
+				} = await getFirebaseDraftBody({ messageRoomId, firestore, roomId }) || {};
 
-				const newContent = messageDocs?.reduce(
-					(acc, itm) => {
-						const content = combineChunks({ chunks: itm?.data });
-
-						setDraftQuillBody(
-							(prev) => ({
-								...(prev || {}),
-								[itm?.type]: content,
-							}),
-						);
-						return `${acc}<br>${content.content}`;
-					},
-					'',
-				);
-
-				setMessage(newContent);
+				setFullThread(newContent);
 			} else {
 				const mailResData = await trigger({
 					params: getParams({ messageId, source }),
 				});
 
-				setMessage(mailResData?.data?.body?.content);
+				setFullThread(mailResData?.data?.body?.content);
 
 				const attachmentResData = await attachmentTrigger({
 					params: getParams({ messageId, source }),
@@ -117,20 +67,40 @@ function useGetMailContent({
 
 				const newContent = formatBody({ mailResData, attachmentResData });
 
-				setMessage(newContent);
+				setFullThread(newContent);
 			}
 		} catch (err) {
-			console.error(err);
+			setExpandedStateId('');
+			setFullThread('');
 		} finally {
-			setExpandedState(true);
+			setLoading(false);
 		}
-	}, [combinedLoading, message, isDraft, getFirebaseEmailBody, setDraftQuillBody,
-		trigger, messageId, source, attachmentTrigger, setExpandedState]);
+	}, [firestore, roomId, trigger, source, attachmentTrigger]);
+
+	const toggleMailBody = ({ isDraft = false, messageId = '', messageRoomId = '' }) => {
+		if (loading) {
+			return;
+		}
+
+		setExpandedStateId('');
+		setFullThread('');
+
+		if (expandedStateId !== messageRoomId) {
+			getEmailBody({ isDraft, messageId, messageRoomId });
+		}
+	};
+
+	useEffect(() => {
+		setLoading(false);
+		setFullThread('');
+		setExpandedStateId('');
+	}, [roomId]);
 
 	return {
-		getEmailBody,
-		message,
-		loading,
+		expandLoading: loading,
+		toggleMailBody,
+		fullThread,
+		expandedStateId,
 	};
 }
 

@@ -1,4 +1,4 @@
-import TimeLine from '../../../../../../common/TimeLine';
+import useGetMailContent from '../../../../../../hooks/useGetMailContent';
 import { LoadPrevMessages } from '../MessagesThread';
 import { ReceiveDivComponent, SentDivComponent } from '../MessagesThread/conversationDivMappings';
 import NewUserOutBound from '../MessagesThread/NewUserOutBound';
@@ -6,7 +6,6 @@ import NewUserOutBound from '../MessagesThread/NewUserOutBound';
 const CONVERSATION_TYPE_MAPPING = {
 	sent     : ReceiveDivComponent,
 	received : SentDivComponent,
-	default  : TimeLine,
 };
 
 const MESSAGE_CONVERSATION_TYPES = ['sent', 'received'];
@@ -41,6 +40,8 @@ function MailsThread(
 		(item) => MESSAGE_CONVERSATION_TYPES.includes(item?.conversation_type),
 	);
 
+	const mailContentProps = useGetMailContent({ firestore, formattedData });
+
 	if (hasNoFireBaseRoom) {
 		return (
 			<NewUserOutBound
@@ -53,8 +54,11 @@ function MailsThread(
 	return (
 		<>
 			{(updatedArray || [])?.map((eachMessage) => {
-				const Component = CONVERSATION_TYPE_MAPPING[eachMessage?.conversation_type]
-                 || CONVERSATION_TYPE_MAPPING.default;
+				const Component = CONVERSATION_TYPE_MAPPING[eachMessage?.conversation_type] || null;
+
+				if (!Component) {
+					return null;
+				}
 
 				return (
 					<Component
@@ -72,6 +76,7 @@ function MailsThread(
 						firestore={firestore}
 						isTheFirstMessageId={isTheFirstMessageId?.id}
 						roomId={roomId}
+						{...(mailContentProps || {})}
 					/>
 				);
 			})}

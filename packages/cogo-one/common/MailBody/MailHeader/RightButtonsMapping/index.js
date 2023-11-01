@@ -74,6 +74,7 @@ function RightButtonsMapping({
 	handleClick = () => {},
 	emailStatus = '',
 	isDraftAlreadySent = false,
+	loading = false,
 }) {
 	const buttonKeys = BUTTON_KEYS_MAPPING[isDraft ? 'draft' : 'mail'] || [];
 
@@ -93,6 +94,7 @@ function RightButtonsMapping({
 						role="presentation"
 						key={key}
 						className={styles.icon_styles}
+						style={{ loading: loading ? 'not-allowed' : 'pointer' }}
 						onClick={(e) => {
 							e.stopPropagation();
 							handleClick({ buttonType: key });

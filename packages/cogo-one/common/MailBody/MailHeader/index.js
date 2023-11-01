@@ -16,6 +16,7 @@ function MailHeader({
 	hasPermissionToEdit = false,
 	isDraft = false,
 	emailStatus = '',
+	loading = false,
 }) {
 	const {
 		response, send_by = '',
@@ -83,6 +84,7 @@ function MailHeader({
 							handleClick={handleClick}
 							emailStatus={emailStatus}
 							isDraftAlreadySent={!!communication_id}
+							loading={loading}
 						/>
 					</div>
 				) : null}
