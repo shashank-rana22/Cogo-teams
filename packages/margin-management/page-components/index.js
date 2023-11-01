@@ -1,16 +1,15 @@
 import { Button } from '@cogoport/components';
-import { Link } from '@cogoport/next';
+import { useRouter } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
 
 import useListMargins from '../hooks/useListMargins';
 
-// import MarginValues from './MarginValues';
-// import Search from './Search';
 import styles from './styles.module.css';
 import TabComponent from './TabComponent';
-// import ListPagination from './TabComponent/ListPagination';
 
 function MarginManagement() {
+	const router = useRouter();
+
 	const {
 		data = {},
 		loading = false,
@@ -35,9 +34,13 @@ function MarginManagement() {
 					Margin Management
 					<ScopeSelect size="md" apisToConsider={['list_margins']} />
 				</h1>
-				<Link href="/margins/create" className={styles.button}>
-					<Button size="lg" themeType="primary">CREATE NEW MARGIN</Button>
-				</Link>
+				<Button
+					onClick={() => router.push('/margins/create')}
+					size="lg"
+					themeType="primary"
+				>
+					+ Create New Margin
+				</Button>
 			</div>
 			<TabComponent
 				marginBreakupData={marginBreakupData}
