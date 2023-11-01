@@ -2,9 +2,10 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useHarbourRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
-const useListAllOrders = ({ dateArray = [] }) => {
+const useListAllOrders = ({ dateArray = [] } = []) => {
 	const [filters, setFilters] = useState({
 		page_limit : 10,
 		page       : 1,
@@ -17,6 +18,9 @@ const useListAllOrders = ({ dateArray = [] }) => {
 
 	const getOrders = useCallback(
 		async () => {
+			if (isEmpty(dateArray)) {
+				return;
+			}
 			try {
 				const { page_limit, page, order_status, date_sort, ...rest } = filters;
 				await trigger({
