@@ -1,4 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMAppFinance,
 	IcMAppInsurance,
@@ -8,7 +7,8 @@ import {
 	IcMAppMachineIntelligence,
 	IcMAppCustoms,
 } from '@cogoport/icons-react';
-import { Image } from '@cogoport/next';
+
+import SecureNow from '../../../../common/SecureNow';
 
 const other_services = [
 	{
@@ -16,12 +16,7 @@ const other_services = [
 		value         : 'insurance',
 		icon          : IcMAppInsurance,
 		is_available  : false,
-		footerContent : (
-			<>
-				Powered by
-				{' '}
-				<Image src={GLOBAL_CONSTANTS.image_url.secure_now} width={72} height={12} />
-			</>),
+		footerContent : <SecureNow />,
 	},
 	{
 		label        : 'Customs Clearance',
