@@ -2,6 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
+import getFormattedDate from '../../../utils/get-formatted-date';
 import getRankFromScore from '../configurations/getRankFromScore';
 import PublicLeaderBoardContext from '../context/PublicLeaderBoardContext';
 
@@ -58,8 +59,9 @@ function useGetLeaderbordList(props) {
 				report_type      : ['owner_wise', 'manager_wise', 'kam_wise'].includes(view)
 					? `${view.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]}_report` : undefined,
 				created_at_greater_than : dateRange?.startDate || undefined,
-				created_at_less_than    : dateRange?.endDate || undefined,
-				office_location_id      : office_location_id || undefined,
+				created_at_less_than    : dateRange?.endDate
+					? getFormattedDate({ currentDate: dateRange?.endDate }) : undefined,
+				office_location_id: office_location_id || undefined,
 			},
 		}));
 	}, [view, dateRange, office_location_id]);
