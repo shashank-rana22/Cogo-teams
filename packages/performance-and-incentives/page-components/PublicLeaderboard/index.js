@@ -24,6 +24,11 @@ function PublicDashboard() {
 	const switchScreen = useCallback(() => {
 		if (screen === 'overall') setScreen('comparison');
 		else setScreen('overall');
+		setDuration('today');
+		setDateRange({
+			startDate : getTodayStartDate(),
+			endDate   : new Date(),
+		});
 	}, [screen, setScreen]);
 
 	const { countdown } = useCountDown({ updatedAt });
