@@ -10,7 +10,7 @@ function PriceFreightCtr({
 	at_actuals = false,
 }) {
 	const data = [
-		(!at_actuals && {
+		(!at_actuals && total_price_discounted === 0 && {
 			label  : 'Price : ',
 			amount : formatAmount({
 				amount   : total_price_discounted,
