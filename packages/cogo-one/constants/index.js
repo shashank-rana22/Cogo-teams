@@ -518,6 +518,7 @@ export const STATUS_TYPE_MAPPING = {
 export const STATUS_KEY_MAPPING = {
 	open   : 'unresolved,pending,escalated,overdue,reject_requested,resolve_requested',
 	closed : 'closed,rejected',
+	all    : 'unresolved,pending,escalated,overdue,reject_requested,resolve_requested,closed,rejected',
 };
 
 export const OFFLINE_REASONS_OPTIONS = [

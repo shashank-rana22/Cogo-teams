@@ -1,9 +1,7 @@
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const URL_MAPPING = {
-	fcl_freight : 'fcl',
-	air_freight : 'air-freight',
-};
+const URL_MAPPING = GLOBAL_CONSTANTS.SHIPMENT_ROUTE_MAPPING;
 
 const getRedirectionDetails = ({
 	isCheckoutApiSuccess = false,

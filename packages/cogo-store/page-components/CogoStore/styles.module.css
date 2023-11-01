@@ -1,0 +1,19 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	background: #fff;
+
+	@media (max-width: 767px) {
+		padding: 12px;
+		margin-top: 54px;
+	}
+
+	:global {
+		@media (max-width: 767px) {
+			.ui_carousel_container {
+				margin-top: 12px;
+			}
+		}
+	}
+}
