@@ -5,6 +5,16 @@ import ENTITY_MAPPING from './entityMapping';
 import LANGUAGE_OPTIONS from './languageMapping';
 import supplierEntityMapping from './supplierEntityMapping.json';
 
+const COUNTRY_IDS = {
+	IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
+	VN : '177fcbad-8ef7-4324-871c-6c31745f4411',
+	GB : '222d4b9d-56a8-4580-b761-a71c653263fb',
+	SG : '6e18d508-87b9-4e7e-a785-b47edc76b0b7',
+	ID : '2693fa76-6539-410d-a0b0-551d9e620ba3',
+	TH : '61a683f3-128b-4193-98f7-dd72f68db03d',
+	CN : '1b94734e-7d51-4e94-9dd2-ef96aee64a8f',
+};
+
 const GLOBAL_CONSTANTS = {
 	attendence_options: [
 		{ value: 'flexi_shift', label: 'Flexi Shift' },
@@ -37,14 +47,7 @@ const GLOBAL_CONSTANTS = {
 		TH : '6d92cf58-3392-44c3-8e1b-09192f98f8be',
 		CN : 'd39c9a59-93e3-4823-b85f-c72139cf138f',
 	},
-	country_ids: {
-		IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
-		VN : '177fcbad-8ef7-4324-871c-6c31745f4411',
-		SG : '6e18d508-87b9-4e7e-a785-b47edc76b0b7',
-		ID : '2693fa76-6539-410d-a0b0-551d9e620ba3',
-		TH : '61a683f3-128b-4193-98f7-dd72f68db03d',
-		CN : '1b94734e-7d51-4e94-9dd2-ef96aee64a8f',
-	},
+	country_ids: COUNTRY_IDS,
 
 	platform_supported_country_codes: ['IN', 'VN', 'SG', 'ID', 'TH', 'CN'],
 
@@ -241,6 +244,7 @@ const GLOBAL_CONSTANTS = {
 			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8',		// Rishi's ID
 			'7f31a684-61dd-4a65-8ca7-f16bc9bcafd3',		// Akash's ID
 		],
+		smt_allotted_users_role_ids: ['ae80297f-e30d-45fb-845c-61c302523476', 'dcdcb3d8-4dca-42c2-ba87-1a54bc4ad7fb'],
 	},
 	view_key_mappings: {
 		sales_team_members_view          : 'sales_agent_id',
@@ -492,6 +496,8 @@ const GLOBAL_CONSTANTS = {
 		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
 		public_leaderboard_ranking_badge:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/performance-leaderboard.svg',
+		public_leaderboard_winner_icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/winner_icon.svg',
+		secure_now                     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/secureNow.png',
 	},
 
 	video_call_ring_tone_url:
@@ -505,6 +511,10 @@ const GLOBAL_CONSTANTS = {
 		+ 'Book%201%20-%20Copy.xlsx',
 		bulk_jv_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/81afabc7ffea4be1540099612af2ffd1/'
 		+ 'JVBulkUploadSampleExcel.xlsx',
+		csd_sample: 'https://cogoport-production.sgp1.digitaloceanspaces.com/9b60f34ea9aeb09a2dff0bd02c38174e/'
+		+ 'SampleJvUploadForCSD.xlsx',
+		others_sample: 'https://cogoport-production.sgp1.digitaloceanspaces.com/1374e265882bf79899b72c75025c8b5e/'
+		+ 'SampleJVUploadForOtherAccmode.xlsx',
 	},
 
 	urls: {
@@ -756,6 +766,41 @@ const GLOBAL_CONSTANTS = {
 	],
 	service_supported_countries: {
 		feature_supported_service: {
+			common: {
+				services: {
+					feedback_services: {
+						allowed_currency: [
+							'INR',
+							'USD',
+							'EUR',
+							'GBP',
+							'VND',
+							'IDR',
+							'SGD',
+							'THB',
+							'CNY',
+							'AED',
+						],
+					},
+					invoicing_parties_checkout: {
+						allowed_currency: ['INR', 'USD', 'VND', 'IDR', 'SGD', 'THB', 'CNY'],
+					},
+					air_domestic: {
+						countries           : ['IN'],
+						default_country_id  : COUNTRY_IDS.IN,
+						default_country_ids : [COUNTRY_IDS.IN],
+					},
+					ftl_freight: {
+						countries           : ['IN', 'VN'],
+						default_country_id  : COUNTRY_IDS.IN,
+						default_country_ids : [COUNTRY_IDS.IN, COUNTRY_IDS.VN],
+					},
+					ltl_freight: {
+						countries           : ['IN'],
+						default_country_ids : [COUNTRY_IDS.IN, COUNTRY_IDS.VN],
+					},
+				},
+			},
 			cargo_insurance: {
 				countries: ['IN'],
 			},
@@ -871,6 +916,10 @@ const GLOBAL_CONSTANTS = {
 	default_preferred_language : 'english',
 	supplier_entity_mapping    : supplierEntityMapping.shippingCompanies,
 	cogoport_care_user_id      : '413eb04c-037b-44cd-b68c-ce4fc277c156',
+	office_location_ids        : {
+		gurgaon : '9cf87c31-f991-4351-976d-3abd7eff374d',
+		mumbai  : '48a489eb-76d3-419a-bffc-dac6715056d3',
+	},
 };
 
 export default GLOBAL_CONSTANTS;

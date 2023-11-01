@@ -33,7 +33,7 @@ function VendorDetailsInfo({
 	return (
 		<div className={styles.container}>
 			{details.map((item) => (
-				<div key={item.label}>
+				<div key={item.label} className={styles.box_info}>
 					<div className={styles.top}>
 						{item.label}
 					</div>
