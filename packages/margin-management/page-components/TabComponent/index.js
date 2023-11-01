@@ -167,7 +167,8 @@ function TabComponent({
 					className="primary lg"
 					show={showFunnelModal}
 					onClose={() => setShowFunnelModal(false)}
-					size="lg"
+					size="xl"
+					scroll={false}
 				>
 					<Modal.Header title="Transaction Details" />
 					<Modal.Body>
