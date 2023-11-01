@@ -8,7 +8,7 @@ import { merge, startCase } from '@cogoport/utils';
 
 import useGetMainPortsOptions from '../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 
-function FieldMutation({ fields, values, filter, chargeCodes }) {
+function FieldMutation({ fields, values, filter, chargeCodes, fclCfsChargeCodes }) {
 	const organizationUsers = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganizationUsers(),
@@ -78,7 +78,8 @@ function FieldMutation({ fields, values, filter, chargeCodes }) {
 					const chargeValues = values[control.name];
 					chargeValues?.forEach((item, i) => {
 						UNIT_OPTIONS[i] = (
-							chargeCodes?.[item.code]?.units || ['per_container']
+							chargeCodes?.[item.code]?.units || fclCfsChargeCodes?.[item.cfs_line_items]?.units
+							|| ['per_container']
 						).map((unit) => ({
 							label : startCase(unit),
 							value : unit,
@@ -92,6 +93,13 @@ function FieldMutation({ fields, values, filter, chargeCodes }) {
 					const OPTIONS = [];
 					Object.keys(chargeCodes || {}).forEach((code) => {
 						OPTIONS.push({ label: `${code} ${chargeCodes[code]?.name}`, value: code });
+					});
+					childCtrl.options =	OPTIONS;
+				}
+				if (childCtrl.name === 'cfs_line_items') {
+					const OPTIONS = [];
+					Object.keys(fclCfsChargeCodes || {}).forEach((code) => {
+						OPTIONS.push({ label: `${code} ${fclCfsChargeCodes[code]?.name}`, value: code });
 					});
 					childCtrl.options =	OPTIONS;
 				}
