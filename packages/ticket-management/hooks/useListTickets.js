@@ -9,7 +9,7 @@ import {
 	useCallback,
 } from 'react';
 
-import { TICKET_SECTION_MAPPING } from '../constants';
+import { EMPLOYEE_LEVEL, MY_TEAM_LEVEL, TICKET_SECTION_MAPPING } from '../constants';
 
 const DEFAULT_PAGE = 1;
 const PAGE_DECREMENT = 1;
@@ -40,8 +40,9 @@ const getPayload = ({
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 		formatType : 'date',
 	}) || undefined,
-	SerialID : serialId || undefined,
-	IDType   : idType || undefined,
+	SerialID      : serialId || undefined,
+	IDType        : idType || undefined,
+	EmployeeLevel : MY_TEAM_LEVEL?.includes(spectatorType) ? EMPLOYEE_LEVEL : undefined,
 });
 
 const useListTickets = ({

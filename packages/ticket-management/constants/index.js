@@ -130,9 +130,8 @@ export const getSpectatorTypeOptions = ({ t }) => [
 	{ label: t('myTickets:spectator_type_2'), value: 'agent' },
 	{ label: t('myTickets:spectator_type_3'), value: 'closure_authorizer' },
 	{ label: t('myTickets:spectator_type_4'), value: 'configuration_owner' },
-	{ label: t('myTickets:spectator_type_5'), value: 'user_manager' },
-	{ label: t('myTickets:spectator_type_6'), value: 'assigned_to_my_team' },
-	{ label: t('myTickets:spectator_type_7'), value: 'raised_by_my_team' },
+	{ label: t('myTickets:spectator_type_5'), value: 'assigned_to_my_team' },
+	{ label: t('myTickets:spectator_type_6'), value: 'raised_by_my_team' },
 ];
 
 export const getTicketActionLabel = ({ t, type }) => {
@@ -255,3 +254,6 @@ export const sortByOptions = ({ t }) => [
 export const DISABLE_STATUS_KEY = ['dislike_id', 'missing_id'];
 
 export const CLOSED_TICKET_STATUS = ['closed', 'overdue'];
+
+export const EMPLOYEE_LEVEL = [0, 1, 2, 3, 4, 5];
+export const MY_TEAM_LEVEL = ['assigned_to_my_team', 'raised_by_my_team'];
