@@ -809,7 +809,6 @@ const GLOBAL_CONSTANTS = {
 					},
 				},
 			},
-
 			cargo_insurance: {
 				countries: ['IN'],
 			},

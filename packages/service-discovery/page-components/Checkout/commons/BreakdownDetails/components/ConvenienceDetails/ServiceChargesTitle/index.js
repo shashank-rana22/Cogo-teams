@@ -13,17 +13,21 @@ function ServiceChargesTitle({
 			<div className={styles.service_name}>Bill Summary</div>
 
 			<div className={styles.flex}>
-				<div className={styles.price_display} style={{ marginRight: '8px' }}>
-					<div
-						style={{ color: '#c26d1a' }}
-						className={styles.label}
-					>
-						{discount ? 'Discount Applied' : 'Apply Coupon'}
-					</div>
+				{discount ? (
+					<div className={styles.price_display} style={{ marginRight: '8px' }}>
+						<div
+							style={{ color: '#c26d1a' }}
+							className={styles.label}
+						>
+							Discount Applied
+						</div>
 
-					{discount ? <div className={styles.coupon_value}>{localedDiscount}</div> : null}
-				</div>
-				|
+						<div className={styles.coupon_value}>{localedDiscount}</div>
+					</div>
+				) : null}
+
+				{discount ? '|' : null}
+
 				<div className={styles.price_display} style={{ marginRight: '12px' }}>
 					<div className={styles.label}>Services Sub Total:</div>
 					{' '}

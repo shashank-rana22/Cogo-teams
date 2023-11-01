@@ -18,8 +18,6 @@ function LoadItem({
 }) {
 	const { commodity = '', trucks_count = 0, truck_type = '', volume = 0, weight = 0 } = loadItem;
 
-	const moreThanOne = !isAllowedToEdit;
-
 	return (
 		<div className={styles.container} style={{ margin }}>
 			<div className={styles.load_item}>
@@ -34,7 +32,7 @@ function LoadItem({
 							</div>
 						)}
 					>
-						<div className={cl`${styles.text} ${!moreThanOne && styles.overflow}`}>
+						<div className={cl`${styles.text} ${isAllowedToEdit && styles.overflow}`}>
 							{trucks_count}
 							{' X '}
 							{startCase(truck_type)}
@@ -85,7 +83,7 @@ function LoadItem({
 							</div>
 						)}
 					>
-						<div className={cl`${styles.text} ${!moreThanOne && styles.overflow}`}>
+						<div className={cl`${styles.text} ${isAllowedToEdit && styles.overflow}`}>
 							{startCase(commodity)}
 						</div>
 					</Tooltip>

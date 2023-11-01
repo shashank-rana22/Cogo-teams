@@ -31,7 +31,7 @@ function ToggleLocation({
 	};
 
 	return (
-		<div className={styles.container} style={{ ...(style || {}) }}>
+		<div className={styles.container} style={style}>
 			<ButtonIcon
 				className={cl`${styles.button} ${active && styles.active}`}
 				size="sm"

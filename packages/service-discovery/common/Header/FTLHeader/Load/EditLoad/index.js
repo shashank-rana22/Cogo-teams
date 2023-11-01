@@ -23,7 +23,7 @@ const getTabWisePrefilledValues = (activeTab, values = {}) => {
 	let formValues = {};
 
 	if (activeTab === 'truck') {
-		const { trucks:trucksData = [] } = values || {};
+		const { trucks: trucksData = [] } = values || {};
 
 		formValues = {
 			trucks: [

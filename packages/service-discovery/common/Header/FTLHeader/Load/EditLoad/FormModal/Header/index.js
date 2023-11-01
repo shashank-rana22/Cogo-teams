@@ -5,12 +5,8 @@ import { useRef, useEffect } from 'react';
 import styles from './styles.module.css';
 
 const TAB_PANELS_MAPPING = {
-	truck: {
-		label: 'By Trucks',
-	},
-	cargo: {
-		label: 'By Cargo',
-	},
+	truck : 'By Trucks',
+	cargo : 'By Cargo',
 };
 
 function Header({
@@ -49,13 +45,9 @@ function Header({
 					themeType="primary"
 					onChange={onChange}
 				>
-					{Object.entries(TAB_PANELS_MAPPING).map(([key, obj]) => {
-						const { label = '' } = obj;
-
-						return (
-							<TabPanel key={key} name={key} title={label} />
-						);
-					})}
+					{Object.entries(TAB_PANELS_MAPPING).map(([key, label]) => (
+						<TabPanel key={key} name={key} title={label} />
+					))}
 				</Tabs>
 			</div>
 		</div>

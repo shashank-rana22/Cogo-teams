@@ -1,5 +1,4 @@
 import { RadioGroup } from '@cogoport/components';
-import { useMemo } from 'react';
 
 import ftlControls from '../../../../../../page-components/SearchResults/configurations/ftl/form-controls';
 import Layout from '../../../../../Layout';
@@ -7,6 +6,10 @@ import Layout from '../../../../../Layout';
 import CommodityControl from './CommodityControl';
 import Header from './Header';
 import styles from './styles.module.css';
+
+const OPTIONS = [
+	{ name: 'cargo_per_package', value: 'cargo_per_package', label: 'Per Package' },
+	{ name: 'cargo_gross', value: 'cargo_gross', label: 'Total/Gross' }];
 
 function FormModal({
 	control = () => {},
@@ -24,11 +27,6 @@ function FormModal({
 	onClose = () => {},
 	isMobile = false,
 }) {
-	const radioOptions = useMemo(() => [
-		{ name: 'cargo_per_package', value: 'cargo_per_package', label: 'Per Package' },
-		{ name: 'cargo_gross', value: 'cargo_gross', label: 'Total/Gross' },
-	], []);
-
 	const formValues = watch();
 
 	const controls = ftlControls({
@@ -52,7 +50,7 @@ function FormModal({
 					<span className={styles.label}>Select Type: </span>
 
 					<RadioGroup
-						options={radioOptions}
+						options={OPTIONS}
 						onChange={setCargoType}
 						value={cargoType}
 					/>
