@@ -3,6 +3,7 @@ import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
+import ScrollAnnouncement from '../../../../common/ScrollAnouncement';
 import DURATION_CONSTANTS from '../../../../constants/duration-constants';
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-viewtype-constants';
 import getEntityOptions from '../../../../utils/get-entity-options';
@@ -131,6 +132,8 @@ function Header(props) {
 				)}
 
 			</div>
+
+			<ScrollAnnouncement />
 
 		</div>
 	);
