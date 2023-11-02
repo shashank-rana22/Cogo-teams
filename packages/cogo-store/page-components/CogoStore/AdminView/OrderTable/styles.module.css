@@ -102,34 +102,34 @@
 
 	&.placed {
 		width: fit-content;
-		padding: 4px;
+		padding: 2px 4px;
 		background: #f9f9f9;
 	}
 
 	&.delivered {
 		width: fit-content;
-		padding: 4px;
+		padding: 2px 4px;
 		color: #849e4c;
 		background: #f7faef;
 	}
 
 	&.cancelled {
 		width: fit-content;
-		padding: 4px;
+		padding: 2px 4px;
 		color: #bf291e;
 		background: #fdebe9;
 	}
 
 	&.returned {
 		width: fit-content;
-		padding: 4px;
+		padding: 2px 4px;
 		color: #c26d1a;
 		background: #fef3e9;
 	}
 
 	&.out_for_delivery {
 		width: fit-content;
-		padding: 4px;
+		padding: 2px 4px;
 		color: #7278ad;
 		background: #f2f3fa;
 	}

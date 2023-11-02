@@ -1,6 +1,6 @@
 import { Table, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMTick } from '@cogoport/icons-react';
+import { IcMArrowLeft, IcMTick } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { getCookie, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -37,7 +37,7 @@ function MyCart() {
 	const { list, card_totals } = data || {};
 
 	const onClose = () => {
-		const payload = list.map((item) => ({
+		const payload = (list || []).map((item) => ({
 			product_variation_id : item.id,
 			quantity             : item.quantity,
 			sub_total_amount     : item.sub_total_amount,
@@ -96,7 +96,10 @@ function MyCart() {
 								themeType="secondary"
 								onClick={() => push('/cogo-store')}
 							>
-								<span className={styles.btn_txt}>Return to Store</span>
+								<span className={styles.btn_txt}>
+									<IcMArrowLeft />
+									<span>Return to Store</span>
+								</span>
 
 							</Button>
 						</div>
@@ -104,7 +107,7 @@ function MyCart() {
 
 					<div className={styles.right_cart}>
 						<div className={styles.totals}>
-							<h2 className={styles.heading_total}>Cart Totals</h2>
+							<h2 className={styles.heading_total}>Cart Total</h2>
 
 							<div className={styles.total_section}>
 								<div className={styles.total_item}>
@@ -114,16 +117,9 @@ function MyCart() {
 										{card_totals?.card_total_amount}
 									</span>
 								</div>
-								<div className={styles.total_item}>
+								<div className={styles.total_item} style={{ paddingBottom: '8px' }}>
 									<span className={styles.grey}>Shipping</span>
 									<span className={styles.black}>Free</span>
-								</div>
-								<div className={styles.total_item} style={{ paddingBottom: '8px' }}>
-									<span className={styles.grey}>Tax</span>
-									<span className={styles.black}>
-										{currency_code}
-										{card_totals?.taxes}
-									</span>
 								</div>
 								<div className={styles.total_amount}>
 									<span className={styles.black} style={{ fontSize: '16px' }}>Total</span>
@@ -158,6 +154,7 @@ function MyCart() {
 					setShow={setShow}
 					onClose={onClose}
 					getColorFromCode={getColorFromCode}
+					currency_code={currency_code}
 				/>
 			</div>
 		</div>

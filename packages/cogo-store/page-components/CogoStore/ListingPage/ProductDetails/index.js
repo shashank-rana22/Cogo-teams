@@ -5,6 +5,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../commons/EmptyState';
+import ProductDetailsLoading from '../../../../commons/ProductDetailsLoading';
 
 import styles from './styles.module.css';
 
@@ -14,46 +15,49 @@ function ProductDetails({
 	after_coupon_price = '', ADD_TO_CART = '', synchronizeCart = '',
 	handleBuyNow = () => {}, addedToCart = false, handleAddToCart = () => {}, selectedImage = '',
 	TICK_ICON = '', colorValuePairs = [], handleVariationColor = () => {},
-	handleImageClick = () => {}, office_location = '', currency_code = '', merchSize = '', merchColor = '',
+	handleImageClick = () => {}, office_location = '', currency_code = '', merchSize = '',
 	loading = false,
 }) {
 	if (loading) {
-		return null;
+		return <ProductDetailsLoading />;
 	}
 	return (
 
 		<div className={styles.main_container}>
 			<div className={styles.header}>
-				<div className={styles.product_image}>
-					<div className={styles.product_select_image}>
+				{isEmpty(product_images) ? <EmptyState />
+					: (
+						<div className={styles.product_image}>
+							<div className={styles.product_select_image}>
 
-						{isEmpty(product_images) ? <EmptyState />
-							: (product_images || []).map((item_img) => (
-								<img
-									src={item_img}
-									key={item_img}
-									alt="cogo-merchandise"
-									aria-hidden
-									onClick={() => handleImageClick(item_img)}
-									width="100px"
-									style={{ cursor: 'pointer' }}
-								/>
-							))}
-					</div>
-					<div className={styles.product_display_image}>
-						{isEmpty(product_images) || (
-							<img
-								src={
+								{isEmpty(product_images) ? null
+									: (product_images || []).map((item_img) => (
+										<img
+											src={item_img}
+											key={item_img}
+											alt="cogo-merchandise"
+											aria-hidden
+											onClick={() => handleImageClick(item_img)}
+											width="100px"
+											style={{ cursor: 'pointer' }}
+										/>
+									))}
+							</div>
+							<div className={styles.product_display_image}>
+								{isEmpty(product_images) || (
+									<img
+										src={
 									selectedImage
 									|| (product_images && product_images[GLOBAL_CONSTANTS.zeroth_index])
 								}
-								className={styles.product_main_image}
-								alt="cogo-merchandise"
-							/>
+										className={styles.product_main_image}
+										alt="cogo-merchandise"
+									/>
 
-						)}
-					</div>
-				</div>
+								)}
+							</div>
+						</div>
+					)}
 				<div className={styles.product_details}>
 					<div className={styles.product_details_heading}>
 						<div className={styles.product_name}>
@@ -83,7 +87,7 @@ function ProductDetails({
 						<div className={styles.product_filter_item}>
 							<span>Color</span>
 							<Select
-								value={merchColor || filtersVariation?.color_id}
+								value={filtersVariation?.color_id}
 								className={styles.select_filters}
 								onChange={(e) => handleVariationColor(e)}
 								placeholder="Select Color"
@@ -136,9 +140,14 @@ function ProductDetails({
 					</div>
 
 					<div className={styles.cta_buttons}>
-						<Button size="lg" themeType="secondary" className={styles.add_to_cart}>
+						<Button
+							size="lg"
+							themeType="secondary"
+							className={styles.add_to_cart}
+							onClick={handleAddToCart}
+						>
 							<img src={ADD_TO_CART} alt="add-to-icons" />
-							<span onClick={handleAddToCart} aria-hidden>
+							<span aria-hidden>
 								{addedToCart ? 'Added to Cart' : 'Add to Cart'}
 							</span>
 						</Button>
@@ -152,26 +161,22 @@ function ProductDetails({
 						</Button>
 					</div>
 					<div className={styles.functionality_cart}>
-						<div className={styles.functionality_cart_wrap}>
-							<img
-								className={styles.functionality_cart_img}
-								src={synchronizeCart}
-								alt="schronize_icon"
-							/>
-						</div>
+						<img
+							className={styles.functionality_cart_img}
+							src={synchronizeCart}
+							alt="schronize_icon"
+						/>
 						{' '}
 						<div>
 							No return policy
 						</div>
 					</div>
 					<div className={styles.functionality_cart}>
-						<div className={styles.functionality_cart_wrap}>
-							<img
-								className={styles.functionality_cart_img}
-								src={ADD_TO_CART}
-								alt="schronize_icon"
-							/>
-						</div>
+						<img
+							className={styles.functionality_cart_img}
+							src={ADD_TO_CART}
+							alt="schronize_icon"
+						/>
 						{' '}
 						<div>
 							Free Shipping at office
