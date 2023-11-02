@@ -21,7 +21,6 @@ import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 import useListCogooneGroupMembers from '../../hooks/useListCogooneGroupMembers';
 import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
-import Calender from './Calendar';
 import Conversations from './Conversations';
 import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
@@ -54,6 +53,7 @@ function CogoOne() {
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
 	const [mailAttachments, setMailAttachments] = useState([]);
+	const [isBotSession, setIsBotSession] = useState(false);
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
 		activeMessageCard : activeTab?.data,
@@ -98,8 +98,8 @@ function CogoOne() {
 		userId,
 		userName,
 		signature,
-		resetEmailState: () => {
-			setEmailState({ ...DEFAULT_EMAIL_STATE, body: signature });
+		resetEmailState: ({ mailView = '' } = {}) => {
+			setEmailState({ ...DEFAULT_EMAIL_STATE, mailView, body: signature });
 			setMailAttachments([]);
 		},
 		setMailAttachments,
@@ -159,6 +159,8 @@ function CogoOne() {
 			<div className={styles.layout_container}>
 				<div className={styles.customers_layout}>
 					<Customers
+						setIsBotSession={setIsBotSession}
+						isBotSession={isBotSession}
 						viewType={viewType}
 						activeTab={activeTab}
 						userId={userId}
@@ -194,6 +196,10 @@ function CogoOne() {
 								viewType={viewType}
 								setActiveTab={setActiveTab}
 								mailProps={mailProps}
+								isBotSession={isBotSession}
+								firestore={firestore}
+								userId={userId}
+								initialViewType={initialViewType}
 							/>
 						</div>
 					) : (
@@ -256,7 +262,6 @@ function CogoOne() {
 						</>
 					)}
 			</div>
-			<Calender firestore={firestore} />
 			<ModalComp
 				raiseTicketModal={raiseTicketModal}
 				setRaiseTicketModal={setRaiseTicketModal}

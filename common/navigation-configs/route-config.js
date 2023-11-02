@@ -20,6 +20,7 @@ import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
 import cogoAssured from './config/cogo-assured';
 import cogoOne from './config/cogo-one';
+import cogoStore from './config/cogo-store';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import controlledBooking from './config/controlled-booking';
@@ -35,6 +36,7 @@ import ftlAdmin from './config/ftl-admin';
 import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
 import governanceManager from './config/governance-manager';
 import groundOps from './config/ground-ops';
+import handlingFees from './config/handling-fees';
 import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
 import ingestion from './config/ingestion';
@@ -189,6 +191,8 @@ const routeConfig = {
 	...margins,
 	...saas,
 	...serviceManagement,
+	...cogoStore,
+	...handlingFees,
 };
 
 export default routeConfig;

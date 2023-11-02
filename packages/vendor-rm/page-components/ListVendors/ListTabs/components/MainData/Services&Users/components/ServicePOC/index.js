@@ -3,7 +3,6 @@ import { IcMEdit } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import getOfficeLocation from '../../../../../../../../utils/getOfficeLocation';
 import getPocRole from '../../utils/getPocRole';
 
 import LoadingState from './LoadingState';
@@ -12,8 +11,8 @@ import styles from './styles.module.css';
 const FIRST_INDEX = 1;
 
 const FIELDS_TO_SHOW = {
-	category           : 'Service category',
-	cogoport_office_id : 'Cogoport Office',
+	category    : 'Service category',
+	office_name : 'Cogoport Office',
 };
 
 const POCS_MAPPING = {
@@ -61,9 +60,7 @@ function ServicePOC({
 								</span>
 
 								<span className={styles.bottom}>
-									{item === 'cogoport_office_id'
-										? getOfficeLocation(singleServicePoc?.cogoport_office_id)
-										: startCase(singleServicePoc?.[item])}
+									{startCase(singleServicePoc?.[item])}
 								</span>
 							</div>
 						)) }

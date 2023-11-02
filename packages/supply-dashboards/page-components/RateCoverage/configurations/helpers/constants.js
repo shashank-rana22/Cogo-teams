@@ -5,9 +5,9 @@ import {
 } from '@cogoport/icons-react';
 
 export const STAT_CARDS_MAPPING = {
-	pending   : { title: 'Today\'s Pending', color: '#FF5733', status: 'pending' },
-	completed : { title: 'Today\'s Completed', color: '#728F3C', status: 'completed' },
-	backlog   : { title: 'Previous Backlogs', color: '#F69E50', status: 'backlog' },
+	pending   : { id: 1, title: 'Today\'s Pending', color: '#FF5733', status: 'pending' },
+	completed : { id: 2, title: 'Today\'s Completed', color: '#728F3C', status: 'completed' },
+	backlog   : { id: 3, title: 'Previous Backlogs', color: '#F69E50', status: 'backlog' },
 };
 
 export const WEEKLY_BACKLOG = {
@@ -215,18 +215,10 @@ export const rateTypeOptions = [
 ];
 
 export const airRateTypeOptions = [
-	{
-		label : 'Market place',
-		value : 'market_place',
-	},
-	{
-		label : 'Promotional',
-		value : 'promotional',
-	},
-	{
-		label : 'Consolidation',
-		value : 'consolidated',
-	},
+	{ label: 'Market place', value: 'market_place' },
+	{ label: 'Promotional', value: 'promotional' },
+	{ label: 'Consolidation', value: 'consolidated' },
+	{ label: 'Non Tariff Rate', value: 'non_tariff_rate' },
 ];
 
 export const flighOperationTypeOptions = [

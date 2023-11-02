@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 const MAX_LIST_ITEMS = 9;
 
 function List(props) {
-	const { tableList = [], view, totalReportCount } = props;
+	const { tableList = [], view, totalReportCount, screen = 'overall' } = props;
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({ view });
 
@@ -42,7 +42,6 @@ function List(props) {
 
 			<div
 				className={styles.list_body_container}
-				style={{ top: isOverflowed ? '50px' : '' }}
 				ref={divRef}
 			>
 				<div
@@ -50,6 +49,7 @@ function List(props) {
 					style={{
 						animationDuration: isOverflowed
 							? getAnimationDuration({ listLength: tableList.length }) : '0s',
+						top: isOverflowed ? '70px' : '',
 					}}
 				>
 					{tableList.map((listItem) => (
@@ -73,7 +73,7 @@ function List(props) {
 
 			</div>
 
-			{ totalReportCount > MAX_LIST_ITEMS ? (
+			{ screen === 'overall' && totalReportCount > MAX_LIST_ITEMS ? (
 				<p className={styles.info_text}>
 					Total:
 					{' '}
