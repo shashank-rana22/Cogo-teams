@@ -29,7 +29,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 	const [priceData, setPriceData] = useState(null);
 	const { data:revenueDeskDecisionsData } = useListRevenueDeskDecisions({ shipmentId: itemData?.id });
 	const { data: servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
-	const { data: documents } = useListShipmentDocuments({ shipmentId: itemData?.id });
+	const { data: documents = {} } = useListShipmentDocuments({ shipmentId: itemData?.id });
 	const shipment_services = servicesData?.list || [];
 	const handlePillSelected = (trade_type) => {
 		setIsPillSelected((prev) => ({ ...prev, [trade_type]: !prev?.[trade_type] }));
@@ -108,7 +108,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 			</div>
 			{itemData?.state === 'cancelled' ? <CancelledShipmentCard itemData={itemData} /> : null}
 			<div className={styles.card_container}>
-				<ShipmentCard itemData={itemData} priceData={priceData} />
+				<ShipmentCard itemData={itemData} priceData={priceData} documents={documents?.list} />
 			</div>
 			<div className={styles.tabs_container}>
 				<Tabs

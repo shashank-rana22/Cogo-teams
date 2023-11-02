@@ -1,10 +1,8 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useListShipmentDocuments = ({ shipmentId }) => {
-	const [filters, setFilters] = useState({});
-
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'list_shipment_documents',
 		method : 'GET',
@@ -30,14 +28,11 @@ const useListShipmentDocuments = ({ shipmentId }) => {
 
 	useEffect(() => {
 		apiTrigger();
-	}, [apiTrigger, filters]);
+	}, [apiTrigger]);
 
 	return {
 		loading,
 		data,
-		apiTrigger,
-		filters,
-		setFilters,
 	};
 };
 
