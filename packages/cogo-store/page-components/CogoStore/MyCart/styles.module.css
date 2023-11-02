@@ -26,7 +26,7 @@
 .shopping_card_header {
 	padding: 20px 10px;
 	font-size: 18px;
-	font-weight: 500;
+	font-weight: 600;
 	color: #191c1f;
 }
 
@@ -52,6 +52,7 @@
 		}
 
 		.ui_table_body_cell {
+			padding: 16px 0;
 			background-color: #fff;
 		}
 
@@ -96,6 +97,7 @@
 	justify-content: space-between;
 	width: 100%;
 	padding: 8px 0;
+	margin: 16px 0;
 	border-top: 1px solid #e0e0e0;
 }
 
@@ -157,6 +159,12 @@
 	justify-content: space-between;
 	padding: 16px;
 	border-top: 1px solid #e0e0e0;
+
+	:global {
+		.ui_button_container {
+			padding-left: 6px;
+		}
+	}
 }
 
 .btn_txt {
