@@ -1,0 +1,38 @@
+.container {
+	:global {
+		.ui_modal_body_container {
+			padding: 0 16px;
+			overflow-x: visible;
+			border: none;
+		}
+
+		.ui_modal_footer_container {
+			padding: 0 16px 16px 0;
+			box-shadow: none;
+		}
+
+		.ui_modal_header_container {
+			padding: 6px 16px 0;
+		}
+	}
+}
+
+.body {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.conform {
+	align-items: center;
+}
+
+.info_icon {
+	width: 25px;
+	height: 25px;
+	margin-bottom: 10px;
+}
+
+.label {
+	font-weight: 500;
+}

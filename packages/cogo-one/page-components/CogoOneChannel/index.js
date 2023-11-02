@@ -262,7 +262,6 @@ function CogoOne() {
 						</>
 					)}
 			</div>
-
 			<ModalComp
 				raiseTicketModal={raiseTicketModal}
 				setRaiseTicketModal={setRaiseTicketModal}
