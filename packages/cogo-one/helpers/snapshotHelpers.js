@@ -1,9 +1,9 @@
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, throttle } from '@cogoport/utils';
 import {
 	onSnapshot,
 	doc,
 	query,
-	limit, where, getDocs, orderBy,
+	limit, where, getDocs, orderBy, getCountFromServer,
 } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
@@ -155,6 +155,16 @@ export function mountUnreadCountSnapShot({
 
 	snapshotCleaner({ ref: unreadCountSnapshotListener });
 
+	const changeQuery = query(
+		omniChannelCollection,
+		where('has_admin_unread_messages', '==', true),
+		...(baseQuery || []),
+		...(sessionQuery || []),
+		...(queryFilters || []),
+		orderBy('new_message_sent_at', 'desc'),
+		limit(1),
+	);
+
 	const countUnreadChatQuery = query(
 		omniChannelCollection,
 		where('has_admin_unread_messages', '==', true),
@@ -165,10 +175,17 @@ export function mountUnreadCountSnapShot({
 		limit(UNREAD_COUNT_PAGE_LIMIT),
 	);
 
+	const throttledCount = throttle(async () => {
+		const unreadChats = await getCountFromServer(countUnreadChatQuery);
+		const unreadCount = unreadChats?.data()?.count || FALLBACK_VALUE;
+
+		setUnReadChatsCount(unreadCount);
+	}, 600);
+
 	snapshotRef.current = onSnapshot(
-		countUnreadChatQuery,
-		(countUnreadChatSnapshot) => {
-			setUnReadChatsCount(countUnreadChatSnapshot.size || FALLBACK_VALUE);
+		changeQuery,
+		() => {
+			throttledCount();
 		},
 	);
 }

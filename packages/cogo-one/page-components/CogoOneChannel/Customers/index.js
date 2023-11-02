@@ -66,7 +66,7 @@ function Customers({
 		isBotSession,
 	});
 
-	const { unReadMailsCount = 0 } = useGetUnreadMailsCount({
+	const { unReadMailsCount = 0, throttledGetCount = () => {} } = useGetUnreadMailsCount({
 		firestore,
 		viewType,
 		agentId: userId,
@@ -117,6 +117,7 @@ function Customers({
 			firestore,
 			userId,
 			isBotSession,
+			throttledGetCount,
 		},
 		teams: {
 			setActiveTeamCard: (val) => {

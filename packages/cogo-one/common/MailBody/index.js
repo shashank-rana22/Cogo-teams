@@ -158,7 +158,7 @@ function MailBody({
 
 				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
 
-				{(!loading && expandedState) ? (
+				{(!loading && expandedState && fullThread) ? (
 					<div
 						className={cl`${styles.body} 
 							${expandedState ? styles.expanded_body : styles.collapsed_body}`}

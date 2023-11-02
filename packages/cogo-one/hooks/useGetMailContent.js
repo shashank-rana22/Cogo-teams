@@ -31,7 +31,7 @@ function useGetMailContent({
 
 	const [loading, setLoading] = useState(false);
 
-	const { source = '', roomId = '' } = formattedData || {};
+	const { source = '', id = '' } = formattedData || {};
 
 	const [, trigger] = useLensRequest({
 		url    : '/get_mail',
@@ -51,7 +51,7 @@ function useGetMailContent({
 			if (isDraft) {
 				const {
 					newContent,
-				} = await getFirebaseDraftBody({ messageRoomId, firestore, roomId }) || {};
+				} = await getFirebaseDraftBody({ messageRoomId, firestore, roomId: id }) || {};
 
 				setFullThread(newContent);
 			} else {
@@ -75,7 +75,7 @@ function useGetMailContent({
 		} finally {
 			setLoading(false);
 		}
-	}, [firestore, roomId, trigger, source, attachmentTrigger]);
+	}, [firestore, id, trigger, source, attachmentTrigger]);
 
 	const toggleMailBody = ({ isDraft = false, messageId = '', messageRoomId = '' }) => {
 		if (loading) {
@@ -94,7 +94,7 @@ function useGetMailContent({
 		setLoading(false);
 		setFullThread('');
 		setExpandedStateId('');
-	}, [roomId]);
+	}, [id]);
 
 	return {
 		expandLoading: loading,
