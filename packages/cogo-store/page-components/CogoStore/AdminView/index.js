@@ -15,15 +15,17 @@ function AdminView() {
 	return (
 		<div className={styles.container}>
 			<Header />
-			<OverView data={data} refetch={refetch} />
-			<OrderTable
-				data={data}
-				filters={filters}
-				setFilters={setFilters}
-				dateArray={dateArray}
-				refetch={refetch}
-				loading={loading}
-			/>
+			<div className={styles.sub_container}>
+				<OverView data={data} refetch={refetch} />
+				<OrderTable
+					data={data}
+					filters={filters}
+					setFilters={setFilters}
+					dateArray={dateArray}
+					refetch={refetch}
+					loading={loading}
+				/>
+			</div>
 		</div>
 	);
 }

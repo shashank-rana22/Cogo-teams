@@ -1,5 +1,8 @@
 .container {
-	padding: 16px;
-	margin-top: 54px;
+	background: #fff;
+}
+
+.sub_container {
+	padding: 0 12px 12px;
 	background: #fff;
 }
