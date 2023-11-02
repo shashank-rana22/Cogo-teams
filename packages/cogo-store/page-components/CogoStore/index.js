@@ -10,13 +10,26 @@ import HomePageContent from './HomePageContent';
 import styles from './styles.module.css';
 
 function CogoStore() {
-	const { data, filters, setFilters } = useGetListProductDetail();
+	const { data, filters, setFilters, loading } = useGetListProductDetail();
 	const { data: productData } = useGetProductFilterDetail();
 	return (
 		<div className={styles.container}>
 			<Header />
-			<Carousel size="md" slides={CarouselData} autoScroll timeInterval={4000} />
-			<HomePageContent data={data} filters={filters} setFilters={setFilters} productData={productData} />
+			<Carousel
+				size="md"
+				slides={CarouselData}
+				autoScroll
+				timeInterval={4000}
+				showArrow={false}
+				showDots={false}
+			/>
+			<HomePageContent
+				data={data}
+				filters={filters}
+				setFilters={setFilters}
+				productData={productData}
+				laoding={loading}
+			/>
 		</div>
 	);
 }

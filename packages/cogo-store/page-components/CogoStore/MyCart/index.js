@@ -114,16 +114,9 @@ function MyCart() {
 										{card_totals?.card_total_amount}
 									</span>
 								</div>
-								<div className={styles.total_item}>
+								<div className={styles.total_item} style={{ paddingBottom: '8px' }}>
 									<span className={styles.grey}>Shipping</span>
 									<span className={styles.black}>Free</span>
-								</div>
-								<div className={styles.total_item} style={{ paddingBottom: '8px' }}>
-									<span className={styles.grey}>Tax</span>
-									<span className={styles.black}>
-										{currency_code}
-										{card_totals?.taxes}
-									</span>
 								</div>
 								<div className={styles.total_amount}>
 									<span className={styles.black} style={{ fontSize: '16px' }}>Total</span>
