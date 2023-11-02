@@ -1,0 +1,39 @@
+.container {
+	display: flex;
+	padding: 12px;
+	background-color: #fffefa;
+}
+
+.element_div {
+	display: flex;
+	flex-direction: column;
+	width: 224px;
+
+	:global {
+		.ui_input_number_container {
+			width: 180px;
+		}
+	}
+}
+
+.label {
+	margin-bottom: 4px;
+	font-size: 12px;
+}
+
+.left_container {
+	flex-basis: 60%;
+}
+
+.time_div {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 20px;
+
+	:global {
+		.ui_datepicker_container {
+			width: 224px;
+		}
+	}
+}

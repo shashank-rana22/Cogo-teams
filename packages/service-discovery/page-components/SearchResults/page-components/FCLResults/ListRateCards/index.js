@@ -6,8 +6,8 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import DotLoader from '../../../../../common/LoadingState/DotLoader';
+import AdditionalTabs from '../../../common/AdditionalTabs';
 import EmptyState from '../../../common/EmptyState';
-import RequestRate from '../../../common/EmptyState/RequestRate';
 import CogoAssuredCard from '../CogoAssuredCard';
 import FclCard from '../FclCard';
 
@@ -108,6 +108,7 @@ function ListRateCards({
 				setShowFilterModal={setShowFilterModal}
 				setOpenAccordian={setOpenAccordian}
 				openAccordian={openAccordian}
+				setScreen={setScreen}
 			/>
 		);
 	}
@@ -239,14 +240,12 @@ function ListRateCards({
 				</div>
 			)}
 
-			{loading ? null : (
-				<div className={styles.request_rate}>
-					<RequestRate
-						details={detail}
-						rates={rates}
-					/>
-				</div>
-			)}
+			<AdditionalTabs
+				detail={detail}
+				rates={rates}
+				loading={loading}
+				setScreen={setScreen}
+			/>
 		</div>
 	);
 }

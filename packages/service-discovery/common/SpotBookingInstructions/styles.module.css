@@ -1,0 +1,23 @@
+.container {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.important_div {
+	position: relative;
+	padding: 4px 8px;
+	margin-right: 8px;
+	font-size: 12px;
+	border: 2px solid #fde74d;
+	border-radius: 8px;
+}
+
+.content {
+	:global {
+		.ui_accordion_content {
+			background-color: #fff;
+		}
+	}
+}

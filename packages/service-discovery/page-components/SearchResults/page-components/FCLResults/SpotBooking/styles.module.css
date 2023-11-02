@@ -1,0 +1,16 @@
+.container {
+	position: sticky;
+	top: 86px;
+	z-index: 99;
+	width: 100%;
+	padding: 24px;
+}
+
+.heading {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.sub_heading {
+	margin-top: 4px;
+}
