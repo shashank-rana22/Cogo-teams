@@ -1,14 +1,19 @@
-.list_body {
+.loader {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: center;
+	justify-content: space-between;
 	width: 100%;
-	padding: 16px 30px;
-	margin-top: -50px;
+	margin-top: 16px;
+	margin-right: 12px;
 }
 
-.list_card {
+.circle {
+	display: flex;
+}
+
+.loader_cont {
 	width: 33%;
-	padding: 20px;
-	cursor: pointer;
+	padding: 12px;
+	margin-bottom: 12px;
+	box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
 }
