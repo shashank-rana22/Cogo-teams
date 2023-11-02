@@ -140,7 +140,7 @@
     "discount_control_conditions_placeholder":"Nhập điều kiện",
     "discount_control_status":"Trạng thái",
     "discount_success_toast":"Cập nhật chương trình giảm giá",
-    "discount_invalid_metadata":"Please Enter valid JSON metadata or conditions",
+    "discount_invalid_metadata":"Vui lòng nhập siêu dữ liệu JSON hợp lệ hoặc điều kiện",
     "edit_btn":"Biên tập",
     "discount_create_success_toast":"Tạo ra chương trình giảm giá",
     "status_active":"Tích cực",
