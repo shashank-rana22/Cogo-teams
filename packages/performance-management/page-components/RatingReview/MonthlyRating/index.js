@@ -1,8 +1,10 @@
 import { Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCStarfull } from '@cogoport/icons-react';
-import { getDate, getMonth, getYear, upperCase } from '@cogoport/utils';
-import React from 'react';
+import { upperCase } from '@cogoport/utils';
+import React, { useEffect, useState } from 'react';
+
+import useGetListRatingYears from '../hooks/useGetListRatingYears';
 
 import styles from './styles.module.css';
 import TableView from './TableView';
@@ -19,45 +21,66 @@ function MonthlyRating({ props = {} }) {
 		setPage,
 		search,
 		setSearch,
-		location,
-		setLocation,
-		department,
-		setDepartment,
+		// location,
+		// setLocation,
+		// department,
+		// setDepartment,
 		showUnrated,
 		setShowUnrated,
 		refetch,
-		value,
-		setValue,
 		cycle_month,
+		setFilterMonth,
+		filter_month,
+		filter_year,
+		setFilterYear,
 	} = useMonthlyRating({ props });
 
-	const { team_rating = 0 } = paginationData || {};
-	const today = new Date();
-	const date_now = getDate(today);
-	const month_now = getMonth(today);
-	const year_now = getYear(today);
+	const { loading: year_loading, data:month_year_data } = useGetListRatingYears();
 
-	const options = Array.from({ length: 6 }, (_, index) => {
-		let monthIndex = month_now - index;
-		let year = year_now;
+	const [years_to_show, setYearsToShow] = useState([]);
+	const [months_to_show, setMonthsToShow] = useState([]);
 
-		if (date_now < 21) {
-			monthIndex -= 1;
-			if (monthIndex < 0) {
-				monthIndex = 11;
-				year -= 1;
-			}
+	useEffect(() => {
+		if (!year_loading) {
+			const yearsArray = month_year_data?.map((item) => ({
+				label : item?.year,
+				value : item?.year,
+			}));
+			setYearsToShow(yearsArray);
 		}
+	}, [month_year_data, year_loading]);
 
-		const prevMonth = new Date(year, monthIndex, date_now);
-		const prevMonthLabel = `${prevMonth.toLocaleString('default', { month: 'long' })} - ${prevMonth.getFullYear()}`;
-		const monthValue = {
-			month : prevMonth.getMonth() + 1,
-			year  : prevMonth.getFullYear(),
-		};
+	const handleSelectYear = (year) => {
+		setFilterYear(year);
+		setMonthsToShow(month_year_data?.find((item) => item.year === year).month);
+	};
+	const { team_rating = 0 } = paginationData || {};
+	// const today = new Date();
+	// const date_now = getDate(today);
+	// const month_now = getMonth(today);
+	// const year_now = getYear(today);
 
-		return { label: prevMonthLabel, value: monthValue };
-	});
+	// const options = Array.from({ length: 6 }, (_, index) => {
+	// 	let monthIndex = month_now - index;
+	// 	let year = year_now;
+
+	// 	if (date_now < 21) {
+	// 		monthIndex -= 1;
+	// 		if (monthIndex < 0) {
+	// 			monthIndex = 11;
+	// 			year -= 1;
+	// 		}
+	// 	}
+
+	// 	const prevMonth = new Date(year, monthIndex, date_now);
+	// 	const prevMonthLabel = `${prevMonth.toLocaleString('default', { month: 'long' })} - ${prevMonth.getFullYear()}`;
+	// 	const monthValue = {
+	// 		month : prevMonth.getMonth() + 1,
+	// 		year  : prevMonth.getFullYear(),
+	// 	};
+
+	// 	return { label: prevMonthLabel, value: monthValue };
+	// });
 	return (
 		<div className={styles.container}>
 			<div className={styles.inner_container}>
@@ -86,14 +109,32 @@ function MonthlyRating({ props = {} }) {
 							stars
 						</div>
 					</div>
-					<Select
-						value={value}
-						onChange={(val) => { setValue(val); }}
-						placeholder="Select Month"
-						options={options}
-						size="md"
-						style={{ width: '200px' }}
-					/>
+					{
+						props?.activeTab === 'hrbp_view' || props?.activeTab === 'functional_manager'
+							? (
+								<div style={{ display: 'flex' }}>
+									<Select
+										value={filter_year}
+										onChange={(val) => { handleSelectYear(val); }}
+										placeholder="Year"
+										options={years_to_show}
+										size="md"
+										style={{ width: '120px', marginRight: '4px' }}
+									/>
+									<Select
+										value={filter_month}
+										onChange={(val) => { setFilterMonth(val); }}
+										placeholder="Month"
+										options={months_to_show}
+										size="md"
+										style={{ width: '120px' }}
+									/>
+								</div>
+							)
+
+							:								null
+					}
+
 				</div>
 
 				{(team_rating) > COMPANY_AVERAGE_RATING ? (
@@ -114,10 +155,10 @@ function MonthlyRating({ props = {} }) {
 					setPage={setPage}
 					search={search}
 					setSearch={setSearch}
-					location={location}
-					setLocation={setLocation}
-					department={department}
-					setDepartment={setDepartment}
+					// location={location}
+					// setLocation={setLocation}
+					// department={department}
+					// setDepartment={setDepartment}
 					props={props}
 					showUnrated={showUnrated}
 					setShowUnrated={setShowUnrated}

@@ -28,7 +28,7 @@ import convenienceRates from './config/convenience-rates';
 import costBookingDesk from './config/cost-booking-desk';
 import demandForecast from './config/demand-forecast';
 import documentDesk from './config/document-desk';
-import employeeDashboard from './config/employee-dashboard';
+// import employeeDashboard from './config/employee-dashboard';
 import employeeDirectory from './config/employee-directory';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
@@ -163,7 +163,7 @@ const routeConfig = {
 	...governanceManager,
 	...byodDashboard,
 	...convenienceRates,
-	...employeeDashboard,
+	// ...employeeDashboard,
 	...managerDashboard,
 	...printingDesk,
 	...warehouseManagement,

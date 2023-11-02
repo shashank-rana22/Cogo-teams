@@ -7,6 +7,7 @@ const getColumns = ({
 	handleSelectId, selectedEmployees, list, handleRatingUpdate,
 }) => {
 	const isVerticalHead = props?.level === 'vertical_head' && props?.activeTab === 'vertical_head';
+	const ishrbp = props?.activeTab === 'hrbp_view';
 
 	const columns = [
 		{
@@ -81,7 +82,23 @@ const getColumns = ({
 		id: 'updated_employee',
 	};
 
-	return isVerticalHead ? [checkboxCol, ...columns, actionCol] : columns;
+	const managerCol = {
+		Header   : 'Manager',
+		accessor : (item) => (
+			<div className={styles.table_name}>
+				{item?.manager_name || '-'}
+			</div>
+		),
+		id: 'manager_name',
+	};
+
+	if (isVerticalHead) {
+		return [checkboxCol, ...columns, managerCol, actionCol];
+	}
+	if (ishrbp) {
+		return [...columns, managerCol];
+	}
+	return columns;
 };
 
 export default getColumns;

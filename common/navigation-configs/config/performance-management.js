@@ -6,6 +6,9 @@ const PERFORMANCE_MANAGEMENT = {
 	'/[partner_id]/performance-management/rating-review': {
 		navigation: 'performance_management-performance_rating_review',
 	},
+	'/[partner_id]/performance-management/employee_dashboard': {
+		navigation: 'performance_management-employee_dashboard',
+	},
 	'/[partner_id]/performance-management/kra-assignment': {
 		navigation: 'performance_management-kra_assignment',
 	},
