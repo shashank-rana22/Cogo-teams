@@ -21,8 +21,9 @@ function ScrollAnnouncement({
 			</div>
 			<div
 				className={styles.bar}
-				onMouseEnter={handleTap}
-				onMouseLeave={handleTap}
+				onMouseUp={handleTap}
+				onMouseDown={handleTap}
+				role="presentation"
 			>
 				<span className={cl`${styles.bar_content} ${isScrolling && styles.bar_content_scrolling}`}>
 					{text}
