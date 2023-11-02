@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function AdminView() {
 	const { data: dateArray } = useGetOrderDates();
-	const { data, filters, setFilters, refetch, loading } = useListAllOrders({ dateArray });
+	const { data, filters, setFilters, refetch, loading } =	 useListAllOrders({ dateArray });
 
 	return (
 		<div className={styles.container}>

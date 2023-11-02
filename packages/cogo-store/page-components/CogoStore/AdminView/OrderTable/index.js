@@ -6,8 +6,10 @@ import {
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState	} from 'react';
 
+import EmptyState from '../../../../commons/EmptyState';
 import useGetProductFilterDetail from '../../../../hooks/useGetProductFilterDetail';
 import useUpdateStatus from '../../../../hooks/useUpdateStatus';
 import { STATUS_OPTIONS } from '../../../../utils/constants';
@@ -97,18 +99,24 @@ function OrderTable({ data, filters, setFilters, dateArray, refetch, loading }) 
 						</div>
 					</div>
 				</div>
-				<div className={styles.table_container}>
-					<Table columns={columns} data={list || []} loading={loading} />
-				</div>
-				<div className={styles.pagination}>
-					<Pagination
-						type="table"
-						currentPage={page}
-						totalItems={total_count}
-						pageSize={page_limit}
-						onPageChange={onPageChange}
-					/>
-				</div>
+				{isEmpty(list) ? <EmptyState /> : (
+					<>
+						<div className={styles.table_container}>
+							<Table columns={columns} data={list || []} loading={loading} />
+						</div>
+						<div className={styles.pagination}>
+							<Pagination
+								type="table"
+								currentPage={page}
+								totalItems={total_count}
+								pageSize={page_limit}
+								onPageChange={onPageChange}
+							/>
+						</div>
+
+					</>
+				)}
+
 			</div>
 		</div>
 	);
