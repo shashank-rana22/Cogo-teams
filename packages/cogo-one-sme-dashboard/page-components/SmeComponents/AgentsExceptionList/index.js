@@ -11,6 +11,7 @@ const TABLE_TYPES = ['search', 'call', 'mail', 'quotation', 'booking'];
 function AgentsExceptionList() {
 	const [tableType, setTableType] = useState('search');
 	const [page, setPage] = useState(1);
+
 	const tableColumns = getTableColumns() || [];
 
 	return (

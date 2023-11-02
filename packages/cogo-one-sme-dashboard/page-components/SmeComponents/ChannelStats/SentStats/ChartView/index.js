@@ -43,7 +43,7 @@ function ChartView({ channelType = '' }) {
 			<div className={styles.chart_labels}>
 				{legends.map(
 					(itm) => (
-						<div key={itm?.legend_component}>
+						<div key={itm?.name}>
 							<div className={styles.legends_header}>
 								<div
 									className={styles.circle_dot}

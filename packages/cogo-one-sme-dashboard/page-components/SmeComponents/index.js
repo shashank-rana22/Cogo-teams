@@ -1,6 +1,7 @@
 import React from 'react';
 
 import AgentsExceptionList from './AgentsExceptionList';
+import AgentsPerformanceView from './AgentsPerformanceView';
 import Analytics from './Analytics';
 import ChannelStats from './ChannelStats';
 import PerAgentData from './PerAgentData';
@@ -13,6 +14,7 @@ const CHANNELS = ['email', 'whatsapp', 'calls'];
 function SmeComponents() {
 	return (
 		<div className={styles.container}>
+			<AgentsPerformanceView />
 			<RevenueContainer />
 			<PerAgentData />
 			<Analytics />

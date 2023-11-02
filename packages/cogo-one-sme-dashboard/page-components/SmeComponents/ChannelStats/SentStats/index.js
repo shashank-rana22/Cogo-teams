@@ -1,7 +1,7 @@
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import ChartView from './ChartData';
+import ChartView from './ChartView';
 import styles from './styles.module.css';
 
 const DATA = {

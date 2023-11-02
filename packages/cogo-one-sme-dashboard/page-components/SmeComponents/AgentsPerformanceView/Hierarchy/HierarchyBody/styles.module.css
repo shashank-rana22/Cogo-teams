@@ -1,0 +1,17 @@
+.container {
+	display: flex;
+	flex-grow: 1;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	overflow-y: auto;
+}
+
+.prev_selected {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	border-bottom: 1px solid #e0e0e0;
+}

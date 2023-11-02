@@ -15135,7 +15135,6 @@ const partner = {
 		},
 	],
 	cogo_one_sme_dashboard: [
-
 	],
 };
 

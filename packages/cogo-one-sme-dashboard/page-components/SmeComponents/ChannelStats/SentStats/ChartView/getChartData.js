@@ -8,12 +8,12 @@ const getChartData = ({ channelType = '' }) => {
 				id   : 'Click Rate',
 				data : [
 					{
-						x     : '',
+						x     : 'clicked',
 						y     : Number(clickRate),
 						color : channelType === 'whatsapp' ? '#ABCD62' : '#88CAD1',
 					},
 					{
-						x     : '',
+						x     : 'no response',
 						y     : 100 - clickRate,
 						color : '#d9d9d9',
 					},
@@ -23,12 +23,12 @@ const getChartData = ({ channelType = '' }) => {
 				id   : 'Open Rate',
 				data : [
 					{
-						x     : '',
+						x     : 'open',
 						y     : Number(openRate),
 						color : channelType === 'whatsapp' ? '#888FD1' : '#F68B21',
 					},
 					{
-						x     : '',
+						x     : 'not touched',
 						y     : 100 - openRate,
 						color : '#d9d9d9',
 					},

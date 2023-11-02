@@ -395,6 +395,8 @@ const GLOBAL_CONSTANTS = {
 		call_rejected       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call_rejected.png',
 		call_missed         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call_missed.png',
 		call_not_connected  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call_not_connected.png',
+		preloader           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/preloader.gif',
+		cogoport_short_logo : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_analytics.svg',
 		awb_docs_images     : {
 			original_3:
 			'https://cogoport-production.sgp1.digitaloceanspaces.com/1fcd0257b396ea304a7aebfeaceaee76/original_3.png',
