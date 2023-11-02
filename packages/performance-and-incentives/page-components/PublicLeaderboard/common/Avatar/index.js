@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
@@ -41,15 +42,17 @@ function Avatar(props) {
 	return (
 
 		<div className={styles.image_container} style={SIZE_STYLE}>
-			<div className={styles.rank}><b>{rank}</b></div>
+			<div className={cl`${styles.rank} ${styles[`rank_${rank}`]}`}><b>{rank}</b></div>
 
-			{picture ? (
-				<img
-					className={styles.image}
-					src={picture}
-					alt="profile"
-				/>
-			) : <div className={styles.persona}>{PERSONA}</div>}
+			<div className={cl`${styles.avatar_wrap} ${styles[`rank_${rank}`]}`}>
+				{picture ? (
+					<img
+						className={styles.image}
+						src={picture}
+						alt="profile"
+					/>
+				) : <div className={styles.persona}>{PERSONA}</div>}
+			</div>
 		</div>
 
 	);

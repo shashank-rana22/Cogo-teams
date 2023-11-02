@@ -7,21 +7,15 @@ const CarouselData = [
 		key    : 'item1',
 		render : () => (
 			<div className={styles.carousel}>
-				<img src={GLOBAL_CONSTANTS.image_url.DARK_BG} alt="" width="100%" />
-				<div className={styles.overlay_content}>
-					<img src={GLOBAL_CONSTANTS.image_url.JACKET} alt="" />
-				</div>
-
-				<span className={styles.home_text}>Welcome to the</span>
-				<span className={styles.home_text2}>CogoMerch store!</span>
-				<span className={styles.home_text3}>
-					Quality & Affordable clothing
-					{' '}
-					<br />
-					{' '}
-					in multiple styles
-				</span>
-
+				<img src={GLOBAL_CONSTANTS.image_url.CAROUSEL_ONE} alt="" width="100%" />
+			</div>
+		),
+	},
+	{
+		key    : 'item2',
+		render : () => (
+			<div className={styles.carousel}>
+				<img src={GLOBAL_CONSTANTS.image_url.CAROUSEL_TWO} alt="" width="100%" />
 			</div>
 		),
 	},
@@ -29,20 +23,7 @@ const CarouselData = [
 		key    : 'item3',
 		render : () => (
 			<div className={styles.carousel}>
-				<img src={GLOBAL_CONSTANTS.image_url.DARK_BG} alt="" width="100%" />
-				<div className={styles.overlay_content_shoes}>
-					<img src={GLOBAL_CONSTANTS.image_url.cogo_shoes} alt="" />
-
-				</div>
-
-				<span className={styles.home_text_laptop}>
-					Unlock your professional
-					{' '}
-					<br />
-					Wardrobe with the
-				</span>
-				<span className={styles.home_text_shoes}>Cogoport Merchandise now</span>
-
+				<img src={GLOBAL_CONSTANTS.image_url.CAROUSEL_THREE} alt="" width="100%" />
 			</div>
 		),
 	},

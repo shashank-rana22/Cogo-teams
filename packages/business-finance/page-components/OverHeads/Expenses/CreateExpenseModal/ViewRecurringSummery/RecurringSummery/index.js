@@ -193,12 +193,6 @@ function RecurringSummery({
 
 	return (
 		<div className={styles.container}>
-			<div>Expense Details</div>
-			<div className={styles.header} />
-			{summeryMapping.map(({ key, val }) => (
-				<RenderSummaryData key={key} summary={val} />
-			))}
-
 			{(isEmpty(level1) && isEmpty(level2) && isEmpty(level3)) ? (
 				null
 			) : (
@@ -208,6 +202,13 @@ function RecurringSummery({
 					/>
 				</div>
 			)}
+
+			<div>Expense Details</div>
+			<div className={styles.header} />
+			{summeryMapping.map(({ key, val }) => (
+				<RenderSummaryData key={key} summary={val} />
+			))}
+
 		</div>
 	);
 }

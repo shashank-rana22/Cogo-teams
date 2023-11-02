@@ -1,6 +1,7 @@
 .container {
 	display: flex;
-	height: calc(100% - 122px);
+	height: calc(100% - 112px);
+	padding-top: 12px;
 
 	@media (min-width: 2560px) {
 		height: calc(100% - 332px);

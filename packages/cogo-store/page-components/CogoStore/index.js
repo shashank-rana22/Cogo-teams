@@ -28,7 +28,7 @@ function CogoStore() {
 				filters={filters}
 				setFilters={setFilters}
 				productData={productData}
-				laoding={loading}
+				loading={loading}
 			/>
 		</div>
 	);

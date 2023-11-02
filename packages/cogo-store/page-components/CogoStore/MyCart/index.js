@@ -1,6 +1,6 @@
 import { Table, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMTick } from '@cogoport/icons-react';
+import { IcMArrowLeft, IcMTick } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { getCookie, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -37,7 +37,7 @@ function MyCart() {
 	const { list, card_totals } = data || {};
 
 	const onClose = () => {
-		const payload = list.map((item) => ({
+		const payload = (list || []).map((item) => ({
 			product_variation_id : item.id,
 			quantity             : item.quantity,
 			sub_total_amount     : item.sub_total_amount,
@@ -96,7 +96,10 @@ function MyCart() {
 								themeType="secondary"
 								onClick={() => push('/cogo-store')}
 							>
-								<span className={styles.btn_txt}>Return to Store</span>
+								<span className={styles.btn_txt}>
+									<IcMArrowLeft />
+									<span>Return to Store</span>
+								</span>
 
 							</Button>
 						</div>
@@ -151,6 +154,7 @@ function MyCart() {
 					setShow={setShow}
 					onClose={onClose}
 					getColorFromCode={getColorFromCode}
+					currency_code={currency_code}
 				/>
 			</div>
 		</div>

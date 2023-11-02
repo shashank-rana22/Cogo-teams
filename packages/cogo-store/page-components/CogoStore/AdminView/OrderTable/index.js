@@ -83,6 +83,7 @@ function OrderTable({ data, filters, setFilters, dateArray, refetch, loading }) 
 										setFilters((prev) => ({ ...prev, date_sort: e, page: 1 }));
 										setSelectedMonth(e);
 									}}
+									style={{ width: '150px' }}
 								/>
 								<Select
 									placeholder="Status"
@@ -93,6 +94,7 @@ function OrderTable({ data, filters, setFilters, dateArray, refetch, loading }) 
 									)}
 									value={filters.order_status}
 									isClearable
+									style={{ width: '120px' }}
 								/>
 
 							</div>
