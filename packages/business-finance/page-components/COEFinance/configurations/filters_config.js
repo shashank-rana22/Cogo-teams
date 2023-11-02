@@ -26,6 +26,7 @@ export const FILTERS = [
 					{ value: 'lcl_customs', label: 'LCL Customs' },
 					{ value: 'air_customs', label: 'AIR Customs' },
 					{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
+					{ value: 'air_freight_local', label: 'AIR Freight Local' },
 				],
 			},
 		],
