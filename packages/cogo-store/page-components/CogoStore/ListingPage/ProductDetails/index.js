@@ -18,7 +18,7 @@ function ProductDetails({
 	handleImageClick = () => {}, office_location = '', currency_code = '', merchSize = '',
 	loading = false,
 }) {
-	if (!loading) {
+	if (loading) {
 		return <ProductDetailsLoading />;
 	}
 	return (
