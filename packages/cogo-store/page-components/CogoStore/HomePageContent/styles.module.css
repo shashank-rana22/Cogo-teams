@@ -8,11 +8,11 @@
 	justify-content: space-between;
 	width: 100%;
 	padding: 16px 30px;
-	margin-top: -32px;
 	background-color: #fff;
 }
 
 .list_header_left {
+	margin-left: 30px;
 	font-size: 24px;
 	font-weight: 600;
 	color: #221f20;
@@ -30,7 +30,6 @@
 .list_card {
 	width: 33%;
 	padding: 20px;
-	margin-bottom: 24px;
 	cursor: pointer;
 }
 

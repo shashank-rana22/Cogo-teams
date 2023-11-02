@@ -15,7 +15,14 @@ function CogoStore() {
 	return (
 		<div className={styles.container}>
 			<Header />
-			<Carousel size="md" slides={CarouselData} autoScroll timeInterval={4000} />
+			<Carousel
+				size="md"
+				slides={CarouselData}
+				autoScroll
+				timeInterval={4000}
+				showArrow={false}
+				showDots={false}
+			/>
 			<HomePageContent
 				data={data}
 				filters={filters}
