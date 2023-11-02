@@ -20,7 +20,7 @@ function LocationDetails({ name = '', code = '', country = '', isLocalService = 
 	);
 }
 
-function Body({ item }) {
+function Body({ item, atActuals = false }) {
 	const originCode = (item?.origin_port || item?.origin_airport)?.port_code;
 	const originName = (item?.origin_port || item?.origin_airport)?.name.split('(')[0];
 	const originCountry = (item?.origin_port || item?.origin_airport)?.display_name.split(' ').slice(-1);
@@ -65,6 +65,15 @@ function Body({ item }) {
 							isLocalService={isLocalService}
 						/>
 					</>
+				)}
+				{isLocalService && atActuals && (
+					<div className={styles.actuals_wrapper}>
+						<div className={styles.actuals_label}>Locals at</div>
+						<div className={styles.actuals_value}>
+							<div className={styles.actuals_pill} />
+							<span>At Actuals</span>
+						</div>
+					</div>
 				)}
 			</div>
 			{['fcl_freight_local', 'fcl_freight'].includes(item?.service_type) && (

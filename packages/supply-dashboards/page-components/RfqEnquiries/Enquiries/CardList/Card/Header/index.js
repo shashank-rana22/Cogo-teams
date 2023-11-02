@@ -11,6 +11,12 @@ const SERVICE_MAPPING = {
 	lcl_freight       : { icon: IcMLcl, label: 'LCL' },
 	air_freight       : { icon: IcMAir, label: 'AIR' },
 	fcl_freight_local : { icon: IcMLocalCharges, label: 'FCL Local' },
+	lcl_freight_local : { icon: IcMLocalCharges, label: 'LCL Local' },
+};
+
+const TRADE_TYPE_PREFIX = {
+	export : 'Origin',
+	import : 'Dest',
 };
 
 const getTradeType = (list) => {
@@ -25,15 +31,17 @@ function Header({ item }) {
 	const service = item?.detail?.service_type;
 	const rank = item?.negotiation_rank;
 	const trade_type = item?.detail?.inco_term
-		? startCase(getIncoTermMapping[item?.detail?.inco_term])
-		: startCase(getTradeType(item?.detail?.service_details));
-	const atActuals = item?.at_actuals;
+		? getIncoTermMapping[item?.detail?.inco_term]
+		: getTradeType(item?.detail?.service_details);
 	const Icon = SERVICE_MAPPING[service]?.icon;
+	const tradeTypePrefix = item?.detail?.inco_term ? '' : TRADE_TYPE_PREFIX[trade_type] || '';
 	return (
 		<div className={styles.heading}>
 			<div className={styles.service}>
 				<div className={styles.service_name}>
 					<Icon width={30} height={30} style={{ padding: '4px' }} />
+					{tradeTypePrefix || ''}
+					{' '}
 					{SERVICE_MAPPING[service]?.label}
 				</div>
 				<div>
@@ -48,10 +56,11 @@ function Header({ item }) {
 					) : null}
 				</div>
 			</div>
-			<div>
-				{atActuals && <Pill color="#FDE74D">At Actuals</Pill>}
-				<Pill color="blue">{trade_type}</Pill>
-			</div>
+			{!tradeTypePrefix && (
+				<div>
+					{!tradeTypePrefix && <Pill color="blue">{startCase(trade_type)}</Pill>}
+				</div>
+			)}
 		</div>
 
 	);
