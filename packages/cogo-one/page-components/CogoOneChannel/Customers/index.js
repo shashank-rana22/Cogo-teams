@@ -1,7 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import getTabMappings from '../../../configurations/getTabMappings';
 import { getUserActiveMails } from '../../../configurations/mail-configuration';
@@ -50,13 +50,14 @@ function Customers({
 	autoAssignChats = {},
 	setAutoAssignChats = () => {},
 	preferenceLoading = false,
+	setIsBotSession = () => {},
+	isBotSession = false,
 }) {
 	const {
 		userEmailAddress = '',
 		userSharedMails = [],
 	} = mailProps || {};
 
-	const [isBotSession, setIsBotSession] = useState(false);
 	const userActiveMails = getUserActiveMails({ viewType, userEmailAddress });
 
 	const { unReadChatsCount } = useGetUnreadMessagesCount({

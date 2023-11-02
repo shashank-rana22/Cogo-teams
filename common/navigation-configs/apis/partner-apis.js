@@ -5775,6 +5775,48 @@ const partner = {
 			service_name : 'partner',
 		},
 	],
+	handling_fees: [
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_handling_fee_configurations',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'create_handling_fee_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'update_handling_fee_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'get_handling_fee_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'create_handling_fee_custom_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'update_handling_fee_custom_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+	],
 	condition: [
 		{
 			api          : 'update_condition',
@@ -13355,6 +13397,26 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'update_channel_partner_document',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'update_organization_document',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_onboarding_requests',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'assign_onboarding_agent',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_spot_searches',
 			access_type  : 'private',
 			feature      : 'rate_requests',
@@ -13364,6 +13426,38 @@ const partner = {
 			api          : 'update_video_conference_user_activity',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'verify_organization_kyc',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'verify_channel_partner_kyc',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'verify_organization_trade_party',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_omnichannel_onboarding_requests',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'post_allocation_request_status',
+			access_type  : 'private',
+			feature      : 'allocation',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_request_rejection_reasons',
+			access_type  : 'private',
+			feature      : 'allocation',
+			service_name : 'allocation',
 		},
 		{
 			api          : 'get_video_conference_link',
