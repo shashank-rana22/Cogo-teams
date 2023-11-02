@@ -165,10 +165,7 @@ function MailBody({
 						dangerouslySetInnerHTML={{ __html: formatEmailBody({ message: fullThread || '' }) }}
 					/>
 				) : (
-					<div
-						className={cl`${styles.body_preview} 
-							${expandedState ? styles.expanded_body_preview : styles.collapsed_body_preview}`}
-					>
+					<div className={cl`${styles.body_preview} ${styles.collapsed_body_preview}`}>
 						{body_preview || ''}
 					</div>
 				)}
