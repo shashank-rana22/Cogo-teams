@@ -51,7 +51,7 @@ function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters
 							page        : 1,
 						}))}
 						isClearable
-						style={{ width: '150px', marginRight: '46px' }}
+						style={{ width: '150px', marginRight: '30px' }}
 					/>
 				</div>
 			</div>

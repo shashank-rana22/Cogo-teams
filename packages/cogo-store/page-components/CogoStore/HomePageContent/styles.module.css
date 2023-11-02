@@ -7,12 +7,12 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	padding: 16px 30px;
+	padding: 16px 30px 0;
 	background-color: #fff;
 }
 
 .list_header_left {
-	margin-left: 30px;
+	margin-left: 12px;
 	font-size: 24px;
 	font-weight: 600;
 	color: #221f20;
@@ -23,12 +23,11 @@
 	flex-wrap: wrap;
 	align-items: center;
 	width: 100%;
-	padding: 16px 30px;
-	margin-top: -50px;
+	padding: 0 16px 30px;
 }
 
 .list_card {
-	width: 33%;
+	width: 33.33%;
 	padding: 20px;
 	cursor: pointer;
 }
@@ -56,6 +55,7 @@
 	display: flex;
 	flex: 1 0 0;
 	flex-direction: column;
+	gap: 4px;
 	align-items: flex-start;
 	padding-left: 8px;
 	margin-top: 12px;
@@ -89,8 +89,8 @@
 
 .color_dot {
 	display: inline-block;
-	width: 10px;
-	height: 10px;
+	width: 15px;
+	height: 15px;
 	margin-right: 5px;
 	border: 1px solid rgb(0 0 0 / 20%);
 	border-radius: 50%;
