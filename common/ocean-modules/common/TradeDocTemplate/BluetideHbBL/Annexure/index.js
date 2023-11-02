@@ -90,9 +90,9 @@ function Annexure({
 						<tbody>
 							{mode === MODE_READ
 								? (initialValues?.containers || []).map((container) => {
-									const containers = container?.container_number.split(' ');
-									const marksAndNumber = container?.marks_and_number.split(' ');
-									const grossWeight = container?.gross_weight.split(' ');
+									const containers = container?.container_number?.split(' ');
+									const marksAndNumber = container?.marks_and_number?.split(' ');
+									const grossWeight = container?.gross_weight?.split(' ');
 									return (
 										<tr key={container?.container_number}>
 											<td className={styles.table_data_read}>
