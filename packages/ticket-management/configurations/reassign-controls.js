@@ -15,10 +15,14 @@ const getShipmentTypeOption = ({ t = () => {}, requestType = '' }) => {
 		{ label: t('myTickets:sales_agent'), value: 'sales_agent' },
 		{ label: t('myTickets:kam_owner'), value: 'kam_owner' },
 		{ label: t('myTickets:stakeholders'), value: 'stakeholders' },
+		{ label: t('myTickets:id_creator'), value: 'id_creator' },
 	];
 
 	if (requestType !== 'shipment') {
 		return options?.filter((option) => option?.value !== 'stakeholders');
+	}
+	if (requestType !== 'rate') {
+		return options?.filter((option) => option?.value !== 'id_creator');
 	}
 	return options;
 };

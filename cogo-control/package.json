@@ -125,7 +125,9 @@
     "@cogoport/warehouse-management": "workspace:1.0.0",
     "@cogoport/business":"workspace:1.0.0",
     "@cogoport/saas": "workspace:0.1.0",
-    "@cogoport/cogo-assured": "workspace:0.1.0"
+    "@cogoport/cogo-assured": "workspace:0.1.0",
+    "@cogoport/cogo-store": "workspace:0.1.0",
+	  "@cogoport/handling-fees": "workspace:0.1.0"
   },
   "browserslist": [
     "defaults"

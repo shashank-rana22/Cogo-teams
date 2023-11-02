@@ -7,12 +7,12 @@ const getPayload = ({
 	id, priority, finalUrl, selectedServices, issue_type, additional_information,
 	notify_customer, additionalData, request_type, category, serial_id, sub_category,
 	service, trade_type, raised_by_desk, raised_to_desk, isOperation, defaultTypeId,
-	id_type, service_type,
+	id_type, service_type, platform_category,
 }) => ({
 	UserID        : id || undefined,
 	PerformedByID : id || undefined,
 	Source        : 'admin',
-	Category      : category || undefined,
+	Category      : category || platform_category || undefined,
 	Priority      : priority || undefined,
 	UserType      : 'ticket_user',
 	Data          : {
@@ -73,6 +73,7 @@ const useRaiseTicket = ({
 			raised_to_desk,
 			id_type,
 			service_type,
+			platform_category,
 			...rest
 		} = val || {};
 		const { finalUrl = '' } = file_url || {};
@@ -113,6 +114,7 @@ const useRaiseTicket = ({
 					isOperation,
 					id_type,
 					service_type,
+					platform_category,
 				}),
 			});
 

@@ -14,7 +14,7 @@ jobs:
     uses: ./.github/workflows/reusable-run-setup.yml
     secrets: inherit
     with:
-      platform: cogo-action-xlarge-runner
+      platform: ubuntu-latest
 
   lint:
     name: Test
@@ -22,4 +22,4 @@ jobs:
     uses: ./.github/workflows/comment-test-lint.yml
     secrets: inherit
     with:
-      platform: cogo-action-large-runner
+      platform: ubuntu-latest

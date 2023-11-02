@@ -23,6 +23,7 @@ const SHOW_EDIT_SUPPLIER_STAKEHOLDERS = [
 	'document_desk_manager',
 	'costbooking_ops',
 	'so1_so2_ops',
+	'so2_executive',
 ];
 
 const SERVICE_COMPLETED_OR_CANCELLED = ['completed', 'cancelled'];

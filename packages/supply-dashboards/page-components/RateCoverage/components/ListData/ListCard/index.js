@@ -49,6 +49,7 @@ function ListCard({
 		assigned_to = {},
 		service_provider = {},
 		reverted_count,
+		cargo_handling_type,
 	} = data;
 
 	const {
@@ -84,6 +85,7 @@ function ListCard({
 		{ id: 4, label: weight_slabs && startCase(weight_slabs) },
 		{ id: 5, label: stacking_type && startCase(stacking_type) },
 		{ id: 6, label: price_type && `Price Type : ${startCase(price_type)}` },
+		{ id: 7, label: cargo_handling_type && startCase(cargo_handling_type) },
 	];
 
 	const handleAddRate = () => {
@@ -184,7 +186,8 @@ function ListCard({
 								<Pill size="md" color="green">
 									Reverted Status :
 									{' '}
-									{startCase(reverted_status === 'reverted' ? 'reverted' : 'not reverted')}
+									{startCase((reverted_status === 'reverted'
+									|| reverted_status === 'completed') ? 'reverted' : 'not reverted')}
 								</Pill>
 							)}
 						</div>
@@ -299,7 +302,9 @@ function ListCard({
 							size="md"
 							style={{ marginLeft: '16px', padding: '10px' }}
 							onClick={handleAddRate}
-							disabled={reverted_status === 'reverted'}
+							disabled={(['rate_feedback', 'rate_request']?.includes(source)
+							&& (reverted_status === 'reverted' || reverted_status === 'completed'))
+							|| reverted_status === 'reverted'}
 						>
 							{filter?.status !== 'completed' ? 'Add Rate' : 'Edit Rate'}
 						</Button>

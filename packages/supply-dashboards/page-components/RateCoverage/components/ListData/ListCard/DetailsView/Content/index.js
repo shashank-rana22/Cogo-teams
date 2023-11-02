@@ -90,6 +90,7 @@ function ServiceDetailsContent({
 			commodity_type,
 			volume,
 			commodity_sub_type,
+			cargo_handling_type,
 		} = val;
 
 		const formatLine = (label, value) => (value ? `${label} ${startCase(value)}\n` : '');
@@ -124,6 +125,7 @@ function ServiceDetailsContent({
 		textToCopy += formatLine('TRADE TYPE:', tradeType);
 		textToCopy += formatLine('OPERATION TYPE:', operation_type);
 		textToCopy += formatLine('VOL WEIGHT:', formatVolume);
+		textToCopy += formatLine('CARGO HANDLING TYPE:', cargo_handling_type);
 		textToCopy += formatLine('No of Packages:', !isEmpty(bookingParams) ? (bookingParams || []).map((item) => {
 			const { length = 0, width = 0, height = 0 } = item || {};
 			const dimension = length
