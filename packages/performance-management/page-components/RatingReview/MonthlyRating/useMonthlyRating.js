@@ -8,6 +8,7 @@ const useMonthlyRating = ({ props }) => {
 	const [location, setLocation] = useState('');
 	const [department, setDepartment] = useState('');
 	const [showUnrated, setShowUnrated] = useState(false);
+	const [value, setValue] = useState(null);
 
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		method : 'GET',
@@ -23,6 +24,8 @@ const useMonthlyRating = ({ props }) => {
 							? 'functional_manager' : props?.level,
 						page,
 						page_limit : 30,
+						month      : value?.month,
+						year       : value?.year,
 						filters    : {
 							department_id   : department || undefined,
 							office_location : location || undefined,
@@ -35,14 +38,15 @@ const useMonthlyRating = ({ props }) => {
 				console.log('error :: ', error);
 			}
 		},
-		[department, location, page, props?.activeTab, props?.level, search, showUnrated, trigger],
+		[department, location, page,
+			props?.activeTab, props?.level, search, showUnrated, trigger, value?.month, value?.year],
 	);
 
 	useEffect(() => {
 		fetch();
 	}, [fetch, page, search, location, department, showUnrated]);
 
-	const { list, ...paginationData } = data || {};
+	const { list, cycle_month, ...paginationData } = data || {};
 
 	return {
 		list,
@@ -59,6 +63,9 @@ const useMonthlyRating = ({ props }) => {
 		showUnrated,
 		setShowUnrated,
 		refetch: fetch,
+		value,
+		setValue,
+		cycle_month,
 	};
 };
 
