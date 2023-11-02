@@ -1,7 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import Avatar from '../../../../common/Avatar';
+import Avatar from '../../../../../common/Avatar';
 
 import styles from './styles.module.css';
 

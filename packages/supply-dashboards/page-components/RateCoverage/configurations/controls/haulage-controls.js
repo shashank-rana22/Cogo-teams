@@ -181,7 +181,7 @@ const haulageControls = ({
 			buttonText         : 'Add Line Items',
 			noDeleteButtonTill : 1,
 			value              : [{
-				customs_code : '',
+				code         : '',
 				unit         : '',
 				currency     : '',
 				price        : '',
@@ -190,14 +190,11 @@ const haulageControls = ({
 			}],
 			controls: [
 				{
-					name        : 'customs_code',
-					valueKey    : 'code',
-					type        : 'async_select',
+					name        : 'code',
+					type        : 'select',
 					span        : 2,
-					asyncKey    : 'list_rate_charge_codes',
-					params      : { service_name: 'haulage_freight_charges' },
-					initialCall : true,
-					rules       : { required: 'Code is required' },
+					placeholder : 'Charge Name',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'currency',
