@@ -1,0 +1,28 @@
+.item_container {
+	display: flex;
+	padding-bottom: 10px;
+}
+
+.line_item_sub_container {
+	display: flex;
+	align-items: center;
+	width: 33%;
+	font-size: 12px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.detailed_price {
+	display: flex;
+	flex-direction: column;
+}
+
+.faded {
+	font-weight: 500;
+	color: #828282;
+}
+
+.regular {
+	font-weight: 500;
+	color: #333;
+}
