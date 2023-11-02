@@ -42,9 +42,9 @@ function OrderHistory() {
 		quantityNames = [];
 		imagesSrc = '';
 		orderData.forEach((orderItem) => {
-			const orderQuant = orderItem.order_quantity;
-			const productNam = orderItem.product_name;
-			const productImages = orderItem.product_images;
+			const orderQuant = orderItem?.order_quantity || 0;
+			const productNam = orderItem?.product_name || '';
+			const productImages = orderItem?.product_images || [];
 
 			if (imagesSrc === '') {
 				imagesSrc = productImages[GLOBAL_CONSTANTS.zeroth_index];
