@@ -25,13 +25,13 @@ const getMyCartColumns = ({
 					<div className={styles.products_right}>
 						<div className={styles.black}>{item.product_name}</div>
 						<div className={styles.dot_list}>
-							<span>Colour</span>
+							<span>Color</span>
 							<div
 								className={styles.color_dot}
 								key={item.color_id}
 								style={{
 									backgroundColor : `${getColorFromCode(item?.color_id)}`,
-									border          : '1px solid black',
+									border          : '1px solid rgba(0,0,0,.2)',
 								}}
 							/>
 							<span>{item?.size}</span>

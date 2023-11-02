@@ -27,7 +27,7 @@ const useGetListProductVariationDetails = () => {
 							color_id,
 							size,
 						},
-						product_id,
+						id: product_id,
 					},
 				});
 			} catch (error) {

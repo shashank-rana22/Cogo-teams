@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
-import { setCookie, getCookie } from '@cogoport/utils';
+import { setCookie, getCookie, isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useMemo } from 'react';
 
 import useGetListProductVariationDetails from '../../../hooks/useGetListProductVariationDetails';
@@ -116,8 +116,8 @@ function ListingPage() {
 	};
 
 	useEffect(() => {
-		if ((product_images || []).length > 0) {
-			setSelectedImage(product_images[0]);
+		if (!isEmpty(product_images)) {
+			setSelectedImage(product_images[GLOBAL_CONSTANTS.zeroth_index]);
 		}
 	}, [product_images]);
 

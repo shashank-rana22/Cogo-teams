@@ -5,9 +5,16 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function ModalMyCart({ list = [], show = false, setShow = () => {}, onClose = () => {}, getColorFromCode = () => {} }) {
+function ModalMyCart({
+	list = [],
+	show = false,
+	setShow = () => {},
+	onClose = () => {},
+	getColorFromCode = () => {},
+	currency_code = '',
+}) {
 	return (
-		<Modal size="md" show={show} onClose={onClose} placement="center">
+		<Modal size="md" show={show} onClose={() => setShow(false)} placement="center">
 			<Modal.Body>
 				<IcMError
 					className={styles.error_icon}
@@ -18,26 +25,33 @@ function ModalMyCart({ list = [], show = false, setShow = () => {}, onClose = ()
 				<div className={styles.modal_q}>Are you sure you want to place your order?</div>
 				{(list || []).map((item) => (
 					<div className={styles.products} key={item.id}>
-						<img
-							src={item?.product_images[GLOBAL_CONSTANTS.zeroth_index]}
-							alt=""
-							height="80px"
-							width="80px"
-						/>
 						<div className={styles.products_right}>
-							<div className={styles.black}>{item.product_name}</div>
-							<div className={styles.dot_list}>
-								<span>Colour</span>
-								<div
-									className={styles.color_dot}
-									style={{
-										backgroundColor : `${getColorFromCode(item.color_id)}`,
-										border          : '1px solid black',
-									}}
-								/>
-								<span>{item.size}</span>
-								<span style={{ marginLeft: '4px' }}>{` x ${item.quantity}`}</span>
+							<img
+								src={item?.product_images[GLOBAL_CONSTANTS.zeroth_index]}
+								alt=""
+								height="80px"
+								width="80px"
+							/>
+							<div className={styles.product_content}>
+								<div className={styles.black}>{item.product_name}</div>
+								<div className={styles.dot_list}>
+									<span>Color</span>
+									<div
+										className={styles.color_dot}
+										style={{
+											backgroundColor : `${getColorFromCode(item.color_id)}`,
+											border          : '1px solid rgba(0,0,0,.2)',
+										}}
+									/>
+									<span>{item.size}</span>
+									<span style={{ marginLeft: '4px' }}>{` x ${item.quantity}`}</span>
+								</div>
 							</div>
+						</div>
+						<div className={styles.amount_total}>
+							{currency_code}
+							{' '}
+							{item.sub_total_amount}
 						</div>
 					</div>
 				))}
