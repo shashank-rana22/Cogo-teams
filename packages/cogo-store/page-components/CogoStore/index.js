@@ -21,7 +21,7 @@ function CogoStore() {
 				autoScroll
 				timeInterval={4000}
 				showArrow={false}
-				showDots={false}
+				showDots
 			/>
 			<HomePageContent
 				data={data}

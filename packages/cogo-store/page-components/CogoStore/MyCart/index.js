@@ -107,7 +107,7 @@ function MyCart() {
 
 					<div className={styles.right_cart}>
 						<div className={styles.totals}>
-							<h2 className={styles.heading_total}>Cart Totals</h2>
+							<h2 className={styles.heading_total}>Cart Total</h2>
 
 							<div className={styles.total_section}>
 								<div className={styles.total_item}>

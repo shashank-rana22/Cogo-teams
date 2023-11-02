@@ -15,5 +15,19 @@
 				margin-top: 12px;
 			}
 		}
+
+		.ui_carousel_dots {
+			background-color: #adb7bc;
+			border: 1px solid #adb7bc;
+		}
+
+		.ui_carousel_dots_active {
+			background-color: #ee3425 !important;
+			border: 1px solid #ee3425 !important;
+		}
+
+		.ui_carousel_container div:first-child {
+			bottom: -5px;
+		}
 	}
 }
