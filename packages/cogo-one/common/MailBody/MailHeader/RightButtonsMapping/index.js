@@ -30,7 +30,8 @@ function DraftMailStatus({
 					height={16}
 					color="#f68b21"
 					className={styles.delete_svg}
-					onClick={() => {
+					onClick={(e) => {
+						e.stopPropagation();
 						handleClick({ buttonType: 'delete' });
 					}}
 				/>
@@ -60,7 +61,8 @@ function DraftMailStatus({
 				height={13}
 				color="#f68b21"
 				className={styles.delete_svg}
-				onClick={() => {
+				onClick={(e) => {
+					e.stopPropagation();
 					handleClick({ buttonType: 'preview' });
 				}}
 			/>
@@ -94,10 +96,10 @@ function RightButtonsMapping({
 						role="presentation"
 						key={key}
 						className={styles.icon_styles}
-						style={{ loading: loading ? 'not-allowed' : 'pointer' }}
+						style={{ cursor: loading ? 'not-allowed' : 'pointer' }}
 						onClick={(e) => {
-							e.stopPropagation();
 							handleClick({ buttonType: key });
+							e.stopPropagation();
 						}}
 					>
 						{icon}

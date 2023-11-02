@@ -132,12 +132,12 @@ export function getRecipientData({
 		}
 
 		if (isDraft) {
-			setButtonType(draft_type);
 			setLoading(true);
 			const { draftData:draftQuillBody = {} } = await getFirebaseDraftBody(
 				{ messageRoomId, firestore, roomId },
 			) || {};
 
+			setButtonType(draft_type);
 			setLoading(false);
 			setEmailState(
 				(prev) => ({
