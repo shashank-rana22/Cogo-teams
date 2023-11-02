@@ -9,16 +9,17 @@
 
 .products {
 	display: flex;
-}
-
-.products img {
-	padding: 10px;
-	object-fit: contain;
+	justify-content: space-between;
+	padding: 12px 12px 0 0;
 }
 
 .products_right {
 	display: flex;
-	flex-direction: column;
+}
+
+.products_right img {
+	padding: 10px;
+	object-fit: contain;
 }
 
 .black {
@@ -54,6 +55,11 @@
 	margin-left: 4px;
 }
 
+.product_content {
+	display: flex;
+	flex-direction: column;
+}
+
 .modal_q {
 	margin-top: 16px;
 	font-size: 14px;
@@ -64,4 +70,9 @@
 
 .cancel_btn {
 	margin-right: 8px;
+}
+
+.amount_total {
+	display: flex;
+	align-items: center;
 }
