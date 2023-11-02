@@ -3,6 +3,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
+import LoadingState from '../../../commons/LoadingState';
+
 import styles from './styles.module.css';
 
 function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters = () => {}, loading = false }) {
@@ -54,58 +56,60 @@ function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters
 				</div>
 			</div>
 			<div className={styles.container}>
+				{loading ? <LoadingState /> : (
+					<div className={styles.list_body}>
+						{(list || []).map((item) => (
+							<div
+								role="presentation"
+								className={styles.list_card}
+								key={item.id}
+								onClick={() => {
+									push('/cogo-store/[product_id]', `/cogo-store/${item.id}`);
+								}}
+							>
+								<div className={styles.img_section}>
+									<img
+										src={item.product_images[GLOBAL_CONSTANTS.zeroth_index]}
+										alt=""
+										width="400px"
+										height="300px"
+									/>
+								</div>
+								<div className={styles.text_section}>
+									<div className={styles.grey}>
+										<span>
+											{item.brand_name}
+											{' '}
+											/
+											{' '}
+											{getCategoryName(item.category_id)}
+										</span>
+									</div>
+									<div className={styles.black}>
+										<span>{`${item.product_name} `}</span>
+									</div>
+									<div className={styles.dot_list}>
 
-				<div className={styles.list_body}>
-					{(list || []).map((item) => (
-						<div
-							role="presentation"
-							className={styles.list_card}
-							key={item.id}
-							onClick={() => {
-								push('/cogo-store/[product_id]', `/cogo-store/${item.id}`);
-							}}
-						>
-							<div className={styles.img_section}>
-								<img
-									src={item.product_images[GLOBAL_CONSTANTS.zeroth_index]}
-									alt=""
-									width="400px"
-									height="300px"
-								/>
+										{(item.available_colors || []).map((colorId) => (
+											<div
+												className={styles.color_dot}
+												key={colorId}
+												style={{ backgroundColor: `${getColorFromCode(colorId)}` }}
+											/>
+										))}
+									</div>
+									<div>
+										<span className={styles.cost_real}>
+											{currency_code}
+											{item.after_coupon_price}
+										</span>
+									</div>
+								</div>
 							</div>
-							<div className={styles.text_section}>
-								<div className={styles.grey}>
-									<span>
-										{item.brand_name}
-										{' '}
-										/
-										{' '}
-										{getCategoryName(item.category_id)}
-									</span>
-								</div>
-								<div className={styles.black}>
-									<span>{`${item.product_name} `}</span>
-								</div>
-								<div className={styles.dot_list}>
+						))}
+					</div>
+				)}
 
-									{(item.available_colors || []).map((colorId) => (
-										<div
-											className={styles.color_dot}
-											key={colorId}
-											style={{ backgroundColor: `${getColorFromCode(colorId)}` }}
-										/>
-									))}
-								</div>
-								<div>
-									<span className={styles.cost_real}>
-										{currency_code}
-										{item.after_coupon_price}
-									</span>
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
 			</div>
 		</>
 	);
