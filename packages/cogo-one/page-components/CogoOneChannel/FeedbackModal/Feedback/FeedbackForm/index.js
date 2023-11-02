@@ -17,6 +17,10 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 
 	const [additionalInfo, setAdditionalInfo] = useState([]);
 	const [defaultTypeId, setDefaultTypeId] = useState('');
+	const [subCategories, setSubCategories] = useState({
+		options  : [],
+		subCatId : null,
+	});
 
 	const formProps = useForm();
 
@@ -25,21 +29,39 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 		watch = () => {},
 		formState = {},
 		control = {},
+		resetField = () => {},
 	} = formProps || {};
 
 	const { errors = {} } = formState || {};
 
 	const watchCategory = watch('category');
 	const watchDescription = watch('additional_information');
+	const watchSubCategory = watch('sub_category');
+	const { options = [], subCatId = null } = subCategories || {};
 
 	const { addFeedback, loading } = useAddFeedback({
 		getFeedbacks,
 		additionalInfo,
 		setShowAddFeedback,
 		defaultTypeId,
+		subCatId,
 	});
 
-	const defaultControls = useRaiseTicketcontrols({ setAdditionalInfo, watchCategory, setDefaultTypeId });
+	const formattedSubCategories = (options || []).map((item) => ({
+		label : item?.name,
+		value : item?.name,
+		subId : item?.id,
+	}));
+
+	const defaultControls = useRaiseTicketcontrols({
+		setAdditionalInfo,
+		watchCategory,
+		setDefaultTypeId,
+		resetField,
+		formattedSubCategories,
+		setSubCategories,
+		watchSubCategory,
+	});
 
 	const additionalControls = (additionalInfo || []).map((item) => ({
 		label: (
@@ -81,6 +103,10 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 					const elementItem = { ...controlItem };
 					const { name, label, controllerType } = elementItem || {};
 					const Element = getFieldController(controllerType);
+
+					if (name === 'sub_category' && watchCategory !== 'Tech') {
+						return null;
+					}
 
 					if (!Element) { return null; }
 
