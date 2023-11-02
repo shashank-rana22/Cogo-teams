@@ -31,9 +31,6 @@ function Annexure({
 			{watermark
 				? <Watermark text="draft" /> : null}
 			<section className={styles.section}>
-				<div className={styles.header}>
-					ANNEXURE SHEET
-				</div>
 				<div className={styles.secondary_header}>
 					<div>
 						BL#
@@ -73,6 +70,9 @@ function Annexure({
 								/>
 							)}
 					</div>
+				</div>
+				<div className={styles.header}>
+					ANNEXURE SHEET
 				</div>
 				<div className={styles.table_wrapper}>
 					<table>
