@@ -52,12 +52,12 @@
 		}
 
 		.ui_table_body_cell {
-			padding: 16px 0;
 			background-color: #fff;
 		}
 
 		.ui_table_head_cell {
 			height: 36px;
+			padding-left: 14px;
 			font-weight: 700;
 			color: #221f20;
 			background-color: #e4e7e9;
