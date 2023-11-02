@@ -1,6 +1,7 @@
 import { Pill, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMTimer } from '@cogoport/icons-react';
+import { IcMOpenlink, IcMTimer } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
 import incoTermMapping from '../../../helpers/incoTermMapping';
@@ -11,7 +12,7 @@ import styles from './styles.module.css';
 
 const INDEX_ONE = 1;
 
-function ShipmentCard({ itemData, priceData }) {
+function ShipmentCard({ itemData, priceData, documents = [] }) {
 	const { haulage_type:haulageType = '' } = itemData;
 	const { inco_term:incoTerm = '' } = itemData;
 	return (
@@ -81,6 +82,23 @@ function ShipmentCard({ itemData, priceData }) {
 								: startCase(itemData?.source || '')}
 						</div>
 					</Pill>
+					{
+						documents?.[[GLOBAL_CONSTANTS.zeroth_index]]?.document_url ? (
+							<Pill size="md" color="#F7FAEF">
+								<div style={{ color: '#849E4C', cursor: 'pointer' }}>
+									<a
+										href={documents?.[[GLOBAL_CONSTANTS.zeroth_index]]?.document_url}
+										target="_blank"
+										rel="noreferrer"
+									>
+										View Document
+										<IcMOpenlink />
+									</a>
+								</div>
+							</Pill>
+						) : null
+					}
+
 				</div>
 				<div className={styles.last_section}>
 					<div className={styles.sell_price_text}>
