@@ -16,6 +16,10 @@ const useFeedbackControls = ({
 	watchCategory = '',
 	setAdditionalInfo = () => {},
 	setDefaultTypeId = () => {},
+	resetField = () => {},
+	formattedSubCategories = [],
+	setSubCategories = () => {},
+	watchSubCategory = '',
 }) => {
 	const categoryOptions = useGetAsyncTicketOptions({
 		...asyncTicketsCategory(),
@@ -32,6 +36,7 @@ const useFeedbackControls = ({
 			Audience    : 'cogoone_demand',
 			Category    : watchCategory || undefined,
 			size        : 100,
+			SubCategory : watchSubCategory || undefined,
 		},
 	});
 
@@ -45,6 +50,24 @@ const useFeedbackControls = ({
 			isClearable    : true,
 			defaultOptions : true,
 			rules          : { required: true },
+			onChange       : (_, val) => {
+				setSubCategories((p) => ({ ...p, options: val?.subcategories }));
+				resetField('sub_category');
+				resetField('issue_type');
+			},
+		},
+		{
+			label          : 'Select Sub Category',
+			name           : 'sub_category',
+			controllerType : 'select',
+			placeholder    : 'Select sub category',
+			rules          : { required: true },
+			isClearable    : true,
+			options        : formattedSubCategories,
+			onChange       : (_, val) => {
+				setSubCategories((p) => ({ ...p, subCatId: val?.subId }));
+				resetField('issue_type');
+			},
 		},
 		{
 			...(ticketTypeOptions || {}),

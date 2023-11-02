@@ -123,10 +123,11 @@ function Header({
 						</div>
 					</>
 				) : null}
-				{(hasPermissionToEdit && !isGroup) ? (
+				{(hasPermissionToEdit && !is_draft) ? (
 					<VideoCalling
 						activeTab={activeTab}
-						membersList={membersList}
+						searchName={search_name}
+						isGroup={isGroup}
 					/>
 				) : null}
 			</div>

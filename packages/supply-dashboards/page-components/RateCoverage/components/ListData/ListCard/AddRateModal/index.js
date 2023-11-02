@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
@@ -35,8 +36,10 @@ function AddRateModal({
 	setServiceIdPresent = () => {},
 	spot_data = {},
 	getData = () => {},
+	triggeredFrom = '',
 }) {
 	const [chargeCodes, setChargeCodes] = useState(null);
+	const [fclCfsChargeCodes, setFclCfsChargeCodes] = useState(null);
 	const [activeTab, setActiveTab] = useState('main_freight');
 	const [dependentMainFreight, setDependentMainFreight] = useState([{ service: 'main_freight' }]);
 	const [payload, setPayload] = useState(null);
@@ -71,12 +74,22 @@ function AddRateModal({
 	const { deleteFeedbackRequest } = useDeleteFreightRateFeedbacks(filter?.service);
 	const { updateFlashBookingRate } = useUpdateFlashBookingRate({ data, shipment_data, filter });
 
+	const chargeCodesData = [
+		rateData?.freight_charge_codes,
+		rateData?.fcl_customs_charge_codes,
+		rateData?.lcl_customs_charge_codes,
+		rateData?.air_customs_charge_codes,
+		rateData?.haulage_freight_charge_codes,
+		rateData?.fcl_cfs_charge_codes,
+	].find(Boolean);
+
 	const { finalFields } = FieldMutation({
 		fields,
 		values,
 		filter,
 		chargeCodes,
 		rateData,
+		fclCfsChargeCodes,
 	});
 
 	const handleSuccessActions = () => {
@@ -101,7 +114,7 @@ function AddRateModal({
 	};
 
 	const handleSubmitData = async (formData) => {
-		const rate_id = await createRate(formData, data);
+		const rate_id = await createRate(formData, data, triggeredFrom);
 		if (addLocalServices) {
 			setPayload(formData);
 		}
@@ -173,8 +186,8 @@ function AddRateModal({
 		}
 
 		let mandatoryFreightCodes = [];
-		Object.keys(rateData?.freight_charge_codes || {}).forEach((code) => {
-			if (rateData?.freight_charge_codes?.[code].tags?.includes('mandatory')) {
+		Object.keys(chargeCodesData || {}).forEach((code) => {
+			if (chargeCodesData?.[code].tags?.includes('mandatory')) {
 				let flag = {};
 				prefillFreightCodes.forEach((charge) => {
 					if (charge.code === code) {
@@ -200,10 +213,13 @@ function AddRateModal({
 	}, [JSON.stringify(rateData)]);
 
 	useEffect(() => {
-		if (rateData?.freight_charge_codes) {
-			setChargeCodes(rateData?.freight_charge_codes);
+		if (chargeCodesData) {
+			setChargeCodes(chargeCodesData);
 		}
-	}, [JSON.stringify(rateData?.freight_charge_codes)]);
+		if (rateData?.fcl_customs_cfs_charge_codes) {
+			setFclCfsChargeCodes(rateData?.fcl_customs_cfs_charge_codes);
+		}
+	}, [rateData]);
 
 	useEffect(() => {
 		if (spot_data) {
@@ -255,6 +271,8 @@ function AddRateModal({
 			spot_data={spot_data}
 			dependentMainFreight={dependentMainFreight}
 			filter={filter}
+			getStats={getStats}
+			triggeredFrom={triggeredFrom}
 		/>
 	);
 }

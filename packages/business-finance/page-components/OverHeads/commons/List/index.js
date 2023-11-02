@@ -1,5 +1,7 @@
 import { Pagination } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import CardColumn from './CardColumn';
@@ -18,11 +20,11 @@ export const toTitleCase = (str) => {
 };
 
 function List({
-	config,
-	sort,
-	setSort,
-	itemData,
-	renderHeaderCheckbox,
+	config = {},
+	sort = {},
+	setSort = () => {},
+	itemData = {},
+	renderHeaderCheckbox = () => {},
 	functions = {},
 	loading = false,
 	page = 1,
@@ -46,7 +48,23 @@ function List({
 		general: { isMobile = false },
 	} = useSelector((state) => state);
 
-	const isListEmpty = !itemData || list?.length === 0;
+	const isListEmpty = !itemData || isEmpty(list);
+
+	const myRibbonStyle = (status) => {
+		switch (status) {
+			case 'ACCEPTED':
+			case 'FINANCE_ACCEPTED':
+				return `${styles.ribbon} ${styles.ribbon_accepted}`;
+			case 'INITIATED':
+			case 'LOCKED':
+				return `${styles.ribbon} ${styles.ribbon_pending}`;
+			case 'REJECTED':
+			case 'FINANCE_REJECTED':
+				return `${styles.ribbon} ${styles.ribbon_rejected}`;
+			default:
+				return `${styles.ribbon}`;
+		}
+	};
 
 	return (
 		<section>
@@ -77,7 +95,7 @@ function List({
 								isMobile={isMobile}
 							/>
 							{showRibbon ? (
-								<div className={styles.ribbon}>
+								<div className={myRibbonStyle(singleitem?.status)}>
 									{toTitleCase(singleitem?.status || '')}
 								</div>
 							) : null}
@@ -89,7 +107,7 @@ function List({
 				<div className={styles.no_data}>
 					<img
 						style={{ width: '24%', margin: '8%' }}
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no ressult found.svg"
+						src={GLOBAL_CONSTANTS.image_url.list_no_result_found}
 						alt="no data"
 					/>
 				</div>

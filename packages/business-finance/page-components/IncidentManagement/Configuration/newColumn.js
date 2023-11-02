@@ -37,12 +37,10 @@ function getColumns({
 			id       : 'company_name',
 			Cell     : ({ row: { original } }) => {
 				const { data = {} } = original || {};
-				const { organization = '' } = data || {};
+				const { organization = '', concorPdaApprovalRequest = {} } = data || {};
 				const { interCompanyJournalVoucherRequest } = data || {};
 				const { list } = interCompanyJournalVoucherRequest || {};
-				const getList = () => (list || [{}]).map(
-					(item) => item?.tradePartyName,
-				);
+				const getList = () => (list || [{}]).map((item) => item?.tradePartyName);
 				const companyName = getList()?.[GLOBAL_CONSTANTS.zeroth_index];
 				const bankTradePartyName = data?.bankRequest && data?.organization?.tradePartyType;
 				const tdsTradePartyName = data?.tdsRequest && data?.organization?.tradePartyType;
@@ -66,7 +64,8 @@ function getColumns({
 						) : (
 							<div className={cl`${styles.company_name} ${styles.common}`}>
 								<ShowOverflowingNumber
-									value={toTitleCase(organization?.businessName)}
+									value={toTitleCase(organization?.businessName
+										|| concorPdaApprovalRequest?.supplierName)}
 									maxLength={OVERFLOW_NUMBER}
 								/>
 							</div>

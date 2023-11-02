@@ -1,5 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 const DEFAULT_TRANSIT_TIME = 0;
 const TOTAL_HOURS = 24;
 
@@ -54,7 +52,7 @@ const formatTrailerFreight = (val, user_id) => {
 	const fuelSurchargeObject = {
 		code     : 'FSC',
 		unit     : val.fuel_surcharge_type,
-		currency : GLOBAL_CONSTANTS.currency_code.INR,
+		currency : val.currency,
 		price    : val.fuel_surcharge,
 	};
 

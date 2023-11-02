@@ -189,7 +189,6 @@ export default {
 		ff_cost_booking_executive : '8cc096a8-e279-425c-ba95-3970614c3d8e',
 		service_ops2_role_id      : [
 			'017856dc-b424-4145-9181-5680732cb33b',
-			'12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)
 			'8b04b2b9-baa1-4913-bf4c-b11effecef0b', // SO2 Executive
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 		],
@@ -208,6 +207,7 @@ export default {
 		prod_kam_cp           : 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
 		prod_es_sales         : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 		entity_manager_id     : '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
+		lcl_so2_executive     : '12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)
 		service_ops1_role_ids : [
 			'5b5ee698-ec53-47fe-9584-737c9a174f8c', // Prod_SO1
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
@@ -315,6 +315,7 @@ export default {
 		service_ops3             : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
 		data_superadmin          : 'df340ea2-91b5-4cbc-80ab-d11cec21f040',
 		kam_admin                : 'df6591f0-f41b-4283-9966-7d0225e1df00', // Kam Admin Vietnam
+		so2_executive            : '12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)'
 	},
 	options: {
 		registration_types: [

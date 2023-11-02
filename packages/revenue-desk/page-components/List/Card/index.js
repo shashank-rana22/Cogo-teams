@@ -13,6 +13,7 @@ function Card({ item, loading, setShowDetailPage, filters }) {
 		}
 		return setShowDetailPage(item);
 	};
+
 	return (
 		<div
 			role="presentation"

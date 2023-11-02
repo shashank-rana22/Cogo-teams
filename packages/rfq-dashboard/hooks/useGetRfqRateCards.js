@@ -10,9 +10,11 @@ const useGetRfqRateCards = ({ rfq_id = '', state }) => {
 		params : {
 			group_by_data_required : true,
 			filters                : {
-				card_state: state,
+				card_state : state,
 				rfq_id,
+				status     : 'active',
 			},
+
 		},
 	}, { manual: false });
 

@@ -5,13 +5,12 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { getRecipientData } from '../../helpers/getRecipientData';
-import useCreateReplyAllDraft from '../../hooks/useCreateReplyAllDraft ';
-import useCreateReplyDraft from '../../hooks/useCreateReplyDraft';
 import useGetSignature from '../../hooks/useGetSignature';
 
 import MailActions from './mailActions';
 import MailAttachments from './MailAttachments';
 import MailHeader from './MailHeader';
+import MessageDetails from './MessageDetails';
 import styles from './styles.module.css';
 
 const getEmailText = ({
@@ -62,8 +61,10 @@ function MailBody({
 	toggleMailBody = () => {},
 	fullThread = '',
 	expandedStateId = '',
+	activeMessageCard = {},
 }) {
 	const [loading, setLoading] = useState(false);
+	const [modalData, setModalData] = useState(null);
 
 	const { source = '' } = formattedData || {};
 	const { viewType } = mailProps;
@@ -91,9 +92,6 @@ function MailBody({
 
 	const { signature } = useGetSignature({ viewType });
 
-	const { createReplyAllDraft } = useCreateReplyAllDraft();
-	const { createReplyDraft } = useCreateReplyDraft();
-
 	const date = created_at ? formatDate({
 		date       : new Date(created_at),
 		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -115,8 +113,6 @@ function MailBody({
 		subject,
 		emailVia          : 'firebase_emails',
 		deleteMessage,
-		createReplyDraft,
-		createReplyAllDraft,
 		signature,
 		setLoading,
 		firestore,
@@ -154,6 +150,10 @@ function MailBody({
 					isDraft={isDraft}
 					emailStatus={emailStatus}
 					loading={loading}
+					setModalData={setModalData}
+					modalData={modalData}
+					activeMessageCard={activeMessageCard}
+					viewType={viewType}
 				/>
 
 				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
@@ -195,6 +195,15 @@ function MailBody({
 					</div>
 				</div>
 			</div>
+
+			{isEmpty(modalData)
+				? null
+				: (
+					<MessageDetails
+						modalData={modalData}
+						setModalData={setModalData}
+					/>
+				)}
 		</div>
 	);
 }
