@@ -54,7 +54,9 @@ function EditInvoicePreference({
 
 	const organizationDetails = {
 		id: (end_to_end_shipment.is_possible
-			&& stakeholders[GLOBAL_CONSTANTS.zeroth_index].stakeholder_type === 'origin_booking_agent')
+			&& ['origin_booking_agent', 'destination_booking_agent'].includes(
+				stakeholders[GLOBAL_CONSTANTS.zeroth_index]?.stakeholder_type,
+			))
 			? consignee_shipper_id
 			: importer_exporter_id || undefined,
 		country_id: country_id || undefined,
