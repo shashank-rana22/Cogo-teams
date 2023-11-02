@@ -72,7 +72,7 @@ function AddRateModal({
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
 	const { deleteRequest } = useDeleteFreightRateRequests(filter?.service);
 	const { deleteFeedbackRequest } = useDeleteFreightRateFeedbacks(filter?.service);
-	const { updateFlashBookingRate } = useUpdateFlashBookingRate({ data, shipment_data, filter });
+	const { updateFlashBookingRate } = useUpdateFlashBookingRate({ data, shipment_data, filter, source });
 
 	const chargeCodesData = [
 		rateData?.freight_charge_codes,
