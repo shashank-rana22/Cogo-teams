@@ -19,7 +19,7 @@ function CogoStore() {
 				size="md"
 				slides={CarouselData}
 				autoScroll
-				timeInterval={4000}
+				timeInterval={20000}
 				showArrow={false}
 				showDots={false}
 			/>
@@ -28,7 +28,7 @@ function CogoStore() {
 				filters={filters}
 				setFilters={setFilters}
 				productData={productData}
-				laoding={loading}
+				loading={loading}
 			/>
 		</div>
 	);

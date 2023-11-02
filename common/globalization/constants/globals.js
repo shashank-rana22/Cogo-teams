@@ -264,6 +264,11 @@ const GLOBAL_CONSTANTS = {
 		'August', 'September', 'October', 'November', 'December'],
 
 	image_url: {
+		CAROUSEL_ONE: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/carousel1.svg',
+		CAROUSEL_TWO:
+		'https://cogoport-testing.sgp1.digitaloceanspaces.com/882784d0c199f841e0bf0ef95ff6d8c0/Group%201000010473.svg',
+		CAROUSEL_THREE:
+		'https://cogoport-testing.sgp1.digitaloceanspaces.com/a964769da6e5e643a4020ef4fdb3ae0d/Group%201000010474.svg',
 		DARK_BG          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dark_bg.png',
 		TICK_ICON     			: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Ok.svg',
 		ADD_TO_CART    		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/AddCart',

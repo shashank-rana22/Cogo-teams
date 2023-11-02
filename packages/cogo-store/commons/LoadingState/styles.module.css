@@ -1,0 +1,14 @@
+.list_body {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	width: 100%;
+	padding: 16px 30px;
+	margin-top: -50px;
+}
+
+.list_card {
+	width: 33%;
+	padding: 20px;
+	cursor: pointer;
+}
