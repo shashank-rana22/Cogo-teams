@@ -175,15 +175,13 @@ const useGetMessages = (
 		setMessagesState((prev) => {
 			const { [id]: currentDocument, ...rest } = prev;
 
-			const { [timestamp]: del, ...restDocuments } = currentDocument?.messagesData || {};
+			const { [timestamp]: del, ...restDocuments } = prev?.messagesData || {};
 			return {
 				...rest,
-				[id]: {
-					...currentDocument,
-					messagesData: {
-						...restDocuments,
-					},
+				messagesData: {
+					...restDocuments,
 				},
+
 			};
 		});
 
