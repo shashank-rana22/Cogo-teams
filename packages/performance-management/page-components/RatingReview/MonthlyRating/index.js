@@ -21,10 +21,6 @@ function MonthlyRating({ props = {} }) {
 		setPage,
 		search,
 		setSearch,
-		// location,
-		// setLocation,
-		// department,
-		// setDepartment,
 		showUnrated,
 		setShowUnrated,
 		refetch,
@@ -55,32 +51,7 @@ function MonthlyRating({ props = {} }) {
 		setMonthsToShow(month_year_data?.find((item) => item.year === year).month);
 	};
 	const { team_rating = 0 } = paginationData || {};
-	// const today = new Date();
-	// const date_now = getDate(today);
-	// const month_now = getMonth(today);
-	// const year_now = getYear(today);
 
-	// const options = Array.from({ length: 6 }, (_, index) => {
-	// 	let monthIndex = month_now - index;
-	// 	let year = year_now;
-
-	// 	if (date_now < 21) {
-	// 		monthIndex -= 1;
-	// 		if (monthIndex < 0) {
-	// 			monthIndex = 11;
-	// 			year -= 1;
-	// 		}
-	// 	}
-
-	// 	const prevMonth = new Date(year, monthIndex, date_now);
-	// 	const prevMonthLabel = `${prevMonth.toLocaleString('default', { month: 'long' })} - ${prevMonth.getFullYear()}`;
-	// 	const monthValue = {
-	// 		month : prevMonth.getMonth() + 1,
-	// 		year  : prevMonth.getFullYear(),
-	// 	};
-
-	// 	return { label: prevMonthLabel, value: monthValue };
-	// });
 	return (
 		<div className={styles.container}>
 			<div className={styles.inner_container}>
@@ -155,10 +126,6 @@ function MonthlyRating({ props = {} }) {
 					setPage={setPage}
 					search={search}
 					setSearch={setSearch}
-					// location={location}
-					// setLocation={setLocation}
-					// department={department}
-					// setDepartment={setDepartment}
 					props={props}
 					showUnrated={showUnrated}
 					setShowUnrated={setShowUnrated}

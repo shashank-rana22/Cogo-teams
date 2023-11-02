@@ -20,8 +20,6 @@ const months = [
 const useMonthlyRating = ({ props }) => {
 	const [page, setPage] = useState(GLOBAL_CONSTANTS.one);
 	const [search, setSearch] = useState('');
-	const [location, setLocation] = useState('');
-	const [department, setDepartment] = useState('');
 	const [showUnrated, setShowUnrated] = useState(false);
 	const [filter_year, setFilterYear] = useState(null);
 	const [filter_month, setFilterMonth] = useState(null);
@@ -45,9 +43,7 @@ const useMonthlyRating = ({ props }) => {
 						month      : filter_month || months.indexOf(cycle_month) + 1,
 						year       : filter_year || cycle_year,
 						filters    : {
-							department_id   : department || undefined,
-							office_location : location || undefined,
-							q               : search || undefined,
+							q: search || undefined,
 						},
 						show_unrated_employees: showUnrated ? true : undefined,
 					},
@@ -56,13 +52,13 @@ const useMonthlyRating = ({ props }) => {
 				console.log('error :: ', error);
 			}
 		},
-		[cycle_month, cycle_year, department, filter_month,
-			filter_year, location, page, props?.activeTab, props?.user_role, search, showUnrated, trigger],
+		[cycle_month, cycle_year, filter_month,
+			filter_year, page, props?.activeTab, props?.user_role, search, showUnrated, trigger],
 	);
 
 	useEffect(() => {
 		fetch();
-	}, [fetch, page, search, location, department, showUnrated]);
+	}, [fetch, page, search, showUnrated]);
 
 	return {
 		list,
@@ -72,10 +68,6 @@ const useMonthlyRating = ({ props }) => {
 		setPage,
 		search,
 		setSearch,
-		location,
-		setLocation,
-		department,
-		setDepartment,
 		showUnrated,
 		setShowUnrated,
 		refetch: fetch,
