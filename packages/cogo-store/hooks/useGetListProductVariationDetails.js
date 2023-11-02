@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from 'react';
 const useGetListProductVariationDetails = () => {
 	const router = useRouter();
 	const { query } = router || {};
-	const { product_id = '' } = query || {};
+	const { product_id = '', colorId } = query || {};
 	const [filtersVariation, setFiltersVariation] = useState({
 		color_id : '',
 		size     : '',
@@ -24,10 +24,10 @@ const useGetListProductVariationDetails = () => {
 				await trigger({
 					params: {
 						filters: {
-							color_id,
+							color_id: colorId || color_id,
 							size,
 						},
-						product_id,
+						id: product_id,
 					},
 				});
 			} catch (error) {
@@ -36,7 +36,7 @@ const useGetListProductVariationDetails = () => {
 				}
 			}
 		},
-		[trigger, filtersVariation, product_id],
+		[filtersVariation, trigger, colorId, product_id],
 	);
 
 	useEffect(() => {

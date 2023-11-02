@@ -26,25 +26,6 @@ const CarouselData = [
 		),
 	},
 	{
-		key    : 'item2',
-		render : () => (
-			<div className={styles.carousel}>
-				<img src={GLOBAL_CONSTANTS.image_url.DARK_BG} alt="" width="100%" />
-				<div className={styles.overlay_content}>
-					<img src={GLOBAL_CONSTANTS.image_url.laptop_bag} alt="" />
-
-				</div>
-
-				<span className={styles.image_header}>
-					<img src={GLOBAL_CONSTANTS.image_url.COGO_ICON} alt="" height="50px" width="255px" />
-					<img src={GLOBAL_CONSTANTS.image_url.COPYRIGHT_ICON} alt="" height="10px" />
-				</span>
-				<span className={styles.home_text_laptop}>Our Brand, Your Style</span>
-
-			</div>
-		),
-	},
-	{
 		key    : 'item3',
 		render : () => (
 			<div className={styles.carousel}>
@@ -61,23 +42,6 @@ const CarouselData = [
 					Wardrobe with the
 				</span>
 				<span className={styles.home_text_shoes}>Cogoport Merchandise now</span>
-
-			</div>
-		),
-	},
-	{
-		key    : 'item4',
-		render : () => (
-			<div className={styles.carousel}>
-				<img src={GLOBAL_CONSTANTS.image_url.spring_collection} alt="" width="100%" />
-
-				<span className={styles.home_text_laptop}>
-					NEW
-					{' '}
-					<br />
-					COLLECTION
-				</span>
-				<span className={styles.home_text_season}>SHOP NOW !</span>
 
 			</div>
 		),

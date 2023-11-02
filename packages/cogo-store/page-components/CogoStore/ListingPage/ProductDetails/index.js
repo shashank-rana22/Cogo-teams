@@ -14,7 +14,7 @@ function ProductDetails({
 	after_coupon_price = '', ADD_TO_CART = '', synchronizeCart = '',
 	handleBuyNow = () => {}, addedToCart = false, handleAddToCart = () => {}, selectedImage = '',
 	TICK_ICON = '', colorValuePairs = [], handleVariationColor = () => {},
-	handleImageClick = () => {}, office_location = '', currency_code = '', merchSize = '', merchColor = '',
+	handleImageClick = () => {}, office_location = '', currency_code = '', merchSize = '',
 	loading = false,
 }) {
 	if (loading) {
@@ -83,7 +83,7 @@ function ProductDetails({
 						<div className={styles.product_filter_item}>
 							<span>Color</span>
 							<Select
-								value={merchColor || filtersVariation?.color_id}
+								value={filtersVariation?.color_id}
 								className={styles.select_filters}
 								onChange={(e) => handleVariationColor(e)}
 								placeholder="Select Color"
@@ -136,9 +136,14 @@ function ProductDetails({
 					</div>
 
 					<div className={styles.cta_buttons}>
-						<Button size="lg" themeType="secondary" className={styles.add_to_cart}>
+						<Button
+							size="lg"
+							themeType="secondary"
+							className={styles.add_to_cart}
+							onClick={handleAddToCart}
+						>
 							<img src={ADD_TO_CART} alt="add-to-icons" />
-							<span onClick={handleAddToCart} aria-hidden>
+							<span aria-hidden>
 								{addedToCart ? 'Added to Cart' : 'Add to Cart'}
 							</span>
 						</Button>
