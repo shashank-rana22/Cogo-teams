@@ -5,7 +5,7 @@ import { useHarbourRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useCallback } from 'react';
 
-const useListAllOrders = ({ dateArray = [] } = []) => {
+const useListAllOrders = ({ dateArray = [] } = {}) => {
 	const [filters, setFilters] = useState({
 		page_limit : 10,
 		page       : 1,
