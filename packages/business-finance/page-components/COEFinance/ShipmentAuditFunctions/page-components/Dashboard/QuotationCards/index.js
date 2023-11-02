@@ -17,7 +17,6 @@ import styles from './styles.module.css';
 
 function QuotationCards({
 	getPrePostShipmentQuoteRef = {},
-	quotationsData = {},
 	setQuotationsData = () => {},
 }) {
 	const { query: { active_tab = '', job_id = '', job_number = '' } } = useRouter();
@@ -33,14 +32,12 @@ function QuotationCards({
 		shipmentDetailsTab : true,
 		documentsTab       : false,
 		ticketsTab         : false,
-		costSheetTab       : false,
 	});
 
 	const [checkItem, setCheckItem] = useState({
 		shipmentDetailCheck  : false,
 		documentDetailsCheck : false,
 		ticketDetailsCheck   : false,
-		costSheetCheck       : false,
 	});
 
 	const onTabClick = ({ tabName = '' }) => {
@@ -82,11 +79,8 @@ function QuotationCards({
 				loadingShipment={loadingShipment}
 				tab={tab}
 			/>
-			<CostSheetCard
-				quotationsData={quotationsData}
-				onTabClick={onTabClick}
-				tab={tab}
-			/>
+
+			<CostSheetCard />
 
 			<div className={styles.all_task_container}>
 				<PrePostCheckoutCardsSet

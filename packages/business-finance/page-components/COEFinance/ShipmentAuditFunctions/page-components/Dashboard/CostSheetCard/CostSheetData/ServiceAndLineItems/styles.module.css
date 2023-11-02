@@ -1,3 +1,21 @@
+.service_name {
+	display: flex;
+	align-items: flex-start;
+	padding-bottom: 15px;
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+	color: #333;
+}
+
+.sub_content {
+	display: flex;
+	width: 33%;
+}
+
 .container {
-	padding: 10px;
+	padding-bottom: 15px;
+}
+
+.line {
+	border: 1px solid #bdbdbd;
 }
