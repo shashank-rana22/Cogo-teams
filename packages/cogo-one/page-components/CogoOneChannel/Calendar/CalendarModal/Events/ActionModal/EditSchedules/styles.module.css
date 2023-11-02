@@ -1,0 +1,55 @@
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: 16px 0;
+
+	:global {
+		.react-datepicker__input-container {
+			width: 200px;
+			height: 30px;
+		}
+
+		.react-datepicker__input-container input {
+			height: 30px !important;
+		}
+
+		.ui_time_display_container {
+			width: 160px;
+			height: 30px;
+			margin-left: 4px;
+		}
+
+		.react-datepicker__aria-live {
+			display: none;
+		}
+
+		.ui_time_options_container {
+			> div > div > div {
+				height: 100px;
+			}
+		}
+	}
+}
+
+.each_row {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+}
+
+.error_text {
+	font-size: 10px;
+	color: #ee3425;
+}
+
+.label {
+	margin-bottom: 4px;
+}
