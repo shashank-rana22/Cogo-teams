@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
-import { setCookie, getCookie } from '@cogoport/utils';
+import { setCookie, getCookie, isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useMemo } from 'react';
 
 import useGetListProductVariationDetails from '../../../hooks/useGetListProductVariationDetails';
@@ -99,25 +99,27 @@ function ListingPage() {
 	};
 
 	const handleVariationColor = (e) => {
-		setFiltersVariation((prev) => ({
-			...prev,
-			color_id: e,
-		}));
-		const { product_id = '' } = query || {};
-		push('/cogo-store/[product_id]', `/cogo-store/${product_id}?colorId=${e}`);
+		if (!isEmpty(e)) {
+			setFiltersVariation((prev) => ({
+				...prev,
+				color_id: e,
+			}));
+			const { product_id = '' } = query || {};
+			push('/cogo-store/[product_id]', `/cogo-store/${product_id}?colorId=${e}`);
+		}
 	};
 
 	useEffect(() => {
-		if ((product_images || []).length > 0) {
-			setSelectedImage(product_images[0]);
+		if (!isEmpty(product_images)) {
+			setSelectedImage(product_images[GLOBAL_CONSTANTS.zeroth_index]);
 		}
 	}, [product_images]);
 
 	useEffect(() => {
-		if (filtersVariation?.color_id === '') {
+		if (!isEmpty(color_id?.id)) {
 			setFiltersVariation((prev) => ({ ...prev, color_id: color_id?.id }));
 		}
-	}, [color_id?.id, filtersVariation?.color_id, setFiltersVariation]);
+	}, [color_id?.id, setFiltersVariation]);
 
 	return (
 		<div className={styles.listing_page}>
