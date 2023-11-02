@@ -1,14 +1,17 @@
 import { Button, cl } from '@cogoport/components';
 import { IcMPlusInCircle, IcMArrowRight, IcCVerySad } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { forwardRef, useImperativeHandle, useState } from 'react';
 
 import useGetAddress from '../../hooks/useGetAddress';
 
 import AddressCard from './AddressCard';
+import AddressModal from './AddressModal';
 import styles from './styles.module.css';
 
-function Address({ billingType = '', orgId = '' }) {
+function Address(props, ref) {
+	const { billingType = '', orgId = '' } = props;
+
 	const [selectedAddress, setSelectedAddress] = useState({});
 
 	const [addressModal, setAddressModal] = useState({
@@ -17,9 +20,18 @@ function Address({ billingType = '', orgId = '' }) {
 		openModal : false,
 	});
 
-	const { loading, addressData = [] } = useGetAddress({ billingType, orgId });
+	const {
+		loading,
+		addressData = [],
+		setAddressData,
+		getBillingAddress,
+	} = useGetAddress({ billingType, orgId });
+
 	const { mainAddress = [], allAddress = [] } = addressData || {};
+
 	const addressList = loading ? [...Array(2).keys()] : mainAddress;
+
+	useImperativeHandle(ref, () => () => selectedAddress, [selectedAddress]);
 
 	return (
 		<>
@@ -82,7 +94,7 @@ function Address({ billingType = '', orgId = '' }) {
 				))}
 			</div>
 
-			{/* {addressModal.openModal ? (
+			{addressModal.openModal ? (
 				<AddressModal
 					orgId={orgId}
 					data={allAddress}
@@ -93,10 +105,10 @@ function Address({ billingType = '', orgId = '' }) {
 					getBillingAddress={getBillingAddress}
 					setSelectedAddress={setSelectedAddress}
 				/>
-			) : null} */}
+			) : null}
 
 		</>
 	);
 }
 
-export default Address;
+export default forwardRef(Address);

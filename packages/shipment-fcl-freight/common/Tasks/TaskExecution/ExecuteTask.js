@@ -47,8 +47,6 @@ function ExecuteTask({
 		refetch: getShipmentRefetch = () => {},
 	} = useContext(ShipmentDetailContext);
 
-	console.log(shipment_data, 'shipment_data', servicesList);
-
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
 	const { data: shipmentTradePartnersData } = useListShipmentTradePartners({ shipment_id: shipment_data?.id, task });

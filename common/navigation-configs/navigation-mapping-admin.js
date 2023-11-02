@@ -1293,7 +1293,7 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/booking-desk',
 					type          : 'link',
 					main_apis     : ['list_booking_desk_shipments'],
-					possible_apis : [...apis.shipment, ...apis.booking_desk],
+					possible_apis : [...apis.shipment, ...apis.booking_desk, ...apis.cargo_insurance],
 				},
 				{
 					key           : 'coe-cost_booking',

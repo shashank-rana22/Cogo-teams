@@ -59,7 +59,7 @@ function TaskExecution({
 			/>
 		);
 	}
-	console.log('in task executiuon');
+
 	return (
 		<ExecuteTask
 			task={task}

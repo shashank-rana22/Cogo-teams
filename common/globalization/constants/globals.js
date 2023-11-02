@@ -491,7 +491,11 @@ const GLOBAL_CONSTANTS = {
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti_svg.svg',
 		performance_leaderboard_ranking_badge:
 			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
-		upload_icon: 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/upload_icon.png',
+		upload_icon     : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/upload_icon.png',
+		insurance_pkg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pkg.png',
+		bajaj_insurance : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Bajaj_Insurance_.png',
+		globe_sub       : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/globe',
+
 	},
 
 	video_call_ring_tone_url:

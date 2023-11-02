@@ -1,13 +1,15 @@
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 
 import FormItem from '../common/FormItems';
 import { getRegistrationControls } from '../configurations/insuranceControls';
 import useDraft from '../hooks/useDraft';
+import useInsurance from '../hooks/useInsurance';
 
 import Address from './Address';
+import ConfirmSuccessModal from './ConfirmSuccessModal';
 import FormFields from './FormFields';
 import SideBar from './SideBar';
 import styles from './styles.module.css';
@@ -16,20 +18,35 @@ function CargoInsurance() {
 	const { shipment_data, primary_service, servicesList } = useContext(
 		ShipmentDetailContext,
 	);
-	const [billingType, setBillingType] = useState('Corporate');
 
-	const policyDetails = (servicesList || []).find(
-		(item) => item?.service_type === 'cargo_insurance_service',
-	);
+	const [billingType, setBillingType] = useState('Corporate');
+	const [confirmSuccess, setConfirmSuccess] = useState({
+		isOpen: false,
+	});
+
+	const formRef = useRef({});
 
 	const formHook = useForm({
 		defaultValues: {
 			riskCoverage: 'ALL_RISK',
 		},
 	});
-	const { handleSubmit, getValues } = formHook;
 
-	const { getLoading, draftData } = useDraft({ policyDetails });
+	const { handleSubmit } = formHook;
+
+	const policyDetails = (servicesList || []).find(
+		(item) => item?.service_type === 'cargo_insurance_service',
+	);
+
+	const { getLoading, saveDraftLoading, draftData, saveAsDraft } = useDraft({
+		policyDetails,
+		formHook,
+		billingType,
+		formRef,
+	});
+
+	useInsurance({ draftData, formHook });
+
 	const controls = getRegistrationControls({ billingType });
 
 	return (
@@ -41,7 +58,7 @@ function CargoInsurance() {
 						setBillingType={setBillingType}
 						orgId={draftData?.organizationId}
 						// preSelectedAddress={metadata?.selectedAddress}
-						// ref={(r) => { formRef.current.address = r; }}
+						ref={(r) => { formRef.current.address = r; }}
 					/>
 
 					<div className={styles.form_container}>
@@ -60,18 +77,27 @@ function CargoInsurance() {
 			<div className={styles.footer}>
 				<Button
 					themeType="accent"
-					// loading={saveDraftLoading}
+					loading={saveDraftLoading}
+					disabled={getLoading}
 					className={styles.save_draft_btn}
-					// onClick={saveAsDraft}
+					onClick={saveAsDraft}
 				>
 					Save as Draft
 				</Button>
 
-				<Button>
+				<Button disabled={saveDraftLoading || getLoading}>
 					Confirm
 				</Button>
 			</div>
 
+			<ConfirmSuccessModal
+				confirmSuccess={confirmSuccess}
+				setConfirmSuccess={setConfirmSuccess}
+				loading={loading}
+				pocDetails={draftData?.pocDetails}
+				handleSubmit={handleSubmit}
+				submitHandler={submitHandler}
+			/>
 		</div>
 	);
 }

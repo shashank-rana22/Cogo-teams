@@ -45,6 +45,7 @@ const request = Axios.create({ baseURL: process.env.NEXT_PUBLIC_REST_BASE_API_UR
 
 request.interceptors.request.use((oldConfig) => {
 	const newConfig = { ...oldConfig };
+
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
 
 	const isDevMode = !process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com');
@@ -80,10 +81,11 @@ request.interceptors.request.use((oldConfig) => {
 	return {
 		...newConfig,
 		headers: {
-			authorizationscope : 'partner',
-			authorization      : `Bearer: ${token}`,
+			authorizationscope   : newConfig?.scope || 'partner',
+			authorization        : `Bearer: ${newConfig?.token || token}`,
 			authorizationparameters,
-			'auth-token'       : newConfig.auth_token || undefined,
+			'auth-token'         : newConfig.auth_token || undefined,
+			authorizationscopeid : newConfig.scopeId || undefined,
 		},
 	};
 });

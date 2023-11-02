@@ -1,6 +1,5 @@
 import currencyOptions from '@cogoport/forms/page-components/Business/PriceSelect/currencies';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMProductCodeMapping } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { addDays } from '@cogoport/utils';
 
@@ -59,27 +58,23 @@ const getInsuranceControls = ({ incotermResponse = {} }) => {
 			rules       : { required: true },
 		},
 		{
-			name               : 'hsCode',
-			label              : 'HS Code',
-			placeholder        : 'Select HS Code',
-			prefix             : <IcMProductCodeMapping width={14} height={14} />,
+			name               : 'commodity',
+			label              : 'Commoditiy',
+			placeholder        : 'Select Commodity',
 			type               : 'asyncSelect',
 			size               : 'sm',
-			asyncKey           : 'list_saas_hs_codes',
+			asyncKey           : 'insurance_commodities',
 			initialCall        : true,
 			rules              : { required: true },
-			params             : { codeType: 'FINAL' },
 			labelKey           : 'display_name',
-			valueKey           : 'hsCode',
 			getModifiedOptions : ({ options }) => options.map((opt) => ({
 				...opt,
 				display_name: (
 					<div>
-						{opt?.hsCode}
-						{' '}
-						-
-						{' '}
-						{opt?.description}
+						{opt?.commodity}
+						(
+						{opt?.subCommodity}
+						)
 
 					</div>),
 			})),
