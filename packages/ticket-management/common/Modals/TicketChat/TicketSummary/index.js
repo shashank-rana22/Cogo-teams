@@ -224,6 +224,7 @@ function TicketSummary({
 						shipmentsData={shipmentsData}
 						handleRouteSupply={handleRouteSupply}
 						listLoading={listLoading}
+						requestType={requestType}
 					/>
 				) : null}
 				{service && (

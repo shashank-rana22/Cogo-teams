@@ -37,6 +37,7 @@ import ftlAdmin from './config/ftl-admin';
 import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
 import governanceManager from './config/governance-manager';
 import groundOps from './config/ground-ops';
+import handlingFees from './config/handling-fees';
 import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
 import ingestion from './config/ingestion';
@@ -193,6 +194,7 @@ const routeConfig = {
 	...serviceManagement,
 	...cargoInsurance,
 	...cogoStore,
+	...handlingFees,
 };
 
 export default routeConfig;
