@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState, useContext } from 'react';
 
 import useEditInvoicePref from '../../../../../hooks/useEditInvoicePref';
@@ -31,6 +32,9 @@ function EditInvoicePreference({
 		country_id = '',
 		is_tax_applicable = true,
 		is_job_closed_financially = false,
+		consignee_shipper_id = '',
+		stakeholders = [],
+		end_to_end_shipment = {},
 		shipment_type = '',
 	} = shipment_data || {};
 
@@ -49,8 +53,13 @@ function EditInvoicePreference({
 	});
 
 	const organizationDetails = {
-		id         : importer_exporter_id || undefined,
-		country_id : country_id || undefined,
+		id: (end_to_end_shipment?.is_possible
+			&& ['origin_booking_agent', 'destination_booking_agent'].includes(
+				stakeholders[GLOBAL_CONSTANTS.zeroth_index]?.stakeholder_type,
+			))
+			? consignee_shipper_id
+			: importer_exporter_id || undefined,
+		country_id: country_id || undefined,
 		is_tax_applicable,
 	};
 
