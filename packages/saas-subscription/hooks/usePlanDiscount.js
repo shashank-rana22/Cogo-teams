@@ -18,9 +18,9 @@ const getDefaultValue = ({ info, isCreate = false }) => {
 		config_type,
 		value,
 		usage_count,
-		metadata  : JSON.stringify(metadata),
-		conditions,
-		is_active : is_active ? 'active' : 'inactive',
+		metadata   : JSON.stringify(metadata),
+		conditions : JSON.stringify(conditions),
+		is_active  : is_active ? 'active' : 'inactive',
 	};
 };
 
