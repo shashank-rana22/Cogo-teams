@@ -9,6 +9,10 @@
 		margin-top: 54px;
 	}
 
+	&:nth-child(3) {
+		bottom: 55px;
+	}
+
 	:global {
 		@media (max-width: 767px) {
 			.ui_carousel_container {
@@ -26,8 +30,8 @@
 			border: 1px solid #ee3425 !important;
 		}
 
-		.ui_carousel_container div:first-child {
-			bottom: -5px;
+		div:nth-child(3) {
+			bottom: 45px;
 		}
 	}
 }

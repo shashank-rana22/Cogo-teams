@@ -5,6 +5,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../commons/EmptyState';
+import ProductDetailsLoading from '../../../../commons/ProductDetailsLoading';
 
 import styles from './styles.module.css';
 
@@ -17,8 +18,8 @@ function ProductDetails({
 	handleImageClick = () => {}, office_location = '', currency_code = '', merchSize = '',
 	loading = false,
 }) {
-	if (loading) {
-		return null;
+	if (!loading) {
+		return <ProductDetailsLoading />;
 	}
 	return (
 
