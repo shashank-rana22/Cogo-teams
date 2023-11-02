@@ -14,6 +14,7 @@ import {
 	ChipsController,
 	MultiselectController,
 	SingleDateRangeController,
+	TimepickerController,
 } from '@cogoport/forms';
 
 import FieldArrayController from './FieldArray';
@@ -35,6 +36,7 @@ const CONTROLLER_MAPPING = {
 	mobile_number      : MobileNumberController,
 	chips              : ChipsController,
 	singleDateRange    : SingleDateRangeController,
+	timePicker         : TimepickerController,
 };
 
 export const getFieldController = (type = 'text') => CONTROLLER_MAPPING[type] || null;
