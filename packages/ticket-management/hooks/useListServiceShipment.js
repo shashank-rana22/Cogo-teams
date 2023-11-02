@@ -2,21 +2,25 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
+import { SERVICE_API_MAPPING } from '../constants';
+
 const getParams = ({ serialId }) => ({
 	filters: {
-		serial_id: serialId || undefined,
+		serial_id: serialId ? `${serialId}` : undefined,
 	},
 });
 
-function useListShipments({ serialId = 0, ticketId = 0, idType = '', requestType = '' }) {
+function useListServiceTypeShipment({ serialId = 0, ticketId = 0, idType = '', requestType = '', service = '' }) {
+	const API_NAME = SERVICE_API_MAPPING?.[idType]?.[service] || null;
+
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/list_shipments',
+		url    : `/${API_NAME}`,
 		method : 'get',
 	}, { manual: true });
 
-	const getShipmentsList = useCallback(
+	const getServiceType = useCallback(
 		() => {
-			if (idType !== 'sid' && requestType !== 'shipment') {
+			if (idType === 'sid' || requestType !== 'rate') {
 				return;
 			}
 
@@ -25,22 +29,22 @@ function useListShipments({ serialId = 0, ticketId = 0, idType = '', requestType
 					params: getParams({ serialId }),
 				});
 			} catch (e) {
-				console.error('e:', e);
+				console.error('err:', e);
 			}
 		},
 		[serialId, trigger, idType, requestType],
 	);
 
 	useEffect(() => {
-		getShipmentsList({});
-	}, [getShipmentsList, ticketId]);
+		getServiceType();
+	}, [getServiceType, ticketId]);
 
 	const shipmentsData = data?.list?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	return {
-		listLoading: loading,
-		shipmentsData,
+		serviceLoading : loading,
+		serviceData    : shipmentsData,
 	};
 }
 
-export default useListShipments;
+export default useListServiceTypeShipment;
