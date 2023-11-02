@@ -25,7 +25,6 @@ const QUERY_LIMIT = 1;
 
 const useGetMessages = (
 	{
-		activeChatCollection,
 		id,
 		viewType,
 		firestore = {},
@@ -43,11 +42,16 @@ const useGetMessages = (
 	const { addMessageTimeline = () => {} } = useMessagesTimeline({ setMessagesState, id });
 
 	const mountSnapShot = useCallback(() => {
-		if (isEmpty(activeChatCollection)) {
-			return;
-		}
-
 		try {
+			const activeChatCollection = collection(
+				firestore,
+				`${FIRESTORE_PATH[channel_type]}/${id}/messages`,
+			);
+
+			if (isEmpty(activeChatCollection)) {
+				return;
+			}
+
 			const chatCollectionQuery = query(
 				activeChatCollection,
 				...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accesible_agent_types_query || []),
@@ -93,13 +97,19 @@ const useGetMessages = (
 		} catch (e) {
 			console.error('e', e);
 		}
-	}, [activeChatCollection, viewType, addMessageTimeline, addTimeline]);
+	}, [firestore, channel_type, id, viewType, addTimeline, addMessageTimeline]);
 
 	const getNextData = useCallback(async ({ callBack = () => {} } = {}) => {
-		if (isEmpty(activeChatCollection)) {
-			return;
-		}
 		try {
+			const activeChatCollection = collection(
+				firestore,
+				`${FIRESTORE_PATH[channel_type]}/${id}/messages`,
+			);
+
+			if (isEmpty(activeChatCollection)) {
+				return;
+			}
+
 			const prevTimeStamp = Number(messagesState?.lastDocumentTimeStamp || 0);
 			setLoadingPrevMessages(true);
 
@@ -155,14 +165,11 @@ const useGetMessages = (
 		} finally {
 			setLoadingPrevMessages(false);
 		}
-	}, [
-		activeChatCollection,
-		addMessageTimeline,
+	}, [addMessageTimeline,
 		addTimeline,
-		messagesState?.lastDocumentTimeStamp,
-		messagesState?.messagesData,
-		viewType,
-	]);
+		channel_type,
+		firestore, id,
+		messagesState?.lastDocumentTimeStamp, messagesState?.messagesData, viewType]);
 
 	const deleteMessage = async ({ timestamp = '', messageDocId = '' }) => {
 		setMessagesState((prev) => {
