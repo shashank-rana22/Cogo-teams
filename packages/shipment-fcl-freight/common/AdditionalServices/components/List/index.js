@@ -48,8 +48,6 @@ function List({
 	const isAdditionalServiceAllowed = !(primary_service?.trade_type === 'import'
 	&& isEntityIndia && !ALLOWED_STAKEHOLDERS.includes(activeStakeholder));
 
-	console.log('activeStakeholder', activeStakeholder);
-
 	const canEditCancelService = !!stakeholderConfig?.overview?.can_edit_cancel_service;
 
 	const [item, setItem] = useState({});
