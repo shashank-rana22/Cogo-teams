@@ -68,14 +68,14 @@ function Header() {
 					My Cart
 				</span>
 				{is_hr_admin ? (
-					<div
+					<span
+						className={styles.right_header_text}
 						aria-hidden
 						onClick={() => push('/cogo-store/admin-view')}
-						style={{ marginLeft: '18px', cursor: 'pointer', fontWeight: '600' }}
 					>
 						Admin View
 						<IcMArrowNext style={{ marginLeft: '3px', cursor: 'pointer' }} />
-					</div>
+					</span>
 				) : null}
 			</div>
 		</div>
