@@ -44,7 +44,7 @@ const useGetListProductVariationDetails = () => {
 				}
 			}
 		},
-		[filtersVariation, product_id, trigger, colorId, PARENT_ENTITY_ID],
+		[filtersVariation, product_id, trigger, colorId, code],
 	);
 
 	useEffect(() => {
