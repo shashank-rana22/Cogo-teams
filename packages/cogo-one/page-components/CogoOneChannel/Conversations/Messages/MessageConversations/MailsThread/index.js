@@ -8,8 +8,6 @@ const CONVERSATION_TYPE_MAPPING = {
 	received : SentDivComponent,
 };
 
-const MESSAGE_CONVERSATION_TYPES = ['sent', 'received'];
-
 function MailsThread(
 	{
 		loadingPrevMessages = false,
@@ -33,14 +31,8 @@ function MailsThread(
 	const {
 		user_name = '',
 	} = activeMessageCard;
-
 	const updatedArray = [...(messagesData || [])].reverse();
-
-	const isTheFirstMessageId = updatedArray?.find(
-		(item) => MESSAGE_CONVERSATION_TYPES.includes(item?.conversation_type),
-	);
-
-	const mailContentProps = useGetMailContent({ firestore, formattedData });
+	const mailContentProps = useGetMailContent({ firestore, formattedData, messagesData });
 
 	if (hasNoFireBaseRoom) {
 		return (
@@ -74,7 +66,6 @@ function MailsThread(
 						mailProps={mailProps}
 						deleteMessage={deleteMessage}
 						firestore={firestore}
-						isTheFirstMessageId={isTheFirstMessageId?.id}
 						roomId={roomId}
 						{...(mailContentProps || {})}
 					/>

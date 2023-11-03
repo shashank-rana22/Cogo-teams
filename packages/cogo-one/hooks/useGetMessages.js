@@ -11,7 +11,7 @@ import {
 	deleteDoc,
 	collection,
 } from 'firebase/firestore';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
@@ -229,11 +229,9 @@ const useGetMessages = (
 		}
 	};
 
-	const activeMessageData = messagesState?.messagesData || {};
-
-	const sortedMessageData = Object.keys(activeMessageData || {})
+	const sortedMessageData = useMemo(() => Object.keys(messagesState?.messagesData || {})
 		.sort((a, b) => Number(a) - Number(b))
-		.map((eachkey) => activeMessageData[eachkey]) || [];
+		.map((eachkey) => messagesState?.messagesData?.[eachkey]) || [], [messagesState]);
 
 	useEffect(() => {
 		setMessagesState({});
