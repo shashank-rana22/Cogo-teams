@@ -5,41 +5,45 @@ import { getFieldController } from '../../../../../../common/Form/getFieldContro
 import controls from './get-quest-controls';
 import useCreateQuest from './hooks/useCreateQuest';
 import styles from './styles.module.css';
-// import useGetOverlappedQuests from './hooks/useGetOverlappedQuests';
 
-function QuestForm({ setParams = () => {}, refetch = () => {} }) {
-	const { loading, control, errors, reset, handleClick, handleSubmit } = useCreateQuest({ setParams, refetch });
+function QuestForm({ setParams = () => {}, refetch = () => {}, setQuestMode = () => {} }) {
+	const {
+		loading,
+		control,
+		errors,
+		reset,
+		handleClick,
+		handleSubmit,
+	} = useCreateQuest({ setParams, refetch, setQuestMode });
 
 	return (
-		<>
-			<form onSubmit={handleSubmit(handleClick)}>
-				<div className={styles.form_container}>
-					{controls.map((controlItem) => {
-						const { type, label, name, style = {} } = controlItem || {};
+		<form onSubmit={handleSubmit(handleClick)}>
+			<div className={styles.form_container}>
+				{controls.map((controlItem) => {
+					const { type, label, name, style = {} } = controlItem || {};
 
-						const Element = getFieldController(type);
+					const Element = getFieldController(type);
 
-						return (
-							<div className={styles.control_item} key={name} style={style}>
-								<p className={styles.label}>
-									{label}
-									<sup className={styles.sup}>*</sup>
-								</p>
+					return (
+						<div className={styles.control_item} key={name} style={style}>
+							<p className={styles.label}>
+								{label}
+								<sup className={styles.sup}>*</sup>
+							</p>
 
-								<div>
-									<Element
-										control={control}
-										{...controlItem}
-									/>
+							<div>
+								<Element
+									control={control}
+									{...controlItem}
+								/>
 
-									{errors[name]
+								{errors[name]
                                         && <div className={styles.error_msg}>{errors[name]?.message}</div>}
-								</div>
 							</div>
-						);
-					})}
-				</div>
-			</form>
+						</div>
+					);
+				})}
+			</div>
 			<div className={styles.button_container}>
 				<Button themeType="secondary" onClick={() => reset()}>
 					Reset
@@ -52,7 +56,7 @@ function QuestForm({ setParams = () => {}, refetch = () => {} }) {
 					Create new
 				</Button>
 			</div>
-		</>
+		</form>
 	);
 }
 

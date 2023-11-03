@@ -4,38 +4,43 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useCreateQuest = ({ setParams = () => {}, refetch = () => {} }) => {
+import CREATE_QUEST_KEYS from '../../../configurations/create-quest-key-mappings';
+
+const { CONFIG } = CREATE_QUEST_KEYS;
+
+const useCreateQuest = ({ setParams = () => {}, refetch = () => {}, setQuestMode = () => {} }) => {
 	const { control, handleSubmit, watch, reset, formState: { errors = {} } } = useForm();
 
 	const [{ loading }, trigger] = useAllocationRequest(
 		{
-			url    : '/quest',
-			method : 'POST',
+			url     : '/quest',
+			method  : 'POST',
+			authkey : 'post_agent_scoring_quest',
 		},
-		{ manual: true },
 	);
 
 	const handleClick = async (formValues) => {
 		try {
-			const { name, date_range } = formValues;
+			const { name, date_range, agent_scoring_config_id, quest_string } = formValues;
 
 			await trigger({
 				data: {
 					name,
-					start_date : date_range?.start_date,
-					end_date   : date_range?.end_date,
+					agent_scoring_config_id,
+					quest_string,
+					start_date : date_range?.startDate,
+					end_date   : date_range?.endDate,
 				},
 			});
 
 			Toast.success('Saved successfully!');
+			setQuestMode(CONFIG);
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 
 	const [date_range, agent_scoring_config_id] = watch(['date_range', 'agent_scoring_config_id']);
-
-	// const agent_scoring_config_id = watch('agent_scoring_config_id') || undefined;
 
 	useEffect(() => {
 		const overlapping_date_range = {
