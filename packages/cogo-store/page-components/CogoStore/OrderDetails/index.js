@@ -41,7 +41,7 @@ function OrderDetails() {
 
 	const { data: productData } = useGetProductFilterDetail();
 
-	const { is_hr_admin, currency_code } = productData || {};
+	const { is_hr_admin, currency_symbol } = productData || {};
 
 	const { color } = productData || {};
 
@@ -92,7 +92,7 @@ function OrderDetails() {
 		setValue('order_status', order_status);
 	}, [delivery_date, getOrderData?.delivery_date, order_status, setValue]);
 
-	const columns = getOrderColumns({ color, currency_code });
+	const columns = getOrderColumns({ color, currency_symbol });
 
 	return (
 		<>
@@ -133,7 +133,8 @@ function OrderDetails() {
 								</div>
 							</div>
 							<div className={styles.order_right_detail}>
-								{currency_code}
+								{currency_symbol}
+								{' '}
 								{total_amount}
 							</div>
 						</div>
