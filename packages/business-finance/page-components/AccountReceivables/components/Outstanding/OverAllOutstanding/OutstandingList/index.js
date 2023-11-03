@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import {
-	Button, cl, TabPanel, Tabs, Tooltip, Popover, RadioGroup, Pill,
+	Button, cl, TabPanel, Tabs, Tooltip, Popover, Pill, Modal,
 } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -15,61 +15,13 @@ import useUpdateAccountTagging from '../../../../hooks/useUpdateAccountTagging';
 import useUpdateOutstandingList from '../../../../hooks/useUpdateOutstandingList';
 import checkPermission from '../../../../Utils/checkPermission';
 
+import ChangeStatus from './ChangeStatus';
 import DownloadLedgerModal from './DownloadLedgerModal';
+import ShowMoreOptions from './ShowMoreOptions';
 import StatsOutstanding from './StatsOutstanding/index';
 import styles from './styles.module.css';
 import TabsOptions from './TabOptions';
 import UserDetails from './UserDetails';
-
-function ChangeStatus({ item = {}, refetch = () => {} }) {
-	const [currentstatus, setCurrentStatus] = useState(item?.taggedState);
-	const { apiTrigger } = useUpdateAccountTagging({ item });
-	const onSubmit = () => {
-		(apiTrigger(currentstatus, refetch));
-	};
-	const accountStatusOption = [
-		{ label: 'Credit Controller', value: 'credit_controller' },
-		{ label: 'Collection Agency', value: 'collection_agency' },
-		{ label: 'Pre Legal', value: 'pre_legal' },
-		{ label: 'Legal', value: 'legal' },
-		{ label: 'Never', value: 'never' },
-	];
-	let filtredOptions = [];
-	if (isEmpty(item?.taggedState)) {
-		filtredOptions = accountStatusOption.filter(
-			(ele) => ele.value !== 'credit_controller',
-		);
-	} else {
-		filtredOptions = accountStatusOption.filter(
-			(ele) => ele.value !== item?.taggedState,
-		);
-	}
-	return (
-
-		<>
-
-			<b>Change Current Account Status</b>
-
-			<RadioGroup
-				options={filtredOptions}
-				value={currentstatus}
-				onChange={setCurrentStatus}
-			/>
-
-			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-
-				<Button size="md" themeType="primary" onClick={() => onSubmit()}>
-
-					SUBMIT
-
-				</Button>
-
-			</div>
-
-		</>
-
-	);
-}
 
 // eslint-disable-next-line max-lines-per-function
 function OutstandingList({
@@ -85,8 +37,9 @@ function OutstandingList({
 
 	const [activeTab, setActiveTab] = useState('invoice_details');
 	const [showLedgerModal, setShowLedgerModal] = useState(false);
-
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
+	const [currentstatus, setCurrentStatus] = useState('');
+	const [changeStatus, setChangeStatus] = useState(false);
 
 	const { isDownloading = false, downloadAROustanding = () => {} } = useOpenInvoicesReport({ organizationId });
 	const { apiTrigger } = useUpdateOutstandingList({ item });
@@ -100,6 +53,12 @@ function OutstandingList({
 			setIsAccordionActive(true);
 		}
 	};
+
+	const { apiTrigger :changeStatusTrigger } = useUpdateAccountTagging({ item });
+	const onSubmit = () => {
+		(changeStatusTrigger(currentstatus, refetch));
+	};
+
 	const {
 		businessName,
 		collectionPartyType = [],
@@ -318,7 +277,12 @@ function OutstandingList({
 						{
 							(entityCode !== '101_301')
 								? (
-									<Popover placement="left" render={<ChangeStatus item={item} refetch={refetch} />}>
+									<Popover
+										placement="left"
+										render={(
+											<ShowMoreOptions item={item} setChangeStatus={setChangeStatus} />
+										)}
+									>
 										<div className={styles.download_icon_div}>
 											<IcMOverflowLine />
 										</div>
@@ -367,6 +331,22 @@ function OutstandingList({
 					setShowLedgerModal={setShowLedgerModal}
 					item={item}
 				/>
+			) : null}
+
+			{changeStatus ? (
+				<Modal show={changeStatus} onClose={() => setChangeStatus(false)}>
+					<Modal.Header title="Change Current Account Status" />
+					<Modal.Body>
+						<ChangeStatus
+							item={item}
+							currentstatus={currentstatus}
+							setCurrentStatus={setCurrentStatus}
+						/>
+					</Modal.Body>
+					<Modal.Footer>
+						<Button onClick={onSubmit}>Submit</Button>
+					</Modal.Footer>
+				</Modal>
 			) : null}
 		</div>
 	);
