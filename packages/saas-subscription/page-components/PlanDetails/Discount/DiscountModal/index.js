@@ -44,17 +44,23 @@ function DiscountModal({ discountModal, setDiscountModal, setFeatureModal }) {
 
 			<div className={styles.modal_body}>
 				<div className={styles.form_container}>
+
 					{discountControls.map((config) => {
-						const { name, label, type, rules, showEle = true } = config;
+						const { name, label, type, rules, showEle = true, showOptional = true } = config;
+
 						const Element = getFieldController(type);
 
 						if (!showEle) return null;
 
 						return (
 							<div key={name} className={cl`${styles.col} ${styles[config.name]}`}>
+
 								<div className={styles.label_container}>
 									<p>{label}</p>
-									{isEmpty(rules) ? <p className={styles.opt_text}>(Optional)</p> : null}
+
+									{(isEmpty(rules) && showOptional)
+										? <p className={styles.opt_text}>(Optional)</p>
+										: null}
 								</div>
 								<Element control={control} {...config} />
 							</div>
