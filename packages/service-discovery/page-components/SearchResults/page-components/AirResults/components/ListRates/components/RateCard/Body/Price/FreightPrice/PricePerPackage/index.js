@@ -26,6 +26,7 @@ function PricePerPackage({
 	total_price = 0,
 	showKgTag = false,
 	packages_count = 0,
+	total = false,
 }) {
 	return (
 		<div className={styles.container}>
@@ -41,18 +42,18 @@ function PricePerPackage({
 				<div className={styles.amount_values}>
 					{total_price && total_price !== price ? (
 						<span className={styles.discounted_price}>
-							{format(total_price, price_currency)}
+							{format(total_price, price_currency, total ? ZERO_FRACTION : TWO_FRACTION)}
 						</span>
 					) : null}
 
-					<span>{format(price, price_currency, total_price ? ZERO_FRACTION : TWO_FRACTION)}</span>
+					<span>{format(price, price_currency, total ? ZERO_FRACTION : TWO_FRACTION)}</span>
 				</div>
 
 				{showKgTag ? (
 					<span className={styles.per_kg_label}>Per Kg.</span>
 				) : null}
 
-				{total_price ? (
+				{total ? (
 					<Tooltip
 						placement="top"
 						trigger="mouseenter"

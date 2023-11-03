@@ -16,11 +16,14 @@ function FreightPrice({
 		total_price = 0,
 		freight_price_discounted:price = 0,
 		freight_price_currency = 'INR',
+		freight_price:totalFreight = 0,
 	} = rate || {};
 
-	const freight_price = detail.service_type === 'air_freight' && !rate.is_minimum_threshold_rate
-		? price / (detail?.chargeable_weight || DEFAULT_DIVISOR_VALUE) || DEFAULT_PRICE_VALUE
-		: price || DEFAULT_PRICE_VALUE;
+	const discounted_freight_price = rate.is_minimum_threshold_rate ? price || DEFAULT_PRICE_VALUE
+		: price / (detail?.chargeable_weight || DEFAULT_DIVISOR_VALUE) || DEFAULT_PRICE_VALUE;
+
+	const total_freight_price = rate.is_minimum_threshold_rate ? totalFreight || DEFAULT_PRICE_VALUE
+		: totalFreight / (detail?.chargeable_weight || DEFAULT_DIVISOR_VALUE) || DEFAULT_PRICE_VALUE;
 
 	const showKgTag = detail.service_type === 'air_freight' && !rate.is_minimum_threshold_rate;
 
@@ -30,8 +33,9 @@ function FreightPrice({
 				<span className={styles.label}>Freight Price</span>
 
 				<PricePerPackage
-					price={freight_price}
+					price={discounted_freight_price}
 					price_currency={freight_price_currency}
+					total_price={total_freight_price}
 					showKgTag={showKgTag}
 				/>
 			</div>
@@ -43,6 +47,7 @@ function FreightPrice({
 					price={total_price_discounted}
 					price_currency={total_price_currency}
 					total_price={total_price}
+					total
 				/>
 			</div>
 		</div>

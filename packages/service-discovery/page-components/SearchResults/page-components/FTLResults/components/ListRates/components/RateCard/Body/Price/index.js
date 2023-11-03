@@ -11,7 +11,11 @@ function Price({
 }) {
 	return (
 		<div className={styles.container}>
-			<FreightPrice rate={rate} detail={detail} isContract={isContract} />
+			<FreightPrice
+				service_type={detail?.service_type}
+				rate={rate}
+				isContract={isContract}
+			/>
 
 			<ProceedButton
 				rate={rate}

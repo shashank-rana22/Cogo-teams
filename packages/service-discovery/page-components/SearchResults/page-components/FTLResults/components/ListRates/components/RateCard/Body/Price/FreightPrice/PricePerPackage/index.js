@@ -22,22 +22,23 @@ function PricePerPackage({
 	price_currency = 'INR',
 	total_price_currency = 'INR',
 	total_price = 0,
+	total = false,
 }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.amount_wrapper}>
 				{total_price && total_price !== price ? (
 					<span className={styles.discounted_price}>
-						{format(total_price, total_price_currency)}
+						{format(total_price, total_price_currency, total ? 0 : 2)}
 					</span>
 				) : null}
 
 				<span className={styles.amount}>
-					{format(price, price_currency, total_price ? 0 : 2)}
+					{format(price, price_currency, total ? 0 : 2)}
 				</span>
 			</div>
 
-			{total_price ? (
+			{total ? (
 				<Tooltip
 					placement="top"
 					trigger="mouseenter"
@@ -50,7 +51,7 @@ function PricePerPackage({
 				>
 					<IcMInfo className={styles.info_icon} />
 				</Tooltip>
-			) : null}
+			) : <span className={styles.per_truck_label}>Per Truck</span>}
 		</div>
 	);
 }

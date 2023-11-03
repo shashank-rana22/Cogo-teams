@@ -111,8 +111,6 @@ function PortPair({ item = {}, field = {} }) {
 		key,
 	);
 
-	console.log('item', item);
-
 	const isSingleLocation = onlySingleLocation.includes(service_type);
 
 	const handleClickLocation = () => {
