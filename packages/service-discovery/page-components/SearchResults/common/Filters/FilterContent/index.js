@@ -37,7 +37,10 @@ function Value({ name = '', value = {}, defaultValues = {}, onReset = () => {} }
 	}
 
 	if (name === 'source') {
-		formattedValue = startCase(value);
+		if (value?.includes('predicted')) {
+			const updatedValues = value?.filter((val) => val !== 'predicted');
+			formattedValue = startCase(updatedValues);
+		} else { formattedValue = startCase(value); }
 	}
 
 	return (
