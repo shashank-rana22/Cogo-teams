@@ -5,6 +5,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../commons/EmptyState';
+import ProductDetailsLoading from '../../../../commons/ProductDetailsLoading';
 
 import styles from './styles.module.css';
 
@@ -14,11 +15,11 @@ function ProductDetails({
 	after_coupon_price = '', ADD_TO_CART = '', synchronizeCart = '',
 	handleBuyNow = () => {}, addedToCart = false, handleAddToCart = () => {}, selectedImage = '',
 	TICK_ICON = '', colorValuePairs = [], handleVariationColor = () => {},
-	handleImageClick = () => {}, office_location = '', currency_code = '', merchSize = '',
-	loading = false,
+	handleImageClick = () => {}, office_location = '', merchSize = '',
+	loading = false, currency_symbol = '',
 }) {
 	if (loading) {
-		return null;
+		return <ProductDetailsLoading />;
 	}
 	return (
 
@@ -109,7 +110,7 @@ function ProductDetails({
 					</div>
 					<div className={styles.price_section}>
 						<span className={styles.discounted_price}>
-							{currency_code}
+							{currency_symbol}
 							{' '}
 							{ after_coupon_price }
 

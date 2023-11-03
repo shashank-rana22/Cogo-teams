@@ -17,7 +17,7 @@ function HomePageContent({
 	const { push } = useRouter();
 	const { list = [], total_count } = data || {};
 
-	const { categories, color, currency_code } = productData || {};
+	const { categories, color, currency_symbol } = productData || {};
 
 	const options = (categories || []).map((item) => ({ label: item.name, value: item.name }));
 
@@ -57,7 +57,7 @@ function HomePageContent({
 							page        : 1,
 						}))}
 						isClearable
-						style={{ width: '150px', marginRight: '46px' }}
+						style={{ width: '150px', marginRight: '30px' }}
 					/>
 				</div>
 			</div>
@@ -83,7 +83,7 @@ function HomePageContent({
 									<img
 										src={item.product_images[GLOBAL_CONSTANTS.zeroth_index]}
 										alt=""
-										width="400px"
+										width="100%"
 										height="300px"
 									/>
 								</div>
@@ -112,7 +112,8 @@ function HomePageContent({
 									</div>
 									<div>
 										<span className={styles.cost_real}>
-											{currency_code}
+											{currency_symbol}
+											{' '}
 											{item.after_coupon_price}
 										</span>
 									</div>

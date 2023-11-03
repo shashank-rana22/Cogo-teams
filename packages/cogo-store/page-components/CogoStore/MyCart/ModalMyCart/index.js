@@ -11,7 +11,7 @@ function ModalMyCart({
 	setShow = () => {},
 	onClose = () => {},
 	getColorFromCode = () => {},
-	currency_code = '',
+	currency_symbol = '',
 }) {
 	return (
 		<Modal size="md" show={show} onClose={() => setShow(false)} placement="center">
@@ -49,7 +49,7 @@ function ModalMyCart({
 							</div>
 						</div>
 						<div className={styles.amount_total}>
-							{currency_code}
+							{currency_symbol}
 							{' '}
 							{item.sub_total_amount}
 						</div>
