@@ -94,7 +94,7 @@ const useGetCoverageStats = ({ filter, source, showWeekData }) => {
 						weekly_stats            : !daily_stats,
 						...DATE_PARAMS,
 						transport_modes_keyword : filter?.service === 'trailer' ? 'trailer' : undefined,
-						source                  : showWeekData ? source : undefined,
+						source                  : (showWeekData && source) ? source : undefined,
 					},
 				},
 			});
