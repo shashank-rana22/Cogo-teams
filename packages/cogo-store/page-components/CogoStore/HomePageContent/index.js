@@ -7,11 +7,16 @@ import LoadingState from '../../../commons/LoadingState';
 
 import styles from './styles.module.css';
 
-function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters = () => {}, loading = false }) {
+function HomePageContent({
+	data = {}, productData = {},
+	filters = {},
+	setFilters = () => {},
+	loading = false,
+}) {
 	const { push } = useRouter();
 	const { list = [], total_count } = data || {};
 
-	const { categories, color, currency_code } = productData || {};
+	const { categories, color, currency_symbol } = productData || {};
 
 	const options = (categories || []).map((item) => ({ label: item.name, value: item.name }));
 
@@ -55,9 +60,13 @@ function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters
 					/>
 				</div>
 			</div>
-			<div className={styles.container}>
+			<div
+				className={styles.container}
+			>
 				{loading ? <LoadingState /> : (
-					<div className={styles.list_body}>
+					<div
+						className={styles.list_body}
+					>
 						{(list || []).map((item) => (
 							<div
 								role="presentation"
@@ -71,8 +80,7 @@ function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters
 									<img
 										src={item.product_images[GLOBAL_CONSTANTS.zeroth_index]}
 										alt=""
-										width="400px"
-										height="300px"
+										width="100%"
 									/>
 								</div>
 								<div className={styles.text_section}>
@@ -100,7 +108,8 @@ function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters
 									</div>
 									<div>
 										<span className={styles.cost_real}>
-											{currency_code}
+											{currency_symbol}
+											{' '}
 											{item.after_coupon_price}
 										</span>
 									</div>
