@@ -103,8 +103,6 @@ function Footer({ detentionValues = {}, handleSubmit = () => {}, detail = {}, wa
 		return acc;
 	}, []);
 
-	console.log('watch', watch(), totalDisplayString);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.text}>

@@ -9,8 +9,6 @@ const getServiceWisePayload = ({ service = {}, values = {} }) => {
 
 	const free_days = INCO_TERM_EXPORT.includes(service?.inco_term) ? 4 : 10;
 
-	console.log('values', values);
-
 	const MAPPING = {
 		fcl_freight: {
 			origin_port_id                  : service?.origin_port_id,
