@@ -1,0 +1,14 @@
+.header {
+	display: flex;
+	align-items: center;
+	margin: 30px 0;
+}
+
+.back_icon {
+	margin-right: 8px;
+	cursor: pointer;
+}
+
+.title {
+	font-size: 18px;
+}
