@@ -4,6 +4,7 @@ import AgentsExceptionList from './AgentsExceptionList';
 import AgentsPerformanceView from './AgentsPerformanceView';
 import Analytics from './Analytics';
 import ChannelStats from './ChannelStats';
+import CustomerFunnel from './CustomerFunnel';
 import PerAgentData from './PerAgentData';
 import RevenueContainer from './RevenueContainer';
 import styles from './styles.module.css';
@@ -14,11 +15,12 @@ const CHANNELS = ['email', 'whatsapp', 'calls'];
 function SmeComponents() {
 	return (
 		<div className={styles.container}>
-			<AgentsPerformanceView />
 			<RevenueContainer />
 			<PerAgentData />
 			<Analytics />
 			<UserData />
+
+			<CustomerFunnel />
 
 			{CHANNELS.map((itm) => (
 				<ChannelStats
@@ -28,6 +30,7 @@ function SmeComponents() {
 			))}
 
 			<AgentsExceptionList />
+			<AgentsPerformanceView />
 		</div>
 	);
 }

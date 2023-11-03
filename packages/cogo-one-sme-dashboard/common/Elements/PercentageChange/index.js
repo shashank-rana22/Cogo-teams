@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Growth({ showGrowth = false }) {
+export function Growth({ showGrowth = false }) {
 	if (showGrowth) {
 		return (
 			<IcMArrowBack
