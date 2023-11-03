@@ -62,16 +62,8 @@ const useGetCoverageStats = ({ filter, source, showWeekData }) => {
 			}
 		});
 
-		// const isTodayDateRequired = filter?.status === 'completed';
-
 		const DATE_PARAMS = {};
 
-		// if (isTodayDateRequired) {
-		// 	DATE_PARAMS.start_date = new Date();
-		// }
-		// if (isTodayDateRequired) {
-		// 	DATE_PARAMS.end_date = new Date();
-		// }
 		if (filter?.start_date) { DATE_PARAMS.start_date = filter?.start_date; }
 		if (filter?.end_date) { DATE_PARAMS.end_date = filter?.end_date; }
 
