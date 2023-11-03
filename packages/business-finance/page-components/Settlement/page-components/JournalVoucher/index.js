@@ -1,5 +1,6 @@
 import { Button, Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Filter from '../../../commons/Filters';
@@ -18,7 +19,7 @@ function JournalVoucher({ entityCode }) {
 	const [showBulkJV, setShowBulkJV] = useState(false);
 	const [selectedJV, setSelectedJV] = useState([]);
 	const { data, loading, refetch } = useGetJvList({ filters, entityCode });
-	const { bulkPostJV = () => {} } = usePostBulkJV();
+	const { loading : bulkPostLoading = false, bulkPostJV = () => {} } = usePostBulkJV();
 
 	const onPageChange = (val) => {
 		setFilters({ ...filters, page: val });
@@ -64,7 +65,9 @@ function JournalVoucher({ entityCode }) {
 					<Button
 						size="md"
 						themeType="primary"
-						onClick={() => bulkPostJV({ selectedJV })}
+						onClick={() => bulkPostJV({ selectedJV, setSelectedJV })}
+						disabled={isEmpty(selectedJV) || bulkPostLoading}
+						loading={bulkPostLoading}
 						style={{ marginLeft: '10px', padding: '18px' }}
 					>
 						Bulk Post

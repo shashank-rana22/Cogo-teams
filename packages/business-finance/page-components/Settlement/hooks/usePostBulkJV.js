@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
 function usePostBulkJV() {
@@ -10,10 +11,18 @@ function usePostBulkJV() {
 		{ manual: true },
 	);
 
-	const bulkPostJV = async ({ selectedJV = [] }) => {
-		await trigger({
-			data: selectedJV,
-		});
+	const bulkPostJV = async ({ selectedJV = [], setSelectedJV = () => {} }) => {
+		try {
+			await trigger({
+				data: selectedJV,
+			});
+
+			setSelectedJV([]);
+
+			Toast.success('Processing your request. Please come back later.');
+		} catch (err) {
+			Toast.error(err?.response?.data?.message || 'Something went wrong');
+		}
 	};
 
 	return {

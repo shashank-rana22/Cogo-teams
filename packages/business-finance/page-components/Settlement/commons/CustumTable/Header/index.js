@@ -1,5 +1,6 @@
 import { Checkbox } from '@cogoport/components';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -26,7 +27,7 @@ function Header({ setFilters = () => {}, filters = {}, selectedJV = [], setSelec
 		<div className={styles.header}>
 			<div className={styles.checkbox}>
 				<Checkbox
-					checked={allChecked}
+					checked={allChecked && !isEmpty(list)}
 					onChange={checkAllJV}
 				/>
 			</div>
