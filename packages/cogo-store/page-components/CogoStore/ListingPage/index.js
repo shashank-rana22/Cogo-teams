@@ -48,6 +48,7 @@ function ListingPage() {
 		available_colors,
 		available_sizes,
 		color_id,
+		size_chart,
 	} = productDataDetails || {};
 
 	const selectedColors = useMemo(() => (available_colors || []).map((colorId) => ({
@@ -171,6 +172,7 @@ function ListingPage() {
 				currency_symbol={currency_symbol}
 				loading={productVariationLoading || productFilterLoading}
 				setAddedToCart={setAddedToCart}
+				size_chart={size_chart}
 			/>
 		</div>
 	);

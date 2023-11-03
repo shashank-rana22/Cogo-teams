@@ -1,4 +1,4 @@
-import { Input } from '@cogoport/components';
+import { Input, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMMinus, IcMPlus, IcCFcrossInCircle } from '@cogoport/icons-react';
 import React from 'react';
@@ -59,15 +59,19 @@ const getMyCartColumns = ({
 		Header   : 'QUANTITY',
 		accessor : (item = {}) => {
 			const handleIncrease = async () => {
-				const quantity = item.quantity + GLOBAL_CONSTANTS.one;
-				const payload = [
-					{
-						product_variation_id: item?.id,
-						quantity,
-					},
-				];
-				await updateCart({ payload });
-				refetchCartDetails();
+				if (item.quantity <= 5) {
+					const quantity = item.quantity + GLOBAL_CONSTANTS.one;
+					const payload = [
+						{
+							product_variation_id: item?.id,
+							quantity,
+						},
+					];
+					await updateCart({ payload });
+					refetchCartDetails();
+				} else {
+					Toast.error('Quantity limit exceeded');
+				}
 			};
 
 			const handleDecrease = async () => {
@@ -104,14 +108,18 @@ const getMyCartColumns = ({
 						style={{ width: '90px' }}
 						value={item.quantity}
 						onChange={async (val) => {
-							const payload = [
-								{
-									product_variation_id : item.id,
-									quantity             : val,
-								},
-							];
-							await updateCart({ payload });
-							refetchCartDetails();
+							if (val <= 5) {
+								const payload = [
+									{
+										product_variation_id : item.id,
+										quantity             : val,
+									},
+								];
+								await updateCart({ payload });
+								refetchCartDetails();
+							} else {
+								Toast.error('Quantity limit exceeded');
+							}
 						}}
 						placeholder="1"
 					/>

@@ -12,7 +12,6 @@ function HomePageContent({
 	filters = {},
 	setFilters = () => {},
 	loading = false,
-	handleScroll = () => {},
 }) {
 	const { push } = useRouter();
 	const { list = [], total_count } = data || {};
@@ -63,8 +62,6 @@ function HomePageContent({
 			</div>
 			<div
 				className={styles.container}
-				role="presentation"
-				onScroll={(e) => { handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight); }}
 			>
 				{loading ? <LoadingState /> : (
 					<div

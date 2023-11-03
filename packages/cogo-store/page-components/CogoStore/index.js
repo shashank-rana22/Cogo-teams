@@ -10,7 +10,7 @@ import HomePageContent from './HomePageContent';
 import styles from './styles.module.css';
 
 function CogoStore() {
-	const { data, filters, setFilters, loading, handleScroll } = useGetListProductDetail();
+	const { data, filters, setFilters, loading } = useGetListProductDetail();
 	const { data: productData } = useGetProductFilterDetail();
 	return (
 		<div className={styles.container}>
@@ -28,7 +28,6 @@ function CogoStore() {
 				filters={filters}
 				setFilters={setFilters}
 				productData={productData}
-				handleScroll={handleScroll}
 				loading={loading}
 			/>
 		</div>
