@@ -1,12 +1,11 @@
 import FieldArray from '../../commons/FieldArray';
 
-import getControls from './get-quest-config-controls';
 import useCreatePostConfig from './useCreatePostConfig';
 
-function QuestConfig({ config_id = null }) {
-	const controls = getControls({ config_id });
+function QuestConfig({ quest_id = null, data = {} }) {
+	console.log('quest_id::', quest_id);
 
-	const { control, errors } = useCreatePostConfig({ config_id });
+	const { control, errors, watch } = useCreatePostConfig({ config_id: data?.agent_scoring_config_id });
 
 	return (
 		<div>
@@ -14,11 +13,12 @@ function QuestConfig({ config_id = null }) {
 				<FieldArray
 					name="agent_scoring_quest_configurations"
 					control={control}
-					controls={controls}
 					error={errors}
 					showElement
 					buttonText=""
 					size="sm"
+					config_id={data?.agent_scoring_config_id}
+					watch={watch}
 				/>
 			</div>
 		</div>

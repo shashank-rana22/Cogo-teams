@@ -1,6 +1,7 @@
 import { IcMDelete } from '@cogoport/icons-react';
 
 import { getFieldController } from '../../../../../../../common/Form/getFieldController';
+import getControls from '../../../CreateQuest/QuestConfig/get-quest-config-controls';
 
 import styles from './styles.module.css';
 
@@ -8,7 +9,7 @@ const FIRST_INDEX = 1;
 
 function Child(props) {
 	const {
-		controls = [],
+		field,
 		control,
 		index,
 		name,
@@ -17,8 +18,17 @@ function Child(props) {
 		noDeleteButtonTill = 0,
 		disabled = false,
 		error = {},
+		config_id = null,
+		watch = () => {},
 		...rest
 	} = props;
+
+	const {
+		agent_scoring_block_name,
+		agent_scoring_block_id,
+	} = watch('agent_scoring_quest_configurations')[index];
+
+	const controls = getControls({ config_id, agent_scoring_block_name, agent_scoring_block_id });
 
 	return (
 		<div className={styles.content}>

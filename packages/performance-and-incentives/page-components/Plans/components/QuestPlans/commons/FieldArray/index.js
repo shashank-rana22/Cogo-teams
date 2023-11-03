@@ -1,18 +1,21 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 
+import getControls from '../../CreateQuest/QuestConfig/get-quest-config-controls';
+
 import Child from './Child';
 
 function FieldArray(props) {
 	const {
 		name,
 		control,
-		controls,
 		error,
 		showElements,
 		buttonText,
 		showButtons = true,
 		disabled = false,
+		config_id = null,
+		watch = () => {},
 		...rest
 	} = props;
 
@@ -22,6 +25,7 @@ function FieldArray(props) {
 	});
 
 	const CHILD_EMPTY_VALUES = {};
+	const controls = getControls({ config_id, watch });
 	controls.forEach((controlItem) => {
 		CHILD_EMPTY_VALUES[controlItem.name] = '';
 	});
@@ -35,7 +39,8 @@ function FieldArray(props) {
 					field={field}
 					index={index}
 					control={control}
-					controls={controls}
+					config_id={config_id}
+					watch={watch}
 					name={name}
 					remove={remove}
 					error={error?.[name]?.[index]}

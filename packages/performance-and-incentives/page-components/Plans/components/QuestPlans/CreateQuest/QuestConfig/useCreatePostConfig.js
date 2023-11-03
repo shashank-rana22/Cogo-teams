@@ -7,7 +7,7 @@ import { useAllocationRequest } from '@cogoport/request';
 const useCreatePostConfig = ({ config_id }) => {
 	const router = useRouter();
 
-	const { control, handleSubmit } = useForm();
+	const { control, handleSubmit, watch } = useForm();
 
 	const [{ loading }, trigger] = useAllocationRequest(
 		{
@@ -44,6 +44,7 @@ const useCreatePostConfig = ({ config_id }) => {
 		control,
 		handleSubmit,
 		handleClick,
+		watch,
 		// fields,
 		// append,
 		// remove,

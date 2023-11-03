@@ -43,7 +43,7 @@ function CreateQuests({ setMode = () => {} }) {
 
 			<QuestForm setParams={setParams} data={data} />
 
-			{id ? <QuestConfig config_id={id} data={data} />
+			{id ? <QuestConfig quest_id={id} data={data} />
 				: <OverlappedQuest params={params} setParams={setParams} />}
 		</div>
 	);
