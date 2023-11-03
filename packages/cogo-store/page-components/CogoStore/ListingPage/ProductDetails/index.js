@@ -5,6 +5,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../../commons/EmptyState';
+import ProductDetailsLoading from '../../../../commons/ProductDetailsLoading';
 
 import styles from './styles.module.css';
 
@@ -18,7 +19,7 @@ function ProductDetails({
 	loading = false,
 }) {
 	if (loading) {
-		return null;
+		return <ProductDetailsLoading />;
 	}
 	return (
 
