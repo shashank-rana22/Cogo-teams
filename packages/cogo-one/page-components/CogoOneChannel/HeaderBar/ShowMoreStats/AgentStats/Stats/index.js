@@ -29,7 +29,15 @@ function Stats({
 	const {
 		rating = [],
 		avg_response_time : avgResponseTime = 0, rate_revert : rateRevert = 0, agent_msg_stats : agentMsgStats = [],
+		mail_stats = {},
 	} = agentStatsData || {};
+
+	const {
+		sent_count = 0,
+		read_count = 0,
+		unread_count = 0,
+		received_count = 0,
+	} = mail_stats || {};
 
 	const { data, escalateLoading } = useGetAgentTimelineEscalate({ viewType, timePeriodValue });
 
@@ -69,7 +77,10 @@ function Stats({
 		avg_response_time           : `${(avgResponseTime || MIN_COUNT)?.toFixed(MIN_ROUND_UP_DIGIT)} min`,
 		emails_send_count           : getFormattedNumber(emailCount || MIN_COUNT),
 		escalate_chats_count        : getFormattedNumber(escalateCount || MIN_COUNT),
-
+		mail_sent                   : getFormattedNumber(sent_count || MIN_COUNT),
+		mail_received               : getFormattedNumber(received_count || MIN_COUNT),
+		mail_read                   : getFormattedNumber(read_count || MIN_COUNT),
+		mail_unread                 : getFormattedNumber(unread_count || MIN_COUNT),
 	};
 
 	const STATS_FEEDBACK_MAPPING = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.stats_feedback_count;
