@@ -14,6 +14,7 @@ import getModifiedControls from '../../helpers/getModifiedControls';
 import getShowElements from '../../helpers/getShowElements';
 import useCreateMargin from '../../hooks/useCreateMargin';
 import useGetActiveSubscription from '../../hooks/useGetActiveSubscription';
+import useGetChargeCodes from '../../hooks/useGetChargeCodes';
 import useUpdateMargin from '../../hooks/useUpdateMargin';
 import DeactiveModal from '../MarginValues/Buttons/DeactivateModal';
 
@@ -48,6 +49,7 @@ function Create({ type = 'create', item = {} }) {
 	const { onSubmit: updateForm } = useUpdateMargin();
 	const [openModal, setOpenModal] = useState(false);
 	const [showAdvancedForm, setShowAdvancedForm] = useState(false);
+	const [chargeCodes, setChargeCodes] = useState([]);
 
 	const {
 		control,
@@ -76,7 +78,9 @@ function Create({ type = 'create', item = {} }) {
 		setValue,
 	});
 
-	const marginControls = getMarginControls({ service: formValues?.service });
+	const { loading = false } = useGetChargeCodes({ service: formValues?.service, setChargeCodes });
+
+	const marginControls = getMarginControls({ service: formValues?.service, chargeCodes });
 
 	const extraControls = useMemo(() => {
 		let result = getFclControls({ type })[formValues?.service] || [];
@@ -276,6 +280,7 @@ function Create({ type = 'create', item = {} }) {
 					formValues={formValues}
 					// customFieldArrayControls={customFieldArrayControls}
 					showElements={showElements}
+					loading={loading}
 				/>
 
 				<div className={styles.btn_wrapper}>

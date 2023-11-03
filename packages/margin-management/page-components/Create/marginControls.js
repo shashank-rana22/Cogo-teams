@@ -1,7 +1,7 @@
 import validateMarginSlabs from '../../helpers/validateMarginSlabs';
 
-export default function getMarginControls({ service = '' }) {
-	const service_name = `${service}_charges`;
+export default function getMarginControls({ chargeCodes = [] }) {
+	// const service_name = `${service}_charges`;
 	const marginControls = [{
 		name               : 'margin_slabs',
 		label              : 'Margin values',
@@ -46,15 +46,12 @@ export default function getMarginControls({ service = '' }) {
 				noDeleteButtonTill : 1,
 				controls           : [
 					{
-						name        : 'code',
-						label       : 'Code',
-						valueKey    : 'code',
-						type        : 'async_select',
-						initialCall : true,
-						span        : 2,
-						asyncKey    : 'list_rate_charge_codes',
-						params      : { service_name, page_limit: 10 },
-						rules       : { required: 'Code is required' },
+						name    : 'code',
+						label   : 'Code',
+						type    : 'select',
+						span    : 2,
+						options : chargeCodes,
+						rules   : { required: 'Code is required' },
 					},
 					{
 						name    : 'type',
