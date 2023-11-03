@@ -2,6 +2,8 @@ import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
+import getFirebaseDraftBody from './getFirebaseDraftBody';
+
 const CHECK_ONE_OR_MORE_ELEMENTS = 1;
 const NULL_SUBJECT_LENGTH = 0;
 const MAXIMUM_ALLOWED_SUBJECT_LENGTH = 250;
@@ -76,7 +78,11 @@ export function getRecipientData({
 	eachMessage = {},
 	deleteMessage = () => {},
 	signature = '',
-	draftQuillBody = {},
+	setLoading = () => {},
+	roomId = '',
+	firestore = {},
+	messageRoomId = '',
+	loading = false,
 }) {
 	const {
 		setButtonType = () => {},
@@ -108,9 +114,13 @@ export function getRecipientData({
 	const filteredCcData = ccData?.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase()) || [];
 	const filteredBccData = bccData?.filter((itm) => itm.toLowerCase() !== activeMailAddress?.toLowerCase()) || [];
 
-	const handleClick = ({
+	const handleClick = async ({
 		buttonType: newButtonType = '',
 	}) => {
+		if (loading) {
+			return;
+		}
+
 		if (newButtonType === 'delete') {
 			deleteMessage({ timestamp: created_at, messageDocId: id });
 			return;
@@ -122,8 +132,13 @@ export function getRecipientData({
 		}
 
 		if (isDraft) {
-			setButtonType(draft_type);
+			setLoading(true);
+			const { draftData:draftQuillBody = {} } = await getFirebaseDraftBody(
+				{ messageRoomId, firestore, roomId },
+			) || {};
 
+			setButtonType(draft_type);
+			setLoading(false);
 			setEmailState(
 				(prev) => ({
 					...prev,

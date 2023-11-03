@@ -136,6 +136,7 @@ function DetailsCard({
 						<Details
 							dataList={dataList}
 							shipmentId={shipmentId}
+							loadingShipment={loadingShipment}
 						/>
 					</div>
 				</div>
