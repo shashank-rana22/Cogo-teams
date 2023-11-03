@@ -22,7 +22,7 @@ function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 
 	const { tax_total_price_discounted = 0, tax_total_price_currency = '', source = '' } = rate;
 
-	const { quotation_email_sent_at = '' } = detail;
+	const { quotation_email_sent_at = '', source: checkoutSource = '' } = detail;
 
 	const {
 		shipping_line = {},
@@ -42,13 +42,15 @@ function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 
 	return (
 		<div className={styles.container}>
-			<Pill
-				size="md"
-				color="#FEF199"
-				className={styles.pill}
-			>
-				Spotline Booking
-			</Pill>
+			{checkoutSource === 'spot_line_booking' ? (
+				<Pill
+					size="md"
+					color="#FEF199"
+					className={styles.pill}
+				>
+					Spotline Booking
+				</Pill>
+			) : null}
 
 			<div className={styles.main_content}>
 				<ShippingLineDetails shipping_line={shipping_line} source={source} />
