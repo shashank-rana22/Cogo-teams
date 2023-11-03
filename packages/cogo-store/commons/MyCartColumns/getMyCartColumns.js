@@ -10,7 +10,7 @@ const getMyCartColumns = ({
 	refetchCartDetails = () => {},
 	setCouponApplied = () => {},
 	color = [],
-	currency_code,
+	currency_symbol,
 }) => ([
 	{
 		Header   : 'PRODUCTS',
@@ -47,7 +47,8 @@ const getMyCartColumns = ({
 		accessor : (item = {}) => (
 			<div className={styles.dot_list}>
 				<div className={styles.amt_black}>
-					{currency_code}
+					{currency_symbol}
+					{' '}
 					{item?.after_coupon_price}
 				</div>
 			</div>
@@ -137,7 +138,8 @@ const getMyCartColumns = ({
 			return (
 				<div className={styles.dot_list}>
 					<div className={styles.amt_black}>
-						{currency_code}
+						{currency_symbol}
+						{' '}
 						{item?.sub_total_amount || '-'}
 					</div>
 					<IcCFcrossInCircle

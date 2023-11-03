@@ -11,7 +11,7 @@ function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters
 	const { push } = useRouter();
 	const { list = [], total_count } = data || {};
 
-	const { categories, color, currency_code } = productData || {};
+	const { categories, color, currency_symbol } = productData || {};
 
 	const options = (categories || []).map((item) => ({ label: item.name, value: item.name }));
 
@@ -71,7 +71,7 @@ function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters
 									<img
 										src={item.product_images[GLOBAL_CONSTANTS.zeroth_index]}
 										alt=""
-										width="400px"
+										width="100%"
 										height="300px"
 									/>
 								</div>
@@ -100,7 +100,8 @@ function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters
 									</div>
 									<div>
 										<span className={styles.cost_real}>
-											{currency_code}
+											{currency_symbol}
+											{' '}
 											{item.after_coupon_price}
 										</span>
 									</div>

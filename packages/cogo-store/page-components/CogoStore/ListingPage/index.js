@@ -33,7 +33,7 @@ function ListingPage() {
 		loading:productVariationLoading = false,
 	} = useGetListProductVariationDetails();
 
-	const { user_details, currency_code } = productData || {};
+	const { user_details, currency_code, currency_symbol } = productData || {};
 
 	const { office_location } = user_details || {};
 
@@ -153,6 +153,7 @@ function ListingPage() {
 				handleApplyClick={handleApplyClick}
 				handleImageClick={handleImageClick}
 				currency_code={currency_code}
+				currency_symbol={currency_symbol}
 				loading={productVariationLoading || productFilterLoading}
 			/>
 		</div>
