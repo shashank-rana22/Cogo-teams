@@ -19,7 +19,7 @@ function EmployeeDashboard() {
 	return (
 		<>
 			<div className={styles.heading}>
-				Performance Rating
+				Employee Ratings
 			</div>
 
 			<div className={styles.flex_container}>
