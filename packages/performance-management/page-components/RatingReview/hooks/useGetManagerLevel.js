@@ -9,11 +9,12 @@ const useGetManagerLevel = () => {
 		method : 'GET',
 	}, { manual: false });
 
-	const { level } = data || {};
+	const { level, user_role } = data || {};
 
 	return {
 		loading,
 		level,
+		user_role,
 		activeTab,
 		setActiveTab,
 	};
