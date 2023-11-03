@@ -16,7 +16,7 @@ function HomePageContent({
 	const { push } = useRouter();
 	const { list = [], total_count } = data || {};
 
-	const { categories, color, currency_symbol } = productData || {};
+	const { categories, color } = productData || {};
 
 	const options = (categories || []).map((item) => ({ label: item.name, value: item.name }));
 
@@ -108,7 +108,7 @@ function HomePageContent({
 									</div>
 									<div>
 										<span className={styles.cost_real}>
-											{currency_symbol}
+											{item?.currency_symbol || ''}
 											{' '}
 											{item.after_coupon_price}
 										</span>

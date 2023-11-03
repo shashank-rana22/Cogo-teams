@@ -107,14 +107,16 @@ function ProductDetails({
 								}}
 								>
 									<span>Size</span>
-									<span
-										className={styles.size}
-										onClick={() => setOpenModal(true)}
-										aria-hidden
-									>
-										Size Chart
-										<IcMArrowRight style={{ marginLeft: '4px' }} />
-									</span>
+									{!isEmpty(size_chart) ? 	(
+										<span
+											className={styles.size}
+											onClick={() => setOpenModal(true)}
+											aria-hidden
+										>
+											Size Chart
+											<IcMArrowRight style={{ marginLeft: '4px' }} />
+										</span>
+									) : null}
 								</div>
 								<Select
 									value={merchSize || filtersVariation?.size}
