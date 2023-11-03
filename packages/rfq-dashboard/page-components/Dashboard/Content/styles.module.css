@@ -1,9 +1,21 @@
+.wrapper {
+	flex: 1;
+}
+
 .container {
 	position: relative;
 	width: calc(100% - 16px);
+	height: calc(100% - 35px);
 	margin-left: 16px;
 	border-radius: 4px;
-	box-shadow: 0 0 8px rgb(98 127 172 / 10%);
+
+	:global(.ui_tabs_container) {
+		height: 100%;
+	}
+
+	:global(.ui_tabs_tabpanel) {
+		height: calc(100% - 54px);
+	}
 }
 
 .title {
@@ -15,7 +27,7 @@
 .pagination_container {
 	display: flex;
 	justify-content: center;
-	margin-top: 6px;
+	margin-top: 12px;
 }
 
 .button {
