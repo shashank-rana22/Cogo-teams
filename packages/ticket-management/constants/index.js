@@ -23,6 +23,10 @@ export const SERVICE_API_MAPPING = {
 		trailer_freight : 'list_trailer_freight_rate_feedbacks',
 		haulage_freight : 'list_haulage_freight_rate_feedbacks',
 		air_customs     : 'list_air_customs_rate_feedbacks',
+		box             : 'list_air_freight_rate_feedbacks',
+		crate           : 'list_air_freight_rate_feedbacks',
+		pallet          : 'list_air_freight_rate_feedbacks',
+		loose           : 'list_air_freight_rate_feedbacks',
 	},
 };
 
@@ -245,6 +249,7 @@ export const SINGLE_LOCATIONS = [
 	'fcl_freight_local',
 	'air_freight_local',
 	'lcl_freight_local',
+	'ltl_freight',
 ];
 
 export const sortByOptions = ({ t }) => [

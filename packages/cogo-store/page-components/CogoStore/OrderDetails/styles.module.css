@@ -124,6 +124,7 @@
 
 		.react-datepicker__input-container input {
 			width: 330px;
+			min-width: 330px;
 		}
 	}
 }

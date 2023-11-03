@@ -6,6 +6,8 @@ import { isEmpty } from '@cogoport/utils';
 
 import { DEFAULT_EMAIL_STATE } from '../constants/mailConstants';
 
+import useAssignMeetingAgent from './useAssignMeetingAgent';
+
 const getLensPayload = ({ payload }) => payload;
 
 const getOmniChannelLink = ({ id, channel_type }) => {
@@ -75,13 +77,26 @@ function useReplyMail(mailProps) {
 		userSharedMails = [],
 		saveDraft = () => {},
 		setMailAttachments = () => {},
+		emailState = {},
 	} = mailProps;
+
+	const { emailDemoData = {} } = emailState || {};
+	const {
+		agentId = '',
+		calendarId = '',
+		isEmail = false,
+		scheduleId = '',
+		source = '',
+		requestId = '',
+	} = emailDemoData || {};
 
 	const {
 		endPoint = '',
 		requestFunc = () => {},
 		payloadFunc: getPayload = () => {},
 	} = API_MAPPING[buttonType] || API_MAPPING.send_mail;
+
+	const { meetingAgent = () => {}, updateLoader = false } = useAssignMeetingAgent({});
 
 	const [{ loading } = {}, trigger] = requestFunc({
 		url    : `/${endPoint}`,
@@ -108,6 +123,19 @@ function useReplyMail(mailProps) {
 					newComposeDraftMsgId : messageId,
 				});
 			}
+
+			if (res?.data?.id && source === 'email_demo') {
+				await meetingAgent({
+					isEmail,
+					agentId,
+					calendarId,
+					scheduleId,
+					communicationId : res?.data?.id,
+					requestId,
+					requestStatus   : 'processing',
+				});
+			}
+
 			Toast.success('Mail Sent Successfully.');
 			setEmailState(DEFAULT_EMAIL_STATE);
 			setMailAttachments([]);
@@ -119,7 +147,7 @@ function useReplyMail(mailProps) {
 
 	return {
 		replyMailApi,
-		replyLoading: loading,
+		replyLoading: loading || updateLoader,
 	};
 }
 

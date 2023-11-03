@@ -1,0 +1,37 @@
+.dates_container {
+	display: flex;
+	align-items: center;
+}
+
+.arrow_down {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 6px 0;
+	transform: 0.3s ease;
+	animation: slide-down 1s both;
+
+	@keyframes slidedown {
+		0% {
+			visibility: visible;
+			transform: translateY(-10%);
+		}
+
+		100% {
+			transform: translateY(0);
+		}
+	}
+}
+
+.icon {
+	transform: rotate(90deg);
+}
+
+.error_text {
+	height: 10px;
+	margin-top: 2px;
+	font-size: 10px;
+	color: #ee3425;
+	text-align: left;
+	transition: 0.3s ease;
+}
