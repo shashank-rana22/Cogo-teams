@@ -53,41 +53,46 @@ function ListItem(props) {
 		<div
 			role="presentation"
 			onClick={handleClick}
-			className={getClassName({ isAllowed, listItem, index, user, userPosition, viewType, currLevel })}
-			style={{ background: getBackgroundColor({ listItem, currLevel, user }) }}
+			className={styles.container}
 		>
-			{LIST_COLUMN_MAPPING.map((columnItem) => {
-				const { key, flex, accessor } = columnItem;
 
-				if (key === 'report_type' && currLevel?.report_type === ADMIN_REPORT) return null;
+			<div
+				className={getClassName({ isAllowed, listItem, index, user, userPosition, viewType, currLevel })}
+				style={{ background: getBackgroundColor({ listItem, currLevel, user }) }}
+			>
+				{LIST_COLUMN_MAPPING.map((columnItem) => {
+					const { key, flex, accessor } = columnItem;
 
-				return (
-					<div
-						key={key}
-						style={{ flex }}
-						className={styles.list_column}
-					>
-						{conditionalWrapper({
-							condition : listItem.rank === GLOBAL_CONSTANTS.one && key === 'rank',
-							title     : key,
-							wrapper   : (children) => (
-								<div className={styles.rank_container}>
-									<Image
-										src={GLOBAL_CONSTANTS.image_url.performance_leaderboard_ranking_badge}
-										width={30}
-										height={30}
-										alt="Badge"
-										style={{ marginRight: '8px' }}
-									/>
-									{children}
-								</div>
-							),
-							children: accessor(listItem),
-						})}
+					if (key === 'report_type' && currLevel?.report_type === ADMIN_REPORT) return null;
 
-					</div>
-				);
-			})}
+					return (
+						<div
+							key={key}
+							style={{ flex }}
+							className={styles.list_column}
+						>
+							{conditionalWrapper({
+								condition : listItem.rank === GLOBAL_CONSTANTS.one && key === 'rank',
+								title     : key,
+								wrapper   : (children) => (
+									<div className={styles.rank_container}>
+										<Image
+											src={GLOBAL_CONSTANTS.image_url.performance_leaderboard_ranking_badge}
+											width={30}
+											height={30}
+											alt="Badge"
+											style={{ marginRight: '8px' }}
+										/>
+										{children}
+									</div>
+								),
+								children: accessor(listItem),
+							})}
+
+						</div>
+					);
+				})}
+			</div>
 
 		</div>
 
