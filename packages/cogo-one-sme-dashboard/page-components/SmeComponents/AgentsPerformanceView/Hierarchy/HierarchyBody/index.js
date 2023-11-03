@@ -1,26 +1,34 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import getBranchesData from '../../../../../utils/getBranchesData';
+import useListPartners from '../../../../../hooks/useListPartners';
 
+import getOptions from './getOptions';
 import styles from './styles.module.css';
 import UserCard from './UserCard';
 
 const NEXT_DATA_VIEW_TYPE = {
-	countries : 'branches',
-	// countries : 'countries',
-	branches  : 'users',
+	partners : 'branches',
+	branches : 'users',
 };
 
 function HierarchyBody({
-	loading = false,
-	countriesData = [],
 	hierarchyData = [],
 	setHierarchyData = () => {},
 }) {
-	if (loading) {
+	const currentView = isEmpty(hierarchyData) ? ''
+		: hierarchyData?.[hierarchyData.length - 1]?.hierarchyDataType;
+
+	const nextViewType = NEXT_DATA_VIEW_TYPE?.[currentView] || 'partners';
+
+	const { partnersList = [], partnersLoading = false } = useListPartners({ nextViewType });
+
+	const userOptions = getOptions({ hierarchyData, nextViewType, partnersList });
+
+	if (partnersLoading) {
 		return (
 			<div className={styles.container}>
 				<Image
@@ -33,32 +41,14 @@ function HierarchyBody({
 		);
 	}
 
-	const currentView = isEmpty(hierarchyData) ? ''
-		: hierarchyData?.[hierarchyData.length - 1]?.hierarchyDataType;
-
-	const nextViewType = NEXT_DATA_VIEW_TYPE?.[currentView] || 'countries';
-
-	if (!nextViewType || nextViewType === 'countries') {
-		return (
-			<div className={styles.container}>
-				{countriesData?.map(
-					(itm) => (
-						<UserCard
-							key={itm?.id}
-							data={itm}
-							setHierarchyData={setHierarchyData}
-						/>
-					),
-				)}
-			</div>
-		);
-	}
-
-	const branchesData = getBranchesData({ country_id: hierarchyData?.[hierarchyData.length - 1]?.id });
-
 	return (
-		<div className={styles.container}>
-			<div className={styles.prev_selected}>
+		<div
+			className={styles.container}
+			style={{ alignItems: isEmpty(hierarchyData) ? 'center' : 'flex-start' }}
+		>
+			<div className={cl`${styles.prev_selected} 
+				${isEmpty(hierarchyData) ? styles.no_container : styles.border_bottom_required}`}
+			>
 				{hierarchyData?.map(
 					(itm, index) => (
 						<>
@@ -77,12 +67,13 @@ function HierarchyBody({
 				)}
 			</div>
 
-			{branchesData?.map(
+			{userOptions?.map(
 				(itm) => (
 					<UserCard
 						key={itm?.id}
 						data={itm}
 						setHierarchyData={setHierarchyData}
+						nextViewType={nextViewType}
 					/>
 				),
 			)}
