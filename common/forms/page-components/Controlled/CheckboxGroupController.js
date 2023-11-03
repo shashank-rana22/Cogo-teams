@@ -18,7 +18,12 @@ function CheckboxGroupController(props) {
 					{...rest}
 					key={name}
 					id={name}
-					onChange={onChange}
+					onChange={(val, obj) => {
+						if (typeof rest.onChange === 'function') {
+							rest.onChange(val, obj);
+						}
+						onChange(val, obj);
+					}}
 					value={value}
 					onBlur={onBlur}
 					data-test-value={value}

@@ -771,5 +771,30 @@
             "portfolio_manager",
             "entity_manager"
         ]
+    },
+    "so2_executive": {
+        "trade_parties": ["collection_party"],
+        "can_view": [
+            "notifying_party",
+            "invoicing_party",
+            "service_provider",
+            "pocs",
+            "collection_party",
+            "shipper",
+            "consignee"
+        ],
+        "can_edit": ["notifying_party", "collection_party"],
+        "can_add_service_provider_poc": true,
+        "hidden_poc": [
+            "booking_agent",
+            "origin_booking_agent",
+            "destination_booking_agent",
+            "consignee_shipper_booking_agent"
+        ],
+        "edit_internal_poc": [
+            "service_ops1",
+            "service_ops2",
+            "so1_so2_ops"
+        ]
     }
 }
