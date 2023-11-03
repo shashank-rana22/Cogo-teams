@@ -3,9 +3,7 @@ import FieldArray from '../../commons/FieldArray';
 import useCreatePostConfig from './useCreatePostConfig';
 
 function QuestConfig({ quest_id = null, data = {} }) {
-	console.log('quest_id::', quest_id);
-
-	const { control, errors, watch } = useCreatePostConfig({ config_id: data?.agent_scoring_config_id });
+	const { control, errors, watch } = useCreatePostConfig({ quest_id });
 
 	return (
 		<div>

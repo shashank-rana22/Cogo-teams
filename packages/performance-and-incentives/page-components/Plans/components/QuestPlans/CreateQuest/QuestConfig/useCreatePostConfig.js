@@ -4,7 +4,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 
-const useCreatePostConfig = ({ config_id }) => {
+const useCreatePostConfig = ({ quest_id }) => {
 	const router = useRouter();
 
 	const { control, handleSubmit, watch } = useForm();
@@ -24,7 +24,7 @@ const useCreatePostConfig = ({ config_id }) => {
 
 			const { data } = await trigger({
 				data: {
-					agent_scoring_quest_id : config_id,
+					agent_scoring_quest_id : quest_id,
 					quest_string,
 					start_date             : date_range?.startDate,
 					end_date               : date_range?.endDate,

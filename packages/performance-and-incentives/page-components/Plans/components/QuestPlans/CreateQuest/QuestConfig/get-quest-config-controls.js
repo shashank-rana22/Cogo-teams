@@ -34,6 +34,15 @@ const getControls = ({ config_id, agent_scoring_block_name = null, agent_scoring
 			params      : { filters: { agent_scoring_config_id: config_id, agent_scoring_block_id } },
 			rules       : { required: 'Required' },
 		},
+		{
+			name        : 'value',
+			label       : 'Value',
+			type        : 'number',
+			placeholder : 'Type number',
+			asyncKey    : 'agent_scoring_parameters',
+			disabled    : !agent_scoring_block_id,
+			rules       : { required: 'Required' },
+		},
 	];
 
 	return controls;
