@@ -1,13 +1,48 @@
-import styles from './styles.module.css';
-// import useGetQuestList from './useGetQuestList';
+import { Pagination, Table } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
-function List() {
-	// const { loading, data } = useGetQuestList();
+import EmptyState from '../../../../commons/EmptyState';
+
+import getListColumns from './get-list-columns';
+import styles from './styles.module.css';
+
+function List(props) {
+	const { list = [], paginationData, getNextPage, loading, params = {}, setParams } = props;
+
+	const { page, total_count, page_limit } = paginationData || {};
+
+	const LIST_COLUMNS = getListColumns({ params, setParams });
+
+	if (!loading && isEmpty(list)) {
+		return (
+			<EmptyState
+				flexDirection="column"
+				height={400}
+				width={700}
+				textSize={24}
+			/>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
-			<div>
-				Some list herere
+			<div className={styles.table_container}>
+				<Table
+					className={styles.quest_table}
+					columns={LIST_COLUMNS}
+					data={list}
+					loading={loading}
+				/>
+			</div>
+
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={total_count}
+					pageSize={page_limit}
+					onPageChange={getNextPage}
+				/>
 			</div>
 		</div>
 	);
