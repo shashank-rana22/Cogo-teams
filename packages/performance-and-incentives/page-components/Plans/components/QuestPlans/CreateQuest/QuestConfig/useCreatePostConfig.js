@@ -7,11 +7,9 @@ import { useAllocationRequest } from '@cogoport/request';
 const useCreatePostConfig = ({ quest_id, data = {} }) => {
 	const router = useRouter();
 
-	console.log('data::', router);
-
 	const { control, formState: { errors = {} }, handleSubmit, watch } = useForm({
 		defaultValues: {
-			agent_scoring_quest_configurations: data?.quest_configuration,
+			agent_scoring_quest_configurations: data?.quest_configurations,
 		},
 	});
 
@@ -25,7 +23,6 @@ const useCreatePostConfig = ({ quest_id, data = {} }) => {
 	);
 
 	const handleClick = async (formValues) => {
-		console.log('formValues::', formValues);
 		try {
 			const { agent_scoring_quest_configurations } = formValues;
 
@@ -51,9 +48,6 @@ const useCreatePostConfig = ({ quest_id, data = {} }) => {
 		handleClick,
 		watch,
 		errors,
-		// fields,
-		// append,
-		// remove,
 	};
 };
 
