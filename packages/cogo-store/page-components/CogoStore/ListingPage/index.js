@@ -51,8 +51,22 @@ function ListingPage() {
 	} = productDataDetails || {};
 
 	const selectedColors = useMemo(() => (available_colors || []).map((colorId) => ({
-		label : colorId.name,
-		value : colorId.id,
+		label: (
+			<div style={{ display: 'flex', alignItems: 'center' }}>
+				<div
+					className={styles.color_dot}
+					style={{
+						backgroundColor : colorId.hexcode,
+						width           : '15px',
+						height          : '15px',
+						borderRadius    : '10px',
+						marginRight     : '10px',
+					}}
+				/>
+				{colorId.name}
+			</div>
+		),
+		value: colorId.id,
 	})), [available_colors]);
 
 	const sizeValuePairs = useMemo(() => (available_sizes || []).map((sizeAvail) => ({

@@ -72,7 +72,6 @@ function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters
 										src={item.product_images[GLOBAL_CONSTANTS.zeroth_index]}
 										alt=""
 										width="100%"
-										height="300px"
 									/>
 								</div>
 								<div className={styles.text_section}>

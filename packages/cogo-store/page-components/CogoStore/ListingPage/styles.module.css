@@ -249,3 +249,12 @@
 		margin-top: 54px;
 	}
 }
+
+.color_dot {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	margin-right: 5px;
+	border: 1px solid rgb(0 0 0 / 20%);
+	border-radius: 50%;
+}
