@@ -6,7 +6,9 @@ import styles from './styles.module.css';
 const SPOT_BOOKING_SERVICES = ['fcl_freight'];
 
 function SpotBooking({ detail = {}, setScreen = () => {} }) {
-	if (!SPOT_BOOKING_SERVICES.includes(detail?.service_type)) {
+	const { service_type = '', is_spot_line_booking_available = false } = detail;
+
+	if (!SPOT_BOOKING_SERVICES.includes(service_type) || !is_spot_line_booking_available) {
 		return null;
 	}
 
