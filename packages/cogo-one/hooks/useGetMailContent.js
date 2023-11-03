@@ -1,4 +1,5 @@
 import { useLensRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback, useState, useEffect } from 'react';
 
 import getFirebaseDraftBody from '../helpers/getFirebaseDraftBody';
@@ -25,6 +26,7 @@ const formatBody = ({ mailResData = {}, attachmentResData = {} }) => {
 function useGetMailContent({
 	firestore = {},
 	formattedData = {},
+	updatedArray = [],
 }) {
 	const [fullThread, setFullThread] = useState('');
 	const [expandedStateId, setExpandedStateId] = useState('');
@@ -70,8 +72,7 @@ function useGetMailContent({
 				setFullThread(newContent);
 			}
 		} catch (err) {
-			setExpandedStateId('');
-			setFullThread('');
+			console.log('err', err);
 		} finally {
 			setLoading(false);
 		}
@@ -96,10 +97,22 @@ function useGetMailContent({
 	}, [getEmailBody, loading]);
 
 	useEffect(() => {
-		setLoading(false);
-		setFullThread('');
-		setExpandedStateId('');
-	}, [id]);
+		if (!isEmpty(updatedArray)) {
+			const [firstMessage = {}] = updatedArray || [];
+
+			const {
+				response,
+				is_draft: isDraft = false,
+				id: messageRoomId = '',
+			} = firstMessage || {};
+
+			const {
+				message_id = '',
+			} = response || {};
+
+			getEmailBody({ isDraft, messageId: message_id, messageRoomId });
+		}
+	}, [updatedArray, getEmailBody]);
 
 	return {
 		expandLoading: loading,

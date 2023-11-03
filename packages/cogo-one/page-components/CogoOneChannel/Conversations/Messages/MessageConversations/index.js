@@ -166,7 +166,7 @@ function MessageConversations({
 						latestMessagesAtTop={latestMessagesAtTop}
 						deleteMessage={deleteMessage}
 						roomId={id}
-						key={latestMessagesAtTop}
+						key={id}
 					/>
 				)}
 			</div>

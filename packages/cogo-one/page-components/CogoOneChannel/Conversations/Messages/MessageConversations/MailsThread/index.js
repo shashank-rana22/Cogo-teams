@@ -36,7 +36,7 @@ function MailsThread(
 
 	const updatedArray = useMemo(() => [...(messagesData || [])].reverse(), [messagesData]);
 
-	const mailContentProps = useGetMailContent({ firestore, formattedData, messagesData });
+	const mailContentProps = useGetMailContent({ firestore, formattedData, updatedArray });
 
 	if (hasNoFireBaseRoom) {
 		return (
