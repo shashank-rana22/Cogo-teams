@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 const getFormatDate = (newdate) => {
 	const [date, time] = newdate?.split(' ') || [];
 	const [day, month, year] = date.split('-');
-	const reversedDate = `${year}-${month}-${day} ${time}`;
+	const reversedDate = `${month}-${day}-${year} ${time}`;
 
 	return formatDate(
 		{ date: reversedDate, dateformat: GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'], formatType: 'date' },

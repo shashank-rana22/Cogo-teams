@@ -2439,6 +2439,17 @@ const navigationMapping = ({ t = () => {} }) => {
 					type          : 'link',
 					possible_apis : apis.kra_assignment,
 				},
+				{
+					key           : 'performance_management-employee_dashboard',
+					title         : 'Employee Rating',
+					href          : '/v2/employee-dashboard',
+					as            : '/v2/employee-dashboard',
+					type          : 'link',
+					possible_apis : [
+						...apis.employee_performance_dashboard,
+						...apis.separation,
+					],
+				},
 			],
 		},
 		chro: {
@@ -2587,20 +2598,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/manager-dashboard',
 			type          : 'link',
 			possible_apis : apis.performance_manager_dashboard,
-		},
-		employee_dashboard: {
-			key           : 'employee_dashboard',
-			title         : t('common:employee_dashboard'),
-			href          : '/v2/employee-dashboard',
-			as            : '/v2/employee-dashboard',
-			type          : 'link',
-			icon          : IcMDashboard,
-			possible_apis : [
-				...apis.employee_performance_dashboard,
-				...apis.separation,
-			],
-			main_apis   : [],
-			module_type : 'dashboards',
 		},
 		ftl_admin: {
 			key           : 'ftl_admin',
