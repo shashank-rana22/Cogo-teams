@@ -57,7 +57,7 @@ const useFeedbackControls = ({
 			},
 		},
 		{
-			label          : 'Select Sub Category',
+			label          : <RenderLabel label="Select Sub Category" />,
 			name           : 'sub_category',
 			controllerType : 'select',
 			placeholder    : 'Select sub category',

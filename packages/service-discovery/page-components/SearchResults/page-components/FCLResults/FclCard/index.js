@@ -97,28 +97,54 @@ function MiddleSection({
 
 	const { component:RouteComponent, props } = MAPPING[isIcdPortPresent];
 
+	const {
+		freight_price = 0,
+		freight_price_currency = '',
+		freight_price_discounted = 0,
+		total_price_discounted = 0,
+		total_price = 0,
+		total_price_currency = '',
+		service_rates = {},
+	} = rateCardData || {};
+
+	const primaryServiceRates = Object.values(service_rates).filter(
+		({ service_type }) => service_type === detail?.service_type,
+	) || [];
+
+	const containersCount = primaryServiceRates.reduce((acc, { containers_count = 0 }) => acc + containers_count, 0);
+
 	return (
 		<div className={styles.middle}>
 			<RouteComponent {...props} />
 
 			<div className={styles.rate_details}>
-				<div style={{ marginRight: 24 }}>
-					<div className={styles.freight_text}>Basic Freight Price</div>
+				<div className={styles.amount_container}>
 
-					<FreightPriceDetail
-						price={rateCardData?.freight_price_discounted}
-						price_currency={rateCardData?.freight_price_currency}
-					/>
-				</div>
+					<div className={styles.price_item}>
+						<div className={styles.freight_text}>
+							{primaryServiceRates.length > 1 ? 'Avg. ' : ''}
+							Freight Price
+						</div>
 
-				<div>
-					<div className={cl`${styles.freight_text} ${styles.total}`}>Total Freight Price</div>
+						<FreightPriceDetail
+							price={freight_price_discounted / (containersCount || 1)}
+							price_currency={freight_price_currency}
+							total_price={freight_price / (containersCount || 1)}
+							total_price_currency={freight_price_currency}
+						/>
+					</div>
 
-					<FreightPriceDetail
-						price={rateCardData?.total_price_discounted}
-						price_currency={rateCardData?.total_price_currency}
-						totalPrice
-					/>
+					<div className={cl`${styles.price_item} ${styles.total}`}>
+						<div className={cl`${styles.freight_text} ${styles.total}`}>Total Landed Price</div>
+
+						<FreightPriceDetail
+							price={total_price_discounted}
+							price_currency={total_price_currency}
+							total_price={total_price}
+							total_price_currency={total_price_currency}
+							total
+						/>
+					</div>
 				</div>
 
 				<QuotationDetails

@@ -1,4 +1,5 @@
 import { RatingComponent, Input, Button, Checkbox } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -7,8 +8,9 @@ const getColumns = ({
 	handleSelectId, selectedEmployees, list, handleRatingUpdate,
 }) => {
 	const isVerticalHead = props?.level === 'vertical_head' && props?.activeTab === 'vertical_head';
+	const ishrbp = props?.activeTab === 'hrbp_view';
 
-	const columns = [
+	const columns1 = [
 		{
 			Header   : 'NAME',
 			accessor : (item) => (
@@ -25,7 +27,8 @@ const getColumns = ({
 				</div>
 			),
 			id: 'name',
-		},
+		}];
+	const columns2 = [
 		{
 			Header   : 'RATING',
 			accessor : (item) => (
@@ -81,7 +84,23 @@ const getColumns = ({
 		id: 'updated_employee',
 	};
 
-	return isVerticalHead ? [checkboxCol, ...columns, actionCol] : columns;
+	const managerCol = {
+		Header   : 'MANAGER NAME',
+		accessor : (item) => (
+			<div className={styles.table_name}>
+				{startCase(item?.manager_name) || '-'}
+			</div>
+		),
+		id: 'manager_name',
+	};
+
+	if (isVerticalHead) {
+		return [checkboxCol, ...columns1, managerCol, ...columns2, actionCol];
+	}
+	if (ishrbp) {
+		return [...columns1, managerCol, ...columns2];
+	}
+	return [...columns1, ...columns2];
 };
 
 export default getColumns;

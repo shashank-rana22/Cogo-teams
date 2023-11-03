@@ -6,20 +6,17 @@ import styles from './styles.module.css';
 const getOrderColumns = ({ currency_code = '' }) => ([
 	{
 		Header   : 'PRODUCTS',
-		accessor : (item = {}) => {
-			console.log(item, 'item');
-			return (
-				<div className={styles.products}>
-					<img src={item?.product_images[GLOBAL_CONSTANTS.zeroth_index]} alt="" width="90px" height="90px" />
-					<div className={styles.products_right}>
-						<div className={styles.black}>{item.product_name}</div>
-						<div className={styles.dot_list}>
-							<span>{item.product_description}</span>
-						</div>
+		accessor : (item = {}) => (
+			<div className={styles.products}>
+				<img src={item?.product_images[GLOBAL_CONSTANTS.zeroth_index]} alt="" width="90px" height="90px" />
+				<div className={styles.products_right}>
+					<div className={styles.black}>{item.product_name}</div>
+					<div className={styles.dot_list}>
+						<span>{item.product_description}</span>
 					</div>
 				</div>
-			);
-		},
+			</div>
+		),
 		id: 'products',
 	},
 	{

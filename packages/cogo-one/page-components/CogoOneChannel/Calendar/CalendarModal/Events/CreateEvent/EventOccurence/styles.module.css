@@ -1,0 +1,51 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin-bottom: 12px;
+
+	:global {
+		.ui_input_number_container {
+			width: 44%;
+		}
+
+		.ui_multiselect_display_container {
+			min-width: 120px;
+			max-width: 163px;
+		}
+	}
+}
+
+.each_control {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.label {
+	display: flex;
+	justify-content: flex-end;
+	width: 40%;
+	padding-right: 12px;
+	font-size: 16px;
+}
+
+.error_text {
+	align-self: end;
+	width: 60%;
+	font-size: 10px;
+	color: #ee3425;
+	transition: 0.3s ease;
+}
+
+.cancel_button {
+	margin-right: 8px;
+}

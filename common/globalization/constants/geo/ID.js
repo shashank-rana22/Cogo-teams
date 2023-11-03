@@ -559,7 +559,7 @@ export default {
 		registration_number: {
 			label      : 'NPWP',
 			pattern    : /^\d{15}|\d{16}$/,
-			max_length : 13,
+			max_length : 16,
 		},
 		banking_code: {
 			financial_system_code : 'swift',

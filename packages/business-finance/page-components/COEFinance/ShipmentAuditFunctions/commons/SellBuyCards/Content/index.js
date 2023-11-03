@@ -4,7 +4,6 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useApproveQuotation from '../../../../hook/useApproveQuotation';
 import RaiseTicketModal from '../../RaiseTicketModal';
 
 import Body from './Body';
@@ -30,18 +29,8 @@ function Content({
 	const [lineItemSectionOpen, setLineItemSectionOpen] = useState({});
 	const [showTicketModal, setShowTicketModal] = useState(false);
 
-	const approvedIdList = data?.filter((item) => item?.quotation_state === 'APPROVED').map((item) => item?.id);
-	const initIdList = data?.filter((item) => item?.quotation_state === 'INIT').map((item) => item?.id);
 	const currentStatus = data?.some((item) => item?.quotation_state === 'INIT');
 	const auditStatus = window.sessionStorage.getItem('audit_status');
-
-	const {
-		approveQuotation = () => {},
-	} = useApproveQuotation({
-		idList : (currentStatus ? initIdList : approvedIdList),
-		status : (currentStatus ? 'APPROVED' : 'INIT'),
-		type,
-	});
 
 	return (
 		<div className={styles.overall_container}>
@@ -106,27 +95,9 @@ function Content({
 								/>
 							) : null}
 
-							<Button
-								size="md"
-								themeType="primary"
-								onClick={() => approveQuotation(getClosedTasks)}
-							>
-								Accept
-							</Button>
 						</div>
 					) : null}
 
-					{!currentStatus && auditStatus !== 'audited' ? (
-						<div className={styles.buttons_container}>
-							<Button
-								size="md"
-								themeType="primary"
-								onClick={() => approveQuotation(getClosedTasks)}
-							>
-								Undo
-							</Button>
-						</div>
-					) : null}
 				</div>
 			) : null}
 		</div>
