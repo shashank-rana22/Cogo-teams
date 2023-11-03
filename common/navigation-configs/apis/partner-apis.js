@@ -15254,6 +15254,16 @@ const partner = {
 		},
 	],
 	cogo_one_sme_dashboard: [
+		{
+			api          : 'list_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'get_partner_user_rm_mapping',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 };
 

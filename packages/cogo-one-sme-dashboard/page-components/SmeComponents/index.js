@@ -8,6 +8,7 @@ import CustomerFunnel from './CustomerFunnel';
 import PerAgentData from './PerAgentData';
 import RevenueContainer from './RevenueContainer';
 import styles from './styles.module.css';
+import TransactionsFunnel from './TransactionsFunnel';
 import UserData from './UserData';
 
 const CHANNELS = ['email', 'whatsapp', 'calls'];
@@ -21,6 +22,8 @@ function SmeComponents() {
 			<UserData />
 
 			<CustomerFunnel />
+
+			<TransactionsFunnel />
 
 			{CHANNELS.map((itm) => (
 				<ChannelStats
