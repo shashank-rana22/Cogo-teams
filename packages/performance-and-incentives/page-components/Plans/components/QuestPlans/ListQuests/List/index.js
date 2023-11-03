@@ -17,8 +17,8 @@ function List(props) {
 		return (
 			<EmptyState
 				flexDirection="column"
-				height={400}
-				width={700}
+				height={225}
+				width={355}
 				textSize={24}
 			/>
 		);

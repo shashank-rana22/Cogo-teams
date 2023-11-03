@@ -3,7 +3,7 @@ import List from './List';
 import useGetQuestList from './useGetQuestList';
 
 function ListQuests({ setMode = () => {} }) {
-	const { loading, list, paginationData, getNextPage, params, setParams } = useGetQuestList();
+	const { loading, list, paginationData, getNextPage, params, setParams } = useGetQuestList({ manual: false });
 
 	return (
 		<div>
