@@ -44,11 +44,11 @@ const getPayloadForDraft = ({ data = {}, pocDetails, performedBy, policySearchId
 	};
 };
 
-const getPayloadForSaveAsDraft = ({
+const getPayloadForSaveAsDraft = async ({
 	draftData = {}, performedBy = '', formRef, billingType, getValues,
 	draftId = '',
 }) => {
-	const selectedAddress = formRef.current.address();
+	const selectedAddress = await formRef.current.address();
 
 	const {
 		invoiceDate, invoiceNo, pan_number,
