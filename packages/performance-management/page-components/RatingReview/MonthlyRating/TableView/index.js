@@ -123,19 +123,27 @@ function TableView({
 			</div>
 
 			<div className={styles.bottom_banner}>
-				<div className={styles.banner_text}>
-					{showUnrated
-						? 'Showing unrated employees.'
-						: `${total_unrated_employees} Employees have not been rated.`}
-					<div
-						role="presentation"
-						className={styles.link_text}
-						onClick={handleUnrated}
-					>
-						{!showUnrated ? 'Show unrated employees' : 'Remove filter'}
-					</div>
-				</div>
+				<div>
 
+					{
+					total_unrated_employees > GLOBAL_CONSTANTS.zeroth_index
+						? (
+							<div className={styles.banner_text}>
+								{showUnrated
+									? 'Showing unrated employees.'
+									: `${total_unrated_employees} Employees have not been rated.`}
+								<div
+									role="presentation"
+									className={styles.link_text}
+									onClick={handleUnrated}
+								>
+									{!showUnrated ? 'Show unrated employees' : 'Remove filter'}
+								</div>
+							</div>
+						)
+						:				null
+				}
+				</div>
 				{!isEmpty(list) && (
 					<Button
 						onClick={() => setShowModal(true)}
