@@ -2729,7 +2729,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		cogo_store: {
 			key           : 'cogo_store',
-			title         : 'Cogo Store',
+			title         : 'CogoMerch',
 			isSubNavs     : false,
 			module_type   : 'dashboards',
 			main_apis     : [],

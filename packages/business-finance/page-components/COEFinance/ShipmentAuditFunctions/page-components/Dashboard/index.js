@@ -3,7 +3,6 @@ import { useRouter } from '@cogoport/next';
 import { useRef, useState } from 'react';
 
 import useUpdateJobAuditStatus from '../../../hook/useUpdateJobAuditStatus';
-import getApproveJobAuditBttnCondition from '../../utils/getApproveJobAuditButtonCondition';
 
 import QuotationCards from './QuotationCards';
 import styles from './styles.module.css';
@@ -24,8 +23,6 @@ function Dashboard() {
 		updateJobAuditStatus,
 		loading,
 	} = useUpdateJobAuditStatus({ getPrePostShipmentQuote: getPrePostShipmentQuoteRef.current, active_tab });
-
-	const { bttnDisableCondition } = getApproveJobAuditBttnCondition({ quotationsData });
 
 	const handleClick = () => {
 		window.sessionStorage.removeItem('currency');
@@ -61,22 +58,21 @@ function Dashboard() {
 						)}
 					</div>
 					<div className={styles.header_button}>
-						{auditStatus !== 'audited' && (
-							<Button
-								size="md"
-								themeType="primary"
-								disabled={!bttnDisableCondition || loading}
-								onClick={() => updateJobAuditStatus({ jobId: job_id, status: 'AUDITED' })}
-							>
-								Approve
-							</Button>
-						)}
+						<Button
+							size="md"
+							themeType="primary"
+							disabled={loading}
+							onClick={() => updateJobAuditStatus({ jobId: job_id, status: 'AUDITED' })}
+						>
+							Approve
+						</Button>
 					</div>
 				</div>
 			</div>
 
 			<QuotationCards
 				getPrePostShipmentQuoteRef={getPrePostShipmentQuoteRef}
+				quotationsData={quotationsData}
 				setQuotationsData={setQuotationsData}
 			/>
 

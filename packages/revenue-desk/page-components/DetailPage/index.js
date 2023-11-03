@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Pill, TabPanel, Tabs } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCCogoassured, IcMArrowBack, IcMArrowDown, IcMArrowUp, IcMTick } from '@cogoport/icons-react';
@@ -7,6 +8,7 @@ import { useState } from 'react';
 import iconMapping from '../../helpers/iconMapping';
 import serviceLabelMapping from '../../helpers/serviceLabelMapping';
 import useListRevenueDeskDecisions from '../../hooks/useListRevenueDeskDecisions';
+import useListShipmentDocuments from '../../hooks/useListShipmentDocuments';
 import useListShipmentServices from '../../hooks/useListShipmentservices';
 import { DEFAULT_INDEX } from '../constants';
 
@@ -27,6 +29,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 	const [priceData, setPriceData] = useState(null);
 	const { data:revenueDeskDecisionsData } = useListRevenueDeskDecisions({ shipmentId: itemData?.id });
 	const { data: servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
+	const { data: documents = {} } = useListShipmentDocuments({ shipmentId: itemData?.id });
 	const shipment_services = servicesData?.list || [];
 	const handlePillSelected = (trade_type) => {
 		setIsPillSelected((prev) => ({ ...prev, [trade_type]: !prev?.[trade_type] }));
@@ -105,7 +108,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 			</div>
 			{itemData?.state === 'cancelled' ? <CancelledShipmentCard itemData={itemData} /> : null}
 			<div className={styles.card_container}>
-				<ShipmentCard itemData={itemData} priceData={priceData} />
+				<ShipmentCard itemData={itemData} priceData={priceData} documents={documents?.list} />
 			</div>
 			<div className={styles.tabs_container}>
 				<Tabs
