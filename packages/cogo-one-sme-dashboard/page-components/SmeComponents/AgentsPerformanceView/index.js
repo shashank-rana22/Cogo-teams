@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function AgentsPerformanceView() {
 	const [dateRange, setDateRange] = useState({});
-	const [selectedItem, setSelectedItem] = useState({});
+	const [hierarchyData, setHierarchyData] = useState([]);
 
 	return (
 		<div className={styles.container}>
@@ -29,14 +29,15 @@ function AgentsPerformanceView() {
 					/>
 				</div>
 			</div>
+
 			<div className={styles.body_container}>
 				<Hierarchy
-					setSelectedItem={setSelectedItem}
-					selectedItem={selectedItem}
+					setHierarchyData={setHierarchyData}
+					hierarchyData={hierarchyData}
 				/>
 
 				<SelectedStats
-					selectedItem={selectedItem}
+					hierarchyData={hierarchyData}
 				/>
 			</div>
 		</div>

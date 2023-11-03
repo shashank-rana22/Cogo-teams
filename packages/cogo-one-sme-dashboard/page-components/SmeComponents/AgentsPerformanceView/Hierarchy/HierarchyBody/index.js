@@ -55,23 +55,28 @@ function HierarchyBody({
 	}
 
 	const branchesData = getBranchesData({ country_id: hierarchyData?.[hierarchyData.length - 1]?.id });
-	console.log('branchesData:', branchesData);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.prev_selected}>
 				{hierarchyData?.map(
 					(itm, index) => (
-						<UserCard
-							key={itm?.id}
-							data={itm}
-							cardIndex={index}
-							setHierarchyData={setHierarchyData}
-							cardType="shortForm"
-						/>
+						<>
+							<UserCard
+								key={itm?.id}
+								data={itm}
+								cardIndex={index}
+								hierarchyData={hierarchyData}
+								setHierarchyData={setHierarchyData}
+								cardType="shortForm"
+								isLastIndex={index === ((hierarchyData?.length || 0) - 1)}
+							/>
+							<div className={styles.hierarchy_data_view} />
+						</>
 					),
 				)}
 			</div>
+
 			{branchesData?.map(
 				(itm) => (
 					<UserCard

@@ -12,19 +12,21 @@ function UserCard({
 	setHierarchyData = () => {},
 	cardType = '',
 	cardIndex = 0,
+	isLastIndex = false,
 }) {
 	const CountriesFlag = ICONS_MAPPING?.[data?.country_code];
 
 	if (cardType === 'shortForm') {
 		return (
 			<div
-				className={styles.short_container}
+				className={cl`${styles.short_container} 
+					${isLastIndex ? '' : styles.hover_short_container}`}
 				role="presentation"
 				onClick={() => {
 					setHierarchyData(
 						(prev) => {
 							if (cardIndex !== prev.length - 1) {
-								return prev?.slice(0, cardIndex) || [];
+								return prev?.slice(0, cardIndex - 1) || [];
 							}
 							return prev;
 						},
@@ -53,7 +55,8 @@ function UserCard({
 
 	return (
 		<div
-			className={styles.container}
+			className={cl`${styles.container} 
+				${isLastIndex ? '' : styles.hover_container}`}
 			role="presentation"
 			onClick={() => setHierarchyData(
 				(prev) => ([...prev, {

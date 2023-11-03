@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import getCountriesData from '../../../../utils/getCountriesData';
 
@@ -6,9 +6,10 @@ import Header from './Header';
 import HierarchyBody from './HierarchyBody';
 import styles from './styles.module.css';
 
-function Hierarchy() {
-	const [hierarchyData, setHierarchyData] = useState([]);
-
+function Hierarchy({
+	setHierarchyData = () => {},
+	hierarchyData = [],
+}) {
 	const countriesData = getCountriesData();
 
 	return (

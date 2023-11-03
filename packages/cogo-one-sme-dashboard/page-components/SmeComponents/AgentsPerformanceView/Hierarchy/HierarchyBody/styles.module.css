@@ -15,3 +15,9 @@
 	width: 100%;
 	border-bottom: 1px solid #e0e0e0;
 }
+
+.hierarchy_data_view {
+	width: 1px;
+	height: 30px;
+	background: #e0e0e0;
+}

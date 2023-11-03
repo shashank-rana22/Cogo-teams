@@ -74,7 +74,7 @@ const dataMapping = () => (
 	}
 );
 
-function SelectedStats({ selectedItem = {} }) {
+function SelectedStats({ hierarchyData = [] }) {
 	const data = dataMapping();
 
 	return (
@@ -82,7 +82,9 @@ function SelectedStats({ selectedItem = {} }) {
 			<div className={styles.header}>
 				<IcMDataPipeline className={styles.stats_icon} />
 				<div className={styles.header_name}>
-					{isEmpty(selectedItem) ? 'Entire Organization' : selectedItem?.name}
+					{isEmpty(hierarchyData)
+						? 'Entire Organization'
+						: hierarchyData?.[(hierarchyData?.length || 0) - 1]?.name}
 					{' '}
 					Stats
 				</div>
