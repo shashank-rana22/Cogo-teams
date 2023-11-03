@@ -140,7 +140,7 @@
     "discount_control_conditions_placeholder":"เข้าสู่เงื่อนไข",
     "discount_control_status":"สถานะ",
     "discount_success_toast":"อัปเดตส่วนลดแผน",
-    "discount_invalid_metadata":"โปรดป้อนข้อมูลเมตา JSON ที่ถูกต้อง",
+    "discount_invalid_metadata":"โปรดป้อนข้อมูลเมตาหรือเงื่อนไขของ JSON ที่ถูกต้อง",
     "edit_btn":"แก้ไข",
     "discount_create_success_toast":"สร้างส่วนลดแผน",
     "status_active":"คล่องแคล่ว",
