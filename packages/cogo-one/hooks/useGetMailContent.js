@@ -72,7 +72,7 @@ function useGetMailContent({
 				setFullThread(newContent);
 			}
 		} catch (err) {
-			console.log('err', err);
+			console.error('err', err);
 		} finally {
 			setLoading(false);
 		}
@@ -110,7 +110,7 @@ function useGetMailContent({
 				message_id = '',
 			} = response || {};
 
-			getEmailBody({ isDraft, messageId: message_id, messageRoomId });
+			setTimeout(() => getEmailBody({ isDraft, messageId: message_id, messageRoomId }), 10);
 		}
 	}, [updatedArray, getEmailBody]);
 
