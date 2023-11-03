@@ -4,10 +4,16 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 
-const useCreatePostConfig = ({ quest_id }) => {
+const useCreatePostConfig = ({ quest_id, data = {} }) => {
 	const router = useRouter();
 
-	const { control, handleSubmit, watch } = useForm();
+	console.log('data::', router);
+
+	const { control, formState: { errors = {} }, handleSubmit, watch } = useForm({
+		defaultValues: {
+			agent_scoring_quest_configurations: data?.quest_configuration,
+		},
+	});
 
 	const [{ loading }, trigger] = useAllocationRequest(
 		{
@@ -19,21 +25,20 @@ const useCreatePostConfig = ({ quest_id }) => {
 	);
 
 	const handleClick = async (formValues) => {
+		console.log('formValues::', formValues);
 		try {
-			const { date_range, quest_string } = formValues;
+			const { agent_scoring_quest_configurations } = formValues;
 
-			const { data } = await trigger({
+			const { data: res } = await trigger({
 				data: {
-					agent_scoring_quest_id : quest_id,
-					quest_string,
-					start_date             : date_range?.startDate,
-					end_date               : date_range?.endDate,
+					agent_scoring_quest_id: quest_id,
+					agent_scoring_quest_configurations,
 				},
 			});
 
 			Toast.success('Saved successfully!');
 
-			router.push(`/performance-and-incentives/plans?tab=quest_plans&mode=create&id=${data?.id}`);
+			router.push(`/performance-and-incentives/plans?tab=quest_plans&mode=create&id=${res?.id}`);
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
@@ -45,6 +50,7 @@ const useCreatePostConfig = ({ quest_id }) => {
 		handleSubmit,
 		handleClick,
 		watch,
+		errors,
 		// fields,
 		// append,
 		// remove,

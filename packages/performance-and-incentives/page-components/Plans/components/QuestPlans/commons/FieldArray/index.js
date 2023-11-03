@@ -9,7 +9,7 @@ function FieldArray(props) {
 	const {
 		name,
 		control,
-		error,
+		errors,
 		showElements,
 		buttonText,
 		showButtons = true,
@@ -43,7 +43,7 @@ function FieldArray(props) {
 					watch={watch}
 					name={name}
 					remove={remove}
-					error={error?.[name]?.[index]}
+					error={errors?.[name]?.[index]}
 					showElements={showElements?.[index]}
 					disabled={disabled}
 				/>
