@@ -7,7 +7,13 @@ import LoadingState from '../../../commons/LoadingState';
 
 import styles from './styles.module.css';
 
-function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters = () => {}, loading = false }) {
+function HomePageContent({
+	data = {}, productData = {},
+	filters = {},
+	setFilters = () => {},
+	loading = false,
+	handleScroll = () => {},
+}) {
 	const { push } = useRouter();
 	const { list = [], total_count } = data || {};
 
@@ -55,9 +61,15 @@ function HomePageContent({ data = {}, productData = {}, filters = {}, setFilters
 					/>
 				</div>
 			</div>
-			<div className={styles.container}>
+			<div
+				className={styles.container}
+				role="presentation"
+				onScroll={(e) => { handleScroll(e.target.clientHeight, e.target.scrollTop, e.target.scrollHeight); }}
+			>
 				{loading ? <LoadingState /> : (
-					<div className={styles.list_body}>
+					<div
+						className={styles.list_body}
+					>
 						{(list || []).map((item) => (
 							<div
 								role="presentation"
