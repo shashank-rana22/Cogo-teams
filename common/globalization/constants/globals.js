@@ -495,6 +495,7 @@ const GLOBAL_CONSTANTS = {
 		insurance_pkg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pkg.png',
 		bajaj_insurance : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Bajaj_Insurance_.png',
 		globe_sub       : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/globe',
+		mail_sent       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mail_sent.gif',
 
 	},
 

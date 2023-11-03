@@ -50,7 +50,6 @@ function ConfirmSuccessModal({
 
 					<div className={styles.footer}>
 						<Button
-							size="sm"
 							disabled={loading}
 							themeType="secondary"
 							className={styles.cancel_btn}
@@ -60,7 +59,6 @@ function ConfirmSuccessModal({
 						</Button>
 
 						<Button
-							size="sm"
 							loading={loading}
 							themeType="accent"
 							onClick={handleSubmit(submitHandler)}
