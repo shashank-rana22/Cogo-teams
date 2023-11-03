@@ -17,7 +17,7 @@ function useGetLeaderbordList(props) {
 		setNextReloadAt = () => {},
 	} = props;
 
-	const { countdown } = useContext(PublicLeaderBoardContext);
+	const { countdown, officeLocation } = useContext(PublicLeaderBoardContext);
 
 	const [params, setParams] = useState({
 		page                     : 1,
@@ -59,10 +59,10 @@ function useGetLeaderbordList(props) {
 					? `${view.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]}_report` : undefined,
 				created_at_greater_than : dateRange?.startDate || undefined,
 				created_at_less_than    : dateRange?.endDate || undefined,
-				office_location_id      : office_location_id || undefined,
+				office_location_id      : office_location_id || officeLocation || undefined,
 			},
 		}));
-	}, [view, dateRange, office_location_id]);
+	}, [view, dateRange, office_location_id, officeLocation]);
 
 	const rankData = getRankFromScore({ score });
 

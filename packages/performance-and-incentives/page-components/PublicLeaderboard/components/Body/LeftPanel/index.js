@@ -25,7 +25,7 @@ function LeftPanel(props) {
 	const { list, loading, total_report_count: totalReportCount, additional_stats, rank } = useGetLeaderbordList({
 		view,
 		dateRange,
-		pageLimit          : 50,
+		pageLimit          : 10,
 		setUpdatedAt,
 		setNextReloadAt,
 		office_location_id : screen === 'comparison' ? location?.value : null,

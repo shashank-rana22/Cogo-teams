@@ -15,6 +15,7 @@ function PublicDashboard() {
 	const [updatedAt, setUpdatedAt] = useState('');
 	const [nextReloadAt, setNextReloadAt] = useState(100);
 	const [duration, setDuration] = useState('today');
+	const [officeLocation, setOfficeLocation] = useState('');
 
 	const [dateRange, setDateRange] = useState({
 		startDate : getTodayStartDate(),
@@ -37,7 +38,8 @@ function PublicDashboard() {
 
 	const contextValues = useMemo(() => ({
 		countdown,
-	}), [countdown]);
+		officeLocation,
+	}), [countdown, officeLocation]);
 
 	return (
 		<PublicLeaderBoardContext.Provider value={contextValues}>
@@ -55,6 +57,8 @@ function PublicDashboard() {
 					reloadCounter={reloadCounter}
 					nextReloadAt={nextReloadAt}
 					switchScreen={switchScreen}
+					officeLocation={officeLocation}
+					setOfficeLocation={setOfficeLocation}
 				/>
 
 				<Body

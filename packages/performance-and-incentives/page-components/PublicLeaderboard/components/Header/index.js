@@ -7,14 +7,19 @@ import Counter from '../../common/Counter';
 import DateFilter from '../../common/DateFilter';
 import TEXT_MAPPING from '../../configurations/header-text-mapping';
 import VIEW_OPTIONS from '../../configurations/view-type-options';
+import LEADERBOARD_LOCATIONS from '../../utils/leaderboard-locations';
 
 import CountDownTimer from './CountDownTimer';
 import styles from './styles.module.css';
+
+const leaderBoardOptions = Object.values(LEADERBOARD_LOCATIONS).map((location) => location);
 
 function Header(props) {
 	const {
 		screen, view, setView, dateRange, setDateRange, updatedAt, countdown, duration, setDuration, switchScreen,
 		reloadCounter, nextReloadAt,
+		officeLocation,
+		setOfficeLocation,
 	} = props;
 
 	return (
@@ -54,6 +59,18 @@ function Header(props) {
 			</div>
 
 			<div className={styles.end_side}>
+
+				{screen === 'overall' ? (
+					<Select
+						value={officeLocation}
+						onChange={setOfficeLocation}
+						options={leaderBoardOptions}
+						placeholder="Location"
+						className={styles.location_selector}
+						isClearable
+					/>
+				) : null}
+
 				{screen === 'comparison' ? (
 					<DateFilter
 						screen={screen}

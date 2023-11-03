@@ -1,9 +1,9 @@
 .list_row {
 	display: flex;
 	padding: 8px 10px;
-	margin-bottom: 8px;
+	margin-bottom: 10px;
 	background-color: #fff;
-	border: 1px solid #f9f9f9;
+	border: 1px solid #f2f2f2;
 	border-radius: 6px;
 }
 
@@ -38,4 +38,9 @@
 
 .selected_item {
 	background: #fef199;
+}
+
+.blurred {
+	filter: blur(4px);
+	border: 1px solid #f2f2f2;
 }
