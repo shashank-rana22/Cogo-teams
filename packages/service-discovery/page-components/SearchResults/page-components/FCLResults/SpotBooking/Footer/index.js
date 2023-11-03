@@ -9,7 +9,14 @@ import getServicePayload from './getServicePayload';
 import getUpdatePayload from './getUpdatePayload';
 import styles from './styles.module.css';
 
-function Footer({ detentionValues = {}, handleSubmit = () => {}, detail = {}, watch = () => {} }) {
+function Footer({
+	detentionValues = {},
+	handleSubmit = () => {},
+	detail = {},
+	watch = () => {},
+	setFinalLoading = () => {},
+	finalLoading = false,
+}) {
 	const router = useRouter();
 	const { service_details = {}, service_type = ''	} = detail;
 
@@ -34,6 +41,8 @@ function Footer({ detentionValues = {}, handleSubmit = () => {}, detail = {}, wa
 
 	const onSubmit = async (values) => {
 		try {
+			setFinalLoading(true);
+
 			const {
 				shipping_line_id = '',
 				number_of_stops = 0,
@@ -78,6 +87,7 @@ function Footer({ detentionValues = {}, handleSubmit = () => {}, detail = {}, wa
 
 			router.push(`/checkout/${id}`);
 		} catch (err) {
+			setFinalLoading(false);
 			Toast.error(getApiErrorString(err.response?.data));
 		}
 	};
@@ -121,6 +131,7 @@ function Footer({ detentionValues = {}, handleSubmit = () => {}, detail = {}, wa
 				themeType="accent"
 				style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 16, paddingBottom: 16 }}
 				onClick={() => handleSubmit(onSubmit)()}
+				loading={finalLoading}
 			>
 				Proceed With Spotline Booking
 			</Button>

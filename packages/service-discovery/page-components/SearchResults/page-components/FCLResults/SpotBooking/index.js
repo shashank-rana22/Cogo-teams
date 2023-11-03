@@ -1,6 +1,8 @@
+import { cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
+import CustomLoadingState from '../../../../../common/LoadingState/CustomLoadingState';
 import SpotBookingInstructions from '../../../../../common/SpotBookingInstructions';
 import useListOperators from '../../../../../common/SpotBookingInstructions/hooks/useListOperators';
 
@@ -21,6 +23,7 @@ function SpotBooking({ detail = {} }) {
 		destination_detention : 4,
 		destination_demurrage : 4,
 	});
+	const [finalLoading, setFinalLoading] = useState(false);
 
 	const { shippingLines = [], loading } = useListOperators();
 
@@ -33,7 +36,9 @@ function SpotBooking({ detail = {} }) {
 	}
 
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${finalLoading && styles.loading}`}>
+			{finalLoading ? <CustomLoadingState /> : null}
+
 			<div className={styles.heading}>Spotline Booking</div>
 			<div className={styles.sub_heading}>Fill in the details to Create a Spot Line Booking</div>
 
@@ -47,7 +52,14 @@ function SpotBooking({ detail = {} }) {
 
 			<SpotBookingInstructions shippingLines={shippingLines} loading={loading} />
 
-			<Footer handleSubmit={handleSubmit} detentionValues={detentionValues} detail={detail} watch={watch} />
+			<Footer
+				handleSubmit={handleSubmit}
+				detentionValues={detentionValues}
+				detail={detail}
+				watch={watch}
+				setFinalLoading={setFinalLoading}
+				finalLoading={finalLoading}
+			/>
 		</div>
 	);
 }
