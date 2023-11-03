@@ -84,7 +84,17 @@ function TableView({
 	return (
 		<div className={styles.container}>
 			<div className={styles.filters}>
-
+				<div>
+					{isVerticalHead && !isEmpty(list) && (
+						<div className={styles.checkbox_container}>
+							<Checkbox
+								label={`Select All ${total_count} Employees`}
+								checked={isAllSelected}
+								onChange={(e) => handleAllEmployeeSelect(e)}
+							/>
+						</div>
+					)}
+				</div>
 				<Input
 					value={search}
 					onChange={(e) => handleSearch(e)}
@@ -93,16 +103,6 @@ function TableView({
 					style={{ width: 300 }}
 				/>
 			</div>
-
-			{isVerticalHead && !isEmpty(list) && (
-				<div className={styles.checkbox_container}>
-					<Checkbox
-						label={`Select All ${total_count} Employees`}
-						checked={isAllSelected}
-						onChange={(e) => handleAllEmployeeSelect(e)}
-					/>
-				</div>
-			)}
 
 			<div className={styles.table_container}>
 				{isEmpty(list) && !loading
