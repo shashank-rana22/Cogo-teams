@@ -3,6 +3,7 @@ import React from 'react';
 import AgentsExceptionList from './AgentsExceptionList';
 import AgentsPerformanceView from './AgentsPerformanceView';
 import Analytics from './Analytics';
+import CampaignsData from './CampaignsData';
 import ChannelStats from './ChannelStats';
 import CustomerFunnel from './CustomerFunnel';
 import PerAgentData from './PerAgentData';
@@ -31,6 +32,8 @@ function SmeComponents() {
 					key={itm}
 				/>
 			))}
+
+			<CampaignsData />
 
 			<AgentsExceptionList />
 			<AgentsPerformanceView />

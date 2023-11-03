@@ -1,7 +1,9 @@
 import React from 'react';
 
 import CustomerBased from './CustomerBased';
+import CustomerInteractionFunnel from './CustomerInteractionFunnel';
 import ServiceBased from './ServiceBased';
+import ServicesWiseBifurcation from './ServicesWiseBifurcation';
 import styles from './styles.module.css';
 
 function TransactionsFunnel() {
@@ -12,6 +14,8 @@ function TransactionsFunnel() {
 			</div>
 			<CustomerBased />
 			<ServiceBased />
+			<CustomerInteractionFunnel />
+			<ServicesWiseBifurcation />
 		</>
 	);
 }
