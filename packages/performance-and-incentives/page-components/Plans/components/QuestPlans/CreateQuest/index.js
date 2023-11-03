@@ -1,8 +1,7 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { useRouter } from '@cogoport/next';
 
 import MODE_KEYS_MAPPING from '../configurations/active-mode-key-mapping';
-import CREATE_QUEST_KEYS from '../configurations/create-quest-key-mappings';
 import useGetQuestList from '../hooks/useGetQuestList';
 import List from '../ListQuests/List';
 
@@ -12,10 +11,10 @@ import styles from './styles.module.css';
 
 const { LIST } = MODE_KEYS_MAPPING;
 
-const { OVERLAPPING } = CREATE_QUEST_KEYS;
-
 function CreateQuests({ setMode = () => {} }) {
-	const [questMode, setQuestMode] = useState(OVERLAPPING);
+	const router = useRouter();
+
+	const { query: { id = null } } = router;
 
 	const {
 		loading,
@@ -27,6 +26,11 @@ function CreateQuests({ setMode = () => {} }) {
 		refetch,
 	} = useGetQuestList({ manual: true });
 
+	const onClickBack = () => {
+		if (id) router.push('/performance-and-incentives/plans?tab=quest_plans');
+		setMode(LIST);
+	};
+
 	return (
 		<div>
 			<div className={styles.header}>
@@ -34,16 +38,16 @@ function CreateQuests({ setMode = () => {} }) {
 					className={styles.back_icon}
 					width={20}
 					height={20}
-					onClick={() => setMode(LIST)}
+					onClick={onClickBack}
 				/>
 
 				<div className={styles.title}>Create Quest</div>
 			</div>
 
-			<QuestForm setParams={setParams} refetch={refetch} setQuestMode={setQuestMode} />
+			<QuestForm setParams={setParams} refetch={refetch} />
 
-			{questMode === OVERLAPPING
-				? (
+			{id ? <QuestConfig />
+				: 	(
 					<List
 						loading={loading}
 						list={list}
@@ -52,7 +56,7 @@ function CreateQuests({ setMode = () => {} }) {
 						params={params}
 						setParams={setParams}
 					/>
-				) : <QuestConfig /> }
+				)}
 		</div>
 	);
 }

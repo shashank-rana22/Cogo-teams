@@ -1,6 +1,6 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
 
 import IncentivePlans from './components/IncentivePlans';
 import QuestPlans from './components/QuestPlans';
@@ -29,13 +29,18 @@ const TAB_PANNEL_COMPONENT_MAPPING = {
 };
 
 function Plans() {
-	const [activeTab, setActiveTab] = useState(SCORING_PLANS);
+	const router = useRouter();
+	const { query: { tab = SCORING_PLANS } } = router;
+
+	const handleTabChange = (value) => {
+		router.push(`/performance-and-incentives/plans?tab=${value}`);
+	};
 
 	return (
 		<section className={styles.container}>
 			<Tabs
-				activeTab={activeTab}
-				onChange={setActiveTab}
+				activeTab={tab}
+				onChange={handleTabChange}
 				fullWidth
 				themeType="primary"
 			>

@@ -1,14 +1,13 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-import CREATE_QUEST_KEYS from '../../../configurations/create-quest-key-mappings';
+const useCreateQuest = ({ setParams = () => {}, refetch = () => {} }) => {
+	const router = useRouter();
 
-const { CONFIG } = CREATE_QUEST_KEYS;
-
-const useCreateQuest = ({ setParams = () => {}, refetch = () => {}, setQuestMode = () => {} }) => {
 	const { control, handleSubmit, watch, reset, formState: { errors = {} } } = useForm();
 
 	const [{ loading }, trigger] = useAllocationRequest(
@@ -23,7 +22,7 @@ const useCreateQuest = ({ setParams = () => {}, refetch = () => {}, setQuestMode
 		try {
 			const { name, date_range, agent_scoring_config_id, quest_string } = formValues;
 
-			await trigger({
+			const { data } = await trigger({
 				data: {
 					name,
 					agent_scoring_config_id,
@@ -34,7 +33,8 @@ const useCreateQuest = ({ setParams = () => {}, refetch = () => {}, setQuestMode
 			});
 
 			Toast.success('Saved successfully!');
-			setQuestMode(CONFIG);
+
+			router.push(`/performance-and-incentives/plans?tab=quest_plans&mode=create&id=${data?.id}`);
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
