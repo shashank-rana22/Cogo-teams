@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, Pill, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMUnlock, IcMLock } from '@cogoport/icons-react';
 import { useContext } from 'react';
@@ -42,6 +42,14 @@ function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 
 	return (
 		<div className={styles.container}>
+			<Pill
+				size="md"
+				color="#FEF199"
+				className={styles.pill}
+			>
+				Spotline Booking
+			</Pill>
+
 			<div className={styles.main_content}>
 				<ShippingLineDetails shipping_line={shipping_line} source={source} />
 

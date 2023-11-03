@@ -13,3 +13,8 @@
 .text {
 	font-size: 16px;
 }
+
+.flex {
+	display: flex;
+	align-items: center;
+}

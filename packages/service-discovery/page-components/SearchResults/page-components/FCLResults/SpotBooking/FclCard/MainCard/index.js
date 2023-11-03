@@ -105,7 +105,7 @@ function MainCard({ shippingLines = [], detail = {}, formProps = {} }) {
 							return (
 								<div
 									key={serviceDetails?.id}
-									className={cl`${styles.element_div} ${styles[formControls.name]}`}
+									className={cl`${styles.element_div} ${styles.containers}`}
 								>
 									{(containerDetail || []).map((conDetail) => (
 										<Pill

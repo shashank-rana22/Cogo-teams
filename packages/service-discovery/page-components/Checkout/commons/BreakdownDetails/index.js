@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Accordion, cl, Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -58,13 +59,18 @@ function BreakdownDetails({
 
 	const showTaxes = ['preview_booking', 'booking_confirmation'].includes(source);
 
-	const { primary_service = '' } = detail || {};
+	const { primary_service = '', source: checkoutSource = '' } = detail || {};
 
 	const { source: rateSource = '' } = rate;
 
 	return (
 		<>
-			<BreakdownDetailsHeader disableForm={disableForm} resetMargins={resetMargins} rateDetails={rateDetails} />
+			<BreakdownDetailsHeader
+				disableForm={disableForm}
+				resetMargins={resetMargins}
+				rateDetails={rateDetails}
+				checkoutSource={checkoutSource}
+			/>
 
 			<ServiceIcons
 				primaryService={primaryService}

@@ -14,7 +14,7 @@ const MAPPING = {
 	fcl_freight: FclCard,
 };
 
-function SpotBooking({ detail = {} }) {
+function SpotBooking({ detail = {}, setScreen = () => {} }) {
 	const { service_type = '' } = detail;
 
 	const [detentionValues, setDetentionValues] = useState({
@@ -59,6 +59,7 @@ function SpotBooking({ detail = {} }) {
 				watch={watch}
 				setFinalLoading={setFinalLoading}
 				finalLoading={finalLoading}
+				setScreen={setScreen}
 			/>
 		</div>
 	);

@@ -5,9 +5,12 @@ import BreakdownDetails from '../../../../commons/BreakdownDetails';
 import { CheckoutContext } from '../../../../context';
 
 import AdditionalContent from './AdditionalContent';
+import BookingPreview from './BookingPreview';
 
 function EditMargin({ state = '' }) {
-	const { rate } = useContext(CheckoutContext);
+	const { rate, detail = {} } = useContext(CheckoutContext);
+
+	const { source = '' } = detail;
 
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[GLOBAL_CONSTANTS.zeroth_index];
 
@@ -24,6 +27,8 @@ function EditMargin({ state = '' }) {
 
 	return (
 		<>
+			<BookingPreview source={source} />
+
 			<BreakdownDetails
 				rateDetails={rateDetails}
 				setRateDetails={setRateDetails}

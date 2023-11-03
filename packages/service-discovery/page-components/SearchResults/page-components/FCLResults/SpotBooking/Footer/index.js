@@ -16,6 +16,7 @@ function Footer({
 	watch = () => {},
 	setFinalLoading = () => {},
 	finalLoading = false,
+	setScreen = () => {},
 }) {
 	const router = useRouter();
 	const { service_details = {}, service_type = ''	} = detail;
@@ -126,15 +127,26 @@ function Footer({
 				<b>{isEmpty(totalDisplayString) ? 'N/A' : totalDisplayString.join(' + ')}</b>
 			</div>
 
-			<Button
-				size="lg"
-				themeType="accent"
-				style={{ paddingLeft: 20, paddingRight: 20, paddingTop: 16, paddingBottom: 16 }}
-				onClick={() => handleSubmit(onSubmit)()}
-				loading={finalLoading}
-			>
-				Proceed With Spotline Booking
-			</Button>
+			<div className={styles.flex}>
+				<Button
+					size="lg"
+					themeType="secondary"
+					onClick={() => setScreen('listRateCard')}
+					disabled={finalLoading}
+				>
+					Go Back
+				</Button>
+
+				<Button
+					size="lg"
+					themeType="accent"
+					onClick={() => handleSubmit(onSubmit)()}
+					style={{ marginLeft: '16px' }}
+					loading={finalLoading}
+				>
+					Proceed With Spotline Booking
+				</Button>
+			</div>
 		</div>
 	);
 }

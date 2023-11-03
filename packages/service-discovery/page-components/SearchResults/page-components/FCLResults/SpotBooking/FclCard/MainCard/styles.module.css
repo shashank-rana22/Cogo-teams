@@ -17,6 +17,14 @@
 			width: 120px;
 		}
 	}
+
+	&.containers {
+		:global {
+			.ui_input_number_container {
+				width: 100px;
+			}
+		}
+	}
 }
 
 .label {
