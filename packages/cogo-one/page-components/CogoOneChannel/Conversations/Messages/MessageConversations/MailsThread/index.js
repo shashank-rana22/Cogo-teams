@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import useGetMailContent from '../../../../../../hooks/useGetMailContent';
 import { LoadPrevMessages } from '../MessagesThread';
 import { ReceiveDivComponent, SentDivComponent } from '../MessagesThread/conversationDivMappings';
@@ -31,7 +33,9 @@ function MailsThread(
 	const {
 		user_name = '',
 	} = activeMessageCard;
-	const updatedArray = [...(messagesData || [])].reverse();
+
+	const updatedArray = useMemo(() => [...(messagesData || [])].reverse(), [messagesData]);
+
 	const mailContentProps = useGetMailContent({ firestore, formattedData, messagesData });
 
 	if (hasNoFireBaseRoom) {
@@ -45,7 +49,7 @@ function MailsThread(
 
 	return (
 		<>
-			{(updatedArray || [])?.map((eachMessage) => {
+			{updatedArray?.map((eachMessage) => {
 				const Component = CONVERSATION_TYPE_MAPPING[eachMessage?.conversation_type] || null;
 
 				if (!Component) {

@@ -77,7 +77,12 @@ function useGetMailContent({
 		}
 	}, [firestore, id, trigger, source, attachmentTrigger]);
 
-	const toggleMailBody = ({ isDraft = false, messageId = '', messageRoomId = '' }) => {
+	const toggleMailBody = useCallback(({
+		isDraft = false,
+		messageId = '',
+		messageRoomId = '',
+		expandedStateIdProp = '',
+	}) => {
 		if (loading) {
 			return;
 		}
@@ -85,10 +90,10 @@ function useGetMailContent({
 		setExpandedStateId('');
 		setFullThread('');
 
-		if (expandedStateId !== messageRoomId) {
+		if (expandedStateIdProp !== messageRoomId) {
 			getEmailBody({ isDraft, messageId, messageRoomId });
 		}
-	};
+	}, [getEmailBody, loading]);
 
 	useEffect(() => {
 		setLoading(false);

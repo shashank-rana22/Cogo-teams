@@ -122,7 +122,7 @@ function MailBody({
 	});
 
 	const handleExpandClick = () => {
-		toggleMailBody({ isDraft, messageId: message_id, messageRoomId: id });
+		toggleMailBody({ isDraft, messageId: message_id, messageRoomId: id, expandedStateIdProp: expandedStateId });
 	};
 
 	const emailBorderColor = getEmailBorder({ isDraft, emailStatus });
