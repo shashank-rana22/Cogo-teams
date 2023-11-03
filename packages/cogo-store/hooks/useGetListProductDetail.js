@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 const useGetListProductDetail = () => {
 	const [filters, setFilters] = useState({
-		page_limit : 6,
+		page_limit : 30,
 		page       : 1,
 	});
 	const [{ loading, data }, trigger] = useHarbourRequest({

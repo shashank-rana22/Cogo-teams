@@ -17,7 +17,7 @@ function ReassignTicket({
 	getTicketDetails = () => {}, setListData = () => {}, ticket = {}, shipmentsData = {},
 }) {
 	const { Data: data = {} } = ticket || {};
-	const { RequestType: requestType = '' } = data || {};
+	const { RequestType: requestType = '', IDType: idType = '' } = data || {};
 	const { id = '' } = shipmentsData || {};
 
 	const { t } = useTranslation(['myTickets']);
@@ -31,7 +31,7 @@ function ReassignTicket({
 
 	const watchType = watch('type');
 
-	const controls = useReassignTicketsControls({ t, watchType, setUserData, stakeHoldersData, requestType });
+	const controls = useReassignTicketsControls({ t, watchType, setUserData, stakeHoldersData, requestType, idType });
 
 	const { reassignTicket, reassignLoading } = useReassignTicket({
 		ticketId,
