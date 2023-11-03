@@ -1,10 +1,11 @@
 import { AddCompanyModal } from '@cogoport/ocean-modules';
+import ShipmentInsurance from '@cogoport/shipment-insurance';
 
 import { CUSTOM_TASK_MAPPING } from '../../../constants/custom-tasks';
 
 import {
 	AmendDraftBl,
-	CargoInsurance,
+	// CargoInsurance,
 	ChooseServiceProvider,
 	GenerateFreightCertificate,
 	NominationTask,
@@ -43,7 +44,7 @@ const COMPONENT_MAPPING = {
 	[CONFIRM_WITH_SHIPPER]            : ConfirmWithShipper,
 	[UPDATE_NOMINATION_DETAILS]       : NominationTask,
 	[GENERATE_FREIGHT_CERTIFICATE]    : GenerateFreightCertificate,
-	[GENERATE_CARGO_INSURANCE]        : CargoInsurance,
+	[GENERATE_CARGO_INSURANCE]        : ShipmentInsurance,
 	[UPLOAD_COMPLIANCE_DOCUMENTS]     : UploadComplianceDocs,
 	[UPLOAD_BOOKING_NOTE]             : UploadBookingNote,
 	[ADD_CONSIGNEE_DETAILS]           : AddCompanyModal,
