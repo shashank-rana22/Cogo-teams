@@ -41,7 +41,7 @@ const getServiceWisePayload = ({ service = {}, values = {} }) => {
 			arrival             : values?.arrival || undefined,
 			service_provider_id : default_service_provider_id,
 			transit_time        : values?.transit_time || undefined,
-			number_of_stops     : values?.number_of_stops || undefined,
+			number_of_stops     : Number(values?.number_of_stops),
 			rate                : {
 				line_items     : [],
 				margins        : [],

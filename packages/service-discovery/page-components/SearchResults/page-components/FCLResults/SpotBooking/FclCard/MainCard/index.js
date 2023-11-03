@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 
@@ -11,6 +11,10 @@ import styles from './styles.module.css';
 const getPriceError = (error = {}) => {
 	if (isEmpty(error)) {
 		return null;
+	}
+
+	if (error.price?.type === 'min') {
+		return 'price should be greater than 0';
 	}
 
 	return `${startCase(Object.keys(error)[GLOBAL_CONSTANTS.zeroth_index])} is Required`;
@@ -42,7 +46,7 @@ function MainCard({ shippingLines = [], detail = {}, formProps = {} }) {
 		name           : `bas_${service.container_size}_${service.container_type}_${service.commodity}`,
 		control,
 		label          : 'Basic Freight Rate/Ctr*',
-		rules          : { required: 'Price is Required' },
+		rules          : { required: 'Enter valid price', min: 1 },
 	}));
 
 	return (
@@ -64,8 +68,13 @@ function MainCard({ shippingLines = [], detail = {}, formProps = {} }) {
 					{restControls.map((currControls) => {
 						const ActiveElement = getElementController(currControls.type);
 
+						console.log('currControls', currControls);
+
 						return (
-							<div key={currControls.name} className={styles.element_div}>
+							<div
+								key={currControls.name}
+								className={cl`${styles.element_div} ${styles[currControls.name]}`}
+							>
 								<div className={styles.label}>{currControls.label}</div>
 								<ActiveElement {...currControls} control={control} />
 								{errors?.[currControls.name] && (
@@ -81,44 +90,54 @@ function MainCard({ shippingLines = [], detail = {}, formProps = {} }) {
 			</div>
 
 			<div className={styles.right_container}>
-				{primaryServicesControls.map(
-					({ serviceDetails = {}, ...formControls }) => {
-						const containerDetail = getDetails({
-							primary_service : service_type,
-							item            : serviceDetails,
-						});
+				<div className={styles.container_details}>
+					{primaryServicesControls.map(
+						({ serviceDetails = {}, ...formControls }) => {
+							const containerDetail = getDetails({
+								primary_service : service_type,
+								item            : serviceDetails,
+							});
 
-						const ActiveElement = getElementController(formControls?.type);
+							const ActiveElement = getElementController(formControls?.type);
 
-						const errorMessage = getPriceError(errors?.[formControls.name]);
+							const errorMessage = getPriceError(errors?.[formControls.name]);
 
-						return (
-							<div key={serviceDetails?.id} className={styles.element_div}>
-								{(containerDetail || []).map((conDetail) => (
-									<Pill
-										key={conDetail}
-										size="md"
-										style={{
-											border     : '1px solid #24C7D9',
-											background : '#ffffff',
-										}}
+							return (
+								<div
+									key={serviceDetails?.id}
+									className={cl`${styles.element_div} ${styles[formControls.name]}`}
+								>
+									{(containerDetail || []).map((conDetail) => (
+										<Pill
+											key={conDetail}
+											size="md"
+											style={{
+												border     : '1px solid #24C7D9',
+												background : '#ffffff',
+											}}
+										>
+											{conDetail}
+										</Pill>
+									))}
+									<div
+										style={{ marginTop: '16px' }}
+										className={styles.label}
 									>
-										{conDetail}
-									</Pill>
-								))}
-								<div style={{ marginTop: '16px' }} className={styles.label}>{formControls?.label}</div>
-								<ActiveElement {...formControls} />
-
-								{errorMessage && (
-									<div className={styles.error_message}>
-										{' '}
-										{errorMessage}
+										{formControls?.label}
 									</div>
-								)}
-							</div>
-						);
-					},
-				)}
+									<ActiveElement {...formControls} />
+
+									{errorMessage && (
+										<div className={styles.error_message}>
+											{' '}
+											{errorMessage}
+										</div>
+									)}
+								</div>
+							);
+						},
+					)}
+				</div>
 			</div>
 		</div>
 	);

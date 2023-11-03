@@ -7,6 +7,8 @@ function DatepickerController(props) {
 		name, control, rules, value, ...rest
 	} = props;
 
+	console.log('props', props);
+
 	return (
 		<Controller
 			key={name}

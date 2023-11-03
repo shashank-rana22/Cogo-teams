@@ -1,5 +1,7 @@
 import { addDays } from '@cogoport/utils';
 
+import validate from './validateNumber';
+
 export const fclControls = ({ shippingLineOptions = [] }) => {
 	const controls = [
 		{
@@ -15,28 +17,30 @@ export const fclControls = ({ shippingLineOptions = [] }) => {
 			},
 		},
 		{
-			label       : 'Departure',
-			name        : 'departure',
-			type        : 'datepicker',
-			placeholder : 'Departure',
-			minDate     : addDays(new Date(), 4),
-			rules       : { required: 'Departure is Required' },
+			label                 : 'Departure',
+			name                  : 'departure',
+			type                  : 'datepicker',
+			placeholder           : 'Departure',
+			minDate               : addDays(new Date(), 4),
+			isPreviousDaysAllowed : true,
+			rules                 : { required: 'Departure is Required' },
 		},
 		{
 			name        : 'number_of_stops',
 			label       : 'Number of Stops',
-			type        : 'number',
+			type        : 'text',
 			placeholder : 'Enter number of stops',
 			size        : 'sm',
-			rules       : { required: 'No. of Stops are Required', min: 0 },
+			rules       : { required: 'No. of Stops are Required', validate: (val) => validate(val) },
 		},
 		{
-			name        : 'arrival',
-			label       : 'Arrival',
-			placeholder : 'Arrival',
-			minDate     : addDays(new Date(), 4),
-			type        : 'datepicker',
-			rules       : { required: 'Arrival is Required' },
+			name                  : 'arrival',
+			label                 : 'Arrival',
+			placeholder           : 'Arrival',
+			minDate               : addDays(new Date(), 4),
+			isPreviousDaysAllowed : true,
+			type                  : 'datepicker',
+			rules                 : { required: 'Arrival is Required' },
 		},
 	];
 

@@ -1,4 +1,5 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
@@ -32,49 +33,53 @@ function Footer({ detentionValues = {}, handleSubmit = () => {}, detail = {}, wa
 	}, { manual: true });
 
 	const onSubmit = async (values) => {
-		const {
-			shipping_line_id = '',
-			number_of_stops = 0,
-			departure = '',
-			arrival = '',
-			...basicFreightValues
-		} = values;
+		try {
+			const {
+				shipping_line_id = '',
+				number_of_stops = 0,
+				departure = '',
+				arrival = '',
+				...basicFreightValues
+			} = values;
 
-		const servicePayload = getServicePayload({
-			fclServices,
-			formValues: {
-				shipping_line_id,
-				number_of_stops,
-				departure,
-				arrival,
-			},
-			detentionValues,
-		});
+			const servicePayload = getServicePayload({
+				fclServices,
+				formValues: {
+					shipping_line_id,
+					number_of_stops,
+					departure,
+					arrival,
+				},
+				detentionValues,
+			});
 
-		const payload = {
-			source                      : 'spot_line_booking',
-			source_id                   : detail?.id,
-			primary_service             : detail?.search_type,
-			importer_exporter_id        : detail?.importer_exporter_id,
-			importer_exporter_branch_id : detail?.importer_exporter_branch_id,
-			user_id                     : detail?.user?.id,
-			quotation_type              : 'customize',
-			existing_shipment_id        : detail?.source === 'upsell' ? detail?.source_id : undefined,
-			tags                        : ['version2'],
-			...servicePayload,
-		};
+			const payload = {
+				source                      : 'spot_line_booking',
+				source_id                   : detail?.id,
+				primary_service             : detail?.search_type,
+				importer_exporter_id        : detail?.importer_exporter_id,
+				importer_exporter_branch_id : detail?.importer_exporter_branch_id,
+				user_id                     : detail?.user?.id,
+				quotation_type              : 'customize',
+				existing_shipment_id        : detail?.source === 'upsell' ? detail?.source_id : undefined,
+				tags                        : ['version2'],
+				...servicePayload,
+			};
 
-		const { data = {} } = await triggerCreateCheckout({ data: payload });
+			const { data = {} } = await triggerCreateCheckout({ data: payload });
 
-		const { id = '' } = data;
+			const { id = '' } = data;
 
-		const { data: checkoutData = {} } = await triggerGetCheckout({ params: { id } });
+			const { data: checkoutData = {} } = await triggerGetCheckout({ params: { id } });
 
-		const addPayload = getUpdatePayload({ checkoutData, basicFreightValues });
+			const addPayload = getUpdatePayload({ checkoutData, basicFreightValues });
 
-		await triggerUpdateCheckout({ data: addPayload });
+			await triggerUpdateCheckout({ data: addPayload });
 
-		router.push(`/checkout/${id}`);
+			router.push(`/checkout/${id}`);
+		} catch (err) {
+			Toast.error(getApiErrorString(err.response?.data));
+		}
 	};
 
 	const priceValues = Object.entries(watch()).reduce((acc, [key, value]) => {
