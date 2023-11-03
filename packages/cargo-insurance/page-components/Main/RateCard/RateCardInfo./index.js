@@ -3,7 +3,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Image } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
 
-import INSURANCE_PROVIDER from '../../../../constant/insuranceProvider';
+import INSURANCE_PROVIDER from '../../../../constants/insuranceProvider';
 import styles from '../styles.module.css';
 
 const getFormatedAmount = ({ currency, value }) => formatAmount({

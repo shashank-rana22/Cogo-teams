@@ -6,8 +6,8 @@ import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useState } from 'react';
 
-import INSURANCE_PROVIDER from '../../../constant/insuranceProvider';
-import getPocMapping from '../../../constant/pocMapping';
+import INSURANCE_PROVIDER from '../../../constants/insuranceProvider';
+import getPocMapping from '../../../constants/pocMapping';
 
 import PersonalDetailsModal from './PersonalDetailsModal';
 import styles from './styles.module.css';
