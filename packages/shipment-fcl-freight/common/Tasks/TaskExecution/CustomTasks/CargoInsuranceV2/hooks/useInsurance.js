@@ -14,8 +14,8 @@ const useInsurance = ({ draftData = {}, formHook, setBillingType, formRef }) => 
 
 	const { setValue } = formHook;
 
-	const onClickConfirmSend = () => {
-		const selectedAddress = formRef.current.address();
+	const onClickConfirmSend = async () => {
+		const selectedAddress = await formRef.current.address();
 
 		if (isEmpty(selectedAddress)) {
 			Toast.error('Please Select Billing Address');
