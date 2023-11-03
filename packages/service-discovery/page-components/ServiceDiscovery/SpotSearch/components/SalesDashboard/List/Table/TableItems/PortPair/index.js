@@ -1,6 +1,7 @@
 import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPortArrow } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import SearchType from '../SearchType';
 
@@ -9,6 +10,11 @@ import styles from './styles.module.css';
 const LOCATION_KEY_MAPPING = {
 	origin      : 'pickup',
 	destination : 'drop',
+};
+
+const LINE_LABEL = {
+	fcl_freight : 'Shipping Line',
+	air_freight : 'Airline',
 };
 
 const onlySingleLocation = [
@@ -105,6 +111,8 @@ function PortPair({ item = {}, field = {} }) {
 		key,
 	);
 
+	console.log('item', item);
+
 	const isSingleLocation = onlySingleLocation.includes(service_type);
 
 	const handleClickLocation = () => {
@@ -122,64 +130,75 @@ function PortPair({ item = {}, field = {} }) {
 	const originPortName = origin_display_name?.split(',')?.[GLOBAL_CONSTANTS.zeroth_index];
 	const destinationPortName = destination_display_name?.split(',')?.[GLOBAL_CONSTANTS.zeroth_index];
 
-	const { port, airport, location	} = item || {};
+	const { port, airport, location, shipping_line, airline	} = item || {};
 
 	const singleLocationPort = port || airport || location || {};
 
 	const moreWidth = showPortsName || isSingleLocation;
 
+	const line = shipping_line || airline || {};
+
 	return (
 		<div className={styles.container}>
-
 			<span className={styles.service_type}>
 				<SearchType item={item} field={field} />
 			</span>
 
-			{ isSingleLocation ? (
-				<Tooltip content={<div className={styles.tooltip_content}>{singleLocationPort?.display_name}</div>}>
-					<div
-						className={cl`${styles.location_name} ${moreWidth && styles.more_width}`}
+			<div>
+				{ isSingleLocation ? (
+					<Tooltip content={<div className={styles.tooltip_content}>{singleLocationPort?.display_name}</div>}>
+						<div
+							className={cl`${styles.location_name} ${moreWidth && styles.more_width}`}
+						>
+							{singleLocationPort?.name}
+						</div>
+					</Tooltip>
+				) : (
+					<Tooltip
+						content={(
+							<div className={styles.tooltip_content}>
+								{origin_display_name?.length && (
+									<>
+										{origin_display_name}
+										{' '}
+										<br />
+										<IcMPortArrow height={20} width={20} />
+										<br />
+									</>
+								)}
+								{destination_display_name}
+							</div>
+						)}
 					>
-						{singleLocationPort?.name}
-					</div>
-				</Tooltip>
-			) : (
-				<Tooltip
-					content={(
-						<div className={styles.tooltip_content}>
-							{origin_display_name?.length && (
+						<div
+							role="presentation"
+							className={styles.locations_container}
+							onClick={handleClickLocation}
+						>
+							{(origin || origin_display_name)?.length && (
 								<>
-									{origin_display_name}
+									<div className={cl`${styles.location_name} ${moreWidth && styles.more_width}`}>
+										{showPortsName ? originPortName : origin || origin_display_name}
+									</div>
 									{' '}
-									<br />
-									<IcMPortArrow height={20} width={20} />
-									<br />
+									<IcMPortArrow height={24} width={24} style={{ margin: '0px 12px' }} />
 								</>
 							)}
-							{destination_display_name}
+							<div className={cl`${styles.location_name} ${moreWidth && styles.more_width}`}>
+								{showPortsName ? destinationPortName : destination || destination_display_name}
+							</div>
 						</div>
-					)}
-				>
-					<div
-						role="presentation"
-						className={styles.locations_container}
-						onClick={handleClickLocation}
-					>
-						{(origin || origin_display_name)?.length && (
-							<>
-								<div className={cl`${styles.location_name} ${moreWidth && styles.more_width}`}>
-									{showPortsName ? originPortName : origin || origin_display_name}
-								</div>
-								{' '}
-								<IcMPortArrow height={24} width={24} style={{ margin: '0px 12px' }} />
-							</>
-						)}
-						<div className={cl`${styles.location_name} ${moreWidth && styles.more_width}`}>
-							{showPortsName ? destinationPortName : destination || destination_display_name}
-						</div>
+					</Tooltip>
+				)}
+
+				{['fcl_freight', 'air_freight'].includes(service_type) && !isEmpty(line) ? (
+					<div className={styles.line_name}>
+						<span className={styles.label}>{LINE_LABEL[service_type]}</span>
+						{': '}
+						{line?.short_name}
 					</div>
-				</Tooltip>
-			)}
+				) : null}
+			</div>
 		</div>
 	);
 }

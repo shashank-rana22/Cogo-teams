@@ -40,3 +40,11 @@
 	width: fit-content;
 	cursor: pointer;
 }
+
+.line_name {
+	font-size: 10px;
+
+	.label {
+		color: #828282;
+	}
+}
