@@ -107,6 +107,7 @@ function ListingPage() {
 			const { product_id = '' } = query || {};
 			push('/cogo-store/[product_id]', `/cogo-store/${product_id}?colorId=${e}`);
 		}
+		setAddedToCart(false);
 	};
 
 	useEffect(() => {
@@ -155,6 +156,7 @@ function ListingPage() {
 				currency_code={currency_code}
 				currency_symbol={currency_symbol}
 				loading={productVariationLoading || productFilterLoading}
+				setAddedToCart={setAddedToCart}
 			/>
 		</div>
 	);

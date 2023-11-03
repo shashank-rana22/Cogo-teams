@@ -15,7 +15,7 @@ function ProductDetails({
 	after_coupon_price = '', ADD_TO_CART = '', synchronizeCart = '',
 	handleBuyNow = () => {}, addedToCart = false, handleAddToCart = () => {}, selectedImage = '',
 	TICK_ICON = '', colorValuePairs = [], handleVariationColor = () => {},
-	handleImageClick = () => {}, office_location = '', merchSize = '',
+	handleImageClick = () => {}, office_location = '', merchSize = '', setAddedToCart = () => {},
 	loading = false, currency_symbol = '',
 }) {
 	if (loading) {
@@ -98,10 +98,13 @@ function ProductDetails({
 							<span>Size</span>
 							<Select
 								value={merchSize || filtersVariation?.size}
-								onChange={(e) => setFiltersVariation((prev) => ({
-									...prev,
-									size: e,
-								}))}
+								onChange={(e) => {
+									setFiltersVariation((prev) => ({
+										...prev,
+										size: e,
+									}));
+									setAddedToCart(false);
+								}}
 								className={styles.select_filters}
 								placeholder="Select Size"
 								options={sizeValuePairs}
