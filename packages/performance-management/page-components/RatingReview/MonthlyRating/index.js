@@ -51,7 +51,6 @@ function MonthlyRating({ props = {} }) {
 	}, [filters.year, month_year_data]);
 
 	const handleSelectYear = (year) => {
-		// setFilterYear(year);
 		setFilters((prev) => ({ ...prev, year }));
 		setMonthsToShow(month_year_data?.find((item) => item.year === year).month);
 	};
