@@ -388,6 +388,12 @@ const apis = [
 		service_name : 'location',
 		feature      : 'search',
 	},
+	{
+		api          : 'create_checkout',
+		access_type  : 'private',
+		service_name : 'checkout',
+		feature      : 'spot booking',
+	},
 ];
 
 export default apis;

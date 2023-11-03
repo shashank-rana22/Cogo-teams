@@ -1,17 +1,16 @@
 .container {
 	display: flex;
+	align-items: flex-end;
 	padding: 12px;
 	background-color: #fffefa;
 }
 
 .element_div {
-	display: flex;
-	flex-direction: column;
 	width: 224px;
 
 	:global {
 		.ui_input_number_container {
-			width: 180px;
+			width: 120px;
 		}
 	}
 }
@@ -36,4 +35,13 @@
 			width: 224px;
 		}
 	}
+}
+
+.error_message {
+	font-size: 12px;
+	color: #ee3425;
+}
+
+.right_container {
+	display: flex;
 }
