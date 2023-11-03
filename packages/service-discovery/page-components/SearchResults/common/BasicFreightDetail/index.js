@@ -7,24 +7,44 @@ import styles from './styles.module.css';
 
 const ZERO = 0;
 
+const priceFormat = (price, currency, fraction = ZERO) => formatAmount({
+	amount  : price || ZERO,
+	currency,
+	options : {
+		style                 : 'currency',
+		currencyDisplay       : 'symbol',
+		maximumFractionDigits : fraction,
+	},
+});
+
 function FreightPriceDetail({
 	price = '',
 	price_currency = '',
-	totalPrice = false,
+	total_price = 0,
+	total_price_currency = '',
+	total = false,
 }) {
+	let isPriceDiscounted = false;
+
+	if ((total_price || ZERO) > (price || ZERO)) {
+		isPriceDiscounted = true;
+	}
+
 	return (
 		<div className={styles.container}>
-			{formatAmount({
-				amount   : price || ZERO,
-				currency : price_currency,
-				options  : {
-					style                 : 'currency',
-					currencyDisplay       : 'symbol',
-					maximumFractionDigits : 0,
-				},
-			})}
+			<div className={styles.amount_wrapper}>
+				{isPriceDiscounted ? (
+					<div className={styles.discounted_price}>
+						{priceFormat(total_price, total_price_currency, total ? 0 : 2)}
+					</div>
+				) : null}
 
-			{totalPrice ? (
+				<div className={styles.amount}>
+					{priceFormat(price, price_currency, total ? 0 : 2)}
+				</div>
+			</div>
+
+			{total ? (
 				<Tooltip
 					placement="top"
 					trigger="mouseenter"
@@ -37,7 +57,7 @@ function FreightPriceDetail({
 				>
 					<IcMInfo className={styles.info_icon} />
 				</Tooltip>
-			) : null}
+			) : <span className={styles.per_container_label}>Per ctr.</span>}
 		</div>
 	);
 }

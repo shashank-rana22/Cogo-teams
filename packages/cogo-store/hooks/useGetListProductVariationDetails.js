@@ -2,15 +2,15 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 const useGetListProductVariationDetails = () => {
 	const router = useRouter();
 	const { query } = router || {};
-	const { product_id = '' } = query || {};
+	const { product_id = '', colorId } = query || {};
 	const [filtersVariation, setFiltersVariation] = useState({
-		color_id : '',
-		size     : '',
+		size: '',
 	});
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'GET',
@@ -21,22 +21,24 @@ const useGetListProductVariationDetails = () => {
 		async () => {
 			try {
 				const { color_id, size } = filtersVariation;
-				await trigger({
-					params: {
-						filters: {
-							color_id,
-							size,
+				if (!isEmpty(product_id)) {
+					await trigger({
+						params: {
+							filters: {
+								color_id: colorId || color_id,
+								size,
+							},
+							id: product_id,
 						},
-						product_id,
-					},
-				});
+					});
+				}
 			} catch (error) {
 				if (error?.response?.data) {
 					Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 				}
 			}
 		},
-		[trigger, filtersVariation, product_id],
+		[filtersVariation, trigger, colorId, product_id],
 	);
 
 	useEffect(() => {
