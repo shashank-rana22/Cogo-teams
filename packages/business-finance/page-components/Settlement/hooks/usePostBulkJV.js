@@ -20,6 +20,10 @@ function usePostBulkJV() {
 			setSelectedJV([]);
 
 			Toast.success('Processing your request. Please come back later.');
+
+			setTimeout(() => {
+				Toast.default('Please Refresh after some time');
+			}, [1000]);
 		} catch (err) {
 			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}
