@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
@@ -6,10 +7,22 @@ const BILLING_TYPE_MAPPING = {
 	CORPORATE  : 'Corporate',
 };
 
-const useInsurance = ({ draftData = {}, formHook }) => {
-	const [billingType, setBillingType] = useState('Corporate');
+const useInsurance = ({ draftData = {}, formHook, setBillingType, formRef }) => {
+	const [confirmSuccess, setConfirmSuccess] = useState({
+		isOpen: false,
+	});
 
 	const { setValue } = formHook;
+
+	const onClickConfirmSend = () => {
+		const selectedAddress = formRef.current.address();
+
+		if (isEmpty(selectedAddress)) {
+			Toast.error('Please Select Billing Address');
+			return;
+		}
+		setConfirmSuccess({ isOpen: true, isConfirm: true });
+	};
 
 	useEffect(() => {
 		if (!isEmpty(draftData)) {
@@ -43,7 +56,7 @@ const useInsurance = ({ draftData = {}, formHook }) => {
 	}, [draftData, setBillingType, setValue]);
 
 	return {
-		billingType, setBillingType,
+		onClickConfirmSend, confirmSuccess, setConfirmSuccess,
 	};
 };
 

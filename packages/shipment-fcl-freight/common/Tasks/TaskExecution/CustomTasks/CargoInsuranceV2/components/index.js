@@ -7,6 +7,7 @@ import FormItem from '../common/FormItems';
 import { getRegistrationControls } from '../configurations/insuranceControls';
 import useDraft from '../hooks/useDraft';
 import useInsurance from '../hooks/useInsurance';
+import useInsuranceSend from '../hooks/useInsuranceSend';
 
 import Address from './Address';
 import ConfirmSuccessModal from './ConfirmSuccessModal';
@@ -15,14 +16,11 @@ import SideBar from './SideBar';
 import styles from './styles.module.css';
 
 function CargoInsurance() {
-	const { shipment_data, primary_service, servicesList } = useContext(
+	const { servicesList } = useContext(
 		ShipmentDetailContext,
 	);
 
 	const [billingType, setBillingType] = useState('Corporate');
-	const [confirmSuccess, setConfirmSuccess] = useState({
-		isOpen: false,
-	});
 
 	const formRef = useRef({});
 
@@ -45,7 +43,19 @@ function CargoInsurance() {
 		formRef,
 	});
 
-	useInsurance({ draftData, formHook });
+	const { onClickConfirmSend, confirmSuccess, setConfirmSuccess } = useInsurance({
+		setBillingType,
+		draftData,
+		formHook,
+		formRef,
+	});
+
+	const { loading, submitHandler } = useInsuranceSend({
+		setConfirmSuccess,
+		billingType,
+		draftData,
+		formRef,
+	});
 
 	const controls = getRegistrationControls({ billingType });
 
@@ -54,10 +64,10 @@ function CargoInsurance() {
 			<div className={styles.flex_box}>
 				<div style={{ width: '65%' }}>
 					<Address
+						draftData={draftData}
 						billingType={billingType}
 						setBillingType={setBillingType}
 						orgId={draftData?.organizationId}
-						// preSelectedAddress={metadata?.selectedAddress}
 						ref={(r) => { formRef.current.address = r; }}
 					/>
 
@@ -85,7 +95,10 @@ function CargoInsurance() {
 					Save as Draft
 				</Button>
 
-				<Button disabled={saveDraftLoading || getLoading}>
+				<Button
+					disabled={saveDraftLoading || getLoading}
+					onClick={handleSubmit(onClickConfirmSend)}
+				>
 					Confirm
 				</Button>
 			</div>

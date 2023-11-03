@@ -110,15 +110,11 @@ const useInsuranceSend = ({ setConfirmSuccess, draftData = {}, billingType, form
 	const submitHandler = (data) => {
 		const selectedAddress = formRef.current.address();
 
-		if (isEmpty(selectedAddress)) {
-			Toast.error(t('cargoInsurance:address_err'));
-			return;
-		}
 		confirmSendInsurance({ formData: data, selectedAddress });
 	};
 
 	return {
-		loading, submitHandler, formRef,
+		loading, submitHandler,
 	};
 };
 

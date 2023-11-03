@@ -6,9 +6,12 @@ import { Image } from '@cogoport/next';
 import styles from './styles.module.css';
 
 function ConfirmSuccessModal({
+	handleSubmit,
+	submitHandler,
+	loading = false,
+	pocDetails = {},
+	setConfirmSuccess,
 	confirmSuccess = {},
-	setConfirmSuccess, handleSubmit,
-	pocDetails = {}, loading = false, submitHandler,
 }) {
 	const { isOpen = false, isConfirm = false, isSuccess = false, paymentLink = '' } = confirmSuccess || {};
 	const { email, insuredFirstName, insuredLastName } = pocDetails || {};
@@ -69,30 +72,22 @@ function ConfirmSuccessModal({
 			) : null}
 
 			{isSuccess ? (
-				<>
-					<div className={styles.body}>
-						<Image src={GLOBAL_CONSTANTS.image_url.mail_sent} width={140} height={140} />
+				<div className={styles.body}>
+					<Image src={GLOBAL_CONSTANTS.image_url.mail_sent} width={140} height={140} />
 
-						<h1 className={styles.success_header}>Mail Sent Successfully</h1>
-						<p style={{ margin: 0 }} className={styles.sub_text}>
-							Additonally, you can also send payment link to user via
-							{' '}
-							<IcCWhatsapp />
-							{' '}
-							whatsapp
-						</p>
+					<h1 className={styles.success_header}>Mail Sent Successfully</h1>
+					<p style={{ margin: 0 }} className={styles.sub_text}>
+						Additonally, you can also send payment link to user via
+						{' '}
+						<IcCWhatsapp />
+						{' '}
+						whatsapp
+					</p>
 
-						<Button onClick={copyLinkHandler} size="sm" themeType="linkUi">
-							Copy Link
-						</Button>
-					</div>
-
-					{/* <div className={styles.footer}>
-						<Button size="sm" themeType="linkUi" onClick={() => push('/service-discovery')}>
-							{t('cargoInsurance:service_discovery_cta')}
-						</Button>
-					</div> */}
-				</>
+					<Button onClick={copyLinkHandler} size="sm" themeType="linkUi">
+						Copy Link
+					</Button>
+				</div>
 
 			) : null}
 

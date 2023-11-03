@@ -10,7 +10,7 @@ import AddressModal from './AddressModal';
 import styles from './styles.module.css';
 
 function Address(props, ref) {
-	const { billingType = '', orgId = '' } = props;
+	const { billingType = '', orgId = '', draftData = {} } = props;
 
 	const [selectedAddress, setSelectedAddress] = useState({});
 
@@ -20,12 +20,15 @@ function Address(props, ref) {
 		openModal : false,
 	});
 
+	const { metadata = {} } = draftData || {};
+	const preSelectedAddress = metadata?.selectedAddress;
+
 	const {
 		loading,
 		addressData = [],
 		setAddressData,
 		getBillingAddress,
-	} = useGetAddress({ billingType, orgId });
+	} = useGetAddress({ billingType, orgId, preSelectedAddress, setSelectedAddress });
 
 	const { mainAddress = [], allAddress = [] } = addressData || {};
 

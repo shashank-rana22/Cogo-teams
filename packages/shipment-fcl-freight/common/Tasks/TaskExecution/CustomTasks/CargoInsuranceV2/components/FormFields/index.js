@@ -9,7 +9,9 @@ function FormFields({ formHook = {}, billingType = '', incotermResponse = {}, ve
 
 	return (
 		<div className={styles.container}>
-			<p className={styles.form_title}>Additional fields required to finish the purchase of Insurance</p>
+			<p className={styles.form_title}>
+				Additional fields required to finish the purchase of Insurance
+			</p>
 
 			<div className={styles.form_elements}>
 				<FormItem formhook={formHook} controls={controls} />
