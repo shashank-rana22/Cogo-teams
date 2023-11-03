@@ -36,7 +36,7 @@ function PortDetails({ details = {}, listLoading = false }) {
 }
 
 function ShipmentDetails({
-	idType = '', serialId = 0, t = () => {},
+	idType = '', serialId = 0, t = () => {}, requestType = '',
 	handleRouteBooking = () => {}, service = '', partnerId = '',
 	shipmentsData = {}, handleRouteSupply = () => {}, listLoading = false,
 }) {
@@ -54,6 +54,8 @@ function ShipmentDetails({
 		export : singleDestinationDisplay,
 	};
 
+	const shipmentType = idType !== 'sid' && requestType !== 'shipment' ? service : shipment_type;
+
 	const ROUTE_PAGE_MAPPING = {
 		sid        : handleRouteBooking,
 		missing_id : handleRouteSupply,
@@ -61,7 +63,7 @@ function ShipmentDetails({
 		default    : handleRouteBooking,
 	};
 
-	const isSingleLocation = SINGLE_LOCATIONS?.includes(shipment_type);
+	const isSingleLocation = SINGLE_LOCATIONS?.includes(shipmentType);
 
 	return (
 		<>

@@ -1,12 +1,11 @@
 import { Button } from '@cogoport/components';
 import { useState } from 'react';
 
-import DownloadFileFormat from './DownloadFileFormat';
 import ManualEntry from './ManualEntry';
 import styles from './styles.module.css';
 import UploadFile from './UploadFile';
 
-function Header({ refetch, control }) {
+function Header({ refetch = () => {} }) {
 	const [showModal, setShowModal] = useState({
 		upload_file     : false,
 		manual_entry    : false,
@@ -60,29 +59,6 @@ function Header({ refetch, control }) {
 					refetch={refetch}
 					showModal={showModal}
 					setShowModal={setShowModal}
-				/>
-			)}
-
-			<div>
-				<Button
-					type="button"
-					themeType="secondary"
-					size="md"
-					onClick={() => {
-						setShowModal({
-							download_format: !showModal.download_format,
-						});
-					}}
-				>
-					Download File Format
-
-				</Button>
-			</div>
-			{showModal.download_format && (
-				<DownloadFileFormat
-					showModal={showModal}
-					setShowModal={setShowModal}
-					control={control}
 				/>
 			)}
 		</div>

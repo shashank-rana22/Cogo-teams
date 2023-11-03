@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { useState, useRef, useEffect } from 'react';
 
 import useRaiseTicketcontrols from '../../../../configurations/filter-controls';
-import { FINANCE_PLATFORM_KEYS, RATE_KEYS, SHIPMENT_RATE_KEYS } from '../../../../constants';
+import { FINANCE_PLATFORM_KEYS, PLATFORM_KEYS, RATE_KEYS, SHIPMENT_RATE_KEYS } from '../../../../constants';
 import { getFieldController } from '../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
@@ -16,7 +16,7 @@ const CONTROLS_MAPPING = {
 	shipment       : SHIPMENT_RATE_KEYS,
 	rate           : RATE_KEYS,
 	finance        : FINANCE_PLATFORM_KEYS,
-	platform_issue : FINANCE_PLATFORM_KEYS,
+	platform_issue : PLATFORM_KEYS,
 };
 
 function RaiseTicketsForm({
@@ -49,6 +49,7 @@ function RaiseTicketsForm({
 	const watchRaisedByDesk = watch('raised_by_desk');
 	const watchIdType = watch('id_type');
 	const watchServiceType = watch('service_type');
+	const watchPlatformCategory = watch('platform_category');
 
 	const additionalControls = (additionalInfo || []).map((item) => ({
 		label          : item,
@@ -89,6 +90,7 @@ function RaiseTicketsForm({
 		watchRaisedByDesk,
 		watchServiceType,
 		watchIdType,
+		watchPlatformCategory,
 	});
 
 	const filteredControls = defaultControls
@@ -106,6 +108,10 @@ function RaiseTicketsForm({
 		SHIPMENT_RATE_KEYS.forEach((element) => {
 			if (element !== 'request_type') { resetField(element); }
 		});
+
+		PLATFORM_KEYS.forEach((element) => {
+			if (element !== 'request_type') { resetField(element); }
+		});
 	}, [resetField, watchRequestType]);
 
 	return (
@@ -117,9 +123,16 @@ function RaiseTicketsForm({
 
 				const checkUserId = name === 'user_id' && isEmpty(watchOrgId);
 				const checkServiceType = name === 'service_type' && (isEmpty(watchIdType) || watchIdType === 'sid');
-				const checkService = name === 'service' && watchRequestType !== 'shipment' && watchIdType !== 'sid';
+				const checkService = name === 'service' && watchRequestType !== 'shipment' && watchIdType !== 'sid'
+				&& watchPlatformCategory !== 'Shipment Bookings';
 
-				if (checkServiceType || checkService || checkUserId) {
+				const checkPlatforSid = name === 'serial_id' && !['shipment', 'rate']?.includes(watchRequestType)
+				&& (!watchPlatformCategory || watchPlatformCategory !== 'Shipment Bookings');
+
+				const checkPlatforTrade = name === 'trade_type' && !['shipment', 'rate']?.includes(watchRequestType)
+				&& (!watchPlatformCategory || watchPlatformCategory !== 'Shipment Bookings');
+
+				if (checkServiceType || checkService || checkUserId || checkPlatforSid || checkPlatforTrade) {
 					return null;
 				}
 

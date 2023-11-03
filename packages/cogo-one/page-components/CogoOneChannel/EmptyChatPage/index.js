@@ -19,6 +19,10 @@ const RateRevertsPage = dynamic(() => import('./RateRevertsPage'), {
 	loading: () => <div className={styles.container}><CommonLoader /></div>,
 });
 
+const PlatformAdoption = dynamic(() => import('./PlatformAdoption'), {
+	loading: () => <div className={styles.container}><CommonLoader /></div>,
+});
+
 const MESSAGE_MAPPING = {
 	message         : 'chat',
 	voice           : 'call log',
@@ -32,6 +36,10 @@ function EmptyChatPage({
 	viewType = '',
 	setActiveTab = () => {},
 	mailProps = {},
+	isBotSession = false,
+	firestore = {},
+	userId = '',
+	initialViewType = '',
 }) {
 	const displayMessage = MESSAGE_MAPPING[activeTab?.tab] || activeTab?.tab;
 
@@ -40,6 +48,8 @@ function EmptyChatPage({
 	const showLeadVoiceCalls = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_lead_voice_calls || false;
 
 	const showRateReverts = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_rate_reverts_page || false;
+
+	const showPlatformAdoption = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.permissions?.show_platform_adoption;
 
 	if (showShipments) {
 		return (
@@ -55,6 +65,20 @@ function EmptyChatPage({
 		return (
 			<LeadVoiceCalls
 				setActiveTab={setActiveTab}
+			/>
+		);
+	}
+
+	if (showPlatformAdoption) {
+		return (
+			<PlatformAdoption
+				mailProps={mailProps}
+				isBotSession={isBotSession}
+				firestore={firestore}
+				viewType={viewType}
+				userId={userId}
+				setActiveTab={setActiveTab}
+				initialViewType={initialViewType}
 			/>
 		);
 	}

@@ -1,0 +1,16 @@
+.container {
+	display: flex;
+	align-items: center;
+	width: 60%;
+
+	:global {
+		.ui_select_container {
+			min-width: 130px;
+			max-width: 130px;
+		}
+
+		.ui_input_number_container {
+			width: 30% !important;
+		}
+	}
+}
