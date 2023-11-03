@@ -21,9 +21,7 @@ const useMonthlyRating = ({ props }) => {
 	const [page, setPage] = useState(GLOBAL_CONSTANTS.one);
 	const [search, setSearch] = useState('');
 	const [showUnrated, setShowUnrated] = useState(false);
-	const [filter_year, setFilterYear] = useState(null);
-	const [filter_month, setFilterMonth] = useState(null);
-
+	const [filters, setFilters] = useState({});
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/list_employee_ratings',
@@ -40,8 +38,8 @@ const useMonthlyRating = ({ props }) => {
 							? 'functional_manager' : props?.user_role,
 						page,
 						page_limit : 30,
-						month      : filter_month || months.indexOf(cycle_month) + 1,
-						year       : filter_year || cycle_year,
+						month      : filters?.month || months.indexOf(cycle_month) + 1,
+						year       : filters?.year || cycle_year,
 						filters    : {
 							q: search || undefined,
 						},
@@ -52,13 +50,17 @@ const useMonthlyRating = ({ props }) => {
 				console.log('error :: ', error);
 			}
 		},
-		[cycle_month, cycle_year, filter_month,
-			filter_year, page, props?.activeTab, props?.user_role, search, showUnrated, trigger],
+		[cycle_month, cycle_year, filters?.month, filters?.year,
+			page, props?.activeTab, props?.user_role, search, showUnrated, trigger],
 	);
 
 	useEffect(() => {
 		fetch();
 	}, [fetch, page, search, showUnrated]);
+
+	useEffect(() => {
+		setFilters({ year: cycle_year, month: months.indexOf(cycle_month) + 1 });
+	}, [cycle_month, cycle_year]);
 
 	return {
 		list,
@@ -73,10 +75,8 @@ const useMonthlyRating = ({ props }) => {
 		refetch: fetch,
 		cycle_month,
 		cycle_year,
-		filter_year,
-		setFilterMonth,
-		filter_month,
-		setFilterYear,
+		setFilters,
+		filters,
 	};
 };
 

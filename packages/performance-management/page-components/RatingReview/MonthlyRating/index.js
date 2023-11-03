@@ -1,7 +1,7 @@
 import { Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCStarfull } from '@cogoport/icons-react';
-import { upperCase } from '@cogoport/utils';
+import { isEmpty, upperCase } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import useGetListRatingYears from '../hooks/useGetListRatingYears';
@@ -25,10 +25,8 @@ function MonthlyRating({ props = {} }) {
 		setShowUnrated,
 		refetch,
 		cycle_month,
-		setFilterMonth,
-		filter_month,
-		filter_year,
-		setFilterYear,
+		setFilters,
+		filters,
 	} = useMonthlyRating({ props });
 
 	const { loading: year_loading, data:month_year_data } = useGetListRatingYears();
@@ -46,10 +44,18 @@ function MonthlyRating({ props = {} }) {
 		}
 	}, [month_year_data, year_loading]);
 
+	useEffect(() => {
+		if (filters?.year) {
+			setMonthsToShow(month_year_data?.find((item) => item.year === filters.year).month);
+		}
+	}, [filters.year, month_year_data]);
+
 	const handleSelectYear = (year) => {
-		setFilterYear(year);
+		// setFilterYear(year);
+		setFilters((prev) => ({ ...prev, year }));
 		setMonthsToShow(month_year_data?.find((item) => item.year === year).month);
 	};
+
 	const { team_rating = 0 } = paginationData || {};
 
 	return (
@@ -85,21 +91,25 @@ function MonthlyRating({ props = {} }) {
 							? (
 								<div style={{ display: 'flex' }}>
 									<Select
-										value={filter_year}
+										value={filters?.year}
 										onChange={(val) => { handleSelectYear(val); }}
 										placeholder="Year"
 										options={years_to_show}
 										size="md"
 										style={{ width: '120px', marginRight: '4px' }}
 									/>
-									<Select
-										value={filter_month}
-										onChange={(val) => { setFilterMonth(val); }}
-										placeholder="Month"
-										options={months_to_show}
-										size="md"
-										style={{ width: '120px' }}
-									/>
+									{!isEmpty(filters?.month) && !isEmpty(months_to_show) && filters?.month > 0 && (
+										<Select
+											value={filters?.month}
+											onChange={(val) => {
+												setFilters((prev) => ({ ...prev, month: val }));
+											}}
+											placeholder="Month"
+											options={months_to_show}
+											size="md"
+											style={{ width: '120px' }}
+										/>
+									)}
 								</div>
 							)
 
