@@ -8,13 +8,12 @@ import ServiceAndLineItems from './ServiceAndLineItems';
 import styles from './styles.module.css';
 import Total from './Total';
 
+const BILL_AND_INVOICE_TOTAL = ['billTotal', 'invoiceTotal'];
+
 function CostSheetData({
 	costViewData = {},
 	costViewDataLoading = false,
 }) {
-	const services = [{ service: 'fcl', cost: '1999' }, { service: 'lcl', cost: '222' },
-		{ service: 'ftl', cost: '789' }];
-
 	if (costViewDataLoading) {
 		return (
 			<div className={styles.loader_main}>
@@ -26,17 +25,22 @@ function CostSheetData({
 		return <EmptyStateDocs />;
 	}
 
+	const { billTotal = '', invoiceTotal = '' } = costViewData || {};
+
 	return (
 		<div>
 			<div className={styles.header} />
 			{Object.keys(costViewData)?.map((service) => (
-				<ServiceAndLineItems
-					service={service}
-					key={service}
-					serviceDetails={costViewData[service]}
-				/>
+				!BILL_AND_INVOICE_TOTAL.includes(service) ? (
+					<ServiceAndLineItems
+						service={service}
+						key={service}
+						serviceDetails={costViewData[service]}
+					/>
+				) : null
 			))}
-			<Total services={services} />
+
+			<Total billTotal={billTotal} invoiceTotal={invoiceTotal} />
 		</div>
 	);
 }

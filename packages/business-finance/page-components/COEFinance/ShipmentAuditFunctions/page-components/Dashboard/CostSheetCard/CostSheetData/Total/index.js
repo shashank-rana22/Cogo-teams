@@ -2,7 +2,10 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Total() {
+function Total({
+	billTotal = '',
+	invoiceTotal = '',
+}) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
@@ -10,8 +13,8 @@ function Total() {
 					Total
 				</span>
 			</div>
-			<div className={styles.sub_container}>Service-1 total</div>
-			<div className={styles.sub_container}>Service-2 total</div>
+			<div className={styles.sub_container}>{billTotal}</div>
+			<div className={styles.sub_container}>{invoiceTotal}</div>
 		</div>
 	);
 }

@@ -27,7 +27,6 @@ function CostSheetCard() {
 				</div>
 				<div className={styles.cost_sheet}>
 					<CostSheetData costViewData={costViewData} costViewDataLoading={costViewDataLoading} />
-					{' '}
 				</div>
 			</div>
 		</div>
