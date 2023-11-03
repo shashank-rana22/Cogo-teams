@@ -3,12 +3,28 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-const useCreateQuest = ({ setParams = () => {}, refetch = () => {} }) => {
+const getFormattedData = ({ data }) => {
+	if (isEmpty(data)) return {};
+	return {
+		...data,
+		date_range: {
+			startDate : new Date(data?.start_date) || null,
+			endDate   : new Date(data?.end_date) || null,
+		},
+	};
+};
+
+const useCreateQuest = ({ setParams = () => {}, data = {} }) => {
 	const router = useRouter();
 
-	const { control, handleSubmit, watch, reset, formState: { errors = {} } } = useForm();
+	const { control, handleSubmit, watch, reset, formState: { errors = {} } } = useForm({
+		defaultValues: {
+			...getFormattedData({ data }),
+		},
+	});
 
 	const [{ loading }, trigger] = useAllocationRequest(
 		{
@@ -16,13 +32,14 @@ const useCreateQuest = ({ setParams = () => {}, refetch = () => {} }) => {
 			method  : 'POST',
 			authkey : 'post_agent_scoring_quest',
 		},
+		{ manual: true },
 	);
 
 	const handleClick = async (formValues) => {
 		try {
 			const { name, date_range, agent_scoring_config_id, quest_string } = formValues;
 
-			const { data } = await trigger({
+			const { data: res } = await trigger({
 				data: {
 					name,
 					agent_scoring_config_id,
@@ -34,7 +51,7 @@ const useCreateQuest = ({ setParams = () => {}, refetch = () => {} }) => {
 
 			Toast.success('Saved successfully!');
 
-			router.push(`/performance-and-incentives/plans?tab=quest_plans&mode=create&id=${data?.id}`);
+			router.push(`/performance-and-incentives/plans?tab=quest_plans&mode=create&id=${res?.id}`);
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
@@ -59,9 +76,8 @@ const useCreateQuest = ({ setParams = () => {}, refetch = () => {} }) => {
 					},
 				}
 			));
-			refetch();
 		}
-	}, [date_range, agent_scoring_config_id, setParams, refetch]);
+	}, [date_range, agent_scoring_config_id, setParams]);
 
 	return {
 		loading,

@@ -6,7 +6,7 @@ import controls from './get-quest-controls';
 import useCreateQuest from './hooks/useCreateQuest';
 import styles from './styles.module.css';
 
-function QuestForm({ setParams = () => {}, refetch = () => {} }) {
+function QuestForm({ setParams = () => {}, data = {} }) {
 	const {
 		loading,
 		control,
@@ -14,7 +14,7 @@ function QuestForm({ setParams = () => {}, refetch = () => {} }) {
 		reset,
 		handleClick,
 		handleSubmit,
-	} = useCreateQuest({ setParams, refetch });
+	} = useCreateQuest({ setParams, data });
 
 	return (
 		<form onSubmit={handleSubmit(handleClick)}>
