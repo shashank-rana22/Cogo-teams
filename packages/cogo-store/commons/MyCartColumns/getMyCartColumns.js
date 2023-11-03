@@ -107,20 +107,7 @@ const getMyCartColumns = ({
 						)}
 						style={{ width: '90px' }}
 						value={item.quantity}
-						onChange={async (val) => {
-							if (val <= 5) {
-								const payload = [
-									{
-										product_variation_id : item.id,
-										quantity             : val,
-									},
-								];
-								await updateCart({ payload });
-								refetchCartDetails();
-							} else {
-								Toast.error('Quantity limit exceeded');
-							}
-						}}
+						disabled
 						placeholder="1"
 					/>
 				</div>
