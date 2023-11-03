@@ -11,18 +11,3 @@
 	font-weight: 500;
 	color: #4f4f4f;
 }
-
-.detailed_price {
-	display: flex;
-	flex-direction: column;
-}
-
-.faded {
-	font-weight: 500;
-	color: #828282;
-}
-
-.regular {
-	font-weight: 500;
-	color: #333;
-}

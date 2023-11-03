@@ -1,8 +1,10 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function Total({
+	currency = '',
 	billTotal = '',
 	invoiceTotal = '',
 }) {
@@ -13,8 +15,26 @@ function Total({
 					Total
 				</span>
 			</div>
-			<div className={styles.sub_container}>{billTotal}</div>
-			<div className={styles.sub_container}>{invoiceTotal}</div>
+			<div className={styles.sub_container}>
+				{ formatAmount({
+					amount   : billTotal,
+					currency : currency || 'INR',
+					options  : {
+						currencyDisplay : 'code',
+						style           : 'currency',
+					},
+				})}
+			</div>
+			<div className={styles.sub_container}>
+				{ formatAmount({
+					amount   : invoiceTotal,
+					currency : currency || 'INR',
+					options  : {
+						currencyDisplay : 'code',
+						style           : 'currency',
+					},
+				})}
+			</div>
 		</div>
 	);
 }
