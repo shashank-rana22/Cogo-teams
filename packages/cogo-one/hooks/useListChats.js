@@ -36,6 +36,7 @@ function useListChats({
 	activeFolder = '',
 	sidFilters = '',
 	mailsToBeShown = [],
+	throttledGetCount = () => {},
 }) {
 	const snapshotListener = useRef(null);
 	const pinSnapshotListener = useRef(null);
@@ -119,11 +120,12 @@ function useListChats({
 				);
 				updateDoc(messageDoc, { new_message_count: 0, has_admin_unread_messages: false });
 				setActiveTab((prev) => ({ ...prev, hasNoFireBaseRoom: false, data: val }));
+				throttledGetCount();
 			} catch (e) {
 				Toast.error('Chat Not Found');
 			}
 		}
-	}, [firestore, setActiveTab]);
+	}, [firestore, setActiveTab, throttledGetCount]);
 
 	const updateLoadingState = useCallback((key) => {
 		setLoadingState((prev) => {
