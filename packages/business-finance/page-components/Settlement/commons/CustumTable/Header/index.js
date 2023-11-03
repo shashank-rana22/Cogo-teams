@@ -1,11 +1,35 @@
+import { Checkbox } from '@cogoport/components';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header({ setFilters, filters }) {
+function Header({ setFilters = () => {}, filters = {}, selectedJV = [], setSelectedJV = () => {}, list = [] }) {
+	const allChecked = list?.length === selectedJV.length;
+
+	const checkAllJV = () => {
+		if (allChecked) {
+			setSelectedJV([]);
+		} else {
+			list?.forEach((item) => {
+				if (!selectedJV.includes(item?.jvNum)) {
+					setSelectedJV((pv) => [
+						...pv,
+						item.jvNum,
+					]);
+				}
+			});
+		}
+	};
+
 	return (
 		<div className={styles.header}>
+			<div className={styles.checkbox}>
+				<Checkbox
+					checked={allChecked}
+					onChange={checkAllJV}
+				/>
+			</div>
 			<div className={styles.jvnumb}>JV Number</div>
 			<div className={styles.jvtype}>JV Type</div>
 			<div className={styles.accdate}>
