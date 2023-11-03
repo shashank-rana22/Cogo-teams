@@ -1,8 +1,8 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 
 import MODE_KEYS_MAPPING from '../configurations/active-mode-key-mapping';
+import useGetQuestList from '../hooks/useGetQuestList';
 import List from '../ListQuests/List';
-import useGetQuestList from '../ListQuests/useGetQuestList';
 
 import QuestForm from './QuestForm';
 import styles from './styles.module.css';

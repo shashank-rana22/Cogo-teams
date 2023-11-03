@@ -1,6 +1,8 @@
+import useGetQuestList from '../hooks/useGetQuestList';
+
 import Header from './Header';
 import List from './List';
-import useGetQuestList from './useGetQuestList';
+// import useGetQuestList from './useGetQuestList';
 
 function ListQuests({ setMode = () => {} }) {
 	const { loading, list, paginationData, getNextPage, params, setParams } = useGetQuestList({ manual: false });

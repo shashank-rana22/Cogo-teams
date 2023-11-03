@@ -1,7 +1,7 @@
 import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useGetOverlappedQuests = () => {
+const useGetQuestList = ({ manual = true }) => {
 	const [params, setParams] = useState({
 		page                      : 1,
 		page_limit                : 10,
@@ -11,14 +11,14 @@ const useGetOverlappedQuests = () => {
 		sort_type                 : 'desc',
 	});
 
-	const [{ loading, data }] = useAllocationRequest(
+	const [{ loading, data }, refetch] = useAllocationRequest(
 		{
 			url     : '/quests',
 			method  : 'GET',
 			authkey : 'get_agent_scoring_quests',
 			params,
 		},
-		{ manual: false },
+		{ manual },
 	);
 
 	const getNextPage = (nextPage) => {
@@ -37,7 +37,8 @@ const useGetOverlappedQuests = () => {
 		params,
 		setParams,
 		getNextPage,
+		refetch,
 	};
 };
 
-export default useGetOverlappedQuests;
+export default useGetQuestList;
