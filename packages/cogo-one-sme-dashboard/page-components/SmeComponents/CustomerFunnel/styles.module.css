@@ -1,17 +1,7 @@
-.container {
-	width: 100%;
-	padding: 10px 0;
-}
-
-.header {
-	padding-bottom: 10px;
-	font-size: 22px;
-	color: #212121;
-}
-
 .graph_container {
 	position: relative;
 	padding: 20px;
+	margin-bottom: 10px;
 	border-radius: 6px;
 	box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
 

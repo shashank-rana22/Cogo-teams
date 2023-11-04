@@ -57,32 +57,32 @@ function CustomerFunnel() {
 	}, [data]);
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.header}>
-				Customer Funnel
-			</div>
-
-			<div
-				className={styles.graph_container}
-				ref={funnelGraphContainer}
-			>
-				<div className="funnel_graph" />
-				<div className={styles.graph_labels}>
-					{data.labels.map(
-						(itm, index) => (
-							<div
-								key={itm}
-								className={styles.graph_labels_item}
-							>
-								<div>{itm}</div>
-								<div className={styles.graph_values}>
-									{getFormattedAmount({ number: data.values[index][1] })}
-									<Growth showGrowth={!!(Math.floor(Math.random() * 10) % 2)} />
-								</div>
+		<div
+			className={styles.graph_container}
+			ref={funnelGraphContainer}
+		>
+			<div className="funnel_graph" />
+			<div className={styles.graph_labels}>
+				{data.labels.map(
+					(itm, index) => (
+						<div
+							key={itm}
+							className={styles.graph_labels_item}
+						>
+							<div>
+								{itm}
 							</div>
-						),
-					)}
-				</div>
+							<div className={styles.graph_values}>
+								{getFormattedAmount({
+									number: data.values[index][1],
+								})}
+								<Growth
+									showGrowth={!!(Math.floor(Math.random() * 10) % 2)}
+								/>
+							</div>
+						</div>
+					),
+				)}
 			</div>
 		</div>
 	);

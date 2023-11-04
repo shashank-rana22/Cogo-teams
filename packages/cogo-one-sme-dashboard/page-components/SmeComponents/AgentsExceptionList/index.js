@@ -15,46 +15,40 @@ function AgentsExceptionList() {
 	const tableColumns = getTableColumns() || [];
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.header}>
-				Agents Exception List
+		<div className={styles.table_body}>
+			<div className={styles.header_bar}>
+				{TABLE_TYPES?.map(
+					(itm) => (
+						<div
+							key={itm}
+							role="presentation"
+							onClick={() => setTableType(itm)}
+							className={cl`${styles.table_header} 
+                                    ${tableType === itm ? styles.selected_header : ''}`}
+						>
+							<div className={styles.table_count}>
+								{(Math.random() * 100)?.toFixed(0)}
+							</div>
+							{`Not a Single ${startCase(itm)}`}
+						</div>
+					),
+				)}
 			</div>
 
-			<div className={styles.table_body}>
-				<div className={styles.header_bar}>
-					{TABLE_TYPES?.map(
-						(itm) => (
-							<div
-								key={itm}
-								role="presentation"
-								onClick={() => setTableType(itm)}
-								className={cl`${styles.table_header} 
-                                    ${tableType === itm ? styles.selected_header : ''}`}
-							>
-								<div className={styles.table_count}>
-									{(Math.random() * 100)?.toFixed(0)}
-								</div>
-								{`Not a Single ${startCase(itm)}`}
-							</div>
-						),
-					)}
-				</div>
+			<Table
+				columns={tableColumns}
+				data={getDummyData()}
+				layoutType="table"
+			/>
 
-				<Table
-					columns={tableColumns}
-					data={getDummyData()}
-					layoutType="table"
+			<div className={styles.footer_bar}>
+				<Pagination
+					type="table"
+					currentPage={page}
+					totalItems={100}
+					pageSize={5}
+					onPageChange={(val) => setPage(val)}
 				/>
-
-				<div className={styles.footer_bar}>
-					<Pagination
-						type="table"
-						currentPage={page}
-						totalItems={100}
-						pageSize={5}
-						onPageChange={(val) => setPage(val)}
-					/>
-				</div>
 			</div>
 		</div>
 	);

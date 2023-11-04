@@ -1,42 +1,44 @@
 import React from 'react';
 
-import AgentsExceptionList from './AgentsExceptionList';
-import AgentsPerformanceView from './AgentsPerformanceView';
-import Analytics from './Analytics';
-import CampaignsData from './CampaignsData';
-import ChannelStats from './ChannelStats';
-import CustomerFunnel from './CustomerFunnel';
-import PerAgentData from './PerAgentData';
-import RevenueContainer from './RevenueContainer';
-import styles from './styles.module.css';
-import TransactionsFunnel from './TransactionsFunnel';
-import UserData from './UserData';
+import IntersectionLoader from '../../common/IntersectionLoader';
 
-const CHANNELS = ['email', 'whatsapp', 'calls'];
+import getComponentMapping from './getComponentMapping';
+import styles from './styles.module.css';
 
 function SmeComponents() {
+	const componentMapping = getComponentMapping();
+
 	return (
 		<div className={styles.container}>
-			<RevenueContainer />
-			<PerAgentData />
-			<Analytics />
-			<UserData />
+			{componentMapping?.map(
+				(componentItem) => {
+					const {
+						key = '',
+						Comp = null,
+						initialLoad = false,
+						headerText = '',
+						hiderAfterLoaded = false,
+					} = componentItem || {};
 
-			<CustomerFunnel />
+					if (!Comp) {
+						return null;
+					}
 
-			<TransactionsFunnel />
+					if (initialLoad) {
+						return <Comp key={key} />;
+					}
 
-			{CHANNELS.map((itm) => (
-				<ChannelStats
-					channelType={itm}
-					key={itm}
-				/>
-			))}
-
-			<CampaignsData />
-
-			<AgentsExceptionList />
-			<AgentsPerformanceView />
+					return (
+						<IntersectionLoader
+							key={key}
+							headerText={headerText}
+							hiderAfterLoaded={hiderAfterLoaded}
+						>
+							<Comp />
+						</IntersectionLoader>
+					);
+				},
+			)}
 		</div>
 	);
 }
