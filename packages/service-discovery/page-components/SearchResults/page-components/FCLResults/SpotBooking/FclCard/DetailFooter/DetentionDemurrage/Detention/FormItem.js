@@ -2,7 +2,7 @@ import { InputController } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 
 import getErrorMessage from '../../../../../../../../../configs/getErrorMessage';
-import validate from '../../../MainCard/validateNumber';
+import validate from '../../../../utils/validateNumber';
 
 import styles from './styles.module.css';
 

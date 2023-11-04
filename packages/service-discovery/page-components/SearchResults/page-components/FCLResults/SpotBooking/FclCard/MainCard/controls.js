@@ -1,6 +1,6 @@
 import { addDays } from '@cogoport/utils';
 
-import validate from './validateNumber';
+import validate from '../../utils/validateNumber';
 
 export const fclControls = ({ shippingLineOptions = [] }) => {
 	const controls = [
