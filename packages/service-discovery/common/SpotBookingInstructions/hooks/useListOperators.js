@@ -1,9 +1,6 @@
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 
-const geo = getGeoConstants();
-
-const useListOperators = () => {
+const useListOperators = ({ shipping_line_ids }) => {
 	const [{ loading, data }] = useRequest({
 		url    : '/list_operators',
 		method : 'get',
@@ -11,7 +8,7 @@ const useListOperators = () => {
 			filters: {
 				operator_type : 'shipping_line',
 				status        : 'active',
-				id            : geo.uuid.spot_booking_shipping_lines || [],
+				id            : shipping_line_ids,
 			},
 		},
 	}, { manual: false });

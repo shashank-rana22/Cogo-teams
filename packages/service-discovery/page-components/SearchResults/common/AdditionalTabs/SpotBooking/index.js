@@ -1,5 +1,4 @@
 import { Button, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
@@ -7,9 +6,9 @@ import styles from './styles.module.css';
 const SPOT_BOOKING_SERVICES = ['fcl_freight'];
 
 function SpotBooking({ detail = {}, setScreen = () => {} }) {
-	const { service_type = '', spot_line_config = [] } = detail;
+	const { service_type = '', spot_line_config = {} } = detail;
 
-	const { is_spot_line_booking_available = false	} = spot_line_config[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const { is_spot_line_booking_available = false	} = spot_line_config || {};
 
 	if (!SPOT_BOOKING_SERVICES.includes(service_type) || !is_spot_line_booking_available) {
 		return null;

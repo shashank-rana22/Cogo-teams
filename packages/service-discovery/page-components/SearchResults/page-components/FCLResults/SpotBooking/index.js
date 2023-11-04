@@ -15,7 +15,9 @@ const MAPPING = {
 };
 
 function SpotBooking({ detail = {}, setScreen = () => {} }) {
-	const { service_type = '' } = detail;
+	const { service_type = '', spot_line_config = {} } = detail;
+
+	const { shipping_line_ids = [] } = spot_line_config;
 
 	const [detentionValues, setDetentionValues] = useState({
 		origin_detention      : 4,
@@ -25,7 +27,7 @@ function SpotBooking({ detail = {}, setScreen = () => {} }) {
 	});
 	const [finalLoading, setFinalLoading] = useState(false);
 
-	const { shippingLines = [], loading } = useListOperators();
+	const { shippingLines = [], loading } = useListOperators({ shipping_line_ids });
 
 	const { handleSubmit = () => {}, watch = () => {}, ...formProps } = useForm();
 

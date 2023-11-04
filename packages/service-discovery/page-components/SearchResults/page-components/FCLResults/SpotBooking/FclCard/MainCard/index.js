@@ -68,8 +68,6 @@ function MainCard({ shippingLines = [], detail = {}, formProps = {} }) {
 					{restControls.map((currControls) => {
 						const ActiveElement = getElementController(currControls.type);
 
-						console.log('currControls', currControls);
-
 						return (
 							<div
 								key={currControls.name}
