@@ -8,7 +8,7 @@ const useUpdateCart = (refetch) => {
 		url    : '/update_cart',
 	}, { manual: true });
 
-	const updateCart = async ({ payload }) => {
+	const updateCart = async ({ payload, showToast = false }) => {
 		try {
 			await trigger({
 				data: {
@@ -16,7 +16,9 @@ const useUpdateCart = (refetch) => {
 				},
 			});
 			refetch();
-			Toast.success('Successfully added to cart!');
+			if (showToast) {
+				Toast.success('Successfully added to cart!');
+			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
