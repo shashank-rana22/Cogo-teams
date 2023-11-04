@@ -4,7 +4,7 @@ import CustomSelectOption from '../../../../common/CustomSelectOption';
 
 export const defaultValues = {
 	airline_id   : [],
-	source       : null,
+	rate_type    : null,
 	payment_term : null,
 };
 
@@ -40,11 +40,11 @@ export const getAirControls = ({ airlines = [], airlineParams = {}, setAirlinePa
 			],
 		},
 		{
-			name     : 'source',
+			name     : 'rate_type',
 			label    : 'Rate Type',
 			controls : [
 				{
-					name    : 'source',
+					name    : 'rate_type',
 					type    : 'chips',
 					options : [
 						{
@@ -53,11 +53,11 @@ export const getAirControls = ({ airlines = [], airlineParams = {}, setAirlinePa
 						},
 						{
 							label : 'Cogo Assured',
-							value : 'cogo_assured_rate',
+							value : 'cogo_assured',
 						},
 						{
-							label : 'System Rate',
-							value : 'system_rate',
+							label : 'Market Place',
+							value : 'market_place',
 						},
 						{
 							label : 'Promotional',

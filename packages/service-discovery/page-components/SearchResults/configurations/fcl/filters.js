@@ -3,7 +3,7 @@ import CustomSelectOption from '../../../../common/CustomSelectOption';
 export const getDefaultValues = () => ({
 	shipping_line_id : [],
 	operator_type    : null,
-	source           : null,
+	rate_type        : null,
 	payment_term     : null,
 	schedule_type    : '',
 	// transit_time     : [transitTime?.min, transitTime?.max],
@@ -34,11 +34,11 @@ export const getFclControls = ({ id = '' }) => {
 			],
 		},
 		{
-			name     : 'source',
+			name     : 'rate_type',
 			label    : 'Rate Type',
 			controls : [
 				{
-					name    : 'source',
+					name    : 'rate_type',
 					type    : 'chips',
 					options : [
 						{
@@ -47,11 +47,11 @@ export const getFclControls = ({ id = '' }) => {
 						},
 						{
 							label : 'Cogo Assured',
-							value : 'cogo_assured_rate',
+							value : 'cogo_assured',
 						},
 						{
-							label : 'System Rate',
-							value : 'system_rate',
+							label : 'Market Place',
+							value : 'market_place',
 						},
 						{
 							label : 'Promotional',

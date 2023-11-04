@@ -28,14 +28,6 @@ const getLabel = (key, value) => {
 		return `Transit Time - ${value?.[GLOBAL_CONSTANTS.zeroth_index]} to ${value?.[GLOBAL_CONSTANTS.one]} days`;
 	}
 
-	if (key === 'source') {
-		if (value?.includes('predicted')) {
-			const updatedValues = value?.filter((val) => val !== 'predicted');
-			return startCase(updatedValues);
-		}
-		return startCase(value);
-	}
-
 	if (key === 'schedule_type') {
 		return SCHEDULE_TYPE_MAPPING[value];
 	}

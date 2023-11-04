@@ -1,15 +1,15 @@
 export const DEFAULT_VALUES = {
-	source: null,
+	rate_type: null,
 };
 
 export const getFtlControls = () => {
 	const controls = [
 		{
-			name     : 'source',
-			label    : 'Rate type',
+			name     : 'rate_type',
+			label    : 'Rate Type',
 			controls : [
 				{
-					name    : 'source',
+					name    : 'rate_type',
 					type    : 'chips',
 					options : [
 						{
@@ -17,12 +17,8 @@ export const getFtlControls = () => {
 							value : null,
 						},
 						{
-							label : 'Cogo Assured',
-							value : 'cogo_assured_rate',
-						},
-						{
-							label : 'System Rate',
-							value : 'system_rate',
+							label : 'Market Place',
+							value : 'market_place',
 						},
 						{
 							label : 'Promotional',
@@ -31,10 +27,6 @@ export const getFtlControls = () => {
 						{
 							label : 'Spot Booking',
 							value : 'spot_booking',
-						},
-						{
-							label : 'Contract',
-							value : 'contract',
 						},
 					],
 				},

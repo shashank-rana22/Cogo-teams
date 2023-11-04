@@ -36,13 +36,6 @@ function Value({ name = '', value = {}, defaultValues = {}, onReset = () => {} }
 		formattedValue = `${value.length} Selected`;
 	}
 
-	if (name === 'source') {
-		if (value?.includes('predicted')) {
-			const updatedValues = value?.filter((val) => val !== 'predicted');
-			formattedValue = startCase(updatedValues);
-		} else { formattedValue = startCase(value); }
-	}
-
 	return (
 		<span className={styles.filter_value_pill}>
 			{formattedValue}

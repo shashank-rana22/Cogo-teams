@@ -40,11 +40,6 @@ function FilterModal({
 	const defaultValues = {
 		...controlsDefaultValues,
 		...filters,
-		...(!isEmpty(filters?.source) ? {
-			source: Array.isArray(filters.source) && filters?.source?.some(
-				(value) => ['spot_rates', 'predicted'].includes(value),
-			) ? 'system_rate' : filters.source,
-		} : {}),
 	};
 
 	const {
@@ -60,14 +55,7 @@ function FilterModal({
 			return;
 		}
 
-		const { source = '' } = values || {};
-
-		const finalValues = {
-			...values,
-			source: source === 'system_rate' ? ['spot_rates', 'predicted'] : source || controlsDefaultValues.source,
-		};
-
-		setFilters(removeDefaultValues(controlsDefaultValues, { ...filters, ...finalValues }) || {});
+		setFilters(removeDefaultValues(controlsDefaultValues, { ...filters, ...values }) || {});
 		setScheduleLoading(true);
 		setShow(false);
 	};
