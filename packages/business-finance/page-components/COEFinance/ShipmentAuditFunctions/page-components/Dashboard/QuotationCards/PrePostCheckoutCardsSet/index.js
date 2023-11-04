@@ -45,7 +45,7 @@ function PrePostCheckoutCardsSet({
 				getPrePostShipmentQuotes={getPrePostShipmentQuotes}
 				data={quoteData?.SELL}
 				loading={quoteLoading}
-				type="SELL Quotation"
+				type="Sell Quotation"
 				accordionState={accordionState}
 				toggleAccordion={toggleAccordion}
 				setAccordionState={setAccordionState}
@@ -55,7 +55,7 @@ function PrePostCheckoutCardsSet({
 			<PrePostCheckoutCards
 				data={quoteData?.BUY}
 				loading={quoteLoading}
-				type="BUY Quotation"
+				type="Buy Quotation"
 				accordionState={accordionState}
 				toggleAccordion={toggleAccordion}
 				setAccordionState={setAccordionState}

@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const getOrderColumns = ({ currency_code = '' }) => ([
+const getOrderColumns = ({ currency_symbol = '' }) => ([
 	{
 		Header   : 'PRODUCTS',
 		accessor : (item = {}) => (
@@ -24,7 +24,8 @@ const getOrderColumns = ({ currency_code = '' }) => ([
 		accessor : (item = {}) => (
 			<div className={styles.dot_list}>
 				<div className={styles.amt_black}>
-					{currency_code}
+					{currency_symbol}
+					{' '}
 					{item.final_price}
 				</div>
 			</div>
@@ -45,7 +46,8 @@ const getOrderColumns = ({ currency_code = '' }) => ([
 		accessor : (item = {}) => (
 			<div className={styles.dot_list}>
 				<div className={styles.amt_black}>
-					{currency_code}
+					{currency_symbol}
+					{' '}
 					{item.order_subtotal}
 				</div>
 			</div>

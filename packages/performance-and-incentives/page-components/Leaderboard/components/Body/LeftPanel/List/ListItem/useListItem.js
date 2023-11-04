@@ -33,7 +33,7 @@ const getIsAllowed = ({ levelStack, currLevel, viewType, user, listItem }) => {
 			return true;
 		case OWNER:
 			if (isEmpty(levelStack)) {
-				return user.id === listItem.user?.id;
+				return user.id === listItem?.user?.id;
 			}
 			if (currLevel.isExpanded) {
 				return levelStack.length !== 1;
@@ -41,7 +41,7 @@ const getIsAllowed = ({ levelStack, currLevel, viewType, user, listItem }) => {
 			return true;
 		case MANAGER:
 			if (isEmpty(levelStack)) {
-				return user.id === listItem.user?.id;
+				return user.id === listItem?.user?.id;
 			}
 			if (currLevel.isExpanded) {
 				return levelStack.length !== 1;
