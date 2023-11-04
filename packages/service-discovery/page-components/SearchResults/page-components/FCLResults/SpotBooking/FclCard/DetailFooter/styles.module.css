@@ -43,25 +43,3 @@
 	display: flex;
 	align-items: center;
 }
-
-.cogo_points {
-	display: flex;
-	align-items: center;
-	margin-right: 12px;
-}
-
-.cogo_points_logo {
-	margin: 0 4px;
-}
-
-.info_icon {
-	width: 16px;
-	height: 16px;
-	margin-top: 4px;
-	margin-left: 8px;
-	color: #ee3425;
-}
-
-.tooltip_content {
-	word-break: keep-all;
-}

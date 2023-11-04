@@ -84,12 +84,7 @@ function FCLResults({
 			setRouterLoading,
 		},
 		spot_booking: {
-			headerProps,
-			setHeaderProps,
-			screen,
 			setScreen,
-			cogoAssuredRates,
-			setRouterLoading,
 			detail,
 		},
 	};

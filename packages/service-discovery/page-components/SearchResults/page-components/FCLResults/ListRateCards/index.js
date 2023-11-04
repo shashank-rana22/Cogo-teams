@@ -109,6 +109,7 @@ function ListRateCards({
 				setOpenAccordian={setOpenAccordian}
 				openAccordian={openAccordian}
 				setScreen={setScreen}
+				rates={rates}
 			/>
 		);
 	}

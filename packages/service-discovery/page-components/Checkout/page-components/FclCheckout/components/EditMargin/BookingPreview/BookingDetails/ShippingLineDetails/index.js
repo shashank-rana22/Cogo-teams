@@ -19,9 +19,7 @@ function ShippingLineDetails({ shipping_line = {}, source = '' }) {
 				/>
 			) : null}
 
-			{ source !== 'cogo_assured_rate' ? (
-				<div className={styles.name}>{short_name}</div>
-			) : null}
+			<div className={styles.name}>{short_name}</div>
 		</div>
 	);
 }

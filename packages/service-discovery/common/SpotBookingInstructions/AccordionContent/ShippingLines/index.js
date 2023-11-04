@@ -16,6 +16,7 @@ function ShippingLines({ shippingLines = [], loading = false }) {
 			</div>
 		);
 	}
+
 	return (
 		<div className={styles.container}>
 			{(shippingLines || []).map((ship) => (

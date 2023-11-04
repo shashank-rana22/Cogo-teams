@@ -5,12 +5,9 @@ import shippingLineLinks from './shipping-line-links';
 import styles from './styles.module.css';
 
 function LinkUI({ ship = {} }) {
-	let url = '';
-	(shippingLineLinks || []).forEach((line) => {
-		if (line?.shipping_line_name === ship?.short_name) {
-			url = line?.url;
-		}
-	});
+	const { short_name = '', logo_url = '' } = ship;
+
+	const { url = '' } = shippingLineLinks.find(({ shipping_line_name }) => short_name === shipping_line_name) || {};
 
 	return (
 		<a
@@ -21,13 +18,13 @@ function LinkUI({ ship = {} }) {
 		>
 			<div className={styles.detail_container}>
 				<img
-					src={ship?.logo_url}
-					alt={ship?.short_name}
-					height="35px"
-					width="35px"
+					src={logo_url}
+					alt={short_name}
+					height="40px"
+					width="40px"
 				/>
 				<div className={styles.custom_link}>
-					{ship?.short_name}
+					{short_name}
 				</div>
 
 				<div className={styles.icon_container}>

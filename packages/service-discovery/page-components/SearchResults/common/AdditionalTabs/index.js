@@ -3,7 +3,7 @@ import RequestRate from '../EmptyState/RequestRate';
 import SpotBooking from './SpotBooking';
 import styles from './styles.module.css';
 
-function AdditionalTabs({ detail = {}, rates = {}, loading = false, setScreen = () => {} }) {
+function AdditionalTabs({ detail = {}, rates = [], loading = false, setScreen = () => {} }) {
 	if (loading) {
 		return null;
 	}

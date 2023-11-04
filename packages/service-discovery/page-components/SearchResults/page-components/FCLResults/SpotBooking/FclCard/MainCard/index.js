@@ -92,8 +92,7 @@ function MainCard({ shippingLines = [], detail = {}, formProps = {} }) {
 					{primaryServicesControls.map(
 						({ serviceDetails = {}, ...formControls }) => {
 							const containerDetail = getDetails({
-								primary_service : service_type,
-								item            : serviceDetails,
+								item: serviceDetails,
 							});
 
 							const ActiveElement = getElementController(formControls?.type);

@@ -15,6 +15,7 @@ function EmptyState({
 	showFilterModal = false,
 	setShowFilterModal = () => {},
 	setScreen = () => {},
+	rates = [],
 }) {
 	return (
 		<div className={styles.container}>
@@ -30,7 +31,7 @@ function EmptyState({
 			/>
 
 			<div className={styles.request_rate_container}>
-				<AdditionalTabs detail={details} setScreen={setScreen} />
+				<AdditionalTabs detail={details} setScreen={setScreen} rates={rates} />
 			</div>
 		</div>
 	);
