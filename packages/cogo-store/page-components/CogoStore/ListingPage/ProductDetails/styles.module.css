@@ -100,10 +100,28 @@
 	margin-right: 24px;
 }
 
+.product_filter_item_1 {
+	box-sizing: border-box;
+	flex-basis: calc(50% - 10px);
+	margin-right: 24px;
+}
+
 .product_filter_item span {
 	margin-bottom: 16px;
 	font-size: 14px;
 	color: #828282;
+}
+
+.product_filter_item_1 span {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	color: #828282;
+}
+
+.size {
+	color: #fc0101 !important;
+	cursor: pointer;
 }
 
 .price_section {
@@ -301,4 +319,9 @@
 	.product_standard {
 		flex-direction: column;
 	}
+}
+
+.chart_img {
+	width: 100%;
+	margin-bottom: 16px;
 }

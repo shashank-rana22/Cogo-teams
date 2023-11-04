@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import useListBfPurchaseBills from '../../../../hook/useListBfPurchaseBills';
 import useListBfSalesInvoices from '../../../../hook/useListBfSalesInvoices';
 import useListShipment from '../../../../hook/useListShipment';
+import CostSheetCard from '../CostSheetCard';
 import DetailsCard from '../DetailsCard';
 import DocumentsCard from '../DocumentsCard';
 import TicketsCard from '../TicketsCard/index';
@@ -78,6 +79,8 @@ function QuotationCards({
 				loadingShipment={loadingShipment}
 				tab={tab}
 			/>
+
+			<CostSheetCard />
 
 			<div className={styles.all_task_container}>
 				<PrePostCheckoutCardsSet
