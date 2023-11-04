@@ -19,7 +19,7 @@ function LineItemsSection({
 			acc.margins.push(item.margins);
 			acc.exchange_rates.push(item.exchange_rate);
 			acc.tax_price.push(item.tax_price);
-			acc.total_prices.push(item.total_price);
+			acc.total_prices.push(item.tax_total_price);
 			return acc;
 		},
 		{

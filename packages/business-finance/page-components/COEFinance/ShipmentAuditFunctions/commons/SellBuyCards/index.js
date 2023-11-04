@@ -34,7 +34,11 @@ function SellBuyCards({
 
 	data?.forEach((i) => {
 		profitabilityData = i.profitability;
-		grandTotal += (i.grand_total * i.exchange_rate);
+		if (i?.document_type === 'CREDIT_NOTE') {
+			grandTotal -= (i.grand_total * i.exchange_rate);
+		} else {
+			grandTotal += (i.grand_total * i.exchange_rate);
+		}
 	});
 
 	return (
