@@ -14,7 +14,7 @@ function CogoStore() {
 	const { data: productData } = useGetProductFilterDetail();
 	return (
 		<div className={styles.container}>
-			<Header productData={productData} />
+			<Header />
 			<Carousel
 				size="md"
 				slides={CarouselData}

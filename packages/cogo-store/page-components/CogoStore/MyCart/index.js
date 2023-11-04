@@ -21,7 +21,7 @@ function MyCart() {
 	const { push } = useRouter();
 	const coupon_applied = (getCookie('apply_coupon') === 'true');
 
-	const { data: productData, refetch } = useGetProductFilterDetail();
+	const { data: productData } = useGetProductFilterDetail();
 	const { currency_code, currency_symbol } = productData || {};
 	const { color, user_details } = productData || {};
 	const { office_location } = user_details || {};
@@ -29,7 +29,7 @@ function MyCart() {
 	const [show, setShow] = useState(false);
 	const [couponApplied, setCouponApplied] = useState(coupon_applied === true);
 
-	const { updateCart } = useUpdateCart(refetch);
+	const { updateCart } = useUpdateCart();
 	const { placeOrder, data: orderData } = usePlaceOrder(coupon_applied);
 
 	const { data, refetchCartDetails, loading } = useGetCartItems(coupon_applied);
@@ -67,7 +67,7 @@ function MyCart() {
 
 	return (
 		<>
-			<Header productData={productData} />
+			<Header />
 			<div className={styles.cart_page}>
 
 				<div className={styles.container}>
@@ -82,7 +82,7 @@ function MyCart() {
 					<div className={styles.cart_body}>
 						<div className={styles.shopping_card}>
 							<div className={styles.shopping_card_header}>
-								Shopping Cart
+								Shopping Card
 							</div>
 							<div className={styles.table_container}>
 								{!isEmpty(list) || loading ? (
@@ -97,7 +97,7 @@ function MyCart() {
 							<div className={styles.table_footer}>
 								<Button
 									themeType="secondary"
-									onClick={() => push('/cogo-merch')}
+									onClick={() => push('/cogo-store')}
 								>
 									<span className={styles.btn_txt}>
 										<IcMArrowLeft />

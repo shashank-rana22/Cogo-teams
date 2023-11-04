@@ -2,23 +2,20 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useUpdateCart = (refetch) => {
+const useUpdateCart = () => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/update_cart',
 	}, { manual: true });
 
-	const updateCart = async ({ payload, showToast = false }) => {
+	const updateCart = async ({ payload }) => {
 		try {
 			await trigger({
 				data: {
 					cart_items: payload,
 				},
 			});
-			refetch();
-			if (showToast) {
-				Toast.success('Successfully added to cart!');
-			}
+			Toast.success('Successfully added to cart!');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}

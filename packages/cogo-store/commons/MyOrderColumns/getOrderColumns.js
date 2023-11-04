@@ -8,25 +8,11 @@ const getOrderColumns = ({ currency_symbol = '' }) => ([
 		Header   : 'PRODUCTS',
 		accessor : (item = {}) => (
 			<div className={styles.products}>
-				<img
-					src={item?.product_images[GLOBAL_CONSTANTS.zeroth_index]}
-					alt=""
-					width="90px"
-					height="90px"
-				/>
+				<img src={item?.product_images[GLOBAL_CONSTANTS.zeroth_index]} alt="" width="90px" height="90px" />
 				<div className={styles.products_right}>
 					<div className={styles.black}>{item.product_name}</div>
 					<div className={styles.dot_list}>
-						<div>Color</div>
-						<div
-							className={styles.color_dot}
-							key={item.color_id}
-							style={{
-								backgroundColor : item?.color_id?.hexcode,
-								border          : '1px solid rgba(0,0,0,.2)',
-							}}
-						/>
-						<div>{item?.size}</div>
+						<span>{item.product_description}</span>
 					</div>
 				</div>
 			</div>

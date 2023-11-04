@@ -34,7 +34,7 @@
 
 .list_card:hover {
 	border-radius: 12px;
-	box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
+	box-shadow: 0 8px 12px rgb(0 0 0 / 20%);
 	transform: scale(1.02);
 }
 

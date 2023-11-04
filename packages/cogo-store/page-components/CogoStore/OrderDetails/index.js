@@ -36,12 +36,12 @@ function OrderDetails() {
 	const { data: getOrderData, getOrderDetails } = useGetOrderDetails({ id });
 	const {
 		order_items_list, order_ticket_id, delivery_date, total_amount,
-		order_status, currency_symbol, updated_at,
+		order_status, created_at,
 	} = getOrderData || {};
 
 	const { data: productData } = useGetProductFilterDetail();
 
-	const { is_hr_admin } = productData || {};
+	const { is_hr_admin, currency_symbol } = productData || {};
 
 	const { color } = productData || {};
 
@@ -55,14 +55,14 @@ function OrderDetails() {
 	};
 
 	const time = formatDate({
-		date       : updated_at,
+		date       : created_at,
 		dateFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
 		formatType : 'time',
 	});
 
-	const month = getMonth(new Date(updated_at));
-	const date = getDate(new Date(updated_at));
-	const year = getYear(new Date(updated_at));
+	const month = getMonth(new Date(created_at));
+	const date = getDate(new Date(created_at));
+	const year = getYear(new Date(created_at));
 
 	const { updateStatus } = useUpdateStatus({ getOrderDetails });
 
@@ -96,12 +96,12 @@ function OrderDetails() {
 
 	return (
 		<>
-			<Header productData={productData} />
+			<Header />
 			<div className={styles.order_detail_outer}>
 
 				<div className={styles.order_detail_container}>
 					<div className={styles.order_detail_header}>
-						<IcMArrowBack style={{ cursor: 'pointer' }} onClick={() => push('/cogo-merch')} />
+						<IcMArrowBack style={{ cursor: 'pointer' }} onClick={() => push('/cogo-store')} />
 						<span>Order Details</span>
 					</div>
 					<div className={styles.order_detail_info}>
@@ -153,7 +153,7 @@ function OrderDetails() {
 								) : (<span className={styles.order_expected_date}>in 7 Days</span>)}
 							</div>
 							<div className={styles.order_expected_right}>
-								{(!['cancelled', 'delivered'].includes(order_status)) ? (
+								{order_status !== 'cancelled' ? (
 									<Button
 										size="md"
 										themeType="secondary"
