@@ -2,9 +2,10 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Image } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
+import { startCase, isEmpty } from '@cogoport/utils';
 
 import INSURANCE_PROVIDER from '../../../constants/insuranceProvider';
+import useRate from '../../../hooks/useRate';
 
 import styles from './styles.module.css';
 
@@ -17,13 +18,17 @@ const getFormatedAmount = ({ currency = '', value }) => formatAmount({
 	},
 });
 
-function RateCard({ rateResponse = [] }) {
+function RateCard({ rateResponse = [], cargoDetails = {}, formHook = {} }) {
+	const { loading, data } = useRate({ cargoDetails, formHook });
+
+	const rate = !isEmpty(data) ? data : rateResponse;
+
 	const {
 		netCharges = '',
 		chargeCurrency = '',
 		serviceProvider = '',
 		serviceChargeList = [],
-	} = rateResponse?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+	} = rate?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	return (
 		<div className={styles.section}>
@@ -51,18 +56,33 @@ function RateCard({ rateResponse = [] }) {
 					</div>
 				</div>
 
-				{serviceChargeList.map((item) => (
-					<div key={item?.productCodeId} className={styles.line_item_flex}>
-						<span>{startCase(item?.displayName)}</span>
+				<div className={styles.line_item}>
+					{loading
+						? (
+							<div className={styles.loader}>
+								<p>Fetching Rates</p>
+								<Image
+									width={60}
+									height={30}
+									alt="loading"
+									src={GLOBAL_CONSTANTS.image_url.loading}
+								/>
+							</div>
+						)
+						: serviceChargeList.map((item) => (
+							<div key={item?.productCodeId} className={styles.line_item_flex}>
+								<span>{startCase(item?.displayName)}</span>
 
-						<span>
-							{getFormatedAmount({
-								currency : chargeCurrency,
-								value    : item?.netCharges,
-							})}
-						</span>
-					</div>
-				))}
+								<span>
+									{getFormatedAmount({
+										currency : chargeCurrency,
+										value    : item?.netCharges,
+									})}
+								</span>
+							</div>
+						))}
+				</div>
+
 			</div>
 		</div>
 	);

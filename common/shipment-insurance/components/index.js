@@ -79,7 +79,7 @@ function CargoInsurance() {
 					</div>
 				</div>
 
-				<SideBar {...draftData} />
+				<SideBar {...draftData} formHook={formHook} />
 			</div>
 
 			<FormFields formHook={formHook} billingType={billingType} {...draftData} />
