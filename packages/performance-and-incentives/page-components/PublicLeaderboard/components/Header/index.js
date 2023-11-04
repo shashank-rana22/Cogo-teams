@@ -4,6 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
+import SCREEN_CONSTANTS from '../../../../constants/screen-constants';
 import Counter from '../../common/Counter';
 import DateFilter from '../../common/DateFilter';
 import TEXT_MAPPING from '../../configurations/header-text-mapping';
@@ -12,6 +13,8 @@ import LEADERBOARD_LOCATIONS from '../../utils/leaderboard-locations';
 
 import CountDownTimer from './CountDownTimer';
 import styles from './styles.module.css';
+
+const { OVERALL, COMPARISION } = SCREEN_CONSTANTS;
 
 const leaderBoardOptions = Object.entries(LEADERBOARD_LOCATIONS).map(([location,
 	locationDetails]) => ({ label: locationDetails.label, value: location }));
@@ -43,7 +46,7 @@ function Header(props) {
 					role="presentation"
 				>
 					<IcMRefresh
-						className={cl`${styles.swicth_icon} ${screen === 'overall' && styles.swicth_icon_active}`}
+						className={cl`${styles.swicth_icon} ${screen === OVERALL && styles.swicth_icon_active}`}
 					/>
 					<Counter
 						reloadCounter={reloadCounter}
@@ -71,7 +74,7 @@ function Header(props) {
 
 			<div className={styles.end_side}>
 
-				{screen === 'overall' ? (
+				{screen === OVERALL ? (
 					<Select
 						value={officeLocation}
 						onChange={(location) => handleLocationChange({ location, push, setOfficeLocation })}
@@ -82,7 +85,7 @@ function Header(props) {
 					/>
 				) : null}
 
-				{screen === 'comparison' ? (
+				{screen === COMPARISION ? (
 					<DateFilter
 						screen={screen}
 						dateRange={dateRange}
@@ -91,6 +94,7 @@ function Header(props) {
 						setDateRange={setDateRange}
 					/>
 				) : null}
+
 				<Select
 					value={view}
 					onChange={setView}

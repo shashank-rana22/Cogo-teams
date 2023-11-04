@@ -1,15 +1,18 @@
 import { cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
+import SCREEN_CONSTANTS from '../../../../../constants/screen-constants';
 import useGetLeaderbordList from '../../../hooks/useGetLeaderbordList';
 
 import PanelBody from './PanelBody';
 import PanelHeader from './PanelHeader';
 import styles from './styles.module.css';
 
+const { OVERALL, COMPARISION } = SCREEN_CONSTANTS;
+
 function LeftPanel(props) {
 	const {
-		screen = 'overall',
+		screen = OVERALL,
 		view = '',
 		dateRange = {},
 		setUpdatedAt = () => {},
@@ -28,7 +31,7 @@ function LeftPanel(props) {
 		pageLimit          : 10,
 		setUpdatedAt,
 		setNextReloadAt,
-		office_location_id : screen === 'comparison' ? location?.value : null,
+		office_location_id : screen === COMPARISION ? location?.value : null,
 		score,
 		setScore,
 	});
@@ -39,7 +42,7 @@ function LeftPanel(props) {
 
 	return (
 		<div className={cl`${styles.container} 
-		${(screen === 'comparison' && rank !== 1) && styles.rank_two_container}`}
+		${(screen === COMPARISION && rank !== 1) && styles.rank_two_container}`}
 		>
 
 			<PanelHeader

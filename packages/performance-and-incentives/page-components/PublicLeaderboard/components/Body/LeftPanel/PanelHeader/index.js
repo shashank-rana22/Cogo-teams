@@ -1,11 +1,14 @@
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
+import SCREEN_CONSTANTS from '../../../../../../constants/screen-constants';
 import DateFilter from '../../../../common/DateFilter';
 import PublicLeaderBoardContext from '../../../../context/PublicLeaderBoardContext';
 
 import LocationStats from './LocationStats';
 import styles from './styles.module.css';
+
+const { COMPARISION } = SCREEN_CONSTANTS;
 
 function PanelHeader(props) {
 	const {
@@ -14,9 +17,9 @@ function PanelHeader(props) {
 
 	const { officeLocation } = useContext(PublicLeaderBoardContext);
 
-	if (screen === 'comparison' && isEmpty(additional_stats)) return null;
+	if (screen === COMPARISION && isEmpty(additional_stats)) return null;
 
-	if (screen === 'comparison') {
+	if (screen === COMPARISION) {
 		return (
 			<LocationStats
 				rank={rank}
