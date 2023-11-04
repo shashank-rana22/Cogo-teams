@@ -68,9 +68,10 @@ const CHANNELS = ['email', 'whatsapp', 'calls'];
 function getComponentMapping() {
 	return [
 		{
-			key         : 'total_revenue',
-			Comp        : RevenueContainer,
-			initialLoad : true,
+			key          : 'total_revenue',
+			Comp         : RevenueContainer,
+			initialLoad  : true,
+			widgetBlocks : ['get_total_revenue_data'],
 		},
 		{
 			key         : 'per_agent_data',

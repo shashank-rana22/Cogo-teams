@@ -15264,6 +15264,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'get_omnichannel_sme_dashboard',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 };
 

@@ -18,6 +18,7 @@ function SmeComponents() {
 						initialLoad = false,
 						headerText = '',
 						hiderAfterLoaded = false,
+						...rest
 					} = componentItem || {};
 
 					if (!Comp) {
@@ -25,7 +26,12 @@ function SmeComponents() {
 					}
 
 					if (initialLoad) {
-						return <Comp key={key} />;
+						return (
+							<Comp
+								key={key}
+								{...rest}
+							/>
+						);
 					}
 
 					return (
@@ -34,7 +40,9 @@ function SmeComponents() {
 							headerText={headerText}
 							hiderAfterLoaded={hiderAfterLoaded}
 						>
-							<Comp />
+							<Comp
+								{...rest}
+							/>
 						</IntersectionLoader>
 					);
 				},

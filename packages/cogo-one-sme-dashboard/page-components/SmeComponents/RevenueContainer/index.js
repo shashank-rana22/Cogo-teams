@@ -7,6 +7,7 @@ import { Image } from '@cogoport/next';
 import React from 'react';
 
 import { PercentageChange } from '../../../common/Elements';
+import useSmeDashboardStats from '../../../hooks/useSmeDashboardStats';
 
 import DataView from './DataView';
 import styles from './styles.module.css';
@@ -30,8 +31,15 @@ const ITEM = {
 	non_allocated_transactions     : 8,
 };
 
-function RevenueContainer() {
+function RevenueContainer({ widgetBlocks = null }) {
 	const geo = getGeoConstants();
+
+	const {
+		dashboardData = {},
+		dashboardLoading = false,
+	} = useSmeDashboardStats({ widgetBlocks });
+
+	console.log('dashboardLoading:', dashboardLoading, dashboardData);
 
 	return (
 		<div className={styles.container}>
