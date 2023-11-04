@@ -46,10 +46,7 @@ function getColumns({
 				const tdsTradePartyName = data?.tdsRequest && data?.organization?.tradePartyType;
 				return list ? (
 					<div className={cl`${styles.company_name} ${styles.common}`}>
-						<ShowOverflowingNumber
-							value={toTitleCase(companyName)}
-							maxLength={OVERFLOW_NUMBER}
-						/>
+						<ShowOverflowingNumber value={toTitleCase(companyName)} maxLength={OVERFLOW_NUMBER} />
 					</div>
 				) : (
 					<div>
@@ -70,7 +67,6 @@ function getColumns({
 								/>
 							</div>
 						)}
-
 					</div>
 				);
 			},
@@ -105,13 +101,12 @@ function getColumns({
 								<span>
 									{t('incidentManagement:icjv_approval')}
 								</span>
-							)
-								: (
-									<ShowOverflowingNumber
-										value={toTitleCase(startCase(requestType))}
-										maxLength={OVERFLOW_NUMBER}
-									/>
-								)}
+							) : (
+								<ShowOverflowingNumber
+									value={toTitleCase(startCase(requestType))}
+									maxLength={OVERFLOW_NUMBER}
+								/>
+							)}
 						</div>
 						<span>
 							{typeof (revoked) === 'boolean' && (
@@ -159,8 +154,13 @@ function getColumns({
 			accessor : 'source',
 			id       : 'source',
 			Cell     : ({ row: { original } }) => {
-				const { source = '' } = original || {};
-				return <div className={cl`${styles.source} ${styles.common}`}>{startCase(source || '-')}</div>;
+				const { source = '', data: { concorPdaApprovalRequest = {} } } = original || {};
+				return (
+					<div className={cl`${styles.source} ${styles.common}`}>
+						<span>{startCase(source || '-')}</span>
+						{concorPdaApprovalRequest?.sid ? <span>{`#${concorPdaApprovalRequest?.sid}`}</span> : null}
+					</div>
+				);
 			},
 		},
 		{
