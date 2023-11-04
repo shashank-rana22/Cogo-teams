@@ -1,9 +1,7 @@
 .error_icon {
 	display: flex;
 	justify-content: center;
-	width: 40px;
-	height: 40px;
-	margin: auto;
+	margin-left: 250px;
 	color: #c26d1a;
 	background-color: #fef3e9;
 	border-radius: 10px;

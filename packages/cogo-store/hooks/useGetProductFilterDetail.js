@@ -11,7 +11,7 @@ const useGetProductFilterDetail = () => {
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'GET',
-		url    : '/get_product_filter_details',
+		url    : './get_product_filter_details',
 	}, { manual: true });
 
 	const getProductFilterDetail = useCallback(
@@ -35,7 +35,7 @@ const useGetProductFilterDetail = () => {
 		getProductFilterDetail();
 	}, [getProductFilterDetail]);
 
-	return { loading, data, refetch: getProductFilterDetail };
+	return { loading, data, getProductFilterDetail };
 };
 
 export default useGetProductFilterDetail;

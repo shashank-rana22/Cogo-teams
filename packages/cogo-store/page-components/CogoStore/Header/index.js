@@ -3,11 +3,14 @@ import { IcALocation, IcMArrowNext, IcMClock } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
+import useGetProductFilterDetail from '../../../hooks/useGetProductFilterDetail';
+
 import styles from './styles.module.css';
 
-function Header({ productData = {} }) {
+function Header() {
 	const { push } = useRouter();
-	const { user_details, cart_items_count } = productData || {};
+	const { data: productData } = useGetProductFilterDetail();
+	const { user_details } = productData || {};
 	const { name, office_location } = user_details || {};
 	const { is_hr_admin } = productData || {};
 	const { COGO_ICON, COPYRIGHT_ICON, CART } = GLOBAL_CONSTANTS.image_url;
@@ -19,7 +22,7 @@ function Header({ productData = {} }) {
 					className={styles.image_header}
 					style={{ cursor: 'pointer' }}
 					aria-hidden
-					onClick={() => push('/cogo-merch')}
+					onClick={() => push('/cogo-store')}
 				>
 					{' '}
 					<img
@@ -47,35 +50,32 @@ function Header({ productData = {} }) {
 			</div>
 
 			<div className={styles.right_header}>
-				<div
+				<span
 					className={styles.right_header_text}
 					aria-hidden
-					onClick={() => push('/cogo-merch/order-history')}
+					onClick={() => push('/cogo-store/order-history')}
 				>
 					<IcMClock height={14} style={{ marginRight: '4px' }} />
 					Order history
-				</div>
+				</span>
 
-				<div
+				<span
 					className={styles.right_header_text}
 					aria-hidden
-					onClick={() => push('/cogo-merch/my-cart')}
-					style={{ position: 'relative' }}
+					onClick={() => push('/cogo-store/my-cart')}
 				>
-					<img src={CART} alt="" height="14px" style={{ marginRight: '12px' }} />
+					<img src={CART} alt="" height="14px" style={{ marginRight: '4px' }} />
 					My Cart
-					{cart_items_count > GLOBAL_CONSTANTS.zeroth_index
-						? <div className={styles.cart_count}>{cart_items_count}</div> : null}
-				</div>
+				</span>
 				{is_hr_admin ? (
-					<div
+					<span
 						className={styles.right_header_text}
 						aria-hidden
-						onClick={() => push('/cogo-merch/admin-view')}
+						onClick={() => push('/cogo-store/admin-view')}
 					>
 						Admin View
 						<IcMArrowNext style={{ marginLeft: '3px', cursor: 'pointer' }} />
-					</div>
+					</span>
 				) : null}
 			</div>
 		</div>

@@ -67,7 +67,7 @@ const getMyCartColumns = ({
 							quantity,
 						},
 					];
-					await updateCart({ payload, showToast: false });
+					await updateCart({ payload });
 					refetchCartDetails();
 				} else {
 					Toast.error('Quantity limit exceeded');
@@ -83,7 +83,7 @@ const getMyCartColumns = ({
 						quantity,
 					},
 				];
-				await updateCart({ payload, showToast: false });
+				await updateCart({ payload });
 				refetchCartDetails();
 			};
 			return (
@@ -126,7 +126,7 @@ const getMyCartColumns = ({
 						quantity             : 0,
 					},
 				];
-				await updateCart({ payload, itemRemoved: true });
+				await updateCart({ payload });
 				setCouponApplied(false);
 				refetchCartDetails();
 			};
