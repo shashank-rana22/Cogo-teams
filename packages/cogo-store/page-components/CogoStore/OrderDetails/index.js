@@ -5,7 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { getMonth, getDate, getYear, startCase } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import getOrderColumns from '../../../commons/MyOrderColumns/getOrderColumns';
 import useCancelOrder from '../../../hooks/useCancelOrder';
@@ -20,6 +20,7 @@ import styles from './styles.module.css';
 
 function OrderDetails() {
 	const { query, push } = useRouter();
+	const [showFullDescription, setShowFullDescription] = useState(false);
 
 	const {
 		control,
@@ -92,7 +93,7 @@ function OrderDetails() {
 		setValue('order_status', order_status);
 	}, [delivery_date, getOrderData?.delivery_date, order_status, setValue]);
 
-	const columns = getOrderColumns({ color, currency_symbol });
+	const columns = getOrderColumns({ color, currency_symbol, showFullDescription, setShowFullDescription });
 
 	return (
 		<>

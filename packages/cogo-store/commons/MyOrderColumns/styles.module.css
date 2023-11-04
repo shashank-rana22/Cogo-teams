@@ -46,7 +46,21 @@
 	margin-left: 4px;
 }
 
-.dot_list span {
+.dot_list_desc {
+	display: flex;
+	align-items: center;
+	margin-bottom: -4px;
+	margin-left: 4px;
+}
+
+.truncatedDescription {
+	max-width: 400px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.fullDescription {
 	text-overflow: ellipsis;
 	white-space: wrap;
 }
