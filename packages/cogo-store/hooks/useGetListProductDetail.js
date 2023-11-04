@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 const useGetListProductDetail = () => {
 	const [filters, setFilters] = useState({
-		page_limit : 50,
+		page_limit : 100,
 		page       : 1,
 	});
 
