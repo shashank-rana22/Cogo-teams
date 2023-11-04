@@ -3,7 +3,6 @@ import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-import ScrollAnnouncement from '../../../../common/ScrollAnouncement';
 import DURATION_CONSTANTS from '../../../../constants/duration-constants';
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-viewtype-constants';
 import getEntityOptions from '../../../../utils/get-entity-options';
@@ -18,6 +17,7 @@ import {
 import DURATION_OPTIONS from '../../configurations/get-duration-filter-options';
 
 import ProgressBars from './ProgressBars';
+import ScrollAnnouncement from './ScrollAnouncement';
 import styles from './styles.module.css';
 
 const { TODAY, LAST_MONTH, THIS_MONTH, LAST_QUARTER, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
