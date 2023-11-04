@@ -76,6 +76,7 @@ function ShipmentDetails({
 					service,
 					partnerId,
 					endPoint: QUERY_PATH?.[idType],
+					serialId,
 				})}
 			>
 				{t(LABEL_MAPPING[idType] || LABEL_MAPPING.sid)}
