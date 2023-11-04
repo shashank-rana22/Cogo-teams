@@ -96,7 +96,7 @@ function OrderDetails() {
 
 	return (
 		<>
-			<Header />
+			<Header productData={productData} />
 			<div className={styles.order_detail_outer}>
 
 				<div className={styles.order_detail_container}>
