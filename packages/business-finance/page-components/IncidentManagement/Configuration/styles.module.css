@@ -49,6 +49,9 @@
 }
 
 .source {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	width: 90px;
 	height: 16px;
 }
