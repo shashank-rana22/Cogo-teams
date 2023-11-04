@@ -8,14 +8,16 @@ const useUpdateCart = () => {
 		url    : '/update_cart',
 	}, { manual: true });
 
-	const updateCart = async ({ payload }) => {
+	const updateCart = async ({ payload, showToast = false }) => {
 		try {
 			await trigger({
 				data: {
 					cart_items: payload,
 				},
 			});
-			Toast.success('Successfully added to cart!');
+			if (showToast) {
+				Toast.success('Successfully added to cart!');
+			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}

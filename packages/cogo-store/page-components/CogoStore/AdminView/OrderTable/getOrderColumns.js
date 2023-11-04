@@ -7,7 +7,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const getOrderColumns = ({ STATUS_OPTIONS = [], updateStatus = () => {}, push, currency_code = '' }) => ([
+const getOrderColumns = ({ STATUS_OPTIONS = [], updateStatus = () => {}, push }) => ([
 	{
 		Header   : 'ORDER ID',
 		accessor : (item = {}) => (
@@ -53,7 +53,8 @@ const getOrderColumns = ({ STATUS_OPTIONS = [], updateStatus = () => {}, push, c
 		accessor : (item = {}) => (
 			<div>
 				<span className={styles.black_text}>
-					{currency_code}
+					{item.currency_symbol}
+					{' '}
 					{item.total_amount}
 				</span>
 			</div>
