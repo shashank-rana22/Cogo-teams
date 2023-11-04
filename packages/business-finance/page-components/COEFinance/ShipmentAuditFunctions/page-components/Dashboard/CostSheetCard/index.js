@@ -19,15 +19,7 @@ function CostSheetCard() {
 				</div>
 			</div>
 			<div className={styles.card}>
-				<div className={styles.hr} />
-				<div className={styles.header_container}>
-					<div className={styles.header_sub_container} />
-					<div className={styles.header_sub_container}>Sell</div>
-					<div className={styles.header_sub_container}>Buy</div>
-				</div>
-				<div className={styles.cost_sheet}>
-					<CostSheetData costViewData={costViewData} costViewDataLoading={costViewDataLoading} />
-				</div>
+				<CostSheetData costViewData={costViewData} costViewDataLoading={costViewDataLoading} />
 			</div>
 		</div>
 	);
