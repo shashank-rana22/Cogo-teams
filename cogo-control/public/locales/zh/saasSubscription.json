@@ -140,7 +140,7 @@
     "discount_control_conditions_placeholder":"输入条件",
     "discount_control_status":"地位",
     "discount_success_toast":"更新计划折扣",
-    "discount_invalid_metadata":"请输入有效的JSON元数据",
+    "discount_invalid_metadata":"请输入有效的JSON元数据或条件",
     "edit_btn":"编辑",
     "discount_create_success_toast":"创建计划折扣",
     "status_active":"积极的",

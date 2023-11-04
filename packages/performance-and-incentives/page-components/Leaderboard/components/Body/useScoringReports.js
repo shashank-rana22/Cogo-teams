@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 
 import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../constants/leaderboard-reporttype-constants';
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-viewtype-constants';
+import getFormattedDate from '../../../../utils/get-formatted-date';
 import getReportViewType from '../../helpers/getReportViewType';
 
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
@@ -89,8 +90,9 @@ const useScoringReports = (props) => {
 				...(previousParams.filters || {}),
 				q                       : searchQuery || undefined,
 				created_at_greater_than : dateRange?.startDate || undefined,
-				created_at_less_than    : dateRange?.endDate || undefined,
-				partner_id              : entity || undefined,
+				created_at_less_than    : dateRange?.endDate
+					? getFormattedDate({ currentDate: dateRange?.endDate }) : undefined,
+				partner_id: entity || undefined,
 			},
 		}));
 	}, [searchQuery, dateRange, entity, setParams]);

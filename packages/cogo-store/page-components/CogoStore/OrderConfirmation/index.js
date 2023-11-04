@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
@@ -58,10 +59,11 @@ function OrderConfirmation({ data = {}, office_location = '' }) {
 
 					</Button>
 					<Button
-						themeType="accent"
+						themeType="primary"
 						onClick={() => push(`/cogo-store/order-details?id=${id}`)}
 					>
 						View Orders
+						<IcMArrowRight width={16} height={16} />
 					</Button>
 				</div>
 			</div>

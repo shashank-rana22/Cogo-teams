@@ -1,4 +1,4 @@
-import { Tooltip } from '@cogoport/components';
+import { Loader, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
@@ -48,11 +48,16 @@ const DEFAULT_VALUE = {
 function Details({
 	dataList = DEFAULT_VALUE,
 	shipmentId = '',
+	loadingShipment = false,
 }) {
 	const { importer_exporter: importerExporter = {} } = dataList || {};
 	const { push = () => {} } = useRouter();
 
 	const { shipment_type:shipmentType = '', serial_id = '' } = dataList || {};
+
+	if (loadingShipment) {
+		return <Loader />;
+	}
 
 	return (
 		<div>
