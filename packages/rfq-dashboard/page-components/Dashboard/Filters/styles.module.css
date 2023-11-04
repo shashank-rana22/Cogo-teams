@@ -3,8 +3,10 @@
 	top: 0;
 	left: 0;
 	width: 25%;
-	height: 620px;
+	min-width: 320px;
+	padding-bottom: 15px;
 	margin-top: 54px;
+	overflow-y: scroll;
 	background: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 10%);
