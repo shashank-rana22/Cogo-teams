@@ -1,0 +1,21 @@
+.verification {
+	:global {
+		.ui_multiselect_container {
+			max-width: 72%;
+		}
+	}
+}
+
+.cancel_button {
+	margin-right: 8px;
+}
+
+.title {
+	margin-bottom: 16px;
+}
+
+.label {
+	font-size: 13px;
+	font-weight: 600;
+	color: #4f4f4f;
+}

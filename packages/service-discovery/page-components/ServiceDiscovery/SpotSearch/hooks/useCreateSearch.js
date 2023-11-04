@@ -1,12 +1,19 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 import getDefaultPayload from '../utils/getDefaultPayload';
 import getEditPayload from '../utils/getEditPayload';
 
 const useCreateSearch = ({ setRouterLoading = () => {}, setHeaderProps = () => {} } = {}) => {
+	const { query = {}, userRoleIDs = [] } = useSelector(({ profile, general }) => ({
+		query       : general?.query,
+		userRoleIDs : profile?.partner?.user_role_ids,
+	}));
+
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'post',
 		url    : '/create_spot_search',
@@ -54,6 +61,18 @@ const useCreateSearch = ({ setRouterLoading = () => {}, setHeaderProps = () => {
 				setRouterLoading(true);
 			}
 
+			const geo = getGeoConstants();
+
+			const cogoVerseTeamIDS = [
+				geo?.uuid.cogoverse_admin,
+				geo?.uuid.cogoverse_executive,
+				geo?.uuid.cogoverse_kam,
+			];
+
+			const isCogoverseMember = (userRoleIDs || []).some((elem) => (cogoVerseTeamIDS || []).includes(elem));
+
+			const fromCogoverse = query?.source === 'communication' || isCogoverseMember;
+
 			payload = {
 				...payload,
 				importer_exporter_branch_id : organization_branch_id,
@@ -61,7 +80,7 @@ const useCreateSearch = ({ setRouterLoading = () => {}, setHeaderProps = () => {
 				source                      : 'platform',
 				search_type                 : service_type,
 				user_id,
-				tags                        : ['version2'],
+				tags                        : ['version2', ...(fromCogoverse ? ['cogoverse'] : [])],
 			};
 
 			if (setHeaderProps) {

@@ -23,6 +23,10 @@ export const SERVICE_API_MAPPING = {
 		trailer_freight : 'list_trailer_freight_rate_feedbacks',
 		haulage_freight : 'list_haulage_freight_rate_feedbacks',
 		air_customs     : 'list_air_customs_rate_feedbacks',
+		box             : 'list_air_freight_rate_feedbacks',
+		crate           : 'list_air_freight_rate_feedbacks',
+		pallet          : 'list_air_freight_rate_feedbacks',
+		loose           : 'list_air_freight_rate_feedbacks',
 	},
 };
 
@@ -124,6 +128,7 @@ export const PRIORITY_MAPPING = {
 };
 
 export const REQUIRED_ROLES = ['partner-roles', 'partner-users', 'stakeholders'];
+export const HIDE_ASSIGN_FIELD = ['id_creator', 'stakeholders'];
 
 export const getSpectatorTypeOptions = ({ t }) => [
 	{ label: t('myTickets:spectator_type_1'), value: 'reviewer' },
@@ -167,6 +172,9 @@ export const SHIPMENT_RATE_KEYS = ['request_type', 'organization_id', 'user_id',
 export const FINANCE_PLATFORM_KEYS = ['request_type', 'category', 'sub_category', 'issue_type',
 	'additional_information', 'priority',
 	'file_url', 'notify_customer'];
+
+export const PLATFORM_KEYS = ['request_type', 'platform_category', 'serial_id', 'service', 'trade_type',
+	'issue_type', 'additional_information', 'priority', 'file_url', 'notify_customer'];
 
 export const RATE_KEYS = ['request_type', 'organization_id', 'user_id', 'id_type',
 	'serial_id', 'service_type', 'service', 'trade_type', 'category', 'sub_category', 'raised_by_desk',
@@ -241,6 +249,7 @@ export const SINGLE_LOCATIONS = [
 	'fcl_freight_local',
 	'air_freight_local',
 	'lcl_freight_local',
+	'ltl_freight',
 ];
 
 export const sortByOptions = ({ t }) => [

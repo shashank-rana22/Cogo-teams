@@ -73,7 +73,7 @@ function Content(props) {
 	};
 
 	return (
-		<div>
+		<div className={styles.wrapper}>
 			<div className={styles.container}>
 				<Tabs
 					activeTab={activeTab}
@@ -146,7 +146,7 @@ function Content(props) {
 
 			</div>
 
-			{!loading && (
+			{!loading && data?.total_count > 0 && (
 				<div className={styles.pagination_container}>
 					<Pagination
 						className="md"

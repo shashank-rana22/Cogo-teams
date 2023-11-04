@@ -68,7 +68,7 @@ function Content({
 							themeType="primary"
 							size="sm"
 							onClick={() => {
-								refetch({ filters, setShow });
+								refetch({ setShow });
 							}}
 						>
 							APPLY

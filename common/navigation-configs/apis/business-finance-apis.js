@@ -397,6 +397,11 @@ const business_finance = {
 			service_name : 'shipmentAuditFunction',
 		},
 		{
+			api          : 'get_common_job_shipment_cost_sheet',
+			access_type  : 'private',
+			service_name : 'shipmentAuditFunction',
+		},
+		{
 
 			api         : 'get_common_job_milestone_job_audits',
 			access_type : 'private',

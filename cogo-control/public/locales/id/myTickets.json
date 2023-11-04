@@ -58,7 +58,7 @@
     "has_reassigned_this_ticket_to": "telah mengalihkan kembali tiket ini kepada",
     "this_ticket_has_been_assigned_to": "Tiket ini telah diberikan kepada",
     "this_ticket_has_been_rejected_by": "Tiket ini telah ditolak oleh",
-    "this_ticket_has_been_resolved_by": "Tiket ini telah diselesaikan oleh",
+    "this_ticket_has_been_closed_by": "Tiket ini telah ditutup",
     "has_initiated_resolution_request": "telah memulai permintaan penyelesaian.",
     "has_closed_resolution_request": "telah menutup permintaan penyelesaian.",
     "ticket_has_been_created": "Tiket telah dibuat.",
@@ -173,5 +173,6 @@
     "enter_serial_id": "Masukkan ID serial",
     "apply": "Menerapkan",
     "reset": "Mengatur ulang",
-    "serial_id": "ID Serial"
+    "serial_id": "idSerial",
+    "id_creator": "Pencipta id"
 }

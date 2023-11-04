@@ -4,7 +4,7 @@ import { useTranslation } from 'next-i18next';
 import { useState, useEffect } from 'react';
 
 import { useReassignTicketsControls } from '../../configurations/reassign-controls';
-import { REQUIRED_ROLES } from '../../constants';
+import { HIDE_ASSIGN_FIELD, REQUIRED_ROLES } from '../../constants';
 import useListShipmentStakeholders from '../../hooks/useGetListShipmentStakeholders';
 import useReassignTicket from '../../hooks/useReassignTicket';
 import { getFieldController } from '../../utils/getFieldController';
@@ -17,7 +17,7 @@ function ReassignTicket({
 	getTicketDetails = () => {}, setListData = () => {}, ticket = {}, shipmentsData = {},
 }) {
 	const { Data: data = {} } = ticket || {};
-	const { RequestType: requestType = '' } = data || {};
+	const { RequestType: requestType = '', IDType: idType = '' } = data || {};
 	const { id = '' } = shipmentsData || {};
 
 	const { t } = useTranslation(['myTickets']);
@@ -31,7 +31,7 @@ function ReassignTicket({
 
 	const watchType = watch('type');
 
-	const controls = useReassignTicketsControls({ t, watchType, setUserData, stakeHoldersData, requestType });
+	const controls = useReassignTicketsControls({ t, watchType, setUserData, stakeHoldersData, requestType, idType });
 
 	const { reassignTicket, reassignLoading } = useReassignTicket({
 		ticketId,
@@ -70,7 +70,7 @@ function ReassignTicket({
 							const elementItem = { ...controlItem };
 							const { name, label, controllerType } = elementItem || {};
 							const Element = getFieldController(controllerType);
-							const hideAssignField = name === 'assign_to' && watchType === 'stakeholders';
+							const hideAssignField = name === 'assign_to' && HIDE_ASSIGN_FIELD?.includes(watchType);
 							const hidestakeholderField = name === 'stakeholder' && watchType !== 'stakeholders';
 
 							if (!Element || (name === 'assign_to' && !REQUIRED_ROLES.includes(watchType))

@@ -15,6 +15,7 @@ const useUpdateCart = () => {
 					cart_items: payload,
 				},
 			});
+			Toast.success('Successfully added to cart!');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
