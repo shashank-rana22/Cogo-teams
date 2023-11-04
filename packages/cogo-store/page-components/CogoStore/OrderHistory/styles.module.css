@@ -84,7 +84,7 @@
 
 	&:hover {
 		background-color: #f9f9f9;
-		box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
+		box-shadow: 0 0 5px rgb(0 0 0 / 20%);
 	}
 }
 

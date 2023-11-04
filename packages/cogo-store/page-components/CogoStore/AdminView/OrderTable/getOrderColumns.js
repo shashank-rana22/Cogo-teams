@@ -7,7 +7,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const getOrderColumns = ({ STATUS_OPTIONS = [], updateStatus = () => {}, push }) => ([
+const getOrderColumns = ({ STATUS_OPTIONS = [], updateStatus = () => {}, push, currency_code = '' }) => ([
 	{
 		Header   : 'ORDER ID',
 		accessor : (item = {}) => (
@@ -53,8 +53,7 @@ const getOrderColumns = ({ STATUS_OPTIONS = [], updateStatus = () => {}, push })
 		accessor : (item = {}) => (
 			<div>
 				<span className={styles.black_text}>
-					{item.currency_symbol}
-					{' '}
+					{currency_code}
 					{item.total_amount}
 				</span>
 			</div>
@@ -70,7 +69,7 @@ const getOrderColumns = ({ STATUS_OPTIONS = [], updateStatus = () => {}, push })
 					themeType="secondary"
 					style={{ marginLeft: '6px' }}
 					aria-hidden
-					onClick={() => { push(`/cogo-merch/order-details?id=${item.id}`); }}
+					onClick={() => { push(`/cogo-store/order-details?id=${item.id}`); }}
 				>
 					<span>View</span>
 					<IcMEyeopen
