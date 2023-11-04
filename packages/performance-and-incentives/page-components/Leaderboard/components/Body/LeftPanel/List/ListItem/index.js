@@ -14,7 +14,7 @@ const getClassName = ({
 	isAllowed, listItem = {},
 	index = 0, user = {}, userPosition, viewType, currLevel = {},
 }) => `${styles.list_row} 
-			${listItem.rank === GLOBAL_CONSTANTS.one ? styles.box_shadow : ''} 
+			${listItem?.rank === GLOBAL_CONSTANTS.one ? styles.box_shadow : ''} 
 			${isAllowed ? styles.hover : ''}
 			${checkToBlurItem({
 		user,

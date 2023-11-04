@@ -45,6 +45,7 @@
 }
 
 .blurred {
+	user-select: none;
 	filter: blur(4px);
 	opacity: 0.6;
 }

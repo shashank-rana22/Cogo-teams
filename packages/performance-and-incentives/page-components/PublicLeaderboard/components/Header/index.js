@@ -2,6 +2,7 @@ import { Select, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMRefresh } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 
 import Counter from '../../common/Counter';
 import DateFilter from '../../common/DateFilter';
@@ -12,7 +13,15 @@ import LEADERBOARD_LOCATIONS from '../../utils/leaderboard-locations';
 import CountDownTimer from './CountDownTimer';
 import styles from './styles.module.css';
 
-const leaderBoardOptions = Object.values(LEADERBOARD_LOCATIONS).map((location) => location);
+const leaderBoardOptions = Object.entries(LEADERBOARD_LOCATIONS).map(([location,
+	locationDetails]) => ({ label: locationDetails.label, value: location }));
+
+const handleLocationChange = ({ location, push, setOfficeLocation }) => {
+	if (location) push(`/performance-and-incentives/public-leaderboard?location=${location}`);
+	else push('/performance-and-incentives/public-leaderboard');
+
+	setOfficeLocation(location);
+};
 
 function Header(props) {
 	const {
@@ -21,6 +30,8 @@ function Header(props) {
 		officeLocation,
 		setOfficeLocation,
 	} = props;
+
+	const { push } = useRouter();
 
 	return (
 		<div className={styles.container}>
@@ -63,7 +74,7 @@ function Header(props) {
 				{screen === 'overall' ? (
 					<Select
 						value={officeLocation}
-						onChange={setOfficeLocation}
+						onChange={(location) => handleLocationChange({ location, push, setOfficeLocation })}
 						options={leaderBoardOptions}
 						placeholder="Location"
 						className={styles.location_selector}

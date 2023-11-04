@@ -4,6 +4,12 @@ import { useState, useEffect, useContext } from 'react';
 
 import getRankFromScore from '../configurations/getRankFromScore';
 import PublicLeaderBoardContext from '../context/PublicLeaderBoardContext';
+import LEADERBOARD_LOCATIONS from '../utils/leaderboard-locations';
+
+const getLocation = ({
+	office_location_id,
+	officeLocation,
+}) => office_location_id || LEADERBOARD_LOCATIONS[officeLocation]?.value || undefined;
 
 function useGetLeaderbordList(props) {
 	const {
@@ -59,7 +65,7 @@ function useGetLeaderbordList(props) {
 					? `${view.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]}_report` : undefined,
 				created_at_greater_than : dateRange?.startDate || undefined,
 				created_at_less_than    : dateRange?.endDate || undefined,
-				office_location_id      : office_location_id || officeLocation || undefined,
+				office_location_id      : getLocation({ office_location_id, officeLocation }),
 			},
 		}));
 	}, [view, dateRange, office_location_id, officeLocation]);

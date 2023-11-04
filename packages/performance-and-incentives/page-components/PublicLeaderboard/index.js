@@ -10,7 +10,7 @@ import useReloadCounter from './hooks/useReloadCounter';
 import styles from './styles.module.css';
 
 function PublicDashboard() {
-	const [screen, setScreen] = useState('comparison');
+	const [screen, setScreen] = useState('overall');
 	const [view, setView] = useState('kam_wise');
 	const [updatedAt, setUpdatedAt] = useState('');
 	const [nextReloadAt, setNextReloadAt] = useState(100);
