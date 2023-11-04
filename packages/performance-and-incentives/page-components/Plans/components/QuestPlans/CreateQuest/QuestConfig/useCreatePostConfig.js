@@ -3,9 +3,24 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
+import { useState } from 'react';
+
+import getQuestFormattedData from './configurations/getQuestFormattedData';
+import getStringFromQuest from './configurations/getStringFromQuest';
+
+const REQUIRED_FEILDS = ['agent_scoring_block_id', 'agent_scoring_parameter_id', 'value'];
+
+const FIELD_LABEL_MAPPING = {
+	agent_scoring_block_id     : 'sub_block_name',
+	agent_scoring_parameter_id : 'display_name',
+};
 
 const useCreatePostConfig = ({ quest_id, data = {} }) => {
 	const router = useRouter();
+
+	const questFormattedData = getQuestFormattedData({ data: data?.quest_configurations });
+
+	const [labelData, setLabelData] = useState(questFormattedData || []);
 
 	const { control, formState: { errors = {} }, handleSubmit, watch } = useForm({
 		defaultValues: {
@@ -39,6 +54,26 @@ const useCreatePostConfig = ({ quest_id, data = {} }) => {
 		}
 	};
 
+	const formattedString = getStringFromQuest({ data: labelData });
+
+	const onChangeChild = ({ val, obj, index, name }) => {
+		if (!REQUIRED_FEILDS.includes(name)) return;
+
+		const newLabelData = [...labelData];
+
+		newLabelData[index] = { ...labelData[index], [name]: obj?.[FIELD_LABEL_MAPPING[name]] || val };
+
+		setLabelData(newLabelData);
+	};
+
+	const onDeleteChild = ({ index }) => {
+		const newLabelData = [...labelData];
+
+		newLabelData.splice(index, 1);
+
+		setLabelData(newLabelData);
+	};
+
 	return {
 		loading,
 		control,
@@ -46,6 +81,9 @@ const useCreatePostConfig = ({ quest_id, data = {} }) => {
 		handleClick,
 		watch,
 		errors,
+		onChangeChild,
+		onDeleteChild,
+		generateQuest: formattedString,
 	};
 };
 

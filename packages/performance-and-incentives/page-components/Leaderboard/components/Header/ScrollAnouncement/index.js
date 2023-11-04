@@ -2,6 +2,7 @@ import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMAnnouncement } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
@@ -16,7 +17,7 @@ function ScrollAnnouncement() {
 		setIsScrolling(!isScrolling);
 	};
 
-	if (loading) return null;
+	if (loading || isEmpty(list)) return null;
 
 	return (
 		<div className={styles.container}>

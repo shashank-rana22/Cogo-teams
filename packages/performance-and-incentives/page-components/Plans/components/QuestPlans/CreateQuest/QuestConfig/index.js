@@ -11,9 +11,12 @@ function QuestConfig({ quest_id = null, data = {} }) {
 	const {
 		control,
 		errors,
+		generateQuest,
 		watch,
 		handleSubmit,
 		handleClick,
+		onChangeChild,
+		onDeleteChild,
 	} = useCreatePostConfig({ quest_id, data });
 
 	return (
@@ -25,6 +28,12 @@ function QuestConfig({ quest_id = null, data = {} }) {
 			</div>
 
 			<div className={styles.field_container}>
+
+				<div className={styles.generated_string}>
+					<div className={styles.generated_string_heading}>Auto-generate quest:</div>
+					<div className={styles.generated_string_content}>{generateQuest}</div>
+					<Button>Fill </Button>
+				</div>
 
 				<div className={styles.quest_string_label}>
 					Quest String
@@ -50,6 +59,8 @@ function QuestConfig({ quest_id = null, data = {} }) {
 					size="sm"
 					config_id={data?.agent_scoring_config_id}
 					watch={watch}
+					onChangeChild={onChangeChild}
+					onDeleteChild={onDeleteChild}
 				/>
 
 				<Button onClick={handleSubmit(handleClick)}>Save</Button>

@@ -20,6 +20,8 @@ function Child(props) {
 		error = {},
 		config_id = null,
 		watch = () => {},
+		onChangeChild = () => {},
+		onDeleteChild = () => {},
 		...rest
 	} = props;
 
@@ -48,6 +50,7 @@ function Child(props) {
 							id={`create_form_${controlItem?.name}_field`}
 							{...controlItem}
 							name={`${name}.${index}.${controlItem?.name}`}
+							onChange={(val, obj) => onChangeChild({ val, obj, index, name: controlItem?.name })}
 						/>
 
 						<div className={styles.error_message}>
@@ -60,7 +63,7 @@ function Child(props) {
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 				<IcMDelete
 					className={`form-fieldArray-${name}-remove`}
-					onClick={() => remove(index, FIRST_INDEX)}
+					onClick={() => { remove(index, FIRST_INDEX); onDeleteChild({ index }); }}
 					style={{
 						height    : '20px',
 						width     : '20px',
