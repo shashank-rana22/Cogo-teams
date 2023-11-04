@@ -1,9 +1,11 @@
 import SUB_FUNCTION_MAPPING from './subFunctionMappings';
 import WORK_SCOPES_OPTIONS from './workScopeMappings';
 
-const PLATFORM_OPTIONS = [{ label: 'Admin', value: 'admin' },
+const PLATFORM_OPTIONS = [
+	{ label: 'Admin', value: 'admin' },
 	{ label: 'App', value: 'app' },
 	{ label: 'Partner', value: 'partner' },
+	{ label: 'Public', value: 'public' },
 	{ label: 'All', value: 'all' }];
 
 const AUTH_FUNCTION_OPTIONS = [{ label: 'Sales', value: 'sales' },
@@ -12,6 +14,7 @@ const AUTH_FUNCTION_OPTIONS = [{ label: 'Sales', value: 'sales' },
 	{ label: 'Finance', value: 'finance' },
 	{ label: 'Training', value: 'training' },
 	{ label: 'HR', value: 'hr' },
+	{ label: 'Public', value: 'public' },
 	{ label: 'All', value: 'all' },
 ];
 
@@ -108,9 +111,9 @@ const createQuestionControls = ({ watchFunctions, countryOptions }) => {
 			type        : 'select',
 			options     : SUB_FUNCTION_MAPPING[watchFunctions],
 			placeholder : 'Select Sub Functions',
-			rules       : {
-				required: 'Sub function is required',
-			},
+			// rules       : {
+			// 	required: 'Sub function is required',
+			// },
 		},
 	];
 

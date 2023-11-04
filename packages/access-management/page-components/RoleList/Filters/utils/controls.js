@@ -161,6 +161,7 @@ const getAllSubFunctions = (role_functions, t) => {
 				value : 'enrichment',
 			},
 		],
+		public: [],
 	};
 
 	if (role_functions?.length > MIN_ARRAY_LENGTH) {
@@ -226,6 +227,10 @@ export const controls = (role_functions, partnerOptions, t) => [
 			{
 				label : t('accessManagement:roles_and_permission_select_role_functions_select_external'),
 				value : 'external',
+			},
+			{
+				label : 'Public',
+				value : 'public',
 			},
 		],
 		params: { filters: { status: 'active' } },
