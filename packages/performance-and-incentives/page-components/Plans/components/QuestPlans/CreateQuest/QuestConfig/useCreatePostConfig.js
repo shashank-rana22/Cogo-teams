@@ -24,18 +24,16 @@ const useCreatePostConfig = ({ quest_id, data = {} }) => {
 
 	const handleClick = async (formValues) => {
 		try {
-			const { agent_scoring_quest_configurations } = formValues;
-
-			const { data: res } = await trigger({
+			await trigger({
 				data: {
 					agent_scoring_quest_id: quest_id,
-					agent_scoring_quest_configurations,
+					...formValues,
 				},
 			});
 
 			Toast.success('Saved successfully!');
 
-			router.push(`/performance-and-incentives/plans?tab=quest_plans&mode=create&id=${res?.id}`);
+			router.push('/performance-and-incentives/plans?tab=quest_plans');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

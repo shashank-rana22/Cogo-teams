@@ -23,7 +23,7 @@ function CreateQuests({ setMode = () => {} }) {
 
 	const onClickBack = () => {
 		if (id) router.push('/performance-and-incentives/plans?tab=quest_plans');
-		setMode(LIST);
+		else setMode(LIST);
 	};
 
 	if (questLoading) return null;

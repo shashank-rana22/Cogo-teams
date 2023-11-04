@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { InputController } from '@cogoport/forms';
 import { IcMJobsConfig } from '@cogoport/icons-react';
 
 import FieldArray from '../../commons/FieldArray';
@@ -24,6 +25,21 @@ function QuestConfig({ quest_id = null, data = {} }) {
 			</div>
 
 			<div className={styles.field_container}>
+
+				<div className={styles.quest_string_label}>
+					Quest String
+					<sup className={styles.sup}>*</sup>
+				</div>
+
+				<InputController
+					name="quest_string"
+					size="sm"
+					control={control}
+					errors={errors}
+					rules={{ required: 'Required' }}
+					style={{ width: '84%' }}
+				/>
+
 				<FieldArray
 					name="agent_scoring_quest_configurations"
 					control={control}

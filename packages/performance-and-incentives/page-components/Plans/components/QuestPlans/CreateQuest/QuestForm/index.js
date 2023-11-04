@@ -28,13 +28,15 @@ function QuestForm({ setParams = () => {}, data = {} }) {
 				{controls.map((controlItem) => {
 					const { type, label, name, style = {} } = controlItem || {};
 
+					const isRequired = !!controlItem?.rules?.required;
+
 					const Element = getFieldController(type);
 
 					return (
 						<div className={styles.control_item} key={name} style={style}>
 							<p className={styles.label}>
 								{label}
-								<sup className={styles.sup}>*</sup>
+								{isRequired ? <sup className={styles.sup}>*</sup> : null}
 							</p>
 
 							<div>

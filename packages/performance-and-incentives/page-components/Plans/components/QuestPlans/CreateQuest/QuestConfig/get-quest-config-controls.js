@@ -8,6 +8,7 @@ const getControls = ({ config_id, agent_scoring_block_name = null, agent_scoring
 			asyncKey    : 'agent_scoring_blocks',
 			initialCall : true,
 			valueKey    : 'name',
+			labelKey    : 'display_name',
 			params      : { list_blocks_required_only: true, filters: { agent_scoring_config_id: config_id } },
 			rules       : { required: 'Required' },
 		},
