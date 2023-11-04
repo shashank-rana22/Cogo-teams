@@ -5,11 +5,15 @@ import getService from '../../../../../utils/getService';
 
 import styles from './styles.module.css';
 
-const serviceMap = {
-	fcl_freight : 'FCL',
-	lcl_freight : 'LCL',
-	air_freight : 'Air',
+const SERVICE_MAPPING = {
+	fcl_freight       : { label: 'FCL', color: '#436DF4' },
+	lcl_freight       : { label: 'LCL', color: '#436DF4' },
+	air_freight       : { label: 'Air', color: '#221F20' },
+	fcl_freight_local : { label: 'FCL Local', color: '#133DC4' },
+	lcl_freight_local : { label: 'LCL Local', color: '#133DC4' },
 };
+
+const ONE = 1;
 
 function ServiceDetail({ item, service, formattedData }) {
 	const { contentToShow, unit } = getQuantity({ portPairdata: formattedData, service });
@@ -18,13 +22,13 @@ function ServiceDetail({ item, service, formattedData }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.service}>
-				<Element width={24} height={24} style={{ color: service === 'air_freight' ? '#221F20' : '#436DF4' }} />
-				{startCase(serviceMap[service])}
+				<Element width={24} height={24} style={{ color: SERVICE_MAPPING[service].color }} />
+				{startCase(SERVICE_MAPPING[service].label)}
 			</div>
 			<div className={styles.port_pair}>
 				{(item[`${service}_services`] || []).length }
 				{' '}
-				{(item[`${service}_services`] || []).length > 1 ? 'Port Pairs' : 'Port Pair'}
+				{(item[`${service}_services`] || []).length > ONE ? 'Port Pairs' : 'Port Pair'}
 			</div>
 			<div className={styles.quantity}>
 				{`${contentToShow} ${unit}`}

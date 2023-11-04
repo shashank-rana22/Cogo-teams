@@ -1,4 +1,4 @@
-import { IcCFcl, IcCLcl, IcCAir } from '@cogoport/icons-react';
+import { IcCFcl, IcCLcl, IcCAir, IcMLocalCharges } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -20,6 +20,14 @@ const ICON_MAPPING = {
 		service_icon  : IcCAir,
 		service_label : 'AIR',
 	},
+	fcl_freight_local: {
+		service_icon  : IcMLocalCharges,
+		service_label : 'FCL Local',
+	},
+	lcl_freight_local: {
+		service_icon  : IcMLocalCharges,
+		service_label : 'LCL Local',
+	},
 };
 
 const useGetPortCard = ({ props }) => {
@@ -36,11 +44,11 @@ const useGetPortCard = ({ props }) => {
 
 	const {
 		detail = {}, freight_price_currency = '', freight_price_discounted = '',
-		total_price_discounted = '', id = '', stats = {}, rfq_search: { search_params },
+		total_price_discounted = '', id = '', stats = {}, rfq_search: { search_params = {}, at_actuals = false },
 	} = data;
 
 	const {
-		origin_port, destination_port, service_type, origin_airport = {}, destination_airport = {},
+		origin_port, destination_port, service_type, origin_airport = {}, destination_airport = {}, port = {},
 	} = detail;
 
 	const services = search_params[`${service_type}_services_attributes`];
@@ -89,6 +97,7 @@ const useGetPortCard = ({ props }) => {
 	return {
 		loading,
 		Component,
+		single_port      : port,
 		origin_port      : origin_port || origin_airport,
 		service_type,
 		destination_port : destination_port || destination_airport,
@@ -116,6 +125,7 @@ const useGetPortCard = ({ props }) => {
 		margin_limit,
 		rfq_state,
 		iconText,
+		at_actuals,
 	};
 };
 
