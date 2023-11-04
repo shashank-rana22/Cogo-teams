@@ -60,6 +60,10 @@
 	:global {
 		.ui_checkbox_container {
 			padding-left: 0;
+
+			.ui_checkbox_style {
+				accent-color: #000 !important;
+			}
 		}
 	}
 

@@ -42,6 +42,7 @@
 	}
 
 	&.compared_rate {
+		background: #fcffff;
 		border: 1px solid #88cad1;
 	}
 }
@@ -79,20 +80,6 @@
 	flex-wrap: wrap;
 }
 
-@media (max-width: 768px) {
-	.middle {
-		flex-direction: column;
-		align-items: stretch;
-	}
-
-	.freight_details_container,
-	.total_freight_container {
-		flex-basis: 100%;
-		margin-right: 0;
-		margin-bottom: 24px;
-	}
-}
-
 .pill {
 	display: flex;
 	align-items: center;
@@ -118,5 +105,25 @@
 
 	&.total {
 		margin-left: 20px;
+	}
+}
+
+@media (max-width: 768px) {
+	.middle {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.freight_details_container,
+	.total_freight_container {
+		flex-basis: 100%;
+		margin-right: 0;
+		margin-bottom: 24px;
+	}
+
+	.amount_container {
+		justify-content: space-between;
+		width: 100%;
+		margin-right: 0;
 	}
 }

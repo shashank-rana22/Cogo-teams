@@ -13,6 +13,7 @@
 	}
 
 	&.compared_rate {
+		background: #fcffff;
 		border: 1px solid #88cad1;
 	}
 }

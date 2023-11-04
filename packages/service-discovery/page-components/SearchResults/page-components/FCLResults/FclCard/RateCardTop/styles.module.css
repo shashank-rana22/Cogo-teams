@@ -57,6 +57,12 @@
 	align-items: center;
 	margin-top: 16px;
 
+	:global {
+		.ui_checkbox_style {
+			accent-color: #000 !important;
+		}
+	}
+
 	&.cogo_assured_rate {
 		margin-top: 0;
 	}
