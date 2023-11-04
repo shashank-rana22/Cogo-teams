@@ -1,10 +1,14 @@
 import { Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../../common/Form/getFieldController';
+import QUEST_MODE_KEYS from '../../configurations/quest-mode-key-mappings';
 
 import controls from './get-quest-controls';
 import useCreateQuest from './hooks/useCreateQuest';
 import styles from './styles.module.css';
+
+const { CREATE, EDIT } = QUEST_MODE_KEYS;
 
 function QuestForm({ setParams = () => {}, data = {} }) {
 	const {
@@ -15,6 +19,8 @@ function QuestForm({ setParams = () => {}, data = {} }) {
 		handleClick,
 		handleSubmit,
 	} = useCreateQuest({ setParams, data });
+
+	const MODE = isEmpty(data) ? CREATE : EDIT;
 
 	return (
 		<form onSubmit={handleSubmit(handleClick)}>
@@ -35,6 +41,7 @@ function QuestForm({ setParams = () => {}, data = {} }) {
 								<Element
 									control={control}
 									{...controlItem}
+									disabled={MODE === EDIT}
 								/>
 
 								{errors[name]
@@ -44,18 +51,21 @@ function QuestForm({ setParams = () => {}, data = {} }) {
 					);
 				})}
 			</div>
-			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={() => reset()}>
-					Reset
-				</Button>
-				<Button
-					type="submit"
-					themeType="primary"
-					loading={loading}
-				>
-					Create new
-				</Button>
-			</div>
+			{MODE === CREATE
+				? (
+					<div className={styles.button_container}>
+						<Button themeType="secondary" onClick={() => reset()}>
+							Reset
+						</Button>
+						<Button
+							type="submit"
+							themeType="primary"
+							loading={loading}
+						>
+							Create new
+						</Button>
+					</div>
+				) : null}
 		</form>
 	);
 }

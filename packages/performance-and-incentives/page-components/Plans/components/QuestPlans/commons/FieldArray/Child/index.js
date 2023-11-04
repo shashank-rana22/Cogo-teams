@@ -64,7 +64,7 @@ function Child(props) {
 					style={{
 						height    : '20px',
 						width     : '20px',
-						marginTop : '12px',
+						marginTop : '24px',
 						cursor    : 'pointer',
 					}}
 				/>

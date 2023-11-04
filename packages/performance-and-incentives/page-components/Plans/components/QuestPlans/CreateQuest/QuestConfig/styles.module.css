@@ -1,6 +1,13 @@
-.container {
+.heading {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	margin: 20px 0;
+	font-size: 16px;
+}
+
+.field_container {
 	padding: 16px;
-	margin-top: 16px;
 	background-color: #fff;
 	border-radius: 8px;
 }
