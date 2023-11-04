@@ -8,13 +8,14 @@ const useUpdateAccountTagging = ({ item = {} }) => {
 		method  : 'put',
 		authKey : 'put_payments_outstanding_update_account_taggings',
 	}, { manual: true });
-	const apiTrigger = async ({ currentStatus : val, refetch, setChangeStatus = () => {} }) => {
+	const apiTrigger = async ({ currentStatus : val, refetch, setChangeStatus = () => {}, tagged_person = '' }) => {
 		try {
 			const resp = await trigger({
 				data: {
 					taggedState    : val,
 					entityCode     : item?.entityCode,
 					organizationId : item?.organizationId,
+					taggedUserId   : tagged_person,
 				},
 			});
 

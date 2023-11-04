@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequestBf } from '@cogoport/request';
+import { useRequest } from '@cogoport/request';
 
 const useUpdateLegalDocuments = () => {
-	const [{ loading }, trigger] = useRequestBf({
+	const [{ loading }, trigger] = useRequest({
 		url    : '/themis/upload_legal_documents_to_sharepoint',
 		method : 'post',
 	}, { manual: true });
