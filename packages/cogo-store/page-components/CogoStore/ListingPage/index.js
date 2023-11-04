@@ -22,7 +22,7 @@ function ListingPage() {
 
 	let dataArray = [];
 
-	const { data: productData, loading:productFilterLoading = false } = useGetProductFilterDetail();
+	const { data: productData, loading:productFilterLoading = false, refetch } = useGetProductFilterDetail();
 
 	const [applyCoupon, setApplyCoupon] = useState(getCookie('apply_coupon') === 'true');
 
@@ -37,7 +37,7 @@ function ListingPage() {
 
 	const { office_location } = user_details || {};
 
-	const { updateCart } = useUpdateCart();
+	const { updateCart } = useUpdateCart(refetch);
 
 	const {
 		after_coupon_price, product_images, description, discounted_price, documentation,
@@ -110,7 +110,7 @@ function ListingPage() {
 
 	const handleBuyNow = () => {
 		handleAddToCart();
-		push('/cogo-store/my-cart');
+		push('/cogo-merch/my-cart');
 	};
 
 	const handleVariationColor = (e) => {
@@ -120,7 +120,7 @@ function ListingPage() {
 				color_id: e,
 			}));
 			const { product_id = '' } = query || {};
-			push('/cogo-store/[product_id]', `/cogo-store/${product_id}?colorId=${e}`);
+			push('/cogo-merch/[product_id]', `/cogo-merch/${product_id}?colorId=${e}`);
 		}
 		setAddedToCart(false);
 	};
@@ -139,7 +139,7 @@ function ListingPage() {
 
 	return (
 		<div className={styles.listing_page}>
-			<Header />
+			<Header productData={productData} />
 			<ProductDetails
 				product_images={product_images}
 				product_name={product_name}

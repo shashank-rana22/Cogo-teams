@@ -73,7 +73,7 @@ function HomePageContent({
 								className={styles.list_card}
 								key={item.id}
 								onClick={() => {
-									push('/cogo-store/[product_id]', `/cogo-store/${item.id}`);
+									push('/cogo-merch/[product_id]', `/cogo-merch/${item.id}`);
 								}}
 							>
 								<div className={styles.img_section}>
