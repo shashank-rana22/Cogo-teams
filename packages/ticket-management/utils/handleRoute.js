@@ -21,7 +21,7 @@ export const handleRouteSupply = ({ e, endPoint = '', partnerId = '', service = 
 	e.stopPropagation();
 
 	const supplyPage = `${window.location.origin}/${partnerId}/supply/dashboards/${endPoint}
-	&service=${service}?serialId=${serialId}`;
+	?service=${service}?serialId=${serialId}`;
 
 	window.open(supplyPage, '_blank');
 };
