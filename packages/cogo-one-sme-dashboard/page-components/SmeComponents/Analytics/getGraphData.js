@@ -3,274 +3,108 @@
 function getGraphData() {
 	return [
 		{
-			id    : 'japan',
-			color : 'hsl(358, 70%, 50%)',
-			data  : [
-				{
-					x : 'plane',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'helicopter',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'boat',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'train',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'subway',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'bus',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'car',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'moto',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'bicycle',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'horse',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'skateboard',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'others',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-			],
+			date   : new Date(2019, 5, 12).getTime(),
+			value1 : Number((Math.random() * 1000).toFixed(0)),
+			value2 : Number((Math.random() * 1000).toFixed(0)),
+			value3 : Number((Math.random() * 1000).toFixed(0)),
+			value4 : Number((Math.random() * 1000).toFixed(0)),
+			value5 : Number((Math.random() * 1000).toFixed(0)),
 		},
 		{
-			id    : 'france',
-			color : 'hsl(136, 70%, 50%)',
-			data  : [
-				{
-					x : 'plane',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'helicopter',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'boat',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'train',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'subway',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'bus',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'car',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'moto',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'bicycle',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'horse',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'skateboard',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'others',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-			],
+			date   : new Date(2019, 5, 13).getTime(),
+			value1 : Number((Math.random() * 1000).toFixed(0)),
+			value2 : Number((Math.random() * 1000).toFixed(0)),
+			value3 : Number((Math.random() * 1000).toFixed(0)),
+			value4 : Number((Math.random() * 1000).toFixed(0)),
+			value5 : Number((Math.random() * 1000).toFixed(0)),
 		},
 		{
-			id    : 'us',
-			color : 'hsl(18, 70%, 50%)',
-			data  : [
-				{
-					x : 'plane',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'helicopter',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'boat',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'train',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'subway',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'bus',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'car',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'moto',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'bicycle',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'horse',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'skateboard',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'others',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-			],
+			date   : new Date(2019, 5, 14).getTime(),
+			value1 : Number((Math.random() * 1000).toFixed(0)),
+			value2 : Number((Math.random() * 1000).toFixed(0)),
+			value3 : Number((Math.random() * 1000).toFixed(0)),
+			value4 : Number((Math.random() * 1000).toFixed(0)),
+			value5 : Number((Math.random() * 1000).toFixed(0)),
 		},
 		{
-			id    : 'germany',
-			color : 'hsl(290, 70%, 50%)',
-			data  : [
-				{
-					x : 'plane',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'helicopter',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'boat',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'train',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'subway',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'bus',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'car',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'moto',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'bicycle',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'horse',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'skateboard',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'others',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-			],
+			date   : new Date(2019, 5, 15).getTime(),
+			value1 : Number((Math.random() * 1000).toFixed(0)),
+			value2 : Number((Math.random() * 1000).toFixed(0)),
+			value3 : Number((Math.random() * 1000).toFixed(0)),
+			value4 : Number((Math.random() * 1000).toFixed(0)),
+			value5 : Number((Math.random() * 1000).toFixed(0)),
 		},
 		{
-			id    : 'norway',
-			color : 'hsl(348, 70%, 50%)',
-			data  : [
-				{
-					x : 'plane',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'helicopter',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'boat',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'train',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'subway',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'bus',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'car',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'moto',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'bicycle',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'horse',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'skateboard',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-				{
-					x : 'others',
-					y : Number((Math.random() * 1000).toFixed(0)),
-				},
-			],
+			date   : new Date(2019, 5, 16).getTime(),
+			value1 : Number((Math.random() * 1000).toFixed(0)),
+			value2 : Number((Math.random() * 1000).toFixed(0)),
+			value3 : Number((Math.random() * 1000).toFixed(0)),
+			value4 : Number((Math.random() * 1000).toFixed(0)),
+			value5 : Number((Math.random() * 1000).toFixed(0)),
+		},
+		{
+			date   : new Date(2019, 5, 17).getTime(),
+			value1 : Number((Math.random() * 1000).toFixed(0)),
+			value2 : Number((Math.random() * 1000).toFixed(0)),
+			value3 : Number((Math.random() * 1000).toFixed(0)),
+			value4 : Number((Math.random() * 1000).toFixed(0)),
+			value5 : Number((Math.random() * 1000).toFixed(0)),
+		},
+		{
+			date   : new Date(2019, 5, 18).getTime(),
+			value1 : Number((Math.random() * 1000).toFixed(0)),
+			value2 : Number((Math.random() * 1000).toFixed(0)),
+			value3 : Number((Math.random() * 1000).toFixed(0)),
+			value4 : Number((Math.random() * 1000).toFixed(0)),
+			value5 : Number((Math.random() * 1000).toFixed(0)),
+		},
+		{
+			date   : new Date(2019, 5, 19).getTime(),
+			value1 : Number((Math.random() * 1000).toFixed(0)),
+			value2 : Number((Math.random() * 1000).toFixed(0)),
+			value3 : Number((Math.random() * 1000).toFixed(0)),
+			value4 : Number((Math.random() * 1000).toFixed(0)),
+			value5 : Number((Math.random() * 1000).toFixed(0)),
+		},
+		{
+			date   : new Date(2019, 5, 20).getTime(),
+			value1 : Number((Math.random() * 1000).toFixed(0)),
+			value2 : Number((Math.random() * 1000).toFixed(0)),
+			value3 : Number((Math.random() * 1000).toFixed(0)),
+			value4 : Number((Math.random() * 1000).toFixed(0)),
+			value5 : Number((Math.random() * 1000).toFixed(0)),
+		},
+		{
+			date   : new Date(2019, 5, 21).getTime(),
+			value1 : Number((Math.random() * 1000).toFixed(0)),
+			value2 : Number((Math.random() * 1000).toFixed(0)),
+			value3 : Number((Math.random() * 1000).toFixed(0)),
+			value4 : Number((Math.random() * 1000).toFixed(0)),
+			value5 : Number((Math.random() * 1000).toFixed(0)),
+		},
+		{
+			date   : new Date(2019, 5, 22).getTime(),
+			value1 : Number((Math.random() * 1000).toFixed(0)),
+			value2 : Number((Math.random() * 1000).toFixed(0)),
+			value3 : Number((Math.random() * 1000).toFixed(0)),
+			value4 : Number((Math.random() * 1000).toFixed(0)),
+			value5 : Number((Math.random() * 1000).toFixed(0)),
+		},
+		{
+			date   : new Date(2019, 5, 23).getTime(),
+			value1 : Number((Math.random() * 1000).toFixed(0)),
+			value2 : Number((Math.random() * 1000).toFixed(0)),
+			value3 : Number((Math.random() * 1000).toFixed(0)),
+			value4 : Number((Math.random() * 1000).toFixed(0)),
+			value5 : Number((Math.random() * 1000).toFixed(0)),
+		},
+		{
+			date   : new Date(2019, 5, 24).getTime(),
+			value1 : Number((Math.random() * 1000).toFixed(0)),
+			value2 : Number((Math.random() * 1000).toFixed(0)),
+			value3 : Number((Math.random() * 1000).toFixed(0)),
+			value4 : Number((Math.random() * 1000).toFixed(0)),
+			value5 : Number((Math.random() * 1000).toFixed(0)),
 		},
 	];
 }

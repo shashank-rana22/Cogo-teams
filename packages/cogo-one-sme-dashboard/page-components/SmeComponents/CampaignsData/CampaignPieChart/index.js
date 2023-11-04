@@ -29,6 +29,22 @@ const data = [
 		color : '#F2E3C3',
 	},
 ];
+
+function CenteredMetric({ centerX, centerY }) {
+	return (
+		<text
+			x={centerX}
+			y={centerY}
+			textAnchor="middle"
+			dominantBaseline="central"
+			className={styles.style_component_text}
+		>
+			{data.reduce((acc, itm) => acc + itm.value, 0)}
+		</text>
+
+	);
+}
+
 function CampaignPieChart() {
 	return (
 		<div className={styles.container}>
@@ -53,6 +69,7 @@ function CampaignPieChart() {
 						arcLabelsSkipAngle={15}
 						transitionMode="startAngle"
 						legends={[]}
+						layers={['arcs', 'arcLabels', 'arcLinkLabels', 'legends', CenteredMetric]}
 						colors={data.map((itm) => itm?.color)}
 					/>
 				</div>

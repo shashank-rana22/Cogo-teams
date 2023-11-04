@@ -42,12 +42,13 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 50%;
-	padding-right: 20px;
+	padding: 0 20px;
 }
 
 .legend_item_name {
 	display: flex;
 	align-items: center;
+	font-size: 14px;
 }
 
 .legends_circle {
@@ -58,7 +59,13 @@
 }
 
 .legends_value {
-	font-size: 22px;
+	font-size: 24px;
 	font-weight: 600;
 	text-align: right;
+}
+
+.style_component_text {
+	font-size: 26px;
+	font-weight: 700;
+	color: #0c0507;
 }
