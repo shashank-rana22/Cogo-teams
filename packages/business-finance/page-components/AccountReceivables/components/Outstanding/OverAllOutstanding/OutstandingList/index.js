@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import {
-	Button, cl, TabPanel, Tabs, Tooltip, Popover, Pill, Modal,
+	Button, cl, TabPanel, Tabs, Tooltip, Popover, Pill,
 } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -11,7 +11,6 @@ import React, { useState } from 'react';
 
 import { getTaxLabels } from '../../../../constants/index';
 import useOpenInvoicesReport from '../../../../hooks/useOpenInvoicesReport';
-import useUpdateAccountTagging from '../../../../hooks/useUpdateAccountTagging';
 import useUpdateOutstandingList from '../../../../hooks/useUpdateOutstandingList';
 import checkPermission from '../../../../Utils/checkPermission';
 
@@ -38,7 +37,7 @@ function OutstandingList({
 	const [activeTab, setActiveTab] = useState('invoice_details');
 	const [showLedgerModal, setShowLedgerModal] = useState(false);
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
-	const [currentstatus, setCurrentStatus] = useState('');
+	const [currentStatus, setCurrentStatus] = useState('');
 	const [changeStatus, setChangeStatus] = useState(false);
 
 	const { isDownloading = false, downloadAROustanding = () => {} } = useOpenInvoicesReport({ organizationId });
@@ -52,11 +51,6 @@ function OutstandingList({
 			setActiveTab(val);
 			setIsAccordionActive(true);
 		}
-	};
-
-	const { apiTrigger :changeStatusTrigger } = useUpdateAccountTagging({ item });
-	const onSubmit = () => {
-		(changeStatusTrigger(currentstatus, refetch));
 	};
 
 	const {
@@ -334,19 +328,14 @@ function OutstandingList({
 			) : null}
 
 			{changeStatus ? (
-				<Modal show={changeStatus} onClose={() => setChangeStatus(false)}>
-					<Modal.Header title="Change Current Account Status" />
-					<Modal.Body>
-						<ChangeStatus
-							item={item}
-							currentstatus={currentstatus}
-							setCurrentStatus={setCurrentStatus}
-						/>
-					</Modal.Body>
-					<Modal.Footer>
-						<Button onClick={onSubmit}>Submit</Button>
-					</Modal.Footer>
-				</Modal>
+				<ChangeStatus
+					item={item}
+					currentStatus={currentStatus}
+					setCurrentStatus={setCurrentStatus}
+					changeStatus={changeStatus}
+					setChangeStatus={setChangeStatus}
+					refetch={refetch}
+				/>
 			) : null}
 		</div>
 	);
