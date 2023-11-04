@@ -64,7 +64,8 @@ function Header({ productData = {} }) {
 				>
 					<img src={CART} alt="" height="14px" style={{ marginRight: '12px' }} />
 					My Cart
-					<div className={styles.cart_count}>{cart_items_count}</div>
+					{cart_items_count > GLOBAL_CONSTANTS.zeroth_index
+						? <div className={styles.cart_count}>{cart_items_count}</div> : null}
 				</div>
 				{is_hr_admin ? (
 					<div
