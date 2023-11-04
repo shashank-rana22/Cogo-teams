@@ -128,7 +128,7 @@ function OrderHistory() {
 													className={styles.order_item}
 													key={item?.id}
 													aria-hidden
-													onClick={() => push(`/cogo-store/order-details?id=${item.id}`)}
+													onClick={() => push(`/cogo-merch/order-details?id=${item.id}`)}
 												>
 													<div className={styles.order_item_id}>
 														{getOrderData(item?.order_items_list)}

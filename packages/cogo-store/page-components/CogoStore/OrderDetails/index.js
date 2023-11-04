@@ -5,7 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { getMonth, getDate, getYear, startCase } from '@cogoport/utils';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import getOrderColumns from '../../../commons/MyOrderColumns/getOrderColumns';
 import useCancelOrder from '../../../hooks/useCancelOrder';
@@ -20,7 +20,6 @@ import styles from './styles.module.css';
 
 function OrderDetails() {
 	const { query, push } = useRouter();
-	const [showFullDescription, setShowFullDescription] = useState(false);
 
 	const {
 		control,
@@ -37,7 +36,7 @@ function OrderDetails() {
 	const { data: getOrderData, getOrderDetails } = useGetOrderDetails({ id });
 	const {
 		order_items_list, order_ticket_id, delivery_date, total_amount,
-		order_status, created_at, currency_symbol,
+		order_status, currency_symbol, updated_at,
 	} = getOrderData || {};
 
 	const { data: productData } = useGetProductFilterDetail();
@@ -56,14 +55,14 @@ function OrderDetails() {
 	};
 
 	const time = formatDate({
-		date       : created_at,
+		date       : updated_at,
 		dateFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
 		formatType : 'time',
 	});
 
-	const month = getMonth(new Date(created_at));
-	const date = getDate(new Date(created_at));
-	const year = getYear(new Date(created_at));
+	const month = getMonth(new Date(updated_at));
+	const date = getDate(new Date(updated_at));
+	const year = getYear(new Date(updated_at));
 
 	const { updateStatus } = useUpdateStatus({ getOrderDetails });
 
@@ -93,7 +92,7 @@ function OrderDetails() {
 		setValue('order_status', order_status);
 	}, [delivery_date, getOrderData?.delivery_date, order_status, setValue]);
 
-	const columns = getOrderColumns({ color, currency_symbol, showFullDescription, setShowFullDescription });
+	const columns = getOrderColumns({ color, currency_symbol });
 
 	return (
 		<>
@@ -102,7 +101,7 @@ function OrderDetails() {
 
 				<div className={styles.order_detail_container}>
 					<div className={styles.order_detail_header}>
-						<IcMArrowBack style={{ cursor: 'pointer' }} onClick={() => push('/cogo-store')} />
+						<IcMArrowBack style={{ cursor: 'pointer' }} onClick={() => push('/cogo-merch')} />
 						<span>Order Details</span>
 					</div>
 					<div className={styles.order_detail_info}>
@@ -154,7 +153,7 @@ function OrderDetails() {
 								) : (<span className={styles.order_expected_date}>in 7 Days</span>)}
 							</div>
 							<div className={styles.order_expected_right}>
-								{order_status !== 'cancelled' ? (
+								{(!['cancelled', 'delivered'].includes(order_status)) ? (
 									<Button
 										size="md"
 										themeType="secondary"

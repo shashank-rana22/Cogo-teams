@@ -110,7 +110,7 @@ function ListingPage() {
 
 	const handleBuyNow = () => {
 		handleAddToCart();
-		push('/cogo-store/my-cart');
+		push('/cogo-merch/my-cart');
 	};
 
 	const handleVariationColor = (e) => {
@@ -120,7 +120,7 @@ function ListingPage() {
 				color_id: e,
 			}));
 			const { product_id = '' } = query || {};
-			push('/cogo-store/[product_id]', `/cogo-store/${product_id}?colorId=${e}`);
+			push('/cogo-merch/[product_id]', `/cogo-merch/${product_id}?colorId=${e}`);
 		}
 		setAddedToCart(false);
 	};

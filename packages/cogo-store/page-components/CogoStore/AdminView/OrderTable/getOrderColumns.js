@@ -70,7 +70,7 @@ const getOrderColumns = ({ STATUS_OPTIONS = [], updateStatus = () => {}, push })
 					themeType="secondary"
 					style={{ marginLeft: '6px' }}
 					aria-hidden
-					onClick={() => { push(`/cogo-store/order-details?id=${item.id}`); }}
+					onClick={() => { push(`/cogo-merch/order-details?id=${item.id}`); }}
 				>
 					<span>View</span>
 					<IcMEyeopen

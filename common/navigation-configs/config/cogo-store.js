@@ -1,30 +1,30 @@
 const cogoStore = {
-	'/[partner_id]/cogo-store': {
+	'/[partner_id]/cogo-merch': {
 		layoutType : 'no_header',
 		navigation : 'cogo_store',
 		isMainNav  : true,
 	},
-	'/[partner_id]/cogo-store/[product_id]': {
+	'/[partner_id]/cogo-merch/[product_id]': {
 		layoutType : 'no_header',
 		navigation : 'cogo_store',
 		isMainNav  : false,
 	},
-	'/[partner_id]/cogo-store/my-cart': {
+	'/[partner_id]/cogo-merch/my-cart': {
 		layoutType : 'no_header',
 		navigation : 'cogo_store',
 		isMainNav  : false,
 	},
-	'/[partner_id]/cogo-store/order-details': {
+	'/[partner_id]/cogo-merch/order-details': {
 		layoutType : 'no_header',
 		navigation : 'cogo_store',
 		isMainNav  : false,
 	},
-	'/[partner_id]/cogo-store/order-history': {
+	'/[partner_id]/cogo-merch/order-history': {
 		layoutType : 'no_header',
 		navigation : 'cogo_store',
 		isMainNav  : false,
 	},
-	'/[partner_id]/cogo-store/admin-view': {
+	'/[partner_id]/cogo-merch/admin-view': {
 		layoutType : 'no_header',
 		navigation : 'cogo_store',
 		isMainNav  : false,

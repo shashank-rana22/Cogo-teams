@@ -82,7 +82,7 @@ function MyCart() {
 					<div className={styles.cart_body}>
 						<div className={styles.shopping_card}>
 							<div className={styles.shopping_card_header}>
-								Shopping Card
+								Shopping Cart
 							</div>
 							<div className={styles.table_container}>
 								{!isEmpty(list) || loading ? (
@@ -97,7 +97,7 @@ function MyCart() {
 							<div className={styles.table_footer}>
 								<Button
 									themeType="secondary"
-									onClick={() => push('/cogo-store')}
+									onClick={() => push('/cogo-merch')}
 								>
 									<span className={styles.btn_txt}>
 										<IcMArrowLeft />

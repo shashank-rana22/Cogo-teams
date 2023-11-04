@@ -55,14 +55,14 @@ function OrderConfirmation({ data = {}, office_location = '' }) {
 					<Button
 						themeType="secondary"
 						className={styles.cancel_btn}
-						onClick={() => push('/cogo-store')}
+						onClick={() => push('/cogo-merch')}
 					>
 						Go to Store
 
 					</Button>
 					<Button
 						themeType="primary"
-						onClick={() => push(`/cogo-store/order-details?id=${id}`)}
+						onClick={() => push(`/cogo-merch/order-details?id=${id}`)}
 					>
 						View Orders
 						<IcMArrowRight width={16} height={16} />

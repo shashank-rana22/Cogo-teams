@@ -19,7 +19,7 @@ function Header({ productData = {} }) {
 					className={styles.image_header}
 					style={{ cursor: 'pointer' }}
 					aria-hidden
-					onClick={() => push('/cogo-store')}
+					onClick={() => push('/cogo-merch')}
 				>
 					{' '}
 					<img
@@ -50,7 +50,7 @@ function Header({ productData = {} }) {
 				<div
 					className={styles.right_header_text}
 					aria-hidden
-					onClick={() => push('/cogo-store/order-history')}
+					onClick={() => push('/cogo-merch/order-history')}
 				>
 					<IcMClock height={14} style={{ marginRight: '4px' }} />
 					Order history
@@ -59,7 +59,7 @@ function Header({ productData = {} }) {
 				<div
 					className={styles.right_header_text}
 					aria-hidden
-					onClick={() => push('/cogo-store/my-cart')}
+					onClick={() => push('/cogo-merch/my-cart')}
 					style={{ position: 'relative' }}
 				>
 					<img src={CART} alt="" height="14px" style={{ marginRight: '12px' }} />
@@ -71,7 +71,7 @@ function Header({ productData = {} }) {
 					<div
 						className={styles.right_header_text}
 						aria-hidden
-						onClick={() => push('/cogo-store/admin-view')}
+						onClick={() => push('/cogo-merch/admin-view')}
 					>
 						Admin View
 						<IcMArrowNext style={{ marginLeft: '3px', cursor: 'pointer' }} />
