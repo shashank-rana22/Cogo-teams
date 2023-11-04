@@ -37,12 +37,12 @@ function OrderDetails() {
 	const { data: getOrderData, getOrderDetails } = useGetOrderDetails({ id });
 	const {
 		order_items_list, order_ticket_id, delivery_date, total_amount,
-		order_status, created_at,
+		order_status, created_at, currency_symbol,
 	} = getOrderData || {};
 
 	const { data: productData } = useGetProductFilterDetail();
 
-	const { is_hr_admin, currency_symbol } = productData || {};
+	const { is_hr_admin } = productData || {};
 
 	const { color } = productData || {};
 
@@ -97,7 +97,7 @@ function OrderDetails() {
 
 	return (
 		<>
-			<Header />
+			<Header productData={productData} />
 			<div className={styles.order_detail_outer}>
 
 				<div className={styles.order_detail_container}>
