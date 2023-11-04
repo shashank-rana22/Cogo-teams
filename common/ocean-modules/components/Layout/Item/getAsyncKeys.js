@@ -558,6 +558,14 @@ const getAsyncFields = (key) => {
 				page_limit: 10,
 			},
 		},
+		fcl_freight_local_contracts: {
+			valueKey      : 'value',
+			labelKey      : 'label',
+			asyncKey      : 'list_contract_fcl_freight_local_services',
+			defaultParams : {
+				page_limit: 10,
+			},
+		},
 		lcl_freight_contracts: {
 			valueKey      : 'value',
 			labelKey      : 'label',

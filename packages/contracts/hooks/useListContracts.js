@@ -20,10 +20,15 @@ const useListContracts = () => {
 			const res = await trigger({
 				params: {
 					filters: {
-						service_types : ['fcl_freight', 'lcl_freight', 'air_freight'],
+						service_types: ['fcl_freight',
+							'lcl_freight',
+							'air_freight',
+							'fcl_freight_local',
+							'lcl_freight_local',
+						],
 						status,
-						sort_by       : status === 'active' ? 'updated_at' : undefined,
-						q             : q || undefined,
+						sort_by : status === 'active' ? 'updated_at' : undefined,
+						q       : q || undefined,
 					},
 					services_data_required             : true,
 					contract_utilisation_data_required : true,

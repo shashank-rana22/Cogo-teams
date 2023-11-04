@@ -35,26 +35,46 @@ function Header({ activePair, handleUpdateContract, stats }) {
 	const originName = activePair?.origin?.split('(')[0];
 	const destinationCode = activePair?.destination_code;
 	const destinationName = activePair?.destination?.split('(')[0];
+	const singlePortCode = activePair?.single_port_code;
+	const singlePortName = activePair?.single_port?.split('(')[0];
 	return (
 		<div className={styles.heading}>
 			<div className={styles.port_pair}>
 
-				<div>
-					{`${originName}(${originCode})`}
-				</div>
-				<IcMPortArrow />
-				<div>
-					{`${destinationName}(${destinationCode})`}
-				</div>
+				{singlePortCode ? (
+					<div>
+						{`${singlePortName}(${singlePortCode})`}
+					</div>
+				) : (
+					<>
+						<div>
+							{`${originName}(${originCode})`}
+						</div>
+						<IcMPortArrow />
+						<div>
+							{`${destinationName}(${destinationCode})`}
+						</div>
+					</>
+				)}
 			</div>
 
 			<div className={styles.pills}>
+				{activePair?.at_actuals && (
+					<div key="at_actuals">
+						<Pill
+							size="md"
+							color="#DFE1EF"
+						>
+							At Actuals
+						</Pill>
+					</div>
+				)}
 				{keys.map((item) => {
 					const content = item === 'weight' ? `${activePair[item]} 
 					${keysToMap[item][activePair?.service_type]}`
 						: `${activePair[item]} ${keysToMap[item]}`;
 					return (
-						<div>
+						<div key={item}>
 							{activePair[item] ? (
 								<Pill
 									size="md"

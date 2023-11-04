@@ -5,19 +5,35 @@ import { isEmpty } from '@cogoport/utils';
 
 import LoadingState from '../../../../../../common/LoadingState';
 import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../../../constants/leaderboard-reporttype-constants';
+import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../constants/leaderboard-viewtype-constants';
 
 import getListColumnMapping from './get-list-column-mapping';
 import ListItem from './ListItem';
 import styles from './styles.module.css';
 
-const DOTS = 3;
+const { ADMIN, OWNER } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 const { ADMIN_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
+
+const getListItem = ({ viewType, currLevel, userPosition, listItem, index, currentUserData }) => {
+	if ([ADMIN, OWNER].includes(viewType) || !isEmpty(currLevel.user) || currLevel.isExpanded) return listItem;
+
+	if (userPosition >= 10 && index === 6) return currentUserData;
+
+	return listItem;
+};
+
+const getList = ({ list = [], viewType, currLevel }) => {
+	if ([ADMIN, OWNER].includes(viewType) || !isEmpty(currLevel.user) || currLevel.isExpanded) return list;
+
+	return list.slice(0, 10) || [];
+};
 
 function List(props) {
 	const {
 		listLoading, list, viewType, currLevel, setCurrLevel,
 		levelStack, setLevelStack, currentUserData, isChannel,
+		userPosition,
 	} = props;
 
 	const { user = {} }	 = useSelector((state) => state?.profile || {});
@@ -55,40 +71,33 @@ function List(props) {
 			</div>
 
 			<div className={styles.list_body_container}>
-				{list.map((listItem) => (
-					<ListItem
-						key={listItem.id}
-						listItem={listItem}
-						user={user}
-						viewType={viewType}
-						currLevel={currLevel}
-						setCurrLevel={setCurrLevel}
-						isChannel={isChannel}
-						levelStack={levelStack}
-						setLevelStack={setLevelStack}
-						LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
-					/>
-				))}
+				{getList({ list, viewType, currLevel }).map((listItem, index) => {
+					const item = getListItem({
+						viewType,
+						currLevel,
+						userPosition,
+						listItem,
+						index,
+						currentUserData,
+					});
 
-				{(!isEmpty(currentUserData) && isEmpty(list.find((item) => item.user?.id === user.id))) ? (
-					<>
-						<div className={styles.ellipsis_container}>
-							{[...Array(DOTS).keys()].map((key) => <span key={key} className={styles.dot}>.</span>)}
-						</div>
-
+					return (
 						<ListItem
-							listItem={currentUserData}
+							key={listItem.id}
+							listItem={item}
 							user={user}
+							index={index}
 							viewType={viewType}
 							currLevel={currLevel}
 							setCurrLevel={setCurrLevel}
 							isChannel={isChannel}
 							levelStack={levelStack}
+							userPosition={userPosition}
 							setLevelStack={setLevelStack}
 							LIST_COLUMN_MAPPING={LIST_COLUMN_MAPPING}
 						/>
-					</>
-				) : null}
+					);
+				})}
 			</div>
 		</div>
 	);

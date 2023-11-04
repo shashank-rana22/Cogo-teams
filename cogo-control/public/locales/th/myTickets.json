@@ -174,5 +174,6 @@
     "apply": "นำมาใช้",
     "reset": "รีเซ็ต",
     "serial_id": "ID อนุกรม",
-    "id_creator": "ผู้สร้าง ID"
+    "id_creator": "ผู้สร้าง ID",
+    "messaged_at":"ส่งข้อความที่"
 }

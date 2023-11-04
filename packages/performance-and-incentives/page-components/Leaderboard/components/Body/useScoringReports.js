@@ -31,7 +31,7 @@ const getUserRmIdsFilter = ({ currLevel, levelStack }) => {
 };
 
 const useScoringReports = (props) => {
-	const { currLevel, dateRange, entity, isChannel, levelStack } = props;
+	const { currLevel, dateRange, entity, isChannel, levelStack, setUserPosition } = props;
 
 	const { incentive_leaderboard_viewtype, user } = useSelector(({ profile }) => profile);
 
@@ -96,6 +96,12 @@ const useScoringReports = (props) => {
 			},
 		}));
 	}, [searchQuery, dateRange, entity, setParams]);
+
+	useEffect(() => {
+		const userPostion = list.findIndex((item) => item.user?.id === user?.id);
+
+		setUserPosition(userPostion || 0);
+	}, [list, setUserPosition, user.id]);
 
 	return {
 		list,

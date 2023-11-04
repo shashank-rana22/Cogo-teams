@@ -174,5 +174,6 @@
     "apply": "Apply",
     "reset": "Reset",
     "serial_id": "Serial ID",
-    "id_creator": "ID creator"
+    "id_creator": "ID creator",
+    "messaged_at":"Messaged At"
 }
