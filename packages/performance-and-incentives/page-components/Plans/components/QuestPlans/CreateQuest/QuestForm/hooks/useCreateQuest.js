@@ -17,7 +17,7 @@ const getFormattedData = ({ data }) => {
 	};
 };
 
-const useCreateQuest = ({ setParams = () => {}, data = {} }) => {
+const useCreateQuest = ({ setParams = () => {}, data = {}, setShowOverlapped = () => {} }) => {
 	const router = useRouter();
 
 	const { control, handleSubmit, watch, reset, formState: { errors = {} } } = useForm({
@@ -66,6 +66,7 @@ const useCreateQuest = ({ setParams = () => {}, data = {} }) => {
 		};
 
 		if (date_range || agent_scoring_config_id) {
+			setShowOverlapped(true);
 			setParams((p) => (
 				{
 					...p,
@@ -76,8 +77,10 @@ const useCreateQuest = ({ setParams = () => {}, data = {} }) => {
 					},
 				}
 			));
+		} else {
+			setShowOverlapped(false);
 		}
-	}, [date_range, agent_scoring_config_id, setParams]);
+	}, [date_range, agent_scoring_config_id, setParams, setShowOverlapped]);
 
 	return {
 		loading,

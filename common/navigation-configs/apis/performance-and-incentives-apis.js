@@ -65,6 +65,11 @@ const performance_and_incentives = {
 			access_type  : 'private',
 			service_name : 'agent_scoring',
 		},
+		{
+			api          : 'post_agent_scoring_quest_attributes',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
 	],
 	performance_and_incentives_leaderboard: [
 		{

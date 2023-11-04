@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 const { CREATE, EDIT } = QUEST_MODE_KEYS;
 
-function QuestForm({ setParams = () => {}, data = {} }) {
+function QuestForm({ setParams = () => {}, data = {}, setShowOverlapped = () => {} }) {
 	const {
 		loading,
 		control,
@@ -18,7 +18,7 @@ function QuestForm({ setParams = () => {}, data = {} }) {
 		reset,
 		handleClick,
 		handleSubmit,
-	} = useCreateQuest({ setParams, data });
+	} = useCreateQuest({ setParams, data, setShowOverlapped });
 
 	const MODE = isEmpty(data) ? CREATE : EDIT;
 

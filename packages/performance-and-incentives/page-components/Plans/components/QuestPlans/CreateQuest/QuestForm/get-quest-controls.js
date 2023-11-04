@@ -18,7 +18,7 @@ const controls = [
 	},
 	{
 		name                  : 'date_range',
-		label                 : 'Starts at',
+		label                 : 'Duration',
 		type                  : 'dateRangePicker',
 		isPreviousDaysAllowed : false,
 		placeholder           : 'Enter Name',

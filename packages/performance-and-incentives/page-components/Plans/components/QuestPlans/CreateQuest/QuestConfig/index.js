@@ -38,6 +38,7 @@ function QuestConfig({ quest_id = null, data = {} }) {
 					errors={errors}
 					rules={{ required: 'Required' }}
 					style={{ width: '84%' }}
+					value={data?.quest_string}
 				/>
 
 				<FieldArray

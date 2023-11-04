@@ -1,15 +1,22 @@
+import useDeactivateQuest from '../hooks/useDeactivateQuest';
 import useGetQuestList from '../hooks/useGetQuestList';
 
 import Header from './Header';
 import List from './List';
-// import useGetQuestList from './useGetQuestList';
 
-function ListQuests({ setMode = () => {} }) {
-	const { loading, list, paginationData, getNextPage, params, setParams } = useGetQuestList({ manual: false });
+function ListQuests() {
+	const {
+		loading,
+		list,
+		paginationData, getNextPage, params, setParams,
+		refetch,
+	} = useGetQuestList({ manual: false });
+
+	const { handleClick } = useDeactivateQuest({ afterDeactivate: refetch });
 
 	return (
 		<div>
-			<Header setMode={setMode} />
+			<Header />
 
 			<List
 				loading={loading}
@@ -18,6 +25,7 @@ function ListQuests({ setMode = () => {} }) {
 				params={params}
 				setParams={setParams}
 				getNextPage={getNextPage}
+				handleDeactivate={handleClick}
 			/>
 		</div>
 	);

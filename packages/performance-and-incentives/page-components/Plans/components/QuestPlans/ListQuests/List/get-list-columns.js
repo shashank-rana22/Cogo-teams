@@ -1,11 +1,12 @@
-import { Pill, cl } from '@cogoport/components';
+import { Pill, Popover, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMArrowRotateVertical } from '@cogoport/icons-react';
+import { IcMArrowRotateVertical, IcMOverflowDot } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import SCORING_PLAN_STATUS_COLOUR_MAPPING from '../../../../constants/scoring-plan-status-colour-mapping';
 
+import Actions from './Actions';
 import styles from './styles.module.css';
 
 const handleSort = ({ params = {}, setParams = () => {}, sortBy }) => {
@@ -22,7 +23,7 @@ const handleSort = ({ params = {}, setParams = () => {}, sortBy }) => {
 
 const getListColumns = (props) => {
 	const {
-		params = {}, setParams = () => {},
+		params = {}, setParams = () => {}, handleDeactivate = () => {},
 	} = props;
 	const LIST_COLUMNS = [
 		{
@@ -95,7 +96,6 @@ const getListColumns = (props) => {
 				}) : '___'
 			),
 		},
-
 		{
 			id  : 'created_at',
 			key : 'created_at',
@@ -115,6 +115,35 @@ const getListColumns = (props) => {
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 					formatType : 'date',
 				}) : '___'
+			),
+		},
+		{
+			id       : 'actions',
+			key      : 'actions',
+			Header   : <div className={styles.heading}>ACTIONS</div>,
+			accessor : ({ id }) => (
+				<div className={styles.actions}>
+
+					<div>
+						<Popover
+							// visible={activeActionId === id && !showActivationModal}
+							placement="left"
+							interactive
+							render={(
+								<Actions quest_id={id} handleDeactivate={handleDeactivate} />
+							)}
+							// onClickOutside={() => setActiveActionId(null)}
+						>
+							<div className={styles.action_icon_container}>
+								<IcMOverflowDot
+									width={16}
+									height={16}
+									// onClick={() => setActiveActionId((pvId) => (pvId === id ? null : id))}
+								/>
+							</div>
+						</Popover>
+					</div>
+				</div>
 			),
 		},
 	];

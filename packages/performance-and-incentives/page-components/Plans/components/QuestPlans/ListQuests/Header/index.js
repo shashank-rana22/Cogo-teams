@@ -1,12 +1,15 @@
 import { Button } from '@cogoport/components';
-
-import MODE_KEYS_MAPPING from '../../configurations/active-mode-key-mapping';
+import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-const { CREATE } = MODE_KEYS_MAPPING;
+function Header() {
+	const { push } = useRouter();
 
-function Header({ setMode = () => {} }) {
+	const onClickCreate = () => {
+		push('/performance-and-incentives/plans?tab=quest_plans&mode=create');
+	};
+
 	return (
 		<div className={styles.header}>
 			<h2 className={styles.heading}>Quests</h2>
@@ -15,7 +18,7 @@ function Header({ setMode = () => {} }) {
 				size="lg"
 				themeType="primary"
 				type="button"
-				onClick={() => setMode(CREATE)}
+				onClick={onClickCreate}
 			>
 				Create Quest
 			</Button>

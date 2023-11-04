@@ -7,13 +7,15 @@ import getListColumns from './get-list-columns';
 import styles from './styles.module.css';
 
 function List(props) {
-	const { list = [], paginationData, getNextPage, loading, params = {}, setParams } = props;
+	const {
+		list = [], paginationData, getNextPage, loading, params = {}, setParams, handleDeactivate, showEmpty = false,
+	} = props;
 
 	const { page, total_count, page_limit } = paginationData || {};
 
-	const LIST_COLUMNS = getListColumns({ params, setParams });
+	const LIST_COLUMNS = getListColumns({ params, setParams, handleDeactivate });
 
-	if (!loading && isEmpty(list)) {
+	if ((!loading && isEmpty(list)) || showEmpty) {
 		return (
 			<EmptyState
 				flexDirection="column"

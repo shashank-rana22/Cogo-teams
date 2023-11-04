@@ -1,5 +1,9 @@
+import { IcMCenterAlign } from '@cogoport/icons-react';
+
 import List from '../../ListQuests/List';
 import useGetQuestList from '../hooks/useGetQuestList';
+
+import styles from './styles.module.css';
 
 function OverlappedQuest({ params = {}, setParams = () => {} }) {
 	const {
@@ -10,14 +14,20 @@ function OverlappedQuest({ params = {}, setParams = () => {} }) {
 	} = useGetQuestList({ params, setParams });
 
 	return (
-		<List
-			loading={loading}
-			list={list}
-			paginationData={paginationData}
-			getNextPage={getNextPage}
-			params={params}
-			setParams={setParams}
-		/>
+		<>
+			<div className={styles.heading}>
+				<IcMCenterAlign height={18} width={18} />
+				Overlapped Quests
+			</div>
+			<List
+				loading={loading}
+				list={list}
+				paginationData={paginationData}
+				getNextPage={getNextPage}
+				params={params}
+				setParams={setParams}
+			/>
+		</>
 	);
 }
 
