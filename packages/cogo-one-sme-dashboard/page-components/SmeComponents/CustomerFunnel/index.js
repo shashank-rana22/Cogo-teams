@@ -68,6 +68,24 @@ function CustomerFunnel() {
 						<div
 							key={itm}
 							className={styles.graph_labels_item}
+							onMouseEnter={() => {
+								funnelGraphRef.current.updateData(
+									{
+										...data,
+										values: data.values.map(
+											(curEle, ind) => {
+												if (ind !== index) {
+													return curEle;
+												}
+												return [100, curEle[1] + 100, 100];
+											},
+										),
+									},
+								);
+							}}
+							onMouseLeave={() => {
+								funnelGraphRef.current.updateData(data);
+							}}
 						>
 							<div>
 								{itm}

@@ -11,8 +11,7 @@ const useSmeDashboardStats = ({ widgetBlocks = null }) => {
 		url    : '/get_omnichannel_sme_dashboard',
 		method : 'get',
 	}, {
-		manual     : true,
-		autoCancel : false,
+		manual: true,
 	});
 
 	const getSmeDashboardStats = useCallback(

@@ -7,6 +7,11 @@
 	border-radius: 6px;
 }
 
+.loading_container {
+	align-items: center;
+	justify-content: center;
+}
+
 .container_left_body {
 	display: flex;
 	flex-direction: column;
@@ -48,9 +53,15 @@
 .total_gain {
 	display: flex;
 	align-items: center;
-	font-size: 32px;
+	font-size: 30px;
 	font-weight: 500;
 	color: #212121;
+
+	:global {
+		.ui_percentage_view {
+			font-size: 12px;
+		}
+	}
 }
 
 .label_transaction {

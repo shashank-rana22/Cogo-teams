@@ -26,6 +26,10 @@ function PercentageChange({
 	percentageChanged = 0,
 	showArrows = false,
 }) {
+	if (percentageChanged === 'initial') {
+		return null;
+	}
+
 	return (
 		<div
 			className={cl`${styles.percentage_change} ${cl.ns('percentage_view')}`}

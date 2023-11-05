@@ -1,4 +1,4 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
@@ -7,6 +7,7 @@ import { Image } from '@cogoport/next';
 import React from 'react';
 
 import { PercentageChange } from '../../../common/Elements';
+import calcChange from '../../../helpers/calcChange';
 import useSmeDashboardStats from '../../../hooks/useSmeDashboardStats';
 
 import DataView from './DataView';
@@ -14,8 +15,8 @@ import styles from './styles.module.css';
 
 const FALLBACK_AMOUNT = 0;
 
-const ITEM = {
-	total_amount                   : 70000,
+const DEFAULT_ITEMS = {
+	total_amount                   : 0,
 	currency                       : 'USD',
 	percentage_gain                : 3,
 	total_transactions             : 40,
@@ -39,7 +40,35 @@ function RevenueContainer({ widgetBlocks = null }) {
 		dashboardLoading = false,
 	} = useSmeDashboardStats({ widgetBlocks });
 
-	console.log('dashboardLoading:', dashboardLoading, dashboardData);
+	const { total_revenue_data = {} } = dashboardData || {};
+
+	const {
+		current_data = {},
+		previous_data = {},
+	} = total_revenue_data || {};
+
+	const totalRevPercentageChange = calcChange({
+		currVal : current_data?.total_revenue,
+		prevVal : previous_data?.total_revenue,
+	});
+
+	const totalCouPercentageChange = calcChange({
+		currVal : current_data?.total_revenue,
+		prevVal : previous_data?.total_revenue,
+	});
+
+	if (dashboardLoading) {
+		return (
+			<div className={cl`${styles.container} ${styles.loading_container}`}>
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.cargo_insurance_loader}
+					height={200}
+					width={200}
+					alt="load"
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -56,16 +85,17 @@ function RevenueContainer({ widgetBlocks = null }) {
 					<div className={styles.transaction_container}>
 						<div className={styles.total_gain}>
 							{formatAmount({
-								amount   : Number(ITEM?.total_amount) || FALLBACK_AMOUNT,
-								currency : ITEM?.currency || geo.country.currency.code,
+								amount   : Number((current_data?.total_revenue || 0)) || FALLBACK_AMOUNT,
+								currency : DEFAULT_ITEMS?.currency || geo.country.currency.code,
 								options  : {
 									style                 : 'currency',
 									currencyDisplay       : 'symbol',
-									maximumFractionDigits : 0,
+									notation              : 'compact',
+									maximumFractionDigits : 2,
 								},
 							})}
 
-							<PercentageChange percentageChanged={ITEM?.percentage_gain} />
+							<PercentageChange percentageChanged={totalRevPercentageChange} />
 						</div>
 
 						<div className={styles.label_transaction}>
@@ -79,8 +109,8 @@ function RevenueContainer({ widgetBlocks = null }) {
 						</div>
 
 						<div className={styles.total_transactions}>
-							{ITEM?.total_transactions || 0}
-							<PercentageChange percentageChanged={ITEM?.percentage_change_transactions} />
+							{current_data?.total_count || 0}
+							<PercentageChange percentageChanged={totalCouPercentageChange} />
 						</div>
 					</div>
 				</div>
@@ -89,9 +119,9 @@ function RevenueContainer({ widgetBlocks = null }) {
 			<div className={styles.data_container}>
 				<div className={styles.organic_container}>
 					<DataView
-						amount={ITEM?.organic_amount}
-						currency={ITEM?.organic_currency}
-						transactions={ITEM?.organic_transactions}
+						amount={current_data?.organic_revenue || 0}
+						currency={current_data?.organic_currency || DEFAULT_ITEMS?.currency}
+						transactions={current_data?.organic_count || 0}
 						geo={geo}
 						title="Organic"
 					/>
@@ -112,23 +142,29 @@ function RevenueContainer({ widgetBlocks = null }) {
 					<div className={styles.inorganic_body}>
 						<div className={styles.allocated_body}>
 							<DataView
-								amount={ITEM?.allocated_amount}
-								currency={ITEM?.allocated_currency}
-								transactions={ITEM?.allocated_transactions}
+								amount={current_data?.inorganic_allocated_revenue}
+								currency={current_data?.inorganic_currency || DEFAULT_ITEMS?.currency}
+								transactions={current_data?.inorganic_allocated_count}
 								geo={geo}
 								title="Allocated"
-								showGrowth="positive"
+								showGrowth={calcChange({
+									currVal : current_data?.inorganic_allocated_revenue,
+									prevVal : previous_data?.inorganic_allocated_revenue,
+								}) > 0 ? 'positive' : 'negative'}
 							/>
 						</div>
 
 						<div className={styles.allocated_body}>
 							<DataView
-								amount={ITEM?.non_allocated_amount}
-								currency={ITEM?.non_allocated_currency}
-								transactions={ITEM?.non_allocated_transactions}
+								amount={current_data?.inorganic_unallocated_revenue}
+								currency={current_data?.inorganic_currency || DEFAULT_ITEMS?.currency}
+								transactions={current_data?.inorganic_unallocated_count}
 								geo={geo}
 								title="Not - Allocated"
-								showGrowth="negative"
+								showGrowth={calcChange({
+									currVal : current_data?.inorganic_unallocated_revenue,
+									prevVal : previous_data?.inorganic_unallocated_revenue,
+								}) > 0 ? 'positive' : 'negative'}
 							/>
 						</div>
 					</div>

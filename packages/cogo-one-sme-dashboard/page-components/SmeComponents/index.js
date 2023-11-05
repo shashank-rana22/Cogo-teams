@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import IntersectionLoader from '../../common/IntersectionLoader';
 
@@ -6,7 +6,10 @@ import getComponentMapping from './getComponentMapping';
 import styles from './styles.module.css';
 
 function SmeComponents() {
-	const componentMapping = getComponentMapping();
+	const componentMapping = useMemo(
+		() => getComponentMapping(),
+		[],
+	);
 
 	return (
 		<div className={styles.container}>

@@ -57,24 +57,30 @@ function FunnelGraphStruct({
 			ref={funnelContainer}
 		>
 			<div className={`funnel_graph_${type}`} />
-			{(showSegregation || showDataBelow) ? (
-				<div className={showSegregation ? styles.graph_labels : styles.graph_data}>
-					{data.labels.map(
-						(itm, index) => (
-							<div
-								key={itm}
-								className={showSegregation ? styles.graph_labels_item : styles.graph_data_item}
-							>
-								<DataContainer
-									itm={itm}
-									data={data}
-									index={index}
-								/>
-							</div>
-						),
-					)}
-				</div>
-			) : null}
+			{(showSegregation || showDataBelow)
+				? (
+					<div
+						className={showSegregation
+							? styles.graph_labels : styles.graph_data}
+					>
+						{data.labels.map(
+							(itm, index) => (
+								<div
+									key={itm}
+									className={showSegregation
+										? styles.graph_labels_item
+										: styles.graph_data_item}
+								>
+									<DataContainer
+										itm={itm}
+										data={data}
+										index={index}
+									/>
+								</div>
+							),
+						)}
+					</div>
+				) : null}
 		</div>
 	);
 }

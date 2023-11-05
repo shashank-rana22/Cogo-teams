@@ -45,7 +45,8 @@ function DataView({
 					options  : {
 						style                 : 'currency',
 						currencyDisplay       : 'symbol',
-						maximumFractionDigits : 0,
+						notation              : 'compact',
+						maximumFractionDigits : 2,
 					},
 				})}
 				{showGrowth ? <Growth showGrowth={showGrowth} /> : null}
