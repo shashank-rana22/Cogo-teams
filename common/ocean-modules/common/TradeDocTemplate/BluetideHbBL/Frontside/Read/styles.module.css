@@ -207,7 +207,7 @@
 
 .section_three {
 	display: flex;
-	height: 55px;
+	height: fit-content;
 	border: 1px solid black;
 
 	&-element {
