@@ -2,20 +2,39 @@ import { Select, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMRefresh } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 
+import SCREEN_CONSTANTS from '../../../../constants/screen-constants';
 import Counter from '../../common/Counter';
 import DateFilter from '../../common/DateFilter';
 import TEXT_MAPPING from '../../configurations/header-text-mapping';
 import VIEW_OPTIONS from '../../configurations/view-type-options';
+import LEADERBOARD_LOCATIONS from '../../utils/leaderboard-locations';
 
 import CountDownTimer from './CountDownTimer';
 import styles from './styles.module.css';
+
+const { OVERALL, COMPARISION } = SCREEN_CONSTANTS;
+
+const leaderBoardOptions = Object.entries(LEADERBOARD_LOCATIONS).map(([location,
+	locationDetails]) => ({ label: locationDetails.label, value: location }));
+
+const handleLocationChange = ({ location, push, setOfficeLocation }) => {
+	if (location) push(`/performance-and-incentives/public-leaderboard?location=${location}`);
+	else push('/performance-and-incentives/public-leaderboard');
+
+	setOfficeLocation(location);
+};
 
 function Header(props) {
 	const {
 		screen, view, setView, dateRange, setDateRange, updatedAt, countdown, duration, setDuration, switchScreen,
 		reloadCounter, nextReloadAt,
+		officeLocation,
+		setOfficeLocation,
 	} = props;
+
+	const { push } = useRouter();
 
 	return (
 		<div className={styles.container}>
@@ -27,7 +46,7 @@ function Header(props) {
 					role="presentation"
 				>
 					<IcMRefresh
-						className={cl`${styles.swicth_icon} ${screen === 'overall' && styles.swicth_icon_active}`}
+						className={cl`${styles.swicth_icon} ${screen === OVERALL && styles.swicth_icon_active}`}
 					/>
 					<Counter
 						reloadCounter={reloadCounter}
@@ -54,7 +73,19 @@ function Header(props) {
 			</div>
 
 			<div className={styles.end_side}>
-				{screen === 'comparison' ? (
+
+				{screen === OVERALL ? (
+					<Select
+						value={officeLocation}
+						onChange={(location) => handleLocationChange({ location, push, setOfficeLocation })}
+						options={leaderBoardOptions}
+						placeholder="Location"
+						className={styles.location_selector}
+						isClearable
+					/>
+				) : null}
+
+				{screen === COMPARISION ? (
 					<DateFilter
 						screen={screen}
 						dateRange={dateRange}
@@ -63,6 +94,7 @@ function Header(props) {
 						setDateRange={setDateRange}
 					/>
 				) : null}
+
 				<Select
 					value={view}
 					onChange={setView}

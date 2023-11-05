@@ -1,112 +1,5 @@
-.card {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 8px 16px;
-	background: #fff;
-	border-radius: 8px;
-	box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
-}
-
 .main_container {
 	margin: 25px 30px 0 12px;
-}
-
-.header_container {
-	display: flex;
-	width: 100%;
-	padding: 10px 0 15px;
-}
-
-.header_sub_container {
-	display: flex;
-	align-items: center;
-	width: 33%;
-	font-size: var(--font-size-lg);
-	font-weight: 600;
-	color: #4f4f4f;
-}
-
-.row_heading {
-	font-size: 16px;
-	font-weight: 600;
-}
-
-.card_upper {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
-	cursor: pointer;
-}
-
-.sub_container {
-	display: flex;
-	gap: 10px;
-	align-items: center;
-	width: 100%;
-	padding: 8px 16px;
-}
-
-.tags_container {
-	display: flex;
-	gap: 10px;
-	padding-right: 10px;
-	border-right: 2px solid red;
-}
-
-.wallet_amount_container {
-	display: flex;
-	gap: 20px;
-	align-items: center;
-	margin: 0 10px;
-}
-
-.specific_wallet_container {
-	display: flex;
-	gap: 10px;
-	align-items: center;
-	padding-right: 10px;
-	border-right: 2px solid red;
-}
-
-.data {
-	display: flex;
-	gap: 8px;
-}
-
-.kam_data {
-	display: flex;
-	font-weight: 700;
-}
-
-.caret {
-	cursor: pointer;
-}
-
-.small_hr {
-	width: 5%;
-	border: 1px solid #ed3726;
-	border-radius: 30px;
-}
-
-.container {
-	display: flex;
-	flex-direction: column;
-}
-
-.shipment_container_section {
-	width: 100%;
-	margin-top: 20px;
-	margin-bottom: 15px;
-}
-
-.details {
-	width: 100%;
-}
-
-.cost_sheet {
-	width: 100%;
 }
 
 .headings {
@@ -121,4 +14,14 @@
 	height: 2px;
 	background-color: #ed3726;
 	border-radius: 30px;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 8px 16px;
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
 }

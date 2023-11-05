@@ -66,6 +66,10 @@ const getControls = () => {
 					label : 'AIR',
 					value : 'air_freight',
 				},
+				{
+					label : 'FCL Local',
+					value : 'fcl_freight_local',
+				},
 			],
 		},
 		{
