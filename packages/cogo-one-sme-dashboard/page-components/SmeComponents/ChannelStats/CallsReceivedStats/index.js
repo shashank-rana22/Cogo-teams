@@ -37,7 +37,11 @@ const CALL_STATUS_MAPPING = {
 	},
 };
 
-function CallsReceivedStats() {
+function CallsReceivedStats({
+	dashboardData = {},
+	dashboardLoading = false,
+}) {
+	console.log('dashboardData:', dashboardData);
 	return (
 		<div className={styles.container}>
 			<div className={styles.label}>

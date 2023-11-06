@@ -2,11 +2,17 @@ import FunnelGraph from 'funnel-graph-js';
 import React, { useRef, useEffect, useMemo } from 'react';
 
 import { Growth } from '../../../common/Elements/PercentageChange';
+import useSmeDashboardStats from '../../../hooks/useSmeDashboardStats';
 import getFormattedAmount from '../../../utils/getFormattedAmount';
 
 import styles from './styles.module.css';
 
-function CustomerFunnel() {
+function CustomerFunnel({ widgetBlocks = null, filterParams = {} }) {
+	const {
+		dashboardData = {},
+		dashboardLoading = false,
+	} = useSmeDashboardStats({ widgetBlocks, filterParams });
+
 	const data = useMemo(
 		() => ({
 			labels: ['Website Visitors', 'Awareness Stage', 'AQL (enriched data)', 'Interest Captured', 'MQL',

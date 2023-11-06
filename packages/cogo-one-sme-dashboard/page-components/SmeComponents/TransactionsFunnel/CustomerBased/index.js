@@ -1,10 +1,16 @@
 import React, { useMemo } from 'react';
 
 import FunnelGraphStruct from '../../../../common/FunnelGraphStruct';
+import useSmeDashboardStats from '../../../../hooks/useSmeDashboardStats';
 
 import styles from './styles.module.css';
 
-function CustomerBased() {
+function CustomerBased({ widgetBlocks = null, filterParams = {} }) {
+	const {
+		dashboardData = {},
+		dashboardLoading = false,
+	} = useSmeDashboardStats({ widgetBlocks, filterParams });
+
 	const data = useMemo(
 		() => ({
 			labels: ['Total Quotation Sent (100)',

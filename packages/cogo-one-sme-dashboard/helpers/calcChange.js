@@ -5,8 +5,8 @@ function calcChange({
 	currentData = {},
 	previousData = {},
 }) {
-	let currentValue = currVal;
-	let previousValue = prevVal;
+	let currentValue = +currVal;
+	let previousValue = +prevVal;
 
 	if (valueKey) {
 		currentValue = currentData?.[valueKey] || 0;

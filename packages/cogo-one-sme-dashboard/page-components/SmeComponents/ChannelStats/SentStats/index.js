@@ -1,44 +1,44 @@
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import { LoadingState } from '../../../../common/Elements';
+
 import ChartView from './ChartView';
 import styles from './styles.module.css';
 
-const DATA = {
-	email: {
-		total               : 150,
-		agent_percentage    : 67,
-		system_percentage   : 17,
-		auto_triggered      : 191,
-		agent_triggered     : 294,
-		marketing_triggered : 1200,
+const DATA_KEYS = {
+	emails: {
+		total     : 150,
+		system    : 'total_system_mails',
+		agent     : 'total_agent_mails',
+		marketing : 'total_marketing_mails',
 	},
 	whatsapp: {
-		total               : 2489,
-		agent_percentage    : 37,
-		system_percentage   : 63,
-		auto_triggered      : 291,
-		agent_triggered     : 894,
-		marketing_triggered : 500,
+		total     : 2489,
+		system    : 291,
+		agent     : 894,
+		marketing : 500,
 	},
 };
 
 const MESSAGE_TYPES = {
-	auto: {
-		label : 'System Auto Triggered',
-		value : 'auto_triggered',
-	},
-	agent: {
-		label : 'Sent by Agent',
-		value : 'agent_triggered',
-	},
-	marketing: {
-		label : 'Triggered by Marketing',
-		value : 'marketing_triggered',
-	},
+	system    : 'System Auto Triggered',
+	agent     : 'Sent by Agent',
+	marketing : 'Triggered by Marketing',
 };
 
-function SentStats({ channelType = '' }) {
+function SentStats({
+	channelType = '',
+	dashboardData = {},
+	dashboardLoading = false,
+}) {
+	const sentData = (dashboardData || {})?.[`total_${channelType}_sent_data`];
+
+	const {
+		current_data: currentData = {},
+		previous_data: previousData = {},
+	} = sentData || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -48,40 +48,54 @@ function SentStats({ channelType = '' }) {
 					{startCase(channelType)}
 					{' '}
 					Sent -
-					<span>{DATA?.[channelType]?.total || 0}</span>
+					<span>{DATA_KEYS?.[channelType]?.total || 0}</span>
 				</div>
 
-				<div className={styles.header_chip}>
-					Initiated by Agent -
-					<span className={styles.highlight}>
-						{DATA?.[channelType]?.agent_percentage}
-						%
-					</span>
-					<span className={styles.pipe_span}>|</span>
-					Initiated by System -
-					<span className={styles.highlight}>
-						{DATA?.[channelType]?.system_percentage}
-						%
-					</span>
-				</div>
+				{(currentData?.initiated_by_agent || currentData?.initiated_by_system)
+					? (
+						<div className={styles.header_chip}>
+							Initiated by Agent -
+							<span className={styles.highlight}>
+								{currentData?.initiated_by_agent || 0}
+								%
+							</span>
+							<span className={styles.pipe_span}>|</span>
+							Initiated by System -
+							<span className={styles.highlight}>
+								{currentData?.initiated_by_system || 0}
+								%
+							</span>
+						</div>
+					) : null}
 			</div>
 
 			<div className={styles.view_report}>
-				{Object.entries(MESSAGE_TYPES).map(
-					([keyValue, valueKeys]) => (
-						<div
-							key={keyValue}
-							className={styles.message_type_stats}
-						>
-							{valueKeys?.label}
-							{' '}
-							-
-							{' '}
-							{DATA?.[channelType]?.[valueKeys?.value]}
-							<ChartView channelType={channelType} />
-						</div>
-					),
-				)}
+				{dashboardLoading
+					? <LoadingState />
+					: (
+						<>
+							{Object.entries(MESSAGE_TYPES).map(
+								([keyValue, valueKey]) => (
+									<div
+										key={keyValue}
+										className={styles.message_type_stats}
+									>
+										{valueKey}
+										{' '}
+										-
+										{' '}
+										{currentData?.[DATA_KEYS?.[channelType]?.[keyValue]]}
+										<ChartView
+											channelType={channelType}
+											currentData={currentData}
+											msgType={keyValue}
+											previousData={previousData}
+										/>
+									</div>
+								),
+							)}
+						</>
+					)}
 			</div>
 		</div>
 	);

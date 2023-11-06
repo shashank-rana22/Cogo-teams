@@ -1,6 +1,8 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import React from 'react';
 
+import useSmeDashboardStats from '../../../../hooks/useSmeDashboardStats';
+
 import styles from './styles.module.css';
 
 const data = [
@@ -66,7 +68,12 @@ const data = [
 	},
 ];
 
-function ServicesWiseBifurcation() {
+function ServicesWiseBifurcation({ widgetBlocks = null, filterParams = {} }) {
+	const {
+		dashboardData = {},
+		dashboardLoading = false,
+	} = useSmeDashboardStats({ widgetBlocks, filterParams });
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>

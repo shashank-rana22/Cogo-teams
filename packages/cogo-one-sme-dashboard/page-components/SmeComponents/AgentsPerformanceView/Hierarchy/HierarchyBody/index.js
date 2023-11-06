@@ -4,6 +4,7 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import useGetLeaderbordList from '../../../../../hooks/useGetLeaderbordList';
 import useListPartners from '../../../../../hooks/useListPartners';
 
 import getOptions from './getOptions';
@@ -25,6 +26,11 @@ function HierarchyBody({
 	const nextViewType = NEXT_DATA_VIEW_TYPE?.[currentView] || 'partners';
 
 	const { partnersList = [], partnersLoading = false } = useListPartners({ nextViewType });
+
+	const { leaderBoardData = {}, leaderBoardLoading = false } = useGetLeaderbordList({
+		partnerId        : hierarchyData?.[GLOBAL_CONSTANTS.zeroth_index]?.id,
+		officeLocationId : hierarchyData?.[1]?.hierarchyDataType === 'branches' ? hierarchyData?.[1]?.id : '',
+	});
 
 	const userOptions = getOptions({ hierarchyData, nextViewType, partnersList });
 

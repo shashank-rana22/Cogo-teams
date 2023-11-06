@@ -6,8 +6,18 @@ import { PercentageChange } from '../../../../../common/Elements';
 import getChartData from './getChartData';
 import styles from './styles.module.css';
 
-function ChartView({ channelType = '' }) {
-	const { chartData = [], legends = [] } = getChartData({ channelType });
+function ChartView({
+	channelType = '',
+	currentData = {},
+	previousData = {},
+	msgType = '',
+}) {
+	const { chartData = [], legends = [] } = getChartData({
+		channelType,
+		currentData,
+		msgType,
+		previousData,
+	});
 
 	return (
 		<div className={styles.container}>

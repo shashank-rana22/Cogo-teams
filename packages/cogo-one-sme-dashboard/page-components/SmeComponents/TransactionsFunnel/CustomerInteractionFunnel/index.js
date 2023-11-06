@@ -1,10 +1,16 @@
 import React, { useMemo } from 'react';
 
 import FunnelGraphStruct from '../../../../common/FunnelGraphStruct';
+import useSmeDashboardStats from '../../../../hooks/useSmeDashboardStats';
 
 import styles from './styles.module.css';
 
-function CustomerInteractionFunnel() {
+function CustomerInteractionFunnel({ widgetBlocks = null, filterParams = {} }) {
+	const {
+		dashboardData = {},
+		dashboardLoading = false,
+	} = useSmeDashboardStats({ widgetBlocks, filterParams });
+
 	const data = useMemo(
 		() => ({
 			labels: ['Calls made',

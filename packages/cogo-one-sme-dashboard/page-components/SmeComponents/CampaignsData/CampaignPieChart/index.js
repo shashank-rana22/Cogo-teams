@@ -1,51 +1,58 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import React from 'react';
 
+import { LoadingState } from '../../../../common/Elements';
+import { campaignChartConstants } from '../../../../constants/campaignConstants';
+import useSmeDashboardStats from '../../../../hooks/useSmeDashboardStats';
+
 import styles from './styles.module.css';
 
-const data = [
-	{
-		id    : 'fcl_import',
-		label : 'Active Campaigns',
-		value : 20,
-		color : '#ACDADF',
-	},
-	{
-		id    : 'fcl_export',
-		label : 'New Journey’s Created',
-		value : 15,
-		color : '#C4DC91',
-	},
-	{
-		id    : 'lcl_import',
-		label : 'Live Journey’s',
-		value : 5,
-		color : '#F9AE64',
-	},
-	{
-		id    : 'lcl_Export',
-		label : 'Previous Journey’s Updated',
-		value : 5,
-		color : '#F2E3C3',
-	},
-];
+function CampaignPieChart({
+	widgetBlocks = null,
+	filterParams = {},
+}) {
+	const {
+		dashboardData = {},
+		dashboardLoading = false,
+	} = useSmeDashboardStats({ widgetBlocks, filterParams });
 
-function CenteredMetric({ centerX, centerY }) {
-	return (
-		<text
-			x={centerX}
-			y={centerY}
-			textAnchor="middle"
-			dominantBaseline="central"
-			className={styles.style_component_text}
-		>
-			{data.reduce((acc, itm) => acc + itm.value, 0)}
-		</text>
+	const { total_campaigns_data = {} } = dashboardData || {};
 
+	const campaignsData = campaignChartConstants.map(
+		(itm) => ({
+			...itm,
+			value: total_campaigns_data?.[itm?.id] || 0,
+		}),
 	);
-}
 
-function CampaignPieChart() {
+	function CenteredMetric({ centerX = 0, centerY = 0 }) {
+		return (
+			<text
+				x={centerX}
+				y={centerY}
+				textAnchor="middle"
+				dominantBaseline="central"
+				className={styles.style_component_text}
+			>
+				{total_campaigns_data?.total_live || 0}
+			</text>
+
+		);
+	}
+
+	if (dashboardLoading) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.header}>
+					Total Campaigns
+				</div>
+				<div className={styles.loading_container}>
+					<LoadingState loaderCount={30} />
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -55,7 +62,7 @@ function CampaignPieChart() {
 			<div className={styles.pie_chart_container}>
 				<div className={styles.pie_chart_body}>
 					<ResponsivePie
-						data={data}
+						data={campaignsData}
 						margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
 						padAngle={0.7}
 						innerRadius={0.55}
@@ -70,13 +77,13 @@ function CampaignPieChart() {
 						transitionMode="startAngle"
 						legends={[]}
 						layers={['arcs', 'arcLabels', 'arcLinkLabels', 'legends', CenteredMetric]}
-						colors={data.map((itm) => itm?.color)}
+						colors={campaignsData.map((itm) => itm?.color)}
 					/>
 				</div>
 			</div>
 
 			<div className={styles.legends_container}>
-				{data.map(
+				{campaignsData.map(
 					(itm) => (
 						<div
 							key={itm?.id}
@@ -91,7 +98,6 @@ function CampaignPieChart() {
 					),
 				)}
 			</div>
-
 		</div>
 	);
 }

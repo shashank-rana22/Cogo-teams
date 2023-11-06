@@ -48,6 +48,12 @@
 	justify-content: space-between;
 	width: 100%;
 	padding-top: 20px;
+
+	:global {
+		.ui_loading_container {
+			height: 171px;
+		}
+	}
 }
 
 .message_type_stats {

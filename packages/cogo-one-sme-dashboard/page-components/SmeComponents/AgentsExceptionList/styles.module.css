@@ -27,6 +27,10 @@
 				padding-left: 20px;
 			}
 		}
+
+		.ui_placeholder_skeleton_loader {
+			height: 24px !important;
+		}
 	}
 }
 

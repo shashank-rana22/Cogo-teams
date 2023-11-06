@@ -9,6 +9,13 @@
 	box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
 }
 
+.loading_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 292px;
+}
+
 .header {
 	display: flex;
 	align-items: center;

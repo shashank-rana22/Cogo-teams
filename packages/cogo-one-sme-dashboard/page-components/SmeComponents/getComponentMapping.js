@@ -87,7 +87,7 @@ const ServicesWiseBifurcation = dynamic(
 	},
 );
 
-const CHANNELS = ['email', 'whatsapp', 'calls'];
+const CHANNELS = ['emails', 'whatsapp', 'calls'];
 
 function getComponentMapping({ filterParams = {} }) {
 	return [
@@ -144,7 +144,7 @@ function getComponentMapping({ filterParams = {} }) {
 			Comp : () => (
 				<>
 					<CustomerInteractionFunnel
-						widgetBlocks={['get_customer_based_data']}
+						widgetBlocks={['get_customer_interaction_data']}
 						filterParams={filterParams}
 					/>
 					<ServicesWiseBifurcation
@@ -163,6 +163,11 @@ function getComponentMapping({ filterParams = {} }) {
 					channelType={itm}
 					key={itm}
 					filterParams={filterParams}
+					widgetBlocks={
+						itm === 'calls'
+							? ['get_total_calls_made_data', 'get_total_calls_received_data']
+							: [`get_total_${itm}_sent_data`, `get_total_${itm}_received_data`]
+					}
 				/>
 			)),
 			initialLoad: false,
@@ -187,7 +192,8 @@ function getComponentMapping({ filterParams = {} }) {
 			Comp         : AgentsExceptionList,
 			headerText   : 'Agents Exception List',
 			initialLoad  : false,
-			widgetBlocks : ['get_exception_data_required'],
+			widgetBlocks : ['get_search_exception_data', 'get_call_exception_data',
+				'get_mail_exception_data', 'get_quotation_exception_data', 'get_booking_exception_data'],
 		},
 		{
 			key              : 'agents_performance_view',

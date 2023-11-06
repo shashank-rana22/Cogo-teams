@@ -15279,6 +15279,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'get_agent_scoring_reports',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
 	],
 };
 

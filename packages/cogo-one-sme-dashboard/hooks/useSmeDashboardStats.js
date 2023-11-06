@@ -2,14 +2,18 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty, startOfDay } from '@cogoport/utils';
 import { useCallback, useEffect } from 'react';
 
-const getParams = ({ widgetBlocks, filterParams, selectedFilter }) => {
+const getParams = ({ widgetBlocks, filterParams, selectedFilter, page }) => {
 	const { date_range = {} } = filterParams || {};
 
 	return 	{
 		blocks     : isEmpty(widgetBlocks) ? undefined : widgetBlocks,
-		start_date : date_range?.startDate || startOfDay(new Date()),
+		start_date : startOfDay(date_range?.startDate) || startOfDay(new Date()),
 		end_date   : date_range?.endDate || new Date(),
-		filters    : { range: selectedFilter },
+		filters    : {
+			range      : selectedFilter || undefined,
+			page       : page || undefined,
+			page_limit : page ? 5 : undefined,
+		},
 	};
 };
 
@@ -17,6 +21,7 @@ const useSmeDashboardStats = ({
 	widgetBlocks = null,
 	filterParams = {},
 	selectedFilter = '',
+	page = '',
 }) => {
 	const [{ loading: dashboardLoading, data }, trigger] = useRequest({
 		url    : '/get_omnichannel_sme_dashboard',
@@ -29,13 +34,13 @@ const useSmeDashboardStats = ({
 		async () => {
 			try {
 				await trigger({
-					params: getParams({ widgetBlocks, filterParams, selectedFilter }),
+					params: getParams({ widgetBlocks, filterParams, selectedFilter, page }),
 				});
 			} catch (error) {
-				console.error(error);
+				console.error('err', error);
 			}
 		},
-		[filterParams, selectedFilter, trigger, widgetBlocks],
+		[filterParams, page, selectedFilter, trigger, widgetBlocks],
 	);
 
 	useEffect(() => {

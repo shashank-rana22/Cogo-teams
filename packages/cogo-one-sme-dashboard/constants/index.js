@@ -22,4 +22,5 @@ export const ICONS_MAPPING = {
 	TH       : IcCThailand,
 	ID       : IcCIndonesia,
 	CN       : IcCChina,
+	emails   : IcMEmail,
 };
