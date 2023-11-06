@@ -6,28 +6,21 @@ function NoteText() {
 			<div className={styles.header}>Note regarding Spotline Booking</div>
 
 			<li>
-				A booking token or an approval from your channel manager will be
-				needed for SpotLine Booking
+				Please visit the shipping line&rsquo;s website to verify the availability of SpotLine Bookings.
 			</li>
 			<li>
-				A higher cancellation charge will apply on the customer if booking
-				gets cancelled
+				Be aware that the pricing for SpotLine bookings is time-sensitive.
+				Check the liner&rsquo;s website and provide a quote accordingly.
 			</li>
 			<li>
-				SpotLine bookings are under the scrutiny of Revenue Desk and the CEO
+				In case of booking cancellation, higher cancellation charges will apply to the customer.
 			</li>
 			<li>
-				Check the shipping line&rsquo;s website to confirm if SpotLine
-				Bookings are open
+				Please note that SpotLine bookings are subject to review by the Revenue Desk and the CEO.
 			</li>
 			<li>
-				SpotLine Bookings prices are time sensitive hence, check the prices
-				on the shipping line&rsquo;s website and quote a selling price
-				accordingly
-			</li>
-			<li>
-				TAT for response from Revenue Desk and Booking Note Procurement from
-				SO1 is ~30-45 mins.
+				The expected response time from the Revenue Desk and the
+				procurement of Booking Notes from SO1 is approximately 2 hours.
 			</li>
 		</div>
 	);

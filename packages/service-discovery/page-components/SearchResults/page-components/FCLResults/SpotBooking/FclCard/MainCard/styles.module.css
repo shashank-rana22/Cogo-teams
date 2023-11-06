@@ -25,6 +25,10 @@
 			}
 		}
 	}
+
+	&.suitable_schedule {
+		width: 410px;
+	}
 }
 
 .label {

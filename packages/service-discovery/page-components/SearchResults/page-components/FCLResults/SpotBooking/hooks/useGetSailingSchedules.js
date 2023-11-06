@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -33,7 +32,7 @@ const useGetSailingSchedules = ({
 			setSailingSchedules(list);
 		} catch (err) {
 			setSailingSchedules([]);
-			Toast.error(getApiErrorString(err.response?.data));
+			Toast.error('There is a issue while fetching schedules');
 		}
 	}, [destination_port_id, origin_port_id, shipping_line_id, trigger]);
 

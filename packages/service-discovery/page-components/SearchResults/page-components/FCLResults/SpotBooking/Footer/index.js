@@ -49,16 +49,26 @@ function Footer({
 				number_of_stops = 0,
 				departure = '',
 				arrival = '',
+				sailing_schedule = false,
+				suitable_schedule = '',
 				...basicFreightValues
 			} = values;
 
+			const [exisArrival, exisDeparture, transit_time, exisNumberOfStops] = suitable_schedule.split('_');
+
 			const servicePayload = getServicePayload({
 				fclServices,
-				formValues: {
+				formValues: sailing_schedule ? {
 					shipping_line_id,
 					number_of_stops,
 					departure,
 					arrival,
+				} : {
+					shipping_line_id,
+					number_of_stops : exisNumberOfStops,
+					departure       : exisDeparture,
+					arrival         : exisArrival,
+					transit_time,
 				},
 				detentionValues,
 			});

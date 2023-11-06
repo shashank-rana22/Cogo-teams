@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useContext } from 'react';
 
 import BreakdownDetails from '../../../../commons/BreakdownDetails';
@@ -12,7 +13,13 @@ function EditMargin({ state = '' }) {
 
 	const { source = '' } = detail;
 
-	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[GLOBAL_CONSTANTS.zeroth_index];
+	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[
+		GLOBAL_CONSTANTS.zeroth_index
+	];
+
+	const handling_fees_line_item =	rate?.booking_charges?.handling_fees?.line_items[
+		GLOBAL_CONSTANTS.zeroth_index
+	] || {};
 
 	const [rateDetails, setRateDetails] = useState([]);
 	const [convenienceDetails, setConvenienceDetails] = useState(() => ({
@@ -22,6 +29,15 @@ function EditMargin({ state = '' }) {
 			unit     : convenience_line_item?.unit,
 			quantity : convenience_line_item?.quantity,
 		},
+	}));
+	const [handlingFeeDetails, setHandlingFeeDetails] = useState(() => ({
+		handling_fees: {
+			price    : handling_fees_line_item?.price,
+			currency : handling_fees_line_item?.currency,
+			unit     : handling_fees_line_item?.unit,
+			quantity : handling_fees_line_item?.quantity,
+		},
+		is_available: !isEmpty(handling_fees_line_item),
 	}));
 	const [noRatesPresent, setNoRatesPresent] = useState(false);
 
@@ -35,6 +51,8 @@ function EditMargin({ state = '' }) {
 				convenienceDetails={convenienceDetails}
 				setConvenienceDetails={setConvenienceDetails}
 				setNoRatesPresent={setNoRatesPresent}
+				handlingFeeDetails={handlingFeeDetails}
+				setHandlingFeeDetails={setHandlingFeeDetails}
 				source="edit_margin"
 			/>
 
@@ -44,6 +62,7 @@ function EditMargin({ state = '' }) {
 				convenience_line_item={convenience_line_item}
 				noRatesPresent={noRatesPresent}
 				state={state}
+				handlingFeeDetails={handlingFeeDetails}
 			/>
 		</>
 	);

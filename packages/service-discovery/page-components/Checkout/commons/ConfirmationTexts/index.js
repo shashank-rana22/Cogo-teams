@@ -1,7 +1,7 @@
 import { Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcCFtick, IcMInformation } from '@cogoport/icons-react';
+import { IcCFtick, IcMInfo, IcMInformation } from '@cogoport/icons-react';
 
 import { getDetentionDemurrageDays } from './getDetentionDemurrageDays';
 import styles from './styles.module.css';
@@ -52,7 +52,14 @@ function ConfirmationTexts({
 						demurrage day(s)
 						{' '}
 					</div>
-					<div className={styles.inner_text}>For extra day(s) charges refer T&C </div>
+					<div className={styles.inner_text}>For extra day(s) charges refer T&C</div>
+					{source === 'spot_line_booking' ? (
+						<div className={styles.info_text}>
+							<IcMInfo width={11} height={11} style={{ marginRight: '4px' }} />
+
+							subject to change as per booking note
+						</div>
+					) : null}
 				</div>
 			</div>
 
@@ -71,6 +78,13 @@ function ConfirmationTexts({
 						{' '}
 					</div>
 					<div className={styles.inner_text}>For extra day(s) charges refer T&C </div>
+					{source === 'spot_line_booking' ? (
+						<div className={styles.info_text}>
+							<IcMInfo width={11} height={11} style={{ marginRight: '4px' }} />
+
+							subject to change as per booking note
+						</div>
+					) : null}
 				</div>
 			</div>
 

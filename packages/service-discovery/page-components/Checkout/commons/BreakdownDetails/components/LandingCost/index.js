@@ -13,6 +13,7 @@ function LandingCost({
 	total = 0,
 	otherCharges = [],
 	disableForm = false,
+	handlingFeeDetails = {},
 }) {
 	const {
 		total_price_currency = '',
@@ -21,11 +22,26 @@ function LandingCost({
 
 	const { convenience_rate } = convenienceDetails;
 
+	const { handling_fees = {} } = handlingFeeDetails;
+
 	const { price = 0, currency = '', quantity = 1 } = convenience_rate;
+
+	const {
+		price: handlingFeesPrice = 0,
+		currency: handlingFeesCurrency = '',
+		quantity: handlingFeesQuantity = 1,
+	} = handling_fees || {};
 
 	const finalConvenienceFee = convertCurrencyValue(
 		price * quantity,
 		currency,
+		total_price_currency,
+		conversions,
+	);
+
+	const finalHandlingFee = convertCurrencyValue(
+		handlingFeesPrice * handlingFeesQuantity,
+		handlingFeesCurrency,
 		total_price_currency,
 		conversions,
 	);
@@ -42,7 +58,7 @@ function LandingCost({
 		return acc;
 	}, DEFAULT_VALUE);
 
-	const totalCost = total + finalConvenienceFee + otherChargesPrice;
+	const totalCost = total + finalConvenienceFee + finalHandlingFee + otherChargesPrice;
 
 	return (
 		<div className={styles.container}>

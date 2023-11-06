@@ -30,6 +30,8 @@ function BreakdownDetails({
 	source = '',
 	setNoRatesPresent = () => {},
 	getCheckoutInvoices = () => {},
+	handlingFeeDetails = {},
+	setHandlingFeeDetails = () => {},
 }) {
 	const {
 		rate = {},
@@ -262,6 +264,8 @@ function BreakdownDetails({
 						?.convenience_rate_options
 				}
 				showTaxes={showTaxes}
+				handlingFeeDetails={handlingFeeDetails}
+				setHandlingFeeDetails={setHandlingFeeDetails}
 			/>
 
 			<LandingCost
@@ -271,6 +275,7 @@ function BreakdownDetails({
 				rate={rate}
 				otherCharges={otherCharges}
 				disableForm={disableForm}
+				handlingFeeDetails={handlingFeeDetails}
 			/>
 		</>
 	);
