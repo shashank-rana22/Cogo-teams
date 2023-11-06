@@ -30,8 +30,9 @@
 	justify-content: center;
 	width: 30px;
 	height: 30px;
-	margin-bottom: 4px;
+	margin: 4px 4px 0 0;
 	border-radius: 100px;
+	object-fit: cover;
 }
 
 .user_avatar {

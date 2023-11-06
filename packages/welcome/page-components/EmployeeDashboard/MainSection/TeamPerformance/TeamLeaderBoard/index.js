@@ -1,7 +1,9 @@
-import { Button, Avatar, Modal } from '@cogoport/components';
+import { cl, Button, Avatar, Modal } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
+
+import makeShortName from '../../../../../common/MakeShortName';
 
 import styles from './styles.module.css';
 
@@ -23,11 +25,15 @@ function TeamLeaderBoard({ data = {} }) {
 				<div className={styles.progress_flex} key={item}>
 					<div className={styles.achieved_target}>
 						<div className={styles.avatar}>
-							{item.image ? (
-								<div className={styles.profile_photo}>
-									<img src={item.image} alt="Profile" />
-								</div>
-							) : <Avatar personName={item.name} />}
+							{
+							item.image
+								? <img className={styles.user_avatar_photo} src={item.image} alt="profile" />
+								:							(
+									<div className={cl`${styles.user_avatar_photo} ${styles.user_avatar}`}>
+										{makeShortName(item.name)}
+									</div>
+								)
+						}
 							{' '}
 							{startCase(item.name)}
 						</div>
