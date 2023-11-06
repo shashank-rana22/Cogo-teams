@@ -268,11 +268,6 @@ function OutstandingList({
 							(item?.taggedState && entityCode !== '101_301')
 								? (<Pill size="md" color="green">{startCase(item?.taggedState)}</Pill>) : null
 						}
-						{/* //Todo: change taggedUser with the respective key */}
-						{
-							(item?.taggedUser)
-								? (<Pill size="md" color="green">{startCase(item?.taggedUser)}</Pill>) : null
-						}
 						{
 							(entityCode !== '101_301')
 								? (
