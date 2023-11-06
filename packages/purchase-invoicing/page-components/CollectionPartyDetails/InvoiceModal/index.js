@@ -121,7 +121,7 @@ function InvoiceModal({
 			}}
 		>
 			<Modal.Header title={MODAL_TITLE} />
-			<Modal.Body style={{ maxHeight: '780px' }}>
+			<Modal.Body style={{ maxHeight: '750px' }}>
 				{
 					renderContent === 'form' ? (
 						<InvoiceModalContent
