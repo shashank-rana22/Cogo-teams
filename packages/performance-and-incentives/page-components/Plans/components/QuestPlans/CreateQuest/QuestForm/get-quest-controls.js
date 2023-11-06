@@ -12,7 +12,6 @@ const controls = [
 		placeholder : 'Select',
 		type        : 'asyncSelect',
 		asyncKey    : 'agent_scoring_configs',
-		// params      : { page_limit: 20, filters: { status: 'active' } },
 		initialCall : true,
 		rules       : { required: 'Required' },
 	},

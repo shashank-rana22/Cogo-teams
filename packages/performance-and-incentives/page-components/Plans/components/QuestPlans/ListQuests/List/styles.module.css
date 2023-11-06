@@ -25,6 +25,12 @@
 	}
 }
 
+.quest_tooltip {
+	width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .heading {
 	font-weight: 600;
 }

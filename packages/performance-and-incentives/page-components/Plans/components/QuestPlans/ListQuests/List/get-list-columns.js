@@ -1,4 +1,4 @@
-import { Pill, Popover, cl } from '@cogoport/components';
+import { Pill, Popover, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRotateVertical, IcMOverflowDot } from '@cogoport/icons-react';
@@ -50,9 +50,15 @@ const getListColumns = (props) => {
 		},
 		{
 			id       : 'quest_string',
-			key      : 'nquest_stringame',
-			Header   : <div className={styles.heading}>NAME</div>,
-			accessor : ({ quest_string }) => (isEmpty(quest_string) ? '___' : <div>{quest_string}</div>),
+			key      : 'quest_string',
+			Header   : <div className={styles.heading}>QUEST</div>,
+			accessor : ({ quest_string }) => (
+				// <div>
+				<Tooltip content={quest_string} placement="bottom">
+					<div className={styles.quest_tooltip}>{quest_string}</div>
+				</Tooltip>
+				// </div>
+			),
 		},
 		{
 			id  : 'start_date',
@@ -126,19 +132,16 @@ const getListColumns = (props) => {
 
 					<div>
 						<Popover
-							// visible={activeActionId === id && !showActivationModal}
 							placement="left"
 							interactive
 							render={(
 								<Actions quest_id={id} handleDeactivate={handleDeactivate} />
 							)}
-							// onClickOutside={() => setActiveActionId(null)}
 						>
 							<div className={styles.action_icon_container}>
 								<IcMOverflowDot
 									width={16}
 									height={16}
-									// onClick={() => setActiveActionId((pvId) => (pvId === id ? null : id))}
 								/>
 							</div>
 						</Popover>

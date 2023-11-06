@@ -1,7 +1,5 @@
 import { IcMDelete } from '@cogoport/icons-react';
 
-// import { getFieldController } from '../../../../../../../common/Form/getFieldController';
-
 import { getFieldController } from '../../../../../../../../common/Form/getFieldController';
 
 import styles from './styles.module.css';
@@ -47,8 +45,6 @@ function Child(props) {
 	});
 
 	const subBlockId = watch(`blocks[${blockIndex}].sub_blocks[${subBlockIndex}].sub_block_id`);
-
-	console.log('subBlockId::', subBlockId);
 
 	return (
 		<div key={scoringType} className={styles.content}>
