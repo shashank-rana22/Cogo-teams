@@ -1,10 +1,7 @@
 import { Button, Modal, RadioGroup } from '@cogoport/components';
-import { AsyncSelectController, useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
 import useUpdateAccountTagging from '../../../../../hooks/useUpdateAccountTagging';
-
-import styles from './styles.module.css';
 
 const accountStatusOption = [
 	{ label: 'Credit Controller', value: 'credit_controller' },
@@ -20,6 +17,10 @@ function ChangeStatus({
 }) {
 	const { apiTrigger = () => {} } = useUpdateAccountTagging({ item });
 
+	const onSubmit = () => {
+		apiTrigger({ currentStatus, refetch, setChangeStatus });
+	};
+
 	let filtredOptions = [];
 
 	if (isEmpty(item?.taggedState)) {
@@ -32,13 +33,6 @@ function ChangeStatus({
 		);
 	}
 
-	const { control, watch } = useForm();
-	const { tagged_person = '' } = watch();
-
-	const onSubmit = () => {
-		apiTrigger({ currentStatus, refetch, setChangeStatus, tagged_person });
-	};
-
 	return (
 		<Modal show={changeStatus} onClose={() => setChangeStatus(false)}>
 			<Modal.Header title="Change Current Account Status" />
@@ -49,25 +43,6 @@ function ChangeStatus({
 					value={currentStatus}
 					onChange={(val) => setCurrentStatus(val)}
 				/>
-
-				<div className={styles.select}>
-					<strong>Select Person to Tag</strong>
-
-					<AsyncSelectController
-						name="tagged_person"
-						asyncKey="partner_users_ids"
-						placeholder="Type to search..."
-						control={control}
-						params={{
-							filters: {
-								status: 'active',
-							},
-						}}
-						size="sm"
-						isClearable
-						rules={{ required: true }}
-					/>
-				</div>
 			</Modal.Body>
 
 			<Modal.Footer>
