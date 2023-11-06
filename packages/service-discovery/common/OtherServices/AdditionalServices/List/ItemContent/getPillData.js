@@ -13,6 +13,7 @@ const getPillData = ({ item = {}, service_type = '' }) => {
 		trucks_count,
 		truck_type,
 		container_type,
+		chargeable_weight = 0,
 	} = item || {};
 
 	const commonContainerDetails = [`${['20', '40'].includes(container_size) ? `${container_size}ft.`
@@ -20,6 +21,7 @@ const getPillData = ({ item = {}, service_type = '' }) => {
 
 	const commonPackageDetails = [
 		(volume || weight) && `${volume} CBM, ${weight} KG`,
+		chargeable_weight && `${chargeable_weight} Chargeable Wt.`,
 		packages_count && `${packages_count} Package${packages_count > 1 ? 's' : ''}`,
 		COMMODITY_NAME_MAPPING[commodity]?.name || startCase(commodity),
 	].filter(Boolean);

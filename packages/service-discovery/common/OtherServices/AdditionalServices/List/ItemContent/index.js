@@ -38,7 +38,9 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {}, isMobil
 		};
 
 		function RenderPill() {
-			const pillData = getPillData({ item: service, service_type: service.service_type });
+			const formattedService = { ...(service || {}), chargeable_weight: detail?.chargeable_weight };
+
+			const pillData = getPillData({ item: formattedService, service_type: service.service_type });
 
 			return (
 				<div className={styles.pills_container}>
