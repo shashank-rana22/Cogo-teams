@@ -13,7 +13,7 @@ function SmeDashboard() {
 				setFilterParams={setFilterParams}
 				filterParams={filterParams}
 			/>
-			<SmeComponents />
+			<SmeComponents key="ddlkkd" />
 		</div>
 	);
 }

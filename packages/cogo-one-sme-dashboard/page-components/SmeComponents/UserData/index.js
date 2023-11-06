@@ -1,28 +1,13 @@
+import { cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import { CircularLoader } from '../../../common/Elements';
+import useSmeDashboardStats from '../../../hooks/useSmeDashboardStats';
 import getFormattedAmount from '../../../utils/getFormattedAmount';
 
 import CategoryAccount from './CategoryAccount';
 import styles from './styles.module.css';
-
-const DATA = {
-	total_accounts              : 392056,
-	total_unverified_accounts   : 2917,
-	unverified_whatsapp_numbers : 27836,
-	unverified_mobile_numbers   : 3719,
-	unverified_email_ids        : 12345,
-	allocated                   : {
-		total_accounts : 7240,
-		kyc_verified   : 5923,
-		transacting    : 3589,
-	},
-	unallocated: {
-		total_accounts : 23240,
-		kyc_verified   : 13923,
-		transacting    : 9589,
-	},
-};
 
 const CATEGORIES = {
 	allocated   : 'Allocated Accounts',
@@ -30,18 +15,33 @@ const CATEGORIES = {
 };
 
 const UNVERIFIED_TYPES = {
-	whatsapp       : 'unverified_whatsapp_numbers',
-	mobile_numbers : 'unverified_mobile_numbers',
-	email_id       : 'unverified_email_ids',
+	whatsapp       : 'total_whatsapp_unverified',
+	mobile_numbers : 'total_mobile_unverified',
+	email_id       : 'total_email_unverified',
 };
 
-function UserData() {
+function UserData({ widgetBlocks = null }) {
+	const {
+		dashboardData = {},
+		dashboardLoading = false,
+	} = useSmeDashboardStats({ widgetBlocks });
+
+	const { accounts_data: accountsData = {} } = dashboardData || {};
+
+	if (dashboardLoading) {
+		return (
+			<div className={cl`${styles.container} ${styles.loading_container}`}>
+				<CircularLoader />
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.total_accounts}>
 				Total Accounts -
 				<span>
-					{getFormattedAmount({ number: DATA?.total_accounts })}
+					{getFormattedAmount({ number: accountsData?.total_count })}
 				</span>
 			</div>
 
@@ -51,7 +51,7 @@ function UserData() {
 						<CategoryAccount
 							key={name}
 							type={name}
-							cardData={DATA}
+							cardData={accountsData}
 							label={label}
 						/>
 					),
@@ -62,7 +62,7 @@ function UserData() {
 				<div className={styles.total_accounts}>
 					Total Un-verified Users -
 					<span>
-						{getFormattedAmount({ number: DATA?.total_unverified_accounts })}
+						{getFormattedAmount({ number: accountsData?.total_unverified })}
 					</span>
 				</div>
 
@@ -78,7 +78,7 @@ function UserData() {
 									<div>{startCase(name)}</div>
 								</div>
 								<div className={styles.count}>
-									{getFormattedAmount({ number: DATA?.[valueKey] })}
+									{getFormattedAmount({ number: accountsData?.[valueKey] })}
 								</div>
 							</div>
 						),

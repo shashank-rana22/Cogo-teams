@@ -2,7 +2,7 @@ import { Tooltip, cl } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
-import { PercentageChange } from '..';
+import PercentageChange from '../PercentageChange';
 
 import styles from './styles.module.css';
 import TooltipContent from './tooltipContent';

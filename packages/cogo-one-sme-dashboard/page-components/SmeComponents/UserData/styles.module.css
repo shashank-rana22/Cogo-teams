@@ -9,6 +9,10 @@
 	box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
 }
 
+.loading_container {
+	position: relative;
+}
+
 .total_accounts {
 	padding-bottom: 4px;
 	font-size: 16px;

@@ -23,7 +23,7 @@ function CategoryAccount({
 				</div>
 
 				<div className={styles.value}>
-					{getFormattedAmount({ number: cardData?.[type]?.total_accounts })}
+					{getFormattedAmount({ number: cardData?.[`${type}_count`] })}
 				</div>
 			</div>
 
@@ -33,7 +33,7 @@ function CategoryAccount({
 				</div>
 
 				<div className={styles.value}>
-					{getFormattedAmount({ number: cardData?.[type]?.kyc_verified })}
+					{getFormattedAmount({ number: cardData?.[`${type}_kyc_verified_count`] })}
 				</div>
 			</div>
 
@@ -43,7 +43,7 @@ function CategoryAccount({
 				</div>
 
 				<div className={styles.value}>
-					{getFormattedAmount({ number: cardData?.[type]?.transacting })}
+					{getFormattedAmount({ number: cardData?.[`${type}_transacting_count`] })}
 				</div>
 			</div>
 		</div>

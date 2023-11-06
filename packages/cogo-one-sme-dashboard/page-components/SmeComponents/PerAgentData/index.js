@@ -1,6 +1,7 @@
 import React from 'react';
 
 import AccountTypeWise from '../../../common/Elements/AccountTypeWise';
+import LoadingState from '../../../common/Elements/LoadingState';
 import calcChange from '../../../helpers/calcChange';
 import useSmeDashboardStats from '../../../hooks/useSmeDashboardStats';
 
@@ -43,16 +44,7 @@ function PerAgentData({ widgetBlocks = null }) {
 				<div className={styles.header}>
 					Per Agent Data
 				</div>
-				<div className={styles.loading_container}>
-					{[...Array(30).keys()].map(
-						(idx) =>	(
-							<div
-								key={idx}
-								className={styles.wave_animation}
-							/>
-						),
-					)}
-				</div>
+				<LoadingState loaderCount={30} />
 			</div>
 		);
 	}
