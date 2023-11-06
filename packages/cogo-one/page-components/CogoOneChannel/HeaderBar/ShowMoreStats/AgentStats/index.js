@@ -1,4 +1,4 @@
-import { Select, cl } from '@cogoport/components';
+import { Select } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import { TIMELINE_FILTER_OPTIOINS } from '../../../../../configurations/agent-wise-feedback-mapping';
@@ -58,9 +58,7 @@ function AgentStats({
 			</div>
 
 			<div className={styles.stats_content}>
-				<div className={cl`${styles.stats_count_container}
-				 ${isShowActivityGraph ? '' : styles.stats_non_graph}`}
-				>
+				<div className={styles.stats_count_container}>
 					<Stats
 						totalQuotationSend={totalQuotationSend}
 						booked={booked}
@@ -74,10 +72,7 @@ function AgentStats({
 					/>
 				</div>
 				{isShowActivityGraph && (
-					<div className={cl`${styles.graph_container}
-					${isShowActivityGraph ? '' : styles.non_graph_container}`}
-					>
-
+					<div className={styles.graph_container}>
 						<div className={styles.title}>Activities at a glance</div>
 						<AgentActivityGraph
 							loading={shiplentLoading || agentStatsLoading || statsLoading}

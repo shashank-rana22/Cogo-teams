@@ -13,11 +13,13 @@ import {
 	MobileNumberController,
 	ChipsController,
 	MultiselectController,
+	InputNumberController,
 	SingleDateRangeController,
 	TimepickerController,
 } from '@cogoport/forms';
 
 import FieldArrayController from './FieldArray';
+import GroupController from './GroupController';
 
 const CONTROLLER_MAPPING = {
 	input              : InputController,
@@ -35,6 +37,8 @@ const CONTROLLER_MAPPING = {
 	'multi-select'     : MultiselectController,
 	mobile_number      : MobileNumberController,
 	chips              : ChipsController,
+	number             : InputNumberController,
+	'input-group'      : GroupController,
 	singleDateRange    : SingleDateRangeController,
 	timePicker         : TimepickerController,
 };

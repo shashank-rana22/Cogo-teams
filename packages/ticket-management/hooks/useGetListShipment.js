@@ -8,7 +8,7 @@ const getParams = ({ serialId }) => ({
 	},
 });
 
-function useListShipments({ serialId = 0, ticketId = 0 }) {
+function useListShipments({ serialId = 0, ticketId = 0, idType = '', requestType = '' }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_shipments',
 		method : 'get',
@@ -16,6 +16,10 @@ function useListShipments({ serialId = 0, ticketId = 0 }) {
 
 	const getShipmentsList = useCallback(
 		() => {
+			if (idType !== 'sid' && requestType !== 'shipment') {
+				return;
+			}
+
 			try {
 				trigger({
 					params: getParams({ serialId }),
@@ -24,7 +28,7 @@ function useListShipments({ serialId = 0, ticketId = 0 }) {
 				console.error('e:', e);
 			}
 		},
-		[serialId, trigger],
+		[serialId, trigger, idType, requestType],
 	);
 
 	useEffect(() => {

@@ -8,6 +8,10 @@
 	box-shadow: 0 0 8px rgb(98 127 172 / 10%);
 }
 
+.container:last-child {
+	margin-bottom: 0;
+}
+
 .checkbox {
 	flex: 0.1;
 	padding: unset;

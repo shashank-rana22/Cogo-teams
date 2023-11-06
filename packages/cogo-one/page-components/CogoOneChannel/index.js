@@ -21,6 +21,7 @@ import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 import useListCogooneGroupMembers from '../../hooks/useListCogooneGroupMembers';
 import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
+import Calender from './Calendar';
 import Conversations from './Conversations';
 import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
@@ -262,7 +263,7 @@ function CogoOne() {
 						</>
 					)}
 			</div>
-
+			<Calender firestore={firestore} />
 			<ModalComp
 				raiseTicketModal={raiseTicketModal}
 				setRaiseTicketModal={setRaiseTicketModal}

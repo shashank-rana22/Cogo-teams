@@ -25,7 +25,7 @@ const DEFAULT_PAGE_LIMIT = 8;
 const SHOW_MORE_PAGE_LIMIT = 16;
 
 const ALLOWED_STAKEHOLDERS = ['booking_agent', 'consignee_shipper_booking_agent', 'booking_agent_manager',
-	'superadmin', 'admin', 'prod_process_owner'];
+	'superadmin', 'admin', 'prod_process_owner', 'coe_head'];
 
 function List({
 	isSeller = false,

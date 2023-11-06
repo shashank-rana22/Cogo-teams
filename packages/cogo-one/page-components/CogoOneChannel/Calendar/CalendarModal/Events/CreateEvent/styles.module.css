@@ -1,0 +1,143 @@
+.container {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: 0 10px;
+	overflow-y: hidden;
+	transition: 0.3s ease;
+
+	:global {
+		.ui_tabs_list_title {
+			font-size: 10px;
+		}
+
+		.ui_tab_list_container {
+			border-radius: none;
+		}
+
+		.ui_tab_container {
+			padding: 4px;
+			border-bottom: none;
+		}
+
+		.ui_tabs_container {
+			margin-bottom: 14px;
+		}
+
+		.ui_tab_active {
+			color: #000;
+			background: #cfeaed !important;
+		}
+
+		.ui_tab_container.ui_tab_active .ui_tabs_list_title {
+			color: #4f4f4f;
+		}
+
+		.ui_tab_container.ui_tab_active .ui_tabs_list_icon {
+			color: #4f4f4f;
+		}
+
+		.ui_checkbox_container {
+			padding: 0;
+		}
+
+		.ui_time_display_container {
+			height: 30px;
+			margin-left: 4px;
+		}
+
+		.react-datepicker__input-container {
+			height: 30px;
+		}
+
+		.ui_select_display_container {
+			height: 30px !important;
+		}
+
+		.ui_select_container,
+		.ui_multiselect_container {
+			width: 100%;
+		}
+
+		.ui_multiselect_display_container {
+			height: 30px !important;
+		}
+
+		.react-datepicker__input-container input {
+			height: 30px !important;
+		}
+
+		.ui_select_input_control {
+			font-size: 12px;
+		}
+
+		.ui_multiselect_input_control {
+			font-size: 12px !important;
+		}
+
+		.ui_input_container {
+			height: 30px;
+		}
+
+		.ui_input_control {
+			width: 100%;
+			font-size: 14px !important;
+		}
+	}
+}
+
+.form {
+	height: calc(100% - 37px);
+	padding-bottom: 10px;
+	margin-top: 4px;
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	.label {
+		margin: 6px 0 3px;
+		font-size: 13px;
+		font-weight: 500;
+		color: #221f20;
+	}
+
+	.event_types {
+		display: flex;
+		align-items: center;
+	}
+
+	.title {
+		font-size: 10px;
+	}
+
+	.form_container {
+		display: flex;
+		flex-direction: column;
+		margin-top: 4px;
+	}
+
+	.button_styles {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		margin-top: 8px;
+	}
+
+	.error_container {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.error_text {
+		height: 10px;
+		margin-top: 2px;
+		font-size: 10px;
+		color: #ee3425;
+		text-align: left;
+		transition: 0.3s ease;
+	}
+}

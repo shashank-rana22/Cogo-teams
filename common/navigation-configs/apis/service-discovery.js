@@ -389,6 +389,11 @@ const apis = [
 		feature      : 'search',
 	},
 	{
+		api          : 'get_service_discovery_configuration',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
+	{
 		api          : 'create_checkout',
 		access_type  : 'private',
 		service_name : 'checkout',

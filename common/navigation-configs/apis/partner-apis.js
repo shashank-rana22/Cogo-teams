@@ -5178,6 +5178,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'contract',
 		},
+		{
+			api          : 'list_contract_fcl_freight_local_services',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
 
 		{
 			api          : 'update_organization_trade_requirement_draft',
@@ -5768,6 +5773,48 @@ const partner = {
 			api          : 'list_cogo_entities',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+	],
+	handling_fees: [
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_handling_fee_configurations',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'create_handling_fee_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'update_handling_fee_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'get_handling_fee_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'create_handling_fee_custom_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'update_handling_fee_custom_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 	condition: [
@@ -6860,6 +6907,11 @@ const partner = {
 		},
 		{
 			api          : 'list_contract_fcl_freight_services',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_contract_fcl_freight_local_services',
 			access_type  : 'private',
 			service_name : 'contract',
 		},
@@ -14316,6 +14368,31 @@ const partner = {
 		},
 		{
 			api          : 'list_cogoone_shifts',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_cogoone_calendar',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_cogoone_schedules',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_cogoone_schedule',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_cogoone_calendars',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_cogoone_calendar',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

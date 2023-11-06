@@ -174,5 +174,6 @@
     "apply": "申请",
     "reset": "重置",
     "serial_id": "串行ID",
-    "id_creator": "ID创建者"
+    "id_creator": "ID创建者",
+    "messaged_at":"发出的"
 }
