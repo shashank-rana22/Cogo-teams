@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Accordion, cl, Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -29,6 +30,8 @@ function BreakdownDetails({
 	source = '',
 	setNoRatesPresent = () => {},
 	getCheckoutInvoices = () => {},
+	handlingFeeDetails = {},
+	setHandlingFeeDetails = () => {},
 }) {
 	const {
 		rate = {},
@@ -58,13 +61,18 @@ function BreakdownDetails({
 
 	const showTaxes = ['preview_booking', 'booking_confirmation'].includes(source);
 
-	const { primary_service = '' } = detail || {};
+	const { primary_service = '', source: checkoutSource = '' } = detail || {};
 
 	const { source: rateSource = '' } = rate;
 
 	return (
 		<>
-			<BreakdownDetailsHeader disableForm={disableForm} resetMargins={resetMargins} rateDetails={rateDetails} />
+			<BreakdownDetailsHeader
+				disableForm={disableForm}
+				resetMargins={resetMargins}
+				rateDetails={rateDetails}
+				checkoutSource={checkoutSource}
+			/>
 
 			<ServiceIcons
 				primaryService={primaryService}
@@ -256,6 +264,8 @@ function BreakdownDetails({
 						?.convenience_rate_options
 				}
 				showTaxes={showTaxes}
+				handlingFeeDetails={handlingFeeDetails}
+				setHandlingFeeDetails={setHandlingFeeDetails}
 			/>
 
 			<LandingCost
@@ -265,6 +275,7 @@ function BreakdownDetails({
 				rate={rate}
 				otherCharges={otherCharges}
 				disableForm={disableForm}
+				handlingFeeDetails={handlingFeeDetails}
 			/>
 		</>
 	);
