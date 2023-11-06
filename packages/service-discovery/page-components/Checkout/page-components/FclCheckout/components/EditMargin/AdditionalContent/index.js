@@ -15,6 +15,7 @@ function AdditionalContent({
 	convenience_line_item = {},
 	noRatesPresent = false,
 	state = '',
+	handlingFeeDetails = {},
 }) {
 	const {
 		rate,
@@ -69,6 +70,7 @@ function AdditionalContent({
 				convenienceDetails={convenienceDetails}
 				convenience_line_item={convenience_line_item}
 				state={state}
+				handlingFeeDetails={handlingFeeDetails}
 			/>
 		</div>
 	);

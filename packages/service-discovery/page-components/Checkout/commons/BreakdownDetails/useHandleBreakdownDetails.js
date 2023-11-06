@@ -22,12 +22,12 @@ const useHandleBreakdownDetails = ({
 		checkout_id = '',
 	} = useContext(CheckoutContext);
 
-	const [addLineItemData, setAddLineItemData] = useState({});
-	const [editLineItemData, setEditLineItemData] = useState({});
-
 	const { booking_charges = {}, services = {} } = rate;
 
 	const { primary_service = '' } = detail;
+
+	const [addLineItemData, setAddLineItemData] = useState({});
+	const [editLineItemData, setEditLineItemData] = useState({});
 
 	const updatedServiceRates = useMemo(
 		() => Object.entries(services || {})
@@ -97,7 +97,7 @@ const useHandleBreakdownDetails = ({
 	});
 
 	const otherCharges = Object.entries(booking_charges)
-		.filter(([key]) => key !== 'convenience_rate')
+		.filter(([key]) => !['convenience_rate', 'handling_fees'].includes(key))
 		.map(([, item]) => ({
 			...item.line_items[GLOBAL_CONSTANTS.zeroth_index],
 		}));

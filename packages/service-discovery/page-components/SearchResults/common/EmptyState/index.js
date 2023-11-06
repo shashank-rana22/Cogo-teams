@@ -1,6 +1,6 @@
 import React from 'react';
 
-import RequestRate from '../RequestRate';
+import AdditionalTabs from '../AdditionalTabs';
 
 import NoRatesFound from './NoRatesFound';
 import styles from './styles.module.css';
@@ -14,6 +14,8 @@ function EmptyState({
 	setOpenAccordian = () => {},
 	showFilterModal = false,
 	setShowFilterModal = () => {},
+	setScreen = () => {},
+	rates = [],
 	airlines = [],
 	isMobile = false,
 }) {
@@ -33,7 +35,7 @@ function EmptyState({
 			/>
 
 			<div className={styles.request_rate_container}>
-				<RequestRate details={details} isMobile={isMobile} />
+				<AdditionalTabs detail={details} setScreen={setScreen} rates={rates} isMobile={isMobile} />
 			</div>
 		</div>
 	);

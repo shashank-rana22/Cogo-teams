@@ -51,7 +51,7 @@ function RequestRate({ details = {}, className = {}, rates = [], isMobile = fals
 				<p className={styles.label}>Missing Rate Feedback</p>
 
 				<p className={styles.text}>
-					Unable to find the rates? Send feedback to help the team improve rates.
+					Unable to find the rates? Send feedback about unavailability to help the team improve rates.
 				</p>
 			</div>
 

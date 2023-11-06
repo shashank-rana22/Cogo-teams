@@ -506,6 +506,12 @@ const GLOBAL_CONSTANTS = {
 		no_email_permission     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no_email_permission.png',
 		shipping_line_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
+		secure_now              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/secureNow.png',
+		insurance_pkg           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pkg.png',
+		bajaj_insurance         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Bajaj_Insurance_.png',
+		globe_sub               : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/globe',
+		upload_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/upload_icon.png',
+		mail_sent               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mail_sent.gif',
 		calendar                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/calendar.png',
 		empty_event             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty_events.png',
 		meetings                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/important.png',
@@ -528,8 +534,7 @@ const GLOBAL_CONSTANTS = {
 		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
 		public_leaderboard_ranking_badge:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/performance-leaderboard.svg',
-		public_leaderboard_winner_icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/winner_icon.svg',
-		secure_now                     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/secureNow.png',
+		public_leaderboard_winner_icon: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/winner_icon.svg',
 		airline_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png',
 		wider_arrow: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/wide-arrow',

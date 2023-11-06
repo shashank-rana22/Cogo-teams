@@ -5,11 +5,11 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import DotLoader from '../../../../../common/LoadingState/DotLoader';
+import AdditionalTabs from '../../../common/AdditionalTabs';
 import AppliedFilters from '../../../common/AppliedFilters';
 import ComparisonHeader from '../../../common/Comparison/ComparisonHeader';
 import ContractAd from '../../../common/ContractAd';
 import EmptyState from '../../../common/EmptyState';
-import RequestRate from '../../../common/RequestRate';
 import Schedules from '../../../common/Schedules';
 import CogoAssuredCard from '../CogoAssuredCard';
 import FclCard from '../FclCard';
@@ -119,6 +119,8 @@ function ListRateCards({
 				setShowFilterModal={setShowFilterModal}
 				setOpenAccordian={setOpenAccordian}
 				openAccordian={openAccordian}
+				setScreen={setScreen}
+				rates={rates}
 				isMobile={isMobile}
 				// transitTime={transitTime}
 			/>
@@ -256,15 +258,13 @@ function ListRateCards({
 				</div>
 			)}
 
-			{loading ? null : (
-				<div className={styles.request_rate}>
-					<RequestRate
-						details={detail}
-						rates={rates}
-						isMobile={isMobile}
-					/>
-				</div>
-			)}
+			<AdditionalTabs
+				detail={detail}
+				rates={rates}
+				loading={loading}
+				setScreen={setScreen}
+				isMobile={isMobile}
+			/>
 		</div>
 	);
 }

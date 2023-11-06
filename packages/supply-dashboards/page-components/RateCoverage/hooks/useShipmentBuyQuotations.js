@@ -1,17 +1,18 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useShipmentBuyQuotations = ({
 	shipment_id,
 	service_id,
+	source,
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_shipment_quotation',
 		method : 'get',
 	}, { manual: true });
 
-	const getCharges = async () => {
+	const getCharges = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -21,12 +22,11 @@ const useShipmentBuyQuotations = ({
 		} catch (err) {
 			// console.log(err);
 		}
-	};
+	}, [shipment_id, trigger]);
 
 	useEffect(() => {
-		getCharges();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		if (source === 'live_booking') { getCharges(); }
+	}, [getCharges, source]);
 
 	const service_charges = (
 		data?.service_charges || []

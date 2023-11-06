@@ -322,7 +322,7 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/service-discovery',
 			type          : 'link',
 			icon          : IcMFinanceDashboard,
-			possible_apis : apis.service_discovery,
+			possible_apis : [...apis.service_discovery, ...apis.cargo_insurance],
 			main_apis     : [
 				'list_spot_searches',
 				'list_checkouts',
@@ -1293,7 +1293,7 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/booking-desk',
 					type          : 'link',
 					main_apis     : ['list_booking_desk_shipments'],
-					possible_apis : [...apis.shipment, ...apis.booking_desk],
+					possible_apis : [...apis.shipment, ...apis.booking_desk, ...apis.cargo_insurance],
 				},
 				{
 					key           : 'coe-cost_booking',
@@ -2726,6 +2726,16 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/profile',
 			possible_apis : apis.profile,
 			icon          : IcMAppProfile,
+		},
+		cargo_insurance: {
+			key           : 'cargo_insurance',
+			title         : 'Cargo Insurance',
+			module_type   : 'dashboards',
+			href          : '/v2/cargo-insurance',
+			as            : '/v2/cargo-insurance',
+			showInNav     : false,
+			main_apis     : [],
+			possible_apis : apis.cargo_insurance,
 		},
 		cogo_store: {
 			key           : 'cogo_store',

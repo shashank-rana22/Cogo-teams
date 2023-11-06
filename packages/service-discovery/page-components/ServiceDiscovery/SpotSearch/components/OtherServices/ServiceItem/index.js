@@ -19,7 +19,7 @@ function ServiceItem({
 }) {
 	const [bouncing, setBouncing] = useState(false);
 
-	const { label, value, icon: Icon } = data;
+	const { label, value, icon: Icon, footerContent } = data;
 
 	const is_available = GLOBAL_CONSTANTS.new_search_supported_services.includes(data?.value)
 	|| GLOBAL_CONSTANTS.new_search_supported_services.find((service) => service.includes(data?.value));
@@ -68,6 +68,13 @@ function ServiceItem({
 			>
 				{label}
 			</div>
+
+			{footerContent
+				? (
+					<div className={styles.footer_sec}>
+						{footerContent}
+					</div>
+				) : null}
 
 			{!is_available ? (
 				<ComingSoon bouncing={bouncing} />
