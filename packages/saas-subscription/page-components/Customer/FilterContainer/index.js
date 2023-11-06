@@ -17,6 +17,7 @@ function FilterContainer({ setGlobalFilters, refectUserList }) {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [showPopover, setShowPopover] = useState(false);
 	const [openPlanModal, setOpenPlanModal] = useState(false);
+	const [showBadge, setShowBadge] = useState(false);
 
 	useEffect(() => {
 		if (query !== null && query !== undefined && initialRef.current) {
@@ -43,6 +44,7 @@ function FilterContainer({ setGlobalFilters, refectUserList }) {
 					className={styles.filter}
 					content={(
 						<FilterPopover
+							setShowBadge={setShowBadge}
 							setShowPopover={setShowPopover}
 							setGlobalFilters={setGlobalFilters}
 						/>
@@ -50,6 +52,7 @@ function FilterContainer({ setGlobalFilters, refectUserList }) {
 					visible={showPopover}
 				>
 					<div className={styles.filter_container}>
+						{showBadge ? <div className={styles.badge} /> : null}
 						<Button
 							className={styles.filter_icon}
 							themeType="secondary"

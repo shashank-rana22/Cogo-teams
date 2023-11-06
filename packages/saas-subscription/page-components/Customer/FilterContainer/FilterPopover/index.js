@@ -9,7 +9,7 @@ import { getFieldController } from '../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-function FilterPopover({ setShowPopover, setGlobalFilters }) {
+function FilterPopover({ setShowPopover, setGlobalFilters, setShowBadge }) {
 	const { t } = useTranslation(['saasSubscription']);
 
 	const { control, handleSubmit, reset } = useForm();
@@ -23,6 +23,8 @@ function FilterPopover({ setShowPopover, setGlobalFilters }) {
 			}
 		});
 
+		setShowBadge(!isEmpty(FILTER_DATA));
+
 		setGlobalFilters((prev) => ({
 			...prev,
 			page: 1,
@@ -32,6 +34,7 @@ function FilterPopover({ setShowPopover, setGlobalFilters }) {
 	};
 
 	const clearHandler = () => {
+		setShowBadge(false);
 		setGlobalFilters((prev) => {
 			const { plan_ids, ...rest } = prev || {};
 			return rest;

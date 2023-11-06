@@ -1,6 +1,8 @@
+import { Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMSettings } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 const itemFunction = ({ setEditModal, t }) => ({
 	renderId: (item) => {
@@ -15,9 +17,28 @@ const itemFunction = ({ setEditModal, t }) => ({
 	},
 	renderPlan: (item) => {
 		const { active_subscription = {} } = item || {};
-		const { plan = {} } = active_subscription || {};
+		const { plan = {}, plan_pricing = {} } = active_subscription || {};
+
 		const { display_name = '' } = plan || {};
-		return <span>{display_name}</span>;
+		const { currency = 'USD', period_unit = 'month' } = plan_pricing || {};
+
+		const currencySymbol = GLOBAL_CONSTANTS.currency_symbol[currency] || '';
+
+		return	(
+			<div>
+				<div>{display_name}</div>
+
+				<Pill size="sm" color="yellow">
+					{currencySymbol}
+					{currency}
+				</Pill>
+
+				<Pill size="sm" color="orange">
+					{startCase(period_unit)}
+					ly
+				</Pill>
+			</div>
+		);
 	},
 	renderEndDate: (item) => {
 		const { active_subscription = {} } = item || {};
