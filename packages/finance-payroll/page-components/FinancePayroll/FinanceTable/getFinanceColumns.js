@@ -70,6 +70,8 @@ const getFinanceColumns = ({
 		accessor : (item = {}) => (
 			<div>
 				<span className={styles.black_text}>
+					₹
+					{' '}
 					{item.total_net_payout || '-'}
 				</span>
 			</div>
