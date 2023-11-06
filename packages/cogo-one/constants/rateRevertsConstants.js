@@ -39,16 +39,18 @@ export const defaultRateJobFilters = ({ viewType = '' }) => {
 	const defaultEndDate = isEmpty(localStorageFilterValue?.endDate) ? new Date()
 		: localStorageFilterValue?.endDate;
 
+	const relevantTo = ADMIN_VIEW_REQUIRED_FOR.includes(viewType) ? 'all' : '';
+
 	return {
 		source    : !isEmpty(localStorageSourceValue?.source) ? localStorageSourceValue?.source : [],
-		service   : 'fcl_freight' || localStorageFilterValue?.service,
+		service   : !localStorageFilterValue?.service ? 'fcl_freight' : localStorageFilterValue?.service,
 		dateRange : {
 			startDate : new Date((new Date(defaultStartDate)).setHours(0, 0, 0, 0)),
 			endDate   : new Date((new Date(defaultEndDate)).setHours(23, 59, 59, 59)),
 		},
 		shipment_id         : localStorageFilterValue?.shipment_serial_id,
 		serial_id           : '',
-		relevant_to         : ADMIN_VIEW_REQUIRED_FOR.includes(viewType) ? 'all' : '',
+		relevant_to         : localStorageFilterValue?.relevant_to ? localStorageFilterValue?.relevant_to : relevantTo,
 		service_provider_id : localStorageFilterValue?.service_provider_id,
 	};
 };
