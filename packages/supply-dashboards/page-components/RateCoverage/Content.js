@@ -35,7 +35,7 @@ function RateCoverageContent() {
 		setFilter = () => {},
 	} = useGetListCoverage({ userService });
 
-	const { loading:statsLoading, data:statsData, getStats } = useGetCoverageStats(filter);
+	const { loading:statsLoading, data:statsData, getStats } = useGetCoverageStats({ filter, source, showWeekData });
 
 	const handleToggle = () => {
 		setFilter((prevFilters) => (

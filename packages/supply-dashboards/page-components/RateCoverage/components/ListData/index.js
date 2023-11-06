@@ -1,6 +1,6 @@
-import { Placeholder, Pagination, Input, Button, Tags } from '@cogoport/components';
+import { Placeholder, Pagination, Input, Button } from '@cogoport/components';
 import { IcMFilter } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
@@ -11,6 +11,7 @@ import {
 import Filter from '../Filter';
 import Card from '../TasksOverview/OverviewContent/Card';
 
+import FilterTags from './filterTags';
 import ListCard from './ListCard';
 import styles from './styles.module.css';
 
@@ -37,8 +38,6 @@ function ListData({
 	const { list = [] } = data;
 
 	const { dynamic_statistics = {} } = statsData;
-
-	const { service = '', cogo_entity_id = '', is_flash_booking_reverted = '' } = filter || {};
 
 	const idToUse = source === 'live_booking' ? shipmentId : serialId;
 
@@ -101,63 +100,7 @@ function ListData({
 				</div>
 				<div style={{ display: 'flex' }}>
 					<div className={styles.tags}>
-						<Tags
-							size="md"
-							items={[{
-								disabled : false,
-								children : startCase(service),
-								color    : 'blue',
-								tooltip  : false,
-							}]}
-						/>
-						{source && (
-							<Tags
-								size="md"
-								items={[{
-									disabled : false,
-									children : startCase(source),
-									color    : 'blue',
-									tooltip  : false,
-									closable : true,
-								}]}
-								onItemsChange={() => {
-									setSource('');
-								}}
-							/>
-						)}
-						{cogo_entity_id && (
-							<Tags
-								size="md"
-								items={[{
-									disabled : false,
-									children : startCase(cogo_entity_id === 'no_cogo_entity_id'
-										? 'All Entity' : 'My Entity'),
-									color    : 'blue',
-									tooltip  : false,
-									closable : true,
-								}]}
-								onItemsChange={() => {
-									setFilter({ ...filter, cogo_entity_id: '' });
-								}}
-							/>
-						)}
-						{is_flash_booking_reverted
-					&& (
-						<Tags
-							size="md"
-							items={[{
-								disabled : false,
-								children : startCase(is_flash_booking_reverted === 'reverted'
-									? 'Reverted' : 'Non Reverted'),
-								color    : 'blue',
-								tooltip  : false,
-								closable : true,
-							}]}
-							onItemsChange={() => {
-								setFilter({ ...filter, is_flash_booking_reverted: '' });
-							}}
-						/>
-					)}
+						<FilterTags filter={filter} setFilter={setFilter} source={source} setSource={setSource} />
 					</div>
 					<Button
 						themeType="secondary"
