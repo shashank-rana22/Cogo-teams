@@ -15,9 +15,7 @@ const CHILD_EMPTY_VALUES = {
 };
 
 function QuestConfigForm(props) {
-	const { questLoading, data } = props;
-
-	// console.log('data', data);
+	const { questLoading, data, refetch } = props;
 
 	const {
 		loading,
@@ -32,7 +30,12 @@ function QuestConfigForm(props) {
 		setEditSubBlock,
 		handleClick,
 		prefillValues,
-	} = useQuestConfig({ default_data: data?.quest_configurations, quest_id: data?.id });
+		onChangeChild,
+		onDeleteChild,
+		setBlockId,
+		formattedString,
+		onClickFill,
+	} = useQuestConfig({ data, refetch });
 
 	if (questLoading) return <LoadingState />;
 
@@ -44,15 +47,30 @@ function QuestConfigForm(props) {
 			</div>
 
 			<div className={styles.blocks_container}>
-				<InputController
-					name="quest_string"
-					size="sm"
-					control={control}
-					errors={errors}
-					rules={{ required: 'Required' }}
-					style={{ width: '84%' }}
-					value={data?.quest_string}
-				/>
+
+				<div className={styles.generated_string}>
+					<div className={styles.generated_string_heading}>Auto-generate quest:</div>
+					<div className={styles.generated_string_content}>{formattedString}</div>
+				</div>
+
+				<div className={styles.quest_string_label}>
+					Quest String
+					<sup className={styles.sup}>*</sup>
+				</div>
+
+				<div className={styles.input_string_div}>
+
+					<InputController
+						name="quest_string"
+						size="sm"
+						control={control}
+						errors={errors}
+						rules={{ required: 'Required' }}
+						style={{ width: '84%' }}
+						value={data?.quest_string}
+					/>
+					<Button onClick={onClickFill}>Use Auto-generated </Button>
+				</div>
 				{fields.map((field, index) => (
 					<Block
 						key={field.id}
@@ -65,6 +83,9 @@ function QuestConfigForm(props) {
 						editSubBlock={editSubBlock}
 						setEditSubBlock={setEditSubBlock}
 						prefillValues={prefillValues}
+						onChangeChild={onChangeChild}
+						onDeleteChild={onDeleteChild}
+						setBlockId={setBlockId}
 					/>
 				))}
 

@@ -12,6 +12,36 @@
 	border-radius: 8px;
 }
 
+.generated_string {
+	display: flex;
+	gap: 16px;
+	padding: 0 0 16px;
+	margin: 0 0 16px;
+	border-bottom: 1px solid #eee;
+}
+
+.generated_string_content {
+	width: auto;
+	overflow-x: scroll;
+	white-space: nowrap;
+}
+
+.generated_string_heading {
+	width: 12%;
+	font-weight: 1000;
+}
+
+.quest_string_label {
+	display: flex;
+	align-items: center;
+	margin-bottom: 4px;
+}
+
+.input_string_div {
+	display: flex;
+	gap: 8px;
+}
+
 .container {
 	padding: 18px 24px;
 	background: #fff;

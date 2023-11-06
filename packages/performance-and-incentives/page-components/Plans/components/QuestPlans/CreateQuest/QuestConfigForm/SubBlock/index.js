@@ -2,8 +2,6 @@ import { SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-// import FieldArray from '../../../../ScoringPlans/commons/FieldArray';
-
 import FieldArray from '../../../commons/Form/FieldArray';
 
 import styles from './styles.module.css';
@@ -23,6 +21,9 @@ function SubBlock(props) {
 		editSubBlock,
 		watchBlock,
 		removeSubBlock,
+		onChangeChild,
+		onDeleteChild,
+		setBlockId,
 	} = props;
 
 	const {
@@ -30,7 +31,6 @@ function SubBlock(props) {
 		parameterOptions = [],
 		parameterUnitOptions = {},
 		filteredSubBlockOptions = [],
-		setParamScoringType = () => {},
 	} = useSubBlockCreation({
 		subBlockWiseParameterOptions,
 		watch,
@@ -61,6 +61,9 @@ function SubBlock(props) {
 							value={watch(`blocks[${blockIndex}].sub_blocks[${subBlockIndex}].sub_block_id`)}
 							rules={{ required: `${subBlockType} is required` }}
 							disabled={!isSubBlockEmpty}
+							onChange={(val, obj) => {
+								setBlockId((b) => ({ ...b, [obj?.value]: obj?.label }));
+							}}
 						/>
 
 						{errors?.blocks?.[blockIndex]?.sub_blocks?.[subBlockIndex]?.sub_block_id && (
@@ -100,7 +103,8 @@ function SubBlock(props) {
 					subBlockIndex={subBlockIndex}
 					parameterOptions={parameterOptions}
 					parameterUnitOptions={parameterUnitOptions}
-					setParamScoringType={setParamScoringType}
+					onChangeChild={onChangeChild}
+					onDeleteChild={onDeleteChild}
 					error={errors?.blocks?.[blockIndex]?.sub_blocks?.[subBlockIndex]?.parameters}
 				/>
 			</div>

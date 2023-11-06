@@ -27,6 +27,8 @@ function Child(props) {
 		watch = () => {},
 		parameterOptions = [],
 		parameterUnitOptions = {},
+		onChangeChild = () => {},
+		onDeleteChild = () => {},
 	} = props;
 
 	const [scoringType, paramType] = watch([`${name}.${index}.scoring_type`, `${name}.${index}.parameter`]);
@@ -43,6 +45,10 @@ function Child(props) {
 		paramIndex: index,
 		parameterOptions,
 	});
+
+	const subBlockId = watch(`blocks[${blockIndex}].sub_blocks[${subBlockIndex}].sub_block_id`);
+
+	console.log('subBlockId::', subBlockId);
 
 	return (
 		<div key={scoringType} className={styles.content}>
@@ -69,6 +75,13 @@ function Child(props) {
 							{...(controlName === 'scoring_unit') ? { options: paramUnitOptions } : {}}
 							{...(controlName === 'parameter') ? { options: paramOptions } : {}}
 							{...(TRIGGER_CONTROLS.includes(controlName)) ? memoizedTriggerMapping[controlName] : {}}
+							onChange={(val, obj) => onChangeChild({
+								val,
+								obj,
+								index,
+								name         : controlItem?.name,
+								subBlockName : subBlockId,
+							})}
 						/>
 
 						<div className={styles.error_message}>
@@ -83,7 +96,7 @@ function Child(props) {
 					className={styles.delete_btn}
 					width={16}
 					height={16}
-					onClick={() => remove(index, FIRST_INDEX)}
+					onClick={() => { remove(index, FIRST_INDEX); onDeleteChild({ index, subBlockName: subBlockId }); }}
 				/>
 			) : null}
 		</div>

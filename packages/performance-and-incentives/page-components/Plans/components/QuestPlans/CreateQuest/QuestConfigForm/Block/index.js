@@ -21,6 +21,10 @@ function Block(props) {
 		editSubBlock,
 		setEditSubBlock,
 		prefillValues,
+		onChangeChild,
+		onDeleteChild,
+		setBlockId,
+		// setStringData,
 
 	} = props;
 
@@ -91,6 +95,9 @@ function Block(props) {
 					subBlockOptions={subBlockOptions}
 					subBlockWiseParameterOptions={subBlockWiseParameterOptions}
 					editSubBlock={editSubBlock}
+					onChangeChild={onChangeChild}
+					onDeleteChild={onDeleteChild}
+					setBlockId={setBlockId}
 				/>
 			))}
 
