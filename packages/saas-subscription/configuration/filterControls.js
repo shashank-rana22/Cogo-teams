@@ -8,12 +8,12 @@ const filterControls = [
 		asyncKey    : 'list_saas_plan',
 		initialCall : true,
 		size        : 'sm',
-		// rules       : { required: true },
+
 	},
 	{
 		name    : 'customer_type',
 		type    : 'chips',
-		label   : 'Account type',
+		label   : 'Customer type',
 		options : [
 			{
 				key      : 'importer_exporter',

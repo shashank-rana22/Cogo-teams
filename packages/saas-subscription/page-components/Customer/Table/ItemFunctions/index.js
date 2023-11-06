@@ -20,7 +20,7 @@ const itemFunction = ({ setEditModal, t }) => ({
 		const { plan = {}, plan_pricing = {} } = active_subscription || {};
 
 		const { display_name = '' } = plan || {};
-		const { currency = 'USD', period_unit = 'month' } = plan_pricing || {};
+		const { currency = 'INR', period_unit = 'month' } = plan_pricing || {};
 
 		const currencySymbol = GLOBAL_CONSTANTS.currency_symbol[currency] || '';
 
@@ -28,7 +28,7 @@ const itemFunction = ({ setEditModal, t }) => ({
 			<div>
 				<div>{display_name}</div>
 
-				<Pill size="sm" color="yellow">
+				<Pill size="sm" color="blue">
 					{currencySymbol}
 					{currency}
 				</Pill>
