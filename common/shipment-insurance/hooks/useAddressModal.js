@@ -74,7 +74,7 @@ const useAddressModal = ({ orgId = '', setAddressModal, getBillingAddress }) => 
 	};
 
 	useEffect(() => {
-		if (!includeTax) { setShowPocFeilds(false); }
+		if (!includeTax) setShowPocFeilds(false);
 	}, [includeTax]);
 
 	return { loading: apiLoading || loading, formhook, addressControl, submitHandler, closeModalHandler };

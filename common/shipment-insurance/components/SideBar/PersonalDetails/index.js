@@ -6,13 +6,13 @@ import getPocMapping from '../../../constants/getPocMapping';
 import PersonalDetailsModal from './PersonalDetailsModal';
 import styles from './styles.module.css';
 
+const POC_MAPPING = getPocMapping();
+
 function PersonalDetail({ pocDetails = {} }) {
 	const [detailModal, setDetailModal] = useState({
 		openModal : false,
 		info      : {},
 	});
-
-	const POC_MAPPING = getPocMapping();
 
 	return (
 		<div className={cl`${styles.section} ${styles.personal_detail}`}>

@@ -5,7 +5,7 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty, upperCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
-const START_INDEX = 0;
+const START_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 const MAX = 2;
 const TOKEN = '0c320283-6f34-42d0-ac1d-e3390049fe65';
 
