@@ -2725,7 +2725,7 @@ const navigationMapping = ({ t = () => {} }) => {
 		},
 		payment: {
 			key           : 'payment',
-			title         : 'payment',
+			title         : 'Payment',
 			icon          : IcMAppPayment,
 			href          : '/v2/payment',
 			as            : '/v2/payment',

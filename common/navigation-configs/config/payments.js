@@ -4,10 +4,6 @@ const payment = {
 		navigation : 'payment',
 		isMainNav  : true,
 	},
-	// '/[partner_id]/payment/[tab]': {
-	// 	layoutType : 'no_header',
-	// 	navigation : 'payment',
-	// },
 };
 
 module.exports = payment;

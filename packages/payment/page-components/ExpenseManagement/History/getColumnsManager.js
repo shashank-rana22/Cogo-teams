@@ -1,5 +1,6 @@
 // import { IcMInfo } from '@cogoport/icons-react';
 import { ButtonIcon, Button } from '@cogoport/components';
+import { IcMDownload } from '@cogoport/icons-react';
 import { getMonth, getDate } from '@cogoport/utils';
 import React from 'react';
 
@@ -49,17 +50,17 @@ const getColumnsManager = ({ setItem, setShow, handleUpdate, hr_view }) => {
 			),
 			id: 'category',
 		},
-		{
-			Header   : <div className={styles.header}>DESCRIPTION</div>,
-			accessor : (item) => (
-				<div
-					className={styles.data}
-				>
-					{item?.description || '-'}
-				</div>
-			),
-			id: 'description',
-		},
+		// {
+		// 	Header   : <div className={styles.header}>DESCRIPTION</div>,
+		// 	accessor : (item) => (
+		// 		<div
+		// 			className={styles.data}
+		// 		>
+		// 			{item?.description || '-'}
+		// 		</div>
+		// 	),
+		// 	id: 'description',
+		// },
 		{
 			Header   : <div className={styles.header}>Submitted On</div>,
 			accessor : (item) => (
@@ -115,6 +116,23 @@ const getColumnsManager = ({ setItem, setShow, handleUpdate, hr_view }) => {
 				</div>
 			),
 			id: 'activity',
+		},
+		{
+			Header   : <div className={styles.header}>Attachment</div>,
+			accessor : (item) => (
+				<div
+					className={styles.data}
+				>
+					<ButtonIcon
+						size="md"
+						icon={<IcMDownload />}
+						onClick={() => window.open(item?.attachment_url, '_blank')}
+						themeType="primary"
+					/>
+
+				</div>
+			),
+			id: 'attachment',
 		},
 		{
 			Header   : <div className={styles.header}>Status</div>,

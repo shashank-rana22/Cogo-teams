@@ -1,5 +1,4 @@
-import { Button, Modal, ButtonIcon } from '@cogoport/components';
-import { IcMDownload } from '@cogoport/icons-react';
+import { Button, Modal } from '@cogoport/components';
 import { getMonth, getDate } from '@cogoport/utils';
 import React from 'react';
 
@@ -23,6 +22,10 @@ function ActivityModal({ item, onClose, show }) {
 }
 							</span>
 						</div> */}
+						<div className={styles.section}>
+							<span className={styles.column1}>Description</span>
+							<span className={styles.column2}>{item?.description || '-'}</span>
+						</div>
 						<div className={styles.section}>
 							<span className={styles.column1}>Approved by L1 </span>
 							<span className={styles.column2}>{item?.level1_approved_by || '-'}</span>
@@ -57,7 +60,7 @@ function ActivityModal({ item, onClose, show }) {
 							<span className={styles.column1}>L2 Remarks </span>
 							<span className={styles.column2}>{item?.level2_remarks || '-'}</span>
 						</div>
-						<div className={styles.section}>
+						{/* <div className={styles.section}>
 							<span className={styles.column1}>Attachment</span>
 							<span className={styles.column2}>
 								<ButtonIcon
@@ -67,7 +70,7 @@ function ActivityModal({ item, onClose, show }) {
 									onClick={() => window.open(item?.attachment_url, '_blank')}
 								/>
 							</span>
-						</div>
+						</div> */}
 					</div>
 				</Modal.Body>
 				<Modal.Footer>

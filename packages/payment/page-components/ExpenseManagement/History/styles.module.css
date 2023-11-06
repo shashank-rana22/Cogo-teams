@@ -31,6 +31,13 @@
 	border-radius: 8px;
 }
 
+.header {
+	font-size: 12px;
+	font-weight: 700;
+	color: #4f4f4f;
+	text-transform: uppercase;
+}
+
 .header_input {
 	display: flex;
 	align-items: center;

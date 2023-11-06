@@ -3,7 +3,7 @@ import {
 	IcMArrowUp,
 	IcMArrowDown,
 } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+// import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -21,7 +21,7 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 	const { request_label, pending_count, request_key } = data;
 	const [accordion, setAccordion] = useState(false);
 
-	const router = useRouter();
+	// const router = useRouter();
 	const { data : requestData, setFilters, loading } = useGetEmployeeCollections({
 		isManager,
 		request_type : request_key,
@@ -69,20 +69,6 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 									Approve All
 								</Button>
 							)}
-							{
-								request_label === 'EXPENSE REQUESTS' && (
-									<Button
-										size="md"
-										themeType="link"
-										onClick={(event) => {
-											event.stopPropagation();
-											router.push('/payment');
-										}}
-									>
-										Go to Expense page
-									</Button>
-								)
-							}
 							{accordion ? (
 								<IcMArrowUp width={16} height={16} />
 							) : (

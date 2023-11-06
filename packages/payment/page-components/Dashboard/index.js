@@ -45,7 +45,11 @@ function PayrollDashboard() {
 							<IcMPlus width={18} height={18} />
 						</div>
 					</Button>
-					<Button size="md" themeType="primary">
+					<Button
+						size="md"
+						themeType="primary"
+						onClick={() => router.push('/attendance-leave-management?showInbox=true')}
+					>
 						<div className={styles.button_text_container}>
 							<span className={styles.button_text}>My Inbox</span>
 							<IcMTaskCompleted width={18} height={18} />

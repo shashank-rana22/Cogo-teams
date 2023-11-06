@@ -27,7 +27,7 @@ const MONTHS = [
 	{ label: 'December', value: 12 },
 ];
 
-function ExpenseHistory({ toggleValue, hr_view, value }) {
+function ExpenseHistory({ toggleValue, hr_view, value, search_query }) {
 	const {
 		loading, data, filters,
 		setFilters, refetchlist, debounceQuery,
@@ -40,15 +40,12 @@ function ExpenseHistory({ toggleValue, hr_view, value }) {
 	const [item, setItem] = useState({});
 	const [remark_text, setRemarkText] = useState('');
 	const [payload, setPayload] = useState({});
-	const [search, setSearch] = useState('');
+	const [search, setSearch] = useState(search_query ? decodeURIComponent(search_query) : '');
 
-	// useEffect(()=>{
-	// 	if(!loading1){
+	debounceQuery(search);
+	console.log('search_query', search);
 
-	// 	}
-	// }, []);
 	const handleUpdateReimbursement = async () => {
-		// console.log('payload', payload);
 		await updateReiembursement(payload?.id, payload?.action, remark_text, refetchlist);
 		setShow1(false);
 		setPayload({});
