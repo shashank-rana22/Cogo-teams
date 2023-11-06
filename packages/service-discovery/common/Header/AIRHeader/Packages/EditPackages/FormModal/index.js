@@ -89,6 +89,7 @@ function FormModal({
 			<div
 				key={commoditySubtypeOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value}
 				style={{ marginTop: activeTab === 'cargo_gross' ? 30 : 15 }}
+				className={styles.form}
 			>
 				<Layout
 					controls={controls}
