@@ -55,13 +55,15 @@ function OverAllOutstanding({
 		filtersApplied,
 	} = useGetOrgOutstanding({ entityCode });
 
+	const { include_defaulters = false } = filters || {};
+
 	const [dateFilter, setDateFilter] = useState({
 		startDate : startOfMonth(new Date()),
 		endDate   : new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
 	});
 	const [range, setRange] = useState('this_month');
 	const { statsData, statsLoading } = useGetSageArOutstandingsStats({
-		entityCode,
+		entityCode, include_defaulters,
 	});
 	const [viewGraphStats, setViewGraphStats] = useState(false);
 	const ref = useRef(null);

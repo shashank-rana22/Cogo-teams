@@ -33,23 +33,20 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 
 	const { order, key } = orderBy || {};
 	const [filters, setFilters] = useState({});
-	const [filtersApplied, setFiltersApplied] = useState(true);
+	const [filtersApplied, setFiltersApplied] = useState(false);
 	const {
 		salesAgentId = '', portfolioManagerId = '', portfolioManagerRmId = '',
-		salesAgentRmId = '', kamId = '', creditControllerId = '', companyType = '', exclude_defaulters = false,
+		salesAgentRmId = '', kamId = '', creditControllerId = '', companyType = '', include_defaulters = false,
 	} = filters || {};
 
 	const getFilterApplied = useCallback(() => {
-		let isFilterApplied = true;
-		if (filters?.exclude_defaulters === true) {
-			isFilterApplied = false;
+		let isFilterApplied = false;
 
-			Object.keys(filters).forEach((ele) => {
-				if (ele !== 'exclude_defaulters' && !isEmpty(filters[ele])) {
-					isFilterApplied = true;
-				}
-			});
-		}
+		Object.keys(filters).forEach((ele) => {
+			if (!isEmpty(filters[ele])) {
+				isFilterApplied = true;
+			}
+		});
 
 		return isFilterApplied;
 	}, [filters]);
@@ -97,7 +94,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 						sageId               : sageId || undefined,
 						tradePartySerialId   : tradePartySerialId || undefined,
 						q                    : q || undefined,
-						excludeDefaulters    : !exclude_defaulters,
+						excludeDefaulters    : !include_defaulters,
 					},
 				});
 
@@ -110,7 +107,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 		[trigger, key, order, page, pageLimit,
 			salesAgentId, portfolioManagerId, portfolioManagerRmId,
 			salesAgentRmId, creditControllerId, selectedAgentId, kamId, companyType,
-			entityCode, organizationSerialId, sageId, tradePartySerialId, q, exclude_defaulters, getFilterApplied],
+			entityCode, organizationSerialId, sageId, tradePartySerialId, q, include_defaulters, getFilterApplied],
 	);
 
 	useEffect(() => {

@@ -9,7 +9,7 @@ function Filters({
 	controls = [], filters = {},
 	setFilters = () => {},
 	clearFilter = () => {},
-	filtersApplied = true,
+	filtersApplied = false,
 }) {
 	const [show, setShow] = useState(false);
 

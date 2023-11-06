@@ -1,7 +1,7 @@
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetSageArOutstandingsStats = ({ entityCode }) => {
+const useGetSageArOutstandingsStats = ({ entityCode, include_defaulters }) => {
 	const [
 		{ data, loading }, trigger] = useRequestBf(
 		{
@@ -15,11 +15,13 @@ const useGetSageArOutstandingsStats = ({ entityCode }) => {
 		trigger({
 			params: {
 				entityCode,
+				excludeDefaulters: !include_defaulters,
 			},
 		});
 	}, [
 		entityCode,
 		trigger,
+		include_defaulters,
 	]);
 	return {
 		statsLoading : loading,

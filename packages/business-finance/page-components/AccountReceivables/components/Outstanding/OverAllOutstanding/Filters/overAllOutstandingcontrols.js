@@ -6,11 +6,11 @@ const geo = getGeoConstants();
 
 const overAllOutstandingcontrols = () => [
 	{
-		name     : 'exclude_defaulters',
-		label    : 'Exclude Defaulters',
+		name     : 'include_defaulters',
+		label    : 'Include Defaulters',
 		type     : 'toggle',
-		onLabel  : 'OFF',
-		offLabel : 'ON',
+		onLabel  : 'ON',
+		offLabel : 'OFF',
 		size     : 'md',
 	},
 
