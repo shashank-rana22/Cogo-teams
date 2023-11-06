@@ -52,7 +52,7 @@ function LineItemDeviation({
 					},
 				})}
 				<Pill size="sm" color={deviation >= 0 ? 'green' : 'red'}>
-					{`${deviation >= 0 ? '+' : '-'} ${deviation}%`}
+					{`${deviation}%`}
 				</Pill>
 			</div>
 		);

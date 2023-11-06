@@ -7,8 +7,8 @@ function LineItem({
 	lineItem = {},
 }) {
 	const {
-		sellQuotationTotal = '', buyQuotationTotal = '',
-		invoiceTotal = '', billTotal = '', currency = '',
+		sellQuotationLineItemTotal = '', buyQuotationLineItemTotal = '',
+		invoiceLineItemTotal = '', billLineItemTotal = '', invoiceCurrency = '', billCurrency = '',
 		percentageDeviationBuy = '', percentageDeviationSell = '',
 	} = lineItem || {};
 
@@ -17,17 +17,17 @@ function LineItem({
 			<div className={styles.line_item_sub_container}>{`${lineItem?.name} (${lineItem?.code})`}</div>
 			<div className={styles.line_item_sub_container}>
 				<LineItemDeviation
-					currency={currency}
-					sellOrBuyQuotTotal={sellQuotationTotal}
-					invOrBillTotal={invoiceTotal}
+					currency={invoiceCurrency}
+					sellOrBuyQuotTotal={sellQuotationLineItemTotal}
+					invOrBillTotal={invoiceLineItemTotal}
 					deviation={percentageDeviationSell}
 				/>
 			</div>
 			<div className={styles.line_item_sub_container}>
 				<LineItemDeviation
-					currency={currency}
-					sellOrBuyQuotTotal={buyQuotationTotal}
-					invOrBillTotal={billTotal}
+					currency={billCurrency}
+					sellOrBuyQuotTotal={buyQuotationLineItemTotal}
+					invOrBillTotal={billLineItemTotal}
 					deviation={percentageDeviationBuy}
 				/>
 			</div>
