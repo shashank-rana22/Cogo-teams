@@ -215,20 +215,22 @@ function Post({ feedRefetch }) {
 					</div>
 				</div>
 			</div>
-			<div className={styles.img_container}>
-				{(hasUploadedFiles) && !uploading ? (
-					<UploadedFiles
-						setDraftUploadedFiles={setDraftUploadedFiles}
-						uploaderRef={uploaderRef}
-						eachFileData={fileMetaData}
-					/>
-				) : null}
-				{uploading ? (
-					<div className={styles.uploading}>
-						uploading.....
-					</div>
-				) : null}
-			</div>
+			{!isEmpty(fileMetaData) && (
+				<div className={styles.img_container}>
+					{(hasUploadedFiles) && !uploading ? (
+						<UploadedFiles
+							setDraftUploadedFiles={setDraftUploadedFiles}
+							uploaderRef={uploaderRef}
+							eachFileData={fileMetaData}
+						/>
+					) : null}
+					{uploading ? (
+						<div className={styles.uploading}>
+							uploading.....
+						</div>
+					) : null}
+				</div>
+			)}
 		</>
 	);
 }

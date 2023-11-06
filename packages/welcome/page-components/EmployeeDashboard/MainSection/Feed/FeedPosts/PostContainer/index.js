@@ -215,27 +215,29 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 			{item.feed_type !== 'normal' && (
 				<div className={styles.main_post_data}>
 					<div className={styles.feed_type}>
-						<div className={cl`${styles.circle} ${styles.circle1_bg}`}>
+						<div className={cl`${styles.profile_circle} ${styles.circle1_bg}`}>
 							{feedTypeMapping[item.feed_type]}
 						</div>
 						{item?.tagged_employee_info?.length > 0
 							? item?.tagged_employee_info?.map((val) => (
-
 								val.photo
 									? (
 										<img
-											className={cl`${styles.circle} ${styles.circle_profile}`}
+											className={cl`${styles.profile_circle} ${styles.circle_profile}`}
 											src={val?.photo}
 											alt="profile"
 											key={val?.name}
 										/>
 									)
 									: (
-										<div className={cl`${styles.circle} ${styles.circle2_bg}`} key={val?.name}>
+										<div
+											className={cl`${styles.profile_circle} 
+										${styles.circle3_bg}`}
+											key={val?.name}
+										>
 											{makeShortName(val?.name)}
 										</div>
 									)
-
 							))
 							: null}
 					</div>

@@ -1,13 +1,12 @@
-import { upperCase } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { isEmpty } from '@cogoport/utils';
 
 const makeShortName = (name) => {
-	if (name === null || name === undefined) return '';
+	if (isEmpty(name)) return '';
 	const words = name?.split(' ');
-	let shortName = '';
-	words?.forEach((word) => {
-		shortName += word.slice(0, 1);
-	});
-	return upperCase(shortName);
+	const firstInitial = words?.[GLOBAL_CONSTANTS.zeroth_index][GLOBAL_CONSTANTS.zeroth_index]?.toUpperCase();
+	const lastInitial = words?.[words.length - 1][GLOBAL_CONSTANTS.zeroth_index]?.toUpperCase();
+	return firstInitial + lastInitial;
 };
 
 export default makeShortName;

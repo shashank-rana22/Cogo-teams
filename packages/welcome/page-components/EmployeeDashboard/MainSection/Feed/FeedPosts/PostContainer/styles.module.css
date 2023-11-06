@@ -21,6 +21,7 @@
 	font-weight: 600;
 	background: #ffdfdf;
 	border-radius: 50%;
+	object-fit: cover;
 }
 
 .user_data {
@@ -76,11 +77,24 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 48px;
+	height: 48px;
+	border: 2px solid #fff;
+	border-radius: 100px;
+	object-fit: cover;
+}
+
+.profile_circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 60px;
 	height: 60px;
 	border: 2px solid #fff;
 	border-radius: 100px;
+	object-fit: cover;
 }
+
 
 .circle1_bg {
 	font-size: 24px;
@@ -88,6 +102,12 @@
 }
 
 .circle2_bg {
+	font-size: 20px;
+	color: #fff;
+	background-color: #f68b21;
+}
+
+.circle3_bg {
 	margin-left: -12px;
 	font-size: 24px;
 	color: #fff;

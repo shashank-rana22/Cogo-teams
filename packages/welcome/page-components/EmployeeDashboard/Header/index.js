@@ -7,6 +7,7 @@ import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
+import makeShortName from '../../../common/MakeShortName';
 import { HEADER_NAV } from '../../../utils/constants';
 
 import styles from './styles.module.css';
@@ -132,7 +133,7 @@ function Header({ summaryData }) {
 								)
 								: (
 									<div className={cl`${styles.name_avatar_photo} ${styles.name_avatar}`}>
-										{userName}
+										{makeShortName(userName)}
 									</div>
 								)
 						}
