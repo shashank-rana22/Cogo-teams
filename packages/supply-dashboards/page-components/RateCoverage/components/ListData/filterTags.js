@@ -1,8 +1,9 @@
 import { Tags } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
+
+import { CustomTags } from './FilterComponent/customTags';
+import { DateTag } from './FilterComponent/dateTags';
 
 function FilterTags({ filter = {}, setFilter = () => {}, source = '', setSource = () => {} }) {
 	const {
@@ -22,74 +23,38 @@ function FilterTags({ filter = {}, setFilter = () => {}, source = '', setSource 
 				}]}
 			/>
 			{source && (
-				<Tags
-					size="md"
-					items={[{
-						disabled : false,
-						children : startCase(source),
-						color    : 'blue',
-						tooltip  : false,
-						closable : true,
-					}]}
-					onItemsChange={() => {
-						setSource('');
-					}}
+				<CustomTags
+					text={source}
+					onClose={() => setSource('')}
+					setValue={setSource}
 				/>
 			)}
+
 			{start_date && (
-				<Tags
-					size="md"
-					items={[{
-						disabled : false,
-						children : `StartDate ${formatDate({
-							date       : start_date,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							formatType : 'date',
-							separator  : '/',
-						})}`,
-						color    : 'blue',
-						tooltip  : true,
-						closable : true,
-					}]}
-					onItemsChange={() => {
-						setFilter({ ...filter, start_date: '' });
-					}}
+				<DateTag
+					date={start_date}
+					label="StartDate"
+					filterKey="start_date"
+					filter={filter}
+					setFilter={setFilter}
 				/>
 			)}
+
 			{end_date && (
-				<Tags
-					size="md"
-					items={[{
-						disabled : false,
-						children : `EndDate ${formatDate({
-							date       : end_date,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							formatType : 'date',
-							separator  : '/',
-						})}`,
-						color    : 'blue',
-						tooltip  : true,
-						closable : true,
-					}]}
-					onItemsChange={() => {
-						setFilter({ ...filter, end_date: '' });
-					}}
+				<DateTag
+					date={end_date}
+					label="EndDate"
+					filterKey="end_date"
+					filter={filter}
+					setFilter={setFilter}
 				/>
 			)}
+
 			{cogo_entity_id && (
-				<Tags
-					size="md"
-					items={[{
-						disabled : false,
-						children : startCase(cogo_entity_id === 'no_cogo_entity_id'
-							? 'All Entity' : 'My Entity'),
-						color    : 'blue',
-						tooltip  : false,
-						closable : true,
-					}]}
-					onItemsChange={() => {
-						setFilter({ ...filter, cogo_entity_id: '' });
-					}}
+				<CustomTags
+					text={cogo_entity_id === 'no_cogo_entity_id' ? 'All Entity' : 'My Entity'}
+					onClose={() => setFilter({ ...filter, cogo_entity_id: '' })}
+					setValue={setFilter}
 				/>
 			)}
 			{is_flash_booking_reverted
