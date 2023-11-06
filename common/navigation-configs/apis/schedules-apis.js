@@ -10,44 +10,44 @@ const schedules_apis = {
 		{
 			api          : 'list_vessel_schedules',
 			access_type  : 'private',
-			service_name : 'location',
+			service_name : 'sailing_schedule',
 		},
 		{
 			api          : 'create_vessel_schedule',
 			access_type  : 'private',
-			service_name : 'location',
+			service_name : 'sailing_schedule',
 		},
 		{
 			api          : 'update_vessel_schedule',
 			access_type  : 'private',
-			service_name : 'location',
+			service_name : 'sailing_schedule',
 		},
 		{
 			api          : 'list_vessels',
 			access_type  : 'private',
-			service_name : 'location',
+			service_name : 'sailing_schedule',
 		},
 		{
 			api          : 'list_service_lanes',
 			access_type  : 'private',
-			service_name : 'location',
+			service_name : 'sailing_schedule',
 		},
 	],
 	service_lanes: [
 		{
 			api          : 'list_service_lanes',
 			access_type  : 'private',
-			service_name : 'location',
+			service_name : 'sailing_schedule',
 		},
 		{
 			api          : 'create_service_lane',
 			access_type  : 'private',
-			service_name : 'location',
+			service_name : 'sailing_schedule',
 		},
 		{
 			api          : 'update_service_lane',
 			access_type  : 'private',
-			service_name : 'location',
+			service_name : 'sailing_schedule',
 		},
 	],
 	sailing_schedule: [

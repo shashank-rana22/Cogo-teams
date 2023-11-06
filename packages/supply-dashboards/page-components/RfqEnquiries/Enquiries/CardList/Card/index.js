@@ -12,7 +12,7 @@ function Card({ item, selectedCard, setSelectedCard, revertCounts }) {
 		>
 			<Header item={item} />
 			<div className={styles.line} />
-			<Body item={item?.detail} />
+			<Body item={item?.detail} atActuals={item?.at_actuals} />
 			<div className={styles.line} />
 			<Footer item={item} revertCounts={revertCounts} />
 		</div>

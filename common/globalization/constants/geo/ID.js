@@ -238,6 +238,7 @@ export default {
 		air_so_1_manager      : 'b61bec0d-b9ba-4674-930c-9192aad288ef',
 		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
 		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
+		cogoverse_executive   : 'f23810d3-c6c0-4937-bf2e-2ad301dd708d',
 		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
 		cogo_one_admin_ids    : [
 			'381b9d1d-e005-4cc0-9844-a5f1636e71b1', // Tech SuperAdmin
