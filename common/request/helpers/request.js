@@ -1,9 +1,9 @@
-import store from '@cogoport/store';
+// import store from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import Axios from 'axios';
 import qs from 'qs';
 
-import getAuthorizationParams from './get-final-authpipe';
+// import getAuthorizationParams from './get-final-authpipe';
 import getMicroServiceName from './get-microservice-name';
 // eslint-disable-next-line custom-eslint/import-from-package-utils
 import { getCookie } from './getCookieFromCtx';
@@ -50,7 +50,7 @@ request.interceptors.request.use((oldConfig) => {
 
 	const isDevMode = !process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('https://api.cogoport.com');
 
-	const authorizationparameters = getAuthorizationParams(store, newConfig.url);
+	// const authorizationparameters = getAuthorizationParams(store, newConfig.url);
 	const apiPath = newConfig.url.split('/').pop();
 
 	const originalApiPath = newConfig.url
@@ -81,11 +81,11 @@ request.interceptors.request.use((oldConfig) => {
 	return {
 		...newConfig,
 		headers: {
-			authorizationscope   : newConfig?.scope || 'partner',
-			authorization        : `Bearer: ${newConfig?.token || token}`,
-			authorizationparameters,
+			authorizationscope   : 'micro_service' || newConfig?.scope || 'partner',
+			authorization        : `Bearer: ${'0c320283-6f34-42d0-ac1d-e3390049fe65' || newConfig?.token || token}`,
+			// authorizationparameters,
 			'auth-token'         : newConfig.auth_token || undefined,
-			authorizationscopeid : newConfig.scopeId || undefined,
+			authorizationscopeid : '0c320283-6f34-42d0-ac1d-e3390049fe65' || newConfig.scopeId || undefined,
 		},
 	};
 });
