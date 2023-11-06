@@ -17,7 +17,6 @@ import {
 import DURATION_OPTIONS from '../../configurations/get-duration-filter-options';
 
 import ProgressBars from './ProgressBars';
-import ScrollAnnouncement from './ScrollAnouncement';
 import styles from './styles.module.css';
 
 const { TODAY, LAST_MONTH, THIS_MONTH, LAST_QUARTER, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
@@ -132,8 +131,6 @@ function Header(props) {
 				)}
 
 			</div>
-
-			<ScrollAnnouncement />
 
 		</div>
 	);

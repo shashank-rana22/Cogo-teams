@@ -4,10 +4,12 @@ import { useState } from 'react';
 
 const useGetQuests = () => {
 	const [params, setParams] = useState({
-		page       : 1,
-		page_limit : 10,
-		sort_by    : 'created_at',
-		sort_type  : 'desc',
+		page                      : 1,
+		page_limit                : 10,
+		sort_by                   : 'created_at',
+		sort_type                 : 'desc',
+		cogo_entity_data_required : true,
+		role_data_required        : true,
 	});
 
 	const [{ loading, data }, refetch] = useAllocationRequest(

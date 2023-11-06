@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
+import ScrollAnnouncement from '../../common/ScrollAnouncement';
 import { getTodayStartDate } from '../../utils/start-date-functions';
 
 import Body from './components/Body';
@@ -56,6 +57,8 @@ function PublicDashboard() {
 					nextReloadAt={nextReloadAt}
 					switchScreen={switchScreen}
 				/>
+
+				<ScrollAnnouncement style={{ margin: '0 16px' }} />
 
 				<Body
 					screen={screen}

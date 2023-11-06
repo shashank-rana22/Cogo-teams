@@ -1,14 +1,13 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMAnnouncement } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 import useGetQuests from './useGetQuests';
 
-function ScrollAnnouncement() {
+function ScrollAnnouncement({ style = {} }) {
 	const [isScrolling, setIsScrolling] = useState(false);
 
 	const { loading, list } = useGetQuests();
@@ -20,9 +19,13 @@ function ScrollAnnouncement() {
 	if (loading || isEmpty(list)) return null;
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={style}>
 			<div className={styles.icon_div}>
-				<IcMAnnouncement height={20} width={20} />
+				<img
+					className={styles.icon_div_img}
+					src={GLOBAL_CONSTANTS?.image_url?.public_leaderboard_announcement}
+					alt=""
+				/>
 			</div>
 			<div
 				className={styles.bar}
@@ -43,21 +46,30 @@ function ScrollAnnouncement() {
 									:
 								</span>
 								<span>
-									(
-									{formatDate({
-										date       : start_date,
-										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-										formatType : 'date',
-									})}
-									-
-									{formatDate({
-										date       : end_date,
-										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-										formatType : 'date',
-									})}
-									)
+									from
+									{' '}
+									<span className={styles.date_text}>
+										{formatDate({
+											date       : start_date,
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+											formatType : 'date',
+										})}
+									</span>
+									{' '}
+									to
+									{' '}
+									<span className={styles.date_text}>
+										{formatDate({
+											date       : end_date,
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+											formatType : 'date',
+										})}
+									</span>
+
 								</span>
 								{quest_string}
+
+								<span className={styles.div_end} />
 							</span>
 						);
 					})}
