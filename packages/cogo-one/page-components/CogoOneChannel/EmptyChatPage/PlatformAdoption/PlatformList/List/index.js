@@ -182,7 +182,11 @@ function List({
 			{(list || []).map((item) => {
 				const { request_type = '', id = '' } = item || {};
 
-				const Component = ADOPTIONS_COMPOONENT_MAPPING?.[request_type];
+				const Component = ADOPTIONS_COMPOONENT_MAPPING?.[request_type] || null;
+
+				if (!Component) {
+					return null;
+				}
 
 				return (
 					<Component key={id} {...(COMPONENT_PROPS?.[request_type] || {})} item={item} />
