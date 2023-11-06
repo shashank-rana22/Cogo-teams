@@ -15,7 +15,7 @@ const CHILD_EMPTY_VALUES = {
 };
 
 function QuestConfigForm(props) {
-	const { data, refetch } = props;
+	const { data, refetch, name: questName } = props;
 
 	const {
 		loading,
@@ -35,7 +35,8 @@ function QuestConfigForm(props) {
 		setBlockId,
 		formattedString,
 		onClickFill,
-	} = useQuestConfig({ data, refetch });
+		handleResetString,
+	} = useQuestConfig({ data, refetch, questName });
 
 	return (
 		<>
@@ -64,10 +65,18 @@ function QuestConfigForm(props) {
 						control={control}
 						errors={errors}
 						rules={{ required: 'Required' }}
-						style={{ width: '84%' }}
+						style={{ width: '80%' }}
 						value={data?.quest_string}
 					/>
 					<Button disabled={isEmpty(formattedString)} onClick={onClickFill}>Use Auto-generated </Button>
+					<Button
+						themeType="secondary"
+						disabled={data?.quest_string === watch('quest_string')}
+						onClick={handleResetString}
+					>
+						Reset
+
+					</Button>
 				</div>
 				{fields.map((field, index) => (
 					<Block

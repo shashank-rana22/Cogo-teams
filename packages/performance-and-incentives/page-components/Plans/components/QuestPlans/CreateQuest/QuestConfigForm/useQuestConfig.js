@@ -39,7 +39,7 @@ const getFormattedPayload = (formValues) => {
 	return formattedData;
 };
 
-const useQuestConfig = ({ data = {}, refetch = () => {} }) => {
+const useQuestConfig = ({ data = {}, refetch = () => {}, questName = null }) => {
 	const [editSubBlock, setEditSubBlock] = useState({});
 
 	const [blockId, setBlockId] = useState({});
@@ -114,6 +114,7 @@ const useQuestConfig = ({ data = {}, refetch = () => {} }) => {
 				data: {
 					agent_scoring_quest_id             : data?.id,
 					agent_scoring_quest_configurations : payload,
+					name                               : questName,
 					quest_string,
 				},
 			});
@@ -156,6 +157,10 @@ const useQuestConfig = ({ data = {}, refetch = () => {} }) => {
 		setValue('quest_string', formattedString);
 	};
 
+	const handleResetString = () => {
+		setValue('quest_string', data?.quest_string);
+	};
+
 	useEffect(() => {
 		setValue('blocks', formattedDefaultValues);
 		setEditSubBlock({});
@@ -179,6 +184,7 @@ const useQuestConfig = ({ data = {}, refetch = () => {} }) => {
 		setBlockId,
 		prefillValues: formattedDefaultValues,
 		onClickFill,
+		handleResetString,
 	};
 };
 

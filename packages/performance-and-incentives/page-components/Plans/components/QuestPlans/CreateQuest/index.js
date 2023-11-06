@@ -20,6 +20,8 @@ function CreateQuests() {
 
 	const [showOverlapped, setShowOverlapped] = useState(false);
 
+	const [name, setName] = useState('');
+
 	const onClickBack = () => {
 		router.push('/performance-and-incentives/plans?tab=quest_plans');
 	};
@@ -39,10 +41,17 @@ function CreateQuests() {
 				<div className={styles.title}>Create Quest</div>
 			</div>
 
-			<QuestForm setParams={setParams} data={data} setShowOverlapped={setShowOverlapped} />
+			<QuestForm
+				name={name}
+				setName={setName}
+				setParams={setParams}
+				data={data}
+				setShowOverlapped={setShowOverlapped}
+			/>
 
 			{id ? (
 				<QuestConfigForm
+					name={name}
 					data={data}
 					refetch={refetch}
 				/>
