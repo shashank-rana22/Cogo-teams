@@ -36,12 +36,12 @@ function OrderDetails() {
 	const { data: getOrderData, getOrderDetails } = useGetOrderDetails({ id });
 	const {
 		order_items_list, order_ticket_id, delivery_date, total_amount,
-		order_status, created_at,
+		order_status, currency_symbol, updated_at,
 	} = getOrderData || {};
 
 	const { data: productData } = useGetProductFilterDetail();
 
-	const { is_hr_admin, currency_code } = productData || {};
+	const { is_hr_admin } = productData || {};
 
 	const { color } = productData || {};
 
@@ -55,14 +55,14 @@ function OrderDetails() {
 	};
 
 	const time = formatDate({
-		date       : created_at,
+		date       : updated_at,
 		dateFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
 		formatType : 'time',
 	});
 
-	const month = getMonth(new Date(created_at));
-	const date = getDate(new Date(created_at));
-	const year = getYear(new Date(created_at));
+	const month = getMonth(new Date(updated_at));
+	const date = getDate(new Date(updated_at));
+	const year = getYear(new Date(updated_at));
 
 	const { updateStatus } = useUpdateStatus({ getOrderDetails });
 
@@ -92,11 +92,11 @@ function OrderDetails() {
 		setValue('order_status', order_status);
 	}, [delivery_date, getOrderData?.delivery_date, order_status, setValue]);
 
-	const columns = getOrderColumns({ color, currency_code });
+	const columns = getOrderColumns({ color, currency_symbol });
 
 	return (
 		<>
-			<Header />
+			<Header productData={productData} />
 			<div className={styles.order_detail_outer}>
 
 				<div className={styles.order_detail_container}>
@@ -133,7 +133,8 @@ function OrderDetails() {
 								</div>
 							</div>
 							<div className={styles.order_right_detail}>
-								{currency_code}
+								{currency_symbol}
+								{' '}
 								{total_amount}
 							</div>
 						</div>
@@ -152,7 +153,7 @@ function OrderDetails() {
 								) : (<span className={styles.order_expected_date}>in 7 Days</span>)}
 							</div>
 							<div className={styles.order_expected_right}>
-								{order_status !== 'cancelled' ? (
+								{(!['cancelled', 'delivered'].includes(order_status)) ? (
 									<Button
 										size="md"
 										themeType="secondary"

@@ -61,7 +61,7 @@ function RevenuePrediction({ activePair, data, statsData }) {
 				</div>
 				<div className={styles.revenue_value}>
 					$
-					{statsDataRevenue?.projected_revenue?.toFixed(2)}
+					{statsDataRevenue?.projected_revenue?.toFixed(2) || 0}
 				</div>
 			</div>
 		</div>

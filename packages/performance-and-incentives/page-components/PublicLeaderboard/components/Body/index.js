@@ -1,10 +1,13 @@
 import { useState } from 'react';
 
+import SCREEN_CONSTANTS from '../../../../constants/screen-constants';
 import LEADERBOARD_LOCATIONS from '../../utils/leaderboard-locations';
 
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import styles from './styles.module.css';
+
+const { OVERALL, COMPARISION } = SCREEN_CONSTANTS;
 
 function Body(props) {
 	const {
@@ -21,7 +24,7 @@ function Body(props) {
 				dateRange={dateRange}
 				updatedAt={updatedAt}
 				setUpdatedAt={setUpdatedAt}
-				location={screen === 'comparison' ? LEADERBOARD_LOCATIONS?.mumbai : null}
+				location={screen === COMPARISION ? LEADERBOARD_LOCATIONS?.mumbai : null}
 				duration={duration}
 				setDuration={setDuration}
 				setDateRange={setDateRange}
@@ -30,7 +33,7 @@ function Body(props) {
 				setNextReloadAt={setNextReloadAt}
 			/>
 
-			{screen === 'overall' ? <RightPanel view={view} updatedAt={updatedAt} /> : (
+			{screen === OVERALL ? <RightPanel view={view} updatedAt={updatedAt} /> : (
 				<LeftPanel
 					screen={screen}
 					view={view}

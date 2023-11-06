@@ -7,7 +7,7 @@ const CarouselData = [
 		key    : 'item1',
 		render : () => (
 			<div className={styles.carousel}>
-				<img src={GLOBAL_CONSTANTS.image_url.CAROUSEL_ONE} alt="" width="100%" />
+				<img src={GLOBAL_CONSTANTS.image_url.CAROUSEL_ONE} className={styles.car_img} alt="" />
 			</div>
 		),
 	},
@@ -15,7 +15,7 @@ const CarouselData = [
 		key    : 'item2',
 		render : () => (
 			<div className={styles.carousel}>
-				<img src={GLOBAL_CONSTANTS.image_url.CAROUSEL_TWO} alt="" width="100%" />
+				<img src={GLOBAL_CONSTANTS.image_url.CAROUSEL_TWO} className={styles.car_img} alt="" />
 			</div>
 		),
 	},
@@ -23,7 +23,7 @@ const CarouselData = [
 		key    : 'item3',
 		render : () => (
 			<div className={styles.carousel}>
-				<img src={GLOBAL_CONSTANTS.image_url.CAROUSEL_THREE} alt="" width="100%" />
+				<img src={GLOBAL_CONSTANTS.image_url.CAROUSEL_THREE} className={styles.car_img} alt="" />
 			</div>
 		),
 	},

@@ -33,7 +33,7 @@ function ListingPage() {
 		loading:productVariationLoading = false,
 	} = useGetListProductVariationDetails();
 
-	const { user_details, currency_code } = productData || {};
+	const { user_details, currency_code, currency_symbol } = productData || {};
 
 	const { office_location } = user_details || {};
 
@@ -48,11 +48,26 @@ function ListingPage() {
 		available_colors,
 		available_sizes,
 		color_id,
+		size_chart,
 	} = productDataDetails || {};
 
 	const selectedColors = useMemo(() => (available_colors || []).map((colorId) => ({
-		label : colorId.name,
-		value : colorId.id,
+		label: (
+			<div style={{ display: 'flex', alignItems: 'center' }}>
+				<div
+					className={styles.color_dot}
+					style={{
+						backgroundColor : colorId.hexcode,
+						width           : '15px',
+						height          : '15px',
+						borderRadius    : '10px',
+						marginRight     : '10px',
+					}}
+				/>
+				{colorId.name}
+			</div>
+		),
+		value: colorId.id,
 	})), [available_colors]);
 
 	const sizeValuePairs = useMemo(() => (available_sizes || []).map((sizeAvail) => ({
@@ -107,6 +122,7 @@ function ListingPage() {
 			const { product_id = '' } = query || {};
 			push('/cogo-store/[product_id]', `/cogo-store/${product_id}?colorId=${e}`);
 		}
+		setAddedToCart(false);
 	};
 
 	useEffect(() => {
@@ -153,7 +169,10 @@ function ListingPage() {
 				handleApplyClick={handleApplyClick}
 				handleImageClick={handleImageClick}
 				currency_code={currency_code}
+				currency_symbol={currency_symbol}
 				loading={productVariationLoading || productFilterLoading}
+				setAddedToCart={setAddedToCart}
+				size_chart={size_chart}
 			/>
 		</div>
 	);

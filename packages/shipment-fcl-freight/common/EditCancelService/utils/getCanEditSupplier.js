@@ -12,6 +12,7 @@ const EDIT_SUPPLIER_SERVICE_STATES = [
 const EDIT_SUPPLIER_SERVICE_STATES_COE_HEAD = [
 	'init',
 	'awaiting_service_provider_confirmation',
+	'confirmed_by_service_provider',
 ];
 
 const SHOW_EDIT_SUPPLIER_STAKEHOLDERS = [
@@ -27,11 +28,11 @@ const SHOW_EDIT_SUPPLIER_STAKEHOLDERS = [
 
 const SERVICE_COMPLETED_OR_CANCELLED = ['completed', 'cancelled'];
 
-export default function getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder }) {
+export default function getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder, role_ids = [] }) {
 	if (user_data?.id
 		&& ([GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id, GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id]
 			.includes(user_data?.id)
-			|| (user_data?.id === ENTITY_IDS_MAPPING[ID].coe_head
+			|| (role_ids.includes(ENTITY_IDS_MAPPING[ID]?.uuid?.coe_head)
 				&& EDIT_SUPPLIER_SERVICE_STATES_COE_HEAD?.includes(state)))) {
 		return true;
 	}

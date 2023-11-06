@@ -27,3 +27,7 @@
 .max_width_modal {
 	max-width: 60px;
 }
+
+.full_width {
+	max-width: fit-content;
+}
