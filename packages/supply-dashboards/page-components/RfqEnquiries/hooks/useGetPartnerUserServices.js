@@ -1,17 +1,18 @@
+const OPTION_MAPPING = {
+	fcl_freight       : { label: 'FCL', value: 'fcl_freight' },
+	lcl_freight       : { label: 'LCL', value: 'lcl_freight' },
+	air_freight       : { label: 'AIR', value: 'air_freight' },
+	fcl_freight_local : { label: 'FCL Local', value: 'fcl_freight_local' },
+	lcl_freight_local : { label: 'LCL Local', value: 'lcl_freight_local' },
+};
+
 const useGetPartnerUserServices = ({ partner_user = {} }) => {
 	const OPTIONS = [];
 	OPTIONS.push({ value: undefined, label: 'ALL' });
 
 	(partner_user.services || []).forEach((option) => {
-		if (option === 'fcl_freight') {
-			OPTIONS.push({ label: 'FCL', value: 'fcl_freight' });
-		} else if (option === 'air_freight') {
-			OPTIONS.push({
-				label : 'AIR',
-				value : 'air_freight',
-			});
-		} else if (option === 'lcl_freight') {
-			OPTIONS.push({ label: 'LCL', value: 'lcl_freight' });
+		if (OPTION_MAPPING[option]) {
+			OPTIONS.push(OPTION_MAPPING[option]);
 		}
 	});
 

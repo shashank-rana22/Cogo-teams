@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { IcMAir, IcMFcl, IcMLcl } from '@cogoport/icons-react';
+import { IcMAir, IcMFcl, IcMLcl, IcMLocalCharges } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import SureModal from '../../../../common/SureModal';
@@ -8,10 +8,12 @@ import PortPair from '../../../PageView/List/Card/PortPair';
 import Footer from './Footer';
 import styles from './styles.module.css';
 
-const iconMapping = {
-	fcl_freight : IcMFcl,
-	lcl_freight : IcMLcl,
-	air_freight : IcMAir,
+const SERVICE_MAPPING = {
+	fcl_freight       : { label: 'FCL Freight', icon: IcMFcl },
+	lcl_freight       : { label: 'LCL Freight', icon: IcMLcl },
+	air_freight       : { label: 'AIR Freight', icon: IcMAir },
+	fcl_freight_local : { label: 'FCL Freight Local', icon: IcMLocalCharges },
+	lcl_freight_local : { label: 'LCL Freight Local', icon: IcMLocalCharges },
 };
 
 function Content({
@@ -44,7 +46,7 @@ function Content({
 		});
 	};
 
-	const Element = iconMapping[portPair?.service_type || 'fcl_freight'];
+	const Element = SERVICE_MAPPING[portPair?.service_type || 'fcl_freight'].icon;
 	return (
 		<div
 			role="presentation"
@@ -59,9 +61,7 @@ function Content({
 
 						<div className={styles.display_service}>
 							<Element width={30} height={30} style={{ padding: '4px' }} />
-							{`${portPair?.service_type?.split('_')[0]} ${
-								portPair?.service_type?.split('_')[1]
-							}`}
+							{SERVICE_MAPPING[portPair?.service_type]?.label}
 						</div>
 						<div className={styles.information}>
 							{(portPair?.status === 'quoted' || portPair?.status === 'pending')
