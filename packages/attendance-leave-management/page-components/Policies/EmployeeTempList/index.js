@@ -43,7 +43,7 @@ function EmployeeTempList() {
 						onChange={(e) => handleSearch(e)}
 						value={searchQuery}
 					/>
-					<Button size="md" themeType="accent" onClick={() => setOpenLeaveModal(true)}>
+					<Button size="md" themeType="primary" onClick={() => setOpenLeaveModal(true)}>
 						Give Access
 					</Button>
 					{ openLeaveModal && (

@@ -10,7 +10,6 @@ import styles from './styles.module.css';
 function GiveAccess({
 	show = false,
 	onClose = () => {},
-	// list = [],
 	getListGeoLocationReq = () => {},
 }) {
 	const { createGeoLocationReq, loading } = useCreateGeoLocationReq({ getListGeoLocationReq });
@@ -51,7 +50,7 @@ function GiveAccess({
 					Cancel
 				</Button>
 				<Button onClick={handleSubmit(onSubmit)} disabled={loading}>
-					Submit Request
+					Submit Access
 				</Button>
 			</Modal.Footer>
 		</Modal>

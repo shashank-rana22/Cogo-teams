@@ -1,4 +1,4 @@
-import { Button, Pill } from '@cogoport/components';
+import { Button, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload } from '@cogoport/icons-react';
@@ -27,53 +27,98 @@ const useGetLocationColumn = ({
 		{
 			Header   : <div className={styles.table_header}>NAME</div>,
 			accessor : (item) => (
-				<div className={styles.item_data}>
-					{`${startCase(item.name)}(${item.employee_code})` || '-'}
-				</div>
+				<Tooltip
+					interactive
+					placement="top"
+					className={styles.tooltip}
+					content={(
+						<div className={styles.tooltip_data}>
+							{`${startCase(item.name)}(${item.employee_code})` || '-'}
+						</div>
+					)}
+				>
+					<div className={styles.item_data}>
+						{`${startCase(item.name)}(${item.employee_code})` || '-'}
+					</div>
+				</Tooltip>
 			),
 			id: 'name',
 		},
 		{
 			Header   : <div className={styles.table_header}>FROM DATE</div>,
 			accessor : (item) => (
-				<div className={styles.item_data}>
-					{ formatDate({
-						date       : item?.permission_from_date,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						formatType : 'date',
-					}) || '--'}
-				</div>
+				<Tooltip
+					interactive
+					placement="top"
+					className={styles.tooltip}
+					content={(
+						<div className={styles.tooltip_data}>
+							{ formatDate({
+								date       : item?.permission_from_date,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								formatType : 'date',
+							}) || '--'}
+						</div>
+					)}
+				>
+					<div className={styles.item_data}>
+						{ formatDate({
+							date       : item?.permission_from_date,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'date',
+						}) || '--'}
+					</div>
+				</Tooltip>
 			),
 			id: 'permission_from_date',
 		},
 		{
 			Header   : <div className={styles.table_header}>TO DATE</div>,
 			accessor : (item) => (
-				<div className={styles.item_data}>
-					{ formatDate({
-						date       : item?.permission_to_date,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						formatType : 'date',
-					}) || '--'}
-				</div>
+				<Tooltip
+					interactive
+					placement="top"
+					className={styles.tooltip}
+					content={(
+						<div className={styles.tooltip_data}>
+							{ formatDate({
+								date       : item?.permission_to_date,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								formatType : 'date',
+							}) || '--'}
+						</div>
+					)}
+				>
+					<div className={styles.item_data}>
+						{ formatDate({
+							date       : item?.permission_to_date,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'date',
+						}) || '--'}
+					</div>
+				</Tooltip>
 			),
 			id: 'permission_to_date',
 		},
-		// {
-		// 	Header   : <div className={styles.table_header}>REJECTION REASON</div>,
-		// 	accessor : (item) => (
-		// 		<div className={styles.item_data}>
-		// 			{item?.rejection_reason}
-		// 		</div>
-		// 	),
-		// 	id: 'rejection_reason',
-		// },
 		{
 			Header   : <div className={styles.table_header}>REMARKS</div>,
 			accessor : (item) => (
-				<div className={styles.item_data}>
-					{item?.remarks}
-				</div>
+				<Tooltip
+					interactive
+					placement="top"
+					className={styles.tooltip}
+					content={(
+						<div className={styles.tooltip_data}>
+							{item?.geo_remarks || '-'}
+						</div>
+					)}
+				>
+					<div className={styles.item_data}>
+						{item?.geo_remarks || '-'}
+					</div>
+
+				</Tooltip>
+
 			),
 			id: 'remarks',
 		},

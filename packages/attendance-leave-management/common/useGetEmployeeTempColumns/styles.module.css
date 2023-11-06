@@ -188,3 +188,20 @@
 .timer_icon {
 	margin-right: 16px;
 }
+
+.tooltip {
+	max-width: none !important;
+}
+
+.tooltip_data {
+	max-width: none;
+	word-break: normal;
+}
+
+.item_data {
+	width: fit-content;
+	max-width: 110px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

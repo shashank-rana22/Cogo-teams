@@ -23,7 +23,7 @@ export const LEAVE_CONTROLS = [
 			mappings_data_required        : true,
 		},
 		isClearable : true,
-		labelKey    : 'name',
+		renderLabel : (item) => `${item?.name} (${item?.employee_code || '-'})`,
 		valueKey    : 'id',
 		initialCall : true,
 		rules       : {
@@ -34,7 +34,7 @@ export const LEAVE_CONTROLS = [
 		},
 	},
 	{
-		controlLabel          : 'Select Date Range for this Leave',
+		controlLabel          : 'Select Date Range to give access',
 		name                  : 'date_range',
 		controlType           : 'range_datepicker',
 		placeholder           : 'Select Date Range',
