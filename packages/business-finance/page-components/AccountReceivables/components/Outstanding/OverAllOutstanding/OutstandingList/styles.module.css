@@ -170,3 +170,12 @@
 .country {
 	margin-left: 4px;
 }
+
+.more_options {
+	display: flex;
+	flex-direction: column;
+}
+
+.btn_margin {
+	margin-bottom: 8px;
+}

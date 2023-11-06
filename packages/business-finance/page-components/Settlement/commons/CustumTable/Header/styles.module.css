@@ -5,6 +5,16 @@
 	border-bottom: 2px solid var(--color-accent-orange-2);
 }
 
+.checkbox {
+	flex: 0.1;
+
+	:global {
+		.ui_checkbox_container {
+			padding: 0;
+		}
+	}
+}
+
 .jvnumb {
 	flex: 1.8;
 	width: calc(1.8*(100 / 12));
