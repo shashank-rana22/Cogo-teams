@@ -1,3 +1,4 @@
+import Insurance from '@cogoport/insurance-form';
 import { useRouter } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
 import { isEmpty } from '@cogoport/utils';
@@ -100,16 +101,20 @@ function SpotSearch() {
 
 			{isEmpty(selectedService) ? null : (
 				<div className={styles.locations}>
-					<Routes
-						mode={selectedService}
-						formValues={location}
-						setFormValues={setLocation}
-						organization={organization}
-						errors={errors}
-						createSearch={createSearch}
-						createSearchLoading={loading}
-						setErrors={setErrors}
-					/>
+					{selectedService.mode_value === 'insurance'
+						? <Insurance organization={organization} />
+						: (
+							<Routes
+								mode={selectedService}
+								formValues={location}
+								setFormValues={setLocation}
+								organization={organization}
+								errors={errors}
+								createSearch={createSearch}
+								createSearchLoading={loading}
+								setErrors={setErrors}
+							/>
+						)}
 				</div>
 			)}
 		</div>
