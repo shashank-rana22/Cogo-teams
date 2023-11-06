@@ -8,7 +8,22 @@ const filterControls = [
 		asyncKey    : 'list_saas_plan',
 		initialCall : true,
 		size        : 'sm',
-		rules       : { required: true },
+		// rules       : { required: true },
+	},
+	{
+		name    : 'customer_type',
+		type    : 'chips',
+		label   : 'Account type',
+		options : [
+			{
+				key      : 'importer_exporter',
+				children : 'IE',
+			},
+			{
+				key      : 'channel_partner',
+				children : 'CP',
+			},
+		],
 	},
 ];
 

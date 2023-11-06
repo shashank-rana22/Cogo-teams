@@ -36,20 +36,9 @@ function FilterContainer({ setGlobalFilters, refectUserList }) {
 
 	return (
 		<div className={styles.container}>
-			<h2>{t('saasSubscription:customer_title')}</h2>
-			<div className={styles.flex_box}>
-				<Input
-					size="sm"
-					placeholder={t('saasSubscription:filter_placeholder')}
-					prefix={<IcMSearchlight />}
-					value={searchTerm}
-					onChange={(e) => {
-						setSearchTerm(e);
-						initialRef.current = true;
-					}}
-					className={styles.input_box}
-				/>
+			<h2 className={styles.title}>{t('saasSubscription:customer_title')}</h2>
 
+			<div className={styles.flex_box}>
 				<Popover
 					className={styles.filter}
 					content={(
@@ -70,6 +59,18 @@ function FilterContainer({ setGlobalFilters, refectUserList }) {
 						</Button>
 					</div>
 				</Popover>
+
+				<Input
+					size="sm"
+					placeholder={t('saasSubscription:filter_placeholder')}
+					prefix={<IcMSearchlight />}
+					value={searchTerm}
+					onChange={(e) => {
+						setSearchTerm(e);
+						initialRef.current = true;
+					}}
+					className={styles.input_box}
+				/>
 
 				<Button
 					themeType="accent"

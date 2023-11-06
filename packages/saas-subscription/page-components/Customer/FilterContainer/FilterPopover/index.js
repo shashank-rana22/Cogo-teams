@@ -1,6 +1,7 @@
 import { Button, ButtonIcon } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
 import filterControls from '../../../../configuration/filterControls';
@@ -14,10 +15,18 @@ function FilterPopover({ setShowPopover, setGlobalFilters }) {
 	const { control, handleSubmit, reset } = useForm();
 
 	const submitHandler = (data) => {
+		const FILTER_DATA = {};
+
+		Object.entries(data).forEach(([key, value]) => {
+			if (!isEmpty(value)) {
+				FILTER_DATA[key] = value;
+			}
+		});
+
 		setGlobalFilters((prev) => ({
 			...prev,
 			page: 1,
-			...data,
+			...FILTER_DATA,
 		}));
 		setShowPopover(false);
 	};
@@ -41,6 +50,7 @@ function FilterPopover({ setShowPopover, setGlobalFilters }) {
 				{filterControls.map((config) => {
 					const { name, type, label } = config;
 					const Element = getFieldController(type);
+
 					return (
 						<div key={name} className={styles.element_container}>
 							<p className={styles.label}>{label}</p>
