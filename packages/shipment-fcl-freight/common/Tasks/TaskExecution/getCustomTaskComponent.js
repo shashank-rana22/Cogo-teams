@@ -5,7 +5,6 @@ import { CUSTOM_TASK_MAPPING } from '../../../constants/custom-tasks';
 
 import {
 	AmendDraftBl,
-	// CargoInsurance,
 	ChooseServiceProvider,
 	GenerateFreightCertificate,
 	NominationTask,

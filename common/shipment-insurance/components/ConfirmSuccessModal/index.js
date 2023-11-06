@@ -1,25 +1,39 @@
-import { Modal, Button, Toast } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcAUserchat, IcAMail, IcCWhatsapp } from '@cogoport/icons-react';
+import { IcAUserchat, IcAMail } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
+import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
 function ConfirmSuccessModal({
 	handleSubmit,
-	submitHandler,
+	submitHandler = () => {},
 	loading = false,
 	pocDetails = {},
 	setConfirmSuccess,
 	confirmSuccess = {},
+	onCancel = () => {},
+	refetch = () => {},
 }) {
-	const { isOpen = false, isConfirm = false, isSuccess = false, paymentLink = '' } = confirmSuccess || {};
+	const { isOpen = false, isConfirm = false, isSuccess = false } = confirmSuccess || {};
 	const { email, insuredFirstName, insuredLastName } = pocDetails || {};
 
-	const copyLinkHandler = () => {
-		navigator.clipboard.writeText(paymentLink);
-		Toast.success('Payment Link Copied to clipboard');
-	};
+	useEffect(() => {
+		let timeout;
+
+		if (isSuccess) {
+			timeout = setTimeout(() => {
+				refetch();
+				onCancel();
+			}, 2500);
+		}
+
+		return () => {
+			clearTimeout(timeout);
+		};
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isSuccess]);
 
 	return (
 		<Modal show={isOpen} closeOnOuterClick>
@@ -74,17 +88,6 @@ function ConfirmSuccessModal({
 					<Image src={GLOBAL_CONSTANTS.image_url.mail_sent} width={140} height={140} />
 
 					<h1 className={styles.success_header}>Mail Sent Successfully</h1>
-					<p style={{ margin: 0 }} className={styles.sub_text}>
-						Additonally, you can also send payment link to user via
-						{' '}
-						<IcCWhatsapp />
-						{' '}
-						whatsapp
-					</p>
-
-					<Button onClick={copyLinkHandler} size="sm" themeType="linkUi">
-						Copy Link
-					</Button>
 				</div>
 
 			) : null}

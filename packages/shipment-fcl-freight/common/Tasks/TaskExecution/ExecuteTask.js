@@ -15,7 +15,6 @@ import {
 	UploadSI,
 	MarkIgmShipmentConfirm,
 } from './CustomTasks';
-// import CargoInsurance from './CustomTasks/CargoInsuranceV2/components';
 import ConfirmFreightBooking from './CustomTasks/ConfirmFreightBooking';
 import ExecuteStep from './ExecuteStep';
 import getCustomTaskComponent from './getCustomTaskComponent';

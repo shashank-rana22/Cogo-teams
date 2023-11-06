@@ -15,7 +15,7 @@ import FormFields from './FormFields';
 import SideBar from './SideBar';
 import styles from './styles.module.css';
 
-function CargoInsurance() {
+function CargoInsurance({ onCancel = () => {}, refetch = () => {} }) {
 	const { servicesList } = useContext(
 		ShipmentDetailContext,
 	);
@@ -110,6 +110,8 @@ function CargoInsurance() {
 				pocDetails={draftData?.pocDetails}
 				handleSubmit={handleSubmit}
 				submitHandler={submitHandler}
+				onCancel={onCancel}
+				refetch={refetch}
 			/>
 		</div>
 	);
