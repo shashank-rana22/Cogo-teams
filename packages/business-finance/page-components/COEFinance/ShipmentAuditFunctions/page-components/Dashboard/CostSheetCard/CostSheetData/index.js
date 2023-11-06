@@ -8,7 +8,7 @@ import ServiceAndLineItems from './ServiceAndLineItems';
 import styles from './styles.module.css';
 import Total from './Total';
 
-const BILL_AND_INVOICE_TOTAL = ['billTotal', 'invoiceTotal'];
+const TOTALS_AND_DEVIATIONS = ['billTotal', 'invoiceTotal', 'invoiceTotalDeviation', 'billTotalDeviation'];
 
 function CostSheetData({
 	costViewData = {},
@@ -25,22 +25,38 @@ function CostSheetData({
 		return <EmptyStateDocs />;
 	}
 
-	const { billTotal = '', invoiceTotal = '' } = costViewData || {};
+	const {
+		billTotal = '',
+		invoiceTotal = '',
+		invoiceTotalDeviation = '',
+		billTotalDeviation = '',
+	} = costViewData || {};
 
 	return (
-		<div>
-			<div className={styles.header} />
-			{Object.keys(costViewData)?.map((service) => (
-				!BILL_AND_INVOICE_TOTAL.includes(service) ? (
-					<ServiceAndLineItems
-						service={service}
-						key={service}
-						serviceDetails={costViewData[service]}
-					/>
-				) : null
-			))}
-
-			<Total billTotal={billTotal} invoiceTotal={invoiceTotal} />
+		<div className={styles.card}>
+			<div className={styles.header_container}>
+				<div className={styles.header_sub_container} />
+				<div className={styles.header_sub_container}>Sell</div>
+				<div className={styles.header_sub_container}>Buy</div>
+			</div>
+			<div className={styles.cost_sheet}>
+				<div className={styles.header} />
+				{Object.keys(costViewData)?.map((service) => (
+					!TOTALS_AND_DEVIATIONS.includes(service) ? (
+						<ServiceAndLineItems
+							service={service}
+							key={service}
+							serviceDetails={costViewData[service]}
+						/>
+					) : null
+				))}
+				<Total
+					billTotal={billTotal}
+					invoiceTotal={invoiceTotal}
+					invoiceTotalDeviation={invoiceTotalDeviation}
+					billTotalDeviation={billTotalDeviation}
+				/>
+			</div>
 		</div>
 	);
 }

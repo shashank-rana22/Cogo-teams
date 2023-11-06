@@ -19,6 +19,7 @@ const SUB_ACTIVE_TAB_STATUS_MAPPING = {
 };
 
 const useGetJobList = ({
+	filters = {},
 	paginationFilters = {},
 	search = '',
 	activeTab = '',
@@ -35,16 +36,17 @@ const useGetJobList = ({
 		{ manual: true },
 	);
 
+	const {
+		Service = '',
+		operationalClosedDate = '', creationDate = '',
+		walletUsed = '', tradeType = '',
+	} = filters || {};
+
 	const { query = '', debounceQuery = () => {} } = useDebounceQuery();
 	const { page = 1, pageLimit = 10 } = paginationFilters || {};
 
-	const refetch = useCallback(({ filters = {}, setShow = () => {} }) => {
+	const refetch = useCallback(({ setShow = () => {} }) => {
 		const func = async () => {
-			const {
-				Service = '',
-				operationalClosedDate = '', creationDate = '',
-				walletUsed = '', tradeType = '',
-			} = filters || {};
 			const {
 				startDate : creationStartDate = '', endDate : creationEndDate = '',
 			} = creationDate || '';
@@ -79,7 +81,9 @@ const useGetJobList = ({
 			}
 		};
 		func();
-	}, [CLOSING_STATUS, page, pageLimit, query, trigger, subActiveTab, entityCode]);
+	}, [creationDate, operationalClosedDate, trigger,
+		CLOSING_STATUS, subActiveTab, page, pageLimit, Service,
+		entityCode, tradeType, query, walletUsed]);
 
 	useEffect(() => {
 		debounceQuery(search);

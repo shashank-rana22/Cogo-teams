@@ -174,5 +174,6 @@
     "apply": "Áp dụng",
     "reset": "Cài lại",
     "serial_id": "ID nối tiếp",
-    "id_creator": "Người tạo ID"
+    "id_creator": "Người tạo ID",
+    "messaged_at":"Nhắn tin tại"
 }

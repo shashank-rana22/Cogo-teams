@@ -174,5 +174,6 @@
     "apply": "Menerapkan",
     "reset": "Mengatur ulang",
     "serial_id": "idSerial",
-    "id_creator": "Pencipta id"
+    "id_creator": "Pencipta id",
+    "messaged_at":"Pesan di"
 }
