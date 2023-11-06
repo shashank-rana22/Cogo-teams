@@ -222,7 +222,7 @@ function AddRateModal({
 	}, [rateData]);
 
 	useEffect(() => {
-		if (spot_data) {
+		if (!isEmpty(spot_data)) {
 			const TOTAL_SERVICES = [];
 			const primary_service_id = spot_data?.primary_service_id;
 			Object.keys(spot_data?.service_details || {})?.forEach((spot) => {
