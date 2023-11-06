@@ -82,10 +82,8 @@
 	bottom: 0;
 	font-size: 10px;
 
-	:global {
-		.secure_now_img {
-			mix-blend-mode: multiply;
-		}
+	>img {
+		mix-blend-mode: multiply;
 	}
 }
 
