@@ -1818,6 +1818,14 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/controlled-booking',
 					possible_apis : apis.controlled_booking,
 				},
+				{
+					key           : 'transaction_setting-handling_fees',
+					title         : t('common:handling_fees_configuration'),
+					href          : '/v2/handling-fees',
+					as            : '/v2/handling-fees',
+					main_apis     : [],
+					possible_apis : apis.handling_fees,
+				},
 			],
 			module_type: 'dashboards',
 		},
@@ -2431,6 +2439,17 @@ const navigationMapping = ({ t = () => {} }) => {
 					type          : 'link',
 					possible_apis : apis.kra_assignment,
 				},
+				{
+					key           : 'performance_management-employee_dashboard',
+					title         : 'Employee Rating',
+					href          : '/v2/employee-dashboard',
+					as            : '/v2/employee-dashboard',
+					type          : 'link',
+					possible_apis : [
+						...apis.employee_performance_dashboard,
+						...apis.separation,
+					],
+				},
 			],
 		},
 		chro: {
@@ -2580,20 +2599,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			type          : 'link',
 			possible_apis : apis.performance_manager_dashboard,
 		},
-		employee_dashboard: {
-			key           : 'employee_dashboard',
-			title         : t('common:employee_dashboard'),
-			href          : '/v2/employee-dashboard',
-			as            : '/v2/employee-dashboard',
-			type          : 'link',
-			icon          : IcMDashboard,
-			possible_apis : [
-				...apis.employee_performance_dashboard,
-				...apis.separation,
-			],
-			main_apis   : [],
-			module_type : 'dashboards',
-		},
 		ftl_admin: {
 			key           : 'ftl_admin',
 			title         : t('common:ftl_admin'),
@@ -2722,6 +2727,18 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.profile,
 			icon          : IcMAppProfile,
 		},
+		cogo_store: {
+			key           : 'cogo_store',
+			title         : 'CogoMerch',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			href          : '/v2/cogo-store',
+			as            : '/v2/cogo-store',
+			possible_apis : apis.cogo_store,
+			icon          : IcAWarehouse,
+		},
+
 	};
 
 	return navigationMappingAdmin;

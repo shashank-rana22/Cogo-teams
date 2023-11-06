@@ -1,75 +1,69 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Image } from '@cogoport/next';
+import { cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
 
-import LoadingState from '../../../../../common/LoadingState';
-import List from '../../../common/List';
+import SCREEN_CONSTANTS from '../../../../../constants/screen-constants';
 import useGetLeaderbordList from '../../../hooks/useGetLeaderbordList';
 
+import PanelBody from './PanelBody';
+import PanelHeader from './PanelHeader';
 import styles from './styles.module.css';
-import TopUsers from './TopUsers';
+
+const { OVERALL, COMPARISION } = SCREEN_CONSTANTS;
 
 function LeftPanel(props) {
-	const { view, dateRange, updatedAt, setUpdatedAt } = props;
+	const {
+		screen = OVERALL,
+		view = '',
+		dateRange = {},
+		setUpdatedAt = () => {},
+		duration = 'today',
+		setDuration = () => {},
+		setDateRange = () => {},
+		location = {},
+		score = {},
+		setScore = () => {},
+		setNextReloadAt = () => {},
+	} = props;
 
-	const { list, loading, total_report_count: totalReportCount, trigger } = useGetLeaderbordList({
+	const { list, loading, total_report_count: totalReportCount, additional_stats, rank } = useGetLeaderbordList({
 		view,
 		dateRange,
-		pageLimit: 50,
+		pageLimit          : 10,
 		setUpdatedAt,
+		setNextReloadAt,
+		office_location_id : screen === COMPARISION ? location?.value : null,
+		score,
+		setScore,
 	});
-
-	useEffect(() => {
-		const startTime = new Date(updatedAt);
-		const targetTime = new Date(startTime.getTime() + 35 * 60 * 1000);
-
-		const currentTime = new Date();
-		const timeToWait = targetTime - currentTime;
-
-		if (timeToWait > 0) {
-			const timerId = setTimeout(() => {
-				trigger();
-			}, timeToWait);
-			return () => clearTimeout(timerId);
-		}
-
-		return () => {};
-	}, [trigger, updatedAt]);
 
 	const [firstUser, secondUser, thirdUser, ...tableList] = list;
 
 	const topList = [secondUser, firstUser, thirdUser].filter((item) => !isEmpty(item));
 
-	if (loading) return <div className={styles.container}><LoadingState /></div>;
-
-	if (isEmpty(list)) {
-		return (
-			<div className={styles.container}>
-				<Image
-					src={GLOBAL_CONSTANTS.image_url.empty_customer_card}
-					width={350}
-					height={400}
-					alt="Empty List"
-					className={styles.empty_img}
-				/>
-			</div>
-		);
-	}
-
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} 
+		${(screen === COMPARISION && rank !== 1) && styles.rank_two_container}`}
+		>
 
-			<TopUsers topList={topList} view={view} />
+			<PanelHeader
+				screen={screen}
+				rank={rank}
+				location={location}
+				additional_stats={additional_stats}
+				dateRange={dateRange}
+				duration={duration}
+				setDuration={setDuration}
+				setDateRange={setDateRange}
+			/>
 
-			{isEmpty(tableList) ? <p className={styles.empty_list}>No more standings...</p>
-				: (
-					<List
-						tableList={tableList}
-						view={view}
-						totalReportCount={totalReportCount}
-					/>
-				)}
+			<PanelBody
+				loading={loading}
+				topList={topList}
+				view={view}
+				screen={screen}
+				tableList={tableList}
+				totalReportCount={totalReportCount}
+			/>
 
 		</div>
 	);

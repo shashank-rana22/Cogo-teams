@@ -19,7 +19,6 @@ const formatMailDraftMessage = ({
 	parentEmailMessage = {},
 	roomId = '',
 	emailState = {},
-	showOrgSpecificMail = false,
 }) => {
 	const updateParentMessage = {
 		...parentEmailMessage,
@@ -48,17 +47,16 @@ const formatMailDraftMessage = ({
 				GLOBAL_CONSTANTS.zeroth_index,
 				LIMIT_FOR_BODY_PREVIEW,
 			) || '',
-			cc_mails   : payload?.ccrecipients || [],
-			message_id : payload?.msgId || '',
-			sender     : payload?.sender || '',
-			subject    : payload?.subject || '',
-			to_mails   : payload?.toUserEmail || [],
-			draft_type : buttonType,
-			user_ids   : emailState?.user_ids,
-			...(showOrgSpecificMail ? {
-				custom_subject : emailState?.customSubject || '',
-				orgData        : emailState?.orgData || {},
-			} : {}),
+			cc_mails       : payload?.ccrecipients || [],
+			message_id     : payload?.msgId || '',
+			sender         : payload?.sender || '',
+			subject        : payload?.subject || '',
+			to_mails       : payload?.toUserEmail || [],
+			draft_type     : buttonType,
+			user_ids       : emailState?.user_ids,
+			mailView       : emailState?.mailView,
+			custom_subject : emailState?.customSubject || '',
+			orgData        : emailState?.orgData || {},
 		},
 	};
 };
@@ -70,6 +68,7 @@ const createDraftRoom = async ({
 	rteEditorPayload = {},
 	buttonType = '',
 	emailState = {},
+	agentName = '',
 }) => {
 	const emailCollection = collection(
 		firestore,
@@ -97,6 +96,10 @@ const createDraftRoom = async ({
 		no_of_drafts          : 1,
 		support_agent_id      : agentId,
 		last_draft_document   : msgDocument,
+		spectators_data       : [{
+			agent_id   : agentId,
+			agent_name : agentName,
+		}],
 	};
 
 	let res = {};
@@ -283,7 +286,13 @@ const useSaveDraft = ({
 	emailState = {},
 	showOrgSpecificMail = false,
 }) => {
-	const agentId = useSelector((state) => state.profile?.user?.id);
+	const {
+		agentId = '',
+		agentName = '',
+	} = useSelector((state) => ({
+		agentId   : state.profile?.user?.id,
+		agentName : state.profile?.user?.name,
+	}));
 
 	const { saveChunks, deleteChunks } = useSaveChunks({
 		firestore,
@@ -312,6 +321,7 @@ const useSaveDraft = ({
 				rteEditorPayload,
 				buttonType,
 				emailState,
+				agentName,
 			});
 		}
 

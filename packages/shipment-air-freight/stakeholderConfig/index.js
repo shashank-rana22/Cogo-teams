@@ -10,6 +10,7 @@ import ffCostBooking from './ffCostBooking.json';
 import kamAdminConfig from './kamAdmin.json';
 import prodProcessOwnerConfig from './prodProcessOwner.json';
 import so1So2Ops from './so1So2Ops.json';
+import so2ExecutiveConfig from './so2_executive.json';
 import superadminConfig from './superadmin.json';
 
 const CONFIG_MAPPING = {
@@ -32,6 +33,7 @@ const CONFIG_MAPPING = {
 	ff_cost_booking              : ffCostBooking,
 	so1_revenue_desk             : ffCostBooking,
 	kam_admin                    : kamAdminConfig,
+	so2_executive                : so2ExecutiveConfig,
 };
 
 const stakeholderConfig = ({ stakeholder }) => CONFIG_MAPPING[stakeholder] || defaultConfig;

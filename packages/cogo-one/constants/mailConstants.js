@@ -46,6 +46,8 @@ export const DEFAULT_EMAIL_STATE = {
 	user_ids      : {},
 	orgId         : '',
 	rteContent    : '',
+	reloadKey     : '',
+	mailView      : '',
 	customSubject : {
 		activeTab   : 'shipment',
 		serialId    : '',

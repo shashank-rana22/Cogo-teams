@@ -87,6 +87,9 @@ function AddInvoicingPartyModal({
 						items={CHIPS_OPTIONS}
 						selectedItems={activeComponentKey}
 						onItemChange={(value) => {
+							if (!value) {
+								return;
+							}
 							setActiveComponentKey(value);
 							setSelectedAddress({});
 							setCurrentView('select_address');

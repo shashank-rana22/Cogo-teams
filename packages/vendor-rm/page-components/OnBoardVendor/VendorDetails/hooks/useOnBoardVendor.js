@@ -154,7 +154,7 @@ function useOnBoardVendor({
 			if (!isValidateRegistration) {
 				newField = {
 					...newField,
-					maxLength: 14,
+					maxLength: 16,
 				};
 			}
 		}

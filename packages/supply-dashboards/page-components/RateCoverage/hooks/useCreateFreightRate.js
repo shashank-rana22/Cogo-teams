@@ -29,6 +29,19 @@ const API_NAME = {
 	fcl_cfs     : 'create_fcl_cfs_rate',
 };
 
+const KEYS_TO_SEND = {
+	fcl_freight     : 'fcl_freight_rate_request_id',
+	air_freight     : 'air_freight_rate_request_id',
+	ftl_freight     : 'ftl_freight_rate_request_id',
+	lcl_freight     : 'lcl_freight_rate_request_id',
+	ltl_freight     : 'ltl_freight_rate_request_id',
+	fcl_customs     : 'fcl_customs_rate_request_id',
+	lcl_customs     : 'lcl_customs_rate_request_id',
+	air_customs     : 'air_customs_rate_request_id',
+	haulage_freight : 'haulage_freight_rate_request_id',
+	trailer_freight : 'trailer_freight_rate_request_id',
+};
+
 const getPayload = (service, data, user_id, listData) => {
 	if (service === 'fcl_freight') {
 		return formatFclRate(data, user_id);
@@ -79,12 +92,14 @@ const useCreateFreightRate = (service) => {
 
 	const createRate = async (data, listData, triggeredFrom) => {
 		const newPayload = getPayload(service, data, user_id, listData);
+		const keyToSend = listData?.sources?.includes('rate_request') && KEYS_TO_SEND[service];
 
 		try {
 			const resp = await trigger({
 				data: {
 					...newPayload,
-					source: triggeredFrom || undefined,
+					source      : triggeredFrom || undefined,
+					[keyToSend] : listData?.id || undefined,
 				},
 			});
 			if (resp?.data) { return resp?.data?.id; }

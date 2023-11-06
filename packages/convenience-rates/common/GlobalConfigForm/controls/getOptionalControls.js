@@ -70,7 +70,7 @@ const getOptionalControls = ({
 		},
 		{
 			label       : 'Rate Type',
-			name        : 'rate_source',
+			name        : 'rate_type',
 			type        : 'select',
 			placeholder : 'Select Rate Type',
 			value       : rate_source,

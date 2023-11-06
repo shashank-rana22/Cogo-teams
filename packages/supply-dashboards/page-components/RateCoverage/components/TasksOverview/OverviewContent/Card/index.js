@@ -16,12 +16,21 @@ function Card({
 	className = '',
 	handleClick = () => {},
 	filter = {},
+	card_detail = '',
 }) {
 	const { title = 'Previous Backlogs', color = '#000' } = detail;
 
 	const [visible, setVisible] = useState(false);
 
 	const { loading, urlList, getCsvFile } = useGetCsvFile(filter, activeCard);
+
+	const isStartDatePresent = filter?.start_date || filter?.end_date;
+	let updatedTitle = title;
+	if (card_detail === 'completed' && isStartDatePresent) {
+		updatedTitle = 'Completed';
+	} else if (card_detail === 'pending' && isStartDatePresent) {
+		updatedTitle = 'Pending';
+	}
 
 	const handleDownload = async (e) => {
 		e.stopPropagation();
@@ -42,6 +51,7 @@ function Card({
 			))
 		);
 	}
+
 	return (
 		<div
 			role="button"
@@ -50,7 +60,7 @@ function Card({
 			onClick={handleClick}
 		>
 			<div className={styles.row}>
-				<div className={styles.heading}>{title}</div>
+				<div className={styles.heading}>{updatedTitle}</div>
 				{(activeCard === detail?.status && activeCard !== 'weekly_backlog_count')
 				&&					(
 					<Popover placement="top" render={<div className={styles.url_container}><RenderContent /></div>}>

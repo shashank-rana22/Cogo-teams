@@ -1,0 +1,67 @@
+.main_container {
+	transition: all 0.35s ease;
+}
+
+.modal_container {
+	top: 94% !important;
+	left: 98% !important;
+	width: 76% !important;
+	height: 76% !important;
+	padding: 0;
+	border-radius: 0 !important;
+}
+
+.container {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+.event_list {
+	width: 32%;
+	height: 100%;
+	border-right: 1px solid #e0e0e0;
+}
+
+.calendar {
+	position: relative;
+	width: 68%;
+	height: 100%;
+	padding-top: 8px;
+	transition: 0.3s ease;
+}
+
+.right_arrow {
+	width: 18px;
+	height: 18px;
+	transition: 0.3s ease;
+}
+
+.close_calender {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 9;
+	display: flex;
+	align-items: center;
+	padding: 4px 8px;
+	cursor: pointer;
+	background-color: #5a88fb;
+	border-radius: 0 20px 20px 0;
+	transition: 0.3s ease;
+
+	&:hover {
+		.right_arrow {
+			transition: 0.3s ease;
+			transform: translateX(6px);
+		}
+	}
+}
+
+.default_state {
+	position: absolute;
+	top: 8px;
+	right: 16px;
+	z-index: 9;
+	cursor: pointer;
+}

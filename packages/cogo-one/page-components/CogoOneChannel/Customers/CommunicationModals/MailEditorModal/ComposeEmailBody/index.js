@@ -4,7 +4,7 @@ import { IcMCross } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import dynamic from 'next/dynamic';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
 import getRenderEmailBody from '../../../../../../helpers/getRenderEmailBody';
@@ -46,12 +46,36 @@ function ComposeEmailBody(props) {
 		userActiveMails = [],
 		hideFromMail = false,
 		viewType = '',
+		restrictMailToOrganizations = false,
+		firestore = {},
 	} = props || {};
-	const { onImageUploadBefore, disablRTE } = useImageUploader();
+
+	const { onImageUploadBefore, disableRTE } = useImageUploader();
+	const sunEditorRef = useRef();
 
 	const userActiveMailOptions = (userActiveMails || []).map(
 		(curr) => ({ label: curr, value: curr }),
 	);
+
+	const getSunEditorInstance = (sunEditor) => {
+		sunEditorRef.current = sunEditor;
+	};
+
+	const restrictMailToSingle = (
+		buttonType === 'send_mail'
+			&& restrictMailToOrganizations
+			&& !emailState?.mailView
+	);
+
+	const handleRTEChange = (val) => {
+		const rawText = sunEditorRef.current?.getText();
+
+		setEmailState((p) => ({
+			...p,
+			rawRTEContent : rawText,
+			rteContent    : val,
+		}));
+	};
 
 	useEffect(() => {
 		if (buttonType === 'send_mail' && !activeMailAddress) {
@@ -109,6 +133,10 @@ function ComposeEmailBody(props) {
 				showOrgSpecificMail={showOrgSpecificMail}
 				hideFromMail={hideFromMail}
 				viewType={viewType}
+				restrictMailToSingle={restrictMailToSingle}
+				restrictMailToOrganizations={restrictMailToOrganizations}
+				buttonType={buttonType}
+				firestore={firestore}
 			/>
 
 			<div className={styles.type_to}>
@@ -143,18 +171,19 @@ function ComposeEmailBody(props) {
 
 			<div className={styles.rte_container}>
 				<SunEditor
+					key={emailState?.reloadKey}
 					onImageUploadBefore={onImageUploadBefore}
 					defaultValue={emailState?.rteContent}
-					onChange={(val) => setEmailState((p) => ({ ...p, rteContent: val }))}
+					onChange={handleRTEChange}
 					setOptions={{
 						buttonList    : RTE_TOOL_BAR_CONFIG,
 						defaultTag    : 'div',
 						minHeight     : '300px',
 						showPathLabel : false,
 					}}
-					disable={disablRTE}
+					disable={disableRTE}
 					autoFocus
-
+					getSunEditorInstance={getSunEditorInstance}
 				/>
 
 				<div className={styles.attachments_scroll}>

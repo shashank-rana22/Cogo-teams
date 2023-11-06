@@ -17,10 +17,11 @@ export const handleRouteBooking = ({ e, id = '', service = '', partnerId = '' })
 	window.open(shipmentDetailsPage, '_blank');
 };
 
-export const handleRouteSupply = ({ e, endPoint = '', partnerId = '' }) => {
+export const handleRouteSupply = ({ e, endPoint = '', partnerId = '', service = '', serialId = '' }) => {
 	e.stopPropagation();
 
-	const shupplyPage = `${window.location.origin}/${partnerId}/supply/dashboards/${endPoint}`;
+	const supplyPage = `${window.location.origin}/${partnerId}/supply/dashboards/${endPoint}
+	?service=${service}&serialId=${serialId}`;
 
-	window.open(shupplyPage, '_blank');
+	window.open(supplyPage, '_blank');
 };

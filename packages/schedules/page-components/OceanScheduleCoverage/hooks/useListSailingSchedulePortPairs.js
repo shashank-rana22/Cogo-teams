@@ -19,8 +19,9 @@ const useListSailingSchedulePortPairs = ({ filters, currentPage }) => {
 			await trigger({
 				params: {
 					filters: {
-						origin_port_id      : filters?.origin_port_id || undefined,
-						destination_port_id : filters?.destination_port_id || undefined,
+						origin_port_id      : filters?.origin_port_id.length ? filters?.origin_port_id : undefined,
+						destination_port_id : filters?.destination_port_id.length
+							? filters?.destination_port_id : undefined,
 					},
 					page       : currentPage,
 					page_limit : 15,

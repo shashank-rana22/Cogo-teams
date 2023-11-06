@@ -32,6 +32,7 @@ function ServiceDetailsContent({
 		destination_airport = '',
 		destination_location = '',
 	} = data;
+
 	const [serviceModal, setServiceModal] = useState(false);
 	const originName = (origin_port || origin_airport || port || origin_location || location || airport)?.name;
 	const destinationName = (destination_port || destination_airport || port || destination_location)?.name;
@@ -53,8 +54,17 @@ function ServiceDetailsContent({
 
 	const { rate_card } = booking_params || {};
 
-	const shippinlineName = preferred_shipping_lines?.[DEFAULT_VALUE]?.business_name;
-	const airLineName = preferred_airlines?.[DEFAULT_VALUE]?.business_name;
+	const shippinlineName = !isEmpty(preferred_shipping_lines)
+	&& preferred_shipping_lines?.map((val) => val?.business_name);
+	const airLineName = !isEmpty(preferred_airlines) && preferred_airlines?.map((val) => val?.business_name);
+
+	const resultLineName = ((Array.isArray(shippinlineName) ? shippinlineName.join(', ') : '')
+	|| (Array.isArray(airLineName) ? airLineName.join(', ') : ''));
+
+	const formattedDislikeRates = rate_card?.line_items[DEFAULT_VALUE]?.buy_price
+	&& `${rate_card?.line_items[DEFAULT_VALUE]?.currency} 
+		${rate_card?.line_items[DEFAULT_VALUE]?.buy_price} 
+		${['air_freight', 'air_customs']?.includes(filter?.service) ? 'per kg' : ''}`;
 
 	const handelNewServiceProvider = () => {
 		setServiceModal(!serviceModal);
@@ -79,9 +89,12 @@ function ServiceDetailsContent({
 			operation_type,
 			commodity_type,
 			volume,
+			commodity_sub_type,
+			cargo_handling_type,
 		} = val;
 
 		const formatLine = (label, value) => (value ? `${label} ${startCase(value)}\n` : '');
+		const formatVolume = volume && `${volume} cbm`;
 
 		let textToCopy = '';
 		textToCopy += formatLine('ORIGIN:', originName);
@@ -89,6 +102,7 @@ function ServiceDetailsContent({
 		textToCopy += formatLine('COMMODITY:', commodity_category || commodity);
 		textToCopy += formatLine('CONTAINER SIZE:', container_size);
 		textToCopy += formatLine('CONTAINER TYPE:', container_type);
+		textToCopy += formatLine('CONTAINER SUB TYPE:', commodity_sub_type);
 		textToCopy += formatLine('COINTAINER COUNT:', containers_count);
 		textToCopy += formatLine('COMMODITY TYPE:', commodity_type);
 		textToCopy += formatLine('CARGO READY: ', cargo_readiness_date);
@@ -98,21 +112,21 @@ function ServiceDetailsContent({
 		textToCopy += formatLine('SCHEDULE DEPARTURE:', schedule_departure);
 		textToCopy += formatLine('SHIPPING LINE:', shipping_line);
 		textToCopy += formatLine('FEEDBACKS:', feedbacks);
-		textToCopy += formatLine('CLOSING REMARKS:', closing_remarks);
+		textToCopy += formatLine(`${closing_remarks && ('CLOSING REMARKS:', closing_remarks)}`);
 		textToCopy += formatLine('SERIAL ID:', serial_id);
-		textToCopy += formatLine('INCO:', inco_term);
+		textToCopy += formatLine('INCO:', inco_term || dislike_rates_inco);
 		textToCopy += formatLine('PAYMENT TERM:', payment_term);
 		textToCopy += formatLine('PRICE TYPE:', price_type);
 		textToCopy += formatLine('PACKGES COUNT:', packages_count);
-		textToCopy += formatLine('PREFFERED SHIPPING LINE:', shippinlineName);
-		textToCopy += formatLine('PREFFERED AIRLINE NAME:', airLineName);
+		textToCopy += formatLine('PREFERRED SHIPPING LINE:', shippinlineName);
+		textToCopy += formatLine('PREFERRED AIRLINE NAME:', airLineName);
 		textToCopy += formatLine('TRANSIT TIME:', transitTime);
 		textToCopy += formatLine('CARGO WEIGHT:', cargo_weight_per_container);
 		textToCopy += formatLine('TRADE TYPE:', tradeType);
 		textToCopy += formatLine('OPERATION TYPE:', operation_type);
-		textToCopy += formatLine('VOLUME:', volume);
-		textToCopy += formatLine('INCO:', dislike_rates_inco);
-		textToCopy += formatLine('Packages:', !isEmpty(bookingParams) ? (bookingParams || []).map((item) => {
+		textToCopy += formatLine('VOL WEIGHT:', formatVolume);
+		textToCopy += formatLine('CARGO HANDLING TYPE:', cargo_handling_type);
+		textToCopy += formatLine('No of Packages:', !isEmpty(bookingParams) ? (bookingParams || []).map((item) => {
 			const { length = 0, width = 0, height = 0 } = item || {};
 			const dimension = length
 				? `${length}cm X ${width}cm X ${height}cm,`
@@ -123,11 +137,7 @@ function ServiceDetailsContent({
 				${startCase(item.packing_type || '')},`
 				: '';
 		}) : '');
-		textToCopy += formatLine(
-			'Dislike Rates:',
-			rate_card?.line_items[0]?.buy_price,
-			rate_card?.line_items[0]?.currency,
-		);
+		textToCopy += formatLine('Dislike Rates:', formattedDislikeRates);
 		if (textToCopy) {
 			navigator.clipboard.writeText(textToCopy);
 			copyToClipboard(textToCopy, 'Data');
@@ -157,7 +167,7 @@ function ServiceDetailsContent({
 											}
 
 											return (
-												<div key={val?.label}>
+												<div key={val?.id}>
 													<Pill color="blue">{val?.label}</Pill>
 												</div>
 											);
@@ -239,22 +249,26 @@ function ServiceDetailsContent({
 											<div className={styles.content}>
 												<div className={styles.label}>
 													Status :
-													<Pill size="sm" color={status === 'inactive' ? 'red' : 'green'}>
+													<Pill
+														size="sm"
+														color={status === 'inactive' ? 'red' : 'green'}
+														style={{ padding: '1px 8px' }}
+													>
 														{startCase(status)}
 													</Pill>
 												</div>
 											</div>
 										)}
-
-									{(airLineName || shippinlineName)
+									{(resultLineName)
 										&& (
 											<div className={styles.content}>
 												<div className={styles.label}>
-													{shippinlineName ? 'Shippling Line : ' : 'Air Line : ' }
+													{shippinlineName ? 'Preferred  Shippling Lines: '
+														: 'Preferred  Air Lines: ' }
 												</div>
 												&nbsp;
 												<div className={styles.name}>
-													{startCase(shippinlineName || airLineName)}
+													{resultLineName}
 												</div>
 											</div>
 										)}
@@ -279,7 +293,8 @@ function ServiceDetailsContent({
 													</div>
 													{' '}
 													{' '}
-													Per Kg
+													{['air_freight', 'air_customs']?.includes(filter?.service)
+													&& 'Per Kg' }
 												</div>
 											</div>
 										)}

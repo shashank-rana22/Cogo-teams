@@ -1,37 +1,41 @@
 import {
-	collectionGroup,
-	where,
+	onSnapshot,
 } from 'firebase/firestore';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../constants/viewTypeMapping';
-import {
-	mountUnreadCountSnapShot,
-} from '../helpers/snapshotHelpers';
+import getCountHelper from '../helpers/getCountHelpers';
 
 const useGetUnreadMailsCount = ({ firestore, viewType, agentId, isBotSession, userSharedMails = [] }) => {
 	const [unReadMailsCount, setUnReadMailsCount] = useState(false);
 
 	const unreadCountSnapshotListener = useRef(null);
 
-	useEffect(() => {
-		const getBaseQuery = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.all_chats_base_query;
-		const getSessionQuery = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.session_type_query;
+	const { throttledGetCount, snapshotQuery } = useMemo(
+		() => getCountHelper(
+			{
+				viewType,
+				firestore,
+				userSharedMails,
+				agentId,
+				isBotSession,
+				setUnReadMailsCount,
+			},
+		),
+		[agentId, firestore, isBotSession, userSharedMails, viewType],
+	);
 
-		mountUnreadCountSnapShot({
-			unreadCountSnapshotListener,
-			omniChannelCollection : collectionGroup(firestore, 'rooms'),
-			baseQuery             : getBaseQuery?.({ agentId, userSharedMails }) || [],
-			sessionQuery          : getSessionQuery?.({
-				sessionType: isBotSession ? 'bot' : 'admin',
-			}) || [],
-			queryFilters        : [where('channel_type', 'in', ['email'])],
-			setUnReadChatsCount : setUnReadMailsCount,
-		});
-	}, [firestore, viewType, agentId, isBotSession, userSharedMails]);
+	useEffect(() => {
+		unreadCountSnapshotListener.current = onSnapshot(snapshotQuery, throttledGetCount);
+		const unSubscribe = unreadCountSnapshotListener.current;
+
+		return () => {
+			unSubscribe?.();
+		};
+	}, [snapshotQuery, throttledGetCount]);
 
 	return {
 		unReadMailsCount,
+		throttledGetCount,
 	};
 };
 export default useGetUnreadMailsCount;

@@ -1,0 +1,86 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	height: calc(100% - 36px);
+
+	:global {
+		.ui_datepicker_container {
+			width: 180px;
+		}
+
+		.react-datepicker__input-container input {
+			height: 25px;
+			font-size: 12px;
+		}
+
+		.react-datepicker__input-container .react-datepicker-ignore-onclickoutside {
+			height: 25px;
+		}
+
+		.react-datepicker__close-icon {
+			display: none;
+		}
+
+		.react-datepicker-popper {
+			z-index: 6;
+		}
+	}
+}
+
+.header {
+	height: 36px;
+	margin-left: 40px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #000;
+}
+
+.selectable_date {
+	height: 32px;
+	padding-bottom: 8px;
+	margin: 0 20px;
+	font-size: 12px;
+	color: #828282;
+	text-align: center;
+}
+
+.no_selected_date {
+	padding-top: 18px;
+}
+
+.sedual_event {
+	padding-bottom: 6px;
+	font-size: 16px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.create_event {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 6px;
+	color: #828282;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: fit-content;
+	padding: 10px 0;
+	cursor: pointer;
+	border-top: 1px solid #e0e0e0;
+}
+
+.text {
+	margin-left: 4px;
+	font-size: 12px;
+}
+
+.create_label {
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+}
