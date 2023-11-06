@@ -22,8 +22,6 @@ function CompanyPerformance({
 
 	const { absentee_list, employees_list, task_list } = summaryData || {};
 
-	console.log('depData', data);
-
 	const present_list = ((employees_list || []).length) - ((absentee_list || []).length);
 
 	const { data:absentData } = useGetAbsenteeInsight();

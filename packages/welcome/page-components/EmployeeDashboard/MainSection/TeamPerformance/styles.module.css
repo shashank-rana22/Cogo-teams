@@ -57,19 +57,18 @@
 
 .kpi_flex {
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	margin-top: 12px;
 }
 
 .kpi_data {
 	flex: 1 0 45%;
 	padding-right: 6px;
-
-	/* height: 170px; */
 }
 
 .kpi_okr {
 	position: relative;
+	height: 100%;
 	padding: 14px 14px 18px 20px;
 	color: #221f20;
 	background-color: #f8f2e7;

@@ -56,16 +56,12 @@
 
 .employee_flex {
 	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
+	align-items: stretch;
 	margin: 12px 0;
 }
 
 .employee_data {
-	width: 350px;
-	height: 170px;
-
-	/* flex: 1 0 45%; */
+	flex: 1 0 45%;
 	padding-right: 6px;
 }
 

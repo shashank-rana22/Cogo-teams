@@ -32,9 +32,7 @@ function ThingsToDo({ data = {} }) {
 		<div className={styles.employee_to_do}>
 
 			<div className={styles.employee_things_to_do}>
-
 				<span>Things to do</span>
-
 			</div>
 
 			<div className={styles.listed_things}>
