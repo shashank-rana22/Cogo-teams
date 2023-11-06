@@ -1,11 +1,11 @@
 import { Button } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
 import { IcMJobsConfig } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import blockOptions from '../../../../constants/select-block-options';
 
 import Block from './Block';
-import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 import useQuestConfig from './useQuestConfig';
 
@@ -15,7 +15,7 @@ const CHILD_EMPTY_VALUES = {
 };
 
 function QuestConfigForm(props) {
-	const { questLoading, data, refetch } = props;
+	const { data, refetch } = props;
 
 	const {
 		loading,
@@ -36,8 +36,6 @@ function QuestConfigForm(props) {
 		formattedString,
 		onClickFill,
 	} = useQuestConfig({ data, refetch });
-
-	if (questLoading) return <LoadingState />;
 
 	return (
 		<>
@@ -69,7 +67,7 @@ function QuestConfigForm(props) {
 						style={{ width: '84%' }}
 						value={data?.quest_string}
 					/>
-					<Button onClick={onClickFill}>Use Auto-generated </Button>
+					<Button disabled={isEmpty(formattedString)} onClick={onClickFill}>Use Auto-generated </Button>
 				</div>
 				{fields.map((field, index) => (
 					<Block

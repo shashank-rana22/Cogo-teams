@@ -2,10 +2,11 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
+import useGetQuest from './hooks/useGetQuest';
 import OverlappedQuest from './OverlappedQuest';
 import QuestConfigForm from './QuestConfigForm';
+import LoadingState from './QuestConfigForm/LoadingState';
 import QuestForm from './QuestForm';
-import useGetQuest from './QuestForm/hooks/useGetQuest';
 import styles from './styles.module.css';
 
 function CreateQuests() {
@@ -23,7 +24,7 @@ function CreateQuests() {
 		router.push('/performance-and-incentives/plans?tab=quest_plans');
 	};
 
-	if (questLoading) return null;
+	if (questLoading) return <LoadingState />;
 
 	return (
 		<div>
@@ -42,7 +43,6 @@ function CreateQuests() {
 
 			{id ? (
 				<QuestConfigForm
-					questLoading={questLoading}
 					data={data}
 					refetch={refetch}
 				/>
