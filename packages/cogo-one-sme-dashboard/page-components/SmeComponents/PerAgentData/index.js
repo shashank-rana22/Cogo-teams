@@ -1,61 +1,62 @@
 import React from 'react';
 
 import AccountTypeWise from '../../../common/Elements/AccountTypeWise';
+import calcChange from '../../../helpers/calcChange';
+import useSmeDashboardStats from '../../../hooks/useSmeDashboardStats';
 
 import styles from './styles.module.css';
 
 const DATA_TO_SHOW = {
 	call: {
-		label                : 'Call Connected',
-		total                : 'total_calls_per_agent',
-		total_change         : 'total_calls_change',
-		allocated            : 'allocated_calls_per_agent',
-		allocated_change     : 'allocated_calls_change',
-		non_allocated        : 'non_allocated_calls_per_agent',
-		non_allocated_change : 'non_allocated_calls_change',
+		label         : 'Call Connected',
+		total         : 'per_agent_calls',
+		allocated     : 'per_agent_allocated_calls',
+		non_allocated : 'per_agent_unallocated_calls',
 	},
 	quotes: {
-		label                : 'Quotes',
-		total                : 'total_quotes_per_agent',
-		total_change         : 'total_quotes_change',
-		allocated            : 'allocated_quotes_per_agent',
-		allocated_change     : 'allocated_quotes_change',
-		non_allocated        : 'non_allocated_quotes_per_agent',
-		non_allocated_change : 'non_allocated_quotes_change',
+		label         : 'Quotes',
+		total         : 'per_agent_quotes',
+		allocated     : 'per_agent_allocated_quotes',
+		non_allocated : 'per_agent_unallocated_quotes',
 	},
 	bookings: {
-		label                : 'Bookings',
-		total                : 'total_bookings_per_agent',
-		total_change         : 'total_bookings_change',
-		allocated            : 'allocated_bookings_per_agent',
-		allocated_change     : 'allocated_bookings_change',
-		non_allocated        : 'non_allocated_bookings_per_agent',
-		non_allocated_change : 'non_allocated_bookings_change',
+		label         : 'Bookings',
+		total         : 'per_agent_bookings',
+		allocated     : 'per_agent_allocated_bookings',
+		non_allocated : 'per_agent_unallocated_bookings',
 	},
 };
 
-const DATA = {
-	total_calls_per_agent            : 2.2,
-	total_calls_change               : 1.2,
-	allocated_calls_per_agent        : 2.0,
-	allocated_calls_change           : 3.2,
-	non_allocated_calls_per_agent    : 1.0,
-	non_allocated_calls_change       : -2.0,
-	total_quotes_per_agent           : 44.15,
-	total_quotes_change              : -12.3,
-	allocated_quotes_per_agent       : 44.0,
-	allocated_quotes_change          : -15,
-	non_allocated_quotes_per_agent   : 17.0,
-	non_allocated_quotes_change      : 10.0,
-	total_bookings_per_agent         : 1.5,
-	total_bookings_change            : 20,
-	allocated_bookings_per_agent     : 2.3,
-	allocated_bookings_change        : 30,
-	non_allocated_bookings_per_agent : 0.8,
-	non_allocated_bookings_change    : -10,
-};
+function PerAgentData({ widgetBlocks = null }) {
+	const {
+		dashboardData = {},
+		dashboardLoading = false,
+	} = useSmeDashboardStats({ widgetBlocks });
 
-function PerAgentData() {
+	const { per_agent_data = {} } = dashboardData || {};
+
+	const { current_data = {}, previous_data = {} } = per_agent_data || {};
+
+	if (dashboardLoading) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.header}>
+					Per Agent Data
+				</div>
+				<div className={styles.loading_container}>
+					{[...Array(30).keys()].map(
+						(idx) =>	(
+							<div
+								key={idx}
+								className={styles.wave_animation}
+							/>
+						),
+					)}
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -65,26 +66,42 @@ function PerAgentData() {
 			<div className={styles.body}>
 				{Object.entries(DATA_TO_SHOW).map(
 					([key, value]) => (
-						<div key={key} className={styles.child_body}>
+						<div
+							key={key}
+							className={styles.child_body}
+						>
 							<AccountTypeWise
 								title={key}
 								label={value?.label}
-								dataValue={DATA?.[value?.total]}
-								change={DATA?.[value?.total_change]}
+								dataValue={current_data?.[value?.total]}
+								change={calcChange({
+									valueKey     : value?.total,
+									currentData  : current_data,
+									previousData : previous_data,
+								})}
 							/>
+
 							<div className={styles.segregation}>
 								<AccountTypeWise
 									segregated
 									label="Allocated"
-									dataValue={DATA?.[value?.allocated]}
-									change={DATA?.[value?.allocated_change]}
+									dataValue={current_data?.[value?.allocated]}
+									change={calcChange({
+										valueKey     : value?.allocated,
+										currentData  : current_data,
+										previousData : previous_data,
+									})}
 								/>
 
 								<AccountTypeWise
 									segregated
 									label="Non-allocated"
-									dataValue={DATA?.[value?.non_allocated]}
-									change={DATA?.[value?.non_allocated_change]}
+									dataValue={current_data?.[value?.non_allocated]}
+									change={calcChange({
+										valueKey     : value?.non_allocated,
+										currentData  : current_data,
+										previousData : previous_data,
+									})}
 								/>
 							</div>
 						</div>

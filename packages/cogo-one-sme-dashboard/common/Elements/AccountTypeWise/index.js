@@ -43,7 +43,7 @@ function AccountTypeWise({
 			</div>
 
 			<PercentageChange
-				percentageChanged={change?.toFixed(1)}
+				percentageChanged={change}
 			/>
 		</div>
 	);

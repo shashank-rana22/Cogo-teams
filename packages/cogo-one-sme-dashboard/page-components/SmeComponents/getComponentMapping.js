@@ -15,8 +15,8 @@ const CampaignPieChart = dynamic(
 	},
 );
 
-const CustomerInteractionFunnel = dynamic(
-	() => import('./CampaignsData/CustomerInteractionFunnel'),
+const LeadsData = dynamic(
+	() => import('./CampaignsData/LeadsData'),
 	{
 		ssr     : false,
 		loading : () => <LoaderComp />,
@@ -55,8 +55,32 @@ const CustomerFunnel = dynamic(
 	},
 );
 
-const TransactionsFunnel = dynamic(
-	() => import('./TransactionsFunnel'),
+const CustomerBased = dynamic(
+	() => import('./TransactionsFunnel/CustomerBased'),
+	{
+		ssr     : false,
+		loading : () => <LoaderComp />,
+	},
+);
+
+const ServiceBased = dynamic(
+	() => import('./TransactionsFunnel/ServiceBased'),
+	{
+		ssr     : false,
+		loading : () => <LoaderComp />,
+	},
+);
+
+const CustomerInteractionFunnel = dynamic(
+	() => import('./TransactionsFunnel/CustomerInteractionFunnel'),
+	{
+		ssr     : false,
+		loading : () => <LoaderComp />,
+	},
+);
+
+const ServicesWiseBifurcation = dynamic(
+	() => import('./TransactionsFunnel/ServicesWiseBifurcation'),
 	{
 		ssr     : false,
 		loading : () => <LoaderComp />,
@@ -74,29 +98,57 @@ function getComponentMapping() {
 			widgetBlocks : ['get_total_revenue_data'],
 		},
 		{
-			key         : 'per_agent_data',
-			Comp        : PerAgentData,
-			initialLoad : true,
+			key          : 'per_agent_data',
+			Comp         : PerAgentData,
+			initialLoad  : true,
+			widgetBlocks : ['get_per_agent_data'],
 		},
 		{
-			key         : 'analytics',
-			Comp        : Analytics,
-			initialLoad : true,
+			key          : 'analytics',
+			Comp         : Analytics,
+			initialLoad  : true,
+			widgetBlocks : ['get_analytics_data'],
 		},
 		{
-			key         : 'user_data',
-			Comp        : UserData,
-			initialLoad : true,
+			key          : 'user_data',
+			Comp         : UserData,
+			initialLoad  : true,
+			widgetBlocks : ['get_accounts_data'],
 		},
 		{
-			key         : 'customer_funnel',
-			Comp        : CustomerFunnel,
+			key          : 'customer_funnel',
+			Comp         : CustomerFunnel,
+			initialLoad  : false,
+			headerText   : 'Customer Funnel',
+			widgetBlocks : ['get_customer_funnel_data'],
+		},
+		{
+			key  : 'transactions_funnel',
+			Comp : () => (
+				<>
+					<CustomerBased
+						widgetBlocks={['get_customer_based_data']}
+					/>
+					<ServiceBased
+						widgetBlocks={['get_service_based_data']}
+					/>
+				</>
+			),
 			initialLoad : false,
-			headerText  : 'Customer Funnel',
+			headerText  : 'Transaction Funnel',
 		},
 		{
-			key         : 'transactions_funnel',
-			Comp        : TransactionsFunnel,
+			key  : 'transactions_charts',
+			Comp : () => (
+				<>
+					<CustomerInteractionFunnel
+						widgetBlocks={['get_customer_based_data']}
+					/>
+					<ServicesWiseBifurcation
+						widgetBlocks={['get_service_wise_bifurcation_data']}
+					/>
+				</>
+			),
 			initialLoad : false,
 			headerText  : 'Transaction Funnel',
 		},
@@ -114,17 +166,20 @@ function getComponentMapping() {
 			key  : 'campaign_structure',
 			Comp : () => (
 				<>
-					<CampaignPieChart />
-					<CustomerInteractionFunnel />
+					<CampaignPieChart
+						widgetBlocks={['get_total_campaigns_data']}
+					/>
+					<LeadsData />
 				</>
 			),
 			initialLoad: false,
 		},
 		{
-			key         : 'agents_exception_list',
-			Comp        : AgentsExceptionList,
-			headerText  : 'Agents Exception List',
-			initialLoad : false,
+			key          : 'agents_exception_list',
+			Comp         : AgentsExceptionList,
+			headerText   : 'Agents Exception List',
+			initialLoad  : false,
+			widgetBlocks : ['get_exception_data_required'],
 		},
 		{
 			key              : 'agents_performance_view',
@@ -132,6 +187,7 @@ function getComponentMapping() {
 			headerText       : 'Agents Performance View',
 			initialLoad      : false,
 			hiderAfterLoaded : true,
+			widgetBlocks     : ['get_performance_data_required'],
 		},
 	];
 }

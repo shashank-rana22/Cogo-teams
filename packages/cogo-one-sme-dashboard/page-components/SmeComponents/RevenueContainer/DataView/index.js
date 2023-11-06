@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowBack, IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
@@ -31,6 +32,7 @@ function DataView({
 	geo = {},
 	title = '',
 	showGrowth = '',
+	dashboardLoading = false,
 }) {
 	return (
 		<div className={styles.organic_data}>
@@ -39,21 +41,31 @@ function DataView({
 			</div>
 
 			<div className={styles.organic_amount}>
-				{formatAmount({
-					amount   : Number(amount) || FALLBACK_AMOUNT,
-					currency : currency || geo.country.currency.code,
-					options  : {
-						style                 : 'currency',
-						currencyDisplay       : 'symbol',
-						notation              : 'compact',
-						maximumFractionDigits : 2,
-					},
-				})}
-				{showGrowth ? <Growth showGrowth={showGrowth} /> : null}
+				{dashboardLoading
+					? <Placeholder height={24} width={100} />
+					: (
+						<>
+							{formatAmount({
+								amount   : Number(amount) || FALLBACK_AMOUNT,
+								currency : currency || geo.country.currency.code,
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'symbol',
+									notation              : 'compact',
+									maximumFractionDigits : 2,
+								},
+							})}
+							{showGrowth ? <Growth showGrowth={showGrowth} /> : null}
+						</>
+					)}
 			</div>
 
 			<div className={styles.transaction_organic}>
-				{`Txn - ${transactions}`}
+				Txn -
+				{' '}
+				{dashboardLoading
+					? <Placeholder height={16} width={50} />
+					: transactions}
 			</div>
 		</div>
 	);
