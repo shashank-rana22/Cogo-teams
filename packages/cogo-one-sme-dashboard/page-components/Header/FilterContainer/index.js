@@ -1,8 +1,7 @@
-import { useForm } from '@cogoport/forms';
 import React from 'react';
 
 import dashboardFilters from '../../../configurations/dashboard-filters';
-import { getFieldController } from '../../../utils/getFieldController';
+import { getFieldControls } from '../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
@@ -10,15 +9,6 @@ function FilterContainer({
 	setFilterParams = () => {},
 	filterParams = {},
 }) {
-	const {
-		control,
-		formState: { errors = [] },
-	} = useForm({
-		defaultParams: {
-			filterParams,
-		},
-	});
-
 	const controls = dashboardFilters({ setFilterParams });
 
 	return (
@@ -26,7 +16,7 @@ function FilterContainer({
 			{controls.map(
 				(eachControl) => {
 					const { controlType, name } = eachControl || {};
-					const Element = getFieldController(controlType);
+					const Element = getFieldControls(controlType);
 
 					if (!Element) {
 						return null;
@@ -38,9 +28,15 @@ function FilterContainer({
 							key={name}
 						>
 							<Element
-								control={control}
 								{...eachControl}
-								error={errors?.[name]}
+								value={filterParams?.[name]}
+								onChange={(val) => setFilterParams(
+									(prev) => ({
+										...prev,
+										[name]      : val,
+										renderCount : prev + 1,
+									}),
+								)}
 							/>
 						</div>
 					);

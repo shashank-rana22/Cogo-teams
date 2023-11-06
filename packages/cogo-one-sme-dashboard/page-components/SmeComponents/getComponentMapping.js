@@ -89,7 +89,7 @@ const ServicesWiseBifurcation = dynamic(
 
 const CHANNELS = ['email', 'whatsapp', 'calls'];
 
-function getComponentMapping() {
+function getComponentMapping({ filterParams = {} }) {
 	return [
 		{
 			key          : 'total_revenue',
@@ -128,9 +128,11 @@ function getComponentMapping() {
 				<>
 					<CustomerBased
 						widgetBlocks={['get_customer_based_data']}
+						filterParams={filterParams}
 					/>
 					<ServiceBased
 						widgetBlocks={['get_service_based_data']}
+						filterParams={filterParams}
 					/>
 				</>
 			),
@@ -143,9 +145,11 @@ function getComponentMapping() {
 				<>
 					<CustomerInteractionFunnel
 						widgetBlocks={['get_customer_based_data']}
+						filterParams={filterParams}
 					/>
 					<ServicesWiseBifurcation
 						widgetBlocks={['get_service_wise_bifurcation_data']}
+						filterParams={filterParams}
 					/>
 				</>
 			),
@@ -158,6 +162,7 @@ function getComponentMapping() {
 				<ChannelStats
 					channelType={itm}
 					key={itm}
+					filterParams={filterParams}
 				/>
 			)),
 			initialLoad: false,
@@ -168,8 +173,11 @@ function getComponentMapping() {
 				<>
 					<CampaignPieChart
 						widgetBlocks={['get_total_campaigns_data']}
+						filterParams={filterParams}
 					/>
-					<LeadsData />
+					<LeadsData
+						filterParams={filterParams}
+					/>
 				</>
 			),
 			initialLoad: false,

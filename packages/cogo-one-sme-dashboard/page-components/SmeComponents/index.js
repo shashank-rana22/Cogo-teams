@@ -5,10 +5,10 @@ import IntersectionLoader from '../../common/IntersectionLoader';
 import getComponentMapping from './getComponentMapping';
 import styles from './styles.module.css';
 
-function SmeComponents() {
+function SmeComponents({ filterParams = {} }) {
 	const componentMapping = useMemo(
-		() => getComponentMapping(),
-		[],
+		() => getComponentMapping({ filterParams }),
+		[filterParams],
 	);
 
 	return (
@@ -31,8 +31,9 @@ function SmeComponents() {
 					if (initialLoad) {
 						return (
 							<Comp
-								key={key}
 								{...rest}
+								key={key}
+								filterParams={filterParams}
 							/>
 						);
 					}
@@ -45,6 +46,7 @@ function SmeComponents() {
 						>
 							<Comp
 								{...rest}
+								filterParams={filterParams}
 							/>
 						</IntersectionLoader>
 					);

@@ -18,13 +18,16 @@ const DEFAULT_ITEMS = {
 	fallback_amount : 0,
 };
 
-function RevenueContainer({ widgetBlocks = null }) {
+function RevenueContainer({
+	widgetBlocks = null,
+	filterParams = {},
+}) {
 	const geo = getGeoConstants();
 
 	const {
 		dashboardData = {},
 		dashboardLoading = false,
-	} = useSmeDashboardStats({ widgetBlocks });
+	} = useSmeDashboardStats({ widgetBlocks, filterParams });
 
 	const { total_revenue_data = {} } = dashboardData || {};
 

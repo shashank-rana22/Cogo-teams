@@ -1,4 +1,9 @@
 import {
+	Checkbox, CheckboxGroup, Chips, CreatableSelect, DateRangepicker,
+	Datepicker, Input, MultiSelect, RadioGroup, Select, SingleDateRange,
+	Textarea,
+} from '@cogoport/components';
+import {
 	DatepickerController,
 	InputController,
 	SelectController,
@@ -14,7 +19,9 @@ import {
 	MultiselectController,
 	SingleDateRangeController,
 	DateRangePickerController,
+	AsyncSelect,
 } from '@cogoport/forms';
+import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
 
 const CONTROLLER_MAPPING = {
 	input           : InputController,
@@ -35,3 +42,22 @@ const CONTROLLER_MAPPING = {
 };
 
 export const getFieldController = (type = 'text') => CONTROLLER_MAPPING[type] || null;
+
+const CONTROLS_MAPPING = {
+	input           : Input,
+	select          : Select,
+	datePicker      : Datepicker,
+	asyncSelect     : AsyncSelect,
+	radio           : RadioGroup,
+	checkboxGroup   : CheckboxGroup,
+	textArea        : Textarea,
+	checkbox        : Checkbox,
+	creatableSelect : CreatableSelect,
+	multiSelect     : MultiSelect,
+	mobileNumber    : SelectMobileNumber,
+	chips           : Chips,
+	singleDateRange : SingleDateRange,
+	dateRangePicker : DateRangepicker,
+};
+
+export const getFieldControls = (type = 'text') => CONTROLS_MAPPING[type] || null;

@@ -28,11 +28,11 @@ const DATA_TO_SHOW = {
 	},
 };
 
-function PerAgentData({ widgetBlocks = null }) {
+function PerAgentData({ widgetBlocks = null, filterParams = {} }) {
 	const {
 		dashboardData = {},
 		dashboardLoading = false,
-	} = useSmeDashboardStats({ widgetBlocks });
+	} = useSmeDashboardStats({ widgetBlocks, filterParams });
 
 	const { per_agent_data = {} } = dashboardData || {};
 

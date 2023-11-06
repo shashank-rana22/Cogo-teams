@@ -23,7 +23,6 @@ function ServiceBased() {
 				[511111, 222222, 222222],
 				[410110, 120220, 100000],
 				[300000, 100000, 99999],
-
 			],
 		}),
 		[],
@@ -35,11 +34,20 @@ function ServiceBased() {
 				<div>Service Based</div>
 
 				<div className={styles.legends}>
-					<div className={styles.legends_circle} style={{ background: '#CFBC93' }} />
+					<div
+						className={styles.legends_circle}
+						style={{ background: '#CFBC93' }}
+					/>
 					<div>Ocean</div>
-					<div className={styles.legends_circle} style={{ background: '#F68B21' }} />
+					<div
+						className={styles.legends_circle}
+						style={{ background: '#F68B21' }}
+					/>
 					<div>Air</div>
-					<div className={styles.legends_circle} style={{ background: '#88CAD1' }} />
+					<div
+						className={styles.legends_circle}
+						style={{ background: '#88CAD1' }}
+					/>
 					<div>Surface</div>
 				</div>
 			</div>

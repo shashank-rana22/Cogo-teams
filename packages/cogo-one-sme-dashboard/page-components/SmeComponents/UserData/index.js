@@ -20,11 +20,11 @@ const UNVERIFIED_TYPES = {
 	email_id       : 'total_email_unverified',
 };
 
-function UserData({ widgetBlocks = null }) {
+function UserData({ widgetBlocks = null, filterParams = {} }) {
 	const {
 		dashboardData = {},
 		dashboardLoading = false,
-	} = useSmeDashboardStats({ widgetBlocks });
+	} = useSmeDashboardStats({ widgetBlocks, filterParams });
 
 	const { accounts_data: accountsData = {} } = dashboardData || {};
 
