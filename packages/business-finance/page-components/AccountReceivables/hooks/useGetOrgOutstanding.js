@@ -34,7 +34,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 	const [filters, setFilters] = useState({});
 	const {
 		salesAgentId = '', portfolioManagerId = '', portfolioManagerRmId = '',
-		salesAgentRmId = '', kamId = '', creditControllerId = '', companyType = '',
+		salesAgentRmId = '', kamId = '', creditControllerId = '', companyType = '', exclude_defaulters = false,
 	} = filters || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -80,6 +80,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 						sageId               : sageId || undefined,
 						tradePartySerialId   : tradePartySerialId || undefined,
 						q                    : q || undefined,
+						excludeDefaulters    : !exclude_defaulters,
 					},
 				});
 			} catch (e) {
@@ -89,7 +90,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 		[trigger, key, order, page, pageLimit,
 			salesAgentId, portfolioManagerId, portfolioManagerRmId,
 			salesAgentRmId, creditControllerId, selectedAgentId, kamId, companyType,
-			entityCode, organizationSerialId, sageId, tradePartySerialId, q],
+			entityCode, organizationSerialId, sageId, tradePartySerialId, q, exclude_defaulters],
 	);
 
 	useEffect(() => {

@@ -5,6 +5,14 @@ import { companyType } from '../../../../constants';
 const geo = getGeoConstants();
 
 const overAllOutstandingcontrols = () => [
+	{
+		name     : 'exclude_defaulters',
+		label    : 'Exclude Defaulters',
+		type     : 'toggle',
+		onLabel  : 'OFF',
+		offLabel : 'ON',
+		size     : 'md',
+	},
 
 	{
 

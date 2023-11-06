@@ -26,5 +26,16 @@
 		.ui_select_input_placeholder {
 			font-size: var(--font-size-md);
 		}
+
+		.toggle {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-top: 12px;
+		}
+
+		.ui_toggle_container {
+			padding-right: 0;
+		}
 	}
 }
