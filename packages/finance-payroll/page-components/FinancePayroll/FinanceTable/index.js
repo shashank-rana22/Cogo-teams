@@ -18,34 +18,18 @@ const STATUS_OPTIONS = [
 	{ label: 'Approved', value: 'approved' },
 ];
 
-// const data = [
-// 	{
-// 		name            : 'tanner',
-// 		order_ticket_id : '1',
-// 		type            : 'Payroll',
-// 		remarks         : 'idc',
-// 		amount          : '123214',
-// 		status          : 'processed',
-
-// 	},
-// ];
-
 const MAX_LIMIT = 10;
-function FinanceTable({ data = {}, loading = false, filters, setFilters, refetch }) {
+function FinanceTable({ data = {}, loading = false, filters = {}, setFilters = () => {}, refetch = () => {} }) {
 	const [show, setShow] = useState('');
 	const { list, page, page_limit, total_count } = data || {};
 	const { control, handleSubmit } = useForm();
-	console.log('🚀 ~ file: index.js:29 ~ FinanceTable ~ list:', list);
 	const { uploadDocument } = useUploadFinanceDocuments();
 	const onPageChange = (pageNumber) => {
-		console.log('page');
 		setFilters((prev) => ({
 			...prev,
 			page: pageNumber,
 		}));
 	};
-
-	console.log('filters', filters);
 
 	const { createDownload } = useGetDownloadDetails();
 	const { updatePayroll } = useUpdatePayroll({ refetch });
@@ -79,18 +63,6 @@ function FinanceTable({ data = {}, loading = false, filters, setFilters, refetch
 					<div className={styles.heading}>
 						<div className={styles.search_bar}>
 							<div className={styles.sb_left}>
-								{/* <SelectController
-									size="md"
-									placeholder="date"
-									className={styles.select_input}
-									name="filter_date"
-									control={control}
-									options={DATE_OPTIONS}
-									onChange={(e) => {
-										setFilters((prev) => ({ ...prev, date_sort: e, page: 1 }));
-										setSelectedMonth(e);
-									}}
-								/> */}
 								<Select
 									placeholder="Status"
 									name="order_status"
