@@ -1,6 +1,6 @@
 import { isEmpty, upperCase } from '@cogoport/utils';
 
-const getPayloadForSaveAsDraft = async ({
+const getPayloadForSaveAsDraft = ({
 	draftData = {},
 	performedBy = '',
 	formRef,
@@ -8,13 +8,12 @@ const getPayloadForSaveAsDraft = async ({
 	getValues,
 	policyId = '',
 }) => {
-	const selectedAddress = await formRef.current.address();
+	const selectedAddress = formRef.current.address();
 
 	const {
 		invoiceDate, invoiceNo, pan_number,
 		invoiceDoc, panDoc, gstDoc, aadharDoc, coverageFrom, coverageTo, packageDescription, aadharNumber, ...rest
 	} = getValues() || {};
-
 	const {
 		userId, organizationId, metadata = {}, cargoDetails = {}, invoiceDetails = {}, billingDetails = {},
 		verificationDoc = {}, pocDetails = {}, source = '',

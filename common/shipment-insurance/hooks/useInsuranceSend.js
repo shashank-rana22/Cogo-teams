@@ -1,14 +1,12 @@
 import { Toast } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, upperCase } from '@cogoport/utils';
 
 const getPayload = ({
 	formData = {}, draftData = {}, selectedAddress = {}, performedBy = '',
-	billingType, query = {},
+	billingType,
 }) => {
-	const { draftId, policySearchId } = query || {};
 	const {
 		packageDescription, coverageFrom, coverageTo, invoiceNo, invoiceDate,
 		invoiceDoc = {}, panDoc = {}, gstDoc = {}, aadharDoc = {}, pan_number, aadharNumber, ...rest
@@ -16,20 +14,21 @@ const getPayload = ({
 
 	const {
 		cargoDetails = {}, invoiceDetails = {}, pocDetails = {},
-		userId = '', organizationId = '', source = '',
+		userId = '', organizationId = '', source = '', policyId = '', sid = '', shipmentId = '',
 	} = draftData || {};
 
-	const { transitMode, originCountryId, destinationCountryId, hsCode	} = cargoDetails || {};
+	const { transitMode, originCountryId, destinationCountryId, policyCommodityId	} = cargoDetails || {};
 
 	return {
 		isPaid          : false,
 		checkoutRequest : {
+			sid,
 			userId,
-			policySearchId,
-			organizationId,
-			policyId     : draftId,
+			policyId,
+			shipmentId,
 			source,
-			billingParty : {
+			organizationId,
+			billingParty: {
 				partyName      : selectedAddress?.name,
 				billingAddress : selectedAddress?.address,
 				billingPincode : selectedAddress?.pincode,
@@ -50,7 +49,7 @@ const getPayload = ({
 				packaging    : packageDescription,
 				locationFrom : coverageFrom,
 				locationTo   : coverageTo,
-				hsCode,
+				policyCommodityId,
 				...rest,
 			},
 			invoiceDetails: {
@@ -83,8 +82,6 @@ const getPayload = ({
 };
 
 const useInsuranceSend = ({ setConfirmSuccess, draftData = {}, billingType, formRef }) => {
-	const { query } = useRouter();
-
 	const { user } = useSelector((state) => state.profile);
 
 	const [{ loading }, trigger] = useRequestBf({
@@ -94,7 +91,7 @@ const useInsuranceSend = ({ setConfirmSuccess, draftData = {}, billingType, form
 	}, { manual: true });
 
 	const confirmSendInsurance = async ({ formData, selectedAddress }) => {
-		const payload = getPayload({ formData, draftData, performedBy: user?.id, selectedAddress, billingType, query });
+		const payload = getPayload({ formData, draftData, performedBy: user?.id, selectedAddress, billingType });
 		try {
 			const resp = await trigger({
 				data: payload,
