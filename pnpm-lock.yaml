@@ -3032,6 +3032,7 @@ importers:
       '@cogoport/purchase-invoicing': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
       '@cogoport/shipment-chat': workspace:^0.1.0
+      '@cogoport/shipment-insurance': workspace:^0.1.0
       '@cogoport/shipment-mails': workspace:^0.1.0
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.6
@@ -3053,6 +3054,7 @@ importers:
       '@cogoport/purchase-invoicing': link:../purchase-invoicing
       '@cogoport/request': link:../../common/request
       '@cogoport/shipment-chat': link:../../common/shipment-chat
+      '@cogoport/shipment-insurance': link:../../common/shipment-insurance
       '@cogoport/shipment-mails': link:../../common/shipment-mails
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.11
