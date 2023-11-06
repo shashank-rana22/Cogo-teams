@@ -126,7 +126,7 @@ function Events({
 							className={styles.text}
 							style={{ color: addEvents ? '#fff' : '#4f4f4f' }}
 						>
-							{addEvents ? 'Add Reminder' : 'Cancel'}
+							{addEvents ? 'New Meeting' : 'Cancel'}
 						</div>
 					</Button>
 				</div>
