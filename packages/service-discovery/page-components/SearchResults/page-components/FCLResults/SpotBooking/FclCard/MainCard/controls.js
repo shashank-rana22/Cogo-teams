@@ -10,7 +10,7 @@ export const fclControls = ({ shippingLineOptions = [] }) => {
 			type        : 'select',
 			className   : 'primary sm',
 			placeholder : 'Select Shipping Line',
-			options     : shippingLineOptions || true,
+			options     : shippingLineOptions || [],
 			caret       : true,
 			rules       : {
 				required: 'Shipping Line is required',

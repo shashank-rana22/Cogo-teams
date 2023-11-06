@@ -392,7 +392,13 @@ const apis = [
 		api          : 'create_checkout',
 		access_type  : 'private',
 		service_name : 'checkout',
-		feature      : 'spot booking',
+		feature      : 'spot_booking',
+	},
+	{
+		api          : 'get_sailing_schedules',
+		access_type  : 'private',
+		feature      : 'spot_booking',
+		service_name : 'sailing_schedule',
 	},
 ];
 

@@ -50,6 +50,7 @@ function SpotBooking({ detail = {}, setScreen = () => {} }) {
 				formProps={formProps}
 				setDetentionValues={setDetentionValues}
 				detentionValues={detentionValues}
+				watch={watch}
 			/>
 
 			<SpotBookingInstructions shippingLines={shippingLines} loading={loading} />

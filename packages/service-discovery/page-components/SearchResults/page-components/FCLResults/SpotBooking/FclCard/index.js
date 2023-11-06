@@ -8,6 +8,7 @@ function FclCard({
 	formProps = {},
 	detentionValues = {},
 	setDetentionValues = () => {},
+	watch = () => {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -15,6 +16,7 @@ function FclCard({
 				detail={detail}
 				shippingLines={shippingLines}
 				formProps={formProps}
+				watch={watch}
 			/>
 
 			<DetailFooter
