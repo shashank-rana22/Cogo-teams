@@ -17,7 +17,6 @@ function CargoInsurance({
 	refetch = () => {},
 	task = {},
 }) {
-	console.log(task, 'task');
 	const { shipment_data, primary_service, servicesList } = useContext(
 		ShipmentDetailContext,
 	);
