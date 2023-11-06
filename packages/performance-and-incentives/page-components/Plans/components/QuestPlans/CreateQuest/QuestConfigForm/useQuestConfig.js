@@ -76,7 +76,7 @@ const useQuestConfig = ({ default_data = [], quest_id = null }) => {
 		return response;
 	}), [defaultValues]);
 
-	console.log('defaultValues::', formattedDefaultValues);
+	// console.log('defaultValues::', formattedDefaultValues);
 
 	const [{ loading }, trigger] = useAllocationRequest(
 		{

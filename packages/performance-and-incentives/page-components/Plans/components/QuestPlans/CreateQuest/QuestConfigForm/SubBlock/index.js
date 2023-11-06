@@ -2,7 +2,9 @@ import { SelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import FieldArray from '../../../../ScoringPlans/commons/FieldArray';
+// import FieldArray from '../../../../ScoringPlans/commons/FieldArray';
+
+import FieldArray from '../../../commons/Form/FieldArray';
 
 import styles from './styles.module.css';
 import useSubBlockCreation from './useSubBlockCreation';
@@ -98,7 +100,6 @@ function SubBlock(props) {
 					subBlockIndex={subBlockIndex}
 					parameterOptions={parameterOptions}
 					parameterUnitOptions={parameterUnitOptions}
-					// setParam={setParam}
 					setParamScoringType={setParamScoringType}
 					error={errors?.blocks?.[blockIndex]?.sub_blocks?.[subBlockIndex]?.parameters}
 				/>

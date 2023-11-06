@@ -1,4 +1,6 @@
 import { Button } from '@cogoport/components';
+import { InputController } from '@cogoport/forms';
+import { IcMJobsConfig } from '@cogoport/icons-react';
 
 import blockOptions from '../../../../constants/select-block-options';
 
@@ -13,7 +15,7 @@ const CHILD_EMPTY_VALUES = {
 };
 
 function QuestConfigForm(props) {
-	const { questLoading, quest_id, default_data } = props;
+	const { questLoading, data } = props;
 
 	// console.log('data', data);
 
@@ -30,15 +32,27 @@ function QuestConfigForm(props) {
 		setEditSubBlock,
 		handleClick,
 		prefillValues,
-	} = useQuestConfig({ default_data, quest_id });
+	} = useQuestConfig({ default_data: data?.quest_configurations, quest_id: data?.id });
 
 	if (questLoading) return <LoadingState />;
 
 	return (
 		<>
-			<h3 className={styles.title}>Quest Configurations</h3>
+			<div className={styles.heading}>
+				<IcMJobsConfig height={20} width={20} />
+				Set Configurations
+			</div>
 
 			<div className={styles.blocks_container}>
+				<InputController
+					name="quest_string"
+					size="sm"
+					control={control}
+					errors={errors}
+					rules={{ required: 'Required' }}
+					style={{ width: '84%' }}
+					value={data?.quest_string}
+				/>
 				{fields.map((field, index) => (
 					<Block
 						key={field.id}
@@ -76,7 +90,7 @@ function QuestConfigForm(props) {
 					onClick={handleSubmit(handleClick)}
 					loading={loading}
 				>
-					Save As Draft
+					Save Configurations
 				</Button>
 			</div>
 		</>

@@ -1,4 +1,4 @@
-import { IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
+import { IcMDelete } from '@cogoport/icons-react';
 
 // import { getFieldController } from '../../../../../../../common/Form/getFieldController';
 
@@ -11,8 +11,6 @@ const FIRST_INDEX = 1;
 
 const TRIGGER_CONTROLS = ['provisional_trigger', 'realised_trigger'];
 
-const NO_ADDITIONAL_CONTROLS_BLOCKS = ['Enrichment', 'Engagement'];
-
 function Child(props) {
 	const {
 		controls,
@@ -20,7 +18,6 @@ function Child(props) {
 		index,
 		name,
 		remove,
-		watchBlock,
 		blockIndex = 0,
 		subBlockIndex = 0,
 		showDeleteButton = true,
@@ -30,8 +27,6 @@ function Child(props) {
 		watch = () => {},
 		parameterOptions = [],
 		parameterUnitOptions = {},
-		setParam = () => {},
-		setParamScoringType = () => {},
 	} = props;
 
 	const [scoringType, paramType] = watch([`${name}.${index}.scoring_type`, `${name}.${index}.parameter`]);
@@ -82,18 +77,6 @@ function Child(props) {
 					</div>
 				);
 			})}
-
-			{!NO_ADDITIONAL_CONTROLS_BLOCKS.includes(watchBlock) ? (
-				<IcMPlusInCircle
-					className={styles.add_icon}
-					onClick={() => {
-						setParamScoringType(scoringType);
-						setParam(paramType);
-					}}
-					width={16}
-					height={16}
-				/>
-			) : null}
 
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 				<IcMDelete

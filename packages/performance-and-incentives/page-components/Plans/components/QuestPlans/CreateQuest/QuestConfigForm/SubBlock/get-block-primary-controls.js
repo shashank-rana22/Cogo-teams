@@ -8,16 +8,20 @@ const getPrimaryControls = ({ parameterOptions = [] }) => ([
 		options     : parameterOptions,
 		rules       : { required: 'Required' },
 		style       : {
-			minWidth : '18%',
-			maxWidth : '18%',
+			minWidth : '25%',
+			maxWidth : '25%',
 		},
 	},
 	{
 		name        : 'value',
 		type        : 'number',
-		label       : 'Base Score',
-		placeholder : 'Score',
-		rules       : { required: 'Required' },
+		label       : 'Value',
+		placeholder : 'value',
+		style       : {
+			minWidth : '25%',
+			maxWidth : '25%',
+		},
+		rules: { required: 'Required' },
 	},
 
 ]);
