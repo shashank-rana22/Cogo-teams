@@ -38,7 +38,7 @@ function Header({
 
 	const { dynamic_statistics = {} } = stats || {};
 
-	const { localStorageFilterValue } = defaultRatesLocalStorageValue();
+	const { localStorageFilterValue = {} } = defaultRatesLocalStorageValue();
 
 	const sourceTags = getSourceTags({
 		sources           : params?.source || [],
@@ -67,6 +67,8 @@ function Header({
 		},
 		[dynamic_statistics],
 	);
+
+	const checkFilterApplied = isFiltersApplied || localStorageFilterValue?.filterApplied;
 
 	return (
 		<div className={styles.header_container}>
@@ -148,7 +150,7 @@ function Header({
 						) : null
 					)}
 				>
-					{localStorageFilterValue?.filterApplied || isFiltersApplied ? (
+					{checkFilterApplied ? (
 						<Badge color="orange">
 							<IcMFilter
 								className={styles.filter_icon}

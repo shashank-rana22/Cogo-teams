@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
 import smtRateRevertsFilters from '../../../configurations/smtRateRevertsFilters';
+import { ADMIN_VIEW_REQUIRED_FOR } from '../../../constants/rateRevertsConstants';
 import { getFieldController } from '../../../utils/getFieldController';
 
 import styles from './styles.module.css';
@@ -49,15 +50,20 @@ function FilterModal({
 	};
 
 	const handleReset = () => {
+		localStorage.setItem('smt_rate_data_filter', JSON.stringify({}));
+
 		reset(defaultValues);
 
 		setParams((prev) => ({
-			...prev,
-			...defaultValues,
-			page: 1,
+			source      : prev?.source,
+			service     : 'fcl_freight',
+			relevant_to : ADMIN_VIEW_REQUIRED_FOR.includes(viewType) ? 'all' : '',
+			page        : 1,
+			dateRange   : {
+				startDate : new Date((new Date()).setHours(0, 0, 0, 0)),
+				endDate   : new Date((new Date()).setHours(23, 59, 59, 59)),
+			},
 		}));
-
-		localStorage.setItem('smt_rate_data_filter', JSON.stringify({}));
 
 		setShowFilters(false);
 	};
