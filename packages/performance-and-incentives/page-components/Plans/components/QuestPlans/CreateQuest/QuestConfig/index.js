@@ -58,6 +58,7 @@ function QuestConfig({ quest_id = null, data = {} }) {
 					buttonText="ADD Config"
 					size="sm"
 					config_id={data?.agent_scoring_config_id}
+					data={data}
 					watch={watch}
 					onChangeChild={onChangeChild}
 					onDeleteChild={onDeleteChild}

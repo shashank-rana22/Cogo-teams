@@ -9,6 +9,7 @@ const useDeactivateQuest = ({ afterDeactivate = () => {} }) => {
 			method  : 'POST',
 			authkey : 'post_agent_scoring_quest_attributes',
 		},
+		{ manual: true },
 	);
 
 	const handleClick = async ({ id }) => {

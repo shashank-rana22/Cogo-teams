@@ -2,8 +2,10 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
+// import useGetScoringConfig from './hooks/useGetScoringConfig';
 import OverlappedQuest from './OverlappedQuest';
-import QuestConfig from './QuestConfig';
+// import QuestConfig from './QuestConfig';
+import QuestConfigForm from './QuestConfigForm';
 import QuestForm from './QuestForm';
 import useGetQuest from './QuestForm/hooks/useGetQuest';
 import styles from './styles.module.css';
@@ -13,7 +15,9 @@ function CreateQuests() {
 
 	const { query: { id = null } } = router;
 
-	const { loading: questLoading, data } = useGetQuest({ id });
+	const { loading: questLoading, data, refetch } = useGetQuest({ id });
+
+	// const { data: configData = {}, refetch, getConfigLoading } = useGetScoringConfig({ config_id: id });
 
 	const [params, setParams] = useState({});
 
@@ -40,7 +44,23 @@ function CreateQuests() {
 
 			<QuestForm setParams={setParams} data={data} setShowOverlapped={setShowOverlapped} />
 
-			{id ? <QuestConfig quest_id={id} data={data} /> : null}
+			{/* {id ? (
+				<QuestConfig
+					quest_id={id}
+					questLoading={questLoading}
+					data={data}
+					refetch={refetch}
+				/>
+			) : null} */}
+
+			{id ? (
+				<QuestConfigForm
+					quest_id={id}
+					questLoading={questLoading}
+					default_data={data?.quest_configurations}
+					refetch={refetch}
+				/>
+			) : null}
 
 			{!id && showOverlapped
 				? <OverlappedQuest params={params} setParams={setParams} showOverlapped={showOverlapped} />

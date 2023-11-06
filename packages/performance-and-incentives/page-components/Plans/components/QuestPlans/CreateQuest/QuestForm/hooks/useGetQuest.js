@@ -34,6 +34,7 @@ const useGetQuest = ({ id }) => {
 
 	return {
 		loading,
+		refetch: getAgentScoringQuest,
 		data,
 	};
 };
