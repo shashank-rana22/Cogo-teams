@@ -18,7 +18,7 @@ function ServiceItem({
 }) {
 	const [bouncing, setBouncing] = useState(false);
 
-	const { label, value, icon: Icon, is_available } = data;
+	const { label, value, icon: Icon, is_available, footerContent } = data;
 
 	const handleClick = () => {
 		if (!is_available) {
@@ -64,6 +64,13 @@ function ServiceItem({
 			>
 				{label}
 			</div>
+
+			{footerContent
+				? (
+					<div className={styles.footer_sec}>
+						{footerContent}
+					</div>
+				) : null}
 
 			{!is_available ? (
 				<ComingSoon bouncing={bouncing} />

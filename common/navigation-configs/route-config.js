@@ -14,6 +14,7 @@ import business from './config/business';
 import businessFinance from './config/business-finance';
 import byodDashboard from './config/byod-dashboard';
 import cancellationPolicies from './config/cancellation-policies';
+import cargoInsurance from './config/cargo-insurance';
 import centralisedCustomerService from './config/centralised-customer-service';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
@@ -191,6 +192,7 @@ const routeConfig = {
 	...margins,
 	...saas,
 	...serviceManagement,
+	...cargoInsurance,
 	...cogoStore,
 	...handlingFees,
 };
