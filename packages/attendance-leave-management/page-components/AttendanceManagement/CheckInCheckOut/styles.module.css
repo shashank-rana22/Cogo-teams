@@ -4,7 +4,7 @@
 }
 
 .header {
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .time_container {
@@ -41,7 +41,7 @@
 
 .formatted_time {
 	font-size: 16px;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .button_wrapper {
