@@ -43,14 +43,24 @@ function ConfirmationTexts({
 				<div className={styles.text}>
 					<div className={styles.bold_text}>Free Days at Origin:</div>
 					<div className={cl`${styles.text} ${styles.detention_demurrage}`}>
-						{originDetention}
-						{' '}
-						detention day(s),
-						{' '}
-						{originDemurrage}
-						{' '}
-						demurrage day(s)
-						{' '}
+						{source === 'spot_line_booking' ? (
+							<>
+								{originDetention}
+								{' '}
+								detention day(s)
+							</>
+						) : (
+							<>
+								{originDetention}
+								{' '}
+								detention day(s),
+								{' '}
+								{originDemurrage}
+								{' '}
+								demurrage day(s)
+								{' '}
+							</>
+						)}
 					</div>
 					<div className={styles.inner_text}>For extra day(s) charges refer T&C</div>
 					{source === 'spot_line_booking' ? (
@@ -68,14 +78,24 @@ function ConfirmationTexts({
 				<div className={styles.text}>
 					<div className={styles.bold_text}>Free Days at Destination:</div>
 					<div className={cl`${styles.text} ${styles.detention_demurrage}`}>
-						{destinationDetention}
-						{' '}
-						detention day(s),
-						{' '}
-						{destinationDemurrage}
-						{' '}
-						demurrage day(s)
-						{' '}
+						{source === 'spot_line_booking' ? (
+							<>
+								{destinationDetention}
+								{' '}
+								detention day(s)
+							</>
+						) : (
+							<>
+								{destinationDetention}
+								{' '}
+								detention day(s),
+								{' '}
+								{destinationDemurrage}
+								{' '}
+								demurrage day(s)
+								{' '}
+							</>
+						)}
 					</div>
 					<div className={styles.inner_text}>For extra day(s) charges refer T&C </div>
 					{source === 'spot_line_booking' ? (

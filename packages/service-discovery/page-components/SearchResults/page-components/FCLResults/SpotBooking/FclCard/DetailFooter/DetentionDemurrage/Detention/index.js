@@ -47,7 +47,7 @@ function Detention({
 			) : null}
 
 			<div className={styles.form}>
-				{['detention', 'demurrage'].map((name) => (
+				{['detention'].map((name) => ( // demurrage also possible
 					<FormItem
 						key={name}
 						name={name}

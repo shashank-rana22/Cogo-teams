@@ -193,7 +193,12 @@ function ConvenienceDetails({
 								{loading ? <Spinner width="24px" height="24px" /> : null}
 
 								<div className={styles.select_container}>
-									<div>{startCase(handling_fees.unit)}</div>
+									<Select
+										size="sm"
+										options={[{ value: handling_fees.unit, label: startCase(handling_fees.unit) }]}
+										value={handling_fees.unit}
+										style={{ width: '180px' }}
+									/>
 
 									<Select
 										size="sm"

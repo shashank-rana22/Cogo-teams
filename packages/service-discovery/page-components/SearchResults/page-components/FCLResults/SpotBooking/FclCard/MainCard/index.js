@@ -31,7 +31,7 @@ function MainCard({ shippingLines = [], detail = {}, formProps = {}, watch = () 
 
 	const { service_type = '', service_details = {}, destination_port_id = '', origin_port_id = '' } = detail;
 
-	const { shipping_line_id = '', sailing_schedule = true } = watch() || {};
+	const { shipping_line_id = '', sailing_schedule = false } = watch() || {};
 
 	const shippingLineOptions = shippingLines.map((item) => ({
 		value : item?.id,
@@ -134,7 +134,7 @@ function MainCard({ shippingLines = [], detail = {}, formProps = {}, watch = () 
 							control={control}
 							label="Add custom departure & arrival"
 							style={{ marginLeft: '24px' }}
-							value
+							value={false}
 						/>
 					) : null}
 				</div>

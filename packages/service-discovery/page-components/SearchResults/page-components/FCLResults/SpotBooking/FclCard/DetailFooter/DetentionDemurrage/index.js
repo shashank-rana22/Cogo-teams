@@ -13,9 +13,9 @@ function DetentionDemurrage({
 
 	const {
 		origin_detention,
-		origin_demurrage,
+		// origin_demurrage,
 		destination_detention,
-		destination_demurrage,
+		// destination_demurrage,
 	} = detentionValues;
 
 	return (
@@ -23,15 +23,15 @@ function DetentionDemurrage({
 			<div className={styles.tag}>Origin</div>
 
 			<div className={styles.days_count}>
-				<div>{`DET. ${origin_detention} Days,`}</div>
-				<div style={{ marginLeft: '4px' }}>{`Demurrage. ${origin_demurrage} Days`}</div>
+				<div>{`Detention: ${origin_detention} Free Days`}</div>
+				{/* <div style={{ marginLeft: '4px' }}>{`Demurrage. ${origin_demurrage} Days`}</div> */}
 			</div>
 
 			<div className={styles.tag} style={{ marginLeft: '24px' }}>Destination</div>
 
 			<div className={styles.days_count}>
-				<div>{`DET. ${destination_detention} Days,`}</div>
-				<div style={{ marginLeft: '4px' }}>{`Demurrage. ${destination_demurrage} Days`}</div>
+				<div>{`Detention: ${destination_detention} Free Days`}</div>
+				{/* <div style={{ marginLeft: '4px' }}>{`Demurrage. ${destination_demurrage} Days`}</div> */}
 			</div>
 
 			<Popover

@@ -30,7 +30,8 @@ export const fclControls = ({ shippingLineOptions = [] }) => {
 			label       : 'Number of Stops',
 			type        : 'text',
 			placeholder : 'Enter number of stops',
-			size        : 'sm',
+			size        : 'md',
+			value       : '0',
 			rules       : { required: 'No. of Stops are Required', validate: (val) => validate(val) },
 		},
 		{
