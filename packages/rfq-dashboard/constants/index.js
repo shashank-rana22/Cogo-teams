@@ -1,4 +1,4 @@
-import { IcCFcl, IcCLcl, IcCAir } from '@cogoport/icons-react';
+import { IcCFcl, IcCLcl, IcCAir, IcMLocalCharges } from '@cogoport/icons-react';
 
 const SORT_OPTIONS = [
 	{ label: 'Newest Arrival', value: 'newest' },
@@ -13,9 +13,11 @@ const SVG_PROPS = {
 };
 
 const SERVICE_MAPPING = {
-	fcl_freight : { icon: <IcCFcl {...SVG_PROPS} />, label: 'FCL' },
-	lcl_freight : { icon: <IcCLcl {...SVG_PROPS} />, label: 'LCL' },
-	air_freight : { icon: <IcCAir {...SVG_PROPS} />, label: 'AIR' },
+	fcl_freight       : { icon: <IcCFcl {...SVG_PROPS} />, label: 'FCL' },
+	lcl_freight       : { icon: <IcCLcl {...SVG_PROPS} />, label: 'LCL' },
+	air_freight       : { icon: <IcCAir {...SVG_PROPS} />, label: 'AIR' },
+	fcl_freight_local : { icon: <IcMLocalCharges {...SVG_PROPS} />, label: 'FCL Local' },
+	lcl_freight_local : { icon: <IcMLocalCharges {...SVG_PROPS} />, label: 'LCL Local' },
 };
 
 export { SORT_OPTIONS, SERVICE_MAPPING };

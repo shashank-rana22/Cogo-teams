@@ -21,7 +21,8 @@
     "spectator_type_2": "บัตรที่เริ่มขึ้นโดยฉัน",
     "spectator_type_3": "ผู้อนุมัติปิดบัตร",
     "spectator_type_4": "การกำหนดค่าของฉัน",
-    "spectator_type_5": "ทีมของฉัน",
+    "spectator_type_5": "มอบหมายให้ทีมของฉัน",
+    "spectator_type_6": "ยกขึ้นโดยทีมของฉัน",
     "no_label": "ไม่",
     "yes_label": "ใช่",
     "tickets_label": "บัตร",
@@ -57,7 +58,7 @@
     "has_reassigned_this_ticket_to": "ได้มอบหมายบัตรนี้ใหม่ให้",
     "this_ticket_has_been_assigned_to": "บัตรนี้ได้รับการกำหนดให้กับ",
     "this_ticket_has_been_rejected_by": "บัตรนี้ถูกปฏิเสธโดย",
-    "this_ticket_has_been_resolved_by": "บัตรนี้ได้รับการแก้ไขโดย",
+    "this_ticket_has_been_closed_by": "ตั๋วนี้ถูกปิดโดย",
     "has_initiated_resolution_request": "ได้เริ่มคำขอแก้ไข",
     "has_closed_resolution_request": "ได้ปิดคำขอแก้ไข",
     "ticket_has_been_created": "บัตรถูกสร้าง",
@@ -172,5 +173,7 @@
     "enter_serial_id": "ป้อนรหัสซีเรียล",
     "apply": "นำมาใช้",
     "reset": "รีเซ็ต",
-    "serial_id": "ID อนุกรม"
+    "serial_id": "ID อนุกรม",
+    "id_creator": "ผู้สร้าง ID",
+    "messaged_at":"ส่งข้อความที่"
 }

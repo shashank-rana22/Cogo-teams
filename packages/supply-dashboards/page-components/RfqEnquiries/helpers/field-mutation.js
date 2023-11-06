@@ -5,7 +5,15 @@ import {
 	from '@cogoport/forms/utils/getAsyncFields';
 import { merge, startCase } from '@cogoport/utils';
 
-const FieldMutation = ({
+const QUERY_MAPPING = {
+	fcl_freight       : 'fcl_freight',
+	lcl_freight       : 'lcl_freight',
+	air_freight       : 'air_freight',
+	fcl_freight_local : 'fcl_freight',
+	lcl_freight_local : 'lcl_freight',
+};
+
+const useFieldMutation = ({
 	fields, values, data, service = {},
 }) => {
 	const serviceProviderOptions = useGetAsyncOptions(
@@ -13,7 +21,11 @@ const FieldMutation = ({
 			asyncFieldsOrganization(),
 			{
 				params: {
-					filters: { account_type: 'service_provider', kyc_status: 'verified', service: service?.service },
+					filters: {
+						account_type : 'service_provider',
+						kyc_status   : 'verified',
+						service      : QUERY_MAPPING[service?.service],
+					},
 				},
 			},
 		),
@@ -69,10 +81,10 @@ const FieldMutation = ({
 			}
 			newControl.controls.forEach((childcontrol) => {
 				if (childcontrol.name === 'unit') {
-					const unitOptions = {};
+					const UNIT_OPTIONS = {};
 					const chargeValues = values[control.name];
 					chargeValues?.forEach((item, i) => {
-						unitOptions[i] = (
+						UNIT_OPTIONS[i] = (
 							chargeCodes[item.code]?.units || ['per_container']
 						).map((unit) => ({
 							label : startCase(unit),
@@ -82,7 +94,7 @@ const FieldMutation = ({
 					// eslint-disable-next-line no-param-reassign
 					childcontrol.customProps = {};
 					// eslint-disable-next-line no-param-reassign
-					childcontrol.customProps.options = unitOptions;
+					childcontrol.customProps.options = UNIT_OPTIONS;
 				}
 				if (childcontrol.name === 'code') {
 					const newOptions = Object.keys(chargeCodes).map((code) => ({
@@ -102,4 +114,4 @@ const FieldMutation = ({
 	return { newField };
 };
 
-export default FieldMutation;
+export default useFieldMutation;

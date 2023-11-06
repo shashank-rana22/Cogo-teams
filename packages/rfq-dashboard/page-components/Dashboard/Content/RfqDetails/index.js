@@ -30,18 +30,7 @@ function RfqDetails(props) {
 					setCheckedItems={setCheckedItems}
 					getRfqsForApproval={getRfqsForApproval}
 				/>
-
-				<div>
-					<EmptyState
-						height="250"
-						width="400"
-						flexDirection="column"
-						alignItems="center"
-						emptyText="Data Not Found"
-						textSize="20"
-						marginTop="100px"
-					/>
-				</div>
+				<EmptyState emptyText="Data Not Found" />
 			</div>
 		);
 	}

@@ -1,82 +1,124 @@
-import { Select, DateRangepicker } from '@cogoport/components';
+import { Select, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { useState } from 'react';
+import { IcMRefresh } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 
-import DURATION_CONSTANTS from '../../../../constants/duration-constants';
-import DURATION_OPTIONS from '../../../Leaderboard/configurations/get-duration-filter-options';
+import SCREEN_CONSTANTS from '../../../../constants/screen-constants';
+import Counter from '../../common/Counter';
+import DateFilter from '../../common/DateFilter';
 import TEXT_MAPPING from '../../configurations/header-text-mapping';
-import onChangeDuration from '../../utils/changeDuration';
+import VIEW_OPTIONS from '../../configurations/view-type-options';
+import LEADERBOARD_LOCATIONS from '../../utils/leaderboard-locations';
 
 import CountDownTimer from './CountDownTimer';
 import styles from './styles.module.css';
 
-const { CUSTOM } = DURATION_CONSTANTS;
+const { OVERALL, COMPARISION } = SCREEN_CONSTANTS;
+
+const leaderBoardOptions = Object.entries(LEADERBOARD_LOCATIONS).map(([location,
+	locationDetails]) => ({ label: locationDetails.label, value: location }));
+
+const handleLocationChange = ({ location, push, setOfficeLocation }) => {
+	if (location) push(`/performance-and-incentives/public-leaderboard?location=${location}`);
+	else push('/performance-and-incentives/public-leaderboard');
+
+	setOfficeLocation(location);
+};
 
 function Header(props) {
-	const { view, dateRange, setDateRange, updatedAt, countdown } = props;
+	const {
+		screen, view, setView, dateRange, setDateRange, updatedAt, countdown, duration, setDuration, switchScreen,
+		reloadCounter, nextReloadAt,
+		officeLocation,
+		setOfficeLocation,
+	} = props;
 
-	const [duration, setDuration] = useState('today');
+	const { push } = useRouter();
 
 	return (
 		<div className={styles.container}>
-			<div>
-				<h2 className={styles.heading}>Leaderboard</h2>
 
-				<div className={styles.sub_container}>
-					<p className={styles.sub_heading}>
-						for
-						{' '}
-						<i>
-							<b>{TEXT_MAPPING[view]}</b>
-
-							{' '}
-							(
-							{view === 'kam_wise' ? 'Individual Contribution' : 'Team Contributions'}
-							)
-
-						</i>
-					</p>
-
-					<Select
-						value={duration}
-						onChange={(selectedDuration) => onChangeDuration({
-							selectedDuration,
-							setDateRange,
-							setDuration,
-						})}
-						options={DURATION_OPTIONS}
-						className={styles.period_selector}
+			<div className={styles.sub_container}>
+				<div
+					className={styles.info_icon_div}
+					onClick={switchScreen}
+					role="presentation"
+				>
+					<IcMRefresh
+						className={cl`${styles.swicth_icon} ${screen === OVERALL && styles.swicth_icon_active}`}
 					/>
-
-					{duration === CUSTOM && (
-						<DateRangepicker
-							onChange={setDateRange}
-							value={dateRange}
-							maxDate={new Date()}
-							isPreviousDaysAllowed
-						/>
-					)}
+					<Counter
+						reloadCounter={reloadCounter}
+						nextReloadAt={nextReloadAt}
+					/>
 				</div>
+				<h2 className={styles.heading}>
+					Leaderboards
+				</h2>
+				<p className={styles.sub_heading}>
+					for
+					{' '}
+					<i>
+						<b>{TEXT_MAPPING[view]}</b>
+
+						{' '}
+						(
+						{view === 'kam_wise' ? 'Individual Contribution' : 'Team Contributions'}
+						)
+
+					</i>
+				</p>
+
 			</div>
 
-			<div>
+			<div className={styles.end_side}>
 
-				<CountDownTimer updatedAt={updatedAt} countdown={countdown} />
+				{screen === OVERALL ? (
+					<Select
+						value={officeLocation}
+						onChange={(location) => handleLocationChange({ location, push, setOfficeLocation })}
+						options={leaderBoardOptions}
+						placeholder="Location"
+						className={styles.location_selector}
+						isClearable
+					/>
+				) : null}
 
-				{updatedAt && (
-					<p className={styles.last_updated_at}>
-						Last updated:
-						{' '}
-						{formatDate({
-							date       : updatedAt,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-							formatType : 'dateTime',
-							separator  : '; ',
-						})}
-					</p>
-				)}
+				{screen === COMPARISION ? (
+					<DateFilter
+						screen={screen}
+						dateRange={dateRange}
+						duration={duration}
+						setDuration={setDuration}
+						setDateRange={setDateRange}
+					/>
+				) : null}
+
+				<Select
+					value={view}
+					onChange={setView}
+					options={VIEW_OPTIONS}
+					className={styles.user_selector}
+				/>
+
+				<div>
+					<CountDownTimer updatedAt={updatedAt} countdown={countdown} />
+
+					{updatedAt ? (
+						<p className={styles.last_updated_at}>
+							Last updated:
+							{' '}
+							{formatDate({
+								date       : updatedAt,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+								formatType : 'dateTime',
+								separator  : '; ',
+							})}
+						</p>
+					) : null}
+				</div>
 			</div>
 
 		</div>

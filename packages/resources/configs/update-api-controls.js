@@ -142,6 +142,7 @@ const updateApiControls = ({ selectedApi }) => [
 			{ label: 'Iris', value: 'iris' },
 			{ label: 'Heimdall', value: 'heimdall' },
 			{ label: 'Hades', value: 'hades' },
+			{ label: 'Handling Fee', value: 'handling_fee' },
 		],
 		width    : '20%',
 		disabled : !selectedApi,

@@ -4,26 +4,18 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import useApproveQuotation from '../../../../../../../../hook/useApproveQuotation';
 import RaiseTicketModal from '../../../../../../../commons/RaiseTicketModal';
 import getServiceColumns from '../../../../../../../configurations/getServiceColumns';
 
 import Services from './Services';
 import styles from './styles.module.css';
 
-const NEXT = 1;
-
 export default function Content({
 	services = {},
 	currentKey = '',
-	accordionState = {},
 	shipment_id = '',
-	toggleAccordion = () => {},
 	getPrePostShipmentQuotes = () => {},
 }) {
-	const keys = Object.keys(accordionState);
-	const nextIndex = keys.indexOf(currentKey) + NEXT;
-	const nextItem = (nextIndex < (keys.length - NEXT)) ? keys[nextIndex] : '';
 	const defaultSelectedService = Object.keys(services)?.[GLOBAL_CONSTANTS.zeroth_index] || '';
 
 	const { query: { job_number = '' } } = useRouter();
@@ -34,20 +26,7 @@ export default function Content({
 		setActiveService(service);
 	};
 
-	const idList = [services?.[activeService]?.[GLOBAL_CONSTANTS.zeroth_index]?.id];
-
-	const currentStatus = services?.[activeService]?.[GLOBAL_CONSTANTS.zeroth_index]?.quotationState;
-
 	const auditStatus = window.sessionStorage.getItem('audit_status');
-
-	const {
-		approveQuotation = () => {},
-	} = useApproveQuotation({ idList, status: (currentStatus === 'APPROVED' ? 'INIT' : 'APPROVED') });
-
-	const onApprove = () => {
-		toggleAccordion(nextItem);
-		getPrePostShipmentQuotes();
-	};
 
 	return (
 		<>
@@ -124,27 +103,6 @@ export default function Content({
 										refetch={getPrePostShipmentQuotes}
 									/>
 								) : null}
-								<Button
-									size="md"
-									themeType="primary"
-									onClick={() => approveQuotation(onApprove)}
-								>
-									Accept
-								</Button>
-							</div>
-						) : null}
-
-						{(item?.quotationState === 'APPROVED' && auditStatus !== 'audited') ? (
-							<div className={styles.flex_content}>
-								<div className={styles.flex_content}>
-									<Button
-										size="md"
-										themeType="primary"
-										onClick={() => approveQuotation(getPrePostShipmentQuotes)}
-									>
-										Undo
-									</Button>
-								</div>
 							</div>
 						) : null}
 

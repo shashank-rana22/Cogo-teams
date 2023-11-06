@@ -7,7 +7,7 @@ import {
 
 import StakeholderCustomOption from '../common/ReassignTicket/StakeholderCustomOption';
 
-const getShipmentTypeOption = ({ t = () => {}, requestType = '' }) => {
+const getShipmentTypeOption = ({ t = () => {}, requestType = '', idType = '' }) => {
 	const options = [
 		{ label: t('myTickets:role'), value: 'partner-roles' },
 		{ label: t('myTickets:user'), value: 'partner-users' },
@@ -15,12 +15,20 @@ const getShipmentTypeOption = ({ t = () => {}, requestType = '' }) => {
 		{ label: t('myTickets:sales_agent'), value: 'sales_agent' },
 		{ label: t('myTickets:kam_owner'), value: 'kam_owner' },
 		{ label: t('myTickets:stakeholders'), value: 'stakeholders' },
+		{ label: t('myTickets:id_creator'), value: 'id_creator' },
 	];
 
-	if (requestType !== 'shipment') {
-		return options?.filter((option) => option?.value !== 'stakeholders');
+	if (requestType === 'shipment') {
+		return options?.filter((option) => option?.value !== 'id_creator');
 	}
-	return options;
+
+	if (requestType === 'rate') {
+		if (idType !== 'sid') {
+			return options?.filter((option) => option?.value !== 'stakeholders');
+		}
+	}
+
+	return options?.filter((option) => !['id_creator', 'stakeholders']?.includes(option?.value));
 };
 
 export const useReassignTicketsControls = ({
@@ -29,6 +37,7 @@ export const useReassignTicketsControls = ({
 	setUserData = () => {},
 	stakeHoldersData = [],
 	requestType = '',
+	idType = '',
 }) => {
 	const rolesOptions = useGetAsyncOptionsMicroservice({
 		...{
@@ -65,7 +74,7 @@ export const useReassignTicketsControls = ({
 			label          : t('myTickets:type'),
 			controllerType : 'select',
 			value          : 'partner-roles',
-			options        : getShipmentTypeOption({ t, requestType }),
+			options        : getShipmentTypeOption({ t, requestType, idType }),
 		},
 		{
 			...(assignToOptions || {}),

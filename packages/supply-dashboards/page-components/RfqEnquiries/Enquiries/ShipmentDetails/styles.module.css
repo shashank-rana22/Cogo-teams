@@ -69,13 +69,19 @@
 }
 
 .country {
-	padding: 2px;
+	padding-left: 2px;
 	font-size: 12px;
 	font-weight: 400;
 }
 
 .subname {
 	max-width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.subnameFull {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
