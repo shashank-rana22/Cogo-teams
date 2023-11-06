@@ -1,63 +1,36 @@
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-function BookingParamsMapping({ booking_params, packages }) {
+import styles from '../styles.module.css';
+
+function BookingParamsMapping({ bookingParams = [] }) {
 	return (
-		<div>
-			{(booking_params?.packages || packages)?.map((x) => (
-				<div style={{ display: 'flex' }} key={x.handling_type}>
-					Packages
-					&nbsp;
-					<div>
-						{x.packages_count}
-						{' '}
-						pkg
-						{' '}
-						,
-					</div>
-					{x.handling_type && (
-						<div>
-							{x.handling_type}
+		<div className={styles.wrap}>
+			Packages &nbsp;
+			{
+	(bookingParams || []).map((item) => {
+		const { length = 0, width = 0, height = 0 } = item || {};
+		const dimension = length
+			? `${length}cm X ${width}cm X ${height}cm,`
+			: '';
+
+		return (
+			<div key={item.id}>
+				{item
+					? (
+						<div style={{ width: 'fit-content' }}>
+							{`${item.packages_count} Pkg`}
 							{' '}
-							,
+							{dimension ? `(${dimension}) ` : ''}
+							{startCase(item.packing_type || '')}
 						</div>
-					)}
-				&nbsp;
-					{x.packing_type
-				&& (
-					<div>
-						{x.packing_type}
-						{' '}
-					</div>
-				)}
-									&nbsp;
-					{x.height && 			(
-						<div>
-							,
-							{' '}
-							{x.height}
-							{' '}
-							X
-						</div>
-					)}
-					&nbsp;
-					{x.width && 	(
-						<div>
-							{x.width}
-							{' '}
-							X
-						</div>
-					)}
-									&nbsp;
-					{x.length && 	(
-						<div>
-							{x.length}
-							{' '}
-						</div>
-					)}
-				</div>
-			))}
+					)
+					: null}
+			</div>
+		);
+	})
+	}
 		</div>
 	);
 }
-
 export default BookingParamsMapping;

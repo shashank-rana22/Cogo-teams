@@ -26,7 +26,7 @@ const useGetBankList = () => {
 		});
 
 		setBankDetails(() => (resp.data[GLOBAL_CONSTANTS.zeroth_index].bank_details || [])?.map((item) => ({
-			label : `${item?.beneficiary_name}, ${item?.branch_code}`,
+			label : `${item?.beneficiary_name}, ${item?.branch_code} , ${item?.account_number} `,
 			value : item?.account_number,
 			id    : item?.id,
 		})));

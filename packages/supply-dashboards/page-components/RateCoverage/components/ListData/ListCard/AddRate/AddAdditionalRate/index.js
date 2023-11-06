@@ -9,6 +9,7 @@ function AddAdditionalRates({
 	additionalService = undefined,
 	dependentMainFreight = [], filter = {},
 	source = '',
+	triggeredFrom = '',
 }) {
 	const reference = useRef(null);
 	const serviceType = filter?.service;
@@ -95,6 +96,7 @@ function AddAdditionalRates({
 								filter={filter}
 								data={data}
 								source={source}
+								triggeredFrom={triggeredFrom}
 							/>
 						))}
 					</div>

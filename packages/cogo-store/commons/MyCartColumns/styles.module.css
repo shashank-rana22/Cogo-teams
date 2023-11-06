@@ -1,0 +1,80 @@
+.products {
+	display: flex;
+}
+
+.products img {
+	padding: 10px;
+	border-radius: 5px;
+	object-fit: contain;
+}
+
+.products_right {
+	display: flex;
+	flex-direction: column;
+}
+
+.black {
+	padding-top: 12px;
+	margin-left: 4px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.grey {
+	font-size: 14px;
+	color: #929fa5;
+	text-decoration: line-through;
+}
+
+.amt_black {
+	font-size: 14px;
+	color: #221f20;
+}
+
+.color_dot {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin: 0 5px;
+	background-color: grey;
+	border-radius: 50%;
+}
+
+.dot_list {
+	display: flex;
+	align-items: center;
+	margin-bottom: -4px;
+	margin-left: 4px;
+}
+
+.quantity_control {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_input_display_container {
+			width: 100%;
+
+			.ui_input_label {
+				display: flex;
+				align-items: center;
+			}
+		}
+	}
+}
+
+.minus {
+	width: 30px;
+	height: 30px;
+	font-size: 18px;
+	color: #fff;
+	cursor: pointer;
+	background-color: #3498db;
+	border: none;
+	border-radius: 4px;
+}
+
+.quantity {
+	margin: 0 10px;
+	font-size: 18px;
+}

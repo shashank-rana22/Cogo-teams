@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import useGetPermission from '@cogoport/request/hooks/useGetPermission';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, snakeCase } from '@cogoport/utils';
 import React from 'react';
 
 import CC from '../../utils/conditionConstants';
@@ -33,7 +33,7 @@ function ViewInvoices({
 		if (itemData?.type === 'OVERSEAS') {
 			push(
 				`/business-finance/account-payables/invoices/over-seas-agent?organizationId=${itemData?.organization_id}
-			&services=${itemData?.service_type}&payrun_type=${itemData?.type}
+			&services=${snakeCase(itemData?.service_type)}&payrun_type=${itemData?.type}
 			&payrun=${itemData?.id}&currency=${itemData?.currency}&entity=${itemData?.entityCode}`,
 			);
 		} else {

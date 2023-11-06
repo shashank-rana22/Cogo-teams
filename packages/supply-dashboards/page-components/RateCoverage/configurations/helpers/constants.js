@@ -5,9 +5,9 @@ import {
 } from '@cogoport/icons-react';
 
 export const STAT_CARDS_MAPPING = {
-	pending   : { title: 'Today\'s Pending', color: '#FF5733', status: 'pending' },
-	completed : { title: 'Today\'s Completed', color: '#728F3C', status: 'completed' },
-	backlog   : { title: 'Previous Backlogs', color: '#F69E50', status: 'backlog' },
+	pending   : { id: 1, title: 'Today\'s Pending', color: '#FF5733', status: 'pending' },
+	completed : { id: 2, title: 'Today\'s Completed', color: '#728F3C', status: 'completed' },
+	backlog   : { id: 3, title: 'Previous Backlogs', color: '#F69E50', status: 'backlog' },
 };
 
 export const WEEKLY_BACKLOG = {
@@ -215,18 +215,10 @@ export const rateTypeOptions = [
 ];
 
 export const airRateTypeOptions = [
-	{
-		label : 'Market place',
-		value : 'market_place',
-	},
-	{
-		label : 'Promotional',
-		value : 'promotional',
-	},
-	{
-		label : 'Consolidation',
-		value : 'consolidated',
-	},
+	{ label: 'Market place', value: 'market_place' },
+	{ label: 'Promotional', value: 'promotional' },
+	{ label: 'Consolidation', value: 'consolidated' },
+	{ label: 'Non Tariff Rate', value: 'non_tariff_rate' },
 ];
 
 export const flighOperationTypeOptions = [
@@ -316,3 +308,19 @@ export const LOADER_COUNT = 3;
 export const LIST_CARD_LOADER_COUNT = 5;
 export const VALUE_TWO = 2;
 export const HUNDRED = 100;
+
+export const USER_SERVICES = {
+	'6addea60-a3de-4067-b08d-ece04be594ab' : ['fcl_freight', 'fcl_customs'],
+	'f47788fe-85e8-4f86-a9d7-7c7902ea864a' : ['fcl_freight', 'fcl_customs'],
+	'51641e0e-a5da-452a-81fc-ccb8fe6df343' : ['fcl_freight', 'fcl_customs', 'lcl_freight', 'lcl_customs'],
+	'd7f62f2d-2b41-41ae-a9f0-200255de4d8f' : ['fcl_freight', 'fcl_customs'],
+	'922b367f-0f3e-4872-91d0-68413fc7f955' : ['fcl_freight', 'fcl_customs'],
+	'329fb317-f2f9-4c41-aabd-4a9befc53721' : ['fcl_freight', 'fcl_customs', 'fcl_cfs'],
+	'1a0d178d-c2b9-473c-87e7-1ed0d750aff9' : ['air_freight', 'air_customs'],
+	'763c56c3-4c7e-499f-9c65-1569269cbd2e' : ['air_freight', 'air_customs'],
+	'038c43bf-9056-4398-8364-2241ad7ee0fa' : ['air_freight', 'air_customs'],
+	'836a8d20-c273-485f-b787-c6b7bfe76f77' : ['air_freight', 'air_customs'],
+	'b26629b3-49c8-4874-a758-b733045cb45d' : ['air_freight', 'air_customs'],
+	'0ebebbbc-9823-43a5-b4b7-e52752f32a84' : ['ftl_freight', 'ltl_freight', 'trailer'],
+	'432ddd8c-9bab-4dbd-be33-e91502ecb821' : ['haulage'],
+};

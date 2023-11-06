@@ -1,6 +1,9 @@
 /* eslint-disable max-lines-per-function */
-import { DateRangepicker, Select, Modal, RadioGroup, Input } from '@cogoport/components';
-import { asyncFieldsLocations, asyncFieldsOperators, useGetAsyncOptions } from '@cogoport/forms';
+import { Select, Modal, RadioGroup, Input, DateRangepicker } from '@cogoport/components';
+import {
+	asyncFieldsLocations, asyncFieldsOperators, asyncFieldsOrganization,
+	useGetAsyncOptions,
+} from '@cogoport/forms';
 import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 import { merge, startCase } from '@cogoport/utils';
 
@@ -19,6 +22,7 @@ function Filter({
 	filter = {},
 	setFilter = () => {},
 	setShowWeekData = () => {},
+	userService = undefined,
 }) {
 	const isAirService = filter?.service === 'air_freight' || filter?.service === 'air_customs';
 
@@ -39,6 +43,23 @@ function Filter({
 		{ params: { filters: { operator_type: lineOptions?.[filter?.service] || 'shipping_line' } } },
 	));
 
+	const serviceProviders = useGetAsyncOptions(
+		merge(
+			asyncFieldsOrganization(),
+			{
+				params: {
+					filters: {
+						status       : 'active',
+						kyc_status   : 'verified',
+						account_type : 'service_provider',
+						service      : `${filter?.service}${['haulage',
+							'trailer'].includes(filter.service) ? '_freight' : ''}`,
+					},
+				},
+			},
+		),
+	);
+
 	const FCL_COMMODITY_OPTIONS = [];
 	(Object.keys(FREIGHT_CONTAINER_COMMODITY_MAPPINGS) || []).forEach((containerType) => {
 		FREIGHT_CONTAINER_COMMODITY_MAPPINGS[containerType].forEach((commodity) => {
@@ -50,6 +71,9 @@ function Filter({
 			);
 		});
 	});
+	const filteredServiceOptions = serviceOptions?.filter((option) => userService?.includes(option.value));
+
+	const finalFilter = filter?.releventToMeValue ? filteredServiceOptions : serviceOptions;
 
 	function DateRange() {
 		return (
@@ -87,7 +111,7 @@ function Filter({
 							<p>Service</p>
 							<Select
 								placeholder="select"
-								options={serviceOptions}
+								options={finalFilter}
 								value={filter?.service}
 								style={{ width: '250px' }}
 								onChange={(value) => {
@@ -102,10 +126,26 @@ function Filter({
 								}}
 							/>
 						</div>
+					</div>
+					<div className={styles.details}>
+						<div>
+							<p>Service Provider</p>
+							<Select
+								placeholder="Select Service Provider"
+								{...serviceProviders}
+								value={filter?.service_provider_id}
+								style={{ width: '250px' }}
+								isClearable
+								onChange={(val) => {
+									setFilter((prevFilters) => ({ ...prevFilters, service_provider_id: val, page: 1 }));
+								}}
+							/>
+						</div>
 						<div>
 							{DateRange()}
 						</div>
 					</div>
+
 					<div className={styles.details}>
 						<div>
 							<p>Origin</p>
@@ -258,7 +298,6 @@ function Filter({
 										}}
 									/>
 								</div>
-								{DateRange()}
 							</div>
 						</div>
 					)}

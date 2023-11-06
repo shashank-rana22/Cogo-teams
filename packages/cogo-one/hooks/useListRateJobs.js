@@ -13,7 +13,7 @@ const getPayload = ({ params, orgId, triggeredFrom, viewType, query }) => ({
 	filters           : {
 		source              : params?.source || undefined,
 		status              : triggeredFrom !== 'sideBar' ? 'pending' : undefined,
-		service_provider_id : (triggeredFrom === 'sideBar' && orgId) ? orgId : undefined,
+		service_provider_id : (triggeredFrom === 'sideBar' && orgId) ? orgId : params?.service_provider_id || undefined,
 		shipment_serial_id  : params?.shipment_serial_id || undefined,
 		serial_id           : query || undefined,
 		start_date          : (params?.dateRange?.startDate || new Date()).toISOString(),

@@ -48,7 +48,7 @@ const fclCustomsControls = ({
 			type        : 'select',
 			placeholder : 'Origin Location',
 			span        : 4,
-			value       : data?.location.id,
+			value       : data?.location?.id,
 			disabled    : data?.location?.id,
 			...originLocationOptions,
 			rules       : { required: 'origin location is required' },
@@ -153,7 +153,7 @@ const fclCustomsControls = ({
 			buttonText         : 'Add Custom Line Items',
 			noDeleteButtonTill : 1,
 			value              : [{
-				customs_code : '',
+				code         : '',
 				unit         : '',
 				currency     : '',
 				price        : '',
@@ -162,14 +162,11 @@ const fclCustomsControls = ({
 			}],
 			controls: [
 				{
-					name        : 'customs_code',
-					valueKey    : 'code',
-					type        : 'async_select',
+					name        : 'code',
+					type        : 'select',
 					span        : 2,
-					asyncKey    : 'list_rate_charge_codes',
-					params      : { service_name: 'fcl_customs_charges' },
-					initialCall : true,
-					rules       : { required: 'Code is required' },
+					placeholder : 'Charge Name',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'currency',
@@ -221,13 +218,10 @@ const fclCustomsControls = ({
 			controls           : [
 				{
 					name        : 'cfs_line_items',
-					valueKey    : 'code',
-					type        : 'async_select',
+					type        : 'select',
 					span        : 2,
-					asyncKey    : 'list_rate_charge_codes',
-					params      : { service_name: 'fcl_cfs_charges' },
-					initialCall : true,
-					rules       : { required: 'Code is required' },
+					placeholder : 'Charge Name',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'currency',

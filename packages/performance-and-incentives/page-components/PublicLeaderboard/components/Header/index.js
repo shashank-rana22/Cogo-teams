@@ -1,109 +1,126 @@
-import { Button, Select, DateRangepicker } from '@cogoport/components';
-import { IcMArrowLeft } from '@cogoport/icons-react';
+import { Select, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMRefresh } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useState } from 'react';
 
-import DURATION_CONSTANTS from '../../../../constants/duration-constants';
-import {
-	getThisAseessYearStartDate, getLastMonthStartAndEndDates, getThisMonthStartDate,
-	getThisQuarterStartDate, getTodayStartDate,
-	getLastQuarterStartAndEndDates,
-} from '../../../../utils/start-date-functions';
-import DURATION_OPTIONS from '../../../Leaderboard/configurations/get-duration-filter-options';
+import SCREEN_CONSTANTS from '../../../../constants/screen-constants';
+import Counter from '../../common/Counter';
+import DateFilter from '../../common/DateFilter';
 import TEXT_MAPPING from '../../configurations/header-text-mapping';
 import VIEW_OPTIONS from '../../configurations/view-type-options';
+import LEADERBOARD_LOCATIONS from '../../utils/leaderboard-locations';
 
+import CountDownTimer from './CountDownTimer';
 import styles from './styles.module.css';
 
-const { TODAY, LAST_MONTH, THIS_MONTH, LAST_QUARTER, THIS_QUARTER, THIS_YEAR, CUSTOM } = DURATION_CONSTANTS;
+const { OVERALL, COMPARISION } = SCREEN_CONSTANTS;
 
-const GET_START_DATE_FUNCTION_MAPPING = {
-	[TODAY]        : getTodayStartDate,
-	[LAST_MONTH]   : getLastMonthStartAndEndDates,
-	[THIS_MONTH]   : getThisMonthStartDate,
-	[LAST_QUARTER] : getLastQuarterStartAndEndDates,
-	[THIS_QUARTER] : getThisQuarterStartDate,
-	[THIS_YEAR]    : getThisAseessYearStartDate,
+const leaderBoardOptions = Object.entries(LEADERBOARD_LOCATIONS).map(([location,
+	locationDetails]) => ({ label: locationDetails.label, value: location }));
+
+const handleLocationChange = ({ location, push, setOfficeLocation }) => {
+	if (location) push(`/performance-and-incentives/public-leaderboard?location=${location}`);
+	else push('/performance-and-incentives/public-leaderboard');
+
+	setOfficeLocation(location);
 };
 
-const previousEntries = [LAST_MONTH, LAST_QUARTER];
-
 function Header(props) {
-	const { view, setView, dateRange, setDateRange } = props;
+	const {
+		screen, view, setView, dateRange, setDateRange, updatedAt, countdown, duration, setDuration, switchScreen,
+		reloadCounter, nextReloadAt,
+		officeLocation,
+		setOfficeLocation,
+	} = props;
 
-	const router = useRouter();
-
-	const [duration, setDuration] = useState('today');
-
-	const onChangeDuration = (selectedDuration) => {
-		if (typeof GET_START_DATE_FUNCTION_MAPPING[selectedDuration] === 'function') {
-			if (previousEntries.includes(selectedDuration)) {
-				const { startDate, endDate } = GET_START_DATE_FUNCTION_MAPPING[selectedDuration]();
-
-				setDateRange({ startDate, endDate });
-			} else {
-				setDateRange({
-					startDate : GET_START_DATE_FUNCTION_MAPPING[selectedDuration](),
-					endDate   : new Date(),
-				});
-			}
-		}
-
-		setDuration(selectedDuration);
-	};
+	const { push } = useRouter();
 
 	return (
 		<div className={styles.container}>
-			<div>
-				<h2 className={styles.heading}>Leaderboard</h2>
 
-				<div className={styles.sub_container}>
-					<p className={styles.sub_heading}>
-						for
-						{' '}
-						<i>
-							<b>{TEXT_MAPPING[view]}</b>
-
-							{' '}
-							(
-							{view === 'kam_wise' ? 'Individual Contribution' : 'Team Contributions'}
-							)
-
-						</i>
-					</p>
-
-					<Select
-						value={duration}
-						onChange={onChangeDuration}
-						options={DURATION_OPTIONS}
-						className={styles.period_selector}
+			<div className={styles.sub_container}>
+				<div
+					className={styles.info_icon_div}
+					onClick={switchScreen}
+					role="presentation"
+				>
+					<IcMRefresh
+						className={cl`${styles.swicth_icon} ${screen === OVERALL && styles.swicth_icon_active}`}
 					/>
+					<Counter
+						reloadCounter={reloadCounter}
+						nextReloadAt={nextReloadAt}
+					/>
+				</div>
+				<h2 className={styles.heading}>
+					Leaderboards
+				</h2>
+				<p className={styles.sub_heading}>
+					for
+					{' '}
+					<i>
+						<b>{TEXT_MAPPING[view]}</b>
 
-					{duration === CUSTOM && (
-						<DateRangepicker
-							onChange={setDateRange}
-							value={dateRange}
-							maxDate={new Date()}
-							isPreviousDaysAllowed
-						/>
-					)}
+						{' '}
+						(
+						{view === 'kam_wise' ? 'Individual Contribution' : 'Team Contributions'}
+						)
+
+					</i>
+				</p>
+
+			</div>
+
+			<div className={styles.end_side}>
+
+				{screen === OVERALL ? (
+					<Select
+						value={officeLocation}
+						onChange={(location) => handleLocationChange({ location, push, setOfficeLocation })}
+						options={leaderBoardOptions}
+						placeholder="Location"
+						className={styles.location_selector}
+						isClearable
+					/>
+				) : null}
+
+				{screen === COMPARISION ? (
+					<DateFilter
+						screen={screen}
+						dateRange={dateRange}
+						duration={duration}
+						setDuration={setDuration}
+						setDateRange={setDateRange}
+					/>
+				) : null}
+
+				<Select
+					value={view}
+					onChange={setView}
+					options={VIEW_OPTIONS}
+					className={styles.user_selector}
+				/>
+
+				<div>
+					<CountDownTimer updatedAt={updatedAt} countdown={countdown} />
+
+					{updatedAt ? (
+						<p className={styles.last_updated_at}>
+							Last updated:
+							{' '}
+							{formatDate({
+								date       : updatedAt,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+								formatType : 'dateTime',
+								separator  : '; ',
+							})}
+						</p>
+					) : null}
 				</div>
 			</div>
 
-			<div className={styles.actions_container}>
-				<Select value={view} onChange={setView} options={VIEW_OPTIONS} className={styles.view_selector} />
-
-				<Button
-					type="button"
-					size="lg"
-					themeType="secondary"
-					onClick={() => router.back()}
-					style={{ marginLeft: '12px' }}
-				>
-					<IcMArrowLeft height={20} width={20} style={{ marginRight: '4px' }} />
-					Admin View
-				</Button>
-			</div>
 		</div>
 	);
 }

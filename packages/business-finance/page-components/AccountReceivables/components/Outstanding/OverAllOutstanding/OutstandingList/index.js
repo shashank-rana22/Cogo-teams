@@ -1,14 +1,19 @@
-import { Button, cl, TabPanel, Tabs, Tooltip } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
+/* eslint-disable max-lines-per-function */
+import {
+	Button, cl, TabPanel, Tabs, Tooltip, Popover, RadioGroup, Pill,
+} from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMActivePlans, IcMDownload } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
+import { IcMActivePlans, IcMDownload, IcMOverflowLine, IcMProvision } from '@cogoport/icons-react';
+import useGetPermission from '@cogoport/request/hooks/useGetPermission';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { getTaxLabels } from '../../../../constants/index';
 import useOpenInvoicesReport from '../../../../hooks/useOpenInvoicesReport';
+import useUpdateAccountTagging from '../../../../hooks/useUpdateAccountTagging';
+import useUpdateOutstandingList from '../../../../hooks/useUpdateOutstandingList';
+import checkPermission from '../../../../Utils/checkPermission';
 
 import DownloadLedgerModal from './DownloadLedgerModal';
 import StatsOutstanding from './StatsOutstanding/index';
@@ -16,17 +21,67 @@ import styles from './styles.module.css';
 import TabsOptions from './TabOptions';
 import UserDetails from './UserDetails';
 
-const geo = getGeoConstants();
+function ChangeStatus({ item = {}, refetch = () => {} }) {
+	const [currentstatus, setCurrentStatus] = useState(item?.taggedState);
+	const { apiTrigger } = useUpdateAccountTagging({ item });
+	const onSubmit = () => {
+		(apiTrigger(currentstatus, refetch));
+	};
+	const accountStatusOption = [
+		{ label: 'Credit Controller', value: 'credit_controller' },
+		{ label: 'Collection Agency', value: 'collection_agency' },
+		{ label: 'Pre Legal', value: 'pre_legal' },
+		{ label: 'Legal', value: 'legal' },
+		{ label: 'Never', value: 'never' },
+	];
+	let filtredOptions = [];
+	if (isEmpty(item?.taggedState)) {
+		filtredOptions = accountStatusOption.filter(
+			(ele) => ele.value !== 'credit_controller',
+		);
+	} else {
+		filtredOptions = accountStatusOption.filter(
+			(ele) => ele.value !== item?.taggedState,
+		);
+	}
+	return (
+
+		<>
+
+			<b>Change Current Account Status</b>
+
+			<RadioGroup
+				options={filtredOptions}
+				value={currentstatus}
+				onChange={setCurrentStatus}
+			/>
+
+			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+
+				<Button size="md" themeType="primary" onClick={() => onSubmit()}>
+
+					SUBMIT
+
+				</Button>
+
+			</div>
+
+		</>
+
+	);
+}
 
 // eslint-disable-next-line max-lines-per-function
 function OutstandingList({
 	item = {},
+	refetch = () => {},
 	entityCode = '',
 	showElement = false,
 	organizationId = '',
 	setSelectedOrgId = () => {},
 }) {
-	const { id: roleId = '' } = useSelector((state) => state.profile.auth_role_data);
+	const { isConditionMatches = () => {} } = useGetPermission();
+	const isAllowedToDownload = isConditionMatches(checkPermission.CAN_DOWNLOAD_OUTSTANDING_REPORT);
 
 	const [activeTab, setActiveTab] = useState('invoice_details');
 	const [showLedgerModal, setShowLedgerModal] = useState(false);
@@ -34,6 +89,7 @@ function OutstandingList({
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 
 	const { isDownloading = false, downloadAROustanding = () => {} } = useOpenInvoicesReport({ organizationId });
+	const { apiTrigger } = useUpdateOutstandingList({ item });
 
 	const handleActiveTabs = (val) => {
 		if (val === activeTab) {
@@ -44,7 +100,6 @@ function OutstandingList({
 			setIsAccordionActive(true);
 		}
 	};
-
 	const {
 		businessName,
 		collectionPartyType = [],
@@ -55,7 +110,6 @@ function OutstandingList({
 		selfOrganizationName,
 		selfOrganizationId = '',
 	} = item;
-
 	const propsData = {
 		invoice_details: {
 			organizationId,
@@ -220,7 +274,7 @@ function OutstandingList({
 						{isEmpty(item) ? null : (
 							<UserDetails item={item} />
 						)}
-						{roleId === geo.uuid.corporate_owner_finance_id && (
+						{isAllowedToDownload && (
 							<Tooltip content="AR Outstanding Download" placement="top">
 								<div className={styles.download_icon_div}>
 									<IcMActivePlans
@@ -231,14 +285,46 @@ function OutstandingList({
 								</div>
 							</Tooltip>
 						)}
-						<Tooltip content="Ledger Download" placement="top">
-							<div className={styles.download_icon_div}>
-								<IcMDownload
-									fill="black"
-									onClick={() => setShowLedgerModal(true)}
-								/>
-							</div>
-						</Tooltip>
+						{
+							(entityCode !== '101_301')
+								? (
+									<Tooltip content="Ledger Download" placement="top">
+										<div className={styles.download_icon_div}>
+											<IcMDownload
+												fill="black"
+												onClick={() => setShowLedgerModal(true)}
+											/>
+										</div>
+									</Tooltip>
+								) : null
+						}
+						{
+							(entityCode !== '101_301')
+								? (
+									<div className={styles.download_icon_div}>
+										<IcMProvision
+											onClick={() => { apiTrigger(refetch); }}
+											height={16}
+											width={16}
+											fill="#FFA500"
+										/>
+									</div>
+								) : null
+						}
+						{
+							(item?.taggedState && entityCode !== '101_301')
+								? (<Pill size="md" color="green">{startCase(item?.taggedState)}</Pill>) : null
+						}
+						{
+							(entityCode !== '101_301')
+								? (
+									<Popover placement="left" render={<ChangeStatus item={item} refetch={refetch} />}>
+										<div className={styles.download_icon_div}>
+											<IcMOverflowLine />
+										</div>
+									</Popover>
+								) : null
+						}
 
 						{!showElement && (
 							<Button

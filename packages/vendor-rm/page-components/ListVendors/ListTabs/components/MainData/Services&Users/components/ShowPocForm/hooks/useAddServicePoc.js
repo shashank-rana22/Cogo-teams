@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import subCategoryOptions from '../../../../../../../../utils/sub-category-options';
 import controls from '../utils/controls';
@@ -22,6 +22,10 @@ const useAddServicePoc = ({
 		watch,
 	} = useForm();
 
+	const { country_id = '' } = watch();
+
+	const mutatedControls = useMemo(() => controls({ country_id }), [country_id]);
+
 	const isMainPOCPresent = getVendorData?.pocs?.length !== 0;
 
 	const {
@@ -37,7 +41,7 @@ const useAddServicePoc = ({
 		method : 'post',
 	}, { manual: true });
 
-	const setSubCategory = ({ category: Category, controls: Controls }) => {
+	const setSubCategory = ({ category: Category, Controls }) => {
 		const newControls = Controls.map((item) => {
 			if (item.name !== 'sub_category') {
 				return item;
@@ -55,8 +59,8 @@ const useAddServicePoc = ({
 	};
 
 	useEffect(() => {
-		setSubCategory({ category: watchCategory, controls });
-	}, [watchCategory]);
+		setSubCategory({ category: watchCategory, Controls: mutatedControls });
+	}, [mutatedControls, watchCategory]);
 
 	const onSubmit = async () => {
 		const data = getValues();

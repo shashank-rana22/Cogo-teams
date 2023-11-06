@@ -1,4 +1,6 @@
 import { Button, cl, Textarea } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -8,11 +10,20 @@ import useApproveConcor from '../../../apisModal/useApproveConcor';
 import RejectModal from '../../../common/RejectModal/index';
 import SHIPMENT_MAPPING from '../../../Constants/SHIPMENT_MAPPING';
 import STATUS_MAPPING from '../../../Constants/status_mapping';
-import { getFormatDate } from '../../../utils/formatDate';
 import { getFormatAmount } from '../../../utils/getformatamount';
 import openLink from '../../../utils/openShipmentLink';
 
 import styles from './styles.module.css';
+
+const getFormatDate = (newdate) => {
+	const [date, time] = newdate?.split(' ') || [];
+	const [day, month, year] = date.split('-');
+	const reversedDate = `${month}-${day}-${year} ${time}`;
+
+	return formatDate(
+		{ date: reversedDate, dateformat: GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'], formatType: 'date' },
+	);
+};
 
 function Details({
 	row = {},

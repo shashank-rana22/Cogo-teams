@@ -12,4 +12,5 @@ export const COMMON_AGENT_TYPES = [
 	'cp_support',
 	'bot',
 	'marketing',
+	'support_supply',
 ];

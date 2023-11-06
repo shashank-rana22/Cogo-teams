@@ -42,7 +42,7 @@ export function formatRouteData({ item = {} }) {
 		display_name: destinationDisplayName,
 	} = destinationLocationData;
 
-	const { origin_main_port, destination_main_port } = item;
+	const { origin_main_port = {}, destination_main_port = {}, location_id = {}, airport = {} } = item;
 
 	const {
 		port_code: originMainPortCode = '',
@@ -55,6 +55,9 @@ export function formatRouteData({ item = {} }) {
 		name: destinationMainPortName = '',
 		display_name: destinationMainPortDisplayName,
 	} = destination_main_port || {};
+
+	const { port_code = '', display_name = '' } = location_id || {};
+	const { port_code: airpotPortCode = '', name: airpotDisplayName = '' } = airport || {};
 
 	return {
 		originDisplay: getAppendedString({
@@ -93,9 +96,10 @@ export function formatRouteData({ item = {} }) {
 			name    : originMainPortDisplayName || originDisplayName,
 		},
 		singleDestinationDisplay: {
-			code    : destinationMainPortCode || destinationCode,
-			country : popLastName(destinationMainPortDisplayName || destinationDisplayName),
-			name    : destinationMainPortDisplayName || destinationDisplayName,
+			code    : destinationMainPortCode || destinationCode || port_code || airpotPortCode,
+			country : popLastName(destinationMainPortDisplayName || destinationDisplayName
+				|| display_name || airpotDisplayName),
+			name: destinationMainPortDisplayName || destinationDisplayName || display_name || airpotDisplayName,
 		},
 	};
 }

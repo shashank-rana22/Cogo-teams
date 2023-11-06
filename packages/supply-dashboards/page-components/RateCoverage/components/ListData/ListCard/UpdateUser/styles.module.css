@@ -1,0 +1,16 @@
+.body {
+	margin-top: 10px;
+
+	:global {
+		.ui_modal_body_container {
+			max-height: fit-content;
+			overflow-x: visible;
+		}
+	}
+}
+
+.footer {
+	display: flex;
+	justify-content: end;
+	margin: 10px;
+}

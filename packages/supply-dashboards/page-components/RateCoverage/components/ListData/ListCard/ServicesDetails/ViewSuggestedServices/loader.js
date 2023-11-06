@@ -15,7 +15,7 @@ function LoaderComponenet() {
 						key={i}
 						className={styles.Placeholder}
 					>
-						<Placeholder style={{ borderRadius: '4px' }} width="100%" />
+						<Placeholder style={{ borderRadius: '4px', margin: '10px' }} width="100%" />
 					</div>
 				))}
 				<div />

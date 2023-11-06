@@ -12,13 +12,21 @@ import { getFormattedDuration } from '../../../../../../utils/getFormattedDurati
 import styles from './styles.module.css';
 
 function Card({ item, handleCheck, checkedItems }) {
-	const { stats = {}, live_contracts = '' } = item;
+	const {
+		stats = {},
+		live_contracts = '',
+		importer_exporter = {},
+		sales_agent: salesAgent = {},
+		entity_manager: entityManager = {},
+	} = item;
 
 	const router = useRouter();
 
 	const { port_pair_count = {} } = item;
 
 	const services = Object.keys(port_pair_count);
+
+	const username = importer_exporter?.tags?.includes('partner') ? entityManager?.name : salesAgent?.name;
 
 	return (
 		<div
@@ -73,10 +81,10 @@ function Card({ item, handleCheck, checkedItems }) {
 				</div>
 				<div className={styles.rest_tags}>
 					{
-						item?.sales_agent?.name ? (
+						username ? (
 							<div className={styles.secondary_tag}>
 								<IcMProfile className={styles.avatar} />
-								{item?.sales_agent?.name}
+								{username}
 							</div>
 						) : null
 					}

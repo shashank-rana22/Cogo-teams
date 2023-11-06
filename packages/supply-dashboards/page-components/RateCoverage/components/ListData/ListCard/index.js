@@ -2,7 +2,7 @@
 import { Button, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMPortArrow } from '@cogoport/icons-react';
+import { IcMEdit, IcMPortArrow } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -18,14 +18,16 @@ import CloseModal from './CloseModal';
 import DetailsView from './DetailsView';
 import ServicesDetails from './ServicesDetails';
 import styles from './styles.module.css';
+import UpdateSMTUser from './UpdateUser';
 
 function ListCard({
 	data = {}, getListCoverage = () => {}, filter = {}, getStats = () => {},
-	source = {},
 }) {
+	const source = data?.sources?.[0];
 	const [showCloseModal, setShowCloseModal] = useState(false);
 	const [serviceIdPresent, setServiceIdPresent] = useState('');
 	const [showAddRateModal, setShowAddRateModal] = useState(false);
+	const [updateUser, setUpdateUser] = useState(false);
 
 	const [showPopover, setShowPopover] = useState(false);
 	const {
@@ -46,6 +48,8 @@ function ListCard({
 		serial_id = '',
 		assigned_to = {},
 		service_provider = {},
+		reverted_count,
+		cargo_handling_type,
 	} = data;
 
 	const {
@@ -75,12 +79,13 @@ function ListCard({
 	const service = filter?.service;
 
 	const ITEM_LIST = [
-		{ label: commodity && startCase(commodity) },
-		{ label: container_size && `${container_size}ft` },
-		{ label: container_type && startCase(container_type) },
-		{ label: weight_slabs && startCase(weight_slabs) },
-		{ label: stacking_type && startCase(stacking_type) },
-		{ label: price_type && `Price Type : ${startCase(price_type)}` },
+		{ id: 1, label: commodity && startCase(commodity) },
+		{ id: 2, label: container_size && `${container_size}ft` },
+		{ id: 3, label: container_type && startCase(container_type) },
+		{ id: 4, label: weight_slabs && startCase(weight_slabs) },
+		{ id: 5, label: stacking_type && startCase(stacking_type) },
+		{ id: 6, label: price_type && `Price Type : ${startCase(price_type)}` },
+		{ id: 7, label: cargo_handling_type && startCase(cargo_handling_type) },
 	];
 
 	const handleAddRate = () => {
@@ -96,6 +101,16 @@ function ListCard({
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.revert}>
+				{!isEmpty(reverted_count) && (
+					<Pill size="sm" color="green">
+						{' '}
+						{reverted_count}
+						{' '}
+						Reverts
+					</Pill>
+				)}
+			</div>
 			<div className={styles.details_content}>
 				{['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
 			&& (
@@ -116,9 +131,15 @@ function ListCard({
 									{serial_id}
 								</div>
 								<div className={styles.pill}>
-									Assigned to:
-									{' '}
-									{assigned_to?.name}
+									<div>
+										Assigned to:
+										{' '}
+										{assigned_to?.name}
+										<IcMEdit
+											onClick={() => setUpdateUser(!updateUser)}
+											style={{ margin: '-2px 6px', cursor: 'pointer' }}
+										/>
+									</div>
 								</div>
 								<div className={styles.pill}>
 									Supplier :
@@ -127,6 +148,7 @@ function ListCard({
 								</div>
 							</div>
 						)}
+
 						{data?.created_at && (
 							<div>
 								Created At :
@@ -164,7 +186,8 @@ function ListCard({
 								<Pill size="md" color="green">
 									Reverted Status :
 									{' '}
-									{startCase(reverted_status === 'reverted' ? 'reverted' : 'not reverted')}
+									{startCase((reverted_status === 'reverted'
+									|| reverted_status === 'completed') ? 'reverted' : 'not reverted')}
 								</Pill>
 							)}
 						</div>
@@ -242,7 +265,7 @@ function ListCard({
 					<div style={{ display: 'flex', flexDirection: 'column' }}>
 						<div className={styles.tags_container}>
 							{(ITEM_LIST || [])?.map((val) => (
-								<div key={val?.label}>
+								<div key={val?.id}>
 									{ val?.label
 									&& (
 										<Pill>
@@ -279,7 +302,9 @@ function ListCard({
 							size="md"
 							style={{ marginLeft: '16px', padding: '10px' }}
 							onClick={handleAddRate}
-							disabled={reverted_status === 'reverted'}
+							disabled={(['rate_feedback', 'rate_request']?.includes(source)
+							&& (reverted_status === 'reverted' || reverted_status === 'completed'))
+							|| reverted_status === 'reverted'}
 						>
 							{filter?.status !== 'completed' ? 'Add Rate' : 'Edit Rate'}
 						</Button>
@@ -361,6 +386,16 @@ function ListCard({
 					setServiceIdPresent={setServiceIdPresent}
 					spot_data={spot_data}
 					getData={getData}
+				/>
+			)}
+
+			{updateUser && (
+				<UpdateSMTUser
+					updateUser={updateUser}
+					setUpdateUser={setUpdateUser}
+					filter={filter}
+					getListCoverage={getListCoverage}
+					data={data}
 				/>
 			)}
 

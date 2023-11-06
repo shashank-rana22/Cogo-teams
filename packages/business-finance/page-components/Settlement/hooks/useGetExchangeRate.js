@@ -1,36 +1,33 @@
-import { useRequest } from '@cogoport/request';
+import { Toast } from '@cogoport/components';
+import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const useGetExchangeRate = ({ setValue, from_cur, to_cur }) => {
-	const [{ data, loading }, trigger] = useRequest(
+import { transactionDates } from './helper';
+
+const useGetExchangeRate = ({ setValue = () => {}, from_cur = '', to_cur = '', exchange_date = '' }) => {
+	const [{ loading:exchangeLoading = false }, exRateTrigger] = useRequestBf(
 		{
-			url    : 'get_exchange_rate',
-			method : 'get',
+			url     : 'payments/invoice/exchange-rates',
+			method  : 'post',
+			authKey : 'post_payments_invoice_exchange_rates',
+			data    : {
+				from_curr     : from_cur,
+				to_curr       : to_cur,
+				exchange_date : transactionDates(exchange_date),
+			},
 		},
 		{ manual: true },
 	);
+	const getExchangeRate = useCallback(async () => {
+		try {
+			const exData = await exRateTrigger({});
+			setValue('exchangeRate', exData?.data?.exchange_rate?.toFixed(4));
+		} catch (error) {
+			Toast.error(error?.data?.response?.message || 'Something went wrong');
+		}
+	}, [exRateTrigger, setValue]);
 
-	const getExchangeRate = useCallback(() => {
-		(async () => {
-			try {
-				const exData = await trigger({
-					params: {
-						from_currency : from_cur,
-						to_currency   : to_cur,
-					},
-				});
-				setValue('exchangeRate', exData?.data?.toFixed(2));
-			} catch (error) {
-				console.log(error);
-			}
-		})();
-	}, [trigger, from_cur, to_cur, setValue]);
-
-	return {
-		data,
-		loading,
-		getExchangeRate,
-	};
+	return { exRateTrigger, getExchangeRate, exchangeLoading };
 };
 
 export default useGetExchangeRate;

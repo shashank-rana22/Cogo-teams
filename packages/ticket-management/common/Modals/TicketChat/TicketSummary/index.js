@@ -70,9 +70,8 @@ function TicketSummary({
 	const ticketReviewerName = ticketReviewer?.User?.Name || '';
 	const isTicketExpired = new Date(tat) > new Date();
 	const isActiveReviewer = userId === ticketReviewer?.UserID;
-	const endDate = new Date(tat);
 
-	const formattedTime = useGetCountdown({ time: endDate });
+	const formattedTime = useGetCountdown({ tatTime: tat });
 	const showTimer = (((isActiveReviewer && isTicketExpired) || (userId === performedByID))
 	&& !CLOSED_TICKET_STATUS.includes(status));
 
@@ -225,6 +224,7 @@ function TicketSummary({
 						shipmentsData={shipmentsData}
 						handleRouteSupply={handleRouteSupply}
 						listLoading={listLoading}
+						requestType={requestType}
 					/>
 				) : null}
 				{service && (

@@ -6,6 +6,7 @@ import useCreateTicketActivity from '../../../hooks/useCreateTicketActivity';
 import useListShipments from '../../../hooks/useGetListShipment';
 import useGetTicketActivity from '../../../hooks/useGetTicketActivity';
 import useGetTicketDetails from '../../../hooks/useGetTicketDetails';
+import useListServiceTypeShipment from '../../../hooks/useListServiceShipment';
 import useUpdateTicketActivity from '../../../hooks/useUpdateTicketActivity';
 import ReassignTicket from '../../ReassignTicket';
 import ResolveRequest from '../../ResolveRequest';
@@ -72,7 +73,10 @@ function TicketChat({
 
 	const { Ticket: ticket = {}, IsCurrentReviewer: isCurrentReviewer = false } = ticketData || {};
 	const { Status: status = '', NotifyCustomer: notifyCustomer = false, Data: data = {} } = ticket || {};
-	const { SerialID: serialId } = data || {};
+	const {
+		SerialID: serialId, Service: service, IDType: idType,
+		RequestType: requestType = '',
+	} = data || {};
 
 	const {
 		listData = {},
@@ -108,11 +112,20 @@ function TicketChat({
 		refreshTickets,
 	});
 
-	const { shipmentsData = {}, listLoading = false } = useListShipments({ serialId, ticketId });
+	const { shipmentsData = {}, listLoading = false } = useListShipments({ idType, serialId, ticketId, requestType });
+	const { serviceLoading = false, serviceData = {} } = useListServiceTypeShipment({
+		idType,
+		serialId,
+		ticketId,
+		requestType,
+		service,
+	});
 
 	const doesTicketsExists = !isEmpty(ticketData);
 
 	const loading = chatLoading || createLoading;
+	const formatShipmentData = idType !== 'sid' && requestType !== 'shipment' ? serviceData : shipmentsData;
+	const formatShipmentloading = idType !== 'sid' && requestType !== 'shipment' ? serviceLoading : listLoading;
 
 	const handleSendComment = async () => {
 		if ((message || !isEmpty(file)) && !createLoading) {
@@ -203,8 +216,8 @@ function TicketChat({
 							{...ticketData}
 							detailsLoading={detailsLoading}
 							partnerId={partnerId}
-							listLoading={listLoading}
-							shipmentsData={shipmentsData}
+							listLoading={formatShipmentloading}
+							shipmentsData={formatShipmentData}
 							userId={userId}
 						/>
 					</div>

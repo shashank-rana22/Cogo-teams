@@ -16,6 +16,8 @@ import styles from './styles.module.css';
 
 const ONE_LESS_THAN_LENGTH = 1;
 
+const urlify = (text = {}) => text?.match(GLOBAL_CONSTANTS.regex_patterns.url_match)?.[GLOBAL_CONSTANTS.zeroth_index];
+
 function ChildBlocks(
 	{ id, mainData, blocks, setBlocks, updatePermission },
 	ref,
@@ -24,13 +26,13 @@ function ChildBlocks(
 
 	const handleView = (e, image_url) => {
 		e.stopPropagation();
-		window.open(image_url, '_blank');
+		window.open(urlify(image_url), '_blank');
 	};
 
 	const handleSave = (e, image_url) => {
 		e.stopPropagation();
 		if (image_url) {
-			saveAs(image_url);
+			saveAs(urlify(image_url));
 		}
 	};
 

@@ -1,11 +1,15 @@
 .container {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	row-gap: 1rem;
-	column-gap: 5px;
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.box_info {
+	min-width: 250px;
+	margin: 0 4px 14px 0;
 }
 
 .top {

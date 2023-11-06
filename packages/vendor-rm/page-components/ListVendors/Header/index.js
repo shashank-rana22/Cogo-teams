@@ -6,7 +6,7 @@ const ENTITY_CODE_LENGTH = 1;
 
 function Header({
 	activeEntity = '',
-	setActiveEntity = () => { },
+	setActiveEntity = () => {},
 	entityOptions = [],
 	entityDataCount = 0,
 	entityLoading = false,
@@ -24,7 +24,7 @@ function Header({
 					placeholder="Select Entity"
 					options={entityOptions}
 					size="sm"
-					style={{ width: '284px' }}
+					style={{ width: '284px', height: '28px' }}
 					disabled={entityDataCount <= ENTITY_CODE_LENGTH}
 				/>
 			)}

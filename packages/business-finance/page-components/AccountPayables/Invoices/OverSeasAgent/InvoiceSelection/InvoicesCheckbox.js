@@ -38,6 +38,7 @@ export function GetTableHeaderCheckbox({
 	data = {},
 	loading = false,
 	setApiData = () => {},
+	allowed = true,
 }) {
 	const { list = [] } = apiData || {};
 	const { list: dataList = [] } = data || {};
@@ -48,6 +49,7 @@ export function GetTableHeaderCheckbox({
 		<Checkbox
 			checked={isAllRowsChecked && !loading}
 			onChange={(e) => onChangeTableHeaderCheckbox({ event: e, setApiData })}
+			disabled={!allowed}
 		/>
 	);
 }

@@ -1,0 +1,54 @@
+.action {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 15%;
+
+	ol {
+		padding: 0 0 0 6px !important;
+		margin: 0 !important;
+	}
+}
+
+.info_icon {
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+}
+
+.dot {
+	display: flex;
+	align-items: center;
+}
+
+.dot_icon {
+	width: 18px;
+	height: 18px;
+	margin-left: 4px;
+	cursor: pointer;
+}
+
+.agent_label {
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.lower_label {
+	font-size: 12px;
+	color: #838080;
+}
+
+.async_select {
+	width: 65%;
+}
+
+.button_container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.auto_button {
+	margin-top: 8px;
+}

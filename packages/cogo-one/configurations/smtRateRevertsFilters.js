@@ -1,7 +1,12 @@
 import { SOURCE_OPTIONS, ADMIN_VIEW_REQUIRED_FOR } from '../constants/rateRevertsConstants';
 import SHIPMENT_TYPE_OPTIONS from '../constants/shipmentTypes';
 
-const smtRateRevertsFilters = ({ triggeredFrom = '', viewType = '' }) => [
+const smtRateRevertsFilters = ({
+	triggeredFrom = '',
+	viewType = '',
+	serviceType = '',
+	setFiltersData = () => {},
+}) => [
 	...(ADMIN_VIEW_REQUIRED_FOR.includes(viewType)
 		? [
 			{
@@ -40,7 +45,9 @@ const smtRateRevertsFilters = ({ triggeredFrom = '', viewType = '' }) => [
 		controlType : 'select',
 		size        : 'sm',
 		placeholder : 'select',
-		options     : Object.values(SHIPMENT_TYPE_OPTIONS).filter((itm) => !itm?.hideFor?.includes('smtRateReverts')),
+		options     : Object.values(SHIPMENT_TYPE_OPTIONS).filter(
+			(itm) => !itm?.hideFor?.includes('smtRateReverts'),
+		),
 	},
 	{
 		label                 : 'Date Range',
@@ -59,6 +66,35 @@ const smtRateRevertsFilters = ({ triggeredFrom = '', viewType = '' }) => [
 		size        : 'sm',
 		placeholder : 'Search SID',
 	},
+	...(
+		triggeredFrom !== 'sideBar'
+			? [
+				{
+					label       : 'Service Provider',
+					name        : 'service_provider_id',
+					controlType : 'asyncSelect',
+					placeholder : 'Select service provider',
+					size        : 'sm',
+					asyncKey    : 'organizations',
+					initialCall : true,
+					isClearable : true,
+					onChange    : (_, obj) => setFiltersData(
+						(prev) => ({
+							...prev,
+							service_provider_id: obj,
+						}),
+					),
+					params: {
+						filters: {
+							account_type : 'service_provider',
+							status       : 'active',
+							kyc_status   : 'verified',
+							service_type : serviceType || undefined,
+						},
+					},
+				},
+			] : []
+	),
 ];
 
 export default smtRateRevertsFilters;

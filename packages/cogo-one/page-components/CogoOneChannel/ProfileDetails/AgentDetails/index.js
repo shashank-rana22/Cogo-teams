@@ -11,6 +11,7 @@ import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../constants/viewTypeMapping'
 import { getHasAccessToEditGroup, switchUserChats } from '../../../../helpers/agentDetailsHelpers';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetOrganization from '../../../../hooks/useGetOrganization';
+import useGetUser from '../../../../hooks/useGetUser';
 import useGroupChat from '../../../../hooks/useGroupChat';
 import useListPartnerUsers from '../../../../hooks/useListPartnerUsers';
 
@@ -43,8 +44,6 @@ function AgentDetails({
 	viewType = '',
 	setActiveTab = () => {},
 	mailProps = {},
-	userData = {},
-	getUserLoading = false,
 }) {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
@@ -63,6 +62,18 @@ function AgentDetails({
 		channel_type = '', user_type, id = '', lead_user_details = {},
 		user_details = {},
 	} = formattedMessageData || {};
+
+	const customerUserId = FIREBASE_TABS.includes(activeTab)
+		? formattedMessageData?.user_id : activeVoiceCard?.user_data?.id;
+
+	const {
+		userData = {},
+		loading : getUserLoading = false,
+	} = useGetUser({
+		userId     : customerUserId,
+		leadUserId : lead_user_id,
+		customerId : id,
+	});
 
 	const { partnerUsers } = useListPartnerUsers({ activeMessageCard });
 	const {

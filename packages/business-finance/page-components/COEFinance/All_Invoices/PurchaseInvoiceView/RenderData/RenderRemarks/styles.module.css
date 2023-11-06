@@ -4,6 +4,14 @@
 	margin-bottom: 18px;
 }
 
+.remark_popover {
+	overflow-y: auto;
+
+	:global(.tippy-content) {
+		max-height: 550px;
+	}
+}
+
 .path {
 	position: relative;
 	display: flex;

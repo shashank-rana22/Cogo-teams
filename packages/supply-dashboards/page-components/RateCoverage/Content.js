@@ -1,11 +1,13 @@
 import { Select, Toggle } from '@cogoport/components';
 import { asyncFieldsPartnerUsers, useGetAsyncOptions } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
 import { useState } from 'react';
 
 import ListData from './components/ListData';
 import TasksOverview from './components/TasksOverview';
+import { USER_SERVICES } from './configurations/helpers/constants';
 import useGetCoverageStats from './hooks/useGetCoverageStats';
 import useGetListCoverage from './hooks/useGetListCoverages';
 import styles from './styles.module.css';
@@ -14,7 +16,10 @@ function RateCoverageContent() {
 	const { user_data } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
-	const { user: { name: user_name = '' } = {} } = user_data;
+
+	const { user: { name: user_name = '', id: user_id } = {} } = user_data;
+
+	const userService = USER_SERVICES[user_id] || ['fcl_freight'];
 
 	const [showWeekData, setShowWeekData] = useState(false);
 
@@ -28,7 +33,7 @@ function RateCoverageContent() {
 		setPage = () => {},
 		filter = {},
 		setFilter = () => {},
-	} = useGetListCoverage();
+	} = useGetListCoverage({ userService });
 
 	const { loading:statsLoading, data:statsData, getStats } = useGetCoverageStats(filter);
 
@@ -46,7 +51,8 @@ function RateCoverageContent() {
 	const assignToUsers = useGetAsyncOptions(merge(asyncFieldsPartnerUsers(), {
 		params: {
 			filters: {
-				status: 'active',
+				status   : 'active',
+				role_ids : GLOBAL_CONSTANTS.uuid.smt_allotted_users_role_ids,
 			},
 		},
 	}));
@@ -112,6 +118,7 @@ function RateCoverageContent() {
 				setFilter={setFilter}
 				getStats={getStats}
 				setShowWeekData={setShowWeekData}
+				userService={userService}
 			/>
 		</div>
 	);
