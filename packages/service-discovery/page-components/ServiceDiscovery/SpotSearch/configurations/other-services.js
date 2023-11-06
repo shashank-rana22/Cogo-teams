@@ -15,7 +15,7 @@ const other_services = [
 		label         : 'Cargo Insurance',
 		value         : 'insurance',
 		icon          : IcMAppInsurance,
-		is_available  : false,
+		is_available  : true,
 		footerContent : <SecureNow />,
 	},
 	{
