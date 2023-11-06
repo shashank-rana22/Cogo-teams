@@ -25,8 +25,21 @@ function FilterModal({
 	const serviceType = watch('service');
 	const controls = smtRateRevertsFilters({ triggeredFrom, viewType, setFiltersData, serviceType });
 
+	const sourceValue = JSON.parse(localStorage.getItem('smt_rate_data_source'));
+
 	const onSubmit = (val) => {
 		setShowFilters(false);
+
+		localStorage.setItem('smt_rate_data_filter', JSON.stringify({
+			source              : sourceValue?.source,
+			relevant_to         : val?.relevant_to,
+			service             : val?.service,
+			service_provider_id : val?.service_provider_id,
+			shipment_serial_id  : val?.shipment_serial_id,
+			startDate           : val?.dateRange?.startDate,
+			endDate             : val?.dateRange?.endDate,
+			filterApplied       : true,
+		}));
 
 		setParams((prev) => ({
 			...prev,
@@ -43,6 +56,8 @@ function FilterModal({
 			...defaultValues,
 			page: 1,
 		}));
+
+		localStorage.setItem('smt_rate_data_filter', JSON.stringify({}));
 
 		setShowFilters(false);
 	};

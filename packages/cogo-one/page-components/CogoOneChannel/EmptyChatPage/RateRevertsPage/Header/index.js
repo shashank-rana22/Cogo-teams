@@ -6,6 +6,7 @@ import React, { useState, useMemo } from 'react';
 
 import { FilterModal } from '../../../../../common/SmtRateReverts';
 import { SOURCE_OPTIONS } from '../../../../../constants/rateRevertsConstants';
+import defaultRatesLocalStorageValue from '../../../../../helpers/defaultRatesLocalStorageValue';
 import { getSourceTags, getAppliedFilters } from '../../../../../helpers/getRateRevertsHeaderFunctions';
 
 import styles from './styles.module.css';
@@ -36,6 +37,8 @@ function Header({
 	} = getAppliedFilters({ params, viewType });
 
 	const { dynamic_statistics = {} } = stats || {};
+
+	const { localStorageFilterValue } = defaultRatesLocalStorageValue();
 
 	const sourceTags = getSourceTags({
 		sources           : params?.source || [],
@@ -90,13 +93,18 @@ function Header({
 					isClearable
 					size="sm"
 					prefix={() => null}
-					onChange={(val) => setParams(
-						(prev) => ({
-							...(prev || {}),
-							source : val,
-							page   : 1,
-						}),
-					)}
+					onChange={(val) => {
+						localStorage.setItem('smt_rate_data_source', JSON.stringify({
+							source: val,
+						}));
+						setParams(
+							(prev) => ({
+								...(prev || {}),
+								source : val,
+								page   : 1,
+							}),
+						);
+					}}
 				/>
 
 				<div className={styles.selected_sources}>
@@ -140,7 +148,7 @@ function Header({
 						) : null
 					)}
 				>
-					{isFiltersApplied ? (
+					{localStorageFilterValue?.filterApplied || isFiltersApplied ? (
 						<Badge color="orange">
 							<IcMFilter
 								className={styles.filter_icon}
