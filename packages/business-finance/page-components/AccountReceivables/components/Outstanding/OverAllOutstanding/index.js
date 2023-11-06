@@ -52,6 +52,7 @@ function OverAllOutstanding({
 		refetch,
 		filters,
 		setFilters,
+		filtersApplied,
 	} = useGetOrgOutstanding({ entityCode });
 
 	const [dateFilter, setDateFilter] = useState({
@@ -164,6 +165,7 @@ function OverAllOutstanding({
 					filters={filters}
 					setFilters={setFilters}
 					clearFilter={clearFilter}
+					filtersApplied={filtersApplied}
 				/>
 
 			</div>

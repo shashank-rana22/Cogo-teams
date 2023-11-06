@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useCallback } from 'react';
 
 const useGetOrgOutstanding = ({ entityCode = '' }) => {
@@ -32,10 +33,26 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 
 	const { order, key } = orderBy || {};
 	const [filters, setFilters] = useState({});
+	const [filtersApplied, setFiltersApplied] = useState(true);
 	const {
 		salesAgentId = '', portfolioManagerId = '', portfolioManagerRmId = '',
 		salesAgentRmId = '', kamId = '', creditControllerId = '', companyType = '', exclude_defaulters = false,
 	} = filters || {};
+
+	const getFilterApplied = useCallback(() => {
+		let isFilterApplied = true;
+		if (filters?.exclude_defaulters === true) {
+			isFilterApplied = false;
+
+			Object.keys(filters).forEach((ele) => {
+				if (ele !== 'exclude_defaulters' && !isEmpty(filters[ele])) {
+					isFilterApplied = true;
+				}
+			});
+		}
+
+		return isFilterApplied;
+	}, [filters]);
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -83,6 +100,9 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 						excludeDefaulters    : !exclude_defaulters,
 					},
 				});
+
+				const FB = getFilterApplied();
+				setFiltersApplied(FB);
 			} catch (e) {
 				Toast.error(e?.message);
 			}
@@ -90,7 +110,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 		[trigger, key, order, page, pageLimit,
 			salesAgentId, portfolioManagerId, portfolioManagerRmId,
 			salesAgentRmId, creditControllerId, selectedAgentId, kamId, companyType,
-			entityCode, organizationSerialId, sageId, tradePartySerialId, q, exclude_defaulters],
+			entityCode, organizationSerialId, sageId, tradePartySerialId, q, exclude_defaulters, getFilterApplied],
 	);
 
 	useEffect(() => {
@@ -146,6 +166,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 		setFilters,
 		queryKey,
 		refetch,
+		filtersApplied,
 	};
 };
 
