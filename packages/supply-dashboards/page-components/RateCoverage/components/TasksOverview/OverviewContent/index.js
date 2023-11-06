@@ -31,6 +31,7 @@ function OverviewContent({ data = {}, statsLoading = false, filter = {}, setFilt
 							filter={filter}
 							className={(card_detail === filter?.status) ? 'blue_card' : 'card'}
 							handleClick={() => handleClick(card_detail)}
+							card_detail={card_detail}
 						/>
 					))}
 				</div>

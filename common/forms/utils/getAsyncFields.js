@@ -1310,6 +1310,18 @@ function asyncListAirCustomFeedback() {
 	};
 }
 
+function asyncInsuranceHsCode() {
+	return {
+		labelKey     : 'hsCode',
+		valueKey     : 'id',
+		endpoint     : '/saas/insurance/v2/hs-code',
+		authkey      : 'get_saas_insurance_v2_hs_code',
+		microService : 'business_finance',
+		searchByq    : true,
+		qFilterKey   : 'query',
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1418,4 +1430,5 @@ export {
 	asyncListTrailerRateFeedback,
 	asyncListHaulageRateFeedback,
 	asyncListAirCustomFeedback,
+	asyncInsuranceHsCode,
 };

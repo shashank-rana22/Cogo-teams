@@ -1,0 +1,46 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 12px;
+}
+
+.form_container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.col {
+	width: 27%;
+	padding: 10px;
+	margin: 10px 16px;
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
+	width: 85%;
+	margin: 10px 0;
+}
+
+.error {
+	font-size: 12px;
+	color: #ee3425;
+}
+
+.new_col {
+	margin: 0 16px;
+}
+
+.close_icon {
+	width: 26px;
+	height: 26px;
+	padding: 5px;
+	cursor: pointer;
+	border: 1px solid #333;
+	border-radius: 50%;
+
+	>svg {
+		display: block;
+		margin: auto;
+	}
+}
