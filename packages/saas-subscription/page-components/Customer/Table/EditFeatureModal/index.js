@@ -10,30 +10,36 @@ import styles from './styles.module.css';
 
 const cancelObj = {
 	openEditFeatureModal : false,
-	editAddon            : false,
-	editPlan             : false,
-	editCancelSub        : false,
-	featureInfo          : {},
+	activeComp           : '',
+	extraInfo            : {},
 };
 
-function RenderTitle({ editAddon, product_name = '' }) {
-	const { t } = useTranslation(['saasSubscription']);
-	if (editAddon) {
-		return (
-			<span>{startCase(product_name)}</span>
-		);
-	}
-	return <span>{t('saasSubscription:edit_feature_title')}</span>;
-}
+const getComponentMapping = ({ t, product_name }) => ({
+	edit_plan: {
+		component : Plan,
+		title     : t('saasSubscription:edit_feature_title'),
+	},
+	edit_addon: {
+		component : Quota,
+		title     : startCase(product_name),
+	},
+	cancel_subscription: {
+		component : CancelSub,
+		title     : '',
+	},
+});
 
-function EditFeatureModal({ editModal, setEditModal }) {
-	const {
-		openEditFeatureModal = false,
-		editAddon = false,
-		editPlan = false, editCancelSub = false, featureInfo = {},
-	} = editModal;
-	const { product = {} } = featureInfo || {};
+function EditFeatureModal({ editModal = {}, setEditModal }) {
+	const { activeComp = '', extraInfo = {}, openEditFeatureModal = false } = editModal;
+
+	const { product = {} } = extraInfo || {};
 	const { product_name = '' } = product || {};
+
+	const { t } = useTranslation(['saasSubscription']);
+
+	const COMPONENT_MAPPING = getComponentMapping({ t, product_name });
+
+	const { title = '', component:Component = () => {} } = COMPONENT_MAPPING[activeComp] || {};
 
 	const modalChangeHandler = (value = false) => {
 		setEditModal((prev) => ({
@@ -49,38 +55,25 @@ function EditFeatureModal({ editModal, setEditModal }) {
 			closeOnOuterClick={modalChangeHandler}
 			onClose={modalChangeHandler}
 		>
-			{!editCancelSub ? (
-				<div>
-					<div className={cl`${styles.flex_box} ${styles.title_container}`}>
-						<h3 className={styles.title}>
-							<RenderTitle editAddon={editAddon} product_name={product_name} />
-						</h3>
-						<ButtonIcon
-							size="md"
-							icon={<IcMCross />}
-							themeType="primary"
-							onClick={() => modalChangeHandler(false)}
-						/>
-					</div>
-					{editAddon && (
-						<Quota
-							quotaInfo={featureInfo}
-							modalChangeHandler={modalChangeHandler}
-						/>
-					)}
-					{editPlan && (
-						<Plan
-							modalChangeHandler={modalChangeHandler}
-							featureInfo={featureInfo}
-						/>
-					)}
+			{title ? (
+				<div className={cl`${styles.flex_box} ${styles.title_container}`}>
+					<h3 className={styles.title}>
+						<span>{title}</span>
+					</h3>
+
+					<ButtonIcon
+						size="md"
+						icon={<IcMCross />}
+						themeType="primary"
+						onClick={() => modalChangeHandler(false)}
+					/>
 				</div>
-			) : (
-				<CancelSub
-					modalChangeHandler={modalChangeHandler}
-					subscriptionId={featureInfo}
-				/>
-			)}
+			) : null}
+
+			<Component
+				extraInfo={extraInfo}
+				modalChangeHandler={modalChangeHandler}
+			/>
 		</Modal>
 	);
 }

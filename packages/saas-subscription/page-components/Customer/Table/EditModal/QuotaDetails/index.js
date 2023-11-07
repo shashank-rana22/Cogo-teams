@@ -33,7 +33,12 @@ function QuotaDetails({ editModalChangeHandler, quotas = [], currentTab }) {
 								<span>{quotaLeft}</span>
 								<IcMEdit
 									className={styles.edit_icon}
-									onClick={() => editModalChangeHandler('editAddon', item)}
+									onClick={() => {
+										editModalChangeHandler({
+											activeComp : 'edit_addon',
+											extraInfo  : item,
+										});
+									}}
 								/>
 							</div>
 

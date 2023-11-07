@@ -6,13 +6,15 @@ import useUpdateQuota from '../../../../../hooks/useUpdateQuota';
 import { getFieldController } from '../../../../../utils/getFieldController';
 import styles from '../styles.module.css';
 
-function Quota({ quotaInfo = {}, modalChangeHandler }) {
-	const { id = '' } = quotaInfo || {};
+function Quota({ extraInfo = {}, modalChangeHandler }) {
+	const { id = '' } = extraInfo || {};
+
 	const { t } = useTranslation(['saasSubscription']);
 
 	const editQuotaControl = getEditQuotaControl({ t });
 
 	const { formHook = {}, submitHandler, loading } = useUpdateQuota({ id, modalChangeHandler });
+
 	const { control, formState:{ errors }, handleSubmit } = formHook || {};
 
 	return (

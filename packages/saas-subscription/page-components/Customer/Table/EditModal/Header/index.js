@@ -17,8 +17,8 @@ function Header({ info = {}, editModalChangeHandler, closeModalHandler, ...rest 
 	const { id:product_family_id } = product_family || {};
 
 	const { t } = useTranslation(['saasSubscription']);
-	const headerConfig = getHeaderConfig({ t });
 
+	const headerConfig = getHeaderConfig({ t });
 	const functions = itemFunction({ t });
 
 	return (
@@ -51,10 +51,16 @@ function Header({ info = {}, editModalChangeHandler, closeModalHandler, ...rest 
 				<div className={styles.flex_box}>
 					<Button
 						type="button"
-						onClick={() => editModalChangeHandler(
-							'editPlan',
-							{ id, saas_product_family_id: product_family_id, saas_subscription_customer_id },
-						)}
+						onClick={() => {
+							editModalChangeHandler({
+								activeComp : 'edit_plan',
+								extraInfo  : {
+									id,
+									saas_product_family_id: product_family_id,
+									saas_subscription_customer_id,
+								},
+							});
+						}}
 					>
 						{t('saasSubscription:change_plan')}
 					</Button>
@@ -62,8 +68,15 @@ function Header({ info = {}, editModalChangeHandler, closeModalHandler, ...rest 
 					<Button
 						className={styles.cancel_btn}
 						themeType="secondary"
-						onClick={() => editModalChangeHandler('editCancelSub', id)}
 						type="button"
+						onClick={() => {
+							editModalChangeHandler({
+								activeComp : 'cancel_subscription',
+								extraInfo  : {
+									id,
+								},
+							});
+						}}
 					>
 						{is_free_plan ? t('saasSubscription:reset_plan') : t('saasSubscription:cancel_sub')}
 					</Button>

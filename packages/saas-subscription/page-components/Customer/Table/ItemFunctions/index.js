@@ -4,6 +4,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMSettings } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
+import KYC_MAPPING from '../../../../constant/kycMapping';
+
 const itemFunction = ({ setEditModal = () => {}, t = () => {} }) => ({
 	renderId: (item) => {
 		const { organization = {} } = item || {};
@@ -98,6 +100,14 @@ const itemFunction = ({ setEditModal = () => {}, t = () => {} }) => ({
 
 		return startCase(pricing?.name);
 	},
-	renderKyc: (item, config) => <Pill>{item[config?.key]}</Pill>,
+	renderKyc: (item, config) => {
+		const kycStatus = item[config?.key];
+
+		return (
+			<Pill color={KYC_MAPPING[kycStatus]}>
+				{startCase(kycStatus)}
+			</Pill>
+		);
+	},
 });
 export default itemFunction;

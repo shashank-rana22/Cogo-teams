@@ -1,5 +1,6 @@
 import { cl, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMEdit } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useTranslation } from 'next-i18next';
 
@@ -21,8 +22,10 @@ function EditModal({ editModal, setEditModal }) {
 	const functions = itemFunction({ t });
 
 	const {
-		loading = false, subInfo = {}, editModalChangeHandler,
+		subInfo = {},
+		loading = false,
 		closeModalHandler,
+		editModalChangeHandler,
 	} = useGetSubscriptionInfo({ setEditModal, editModal });
 
 	const { active = {} } = subInfo || {};
@@ -53,7 +56,18 @@ function EditModal({ editModal, setEditModal }) {
 				<div className={cl`${styles.flex_box} ${styles.details_container}`}>
 					{detailsConfig.map((config) => (
 						<div key={config.key} className={styles.details}>
-							<div className={styles.detail_title}>{config?.label}</div>
+
+							<div className={styles.detail_title}>
+								<span>{config?.label}</span>
+
+								{config.key === 'validity'
+									? (
+										<span className={styles.edit_icon}>
+											<IcMEdit width={12} height={12} />
+										</span>
+									)
+									: null}
+							</div>
 
 							<div className={styles.detail_content}>
 								{getValues({
