@@ -1,14 +1,9 @@
-import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
 
 import useGetRateCard from '../../../hooks/useGetRateCard';
 
 import BookCheckout from './BookToCheckout';
-
-const SelectedRateCard = dynamic(() => import('./SelectedRateCard'), {
-	ssr     : false,
-	loading : () => <div />,
-});
+import SelectedRateCard from './SelectedRateCard';
 
 function SelectedCardScreen({
 	setHeaderProps = () => {},

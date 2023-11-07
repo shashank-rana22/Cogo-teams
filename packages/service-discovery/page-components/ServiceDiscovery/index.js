@@ -1,13 +1,11 @@
-import dynamic from 'next/dynamic';
 import React from 'react';
 
-const SpotSearch = dynamic(() => import('./SpotSearch'), {
-	ssr     : false,
-	loading : () => <div />,
-});
+import SpotSearch from './SpotSearch';
 
 function ServiceDiscovery() {
-	return (<SpotSearch />);
+	return (
+		<SpotSearch />
+	);
 }
 
 export default ServiceDiscovery;
