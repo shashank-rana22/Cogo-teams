@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Button, Toast } from '@cogoport/components';
+import { Tabs, TabPanel, Button, Toast, Breadcrumb } from '@cogoport/components';
 import { IcMLiveChat } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
@@ -46,6 +46,19 @@ function AttendanceLeaveDashboard() {
 
 	return (
 		<div>
+			<Breadcrumb className={styles.bread}>
+				<Breadcrumb.Item label={(
+					<div
+						aria-hidden
+						onClick={() => router.push('/welcome')}
+						style={{ cursor: 'pointer' }}
+					>
+						HRMS
+					</div>
+				)}
+				/>
+				<Breadcrumb.Item label="Attendance & Leaves Management" />
+			</Breadcrumb>
 			<div className={styles.heading}>
 				<h1 className={styles.title}>
 					Attendance & Leaves
