@@ -4,7 +4,7 @@ import React from 'react';
 
 import usePostBulkUpdateAccount from '../../../../../hooks/usePostBulkUpdateAccount';
 
-import styles from './styless.module.css';
+import styles from './styles.module.css';
 
 function BulkPostModal({ showBulkPostModal = false, setShowBulkPostModal = () => {}, refetch = () => {} }) {
 	const { control, formState: { errors = {} }, handleSubmit } = useForm();
