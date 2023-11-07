@@ -1,4 +1,4 @@
-import { Button, Placeholder, Popover } from '@cogoport/components';
+import { Button, Placeholder, Popover, Breadcrumb } from '@cogoport/components';
 import {
 	IcMArrowBack,
 	IcMArrowDown,
@@ -37,6 +37,19 @@ function EmployeeProfile() {
 
 	return (
 		<div className={styles.main_container}>
+			<Breadcrumb>
+				<Breadcrumb.Item label={(
+					<div
+						aria-hidden
+						onClick={() => router.push('/welcome')}
+						style={{ cursor: 'pointer' }}
+					>
+						HRMS
+					</div>
+				)}
+				/>
+				<Breadcrumb.Item label="Employee Profile" />
+			</Breadcrumb>
 			{!loading && employee_id ? (
 				<div className={styles.back_container}>
 					<div className={styles.top_text}>
