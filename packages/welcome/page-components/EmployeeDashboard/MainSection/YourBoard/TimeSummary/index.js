@@ -1,17 +1,19 @@
+import { Button, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCCheckIn, IcCCheckOut, IcMArrowRight } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Loader from '../../../../../common/Loader';
 import useGetCheckinStats from '../../../../../hooks/useGetCheckinStats';
+import useUpdateAttendance from '../../../../../hooks/useUpdateAttendance';
+import { getCurrentLocation } from '../../../../../utils/getCurrentLocation';
 
 import CurrentTime from './CurrentTime';
 import styles from './styles.module.css';
 
 function TimeSummary() {
-	const router = useRouter();
+	const [coords, setCoords] = useState(null);
 	const { data, loading } = useGetCheckinStats();
 
 	const getTime = (date, isDate = false) => {
@@ -27,7 +29,27 @@ function TimeSummary() {
 		});
 	};
 
-	const { check_in, check_out } = data || {};
+	const { check_in, check_out, enable_check_out } = data || {};
+	const { loading : updateLoading, updateAttendance } = useUpdateAttendance({ check_in });
+
+	useEffect(() => {
+		getCurrentLocation()
+			.then((location) => {
+				setCoords(location);
+			})
+			.catch((error) => {
+				console.error('Error getting location:', error);
+				Toast.error('Please Enable Location');
+			});
+	}, []);
+	const handleCheckOut = () => {
+		const { latitude, longitude } = coords || {};
+		const dataObj = {
+			lat  : latitude,
+			long : longitude,
+		};
+		updateAttendance(dataObj);
+	};
 
 	if (loading) {
 		return (
@@ -55,16 +77,19 @@ function TimeSummary() {
 					{getTime(check_out)}
 				</div>
 			</div>
-			<div
-				className={styles.checkout}
-				onClick={() => router.push('/attendance-leave-management')}
-				aria-hidden
-			>
-				<div className={styles.checkout_text}>
-					View Attendance
+			<div className={styles.checkout}>
+				<Button
+					themeType="accent"
+					size="lg"
+					disabled={!enable_check_out || updateLoading}
+					onClick={enable_check_out ? handleCheckOut : () => {}}
+
+				>
+					Check
 					{' '}
-				</div>
-				<IcMArrowRight />
+					{check_in ? 'Out' : 'In'}
+					<IcMArrowRight style={{ marginLeft: '2px' }} />
+				</Button>
 			</div>
 		</div>
 	);

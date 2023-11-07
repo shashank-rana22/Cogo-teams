@@ -35,6 +35,12 @@
 	justify-content: flex-end;
 	padding-top: 16px;
 	cursor: pointer;
+
+	:global {
+		.ui_button_container {
+			height: 30px;
+		}
+	}
 }
 
 .checkout_text {
