@@ -11,6 +11,8 @@ import PlatformHistory from './PlatformHistory';
 import PlatformList from './PlatformList';
 import styles from './styles.module.css';
 
+const MIN_COUNT = 0;
+
 function PlatformAdoption({
 	mailProps = {}, firestore = {}, viewType = '', userId = '',
 	isBotSession = false, setActiveTab = () => {}, initialViewType = '',
@@ -66,7 +68,7 @@ function PlatformAdoption({
 						<div className={styles.title}>
 							Task for the Day
 							{' '}
-							<span>{`(${total_count})`}</span>
+							<span>{`(${total_count || MIN_COUNT})`}</span>
 							{' '}
 							<IcMRefresh className={styles.refresh} onClick={() => onboardingRequest({ page: 1 })} />
 						</div>
