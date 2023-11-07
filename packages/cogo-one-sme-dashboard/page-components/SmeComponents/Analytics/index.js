@@ -141,6 +141,12 @@ function Analytics({ widgetBlocks = null, filterParams = {} }) {
 			<div className={styles.header}>
 				<div className={styles.label}>
 					Analytics
+					{GRAPH_LEGENDS?.map((itm) => (
+						<div className={styles.legend_item} key={itm?.key}>
+							<div className={styles.legend_item_color} style={{ background: itm?.color }} />
+							{itm?.label}
+						</div>
+					))}
 				</div>
 
 				<div className={styles.filter_container}>

@@ -8,6 +8,7 @@ function getOptions({
 	hierarchyData = [],
 	partnersList = [],
 	leaderBoardData = {},
+	userHierarchyData = {},
 	loading = false,
 }) {
 	if (loading) {
@@ -43,6 +44,12 @@ function getOptions({
 			),
 			[],
 		);
+	}
+
+	if (nextViewType === 'users') {
+		const { reportees = [] } = userHierarchyData || {};
+
+		return reportees;
 	}
 
 	return [];

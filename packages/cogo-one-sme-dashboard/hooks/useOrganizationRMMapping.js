@@ -9,23 +9,28 @@ const getParams = ({ partnerId, userId }) => ({
 const useOrganizationRMMapping = ({
 	partnerId = '',
 	userId = '',
+	nextViewType = '',
 }) => {
 	const [{ loading = false, data }, trigger] = useRequest({
 		url    : 'get_partner_user_rm_mapping',
 		method : 'GET',
-	}, { manual: false });
+	}, { manual: true });
 
 	const fetchData = useCallback(
 		async () => {
 			try {
+				if (nextViewType !== 'users' || !userId || !partnerId) {
+					return;
+				}
+
 				await trigger({
 					params: getParams({ partnerId, userId }),
 				});
 			} catch (err) {
-				console.error('err', err);
+				console.error('error', err);
 			}
 		},
-		[partnerId, trigger, userId],
+		[nextViewType, partnerId, trigger, userId],
 	);
 
 	useEffect(() => {

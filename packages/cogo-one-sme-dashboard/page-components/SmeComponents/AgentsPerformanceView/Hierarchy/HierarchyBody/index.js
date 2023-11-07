@@ -1,6 +1,5 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -17,48 +16,59 @@ const NEXT_DATA_VIEW_TYPE = {
 	partners : 'branches',
 	branches : 'managers',
 	managers : 'users',
+	users    : 'users',
 };
 
 function HierarchyBody({
 	hierarchyData = [],
 	setHierarchyData = () => {},
 }) {
+	const indiaEntityId = GLOBAL_CONSTANTS.country_entity_ids.IN;
+	const selectedPartnerId = hierarchyData?.[GLOBAL_CONSTANTS.zeroth_index]?.id || '';
+
 	const currentView = isEmpty(hierarchyData) ? ''
 		: hierarchyData?.[hierarchyData.length - 1]?.hierarchyDataType;
 
-	const nextViewType = NEXT_DATA_VIEW_TYPE?.[currentView] || 'partners';
-	console.log('nextViewType:', hierarchyData, currentView, 'dd', nextViewType);
+	const nextViewType = (selectedPartnerId !== indiaEntityId && currentView === 'partners')
+		? 'managers' : NEXT_DATA_VIEW_TYPE?.[currentView] || 'partners';
 
 	const { partnersList = [], partnersLoading = false } = useListPartners({ nextViewType });
 
 	const { leaderBoardData = {}, leaderBoardLoading = false } = useGetLeaderbordList({
-		partnerId        : hierarchyData?.[GLOBAL_CONSTANTS.zeroth_index]?.id,
+		partnerId        : selectedPartnerId,
 		officeLocationId : hierarchyData?.[1]?.hierarchyDataType === 'branches' ? hierarchyData?.[1]?.id : '',
+		nextViewType,
 	});
 
 	const {
 		userHierarchyLoading = false,
 		userHierarchyData = {},
 	} = useOrganizationRMMapping({
-		partnerId : '',
-		userId    : '',
+		partnerId : selectedPartnerId,
+		userId    : hierarchyData?.[(hierarchyData?.length || 0) - 1]?.id,
+		nextViewType,
 	});
+
+	const showLoading = (userHierarchyLoading || partnersLoading || leaderBoardLoading);
 
 	const userOptions = getOptions({
 		hierarchyData,
 		nextViewType,
 		partnersList,
 		leaderBoardData,
-		loading: leaderBoardLoading || userHierarchyLoading,
+		userHierarchyData,
+		loading: showLoading,
 	});
-	console.log('loading', userHierarchyLoading || partnersLoading || leaderBoardLoading);
+
 	return (
 		<div
 			className={styles.container}
 			style={{ alignItems: isEmpty(hierarchyData) ? 'center' : 'flex-start' }}
 		>
 			<div className={cl`${styles.prev_selected} 
-				${isEmpty(hierarchyData) ? styles.no_container : styles.border_bottom_required}`}
+				${isEmpty(hierarchyData) ? styles.no_container : ''} 
+				${(!isEmpty(hierarchyData) && !isEmpty(userOptions))
+				? styles.border_bottom_required : ''}`}
 			>
 				{hierarchyData?.map(
 					(itm, index) => (
@@ -72,7 +82,8 @@ function HierarchyBody({
 								cardType="shortForm"
 								isLastIndex={index === ((hierarchyData?.length || 0) - 1)}
 							/>
-							<div className={styles.hierarchy_data_view} />
+							{(isEmpty(userOptions) && index === (hierarchyData?.length || 0) - 1)
+								? null : <div className={styles.hierarchy_data_view} />}
 						</>
 					),
 				)}
@@ -89,7 +100,7 @@ function HierarchyBody({
 				),
 			)}
 
-			{(userHierarchyLoading || partnersLoading || leaderBoardLoading)
+			{showLoading
 				? <LoadingState />
 				: null}
 		</div>

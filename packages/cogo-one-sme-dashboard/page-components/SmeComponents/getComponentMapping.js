@@ -188,12 +188,10 @@ function getComponentMapping({ filterParams = {} }) {
 			initialLoad: false,
 		},
 		{
-			key          : 'agents_exception_list',
-			Comp         : AgentsExceptionList,
-			headerText   : 'Agents Exception List',
-			initialLoad  : false,
-			widgetBlocks : ['get_search_exception_data', 'get_call_exception_data',
-				'get_mail_exception_data', 'get_quotation_exception_data', 'get_booking_exception_data'],
+			key         : 'agents_exception_list',
+			Comp        : AgentsExceptionList,
+			headerText  : 'Agents Exception List',
+			initialLoad : false,
 		},
 		{
 			key              : 'agents_performance_view',

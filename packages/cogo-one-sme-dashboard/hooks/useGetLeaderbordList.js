@@ -14,7 +14,11 @@ const getParams = ({ partnerId, officeLocationId }) => ({
 	additional_stat_required: false,
 });
 
-function useGetLeaderbordList({ officeLocationId = '', partnerId = '' }) {
+function useGetLeaderbordList({
+	officeLocationId = '',
+	partnerId = '',
+	nextViewType = '',
+}) {
 	const [{ data, loading }, trigger] = useAllocationRequest({
 		url     : '/reports',
 		method  : 'GET',
@@ -24,7 +28,7 @@ function useGetLeaderbordList({ officeLocationId = '', partnerId = '' }) {
 	const getLeaderList = useCallback(
 		async () => {
 			try {
-				if (!(partnerId && officeLocationId)) {
+				if (nextViewType !== 'managers') {
 					return;
 				}
 
@@ -35,7 +39,7 @@ function useGetLeaderbordList({ officeLocationId = '', partnerId = '' }) {
 				console.error('err', error);
 			}
 		},
-		[officeLocationId, partnerId, trigger],
+		[nextViewType, officeLocationId, partnerId, trigger],
 	);
 
 	useEffect(() => {

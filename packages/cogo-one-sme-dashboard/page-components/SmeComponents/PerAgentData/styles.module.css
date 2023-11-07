@@ -9,6 +9,7 @@
 
 	:global {
 		.ui_loading_container {
+			flex: unset;
 			height: 161px;
 		}
 	}

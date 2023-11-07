@@ -51,6 +51,7 @@
 
 	:global {
 		.ui_loading_container {
+			flex: unset;
 			height: 171px;
 		}
 	}

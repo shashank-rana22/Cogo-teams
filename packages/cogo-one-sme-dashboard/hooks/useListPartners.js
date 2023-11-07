@@ -17,8 +17,8 @@ const useListPartners = ({ nextViewType = '' }) => {
 				await trigger({
 					params: {
 						filters: {
-							entity_types: ['cogoport'],
-							// status       : 'active',
+							entity_types : ['cogoport'],
+							status       : 'active',
 						},
 						page_limit          : 1000,
 						roles_data_required : false,

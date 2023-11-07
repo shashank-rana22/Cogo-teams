@@ -15,14 +15,14 @@ const TABLE_TYPES = {
 	booking   : 'booking_exception_data',
 };
 
-function AgentsExceptionList({ widgetBlocks = null, filterParams = {} }) {
+function AgentsExceptionList({ filterParams = {} }) {
 	const [page, setPage] = useState(1);
+	const [tableType, setTableType] = useState('search');
+
 	const {
 		dashboardData = {},
 		dashboardLoading = false,
-	} = useSmeDashboardStats({ widgetBlocks, filterParams, page });
-
-	const [tableType, setTableType] = useState('search');
+	} = useSmeDashboardStats({ widgetBlocks: `get_${tableType}_exception_data`, filterParams, page });
 
 	const tableColumns = getTableColumns() || [];
 
@@ -46,7 +46,7 @@ function AgentsExceptionList({ widgetBlocks = null, filterParams = {} }) {
                                     ${tableType === itm ? styles.selected_header : ''}`}
 						>
 							<div className={styles.table_count}>
-								{dashboardData?.[valueKey]?.total_count || 0}
+								{dashboardData?.[valueKey]?.total_count || '-'}
 							</div>
 							{`Not a Single ${startCase(itm)}`}
 						</div>

@@ -32,51 +32,55 @@ function ReceivedStats({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.label}>
-				Total
-				{' '}
-				{startCase(channelType)}
-				{' '}
-				Received
-			</div>
+			<div>
+				<div className={styles.label}>
+					Total
+					{' '}
+					{startCase(channelType)}
+					{' '}
+					Received
+				</div>
 
-			{dashboardLoading
-				? <LoadingState />
-				: (
-					<>
-						<div className={styles.body}>
-							<div className={styles.icon_container}>
-								<Element
-									className={styles.icon_styles}
-									fill={channelType === 'emails' ? '#034AFD' : 'unset'}
-								/>
-							</div>
-
-							<div className={styles.total_data}>
-								<div className={styles.total_count}>
-									{current_data?.[DATA_KEYS?.[channelType]?.total_count]}
+				<div className={styles.body}>
+					{dashboardLoading
+						? <LoadingState />
+						: (
+							<>
+								<div className={styles.icon_container}>
+									<Element
+										className={styles.icon_styles}
+										fill={channelType === 'emails' ? '#034AFD' : 'unset'}
+									/>
 								</div>
 
-								<PercentageChange
-									percentageChanged={calcChange({
-										valueKey     : DATA_KEYS?.[channelType]?.total_count,
-										currentData  : current_data,
-										previousData : previous_data,
-									})}
-									showArrows
-								/>
-							</div>
-						</div>
+								<div className={styles.total_data}>
+									<div className={styles.total_count}>
+										{current_data?.[DATA_KEYS?.[channelType]?.total_count]}
+									</div>
 
-						<div className={styles.header_chip}>
-							Initiated by Customer -
-							<span className={styles.highlight}>
-								{current_data?.[DATA_KEYS?.[channelType]?.initiated_by_customer] || 0}
-								%
-							</span>
-						</div>
-					</>
-				)}
+									<PercentageChange
+										percentageChanged={calcChange({
+											valueKey     : DATA_KEYS?.[channelType]?.total_count,
+											currentData  : current_data,
+											previousData : previous_data,
+										})}
+										showArrows
+									/>
+								</div>
+							</>
+						)}
+				</div>
+			</div>
+			{current_data?.[DATA_KEYS?.[channelType]?.initiated_by_customer]
+				? (
+					<div className={styles.header_chip}>
+						Initiated by Customer -
+						<span className={styles.highlight}>
+							{current_data?.[DATA_KEYS?.[channelType]?.initiated_by_customer] || 0}
+							%
+						</span>
+					</div>
+				) : null}
 		</div>
 	);
 }

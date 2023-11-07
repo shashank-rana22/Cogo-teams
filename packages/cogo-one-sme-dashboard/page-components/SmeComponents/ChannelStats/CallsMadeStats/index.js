@@ -58,7 +58,6 @@ function SentStats({
 	dashboardData = {},
 	dashboardLoading = false,
 }) {
-	console.log('dashboardData:', dashboardData);
 	return (
 		<div className={styles.container}>
 			<div className={styles.label}>

@@ -48,7 +48,7 @@ function SentStats({
 					{startCase(channelType)}
 					{' '}
 					Sent -
-					<span>{DATA_KEYS?.[channelType]?.total || 0}</span>
+					<span>{currentData?.[DATA_KEYS?.[channelType]?.total] || 0}</span>
 				</div>
 
 				{(currentData?.initiated_by_agent || currentData?.initiated_by_system)

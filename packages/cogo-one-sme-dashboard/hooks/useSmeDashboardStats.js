@@ -5,8 +5,18 @@ import { useCallback, useEffect } from 'react';
 const getParams = ({ widgetBlocks, filterParams, selectedFilter, page }) => {
 	const { date_range = {} } = filterParams || {};
 
+	let blocks;
+
+	if (!isEmpty(widgetBlocks)) {
+		if (typeof widgetBlocks === 'string') {
+			blocks = [widgetBlocks];
+		} else {
+			blocks = widgetBlocks;
+		}
+	}
+
 	return 	{
-		blocks     : isEmpty(widgetBlocks) ? undefined : widgetBlocks,
+		blocks,
 		start_date : startOfDay(date_range?.startDate) || startOfDay(new Date()),
 		end_date   : date_range?.endDate || new Date(),
 		filters    : {
