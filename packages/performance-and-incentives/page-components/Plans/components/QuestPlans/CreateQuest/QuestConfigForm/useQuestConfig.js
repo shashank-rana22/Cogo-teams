@@ -150,7 +150,7 @@ const useQuestConfig = ({ data = {}, refetch = () => {}, questName = null }) => 
 
 		newLabelData.splice(index, 1);
 
-		setLabelData((l) => ({ ...l, [subBlockName]: newLabelData }));
+		setLabelData((label) => ({ ...label, [subBlockName]: newLabelData }));
 	};
 
 	const onClickFill = () => {

@@ -73,10 +73,7 @@ function SubBlock(props) {
 						role="presentation"
 						className={styles.delete_block}
 						onClick={() => {
-							// if (isEmpty(checkForSubBlock())) {
 							removeSubBlock(subBlockIndex);
-							// }
-							// handleClick({ subBlockStatus: 'inactive' });
 						}}
 					>
 						<IcMDelete className={styles.icon} />

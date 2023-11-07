@@ -1,6 +1,7 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -21,8 +22,9 @@ function ScrollAnnouncement({ style = {} }) {
 	return (
 		<div className={styles.container} style={style}>
 			<div className={styles.icon_div}>
-				<img
-					className={styles.icon_div_img}
+				<Image
+					width={20}
+					height={20}
 					src={GLOBAL_CONSTANTS?.image_url?.public_leaderboard_announcement}
 					alt=""
 				/>

@@ -29,7 +29,7 @@ function CreateQuests() {
 	if (questLoading) return <LoadingState />;
 
 	return (
-		<div>
+		<>
 			<div className={styles.header}>
 				<IcMArrowBack
 					className={styles.back_icon}
@@ -60,7 +60,7 @@ function CreateQuests() {
 			{!id && showOverlapped
 				? <OverlappedQuest params={params} setParams={setParams} showOverlapped={showOverlapped} />
 				: null}
-		</div>
+		</>
 	);
 }
 

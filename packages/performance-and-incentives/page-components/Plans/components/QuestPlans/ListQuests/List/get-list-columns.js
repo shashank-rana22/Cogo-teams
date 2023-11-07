@@ -53,11 +53,9 @@ const getListColumns = (props) => {
 			key      : 'quest_string',
 			Header   : <div className={styles.heading}>QUEST</div>,
 			accessor : ({ quest_string }) => (
-				// <div>
 				<Tooltip content={quest_string} placement="bottom">
 					<div className={styles.quest_tooltip}>{quest_string}</div>
 				</Tooltip>
-				// </div>
 			),
 		},
 		{
@@ -130,22 +128,20 @@ const getListColumns = (props) => {
 			accessor : ({ id }) => (
 				<div className={styles.actions}>
 
-					<div>
-						<Popover
-							placement="left"
-							interactive
-							render={(
-								<Actions quest_id={id} handleDeactivate={handleDeactivate} />
-							)}
-						>
-							<div className={styles.action_icon_container}>
-								<IcMOverflowDot
-									width={16}
-									height={16}
-								/>
-							</div>
-						</Popover>
-					</div>
+					<Popover
+						placement="left"
+						interactive
+						render={(
+							<Actions quest_id={id} handleDeactivate={handleDeactivate} />
+						)}
+					>
+						<div className={styles.action_icon_container}>
+							<IcMOverflowDot
+								width={16}
+								height={16}
+							/>
+						</div>
+					</Popover>
 				</div>
 			),
 		},
