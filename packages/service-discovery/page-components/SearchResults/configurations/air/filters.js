@@ -3,9 +3,8 @@ import { isEmpty } from '@cogoport/utils';
 import CustomSelectOption from '../../../../common/CustomSelectOption';
 
 export const defaultValues = {
-	airline_id   : [],
-	rate_type    : null,
-	payment_term : null,
+	airline_id : [],
+	rate_type  : null,
 };
 
 export const getAirControls = ({ airlines = [], airlineParams = {}, setAirlineParams = () => {} }) => {
@@ -66,30 +65,6 @@ export const getAirControls = ({ airlines = [], airlineParams = {}, setAirlinePa
 						{
 							label : 'Spot Booking',
 							value : 'spot_booking',
-						},
-					],
-				},
-			],
-		},
-		{
-			name     : 'payment_term',
-			label    : 'Payment Terms',
-			controls : [
-				{
-					name    : 'payment_term',
-					type    : 'chips',
-					options : [
-						{
-							label : 'All',
-							value : null,
-						},
-						{
-							label : 'Prepaid',
-							value : 'prepaid',
-						},
-						{
-							label : 'Collect',
-							value : 'collect',
 						},
 					],
 				},
