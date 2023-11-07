@@ -1,5 +1,3 @@
-const { default: { new_search_supported_services } } = require('@cogoport/globalization/constants/globals');
-
 module.exports = {
 	edit_button: {
 		buttons: [
@@ -21,7 +19,7 @@ module.exports = {
 		content : `Want to add another container type? Or, 
         want to update the current one?`,
 		subText : 'Update it from here.',
-		show    : new_search_supported_services,
+		show    : ['all'],
 	},
 	comparision_button: {
 		buttons: [

@@ -86,7 +86,8 @@ const useGetSpotSearch = ({
 
 						const curr_sequence_number = sequence_number;
 
-						const isBannerAllowed = show.includes(service_type) && screen === 'listRateCard';
+						const isBannerAllowed =	(show.includes('all') || show.includes(service_type))
+						&& screen === 'listRateCard';
 
 						sequence_number += ONE;
 
