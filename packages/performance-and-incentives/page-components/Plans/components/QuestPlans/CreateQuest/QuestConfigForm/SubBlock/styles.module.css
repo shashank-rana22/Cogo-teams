@@ -1,0 +1,56 @@
+.container {
+	padding: 18px;
+	border-top: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.inner_container {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+.control_item {
+	width: 20%;
+	margin-bottom: 20px;
+
+	@media (max-width: 768px) {
+		width: 40%;
+	}
+}
+
+.sup {
+	color: #f00;
+}
+
+.error_msg {
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
+}
+
+.label {
+	display: flex;
+	align-items: center;
+	margin-bottom: 4px;
+}
+
+.delete_block {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.icon {
+	margin-right: 2px;
+}
+
+.underline_text {
+	text-decoration: underline;
+}
+
+.btn {
+	margin-left: auto;
+}
