@@ -48,7 +48,7 @@ const useInsurance = ({ activeTab, organization = {}, formValues = {}, setActive
 	const [{ loading }, trigger] = useRequestBf({
 		method  : 'post',
 		url     : 'saas/insurance/v2/search-rate',
-		authKey : 'get_saas_insurance_v2_search_rate',
+		authKey : 'post_saas_insurance_v2_search_rate',
 	}, { manual: true });
 
 	const verifyDetails = async (info) => {
