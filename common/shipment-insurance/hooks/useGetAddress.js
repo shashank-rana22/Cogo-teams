@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react';
 
 const START_INDEX = GLOBAL_CONSTANTS.zeroth_index;
 const MAX = 2;
-const TOKEN = '0c320283-6f34-42d0-ac1d-e3390049fe65';
 
 function useAddress({ billingType, orgId = '', preSelectedAddress = {}, setSelectedAddress }) {
 	const [addressData, setAddressData] = useState({
@@ -16,11 +15,8 @@ function useAddress({ billingType, orgId = '', preSelectedAddress = {}, setSelec
 	});
 
 	const [{ loading, data: addressList }, trigger] = useRequest({
-		method  : 'get',
-		url     : 'https://api-meteora1.dev.cogoport.io/list_address_for_insurance',
-		token   : TOKEN,
-		scope   : 'micro_service',
-		scopeId : '0c320283-6f34-42d0-ac1d-e3390049fe65',
+		method : 'get',
+		url    : '/list_address_for_insurance',
 	}, { manual: true });
 
 	const getBillingAddress = async () => {
