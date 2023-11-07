@@ -5,7 +5,7 @@ on:
 
 jobs:
   deploy:
-    if: ${{ contains('prashantp01,Kgarg28,Rajatuba-Cogoport,maytan-cogo,vinodtalapa,ssngurjar',github.actor) }}
+    if: ${{ contains('prashantp01,Kgarg28,Rajatuba-Cogoport,maytan-cogo,vinodtalapa,ssngurjar,raviverma0626',github.actor) }}
     name: Deploying Servers via SSH
     runs-on: ubuntu-latest
     steps:
