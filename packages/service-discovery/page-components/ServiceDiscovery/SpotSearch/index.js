@@ -37,7 +37,10 @@ function SpotSearch() {
 	const [errors, setErrors] = useState({});
 	const [routerLoading, setRouterLoading] = useState(false);
 
-	const { data:{ service_discovery = {} } = {} } = useGetActiveServices();
+	const {
+		data:{ service_discovery = {} } = {},
+		loading:bookableServicesLoading = false,
+	} = useGetActiveServices();
 
 	const { bookable_services = {} } = service_discovery || {};
 
@@ -53,6 +56,10 @@ function SpotSearch() {
 			setRouterLoading(false);
 		});
 	}, [setRouterLoading]);
+
+	if (bookableServicesLoading) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
