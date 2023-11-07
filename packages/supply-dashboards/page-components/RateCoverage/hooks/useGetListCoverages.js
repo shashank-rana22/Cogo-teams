@@ -137,7 +137,6 @@ const useGetListCoverage = ({ userService }) => {
 			if (filter?.is_flash_booking_reverted) {
 				is_flash_booking_reverted = filter?.is_flash_booking_reverted === 'reverted';
 			}
-			console.log(FINAL_FILTERS, '123456');
 			await trigger({
 				params: {
 					filters: {

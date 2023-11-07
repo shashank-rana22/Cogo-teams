@@ -93,7 +93,6 @@ function Filter({
 			</div>
 		);
 	}
-	console.log(filter, '123456');
 
 	return (
 		<Modal size="md" show={showFilters} onClose={() => setShowFilters(!showFilters)} placement="right">
