@@ -7,8 +7,6 @@ import useBlockParameters from './useBlockParameters';
 
 const FIRST_INDEX = 1;
 
-const TRIGGER_CONTROLS = ['provisional_trigger', 'realised_trigger'];
-
 function Child(props) {
 	const {
 		controls,
@@ -24,22 +22,16 @@ function Child(props) {
 		error = {},
 		watch = () => {},
 		parameterOptions = [],
-		parameterUnitOptions = {},
 		onChangeChild = () => {},
 		onDeleteChild = () => {},
 	} = props;
 
-	const [scoringType, paramType] = watch([`${name}.${index}.scoring_type`, `${name}.${index}.parameter`]);
-	const paramUnitOptions = parameterUnitOptions[paramType];
-
 	const {
 		paramOptions,
-		memoizedTriggerMapping,
 	} = useBlockParameters({
 		watch,
 		blockIndex,
 		subBlockIndex,
-		paramType,
 		paramIndex: index,
 		parameterOptions,
 	});
@@ -47,16 +39,13 @@ function Child(props) {
 	const subBlockId = watch(`blocks[${blockIndex}].sub_blocks[${subBlockIndex}].sub_block_id`);
 
 	return (
-		<div key={scoringType} className={styles.content}>
+		<div className={styles.content}>
 			{controls.map((controlItem) => {
 				const { name: controlName, type, style, ...rest } = controlItem;
 
 				const Element = getFieldController(type);
 
-				if (!Element || (scoringType === 'absolute'
-					&& ['fixed_percentage_value', 'variable_percentage_value'].includes(controlName))
-					|| (scoringType === 'percentage' && controlName === 'base_score')) return null;
-
+				if (!Element) return null;
 				return (
 					<div key={`${name}.${index}.${controlName}`} className={styles.list} style={style}>
 
@@ -68,9 +57,7 @@ function Child(props) {
 							id={`create_form_${controlName}_field`}
 							{...rest}
 							name={`${name}.${index}.${controlName}`}
-							{...(controlName === 'scoring_unit') ? { options: paramUnitOptions } : {}}
 							{...(controlName === 'parameter') ? { options: paramOptions } : {}}
-							{...(TRIGGER_CONTROLS.includes(controlName)) ? memoizedTriggerMapping[controlName] : {}}
 							onChange={(val, obj) => onChangeChild({
 								val,
 								obj,

@@ -18,7 +18,8 @@ const useGetQuest = ({ id }) => {
 			await trigger({
 				params: {
 					id,
-					configuration_data_required: true,
+					configuration_data_required        : true,
+					agent_scoring_config_data_required : true,
 				},
 			});
 		} catch (error) {
