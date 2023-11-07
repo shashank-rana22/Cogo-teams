@@ -27,7 +27,7 @@ const getDetails = ({ item, service = '' }) => {
 	].filter(Boolean);
 
 	const commonFTLDetails = [
-		(volume || weight) && (volume && `${volume} CBM`, weight && `, ${weight} Tons`),
+		(volume || weight) && `${volume} CBM, ${weight} Tons`,
 		packages_count && `${packages_count} Package${packages_count > 1 ? 's' : ''}`,
 		trucks_count && `${trucks_count} truck`,
 		truck_type && `${startCase(truck_type)}`,

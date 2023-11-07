@@ -60,6 +60,7 @@ function Load({
 				showPopover={showPopover}
 				popoverComponentData={popoverComponentData}
 				setShowModal={setShowModal}
+				isMobile={isMobile}
 			/>
 
 			{!isEmpty(remainingLoadObjects) ? (
@@ -83,6 +84,7 @@ function Load({
 										popoverComponentData={popoverComponentData}
 										setShowModal={setShowModal}
 										popoverContent
+										isMobile={isMobile}
 									/>
 								);
 							})}

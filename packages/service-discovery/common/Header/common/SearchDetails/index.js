@@ -57,12 +57,12 @@ function SearchDetails({
 					<div className={styles.edit_details}>
 						{showAdditionalHeader ? (
 							<IcMCross
-								height={isMobile ? 12 : 16}
-								width={isMobile ? 12 : 16}
+								height={16}
+								width={16}
 								onClick={() => setHeaderProps({})}
 							/>
 						) : (
-							<IcMEdit height={isMobile ? 12 : 16} width={isMobile ? 12 : 16} onClick={handleEdit} />
+							<IcMEdit height={16} width={16} onClick={handleEdit} />
 						)}
 					</div>
 				) : null}

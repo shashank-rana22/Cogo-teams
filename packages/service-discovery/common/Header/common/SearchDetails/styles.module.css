@@ -39,6 +39,8 @@
 }
 
 .down_arrow {
+	width: 18px;
+	height: 18px;
 	margin-left: 8px;
 	transition: all 0.4s ease;
 

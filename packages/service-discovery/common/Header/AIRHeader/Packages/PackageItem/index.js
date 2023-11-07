@@ -19,12 +19,27 @@ function PackageItem({
 	chargeable_weight = 0,
 	isMobile = false,
 }) {
-	const { commodity = '', commodity_details = [], total_volume = 1, total_weight = 1, total_quantity = 1 } = loadItem;
+	const {
+		commodity = '',
+		commodity_details = [],
+		total_volume = 1,
+		total_weight = 1,
+		total_quantity = 1,
+	} = loadItem;
 
 	const { commodity_type = '', commodity_subtype = '' } = commodity_details[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	return (
-		<div className={styles.load_item}>
+		<div
+			role="presentation"
+			className={styles.load_item}
+			onClick={() => {
+				if (!isMobile) {
+					return;
+				}
+				setShowModal(true);
+			}}
+		>
 			<Tooltip content={(
 				<span className={styles.tooltip_content}>
 					Packages Count:

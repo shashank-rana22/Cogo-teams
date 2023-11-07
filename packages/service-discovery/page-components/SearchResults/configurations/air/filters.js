@@ -51,10 +51,6 @@ export const getAirControls = ({ airlines = [], airlineParams = {}, setAirlinePa
 							value : null,
 						},
 						{
-							label : 'Cogo Assured',
-							value : 'cogo_assured',
-						},
-						{
 							label : 'Market Place',
 							value : 'market_place',
 						},
@@ -63,8 +59,8 @@ export const getAirControls = ({ airlines = [], airlineParams = {}, setAirlinePa
 							value : 'promotional',
 						},
 						{
-							label : 'Spot Booking',
-							value : 'spot_booking',
+							label : 'Non Tariff',
+							value : 'non_tariff_rate',
 						},
 					],
 				},

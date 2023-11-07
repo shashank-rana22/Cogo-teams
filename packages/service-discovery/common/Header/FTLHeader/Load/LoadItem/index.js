@@ -16,6 +16,7 @@ function LoadItem({
 	setInfoBanner = () => {},
 	margin = 0,
 	popoverContent = false,
+	isMobile = false,
 }) {
 	const {
 		commodity = '',
@@ -27,7 +28,17 @@ function LoadItem({
 	} = loadItem;
 
 	return (
-		<div className={styles.container} style={{ margin }}>
+		<div
+			role="presentation"
+			className={styles.container}
+			style={{ margin }}
+			onClick={() => {
+				if (!isMobile) {
+					return;
+				}
+				setShowModal(true);
+			}}
+		>
 			<div className={styles.load_item}>
 				{load_selection_type === 'truck' ? (
 					<Tooltip

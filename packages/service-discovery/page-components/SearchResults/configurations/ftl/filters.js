@@ -17,16 +17,12 @@ export const getFtlControls = () => {
 							value : null,
 						},
 						{
-							label : 'Market Place',
-							value : 'market_place',
+							label : 'Regular',
+							value : 'regular_rate',
 						},
 						{
-							label : 'Promotional',
-							value : 'promotional',
-						},
-						{
-							label : 'Spot Booking',
-							value : 'spot_booking',
+							label : 'AdHoc',
+							value : 'adhoc_rate',
 						},
 					],
 				},

@@ -16,9 +16,20 @@ function ContainerItem({
 	setInfoBanner = () => {},
 	isFirst = false,
 	margin = 0,
+	isMobile = false,
 }) {
 	return (
-		<div className={styles.container} style={{ margin }}>
+		<div
+			role="presentation"
+			className={styles.container}
+			style={{ margin }}
+			onClick={() => {
+				if (!isMobile) {
+					return;
+				}
+				setShowModal(true);
+			}}
+		>
 			<div className={styles.load_item}>
 				<span className={styles.text}>
 					{`${loadItem.containers_count} X ${
