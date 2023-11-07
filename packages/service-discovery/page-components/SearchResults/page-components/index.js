@@ -38,7 +38,9 @@ function SearchResults() {
 	const [comparisonRates, setComparisonRates] = useState([]);
 	const [infoBanner, setInfoBanner] = useState({});
 
-	const isGuideViewed = localStorage.getItem(`guide_completed_for_${id}`) || false;
+	const isMobile = useGetIsMobile();
+
+	const isGuideViewed = localStorage.getItem(`guide_completed_for_${id}`) || isMobile || false;
 
 	const {
 		refetchSearch = () => {},
@@ -56,8 +58,6 @@ function SearchResults() {
 		selectedSchedule = {},
 		bookable_services = {},
 	} = useGetSpotSearch({ setComparisonRates, setInfoBanner, setRouterLoading, setScheduleLoading });
-
-	const isMobile = useGetIsMobile();
 
 	const { createSearch, loading: createLoading } = useCreateSearch({ setRouterLoading, setHeaderProps });
 
