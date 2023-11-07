@@ -1,7 +1,7 @@
 import { Modal, Table } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMAirport, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMArrowRight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import Loader from '../../../../../common/Loader';
@@ -62,7 +62,11 @@ function Holiday({ data = {}, loading = false }) {
 					</div>
 					{holiday_occassion || ''}
 				</div>
-				<IcMAirport fill="#828282" width={50} height={50} />
+				<img
+					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/diwali.gif"
+					alt="diwali"
+					width={100}
+				/>
 			</div>
 			<div
 				className={styles.view_calendar}

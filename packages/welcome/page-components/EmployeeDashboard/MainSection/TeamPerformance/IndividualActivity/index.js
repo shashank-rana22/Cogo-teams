@@ -66,22 +66,22 @@ function IndividualActivity({ data = {} }) {
 			{userData ? (
 				<>
 					<div className={styles.progress_flex_2}>
-						<div className={styles.badge}>
+						{/* <div className={styles.badge}>
 							<div className={styles.upper_text}>Badge</div>
 							<div className={styles.lower_text}>
 								<img
 									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Star_1.svg"
 									alt="star"
 								/>
-								<span style={{ marginLeft: '4px' }}>Believer</span>
+								<span style={{ marginLeft: '6px' }}>Believer</span>
 							</div>
-						</div>
+						</div> */}
 						<div className={styles.badge}>
 							<div className={styles.upper_text}>Claps Received</div>
 							<div className={styles.lower_text}>
 								👏
-								<span style={{ marginLeft: '4px' }}>
-									{userData.claps_received || '0'}
+								<span style={{ marginLeft: '6px' }}>
+									{userData.claps_received || 0}
 									{' '}
 									Claps
 								</span>

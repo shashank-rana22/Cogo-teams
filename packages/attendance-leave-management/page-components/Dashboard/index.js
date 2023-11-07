@@ -19,11 +19,14 @@ const MANAGER = true;
 function AttendanceLeaveDashboard() {
 	const router = useRouter();
 
-	const [activeTab, setActiveTab] = useState('attendance');
 	const { query } = useSelector((state) => state.general);
+
+	const [activeTab, setActiveTab] = useState('attendance');
+
 	const [showInbox, setShowInbox] = useState(query?.showInbox || false);
 
 	const [coords, setCoords] = useState(null);
+
 	const handleShowInbox = () => {
 		setShowInbox(true);
 		router.push('/attendance-leave-management?showInbox=true');
@@ -43,6 +46,15 @@ function AttendanceLeaveDashboard() {
 	const { data, loading, refetch } = useGetCheckinStats(coords);
 
 	const { is_manager, is_policy_view_allowed } = data || {};
+
+	const handleTabs = (tab) => {
+		setActiveTab(tab);
+		router.push(`/attendance-leave-management?activeTab=${tab}`);
+	};
+
+	useEffect(() => {
+		setActiveTab(query.activeTab || 'attendance');
+	}, [query?.activeTab]);
 
 	return (
 		<div>
@@ -67,7 +79,7 @@ function AttendanceLeaveDashboard() {
 					<Tabs
 						activeTab={activeTab}
 						themeType="secondary"
-						onChange={setActiveTab}
+						onChange={handleTabs}
 					>
 						<TabPanel name="attendance" title="Attendance">
 							<div className={styles.tab_panel}>

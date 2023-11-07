@@ -60,7 +60,7 @@ function LeaveBalance() {
 			</div>
 			<div
 				className={styles.apply_leave}
-				onClick={() => router.push('/attendance-leave-management')}
+				onClick={() => router.push('/attendance-leave-management?activeTab=leaves')}
 				aria-hidden
 			>
 				Apply Leave

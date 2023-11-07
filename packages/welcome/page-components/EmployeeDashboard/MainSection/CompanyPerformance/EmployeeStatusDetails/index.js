@@ -16,7 +16,7 @@ function EmployeeStatusDetails({ task_list = {}, summaryData = {}, absentData = 
 
 	const COMPARE_GROWTH = [
 		{
-			percentage : `${result(absentData?.curr_month_absent)}`,
+			percentage : `${result(absentData?.curr_month_absent)}%`,
 			growth     : `${result(absentData?.growth) || 0}%`,
 			text       : 'Absents per month',
 		},

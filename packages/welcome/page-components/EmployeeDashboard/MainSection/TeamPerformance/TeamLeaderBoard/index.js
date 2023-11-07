@@ -1,4 +1,4 @@
-import { cl, Button, Avatar, Modal } from '@cogoport/components';
+import { cl, Button, Modal, Tooltip } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -16,7 +16,7 @@ function TeamLeaderBoard({ data = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_flex}>
-				Team Leaderboard 🏆
+				Team Leaderboard  🏆
 				<Button themeType="secondary">
 					Ratings
 				</Button>
@@ -35,7 +35,12 @@ function TeamLeaderBoard({ data = {} }) {
 								)
 						}
 							{' '}
-							{startCase(item.name)}
+							<Tooltip className={styles.tooltip_name} content={startCase(item.name)} placement="top">
+								<div className={styles.employee_name}>
+									{startCase(item.name)}
+								</div>
+							</Tooltip>
+
 						</div>
 					</div>
 					<span className={styles.points}>
@@ -66,12 +71,21 @@ function TeamLeaderBoard({ data = {} }) {
 								<div className={styles.achieved_target}>
 									<div className={styles.avatar}>
 										{item.image ? (
-											<div className={styles.profile_photo}>
-												<img src={item.image} alt="Profile" />
-											</div>
-										) : <Avatar personName={item.name} />}
+											<img
+												className={styles.user_avatar_photo}
+												src={item.image}
+												alt="profile"
+											/>
+										)
+											:							(
+												<div className={cl`${styles.user_avatar_photo} ${styles.user_avatar}`}>
+													{makeShortName(item.name)}
+												</div>
+											)}
 										{' '}
-										{startCase(item.name)}
+										<span className={styles.employee_name}>
+											{startCase(item.name)}
+										</span>
 									</div>
 								</div>
 								<span className={styles.points}>

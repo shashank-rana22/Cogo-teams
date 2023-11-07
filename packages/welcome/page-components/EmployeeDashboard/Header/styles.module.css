@@ -1,8 +1,12 @@
 .container {
-	padding: 40px 24px 75px;
+	padding: 60px 24px 75px;
 	overflow: hidden;
 	color: #fff;
-	background: #21212c;
+	background: url("https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/diwali.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	/* background: #21212c; */
 	border-radius: 4px;
 }
 
@@ -143,6 +147,18 @@
 	top: 3%;
 	right: 0;
 	overflow: hidden;
+}
+
+.diwali_png {
+	position: absolute;
+	top: 50px;
+	right: 32px;
+	z-index: 3;
+	width: 90px;
+}
+
+.diwali_png_img {
+	width: 100%;
 }
 
 @media (max-width: 767px) {

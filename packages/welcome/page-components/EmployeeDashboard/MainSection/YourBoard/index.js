@@ -1,4 +1,7 @@
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
+
+import useGetHierarchyDetails from '../../../../hooks/useGetHierarchyDetails';
 
 import AttendanceStats from './AttendanceStats';
 import Holiday from './Holiday';
@@ -8,9 +11,17 @@ import OrgData from './OrgData';
 import SalaryUpdate from './SalaryUpdate';
 import styles from './styles.module.css';
 import TimeSummary from './TimeSummary';
+import YourTeam from './YourTeam';
 
 function YourBoard({ data, loading }) {
-	const { manager_detail, hrbp_detail, next_holiday_detail, self_working_stats, last_leave_taken } = data || {};
+	const {
+		manager_detail, hrbp_detail, next_holiday_detail, self_working_stats,
+		last_leave_taken, user_role,
+	} = data || {};
+
+	const { params, setParams, data : hierarchy, loading : hierarchyLoading } = useGetHierarchyDetails();
+
+	console.log('hierarchy', hierarchy);
 
 	return (
 		<div className={styles.container}>
@@ -23,6 +34,8 @@ function YourBoard({ data, loading }) {
 			<OrgData manager_detail={manager_detail} hrbp_detail={hrbp_detail} loading={loading} />
 			<TimeSummary />
 			<NotInOffice data={data} loading={loading} />
+			{user_role !== 'employee' && !isEmpty(hierarchy)
+			&& <YourTeam data={hierarchy} params={params} setParams={setParams} loading={hierarchyLoading} />}
 			<LeaveBalance />
 			<SalaryUpdate data={data} />
 			<AttendanceStats

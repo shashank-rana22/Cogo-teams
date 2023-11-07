@@ -1,5 +1,6 @@
 import { cl, Toggle } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import CompanyPerformance from '../CompanyPerformance';
@@ -16,7 +17,9 @@ function YourPerformance({
 }) {
 	const { graph_detail, clap_recieved, rating_list, user_role, rating_chart_details } = summaryData || {};
 
-	const { self_rating } = rating_list || {};
+	const { self_rating, rating_month } = rating_list || {};
+
+	console.log('summaryData', summaryData, rating_list);
 
 	return (
 		<>
@@ -49,7 +52,11 @@ function YourPerformance({
 					<div className={styles.kpi_flex}>
 						<div className={styles.kpi_data}>
 							<div className={styles.kpi_okr}>
-								<div className={styles.kpi_okr_title}>October KPI</div>
+								<div className={styles.kpi_okr_title}>
+									{`${startCase(rating_month)}`}
+									{' '}
+									KPI
+								</div>
 								<div className={styles.kpi_okr_count}>{self_rating}</div>
 								<div className={styles.view_okr_flex} />
 								<div className={styles.kpi_img}>

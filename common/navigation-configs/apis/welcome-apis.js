@@ -114,6 +114,11 @@ const welcome = [
 		access_type  : 'private',
 		service_name : 'hrms',
 	},
+	{
+		api          : 'get_hierarchy_details',
+		access_type  : 'private',
+		service_name : 'hrms',
+	},
 ];
 
 export default welcome;

@@ -68,13 +68,14 @@
 
 .kpi_okr {
 	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	height: 100%;
 	padding: 14px 14px 18px 20px;
 	color: #221f20;
 	background-color: #f8f2e7;
 	border-radius: 16px;
-
-	/* height: 100%; */
 }
 
 .happiness_index {
@@ -107,7 +108,7 @@
 
 .kpi_img {
 	position: absolute;
-	top: -20px;
+	top: 20px;
 	right: -10px;
 }
 

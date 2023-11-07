@@ -197,7 +197,7 @@ function Post({ feedRefetch }) {
 							className={cl`${styles.claps} ${clapsActive ? styles.claps_active : null}`}
 							aria-hidden
 						>
-							Send claps 👏
+							Claps 👏
 							{' '}
 							{clapsActive && <IcMCross style={{ marginLeft: 8 }} />}
 						</div>
