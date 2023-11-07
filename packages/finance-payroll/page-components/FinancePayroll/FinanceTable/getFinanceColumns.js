@@ -1,8 +1,8 @@
-import { Button, cl, Popover, Modal } from '@cogoport/components';
-import { UploadController } from '@cogoport/forms';
+import { Button, cl, Modal } from '@cogoport/components';
+import { UploadController, SelectController, InputController } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMArrowDown, IcMDownload, IcMCloudUpload } from '@cogoport/icons-react';
+import { IcMDownload, IcMCloudUpload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -11,18 +11,8 @@ import styles from './styles.module.css';
 const getFinanceColumns = ({
 	STATUS_OPTIONS = [],
 	updatePayroll = () => {}, createDownload = () => {},
-	control, show, setShow, handleSubmit,
-	uploadDocument,
+	control, show, setShow, handleSubmit, watch, errors,
 }) => ([
-	// {
-	// 	Header   : 'SL NO',
-	// 	accessor : (item = {}) => (
-	// 		<div>
-	// 			<span className={styles.black_text}>{item.order_ticket_id|| '-'}</span>
-	// 		</div>
-	// 	),
-	// 	id: 'order_id',
-	// },
 	{
 		Header   : 'NAME',
 		accessor : (item = {}) => (
@@ -107,100 +97,99 @@ const getFinanceColumns = ({
 	},
 
 	{
-		Header   : 'UPLOAD RECORD',
-		accessor : (item = {}) => {
-			const onSubmit = (values) => {
-				const payload = {
-					payroll_id   : item.id,
-					document_url : values?.[`payroll_number_document_url_${item.id}`].finalUrl,
-				};
-				uploadDocument({ payload });
-			};
-			return (
-				<div className={styles.download}>
-					<Button
-						size="md"
-						themeType="secondary"
-						style={{ marginLeft: '6px' }}
-						aria-hidden
-						onClick={() => setShow(item.id)}
-					>
-						<span>Upload</span>
-						<IcMCloudUpload
-							style={{ marginLeft: '4px' }}
-							width={14}
-							height={14}
-						/>
-					</Button>
-
-					<Modal size="md" show={show === item.id} onClose={() => setShow(false)} placement="center">
-						<Modal.Header title="Are you sure?" />
-						<Modal.Body>
-							<UploadController
-								className="payroll_document"
-								name={`payroll_number_document_url_${item.id}`}
-								control={control}
-							/>
-						</Modal.Body>
-						<Modal.Footer>
-							<Button onClick={handleSubmit(onSubmit)}>OK</Button>
-						</Modal.Footer>
-					</Modal>
-				</div>
-			);
-		},
-		id: 'upload',
-	},
-	{
 		Header   : 'STATUS',
 		accessor : (item = {}) => {
-			function PopoverContent() {
-				const getStatusValue = (label) => {
-					const status = STATUS_OPTIONS.find((option) => option.label === label);
-					return status ? status.value : null;
+			const getStatusValue = (value) => {
+				const status = STATUS_OPTIONS.find((option) => option.value === value);
+				return status ? status.value : null;
+			};
+			const onSubmit = (values) => {
+				console.log(values?.[`order_status_${item.id}`], 'status');
+				const payload = {
+					payroll_id       : item.id,
+					status           : getStatusValue(values?.[`order_status_${item.id}`]),
+					document_url     : values?.[`payroll_number_document_url_${item.id}`]?.finalUrl || null,
+					rejection_reason : values?.[`rejection_reason_${item.id}`],
 				};
+				updatePayroll({ payload });
+			};
 
-				const handleStatusChange = (newStatus) => {
-					const payload = {
-						payroll_id : item.id,
-						status     : getStatusValue(newStatus),
-					};
-					updatePayroll({ payload });
-				};
-
-				return (
-					<div className={styles.popover_content}>
-						{(STATUS_OPTIONS || []).map((option) => (
-							<div
-								key={option.label}
-								className={styles.popover_item}
-								aria-hidden
-								onClick={() => handleStatusChange(option.label)}
-							>
-								{option.label}
-							</div>
-						))}
-					</div>
-				);
-			}
 			return (
 				<div className={cl`${styles.statuses} ${styles[item.status]}`}>
-					<Popover
-						placement="bottom"
-						render={<PopoverContent />}
-					>
+					{(item.status === 'paid' || item.status === 'failed') ?	(
 						<div className={styles.statuses}>
-							{	startCase(
+							{item.status === 'approved' ? 'Pending'	: startCase(
 								item.status,
 							)}
-							<IcMArrowDown
-								style={{ marginLeft: '4px' }}
-								width={14}
-								height={14}
-							/>
-
 						</div>
-					</Popover>
+					)
+						: (
+							<div className={styles.download}>
+								<div
+									className={styles.statuses}
+									aria-hidden
+									onClick={() => setShow(item.id)}
+								>
+									{item.status === 'approved' ? 'Pending'	: startCase(
+										item.status,
+									)}
+									<IcMCloudUpload
+										style={{ marginLeft: '4px' }}
+										width={14}
+										height={14}
+									/>
+								</div>
+
+								<Modal
+									size="md"
+									show={show === item.id}
+									onClose={() => setShow(false)}
+									placement="center"
+								>
+									<Modal.Header title="Are you sure?" />
+									<Modal.Body>
+										<div style={{ marginBottom: '4px' }}>Select Status</div>
+										<SelectController
+											placeholder="Status"
+											name={`order_status_${item.id}`}
+											options={(STATUS_OPTIONS || [])
+												.filter((option) => option.label !== 'Pending')}
+											control={control}
+											isClearable
+											style={{ marginBottom: '16px' }}
+										/>
+										{watch(`order_status_${item.id}`) === 'paid' && (
+											<>
+												<UploadController
+													className="payroll_document"
+													name={`payroll_number_document_url_${item.id}`}
+													control={control}
+													rules={{ required: true }}
+												/>
+
+												{errors?.[`payroll_number_document_url_${item.id}`]
+													? <div className={styles.errors}>*required</div> : null}
+											</>
+										)}
+										{	watch(`order_status_${item.id}`) === 'failed' && (
+											<>
+												<InputController
+													placeholder="Enter Remarks"
+													name={`rejection_reason_${item.id}`}
+													control={control}
+													rules={{ required: true }}
+												/>
+												{errors?.[`rejection_reason_${item.id}`]
+													? <div className={styles.errors}>*required</div> : null}
+											</>
+										)}
+									</Modal.Body>
+									<Modal.Footer>
+										<Button onClick={handleSubmit(onSubmit)}>OK</Button>
+									</Modal.Footer>
+								</Modal>
+							</div>
+						)}
 				</div>
 			);
 		},

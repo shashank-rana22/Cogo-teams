@@ -13,16 +13,15 @@ import styles from './styles.module.css';
 
 const STATUS_OPTIONS = [
 	{ label: 'Paid', value: 'paid' },
-	{ label: 'Processed', value: 'processed' },
 	{ label: 'Failed', value: 'failed' },
-	{ label: 'Approved', value: 'approved' },
+	{ label: 'Pending', value: 'approved' },
 ];
 
 const MAX_LIMIT = 10;
 function FinanceTable({ data = {}, loading = false, filters = {}, setFilters = () => {}, refetch = () => {} }) {
 	const [show, setShow] = useState('');
 	const { list, page, page_limit, total_count } = data || {};
-	const { control, handleSubmit } = useForm();
+	const { control, handleSubmit, watch, formState:{ errors = {} } } = useForm();
 	const { uploadDocument } = useUploadFinanceDocuments();
 	const onPageChange = (pageNumber) => {
 		setFilters((prev) => ({
@@ -42,6 +41,8 @@ function FinanceTable({ data = {}, loading = false, filters = {}, setFilters = (
 		setShow,
 		handleSubmit,
 		uploadDocument,
+		watch,
+		errors,
 	});
 
 	return (
