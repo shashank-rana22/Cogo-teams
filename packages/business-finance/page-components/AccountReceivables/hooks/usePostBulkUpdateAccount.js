@@ -1,16 +1,24 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 const usePostBulkUpdateAccount = ({ setShowBulkPostModal = () => {}, refetch = () => {} }) => {
+	const { id = '' } = useSelector((state) => state?.profile?.user);
+
 	const [{ loading }, trigger] = useRequestBf({
-		url     : '/payments/bulk-update-account-taggings',
-		method  : 'post',
-		authKey : 'bulk_update_account_taggings',
+		url     : '/payments/outstanding/bulk-update-account-taggings',
+		method  : 'put',
+		authKey : 'put_payments_outstanding_bulk_update_account_taggings',
 	}, { manual: true });
 
 	const onSubmit = async (formValues) => {
 		try {
-			await trigger({ data: { url: formValues?.bulk_update_excel?.finalUrl } });
+			await trigger({
+				data: {
+					url               : formValues?.bulk_update_excel?.finalUrl || undefined,
+					performedByUserId : id || undefined,
+				},
+			});
 
 			setShowBulkPostModal(false);
 

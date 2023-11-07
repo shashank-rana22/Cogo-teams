@@ -1,9 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 const useUpdateAccountTagging = ({ item = {} }) => {
-	const [{ loading }, trigger] = useRequestBf({
+	const { id = '' } = useSelector((state) => state?.profile?.user);
 
+	const [{ loading }, trigger] = useRequestBf({
 		url     : 'payments/outstanding/update-account-taggings',
 		method  : 'put',
 		authKey : 'put_payments_outstanding_update_account_taggings',
@@ -14,9 +16,9 @@ const useUpdateAccountTagging = ({ item = {} }) => {
 			const resp = await trigger({
 				data: {
 					taggedState         : val,
-					entityCode          : item?.entityCode,
-					organizationId      : item?.organizationId,
-					taggedPartnerUserId : formValues?.tagged_person,
+					registrationNumber  : item?.registrationNumber || undefined,
+					taggedPartnerUserId : formValues?.tagged_person || undefined,
+					performedById       : id || undefined,
 				},
 			});
 

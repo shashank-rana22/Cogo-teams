@@ -9505,7 +9505,7 @@ const partner = {
 			feature     : 'outstanding',
 		},
 		{
-			api         : 'bulk_update_account_taggings',
+			api         : 'put_payments_outstanding_bulk_update_account_taggings',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',

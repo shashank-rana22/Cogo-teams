@@ -51,7 +51,7 @@ function ChangeStatus({
 				/>
 
 				<div className={styles.select}>
-					<p className={styles.label}>Select Person to Tag:</p>
+					<p className={styles.label}>Select Sub-Category Tagging:</p>
 
 					<AsyncSelectController
 						name="tagged_person"
