@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { startCase } from '@cogoport/utils';
 import { updateDoc } from 'firebase/firestore';
 
 import getStaticPath from './getStaticPath';
@@ -18,27 +19,33 @@ if (typeof window !== 'undefined') {
 	audio = new Audio(getStaticPath({ path: '/mp3/chat-notification.mp3' }));
 }
 
-const sendTeamsNotification = async ({
+const sendMailNotification = async ({
 	notifyData = {},
 	docRef = {},
 }) => {
 	try {
-		const { search_name = 'User', last_message_document = {}, group_id = '' } = notifyData || {};
+		const {
+			last_message = '', id,
+			channel_type = '', lead_user_details = {}, user_name = '', last_message_document = null,
+		} = notifyData || {};
 
-		const mediaText = last_message_document?.response?.message_type === 'media' ? 'media' : '';
+		const lowerCasedName = lead_user_details?.name?.toLowerCase() || user_name?.toLowerCase();
 
-		const lastMessage = last_message_document?.response?.message || mediaText;
+		const { response = {} } = last_message_document || {};
 
-		const notification = new Notification(search_name, {
-			body : lastMessage,
+		const {
+			subject = '',
+		} = response || {};
+
+		const notification = new Notification(startCase(lowerCasedName || 'Users'), {
+			body : subject || last_message,
 			icon : GLOBAL_CONSTANTS.image_url.cogoport_logo,
 		});
-
 		audio.play();
 
 		notification.onclick = () => {
 			const OMNICHANNEL_URL = window.location.href.split('?')?.[GLOBAL_CONSTANTS.zeroth_index];
-			window.open(`${OMNICHANNEL_URL}?assigned_chat=${group_id}&channel_type=internal_chat`, '_blank');
+			window.open(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`, '_blank');
 		};
 
 		notification.onclose = () => {
@@ -50,4 +57,4 @@ const sendTeamsNotification = async ({
 	}
 };
 
-export default sendTeamsNotification;
+export default sendMailNotification;
