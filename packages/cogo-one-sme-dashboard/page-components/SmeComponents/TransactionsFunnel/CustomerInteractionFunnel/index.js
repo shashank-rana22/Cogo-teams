@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 
+import { LoadingState } from '../../../../common/Elements';
 import FunnelGraphStruct from '../../../../common/FunnelGraphStruct';
+import { CUSTOMER_INTERACTION_LABEL_MAPPING } from '../../../../constants';
 import useSmeDashboardStats from '../../../../hooks/useSmeDashboardStats';
 
 import styles from './styles.module.css';
@@ -11,24 +13,20 @@ function CustomerInteractionFunnel({ widgetBlocks = null, filterParams = {} }) {
 		dashboardLoading = false,
 	} = useSmeDashboardStats({ widgetBlocks, filterParams });
 
+	const { customer_interaction_data = {} } = dashboardData || {};
+
 	const data = useMemo(
 		() => ({
-			labels: ['Calls made',
-				'Calls connected',
-				'Quotations Sent',
-				'Bookings'],
-			colors: [
-				['#7278AD', '#CED1ED'],
-				['#EDD7A9', '#F8F2E7'],
-			],
-			values: [
-				[600, 300],
-				[500, 150],
-				[200, 50],
-				[70, 10],
-			],
+			labels: CUSTOMER_INTERACTION_LABEL_MAPPING?.map(
+				(itm) => `${itm?.label}`,
+			),
+			colors : [['#7278AD'], ['#EDD7A9']],
+			values : CUSTOMER_INTERACTION_LABEL_MAPPING?.map((itm) => ([
+				+((+(customer_interaction_data?.[itm?.allocated] || 0)).toFixed(2)),
+				+((+(customer_interaction_data?.[itm?.unallocated] || 0)).toFixed(2)),
+			])),
 		}),
-		[],
+		[customer_interaction_data],
 	);
 
 	return (
@@ -44,12 +42,16 @@ function CustomerInteractionFunnel({ widgetBlocks = null, filterParams = {} }) {
 				</div>
 			</div>
 
-			<FunnelGraphStruct
-				data={data}
-				type="customer_interaction"
-				showSegregation
-				showDataBelow={false}
-			/>
+			{dashboardLoading ? <LoadingState />
+				: (
+					<FunnelGraphStruct
+						data={data}
+						type="customer_interaction"
+						showSegregation
+						showDataBelow={false}
+						subLabels={['allocated', 'unallocated']}
+					/>
+				)}
 		</div>
 	);
 }
