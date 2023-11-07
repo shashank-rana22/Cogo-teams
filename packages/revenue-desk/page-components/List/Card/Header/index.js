@@ -9,8 +9,20 @@ import serviceLabelMapping from '../../../../helpers/serviceLabelMapping';
 
 import styles from './styles.module.css';
 
+const getBookingSource = (source = '') => {
+	if (source === 'direct') {
+		return 'Sell Without Buy';
+	}
+
+	if (source === 'spot_line_booking') {
+		return 'SpotLine Booking';
+	}
+
+	return startCase(source);
+};
+
 function Header({ data = {}, filters = {} }) {
-	const { discount_reason = {} } = data || {};
+	const { discount_reason = {}, source = '' } = data || {};
 	const { tags = [], name = '', discount_value = 0 } = discount_reason || {};
 	let subscriptionDiscountApplied = '';
 	if ((tags || []).includes('partner_subscription')) {
@@ -49,11 +61,9 @@ function Header({ data = {}, filters = {} }) {
 							</div>
 						</Pill>
 					)}
-					<Pill size="md" color="#F7FAEF">
-						<div style={{ color: '#849E4C' }}>
-							{data?.source === 'direct'
-								? 'Sell Without Buy'
-								: startCase(data.source || '')}
+					<Pill size="md" color={source === 'spot_line_booking' ? '#ee3425' : '#F7FAEF'}>
+						<div style={{ color: source === 'spot_line_booking' ? '#fff' : '#849E4C' }}>
+							{getBookingSource(source)}
 						</div>
 					</Pill>
 					<Pill size="md" color="#F7FAEF">
