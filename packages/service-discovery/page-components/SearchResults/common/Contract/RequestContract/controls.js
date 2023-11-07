@@ -13,7 +13,6 @@ const renderAirlinesLabel = (data) => CustomSelectOption({ data, key: 'airlines'
 const createContracts = ({ isMobile = false, minCargoValues = {} }) => {
 	const {
 		fcl_freight: { min: minContainerCount },
-		// lcl_freight: { min: minVolume },
 		air_freight: { min: minWeight },
 	} = minCargoValues;
 
@@ -55,14 +54,6 @@ const createContracts = ({ isMobile = false, minCargoValues = {} }) => {
 			showIn      : ['fcl_freight', 'lcl_freight'],
 			rules       : { required: 'Container count is required', min: Number(minContainerCount) },
 		},
-		// {
-		// 	name   : 'max_volume',
-		// 	label  : 'Maximum Volume',
-		// 	type   : 'number',
-		// 	span   : 6,
-		// 	showIn : ['air_freight', 'lcl_freight'],
-		// 	rules  : { required: 'Maximum volume is required',min: Number(minVolume)},
-		// },
 		{
 			name   : 'max_weight',
 			label  : 'Maximum Weight',

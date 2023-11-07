@@ -74,7 +74,6 @@ const controls = ({ destination_country_id, origin_country_id, airport_id }) => 
 				status : 'active',
 			},
 			page_limit      : 20,
-			// includes        : { city: true, country: true, default_params_required: true },
 			recommendations : true,
 		},
 		renderLabel : (data) => CustomSelectOption({ data, key: 'locations' }),

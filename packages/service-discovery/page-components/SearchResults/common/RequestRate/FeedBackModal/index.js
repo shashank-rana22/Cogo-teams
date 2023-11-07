@@ -1,18 +1,14 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-// import { useEffect } from 'react';
 
 import getControls from '../controls';
 import FeedBackForm from '../FeedBackForm';
 
 import styles from './styles.module.css';
-// import useGetPriorityAirlineOptions from './useGetPriorityAirlineOptions';
 import useRequestForRate from './useRequestForRate';
 
 const MARGIN_FIRST_BUTTON = 12;
 const ZERO_MARGIN = 0;
-
-// const SERVICES_WITH_PRIORITY_AIRLINE_OPTIONS = ['air_freight'];
 
 function FeedBackModal({
 	data = {},
@@ -34,14 +30,11 @@ function FeedBackModal({
 		(value, index) => rates_id?.indexOf(value) === index,
 	);
 
-	// const { priorityAirlineOptions, airlineOptions } = useGetPriorityAirlineOptions();
-
 	const { control, formState:{ errors }, handleSubmit, reset } = useForm();
 
 	const controls = getControls({
 		service,
 		rates_excludes_ids,
-		// airlineOptions,
 	});
 
 	const showElements = {
@@ -76,19 +69,6 @@ function FeedBackModal({
 			loading,
 		},
 	];
-
-	// useEffect(() => {
-	// 	if (!SERVICES_WITH_PRIORITY_AIRLINE_OPTIONS.includes(service)) {
-	// 		return;
-	// 	}
-
-	// 	const { origin_airport_id = '', destination_airport_id = '' } = details;
-
-	// 	priorityAirlineOptions({
-	// 		origin_airport_id,
-	// 		destination_airport_id,
-	// 	});
-	// }, [details, priorityAirlineOptions, service]);
 
 	return (
 		<Modal
