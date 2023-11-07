@@ -927,7 +927,7 @@ function asyncAllocationEligibleRoles() {
 
 function asyncAgentScoringConfigs() {
 	return {
-		labelKey     : 'name',
+		labelKey     : 'display_name',
 		valueKey     : 'id',
 		endpoint     : '/configs',
 		authkey      : 'get_agent_scoring_configs',
