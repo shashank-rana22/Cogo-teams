@@ -31,6 +31,7 @@ const SUPPORT_SUPPLY = {
 	shift_view_default_type       : '',
 	accessible_new_communications : ['new_mail', 'global_contacts'],
 	group_agents_api_filter       : ['sales'],
+	adoption_assign_buttons       : ['assign_to_agent', 'auto_assign'],
 	permissions                   : {
 		auto_assign                                 : false,
 		bot_message_toggle                          : false,

@@ -81,6 +81,19 @@
 .request_name {
 	display: flex;
 	flex-direction: column;
+	width: 68%;
+
+	@media (max-width: 1280px) {
+		width: 63%;
+	}
+}
+
+.name {
+	max-width: 74%;
+	margin-left: 6px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .role {

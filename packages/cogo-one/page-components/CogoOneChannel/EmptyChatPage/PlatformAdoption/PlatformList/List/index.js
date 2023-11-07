@@ -34,7 +34,7 @@ const ADOPTIONS_COMPOONENT_MAPPING = {
 function List({
 	setActiveTab = () => {}, mailProps = {},
 	verifyAccount = {}, setVerifyAccount = () => {},
-	list = [], onboardingRequest = () => {},
+	list = [], onboardingRequest = () => {}, initialViewType = '',
 }) {
 	const { accountType = '' } = verifyAccount || {};
 
@@ -189,7 +189,12 @@ function List({
 				}
 
 				return (
-					<Component key={id} {...(COMPONENT_PROPS?.[request_type] || {})} item={item} />
+					<Component
+						key={id}
+						{...(COMPONENT_PROPS?.[request_type] || {})}
+						item={item}
+						initialViewType={initialViewType}
+					/>
 				);
 			})}
 

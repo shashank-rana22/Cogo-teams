@@ -10,7 +10,7 @@ import Header from '../../Header';
 
 import styles from './styles.module.css';
 
-function TradeTypeVerifyCard({ item = {}, setVerifyAccount = () => {} }) {
+function TradeTypeVerifyCard({ item = {}, setVerifyAccount = () => {}, initialViewType = '' }) {
 	const {
 		trade_party = {}, request_type = '', organization = {}, requesting_user = {},
 		serial_id = '', documents = [], escalation_cycle = '',
@@ -34,6 +34,7 @@ function TradeTypeVerifyCard({ item = {}, setVerifyAccount = () => {} }) {
 				accountType={account_type}
 				item={item}
 				content={<TradeInfoContent />}
+				initialViewType={initialViewType}
 			/>
 			<div className={styles.body_info}>
 				<div className={styles.each_row}>

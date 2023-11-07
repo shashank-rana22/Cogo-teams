@@ -28,7 +28,7 @@ function getTimeDuration(date) {
 	return `${seconds} sec${seconds > 1 ? 's' : ''} ago`;
 }
 
-function CallDetails({ item = {}, handlePlaceCall = () => {}, handleOpenMessage = () => {} }) {
+function CallDetails({ item = {}, handlePlaceCall = () => {}, handleOpenMessage = () => {}, initialViewType = '' }) {
 	const {
 		missed_agent_data = {}, request_type = '', customer = {}, voice_call_data = {},
 		serial_id = '', escalation_cycle = '', metadata = {}, request_assigned_to = '',
@@ -55,6 +55,7 @@ function CallDetails({ item = {}, handlePlaceCall = () => {}, handleOpenMessage 
 				requestType={request_type}
 				businessName={pocName}
 				content={<CallInfoContent />}
+				initialViewType={initialViewType}
 			/>
 			<div className={styles.body_info}>
 				<div className={styles.each_row}>

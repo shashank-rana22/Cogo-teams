@@ -92,6 +92,7 @@ function PlatformAdoption({
 						setVerifyAccount={setVerifyAccount}
 						verifyAccount={verifyAccount}
 						mailProps={mailProps}
+						initialViewType={initialViewType}
 					/>
 					{page >= 1 ? (
 						<div className={styles.pagination_info}>
