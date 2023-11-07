@@ -9,7 +9,10 @@ import Header from '../../Header';
 
 import styles from './styles.module.css';
 
-function KycVerifyCard({ item = {}, setVerifyAccount = () => {}, handlePlaceCall = () => {} }) {
+function KycVerifyCard({
+	item = {}, setVerifyAccount = () => {}, handlePlaceCall = () => {},
+	initialViewType = '',
+}) {
 	const {
 		organization = {}, request_type = '', requesting_user = {}, performed_by_type = '',
 		updated_at = '', customer = {}, serial_id = '', escalation_cycle = null, documents = [],
@@ -33,6 +36,7 @@ function KycVerifyCard({ item = {}, setVerifyAccount = () => {}, handlePlaceCall
 				accountType={account_type}
 				item={item}
 				content={<KycInfocontent />}
+				initialViewType={initialViewType}
 			/>
 			<div className={styles.body_info}>
 				<div className={styles.each_row}>
@@ -59,7 +63,7 @@ function KycVerifyCard({ item = {}, setVerifyAccount = () => {}, handlePlaceCall
 				<div className={styles.each_row}>
 					<div className={styles.title}>Requsted By :</div>
 					<div className={styles.request_name}>
-						{startCase(name)}
+						<div className={styles.name}>{startCase(name)}</div>
 						<div className={styles.role}>{startCase(performed_by_type)}</div>
 						<div className={styles.role}>
 							{formatDate({
