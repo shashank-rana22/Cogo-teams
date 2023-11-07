@@ -36,14 +36,14 @@ function Status({
 		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const { serial_id = '', is_job_closed = '', entity_id = '' } = shipment_data || {};
+	const { serial_id = '', is_job_closed = '' } = shipment_data || {};
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === invoice?.live_invoice_number,
 	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const showCN = BF_INVOICE_STATUS.includes(bfInvoice?.status)
-	|| (![101, 301, 401, 501].includes(getEntityCode(entity_id)) && bfInvoice?.status === 'FINANCE_REJECTED');
+	|| (![101, 301, 401, 501].includes(getEntityCode(invoice?.entity_id)) && bfInvoice?.status === 'FINANCE_ACCEPTED');
 
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === invoice?.live_invoice_number
