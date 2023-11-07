@@ -91,7 +91,7 @@ function EducationDetailsEdit({
 
 	const educationDetailsArray = useMemo(() => Object.keys(educationDetails).map((label) => ({
 		label,
-		value: educationDetails[label] || '',
+		value: educationDetails[label],
 	})), [educationDetails]);
 
 	useEffect(() => {
