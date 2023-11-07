@@ -68,3 +68,12 @@
 	gap: 8px;
 	white-space: nowrap;
 }
+
+.item_container {
+	display: flex;
+	padding: 8px 10px;
+	margin-bottom: 8px;
+	background-color: #fff;
+	border: 1px solid #f9f9f9;
+	border-radius: 6px;
+}

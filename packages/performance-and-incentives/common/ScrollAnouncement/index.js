@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { Placeholder, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { Image } from '@cogoport/next';
@@ -17,7 +17,15 @@ function ScrollAnnouncement({ style = {} }) {
 		setIsScrolling(!isScrolling);
 	};
 
-	if (loading || isEmpty(list)) return null;
+	if (loading) {
+		return (
+			<div className={styles.item_container}>
+				<Placeholder height={28} />
+			</div>
+		);
+	}
+
+	if (isEmpty(list)) return null;
 
 	return (
 		<div className={styles.container} style={style}>
