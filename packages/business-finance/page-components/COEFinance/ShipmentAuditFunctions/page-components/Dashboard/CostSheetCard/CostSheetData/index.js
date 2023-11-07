@@ -8,7 +8,7 @@ import ServiceAndLineItems from './ServiceAndLineItems';
 import styles from './styles.module.css';
 import Total from './Total';
 
-const TOTALS_AND_DEVIATIONS = ['billTotal', 'invoiceTotal', 'invoiceTotalDeviation', 'billTotalDeviation'];
+const TOTALS_AND_DEVIATIONS = ['billINRTotal', 'invoiceINRTotal', 'invoiceTotalDeviation', 'billTotalDeviation'];
 
 function CostSheetData({
 	costViewData = {},
@@ -26,8 +26,8 @@ function CostSheetData({
 	}
 
 	const {
-		billTotal = '',
-		invoiceTotal = '',
+		billINRTotal = '',
+		invoiceINRTotal = '',
 		invoiceTotalDeviation = '',
 		billTotalDeviation = '',
 	} = costViewData || {};
@@ -51,8 +51,8 @@ function CostSheetData({
 					) : null
 				))}
 				<Total
-					billTotal={billTotal}
-					invoiceTotal={invoiceTotal}
+					billINRTotal={billINRTotal}
+					invoiceINRTotal={invoiceINRTotal}
 					invoiceTotalDeviation={invoiceTotalDeviation}
 					billTotalDeviation={billTotalDeviation}
 				/>

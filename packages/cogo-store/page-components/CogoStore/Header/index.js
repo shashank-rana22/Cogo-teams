@@ -3,14 +3,11 @@ import { IcALocation, IcMArrowNext, IcMClock } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
-import useGetProductFilterDetail from '../../../hooks/useGetProductFilterDetail';
-
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ productData = {} }) {
 	const { push } = useRouter();
-	const { data: productData } = useGetProductFilterDetail();
-	const { user_details } = productData || {};
+	const { user_details, cart_items_count } = productData || {};
 	const { name, office_location } = user_details || {};
 	const { is_hr_admin } = productData || {};
 	const { COGO_ICON, COPYRIGHT_ICON, CART } = GLOBAL_CONSTANTS.image_url;
@@ -50,32 +47,35 @@ function Header() {
 			</div>
 
 			<div className={styles.right_header}>
-				<span
+				<div
 					className={styles.right_header_text}
 					aria-hidden
 					onClick={() => push('/cogo-store/order-history')}
 				>
 					<IcMClock height={14} style={{ marginRight: '4px' }} />
 					Order history
-				</span>
+				</div>
 
-				<span
+				<div
 					className={styles.right_header_text}
 					aria-hidden
 					onClick={() => push('/cogo-store/my-cart')}
+					style={{ position: 'relative' }}
 				>
-					<img src={CART} alt="" height="14px" style={{ marginRight: '4px' }} />
+					<img src={CART} alt="" height="14px" style={{ marginRight: '12px' }} />
 					My Cart
-				</span>
+					{cart_items_count > GLOBAL_CONSTANTS.zeroth_index
+						? <div className={styles.cart_count}>{cart_items_count}</div> : null}
+				</div>
 				{is_hr_admin ? (
-					<span
+					<div
 						className={styles.right_header_text}
 						aria-hidden
 						onClick={() => push('/cogo-store/admin-view')}
 					>
 						Admin View
 						<IcMArrowNext style={{ marginLeft: '3px', cursor: 'pointer' }} />
-					</span>
+					</div>
 				) : null}
 			</div>
 		</div>
