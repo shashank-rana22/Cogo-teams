@@ -22,7 +22,14 @@ import styles from './styles.module.css';
 import TradeTypeVerifyCard from './TradeTypeVerifyCard';
 import VerifyAccount from './VerifyAccount';
 
-const formatList = ({ list = [], type = '' }) => (list || []).filter((item) => type === item?.request_type);
+const ADOPTIONS_COMPOONENT_MAPPING = {
+	kyc_verification         : KycVerifyCard,
+	trade_party_verification : TradeTypeVerifyCard,
+	onboarded_customer       : OrganicCustomer,
+	missed_call              : CallDetails,
+	allocation_request       : AccountAllocateCard,
+	demo_request             : DemoCard,
+};
 
 function List({
 	setActiveTab = () => {}, mailProps = {},
@@ -76,13 +83,6 @@ function List({
 		setVerifyAccount,
 		onboardingRequest,
 	});
-
-	const kycList = formatList({ list, type: 'kyc_verification' });
-	const tradePartyList = formatList({ list, type: 'trade_party_verification' });
-	const organincList = formatList({ list, type: 'onboarded_customer' });
-	const missedList = formatList({ list, type: 'missed_call' });
-	const allocationList = formatList({ list, type: 'allocation_request' });
-	const demoList = formatList({ list, type: 'demo_request' });
 
 	const handlePlaceCall = ({ number, code, userName, leadUserId, pocId }) => {
 		if (!number) {
@@ -143,65 +143,59 @@ function List({
 	if (isEmpty(list)) {
 		return (
 			<div className={styles.empty_container}>
-				<Image src={GLOBAL_CONSTANTS.image_url.list_empty} width={380} height={300} />
+				<Image src={GLOBAL_CONSTANTS.image_url.list_empty} width={380} height={300} alt="list empty" />
 			</div>
 		);
 	}
 
+	const COMPONENT_PROPS = {
+		kyc_verification: {
+			setVerifyAccount,
+			handlePlaceCall,
+		},
+		trade_party_verification: {
+			setVerifyAccount,
+		},
+		onboarded_customer: {
+			setScheduleDemo,
+			handlePlaceCall,
+		},
+		missed_call: {
+			handlePlaceCall,
+			handleOpenMessage,
+		},
+		allocation_request: {
+			setVerifyAccount,
+			onStatusUpdate,
+			loadingUpdate,
+			rejectData,
+			setRejectData,
+		},
+		demo_request: {
+			mailProps,
+			setScheduleDemo,
+		},
+	};
+
 	return (
 		<div className={styles.container}>
-			{!isEmpty(kycList) ? (
-				<KycVerifyCard
-					list={kycList}
-					setVerifyAccount={setVerifyAccount}
-					handlePlaceCall={handlePlaceCall}
-				/>
-			) : null}
-			{!isEmpty(tradePartyList) ? (
-				<TradeTypeVerifyCard
-					list={tradePartyList}
-					setVerifyAccount={setVerifyAccount}
-				/>
-			) : null}
-			{!isEmpty(organincList) ? (
-				<OrganicCustomer
-					list={organincList}
-					setScheduleDemo={setScheduleDemo}
-					handlePlaceCall={handlePlaceCall}
-				/>
-			) : null}
-			{!isEmpty(missedList) ? (
-				<CallDetails
-					list={missedList}
-					handlePlaceCall={handlePlaceCall}
-					handleOpenMessage={handleOpenMessage}
-				/>
-			) : null}
+			{(list || []).map((item) => {
+				const { request_type = '', id = '' } = item || {};
 
-			{!isEmpty(allocationList) ? (
-				<AccountAllocateCard
-					list={allocationList}
-					setVerifyAccount={setVerifyAccount}
-					onStatusUpdate={onStatusUpdate}
-					loadingUpdate={loadingUpdate}
-					rejectData={rejectData}
-					setRejectData={setRejectData}
-				/>
-			) : null}
+				const Component = ADOPTIONS_COMPOONENT_MAPPING?.[request_type] || null;
 
-			{!isEmpty(demoList) ? (
-				<DemoCard
-					list={demoList}
-					mailProps={mailProps}
-					setScheduleDemo={setScheduleDemo}
-				/>
+				if (!Component) {
+					return null;
+				}
 
-			) : null}
+				return (
+					<Component key={id} {...(COMPONENT_PROPS?.[request_type] || {})} item={item} />
+				);
+			})}
 
 			<ScheduleDemo
 				scheduleDemo={scheduleDemo}
 				setScheduleDemo={setScheduleDemo}
-				demoList={demoList}
 				onboardingRequest={onboardingRequest}
 			/>
 			<VerifyAccount

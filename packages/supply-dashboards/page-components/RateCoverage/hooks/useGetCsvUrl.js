@@ -43,7 +43,7 @@ const useGetCsvFile = (filter, activeCard) => {
 			}
 		});
 
-		const isTodayDateRequired = ['pending', 'completed'].includes(filter?.status);
+		const isTodayDateRequired = filter?.status === 'completed';
 
 		const DATE_PARAMS = {};
 
@@ -57,13 +57,21 @@ const useGetCsvFile = (filter, activeCard) => {
 		if (filter?.end_date) { DATE_PARAMS.end_date = filter?.end_date; }
 
 		try {
+			let is_flash_booking_reverted;
+			if (filter?.is_flash_booking_reverted) {
+				is_flash_booking_reverted = filter?.is_flash_booking_reverted === 'reverted';
+			}
 			const resp = await trigger({
 				params: {
 					filters: {
 						...FINAL_FILTERS,
-						source  : sources.includes(activeCard) ? activeCard : undefined,
-						user_id : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
+						status: filter?.status === 'completed' ? ['completed', 'aborted']
+							: filter?.status,
+						source                  : sources.includes(activeCard) ? activeCard : undefined,
+						user_id                 : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
+						is_flash_booking_reverted,
 						...DATE_PARAMS,
+						transport_modes_keyword : filter?.service === 'trailer' ? 'trailer' : undefined,
 					},
 				},
 			});

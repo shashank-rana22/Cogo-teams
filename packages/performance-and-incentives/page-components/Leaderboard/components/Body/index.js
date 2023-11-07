@@ -26,6 +26,7 @@ function Body(props) {
 		isExpanded    : false,
 	});
 	const [isChannel, setIsChannel] = useState(false);
+	const [userPosition, setUserPosition] = useState(0);
 
 	const {
 		list,
@@ -36,7 +37,7 @@ function Body(props) {
 		debounceQuery,
 		listRefetch,
 		lastUpdatedAt,
-	} = useScoringReports({ currLevel, dateRange, entity, isChannel, levelStack });
+	} = useScoringReports({ currLevel, dateRange, entity, isChannel, levelStack, setUserPosition });
 
 	const {
 		data, statsLoading, refetchStats,
@@ -70,6 +71,7 @@ function Body(props) {
 				setLevelStack={setLevelStack}
 				lastUpdatedAt={lastUpdatedAt}
 				getUserProgress={getUserProgress}
+				userPosition={userPosition}
 			/>
 
 			<RightPanel

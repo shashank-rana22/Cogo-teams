@@ -20,6 +20,7 @@ function BreakdownDetailsHeader({
 	disableForm = false,
 	resetMargins = () => {},
 	rateDetails = [],
+	checkoutSource = '',
 }) {
 	const { rate = {}, conversions = {} } = useContext(CheckoutContext);
 
@@ -152,6 +153,10 @@ function BreakdownDetailsHeader({
 		rate?.services,
 		rate?.total_price_currency,
 	]);
+
+	if (checkoutSource === 'spot_line_booking') {
+		return null;
+	}
 
 	return (
 		<div className={styles.header}>

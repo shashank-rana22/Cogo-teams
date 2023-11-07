@@ -5178,6 +5178,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'contract',
 		},
+		{
+			api          : 'list_contract_fcl_freight_local_services',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
 
 		{
 			api          : 'update_organization_trade_requirement_draft',
@@ -6902,6 +6907,11 @@ const partner = {
 		},
 		{
 			api          : 'list_contract_fcl_freight_services',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_contract_fcl_freight_local_services',
 			access_type  : 'private',
 			service_name : 'contract',
 		},
@@ -10081,6 +10091,12 @@ const partner = {
 			api          : 'get_exchange_rate',
 			access_type  : 'private',
 			service_name : 'exchange_rate',
+		},
+		{
+			api         : 'post_payments_parent_jv_bulk_post_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
 		},
 	],
 	tracking: [

@@ -7,10 +7,17 @@ import SidTypeFilters from './SidTypeFilters';
 import styles from './styles.module.css';
 
 function CategoryType(props) {
-	const { searchParams, setSearchParams, isAdmin, idFilters = {}, setIdFilters = () => {} } = props;
-	const { show = false, idType = '', serialId = '' } = idFilters || {};
+	const { searchParams, setSearchParams, idFilters = {}, isAdmin, setIdFilters = () => {} } = props;
+	const {
+		show = false, category = '',
+		subcategory = '', raisedBy = '',
+		raisedTo = '', service = '', trade = '',
+		requestType = '',
+	} = idFilters || {};
 
 	const { t } = useTranslation(['myTickets']);
+
+	const isAppliedFilter = category || subcategory || raisedBy || service || trade || requestType || raisedTo;
 
 	return (
 		<div className={styles.category_container}>
@@ -48,6 +55,7 @@ function CategoryType(props) {
 				render={<SidTypeFilters {...props} />}
 				interactive
 				onClickOutside={() => setIdFilters((prev) => ({ ...prev, show: false }))}
+				className={styles.styled_popover}
 			>
 				<div
 					role="presentation"
@@ -57,7 +65,7 @@ function CategoryType(props) {
 					<IcMDoubleFilter width={20} height={20} />
 				</div>
 			</Popover>
-			{idType && serialId ? (
+			{isAppliedFilter ? (
 				<div className={styles.applied_dot} />
 			) : null}
 		</div>

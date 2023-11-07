@@ -72,11 +72,11 @@ export const TICKET_SECTION_MAPPING = {
 	Open: {
 		Statuses: 'unresolved',
 	},
-	'Closure Pending': {
-		Statuses: 'pending,reject_requested,resolve_requested',
-	},
 	Escalated: {
 		Statuses: 'escalated',
+	},
+	'Closure Pending': {
+		Statuses: 'pending,reject_requested,resolve_requested',
 	},
 	Closed: {
 		Statuses: 'closed,rejected,overdue',
@@ -255,6 +255,7 @@ export const SINGLE_LOCATIONS = [
 export const sortByOptions = ({ t }) => [
 	{ label: t('myTickets:created_at'), value: 'created_at' },
 	{ label: t('myTickets:updated_at'), value: 'updated_at' },
+	{ label: t('myTickets:messaged_at'), value: 'messaged_at' },
 ];
 
 export const DISABLE_STATUS_KEY = ['dislike_id', 'missing_id'];

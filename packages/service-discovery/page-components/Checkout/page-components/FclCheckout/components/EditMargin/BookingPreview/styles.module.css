@@ -1,0 +1,15 @@
+.heading {
+	margin-top: 24px;
+	margin-bottom: 10px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.container {
+	margin: 12px 20px 24px;
+}
+
+.main_heading {
+	font-size: 24px;
+	font-weight: 600;
+}

@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { startCase } from '@cogoport/utils';
+import { startCase, getCookie } from '@cogoport/utils';
 
 import { ICON_MAPPING } from '../../../../../../../constants/calenderConstants';
 
@@ -14,7 +14,7 @@ const LAST_INDEX = 1;
 function ListCard({
 	finalList = [], activeTab = '', actions = () => {},
 }) {
-	const { userId = '' } = useSelector(({ profile }) => ({ userId: profile?.user?.id }));
+	const userId = useSelector(({ profile }) => profile?.user?.id);
 
 	return (
 		<>
@@ -31,12 +31,18 @@ function ListCard({
 					performed_by_id = '',
 					main_status,
 					status = '',
-					invite_link = '',
 					schedule_end = '',
 					schedule_start = '',
 				} = singleEvent || {};
 
-				const meetLink = invite_link;
+				const meetLink = participants?.find(
+					(eachParticipant) => eachParticipant?.source_id === userId,
+				)?.invite_link || '';
+
+				const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
+
+				const updatedMeetLink = `${meetLink}&auth=${token}`;
+
 				const isOwner = userId === performed_by_id;
 
 				const checkStatus = activeTab === 'schedules' ? main_status : status;
@@ -155,13 +161,15 @@ function ListCard({
 											</div>
 										))}
 									</div>
-									<div
-										className={styles.invite_link}
-										onClick={() => window.open(meetLink, '_blank')}
-										role="presentation"
-									>
-										{invite_link}
-									</div>
+									{meetLink ? (
+										<div
+											className={styles.invite_link}
+											onClick={() => window.open(updatedMeetLink, '_blank')}
+											role="presentation"
+										>
+											Join Now
+										</div>
+									) : null}
 									<div className={styles.meeting_times}>
 										{TIME_MAPPING[activeTab]}
 									</div>

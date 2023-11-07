@@ -11,7 +11,7 @@ export const getDetentionDemurrageDays = ({
 	let destinationDetention = '';
 	let destinationDemurrage = '';
 
-	if (source === 'direct') {
+	if (['direct', 'spot_line_booking'].includes(source)) {
 		const primaryServices = detailedServices.map((per_service) => {
 			if (per_service?.service_type === primaryService?.service_type) {
 				return per_service;
