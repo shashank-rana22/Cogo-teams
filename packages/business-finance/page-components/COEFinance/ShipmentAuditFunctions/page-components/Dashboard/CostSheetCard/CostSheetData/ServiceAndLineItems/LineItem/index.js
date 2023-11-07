@@ -14,7 +14,7 @@ function LineItem({
 
 	return (
 		<div className={styles.item_container}>
-			<div className={styles.line_item_sub_container}>{`${lineItem?.name} (${lineItem?.code})`}</div>
+			<div className={styles.line_item_sub_container}>{`${lineItem?.name || ''} (${lineItem?.code || ''})`}</div>
 			<div className={styles.line_item_sub_container}>
 				<LineItemDeviation
 					currency={invoiceCurrency}
