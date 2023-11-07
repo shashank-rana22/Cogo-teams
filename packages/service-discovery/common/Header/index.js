@@ -42,7 +42,11 @@ function Header(props = {}) {
 			<ActiveHeader {...props} />
 
 			{showAdditionalHeader ? (
-				<ExtraHeader headerProps={headerProps} createLoading={createLoading} createSearch={createSearch} />
+				<ExtraHeader
+					headerProps={headerProps}
+					createLoading={createLoading}
+					createSearch={createSearch}
+				/>
 			) : null}
 		</div>
 	);

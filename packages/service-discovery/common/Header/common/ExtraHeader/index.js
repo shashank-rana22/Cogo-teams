@@ -15,7 +15,11 @@ function ExtraHeader({ headerProps = {}, createLoading = false, createSearch = (
 
 	return (
 		<div className={styles.container}>
-			<ActiveComponent {...headerProps} createLoading={createLoading} createSearch={createSearch} />
+			<ActiveComponent
+				{...headerProps}
+				createLoading={createLoading}
+				createSearch={createSearch}
+			/>
 		</div>
 	);
 }
