@@ -73,6 +73,7 @@ function FinanceTable({ data = {}, loading = false, filters = {}, setFilters = (
 									}}
 									value={filters.status}
 									isClearable
+									style={{ width: '140px' }}
 								/>
 
 							</div>
