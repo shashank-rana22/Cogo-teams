@@ -139,7 +139,7 @@ function Filters({
 						className={styles.bulk_btn}
 						onClick={() => setShowBulkPostModal(true)}
 					>
-						Bulk Post
+						Bulk Update
 					</Button>
 				</div>
 				<div className={styles.flex_wrap}>

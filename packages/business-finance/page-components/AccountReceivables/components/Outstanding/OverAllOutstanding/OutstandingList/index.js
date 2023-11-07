@@ -269,6 +269,10 @@ function OutstandingList({
 								? (<Pill size="md" color="green">{startCase(item?.taggedState)}</Pill>) : null
 						}
 						{
+							item?.taggedPersonDetails ? (
+								<Pill size="md" color="green">{startCase(item.taggedPersonDetails?.name)}</Pill>) : null
+						}
+						{
 							(entityCode !== '101_301')
 								? (
 									<Popover
