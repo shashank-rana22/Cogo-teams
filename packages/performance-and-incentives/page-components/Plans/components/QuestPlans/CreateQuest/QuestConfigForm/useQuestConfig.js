@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useFieldArray, useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -39,7 +40,9 @@ const getFormattedPayload = (formValues) => {
 	return formattedData;
 };
 
-const useQuestConfig = ({ data = {}, refetch = () => {}, questName = null }) => {
+const useQuestConfig = ({ data = {}, questName = null }) => {
+	const { push } = useRouter();
+
 	const [editSubBlock, setEditSubBlock] = useState({});
 
 	const [blockId, setBlockId] = useState({});
@@ -120,7 +123,7 @@ const useQuestConfig = ({ data = {}, refetch = () => {}, questName = null }) => 
 			});
 
 			Toast.success('Saved successfully!');
-			refetch();
+			push('/performance-and-incentives/plans?tab=quest_plans');
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
