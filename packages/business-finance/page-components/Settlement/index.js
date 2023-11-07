@@ -41,7 +41,7 @@ function Settlement() {
 		};
 	});
 
-	const tabMapping = tabPanelMapping(entityCode, entity);
+	const tabMapping = tabPanelMapping(entityCode);
 
 	const [activeTab, setActiveTab] = useState(query?.active_tab);
 
