@@ -1,4 +1,4 @@
-import { Input, Placeholder, Popover } from '@cogoport/components';
+import { Button, Input, Placeholder, Popover } from '@cogoport/components';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
 import {
 	IcMArrowRotateUp,
@@ -10,6 +10,7 @@ import { useState } from 'react';
 
 import { SORTBY_OPTION } from '../../../../constants/index';
 
+import BulkPostModal from './BulkPostModal';
 import CallPriorityModal from './CallPriorityModal';
 import FilterpopOver from './FilterpopOver/index';
 import styles from './styles.module.css';
@@ -32,6 +33,7 @@ function Filters({
 }) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
 	const [showCallPriority, setShowCallPriority] = useState(false);
+	const [showBulkPostModal, setShowBulkPostModal] = useState(false);
 
 	const sortStyleAsc = orderBy.order === 'Asc' ? '#303B67' : '#BDBDBD';
 
@@ -132,6 +134,13 @@ function Filters({
 						clearFilter={clearFilter}
 						refetch={refetch}
 					/>
+
+					<Button
+						className={styles.bulk_btn}
+						onClick={() => setShowBulkPostModal(true)}
+					>
+						Bulk Post
+					</Button>
 				</div>
 				<div className={styles.flex_wrap}>
 					<div className={styles.call}>
@@ -177,6 +186,13 @@ function Filters({
 					showCallPriority={showCallPriority}
 					setShowCallPriority={setShowCallPriority}
 					data={callPriorityData}
+				/>
+			) : null}
+			{showBulkPostModal ? (
+				<BulkPostModal
+					showBulkPostModal={showBulkPostModal}
+					setShowBulkPostModal={setShowBulkPostModal}
+					refetch={refetch}
 				/>
 			) : null}
 		</div>
