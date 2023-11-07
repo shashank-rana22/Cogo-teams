@@ -1,4 +1,3 @@
-import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { updateDoc } from 'firebase/firestore';
 
@@ -24,18 +23,6 @@ const sendTeamsNotification = async ({
 	docRef = {},
 }) => {
 	try {
-		const notifyPermissions = await Notification.requestPermission();
-
-		if (notifyPermissions === 'denied') {
-			Toast.error('Notifications are blocked by the user.');
-			return;
-		}
-
-		if (notifyPermissions !== 'granted') {
-			Toast.error('Notification permission not granted.');
-			return;
-		}
-
 		const { search_name = 'User', last_message_document = {}, group_id = '' } = notifyData || {};
 
 		const mediaText = last_message_document?.response?.message_type === 'media' ? 'media' : '';

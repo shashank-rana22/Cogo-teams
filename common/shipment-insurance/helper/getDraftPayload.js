@@ -1,5 +1,7 @@
 import { isEmpty, upperCase } from '@cogoport/utils';
 
+import getFormattedDate from './getFormattedDate';
+
 const getPayloadForSaveAsDraft = ({
 	draftData = {},
 	performedBy = '',
@@ -12,12 +14,17 @@ const getPayloadForSaveAsDraft = ({
 
 	const {
 		invoiceDate, invoiceNo, pan_number,
-		invoiceDoc, panDoc, gstDoc, aadharDoc, coverageFrom, coverageTo, packageDescription, aadharNumber, ...rest
+		invoiceDoc, panDoc, gstDoc, aadharDoc,
+		coverageFrom, coverageTo, packageDescription, aadharNumber, transitDate, ...rest
 	} = getValues() || {};
+
 	const {
 		userId, organizationId, metadata = {}, cargoDetails = {}, invoiceDetails = {}, billingDetails = {},
 		verificationDoc = {}, pocDetails = {}, source = '',
 	} = draftData || {};
+
+	const formmattedTransitDate = getFormattedDate({ currentDate: transitDate });
+	const formmattedInvoiceDate = getFormattedDate({ currentDate: invoiceDate });
 
 	return ({
 		userId,
@@ -44,12 +51,13 @@ const getPayloadForSaveAsDraft = ({
 			packaging    : packageDescription,
 			locationFrom : coverageFrom,
 			locationTo   : coverageTo,
+			transitDate  : formmattedTransitDate,
 			...(rest || {}),
 		},
 		invoiceDetails: {
 			...(invoiceDetails || {}),
 			invoiceNo,
-			invoiceDate,
+			invoiceDate: formmattedInvoiceDate,
 		},
 		pocDetails,
 		verificationDoc: {

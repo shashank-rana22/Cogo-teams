@@ -35,7 +35,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 		setIsPillSelected((prev) => ({ ...prev, [trade_type]: !prev?.[trade_type] }));
 	};
 
-	const { discount_reason = {} } = itemData || {};
+	const { discount_reason = {}, source = '' } = itemData || {};
 	const { tags = [], name = '', discount_value = 0 } = discount_reason || {};
 	let subscriptionDiscountApplied = '';
 	if ((tags || []).includes('partner_subscription')) {
@@ -265,10 +265,10 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData, fetchShipment
 							priceData={priceData}
 							setShowDetailPage={setShowDetailPage}
 							revenueDeskDecisionsData={revenueDeskDecisionsData?.[DEFAULT_INDEX] || []}
+							isSpotLineBooking={source === 'spot_line_booking'}
 						/>
 					)}
 			</div>
-
 		</div>
 	);
 }

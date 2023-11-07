@@ -3,7 +3,7 @@
 	align-items: flex-start;
 	justify-content: space-between;
 	height: fit-content;
-	padding: 20px 32px;
+	padding: 20px 32px 12px;
 
 	@media (min-width: 2560px) {
 		padding: 64px 80px;

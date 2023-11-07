@@ -10,6 +10,7 @@ const OVERFLOW_LENGTH = 11;
 const getFinancialCloseColumns = ({
 	handleClick = () => {},
 	tax = '',
+	subActiveTab = '',
 }) => {
 	const columns = [
 		{
@@ -182,16 +183,18 @@ const getFinancialCloseColumns = ({
 			Header   : '',
 			accessor : (row) => (
 				<div>
-					<Button
-						themeType="secondary"
-						onClick={() => handleClick({
-							jobId     : row?.jobId,
-							jobNumber : row?.jobNumber,
-							currency  : row?.currency,
-						})}
-					>
-						Audit
-					</Button>
+					{subActiveTab !== 'audited' ? (
+						<Button
+							themeType="secondary"
+							onClick={() => handleClick({
+								jobId     : row?.jobId,
+								jobNumber : row?.jobNumber,
+								currency  : row?.currency,
+							})}
+						>
+							Audit
+						</Button>
+					) : null}
 				</div>
 			),
 		},

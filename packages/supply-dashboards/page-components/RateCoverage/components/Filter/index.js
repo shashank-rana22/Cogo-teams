@@ -146,38 +146,61 @@ function Filter({
 						</div>
 					</div>
 
-					<div className={styles.details}>
-						<div>
-							<p>Origin</p>
-							<Select
-								placeholder="Port Pair"
-								{...originLocationOptions}
-								value={filter?.origin_location}
-								style={{ width: '250px' }}
-								isClearable
-								onChange={(val) => {
-									setFilter((prevFilters) => ({ ...prevFilters, origin_location: val, page: 1 }));
-								}}
-							/>
-						</div>
+					{['ftl_freight', 'haulage', 'air_freight', 'ltl_freight', 'trailer_freight',
+						'lcl_freight', 'fcl_freight'].includes(filter?.service) && (
+							<div className={styles.details}>
+								<div>
+									<p>Origin</p>
+									<Select
+										placeholder="Port Pair"
+										{...originLocationOptions}
+										value={filter?.origin_location}
+										style={{ width: '250px' }}
+										isClearable
+										onChange={(val) => {
+											setFilter((prevFilters) => (
+												{ ...prevFilters, origin_location: val, page: 1 }));
+										}}
+									/>
+								</div>
+
+								<div>
+									<p>Destination</p>
+									<Select
+										placeholder="Port Pair"
+										{...destinationLocationOptions}
+										value={filter?.destination_location}
+										isClearable
+										onChange={(val) => {
+											setFilter((prevFilters) => ({
+												...prevFilters,
+												destination_location : val,
+												page                 : 1,
+											}));
+										}}
+									/>
+								</div>
+							</div>
+					)}
+					{['fcl_customs', 'fcl_cfs', 'lcl_customs', 'air_customs'].includes(filter?.service) && (
 
 						<div>
-							<p>Destination</p>
+							<p>Location</p>
 							<Select
 								placeholder="Port Pair"
 								{...destinationLocationOptions}
-								value={filter?.destination_location}
+								value={filter?.location}
 								isClearable
 								onChange={(val) => {
 									setFilter((prevFilters) => ({
 										...prevFilters,
-										destination_location : val,
-										page                 : 1,
+										location : val,
+										page     : 1,
 									}));
 								}}
 							/>
 						</div>
-					</div>
+					)}
 
 					{(source === 'live_booking')
 					&& (
