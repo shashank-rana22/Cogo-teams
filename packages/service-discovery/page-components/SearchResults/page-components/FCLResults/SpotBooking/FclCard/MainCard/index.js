@@ -128,15 +128,13 @@ function MainCard({ shippingLines = [], detail = {}, formProps = {}, watch = () 
 						)}
 					</div>
 
-					{!isEmpty(sailingSchedules) ? (
-						<CheckboxController
-							name="sailing_schedule"
-							control={control}
-							label="Add custom departure & arrival"
-							style={{ marginLeft: '24px' }}
-							value={false}
-						/>
-					) : null}
+					<CheckboxController
+						name="sailing_schedule"
+						control={control}
+						label="Add custom departure & arrival"
+						style={{ marginLeft: '24px' }}
+						value={false}
+					/>
 				</div>
 
 				<div className={styles.time_div}>

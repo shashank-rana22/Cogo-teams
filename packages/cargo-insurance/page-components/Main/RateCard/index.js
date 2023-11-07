@@ -4,7 +4,7 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
-import RateCardInfo from './RateCardInfo.';
+import RateCardInfo from './RateCardInfo';
 import RateCardLoader from './RateCardLoader';
 import styles from './styles.module.css';
 
