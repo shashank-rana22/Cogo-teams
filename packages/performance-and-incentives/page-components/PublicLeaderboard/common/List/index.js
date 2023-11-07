@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 
+import SCREEN_CONSTANTS from '../../../../constants/screen-constants';
 import TEXT_MAPPING from '../../configurations/header-text-mapping';
 import getAnimationDuration from '../../utils/getAnimationDuration';
 
@@ -8,8 +9,10 @@ import styles from './styles.module.css';
 
 const MAX_LIST_ITEMS = 9;
 
+const { OVERALL } = SCREEN_CONSTANTS;
+
 function List(props) {
-	const { tableList = [], view, totalReportCount, screen = 'overall' } = props;
+	const { tableList = [], view, totalReportCount, screen = OVERALL } = props;
 
 	const LIST_COLUMN_MAPPING = getListColumnMapping({ view });
 
@@ -73,7 +76,7 @@ function List(props) {
 
 			</div>
 
-			{ screen === 'overall' && totalReportCount > MAX_LIST_ITEMS ? (
+			{ screen === OVERALL && totalReportCount > MAX_LIST_ITEMS ? (
 				<p className={styles.info_text}>
 					Total:
 					{' '}

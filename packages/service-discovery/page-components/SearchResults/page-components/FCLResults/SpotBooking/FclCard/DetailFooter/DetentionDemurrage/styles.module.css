@@ -1,0 +1,17 @@
+.container {
+	display: flex;
+	align-items: center;
+	font-size: 10px;
+}
+
+.tag {
+	padding: 2px 4px;
+	margin-right: 8px;
+	margin-left: 12px;
+	background: #cfeaed;
+	border-radius: 4px;
+}
+
+.days_count {
+	display: flex;
+}

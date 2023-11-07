@@ -18,6 +18,7 @@ function MailHeader({
 	hasPermissionToEdit = false,
 	isDraft = false,
 	emailStatus = '',
+	loading = false,
 	setModalData = () => {},
 	activeMessageCard = {},
 	viewType = '',
@@ -88,6 +89,7 @@ function MailHeader({
 							handleClick={handleClick}
 							emailStatus={emailStatus}
 							isDraftAlreadySent={!!communication_id}
+							loading={loading}
 						/>
 					) : null}
 

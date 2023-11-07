@@ -89,3 +89,13 @@
 		}
 	}
 }
+
+.location_selector {
+	width: 140px;
+
+	:global {
+		.ui_select_option_item span {
+			width: 100%;
+		}
+	}
+}

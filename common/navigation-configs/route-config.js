@@ -14,6 +14,7 @@ import business from './config/business';
 import businessFinance from './config/business-finance';
 import byodDashboard from './config/byod-dashboard';
 import cancellationPolicies from './config/cancellation-policies';
+import cargoInsurance from './config/cargo-insurance';
 import centralisedCustomerService from './config/centralised-customer-service';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
@@ -36,6 +37,7 @@ import ftlAdmin from './config/ftl-admin';
 import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
 import governanceManager from './config/governance-manager';
 import groundOps from './config/ground-ops';
+import handlingFees from './config/handling-fees';
 import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
 import ingestion from './config/ingestion';
@@ -190,7 +192,9 @@ const routeConfig = {
 	...margins,
 	...saas,
 	...serviceManagement,
+	...cargoInsurance,
 	...cogoStore,
+	...handlingFees,
 };
 
 export default routeConfig;

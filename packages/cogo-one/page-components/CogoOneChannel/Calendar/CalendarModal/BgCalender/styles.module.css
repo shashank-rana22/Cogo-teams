@@ -1,0 +1,92 @@
+.container {
+	width: 100%;
+	height: 100%;
+
+	:global {
+		.rbc-date-cell {
+			padding-left: 5px;
+			text-align: start;
+		}
+
+		.rbc-calendar {
+			width: 100% !important;
+			height: 100% !important;
+		}
+
+		.rbc-month-view {
+			border: none;
+		}
+
+		.rbc-month-row {
+			cursor: pointer;
+			border-right: 1px  solid #ddd;
+			border-left: 1px  solid #ddd;
+
+			&:last-child {
+				border-bottom: 1px  solid #ddd;
+			}
+		}
+
+		.rbc-row-segment {
+			padding: 0;
+		}
+
+		.rbc-event {
+			background: none;
+		}
+
+		.rbc-selected {
+			border: none !important;
+
+			&:focus {
+				border: none !important;
+				outline: none;
+			}
+		}
+
+		.rbc-day-bg {
+			cursor: pointer;
+		}
+
+		.rbc-header {
+			padding-bottom: 20px;
+			font-weight: 600;
+			border: none;
+			border-bottom: 1px  solid #ddd;
+		}
+
+		.rbc-button-link {
+			font-size: 14px !important;
+			font-weight: 600 !important;
+			pointer-events: none;
+		}
+
+		.ui_button_container {
+			padding: 0;
+		}
+	}
+}
+
+.label {
+	width: 180px;
+	font-size: 16px;
+	font-size: 600;
+	text-align: center;
+}
+
+.header_container {
+	display: flex;
+	align-items: center;
+}
+
+.icon_styles {
+	width: 22px;
+	height: 22px;
+	cursor: pointer;
+	transform: 0.3s ease-in-out;
+
+	&:hover {
+		transition: 0.3s  ease-in-out;
+		transform: scale(1.2);
+	}
+}

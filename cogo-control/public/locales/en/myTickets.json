@@ -113,7 +113,7 @@
     "describe_issue": "Describe Issue",
     "select_organization": "Select Organization",
     "select_user": "Select User",
-    "priority_label": "priority",
+    "priority_label": "Priority",
     "select_type": "Select Type",
     "medium": "Medium",
     "low": "Low",
@@ -174,5 +174,6 @@
     "apply": "Apply",
     "reset": "Reset",
     "serial_id": "Serial ID",
-    "id_creator": "ID creator"
+    "id_creator": "ID creator",
+    "messaged_at":"Messaged At"
 }

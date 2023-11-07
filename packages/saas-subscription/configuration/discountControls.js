@@ -55,7 +55,7 @@ const getDiscountControls = ({ isCreate = false, watchConfig = '', unit = '', t 
 			rows        : 3,
 		},
 		{
-			name        : 'condition',
+			name        : 'conditions',
 			label       : t('saasSubscription:discount_control_conditions'),
 			placeholder : t('saasSubscription:discount_control_conditions_placeholder'),
 			size        : 'sm',
@@ -68,6 +68,16 @@ const getDiscountControls = ({ isCreate = false, watchConfig = '', unit = '', t 
 			type    : 'radioGroup',
 			options : [{ value: 'active', label: 'active' }, { value: 'inactive', label: 'inactive' }],
 			rules   : { required: true },
+		},
+		{
+			name         : 'to_all_subscribers',
+			label        : 'To All Subscribers',
+			type         : 'toggle',
+			onLabel      : 'Yes',
+			offLabel     : 'No',
+			size         : 'sm',
+			showOptional : false,
+			showEle      : isCreate,
 		},
 	];
 };

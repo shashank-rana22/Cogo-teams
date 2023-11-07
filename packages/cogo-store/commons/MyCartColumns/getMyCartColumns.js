@@ -1,4 +1,4 @@
-import { Input } from '@cogoport/components';
+import { Input, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMMinus, IcMPlus, IcCFcrossInCircle } from '@cogoport/icons-react';
 import React from 'react';
@@ -10,7 +10,7 @@ const getMyCartColumns = ({
 	refetchCartDetails = () => {},
 	setCouponApplied = () => {},
 	color = [],
-	currency_code,
+	currency_symbol,
 }) => ([
 	{
 		Header   : 'PRODUCTS',
@@ -25,13 +25,13 @@ const getMyCartColumns = ({
 					<div className={styles.products_right}>
 						<div className={styles.black}>{item.product_name}</div>
 						<div className={styles.dot_list}>
-							<span>Colour</span>
+							<span>Color</span>
 							<div
 								className={styles.color_dot}
 								key={item.color_id}
 								style={{
 									backgroundColor : `${getColorFromCode(item?.color_id)}`,
-									border          : '1px solid black',
+									border          : '1px solid rgba(0,0,0,.2)',
 								}}
 							/>
 							<span>{item?.size}</span>
@@ -47,7 +47,8 @@ const getMyCartColumns = ({
 		accessor : (item = {}) => (
 			<div className={styles.dot_list}>
 				<div className={styles.amt_black}>
-					{currency_code}
+					{currency_symbol}
+					{' '}
 					{item?.after_coupon_price}
 				</div>
 			</div>
@@ -58,15 +59,19 @@ const getMyCartColumns = ({
 		Header   : 'QUANTITY',
 		accessor : (item = {}) => {
 			const handleIncrease = async () => {
-				const quantity = item.quantity + GLOBAL_CONSTANTS.one;
-				const payload = [
-					{
-						product_variation_id: item?.id,
-						quantity,
-					},
-				];
-				await updateCart({ payload });
-				refetchCartDetails();
+				if (item.quantity <= 5) {
+					const quantity = item.quantity + GLOBAL_CONSTANTS.one;
+					const payload = [
+						{
+							product_variation_id: item?.id,
+							quantity,
+						},
+					];
+					await updateCart({ payload, showToast: true });
+					refetchCartDetails();
+				} else {
+					Toast.error('Quantity limit exceeded');
+				}
 			};
 
 			const handleDecrease = async () => {
@@ -78,7 +83,7 @@ const getMyCartColumns = ({
 						quantity,
 					},
 				];
-				await updateCart({ payload });
+				await updateCart({ payload, showToast: true });
 				refetchCartDetails();
 			};
 			return (
@@ -102,16 +107,7 @@ const getMyCartColumns = ({
 						)}
 						style={{ width: '90px' }}
 						value={item.quantity}
-						onChange={async (val) => {
-							const payload = [
-								{
-									product_variation_id : item.id,
-									quantity             : val,
-								},
-							];
-							await updateCart({ payload });
-							refetchCartDetails();
-						}}
+						disabled
 						placeholder="1"
 					/>
 				</div>
@@ -130,14 +126,15 @@ const getMyCartColumns = ({
 						quantity             : 0,
 					},
 				];
-				await updateCart({ payload });
+				await updateCart({ payload, itemRemoved: true });
 				setCouponApplied(false);
 				refetchCartDetails();
 			};
 			return (
 				<div className={styles.dot_list}>
 					<div className={styles.amt_black}>
-						{currency_code}
+						{currency_symbol}
+						{' '}
 						{item?.sub_total_amount || '-'}
 					</div>
 					<IcCFcrossInCircle

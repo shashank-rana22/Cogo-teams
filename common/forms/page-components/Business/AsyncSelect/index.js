@@ -107,6 +107,7 @@ import {
 	asyncListTrailerRateFeedback,
 	asyncListHaulageRateFeedback,
 	asyncListAirCustomFeedback,
+	asyncInsuranceHsCode,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -232,6 +233,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_trailer_freight_rate_feedbacks  : asyncListTrailerRateFeedback,
 	list_haulage_freight_rate_feedbacks  : asyncListHaulageRateFeedback,
 	list_air_customs_rate_feedbacks      : asyncListAirCustomFeedback,
+	list_insurance_hs_code               : asyncInsuranceHsCode,
 };
 
 const SINGLE_ENTITY = 1;

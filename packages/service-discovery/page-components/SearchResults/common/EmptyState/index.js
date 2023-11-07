@@ -1,37 +1,22 @@
 import React from 'react';
 
-import NoRatesFound from './NoRatesFound';
-import RequestRate from './RequestRate';
-import styles from './styles.module.css';
+import AdditionalTabs from '../AdditionalTabs';
 
-const REQUEST_RATE_ALLOWED_SERVICES = [
-	'fcl_freight',
-	'lcl_freight',
-	'air_freight',
-	'ftl_freight',
-	'ltl_freight',
-	'fcl_customs',
-	'lcl_customs',
-	'air_customs',
-	'haulage_freight',
-	'fcl_freight_local',
-	'rail_domestic_freight',
-	'trailer_freight',
-];
+import NoRatesFound from './NoRatesFound';
+import styles from './styles.module.css';
 
 function EmptyState({
 	details = {},
 	filters = {},
 	setFilters = () => {},
 	refetch = () => {},
-	service_key = 'search_type',
 	openAccordian = '',
 	setOpenAccordian = () => {},
 	showFilterModal = false,
 	setShowFilterModal = () => {},
+	setScreen = () => {},
+	rates = [],
 }) {
-	const service_type = details[service_key];
-
 	return (
 		<div className={styles.container}>
 			<NoRatesFound
@@ -45,11 +30,9 @@ function EmptyState({
 				setShowFilterModal={setShowFilterModal}
 			/>
 
-			{REQUEST_RATE_ALLOWED_SERVICES.includes(service_type) ? (
-				<div className={styles.request_rate_container}>
-					<RequestRate details={details} />
-				</div>
-			) : null}
+			<div className={styles.request_rate_container}>
+				<AdditionalTabs detail={details} setScreen={setScreen} rates={rates} />
+			</div>
 		</div>
 	);
 }

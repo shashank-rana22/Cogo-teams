@@ -7,7 +7,7 @@ import { formatLineItems, formatWeightSlabs, updateLineItems } from '../helpers/
 import useShipmentBuyQuotations from './useShipmentBuyQuotations';
 
 const useUpdateFlashBookingRate = ({
-	data, filter,
+	data, filter, source,
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_shipment_flash_booking_rate',
@@ -20,6 +20,7 @@ const useUpdateFlashBookingRate = ({
 	const { line_items: quotationLineItems } = useShipmentBuyQuotations({
 		shipment_id,
 		service_id,
+		source,
 	});
 
 	const updateFlashBookingRate = async ({

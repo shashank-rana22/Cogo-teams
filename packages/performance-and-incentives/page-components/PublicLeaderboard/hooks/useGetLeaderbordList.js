@@ -2,8 +2,15 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
+import getFormattedDate from '../../../utils/get-formatted-date';
 import getRankFromScore from '../configurations/getRankFromScore';
 import PublicLeaderBoardContext from '../context/PublicLeaderBoardContext';
+import LEADERBOARD_LOCATIONS from '../utils/leaderboard-locations';
+
+const getLocation = ({
+	office_location_id,
+	officeLocation,
+}) => office_location_id || LEADERBOARD_LOCATIONS[officeLocation]?.value || undefined;
 
 function useGetLeaderbordList(props) {
 	const {
@@ -17,7 +24,7 @@ function useGetLeaderbordList(props) {
 		setNextReloadAt = () => {},
 	} = props;
 
-	const { countdown } = useContext(PublicLeaderBoardContext);
+	const { countdown, officeLocation } = useContext(PublicLeaderBoardContext);
 
 	const [params, setParams] = useState({
 		page                     : 1,
@@ -58,11 +65,12 @@ function useGetLeaderbordList(props) {
 				report_type      : ['owner_wise', 'manager_wise', 'kam_wise'].includes(view)
 					? `${view.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]}_report` : undefined,
 				created_at_greater_than : dateRange?.startDate || undefined,
-				created_at_less_than    : dateRange?.endDate || undefined,
-				office_location_id      : office_location_id || undefined,
+				created_at_less_than    : dateRange?.endDate
+					? getFormattedDate({ currentDate: dateRange?.endDate }) : undefined,
+				office_location_id: getLocation({ office_location_id, officeLocation }),
 			},
 		}));
-	}, [view, dateRange, office_location_id]);
+	}, [view, dateRange, office_location_id, officeLocation]);
 
 	const rankData = getRankFromScore({ score });
 
