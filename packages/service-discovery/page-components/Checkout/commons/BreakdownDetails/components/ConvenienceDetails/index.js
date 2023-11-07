@@ -178,6 +178,7 @@ function ConvenienceDetails({
 										stateFun : setConvenienceDetails,
 										stateKey : 'convenience_rate',
 									})}
+									type="number"
 									style={{ marginLeft: '12px' }}
 									disabled={!shouldEditConvenienceFee || loading}
 								/>
@@ -218,6 +219,7 @@ function ConvenienceDetails({
 									<Input
 										value={handling_fees?.price}
 										size="sm"
+										type="number"
 										onChange={(val) => onChange({
 											value    : val,
 											itemKey  : 'price',
