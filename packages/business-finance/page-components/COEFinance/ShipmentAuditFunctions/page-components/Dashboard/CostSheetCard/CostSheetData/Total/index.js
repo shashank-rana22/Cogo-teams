@@ -6,8 +6,8 @@ import styles from './styles.module.css';
 
 function Total({
 	currency = '',
-	billTotal = '',
-	invoiceTotal = '',
+	billINRTotal = '',
+	invoiceINRTotal = '',
 	invoiceTotalDeviation = '',
 	billTotalDeviation = '',
 }) {
@@ -20,7 +20,7 @@ function Total({
 			</div>
 			<div className={styles.sub_container}>
 				{ formatAmount({
-					amount   : invoiceTotal,
+					amount   : invoiceINRTotal,
 					currency : currency || 'INR',
 					options  : {
 						currencyDisplay : 'code',
@@ -28,12 +28,12 @@ function Total({
 					},
 				})}
 				<Pill color={invoiceTotalDeviation >= 0 ? 'green' : 'red'}>
-					{`${invoiceTotalDeviation >= 0 ? '+' : '-'} ${invoiceTotalDeviation}%`}
+					{`${invoiceTotalDeviation}%`}
 				</Pill>
 			</div>
 			<div className={styles.sub_container}>
 				{ formatAmount({
-					amount   : billTotal,
+					amount   : billINRTotal,
 					currency : currency || 'INR',
 					options  : {
 						currencyDisplay : 'code',
@@ -41,7 +41,7 @@ function Total({
 					},
 				})}
 				<Pill color={billTotalDeviation >= 0 ? 'green' : 'red'}>
-					{`${billTotalDeviation >= 0 ? '+' : '-'} ${billTotalDeviation}%`}
+					{`${billTotalDeviation}%`}
 				</Pill>
 			</div>
 		</div>
