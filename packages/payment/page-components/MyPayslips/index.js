@@ -1,7 +1,7 @@
 import { Select, ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRight } from '@cogoport/icons-react';
-import { useRouter } from 'next/router';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable/index';

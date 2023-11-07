@@ -1,5 +1,6 @@
 import { Select, Toggle } from '@cogoport/components';
 // import { useState } from 'react';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
 
@@ -57,7 +58,19 @@ function Expense({ toggleValue, handleSetToggle, data, loading, value, setValue 
 				{loading ? null
 					: CARDDATA.map((item) => (
 						<div className={styles.expense_card} key={item.label}>
-							<span className={styles.card_value}>{data?.[item.value]}</span>
+							<span className={styles.card_value}>
+								{ item?.label === 'Pending Requests'
+									? data?.[item.value]
+									: formatAmount({
+										amount  : data?.[item.value],
+										options : {
+											style                 : 'currency',
+											currencyDisplay       : 'symbol',
+											maximumFractionDigits : 2,
+										},
+									})}
+
+							</span>
 							<span className={styles.card_label}>{item.label}</span>
 						</div>
 					))}

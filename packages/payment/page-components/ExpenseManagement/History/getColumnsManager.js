@@ -1,5 +1,6 @@
 // import { IcMInfo } from '@cogoport/icons-react';
 import { ButtonIcon, Button } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMDownload } from '@cogoport/icons-react';
 import { getMonth, getDate } from '@cogoport/utils';
 import React from 'react';
@@ -82,12 +83,14 @@ const getColumnsManager = ({ setItem, setShow, handleUpdate, hr_view }) => {
 				<div
 					className={styles.data}
 				>
-					{item?.amount || '-'}
-					{/* {item.salary_date ? formatDate({
-						date       : item.salary_date,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						formatType : 'date',
-					}) : '-'} */}
+					{formatAmount({
+						amount  : item?.amount,
+						options : {
+							style                 : 'currency',
+							currencyDisplay       : 'symbol',
+							maximumFractionDigits : 2,
+						},
+					})}
 				</div>
 			),
 			id: 'amount',
