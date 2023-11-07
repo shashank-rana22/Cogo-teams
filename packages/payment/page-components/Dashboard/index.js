@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Button } from '@cogoport/components';
+import { Tabs, TabPanel, Button, Breadcrumb } from '@cogoport/components';
 import { IcMPlus, IcMTaskCompleted } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState, useEffect } from 'react';
@@ -35,7 +35,19 @@ function PayrollDashboard() {
 
 	return (
 		<div className={styles.main}>
-			<div className={styles.top_text} />
+			<Breadcrumb className={styles.bread}>
+				<Breadcrumb.Item label={(
+					<div
+						aria-hidden
+						style={{ cursor: 'pointer' }}
+						onClick={() => router.push('/welcome')}
+					>
+						HRMS
+					</div>
+				)}
+				/>
+				<Breadcrumb.Item label="Expense Management" />
+			</Breadcrumb>
 			<div className={styles.head_flex}>
 				<span className={styles.heading}>Payments</span>
 				<div className={styles.buttons}>
