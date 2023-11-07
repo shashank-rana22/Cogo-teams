@@ -31,11 +31,10 @@
 }
 
 .details_container {
-	justify-content: flex-start;
 	margin-bottom: 35px;
 
 	.details {
-		width: 45%;
+		width: 33%;
 	}
 
 	.detail_title {

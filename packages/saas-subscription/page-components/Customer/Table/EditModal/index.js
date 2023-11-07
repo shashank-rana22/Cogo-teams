@@ -1,25 +1,24 @@
 import { cl, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
-import { startCase } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 
-import { DETAILS_MAPPING } from '../../../../constant/editModalConstant';
+import { getDetailsConfig } from '../../../../configuration/editModalConfig';
 import useGetSubscriptionInfo from '../../../../hooks/useGetSubscriptionInfo';
+import getValues from '../../../../utils/getValues';
+import itemFunction from '../ItemFunctions';
 
 import Header from './Header';
 import styles from './styles.module.css';
 import TabSection from './TabSection';
 
-const getDetailValue = ({ name, pricing = {}, product_family = {} }) => {
-	if (name === 'plan_details') return startCase(pricing?.name);
-	return startCase(product_family?.product_family_name);
-};
-
 function EditModal({ editModal, setEditModal }) {
 	const { open = false, info = {} } = editModal;
 
 	const { t } = useTranslation(['saasSubscription']);
+
+	const detailsConfig = getDetailsConfig({ t });
+	const functions = itemFunction({ t });
 
 	const {
 		loading = false, subInfo = {}, editModalChangeHandler,
@@ -27,7 +26,6 @@ function EditModal({ editModal, setEditModal }) {
 	} = useGetSubscriptionInfo({ setEditModal, editModal });
 
 	const { active = {} } = subInfo || {};
-	const { pricing = {}, product_family = {} } = active || {};
 
 	return (
 		<Modal show={open} onClose={closeModalHandler} closeOnOuterClick={closeModalHandler} size="lg">
@@ -53,12 +51,16 @@ function EditModal({ editModal, setEditModal }) {
 				/>
 
 				<div className={cl`${styles.flex_box} ${styles.details_container}`}>
-					{Object.keys(DETAILS_MAPPING).map((detail) => (
-						<div key={detail} className={styles.details}>
-							<div className={styles.detail_title}>{DETAILS_MAPPING[detail]}</div>
+					{detailsConfig.map((config) => (
+						<div key={config.key} className={styles.details}>
+							<div className={styles.detail_title}>{config?.label}</div>
 
 							<div className={styles.detail_content}>
-								{getDetailValue({ name: detail, pricing, product_family })}
+								{getValues({
+									config,
+									itemData     : subInfo,
+									itemFunction : functions,
+								})}
 							</div>
 						</div>
 					))}

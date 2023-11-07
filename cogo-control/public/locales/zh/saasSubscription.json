@@ -149,5 +149,6 @@
     "log_control_event":"事件",
     "log_control_created_at":"创建在",
     "log_controls_updated_at":"更新在",
-    "plan_status":"计划状态"
+    "plan_status":"计划状态",
+    "reset_plan":"Reset Plan"
 }

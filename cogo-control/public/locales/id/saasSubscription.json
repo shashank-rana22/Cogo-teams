@@ -149,5 +149,6 @@
     "log_control_event":"Peristiwa",
     "log_control_created_at":"Dibuat di",
     "log_controls_updated_at":"Diperbarui di",
-    "plan_status":"Status Rencana"
+    "plan_status":"Status Rencana",
+    "reset_plan":"Reset Plan"
 }

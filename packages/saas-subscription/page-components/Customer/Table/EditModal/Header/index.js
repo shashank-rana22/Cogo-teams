@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 function Header({ info = {}, editModalChangeHandler, closeModalHandler, ...rest }) {
 	const { id = '', plan = {}, product_family = {}, saas_subscription_customer_id = '' } = rest || {};
 
+	const { is_free_plan } = plan || {};
 	const { organization = {} } = info || {};
 	const { id:product_family_id } = product_family || {};
 
@@ -61,11 +62,10 @@ function Header({ info = {}, editModalChangeHandler, closeModalHandler, ...rest 
 					<Button
 						className={styles.cancel_btn}
 						themeType="secondary"
-						disabled={plan?.plan_name === 'starter-pack'}
 						onClick={() => editModalChangeHandler('editCancelSub', id)}
 						type="button"
 					>
-						{t('saasSubscription:cancel_sub')}
+						{is_free_plan ? t('saasSubscription:reset_plan') : t('saasSubscription:cancel_sub')}
 					</Button>
 				</div>
 			</div>

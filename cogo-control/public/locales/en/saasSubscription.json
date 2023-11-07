@@ -149,5 +149,6 @@
     "log_control_event":"Event",
     "log_control_created_at":"Created at",
     "log_controls_updated_at":"Updated at",
-    "plan_status":"Plan Status"
+    "plan_status":"Plan Status",
+    "reset_plan":"Reset Plan"
 }

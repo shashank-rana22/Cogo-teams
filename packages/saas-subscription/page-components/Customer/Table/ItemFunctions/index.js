@@ -2,7 +2,7 @@ import { Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMSettings } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 const itemFunction = ({ setEditModal = () => {}, t = () => {} }) => ({
 	renderId: (item) => {
@@ -61,11 +61,11 @@ const itemFunction = ({ setEditModal = () => {}, t = () => {} }) => ({
 		</span>
 	),
 	renderValidity: (item) => {
-		const { active_subscription = {} } = item || {};
-		const { start_date = '', end_date = '' } = active_subscription || {};
+		const { active_subscription = {}, active = {} } = item || {};
+		const activeObj = isEmpty(active_subscription) ? active : active_subscription;
+		const { start_date = '', end_date = '' } = activeObj || {};
 
 		return (
-
 			<span>
 				{start_date ? formatDate({
 					date       : start_date,
@@ -86,8 +86,18 @@ const itemFunction = ({ setEditModal = () => {}, t = () => {} }) => ({
 
 		);
 	},
-	// renderKycStatus : (item, config)=>{
-	// 	return
-	// }
+	renderAccountType: (item) => {
+		const { active } = item || {};
+		const { product_family } = active || {};
+
+		return startCase(product_family?.product_family_name);
+	},
+	renderPlanName: (item) => {
+		const { active } = item || {};
+		const { pricing } = active || {};
+
+		return startCase(pricing?.name);
+	},
+	renderKyc: (item, config) => <Pill>{item[config?.key]}</Pill>,
 });
 export default itemFunction;

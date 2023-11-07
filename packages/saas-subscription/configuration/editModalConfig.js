@@ -1,11 +1,13 @@
 export const getDetailsConfig = () => [
 	{
-		key   : 'plan_details',
-		label : 'Plan Details',
+		key        : 'plan_details',
+		label      : 'Plan Details',
+		renderFunc : 'renderPlanName',
 	},
 	{
-		key   : 'account_type',
-		label : 'Family',
+		key        : 'account_type',
+		label      : 'Family',
+		renderFunc : 'renderAccountType',
 	},
 	{
 		key        : 'validity',
@@ -24,7 +26,8 @@ export const getHeaderConfig = () => [
 		label : 'Business Name',
 	},
 	{
-		key   : 'kyc_status',
-		label : 'KYC Status',
+		key        : 'kyc_status',
+		label      : 'KYC Status',
+		renderFunc : 'renderKyc',
 	},
 ];

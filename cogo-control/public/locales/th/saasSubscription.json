@@ -149,5 +149,6 @@
     "log_control_event":"เหตุการณ์",
     "log_control_created_at":"สร้างขึ้นที่",
     "log_controls_updated_at":"อัปเดตที่",
-    "plan_status":"สถานะแผน"
-}
+    "plan_status":"สถานะแผน",
+    "reset_plan":"Reset Plan"
+}   
