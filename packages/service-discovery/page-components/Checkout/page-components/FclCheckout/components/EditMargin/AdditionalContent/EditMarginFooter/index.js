@@ -110,10 +110,12 @@ function EditMarginFooter({
 					convenience_fee_billing_service,
 					adjust_convenience_fee,
 				},
-				handling_fees: {
-					...handling_fees,
-					quantity: undefined,
-				},
+				...(handling_fees.price || handling_fees.price === 0 ? {
+					handling_fees: {
+						...handling_fees,
+						quantity: undefined,
+					},
+				} : {}),
 				checkout_id                             : id,
 				margins                                 : FINAL_MARGINS,
 				is_applicable_for_approval_confirmation : false,
