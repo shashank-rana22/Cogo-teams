@@ -1,6 +1,6 @@
 import { Button, Toast } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -21,13 +21,15 @@ const createDownload = (url) => {
 // };
 
 const useGetColumns = (
-	setShow = () => {},
-	setName = () => {},
-	setUrl = () => {},
-	setUploadShow = () => {},
-	setdocno = () => {},
-	setDocumentUrl = () => {},
-	user_role = '',
+	{
+		setShow = () => {},
+		setName = () => {},
+		setUrl = () => {},
+		setUploadShow = () => {},
+		setdocno = () => {},
+		setDocumentUrl = () => {},
+		user_role = '',
+	},
 ) => (
 	[
 		{
@@ -47,49 +49,48 @@ const useGetColumns = (
 		},
 		{
 			Header   : 'ACTION',
-			accessor : (item) => (
-				<div className={styles.table_item}>
-					<Button
-						size="md"
-						themeType="secondary"
-						className={styles.download_button}
-						onClick={() => createDownload(item.url)}
-						disabled={!item.url}
-					>
-						<IcMDownload width={14} height={14} />
-					</Button>
-					<Button
-						size="md"
-						themeType="secondary"
-						className={styles.view_button}
-						onClick={() => { setShow(true); setUrl(item.url); setName(item.name); }}
-						disabled={!item.url}
-					>
-						<span className={styles.view_text}>View</span>
-					</Button>
-					{
-						user_role
-							? (
-								<Button
-									size="md"
-									themeType="secondary"
-									className={styles.view_button}
-									onClick={() => {
-										setName(item.name);
-										setdocno(item.number);
-										setDocumentUrl(item.url);
-										setUploadShow(true);
-										// handleOpenModal({ item, setdocno, setDocumentUrl, setName, setUploadShow });
-									}}
-								>
-									<span className={styles.view_text}>Update</span>
-								</Button>
-							)
-							: 					null
-					}
+			accessor : (item) => {
+				console.log(item.url, 'check');
+				return (
+					<div className={styles.table_item}>
+						<Button
+							size="md"
+							themeType="secondary"
+							className={styles.download_button}
+							onClick={() => createDownload(item.url)}
+							disabled={!item.url}
+						>
+							<IcMDownload width={14} height={14} />
+						</Button>
+						<Button
+							size="md"
+							themeType="secondary"
+							className={styles.view_button}
+							onClick={() => { setShow(true); setUrl(item.url); setName(item.name); }}
+							disabled={!item.url}
+						>
+							<span className={styles.view_text}>View</span>
+						</Button>
 
-				</div>
-			),
+						<Button
+							size="md"
+							themeType="secondary"
+							className={styles.view_button}
+							onClick={() => {
+								setName(item.name);
+								setdocno(item.number);
+								setDocumentUrl(item.url);
+								setUploadShow(true);
+							// handleOpenModal({ item, setdocno, setDocumentUrl, setName, setUploadShow });
+							}}
+							disabled={!item.url || !(user_role === 'hrbp')}
+						>
+							<span className={styles.view_text}>{isEmpty(item.url) ? 'Upload' : 'Update'}</span>
+						</Button>
+
+					</div>
+				);
+			},
 			id: 'action',
 		},
 	]);

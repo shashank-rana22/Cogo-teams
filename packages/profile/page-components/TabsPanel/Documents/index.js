@@ -21,13 +21,22 @@ function Documents({ data: employeeData = {}, getEmployeeDetails }) {
 	const [docno, setdocno] = useState(null);
 	const [documentUrl, setDocumentUrl] = useState('');
 	const { signed_documents, other_documents, user_role } = employeeData;
-	const columns = useGetColumns(setShow, setName, setUrl, setdocno, setUploadShow, setDocumentUrl, user_role);
-	const signedColumns = useGetSignedDocuments(setShow, setName, setUrl);
+	const columns = useGetColumns({ setShow, setName, setUrl, setdocno, setUploadShow, setDocumentUrl, user_role });
+	const signedColumns = useGetSignedDocuments({
+		setShow,
+		setName,
+		setUrl,
+		setdocno,
+		setUploadShow,
+		setDocumentUrl,
+		user_role,
+	});
 
 	const handleModal = () => {
 		setUploadShow(false);
 	};
 
+	console.log(documentUrl, 'documentUr');
 	const tablesData = getTablesData(signed_documents, other_documents);
 	const otherInfo = otherDocumentsInfo;
 

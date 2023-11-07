@@ -14,9 +14,10 @@ import styles from './styles.module.css';
 function UploadModal({ show, handleModal, docno, documentUrl, name, getEmployeeDetails }) {
 	const { control, setValue, handleSubmit, reset } = useForm();
 	const { updateEmployeeDetails } = useUpdateEmployee({ handleModal, getEmployeeDetails });
-	console.log(show, 'show-check');
+	console.log(documentUrl, 'show-check');
 
 	const onSubmit = (values) => {
+		console.log(values, 'check-payload-controll');
 		let PERSONAL_DETAILS = {};
 		if (name === 'Aadhar Card') {
 			PERSONAL_DETAILS = {
@@ -36,6 +37,7 @@ function UploadModal({ show, handleModal, docno, documentUrl, name, getEmployeeD
 			};
 		}
 		const personal_details = { personal_documents: PERSONAL_DETAILS };
+		console.log(personal_details, 'personal-details');
 		updateEmployeeDetails(personal_details);
 		reset();
 	};
