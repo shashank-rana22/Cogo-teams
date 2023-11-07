@@ -98,7 +98,7 @@ function PrimaryService({ serviceItem = {}, rateDetails = {}, details = {}, serv
 						options  : {
 							style                 : 'currency',
 							currencyDisplay       : 'symbol',
-							maximumFractionDigits : 0,
+							maximumFractionDigits : 2,
 						},
 					})}
 				</strong>

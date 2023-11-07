@@ -83,7 +83,7 @@ function ServiceItem({
 						options  : {
 							style                 : 'currency',
 							currencyDisplay       : 'symbol',
-							maximumFractionDigits : 0,
+							maximumFractionDigits : 2,
 						},
 					})
 				) : '--'}

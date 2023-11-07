@@ -35,7 +35,7 @@ const getPriceBreakUpColumn = [
 					options : {
 						style                 : 'currency',
 						currencyDisplay       : 'symbol',
-						maximumFractionDigits : 0,
+						maximumFractionDigits : 2,
 					},
 				})}
 			</strong>
@@ -70,7 +70,7 @@ const getPriceBreakUpColumn = [
 					options : {
 						style                 : 'currency',
 						currencyDisplay       : 'symbol',
-						maximumFractionDigits : 0,
+						maximumFractionDigits : 2,
 					},
 				})}
 			</strong>

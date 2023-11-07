@@ -28,7 +28,7 @@ function ListHeader({ type = '', currency = '', totalPrice = 0 }) {
 							options : {
 								style                 : 'currency',
 								currencyDisplay       : 'code',
-								maximumFractionDigits : 0,
+								maximumFractionDigits : 2,
 							},
 						}) : 'NA'}
 					</strong>

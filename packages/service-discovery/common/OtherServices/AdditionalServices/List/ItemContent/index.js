@@ -96,7 +96,7 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {}, isMobil
 							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'symbol',
-								maximumFractionDigits : 0,
+								maximumFractionDigits : 2,
 							},
 						})}
 					</div>

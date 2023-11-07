@@ -71,7 +71,7 @@ function Wallet({ data = {}, service_key = 'search_type', isMobile = false, styl
 								style                 : 'currency',
 								notation              : 'compact',
 								compactDisplay        : 'short',
-								minimumFractionDigits : 2,
+								maximumFractionDigits : 2,
 							},
 						})}
 					</span>
