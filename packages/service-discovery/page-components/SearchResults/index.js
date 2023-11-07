@@ -170,7 +170,6 @@ function SearchResults() {
 				}
 				className={styles.children}
 			>
-
 				<FCLResults
 					rates={rates}
 					detail={detail}

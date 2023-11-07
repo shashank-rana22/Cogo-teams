@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, Pill, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMUnlock, IcMLock } from '@cogoport/icons-react';
 import { useContext } from 'react';
@@ -22,7 +22,7 @@ function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 
 	const { tax_total_price_discounted = 0, tax_total_price_currency = '', source = '' } = rate;
 
-	const { quotation_email_sent_at = '' } = detail;
+	const { quotation_email_sent_at = '', source: checkoutSource = '' } = detail;
 
 	const {
 		shipping_line = {},
@@ -42,6 +42,16 @@ function BookingDetails({ setShowBreakup = () => {}, showBreakup = false }) {
 
 	return (
 		<div className={styles.container}>
+			{checkoutSource === 'spot_line_booking' ? (
+				<Pill
+					size="md"
+					color="#FEF199"
+					className={styles.pill}
+				>
+					Spotline Booking
+				</Pill>
+			) : null}
+
 			<div className={styles.main_content}>
 				<ShippingLineDetails shipping_line={shipping_line} source={source} />
 

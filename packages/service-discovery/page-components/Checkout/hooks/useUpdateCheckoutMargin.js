@@ -1,7 +1,10 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
+
+const getApiErrorString = (messages) => Object.keys(messages || {})
+	.map((_) => `${startCase(_)} ${messages[_]}`)
+	.join(', ');
 
 const useUpdateCheckoutMargin = ({ updateCheckout = () => {}, id = '' }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -24,7 +27,7 @@ const useUpdateCheckoutMargin = ({ updateCheckout = () => {}, id = '' }) => {
 			});
 		} catch (error) {
 			if (error?.response) {
-				Toast.error(startCase(getApiErrorString(error?.response?.data) || 'Something went wrong'));
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		}
 	};

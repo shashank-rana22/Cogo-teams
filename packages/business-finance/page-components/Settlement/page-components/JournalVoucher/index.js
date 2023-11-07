@@ -1,11 +1,13 @@
 import { Button, Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import Filter from '../../../commons/Filters';
 import CustumTable from '../../commons/CustumTable';
 import { jvFilters } from '../../configurations/jv-filters';
 import useGetJvList from '../../hooks/useGetJvList';
+import usePostBulkJV from '../../hooks/usePostBulkJV';
 
 import BulkJvUpload from './BulkJvUploadModal/index';
 import CreateJvModal from './CreateJvModal';
@@ -15,7 +17,9 @@ function JournalVoucher({ entityCode }) {
 	const [filters, setFilters] = useState({});
 	const [show, setShow] = useState(false);
 	const [showBulkJV, setShowBulkJV] = useState(false);
+	const [selectedJV, setSelectedJV] = useState([]);
 	const { data, loading, refetch } = useGetJvList({ filters, entityCode });
+	const { loading : bulkPostLoading = false, bulkPostJV = () => {} } = usePostBulkJV();
 
 	const onPageChange = (val) => {
 		setFilters({ ...filters, page: val });
@@ -38,6 +42,7 @@ function JournalVoucher({ entityCode }) {
 						suffix={<IcMSearchlight height="20px" width="20px" className={styles.search} />}
 						style={{ width: '300px' }}
 					/>
+
 					<Button
 						type="button"
 						themeType="primary"
@@ -47,14 +52,25 @@ function JournalVoucher({ entityCode }) {
 					>
 						Create JV
 					</Button>
+
 					<Button
 						size="md"
 						themeType="primary"
 						onClick={() => setShowBulkJV(true)}
 						style={{ marginLeft: '10px', padding: '18px' }}
 					>
-						BulK JV Upload
+						Bulk JV Upload
+					</Button>
 
+					<Button
+						size="md"
+						themeType="primary"
+						onClick={() => bulkPostJV({ selectedJV, setSelectedJV })}
+						disabled={isEmpty(selectedJV) || bulkPostLoading}
+						loading={bulkPostLoading}
+						style={{ marginLeft: '10px', padding: '18px' }}
+					>
+						Bulk Post
 					</Button>
 				</div>
 			</div>
@@ -65,6 +81,8 @@ function JournalVoucher({ entityCode }) {
 				refetch={refetch}
 				setFilters={setFilters}
 				filters={filters}
+				selectedJV={selectedJV}
+				setSelectedJV={setSelectedJV}
 			/>
 			{show ? (
 				<CreateJvModal

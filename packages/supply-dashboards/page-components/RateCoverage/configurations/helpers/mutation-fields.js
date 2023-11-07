@@ -8,7 +8,11 @@ import { merge, startCase } from '@cogoport/utils';
 
 import useGetMainPortsOptions from '../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 
+import { cargoHandlingOptions } from './constants';
+
 function FieldMutation({ fields, values, filter, chargeCodes, fclCfsChargeCodes }) {
+	let finalFilteredOptions = [];
+	const dataTradeType = values?.trade_type;
 	const organizationUsers = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganizationUsers(),
@@ -69,6 +73,10 @@ function FieldMutation({ fields, values, filter, chargeCodes, fclCfsChargeCodes 
 		}
 		if (name === 'destination_location_id') {
 			newControl = { ...newControl, ...destination };
+		}
+		if (name === 'cargo_handling_type') {
+			finalFilteredOptions = cargoHandlingOptions.filter((option) => option.tradeType === dataTradeType);
+			newControl = { ...newControl, options: finalFilteredOptions };
 		}
 
 		if (control?.controls) {
