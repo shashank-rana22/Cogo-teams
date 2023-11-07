@@ -18,14 +18,9 @@ function Block(props) {
 		blockIndex,
 		removeBlock,
 		watch,
-		editSubBlock,
 		setEditSubBlock,
 		prefillValues,
-		onChangeChild,
-		onDeleteChild,
-		setBlockId,
-		// setStringData,
-
+		...rest
 	} = props;
 
 	const {
@@ -82,6 +77,7 @@ function Block(props) {
 
 			{fields.map((field, subBlockIndex) => (
 				<SubBlock
+					{...rest}
 					key={field.id}
 					name={`${name}.sub_blocks.${subBlockIndex}`}
 					blockIndex={blockIndex}
@@ -94,10 +90,6 @@ function Block(props) {
 					removeSubBlock={remove}
 					subBlockOptions={subBlockOptions}
 					subBlockWiseParameterOptions={subBlockWiseParameterOptions}
-					editSubBlock={editSubBlock}
-					onChangeChild={onChangeChild}
-					onDeleteChild={onDeleteChild}
-					setBlockId={setBlockId}
 				/>
 			))}
 

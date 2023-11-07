@@ -26,16 +26,11 @@ function QuestConfigForm(props) {
 		errors,
 		watch,
 		handleSubmit,
-		editSubBlock,
-		setEditSubBlock,
 		handleClick,
-		prefillValues,
-		onChangeChild,
-		onDeleteChild,
-		setBlockId,
 		formattedString,
 		onClickFill,
 		handleResetString,
+		...rest
 	} = useQuestConfig({ data, refetch, questName });
 
 	return (
@@ -80,6 +75,7 @@ function QuestConfigForm(props) {
 				</div>
 				{fields.map((field, index) => (
 					<Block
+						{...rest}
 						key={field.id}
 						name={`blocks.${index}`}
 						control={control}
@@ -87,12 +83,6 @@ function QuestConfigForm(props) {
 						blockIndex={index}
 						removeBlock={remove}
 						watch={watch}
-						editSubBlock={editSubBlock}
-						setEditSubBlock={setEditSubBlock}
-						prefillValues={prefillValues}
-						onChangeChild={onChangeChild}
-						onDeleteChild={onDeleteChild}
-						setBlockId={setBlockId}
 					/>
 				))}
 

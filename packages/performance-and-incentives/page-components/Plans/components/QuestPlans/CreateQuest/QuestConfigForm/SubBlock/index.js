@@ -19,11 +19,9 @@ function SubBlock(props) {
 		subBlockOptions,
 		subBlockWiseParameterOptions,
 		editSubBlock,
-		watchBlock,
 		removeSubBlock,
-		onChangeChild,
-		onDeleteChild,
 		setBlockId,
+		...rest
 	} = props;
 
 	const {
@@ -92,19 +90,17 @@ function SubBlock(props) {
 				</div>
 
 				<FieldArray
+					{...rest}
 					control={control}
 					name={`${name}.parameters`}
 					controls={controls}
 					buttonThemeType="link"
 					buttonText="Add Parameter"
 					watch={watch}
-					watchBlock={watchBlock}
 					blockIndex={blockIndex}
 					subBlockIndex={subBlockIndex}
 					parameterOptions={parameterOptions}
 					parameterUnitOptions={parameterUnitOptions}
-					onChangeChild={onChangeChild}
-					onDeleteChild={onDeleteChild}
 					error={errors?.blocks?.[blockIndex]?.sub_blocks?.[subBlockIndex]?.parameters}
 				/>
 			</div>
