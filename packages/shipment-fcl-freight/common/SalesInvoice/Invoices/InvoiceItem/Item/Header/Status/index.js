@@ -43,7 +43,7 @@ function Status({
 	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const showCN = BF_INVOICE_STATUS.includes(bfInvoice?.status)
-	|| (![101, 301, 401, 501].includes(getEntityCode(entity_id)) && bfInvoice?.status === 'FINANCE REJECTED');
+	|| (![101, 301, 401, 501].includes(getEntityCode(entity_id)) && bfInvoice?.status === 'FINANCE_REJECTED');
 
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === invoice?.live_invoice_number
