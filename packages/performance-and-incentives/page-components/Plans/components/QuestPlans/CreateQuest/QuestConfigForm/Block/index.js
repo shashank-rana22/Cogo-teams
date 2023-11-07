@@ -20,6 +20,7 @@ function Block(props) {
 		watch,
 		setEditSubBlock,
 		prefillValues,
+		config_id,
 		...rest
 	} = props;
 
@@ -35,7 +36,7 @@ function Block(props) {
 		subBlockWiseParameterOptions,
 		blockParameterLoading,
 		filteredBlockOptions,
-	} = useBlockCreation({ control, name, watch, blockIndex, prefillValues });
+	} = useBlockCreation({ control, name, watch, blockIndex, prefillValues, config_id });
 
 	const blockData = checkForBlock();
 

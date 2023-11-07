@@ -4,6 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRotateVertical, IcMOverflowDot } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
+import { getPrefillFormattedDate } from '../../../../../../utils/get-formatted-date';
 import SCORING_PLAN_STATUS_COLOUR_MAPPING from '../../../../constants/scoring-plan-status-colour-mapping';
 
 import Actions from './Actions';
@@ -94,7 +95,7 @@ const getListColumns = (props) => {
 			),
 			accessor: ({ end_date }) => (end_date
 				? formatDate({
-					date       : end_date,
+					date       : new Date(getPrefillFormattedDate({ currentDate: end_date })),
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 					formatType : 'date',
 				}) : '___'

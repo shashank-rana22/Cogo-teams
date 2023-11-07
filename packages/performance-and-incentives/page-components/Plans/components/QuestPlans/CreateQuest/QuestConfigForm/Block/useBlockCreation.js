@@ -7,7 +7,7 @@ import blockOptions from '../../../../../constants/select-block-options';
 
 import useGetAgentScoringBlocks from './useGetAgentScoringBlocks';
 
-const useBlockCreation = ({ control, name, watch, blockIndex, prefillValues }) => {
+const useBlockCreation = ({ control, name, watch, blockIndex, prefillValues, config_id }) => {
 	const CHILD_EMPTY_VALUES = {
 		sub_block_id : '',
 		parameters   : [],
@@ -15,7 +15,7 @@ const useBlockCreation = ({ control, name, watch, blockIndex, prefillValues }) =
 
 	const watchBlock = watch(`${name}.block`);
 
-	const { list, blockParameterLoading } = useGetAgentScoringBlocks({ watchBlock });
+	const { list, blockParameterLoading } = useGetAgentScoringBlocks({ watchBlock, config_id });
 
 	const { fields, append, remove } = useFieldArray({ control, name: `${name}.sub_blocks` });
 

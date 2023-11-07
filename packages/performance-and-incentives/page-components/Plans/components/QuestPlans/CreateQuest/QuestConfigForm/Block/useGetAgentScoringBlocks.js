@@ -4,7 +4,7 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 const useGetAgentScoringBlocks = (props) => {
-	const { watchBlock = '' } = props;
+	const { watchBlock = '', config_id = null } = props;
 
 	const [{ data, loading }, trigger] = useAllocationRequest({
 		url     : 'blocks',
@@ -18,7 +18,8 @@ const useGetAgentScoringBlocks = (props) => {
 				params: {
 					agent_scoring_parameters_data_required : true,
 					filters                                : {
-						q: watchBlock,
+						q                       : watchBlock,
+						agent_scoring_config_id : config_id || undefined,
 					},
 					page_limit: 1000,
 				},
@@ -28,7 +29,7 @@ const useGetAgentScoringBlocks = (props) => {
 				Toast.error(getApiErrorString(error.response?.data) || 'Something went wrong');
 			}
 		}
-	}, [watchBlock, trigger]);
+	}, [watchBlock, trigger, config_id]);
 
 	useEffect(() => {
 		if (watchBlock) {

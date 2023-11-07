@@ -76,6 +76,7 @@ function QuestConfigForm(props) {
 				{fields.map((field, index) => (
 					<Block
 						{...rest}
+						config_id={data?.agent_scoring_config_id}
 						key={field.id}
 						name={`blocks.${index}`}
 						control={control}
