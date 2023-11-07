@@ -2,7 +2,7 @@ import { cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import { CircularLoader } from '../../../common/Elements';
+import { LoadingState } from '../../../common/Elements';
 import useSmeDashboardStats from '../../../hooks/useSmeDashboardStats';
 import getFormattedAmount from '../../../utils/getFormattedAmount';
 
@@ -31,7 +31,7 @@ function UserData({ widgetBlocks = null, filterParams = {} }) {
 	if (dashboardLoading) {
 		return (
 			<div className={cl`${styles.container} ${styles.loading_container}`}>
-				<CircularLoader />
+				<LoadingState />
 			</div>
 		);
 	}

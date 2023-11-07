@@ -18,7 +18,7 @@ function IntersectionLoader({
 				([entry]) => {
 					setIsVisible((prev) => (prev || entry.isIntersecting));
 				},
-				{ rootMargin: '-250px' },
+				{ rootMargin: '-150px' },
 			);
 			observer.observe(ref.current);
 

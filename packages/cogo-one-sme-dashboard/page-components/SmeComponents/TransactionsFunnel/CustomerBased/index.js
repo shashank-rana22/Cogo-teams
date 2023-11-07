@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import { LoadingState } from '../../../../common/Elements';
 import FunnelGraphStruct from '../../../../common/FunnelGraphStruct';
 import useSmeDashboardStats from '../../../../hooks/useSmeDashboardStats';
 
@@ -11,27 +12,28 @@ function CustomerBased({ widgetBlocks = null, filterParams = {} }) {
 		dashboardLoading = false,
 	} = useSmeDashboardStats({ widgetBlocks, filterParams });
 
-	const data = useMemo(
-		() => ({
-			labels: ['Total Quotation Sent (100)',
-				'Total No. of Transactions (80)',
-				'Total Active Transactions (60)',
-				'Total Released Revenue (50)',
-				'Total Invoiced Revenue (50)'],
-			colors: [
-				['#FBD1A6'],
-				['#CFEAED'],
-			],
-			values: [
-				[711111, 422222],
-				[611111, 322222],
-				[511111, 222222],
-				[410110, 120220],
-				[300000, 100000],
+	const { customer_based_data = [] } = dashboardData || {};
 
-			],
-		}),
-		[],
+	const data = useMemo(
+		() => {
+			const sortedCustomerData = customer_based_data?.sort(
+				(a, b) => ((b?.total || 0) - (a?.total || 0)),
+			) || [];
+
+			return {
+				labels: sortedCustomerData.map(
+					(itm) => `${itm?.metric || ''} (${itm?.id_count || 0})`,
+				),
+				colors : [['#FBD1A6'], ['#CFEAED']],
+				values : sortedCustomerData?.map(
+					(itm) => ([
+						+((+(itm?.allocated || 0)).toFixed(2)),
+						+((+(itm?.unallocated || 0)).toFixed(2)),
+					]),
+				),
+			};
+		},
+		[customer_based_data],
 	);
 
 	return (
@@ -40,17 +42,29 @@ function CustomerBased({ widgetBlocks = null, filterParams = {} }) {
 				<div>Customer Based</div>
 
 				<div className={styles.legends}>
-					<div className={styles.legends_circle} style={{ background: '#FBD1A6' }} />
+					<div
+						className={styles.legends_circle}
+						style={{ background: '#FBD1A6' }}
+					/>
 					<div>Allocated</div>
-					<div className={styles.legends_circle} style={{ background: '#CFEAED' }} />
+
+					<div
+						className={styles.legends_circle}
+						style={{ background: '#CFEAED' }}
+					/>
 					<div>Un-Allocated</div>
 				</div>
 			</div>
 
-			<FunnelGraphStruct
-				data={data}
-				type="customer"
-			/>
+			{dashboardLoading
+				? <LoadingState />
+				: (
+					<FunnelGraphStruct
+						data={data}
+						subLabels={['allocated', 'unallocated']}
+						type="customer"
+					/>
+				)}
 		</div>
 	);
 }

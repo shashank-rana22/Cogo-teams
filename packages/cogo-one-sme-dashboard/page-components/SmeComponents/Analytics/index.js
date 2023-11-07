@@ -130,7 +130,7 @@ function Analytics({ widgetBlocks = null, filterParams = {} }) {
 				</div>
 
 				<div className={styles.loading_container}>
-					<LoadingState loaderCount={30} />
+					<LoadingState loaderCount={10} />
 				</div>
 			</div>
 		);

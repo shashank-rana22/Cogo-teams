@@ -4,8 +4,10 @@ import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import { LoadingState } from '../../../../../common/Elements';
 import useGetLeaderbordList from '../../../../../hooks/useGetLeaderbordList';
 import useListPartners from '../../../../../hooks/useListPartners';
+import useOrganizationRMMapping from '../../../../../hooks/useOrganizationRMMapping';
 
 import getOptions from './getOptions';
 import styles from './styles.module.css';
@@ -13,7 +15,8 @@ import UserCard from './UserCard';
 
 const NEXT_DATA_VIEW_TYPE = {
 	partners : 'branches',
-	branches : 'users',
+	branches : 'managers',
+	managers : 'users',
 };
 
 function HierarchyBody({
@@ -24,6 +27,7 @@ function HierarchyBody({
 		: hierarchyData?.[hierarchyData.length - 1]?.hierarchyDataType;
 
 	const nextViewType = NEXT_DATA_VIEW_TYPE?.[currentView] || 'partners';
+	console.log('nextViewType:', hierarchyData, currentView, 'dd', nextViewType);
 
 	const { partnersList = [], partnersLoading = false } = useListPartners({ nextViewType });
 
@@ -32,21 +36,22 @@ function HierarchyBody({
 		officeLocationId : hierarchyData?.[1]?.hierarchyDataType === 'branches' ? hierarchyData?.[1]?.id : '',
 	});
 
-	const userOptions = getOptions({ hierarchyData, nextViewType, partnersList });
+	const {
+		userHierarchyLoading = false,
+		userHierarchyData = {},
+	} = useOrganizationRMMapping({
+		partnerId : '',
+		userId    : '',
+	});
 
-	if (partnersLoading) {
-		return (
-			<div className={styles.container}>
-				<Image
-					src={GLOBAL_CONSTANTS.image_url.preloader}
-					height={250}
-					width={250}
-					alt="loading"
-				/>
-			</div>
-		);
-	}
-
+	const userOptions = getOptions({
+		hierarchyData,
+		nextViewType,
+		partnersList,
+		leaderBoardData,
+		loading: leaderBoardLoading || userHierarchyLoading,
+	});
+	console.log('loading', userHierarchyLoading || partnersLoading || leaderBoardLoading);
 	return (
 		<div
 			className={styles.container}
@@ -83,6 +88,10 @@ function HierarchyBody({
 					/>
 				),
 			)}
+
+			{(userHierarchyLoading || partnersLoading || leaderBoardLoading)
+				? <LoadingState />
+				: null}
 		</div>
 	);
 }

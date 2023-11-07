@@ -1,6 +1,7 @@
 import { cl } from '@cogoport/components';
+import { isEmpty, startCase } from '@cogoport/utils';
 import FunnelGraph from 'funnel-graph-js';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 import getFormattedAmount from '../../utils/getFormattedAmount';
 
@@ -10,18 +11,42 @@ function DataContainer({
 	itm = '',
 	data = {},
 	index = 0,
+	showSegregation = false,
+	subLabels = [],
+	hoverIndex = '',
 }) {
 	return (
 		<>
-			<div>{itm}</div>
-			<div className={styles.graph_values}>
-				{getFormattedAmount({
-					number: data.values[index].reduce(
-						(acc, item) => acc + item,
-						0,
-					),
-				})}
+			<div className={styles.upper_container}>
+				<div>{itm}</div>
+
+				<div className={styles.graph_values}>
+					{getFormattedAmount({
+						number: data.values[index].reduce(
+							(acc, item) => acc + item,
+							0,
+						),
+					})}
+				</div>
 			</div>
+
+			{(showSegregation && !isEmpty(subLabels) && hoverIndex === index)
+				? (
+					<div className={styles.lower_container}>
+						{subLabels.map((item, idx) => (
+							<div
+								key={itm}
+								className={styles.sub_label}
+							>
+								{startCase(item)}
+								:
+								<span>
+									{getFormattedAmount({ number: data?.values?.[index]?.[idx] })}
+								</span>
+							</div>
+						))}
+					</div>
+				) : null}
 		</>
 	);
 }
@@ -30,8 +55,10 @@ function FunnelGraphStruct({
 	data = [],
 	type = '',
 	showSegregation = true,
+	subLabels = [],
 	showDataBelow = false,
 }) {
+	const [hoverIndex, setHoverIndex] = useState('');
 	const funnelContainer = useRef();
 
 	const funnelRef = useRef();
@@ -47,7 +74,7 @@ function FunnelGraphStruct({
 			height            : 200,
 		});
 
-		funnelRef.current.draw();
+		funnelRef.current?.draw?.();
 	}, [data, type]);
 
 	return (
@@ -70,11 +97,16 @@ function FunnelGraphStruct({
 									className={showSegregation
 										? styles.graph_labels_item
 										: styles.graph_data_item}
+									onMouseEnter={() => setHoverIndex(index)}
+									onMouseLeave={() => setHoverIndex('')}
 								>
 									<DataContainer
 										itm={itm}
 										data={data}
 										index={index}
+										showSegregation={showSegregation}
+										subLabels={subLabels}
+										hoverIndex={hoverIndex}
 									/>
 								</div>
 							),

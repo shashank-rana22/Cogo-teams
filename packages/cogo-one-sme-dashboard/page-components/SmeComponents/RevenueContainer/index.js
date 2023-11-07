@@ -1,4 +1,4 @@
-import { Placeholder, Tooltip } from '@cogoport/components';
+import { Tooltip, cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
@@ -6,7 +6,7 @@ import { IcMDollar, IcMInfo } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import React from 'react';
 
-import { PercentageChange } from '../../../common/Elements';
+import { LoadingState, PercentageChange } from '../../../common/Elements';
 import calcChange from '../../../helpers/calcChange';
 import useSmeDashboardStats from '../../../hooks/useSmeDashboardStats';
 
@@ -46,6 +46,17 @@ function RevenueContainer({
 		prevVal : previous_data?.total_revenue,
 	});
 
+	if (dashboardLoading) {
+		return (
+			<div className={cl`${styles.container} ${styles.loading_container}`}>
+				<div className={styles.title}>
+					Total Revenue
+				</div>
+				<LoadingState loaderCount={10} />
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.container_left_body}>
@@ -60,24 +71,18 @@ function RevenueContainer({
 
 					<div className={styles.transaction_container}>
 						<div className={styles.total_gain}>
-							{dashboardLoading
-								? <Placeholder height={45} width={120} />
-								: (
-									<>
-										{formatAmount({
-											amount   : Number(current_data?.total_revenue || 0),
-											currency : DEFAULT_ITEMS?.currency || geo.country.currency.code,
-											options  : {
-												style                 : 'currency',
-												currencyDisplay       : 'symbol',
-												notation              : 'compact',
-												maximumFractionDigits : 2,
-											},
-										})}
+							{formatAmount({
+								amount   : Number(current_data?.total_revenue || 0),
+								currency : DEFAULT_ITEMS?.currency || geo.country.currency.code,
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'symbol',
+									notation              : 'compact',
+									maximumFractionDigits : 2,
+								},
+							})}
 
-										<PercentageChange percentageChanged={totalRevPercentageChange} />
-									</>
-								)}
+							<PercentageChange percentageChanged={totalRevPercentageChange} />
 						</div>
 
 						<div className={styles.label_transaction}>
@@ -95,14 +100,9 @@ function RevenueContainer({
 						</div>
 
 						<div className={styles.total_transactions}>
-							{dashboardLoading
-								? <Placeholder height={33} width={120} />
-								: (
-									<>
-										{current_data?.total_count || 0}
-										<PercentageChange percentageChanged={totalCouPercentageChange} />
-									</>
-								)}
+							{current_data?.total_count || 0}
+
+							<PercentageChange percentageChanged={totalCouPercentageChange} />
 						</div>
 					</div>
 				</div>
@@ -116,7 +116,6 @@ function RevenueContainer({
 						transactions={current_data?.organic_count || 0}
 						geo={geo}
 						title="Organic"
-						dashboardLoading={dashboardLoading}
 					/>
 
 					<Image
@@ -140,7 +139,6 @@ function RevenueContainer({
 								transactions={current_data?.inorganic_allocated_count}
 								geo={geo}
 								title="Allocated"
-								dashboardLoading={dashboardLoading}
 								showGrowth={calcChange({
 									currVal : current_data?.inorganic_allocated_revenue,
 									prevVal : previous_data?.inorganic_allocated_revenue,
@@ -155,7 +153,6 @@ function RevenueContainer({
 								transactions={current_data?.inorganic_unallocated_count}
 								geo={geo}
 								title="Non - Allocated"
-								dashboardLoading={dashboardLoading}
 								showGrowth={calcChange({
 									currVal : current_data?.inorganic_unallocated_revenue,
 									prevVal : previous_data?.inorganic_unallocated_revenue,

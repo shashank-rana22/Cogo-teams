@@ -44,7 +44,7 @@ function PerAgentData({ widgetBlocks = null, filterParams = {} }) {
 				<div className={styles.header}>
 					Per Agent Data
 				</div>
-				<LoadingState loaderCount={30} />
+				<LoadingState loaderCount={10} />
 			</div>
 		);
 	}

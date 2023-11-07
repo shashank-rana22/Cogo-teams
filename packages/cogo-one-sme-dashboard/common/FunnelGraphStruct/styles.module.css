@@ -55,6 +55,7 @@
 	display: flex;
 	flex: 1;
 	flex-direction: column;
+	justify-content: space-between;
 	height: 280px;
 	padding: 10px 4px 0;
 	font-size: 12px;
@@ -63,10 +64,13 @@
 	border-left: 0.5px solid #dbdbdb;
 
 	&:hover {
-		font-weight: 600;
 		cursor: pointer;
 		border-right: 1px solid #909190;
 		border-left: 1px solid #909190;
+
+		.upper_container {
+			font-weight: 600;
+		}
 	}
 }
 
@@ -91,4 +95,19 @@
 	padding-top: 6px;
 	font-size: 16px;
 	font-weight: 600;
+}
+
+.lower_container {
+	width: 100%;
+	padding: 10px 2px;
+	font-size: 10px;
+	background: #fef199;
+	border-radius: 10px;
+}
+
+.sub_label {
+	span {
+		margin-left: 4px;
+		font-weight: 600;
+	}
 }

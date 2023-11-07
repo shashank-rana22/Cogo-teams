@@ -1,3 +1,5 @@
+import { isEmpty } from '@cogoport/utils';
+
 import getBranchesData from '../../../../../utils/getBranchesData';
 import getCountriesData from '../../../../../utils/getCountriesData';
 
@@ -5,7 +7,13 @@ function getOptions({
 	nextViewType = '',
 	hierarchyData = [],
 	partnersList = [],
+	leaderBoardData = {},
+	loading = false,
 }) {
+	if (loading) {
+		return [];
+	}
+
 	if (nextViewType === 'countries') {
 		return getCountriesData();
 	}
@@ -24,6 +32,17 @@ function getOptions({
 		return getBranchesData({
 			country_id: hierarchyData?.[hierarchyData.length - 1]?.country_id,
 		});
+	}
+
+	if (nextViewType === 'managers') {
+		const { list = [] } = leaderBoardData || {};
+
+		return list.reduce(
+			(acc, itm) => (
+				isEmpty(itm?.user) ? acc : [...acc, itm?.user]
+			),
+			[],
+		);
 	}
 
 	return [];

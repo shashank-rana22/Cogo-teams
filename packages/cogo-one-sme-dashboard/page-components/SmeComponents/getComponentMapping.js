@@ -165,7 +165,7 @@ function getComponentMapping({ filterParams = {} }) {
 					filterParams={filterParams}
 					widgetBlocks={
 						itm === 'calls'
-							? ['get_total_calls_made_data', 'get_total_calls_received_data']
+							? ['get_total_calls_made_data']
 							: [`get_total_${itm}_sent_data`, `get_total_${itm}_received_data`]
 					}
 				/>

@@ -14,8 +14,14 @@
 }
 
 .loading_container {
-	align-items: center;
-	justify-content: center;
+	flex-direction: column;
+
+	:global {
+		.ui_loading_container {
+			flex: unset;
+			height: 164px !important;
+		}
+	}
 }
 
 .container_left_body {

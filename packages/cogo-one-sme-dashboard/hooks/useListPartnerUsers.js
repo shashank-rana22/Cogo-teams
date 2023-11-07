@@ -1,13 +1,13 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useListPartners = ({ nextViewType = '' }) => {
-	const [{ loading: partnersLoading, data }, trigger] = useRequest({
-		url    : '/list_partners',
+const useListPartnerUsers = ({ nextViewType = '' }) => {
+	const [{ loading: partnerUsersLoading, data }, trigger] = useRequest({
+		url    : '/list_partner_users',
 		method : 'get',
 	}, { manual: true });
 
-	const getPartners = useCallback(
+	const getPartnerUsers = useCallback(
 		async () => {
 			try {
 				if (nextViewType !== 'partners') {
@@ -17,8 +17,8 @@ const useListPartners = ({ nextViewType = '' }) => {
 				await trigger({
 					params: {
 						filters: {
-							entity_types: ['cogoport'],
-							// status       : 'active',
+							entity_types : ['cogoport'],
+							status       : 'active',
 						},
 						page_limit          : 1000,
 						roles_data_required : false,
@@ -34,16 +34,16 @@ const useListPartners = ({ nextViewType = '' }) => {
 	);
 
 	useEffect(() => {
-		getPartners();
-	}, [getPartners]);
+		getPartnerUsers();
+	}, [getPartnerUsers]);
 
-	const { list: partnersList = [] } = partnersLoading ? {} : (data || {});
+	const { list: partnerUsersList = [] } = partnerUsersLoading ? {} : (data || {});
 
 	return {
-		partnersLoading,
-		getPartners,
-		partnersList,
+		partnerUsersLoading,
+		getPartnerUsers,
+		partnerUsersList,
 	};
 };
 
-export default useListPartners;
+export default useListPartnerUsers;

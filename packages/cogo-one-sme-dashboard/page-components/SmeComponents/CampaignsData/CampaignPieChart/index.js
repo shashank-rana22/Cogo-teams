@@ -47,7 +47,7 @@ function CampaignPieChart({
 					Total Campaigns
 				</div>
 				<div className={styles.loading_container}>
-					<LoadingState loaderCount={30} />
+					<LoadingState loaderCount={10} />
 				</div>
 			</div>
 		);

@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const DATA_KEYS = {
 	emails: {
-		total     : 150,
+		total     : 'total_sent_mails',
 		system    : 'total_system_mails',
 		agent     : 'total_agent_mails',
 		marketing : 'total_marketing_mails',

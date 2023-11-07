@@ -27,7 +27,7 @@ function UserCard({
 					setHierarchyData(
 						(prev) => {
 							if (cardIndex !== prev.length - 1) {
-								return prev?.slice(0, cardIndex - 1) || [];
+								return prev?.slice(0, cardIndex) || [];
 							}
 							return prev;
 						},

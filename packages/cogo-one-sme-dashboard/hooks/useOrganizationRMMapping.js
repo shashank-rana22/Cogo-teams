@@ -33,8 +33,8 @@ const useOrganizationRMMapping = ({
 	}, [fetchData]);
 
 	return {
-		loading,
-		hierarchyData: data,
+		userHierarchyLoading : loading,
+		userHierarchyData    : data,
 	};
 };
 
