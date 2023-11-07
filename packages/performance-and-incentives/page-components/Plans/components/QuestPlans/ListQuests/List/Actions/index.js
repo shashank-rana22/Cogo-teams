@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 function Actions({
 	quest_id = '',
 	handleDeactivate = () => {},
+	status = 'active',
 }) {
 	const { push } = useRouter();
 
@@ -23,12 +24,19 @@ function Actions({
 				</div>
 			</div>
 
-			<div role="presentation" className={styles.workflow_cta} onClick={() => handleDeactivate({ id: quest_id })}>
-				<div className={styles.cta_text}>
-					<IcMCross width={24} height={24} style={{ marginRight: '8px' }} />
-					De-activate
-				</div>
-			</div>
+			{status === 'active'
+				? (
+					<div
+						role="presentation"
+						className={styles.workflow_cta}
+						onClick={() => handleDeactivate({ id: quest_id })}
+					>
+						<div className={styles.cta_text}>
+							<IcMCross width={24} height={24} style={{ marginRight: '8px' }} />
+							De-activate
+						</div>
+					</div>
+				) : null }
 		</div>
 	);
 }

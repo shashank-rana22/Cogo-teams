@@ -9,6 +9,9 @@ const useGetQuestList = ({ manual = true }) => {
 		role_data_required        : true,
 		sort_by                   : 'created_at',
 		sort_type                 : 'desc',
+		filters                   : {
+			status: 'active',
+		},
 	});
 
 	const [{ loading, data }, refetch] = useAllocationRequest(

@@ -8,6 +8,9 @@ const useGetQuestList = ({ params = {}, setParams = () => {} }) => {
 		role_data_required        : true,
 		sort_by                   : 'created_at',
 		sort_type                 : 'desc',
+		filters                   : {
+			status: 'active',
+		},
 	};
 
 	const [{ loading, data }, refetch] = useAllocationRequest(
@@ -15,7 +18,7 @@ const useGetQuestList = ({ params = {}, setParams = () => {} }) => {
 			url     : '/quests',
 			method  : 'GET',
 			authkey : 'get_agent_scoring_quests',
-			params  : { ...DEFAULT_PARAMS, ...params },
+			params  : { ...DEFAULT_PARAMS, ...params, filters: { ...DEFAULT_PARAMS?.filters, ...params?.filters } },
 		},
 		{ manual: false },
 	);

@@ -6,13 +6,15 @@ import { useAllocationRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import { getFormattedDate, getPrefillFormattedDate } from '../../../../../../../utils/get-formatted-date';
+
 const getFormattedData = ({ data }) => {
 	if (isEmpty(data)) return {};
 	return {
 		...data,
 		date_range: {
 			startDate : new Date(data?.start_date) || null,
-			endDate   : new Date(data?.end_date) || null,
+			endDate   : new Date(getPrefillFormattedDate({ currentDate: data?.end_date })) || null,
 		},
 	};
 };
@@ -51,7 +53,7 @@ const useCreateQuest = ({
 					agent_scoring_config_id,
 					quest_string,
 					start_date : date_range?.startDate,
-					end_date   : date_range?.endDate,
+					end_date   : getFormattedDate({ currentDate: date_range?.endDate }),
 				},
 			});
 
@@ -68,7 +70,7 @@ const useCreateQuest = ({
 	useEffect(() => {
 		const overlapping_date_range = {
 			from_date : date_range?.startDate || undefined,
-			to_date   : date_range?.endDate || undefined,
+			to_date   : date_range?.endDate ? getFormattedDate({ currentDate: date_range?.endDate }) : undefined,
 		};
 
 		if (date_range || agent_scoring_config_id) {

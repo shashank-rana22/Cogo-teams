@@ -125,14 +125,14 @@ const getListColumns = (props) => {
 			id       : 'actions',
 			key      : 'actions',
 			Header   : <div className={styles.heading}>ACTIONS</div>,
-			accessor : ({ id }) => (
+			accessor : ({ id, status }) => (
 				<div className={styles.actions}>
 
 					<Popover
 						placement="left"
 						interactive
 						render={(
-							<Actions quest_id={id} handleDeactivate={handleDeactivate} />
+							<Actions status={status} quest_id={id} handleDeactivate={handleDeactivate} />
 						)}
 					>
 						<div className={styles.action_icon_container}>
