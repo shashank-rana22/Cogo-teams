@@ -3,7 +3,7 @@ import { Placeholder } from '@cogoport/components';
 import LinkUI from './LinkUI';
 import styles from './styles.module.css';
 
-function ShippingLines({ shippingLines = [], loading = false }) {
+function ShippingLines({ shippingLines = [], loading = false, setValue = () => {} }) {
 	if (loading) {
 		return (
 			<div className={styles.container}>
@@ -23,6 +23,7 @@ function ShippingLines({ shippingLines = [], loading = false }) {
 				<LinkUI
 					key={ship?.short_name}
 					ship={ship}
+					setValue={setValue}
 				/>
 			))}
 		</div>

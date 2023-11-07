@@ -76,6 +76,7 @@ function ConvenienceDetails({
 						checkout_id={checkout_id}
 						refetch={getCheckout}
 						promotions={promotions.promocodes}
+						source={detail?.source}
 					/>
 
 					<ExchangeRate
@@ -178,6 +179,7 @@ function ConvenienceDetails({
 										stateFun : setConvenienceDetails,
 										stateKey : 'convenience_rate',
 									})}
+									type="number"
 									style={{ marginLeft: '12px' }}
 									disabled={!shouldEditConvenienceFee || loading}
 								/>
@@ -198,6 +200,7 @@ function ConvenienceDetails({
 										options={[{ value: handling_fees.unit, label: startCase(handling_fees.unit) }]}
 										value={handling_fees.unit}
 										style={{ width: '180px' }}
+										disabled={source !== 'edit_margin'}
 									/>
 
 									<Select
@@ -218,6 +221,7 @@ function ConvenienceDetails({
 									<Input
 										value={handling_fees?.price}
 										size="sm"
+										type="number"
 										onChange={(val) => onChange({
 											value    : val,
 											itemKey  : 'price',
