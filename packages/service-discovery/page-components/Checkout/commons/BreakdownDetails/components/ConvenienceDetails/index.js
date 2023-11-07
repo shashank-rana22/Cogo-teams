@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Input, Select, Accordion, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
@@ -82,6 +83,7 @@ function ConvenienceDetails({
 						checkout_id={checkout_id}
 						refetch={getCheckout}
 						promotions={promotions.promocodes}
+						source={detail?.source}
 					/>
 
 					<ExchangeRate
@@ -205,6 +207,7 @@ function ConvenienceDetails({
 										options={[{ value: handling_fees.unit, label: startCase(handling_fees.unit) }]}
 										value={handling_fees.unit}
 										style={{ width: '180px' }}
+										disabled={source !== 'edit_margin'}
 									/>
 
 									<Select

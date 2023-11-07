@@ -31,6 +31,8 @@ function SpotBooking({ detail = {}, setScreen = () => {} }) {
 
 	const { handleSubmit = () => {}, watch = () => {}, ...formProps } = useForm();
 
+	const { setValue = () => {} } = formProps || {};
+
 	const ActiveComponent = MAPPING[service_type];
 
 	if (!ActiveComponent) {
@@ -53,7 +55,7 @@ function SpotBooking({ detail = {}, setScreen = () => {} }) {
 				watch={watch}
 			/>
 
-			<SpotBookingInstructions shippingLines={shippingLines} loading={loading} />
+			<SpotBookingInstructions shippingLines={shippingLines} loading={loading} setValue={setValue} />
 
 			<Footer
 				handleSubmit={handleSubmit}

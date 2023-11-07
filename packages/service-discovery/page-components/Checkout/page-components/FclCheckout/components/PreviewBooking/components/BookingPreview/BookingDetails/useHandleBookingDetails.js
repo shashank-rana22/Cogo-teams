@@ -23,6 +23,7 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 		validity_end,
 		services = {},
 		primary_service,
+		source = '',
 	} = detail;
 
 	const {
@@ -94,6 +95,7 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 				</div>
 			),
 			themeType : 'link',
+			disabled  : source === 'spot_line_booking',
 			style     : {},
 		},
 		{

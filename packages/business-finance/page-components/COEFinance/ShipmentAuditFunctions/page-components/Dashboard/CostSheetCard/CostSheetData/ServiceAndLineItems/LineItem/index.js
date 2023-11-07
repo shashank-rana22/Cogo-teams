@@ -7,27 +7,29 @@ function LineItem({
 	lineItem = {},
 }) {
 	const {
-		sellQuotationTotal = '', buyQuotationTotal = '',
-		invoiceTotal = '', billTotal = '', currency = '',
-		percentageDeviationBuy = '', percentageDeviationSell = '',
+		sellQuotationLineItemTotal = '', buyQuotationLineItemTotal = '', sellQuotationLineItemCurrency = '',
+		invoiceLineItemTotal = '', billLineItemTotal = '', invoiceCurrency = '', billCurrency = '',
+		buyQuotationLineItemCurrency = '', percentageDeviationBuy = '', percentageDeviationSell = '',
 	} = lineItem || {};
 
 	return (
 		<div className={styles.item_container}>
-			<div className={styles.line_item_sub_container}>{`${lineItem?.name} (${lineItem?.code})`}</div>
+			<div className={styles.line_item_sub_container}>{`${lineItem?.name || ''} (${lineItem?.code || ''})`}</div>
 			<div className={styles.line_item_sub_container}>
 				<LineItemDeviation
-					currency={currency}
-					sellOrBuyQuotTotal={sellQuotationTotal}
-					invOrBillTotal={invoiceTotal}
+					currency={invoiceCurrency}
+					quotationCurrency={sellQuotationLineItemCurrency}
+					sellOrBuyQuotTotal={sellQuotationLineItemTotal}
+					invOrBillTotal={invoiceLineItemTotal}
 					deviation={percentageDeviationSell}
 				/>
 			</div>
 			<div className={styles.line_item_sub_container}>
 				<LineItemDeviation
-					currency={currency}
-					sellOrBuyQuotTotal={buyQuotationTotal}
-					invOrBillTotal={billTotal}
+					currency={billCurrency}
+					quotationCurrency={buyQuotationLineItemCurrency}
+					sellOrBuyQuotTotal={buyQuotationLineItemTotal}
+					invOrBillTotal={billLineItemTotal}
 					deviation={percentageDeviationBuy}
 				/>
 			</div>
