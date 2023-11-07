@@ -7,9 +7,9 @@ function LineItem({
 	lineItem = {},
 }) {
 	const {
-		sellQuotationLineItemTotal = '', buyQuotationLineItemTotal = '',
+		sellQuotationLineItemTotal = '', buyQuotationLineItemTotal = '', sellQuotationLineItemCurrency = '',
 		invoiceLineItemTotal = '', billLineItemTotal = '', invoiceCurrency = '', billCurrency = '',
-		percentageDeviationBuy = '', percentageDeviationSell = '',
+		buyQuotationLineItemCurrency = '', percentageDeviationBuy = '', percentageDeviationSell = '',
 	} = lineItem || {};
 
 	return (
@@ -18,6 +18,7 @@ function LineItem({
 			<div className={styles.line_item_sub_container}>
 				<LineItemDeviation
 					currency={invoiceCurrency}
+					quotationCurrency={sellQuotationLineItemCurrency}
 					sellOrBuyQuotTotal={sellQuotationLineItemTotal}
 					invOrBillTotal={invoiceLineItemTotal}
 					deviation={percentageDeviationSell}
@@ -26,6 +27,7 @@ function LineItem({
 			<div className={styles.line_item_sub_container}>
 				<LineItemDeviation
 					currency={billCurrency}
+					quotationCurrency={buyQuotationLineItemCurrency}
 					sellOrBuyQuotTotal={buyQuotationLineItemTotal}
 					invOrBillTotal={billLineItemTotal}
 					deviation={percentageDeviationBuy}

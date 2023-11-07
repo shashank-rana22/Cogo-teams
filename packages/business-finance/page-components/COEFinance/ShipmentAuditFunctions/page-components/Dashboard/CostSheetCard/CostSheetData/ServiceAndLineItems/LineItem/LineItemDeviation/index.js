@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 
 function LineItemDeviation({
 	currency = '',
+	quotationCurrency = '',
 	sellOrBuyQuotTotal = '',
 	invOrBillTotal = '',
 	deviation = '',
@@ -30,7 +31,7 @@ function LineItemDeviation({
 			<div className={styles.faded}>
 				{ formatAmount({
 					amount   : sellOrBuyQuotTotal,
-					currency : currency || 'INR',
+					currency : quotationCurrency || 'INR',
 					options  : {
 						currencyDisplay : 'code',
 						style           : 'currency',
