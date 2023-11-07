@@ -62,6 +62,7 @@ function OutstandingList({
 		lastUpdatedAt,
 		selfOrganizationName,
 		selfOrganizationId = '',
+		taggedPersonDetails = {},
 	} = item;
 	const propsData = {
 		invoice_details: {
@@ -103,6 +104,10 @@ function OutstandingList({
 			</div>
 		);
 	}
+
+	const COGOPORT_ENTITIES = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map(
+		(key) => GLOBAL_CONSTANTS.cogoport_entities?.[key].name,
+	);
 
 	return (
 		<div
@@ -268,10 +273,11 @@ function OutstandingList({
 							(item?.taggedState && entityCode !== '101_301')
 								? (<Pill size="md" color="green">{startCase(item?.taggedState)}</Pill>) : null
 						}
-						{
-							item?.taggedPersonDetails ? (
-								<Pill size="md" color="green">{startCase(item.taggedPersonDetails?.name)}</Pill>) : null
-						}
+						{taggedPersonDetails && !COGOPORT_ENTITIES.includes(taggedPersonDetails?.partnerName) ? (
+							<Pill size="md" color="green">
+								{startCase(taggedPersonDetails?.name)}
+							</Pill>
+						) : null}
 						{
 							(entityCode !== '101_301')
 								? (
