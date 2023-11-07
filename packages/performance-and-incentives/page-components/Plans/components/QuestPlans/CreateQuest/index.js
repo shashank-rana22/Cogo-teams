@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 function CreateQuests() {
 	const router = useRouter();
 
-	const { query: { id = null } } = router;
+	const { query: { id } = {} } = router;
 
 	const { loading: questLoading, data, refetch } = useGetQuest({ id });
 

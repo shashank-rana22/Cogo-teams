@@ -15,7 +15,7 @@ function ListQuests() {
 	const { handleClick } = useDeactivateQuest({ afterDeactivate: refetch });
 
 	return (
-		<div>
+		<>
 			<Header />
 
 			<List
@@ -27,7 +27,7 @@ function ListQuests() {
 				getNextPage={getNextPage}
 				handleDeactivate={handleClick}
 			/>
-		</div>
+		</>
 	);
 }
 

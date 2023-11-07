@@ -60,7 +60,7 @@ function QuestForm({
 			{MODE === CREATE
 				? (
 					<div className={styles.button_container}>
-						<Button themeType="secondary" onClick={() => reset()}>
+						<Button themeType="secondary" onClick={reset}>
 							Reset
 						</Button>
 						<Button
