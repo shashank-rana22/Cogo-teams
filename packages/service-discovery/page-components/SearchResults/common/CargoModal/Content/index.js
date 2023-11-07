@@ -1,5 +1,4 @@
 import { Modal, Button } from '@cogoport/components';
-import React from 'react';
 
 function Content({
 	cargoModal = 'progress',

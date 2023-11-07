@@ -1,5 +1,3 @@
-import React from 'react';
-
 import StatItem from './StatItem';
 import styles from './styles.module.css';
 

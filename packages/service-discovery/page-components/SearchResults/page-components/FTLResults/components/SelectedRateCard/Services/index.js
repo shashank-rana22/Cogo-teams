@@ -1,5 +1,3 @@
-import React from 'react';
-
 import OtherServices from './OtherServices';
 import styles from './styles.module.css';
 

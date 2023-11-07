@@ -1,5 +1,4 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
-import React from 'react';
 
 import Back from '../Header/common/Back';
 

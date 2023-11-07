@@ -1,6 +1,5 @@
 import { Pagination, Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 

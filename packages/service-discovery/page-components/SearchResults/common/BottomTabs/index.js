@@ -1,5 +1,4 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import React from 'react';
 
 import styles from './styles.module.css';
 

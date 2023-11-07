@@ -1,5 +1,3 @@
-import React from 'react';
-
 import getElementController from '../../../../../configs/getElementController';
 import getErrorMessage from '../../../../../configs/getErrorMessage';
 

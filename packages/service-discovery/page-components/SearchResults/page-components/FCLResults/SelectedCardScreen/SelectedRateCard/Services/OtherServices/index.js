@@ -1,5 +1,4 @@
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import AdditionalServices from '../../../../../../../../common/OtherServices/AdditionalServices';
 import SubsidiaryServices from '../../../../../../../../common/OtherServices/SubsidiaryServices';

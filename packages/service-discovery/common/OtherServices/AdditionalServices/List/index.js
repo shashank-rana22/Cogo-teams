@@ -1,5 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import CargoInsurance from '../../CargoInsurance';
 import AccordionView from '../../common/AccordionView';

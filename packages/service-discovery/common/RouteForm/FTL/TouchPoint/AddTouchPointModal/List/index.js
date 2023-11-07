@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete, IcMDrag } from '@cogoport/icons-react';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 import styles from './styles.module.css';
 

@@ -1,6 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
 
 function DeleteServiceModal({
 	show = false,

@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import Child from './Child';
 import styles from './styles.module.css';

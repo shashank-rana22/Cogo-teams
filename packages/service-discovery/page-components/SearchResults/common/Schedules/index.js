@@ -1,6 +1,5 @@
 import { Placeholder } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import useGetWeeklySchedules from '../../hooks/useGetWeeklySchedules';
 

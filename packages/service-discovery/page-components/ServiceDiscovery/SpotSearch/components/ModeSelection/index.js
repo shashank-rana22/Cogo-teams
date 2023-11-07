@@ -1,5 +1,3 @@
-import React from 'react';
-
 import MODES from '../../configurations/modes.json';
 
 import ModeItem from './ModeItem';

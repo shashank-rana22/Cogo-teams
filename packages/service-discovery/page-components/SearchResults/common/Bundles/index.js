@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import OfferBundle from './OfferBundle';
 import { sampleData } from './sampleData';

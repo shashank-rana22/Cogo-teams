@@ -2,7 +2,7 @@ import { Toast, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 

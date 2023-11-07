@@ -2,7 +2,6 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import styles from './styles.module.css';
 

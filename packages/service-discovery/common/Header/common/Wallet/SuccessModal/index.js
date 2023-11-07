@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCopy } from '@cogoport/icons-react';
-import React from 'react';
 
 import copyToClipboard from '../../../../../helpers/copyToClipboard';
 

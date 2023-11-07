@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import ComingSoon from '../../../common/ComingSoonTag';
 

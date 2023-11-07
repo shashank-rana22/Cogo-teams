@@ -1,6 +1,6 @@
 import { cl, Tooltip } from '@cogoport/components';
 import { IcCCogoCoin, IcMInfo } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import BottomTabs from '../../../../common/BottomTabs';
 import PossibleSchedules from '../../../../common/PossibleSchedules';

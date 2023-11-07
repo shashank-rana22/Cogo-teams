@@ -1,7 +1,6 @@
 import { Table } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React from 'react';
 
 import styles from './styles.module.css';
 

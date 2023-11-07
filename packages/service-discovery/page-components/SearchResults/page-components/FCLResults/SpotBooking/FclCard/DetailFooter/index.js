@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import BottomTabs from './BottomTabs';
 import TermsConditions from './BottomTabs/TermsConditions';

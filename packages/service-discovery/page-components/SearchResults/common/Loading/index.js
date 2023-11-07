@@ -1,6 +1,5 @@
 import { Placeholder, cl } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
-import React from 'react';
 
 import styles from './styles.module.css';
 

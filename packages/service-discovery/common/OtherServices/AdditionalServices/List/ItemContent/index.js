@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import FeedBackModal from '../../../../../page-components/SearchResults/common/RequestRate/FeedBackModal';
 import LineItems from '../../../common/LineItems';

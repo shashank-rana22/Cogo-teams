@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import StyledTabs from '../../common/StyledTabs';
 import StyledTabPanel from '../../common/StyledTabs/StyledTabPanel';

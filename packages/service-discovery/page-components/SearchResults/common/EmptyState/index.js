@@ -1,5 +1,3 @@
-import React from 'react';
-
 import AdditionalTabs from '../AdditionalTabs';
 
 import NoRatesFound from './NoRatesFound';

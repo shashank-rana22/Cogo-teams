@@ -1,5 +1,3 @@
-import React from 'react';
-
 import SuggestionModal from './SuggestionModal';
 import WarningModal from './WarningModal';
 

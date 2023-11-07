@@ -2,7 +2,7 @@ import { Button, cl } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import Child from './child';
 import styles from './styles.module.css';

@@ -2,7 +2,7 @@ import { Loader, cl } from '@cogoport/components';
 import { Router } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Header from '../../../common/Header';
 import CustomLoadingState from '../../../common/LoadingState/CustomLoadingState';

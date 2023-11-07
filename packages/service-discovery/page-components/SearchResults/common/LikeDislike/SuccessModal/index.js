@@ -1,6 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
 import { IcCFtick, IcMCross } from '@cogoport/icons-react';
-import React from 'react';
 
 import styles from './styles.module.css';
 

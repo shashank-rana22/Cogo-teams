@@ -6,7 +6,7 @@ import { IcMManufacturing, IcMProfile } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import React, { useMemo, useEffect, useCallback } from 'react';
+import { useMemo, useEffect, useCallback } from 'react';
 
 import CustomSelectOption from '../CustomSelectOption';
 

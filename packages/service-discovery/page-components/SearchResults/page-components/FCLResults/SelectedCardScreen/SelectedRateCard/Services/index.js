@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Bundles from '../../../../../common/Bundles';
 
 import OtherServices from './OtherServices';

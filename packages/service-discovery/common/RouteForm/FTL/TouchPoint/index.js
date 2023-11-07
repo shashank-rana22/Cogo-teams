@@ -2,9 +2,7 @@ import { Button, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, {
-	useState,
-} from 'react';
+import { useState } from 'react';
 
 import AddTouchPointModal from './AddTouchPointModal';
 import styles from './styles.module.css';

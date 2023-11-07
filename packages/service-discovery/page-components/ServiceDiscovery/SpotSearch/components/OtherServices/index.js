@@ -1,5 +1,3 @@
-import React from 'react';
-
 import OTHER_SERVICES from '../../configurations/other-services';
 
 import ServiceItem from './ServiceItem';

@@ -2,7 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcACarriageInsurancePaidTo, IcCFtick, IcMInfo, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import SecureNow from '../../../SecureNow';
 

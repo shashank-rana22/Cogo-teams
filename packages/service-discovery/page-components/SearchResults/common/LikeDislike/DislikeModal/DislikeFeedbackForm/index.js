@@ -1,5 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import getElementController from '../../../../../../configs/getElementController';
 import getErrorMessage from '../../../../../../configs/getErrorMessage';

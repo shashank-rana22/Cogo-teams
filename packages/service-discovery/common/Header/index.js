@@ -1,6 +1,5 @@
 import { cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import AIRHeader from './AIRHeader';
 import ExtraHeader from './common/ExtraHeader';

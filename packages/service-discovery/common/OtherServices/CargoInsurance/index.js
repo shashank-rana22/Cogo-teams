@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import getCountryCode from '../../../helpers/getCountryCode';
 import useGetIsMobile from '../../../helpers/useGetIsMobile';
