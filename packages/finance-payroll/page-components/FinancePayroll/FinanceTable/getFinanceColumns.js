@@ -104,7 +104,6 @@ const getFinanceColumns = ({
 				return status ? status.value : null;
 			};
 			const onSubmit = (values) => {
-				console.log(values?.[`order_status_${item.id}`], 'status');
 				const payload = {
 					payroll_id       : item.id,
 					status           : getStatusValue(values?.[`order_status_${item.id}`]),
