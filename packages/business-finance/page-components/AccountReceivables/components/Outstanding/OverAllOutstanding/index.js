@@ -52,7 +52,10 @@ function OverAllOutstanding({
 		refetch,
 		filters,
 		setFilters,
+		filtersApplied,
 	} = useGetOrgOutstanding({ entityCode });
+
+	const { include_defaulters = false } = filters || {};
 
 	const [dateFilter, setDateFilter] = useState({
 		startDate : startOfMonth(new Date()),
@@ -60,7 +63,7 @@ function OverAllOutstanding({
 	});
 	const [range, setRange] = useState('this_month');
 	const { statsData, statsLoading } = useGetSageArOutstandingsStats({
-		entityCode,
+		entityCode, include_defaulters,
 	});
 	const [viewGraphStats, setViewGraphStats] = useState(false);
 	const ref = useRef(null);
@@ -164,6 +167,7 @@ function OverAllOutstanding({
 					filters={filters}
 					setFilters={setFilters}
 					clearFilter={clearFilter}
+					filtersApplied={filtersApplied}
 				/>
 
 			</div>

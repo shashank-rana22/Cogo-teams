@@ -10,7 +10,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function DetailsForm({ errors, control, handleEntityChange, fromCurrency, toCurrency }) {
+function DetailsForm({ errors, control, handleEntityChange }) {
 	return (
 		<>
 			<div className={styles.flex}>
@@ -102,7 +102,7 @@ function DetailsForm({ errors, control, handleEntityChange, fromCurrency, toCurr
 					<div className={styles.label}>Enter Exchange Rate</div>
 					<InputController
 						control={control}
-						disabled={fromCurrency === toCurrency}
+						disabled
 						name="exchangeRate"
 						placeholder="Exchange Rate"
 						rules={{ required: true }}

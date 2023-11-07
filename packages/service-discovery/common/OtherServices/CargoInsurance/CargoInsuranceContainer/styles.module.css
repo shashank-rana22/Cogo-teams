@@ -12,10 +12,13 @@
 .left_section {
 	display: flex;
 	align-items: center;
+
+	.left_content {
+		margin-left: 26px;
+	}
 }
 
 .label {
-	margin-left: 26px;
 	font-size: 14px;
 	font-weight: 600;
 	color: #000;

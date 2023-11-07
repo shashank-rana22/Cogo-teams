@@ -48,6 +48,7 @@ function EditMarginFooter({
 	convenienceDetails = {},
 	convenience_line_item = {},
 	state = '',
+	handlingFeeDetails = {},
 }) {
 	const { push } = useRouter();
 
@@ -62,6 +63,8 @@ function EditMarginFooter({
 	} = detail;
 
 	const { convenience_fee_billing_service, adjust_convenience_fee } = convenience_line_item;
+
+	const { handling_fees = {} } = handlingFeeDetails;
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
 
@@ -107,6 +110,12 @@ function EditMarginFooter({
 					convenience_fee_billing_service,
 					adjust_convenience_fee,
 				},
+				...(handling_fees.price || handling_fees.price === 0 ? {
+					handling_fees: {
+						...handling_fees,
+						quantity: undefined,
+					},
+				} : {}),
 				checkout_id                             : id,
 				margins                                 : FINAL_MARGINS,
 				is_applicable_for_approval_confirmation : false,
@@ -117,6 +126,7 @@ function EditMarginFooter({
 			const { config = {} } = error.response;
 
 			const { url = '' } = config;
+
 			Toast.error(`${getApiErrorString(error.response?.data)} in ${url}`);
 		}
 	};

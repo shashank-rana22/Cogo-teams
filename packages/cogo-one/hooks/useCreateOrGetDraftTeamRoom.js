@@ -67,7 +67,7 @@ async function getExistingDraftRoom({
 	return { id: draftRoomData?.id, ...(draftRoomData?.data() || {}) };
 }
 
-async function createDraftRoom({
+export async function createDraftRoom({
 	userIds = [],
 	userIdsData = [],
 	firestore = {},
@@ -75,6 +75,7 @@ async function createDraftRoom({
 	length = 0,
 	groupName = '',
 	groupMembersHashString = '',
+	category = 'chat',
 }) {
 	const selfInternalRoomsCollection = collection(firestore, `users/${loggedInAgendId}/groups`);
 
@@ -98,8 +99,9 @@ async function createDraftRoom({
 		new_message_sent_at       : Date.now(),
 		self_has_unread_messages  : false,
 		is_group                  : isGroup,
-		search_name               : searchName?.toUpperCase(),
+		search_name               : category === 'meeting' ? groupName?.toUpperCase() : searchName?.toUpperCase(),
 		group_members_hash_string : groupMembersHashString,
+		category,
 	};
 
 	const res = await addDoc(selfInternalRoomsCollection, draftRoomPayload);

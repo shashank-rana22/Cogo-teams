@@ -5,6 +5,16 @@ import ENTITY_MAPPING from './entityMapping';
 import LANGUAGE_OPTIONS from './languageMapping';
 import supplierEntityMapping from './supplierEntityMapping.json';
 
+const COUNTRY_IDS = {
+	IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
+	VN : '177fcbad-8ef7-4324-871c-6c31745f4411',
+	GB : '222d4b9d-56a8-4580-b761-a71c653263fb',
+	SG : '6e18d508-87b9-4e7e-a785-b47edc76b0b7',
+	ID : '2693fa76-6539-410d-a0b0-551d9e620ba3',
+	TH : '61a683f3-128b-4193-98f7-dd72f68db03d',
+	CN : '1b94734e-7d51-4e94-9dd2-ef96aee64a8f',
+};
+
 const GLOBAL_CONSTANTS = {
 	attendence_options: [
 		{ value: 'flexi_shift', label: 'Flexi Shift' },
@@ -37,14 +47,7 @@ const GLOBAL_CONSTANTS = {
 		TH : '6d92cf58-3392-44c3-8e1b-09192f98f8be',
 		CN : 'd39c9a59-93e3-4823-b85f-c72139cf138f',
 	},
-	country_ids: {
-		IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
-		VN : '177fcbad-8ef7-4324-871c-6c31745f4411',
-		SG : '6e18d508-87b9-4e7e-a785-b47edc76b0b7',
-		ID : '2693fa76-6539-410d-a0b0-551d9e620ba3',
-		TH : '61a683f3-128b-4193-98f7-dd72f68db03d',
-		CN : '1b94734e-7d51-4e94-9dd2-ef96aee64a8f',
-	},
+	country_ids: COUNTRY_IDS,
 
 	platform_supported_country_codes: ['IN', 'VN', 'SG', 'ID', 'TH', 'CN'],
 
@@ -84,7 +87,9 @@ const GLOBAL_CONSTANTS = {
 			'yyyy-MM-dd'          : 'yyyy-MM-dd',
 			'MMM yyyy'            : 'MMM yyyy',
 			'dd MMM'              : 'dd MMM',
-			'EEE, dd'             : 'EEE, dd',
+			'EEE, dd'            	: 'EEE, dd',
+			'MMMM dd, YYYY'       : 'MMMM dd, YYYY',
+			'MMMM, YYYY'          : 'MMMM, YYYY',
 			dd                    : 'dd',
 			MMM                   : 'MMM',
 			yyyy                  : 'yyyy',
@@ -241,6 +246,7 @@ const GLOBAL_CONSTANTS = {
 			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8',		// Rishi's ID
 			'7f31a684-61dd-4a65-8ca7-f16bc9bcafd3',		// Akash's ID
 		],
+		smt_allotted_users_role_ids: ['ae80297f-e30d-45fb-845c-61c302523476', 'dcdcb3d8-4dca-42c2-ba87-1a54bc4ad7fb'],
 	},
 	view_key_mappings: {
 		sales_team_members_view          : 'sales_agent_id',
@@ -260,6 +266,33 @@ const GLOBAL_CONSTANTS = {
 		'August', 'September', 'October', 'November', 'December'],
 
 	image_url: {
+		CAROUSEL_ONE: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/carousel1.svg',
+		CAROUSEL_TWO:
+		'https://cogoport-testing.sgp1.digitaloceanspaces.com/882784d0c199f841e0bf0ef95ff6d8c0/Group%201000010473.svg',
+		CAROUSEL_THREE:
+		'https://cogoport-testing.sgp1.digitaloceanspaces.com/a964769da6e5e643a4020ef4fdb3ae0d/Group%201000010474.svg',
+		DARK_BG          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/dark_bg.png',
+		TICK_ICON     			: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Ok.svg',
+		ADD_TO_CART    		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/AddCart',
+		SYNCHRONIZE_CART	: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Synchronize.svg',
+		COUPON_ICON    		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/percentageCoupon.svg',
+
+		ARROW_RIGHT_TOP       		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/arrow-top-right.svg',
+		ORDERS_PLACED         		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Subtract_icon.svg',
+		TRUCK                 		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/truck_blue.svg',
+		HOURGLASS             		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hourglass.svg',
+		NOTE_BLUE             		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/note_blue.svg',
+		PROFIT                		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Profit.svg',
+		CART                  		: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Cart.svg',
+		JACKET                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Cogo_Jacket.png',
+		laptop_bag              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Laptop_bag.png',
+		COGO_ICON               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_name.svg',
+		COPYRIGHT_ICON          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/copyright.svg',
+		cogo_shoes              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Cogo_Shoes.png',
+		spring_collection       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/collection.png',
+		cart                    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Cart.svg',
+		led                     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/LED.png',
+		check_circle            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/CheckCircle.svg',
 		ship_icon               : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/shipIcon.jpg',
 		truck_icon              : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/truckIcon.png',
 		air_icon2               : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/airplane.png',
@@ -473,6 +506,21 @@ const GLOBAL_CONSTANTS = {
 		no_email_permission     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no_email_permission.png',
 		shipping_line_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/shipping_line_default_logo',
+		secure_now              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/secureNow.png',
+		insurance_pkg           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pkg.png',
+		bajaj_insurance         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Bajaj_Insurance_.png',
+		globe_sub               : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/globe',
+		upload_icon             : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/upload_icon.png',
+		mail_sent               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mail_sent.gif',
+		calendar                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/calendar.png',
+		empty_event             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty_events.png',
+		meetings                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/important.png',
+		edit_square_icon        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/edit_square.png',
+		cogoport_login_logo     : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
+		edit_square             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/edit_square_light.png',
+		new_conversation        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/new-message.png',
+		teams                   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/teams.png',
+		groups                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/group.png',
 		container2              : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/container2.png',
 		container_icon          : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/icdport.svg',
 		empty_state_finder      : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/ic-empty-doc_app.svg',
@@ -481,15 +529,12 @@ const GLOBAL_CONSTANTS = {
 		tracking_loader         : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/cogo-animation.gif',
 		origin_map_pointer      : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/map_origin.svg',
 		destination_map_pointer : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/map_destination.svg',
-		edit_square_icon        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/edit_square.png',
-		cogoport_login_logo     : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-admin.svg',
-		edit_square             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/edit_square_light.png',
-		new_conversation        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/new-message.png',
-		teams                   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/teams.png',
-		groups                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/group.png',
 		performance_leaderboard_confetti:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti_svg.svg',
 		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
+		public_leaderboard_ranking_badge:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/performance-leaderboard.svg',
+		public_leaderboard_winner_icon: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/winner_icon.svg',
 	},
 
 	video_call_ring_tone_url:
@@ -503,6 +548,10 @@ const GLOBAL_CONSTANTS = {
 		+ 'Book%201%20-%20Copy.xlsx',
 		bulk_jv_sample_url: 'https://cogoport-production.sgp1.digitaloceanspaces.com/81afabc7ffea4be1540099612af2ffd1/'
 		+ 'JVBulkUploadSampleExcel.xlsx',
+		csd_sample: 'https://cogoport-production.sgp1.digitaloceanspaces.com/9b60f34ea9aeb09a2dff0bd02c38174e/'
+		+ 'SampleJvUploadForCSD.xlsx',
+		others_sample: 'https://cogoport-production.sgp1.digitaloceanspaces.com/1374e265882bf79899b72c75025c8b5e/'
+		+ 'SampleJVUploadForOtherAccmode.xlsx',
 	},
 
 	urls: {
@@ -754,6 +803,41 @@ const GLOBAL_CONSTANTS = {
 	],
 	service_supported_countries: {
 		feature_supported_service: {
+			common: {
+				services: {
+					feedback_services: {
+						allowed_currency: [
+							'INR',
+							'USD',
+							'EUR',
+							'GBP',
+							'VND',
+							'IDR',
+							'SGD',
+							'THB',
+							'CNY',
+							'AED',
+						],
+					},
+					invoicing_parties_checkout: {
+						allowed_currency: ['INR', 'USD', 'VND', 'IDR', 'SGD', 'THB', 'CNY'],
+					},
+					air_domestic: {
+						countries           : ['IN'],
+						default_country_id  : COUNTRY_IDS.IN,
+						default_country_ids : [COUNTRY_IDS.IN],
+					},
+					ftl_freight: {
+						countries           : ['IN', 'VN'],
+						default_country_id  : COUNTRY_IDS.IN,
+						default_country_ids : [COUNTRY_IDS.IN, COUNTRY_IDS.VN],
+					},
+					ltl_freight: {
+						countries           : ['IN'],
+						default_country_ids : [COUNTRY_IDS.IN, COUNTRY_IDS.VN],
+					},
+				},
+			},
 			cargo_insurance: {
 				countries: ['IN'],
 			},
@@ -869,6 +953,33 @@ const GLOBAL_CONSTANTS = {
 	default_preferred_language : 'english',
 	supplier_entity_mapping    : supplierEntityMapping.shippingCompanies,
 	cogoport_care_user_id      : '413eb04c-037b-44cd-b68c-ce4fc277c156',
+	office_location_ids        : {
+		gurgaon : '9cf87c31-f991-4351-976d-3abd7eff374d',
+		mumbai  : '48a489eb-76d3-419a-bffc-dac6715056d3',
+	},
+	months_with_value: [
+		{ label: 'January', value: 1 },
+		{ label: 'February', value: 2 },
+		{ label: 'March', value: 3 },
+		{ label: 'April', value: 4 },
+		{ label: 'May', value: 5 },
+		{ label: 'June', value: 6 },
+		{ label: 'July', value: 7 },
+		{ label: 'August', value: 8 },
+		{ label: 'September', value: 9 },
+		{ label: 'October', value: 10 },
+		{ label: 'November', value: 11 },
+		{ label: 'December', value: 12 },
+	],
+	days_with_value: [
+		{ label: 'Monday', value: 'monday' },
+		{ label: 'Tuesday', value: 'tuesday' },
+		{ label: 'Wednesday', value: 'wednesday' },
+		{ label: 'Thursday', value: 'thursday' },
+		{ label: 'Friday', value: 'friday' },
+		{ label: 'Saturday', value: 'saturday' },
+		{ label: 'Sunday', value: 'sunday' },
+	],
 };
 
 export default GLOBAL_CONSTANTS;

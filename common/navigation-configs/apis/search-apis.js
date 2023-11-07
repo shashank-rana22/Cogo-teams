@@ -579,5 +579,10 @@ const apis = [
 		access_type : 'private',
 		feature     : 'hs_code',
 	},
+	{
+		api          : 'get_service_discovery_configuration',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
 ];
 export default apis;

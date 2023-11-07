@@ -53,6 +53,8 @@ const useGetListCoverage = ({ userService }) => {
 		cogo_entity_id            : '',
 		shipment_id               : '',
 		trade_type                : '',
+		start_date                : '',
+		end_date                  : '',
 	});
 	const endPoint = API_NAME[filter?.service || 'fcl_freight'];
 
@@ -106,6 +108,7 @@ const useGetListCoverage = ({ userService }) => {
 				params: {
 					filters: {
 						...FINAL_FILTERS,
+						status         : filter?.status === 'completed' ? ['completed', 'aborted'] : filter?.status,
 						[idToUse]      : idValue || undefined,
 						source         : source || undefined,
 						user_id        : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,

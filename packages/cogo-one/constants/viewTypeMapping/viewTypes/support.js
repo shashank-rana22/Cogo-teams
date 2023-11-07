@@ -6,7 +6,7 @@ import {
 import { COMMON_AGENT_TYPES } from '../defaultViewOptions';
 
 const SUPPORT = {
-	chat_tabs_to_be_shown     : ['message', 'voice', 'teams'],
+	chat_tabs_to_be_shown     : ['message', 'voice', 'firebase_emails', 'teams'],
 	all_chats_base_query      : ({ agentId }) => [where('support_agent_id', '==', agentId)],
 	observer_chats_base_query : ({ agentId }) => [where('spectators_ids', 'array-contains', agentId)],
 	teams_chats_base_query    : ({ agentId }) => [where('managers_ids', 'array-contains', agentId)],
@@ -51,10 +51,11 @@ const SUPPORT = {
 		customer_org_users                          : false,
 		convert_account_to_cp                       : false,
 		show_shipment_reminder                      : true,
-		show_lead_voice_calls                       : true,
+		show_lead_voice_calls                       : false,
 		show_shipments_stakeholders_contact_details : false,
 		show_services                               : false,
 		show_rm_agent_details                       : false,
+		show_platform_adoption                      : true,
 	},
 };
 

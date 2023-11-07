@@ -19,17 +19,15 @@ function ViewRecurringSummery({ itemData = {}, recurringState = '' }) {
 				>
 					<Modal.Header title="Details" />
 					<Modal.Body className={styles.modal_data}>
-						<div style={{ marginTop: '20px' }}>
-							{recurringState === 'recurring' ? (
-								<RecurringSummery
-									itemData={itemData}
-								/>
-							) : (
-								<Summery
-									itemData={itemData}
-								/>
-							)}
-						</div>
+						{recurringState === 'recurring' ? (
+							<RecurringSummery
+								itemData={itemData}
+							/>
+						) : (
+							<Summery
+								itemData={itemData}
+							/>
+						)}
 					</Modal.Body>
 					<Modal.Footer>
 						<Button

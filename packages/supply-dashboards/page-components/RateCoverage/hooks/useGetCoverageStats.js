@@ -30,7 +30,7 @@ const AIR_PARAMS_MAPPING = {
 
 };
 
-const useGetCoverageStats = (filter) => {
+const useGetCoverageStats = ({ filter, source, showWeekData }) => {
 	const service = filter?.service;
 	const endPoint = API_END_POINT_MAPPING[service] || 'get_fcl_freight_rate_job_stats';
 
@@ -62,16 +62,8 @@ const useGetCoverageStats = (filter) => {
 			}
 		});
 
-		const isTodayDateRequired = filter?.status === 'completed';
-
 		const DATE_PARAMS = {};
 
-		if (isTodayDateRequired) {
-			DATE_PARAMS.start_date = new Date();
-		}
-		if (isTodayDateRequired) {
-			DATE_PARAMS.end_date = new Date();
-		}
 		if (filter?.start_date) { DATE_PARAMS.start_date = filter?.start_date; }
 		if (filter?.end_date) { DATE_PARAMS.end_date = filter?.end_date; }
 
@@ -86,6 +78,7 @@ const useGetCoverageStats = (filter) => {
 					filters: {
 						...FINAL_FILTERS,
 						user_id        : releventToMeValue ? user_id : FINAL_FILTERS.user_id,
+						status         : filter?.status === 'completed' ? ['completed', 'aborted'] : filter?.status,
 						cogo_entity_id : filter?.cogo_entity_id === 'cogo_entity_id'
 							? user_data?.partner?.id : undefined,
 						daily_stats,
@@ -93,13 +86,14 @@ const useGetCoverageStats = (filter) => {
 						weekly_stats            : !daily_stats,
 						...DATE_PARAMS,
 						transport_modes_keyword : filter?.service === 'trailer' ? 'trailer' : undefined,
+						source                  : (showWeekData && source) ? source : undefined,
 					},
 				},
 			});
 		} catch (err) {
 			// console.log(err);
 		}
-	}, [filter, trigger, user_id, user_data?.partner?.id]);
+	}, [filter, trigger, user_id, user_data?.partner?.id, showWeekData, source]);
 
 	useEffect(() => {
 		getStats();

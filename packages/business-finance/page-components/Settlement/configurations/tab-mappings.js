@@ -4,7 +4,7 @@ import JournalVoucher from '../page-components/JournalVoucher';
 import OnAccountCollection from '../page-components/OnAccountCollection';
 import TdsSettlement from '../page-components/TdsSettlement';
 
-const tabPanelMapping = (entityCode, entity) => (
+const tabPanelMapping = (entityCode) => (
 	[
 		{
 			name      : 'ap-ar-settlement',
@@ -24,7 +24,7 @@ const tabPanelMapping = (entityCode, entity) => (
 		{
 			name      : 'onAccountCollection',
 			title     : 'On Account Collection',
-			component : <OnAccountCollection entity={entity} />,
+			component : <OnAccountCollection entityCode={entityCode} />,
 		},
 		{
 			name      : 'JournalVoucher',

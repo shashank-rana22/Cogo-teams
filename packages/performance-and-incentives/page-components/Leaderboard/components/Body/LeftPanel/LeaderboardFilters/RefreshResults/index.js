@@ -1,14 +1,24 @@
 import { Button, Toast } from '@cogoport/components';
 import { IcMRefresh } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
+
+import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../../constants/leaderboard-viewtype-constants';
+
+const { MANAGER, AGENT } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 function RefreshResults(props) {
 	const { listLoading, listRefetch, refetchStats, statsLoading, getUserProgress } = props;
+
+	const { incentive_leaderboard_viewtype } = useSelector(({ profile }) => profile);
 
 	const fetchData = () => {
 		try {
 			listRefetch();
 			refetchStats();
-			getUserProgress();
+
+			if ([MANAGER, AGENT].includes(incentive_leaderboard_viewtype)) {
+				getUserProgress();
+			}
 		} catch {
 			Toast.error('Something went wrong!');
 		}

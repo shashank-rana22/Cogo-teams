@@ -17,6 +17,9 @@ function Header({ data = {}, filters = {} }) {
 		subscriptionDiscountApplied = name.split(' ')?.[GLOBAL_CONSTANTS.zeroth_index];
 	}
 
+	const { importer_exporter:{ tags: orgTags = [] } = {} } = data || {};
+	const accountType = (orgTags || []).includes('partner') ? 'Channel Partner' : 'Importer Exporter';
+
 	return (
 		<div className={styles.header_container}>
 			<div className={styles.left_section}>
@@ -84,14 +87,20 @@ function Header({ data = {}, filters = {} }) {
 							Saas Subscribed
 						</Pill>
 					) : null}
+					<Pill size="md" color="#F7FAEF">
+						<div style={{ color: '#849E4C' }}>
+							{accountType}
+						</div>
+					</Pill>
 					{subscriptionDiscountApplied ? (
 						<Pill size="md" color="#e6fae8">
+							Subscription (
 							{subscriptionDiscountApplied}
 							{' '}
 							-
 							{' '}
 							{discount_value}
-							%
+							%)
 						</Pill>
 					) : null}
 				</div>

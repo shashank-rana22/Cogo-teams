@@ -8,7 +8,16 @@ import {
 	IcMAppCustoms,
 } from '@cogoport/icons-react';
 
+import SecureNow from '../../../../common/SecureNow';
+
 const other_services = [
+	{
+		label         : 'Cargo Insurance',
+		value         : 'insurance',
+		icon          : IcMAppInsurance,
+		is_available  : true,
+		footerContent : <SecureNow />,
+	},
 	{
 		label        : 'Customs Clearance',
 		value        : 'customs',
@@ -25,12 +34,6 @@ const other_services = [
 		label        : 'Licensing & Docs',
 		value        : 'licensing',
 		icon         : IcMAppLicenses,
-		is_available : false,
-	},
-	{
-		label        : 'Cargo Insurance',
-		value        : 'insurance',
-		icon         : IcMAppInsurance,
 		is_available : false,
 	},
 	{
