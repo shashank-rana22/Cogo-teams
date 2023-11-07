@@ -58,7 +58,7 @@ function ProceedToCheckout({
 						options  : {
 							style                 : 'currency',
 							currencyDisplay       : 'symbol',
-							maximumFractionDigits : 0,
+							maximumFractionDigits : 2,
 						},
 					})}
 				</span>

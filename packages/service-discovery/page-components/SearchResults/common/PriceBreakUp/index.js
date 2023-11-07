@@ -65,7 +65,7 @@ const getPriceBreakUpColumn = [
 					options : {
 						style                 : 'currency',
 						currencyDisplay       : 'symbol',
-						maximumFractionDigits : 0,
+						maximumFractionDigits : 2,
 					},
 				})}
 			</div>
@@ -248,7 +248,7 @@ function PriceBreakup({ rateCardData = {}, detail = {} }) {
 						options  : {
 							style                 : 'currency',
 							currencyDisplay       : 'symbol',
-							maximumFractionDigits : 0,
+							maximumFractionDigits : 2,
 						},
 					})}
 				</div>

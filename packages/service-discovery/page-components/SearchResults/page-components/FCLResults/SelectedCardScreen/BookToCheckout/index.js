@@ -38,7 +38,7 @@ function BookCheckout({ data = {} }) {
 								options  : {
 									style                 : 'currency',
 									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
+									maximumFractionDigits : 2,
 								},
 							})}
 						</strong>

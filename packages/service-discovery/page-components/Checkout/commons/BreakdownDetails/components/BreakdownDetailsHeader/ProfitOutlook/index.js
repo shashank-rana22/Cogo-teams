@@ -22,7 +22,7 @@ function ProfitOutlook({
 		options  : {
 			style                 : 'currency',
 			currencyDisplay       : 'symbol',
-			maximumFractionDigits : 0,
+			maximumFractionDigits : 2,
 		},
 	});
 
@@ -49,7 +49,7 @@ function ProfitOutlook({
 				options  : {
 					style                 : 'currency',
 					currencyDisplay       : 'symbol',
-					maximumFractionDigits : 0,
+					maximumFractionDigits : 2,
 				},
 			}),
 			visible: true,
@@ -62,7 +62,7 @@ function ProfitOutlook({
 				options  : {
 					style                 : 'currency',
 					currencyDisplay       : 'symbol',
-					maximumFractionDigits : 0,
+					maximumFractionDigits : 2,
 				},
 			}),
 			visible: condition.isSuperAdmin,
@@ -75,7 +75,7 @@ function ProfitOutlook({
 				options  : {
 					style                 : 'currency',
 					currencyDisplay       : 'symbol',
-					maximumFractionDigits : 0,
+					maximumFractionDigits : 2,
 				},
 			}),
 			visible: condition.isSuperAdmin,
