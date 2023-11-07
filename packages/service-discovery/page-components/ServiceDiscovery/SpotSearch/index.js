@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 
 import Wallet from '../../../common/Header/common/Wallet';
 import CustomLoadingState from '../../../common/LoadingState/CustomLoadingState';
+import useGetActiveServices from '../../../helpers/useGetActiveServices';
 import useGetIsMobile from '../../../helpers/useGetIsMobile';
 
 import Header from './components/Header';
@@ -35,6 +36,10 @@ function SpotSearch() {
 	const [location, setLocation] = useState({});
 	const [errors, setErrors] = useState({});
 	const [routerLoading, setRouterLoading] = useState(false);
+
+	const { data:{ service_discovery = {} } = {} } = useGetActiveServices();
+
+	const { bookable_services = {} } = service_discovery || {};
 
 	const isMobile = useGetIsMobile();
 
@@ -78,6 +83,7 @@ function SpotSearch() {
 						setSelectedMode={setSelectedMode}
 						setSelectedService={setSelectedService}
 						setLocation={setLocation}
+						bookable_services={bookable_services}
 					/>
 				</div>
 
@@ -113,6 +119,7 @@ function SpotSearch() {
 					selectedService={selectedService}
 					setSelectedService={setSelectedService}
 					setSelectedMode={setSelectedMode}
+					bookable_services={bookable_services}
 				/>
 
 				{isEmpty(selectedService) ? null : (

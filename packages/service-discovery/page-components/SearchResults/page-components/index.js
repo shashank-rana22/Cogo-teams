@@ -1,5 +1,4 @@
 import { Loader, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Router } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -39,7 +38,9 @@ function SearchResults() {
 	const [comparisonRates, setComparisonRates] = useState([]);
 	const [infoBanner, setInfoBanner] = useState({});
 
-	const isGuideViewed = localStorage.getItem(`guide_completed_for_${id}`) || false;
+	const isMobile = useGetIsMobile();
+
+	const isGuideViewed = localStorage.getItem(`guide_completed_for_${id}`) || isMobile || false;
 
 	const {
 		refetchSearch = () => {},
@@ -55,9 +56,8 @@ function SearchResults() {
 		rates = [],
 		setSelectedSchedule = () => {},
 		selectedSchedule = {},
+		bookable_services = {},
 	} = useGetSpotSearch({ setComparisonRates, setInfoBanner, setRouterLoading, setScheduleLoading });
-
-	const isMobile = useGetIsMobile();
 
 	const { createSearch, loading: createLoading } = useCreateSearch({ setRouterLoading, setHeaderProps });
 
@@ -89,7 +89,7 @@ function SearchResults() {
 		);
 	}
 
-	const isServiceSupported = GLOBAL_CONSTANTS.new_search_supported_services.includes(detail?.service_type);
+	const isServiceSupported = detail?.service_type in bookable_services && bookable_services?.[detail?.service_type];
 
 	if (
 		!isEmpty(detail)
