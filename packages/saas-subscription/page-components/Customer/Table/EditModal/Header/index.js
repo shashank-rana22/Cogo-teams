@@ -3,7 +3,9 @@ import { IcMCross } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 import React from 'react';
 
-import { HEADER_MAPPING } from '../../../../../constant/editModalConstant';
+import { getHeaderConfig } from '../../../../../configuration/editModalConfig';
+import getValues from '../../../../../utils/getValues';
+import itemFunction from '../../ItemFunctions';
 
 import styles from './styles.module.css';
 
@@ -14,34 +16,44 @@ function Header({ info = {}, editModalChangeHandler, closeModalHandler, ...rest 
 	const { id:product_family_id } = product_family || {};
 
 	const { t } = useTranslation(['saasSubscription']);
+	const headerConfig = getHeaderConfig({ t });
+
+	const functions = itemFunction({ t });
 
 	return (
 		<>
 			<div className={styles.flex_box}>
 				<h2 className={styles.title}>{t('saasSubscription:config_sub')}</h2>
-				<ButtonIcon size="md" icon={<IcMCross />} themeType="primary" onClick={closeModalHandler} />
+				<ButtonIcon
+					size="md"
+					icon={<IcMCross />}
+					onClick={closeModalHandler}
+				/>
 			</div>
 
 			<div className={styles.flex_box}>
+
 				<div>
-					{Object.keys(HEADER_MAPPING).map((ele) => (
-						<div key={ele}>
+					{headerConfig.map((config) => (
+						<div key={config.key}>
 							<span className={styles.header_title}>
-								{HEADER_MAPPING?.[ele]}
+								{config.label}
 								:
 							</span>
-							<span className={styles.header_value}>{organization?.[ele]}</span>
+							<span className={styles.header_value}>
+								{getValues({ itemData: organization, config, itemFunction: functions })}
+							</span>
 						</div>
 					))}
 				</div>
 
 				<div className={styles.flex_box}>
 					<Button
+						type="button"
 						onClick={() => editModalChangeHandler(
 							'editPlan',
 							{ id, saas_product_family_id: product_family_id, saas_subscription_customer_id },
 						)}
-						type="button"
 					>
 						{t('saasSubscription:change_plan')}
 					</Button>

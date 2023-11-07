@@ -4,7 +4,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMSettings } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-const itemFunction = ({ setEditModal, t }) => ({
+const itemFunction = ({ setEditModal = () => {}, t = () => {} }) => ({
 	renderId: (item) => {
 		const { organization = {} } = item || {};
 		const { serial_id = '' } = organization || {};
@@ -40,19 +40,7 @@ const itemFunction = ({ setEditModal, t }) => ({
 			</div>
 		);
 	},
-	renderEndDate: (item) => {
-		const { active_subscription = {} } = item || {};
-		const { end_date = '' } = active_subscription || {};
-		return (
-			<span>
-				{end_date ? formatDate({
-					date       : end_date,
-					dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
-					formatType : 'date',
-				}) : '--'}
-			</span>
-		);
-	},
+
 	renderFamily: (item) => {
 		const { partner_id = '' } = item || {};
 		return	(
@@ -72,5 +60,34 @@ const itemFunction = ({ setEditModal, t }) => ({
 			/>
 		</span>
 	),
+	renderValidity: (item) => {
+		const { active_subscription = {} } = item || {};
+		const { start_date = '', end_date = '' } = active_subscription || {};
+
+		return (
+
+			<span>
+				{start_date ? formatDate({
+					date       : start_date,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yy'],
+					formatType : 'date',
+				}) : ' '}
+
+				{end_date ? (
+					` - 
+					${formatDate({
+						date       : end_date,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yy'],
+						formatType : 'date',
+					})}`
+
+				) : ' -'}
+			</span>
+
+		);
+	},
+	// renderKycStatus : (item, config)=>{
+	// 	return
+	// }
 });
 export default itemFunction;

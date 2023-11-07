@@ -98,6 +98,7 @@ const GLOBAL_CONSTANTS = {
 			'MMM dd yyyy'         : 'MMM dd yyyy',
 			eee                   : 'eee',
 			'dd MMM yy | hh:mm a' : 'dd MMM yy | hh:mm a',
+			'dd MMM yy'           : 'dd MMM yy',
 		},
 		time: {
 			'hh:mm aaa'    : 'hh:mm aaa',
