@@ -19,6 +19,14 @@ function AdoptionAssignModal({
 			metadata,
 		});
 	};
+
+	const handleClose = () => {
+		setAssignModal(() => ({
+			assignData : null,
+			show       : false,
+		}));
+	};
+
 	if (!show) {
 		return null;
 	}
@@ -28,14 +36,8 @@ function AdoptionAssignModal({
 			show={show}
 			size="sm"
 			scroll={false}
-			onClose={() => setAssignModal(() => ({
-				assignData : null,
-				show       : false,
-			}))}
-			closeOnOuterClick={() => setAssignModal(() => ({
-				assignData : null,
-				show       : false,
-			}))}
+			onClose={handleClose}
+			closeOnOuterClick={handleClose}
 			placement="top"
 		>
 			<Modal.Header title="Assign To Agent" />
@@ -71,10 +73,7 @@ function AdoptionAssignModal({
 				<Button
 					disabled={loading}
 					themeType="tertiary"
-					onClick={() => setAssignModal(() => ({
-						assignData : null,
-						show       : false,
-					}))}
+					onClick={handleClose}
 				>
 					Cancel
 				</Button>
