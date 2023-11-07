@@ -14,6 +14,7 @@ import styles from './styles.module.css';
 function UploadModal({ show, handleModal, docno, documentUrl, name, getEmployeeDetails }) {
 	const { control, setValue, handleSubmit, reset } = useForm();
 	const { updateEmployeeDetails } = useUpdateEmployee({ handleModal, getEmployeeDetails });
+	console.log(show, 'show-check');
 
 	const onSubmit = (values) => {
 		let PERSONAL_DETAILS = {};

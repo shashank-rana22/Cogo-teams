@@ -33,7 +33,8 @@ function EducationDetailsEdit({
 	getEmployeeDetails = () => {},
 }) {
 	const { details } = detailsToEdit || {};
-	const { employee_detail } = data || {};
+	const { employee_detail, user_role } = data || {};
+	console.log(user_role, 'check-role');
 	const { employee_education_details } = employee_detail || {};
 	const { handleSubmit, control, setValue } = useForm();
 
@@ -42,19 +43,13 @@ function EducationDetailsEdit({
 	};
 	const { updateEmployeeDetails } = useUpdateEmployee({ handleModal, getEmployeeDetails });
 
-	console.log(details, data, 'detadffgh');
-
 	const commonKey = !isEmpty(details) ? details[GLOBAL_CONSTANTS.zeroth_index].key : null;
-
-	console.log(commonKey, 'commonLey');
 
 	const educationDetails = details.reduce((res, detail) => {
 		const { key } = detail;
-		console.log(res, 'res');
-		console.log(detail, 'resDetail');
 		const valueKey = detail.value;
 
-		const educationDetail = employee_education_details.find((item) => item.education_level === key);
+		const educationDetail = (employee_education_details || []).find((item) => item.education_level === key);
 
 		if (educationDetail) {
 			res[detail.label] = educationDetail[valueKey];
@@ -96,7 +91,7 @@ function EducationDetailsEdit({
 
 	const educationDetailsArray = useMemo(() => Object.keys(educationDetails).map((label) => ({
 		label,
-		value: educationDetails[label],
+		value: educationDetails[label] || '',
 	})), [educationDetails]);
 
 	useEffect(() => {
@@ -118,7 +113,7 @@ function EducationDetailsEdit({
 				<Modal.Body>
 					<div className={styles.educational_details}>
 						{(educationDetailsArray || []).map((detail) => {
-							const ControlComponent = controlTypes[detail.label];
+							const ControlComponent = controlTypes[detail?.label];
 							return (
 								<div className={styles.input_container} key={detail?.label}>
 									<div className={styles.title}>{`${detail?.label}*`}</div>
@@ -128,6 +123,7 @@ function EducationDetailsEdit({
 											name={detail?.label}
 											placeholder={`Enter your ${detail?.label}`}
 											// rules={{ required: 'required' }}
+											disabled={user_role === 'hrbp' ? false : !isEmpty(detail?.value)}
 											options={detail?.label === 'Score type' ? SCORE_TYPE : undefined}
 										/>
 									) : (
@@ -136,6 +132,7 @@ function EducationDetailsEdit({
 											name={detail?.label}
 											placeholder={`Enter your ${detail?.label}`}
 											// rules={{ required: 'required' }}
+											disabled={user_role === 'hrbp' ? false : !isEmpty(detail?.value)}
 										/>
 									)}
 
