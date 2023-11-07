@@ -1,5 +1,4 @@
 import { cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -16,16 +15,16 @@ function ServiceItem({
 	selectedService = {},
 	setSelectedService = () => {},
 	setSelectedMode = () => {},
+	bookable_services = {},
 }) {
 	const [bouncing, setBouncing] = useState(false);
 
 	const { label, value, icon: Icon, footerContent } = data;
 
-	const is_available = GLOBAL_CONSTANTS.new_search_supported_services.includes(data?.value)
-	|| GLOBAL_CONSTANTS.new_search_supported_services.find((service) => service.includes(data?.value));
+	const isServiceAvailable = value in bookable_services && bookable_services?.[value];
 
 	const handleClick = () => {
-		if (!is_available) {
+		if (!isServiceAvailable) {
 			setBouncing(true);
 
 			setTimeout(() => {
@@ -41,7 +40,7 @@ function ServiceItem({
 	return (
 		<div
 			className={cl`${styles.container} 
-			${selectedService?.mode_value !== value && is_available && styles.top_border}`}
+			${selectedService?.mode_value !== value && isServiceAvailable && styles.top_border}`}
 			style={{
 				background: selectedService?.mode_value === value ? '#FCDC00' : '#FFFFFF',
 			}}
@@ -76,7 +75,7 @@ function ServiceItem({
 					</div>
 				) : null}
 
-			{!is_available ? (
+			{!isServiceAvailable ? (
 				<ComingSoon bouncing={bouncing} />
 			) : null}
 		</div>

@@ -4,6 +4,8 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
+import useGetActiveServices from '../../../helpers/useGetActiveServices';
+
 const BANNER_OPTIONS = require('../utils/getBannerOptions');
 
 const DEFAULT_PAGE = 1;
@@ -31,6 +33,10 @@ const useGetSpotSearch = ({
 		method : 'GET',
 		url    : '/list_spot_search_rate_cards',
 	}, { manual: true });
+
+	const { data:{ service_discovery = {} } = {} } = useGetActiveServices();
+
+	const { bookable_services = {} } = service_discovery || {};
 
 	const getSearch = useCallback(
 		async ({ show_more = false } = {}) => {
@@ -165,6 +171,7 @@ const useGetSpotSearch = ({
 		rates,
 		setSelectedSchedule,
 		selectedSchedule,
+		bookable_services,
 	};
 };
 export default useGetSpotSearch;

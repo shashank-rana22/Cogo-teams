@@ -1,5 +1,4 @@
 import { Breadcrumb, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCError, IcMArrowBack } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -38,6 +37,7 @@ function Checkout({ checkout_type = '' }) {
 		isLoadingStateRequired = false,
 		setIsLoadingStateRequired = () => {},
 		error = {},
+		bookable_services = {},
 	} = useCheckout({ query, partner_id, checkout_type });
 
 	if ((loading && isEmpty(data))) {
@@ -47,7 +47,7 @@ function Checkout({ checkout_type = '' }) {
 	const { shipment_id = '', tags = [] } = detail;
 
 	const isCheckoutApiSuccess = !isEmpty(data);
-	const isServiceSupported = GLOBAL_CONSTANTS.new_search_supported_services.includes(primary_service);
+	const isServiceSupported = primary_service in bookable_services && bookable_services?.[primary_service];
 
 	if (
 		!isCheckoutApiSuccess

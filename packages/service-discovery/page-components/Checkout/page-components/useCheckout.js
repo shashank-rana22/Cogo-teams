@@ -4,6 +4,7 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useMemo, useState, useEffect } from 'react';
 
+import useGetActiveServices from '../../../helpers/useGetActiveServices';
 import getPrefillForm from '../../SearchResults/utils/getPrefillForm';
 import useCreateSearch from '../../ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 import useGetCheckout from '../hooks/useGetCheckout';
@@ -97,6 +98,10 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 	});
 
 	const { createSearch, loading: createSearchLoading } = useCreateSearch();
+
+	const { data:{ service_discovery = {} } = {} } = useGetActiveServices();
+
+	const { bookable_services = {} } = service_discovery || {};
 
 	const primaryService = Object.values(services || {}).find(
 		(service) => service?.service_type === primary_service || !service?.trade_type,
@@ -315,6 +320,7 @@ const useCheckout = ({ query = {}, partner_id = '', checkout_type = '' }) => {
 		isLoadingStateRequired,
 		setIsLoadingStateRequired,
 		error,
+		bookable_services,
 	};
 };
 

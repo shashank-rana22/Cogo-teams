@@ -55,12 +55,12 @@ export const getAirControls = ({ airlines = [], airlineParams = {}, setAirlinePa
 							value : 'market_place',
 						},
 						{
-							label : 'Promotional',
-							value : 'promotional',
-						},
-						{
 							label : 'Non Tariff',
 							value : 'non_tariff_rate',
+						},
+						{
+							label : 'Promotional',
+							value : 'promotional',
 						},
 					],
 				},
