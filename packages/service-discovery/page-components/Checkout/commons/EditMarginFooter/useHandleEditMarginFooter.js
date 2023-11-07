@@ -48,6 +48,7 @@ const useHandleEditMarginFooter = ({
 	convenienceDetails = {},
 	convenience_line_item = {},
 	state = '',
+	handlingFeeDetails = {},
 }) => {
 	const { push } = useRouter();
 
@@ -74,6 +75,8 @@ const useHandleEditMarginFooter = ({
 	const { services: rateServices = {}, source: rateSource = '' } = rate || {};
 
 	const { convenience_fee_billing_service, adjust_convenience_fee } = convenience_line_item;
+
+	const { handling_fees = {} } = handlingFeeDetails;
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
 
@@ -131,6 +134,12 @@ const useHandleEditMarginFooter = ({
 					convenience_fee_billing_service,
 					adjust_convenience_fee,
 				},
+				...(handling_fees.price || handling_fees.price === 0 ? {
+					handling_fees: {
+						...handling_fees,
+						quantity: undefined,
+					},
+				} : {}),
 				checkout_id                             : id,
 				margins                                 : FINAL_MARGINS,
 				is_applicable_for_approval_confirmation : false,
