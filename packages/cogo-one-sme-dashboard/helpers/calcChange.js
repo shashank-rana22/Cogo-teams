@@ -1,12 +1,18 @@
+import { isEmpty } from '@cogoport/utils';
+
 function calcChange({
-	currVal = 0,
-	prevVal = 0,
+	currVal = '',
+	prevVal = '',
 	valueKey = '',
 	currentData = {},
 	previousData = {},
 }) {
-	let currentValue = +currVal;
-	let previousValue = +prevVal;
+	if (isEmpty(previousData) && isEmpty(prevVal)) {
+		return 'initial';
+	}
+
+	let currentValue = +(currVal || 0);
+	let previousValue = +(prevVal || 0);
 
 	if (valueKey) {
 		currentValue = currentData?.[valueKey] || 0;

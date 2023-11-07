@@ -1,8 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { isEmpty, startOfDay } from '@cogoport/utils';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-const getParams = ({ widgetBlocks, filterParams, selectedFilter, page }) => {
+const getParams = ({ widgetBlocks, filterParams, selectedFilter, page, trend }) => {
 	const { date_range = {} } = filterParams || {};
 
 	let blocks;
@@ -17,9 +17,10 @@ const getParams = ({ widgetBlocks, filterParams, selectedFilter, page }) => {
 
 	return 	{
 		blocks,
-		start_date : startOfDay(date_range?.startDate) || startOfDay(new Date()),
-		end_date   : date_range?.endDate || new Date(),
-		filters    : {
+		start_date          : startOfDay(date_range?.startDate) || startOfDay(new Date()),
+		end_date            : date_range?.endDate || new Date(),
+		trend_data_required : (trend === 'previous'),
+		filters             : {
 			range      : selectedFilter || undefined,
 			page       : page || undefined,
 			page_limit : page ? 5 : undefined,
@@ -32,21 +33,59 @@ const useSmeDashboardStats = ({
 	filterParams = {},
 	selectedFilter = '',
 	page = '',
+	trendRequired = false,
 }) => {
-	const [{ loading: dashboardLoading, data }, trigger] = useRequest({
+	const [currentTrend, setCurrentTrend] = useState('');
+
+	const [dashboardData, setDashboardData] = useState({});
+
+	const [, trigger] = useRequest({
 		url    : '/get_omnichannel_sme_dashboard',
 		method : 'get',
 	}, {
-		manual: true,
+		manual     : true,
+		autoCancel : false,
 	});
 
 	const getSmeDashboardStats = useCallback(
-		async () => {
+		async ({ trend }) => {
 			try {
-				await trigger({
-					params: getParams({ widgetBlocks, filterParams, selectedFilter, page }),
+				if (trend !== 'previous') {
+					setDashboardData((prev) => ({ ...prev, loading: true }));
+				}
+
+				const res =	await trigger({
+					params: getParams({ widgetBlocks, filterParams, selectedFilter, page, trend }),
 				});
+
+				setDashboardData(
+					(prev) => {
+						const updatedData = Object.entries(res?.data).reduce(
+							(acc, [key, value]) => {
+								if (trend === 'no_trend') {
+									return { ...acc, [key]: value };
+								}
+
+								return {
+									...acc,
+									[key]: {
+										...prev?.[key],
+										[`${trend}_data`]: value,
+									},
+								};
+							},
+							{},
+						);
+
+						return { ...prev, loading: false, ...updatedData };
+					},
+				);
+
+				if (trend === 'current') {
+					setCurrentTrend('previous');
+				}
 			} catch (error) {
+				setDashboardData((prev) => ({ ...prev, loading: false }));
 				console.error('err', error);
 			}
 		},
@@ -54,13 +93,29 @@ const useSmeDashboardStats = ({
 	);
 
 	useEffect(() => {
-		getSmeDashboardStats();
-	}, [getSmeDashboardStats]);
+		if (!currentTrend) {
+			return;
+		}
+		getSmeDashboardStats({ trend: currentTrend });
+	}, [currentTrend, getSmeDashboardStats]);
+
+	useEffect(
+		() => {
+			let trend = currentTrend;
+
+			if (!trend) {
+				trend = trendRequired ? 'current' : 'no_trend';
+			}
+
+			setCurrentTrend(trend);
+		},
+		[currentTrend, trendRequired],
+	);
 
 	return {
-		dashboardLoading,
+		dashboardLoading: dashboardData?.loading,
 		getSmeDashboardStats,
-		dashboardData: dashboardLoading ? {} : data,
+		dashboardData,
 	};
 };
 

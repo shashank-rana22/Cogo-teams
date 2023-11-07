@@ -24,7 +24,10 @@ function UserData({ widgetBlocks = null, filterParams = {} }) {
 	const {
 		dashboardData = {},
 		dashboardLoading = false,
-	} = useSmeDashboardStats({ widgetBlocks, filterParams });
+	} = useSmeDashboardStats({
+		widgetBlocks,
+		filterParams,
+	});
 
 	const { accounts_data: accountsData = {} } = dashboardData || {};
 

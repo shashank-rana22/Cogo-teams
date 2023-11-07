@@ -1,78 +1,40 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import { LoadingState } from '../../../../common/Elements';
 import useSmeDashboardStats from '../../../../hooks/useSmeDashboardStats';
 
 import styles from './styles.module.css';
 
-const data = [
-	{
-		id    : 'fcl_import',
-		label : 'FCL Import',
-		value : 20,
-		color : '#88CAD1',
-	},
-	{
-		id    : 'fcl_export',
-		label : 'FCL Export',
-		value : 15,
-		color : '#FDE74D',
-	},
-	{
-		id    : 'lcl_import',
-		label : 'LCL Import',
-		value : 5,
-		color : '#F9AE64',
-	},
-	{
-		id    : 'lcl_Export',
-		label : 'LCL Export',
-		value : 5,
-		color : '#F2E3C3',
-	},
-	{
-		id    : 'air_import',
-		label : 'AIR Import',
-		value : 6,
-		color : '#ABCD62',
-	},
-	{
-		id    : 'air_export',
-		label : 'AIR Export',
-		value : 2,
-		color : '#ABB0DE',
-	},
-	{
-		id    : 'air_customs',
-		label : 'AIR Customs',
-		value : 2,
-		color : '#CFEAED',
-	},
-	{
-		id    : 'ocean_customs',
-		label : 'Ocean Customs',
-		value : 1,
-		color : '#F3FAFA',
-	},
-	{
-		id    : 'trucking',
-		label : 'Trucking',
-		value : 0,
-		color : '#FEF3E9',
-	},
-	{
-		id    : 'insurance',
-		label : 'Insurance',
-		value : 0,
-		color : '#F7FAEF',
-	},
-];
-
-function ServicesWiseBifurcation({ widgetBlocks = null, filterParams = {} }) {
+function ServicesWiseBifurcation({
+	widgetBlocks = null,
+	filterParams = {},
+}) {
 	const {
 		dashboardData = {},
 		dashboardLoading = false,
 	} = useSmeDashboardStats({ widgetBlocks, filterParams });
+
+	const { service_wise_bifurcation_data = [] } = dashboardData || {};
+
+	const updatedData = (service_wise_bifurcation_data || [])?.map(
+		(itm) => ({
+			id    : itm?.shipment_type,
+			value : itm?.count,
+			label : startCase(itm?.shipment_type),
+			color : `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+		}),
+	);
+
+	if (dashboardLoading) {
+		<div className={styles.container}>
+			<div className={styles.header}>
+				Services Wise Bifurcation
+			</div>
+			<LoadingState />
+		</div>;
+	}
 
 	return (
 		<div className={styles.container}>
@@ -83,7 +45,7 @@ function ServicesWiseBifurcation({ widgetBlocks = null, filterParams = {} }) {
 			<div className={styles.graph_container}>
 				<div className={styles.pie_chart}>
 					<ResponsivePie
-						data={data}
+						data={updatedData}
 						margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
 						padAngle={0.7}
 						activeOuterRadiusOffset={8}
@@ -96,11 +58,11 @@ function ServicesWiseBifurcation({ widgetBlocks = null, filterParams = {} }) {
 						arcLabelsSkipAngle={15}
 						transitionMode="startAngle"
 						legends={[]}
-						colors={data.map((itm) => itm?.color)}
+						colors={updatedData.map((itm) => itm?.color)}
 					/>
 				</div>
 				<div className={styles.legends_container}>
-					{data.map(
+					{updatedData.map(
 						(itm) => (
 							<div
 								key={itm?.id}
@@ -115,17 +77,8 @@ function ServicesWiseBifurcation({ widgetBlocks = null, filterParams = {} }) {
 						),
 					)}
 				</div>
-
 			</div>
 			<div className={styles.footer}>
-				<div className={styles.footer_item}>
-					<div className={styles.footer_item_label}>
-						SAAS Subscription Sold
-					</div>
-					<div className={styles.footer_item_value}>
-						20
-					</div>
-				</div>
 				<div className={styles.footer_item}>
 					<div className={styles.footer_item_label}>
 						Only Primary Service Sold

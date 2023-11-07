@@ -27,7 +27,11 @@ function RevenueContainer({
 	const {
 		dashboardData = {},
 		dashboardLoading = false,
-	} = useSmeDashboardStats({ widgetBlocks, filterParams });
+	} = useSmeDashboardStats({
+		widgetBlocks,
+		trendRequired: true,
+		filterParams,
+	});
 
 	const { total_revenue_data = {} } = dashboardData || {};
 

@@ -62,7 +62,10 @@ function ChartView({
 								{itm?.label}
 								{' '}
 								-
-								<span>{itm?.value}</span>
+								<span>
+									{itm?.value}
+									%
+								</span>
 							</div>
 							<div className={styles.percentage_view}>
 								<PercentageChange

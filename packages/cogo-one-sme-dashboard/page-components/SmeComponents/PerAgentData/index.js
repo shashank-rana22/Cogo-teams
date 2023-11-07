@@ -32,7 +32,11 @@ function PerAgentData({ widgetBlocks = null, filterParams = {} }) {
 	const {
 		dashboardData = {},
 		dashboardLoading = false,
-	} = useSmeDashboardStats({ widgetBlocks, filterParams });
+	} = useSmeDashboardStats({
+		widgetBlocks,
+		filterParams,
+		trendRequired: true,
+	});
 
 	const { per_agent_data = {} } = dashboardData || {};
 

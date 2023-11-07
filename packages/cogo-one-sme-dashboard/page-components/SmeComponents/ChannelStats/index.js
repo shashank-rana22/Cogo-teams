@@ -1,7 +1,5 @@
 import React from 'react';
 
-import useSmeDashboardStats from '../../../hooks/useSmeDashboardStats';
-
 import CallsMadeStats from './CallsMadeStats';
 import CallsReceivedStats from './CallsReceivedStats';
 import ReceivedStats from './ReceivedStats';
@@ -10,26 +8,18 @@ import styles from './styles.module.css';
 
 function ChannelStats({
 	channelType = '',
-	widgetBlocks = null,
 	filterParams = {},
 }) {
-	const {
-		dashboardData = {},
-		dashboardLoading = false,
-	} = useSmeDashboardStats({ widgetBlocks, filterParams });
-
 	if (channelType === 'calls') {
 		return (
 			<div className={styles.container}>
 				<CallsMadeStats
 					channelType={channelType}
-					dashboardData={dashboardData}
-					dashboardLoading={dashboardLoading}
+					filterParams={filterParams}
 				/>
 				<CallsReceivedStats
 					channelType={channelType}
-					dashboardData={dashboardData}
-					dashboardLoading={dashboardLoading}
+					filterParams={filterParams}
 				/>
 			</div>
 		);
@@ -39,13 +29,11 @@ function ChannelStats({
 		<div className={styles.container}>
 			<SentStats
 				channelType={channelType}
-				dashboardData={dashboardData}
-				dashboardLoading={dashboardLoading}
+				filterParams={filterParams}
 			/>
 			<ReceivedStats
 				channelType={channelType}
-				dashboardData={dashboardData}
-				dashboardLoading={dashboardLoading}
+				filterParams={filterParams}
 			/>
 		</div>
 	);

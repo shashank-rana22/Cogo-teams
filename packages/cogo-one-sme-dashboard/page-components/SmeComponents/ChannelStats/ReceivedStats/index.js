@@ -5,6 +5,7 @@ import React from 'react';
 import { LoadingState, PercentageChange } from '../../../../common/Elements';
 import { ICONS_MAPPING } from '../../../../constants';
 import calcChange from '../../../../helpers/calcChange';
+import useSmeDashboardStats from '../../../../hooks/useSmeDashboardStats';
 
 import styles from './styles.module.css';
 
@@ -15,15 +16,23 @@ const DATA_KEYS = {
 	},
 	whatsapp: {
 		initiated_by_customer : 'initiated_by_customer',
-		total_count           : 'total_messages_received',
+		total_count           : 'total_whatsapp_received',
 	},
 };
 
 function ReceivedStats({
 	channelType = '',
-	dashboardData = {},
-	dashboardLoading = false,
+	filterParams = {},
 }) {
+	const {
+		dashboardData = {},
+		dashboardLoading = false,
+	} = useSmeDashboardStats({
+		widgetBlocks  : `get_total_${channelType}_received_data`,
+		filterParams,
+		trendRequired : true,
+	});
+
 	const receivedData = dashboardData?.[`total_${channelType}_received_data`] || {};
 
 	const Element = ICONS_MAPPING?.[channelType] || IcMDefault;

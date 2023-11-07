@@ -2,6 +2,7 @@ import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import { LoadingState } from '../../../../common/Elements';
+import useSmeDashboardStats from '../../../../hooks/useSmeDashboardStats';
 
 import ChartView from './ChartView';
 import styles from './styles.module.css';
@@ -14,10 +15,10 @@ const DATA_KEYS = {
 		marketing : 'total_marketing_mails',
 	},
 	whatsapp: {
-		total     : 2489,
-		system    : 291,
-		agent     : 894,
-		marketing : 500,
+		total     : 'total_sent_whatsapp',
+		system    : 'total_system_whatsapp',
+		agent     : 'total_agent_whatsapp',
+		marketing : 'total_marketing_whatsapp',
 	},
 };
 
@@ -29,9 +30,17 @@ const MESSAGE_TYPES = {
 
 function SentStats({
 	channelType = '',
-	dashboardData = {},
-	dashboardLoading = false,
+	filterParams = {},
 }) {
+	const {
+		dashboardData = {},
+		dashboardLoading = false,
+	} = useSmeDashboardStats({
+		widgetBlocks  : `get_total_${channelType}_sent_data`,
+		filterParams,
+		trendRequired : true,
+	});
+
 	const sentData = (dashboardData || {})?.[`total_${channelType}_sent_data`];
 
 	const {

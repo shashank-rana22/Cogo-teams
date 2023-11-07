@@ -8,15 +8,30 @@ const DATA_KEYS = {
 			total : 'total_system_mails',
 		},
 		agent: {
-			click : 'total_clicked_agent_mails',
-			open  : 'total_open_agent_mails',
-			total : 'total_agent_mails',
+			replied : 'total_agent_replied_mails',
+			total   : 'total_agent_mails',
 
 		},
 		marketing: {
 			click : 'total_clicked_marketing_mails',
 			open  : 'total_open_marketing_mails',
 			total : 'total_marketing_mails',
+		},
+	},
+	whatsapp: {
+		system: {
+			click : 'total_clicked_system_whatsapp',
+			open  : 'total_open_system_whatsapp',
+			total : 'total_system_whatsapp',
+		},
+		agent: {
+			replied : 'total_agent_replied_whatsapp',
+			total   : 'total_agent_whatsapp',
+		},
+		marketing: {
+			click : 'total_clicked_marketing_whatsapp',
+			open  : 'total_open_marketing_whatsapp',
+			total : 'total_marketing_whatsapp',
 		},
 	},
 };
@@ -47,11 +62,13 @@ const getChartData = ({
 	const prevOpenRate = prevTotalValue === 0 ? 0
 		: (((previousData?.[openKey] || 0) / prevTotalValue) * 100)?.toFixed(2) || 0;
 
-	if (channelType === 'emails' && msgType === 'agent') {
+	if (msgType === 'agent') {
+		const replyKey = DATA_KEYS?.[channelType]?.[msgType]?.replied;
+
 		const repliedRate = totalValue === 0 ? 0
-			: (((currentData?.total_agent_replied_mails || 0) / totalValue) * 100)?.toFixed(2) || 0;
+			: (((currentData?.[replyKey] || 0) / totalValue) * 100)?.toFixed(2) || 0;
 		const prevRepliedRate = totalValue === 0 ? 0
-			: (((previousData?.total_agent_replied_mails || 0) / totalValue) * 100)?.toFixed(2) || 0;
+			: (((previousData?.[replyKey] || 0) / totalValue) * 100)?.toFixed(2) || 0;
 
 		return {
 			chartData: [

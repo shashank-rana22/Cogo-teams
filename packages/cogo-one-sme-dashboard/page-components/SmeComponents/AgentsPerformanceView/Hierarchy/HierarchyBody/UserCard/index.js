@@ -39,7 +39,7 @@ function UserCard({
 					: (
 						<div className={styles.short_logo_container}>
 							<Image
-								src={GLOBAL_CONSTANTS?.image_url?.cogoport_short_logo}
+								src={data?.picture || GLOBAL_CONSTANTS?.image_url?.cogoport_short_logo}
 								height={20}
 								width={20}
 								alt="logo"
