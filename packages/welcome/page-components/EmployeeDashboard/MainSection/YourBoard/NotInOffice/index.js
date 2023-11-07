@@ -1,4 +1,4 @@
-import { Popover, cl } from '@cogoport/components';
+import { Popover, cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
@@ -36,7 +36,7 @@ function NotInOffice({ data = {} }) {
 	function AbsentList() {
 		return (
 			<div className={styles.absent_list}>
-				{(absentee_list || []).map((name) => (
+				{(remainingAbsentees || []).map((name) => (
 					<div
 						key={name}
 						className={styles.list}
@@ -63,7 +63,9 @@ function NotInOffice({ data = {} }) {
 									</div>
 								)
 						}
-						<span className={styles.ellipse}>{item[0]}</span>
+						<Tooltip content={item[0]} placement="top">
+							<div className={styles.ellipse}>{item[0]}</div>
+						</Tooltip>
 					</div>
 				))}
 				<Popover placement="bottom" trigger="mouseenter" render={<AbsentList />}>
