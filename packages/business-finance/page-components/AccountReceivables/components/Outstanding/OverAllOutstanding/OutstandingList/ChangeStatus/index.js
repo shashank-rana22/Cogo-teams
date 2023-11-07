@@ -55,8 +55,7 @@ function ChangeStatus({
 
 					<AsyncSelectController
 						name="tagged_person"
-						asyncKey="partner_users_ids"
-						valueKey="user_id"
+						asyncKey="partner_users"
 						control={control}
 						placeholder="Select..."
 						initialCall={false}
