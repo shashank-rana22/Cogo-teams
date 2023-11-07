@@ -112,6 +112,24 @@ const apis = [
 		module      : 'insurance',
 		feature     : 'insurance',
 	},
+	{
+		api         : 'post_saas_insurance_v2_search_rate',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'get_saas_insurance_v2_rate',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'get_saas_insurance_v2_hs_code',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
 ];
 
 export default apis;
