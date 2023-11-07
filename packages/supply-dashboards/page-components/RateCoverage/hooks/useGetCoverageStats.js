@@ -16,17 +16,53 @@ const API_END_POINT_MAPPING = {
 	fcl_cfs     : 'get_fcl_cfs_rate_job_stats',
 };
 
-const FCL_PARAMS_MAPPING = {
-	origin_location      : 'origin_port_id',
-	destination_location : 'destination_port_id',
-	operater_type        : 'shipping_line_id',
+const PARAM_MAPPING = {
+	fcl_freight: {
+		origin_location      : 'origin_port_id',
+		destination_location : 'destination_port_id',
+		operater_type        : 'shipping_line_id',
 
-};
+	},
+	lcl_freight: {
+		origin_location      : 'origin_port_id',
+		destination_location : 'destination_port_id',
+	},
+	lcl_customs: {
+		location: 'location_id',
+	},
+	air_customs: {
+		location: 'airport_id',
+	},
+	trailer: {
+		origin_location      : 'origin_location_id',
+		destination_location : 'destination_location_id',
+		operater_type        : 'shipping_line_id',
+	},
+	ltl_freight: {
+		origin_location      : 'origin_location_id',
+		destination_location : 'destination_location_id',
+	},
+	air_freight: {
+		origin_location      : 'origin_airport_id',
+		destination_location : 'destination_airport_id',
+		operater_type        : 'airline_id',
 
-const AIR_PARAMS_MAPPING = {
-	origin_location      : 'origin_airport_id',
-	destination_location : 'destination_airport_id',
-	operater_type        : 'airline_id',
+	},
+	haulage: {
+		origin_location      : 'origin_location_id',
+		destination_location : 'destination_location_id',
+		operater_type        : 'shipping_line_id',
+	},
+	fcl_customs: {
+		location: 'location_id',
+	},
+	ftl_freight: {
+		origin_location      : 'origin_location_id',
+		destination_location : 'destination_location_id',
+	},
+	fcl_cfs: {
+		location: 'location_id',
+	},
 
 };
 
@@ -49,8 +85,7 @@ const useGetCoverageStats = ({ filter, source, showWeekData }) => {
 
 		const FINAL_FILTERS = {};
 
-		const paramsMapping = ['air_freight', 'air_customs']?.includes(filter?.service)
-			? AIR_PARAMS_MAPPING : FCL_PARAMS_MAPPING;
+		const paramsMapping = PARAM_MAPPING[filter?.service];
 
 		Object.keys(restFilters).forEach((ele) => {
 			if (restFilters[ele]) {
