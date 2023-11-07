@@ -180,7 +180,7 @@ function FclCard({
 	detail = {},
 	isSelectedCard = false,
 	setScreen = () => {},
-	comparisonRates = () => {},
+	comparisonRates = {},
 	setComparisonRates = {},
 	refetchSearch = () => {},
 	infoBanner = {},
@@ -258,9 +258,9 @@ function FclCard({
 		<div
 			className={cl`
 				${styles.container} 
-				${isCogoAssured && styles.cogo_assured}
 				${isSelectedCard && styles.selected_card}
-				${selectedForComparison && styles.compared_rate}
+				${isCogoAssured && styles.cogo_assured}
+				${selectedForComparison && !isCogoAssured && styles.compared_rate}
 			`}
 			style={(!index && !isSelectedCard) ? { marginTop: 0 } : {}}
 		>
