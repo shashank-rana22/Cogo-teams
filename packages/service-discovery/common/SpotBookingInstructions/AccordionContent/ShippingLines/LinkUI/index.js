@@ -4,8 +4,8 @@ import React from 'react';
 import shippingLineLinks from './shipping-line-links';
 import styles from './styles.module.css';
 
-function LinkUI({ ship = {} }) {
-	const { short_name = '', logo_url = '' } = ship;
+function LinkUI({ ship = {}, setValue = () => {} }) {
+	const { short_name = '', logo_url = '', id = '' } = ship;
 
 	const { url = '' } = shippingLineLinks.find(({ shipping_line_name }) => short_name === shipping_line_name) || {};
 
@@ -15,6 +15,7 @@ function LinkUI({ ship = {} }) {
 			href={url}
 			target="_blank"
 			rel="noreferrer"
+			onClick={() => setValue('shipping_line_id', id)}
 		>
 			<div className={styles.detail_container}>
 				<img

@@ -5,7 +5,7 @@ const geo = getGeoConstants();
 const INCO_TERM_EXPORT = ['cif', 'cfr', 'cpt', 'cip', 'dat', 'dap', 'ddp'];
 
 const getServiceWisePayload = ({ service = {}, values = {} }) => {
-	const default_service_provider_id = geo.uuid.cogoxpress_id;
+	const default_service_provider_id = geo.uuid.cogo_freight_supplier;
 
 	const free_days = INCO_TERM_EXPORT.includes(service?.inco_term) ? 4 : 10;
 

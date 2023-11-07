@@ -14,7 +14,7 @@ const YOUTUBE_LINK = `<a
 	href="https://www.youtube.com/watch?v=MNjRdcPuweY&ab_channel=Cogoport"
 	rel="noopener noreferrer" target="_blank">Demo Tutorial Link</a>`;
 
-function DemoCard({ item = {}, mailProps = {}, setScheduleDemo = () => {} }) {
+function DemoCard({ item = {}, mailProps = {}, setScheduleDemo = () => {}, initialViewType = '' }) {
 	const { setButtonType, setEmailState, buttonType, signature } = mailProps;
 	const {
 		id = '', request_type = '', organization = {}, source = '', request_submitted_by = {},
@@ -69,14 +69,16 @@ function DemoCard({ item = {}, mailProps = {}, setScheduleDemo = () => {} }) {
 				accountType={account_type}
 				item={item}
 				content={<DemoInfoContent />}
+				initialViewType={initialViewType}
 			/>
 			<div className={styles.body_info}>
 				<div className={styles.each_row}>
 					<div className={styles.title}>Requested by :</div>
-					<div className={styles.request_name}>
-						{name}
-						{' '}
-						<span>{`(${startCase(performed_by_type)})`}</span>
+					<div className={styles.name_section}>
+						<div className={styles.request_name}>
+							{startCase(name)}
+						</div>
+						<div className={styles.agent_type}>{`(${startCase(performed_by_type)})`}</div>
 					</div>
 				</div>
 				<div className={styles.each_row}>

@@ -8,7 +8,7 @@ import Header from '../../Header';
 
 import styles from './styles.module.css';
 
-function OrganicCustomer({ item = {}, setScheduleDemo = () => {}, handlePlaceCall = () => {} }) {
+function OrganicCustomer({ item = {}, setScheduleDemo = () => {}, handlePlaceCall = () => {}, initialViewType = '' }) {
 	const {
 		request_type = '', customer = {}, organization = {}, intro_call = {},
 		serial_id = '', escalation_cycle = '',
@@ -35,6 +35,7 @@ function OrganicCustomer({ item = {}, setScheduleDemo = () => {}, handlePlaceCal
 				accountType={account_type}
 				item={item}
 				content={<OrganicInfoContent />}
+				initialViewType={initialViewType}
 			/>
 			<div className={styles.body_info}>
 				<div className={styles.status_row}>

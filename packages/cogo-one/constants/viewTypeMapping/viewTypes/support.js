@@ -32,6 +32,7 @@ const SUPPORT = {
 	shift_view_default_type       : '',
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts'],
 	group_agents_api_filter       : ['shipment_specialist', 'support', 'shipment_specialist_admin'],
+	adoption_assign_buttons       : ['assign_to_agent', 'auto_assign'],
 	permissions                   : {
 		auto_assign                                 : false,
 		bot_message_toggle                          : false,

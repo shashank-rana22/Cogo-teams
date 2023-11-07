@@ -1,3 +1,5 @@
+import ScrollAnnouncement from '../../common/ScrollAnouncement';
+
 import EmptyState from './common/EmptyState';
 import FetchingLeaderboard from './common/FetchingLeaderboard';
 import Body from './components/Body';
@@ -43,6 +45,8 @@ function Leaderboard() {
 				kam_progress={kam_progress}
 				manager_progress={manager_progress}
 			/>
+
+			<ScrollAnnouncement />
 
 			<Body dateRange={dateRange} entity={entity} getUserProgress={getUserProgress} />
 		</>

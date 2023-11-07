@@ -29,6 +29,7 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 		importer_exporter_id = '',
 		importer_exporter_branch_id = '',
 		user = {},
+		source = '',
 	} = detail;
 
 	const {
@@ -132,6 +133,7 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 				</div>
 			),
 			themeType : 'link',
+			disabled  : source === 'spot_line_booking',
 			style     : {},
 		},
 		{

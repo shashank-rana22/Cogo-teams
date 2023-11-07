@@ -1,17 +1,19 @@
-import { Button, Modal, Popover, Tooltip } from '@cogoport/components';
-import { AsyncSelect } from '@cogoport/forms';
+import { Button, Popover, Tooltip } from '@cogoport/components';
 import { IcMInfo, IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
+import { VIEW_TYPE_GLOBAL_MAPPING } from '../../constants/viewTypeMapping';
 import useAssignOnboardingAgent from '../../hooks/useAssignOnboardingAgent';
+import useUpdateOnboardingRequest from '../../hooks/useUpdateOnboardingRequest';
 
+import AdoptionAssignModal from './AdoptionAssignModal';
 import styles from './styles.module.css';
 
-function PlatFormAdoptionAssign({ data = {}, content = null }) {
+function PlatFormAdoptionAssign({ data = {}, content = null, initialViewType = '' }) {
 	const {
 		request_type = '', source = '', source_id = '', created_at = '', metadata = {},
-		agent_id = '',
+		agent_id = '', id = '',
 	} = data || {};
 
 	const [assignModal, setAssignModal] = useState({
@@ -19,20 +21,40 @@ function PlatFormAdoptionAssign({ data = {}, content = null }) {
 		assignData : null,
 	});
 
+	const buttonMapping = VIEW_TYPE_GLOBAL_MAPPING[initialViewType]?.adoption_assign_buttons || [];
+
 	const { onboardingAgent = () => {}, loading = false } = useAssignOnboardingAgent({ setAssignModal });
+	const { requestLoader = false, updateRequest = () => {} } = useUpdateOnboardingRequest();
 
 	const { show = false, assignData = null } = assignModal || {};
 
-	const handleSubmit = () => {
-		onboardingAgent({
-			source,
-			sourceId       : source_id,
-			agentId        : assignData,
-			requestType    : request_type,
-			requestedAt    : created_at,
-			previousAgents : agent_id,
-			metadata,
-		});
+	const loaderMapping = {
+		assign_to_agent    : null,
+		auto_assign        : loading,
+		marks_as_completed : requestLoader,
+	};
+
+	const handleAssign = (name) => {
+		if (name === 'assign_to_agent') {
+			setAssignModal((prev) => ({ ...prev, show: true }));
+		}
+		if (name === 'auto_assign') {
+			onboardingAgent({
+				source,
+				sourceId       : source_id,
+				requestType    : request_type,
+				requestedAt    : created_at,
+				previousAgents : agent_id,
+				metadata,
+			});
+		}
+
+		if (name === 'marks_as_completed') {
+			updateRequest({
+				requestId     : id,
+				requestStatus : 'completed',
+			});
+		}
 	};
 
 	return (
@@ -49,28 +71,18 @@ function PlatFormAdoptionAssign({ data = {}, content = null }) {
 					placement="bottom"
 					render={(
 						<div className={styles.button_container}>
-							<Button
-								themeType="secondary"
-								size="sm"
-								onClick={() => setAssignModal((prev) => ({ ...prev, show: true }))}
-							>
-								Assign to agent
-							</Button>
-							<Button
-								themeType="secondary"
-								size="sm"
-								onClick={() => onboardingAgent({
-									source,
-									sourceId       : source_id,
-									requestType    : request_type,
-									requestedAt    : created_at,
-									previousAgents : agent_id,
-									metadata,
-								})}
-								className={styles.auto_button}
-							>
-								Auto Assign
-							</Button>
+							{buttonMapping?.map((itm) => (
+								<Button
+									themeType="secondary"
+									key={itm}
+									size="sm"
+									className={styles.auto_button}
+									onClick={() => handleAssign(itm)}
+									loading={loaderMapping?.[itm]}
+								>
+									{startCase(itm)}
+								</Button>
+							))}
 						</div>
 					)}
 					interactive
@@ -81,65 +93,21 @@ function PlatFormAdoptionAssign({ data = {}, content = null }) {
 				</Popover>
 			</div>
 
-			{show && (
-				<Modal
+			{show ? (
+				<AdoptionAssignModal
 					show={show}
-					size="sm"
-					scroll={false}
-					onClose={() => setAssignModal(() => ({
-						assignData : null,
-						show       : false,
-					}))}
-					closeOnOuterClick={() => setAssignModal(() => ({
-						assignData : null,
-						show       : false,
-					}))}
-					placement="top"
-				>
-					<Modal.Header title="Assign To Agent" />
-					<Modal.Body>
-						<div className={styles.label}>Select agent</div>
-						<AsyncSelect
-							asyncKey="list_chat_agents"
-							isClearable
-							initialCall
-							value={assignData}
-							onChange={(val) => setAssignModal((prev) => ({ ...prev, assignData: val }))}
-							params={{
-								filters: {
-									status     : 'active',
-									agent_type : ['support', 'support_supply'],
-								},
-								sort_by: 'agent_type',
-							}}
-							renderLabel={(item) => (
-								<div>
-									<div className={styles.agent_label}>
-										{startCase(item.name)}
-									</div>
-									<div className={styles.lower_label}>
-										{startCase(item?.agent_type)}
-									</div>
-								</div>
-							)}
-							className={styles.async_select}
-						/>
-					</Modal.Body>
-					<Modal.Footer>
-						<Button
-							disabled={loading}
-							themeType="tertiary"
-							onClick={() => setAssignModal(() => ({
-								assignData : null,
-								show       : false,
-							}))}
-						>
-							Cancel
-						</Button>
-						<Button loading={loading} onClick={handleSubmit}>Submit</Button>
-					</Modal.Footer>
-				</Modal>
-			)}
+					setAssignModal={setAssignModal}
+					loading={loading}
+					source={source}
+					source_id={source_id}
+					metadata={metadata}
+					assignData={assignData}
+					request_type={request_type}
+					created_at={created_at}
+					agent_id={agent_id}
+					onboardingAgent={onboardingAgent}
+				/>
+			) : null}
 		</>
 	);
 }
