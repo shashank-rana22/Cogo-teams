@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { AsyncSelectController, useForm, RadioGroupController } from '@cogoport/forms';
+import { AsyncSelectController, useForm, RadioGroupController, ToggleController } from '@cogoport/forms';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -64,6 +64,17 @@ function ShowFilterOptions({
 							<div style={{ marginTop: '10px' }}>
 								<b>{item.label}</b>
 								<RadioGroupController
+									key={item?.name}
+									{...item}
+									control={control}
+								/>
+							</div>
+						);
+					case 'toggle':
+						return (
+							<div className="toggle">
+								<b>{item.label}</b>
+								<ToggleController
 									key={item?.name}
 									{...item}
 									control={control}

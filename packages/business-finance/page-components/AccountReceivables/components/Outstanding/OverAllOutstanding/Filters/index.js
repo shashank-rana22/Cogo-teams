@@ -9,6 +9,7 @@ function Filters({
 	controls = [], filters = {},
 	setFilters = () => {},
 	clearFilter = () => {},
+	filtersApplied = false,
 }) {
 	const [show, setShow] = useState(false);
 
@@ -43,6 +44,8 @@ function Filters({
 				{' '}
 
 				<IcMFilter className={styles.style_filter_button} />
+
+				{filtersApplied ? <div className={styles.filter_dot} /> : null}
 
 			</Button>
 

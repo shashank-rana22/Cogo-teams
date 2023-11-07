@@ -5,6 +5,7 @@ import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
+import useGetProductFilterDetail from '../../../hooks/useGetProductFilterDetail';
 import Header from '../Header';
 
 import styles from './styles.module.css';
@@ -12,9 +13,10 @@ import styles from './styles.module.css';
 function OrderConfirmation({ data = {}, office_location = '' }) {
 	const { push } = useRouter();
 	const { id } = data || {};
+	const { data : productData } = useGetProductFilterDetail();
 	return (
 		<>
-			<Header />
+			<Header productData={productData} />
 			<div className={styles.container}>
 				<div className={styles.img}>
 					<img src={GLOBAL_CONSTANTS.image_url.check_circle} alt="" />

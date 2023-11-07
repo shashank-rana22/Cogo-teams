@@ -8,7 +8,7 @@ const useUpdateAccountTagging = ({ item = {} }) => {
 		method  : 'put',
 		authKey : 'put_payments_outstanding_update_account_taggings',
 	}, { manual: true });
-	const apiTrigger = async (val, refetch) => {
+	const apiTrigger = async ({ currentStatus : val, refetch, setChangeStatus = () => {} }) => {
 		try {
 			const resp = await trigger({
 				data: {
@@ -17,7 +17,11 @@ const useUpdateAccountTagging = ({ item = {} }) => {
 					organizationId : item?.organizationId,
 				},
 			});
+
+			setChangeStatus(false);
+
 			Toast.success(resp?.data?.message || 'Updated Successfully');
+
 			refetch();
 		} catch (err) {
 			Toast.error(err?.response?.data?.message || 'Update Failed');
