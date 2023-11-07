@@ -26,7 +26,7 @@ function ScrollAnnouncement({ style = {} }) {
 					width={20}
 					height={20}
 					src={GLOBAL_CONSTANTS?.image_url?.public_leaderboard_announcement}
-					alt=""
+					alt="announcement_icon"
 				/>
 			</div>
 			<div
