@@ -229,7 +229,7 @@ export const controls = (role_functions, partnerOptions, t) => [
 				value : 'external',
 			},
 			{
-				label : 'Public',
+				label : t('accessManagement:roles_and_permission_select_role_functions_select_public'),
 				value : 'public',
 			},
 		],

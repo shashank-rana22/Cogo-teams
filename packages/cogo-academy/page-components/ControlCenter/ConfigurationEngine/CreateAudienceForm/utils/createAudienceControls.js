@@ -111,9 +111,9 @@ const createQuestionControls = ({ watchFunctions, countryOptions }) => {
 			type        : 'select',
 			options     : SUB_FUNCTION_MAPPING[watchFunctions],
 			placeholder : 'Select Sub Functions',
-			// rules       : {
-			// 	required: 'Sub function is required',
-			// },
+			rules       : {
+				required: 'Sub function is required',
+			},
 		},
 	];
 
