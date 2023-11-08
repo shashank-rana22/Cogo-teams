@@ -55,10 +55,15 @@ function ScrollAnnouncement({ style = {}, loading = false, list = [] }) {
 						}}
 						className={cl`${styles.bar_content} ${isScrolling && styles.bar_content_scrolling}`}
 					>
-						{(list || []).map((item) => {
+						{(list || []).map((item, ind) => {
 							if (ref?.current?.offsetWidth === undefined) return null;
+							if (!item?.quest_string) return null;
 							return (
 								<span key={item?.id} className={styles.quest_container}>
+									<span className={styles.quest_heading}>
+										{ind + 1}
+										{'. '}
+									</span>
 									<div dangerouslySetInnerHTML={{ __html: item?.quest_string }} />
 								</span>
 							);
