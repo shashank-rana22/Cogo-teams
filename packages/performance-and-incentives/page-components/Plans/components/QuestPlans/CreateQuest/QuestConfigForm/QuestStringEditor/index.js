@@ -19,10 +19,6 @@ function QuestStringEditor({
 }) {
 	const RichTextEditor = richTextEditor;
 
-	const handleChange = (value) => {
-		setEditor(value);
-	};
-
 	const onClickFill = () => {
 		setEditor(RichTextEditor?.createValueFromString(formattedString?.value, 'html'));
 	};
@@ -54,7 +50,7 @@ function QuestStringEditor({
 			</div>
 			<RichTextEditor
 				value={editor}
-				onChange={handleChange}
+				onChange={setEditor}
 				required
 				id="body-text"
 				name="bodyText"

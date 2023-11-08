@@ -21,7 +21,7 @@ function Header({ control = {}, debounceQuery = () => {} }) {
 					name="q"
 					placeholder="Search name"
 					type="text"
-					onChange={(val) => debounceQuery(val)}
+					onChange={debounceQuery}
 					control={control}
 					size="md"
 					className={styles.search_input}
