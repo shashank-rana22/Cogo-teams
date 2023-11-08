@@ -1,4 +1,5 @@
-import { cl, Button } from '@cogoport/components';
+import { cl, Button, Tooltip } from '@cogoport/components';
+import { IcMInfo } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 
 import getEditQuotaControl from '../../../../../configuration/editQuotaControl';
@@ -6,8 +7,27 @@ import useUpdateQuota from '../../../../../hooks/useUpdateQuota';
 import { getFieldController } from '../../../../../utils/getFieldController';
 import styles from '../styles.module.css';
 
+function TooltipContent({ pricings = [] }) {
+	return (
+		<div>
+			{pricings.map((ele) => {
+				const { id, buy_price, currency } = ele || {};
+				return (
+					<div key={id}>
+						{'1 quota = '}
+						{buy_price}
+						{' '}
+						{currency}
+					</div>
+				);
+			})}
+		</div>
+	);
+}
+
 function Quota({ extraInfo = {}, modalChangeHandler }) {
-	const { id = '' } = extraInfo || {};
+	const { id = '', product = {} } = extraInfo || {};
+	const { pricings = [] } = product || {};
 
 	const { t } = useTranslation(['saasSubscription']);
 
@@ -26,7 +46,16 @@ function Quota({ extraInfo = {}, modalChangeHandler }) {
 					return (
 						<div key={name} className={styles.col}>
 							<div className={styles.label_container}>
-								<p className={styles.label}>{label}</p>
+								<p className={cl`${styles.label} ${styles.row}`}>
+									{label}
+									{name === 'quantity'
+										? (
+											<Tooltip content={<TooltipContent pricings={pricings} />}>
+												<div className={styles.info}><IcMInfo /></div>
+											</Tooltip>
+										)
+										: null}
+								</p>
 								{errors?.[name] && (
 									<p className={styles.error}>
 										{errors?.[name]?.message || errors?.[name]?.type}
