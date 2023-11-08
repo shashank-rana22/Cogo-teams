@@ -3,7 +3,6 @@ import { CheckboxController, SelectController } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useMemo } from 'react';
 
@@ -162,62 +161,53 @@ function MainCard({ shippingLines = [], detail = {}, formProps = {}, watch = () 
 			</div>
 
 			<div className={styles.right_container}>
-				<div className={styles.container_wrapper}>
-					<div className={styles.container_details}>
-						{primaryServicesControls.map(
-							({ serviceDetails = {}, ...formControls }) => {
-								const containerDetail = getDetails({
-									item: serviceDetails,
-								});
+				<div className={styles.container_details}>
+					{primaryServicesControls.map(
+						({ serviceDetails = {}, ...formControls }) => {
+							const containerDetail = getDetails({
+								item: serviceDetails,
+							});
 
-								const ActiveElement = getElementController(formControls?.type);
+							const ActiveElement = getElementController(formControls?.type);
 
-								const errorMessage = getPriceError(errors?.[formControls.name]);
+							const errorMessage = getPriceError(errors?.[formControls.name]);
 
-								return (
-									<div
-										key={serviceDetails?.id}
-										className={cl`${styles.element_div} ${styles.containers}`}
-									>
-										{(containerDetail || []).map((conDetail) => (
-											<Pill
-												key={conDetail}
-												size="md"
-												style={{
-													border     : '1px solid #24C7D9',
-													background : '#ffffff',
-												}}
-											>
-												{conDetail}
-											</Pill>
-										))}
-										<div
-											style={{ marginTop: '16px' }}
-											className={styles.label}
+							return (
+								<div
+									key={serviceDetails?.id}
+									className={cl`${styles.element_div} ${styles.containers}`}
+								>
+									{(containerDetail || []).map((conDetail) => (
+										<Pill
+											key={conDetail}
+											size="md"
+											style={{
+												border     : '1px solid #24C7D9',
+												background : '#ffffff',
+											}}
 										>
-											{formControls?.label}
-										</div>
-										<ActiveElement {...formControls} />
-
-										{errorMessage && (
-											<div className={styles.error_message}>
-												{' '}
-												{errorMessage}
-											</div>
-										)}
+											{conDetail}
+										</Pill>
+									))}
+									<div
+										style={{ marginTop: '16px' }}
+										className={styles.label}
+									>
+										{formControls?.label}
 									</div>
-								);
-							},
-						)}
-					</div>
+									<ActiveElement {...formControls} />
 
-					<div className={styles.info_text}>
-						<IcMInfo width={12} height={12} style={{ marginRight: '4px' }} />
-
-						You can add additional line items in the next step
-					</div>
+									{errorMessage && (
+										<div className={styles.error_message}>
+											{' '}
+											{errorMessage}
+										</div>
+									)}
+								</div>
+							);
+						},
+					)}
 				</div>
-
 			</div>
 		</div>
 	);
