@@ -322,7 +322,7 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/service-discovery',
 			type          : 'link',
 			icon          : IcMFinanceDashboard,
-			possible_apis : apis.service_discovery,
+			possible_apis : [...apis.service_discovery, ...apis.cargo_insurance],
 			main_apis     : [
 				'list_spot_searches',
 				'list_checkouts',
@@ -1293,7 +1293,7 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/booking-desk',
 					type          : 'link',
 					main_apis     : ['list_booking_desk_shipments'],
-					possible_apis : [...apis.shipment, ...apis.booking_desk],
+					possible_apis : [...apis.shipment, ...apis.booking_desk, ...apis.cargo_insurance],
 				},
 				{
 					key           : 'coe-cost_booking',
@@ -1817,6 +1817,14 @@ const navigationMapping = ({ t = () => {} }) => {
 					href          : '/v2/controlled-booking',
 					as            : '/v2/controlled-booking',
 					possible_apis : apis.controlled_booking,
+				},
+				{
+					key           : 'transaction_setting-handling_fees',
+					title         : t('common:handling_fees_configuration'),
+					href          : '/v2/handling-fees',
+					as            : '/v2/handling-fees',
+					main_apis     : [],
+					possible_apis : apis.handling_fees,
 				},
 			],
 			module_type: 'dashboards',
@@ -2431,6 +2439,17 @@ const navigationMapping = ({ t = () => {} }) => {
 					type          : 'link',
 					possible_apis : apis.kra_assignment,
 				},
+				{
+					key           : 'performance_management-employee_dashboard',
+					title         : 'Employee Rating',
+					href          : '/v2/employee-dashboard',
+					as            : '/v2/employee-dashboard',
+					type          : 'link',
+					possible_apis : [
+						...apis.employee_performance_dashboard,
+						...apis.separation,
+					],
+				},
 			],
 		},
 		chro: {
@@ -2580,20 +2599,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			type          : 'link',
 			possible_apis : apis.performance_manager_dashboard,
 		},
-		employee_dashboard: {
-			key           : 'employee_dashboard',
-			title         : t('common:employee_dashboard'),
-			href          : '/v2/employee-dashboard',
-			as            : '/v2/employee-dashboard',
-			type          : 'link',
-			icon          : IcMDashboard,
-			possible_apis : [
-				...apis.employee_performance_dashboard,
-				...apis.separation,
-			],
-			main_apis   : [],
-			module_type : 'dashboards',
-		},
 		ftl_admin: {
 			key           : 'ftl_admin',
 			title         : t('common:ftl_admin'),
@@ -2722,6 +2727,28 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.profile,
 			icon          : IcMAppProfile,
 		},
+		cargo_insurance: {
+			key           : 'cargo_insurance',
+			title         : 'Cargo Insurance',
+			module_type   : 'dashboards',
+			href          : '/v2/cargo-insurance',
+			as            : '/v2/cargo-insurance',
+			showInNav     : false,
+			main_apis     : [],
+			possible_apis : apis.cargo_insurance,
+		},
+		cogo_store: {
+			key           : 'cogo_store',
+			title         : 'CogoMerch',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			href          : '/v2/cogo-store',
+			as            : '/v2/cogo-store',
+			possible_apis : apis.cogo_store,
+			icon          : IcAWarehouse,
+		},
+
 	};
 
 	return navigationMappingAdmin;

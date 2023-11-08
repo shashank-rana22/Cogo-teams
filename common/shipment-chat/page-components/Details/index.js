@@ -15,7 +15,7 @@ import SendTo from './SendTo';
 import styles from './styles.module.css';
 
 const INITIAL_STATE_ROWS = 1;
-const TOTAL_STAKEHOLDERS_LENGTH = 2;
+const TOTAL_STAKEHOLDERS_LENGTH = 1;
 const TOTAL_ROWS = 3;
 const ENTER_KEY = 13;
 const DELETE_KEY_1 = 46;

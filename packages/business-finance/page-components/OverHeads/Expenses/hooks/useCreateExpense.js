@@ -188,7 +188,7 @@ const useCreateExpense = ({
 				data: payload,
 			});
 		} catch (err) {
-			Toast.error(err?.message || 'Something went wrong');
+			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}
 	};
 

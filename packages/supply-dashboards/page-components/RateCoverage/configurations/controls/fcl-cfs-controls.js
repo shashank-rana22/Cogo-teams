@@ -270,16 +270,20 @@ const cfsControls = ({ data, originLocationOptions, CommodityOptions, source }) 
 			showButtons        : true,
 			buttonText         : 'Add Custom Line Items',
 			noDeleteButtonTill : 1,
-			controls           : [
+			value              : [{
+				code     : '',
+				unit     : '',
+				currency : '',
+				price    : '',
+				remarks  : '',
+			}],
+			controls: [
 				{
-					name        : 'cfs_line_items',
-					valueKey    : 'code',
-					type        : 'async_select',
+					name        : 'code',
+					type        : 'select',
 					span        : 2,
-					asyncKey    : 'list_rate_charge_codes',
-					params      : { service_name: 'fcl_cfs_charges' },
-					initialCall : true,
-					rules       : { required: 'Code is required' },
+					placeholder : 'Charge Name',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'currency',

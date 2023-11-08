@@ -4,6 +4,8 @@ import { IcACarriageInsurancePaidTo, IcCFtick, IcMInfo, IcMMinusInCircle, IcMPlu
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import SecureNow from '../../../SecureNow';
+
 import styles from './styles.module.css';
 
 function CargoInsuranceContainer({
@@ -32,7 +34,11 @@ function CargoInsuranceContainer({
 					height={32}
 				/>
 
-				<span className={styles.label}>Cargo Insurance</span>
+				<div className={styles.left_content}>
+					<span className={styles.label}>Cargo Insurance</span>
+
+					<SecureNow />
+				</div>
 			</div>
 
 			<div className={styles.right_section}>

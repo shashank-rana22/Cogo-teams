@@ -5,11 +5,11 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback } from 'react';
 
 const useVendorInfo = () => {
-	const [data, setData] = useState({});
-
 	const {
 		general: { query },
 	} = useSelector((state) => state);
+
+	const [data, setData] = useState({});
 
 	const { vendor_id = '' } = query;
 
@@ -30,7 +30,6 @@ const useVendorInfo = () => {
 			const response = await trigger({
 				params,
 			});
-
 			setData(response);
 		} catch (e) {
 			Toast.error(getApiErrorString(e?.response?.data));

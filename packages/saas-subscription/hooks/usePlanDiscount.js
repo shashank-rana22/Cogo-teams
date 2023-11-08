@@ -18,9 +18,9 @@ const getDefaultValue = ({ info, isCreate = false }) => {
 		config_type,
 		value,
 		usage_count,
-		metadata  : JSON.stringify(metadata),
-		conditions,
-		is_active : is_active ? 'active' : 'inactive',
+		metadata   : JSON.stringify(metadata),
+		conditions : JSON.stringify(conditions),
+		is_active  : is_active ? 'active' : 'inactive',
 	};
 };
 
@@ -62,24 +62,34 @@ const usePlanDiscount = ({ discountModal = {}, setFeatureModal, setDiscountModal
 			setFeatureModal({ apiCall: true });
 			setDiscountModal({ open: false });
 		} catch (err) {
-			console.log(err, 'err');
+			Toast.error(err?.response?.data?.message);
 		}
 	};
 
 	const submitHandler = (data) => {
-		const { metadata, value, is_active } = data || {};
+		const { metadata, conditions, value, is_active, to_all_subscribers = false, ...rest } = data || {};
+
 		const { service_name = '', config_type = '', id = '' } = info || {};
 
 		const extraInfo = { id, unit, config_type, service_name };
 
 		try {
-			const validaMetadata = JSON.parse(metadata);
+			const validMetadata = metadata ? JSON.parse(metadata) : null;
+			const validConditions = conditions ? JSON.parse(conditions) : null;
+
 			const payload = {
-				...data,
-				is_active : is_active === 'active',
-				value     : +value,
-				metadata  : validaMetadata,
-				...(!isCreate ? extraInfo : { saas_plan_id: planId, unit: 'percentage' }),
+				...rest,
+				is_active                        : is_active === 'active',
+				value                            : +value,
+				metadata                         : validMetadata,
+				conditions                       : validConditions,
+				refresh_for_existing_subscribers : isCreate ? to_all_subscribers : undefined,
+				...(!isCreate
+					? extraInfo
+					: {
+						unit         : 'percentage',
+						saas_plan_id : planId,
+					}),
 			};
 
 			createUpdatePlanDiscount(payload);

@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image, useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
+import { v1 as uuid } from 'uuid';
 
 import styles from './styles.module.css';
 
@@ -68,7 +69,8 @@ function TemplateSuggestion({
 			onClick={() => setEmailState(
 				(prev) => ({
 					...prev,
-					customSubject: {
+					reloadKey     : uuid(),
+					customSubject : {
 						...(prev.customSubject || {}),
 						subjectText: subject,
 					},

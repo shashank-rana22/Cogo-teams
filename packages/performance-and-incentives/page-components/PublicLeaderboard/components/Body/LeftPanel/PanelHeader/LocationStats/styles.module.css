@@ -1,0 +1,57 @@
+.container {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
+
+.location__data {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	justify-content: space-between;
+}
+
+.location__data_heading {
+	font-size: 20px;
+	font-weight: 1000;
+	text-transform: uppercase;
+
+	@media (min-width: 2560px) {
+		font-size: 30px;
+	}
+}
+
+.icon {
+	width: 65px;
+	height: 65px;
+
+	@media (min-width: 2560px) {
+		width: 85px;
+		height: 85px;
+	}
+}
+
+.location__data_stats {
+	display: flex;
+	gap: 12px;
+	padding: 4px 12px;
+	border: 1px solid #ced1ed;
+	border-radius: 8px;
+
+	@media (min-width: 2560px) {
+		font-size: 24px;
+	}
+}
+
+.location__data_stats_count {
+	font-weight: 1000;
+}
+
+.location__data_stats_winner {
+	display: flex;
+	padding: 6px 12px;
+	background-image: linear-gradient(to right, #ced1ed, #fff);
+	border: none;
+	border-right: 1px solid #ced1ed;
+	border-radius: 8px;
+}

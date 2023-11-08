@@ -1,6 +1,4 @@
 import { useDebounceQuery } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import {
@@ -10,39 +8,13 @@ import {
 } from 'react';
 
 import { TICKET_SECTION_MAPPING } from '../constants';
+import { getPayload } from '../utils/getListPayload';
 
 const DEFAULT_PAGE = 1;
-const PAGE_DECREMENT = 1;
+
 const PAGE_INCREMENT = 1;
 const MIN_TICKET_COUNT = 1;
 const WINDOW_VIEW = 20;
-
-const getPayload = ({
-	performerId, pageIndex, agent, searchQuery, category, spectatorType, startDate, endDate, sortType = '',
-	sortOrder = '', idType = '', serialId = '',
-}) => ({
-	PerformedByID : performerId,
-	size          : 10,
-	page          : pageIndex - PAGE_DECREMENT,
-	AgentID       : agent || undefined,
-	QFilter       : searchQuery || undefined,
-	Type          : category || undefined,
-	SpectatorType : spectatorType || undefined,
-	SortBy        : sortType || undefined,
-	SortType      : sortOrder || undefined,
-	StartDate     : formatDate({
-		date       : startDate,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		formatType : 'date',
-	}) || undefined,
-	EndDate: formatDate({
-		date       : endDate,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		formatType : 'date',
-	}) || undefined,
-	SerialID : serialId || undefined,
-	IDType   : idType || undefined,
-});
 
 const useListTickets = ({
 	searchParams,
@@ -62,8 +34,9 @@ const useListTickets = ({
 	const { agent, category } = searchParams || {};
 	const { sortOrder = '', sortType = '' } = sortBy || {};
 	const {
-		idType = '',
-		serialId = '',
+		idType = '', serialId = '', category: filterCategory = '',
+		subcategory = '', raisedBy = '', raisedTo = '',
+		service = '', trade = '', requestType = '',
 	} = idFilters || {};
 
 	const { id : performerId = '' } = useSelector((state) => state?.profile?.user);
@@ -94,10 +67,18 @@ const useListTickets = ({
 			sortOrder,
 			idType,
 			serialId,
+			filterCategory,
+			subcategory,
+			raisedBy,
+			raisedTo,
+			service,
+			trade,
+			requestType,
 		});
 		return { ...payload, ...(TICKET_SECTION_MAPPING?.[status] || {}) };
-	}, [performerId, agent, searchQuery, category, spectatorType, startDate, endDate,
-		status, sortType, sortOrder, idType, serialId]);
+	}, [performerId, agent, searchQuery, category, spectatorType,
+		startDate, endDate, sortType, sortOrder, idType, serialId, requestType,
+		filterCategory, subcategory, raisedBy, raisedTo, service, trade, status]);
 
 	const fetchTickets = useCallback(async (pageIndex) => {
 		try {

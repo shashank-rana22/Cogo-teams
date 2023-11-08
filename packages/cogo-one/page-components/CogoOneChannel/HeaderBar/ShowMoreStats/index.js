@@ -44,18 +44,16 @@ function ShowMoreStats({
 					handlePunchIn={handlePunchIn}
 				/>
 			</div>
-			<div className={styles.agent_stats_container}>
-				<AgentStats
-					setShowDetails={setShowDetails}
-					showDetails={showDetails}
-					name={name}
-					viewType={viewType}
-					agentStatsLoading={agentStatsLoading}
-					agentStatsData={agentStatsData}
-					timePeriodValue={timePeriodValue}
-					setTimePeriodValue={setTimePeriodValue}
-				/>
-			</div>
+			<AgentStats
+				setShowDetails={setShowDetails}
+				showDetails={showDetails}
+				name={name}
+				viewType={viewType}
+				agentStatsLoading={agentStatsLoading}
+				agentStatsData={agentStatsData}
+				timePeriodValue={timePeriodValue}
+				setTimePeriodValue={setTimePeriodValue}
+			/>
 		</>
 	);
 }

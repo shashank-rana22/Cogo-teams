@@ -1,6 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
+import { getTimeZone } from '../utils/timeLineFunctions';
+
 import getRenderEmailBody from './getRenderEmailBody';
 
 export const ENDPOINT_MAPPING = {
@@ -57,6 +59,7 @@ export const getCommunicationPayload = ({
 		userId,
 		attachments       : isEmpty(uploadedFiles) ? undefined : uploadedFiles,
 		internetMessageId : internet_message_id,
+		time_zone         : getTimeZone(),
 	};
 
 	return {

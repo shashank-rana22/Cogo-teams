@@ -1,7 +1,7 @@
 import { Button, cl, Chips, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPlusInCircle } from '@cogoport/icons-react';
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 
 import getDetails from '../../../../../../../../../common/ContainerDetails/getDetails';
 import { CheckoutContext } from '../../../../../../../context';
@@ -13,19 +13,6 @@ import useHandleSelectServices from './useHandleSelectServices';
 
 const ONE = 1;
 
-const CURRENCY_OPTIONS = [
-	GLOBAL_CONSTANTS.currency_code.USD,
-	GLOBAL_CONSTANTS.currency_code.INR,
-	GLOBAL_CONSTANTS.currency_code.VND,
-].map((currencyCode) => ({
-	key      : currencyCode,
-	disabled : false,
-	children : currencyCode,
-	prefix   : GLOBAL_CONSTANTS.currency_symbol[currencyCode],
-	suffix   : null,
-	tooltip  : false,
-}));
-
 function SelectServices({
 	selectedAddress = {},
 	setCurrentView = () => {},
@@ -35,6 +22,18 @@ function SelectServices({
 	rate = {},
 	getCheckoutInvoices = () => {},
 }) {
+	const ALLOWED_CURRENCY = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
+		.common.services.invoicing_parties_checkout.allowed_currency;
+
+	const currencyOptions = useMemo(() => ALLOWED_CURRENCY.map((currencyCode) => ({
+		key      : currencyCode,
+		disabled : false,
+		children : currencyCode,
+		prefix   : GLOBAL_CONSTANTS.currency_symbol[currencyCode],
+		suffix   : null,
+		tooltip  : false,
+	})), [ALLOWED_CURRENCY]);
+
 	const {
 		detail = {},
 		checkout_id = '',
@@ -79,7 +78,7 @@ function SelectServices({
 
 				<Chips
 					size="md"
-					items={CURRENCY_OPTIONS}
+					items={currencyOptions}
 					selectedItems={selectedAddress.invoice_currency}
 					onItemChange={(val) => {
 						setSelectedAddress((prev) => ({ ...prev, invoice_currency: val }));

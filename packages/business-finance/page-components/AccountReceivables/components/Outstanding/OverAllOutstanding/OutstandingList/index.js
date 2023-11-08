@@ -1,16 +1,22 @@
-import { Button, cl, TabPanel, Tabs, Tooltip } from '@cogoport/components';
+/* eslint-disable max-lines-per-function */
+import {
+	Button, cl, TabPanel, Tabs, Tooltip, Popover, Pill,
+} from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMActivePlans, IcMDownload } from '@cogoport/icons-react';
+import { IcMActivePlans, IcMDownload, IcMOverflowLine, IcMProvision } from '@cogoport/icons-react';
 import useGetPermission from '@cogoport/request/hooks/useGetPermission';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { getTaxLabels } from '../../../../constants/index';
 import useOpenInvoicesReport from '../../../../hooks/useOpenInvoicesReport';
+import useUpdateOutstandingList from '../../../../hooks/useUpdateOutstandingList';
 import checkPermission from '../../../../Utils/checkPermission';
 
+import ChangeStatus from './ChangeStatus';
 import DownloadLedgerModal from './DownloadLedgerModal';
+import ShowMoreOptions from './ShowMoreOptions';
 import StatsOutstanding from './StatsOutstanding/index';
 import styles from './styles.module.css';
 import TabsOptions from './TabOptions';
@@ -19,6 +25,7 @@ import UserDetails from './UserDetails';
 // eslint-disable-next-line max-lines-per-function
 function OutstandingList({
 	item = {},
+	refetch = () => {},
 	entityCode = '',
 	showElement = false,
 	organizationId = '',
@@ -29,10 +36,12 @@ function OutstandingList({
 
 	const [activeTab, setActiveTab] = useState('invoice_details');
 	const [showLedgerModal, setShowLedgerModal] = useState(false);
-
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
+	const [currentStatus, setCurrentStatus] = useState('');
+	const [changeStatus, setChangeStatus] = useState(false);
 
 	const { isDownloading = false, downloadAROustanding = () => {} } = useOpenInvoicesReport({ organizationId });
+	const { apiTrigger } = useUpdateOutstandingList({ item });
 
 	const handleActiveTabs = (val) => {
 		if (val === activeTab) {
@@ -53,7 +62,10 @@ function OutstandingList({
 		lastUpdatedAt,
 		selfOrganizationName,
 		selfOrganizationId = '',
+		taggedPersonDetails = {},
 	} = item;
+
+	const { partnerName = '', name : taggedName = '' } = taggedPersonDetails || {};
 
 	const propsData = {
 		invoice_details: {
@@ -230,14 +242,58 @@ function OutstandingList({
 								</div>
 							</Tooltip>
 						)}
-						<Tooltip content="Ledger Download" placement="top">
-							<div className={styles.download_icon_div}>
-								<IcMDownload
-									fill="black"
-									onClick={() => setShowLedgerModal(true)}
-								/>
-							</div>
-						</Tooltip>
+						{
+							(entityCode !== '101_301')
+								? (
+									<Tooltip content="Ledger Download" placement="top">
+										<div className={styles.download_icon_div}>
+											<IcMDownload
+												fill="black"
+												onClick={() => setShowLedgerModal(true)}
+											/>
+										</div>
+									</Tooltip>
+								) : null
+						}
+						{
+							(entityCode !== '101_301')
+								? (
+									<div className={styles.download_icon_div}>
+										<IcMProvision
+											onClick={() => { apiTrigger(refetch); }}
+											height={16}
+											width={16}
+											fill="#FFA500"
+										/>
+									</div>
+								) : null
+						}
+						{
+							(item?.taggedState && entityCode !== '101_301')
+								? (<Pill size="md" color="green">{startCase(item?.taggedState)}</Pill>) : null
+						}
+						{!isEmpty(taggedPersonDetails) ? (
+							<Pill size="md" color="green">
+								{['MZM', 'RUBIX'].includes(partnerName)
+									? `${partnerName}- ${startCase(taggedName)}`
+									: startCase(taggedName)}
+							</Pill>
+						) : null}
+						{
+							(entityCode !== '101_301')
+								? (
+									<Popover
+										placement="left"
+										render={(
+											<ShowMoreOptions item={item} setChangeStatus={setChangeStatus} />
+										)}
+									>
+										<div className={styles.download_icon_div}>
+											<IcMOverflowLine />
+										</div>
+									</Popover>
+								) : null
+						}
 
 						{!showElement && (
 							<Button
@@ -279,6 +335,17 @@ function OutstandingList({
 					showLedgerModal={showLedgerModal}
 					setShowLedgerModal={setShowLedgerModal}
 					item={item}
+				/>
+			) : null}
+
+			{changeStatus ? (
+				<ChangeStatus
+					item={item}
+					currentStatus={currentStatus}
+					setCurrentStatus={setCurrentStatus}
+					changeStatus={changeStatus}
+					setChangeStatus={setChangeStatus}
+					refetch={refetch}
 				/>
 			) : null}
 		</div>

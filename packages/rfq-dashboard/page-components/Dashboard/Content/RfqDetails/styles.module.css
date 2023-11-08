@@ -1,11 +1,11 @@
 .container {
-	width: 950px;
+	min-width: 630px;
+	height: 100%;
 	margin-top: 12px;
 }
 
 .emptycontainer {
-	width: 950px;
-	height: 620px;
+	min-width: 630px;
+	height: calc(100% + 35px);
 	margin-top: 12px;
-	background-color: white;
 }

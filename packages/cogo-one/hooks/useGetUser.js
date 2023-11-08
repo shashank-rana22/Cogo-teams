@@ -1,35 +1,47 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
-const useGetUser = ({ lead_user_id = null, userId = null, customerId }) => {
-	const apiName =	 !userId ? '/get_lead_user' : '/get_user';
-	const payload = !userId ? lead_user_id : userId;
+const getParams = ({ userId, leadUserId }) => ({
+	id: userId || leadUserId,
+});
+
+const useGetUser = ({
+	leadUserId = '',
+	userId = '',
+	customerId = '',
+}) => {
+	const apiName =	 userId ? '/get_user' : '/get_lead_user';
+
 	const [{ loading, data }, trigger] = useRequest({
 		url    : apiName,
 		method : 'get',
-	}, { manual: true });
+	}, { manual: true, autoCancel: false });
 
-	const fetchUser = async () => {
-		try {
-			await trigger({
-				params: {
-					id: payload,
-				},
-			});
-		} catch (error) {
-			// console.log(error);
-		}
-	};
+	const fetchUser = useCallback(
+		async () => {
+			try {
+				if (!userId && !leadUserId) {
+					return;
+				}
+
+				await trigger({
+					params: getParams({ leadUserId, userId }),
+				});
+			} catch (error) {
+				console.error(error);
+			}
+		},
+		[leadUserId, trigger, userId],
+	);
+
 	useEffect(() => {
-		if (userId || lead_user_id) {
-			fetchUser();
-		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [lead_user_id, userId, customerId]);
+		fetchUser();
+	}, [fetchUser, customerId]);
 
 	return {
 		loading,
-		userData: data?.data,
+		userData: loading || !customerId ? {} : data?.data,
 	};
 };
+
 export default useGetUser;

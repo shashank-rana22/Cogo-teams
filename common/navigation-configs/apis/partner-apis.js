@@ -5145,6 +5145,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'bookings',
 		},
+		{
+			api          : 'list_chat_agents',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 
 	operations_dashboard: [
@@ -5170,6 +5175,11 @@ const partner = {
 		},
 		{
 			api          : 'list_contract_fcl_freight_services',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_contract_fcl_freight_local_services',
 			access_type  : 'private',
 			service_name : 'contract',
 		},
@@ -5763,6 +5773,48 @@ const partner = {
 			api          : 'list_cogo_entities',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+	],
+	handling_fees: [
+		{
+			api          : 'list_cogo_entities',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_handling_fee_configurations',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'create_handling_fee_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'update_handling_fee_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'get_handling_fee_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'create_handling_fee_custom_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'update_handling_fee_custom_configuration',
+			access_type  : 'private',
+			service_name : 'handling_fee',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 	condition: [
@@ -6855,6 +6907,11 @@ const partner = {
 		},
 		{
 			api          : 'list_contract_fcl_freight_services',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
+			api          : 'list_contract_fcl_freight_local_services',
 			access_type  : 'private',
 			service_name : 'contract',
 		},
@@ -8757,7 +8814,7 @@ const partner = {
 	],
 	overheads: [
 		{
-			api         : 'post_purchase_expense_send_email',
+			api         : 'post_incident_management_incident_send_overhead_mail',
 			access_type : 'private',
 			module      : 'Expenses',
 			feature     : 'Expenses',
@@ -9286,6 +9343,25 @@ const partner = {
 			feature     : 'outstanding',
 		},
 		{
+			api         : 'get_payments_outstanding_by_customer_v2',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'put_payments_outstanding_customer_v2',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'put_payments_outstanding_update_account_taggings',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+
+		},
+		{
 			api         : 'get_sales_outstanding_invoice_list',
 			access_type : 'private',
 			module      : 'outstanding',
@@ -9428,6 +9504,12 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
+		{
+			api         : 'put_payments_outstanding_bulk_update_account_taggings',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
 
 	],
 	compliance: [
@@ -9532,7 +9614,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_purchase_expense_expense_configuration_by_id',
+			api         : 'get_purchase_expense_expense_configuration',
 			access_type : 'private',
 		},
 		{
@@ -9784,6 +9866,12 @@ const partner = {
 			feature     : 'settlement',
 		},
 		{
+			api         : 'post_payments_accounts_bulk_upload_payments',
+			access_type : 'private',
+			module      : 'settlement',
+			feature     : 'settlement',
+		},
+		{
 			api         : 'get_payments_settlement_documents',
 			access_type : 'private',
 			module      : 'settlement',
@@ -10009,6 +10097,12 @@ const partner = {
 			api          : 'get_exchange_rate',
 			access_type  : 'private',
 			service_name : 'exchange_rate',
+		},
+		{
+			api         : 'post_payments_parent_jv_bulk_post_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
 		},
 	],
 	tracking: [
@@ -13315,6 +13409,31 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'assign_meeting_agent',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_channel_partner_document',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'update_organization_document',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_onboarding_requests',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'assign_onboarding_agent',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_spot_searches',
 			access_type  : 'private',
 			feature      : 'rate_requests',
@@ -13324,6 +13443,38 @@ const partner = {
 			api          : 'update_video_conference_user_activity',
 			access_type  : 'private',
 			service_name : 'communication',
+		},
+		{
+			api          : 'verify_organization_kyc',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'verify_channel_partner_kyc',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'verify_organization_trade_party',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_omnichannel_onboarding_requests',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'post_allocation_request_status',
+			access_type  : 'private',
+			feature      : 'allocation',
+			service_name : 'allocation',
+		},
+		{
+			api          : 'get_allocation_request_rejection_reasons',
+			access_type  : 'private',
+			feature      : 'allocation',
+			service_name : 'allocation',
 		},
 		{
 			api          : 'get_video_conference_link',
@@ -14234,6 +14385,31 @@ const partner = {
 		},
 		{
 			api          : 'list_cogoone_shifts',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'create_cogoone_calendar',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_cogoone_schedules',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_cogoone_schedule',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_cogoone_calendars',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'update_cogoone_calendar',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

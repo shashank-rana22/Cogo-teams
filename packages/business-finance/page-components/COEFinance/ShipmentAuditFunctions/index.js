@@ -39,6 +39,7 @@ function ShipmentAuditFunction({
 		creationDate          : null,
 		tradeType             : '',
 	});
+
 	const [paginationFilters, setPaginationFilters] = useState({
 		page      : 1,
 		pageLimit : 10,
@@ -51,7 +52,7 @@ function ShipmentAuditFunction({
 		data = {},
 		loading = false,
 		refetch = () => {},
-	} =	 useGetJobList({ paginationFilters, search, activeTab, subActiveTab, entityCode });
+	} =	 useGetJobList({ filters, paginationFilters, search, activeTab, subActiveTab, entityCode });
 	const { list = [] } = data || {};
 
 	const handlePrePostChange = () => {
@@ -72,8 +73,8 @@ function ShipmentAuditFunction({
 		window.sessionStorage.setItem('audit_status', subActiveTab);
 	};
 
-	const operationColumns = getJobColumns({ handleClick, tax });
-	const financeColumns = getFinancialCloseColumns({ handleClick, tax });
+	const operationColumns = getJobColumns({ handleClick, tax, subActiveTab });
+	const financeColumns = getFinancialCloseColumns({ handleClick, tax, subActiveTab });
 
 	useEffect(() => {
 		setPaginationFilters((prev) => ({ ...prev, page: 1 }));

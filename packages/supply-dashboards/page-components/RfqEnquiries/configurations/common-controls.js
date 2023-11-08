@@ -20,9 +20,9 @@ const commonControls = ({ service }) => {
 		},
 	];
 	const lineControls = {
-		label: ['fcl_freight', 'haulage_freight']
+		label: ['fcl_freight', 'fcl_freight_local', 'haulage_freight']
 			.includes(service) ? 'Shipping Line' : 'Air Line',
-		name: ['fcl_freight', 'haulage_freight']
+		name: ['fcl_freight', 'fcl_freight_local', 'haulage_freight']
 			.includes(service) ? 'shipping_line_id' : 'airline_id',
 		placeholder : 'Select',
 		type        : 'select',
@@ -30,7 +30,7 @@ const commonControls = ({ service }) => {
 		rules       : { required: 'This is required' },
 		requirement : service !== 'haulage_freight',
 	};
-	if (['fcl_freight', 'haulage_freight', 'air_freight'].includes(service)) {
+	if (['fcl_freight', 'fcl_freight_local', 'haulage_freight', 'air_freight'].includes(service)) {
 		return [...controls, lineControls];
 	}
 	return controls;

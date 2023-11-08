@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 
 import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../constants/leaderboard-reporttype-constants';
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-viewtype-constants';
+import getFormattedDate from '../../../../utils/get-formatted-date';
 import getReportViewType from '../../helpers/getReportViewType';
 
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
@@ -30,7 +31,7 @@ const getUserRmIdsFilter = ({ currLevel, levelStack }) => {
 };
 
 const useScoringReports = (props) => {
-	const { currLevel, dateRange, entity, isChannel, levelStack } = props;
+	const { currLevel, dateRange, entity, isChannel, levelStack, setUserPosition } = props;
 
 	const { incentive_leaderboard_viewtype, user } = useSelector(({ profile }) => profile);
 
@@ -89,11 +90,18 @@ const useScoringReports = (props) => {
 				...(previousParams.filters || {}),
 				q                       : searchQuery || undefined,
 				created_at_greater_than : dateRange?.startDate || undefined,
-				created_at_less_than    : dateRange?.endDate || undefined,
-				partner_id              : entity || undefined,
+				created_at_less_than    : dateRange?.endDate
+					? getFormattedDate({ currentDate: dateRange?.endDate }) : undefined,
+				partner_id: entity || undefined,
 			},
 		}));
 	}, [searchQuery, dateRange, entity, setParams]);
+
+	useEffect(() => {
+		const userPostion = list.findIndex((item) => item.user?.id === user?.id);
+
+		setUserPosition(userPostion || 0);
+	}, [list, setUserPosition, user.id]);
 
 	return {
 		list,

@@ -16,21 +16,57 @@ const API_END_POINT_MAPPING = {
 	fcl_cfs     : 'get_fcl_cfs_rate_job_stats',
 };
 
-const FCL_PARAMS_MAPPING = {
-	origin_location      : 'origin_port_id',
-	destination_location : 'destination_port_id',
-	operater_type        : 'shipping_line_id',
+const PARAM_MAPPING = {
+	fcl_freight: {
+		origin_location      : 'origin_port_id',
+		destination_location : 'destination_port_id',
+		operater_type        : 'shipping_line_id',
+
+	},
+	lcl_freight: {
+		origin_location      : 'origin_port_id',
+		destination_location : 'destination_port_id',
+	},
+	lcl_customs: {
+		location: 'location_id',
+	},
+	air_customs: {
+		location: 'airport_id',
+	},
+	trailer: {
+		origin_location      : 'origin_location_id',
+		destination_location : 'destination_location_id',
+		operater_type        : 'shipping_line_id',
+	},
+	ltl_freight: {
+		origin_location      : 'origin_location_id',
+		destination_location : 'destination_location_id',
+	},
+	air_freight: {
+		origin_location      : 'origin_airport_id',
+		destination_location : 'destination_airport_id',
+		operater_type        : 'airline_id',
+
+	},
+	haulage: {
+		origin_location      : 'origin_location_id',
+		destination_location : 'destination_location_id',
+		operater_type        : 'shipping_line_id',
+	},
+	fcl_customs: {
+		location: 'location_id',
+	},
+	ftl_freight: {
+		origin_location      : 'origin_location_id',
+		destination_location : 'destination_location_id',
+	},
+	fcl_cfs: {
+		location: 'location_id',
+	},
 
 };
 
-const AIR_PARAMS_MAPPING = {
-	origin_location      : 'origin_airport_id',
-	destination_location : 'destination_airport_id',
-	operater_type        : 'airline_id',
-
-};
-
-const useGetCoverageStats = (filter) => {
+const useGetCoverageStats = ({ filter, source, showWeekData }) => {
 	const service = filter?.service;
 	const endPoint = API_END_POINT_MAPPING[service] || 'get_fcl_freight_rate_job_stats';
 
@@ -49,8 +85,7 @@ const useGetCoverageStats = (filter) => {
 
 		const FINAL_FILTERS = {};
 
-		const paramsMapping = ['air_freight', 'air_customs']?.includes(filter?.service)
-			? AIR_PARAMS_MAPPING : FCL_PARAMS_MAPPING;
+		const paramsMapping = PARAM_MAPPING[filter?.service];
 
 		Object.keys(restFilters).forEach((ele) => {
 			if (restFilters[ele]) {
@@ -62,16 +97,8 @@ const useGetCoverageStats = (filter) => {
 			}
 		});
 
-		const isTodayDateRequired = ['pending', 'completed'].includes(filter?.status);
-
 		const DATE_PARAMS = {};
 
-		if (isTodayDateRequired) {
-			DATE_PARAMS.start_date = new Date();
-		}
-		if (isTodayDateRequired) {
-			DATE_PARAMS.end_date = new Date();
-		}
 		if (filter?.start_date) { DATE_PARAMS.start_date = filter?.start_date; }
 		if (filter?.end_date) { DATE_PARAMS.end_date = filter?.end_date; }
 
@@ -86,6 +113,7 @@ const useGetCoverageStats = (filter) => {
 					filters: {
 						...FINAL_FILTERS,
 						user_id        : releventToMeValue ? user_id : FINAL_FILTERS.user_id,
+						status         : filter?.status === 'completed' ? ['completed', 'aborted'] : filter?.status,
 						cogo_entity_id : filter?.cogo_entity_id === 'cogo_entity_id'
 							? user_data?.partner?.id : undefined,
 						daily_stats,
@@ -93,13 +121,14 @@ const useGetCoverageStats = (filter) => {
 						weekly_stats            : !daily_stats,
 						...DATE_PARAMS,
 						transport_modes_keyword : filter?.service === 'trailer' ? 'trailer' : undefined,
+						source                  : (showWeekData && source) ? source : undefined,
 					},
 				},
 			});
 		} catch (err) {
 			// console.log(err);
 		}
-	}, [filter, trigger, user_id, user_data?.partner?.id]);
+	}, [filter, trigger, user_id, user_data?.partner?.id, showWeekData, source]);
 
 	useEffect(() => {
 		getStats();

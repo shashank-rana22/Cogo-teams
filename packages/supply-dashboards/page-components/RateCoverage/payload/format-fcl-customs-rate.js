@@ -5,7 +5,7 @@ const formatFclCustomsRate = (data, user_id) => {
 	let customCharges = data.line_items;
 	for (let i = 0; i < customCharges.length; i += INCREMENT_VALUE) {
 		const obj = {
-			code     : customCharges[i].customs_code,
+			code     : customCharges[i].code,
 			currency : customCharges[i].currency,
 			price    : Number(customCharges[i].price),
 			unit     : customCharges[i].unit,
@@ -36,6 +36,7 @@ const formatFclCustomsRate = (data, user_id) => {
 		service_provider_id : data?.service_provider_id,
 		sourced_by_id       : data?.sourced_by_id,
 		procured_by_id      : data?.procured_by_id || user_id,
+		cargo_handling_type : data?.cargo_handling_type,
 		customs_line_items  : CUSTOMS_LINE_ITEM,
 		cfs_line_items      : CFS_LINE_ITEM,
 	};

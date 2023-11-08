@@ -28,13 +28,19 @@
 			font-size: 10px;
 			color: #858585;
 		}
+
+		.ui_toggle_container {
+			padding: 0 10px;
+		}
 	}
 }
 
 .value,
 .config_type,
 .service_name,
-.usage_count {
+.usage_count,
+.is_active,
+.to_all_subscribers {
 	width: 45%;
 }
 
