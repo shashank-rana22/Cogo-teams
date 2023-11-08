@@ -1,4 +1,4 @@
-import currencies from '../../../../helpers/currencies';
+import currencies from '../../../../../../helpers/currencies';
 
 const getControls = ({ item = {} }) => ({
 	commonControls: [

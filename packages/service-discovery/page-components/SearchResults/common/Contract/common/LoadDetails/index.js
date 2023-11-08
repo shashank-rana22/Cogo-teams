@@ -1,10 +1,9 @@
 import { startCase } from '@cogoport/utils';
-import React from 'react';
 
 import styles from './styles.module.css';
 
 function LoadDetails({ detail = {} }) {
-	const { container_type, container_size, commodity } = detail;
+	const { container_type, container_size, commodity, weight, volume } = detail;
 
 	return (
 		<div className={styles.container}>
@@ -18,6 +17,12 @@ function LoadDetails({ detail = {} }) {
 
 			{container_type ? (
 				<span className={styles.load_item}>{startCase(container_type)}</span>
+			) : null}
+
+			{volume || weight ? (
+				<span className={styles.load_item}>
+					{`Vol: ${volume} CBM, WT: ${weight} KG`}
+				</span>
 			) : null}
 
 			<span className={styles.load_item}>

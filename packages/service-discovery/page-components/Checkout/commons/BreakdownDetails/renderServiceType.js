@@ -42,7 +42,7 @@ function RenderServiceType({ item, service_details }) {
 
 	const allWords = serviceName.split(' ');
 
-	const wordsToConvert = ['Fcl', 'Cfs'];
+	const wordsToConvert = ['Fcl', 'Cfs', 'Ftl', 'Ltl', 'Lcl'];
 
 	const convertedWords = allWords.map((currWord) => {
 		if (wordsToConvert.includes(currWord)) {

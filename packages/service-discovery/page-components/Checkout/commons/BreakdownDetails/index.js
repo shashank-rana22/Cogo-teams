@@ -7,7 +7,6 @@ import { useContext } from 'react';
 
 import { CheckoutContext } from '../../context';
 import { displayTotal, convertCurrencyValue } from '../../helpers/dynamic-values';
-import ServiceIcons from '../../page-components/FclCheckout/commons/ServiceIcons';
 
 import AddLineItemModal from './components/AddLineItemModal';
 import BreakdownDetailsHeader from './components/BreakdownDetailsHeader';
@@ -17,6 +16,7 @@ import EditLineItemModal from './components/EditLineItemModal';
 import Header from './components/Header';
 import LandingCost from './components/LandingCost';
 import ServiceBreakup from './components/ServiceBreakup';
+import ServiceIcons from './components/ServiceIcons';
 import RenderServiceType from './renderServiceType';
 import styles from './styles.module.css';
 import useHandleBreakdownDetails from './useHandleBreakdownDetails';
@@ -43,6 +43,7 @@ function BreakdownDetails({
 		loading,
 		shouldEditMargin = true,
 		primaryService,
+		isMobile = false,
 	} = useContext(CheckoutContext);
 
 	const {
@@ -83,34 +84,34 @@ function BreakdownDetails({
 			/>
 
 			{rateDetails.map((item, index) => {
-				const { id = '', service_type = '' } = item || {};
+				const { id = '', service_type = '', line_items = [], tax_total_price_currency = '' } = item || {};
 
-				const fclLocalEmpty = !item?.line_items?.length
+				const fclLocalEmpty = !line_items?.length
 				&& [
 					'fcl_freight_local_service',
 					'fcl_freight_local',
 					'air_freight_local',
-				].includes(item?.service_type);
+				].includes(service_type);
 
-				const serviceEditedMargins = item?.line_items.map((lineItem) => lineItem.filteredMargins);
+				const serviceEditedMargins = line_items.map((lineItem) => lineItem.filteredMargins);
 
 				const totalDisplay = displayTotal(
-					item?.line_items || [],
+					line_items || [],
 					serviceEditedMargins,
 					conversions,
-					item?.tax_total_price_currency,
+					tax_total_price_currency,
 				);
 
 				total += convertCurrencyValue(
 					Number(totalDisplay.toFixed(ROUND_OFF_VALUE)),
-					item?.tax_total_price_currency,
+					tax_total_price_currency,
 					rate?.total_price_currency,
 					conversions,
 				);
 
 				let totalDisplayString = formatAmount({
 					amount   : totalDisplay,
-					currency : item.tax_total_price_currency,
+					currency : tax_total_price_currency,
 					options  : {
 						style                 : 'currency',
 						currencyDisplay       : 'code',
@@ -124,13 +125,15 @@ function BreakdownDetails({
 
 				const noRatesFound = !item?.total_price_discounted
 				&& !(fclLocalEmpty && rateSource !== 'cogo_assured_rate')
-				&& item?.service_type !== primary_service;
+				&& service_type !== primary_service;
 
 				if (noRatesFound) {
 					setNoRatesPresent(true);
 				}
 
 				const service_details = detail?.services?.[item?.id];
+
+				const addedLineItems = line_items.map(({ code }) => code);
 
 				return (
 					<Accordion
@@ -145,21 +148,28 @@ function BreakdownDetails({
 										<RenderServiceType item={item} service_details={service_details} />
 									</div>
 
-									<ContainerDetails
-										primary_service={primary_service}
-										details={detail.services[id] || {}}
-									/>
+									{!isMobile ? (
+										<ContainerDetails
+											service_type={service_type}
+											details={detail.services[id] || {}}
+										/>
+									) : null}
 
-									{checkoutSource === 'spot_line_booking' && service_type === primary_service ? (
+									{!isMobile
+									&& checkoutSource === 'spot_line_booking'
+									&& service_type === primary_service ? (
 										<div className={styles.info_text}>
-											<IcMInfo width={12} height={12} style={{ marginRight: '4px' }} />
-
+											<IcMInfo
+												width={12}
+												height={12}
+												style={{ marginRight: '4px' }}
+											/>
 											Add line items for any applicable charges
 										</div>
-									) : null}
+										) : null}
 								</div>
 
-								{noRatesFound ? (
+								{!isMobile && (noRatesFound ? (
 									<div className={styles.flex}>
 										<Pill size="lg">NO RATES</Pill>
 
@@ -167,15 +177,16 @@ function BreakdownDetails({
 											type="button"
 											size="sm"
 											themeType="accent"
-											onClick={() => handleDeleteRate({ serviceType: item?.service_type, id })}
+											onClick={() => handleDeleteRate({ serviceType: service_type, id })}
 											disabled={deleteRateLoading}
 										>
 											Remove
 											{' '}
-											{startCase(item?.service_type)}
+											{startCase(service_type)}
 										</Button>
 									</div>
-								) : <div className={styles.total_display}>{totalDisplayString}</div>}
+								) : <div className={styles.total_display}>{totalDisplayString}</div>)}
+
 							</div>
 						)}
 					>
@@ -198,9 +209,10 @@ function BreakdownDetails({
 									onClick={() => {
 										setAddLineItemData({
 											index,
-											service_type : item?.service_type,
-											service_id   : item?.id,
-											details      : detail.services[id] || {},
+											service_type,
+											service_id : item?.id,
+											details    : detail.services[id] || {},
+											addedLineItems,
 										});
 									}}
 								>
@@ -214,9 +226,9 @@ function BreakdownDetails({
 									onClick={() => {
 										setEditLineItemData({
 											index,
-											service_type : item?.service_type,
-											service_id   : item?.id,
-											details      : detail.services[id] || {},
+											service_type,
+											service_id : item?.id,
+											details    : detail.services[id] || {},
 										});
 									}}
 								>

@@ -8,12 +8,25 @@
 }
 
 .location_name {
-	max-width: 120px;
+	max-width: 140px;
 	overflow: hidden;
 	font-size: 14px;
 	font-weight: 500;
+	text-decoration: underline;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	@media (max-width: 1220px) {
+		max-width: 100px;
+	}
+
+	&.more_width {
+		max-width: 240px;
+
+		@media (max-width: 1220px) {
+			max-width: 200px;
+		}
+	}
 }
 
 .tooltip_content {
@@ -26,4 +39,12 @@
 	align-items: center;
 	width: fit-content;
 	cursor: pointer;
+}
+
+.line_name {
+	font-size: 10px;
+
+	.label {
+		color: #828282;
+	}
 }

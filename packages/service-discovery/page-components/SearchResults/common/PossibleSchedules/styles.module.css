@@ -1,0 +1,33 @@
+.container {
+	padding-top: 26px;
+
+	@media (max-width: 768px) {
+		padding: 0;
+	}
+}
+
+.loader_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.loader {
+	width: 32px;
+	height: 32px;
+}
+
+@keyframes top-animation {
+	0% {
+		opacity: 0;
+		transform: translateX(-40px);
+	}
+
+	50% {
+		opacity: 0.5;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}

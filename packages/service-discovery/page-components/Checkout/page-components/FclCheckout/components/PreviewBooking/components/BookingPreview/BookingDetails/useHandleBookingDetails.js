@@ -1,21 +1,18 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { useRouter } from '@cogoport/next';
 import { useContext, useEffect, useRef, useState } from 'react';
 
-import getPrefillForm from '../../../../../../../../SearchResults/utils/getPrefillForm';
-import useCreateSearch from '../../../../../../../../ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 import { CheckoutContext } from '../../../../../../../context';
 import handleTimer from '../../../../../../../utils/handleTimer';
 
 const SECOND_TO_MILLISECOND = 1000;
 
 const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = false }) => {
-	const router = useRouter();
-
 	const {
 		detail = {},
 		primaryService = {},
 		rate = {},
+		handleUnlockLatestRate = () => {},
+		createSearchLoading = false,
 	} = useContext(CheckoutContext);
 
 	const timerRef = useRef({});
@@ -26,9 +23,6 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 		validity_end,
 		services = {},
 		primary_service,
-		importer_exporter_id = '',
-		importer_exporter_branch_id = '',
-		user = {},
 		source = '',
 	} = detail;
 
@@ -57,9 +51,7 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 		},
 	});
 
-	const { createSearch, loading } = useCreateSearch();
-
-	const { destination_port = {}, origin_port = {}, shipping_line = {} } = primaryService;
+	const { shipping_line = {} } = primaryService;
 
 	const hasExpired = new Date().getTime() >= new Date(validity_end).getTime();
 
@@ -91,43 +83,13 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 		return () => {};
 	}, [hasExpired, validity_end]);
 
-	const handleUnlockLatestRate = async () => {
-		const formValues = getPrefillForm(
-			{
-				...detail,
-				service_details : services,
-				services        : undefined,
-			},
-			'primary_service',
-		);
-
-		const values = {
-			organization_branch_id : importer_exporter_branch_id,
-			organization_id        : importer_exporter_id,
-			service_type           : primary_service,
-			user_id                : user.id,
-			origin                 : origin_port,
-			destination            : destination_port,
-			formValues,
-		};
-
-		const spot_search_id = await createSearch({ action: 'edit', values });
-
-		if (spot_search_id && typeof spot_search_id === 'string') {
-			router.push(
-				'/book/[spot_search_id]',
-				`/book/${spot_search_id}`,
-			);
-		}
-	};
-
 	const BUTTON_MAPPING = [
 		{
 			key   : 'coupon_code',
 			id    : 'coupon_code',
 			label : !discount ? 'Have a Coupon Code?' : (
 				<div style={{ color: '#849e4c' }}>
-					Coupon Applied -
+					Coupon Applied:
 					{' '}
 					{localedDiscount}
 				</div>
@@ -144,7 +106,7 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 				: 'View Details & Break Up',
 			themeType : 'link',
 			style     : { marginLeft: '36px' },
-			loading,
+			loading   : createSearchLoading,
 		},
 		{
 			key       : 'latest_rate',
@@ -152,7 +114,7 @@ const useHandleBookingDetails = ({ setShowBreakup = () => {}, showBreakup = fals
 			label     : 'Unlock Latest rate',
 			themeType : 'link',
 			style     : { marginLeft: '36px' },
-			loading,
+			loading   : createSearchLoading,
 		},
 	];
 

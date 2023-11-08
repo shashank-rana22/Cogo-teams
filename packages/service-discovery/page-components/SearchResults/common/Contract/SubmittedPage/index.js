@@ -1,29 +1,28 @@
-import { Button, Pill } from '@cogoport/components';
+import { Button, Pill, cl } from '@cogoport/components';
 import { IcCFtick, IcMArrowNext } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
 
 import getLocationInfo from '../../../utils/locations-search';
 
 import LocationItem from './LocationItem';
 import styles from './styles.module.css';
 
-function Submitted({ detail = {}, contractData = {} }) {
+function Submitted({ detail = {}, contractData = {}, isMobile = false }) {
 	const { query } = useSelector(({ general }) => ({ query: general.query }));
 
 	const { partner_id = '' } = query;
 
-	const { max_containers_count = 100 } = contractData;
+	const { max_containers_count = 0, max_weight = 0 } = contractData;
 
-	const { container_type, container_size, commodity } = detail;
+	const { container_type, container_size, commodity = '', volume, weight } = detail;
 
 	const { origin, destination } = getLocationInfo(detail, 'search_type');
 
 	const redirectToContract = () => {
 		const newHref = `${window.location.origin}/${partner_id}/
-    contract-rates/dashboard?activeTab=pending_approval&page=1`;
-		window.location.href = newHref;
+		contract-rates/dashboard?activeTab=pending_approval&page=1`;
+		window.open(newHref, '_blank');
 	};
 
 	return (
@@ -64,32 +63,53 @@ function Submitted({ detail = {}, contractData = {} }) {
 							) : null}
 						</div>
 
+						{isMobile ? (
+							<Pill size="sm" color="#FBD1A6" style={{ fontWeight: 600 }}>Pending Approval</Pill>
+						) : null}
 					</div>
 
 					<div className={styles.right_section}>
-						<div className={styles.containers_count}>
-							Count:
-							{' '}
-							<strong>{`${max_containers_count} Ctr.`}</strong>
-						</div>
+						{max_containers_count ? (
+							<div className={styles.requested_amount}>
+								Count:
+								{' '}
+								<strong>{`${max_containers_count} Ctr.`}</strong>
+							</div>
+						) : null}
+
+						{max_weight ? (
+							<div className={styles.requested_amount}>
+								Weight:
+								{' '}
+								<strong>{`${max_weight} Kgs`}</strong>
+							</div>
+						) : null}
 
 						<div className={styles.load_details}>
 							{container_size ? (
-								<span className={styles.load_item}>
+								<div className={styles.load_item}>
 									{container_size === '20' || container_size === '40'
 										? `${container_size}ft`
 										: container_size}
 									{' '}
 									{startCase(container_type)}
-								</span>
+								</div>
 							) : null}
 
-							<span className={styles.load_item}>
+							{volume || weight ? (
+								<div className={styles.load_item}>
+									{`Vol: ${volume} CBM, WT: ${weight} KG`}
+								</div>
+							) : null}
+
+							<div className={cl`${styles.load_item} ${styles.commodity}`}>
 								{startCase(commodity) || 'All Commodities'}
-							</span>
+							</div>
 						</div>
 
-						<Pill size="sm" color="#FBD1A6">Pending Approval</Pill>
+						{isMobile ? null : (
+							<Pill size="sm" color="#FBD1A6">Pending Approval</Pill>
+						)}
 					</div>
 				</div>
 			</div>

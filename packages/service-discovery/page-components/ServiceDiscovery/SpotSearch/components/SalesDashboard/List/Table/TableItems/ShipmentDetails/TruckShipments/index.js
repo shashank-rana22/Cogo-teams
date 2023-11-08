@@ -1,4 +1,4 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, Pill } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
@@ -23,12 +23,16 @@ function TruckShipments({
 			commodity = '',
 			trade_type = '',
 			truck_type = '',
+			volume = 0,
+			weight = 0,
 		} = services[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 		commodityDetails = {
 			finalCommodity : commodity,
 			tradeType      : trade_type,
 			truckType      : truck_type,
+			weight,
+			volume,
 		};
 	}
 
@@ -37,12 +41,20 @@ function TruckShipments({
 			commodityKey,
 		)
 	) {
-		const { commodity = '', trade_type = '', truck_type = '' } = itemData || {};
+		const {
+			commodity = '',
+			trade_type = '',
+			truck_type = '',
+			volume = 0,
+			weight = 0,
+		} = itemData || {};
 
 		commodityDetails = {
 			finalCommodity : commodity,
 			tradeType      : trade_type,
 			truckType      : truck_type,
+			weight,
+			volume,
 		};
 	}
 
@@ -50,51 +62,77 @@ function TruckShipments({
 		finalCommodity = 'General',
 		tradeType = '-',
 		truckType,
+		weight,
+		volume,
 	} = commodityDetails || {};
+
+	function Content() {
+		return (
+			<div className={styles.container}>
+				{weight || volume ? (
+					<div className={styles.flex}>
+						{volume && (
+							<Pill
+								size="md"
+								color="#F9F9F9"
+								className={styles.pill}
+							>
+								{volume}
+								{' '}
+								CBM Vol.
+							</Pill>
+						)}
+						{weight && (
+							<Pill
+								size="md"
+								color="#F9F9F9"
+								className={styles.pill}
+							>
+								{weight}
+								{' '}
+								Tons WT.
+							</Pill>
+						)}
+					</div>
+				) : null}
+
+				{truckType && (
+					<Pill
+						size="md"
+						color="#F9F9F9"
+						className={styles.pill}
+					>
+						{startCase(truckType)}
+					</Pill>
+				)}
+
+				{tradeType && (
+					<Pill
+						size="md"
+						color="#F9F9F9"
+						className={styles.pill}
+					>
+						{startCase(tradeType)}
+					</Pill>
+				)}
+
+				<Pill
+					size="md"
+					color="#F9F9F9"
+					className={styles.pill}
+				>
+					{startCase(finalCommodity || 'all_commodities')}
+				</Pill>
+			</div>
+		);
+	}
 
 	return (
 		<Tooltip
-			theme="light"
 			placement="top"
-			content={(
-				<div>
-					<span>
-						Commodity :
-						{startCase(finalCommodity || 'all_commodities')}
-					</span>
-
-					<span>
-						Trade Type :
-						{startCase(tradeType)}
-					</span>
-
-					{commodityDetails.truckType && (
-						<span>
-							Truck Type :
-							{startCase(truckType)}
-						</span>
-					)}
-				</div>
-			)}
+			content={<Content />}
 		>
-			<div className={styles.container}>
-				<span>
-					Commodity :
-					{startCase(finalCommodity || 'all_commodities')}
-				</span>
-
-				<span>
-					Trade Type :
-					{startCase(tradeType)}
-				</span>
-
-				{truckType && (
-					<span>
-						Truck Type :
-						{startCase(truckType)}
-					</span>
-				)}
-			</div>
+			<Content />
 		</Tooltip>
 	);
 }

@@ -13,6 +13,8 @@ const DELTA_VALUE = 1;
 
 const ROUND_OFF_VALUE = 2;
 
+const DEFAULT_VALUE = 0;
+
 function PriceComponent({
 	isEditMode = false,
 	totalDisplayString = '',
@@ -117,6 +119,7 @@ function getExtraCharges({
 	currencies,
 	currency_conversion_delta,
 	primaryServiceDetails,
+	cogofx_currencies = {},
 }) {
 	let extraCharges = 0;
 	const { booking_charges } = rate;
@@ -132,7 +135,7 @@ function getExtraCharges({
 			const toBaseCurrency = lineItem[GLOBAL_CONSTANTS.zeroth_index].total_price_discounted
 				* currencies[lineItem?.[GLOBAL_CONSTANTS.zeroth_index].currency];
 
-			price = toBaseCurrency / currencies[invoicingPartyCurrency];
+			price = toBaseCurrency / (currencies[invoicingPartyCurrency] || cogofx_currencies[invoicingPartyCurrency]);
 		}
 		const tax = getTax(
 			price,
@@ -202,6 +205,7 @@ function TotalCost({
 			rate,
 			invoicingPartyCurrency,
 			currencies,
+			cogofx_currencies,
 			currency_conversion_delta,
 			primaryServiceDetails,
 		});
@@ -210,7 +214,7 @@ function TotalCost({
 	invoicingPartyPrice += extraCharges;
 
 	const totalDisplayString = formatAmount({
-		amount   : invoicingPartyPrice,
+		amount   : invoicingPartyPrice || DEFAULT_VALUE,
 		currency : invoicingPartyCurrency,
 		options  : {
 			style                 : 'currency',
