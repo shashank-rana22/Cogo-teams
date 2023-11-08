@@ -23,8 +23,7 @@ const useCreateQuest = ({
 	setParams = () => {},
 	data = {},
 	setShowOverlapped = () => {},
-	questName = '',
-	setName = () => {},
+	setQuestData = () => {},
 }) => {
 	const router = useRouter();
 
@@ -91,8 +90,8 @@ const useCreateQuest = ({
 	}, [date_range, agent_scoring_config_id, setParams, setShowOverlapped]);
 
 	useEffect(() => {
-		if (questName !== name) setName(name);
-	}, [name, setName, questName]);
+		setQuestData((p) => ({ ...p, name, date_range }));
+	}, [name, setQuestData, date_range]);
 
 	return {
 		loading,

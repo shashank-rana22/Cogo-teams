@@ -15,7 +15,7 @@ const CHILD_EMPTY_VALUES = {
 };
 
 function QuestConfigForm(props) {
-	const { data, refetch, name: questName } = props;
+	const { data, refetch, questData } = props;
 
 	const {
 		loading,
@@ -31,7 +31,7 @@ function QuestConfigForm(props) {
 		onClickFill,
 		handleResetString,
 		...rest
-	} = useQuestConfig({ data, refetch, questName });
+	} = useQuestConfig({ data, refetch, questData });
 
 	return (
 		<>

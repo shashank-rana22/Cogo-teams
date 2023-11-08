@@ -5,6 +5,8 @@ import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useEffect, useMemo, useState } from 'react';
 
+import { getFormattedDate } from '../../../../../../utils/get-formatted-date';
+
 import getQuestFormattedData from './configurations/getQuestFormattedData';
 import getStringFromQuest from './configurations/getStringFromQuest';
 
@@ -40,7 +42,7 @@ const getFormattedPayload = (formValues) => {
 	return formattedData;
 };
 
-const useQuestConfig = ({ data = {}, questName = null }) => {
+const useQuestConfig = ({ data = {}, questData = {} }) => {
 	const { push } = useRouter();
 
 	const [editSubBlock, setEditSubBlock] = useState({});
@@ -117,8 +119,11 @@ const useQuestConfig = ({ data = {}, questName = null }) => {
 				data: {
 					agent_scoring_quest_id             : data?.id,
 					agent_scoring_quest_configurations : payload,
-					name                               : questName,
 					quest_string,
+					name                               : questData?.name || undefined,
+					start_date                         : questData?.date_range?.startDate || undefined,
+					end_date                           : questData?.date_range?.endDate
+						? getFormattedDate({ currentDate: questData?.date_range?.endDate }) : undefined,
 				},
 			});
 
