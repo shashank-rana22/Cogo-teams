@@ -1,5 +1,7 @@
 import incoterms from './incoterms.json';
 
-const getTradeTypeWiseIncoTerms = (tradeType = 'export') => incoterms.filter((item) => item.tradeType === tradeType);
-
+const getTradeTypeWiseIncoTerms = ({
+	tradeType = 'export',
+	isCrossLocationSearch,
+}) => incoterms.filter((item) => (item.tradeType === tradeType || isCrossLocationSearch));
 export default getTradeTypeWiseIncoTerms;
