@@ -1,21 +1,22 @@
 {
-	"name": "@cogoport/welcome",
-	"description": "Welcome Page",
+	"name": "@cogoport/hrms",
+	"description": "HRMS",
 	"version": "0.1.0",
 	"main": "index.js",
 	"sideEffects": false,
 	"dependencies": {
 		"@cogoport/charts": "^1.0.1",
-		"@cogoport/components": "^1.0.359",
+		"@cogoport/components": "^1.0.452",
 		"@cogoport/core": "workspace:*",
+		"@cogoport/globalization": "workspace:*",
 		"@cogoport/forms": "workspace:*",
-		"@cogoport/icons-react": "^1.0.58",
+		"@cogoport/icons-react": "^1.0.106",
 		"@cogoport/next": "workspace:0.1.0",
 		"@cogoport/request": "workspace:^0.1.0",
 		"@cogoport/store": "workspace:^0.1.0",
 		"@cogoport/utils": "^1.2.6",
-		"axios": "^1.3.4",
-		"axios-hooks": "^4.0.0",
+		"react-mentions" : "^4.4.10",
+		"date-fns": "^2.29.3",
 		"react": "18.2.0"
 	}
 }
