@@ -37,17 +37,8 @@ function QuestConfigForm(props) {
 
 	const scroll_list = [{ quest_string: editor.toString('html') }];
 
-	// console.log('list::', list);
-
 	return (
-		<div className={styles.container_head}>
-			<ScrollAnnouncement id={data?.id} list={scroll_list} />
-			<QuestStringEditor
-				editor={editor}
-				setEditor={setEditor}
-				formattedString={formattedString}
-				handleResetString={handleResetString}
-			/>
+		<>
 			<div className={styles.heading}>
 				<IcMJobsConfig height={20} width={20} />
 				Set Configurations
@@ -81,19 +72,31 @@ function QuestConfigForm(props) {
 
 			</div>
 
-			<div className={styles.btn_container}>
-				<Button
-					size="lg"
-					type="button"
-					themeType="primary"
-					style={{ marginRight: '8px' }}
-					onClick={handleSubmit(handleClick)}
-					loading={loading}
-				>
-					Save Configurations
-				</Button>
+			<div className={styles.container_head}>
+
+				<ScrollAnnouncement id={data?.id} list={scroll_list} />
+
+				<QuestStringEditor
+					editor={editor}
+					setEditor={setEditor}
+					formattedString={formattedString}
+					handleResetString={handleResetString}
+				/>
+
+				<div className={styles.btn_container}>
+					<Button
+						size="lg"
+						type="button"
+						themeType="primary"
+						style={{ marginRight: '8px' }}
+						onClick={handleSubmit(handleClick)}
+						loading={loading}
+					>
+						Save Configurations
+					</Button>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 

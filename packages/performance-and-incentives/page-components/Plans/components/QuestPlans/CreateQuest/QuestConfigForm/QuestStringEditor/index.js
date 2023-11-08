@@ -29,20 +29,28 @@ function QuestStringEditor({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.generated_string}>
-				<div className={styles.generated_string_heading}>Auto-generate quest:</div>
-				<div className={styles.generated_string_content}>{formattedString?.label}</div>
-			</div>
-			<div className={styles.generate_button}>
-				<Button disabled={isEmpty(formattedString?.value)} onClick={onClickFill}>Use Auto-generated </Button>
+			<div className={styles.header}>
+				<div className={styles.generated_string_heading}>
+					Quest string editor
+				</div>
+				<div className={styles.generate_button}>
+					<Button
+						disabled={isEmpty(formattedString?.value)}
+						onClick={onClickFill}
+					>
+						Use Auto-generated
+						{' '}
 
-				<Button
-					themeType="secondary"
-					onClick={handleResetString}
-				>
-					Reset
+					</Button>
 
-				</Button>
+					<Button
+						themeType="secondary"
+						onClick={handleResetString}
+					>
+						Reset
+
+					</Button>
+				</div>
 			</div>
 			<RichTextEditor
 				value={editor}
