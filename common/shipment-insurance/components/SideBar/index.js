@@ -3,7 +3,7 @@ import RateCard from './RateCard';
 
 function SideBar({ pocDetails = {}, rateResponse = [], cargoDetails = {}, formHook = {} }) {
 	return (
-		<div>
+		<div style={{ width: '30%' }}>
 			<PersonalDetail pocDetails={pocDetails} />
 
 			<RateCard rateResponse={rateResponse} cargoDetails={cargoDetails} formHook={formHook} />

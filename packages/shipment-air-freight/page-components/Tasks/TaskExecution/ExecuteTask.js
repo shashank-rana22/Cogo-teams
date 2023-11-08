@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import ShipmentInsurance from '@cogoport/shipment-insurance';
 
 import incoTermArray from '../../../constants/inco-terms.json';
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
@@ -77,6 +78,10 @@ function ExecuteTask({
 	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - DEFAULT_STEP_VALUE] : {};
 
 	const Component = exportTradeTypeTasks?.[task?.task];
+
+	console.log(task, 'task');
+	console.log(tradeType, 'tradeType');
+	console.log(services, 'services');
 
 	if (loading || servicesLoading) {
 		return <div><LoadingState /></div>;
@@ -200,6 +205,12 @@ function ExecuteTask({
 				onCancel={onCancel}
 				type="gatepass"
 			/>
+		);
+	}
+
+	if (task?.task === 'generate_cargo_insurance') {
+		return (
+			<ShipmentInsurance onCancel={onCancel} refetch={taskListRefetch} servicesList={services} />
 		);
 	}
 
