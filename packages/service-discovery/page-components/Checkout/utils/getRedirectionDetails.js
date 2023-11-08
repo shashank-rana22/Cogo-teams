@@ -1,7 +1,7 @@
-const URL_MAPPING = {
-	fcl_freight : 'fcl',
-	air_freight : 'air-freight',
-};
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+const URL_MAPPING = GLOBAL_CONSTANTS.SHIPMENT_ROUTE_MAPPING;
 
 const getRedirectionDetails = ({
 	isCheckoutApiSuccess = false,
@@ -11,12 +11,16 @@ const getRedirectionDetails = ({
 	shipment_id = '',
 	redirect_required = 'true',
 	primary_service = '',
+	error = {},
 }) => {
 	if (!isCheckoutApiSuccess) {
 		return {
-			url: `/v2/${partner_id}/service-discovery`,
-			message:
-				'There is some issue in checkout, redirecting to service discovery',
+			url     : `/v2/${partner_id}/service-discovery`,
+			message : error?.response?.data && error?.response?.status === 400
+				? getApiErrorString(error?.response?.data)
+				: 'There is some issue in checkout',
+			redirection    : false,
+			button_message : 'Go to Service Discovery',
 		};
 	}
 
@@ -29,22 +33,21 @@ const getRedirectionDetails = ({
 
 		return {
 			url,
-			message:
-				'The checkout is already booked',
+			message: 'The checkout is already booked',
 		};
 	}
 
 	if (!tags.includes('version2') && redirect_required === 'true') {
 		return {
-			url: `/${partner_id}/checkout/${checkout_id}`,
-			message:
-				'This is created using old admin, redirecting to old admin',
+			url     : `/${partner_id}/checkout/${checkout_id}`,
+			message : 'This is created using old admin, redirecting to old admin',
 		};
 	}
 
 	return {
-		url     : `/${partner_id}/checkout/${checkout_id}`,
-		message : 'new admin supports only FCL, redirecting to old admin',
+		url: `/${partner_id}/checkout/${checkout_id}`,
+		message:
+			'new admin does not support this service, redirecting to old admin',
 	};
 };
 

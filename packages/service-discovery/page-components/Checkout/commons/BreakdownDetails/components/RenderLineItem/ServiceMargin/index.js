@@ -53,6 +53,7 @@ function ServiceMargin({
 					size="sm"
 					disabled={!shouldEditMargin}
 					value={value}
+					type="number"
 					onChange={(selectedValue) => onChangeLineItem({ selectedValue, lineItemKey: 'value' })}
 				/>
 

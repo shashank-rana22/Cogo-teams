@@ -76,7 +76,7 @@ function FieldPair({ item = {}, field = {} }) {
 			onClickOutside={() => setShow(false)}
 			render={<PopoverContent popoverData={item[popoverKey]} />}
 		>
-			<div role="presentation" onClick={handleClick} style={{ cursor: 'pointer' }}>
+			<div role="presentation" onClick={handleClick} className={styles.lower_text}>
 				{getValue(item, field?.lowerKey)}
 				{' '}
 				{SUFFIX[field?.lowerKey?.key]}

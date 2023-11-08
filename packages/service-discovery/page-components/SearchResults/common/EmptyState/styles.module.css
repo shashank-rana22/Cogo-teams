@@ -1,7 +1,17 @@
 .container {
+	height: calc(100vh - 85px);
 	padding: 24px;
+
+	@media (max-width: 768px) {
+		height: calc(100vh - 62px);
+		padding-top: 0;
+	}
 }
 
 .request_rate_container {
 	margin-top: 44px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }

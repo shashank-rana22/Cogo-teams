@@ -28,6 +28,16 @@ function PlatformAdoption({
 		accountType        : '',
 	});
 	const [showHistory, setShowHistory] = useState(false);
+	const [filterValues, setFilterValues] = useState({
+		show             : false,
+		requestType      : '',
+		assignTo         : '',
+		escalationCycle  : '',
+		requestStatus    : '',
+		start            : null,
+		end              : null,
+		requestCompleted : '',
+	});
 
 	const { unReadChatsCount } = useGetUnreadMessagesCount({
 		firestore,
@@ -47,20 +57,37 @@ function PlatformAdoption({
 	const {
 		loading = false, data = {},
 		onboardingRequest = () => {},
-	} = useListOmnichannelOnboardingRequests({ showHistory, initialViewType });
+	} = useListOmnichannelOnboardingRequests({ showHistory, initialViewType, filterValues, setFilterValues });
 
 	const { list, ...rest } = data || {};
 	const { page, page_limit, total_count } = rest || {};
+
+	const handleViewHistory = () => {
+		setFilterValues({
+			show             : false,
+			requestType      : '',
+			assignTo         : '',
+			escalationCycle  : '',
+			requestStatus    : '',
+			start            : null,
+			end              : null,
+			requestCompleted : '',
+		});
+		setShowHistory((p) => !p);
+	};
 
 	return (
 		<div className={styles.container}>
 			{showHistory ? (
 				<PlatformHistory
-					setShowHistory={setShowHistory}
 					rest={rest}
 					list={list}
 					loading={loading}
 					onboardingRequest={onboardingRequest}
+					setFilterValues={setFilterValues}
+					filterValues={filterValues}
+					initialViewType={initialViewType}
+					handleViewHistory={handleViewHistory}
 				/>
 			) : (
 				<>
@@ -75,7 +102,7 @@ function PlatformAdoption({
 						<div
 							role="presentation"
 							className={styles.history_title}
-							onClick={() => setShowHistory((p) => !p)}
+							onClick={handleViewHistory}
 						>
 							<IcMPlansExpiring fill="#034afd" />
 							View History
@@ -85,6 +112,9 @@ function PlatformAdoption({
 						unReadChatsCount={unReadChatsCount}
 						unReadMailsCount={unReadMailsCount}
 						setActiveTab={setActiveTab}
+						setFilterValues={setFilterValues}
+						filterValues={filterValues}
+						initialViewType={initialViewType}
 					/>
 					<PlatformList
 						list={list}

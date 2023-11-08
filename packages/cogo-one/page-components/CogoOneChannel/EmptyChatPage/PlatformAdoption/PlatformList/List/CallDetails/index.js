@@ -40,7 +40,7 @@ function CallDetails({ item = {}, handlePlaceCall = () => {}, handleOpenMessage 
 		id: pocId = '', whatsapp_country_code = '', email = '', whatsapp_number = '',
 	} = customer || {};
 	const { start_time_of_call = '' } = voice_call_data || {};
-	const { last_comm_log = {} } = metadata || {};
+	const { last_comm_log = {}, lead_organization_id = '', organization_id = '' } = metadata || {};
 	const { communication_summary = '' } = last_comm_log || {};
 
 	const formattedTime = getTimeDuration(start_time_of_call);
@@ -106,6 +106,8 @@ function CallDetails({ item = {}, handlePlaceCall = () => {}, handleOpenMessage 
 							pocId,
 							leadUserId   : lead_user_id,
 							isUnkownUser : true,
+							leadOrgId    : lead_organization_id,
+							orgId        : organization_id,
 						})}
 					>
 						<IcMCall width={20} height={20} />

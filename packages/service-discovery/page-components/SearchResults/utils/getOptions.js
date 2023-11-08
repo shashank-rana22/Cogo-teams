@@ -1,5 +1,6 @@
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
+import packageTypes from '@cogoport/constants/package-types.json';
 import truckTypes from '@cogoport/constants/truck-types.json';
 import { startCase } from '@cogoport/utils';
 
@@ -21,6 +22,8 @@ const getOptions = (
 			...truck,
 			label: `${startCase(truck.type)} Body ${truck.label}`,
 		}));
+	} else if (key === 'package-types') {
+		options = packageTypes;
 	}
 
 	return options;

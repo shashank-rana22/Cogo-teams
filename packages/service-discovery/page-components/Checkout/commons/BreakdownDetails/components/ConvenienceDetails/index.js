@@ -1,8 +1,10 @@
+/* eslint-disable max-lines-per-function */
 import { Input, Select, Accordion, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 
-import currencies from '../../../../helpers/currencies';
+import getCurrencyOptions from '../../../../../../helpers/getCurrencyOptions';
 import Promocodes from '../../../Promocodes';
 import Spinner from '../../../Spinner';
 
@@ -54,6 +56,11 @@ function ConvenienceDetails({
 		detail,
 	});
 
+	const ALLOWED_CURRENCY = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
+		.common.services.convenience_fee_checkout.allowed_currency;
+
+	const CURRENCY_OPTIONS = getCurrencyOptions({ ALLOWED_CURRENCY });
+
 	return (
 		<Accordion
 			className={cl`${styles.container} ${styles[source]}`}
@@ -94,7 +101,7 @@ function ConvenienceDetails({
 								Sub Total
 								{' '}
 								<span style={{ fontSize: '12px' }}>
-									(excl service charges and taxes)
+									(excl service charges, taxes and discounts)
 								</span>
 							</div>
 							<div className={styles.amount}>{subTotalDisplay}</div>
@@ -130,7 +137,7 @@ function ConvenienceDetails({
 					})}
 
 					<div className={styles.item_container}>
-						<div className={styles.convenience_container}>
+						<div className={cl`${styles.convenience_container} ${styles.convenience}`}>
 							<div className={styles.text}>Convenience Fee</div>
 
 							{loading ? <Spinner width="24px" height="24px" /> : null}
@@ -157,7 +164,7 @@ function ConvenienceDetails({
 
 								<Select
 									size="sm"
-									options={currencies}
+									options={CURRENCY_OPTIONS}
 									value={currency}
 									disabled={!shouldEditConvenienceFee || loading}
 									style={{ marginLeft: '12px' }}
@@ -200,12 +207,12 @@ function ConvenienceDetails({
 										options={[{ value: handling_fees.unit, label: startCase(handling_fees.unit) }]}
 										value={handling_fees.unit}
 										style={{ width: '180px' }}
-										disabled={source !== 'edit_margin'}
+										disabled={!shouldEditConvenienceFee || loading}
 									/>
 
 									<Select
 										size="sm"
-										options={currencies}
+										options={CURRENCY_OPTIONS}
 										value={handling_fees?.currency}
 										disabled={!shouldEditConvenienceFee || loading}
 										style={{ marginLeft: '12px' }}
