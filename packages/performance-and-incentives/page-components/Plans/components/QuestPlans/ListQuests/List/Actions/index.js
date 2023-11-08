@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function Actions({
 	quest_id = '',
-	handleDeactivate = () => {},
+	handleUpdate = () => {},
 	status = 'active',
 }) {
 	const { push } = useRouter();
@@ -29,7 +29,7 @@ function Actions({
 					<div
 						role="presentation"
 						className={styles.workflow_cta}
-						onClick={() => handleDeactivate({ id: quest_id })}
+						onClick={() => handleUpdate({ id: quest_id, status: 'inactive' })}
 					>
 						<div className={styles.cta_text}>
 							<IcMCross width={24} height={24} style={{ marginRight: '8px' }} />

@@ -1,5 +1,5 @@
-import useDeactivateQuest from '../hooks/useDeactivateQuest';
 import useGetQuestList from '../hooks/useGetQuestList';
+import useUpdateQuest from '../hooks/useUpdateQuest';
 
 import Header from './Header';
 import List from './List';
@@ -12,7 +12,7 @@ function ListQuests() {
 		refetch,
 	} = useGetQuestList({ manual: false });
 
-	const { handleClick } = useDeactivateQuest({ afterDeactivate: refetch });
+	const { handleClick } = useUpdateQuest({ afterUpdate: refetch });
 
 	return (
 		<>
@@ -25,7 +25,7 @@ function ListQuests() {
 				params={params}
 				setParams={setParams}
 				getNextPage={getNextPage}
-				handleDeactivate={handleClick}
+				handleUpdate={handleClick}
 			/>
 		</>
 	);
