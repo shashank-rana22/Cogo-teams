@@ -15,10 +15,6 @@
 .summary {
 	display: flex;
 	align-items: center;
-
-	/* padding-bottom: 16px;
-	margin-bottom: 16px;
-	border-bottom: 1px solid #e0e0e0; */
 }
 
 .avg_data {
