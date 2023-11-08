@@ -7,8 +7,8 @@ const getOrgAddress = (item) => ({
 });
 
 export const formatKycOrgData = ({ orgData = {} }) => {
-	const { organization = {}, requesting_user = {}, customer = {} } = orgData || {};
-	const { business_name = '', billing_addresses = [], registration_number = '' } = organization || {};
+	const { organization = {}, requesting_user = {}, customer = {}, billing_addresses = [] } = orgData || {};
+	const { business_name = '', registration_number = '' } = organization || {};
 	const { name: requestUserName = '' } = requesting_user || {};
 	const { email = '', mobile_country_code = '', mobile_number = '' } = customer || {};
 
@@ -31,8 +31,8 @@ export const formatKycOrgData = ({ orgData = {} }) => {
 };
 
 export const formatTradePartyData = ({ orgData = {} }) => {
-	const { organization = {}, requesting_user = {}, customer = {} } = orgData || {};
-	const { business_name: orgName = '', billing_addresses = [], registration_number = '' } = organization || {};
+	const { organization = {}, requesting_user = {}, customer = {}, billing_addresses = [] } = orgData || {};
+	const { business_name: orgName = '', registration_number = '' } = organization || {};
 	const { name = '' } = requesting_user || {};
 	const {
 		email = '', mobile_country_code = '',
@@ -58,8 +58,8 @@ export const formatTradePartyData = ({ orgData = {} }) => {
 };
 
 export const formatOnboardData = ({ orgData = {} }) => {
-	const { customer = {}, organization = {} } = orgData || {};
-	const { business_name: orgName = '', billing_addresses = [], registration_number = '' } = organization || {};
+	const { customer = {}, organization = {}, billing_addresses = [] } = orgData || {};
+	const { business_name: orgName = '', registration_number = '' } = organization || {};
 	const { name = '', email = '', mobile_country_code = '', mobile_number = '' } = customer || {};
 	const {
 		address = '', pincode = '',
