@@ -15,6 +15,7 @@ function SelectMobileNumber({
 	inputType = 'text',
 	type = 'text',
 	disable_country_code = false,
+	mobileSelectRef = () => {},
 	...rest
 }) {
 	const { [codeKey]: country_code = '', [numberKey]: number = '' } =	value || {};
@@ -56,6 +57,7 @@ function SelectMobileNumber({
 					type={inputType || type}
 					value={number || (value || {})[numberKey]}
 					onChange={handleNumberChange}
+					ref={mobileSelectRef}
 				/>
 			</div>
 		</div>

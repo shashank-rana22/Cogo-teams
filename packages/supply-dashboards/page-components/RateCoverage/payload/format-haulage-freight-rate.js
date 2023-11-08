@@ -5,7 +5,7 @@ const formatHaulageFreightRate = (data, user_id, listData) => {
 	const charges = data?.line_items || [];
 	for (let i = 0; i < charges.length; i += INCREMENT_VALUE) {
 		const obj = {
-			code     : charges[i].customs_code,
+			code     : charges[i].code,
 			currency : charges[i].currency,
 			price    : Number(charges[i].price),
 			unit     : charges[i].unit,

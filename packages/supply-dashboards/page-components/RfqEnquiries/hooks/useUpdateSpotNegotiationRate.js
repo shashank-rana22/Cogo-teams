@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 /* eslint-disable max-len */
 import { Toast } from '@cogoport/components';
 import { useForm, getApiError } from '@cogoport/forms';
@@ -6,7 +7,7 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useRef } from 'react';
 
 import getField from '../configurations';
-import FieldMutation from '../helpers/field-mutation';
+import useFieldMutation from '../helpers/field-mutation';
 import getPayload from '../helpers/getPayload';
 import IncompletionReasons from '../IncompleteReasons/IncompleteReason';
 
@@ -14,17 +15,17 @@ import useGetRates from './useGetRates';
 import useGetSpotNegotiationRate from './useGetSpotNegotiatonRate';
 
 const getDefaultValues = (oldfields) => {
-	const defaultValues = {};
+	const DEFAULT_VALUES = {};
 	const newfields = oldfields.map((field) => {
 		const { value, ...rest } = field;
 		if (field.type === 'fieldArray') {
-			defaultValues[field.name] = value || [];
+			DEFAULT_VALUES[field.name] = value || [];
 		} else {
-			defaultValues[field.name] = value || '';
+			DEFAULT_VALUES[field.name] = value || '';
 		}
 		return rest;
 	});
-	return { defaultValues, fields: newfields };
+	return { defaultValues: DEFAULT_VALUES, fields: newfields };
 };
 
 const useUpdateSpotNegotiationRate = ({
@@ -52,7 +53,7 @@ const useUpdateSpotNegotiationRate = ({
 
 	const prefillData = useRef();
 
-	const { newField } = FieldMutation({
+	const { newField } = useFieldMutation({
 		fields, values, data, service,
 	});
 
@@ -320,9 +321,11 @@ const useUpdateSpotNegotiationRate = ({
 		origin_main_port_id      : service?.data?.origin_port?.is_icd || service?.data?.origin_location?.is_icd,
 		destination_main_port_id : service?.data?.destination_port?.is_icd
 		|| service?.data?.destination_location?.is_icd,
+		main_port_id: service?.data?.port?.is_icd
+		|| service?.data?.location?.is_icd,
 		haulage_type         : service?.service === 'haulage_freight',
 		transportation_modes : service?.service === 'haulage_freight',
-		shipping_line_id     : service?.service === 'fcl_freight'
+		shipping_line_id     : ['fcl_freight', 'fcl_freight_local'].includes(service?.service)
 		|| (service?.service === 'haulage_freight' && values?.haulage_type === 'carrier'),
 		airline_id: service?.service === 'air_freight',
 	};

@@ -1,0 +1,40 @@
+.container {
+	padding: 20px;
+	background-color: #fff;
+}
+
+.flex_box {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+.form_container {
+	margin: 40px 0;
+}
+
+.form_title {
+	margin-bottom: 20px;
+	font-weight: 600;
+}
+
+.form_elements {
+	display: flex;
+	align-items: flex-start;
+
+	:global {
+		.form_col {
+			width: 35%;
+			margin: 0 18px;
+		}
+	}
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
+
+	.save_draft_btn {
+		margin-right: 20px;
+	}
+}

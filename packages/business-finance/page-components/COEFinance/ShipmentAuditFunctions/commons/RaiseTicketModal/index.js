@@ -55,6 +55,8 @@ function RaiseTicketModal({
 		source: 'audit_function',
 	});
 
+	const { shipment_type = '', trade_type = '' } = shipmentData || {};
+
 	const { data:configData = {} } = useGetConfigurationCategory(shipmentData);
 
 	const raiseToDesk = configData?.items?.[GLOBAL_CONSTANTS.zeroth_index]?.raised_to_desk;
@@ -107,14 +109,13 @@ function RaiseTicketModal({
 						</div>
 						<div className={styles.pill_container}>
 							<div className={styles.label}>
-
 								{`#${id}`}
 							</div>
 							<div className={styles.pill}>
-								<Pill size="md" color="#D9EAFD">{service?.label}</Pill>
+								<Pill size="md" color="#D9EAFD">{upperCase(shipment_type)}</Pill>
 							</div>
 							<div className={styles.pill}>
-								<Pill size="md" color="#FCEDBF">{upperCase(shipmentData?.trade_type)}</Pill>
+								<Pill size="md" color="#FCEDBF">{upperCase(trade_type)}</Pill>
 
 							</div>
 						</div>

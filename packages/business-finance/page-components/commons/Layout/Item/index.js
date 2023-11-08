@@ -40,6 +40,7 @@ function Item({
 			</h4>
 			<Element
 				{...props}
+				rules={rules}
 				control={control}
 			/>
 			<p className={styles.error}>

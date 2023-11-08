@@ -25,12 +25,13 @@ function OverviewContent({ data = {}, statsLoading = false, filter = {}, setFilt
 						<Card
 							detail={STAT_CARDS_MAPPING[card_detail]}
 							data={statistics}
-							key={card_detail}
+							key={card_detail?.id}
 							statsLoading={statsLoading}
 							activeCard={filter?.status}
 							filter={filter}
 							className={(card_detail === filter?.status) ? 'blue_card' : 'card'}
 							handleClick={() => handleClick(card_detail)}
+							card_detail={card_detail}
 						/>
 					))}
 				</div>

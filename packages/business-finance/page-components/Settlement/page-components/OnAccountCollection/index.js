@@ -1,6 +1,5 @@
 import { Button, Input, Popover, Tooltip } from '@cogoport/components';
 import {
-	AsyncSelectController,
 	SelectController,
 	useForm,
 } from '@cogoport/forms';
@@ -23,13 +22,13 @@ import styles from './styles.module.css';
 
 const SEARCH_PLACEHOLDER = 'Search by Customer Name / UTR No /Doc. Value';
 
-function OnAccountCollection({ entity }) {
+function OnAccountCollection({ entityCode }) {
 	const {
 		control,
 		watch,
 		formState: { errors = {} },
 	} = useForm();
-	const entityType = watch('entityCode');
+
 	const currencyType = watch('currency');
 	const {
 		data,
@@ -38,7 +37,7 @@ function OnAccountCollection({ entity }) {
 		loading,
 		clearFilters,
 		refetch,
-	} = useAccountCollection({ entityType, currencyType });
+	} = useAccountCollection({ entityType: entityCode, currencyType });
 	const [checkedRows, setCheckedRows] = useState([]);
 	const [showConfirm, setShowConfirm] = useState(false);
 
@@ -84,22 +83,6 @@ function OnAccountCollection({ entity }) {
 			<div className={styles.container}>
 				<div className={styles.filter_data}>
 					<div className={styles.filter_amount_collection}>
-						<AsyncSelectController
-							control={control}
-							name="entityCode"
-							asyncKey="list_cogo_entity"
-							renderLabel={(item) => `${item?.entity_code} - ${item?.business_name}`}
-							placeholder="Select Entity"
-							labelKey="entity_code"
-							value={entity}
-							initialCall
-							rules={{ required: true }}
-							isClearable
-							isSingleEntity
-						/>
-						{errors?.entityCode ? (
-							<div className={styles.errors}>* Required</div>
-						) : null}
 						<Filter
 							controls={amountCollectionFilters({
 								accMode,

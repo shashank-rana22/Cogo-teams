@@ -238,11 +238,7 @@ const trailerControls = ({
 			type        : 'select',
 			span        : 2,
 			placeholder : '% of Basic Freight',
-			style       : {
-				marginLeft  : '10%',
-				marginRight : '10%',
-			},
-			options: [
+			options     : [
 				{
 					value : 'percentage_of_freight',
 					label : '% of Basic Freight',

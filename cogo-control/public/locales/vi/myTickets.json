@@ -21,7 +21,8 @@
     "spectator_type_2": "Vé Tôi Đã Tạo",
     "spectator_type_3": "Người Ủy Quyền Đóng",
     "spectator_type_4": "Cấu Hình Của Tôi",
-    "spectator_type_5": "Đội của tôi",
+    "spectator_type_5": "Được giao cho nhóm của tôi",
+     "spectator_type_6": "Lớn lên bởi nhóm của tôi",
     "no_label": "Không",
     "yes_label": "Có",
     "tickets_label": "Vé",
@@ -57,7 +58,7 @@
     "has_reassigned_this_ticket_to": "đã giao lại vé này cho",
     "this_ticket_has_been_assigned_to": "vé này đã được giao cho",
     "this_ticket_has_been_rejected_by": "vé này đã bị từ chối bởi",
-    "this_ticket_has_been_resolved_by": "vé này đã được giải quyết bởi",
+    "this_ticket_has_been_closed_by": "Vé này đã được đóng lại bởi",
     "has_initiated_resolution_request": "đã khởi tạo yêu cầu giải quyết.",
     "has_closed_resolution_request": "đã đóng yêu cầu giải quyết.",
     "ticket_has_been_created": "Vé Đã Được Tạo.",
@@ -172,5 +173,7 @@
     "enter_serial_id": "Nhập ID nối tiếp",
     "apply": "Áp dụng",
     "reset": "Cài lại",
-    "serial_id": "ID nối tiếp"
+    "serial_id": "ID nối tiếp",
+    "id_creator": "Người tạo ID",
+    "messaged_at":"Nhắn tin tại"
 }

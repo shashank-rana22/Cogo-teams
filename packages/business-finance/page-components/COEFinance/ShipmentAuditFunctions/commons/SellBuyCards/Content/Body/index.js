@@ -1,4 +1,5 @@
 import { Pill, Placeholder, Tooltip, cl } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -10,16 +11,26 @@ function Body({
 	loading = false,
 	source = 'FIN',
 	type = '',
+	invoicesMap = {},
+	billsMap = {},
 	setLineItemSectionOpen = () => {},
 	lineItemSectionOpen = {},
 }) {
 	const {
 		document_number = '', trade_party = '', document_date = '', document_status = '',
-		grand_total = '', quotation_state = '', id = '', line_items = [],
+		grand_total = '', quotation_state = '', id = '', line_items = {},
 	} = data || {};
 
 	const key = `${type}_${source}_${id}`;
 	const isOpen = lineItemSectionOpen?.[key];
+
+	const openDocument = () => {
+		if (type === 'sell') {
+			window.open(invoicesMap?.[document_number], '_blank');
+		} else {
+			window.open(billsMap?.[document_number], '_blank');
+		}
+	};
 
 	return (
 		<div className={cl`${!isOpen ? styles.custom_accordion : styles.custom_accordion_open}`}>
@@ -27,7 +38,13 @@ function Body({
 				<div>
 					<div className={styles.accord_body}>
 						<div className={styles.accord_row_content}>
-							<div className={styles.regular}>{document_number}</div>
+							<div
+								className={cl`${styles.regular} ${styles.invoice_url}`}
+								role="presentation"
+								onClick={() => openDocument()}
+							>
+								{document_number}
+							</div>
 							<div className={styles.trade_party_container}>
 								{trade_party ? (
 									<Tooltip
@@ -58,11 +75,29 @@ function Body({
 								{grand_total ? (
 									<Tooltip
 										content={(
-											<div>{grand_total}</div>
+											<div>
+												{formatAmount({
+													amount   : grand_total,
+													currency : data?.currency,
+													options  : {
+														currencyDisplay : 'code',
+														style           : 'currency',
+													},
+												})}
+											</div>
 										)}
 										placement="top"
 									>
-										<div className={styles.date_content}>{grand_total}</div>
+										<div>
+											{formatAmount({
+												amount   : grand_total,
+												currency : data?.currency,
+												options  : {
+													currencyDisplay : 'code',
+													style           : 'currency',
+												},
+											})}
+										</div>
 									</Tooltip>
 								) : '-'}
 							</div>
@@ -83,26 +118,26 @@ function Body({
 									</div>
 								</Tooltip>
 							</div>
-						</div>
-						{isOpen ? (
-							<IcMArrowRotateUp
-								style={{ cursor: 'pointer' }}
-								onClick={() => {
-									setLineItemSectionOpen((prev) => ({ ...prev, [key]: !(prev?.[key]) }));
-								}}
-							/>
-						)
-							: (
-								<IcMArrowRotateDown
+							{isOpen ? (
+								<IcMArrowRotateUp
 									style={{ cursor: 'pointer' }}
 									onClick={() => {
 										setLineItemSectionOpen((prev) => ({ ...prev, [key]: !(prev?.[key]) }));
 									}}
 								/>
-							)}
+							)
+								: (
+									<IcMArrowRotateDown
+										style={{ cursor: 'pointer' }}
+										onClick={() => {
+											setLineItemSectionOpen((prev) => ({ ...prev, [key]: !(prev?.[key]) }));
+										}}
+									/>
+								)}
+						</div>
 					</div>
 					<div className={`${!isOpen ? styles.nothing : styles.content}`}>
-						<LineItemsSection lineItems={line_items} />
+						<LineItemsSection lineItems={line_items?.lineItems} />
 					</div>
 				</div>
 			)}

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Accordion, cl, Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -15,7 +16,7 @@ import EditLineItemModal from './components/EditLineItemModal';
 import Header from './components/Header';
 import LandingCost from './components/LandingCost';
 import ServiceBreakup from './components/ServiceBreakup';
-import renderServiceType from './renderServiceType';
+import RenderServiceType from './renderServiceType';
 import styles from './styles.module.css';
 import useHandleBreakdownDetails from './useHandleBreakdownDetails';
 
@@ -29,6 +30,8 @@ function BreakdownDetails({
 	source = '',
 	setNoRatesPresent = () => {},
 	getCheckoutInvoices = () => {},
+	handlingFeeDetails = {},
+	setHandlingFeeDetails = () => {},
 }) {
 	const {
 		rate = {},
@@ -58,13 +61,18 @@ function BreakdownDetails({
 
 	const showTaxes = ['preview_booking', 'booking_confirmation'].includes(source);
 
-	const { primary_service = '' } = detail || {};
+	const { primary_service = '', source: checkoutSource = '' } = detail || {};
 
 	const { source: rateSource = '' } = rate;
 
 	return (
 		<>
-			<BreakdownDetailsHeader disableForm={disableForm} resetMargins={resetMargins} rateDetails={rateDetails} />
+			<BreakdownDetailsHeader
+				disableForm={disableForm}
+				resetMargins={resetMargins}
+				rateDetails={rateDetails}
+				checkoutSource={checkoutSource}
+			/>
 
 			<ServiceIcons
 				primaryService={primaryService}
@@ -133,7 +141,7 @@ function BreakdownDetails({
 							<div className={styles.service_container}>
 								<div className={styles.service_details}>
 									<div className={styles.service_name}>
-										{renderServiceType(item, service_details)}
+										<RenderServiceType item={item} service_details={service_details} />
 									</div>
 
 									<ContainerDetails
@@ -256,6 +264,8 @@ function BreakdownDetails({
 						?.convenience_rate_options
 				}
 				showTaxes={showTaxes}
+				handlingFeeDetails={handlingFeeDetails}
+				setHandlingFeeDetails={setHandlingFeeDetails}
 			/>
 
 			<LandingCost
@@ -265,6 +275,7 @@ function BreakdownDetails({
 				rate={rate}
 				otherCharges={otherCharges}
 				disableForm={disableForm}
+				handlingFeeDetails={handlingFeeDetails}
 			/>
 		</>
 	);

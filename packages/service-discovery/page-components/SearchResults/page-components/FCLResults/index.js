@@ -2,11 +2,13 @@ import Comparison from '../../common/Comparison';
 
 import ListRateCards from './ListRateCards';
 import SelectedCardScreen from './SelectedCardScreen';
+import SpotBooking from './SpotBooking';
 
 const SCREEN_MAPPING = {
 	listRateCard       : ListRateCards,
 	selectedCardScreen : SelectedCardScreen,
 	comparison         : Comparison,
+	spot_booking       : SpotBooking,
 };
 
 function FCLResults({
@@ -80,6 +82,10 @@ function FCLResults({
 			setScreen,
 			cogoAssuredRates,
 			setRouterLoading,
+		},
+		spot_booking: {
+			setScreen,
+			detail,
 		},
 	};
 
