@@ -40,7 +40,7 @@ function PayrollDashboard() {
 					<div
 						aria-hidden
 						style={{ cursor: 'pointer' }}
-						onClick={() => router.push('/welcome')}
+						onClick={() => router.push('/hrms')}
 					>
 						HRMS
 					</div>
