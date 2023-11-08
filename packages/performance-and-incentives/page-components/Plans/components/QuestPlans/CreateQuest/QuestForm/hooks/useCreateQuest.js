@@ -44,13 +44,12 @@ const useCreateQuest = ({
 
 	const handleClick = async (formValues) => {
 		try {
-			const { name, date_range, agent_scoring_config_id, quest_string } = formValues;
+			const { name, date_range, agent_scoring_config_id } = formValues;
 
 			const { data: res } = await trigger({
 				data: {
 					name,
 					agent_scoring_config_id,
-					quest_string,
 					start_date : date_range?.startDate,
 					end_date   : getFormattedDate({ currentDate: date_range?.endDate }),
 				},

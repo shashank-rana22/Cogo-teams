@@ -2,8 +2,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 24px;
-
-	/* justify-content: space-between; */
 	padding: 20px;
 	background: #fff;
 	border-radius: 8px;

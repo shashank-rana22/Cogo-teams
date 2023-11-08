@@ -25,12 +25,6 @@
 	border-bottom: 1px solid #eee;
 }
 
-.generated_string_content {
-	width: auto;
-	overflow-x: scroll;
-	white-space: nowrap;
-}
-
 .generated_string_heading {
 	font-weight: 1000;
 }
