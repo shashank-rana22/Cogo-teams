@@ -372,3 +372,14 @@ export const cargoHandlingOptions	= [
 		tradeType : 'import',
 	},
 ];
+
+export const COMMODITY_TYPE_OPTIONS = {
+	general: [
+		{ label: 'All', value: 'all' },
+	],
+	special_consideration: [
+		{ label: 'Dangerous Goods', value: 'dangerous' },
+		{ label: 'Temperature Controlled/Pharma', value: 'temp_controlled' },
+		{ label: 'Other Special Commodity Sub Type', value: 'other_special' },
+	],
+};
