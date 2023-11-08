@@ -4,7 +4,6 @@ import {
 	asyncFieldsPartnerUsersIds,
 	useGetAsyncOptions,
 } from '@cogoport/forms';
-import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { merge } from '@cogoport/utils';
 
 import { filterOption } from '../helpers/constants';
@@ -106,8 +105,6 @@ function useControls({ data = {}, user_id = {}, filter = {}, source = {}, servic
 		),
 	);
 
-	const CommodityOptions = getCommodityList(filter?.service, data?.container_type);
-
 	let CONTROL = [];
 	const selectedService = filter?.service;
 	if (selectedService && serviceControlsMap[selectedService]) {
@@ -117,7 +114,6 @@ function useControls({ data = {}, user_id = {}, filter = {}, source = {}, servic
 			user_id,
 			listPartnerUserOptions,
 			listAirLineOptions,
-			CommodityOptions,
 			originLocationOptions,
 			destinationLocationOptions,
 			source,

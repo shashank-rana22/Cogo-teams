@@ -4,7 +4,6 @@ import { currencyOptions } from '../helpers/constants';
 
 const lclControls = ({
 	data,
-	CommodityOptions,
 	originLocationOptions, destinationLocationOptions,
 	source,
 }) => {
@@ -66,7 +65,6 @@ const lclControls = ({
 			placeholder : 'Commodity',
 			span        : 3,
 			value       : data?.commodity,
-			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
 
