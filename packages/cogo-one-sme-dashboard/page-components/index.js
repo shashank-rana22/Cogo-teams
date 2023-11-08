@@ -1,5 +1,7 @@
+import NotFound from '@cogoport/error/page-components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import { useRouter } from '@cogoport/next';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useSelector } from '@cogoport/store';
 import { startOfDay } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -8,7 +10,12 @@ import SmeComponents from './SmeComponents';
 import styles from './styles.module.css';
 
 function SmeDashboard() {
-	const { query = '' } = useRouter();
+	const { query = {}, userId = '' } = useSelector(
+		(state) => ({
+			query  : state?.general?.query,
+			userId : state?.profile?.user?.id,
+		}),
+	);
 
 	const geo = getGeoConstants();
 
@@ -27,6 +34,12 @@ function SmeDashboard() {
 			],
 		}),
 	);
+
+	const ALLOW_SME_DASHBOARD_FOR = GLOBAL_CONSTANTS.uuid.allow_sme_dashboard_for;
+
+	if (!ALLOW_SME_DASHBOARD_FOR?.includes(userId)) {
+		return <NotFound />;
+	}
 
 	return (
 		<div className={styles.main_container}>

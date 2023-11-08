@@ -1,23 +1,47 @@
+import { cl } from '@cogoport/components';
 import FunnelGraph from 'funnel-graph-js';
 import React, { useRef, useEffect, useMemo } from 'react';
 
+import { LoadingState } from '../../../common/Elements';
 import { Growth } from '../../../common/Elements/PercentageChange';
 import useSmeDashboardStats from '../../../hooks/useSmeDashboardStats';
 import getFormattedAmount from '../../../utils/getFormattedAmount';
 
+import dataFormatter from './dataFormatter';
 import styles from './styles.module.css';
 
-function CustomerFunnel({ widgetBlocks = null, filterParams = {} }) {
+function CustomerFunnel({
+	widgetBlocks = null,
+	filterParams = {},
+}) {
+	const funnelGraphContainer = useRef();
+
+	const funnelGraphRef = useRef();
+
 	const {
 		dashboardData = {},
 		dashboardLoading = false,
-	} = useSmeDashboardStats({ widgetBlocks, filterParams });
+	} = useSmeDashboardStats({
+		widgetBlocks,
+		filterParams,
+		trendRequired: true,
+	});
+
+	const { customer_funnel_data = {} } = dashboardData || {};
+
+	const {
+		current_data = null,
+		previous_data = null,
+	} = customer_funnel_data || {};
+
+	const dataFormat = dataFormatter({
+		currentData  : current_data,
+		previousData : previous_data,
+	});
 
 	const data = useMemo(
 		() => ({
-			labels: ['Website Visitors', 'Awareness Stage', 'AQL (enriched data)', 'Interest Captured', 'MQL',
-				'Account Created', 'Engagement Stage(Pre KYC)', 'KYC Verified', 'Engagement Stage(Post KYC)',
-				'Transaction Stage', 'Retained Customers', 'Churned Stage', 'Retired Stage'],
+			labels    : dataFormat.map((itm) => itm?.label),
 			subLabels : ['shadow-top', 'graph-data', 'shadow-bottom'],
 			colors    : [
 				['#e6f7a1', '#f3f5eb', '#b0eef5'],
@@ -25,42 +49,36 @@ function CustomerFunnel({ widgetBlocks = null, filterParams = {} }) {
 					'#BDDF75', '#8FDFE8', '#91E0E5', ' #8FE1EA'],
 				['#e6f7a1', '#f3f5eb', '#b0eef5'],
 			],
-			values: [
-				[50, 1798, 50],
-				[50, 1689, 50],
-				[50, 1524, 50],
-				[50, 1342, 50],
-				[50, 1122, 50],
-				[50, 935, 50],
-				[50, 735, 50],
-				[50, 634, 50],
-				[50, 574, 50],
-				[50, 434, 50],
-				[50, 220, 50],
-				[50, 81, 50],
-				[50, 17, 50],
-			],
+			values: dataFormat?.map((itm) => ([50, itm?.value, 50])),
 		}),
-		[],
+		[dataFormat],
 	);
 
-	const funnelGraphContainer = useRef();
-
-	const funnelGraphRef = useRef();
-
 	useEffect(() => {
-		funnelGraphRef.current = new FunnelGraph({
-			container         : '.funnel_graph',
-			direction         : 'horizontal',
-			gradientDirection : 'horizontal',
-			displayPercent    : false,
-			data,
-			width             : funnelGraphContainer.current.clientWidth - 40,
-			height            : 450,
-		});
+		if (!dashboardLoading) {
+			funnelGraphRef.current = new FunnelGraph({
+				container         : '.funnel_graph',
+				direction         : 'horizontal',
+				gradientDirection : 'horizontal',
+				displayPercent    : false,
+				data,
+				width             : funnelGraphContainer.current.clientWidth - 40,
+				height            : 450,
+			});
 
-		funnelGraphRef.current.draw();
-	}, [data]);
+			funnelGraphRef.current.draw();
+		}
+	}, [dashboardLoading, data]);
+
+	if (dashboardLoading) {
+		return (
+			<div
+				className={cl`${styles.graph_container} ${styles.loading_graph_container}`}
+			>
+				<LoadingState />
+			</div>
+		);
+	}
 
 	return (
 		<div
@@ -69,10 +87,10 @@ function CustomerFunnel({ widgetBlocks = null, filterParams = {} }) {
 		>
 			<div className="funnel_graph" />
 			<div className={styles.graph_labels}>
-				{data.labels.map(
+				{dataFormat.map(
 					(itm, index) => (
 						<div
-							key={itm}
+							key={itm?.valueKey}
 							className={styles.graph_labels_item}
 							onMouseEnter={() => {
 								funnelGraphRef.current.updateData(
@@ -83,7 +101,7 @@ function CustomerFunnel({ widgetBlocks = null, filterParams = {} }) {
 												if (ind !== index) {
 													return curEle;
 												}
-												return [100, curEle[1] + 100, 100];
+												return [10000, curEle[1], 10000];
 											},
 										),
 									},
@@ -94,14 +112,14 @@ function CustomerFunnel({ widgetBlocks = null, filterParams = {} }) {
 							}}
 						>
 							<div>
-								{itm}
+								{itm?.label || ''}
 							</div>
 							<div className={styles.graph_values}>
 								{getFormattedAmount({
-									number: data.values[index][1],
+									number: itm?.value,
 								})}
 								<Growth
-									showGrowth={!!(Math.floor(Math.random() * 10) % 2)}
+									showGrowth={itm?.change > 0}
 								/>
 							</div>
 						</div>

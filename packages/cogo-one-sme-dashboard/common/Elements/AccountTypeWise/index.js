@@ -1,18 +1,15 @@
-import { Tooltip, cl } from '@cogoport/components';
-import { IcMInfo } from '@cogoport/icons-react';
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import PercentageChange from '../PercentageChange';
 
 import styles from './styles.module.css';
-import TooltipContent from './tooltipContent';
 
 function AccountTypeWise({
 	label = '',
 	dataValue = 0,
 	change = 0,
 	segregated = false,
-	title = '',
 	decimalNotRequired = false,
 }) {
 	return (
@@ -24,15 +21,6 @@ function AccountTypeWise({
 			>
 				{label || ''}
 
-				{title === 'bookings' ? (
-					<Tooltip
-						placement="bottom-end"
-						content={<TooltipContent />}
-						className={styles.tooltip}
-					>
-						<IcMInfo />
-					</Tooltip>
-				) : null}
 			</div>
 
 			<div

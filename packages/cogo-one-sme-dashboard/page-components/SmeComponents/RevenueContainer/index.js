@@ -1,8 +1,8 @@
-import { Tooltip, cl } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMDollar, IcMInfo } from '@cogoport/icons-react';
+import { IcMDollar } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import React from 'react';
 
@@ -91,16 +91,6 @@ function RevenueContainer({
 
 						<div className={styles.label_transaction}>
 							Transaction
-							{dashboardLoading
-								? <IcMInfo />
-								: (
-									<Tooltip
-										placement="bottom"
-										content="Total Revenue attained"
-									>
-										<IcMInfo />
-									</Tooltip>
-								)}
 						</div>
 
 						<div className={styles.total_transactions}>

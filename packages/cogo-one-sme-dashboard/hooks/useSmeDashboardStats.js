@@ -1,3 +1,5 @@
+// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+// import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequest } from '@cogoport/request';
 import { isEmpty, startOfDay } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
@@ -21,6 +23,18 @@ const getParams = ({ widgetBlocks, filterParams, selectedFilter, page, trend }) 
 
 	return 	{
 		blocks,
+		// start_date: formatDate({
+		// 	date       : date_range?.startDate || new Date(),
+		// 	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		// 	formatType : 'date',
+		// 	separator  : '',
+		// }),
+		// end_date: formatDate({
+		// 	date       : date_range?.endDate || new Date(),
+		// 	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		// 	formatType : 'date',
+		// 	separator  : '',
+		// }),
 		start_date          : startOfDay(date_range?.startDate || new Date()),
 		end_date            : date_range?.endDate || new Date(),
 		trend_data_required : (trend === 'previous'),

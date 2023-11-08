@@ -213,6 +213,7 @@ const GLOBAL_CONSTANTS = {
 	],
 	uuid: {
 		amitabh_user_id         : 'cd8dde11-678c-4467-85b2-2e2d6055bef4',
+		purnendu_shekhar_id     : '95d62549-8ab6-4ee5-a655-9edd0ec46dac',
 		superadmin_id           : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
 		tech_superadmin_id      : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
 		cogoacademy_admin_id    : '13cb3b79-95c2-49ca-9ebd-8c3ee1996981',
@@ -231,6 +232,13 @@ const GLOBAL_CONSTANTS = {
 			GB : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
 			UK : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
 		},
+		allow_sme_dashboard_for: [
+			'cd8dde11-678c-4467-85b2-2e2d6055bef4', // amitabh shankar
+			'95d62549-8ab6-4ee5-a655-9edd0ec46dac', // purnendu shekhar
+			'd7d62f21-c148-4f7c-9aa1-d916897aed91', // sagar bankar
+			'f03f3672-f7fa-443c-b5a7-079e8a2d8890', // sanmit vartak
+			'615bfbe9-7b7a-40c0-b9ae-8968b1b64c67', // javin chew
+		],
 		paramount_org_id : '1e4b9f43-4863-4e29-a944-8e9e8780e514',
 		rfq_admin_ids    : [
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670',
