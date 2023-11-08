@@ -34,6 +34,7 @@ function ShipmentAuditFunction({
 		Entity                : null,
 		walletUsed            : null,
 		operationalClosedDate : null,
+		financialClosedDate   : null,
 		creationDate          : null,
 		tradeType             : '',
 	});
@@ -132,6 +133,7 @@ function ShipmentAuditFunction({
 						onClickOutside={() => setShow(false)}
 						render={(
 							<Content
+								activeTab={activeTab}
 								filters={filters}
 								setFilters={setFilters}
 								receivables={receivables}

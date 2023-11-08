@@ -37,8 +37,8 @@ const useGetJobList = ({
 	);
 
 	const {
-		Service = '',
-		operationalClosedDate = '', creationDate = '',
+		Service = '', operationalClosedDate = '',
+		creationDate = '', financialClosedDate = '',
 		walletUsed = '', tradeType = '',
 	} = filters || {};
 
@@ -53,6 +53,9 @@ const useGetJobList = ({
 			const {
 				startDate : opeerationalClosedStartDate = '', endDate : operationalClosedEndDate = '',
 			} = operationalClosedDate || '';
+			const {
+				startDate: financialClosedStartDate = '', endDate: financialClosedEndDate = '',
+			} = financialClosedDate || '';
 			try {
 				await trigger({
 					params: {
@@ -71,6 +74,10 @@ const useGetJobList = ({
 							&& getFormatDate(opeerationalClosedStartDate)) || undefined,
 						operationalClosedEndDate: (opeerationalClosedStartDate && operationalClosedEndDate
 							&& getFormatDate(operationalClosedEndDate)) || undefined,
+						financialClosedStartDate: (financialClosedStartDate && financialClosedEndDate
+							&& getFormatDate(financialClosedStartDate)) || undefined,
+						financialClosedEndDate: (financialClosedStartDate && financialClosedEndDate
+							&& getFormatDate(financialClosedEndDate)) || undefined,
 						query      : query || undefined,
 						walletUsed : walletUsed || undefined,
 					},
@@ -83,7 +90,7 @@ const useGetJobList = ({
 		func();
 	}, [creationDate, operationalClosedDate, trigger,
 		CLOSING_STATUS, subActiveTab, page, pageLimit, Service,
-		entityCode, tradeType, query, walletUsed]);
+		financialClosedDate, entityCode, tradeType, query, walletUsed]);
 
 	useEffect(() => {
 		debounceQuery(search);
