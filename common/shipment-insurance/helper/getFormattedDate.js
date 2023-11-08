@@ -5,8 +5,6 @@ const getFormattedDate = ({ currentDate = '' }) => {
 
 	originalDate.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
 
-	const newDate = originalDate.toISOString();
-
-	return newDate;
+	return originalDate;
 };
 export default getFormattedDate;
