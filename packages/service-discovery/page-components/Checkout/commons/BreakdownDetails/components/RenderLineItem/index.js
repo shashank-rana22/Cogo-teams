@@ -180,11 +180,11 @@ function RenderLineItem({
 				shouldEditMargin={
 					(shouldEditMargin
 						&& isServiceMarginAllowedRate
-						&& isLineItemMarginEditAllowed
+						&& (isLineItemMarginEditAllowed || (detail?.source === 'spot_line_booking' && code === 'BAS'))
 						&& isQutationEditAllowed
 						&& !disableForm
 						&& item?.service_type !== 'cargo_insurance')
-					|| isNew || (detail?.source === 'spot_line_booking' && code === 'BAS')
+					|| isNew
 				}
 			/>
 		</div>
