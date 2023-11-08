@@ -119,6 +119,7 @@
     "@cogoport/supply-tools": "workspace:0.1.0",
     "@cogoport/error":"workspace:1.0.0",
     "@cogoport/marketing":"workspace:0.1.0",
+    "@cogoport/partners": "workspace:0.1.0",
     "@cogoport/profile":"workspace:0.1.0",
     "@cogoport/performance-and-incentives": "workspace:0.1.0",
     "@cogoport/margin-management":"workspace:0.1.0",
