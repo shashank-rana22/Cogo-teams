@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
