@@ -4,6 +4,7 @@ import {
 	asyncFieldsOrganization, asyncFieldsOrganizationUsers,
 	useGetAsyncOptions, asyncFieldsLocations,
 } from '@cogoport/forms';
+import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { merge, startCase } from '@cogoport/utils';
 
 import useGetMainPortsOptions from '../../../RfqEnquiries/hooks/useGetMainPortsOptions';
@@ -51,6 +52,8 @@ function FieldMutation({ fields, values, filter, chargeCodes, fclCfsChargeCodes 
 		labelKey : 'display_name',
 	}));
 
+	const CommodityOptions = getCommodityList(filter?.service, values?.container_type);
+
 	const finalFields = (fields || []).map((control) => {
 		const { name } = control;
 		let newControl = { ...control };
@@ -77,6 +80,9 @@ function FieldMutation({ fields, values, filter, chargeCodes, fclCfsChargeCodes 
 		if (name === 'cargo_handling_type') {
 			finalFilteredOptions = cargoHandlingOptions.filter((option) => option.tradeType === dataTradeType);
 			newControl = { ...newControl, options: finalFilteredOptions };
+		}
+		if (name === 'commodity') {
+			newControl = { ...newControl, options: CommodityOptions };
 		}
 
 		if (control?.controls) {

@@ -1,5 +1,4 @@
 import {
-	commodityOptions,
 	currencyOptions,
 	densityCargoOptions,
 	densityRatioOptions,
@@ -80,7 +79,6 @@ const airControls = ({
 			placeholder : 'Commodity',
 			type        : 'select',
 			value       : data?.commodity || 'general',
-			options     : commodityOptions,
 			span        : 4,
 			rules       : { required: 'commodity is required' },
 		},

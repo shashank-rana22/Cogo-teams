@@ -7,7 +7,6 @@ import { currencyOptions } from '../helpers/constants';
 const fclCustomsControls = ({
 	data,
 	originLocationOptions,
-	CommodityOptions,
 	source,
 }) => {
 	const controls = [
@@ -109,7 +108,6 @@ const fclCustomsControls = ({
 			placeholder : 'Commodity',
 			span        : 4,
 			value       : 'general',
-			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
 		{

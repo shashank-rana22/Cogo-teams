@@ -6,7 +6,6 @@ import { currencyOptions } from '../helpers/constants';
 
 const haulageControls = ({
 	data,
-	CommodityOptions,
 	originLocationOptions,
 	destinationLocationOptions,
 	source,
@@ -96,7 +95,6 @@ const haulageControls = ({
 			placeholder : 'Commodity',
 			span        : 3,
 			value       : data?.commodity,
-			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
 		{
