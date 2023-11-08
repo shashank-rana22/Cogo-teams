@@ -14,8 +14,6 @@ import getFinancialCloseColumns from './configurations/getFinancialCloseColumns'
 import getJobColumns from './configurations/getJobColumns';
 import styles from './styles.module.css';
 
-const DEFAULT_PAGE_LIMIT = 10;
-
 const TABS = [
 	{ key: 'to_be_audited', label: 'To be Audited' },
 	{ key: 'partially_audited', label: 'Partially Audited' },
@@ -178,7 +176,7 @@ function ShipmentAuditFunction({
 						/>
 					)}
 
-				{!isEmpty(list) && list?.length >= DEFAULT_PAGE_LIMIT
+				{!isEmpty(list)
 					? (
 						<Pagination
 							className={styles.pagination}
