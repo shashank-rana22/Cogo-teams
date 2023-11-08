@@ -62,7 +62,11 @@ function OutstandingList({
 		lastUpdatedAt,
 		selfOrganizationName,
 		selfOrganizationId = '',
+		taggedPersonDetails = {},
 	} = item;
+
+	const { partnerName = '', name : taggedName = '' } = taggedPersonDetails || {};
+
 	const propsData = {
 		invoice_details: {
 			organizationId,
@@ -268,6 +272,13 @@ function OutstandingList({
 							(item?.taggedState && entityCode !== '101_301')
 								? (<Pill size="md" color="green">{startCase(item?.taggedState)}</Pill>) : null
 						}
+						{!isEmpty(taggedPersonDetails) ? (
+							<Pill size="md" color="green">
+								{['MZM', 'RUBIX'].includes(partnerName)
+									? `${partnerName}- ${startCase(taggedName)}`
+									: startCase(taggedName)}
+							</Pill>
+						) : null}
 						{
 							(entityCode !== '101_301')
 								? (

@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 function AccountAllocateCard({
 	item = {}, setVerifyAccount = () => {}, onStatusUpdate = () => {},
-	loadingUpdate = false, setRejectData = () => {}, rejectData = {},
+	loadingUpdate = false, setRejectData = () => {}, rejectData = {}, initialViewType = '',
 }) {
 	const {
 		id = '', request_type = '', requesting_agent = {}, current_stakeholder = {}, escalation_cycle = '',
@@ -38,6 +38,7 @@ function AccountAllocateCard({
 					tags={tags}
 					accountType={account_type}
 					content={<AccountInfoContent />}
+					initialViewType={initialViewType}
 				/>
 				<div className={styles.body_info}>
 					<div className={styles.each_row}>

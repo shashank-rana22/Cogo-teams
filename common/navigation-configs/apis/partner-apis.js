@@ -9504,6 +9504,12 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
+		{
+			api         : 'put_payments_outstanding_bulk_update_account_taggings',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
 
 	],
 	compliance: [
@@ -13402,6 +13408,11 @@ const partner = {
 		},
 	],
 	cogo_one: [
+		{
+			api          : 'assign_meeting_agent',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 		{
 			api          : 'update_channel_partner_document',
 			access_type  : 'private',

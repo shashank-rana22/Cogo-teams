@@ -24,7 +24,7 @@ function UpdateSMTUser({
 	};
 
 	return (
-		<Modal size="md" show={updateUser} onClose={setUpdateUser} placement="top">
+		<Modal size="md" show={updateUser} onClose={() => setUpdateUser(false)} placement="top">
 			<Modal.Header title="ReAssign Task To New User ?" />
 			<div className={styles.body}>
 				<Modal.Body>
