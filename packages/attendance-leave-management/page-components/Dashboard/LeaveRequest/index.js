@@ -30,8 +30,8 @@ function LeaveRequest({ setShowInbox = () => {}, isManager = false }) {
 	};
 
 	const handleGoBack = () => {
-		if (back === 'welcome') {
-			push('/welcome');
+		if (back === 'hrms') {
+			push('/hrms');
 		} else {
 			push('/attendance-leave-management');
 			setShowInbox(false);

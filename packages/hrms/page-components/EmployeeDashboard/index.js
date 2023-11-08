@@ -18,7 +18,7 @@ function HrmsEmployeeDashboard() {
 	const { data: summaryData, loading } = useGetDashboardSummary(isEmployeeDashboardActive);
 
 	const handleBack = () => {
-		router.push('/welcome');
+		router.push('/hrms');
 	};
 
 	if (router.query?.is_payslip === 'payslip') {
