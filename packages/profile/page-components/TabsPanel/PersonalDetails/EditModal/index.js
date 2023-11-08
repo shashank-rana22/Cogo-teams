@@ -14,7 +14,6 @@ import { CONTROL_MAPPING, BASIC_CONTROLS, FAMILY_CONTROLS, ADDRESS_CONTROLS, MED
 
 import styles from './styles.module.css';
 
-console.log(PREVIOUS_JOB_HISTORY, 'hist');
 const controlMapping = {
 	basic       : BASIC_CONTROLS,
 	family      : FAMILY_CONTROLS,
@@ -22,7 +21,6 @@ const controlMapping = {
 	personal    : MEDIA_CONTROLS,
 	job_history : PREVIOUS_JOB_HISTORY,
 };
-console.log('🚀 ~ file: index.js:25 ~ controlMapping:', controlMapping);
 
 function EditModal({ show = false, handleModal = () => {}, data, mappingKey, getEmployeeDetails }) {
 	const { control, handleSubmit, setValue } = useForm();
@@ -46,7 +44,6 @@ function EditModal({ show = false, handleModal = () => {}, data, mappingKey, get
 	);
 
 	useEffect(() => {
-		console.log(personal_details?.social_media_links?.github, 'github');
 		if (mappingKey === 'basic') {
 			setValues({
 				first_name     : processed_employee_detail?.first_name,

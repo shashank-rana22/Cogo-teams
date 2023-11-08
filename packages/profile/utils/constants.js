@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import {
@@ -5,6 +6,7 @@ import {
 	IcMLocation,
 	IcMEmail,
 	IcMCall,
+	IcMCloudUpload,
 } from '@cogoport/icons-react';
 
 export const getEmployeeData = (employee_detail) => ([
@@ -21,7 +23,13 @@ const DOCUMENT_MAPPING = {
 	passport     : 'Passport',
 };
 
-export const getTablesData = (signed_documents, other_documents) => ([
+export const getTablesData = (
+	signed_documents,
+	other_documents,
+	showAddUploadModal,
+	setShowAddUploadModal,
+	flagUpload,
+) => ([
 	{
 		heading : 'Employee Letters',
 		data    : signed_documents.map((document) => ({
@@ -35,18 +43,35 @@ export const getTablesData = (signed_documents, other_documents) => ([
 		})),
 	},
 	{
-		heading : 'Other Documents',
-		data    : other_documents.map((document) => ({
-			name      : DOCUMENT_MAPPING[document.document_type],
-			key       : document.document_type,
-			updatedAt : (document?.updated_at === undefined) ? ' — ' : formatDate({
-				date       : document.updated_at,
-				dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
-				formatType : 'date',
-			}),
-			url    : document.document_url,
-			number : document.document_number,
-		})),
+		heading:
+	<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+		<div>Other Documents</div>
+		<div>
+			<Button
+				size="md"
+				themeType="secondary"
+				disabled={!flagUpload}
+				onClick={() => setShowAddUploadModal(true)}
+			>
+				<IcMCloudUpload />
+				Upload
+			</Button>
+		</div>
+	</div>,
+		data: other_documents.map((document) => {
+			console.log(document?.document_type, 'document_type');
+			return ({
+				name      : DOCUMENT_MAPPING[document.document_type],
+				key       : document.document_type,
+				updatedAt : (document?.updated_at === undefined) ? ' — ' : formatDate({
+					date       : document.updated_at,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+					formatType : 'date',
+				}),
+				url    : document.document_url,
+				number : document.document_number,
+			});
+		}),
 	},
 ]);
 

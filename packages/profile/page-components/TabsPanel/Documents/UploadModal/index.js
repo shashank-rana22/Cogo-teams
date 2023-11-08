@@ -20,18 +20,37 @@ function UploadModal({ show = false, handleModal = () => {}, docno, documentUrl,
 		let PERSONAL_DETAILS = {};
 		if (name === 'Aadhaar Card') {
 			PERSONAL_DETAILS = {
-				aadhar_card: {
+				aadhaar_card: {
 					document_url: values?.[`${name}document_url`]?.finalUrl
 					|| values?.document_url || documentUrl,
 					document_number: values?.[`${name}document_number`] || docno,
 				},
 			};
-		} else {
+		}
+		if (name === 'Pan Card') {
 			PERSONAL_DETAILS = {
 				pan_card: {
 					document_url: values?.[`${name}document_url`]?.finalUrl
 					|| values?.document_url || documentUrl,
-					document_number: values?.[`${name}document_number`] || docno,
+					document_number: values?.[`${name}document_number`],
+				},
+			};
+		}
+		if (name === 'Resume') {
+			PERSONAL_DETAILS = {
+				resume: {
+					document_url: values?.[`${name}document_url`]?.finalUrl
+					|| values?.document_url || documentUrl,
+					document_number: values?.[`${name}document_number`],
+				},
+			};
+		}
+		if (name === 'Passport') {
+			PERSONAL_DETAILS = {
+				passport: {
+					document_url: values?.[`${name}document_url`]?.finalUrl
+					|| values?.document_url || documentUrl,
+					document_number: values?.[`${name}document_number`],
 				},
 			};
 		}

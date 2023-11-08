@@ -858,6 +858,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'create_employee_document',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	payroll: [
 		{

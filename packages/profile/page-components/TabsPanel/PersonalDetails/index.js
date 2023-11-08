@@ -14,6 +14,7 @@ import styles from './styles.module.css';
 
 function PersonalDetails({ data = {}, loading = false, getEmployeeDetails }) {
 	const [show, setShow] = useState(false);
+	const [datatoedit, setDataToEdit] = useState({});
 
 	// const { employee_detail, modified_employee_detail, processed_employee_detail, personal_details } = data || {};
 	// const { family_details } = personal_details || {};
@@ -26,8 +27,6 @@ function PersonalDetails({ data = {}, loading = false, getEmployeeDetails }) {
 	const handleModal = () => {
 		setShow(!show);
 	};
-
-	const [datatoedit, setDataToEdit] = useState({});
 
 	const handleClickDetails = (details) => {
 		setDataToEdit(details);

@@ -11,7 +11,6 @@ const options = [
 function FamilyDetailModal({ control = () => {}, show = false, handleModal = () => {} }) {
 	return (
 		<div>
-			{' '}
 			<Modal size="md" show={show} onClose={handleModal} placement="center">
 				<Modal.Header title="Edit Family Details" />
 				<Modal.Body>
@@ -116,10 +115,6 @@ function FamilyDetailModal({ control = () => {}, show = false, handleModal = () 
 								type="number"
 							/>
 						</div>
-						{/* <MobileNumberSelectController
-							control={control}
-							name="country_code"
-						/> */}
 					</div>
 				</Modal.Body>
 				<Modal.Footer>

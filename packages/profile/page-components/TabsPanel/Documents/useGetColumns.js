@@ -1,5 +1,5 @@
 import { Button, Toast } from '@cogoport/components';
-import { IcMDownload } from '@cogoport/icons-react';
+import { IcMCloudUpload, IcMDownload } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -85,7 +85,19 @@ const useGetColumns = (
 							}}
 							disabled={!item.url || !(user_role === 'hrbp')}
 						>
-							<span className={styles.view_text}>{isEmpty(item.url) ? 'Upload' : 'Update'}</span>
+							<span className={styles.view_text}>
+								{isEmpty(item.url) ? (
+									<div style={{ display: 'flex', alignItems: 'center' }}>
+										<IcMCloudUpload />
+										Upload
+									</div>
+								) : (
+									<div style={{ display: 'flex', alignItems: 'center' }}>
+										<IcMCloudUpload />
+										Update
+									</div>
+								) }
+							</span>
 						</Button>
 
 					</div>

@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -19,6 +18,7 @@ const useUpdateEmployee = ({ handleModal = () => {}, getEmployeeDetails }) => {
 	if (!isEmpty(query?.employee_id)) {
 		id_user = query.employee_id;
 	}
+
 	console.log('id:use', id_user, profile?.user?.id);
 
 	const updateEmployeeDetails = async (payload) => {
@@ -30,7 +30,7 @@ const useUpdateEmployee = ({ handleModal = () => {}, getEmployeeDetails }) => {
 			getEmployeeDetails();
 			handleModal();
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			Toast.error((error?.response?.data?.message));
 		}
 	};
 
