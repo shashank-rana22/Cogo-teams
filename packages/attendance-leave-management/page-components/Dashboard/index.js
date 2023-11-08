@@ -62,7 +62,7 @@ function AttendanceLeaveDashboard() {
 				<Breadcrumb.Item label={(
 					<div
 						aria-hidden
-						onClick={() => router.push('/welcome')}
+						onClick={() => router.push('/hrms')}
 						style={{ cursor: 'pointer' }}
 					>
 						HRMS
