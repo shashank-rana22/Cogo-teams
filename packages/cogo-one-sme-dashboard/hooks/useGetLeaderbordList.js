@@ -6,8 +6,8 @@ const getParams = ({ partnerId, officeLocationId }) => ({
 	page_limit         : 100,
 	user_data_required : true,
 	filters            : {
-		report_view_type   : 'owner_wise',
-		report_type        : 'owner_report',
+		report_view_type   : 'manager_wise',
+		report_type        : 'manager_report',
 		office_location_id : officeLocationId,
 		partner_id         : partnerId,
 	},
