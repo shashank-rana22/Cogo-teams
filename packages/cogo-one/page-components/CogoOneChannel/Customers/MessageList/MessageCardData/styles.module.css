@@ -182,6 +182,13 @@
 	border-radius: 0 4px;
 }
 
+.bell_icon {
+	width: 12px;
+	height: 12px;
+	fill: #fff;
+	transform: rotate(-30deg);
+}
+
 .pinned_div {
 	position: absolute;
 	top: 3px;
