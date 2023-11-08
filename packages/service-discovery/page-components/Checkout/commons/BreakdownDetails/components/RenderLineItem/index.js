@@ -184,7 +184,7 @@ function RenderLineItem({
 						&& isQutationEditAllowed
 						&& !disableForm
 						&& item?.service_type !== 'cargo_insurance')
-					|| isNew
+					|| isNew || (detail?.source === 'spot_line_booking' && code === 'BAS')
 				}
 			/>
 		</div>
