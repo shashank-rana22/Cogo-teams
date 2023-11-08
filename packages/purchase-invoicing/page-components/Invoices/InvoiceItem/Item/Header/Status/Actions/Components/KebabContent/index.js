@@ -1,8 +1,18 @@
 import { Popover, cl, Button } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
+
+const ACTIONS_MAPPING = [
+	{
+		key: 'edit_invoice',
+	},
+	{
+		key: 'mark_inactive',
+	},
+];
 
 function KebabContent({
 	setShowModal = () => {},
@@ -25,14 +35,16 @@ function KebabContent({
 					className={styles.popover_content}
 					onClickOutside={() => setShow(false)}
 					content={(
-						<Button
-							themeType="tertiary"
-							className={styles.text}
-							onClick={() => handleClick('edit_invoice')}
-						>
-							Edit Invoice
-						</Button>
-					)}
+						ACTIONS_MAPPING.map((action) => (
+							<Button
+								themeType="tertiary"
+								className={styles.text}
+								key={action.key}
+								onClick={() => handleClick(action.key)}
+							>
+								{startCase(action.key)}
+							</Button>
+						)))}
 				>
 					<Button
 						themeType="tertiary"

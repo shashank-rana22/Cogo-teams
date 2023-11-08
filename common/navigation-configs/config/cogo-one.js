@@ -11,6 +11,10 @@ const cogoOne = {
 		navigation : 'cogo_one-dashboard',
 		isMainNav  : true,
 	},
+	'/[partner_id]/cogo-one/sme-dashboard': {
+		navigation : 'cogo_one-sme_dashboard',
+		isMainNav  : true,
+	},
 };
 
 export default cogoOne;

@@ -4,13 +4,20 @@ import {
 	asyncFieldsOrganization, asyncFieldsOrganizationUsers,
 	useGetAsyncOptions, asyncFieldsLocations,
 } from '@cogoport/forms';
+import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { merge, startCase } from '@cogoport/utils';
 
 import useGetMainPortsOptions from '../../../RfqEnquiries/hooks/useGetMainPortsOptions';
+import {
+	DANGEROUS_COMMODITY_OPTIONS, OTHER_SPECIAL_INTERNATIONAL_OPTIONS,
+	TEMP_CONTROLLED_RANGE_OPTIONS,
+} from '../air-subType';
 
-import { cargoHandlingOptions } from './constants';
+import { cargoHandlingOptions, COMMODITY_TYPE_OPTIONS } from './constants';
 
-function FieldMutation({ fields, values, filter, chargeCodes, fclCfsChargeCodes }) {
+function FieldMutation({
+	fields, values, filter, chargeCodes, fclCfsChargeCodes,
+}) {
 	let finalFilteredOptions = [];
 	const dataTradeType = values?.trade_type;
 	const organizationUsers = useGetAsyncOptions(
@@ -51,6 +58,14 @@ function FieldMutation({ fields, values, filter, chargeCodes, fclCfsChargeCodes 
 		labelKey : 'display_name',
 	}));
 
+	const CommodityOptions = getCommodityList(filter?.service, values?.container_type);
+
+	const COMMODITY_SUB_TYPE_MAPPING = {
+		dangerous       : DANGEROUS_COMMODITY_OPTIONS,
+		temp_controlled : TEMP_CONTROLLED_RANGE_OPTIONS,
+		other_special   : OTHER_SPECIAL_INTERNATIONAL_OPTIONS,
+	};
+
 	const finalFields = (fields || []).map((control) => {
 		const { name } = control;
 		let newControl = { ...control };
@@ -77,6 +92,19 @@ function FieldMutation({ fields, values, filter, chargeCodes, fclCfsChargeCodes 
 		if (name === 'cargo_handling_type') {
 			finalFilteredOptions = cargoHandlingOptions.filter((option) => option.tradeType === dataTradeType);
 			newControl = { ...newControl, options: finalFilteredOptions };
+		}
+		if (name === 'commodity') {
+			newControl = { ...newControl, options: CommodityOptions };
+		}
+		if (name === 'commodity_type') {
+			newControl = { ...newControl, options: COMMODITY_TYPE_OPTIONS[values?.air_commodity] };
+		}
+		if (name === 'commodity_sub_type') {
+			newControl = {
+				...newControl,
+				options: values?.air_commodity === 'special_consideration'
+					? COMMODITY_SUB_TYPE_MAPPING[values?.commodity_type] : [{ label: 'All', value: 'all' }],
+			};
 		}
 
 		if (control?.controls) {
