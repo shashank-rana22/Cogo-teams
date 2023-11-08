@@ -48,7 +48,7 @@ function Actions({
 			</div>
 
 			{showKeys.map((key) => {
-				const { update_status, title, icon: Icon } = STATUS_COMPONENT_MAPPING[key];
+				const { update_status, title, icon: Icon } = STATUS_COMPONENT_MAPPING[key] || {};
 				return (
 					<div
 						key={title}
@@ -57,7 +57,7 @@ function Actions({
 						onClick={() => handleUpdate({ id: quest_id, status: update_status })}
 					>
 						<div className={styles.cta_text}>
-							<Icon width={24} height={24} style={{ marginRight: '8px' }} />
+							{Icon ? <Icon width={24} height={24} style={{ marginRight: '8px' }} /> : null}
 							{title}
 						</div>
 					</div>

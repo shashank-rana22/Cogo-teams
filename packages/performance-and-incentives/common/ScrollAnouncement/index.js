@@ -2,7 +2,7 @@ import { Placeholder, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './styles.module.css';
 
@@ -10,6 +10,12 @@ const LOOP_SIZE = 2;
 
 function ScrollAnnouncement({ style = {}, loading = false, list = [] }) {
 	const ref = useRef(null);
+
+	const [divWidth, setDivWidth] = useState(1200);
+
+	useEffect(() => {
+		if (divWidth !== ref?.current?.offsetWidth) { setDivWidth(ref?.current?.offsetWidth); }
+	}, [ref?.current?.offsetWidth, divWidth]);
 
 	const [isScrolling, setIsScrolling] = useState(false);
 
@@ -51,13 +57,13 @@ function ScrollAnnouncement({ style = {}, loading = false, list = [] }) {
 						key={loop_item}
 						ref={index === 0 ? ref : null}
 						style={{
-							animationDuration: `${(ref?.current?.offsetWidth || 1200) / 80}s`,
+							animationDuration:
+							`${divWidth / 80}s`,
 						}}
 						className={cl`${styles.bar_content} ${isScrolling && styles.bar_content_scrolling}`}
 					>
 						{(list || []).map((item, ind) => {
-							if (ref?.current?.offsetWidth === undefined) return null;
-							if (!item?.quest_string) return null;
+							if (!ref?.current?.offsetWidth || !item?.quest_string) return null;
 							return (
 								<span key={item?.id} className={styles.quest_container}>
 									<span className={styles.quest_heading}>
