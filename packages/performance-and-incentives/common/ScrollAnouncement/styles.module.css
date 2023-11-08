@@ -40,6 +40,7 @@
 }
 
 .bar {
+	display: flex;
 	width: 100%;
 	padding: 12px 0;
 	overflow: hidden;
@@ -48,14 +49,12 @@
 .bar_content {
 	display: flex;
 	gap: 16px;
-	width: 100%;
-	transform: translateX(100%);
+	width: max-content;
+	padding-left: 20px;
 	animation: move 25s linear infinite;
-	animation-fill-mode: forwards;
 }
 
 .bar_content_scrolling {
-	transition-delay: 1s;
 	animation-play-state: paused;
 }
 
