@@ -1,4 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import SearchDetails from '../common/SearchDetails';
 import Wallet from '../common/Wallet';
@@ -17,8 +18,13 @@ function FCLHeader({
 	setInfoBanner = () => {},
 	setRouterLoading = () => {},
 	isGuideViewed = false,
+	createLoading = false,
+	createSearch = () => {},
+	isMobile = false,
 	...rest
 }) {
+	const [show, setShow] = useState(false);
+
 	const isAllowedToEdit = activePage === 'search_results';
 
 	if (isEmpty(data)) {
@@ -39,26 +45,35 @@ function FCLHeader({
 					currentScreen={rest.currentScreen}
 					setCurrentScreen={rest.setCurrentScreen}
 					setRouterLoading={setRouterLoading}
+					isMobile={isMobile}
+					show={show}
+					setShow={setShow}
 				/>
 			</div>
 
-			<div className={styles.right_section}>
-				<ContainerDetails
-					data={data}
-					loading={loading && isEmpty(data)}
-					activePage={rest.activePage}
-					isAllowedToEdit={isAllowedToEdit}
-					infoBanner={infoBanner}
-					setInfoBanner={setInfoBanner}
-					isGuideViewed={isGuideViewed}
-					setRouterLoading={setRouterLoading}
-				/>
+			{show || !isMobile ? (
+				<div className={styles.right_section}>
+					<ContainerDetails
+						data={data}
+						loading={loading && isEmpty(data)}
+						activePage={rest.activePage}
+						isAllowedToEdit={isAllowedToEdit}
+						infoBanner={infoBanner}
+						setInfoBanner={setInfoBanner}
+						isGuideViewed={isGuideViewed}
+						setRouterLoading={setRouterLoading}
+						createLoading={createLoading}
+						createSearch={createSearch}
+						isMobile={isMobile}
+					/>
 
-				<Wallet
-					data={data}
-					service_key={service_key}
-				/>
-			</div>
+					<Wallet
+						data={data}
+						service_key={service_key}
+						isMobile={isMobile}
+					/>
+				</div>
+			) : null}
 		</div>
 	);
 }

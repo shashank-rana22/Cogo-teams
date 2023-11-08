@@ -1,7 +1,7 @@
 import { Modal, Button, Pill, cl } from '@cogoport/components';
 import { isEmpty, upperCase } from '@cogoport/utils';
 
-import { fclIncoTerms } from '../configs';
+import { getServiceIncoTerms } from '../configs';
 import useUpdateCheckoutIncoTerm from '../hooks/useUpdateCheckoutIncoTerm';
 
 import iconsMapping from './icons-mapping';
@@ -15,6 +15,7 @@ function ChangeIncoTermModal({
 	incoterm = '',
 	checkout_id = '',
 	service_details = {},
+	service_type: primary_service = '',
 }) {
 	const { selectedValue } = incoTermModalData;
 	const { updateCheckoutIncoTerm, loading } = useUpdateCheckoutIncoTerm({
@@ -31,7 +32,9 @@ function ChangeIncoTermModal({
 		return `${trade_type}_${service_type}`;
 	});
 
-	const servicesToAdd = fclIncoTerms.filter(
+	const incoTerms = getServiceIncoTerms({ primary_service });
+
+	const servicesToAdd = incoTerms.filter(
 		({ inco_terms = [], mandatory = false, name = '' }) => inco_terms.includes(selectedValue)
 				&& mandatory
 				&& !addedServices.includes(name),
@@ -41,12 +44,12 @@ function ChangeIncoTermModal({
 		/trailer_freight|haulage_freight|ftl_freight/g,
 		'transportation',
 	)).filter((item) => {
-		const incoTermObject = fclIncoTerms.find(({ name }) => name === item) || {};
+		const incoTermObject = incoTerms.find(({ name }) => name === item) || {};
 
 		const { inco_terms = [] } = incoTermObject;
 
 		return !isEmpty(incoTermObject) && !inco_terms.includes(selectedValue);
-	}).map((item) => fclIncoTerms.find((incoTerm) => incoTerm.name === item));
+	}).map((item) => incoTerms.find((incoTerm) => incoTerm.name === item));
 
 	return (
 		<Modal
@@ -64,8 +67,8 @@ function ChangeIncoTermModal({
 					to
 					{' '}
 					<b>{upperCase(selectedValue)}</b>
-					. As a result, we will add or remove services( if any).
-					If you want to continue with the same services, please leave the Incoterm unchanged.
+					. As a result, we will add or remove services(as applicable).
+					If you wish to continue with the current services, leave the Incoterm unchanged.
 				</div>
 
 				{!isEmpty(servicesToAdd) ? (

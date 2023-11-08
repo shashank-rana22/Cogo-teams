@@ -5,6 +5,8 @@ import { IcMArrowRight, IcMHome } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
+import AdoptionFilter from '../AdoptionFilter';
+
 import styles from './styles.module.css';
 
 const COLUMNS = [
@@ -88,8 +90,8 @@ const COLUMNS = [
 ];
 
 function PlatformHistory({
-	setShowHistory = () => {}, list = [], loading = false, rest = {},
-	onboardingRequest = () => {},
+	handleViewHistory = () => {}, list = [], loading = false, rest = {}, onboardingRequest = () => {},
+	setFilterValues = () => {}, filterValues = {}, initialViewType = '',
 }) {
 	const { page, page_limit, total_count } = rest || {};
 
@@ -97,12 +99,20 @@ function PlatformHistory({
 		<>
 			<div className={styles.history_container}>
 				<div className={styles.header_section}>
-					<div role="presentation" className={styles.back} onClick={() => setShowHistory((p) => !p)}>
-						<IcMHome fill="#034AFD" width={20} height={20} />
-						<div className={styles.back_title}>Home</div>
+					<div className={styles.home_section}>
+						<div role="presentation" className={styles.back} onClick={handleViewHistory}>
+							<IcMHome fill="#034AFD" width={20} height={20} />
+							<div className={styles.back_title}>Home</div>
+						</div>
+						<IcMArrowRight className={styles.side_arrow} />
+						<div className={styles.title}>Task History</div>
 					</div>
-					<IcMArrowRight className={styles.side_arrow} />
-					<div className={styles.title}>Task History</div>
+					<AdoptionFilter
+						setFilterValues={setFilterValues}
+						filterValues={filterValues}
+						initialViewType={initialViewType}
+						pageType="history"
+					/>
 				</div>
 				{isEmpty(list) && !loading ? (
 					<div className={styles.empty_container}>

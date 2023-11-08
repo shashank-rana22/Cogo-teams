@@ -69,3 +69,11 @@
 	height: 18px;
 	margin-left: 6px;
 }
+
+.quotation_expired {
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+	margin-left: 4px;
+	color: #eb3425;
+}

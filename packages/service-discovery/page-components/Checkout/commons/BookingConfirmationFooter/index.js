@@ -87,6 +87,8 @@ function BookingConfirmationFooter({
 		checkout_type = '',
 		invoice = {},
 		rate = {},
+		handleUnlockLatestRate = () => {},
+		createSearchLoading = false,
 	} = useContext(CheckoutContext);
 
 	const {
@@ -197,8 +199,19 @@ function BookingConfirmationFooter({
 				/>
 
 				{hasExpired ? (
-					<span style={{ fontWeight: 400, marginLeft: '4px', color: '#eb3425' }}>
+					<span className={styles.quotation_expired}>
 						This Quotation has expired
+						{' '}
+						<Button
+							loading={createSearchLoading}
+							size="lg"
+							type="button"
+							themeType="link"
+							style={{ marginLeft: '4px' }}
+							onClick={handleUnlockLatestRate}
+						>
+							Create New Search
+						</Button>
 					</span>
 				) : null}
 			</div>

@@ -1,24 +1,18 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 
-import { CheckoutContext } from '../../../../context';
 import bookingConfirmationType from '../../../../helpers/bookingConfirmationType';
 import getBookingTypeOptions from '../../../../helpers/getBookingTypeOptions';
 
-const useHandleBookingConfirmation = () => {
+const useHandleBookingConfirmation = ({ checkoutMethod, detail }) => {
 	const {
 		general: { query },
 		userSettings,
 	} = useSelector((state) => state);
 
-	const {
-		detail = {},
-		checkoutMethod,
-	} = useContext(CheckoutContext);
-
-	const { services = {}, checkout_approvals = [], primary_service = '' } = detail;
+	const { services = {}, checkout_approvals = [] } = detail;
 
 	const controlledBookingServices = Object.values(services).filter(
 		(service) => (
@@ -40,24 +34,13 @@ const useHandleBookingConfirmation = () => {
 
 	const { importer_exporter = {} } = detail;
 
-	const { organization_settings = [], tags = [], is_agent_allowed_to_book = true } = importer_exporter;
+	const { organization_settings = [], tags = [] } = importer_exporter;
 
 	const { rfq_id, checkoutType } = query || {};
 
 	const excludeWhatsapp = checkoutType === 'rfq' || rfq_id;
 
 	const isOrgCP = tags.includes('partner');
-
-	const checkout_settings = organization_settings.filter(
-		(setting) => setting.setting_type === 'checkout',
-	)?.[GLOBAL_CONSTANTS.zeroth_index];
-
-	const { setting_config: { assisted_booking_services = [] } = {} } = checkout_settings || {};
-
-	const isAssistedBookingNotAllowed =	!isEmpty(assisted_booking_services)
-	&& (assisted_booking_services.includes('none')
-		|| !assisted_booking_services.includes(primary_service))
-		&& !is_agent_allowed_to_book && checkoutMethod !== 'controlled_checkout';
 
 	useEffect(() => {
 		if (bookingConfirmationMode) {
@@ -110,7 +93,6 @@ const useHandleBookingConfirmation = () => {
 		setIsVeryRisky,
 		error,
 		setError,
-		isAssistedBookingNotAllowed,
 		noRatesPresent,
 		setNoRatesPresent,
 	};

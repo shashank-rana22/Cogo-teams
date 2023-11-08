@@ -17,8 +17,6 @@ const useHandleConvenienceDetails = ({
 	rate = {},
 	detail = {},
 }) => {
-	const subTotal = total;
-
 	const { convenience_rate = {} } = convenienceDetails || {};
 
 	const { currency = '', price = '', quantity = 1 } = convenience_rate;
@@ -26,6 +24,8 @@ const useHandleConvenienceDetails = ({
 	const totalBeforeDiscount = rate?.tax_total_price || DEFAULT_VALUE;
 	const totalPrice = rate?.tax_total_price_discounted || DEFAULT_VALUE;
 	const discount = totalPrice - totalBeforeDiscount;
+
+	const subTotal = total - discount;
 
 	const [{ loading }, trigger] = useRequest(
 		{

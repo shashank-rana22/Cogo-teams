@@ -77,8 +77,7 @@ const GLOBAL_CONSTANTS = {
 	cargo_insurance: {
 		IN: ['fcl_freight', 'air_freight', 'lcl_freight'],
 	},
-	new_search_supported_services : ['fcl_freight'],
-	formats                       : {
+	formats: {
 		date: {
 			'dd/MM/yyyy'          : 'dd/MM/yyyy',
 			'dd MMM yyyy'         : 'dd MMM yyyy',
@@ -534,6 +533,9 @@ const GLOBAL_CONSTANTS = {
 		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
 		public_leaderboard_ranking_badge:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/performance-leaderboard.svg',
+		airline_default_icon:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png',
+		wider_arrow                     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/wide-arrow',
 		public_leaderboard_winner_icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/winner_icon.svg',
 		public_leaderboard_announcement : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/announcement.svg',
 	},
@@ -821,6 +823,12 @@ const GLOBAL_CONSTANTS = {
 						],
 					},
 					invoicing_parties_checkout: {
+						allowed_currency: ['INR', 'USD', 'VND', 'IDR', 'SGD', 'THB', 'CNY'],
+					},
+					preview_booking_checkout: {
+						allowed_currency: ['INR', 'USD', 'VND', 'IDR', 'SGD', 'THB', 'CNY'],
+					},
+					convenience_fee_checkout: {
 						allowed_currency: ['INR', 'USD', 'VND', 'IDR', 'SGD', 'THB', 'CNY'],
 					},
 					air_domestic: {

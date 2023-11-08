@@ -1,20 +1,16 @@
-import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
 
 import useGetRateCard from '../../../hooks/useGetRateCard';
 
 import BookCheckout from './BookToCheckout';
-
-const SelectedRateCard = dynamic(() => import('./SelectedRateCard'), {
-	ssr     : false,
-	loading : () => <div />,
-});
+import SelectedRateCard from './SelectedRateCard';
 
 function SelectedCardScreen({
 	setHeaderProps = () => {},
 	setRouterLoading = () => {},
 	headerProps = {},
 	cogoAssuredRates = [],
+	isMobile = false,
 }) {
 	const [screen, setScreen] = useState('selectedCard');
 	const [showShippingLineModal, setShowShippingLineModal] = useState(false);
@@ -23,7 +19,7 @@ function SelectedCardScreen({
 		data = {},
 		refetch = () => {},
 		loading = false,
-	} = useGetRateCard();
+	} = useGetRateCard({ service_type: 'fcl_freight' });
 
 	const {
 		rate_card: rateCardData = {},
@@ -45,6 +41,7 @@ function SelectedCardScreen({
 				showShippingLineModal,
 				setShowShippingLineModal,
 				setRouterLoading,
+				isMobile,
 			},
 		},
 		bookCheckout: {

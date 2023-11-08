@@ -1,6 +1,6 @@
 import { Select } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 
