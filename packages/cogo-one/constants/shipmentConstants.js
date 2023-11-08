@@ -85,3 +85,13 @@ export const SINGLE_LOCATIONS = [
 	'air_freight_local',
 	'lcl_freight_local',
 ];
+
+export const ROUTES_MAPPING = {
+	fcl_freight : 'fcl',
+	air_freight : 'air-freight',
+};
+
+export const TRADE_TYPE_MAPPING = {
+	import : 'Origin',
+	export : 'Destination',
+};
