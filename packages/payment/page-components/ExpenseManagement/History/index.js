@@ -27,7 +27,7 @@ const MONTHS = [
 	{ label: 'December', value: 12 },
 ];
 
-function ExpenseHistory({ toggleValue, hr_view, value, search_query }) {
+function ExpenseHistory({ toggleValue = false, hr_view = '', value = '', search_query = '' }) {
 	const {
 		loading, data, filters,
 		setFilters, refetchlist, debounceQuery,
@@ -43,7 +43,6 @@ function ExpenseHistory({ toggleValue, hr_view, value, search_query }) {
 	const [search, setSearch] = useState(search_query ? decodeURIComponent(search_query) : '');
 
 	debounceQuery(search);
-	console.log('search_query', search);
 
 	const handleUpdateReimbursement = async () => {
 		await updateReiembursement(payload?.id, payload?.action, remark_text, refetchlist);
@@ -59,7 +58,6 @@ function ExpenseHistory({ toggleValue, hr_view, value, search_query }) {
 		} else {
 			setShow1(true);
 		}
-		// updateReiembursement({ payload, action, refetchlist });
 	};
 
 	const handlePagination = (pageNumber) => {
@@ -108,8 +106,6 @@ function ExpenseHistory({ toggleValue, hr_view, value, search_query }) {
 											size="md"
 											placeholder="Category"
 											className={styles.select_input}
-									// name="payroll_status"
-									// control={control}
 											value={filters?.category}
 											options={status_data?.expense_category}
 											isClearable
@@ -123,8 +119,6 @@ function ExpenseHistory({ toggleValue, hr_view, value, search_query }) {
 											size="md"
 											placeholder="Status"
 											className={styles.select_input}
-									// name="payroll_status"
-									// control={control}
 											value={filters?.reimbursement_status}
 											options={status_data?.expense_status}
 											isClearable
@@ -145,7 +139,6 @@ function ExpenseHistory({ toggleValue, hr_view, value, search_query }) {
 									<Input
 										size="md"
 										className={styles.select_input}
-									// prefix={<IcMAppSearch className={styles.search_icon} width={20} height={20} />}
 										placeholder="Search"
 										onChange={(val) => {
 											setSearch(val);

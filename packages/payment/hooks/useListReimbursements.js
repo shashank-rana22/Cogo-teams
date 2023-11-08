@@ -2,7 +2,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState, useCallback, useEffect } from 'react';
 
-const useListReimbursements = ({ toggleValue, value }) => {
+const useListReimbursements = ({ toggleValue = false, value = '' }) => {
 	const [filters, setFilters] = useState({
 		page_limit : 10,
 		page       : 1,

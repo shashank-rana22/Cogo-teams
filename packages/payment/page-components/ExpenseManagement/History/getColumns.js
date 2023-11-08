@@ -1,6 +1,4 @@
 import { ButtonIcon } from '@cogoport/components';
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-// import formatDate from '@cogoport/globalization/utils/formatDate';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMDelete } from '@cogoport/icons-react';
 import { getMonth, getDate } from '@cogoport/utils';
@@ -28,7 +26,7 @@ function GetStatus(name) {
 	);
 }
 
-const getColumns = ({ setItem, setShow, handleUpdate }) => {
+const getColumns = ({ setItem = () => {}, setShow = () => {}, handleUpdate = () => {} }) => {
 	const columns = [
 		{
 			Header   : <div className={styles.header}>CATEGORY</div>,
@@ -121,15 +119,6 @@ const getColumns = ({ setItem, setShow, handleUpdate }) => {
 			),
 			id: 'status',
 		},
-		// {
-		// 	Header   : <div className={styles.header}>AMOUNT</div>,
-		// 	accessor : (item) => (
-		// 		<div className={styles.data}>
-		// 			{item.amount}
-		// 		</div>
-		// 	),
-		// 	id: 'amount',
-		// },
 		{
 			Header   : <div className={styles.header}>Actions</div>,
 			accessor : (item) => (
@@ -141,7 +130,6 @@ const getColumns = ({ setItem, setShow, handleUpdate }) => {
 							onClick={() => handleUpdate(item?.id, 'delete')}
 						>
 							<ButtonIcon size="md" icon={<IcMDelete />} themeType="primary" />
-							{/* <ButtonIcon size="md" icon={<IcMEdit />} themeType="primary" /> */}
 						</div>
 					)
 					: null

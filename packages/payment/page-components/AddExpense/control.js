@@ -31,14 +31,6 @@ const getControls = () => [
 		isPreviousDaysAllowed : true,
 		rules                 : { required: 'This is required' },
 	},
-	// {
-	// 	name                  : 'ended_at',
-	// 	label                 : 'End Date*',
-	// 	type                  : 'date-select',
-	// 	// placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-	// 	isPreviousDaysAllowed : true,
-	// 	rules                 : { required: 'This is required' },
-	// },
 	{
 		name        : 'amount',
 		label       : 'Amount',

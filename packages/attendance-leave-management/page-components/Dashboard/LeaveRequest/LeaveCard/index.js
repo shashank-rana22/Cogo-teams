@@ -3,7 +3,6 @@ import {
 	IcMArrowUp,
 	IcMArrowDown,
 } from '@cogoport/icons-react';
-// import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -21,7 +20,6 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 	const { request_label, pending_count, request_key } = data;
 	const [accordion, setAccordion] = useState(false);
 
-	// const router = useRouter();
 	const { data : requestData, setFilters, loading } = useGetEmployeeCollections({
 		isManager,
 		request_type : request_key,

@@ -25,12 +25,6 @@ function PayrollDashboard() {
 
 	const handleSetTab = (clickedTab) => {
 		setTab(clickedTab);
-
-		// if (clickedTab === 'expensemanagement') {
-		// 	router.push('/payment');
-		// } else {
-		// 	router.push(`/payment/${clickedTab}`);
-		// }
 	};
 
 	return (

@@ -12,11 +12,6 @@ const tabs = [
 		title     : 'My Payslips',
 		Component : <MyPayslips />,
 	},
-	// {
-	// 	name      : 'people',
-	// 	title     : 'People',
-	// 	Component : <PeopleSalary />,
-	// },
 ];
 
 export default tabs;

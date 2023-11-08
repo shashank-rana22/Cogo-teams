@@ -1,5 +1,4 @@
 import { Select, Toggle } from '@cogoport/components';
-// import { useState } from 'react';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
@@ -20,7 +19,10 @@ const CARDDATA = [
 
 ];
 
-function Expense({ toggleValue, handleSetToggle, data, loading, value, setValue }) {
+function Expense({
+	toggleValue = false,
+	handleSetToggle = () => {}, data = { }, loading = false, value = '', setValue = () => {},
+}) {
 	const { hr_view } = data || '-';
 	return (
 		<div className={styles.sub_container}>

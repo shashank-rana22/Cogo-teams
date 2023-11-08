@@ -20,7 +20,7 @@ const ELEMENT_MAPPING = {
 	fileUpload    : UploadController,
 };
 
-function AddNewExpense({ onClose, show }) {
+function AddNewExpense({ onClose = () => {}, show = false }) {
 	const { handleSubmit, control, formState: { errors }, reset } = useForm();
 	const { createReimbursement } = useCreateReimbursement();
 
@@ -33,7 +33,6 @@ function AddNewExpense({ onClose, show }) {
 			submitted_on   : values?.submitted_on,
 			attachment_url : values?.attachment?.finalUrl || values?.attachment,
 		};
-		// console.log('values', payload);
 		createReimbursement({ payload });
 		reset();
 		onClose();
@@ -68,15 +67,6 @@ function AddNewExpense({ onClose, show }) {
 								</div>
 							);
 						})}
-
-						{/* <div className={styles.control_container}>
-							<div className={styles.label}>
-								Attachment
-							</div>
-							<div className={styles.control}>
-								<FileSelect value={fileValue} onChange={setFileValue} type="input" />
-							</div>
-						</div> */}
 					</div>
 				</Modal.Body>
 				<Modal.Footer>

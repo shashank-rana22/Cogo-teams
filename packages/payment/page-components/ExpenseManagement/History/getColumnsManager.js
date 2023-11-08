@@ -1,4 +1,3 @@
-// import { IcMInfo } from '@cogoport/icons-react';
 import { ButtonIcon, Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMDownload } from '@cogoport/icons-react';
@@ -27,7 +26,7 @@ function GetStatus(name) {
 	);
 }
 
-const getColumnsManager = ({ setItem, setShow, handleUpdate, hr_view }) => {
+const getColumnsManager = ({ setItem = () => { }, setShow = () => {}, handleUpdate = () => {}, hr_view = '' }) => {
 	const columns = [
 		{
 			Header   : <div className={styles.header}>Name</div>,
@@ -51,17 +50,6 @@ const getColumnsManager = ({ setItem, setShow, handleUpdate, hr_view }) => {
 			),
 			id: 'category',
 		},
-		// {
-		// 	Header   : <div className={styles.header}>DESCRIPTION</div>,
-		// 	accessor : (item) => (
-		// 		<div
-		// 			className={styles.data}
-		// 		>
-		// 			{item?.description || '-'}
-		// 		</div>
-		// 	),
-		// 	id: 'description',
-		// },
 		{
 			Header   : <div className={styles.header}>Submitted On</div>,
 			accessor : (item) => (
@@ -148,15 +136,6 @@ const getColumnsManager = ({ setItem, setShow, handleUpdate, hr_view }) => {
 			),
 			id: 'status',
 		},
-		// {
-		// 	Header   : <div className={styles.header}>AMOUNT</div>,
-		// 	accessor : (item) => (
-		// 		<div className={styles.data}>
-		// 			{item.amount}
-		// 		</div>
-		// 	),
-		// 	id: 'amount',
-		// },
 		{
 			Header   : <div className={styles.header}>Actions</div>,
 			accessor : (item) => (

@@ -6,22 +6,13 @@ import { MONTHS } from '../../../../Constants/contants';
 
 import styles from './styles.module.css';
 
-function ActivityModal({ item, onClose, show }) {
+function ActivityModal({ item = {}, onClose = () => {}, show = false }) {
 	return (
 		<div className={styles.whole_container}>
 			<Modal size="xl" show={show} onClose={onClose} placement="center">
 				<Modal.Header title="Activity log" />
 				<Modal.Body>
 					<div className={styles.container}>
-						{/* <div className={styles.section}>
-							<span className={styles.column1}>Submitted On</span>
-							<span className={styles.column2}>
-								{
-								`${MONTHS[getMonth(new Date(item?.submitted_on))]}
-								${getDate(new Date(item?.submitted_on))}` || '-'
-}
-							</span>
-						</div> */}
 						<div className={styles.section}>
 							<span className={styles.column1}>Description</span>
 							<span className={styles.column2}>{item?.description || '-'}</span>
@@ -60,17 +51,6 @@ function ActivityModal({ item, onClose, show }) {
 							<span className={styles.column1}>L2 Remarks </span>
 							<span className={styles.column2}>{item?.level2_remarks || '-'}</span>
 						</div>
-						{/* <div className={styles.section}>
-							<span className={styles.column1}>Attachment</span>
-							<span className={styles.column2}>
-								<ButtonIcon
-									size="xl"
-									icon={<IcMDownload />}
-									themeType="primary"
-									onClick={() => window.open(item?.attachment_url, '_blank')}
-								/>
-							</span>
-						</div> */}
 					</div>
 				</Modal.Body>
 				<Modal.Footer>

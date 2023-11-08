@@ -34,8 +34,6 @@ function MyPayslips() {
 	const { loading, data: payslipData } = useGetListPayslip(parseInt(year, 10));
 
 	const rightForms = [
-		// { heading: 'Form 16s', subheading: 'View and download form 16s' },
-		// { heading: 'Salary Advance', subheading: 'Request an salary advance' },
 		{ heading: 'Raise Dispute', subheading: 'Have issues with the salary credited?' },
 	];
 
@@ -43,7 +41,6 @@ function MyPayslips() {
 		<div className={styles.main_container}>
 			<div className={styles.left_container}>
 				<div className={styles.flex}>
-					{/* <IcMArrowBack width={18} height={18} onClick={() => router.push('/payroll')} /> */}
 					<div className={styles.heading_container}>
 						<span className={styles.heading}>MY PAYSLIPS</span>
 						<span className={styles.subheading}>View all you payslips</span>
