@@ -1,11 +1,21 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+
 import getFormattedAmount from '../../../../utils/getFormattedAmount';
 
 const dataFormatter = ({ performance_data = {} }) => (
 	{
 		booked_revenue: {
 			label : 'Total Booked Revenue and Invoiced Revenue',
-			value : ((performance_data?.invoiced_revenue_count || 0)
-					+ (performance_data?.total_revenue_count || 0)),
+			value : formatAmount({
+				amount: ((performance_data?.invoiced_revenue_count || 0)
+				+ (performance_data?.total_revenue_count || 0)),
+				currency : 'USD',
+				options  : {
+					style                 : 'currency',
+					currencyDisplay       : 'symbol',
+					maximumFractionDigits : 2,
+				},
+			}),
 		},
 		quotations: {
 			label : 'No of Quotation Sent',
