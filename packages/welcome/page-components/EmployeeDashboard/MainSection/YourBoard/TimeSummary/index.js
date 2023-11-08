@@ -6,15 +6,15 @@ import React, { useState, useEffect } from 'react';
 
 import Loader from '../../../../../common/Loader';
 import useGetCheckinStats from '../../../../../hooks/useGetCheckinStats';
+import { getCurrentLocation } from '../../../../../hooks/useGetCurrentLocation';
 import useUpdateAttendance from '../../../../../hooks/useUpdateAttendance';
-import { getCurrentLocation } from '../../../../../utils/getCurrentLocation';
 
 import CurrentTime from './CurrentTime';
 import styles from './styles.module.css';
 
 function TimeSummary() {
 	const [coords, setCoords] = useState(null);
-	const { data, loading } = useGetCheckinStats();
+	const { data, loading, refetch } = useGetCheckinStats();
 
 	const getTime = (date, isDate = false) => {
 		if (!date) {
@@ -30,7 +30,7 @@ function TimeSummary() {
 	};
 
 	const { check_in, check_out, enable_check_out } = data || {};
-	const { loading : updateLoading, updateAttendance } = useUpdateAttendance({ check_in });
+	const { loading : updateLoading, updateAttendance } = useUpdateAttendance({ check_in, refetch });
 
 	useEffect(() => {
 		getCurrentLocation()
