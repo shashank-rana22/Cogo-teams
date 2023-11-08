@@ -1,4 +1,3 @@
-/* eslint-disable no-magic-numbers */
 import { IcMSend } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
