@@ -95,7 +95,7 @@ function SpotSearch() {
 				</div>
 
 				{!isEmpty(selectedMode) ? (
-					<>
+					<div className={styles.animation_div}>
 						<div className={styles.locations}>
 							<Routes
 								mode={selectedMode}
@@ -119,7 +119,7 @@ function SpotSearch() {
 							createSearch={createSearch}
 							createSearchLoading={loading}
 						/>
-					</>
+					</div>
 				) : null}
 
 				<OtherServices
