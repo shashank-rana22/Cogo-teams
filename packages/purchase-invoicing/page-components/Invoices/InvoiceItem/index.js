@@ -16,7 +16,7 @@ function InvoiceItem({
 			<div className={styles.header_container}>
 				<div className={styles.invoice_party_details}>
 					<div className={styles.invoice_party_name}>{item?.name || item?.business_name}</div>
-					<div className={styles.label}>Invoicing Party</div>
+					<div className={styles.label}>Collection Party</div>
 				</div>
 
 				<div className={styles.invoice_value_container}>

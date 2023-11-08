@@ -26,6 +26,7 @@ const useGetShipmentCrossEntityInvoice = ({ shipment_id = '', shipment_type = ''
 			await trigger({
 				params: {
 					shipment_id,
+					type: 'buy',
 				},
 			});
 		} catch (error) {
