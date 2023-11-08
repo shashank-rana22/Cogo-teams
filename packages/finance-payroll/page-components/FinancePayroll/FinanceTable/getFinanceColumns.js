@@ -144,6 +144,7 @@ const getFinanceColumns = ({
 									show={show === item.id}
 									onClose={() => setShow(false)}
 									placement="center"
+									className={styles.modal}
 								>
 									<Modal.Header title="Are you sure?" />
 									<Modal.Body>
