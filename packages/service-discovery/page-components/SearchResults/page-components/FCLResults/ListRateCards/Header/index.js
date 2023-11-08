@@ -1,12 +1,9 @@
-import dynamic from 'next/dynamic';
-
+import CopyUrl from '../../../../common/CopyUrl';
 import DetentionDemurrage from '../../../../common/D&D';
 import Filters from '../../../../common/Filters';
 import RefreshRate from '../../../../common/RefreshRate';
 
 import styles from './styles.module.css';
-
-const CopyUrl = dynamic(() => import('../../../../common/CopyUrl'), { ssr: false });
 
 function Header({
 	details = {},
