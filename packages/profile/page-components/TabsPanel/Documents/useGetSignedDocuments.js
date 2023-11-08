@@ -1,6 +1,6 @@
 import { Button, Toast } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -17,9 +17,6 @@ const useGetSignedDocuments = ({
 	setShow = () => {},
 	setName = () => {},
 	setUrl = () => {},
-	user_role = '',
-	setDocumentUrl = () => {},
-	setUploadShow = () => {},
 }) => ([
 	{
 		Header   : 'NAME',
@@ -52,20 +49,6 @@ const useGetSignedDocuments = ({
 					disabled={!item.url}
 				>
 					<span className={styles.view_text}>View</span>
-				</Button>
-				<Button
-					size="md"
-					themeType="secondary"
-					className={styles.view_button}
-					onClick={() => {
-						setName(item.name);
-						setDocumentUrl(item.url);
-						setUploadShow(true);
-						// handleOpenModal({ item, setdocno, setDocumentUrl, setName, setUploadShow });
-					}}
-					disabled={!(user_role === 'hrbp') && item.url !== ''}
-				>
-					<span className={styles.view_text}>{isEmpty(item.url) ? 'Upload' : 'Update'}</span>
 				</Button>
 			</div>
 		),

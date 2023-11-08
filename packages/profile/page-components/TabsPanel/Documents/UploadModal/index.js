@@ -11,15 +11,14 @@ import styles from './styles.module.css';
 // 	'Pan Card'     : 'pan_card',
 // };
 
-function UploadModal({ show, handleModal, docno, documentUrl, name, getEmployeeDetails }) {
+function UploadModal({ show = false, handleModal = () => {}, docno, documentUrl, name, getEmployeeDetails }) {
 	const { control, setValue, handleSubmit, reset } = useForm();
 	const { updateEmployeeDetails } = useUpdateEmployee({ handleModal, getEmployeeDetails });
-	console.log(documentUrl, 'show-check');
+	console.log(name, 'show-check');
 
 	const onSubmit = (values) => {
-		console.log(values, 'check-payload-controll');
 		let PERSONAL_DETAILS = {};
-		if (name === 'Aadhar Card') {
+		if (name === 'Aadhaar Card') {
 			PERSONAL_DETAILS = {
 				aadhar_card: {
 					document_url: values?.[`${name}document_url`]?.finalUrl
