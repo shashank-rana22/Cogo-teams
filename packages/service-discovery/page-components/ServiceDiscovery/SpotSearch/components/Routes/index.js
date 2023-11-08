@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, Toast, cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
@@ -52,10 +52,19 @@ function Routes({
 			...organization,
 		};
 
-		const isValid = isFormValid(valuesToBeChecked, setErrors);
+		let errorMessage = '';
 
-		if (!isValid) {
+		if (!isFormValid(valuesToBeChecked, setErrors)) {
 			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+			errorMessage = 'Please fill all required fields!';
+		}
+
+		if (formValues?.origin?.id === formValues?.destination?.id) {
+			errorMessage = 'Origin and Destination cannot be same';
+		}
+
+		if (errorMessage) {
+			Toast.error(errorMessage);
 			return;
 		}
 
@@ -79,17 +88,15 @@ function Routes({
 	};
 
 	useEffect(() => {
-		let canContinue = true;
+		let canContinue = false;
 
-		if (!formValues || isEmpty(formValues)) {
-			canContinue = false;
-		} else {
-			Object.keys(formValues).forEach((key) => {
-				if (!formValues[key] || isEmpty(formValues[key])) {
-					canContinue = false;
-				}
-			});
+		const condition = formValues && !isEmpty(formValues)
+		&& Object.values(formValues)?.every((val) => val && !isEmpty(val));
+
+		if (condition) {
+			canContinue = true;
 		}
+
 		setButtonDisabled(!canContinue);
 	}, [formValues]);
 

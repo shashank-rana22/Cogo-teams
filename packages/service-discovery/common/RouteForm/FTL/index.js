@@ -1,5 +1,6 @@
 import { Toggle, Toast } from '@cogoport/components';
 import { IcATruck } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import LocationControl from '../common/LocationControl';
@@ -9,6 +10,19 @@ import controls from './ftl-route-controls';
 import ReturnJourney from './ReturnJourney';
 import styles from './styles.module.css';
 import TouchPoint from './TouchPoint';
+
+const hasErrors = (formValues = {}) => {
+	let errorMessage = '';
+
+	if (isEmpty(formValues?.origin) || isEmpty(formValues?.destination)) {
+		errorMessage = 'Please fill all required fields!';
+	}
+
+	if (formValues?.origin?.id === formValues?.destination?.id) {
+		errorMessage = 'Origin and Destination cannot be same';
+	}
+	return errorMessage;
+};
 
 function FTLRouteForm({
 	mode = '',
@@ -21,12 +35,7 @@ function FTLRouteForm({
 	isMobile = false,
 	...restProps
 }) {
-	const [error, setError] = useState(() => {
-		if (!formValues?.origin || !formValues?.destination) {
-			return true;
-		}
-		return false;
-	});
+	const [error, setError] = useState(hasErrors(formValues));
 
 	const [originControls, destinationControls] = getControls(controls, mode);
 
@@ -36,7 +45,7 @@ function FTLRouteForm({
 
 	const handleToggle = async () => {
 		if (error) {
-			Toast.error('Please fill all required fields!');
+			Toast.error(error);
 
 			return;
 		}
@@ -62,12 +71,7 @@ function FTLRouteForm({
 	};
 
 	useEffect(() => {
-		setError(() => {
-			if (!formValues?.origin || !formValues?.destination) {
-				return true;
-			}
-			return false;
-		});
+		setError(hasErrors(formValues));
 	}, [formValues]);
 
 	return (
