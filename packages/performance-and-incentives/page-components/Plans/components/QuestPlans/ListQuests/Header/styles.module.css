@@ -8,3 +8,18 @@
 .heading {
 	margin: 0;
 }
+
+.header_end {
+	display: flex;
+	gap: 16px;
+}
+
+.create_button {
+	width: 50%;
+	white-space: nowrap;
+}
+
+.search_input {
+	height: 32px !important;
+	font-size: 14px;
+}

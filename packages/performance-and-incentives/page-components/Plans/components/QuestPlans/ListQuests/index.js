@@ -10,13 +10,15 @@ function ListQuests() {
 		list,
 		paginationData, getNextPage, params, setParams,
 		refetch,
+		debounceQuery,
+		control,
 	} = useGetQuestList({ manual: false });
 
 	const { handleClick } = useUpdateQuest({ afterUpdate: refetch });
 
 	return (
 		<>
-			<Header />
+			<Header control={control} debounceQuery={debounceQuery} />
 
 			<List
 				loading={loading}

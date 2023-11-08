@@ -1,9 +1,10 @@
 import { Button } from '@cogoport/components';
+import { InputController } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ control = {}, debounceQuery = () => {} }) {
 	const { push } = useRouter();
 
 	const onClickCreate = () => {
@@ -12,16 +13,30 @@ function Header() {
 
 	return (
 		<div className={styles.header}>
-			<h2 className={styles.heading}>Quests</h2>
 
-			<Button
-				size="lg"
-				themeType="primary"
-				type="button"
-				onClick={onClickCreate}
-			>
-				Create Quest
-			</Button>
+			<div className={styles.heading}>Quests</div>
+
+			<div className={styles.header_end}>
+				<InputController
+					name="q"
+					placeholder="Search name"
+					type="text"
+					onChange={(val) => debounceQuery(val)}
+					control={control}
+					size="md"
+					className={styles.search_input}
+				/>
+
+				<Button
+					size="md"
+					themeType="primary"
+					type="button"
+					onClick={onClickCreate}
+					className={styles.create_button}
+				>
+					Create Quest
+				</Button>
+			</div>
 		</div>
 	);
 }
