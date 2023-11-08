@@ -57,9 +57,8 @@ function SuccessModal({
 							currency : GLOBAL_CONSTANTS.currency_code.USD,
 							options  : {
 								style                 : 'currency',
-								notation              : 'compact',
-								compactDisplay        : 'short',
-								minimumFractionDigits : 2,
+								currencyDisplay       : 'symbol',
+								maximumFractionDigits : 2,
 							},
 						})}
 					</strong>
