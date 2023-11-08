@@ -200,7 +200,7 @@ function ConvenienceDetails({
 										options={[{ value: handling_fees.unit, label: startCase(handling_fees.unit) }]}
 										value={handling_fees.unit}
 										style={{ width: '180px' }}
-										disabled={source !== 'edit_margin'}
+										disabled={!shouldEditConvenienceFee || loading}
 									/>
 
 									<Select

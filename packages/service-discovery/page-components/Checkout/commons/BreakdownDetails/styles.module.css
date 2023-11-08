@@ -88,3 +88,12 @@
 		}
 	}
 }
+
+.info_text {
+	display: flex;
+	align-items: center;
+	margin-left: 12px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #ee3425;
+}
