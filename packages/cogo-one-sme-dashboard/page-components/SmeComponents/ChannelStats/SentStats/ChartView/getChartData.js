@@ -21,7 +21,7 @@ const DATA_KEYS = {
 	whatsapp: {
 		system: {
 			click : 'total_clicked_system_whatsapp',
-			open  : 'total_open_system_whatsapp',
+			open  : 'total_replied_system_whatsapp',
 			total : 'total_system_whatsapp',
 		},
 		agent: {
@@ -30,7 +30,7 @@ const DATA_KEYS = {
 		},
 		marketing: {
 			click : 'total_clicked_marketing_whatsapp',
-			open  : 'total_open_marketing_whatsapp',
+			open  : 'total_replied_marketing_whatsapp',
 			total : 'total_marketing_whatsapp',
 		},
 	},
@@ -116,7 +116,7 @@ const getChartData = ({
 				],
 			},
 			{
-				id   : 'Open Rate',
+				id   : `${channelType === 'whatsapp' ? 'Replied' : 'Open'} Rate`,
 				data : [
 					{
 						x     : 'open',
@@ -141,7 +141,7 @@ const getChartData = ({
 			},
 			{
 				name   : 'click_rate',
-				label  : 'Click Rate',
+				label  : `${channelType === 'whatsapp' ? 'Replied' : 'Open'} Rate`,
 				value  : clickRate,
 				change : calcChange({ currVal: clickRate, prevVal: prevClickRate }),
 				color  : channelType === 'whatsapp' ? '#ABCD62' : '#88CAD1',

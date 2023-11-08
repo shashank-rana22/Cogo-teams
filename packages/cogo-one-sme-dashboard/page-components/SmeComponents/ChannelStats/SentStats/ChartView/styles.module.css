@@ -43,7 +43,11 @@
 
 	:global {
 		.ui_percentage_view {
-			font-size: 11px;
+			font-size: 10px;
 		}
 	}
+}
+
+.label {
+	font-size: 13px;
 }

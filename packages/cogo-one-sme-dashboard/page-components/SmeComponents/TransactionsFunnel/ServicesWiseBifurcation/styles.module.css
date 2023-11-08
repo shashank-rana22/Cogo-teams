@@ -32,6 +32,8 @@
 
 .graph_container {
 	display: flex;
+	align-items: center;
+	height: 280px;
 }
 
 .pie_chart {
@@ -44,6 +46,12 @@
 	flex-wrap: wrap;
 	align-items: center;
 	width: calc(100% - 250px);
+	max-height: 100%;
+	overflow-y: scroll;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .legend_item {
@@ -51,7 +59,7 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 50%;
-	padding-right: 20px;
+	padding: 4px 20px 4px 0;
 }
 
 .legends_circle {

@@ -5,7 +5,10 @@ import React from 'react';
 import getStepperItems from './getStepperItems';
 import styles from './styles.module.css';
 
-function Header({ setHierarchyData = () => {}, hierarchyData = [] }) {
+function Header({
+	setHierarchyData = () => {},
+	hierarchyData = [],
+}) {
 	const items = getStepperItems({ hierarchyData });
 
 	return (

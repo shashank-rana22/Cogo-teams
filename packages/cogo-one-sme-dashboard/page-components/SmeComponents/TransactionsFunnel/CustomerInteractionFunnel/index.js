@@ -18,7 +18,7 @@ function CustomerInteractionFunnel({ widgetBlocks = null, filterParams = {} }) {
 	const data = useMemo(
 		() => ({
 			labels: CUSTOMER_INTERACTION_LABEL_MAPPING?.map(
-				(itm) => `${itm?.label}`,
+				(itm) => itm?.label,
 			),
 			colors : [['#7278AD'], ['#EDD7A9']],
 			values : CUSTOMER_INTERACTION_LABEL_MAPPING?.map((itm) => ([

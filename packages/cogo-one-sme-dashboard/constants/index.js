@@ -51,3 +51,9 @@ export const CUSTOMER_INTERACTION_LABEL_MAPPING = [
 		unallocated : 'unallocated_booked_shipments',
 	},
 ];
+
+export const COMMON_COLORS = [
+	'#88CAD1', '#FDE74D', '#F9AE64', '#F2E3C3', '#ABCD62',
+	'#ABB0DE', '#CFEAED', '#F8AEA8', '#CFBC93', '#888FD1',
+	'#ECF1FC', '#F37166', '#FDEBE9', '#E67240', '#4F4F4F',
+];

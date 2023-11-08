@@ -3,7 +3,11 @@ import { isEmpty, startOfDay } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 const getParams = ({ widgetBlocks, filterParams, selectedFilter, page, trend }) => {
-	const { date_range = {} } = filterParams || {};
+	const {
+		date_range = {},
+		partner_id = '',
+		role_id = [],
+	} = filterParams || {};
 
 	let blocks;
 
@@ -17,13 +21,15 @@ const getParams = ({ widgetBlocks, filterParams, selectedFilter, page, trend }) 
 
 	return 	{
 		blocks,
-		start_date          : startOfDay(date_range?.startDate) || startOfDay(new Date()),
+		start_date          : startOfDay(date_range?.startDate || new Date()),
 		end_date            : date_range?.endDate || new Date(),
 		trend_data_required : (trend === 'previous'),
 		filters             : {
 			range      : selectedFilter || undefined,
 			page       : page || undefined,
 			page_limit : page ? 5 : undefined,
+			partner_id : partner_id || undefined,
+			role_id    : isEmpty(role_id) ? undefined : role_id,
 		},
 	};
 };

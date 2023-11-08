@@ -9,13 +9,13 @@ function FilterContainer({
 	setFilterParams = () => {},
 	filterParams = {},
 }) {
-	const controls = dashboardFilters({ setFilterParams });
+	const controls = dashboardFilters({ setFilterParams, filterParams });
 
 	return (
 		<div className={styles.field_container}>
 			{controls.map(
 				(eachControl) => {
-					const { controlType, name } = eachControl || {};
+					const { controlType = '', name = '' } = eachControl || {};
 					const Element = getFieldControls(controlType);
 
 					if (!Element) {
@@ -29,12 +29,12 @@ function FilterContainer({
 						>
 							<Element
 								{...eachControl}
-								value={filterParams?.[name]}
+								size="sm"
 								onChange={(val) => setFilterParams(
 									(prev) => ({
 										...prev,
 										[name]      : val,
-										renderCount : prev + 1,
+										renderCount : (prev?.renderCount || 1) + 1,
 									}),
 								)}
 							/>

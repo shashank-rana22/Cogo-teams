@@ -15301,6 +15301,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'agent_scoring',
 		},
+		{
+			api          : 'list_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'list_partner_addresses',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 };
 

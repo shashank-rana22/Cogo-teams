@@ -15,14 +15,6 @@ const CampaignPieChart = dynamic(
 	},
 );
 
-const LeadsData = dynamic(
-	() => import('./CampaignsData/LeadsData'),
-	{
-		ssr     : false,
-		loading : () => <LoaderComp />,
-	},
-);
-
 const ChannelStats = dynamic(
 	() => import('./ChannelStats'),
 	{
@@ -170,15 +162,10 @@ function getComponentMapping({ filterParams = {} }) {
 		{
 			key  : 'campaign_structure',
 			Comp : () => (
-				<>
-					<CampaignPieChart
-						widgetBlocks={['get_total_campaigns_data']}
-						filterParams={filterParams}
-					/>
-					<LeadsData
-						filterParams={filterParams}
-					/>
-				</>
+				<CampaignPieChart
+					widgetBlocks={['get_total_campaigns_data']}
+					filterParams={filterParams}
+				/>
 			),
 			initialLoad: false,
 		},

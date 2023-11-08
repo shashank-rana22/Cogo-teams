@@ -34,7 +34,7 @@ function CampaignPieChart({
 				dominantBaseline="central"
 				className={styles.style_component_text}
 			>
-				{total_campaigns_data?.total_live || 0}
+				{campaignsData.reduce((acc, itm) => acc + (itm?.value || 0), 0)}
 			</text>
 
 		);
@@ -64,7 +64,6 @@ function CampaignPieChart({
 					<ResponsivePie
 						data={campaignsData}
 						margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-						padAngle={0.7}
 						innerRadius={0.55}
 						activeOuterRadiusOffset={8}
 						borderColor={{ theme: 'background' }}
