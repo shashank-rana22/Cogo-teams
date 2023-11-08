@@ -3,6 +3,7 @@ import {
 	asyncFieldsTicketTypes,
 } from '@cogoport/forms';
 import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOptions';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 function RenderLabel({ label = '' }) {
 	return (
@@ -20,6 +21,7 @@ const useFeedbackControls = ({
 	formattedSubCategories = [],
 	setSubCategories = () => {},
 	watchSubCategory = '',
+	setValue = () => {},
 }) => {
 	const categoryOptions = useGetAsyncTicketOptions({
 		...asyncTicketsCategory(),
@@ -54,6 +56,7 @@ const useFeedbackControls = ({
 				setSubCategories((p) => ({ ...p, options: val?.subcategories }));
 				resetField('sub_category');
 				resetField('issue_type');
+				resetField('serial_id');
 			},
 		},
 		{
@@ -68,6 +71,47 @@ const useFeedbackControls = ({
 				setSubCategories((p) => ({ ...p, subCatId: val?.subId }));
 				resetField('issue_type');
 			},
+		},
+		{
+			label          : <RenderLabel label="Select SID" />,
+			name           : 'serial_id',
+			asyncKey       : 'list_shipments',
+			valueKey       : 'serial_id',
+			controllerType : 'asyncSelect',
+			placeholder    : 'select sid',
+			rules          : { required: true },
+			initialCall    : true,
+			isClearable    : true,
+			onChange       : (_, obj) => {
+				resetField('service');
+				resetField('trade_type');
+				setValue('service', obj?.shipment_type);
+				if (!obj?.trade_type) {
+					setValue('trade_type', GLOBAL_CONSTANTS.options.inco_term?.[obj?.inco_term]?.trade_type);
+				} else {
+					setValue('trade_type', obj?.trade_type);
+				}
+			},
+		},
+		{
+			label          : <RenderLabel label="Select Service" />,
+			name           : 'service',
+			controllerType : 'select',
+			placeholder    : 'select service',
+			options        : GLOBAL_CONSTANTS.shipment_types,
+			isClearable    : true,
+			disabled       : true,
+			rules          : { required: true },
+		},
+		{
+			label          : <RenderLabel label="Select Trade Type" />,
+			name           : 'trade_type',
+			controllerType : 'select',
+			placeholder    : 'select trade type',
+			rules          : { required: true },
+			disabled       : true,
+			options        : GLOBAL_CONSTANTS.trade_types,
+			isClearable    : true,
 		},
 		{
 			...(ticketTypeOptions || {}),

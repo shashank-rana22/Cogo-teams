@@ -30,6 +30,7 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 		formState = {},
 		control = {},
 		resetField = () => {},
+		setValue = () => {},
 	} = formProps || {};
 
 	const { errors = {} } = formState || {};
@@ -61,6 +62,7 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 		formattedSubCategories,
 		setSubCategories,
 		watchSubCategory,
+		setValue,
 	});
 
 	const additionalControls = (additionalInfo || []).map((item) => ({
@@ -104,7 +106,12 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 					const { name, label, controllerType } = elementItem || {};
 					const Element = getFieldController(controllerType);
 
-					if (name === 'sub_category' && watchCategory !== 'Tech') {
+					const hideSid = name === 'serial_id' && watchCategory?.toLowerCase() !== 'shipment';
+					const hideService = name === 'service' && watchCategory?.toLowerCase() !== 'shipment';
+					const hideTradeType = name === 'trade_type' && watchCategory?.toLowerCase() !== 'shipment';
+					const hideSubCategory = name === 'sub_category' && watchCategory !== 'Tech';
+
+					if (hideService || hideTradeType || hideSubCategory || hideSid) {
 						return null;
 					}
 

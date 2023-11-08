@@ -33,23 +33,38 @@
 
 .title {
 	align-self: flex-start;
-	margin-right: 10px;
 	font-size: 12px;
 }
 
-.request_name {
+.name_section {
 	display: flex;
 	align-items: center;
+}
+
+.request_name {
+	max-width: 74%;
+	margin-left: 6px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.agent_type {
+	margin-left: 6px;
+	font-size: 10px;
+	color: #4f4f4f;
 }
 
 .source {
 	display: flex;
 	flex-direction: column;
+	margin-left: 6px;
 }
 
 .schedule_time {
 	display: flex;
 	align-items: center;
+	margin-left: 4px;
 	font-size: 12px;
 	color: #4f4f4f;
 }

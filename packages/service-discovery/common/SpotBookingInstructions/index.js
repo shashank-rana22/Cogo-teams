@@ -12,11 +12,11 @@ function AccordionTitle() {
 	);
 }
 
-function SpotBookingInstructions({ shippingLines = [], loading = false }) {
+function SpotBookingInstructions({ shippingLines = [], loading = false, setValue = () => {} }) {
 	return (
 		<div className={styles.content}>
 			<Accordion isOpen title={<AccordionTitle />}>
-				<AccordionContent shippingLines={shippingLines} loading={loading} />
+				<AccordionContent shippingLines={shippingLines} loading={loading} setValue={setValue} />
 			</Accordion>
 		</div>
 	);

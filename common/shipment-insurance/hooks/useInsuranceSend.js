@@ -3,13 +3,15 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, upperCase } from '@cogoport/utils';
 
+import getFormattedDate from '../helper/getFormattedDate';
+
 const getPayload = ({
 	formData = {}, draftData = {}, selectedAddress = {}, performedBy = '',
 	billingType,
 }) => {
 	const {
 		packageDescription, coverageFrom, coverageTo, invoiceNo, invoiceDate,
-		invoiceDoc = {}, panDoc = {}, gstDoc = {}, aadharDoc = {}, pan_number, aadharNumber, ...rest
+		invoiceDoc = {}, panDoc = {}, gstDoc = {}, aadharDoc = {}, pan_number, aadharNumber, transitDate, ...rest
 	} = formData || {};
 
 	const {
@@ -18,6 +20,9 @@ const getPayload = ({
 	} = draftData || {};
 
 	const { transitMode, originCountryId, destinationCountryId, policyCommodityId	} = cargoDetails || {};
+
+	const formmattedTransitDate = getFormattedDate({ currentDate: transitDate });
+	const formmattedInvoiceDate = getFormattedDate({ currentDate: invoiceDate });
 
 	return {
 		isPaid          : false,
@@ -50,12 +55,13 @@ const getPayload = ({
 				locationFrom : coverageFrom,
 				locationTo   : coverageTo,
 				policyCommodityId,
+				transitDate  : formmattedTransitDate,
 				...rest,
 			},
 			invoiceDetails: {
 				...invoiceDetails,
 				invoiceNo,
-				invoiceDate,
+				invoiceDate: formmattedInvoiceDate,
 			},
 			pocDetails,
 			verificationDoc: {

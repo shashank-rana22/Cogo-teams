@@ -9,15 +9,18 @@ function ServiceAndLineItems({
 	service = '',
 	serviceDetails = {},
 }) {
-	const { lineItems = [], invoiceLineItemTotal = '', billLineItemTotal = '' } = serviceDetails || {};
+	const {
+		lineItems = [], invoiceLineItemTotalByService = '', billLineItemTotalCurrencyByService = '',
+		billLineItemTotalByService = '', invoiceLineItemTotalCurrencyByService = '',
+	} = serviceDetails || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.service_name}>
 				<div className={styles.sub_content}>{startCase(service)}</div>
 				<div className={styles.sub_content}>
 					{formatAmount({
-						amount   : invoiceLineItemTotal,
-						currency : 'INR',
+						amount   : invoiceLineItemTotalByService,
+						currency : invoiceLineItemTotalCurrencyByService || 'INR',
 						options  : {
 							currencyDisplay : 'code',
 							style           : 'currency',
@@ -26,8 +29,8 @@ function ServiceAndLineItems({
 				</div>
 				<div className={styles.sub_content}>
 					{formatAmount({
-						amount   : billLineItemTotal,
-						currency : 'INR',
+						amount   : billLineItemTotalByService,
+						currency : billLineItemTotalCurrencyByService || 'INR',
 						options  : {
 							currencyDisplay : 'code',
 							style           : 'currency',
