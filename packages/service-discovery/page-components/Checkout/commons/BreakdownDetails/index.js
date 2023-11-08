@@ -1,6 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { Button, Accordion, cl, Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useContext } from 'react';
 
@@ -153,6 +154,19 @@ function BreakdownDetails({
 											details={detail.services[id] || {}}
 										/>
 									) : null}
+
+									{!isMobile
+									&& checkoutSource === 'spot_line_booking'
+									&& service_type === primary_service ? (
+										<div className={styles.info_text}>
+											<IcMInfo
+												width={12}
+												height={12}
+												style={{ marginRight: '4px' }}
+											/>
+											Add line items for any applicable charges
+										</div>
+										) : null}
 								</div>
 
 								{!isMobile && (noRatesFound ? (

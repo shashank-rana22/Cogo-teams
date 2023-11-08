@@ -108,10 +108,6 @@ function OutstandingList({
 		);
 	}
 
-	const COGOPORT_ENTITIES = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).map(
-		(key) => GLOBAL_CONSTANTS.cogoport_entities?.[key].name,
-	);
-
 	return (
 		<div
 			className={styles.card}
@@ -276,7 +272,7 @@ function OutstandingList({
 							(item?.taggedState && entityCode !== '101_301')
 								? (<Pill size="md" color="green">{startCase(item?.taggedState)}</Pill>) : null
 						}
-						{!isEmpty(taggedPersonDetails) && !COGOPORT_ENTITIES.includes(partnerName) ? (
+						{!isEmpty(taggedPersonDetails) ? (
 							<Pill size="md" color="green">
 								{['MZM', 'RUBIX'].includes(partnerName)
 									? `${partnerName}- ${startCase(taggedName)}`
