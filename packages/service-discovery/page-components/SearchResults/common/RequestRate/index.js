@@ -5,7 +5,7 @@ import { useState } from 'react';
 import FeedBackModal from './FeedBackModal';
 import styles from './styles.module.css';
 
-function RequestRate({ details = {}, className = {}, rates = [], isMobile = false }) {
+function RequestRate({ details = {}, className = null, rates = [], isMobile = false }) {
 	const [showFeedbackModal, setShowFeedBackModal] = useState(false);
 
 	const ADDITIONAL_SERVICES = [];
