@@ -58,7 +58,7 @@ function SelectedStats({
 															Cancelled Shipments
 														</div>
 														<div className={styles.value_data}>
-															{performance_data?.cancelled_shipments || '-'}
+															{performance_data?.cancelled_shipments || '0'}
 														</div>
 													</div>
 												</>
