@@ -1,5 +1,5 @@
-import { Placeholder } from '@cogoport/components';
-import { IcMDataPipeline } from '@cogoport/icons-react';
+import { Placeholder, Tooltip } from '@cogoport/components';
+import { IcMDataPipeline, IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -38,6 +38,35 @@ function SelectedStats({
 						>
 							<div className={styles.label_data}>
 								{valueKeys.label}
+								{key === 'shipments'
+									? (
+										<Tooltip
+											interactive
+											className={styles.tooltip_container}
+											content={(
+												<>
+													<div className={styles.data_row}>
+														<div className={styles.label_data}>
+															Active Shipments
+														</div>
+														<div className={styles.value_data}>
+															{performance_data?.booked_shipments || '-'}
+														</div>
+													</div>
+													<div className={styles.data_row}>
+														<div className={styles.label_data}>
+															Cancelled Shipments
+														</div>
+														<div className={styles.value_data}>
+															{performance_data?.cancelled_shipments || '-'}
+														</div>
+													</div>
+												</>
+											)}
+										>
+											<IcMInfo className={styles.info_icon} />
+										</Tooltip>
+									) : null}
 							</div>
 
 							<div className={styles.value_data}>

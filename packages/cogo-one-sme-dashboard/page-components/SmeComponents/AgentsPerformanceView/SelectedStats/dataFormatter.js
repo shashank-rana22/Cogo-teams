@@ -7,8 +7,8 @@ const dataFormatter = ({ performance_data = {} }) => (
 		booked_revenue: {
 			label : 'Total Booked Revenue and Invoiced Revenue',
 			value : formatAmount({
-				amount: ((performance_data?.invoiced_revenue_count || 0)
-				+ (performance_data?.total_revenue_count || 0)),
+				amount: ((performance_data?.booked_revenue || 0)
+				+ (performance_data?.invoiced_revenue || 0)),
 				currency : 'USD',
 				options  : {
 					style                 : 'currency',
