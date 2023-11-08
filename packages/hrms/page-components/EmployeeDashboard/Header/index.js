@@ -87,7 +87,7 @@ function Header({ summaryData }) {
 	// const { rectangle } = GLOBAL_CONSTANTS.image_url;
 
 	const handleShowInbox = () => {
-		router.push('/attendance-leave-management?showInbox=true&back=welcome');
+		router.push('/attendance-leave-management?showInbox=true&back=hrms');
 	};
 
 	const handleRoute = (val) => {
