@@ -14,7 +14,6 @@ const useGetColumns = (setShowModal = () => {}, setModalUrl = () => {}, setDocum
 	};
 
 	const handleShow = (url) => {
-		console.log(url);
 		setModalUrl(url);
 		setShowModal(true);
 	};

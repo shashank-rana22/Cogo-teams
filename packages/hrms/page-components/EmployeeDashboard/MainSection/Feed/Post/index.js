@@ -96,8 +96,6 @@ function Post({ feedRefetch }) {
 		setDraftMessages('');
 	};
 
-	console.log('draftMessages', draftMessages);
-
 	return (
 		<>
 			<div className={styles.container}>

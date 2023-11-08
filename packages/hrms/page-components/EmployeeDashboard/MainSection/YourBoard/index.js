@@ -21,8 +21,6 @@ function YourBoard({ data, loading }) {
 
 	const { params, setParams, data : hierarchy, loading : hierarchyLoading } = useGetHierarchyDetails();
 
-	console.log('hierarchy', hierarchy);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>

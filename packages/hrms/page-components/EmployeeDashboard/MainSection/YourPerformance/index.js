@@ -19,8 +19,6 @@ function YourPerformance({
 
 	const { self_rating, rating_month } = rating_list || {};
 
-	console.log('summaryData', summaryData, rating_list);
-
 	return (
 		<>
 			{(user_role === 'employee' || isEmployeeDashboardActive === false) && (

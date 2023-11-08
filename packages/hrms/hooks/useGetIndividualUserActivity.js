@@ -9,7 +9,6 @@ const useGetIndividualUserActivity = (selectedUser) => {
 
 	const getIndividualUserActivity = useCallback(
 		(id) => {
-			console.log(id, 'id', selectedUser);
 			if (id || selectedUser) {
 				trigger({
 					params: {

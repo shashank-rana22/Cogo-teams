@@ -88,28 +88,12 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 	const { createCompanyFeed } = useCreateCompanyFeed(feedRefetch, 'deleted');
 
 	const [selectedIcon, setSelectedIcon] = useState('appLike');
-	// const [taggedPeople, setTaggedPeople] = useState([]);
 
 	useEffect(() => {
 		if (reactionsObject) {
 			setReactionData(reactionsObject);
 		}
 	}, [reactionsObject]);
-
-	// useEffect(() => {
-	// 	if (['appreciation', 'work_anniversary', 'birthday'].includes(item?.feed_type)) {
-	// 		const initials = item?.tagged_employee_names?.map((name) => {
-	// 			const words = name?.split(' ');
-	// 			const firstInitial = words?.[0][0]?.toUpperCase();
-	// 			const lastInitial = words?.[words.length - 1][GLOBAL_CONSTANTS.zeroth_index]?.toUpperCase();
-	// 			return firstInitial + lastInitial;
-	// 		});
-
-	// 		const filteredArray = initials.filter(Boolean);
-
-	// 		setTaggedPeople(filteredArray);
-	// 	}
-	// }, [item.feed_content, item?.feed_type, item?.tagged_employee_names]);
 
 	useEffect(() => {
 		if (Array.isArray(item?.my_reaction)) {
@@ -121,7 +105,6 @@ function PostContainer({ item = {}, bypass, feedRefetch }) {
 	}, [item?.my_reaction]);
 
 	const handleIconSelect = async (newIcon) => {
-		console.log('item', item);
 		setSelectedIcon(newIcon);
 		const payload = {
 			item_id       : item.id,

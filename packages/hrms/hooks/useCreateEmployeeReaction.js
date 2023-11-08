@@ -17,7 +17,6 @@ const useCreateEmployeeReaction = () => {
 			console.log('err', error);
 		}
 	};
-	console.log(data, 'react-data');
 
 	return { data, loading, createEmployeeReaction };
 };
