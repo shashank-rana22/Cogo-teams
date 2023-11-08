@@ -162,6 +162,16 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'ignore_application_process',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'ignore_all_process',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	employee_portal: [
 		{

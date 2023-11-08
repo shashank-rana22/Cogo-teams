@@ -1,7 +1,7 @@
 import { Button, Toast, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMTaskCompleted, IcMArrowRight } from '@cogoport/icons-react';
+import { IcMArrowRight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -10,6 +10,7 @@ import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationPr
 import CancellationRequest from '../CancellationRequest';
 
 import DatePicker from './DatePicker';
+import Heading from './Heading';
 import InterviewQuestions from './InterviewQuestions';
 import JoiningBonus from './JoiningBonus';
 import NotesForManager from './NotesForManager';
@@ -28,10 +29,10 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 		setValue,
 	} = useForm();
 
-	const { hr_meet, application_status, applicant_details } = data || {};
+	const { hr_meet, application_status, applicant_details, application_process_details } = data || {};
 	const { last_working_day } = applicant_details || {};
 	const { hr_meet:hrMeet } = hr_meet || {};
-	const { sub_process_detail_id, sub_process_data = {}, is_complete } = hrMeet || {};
+	const { sub_process_detail_id, sub_process_data = {}, is_complete, is_ignored } = hrMeet || {};
 	const { lastWorkingDay } = sub_process_data || {};
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, handleNext });
 	const compulsory_question_1 = watch('your_notes');
@@ -99,21 +100,33 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 			setValue('suggested_date', last_working_day ? new Date(last_working_day) : undefined);
 			setValue('joining_bonus_amount', sub_process_data?.joiningBonus);
 			setValue('joining_bonus_clawback', sub_process_data?.joiningBonusApplicable);
-			setValue('your_notes', sub_process_data?.notes[GLOBAL_CONSTANTS.zeroth_index].value);
-			setValue('your_notes_cb', sub_process_data?.notes[GLOBAL_CONSTANTS.zeroth_index].is_shared_with_manager);
-			setValue('your_notes_2', sub_process_data?.notes[GLOBAL_CONSTANTS.one].value);
-			setValue('your_notes_cb_2', sub_process_data?.notes[GLOBAL_CONSTANTS.one].is_shared_with_manager);
-			setValue('your_notes_3', sub_process_data?.notes[GLOBAL_CONSTANTS.two].value);
-			setValue('your_notes_cb_3', sub_process_data?.notes[GLOBAL_CONSTANTS.two].is_shared_with_manager);
-			setValue('your_notes_4', sub_process_data?.notes[THIRD_INDEX].value);
-			setValue('your_notes_cb_4', sub_process_data?.notes[THIRD_INDEX].is_shared_with_manager);
-			setValue('your_notes_manager', sub_process_data?.notes[FOURTH_INDEX].value);
+			setValue('your_notes', sub_process_data?.notes?.[GLOBAL_CONSTANTS.zeroth_index].value);
+			setValue('your_notes_cb', sub_process_data?.notes?.[GLOBAL_CONSTANTS.zeroth_index].is_shared_with_manager);
+			setValue('your_notes_2', sub_process_data?.notes?.[GLOBAL_CONSTANTS.one].value);
+			setValue('your_notes_cb_2', sub_process_data?.notes?.[GLOBAL_CONSTANTS.one].is_shared_with_manager);
+			setValue('your_notes_3', sub_process_data?.notes?.[GLOBAL_CONSTANTS.two].value);
+			setValue('your_notes_cb_3', sub_process_data?.notes?.[GLOBAL_CONSTANTS.two].is_shared_with_manager);
+			setValue('your_notes_4', sub_process_data?.notes?.[THIRD_INDEX].value);
+			setValue('your_notes_cb_4', sub_process_data?.notes?.[THIRD_INDEX].is_shared_with_manager);
+			setValue('your_notes_manager', sub_process_data?.notes?.[FOURTH_INDEX].value);
 		}
 	}, [setValue, data, sub_process_data, last_working_day, lastWorkingDay]);
 
+	if (is_ignored) {
+		return (
+			<Heading
+				title="HR MEETING"
+				subTitle="Summary of application"
+				application_process_details={application_process_details}
+				refetch={refetch}
+				isComplete={is_complete}
+				isIgnored={is_ignored}
+			/>
+		);
+	}
 	return (
 		<>
-			<div className={styles.header}>
+			{/* <div className={styles.header}>
 				<div className={styles.left_header}>
 					<span className={styles.upper_text}>HR MEETING</span>
 					<span className={styles.lower_text}>Summary of application</span>
@@ -124,7 +137,15 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 						<span style={{ marginLeft: '4px' }}>Notes & Logs</span>
 					</Button>
 				</div>
-			</div>
+			</div> */}
+			<Heading
+				title="HR MEETING"
+				subTitle="Summary of application"
+				application_process_details={application_process_details}
+				refetch={refetch}
+				isComplete={is_complete}
+				isIgnored={is_ignored}
+			/>
 			{application_status === 'cancellation_requested' ? (
 				<CancellationRequest
 					data={data}

@@ -8,14 +8,28 @@ import Heading from '../HRMeeting/Heading';
 import styles from './styles.module.css';
 
 function HandoverTakeoverClearance({ data = {}, refetch = () => {}, handleBack = () => {}, handleNext = () => {} }) {
-	const { hoto_clearance, application_status, applicant_details } = data || {};
+	const { hoto_clearance, application_status, applicant_details, application_process_details } = data || {};
 	const { process_user_details, hoto_clearance:hotoClearance } = hoto_clearance || {};
 	let { name } = process_user_details || {};
-	const { is_complete } = hotoClearance || {};
+	const { is_complete, is_ignored } = hotoClearance || {};
 	const { sub_process_data } = hotoClearance || {};
 	const { name:approver_name } = sub_process_data || {};
 
 	name = !approver_name ? name : approver_name;
+
+	if (is_ignored) {
+		return (
+			<Heading
+				title="HANDOVER TAKEOVER CLEARANCE"
+				subTitle="Knowledge Transfer"
+				isComplete={is_complete}
+				name={name}
+				refetch={refetch}
+				isIgnored={is_ignored}
+				application_process_details={application_process_details}
+			/>
+		);
+	}
 
 	return (
 		<>
@@ -24,6 +38,9 @@ function HandoverTakeoverClearance({ data = {}, refetch = () => {}, handleBack =
 				subTitle="Knowledge Transfer"
 				isComplete={is_complete}
 				name={name}
+				refetch={refetch}
+				isIgnored={is_ignored}
+				application_process_details={application_process_details}
 			/>
 			{application_status === 'cancellation_requested' ? (
 				<CancellationRequest
