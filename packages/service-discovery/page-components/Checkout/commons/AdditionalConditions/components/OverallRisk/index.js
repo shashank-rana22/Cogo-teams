@@ -42,7 +42,7 @@ function OverallRisk({ detail = {}, setIsVeryRisky = () => {} }) {
 		{ manual: false },
 	);
 
-	const { overall_credit_risk = 'very_severe', message = '' } = data || {};
+	const { overall_credit_risk = '', message = '' } = data || {};
 
 	useEffect(() => {
 		setIsVeryRisky(
