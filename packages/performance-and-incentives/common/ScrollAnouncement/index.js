@@ -55,8 +55,7 @@ function ScrollAnnouncement({ style = {} }) {
 						key={loop_item}
 						ref={index === 0 ? ref : null}
 						style={{
-							animationDuration : `${(ref?.current?.offsetWidth || 1200) / 80}s`,
-							transform         : `translateX(${0}px)`,
+							animationDuration: `${(ref?.current?.offsetWidth || 1200) / 80}s`,
 						}}
 						className={cl`${styles.bar_content} ${isScrolling && styles.bar_content_scrolling}`}
 					>
