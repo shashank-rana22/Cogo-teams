@@ -1,7 +1,7 @@
 import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useGetQuests = () => {
+const useGetQuests = ({ id = null }) => {
 	const [params, setParams] = useState({
 		page                      : 1,
 		page_limit                : 10000,
@@ -10,6 +10,7 @@ const useGetQuests = () => {
 		cogo_entity_data_required : true,
 		role_data_required        : true,
 		filters                   : {
+			id                     : id || undefined,
 			status                 : 'active',
 			overlapping_date_range : {
 				from_date : new Date(),

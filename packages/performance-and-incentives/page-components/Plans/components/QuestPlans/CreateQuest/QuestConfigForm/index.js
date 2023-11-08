@@ -1,11 +1,11 @@
 import { Button } from '@cogoport/components';
-import { InputController } from '@cogoport/forms';
 import { IcMJobsConfig } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 
+import ScrollAnnouncement from '../../../../../../common/ScrollAnouncement';
 import blockOptions from '../../../../constants/select-block-options';
 
 import Block from './Block';
+import QuestStringEditor from './QuestStringEditor';
 import styles from './styles.module.css';
 import useQuestConfig from './useQuestConfig';
 
@@ -28,51 +28,32 @@ function QuestConfigForm(props) {
 		handleSubmit,
 		handleClick,
 		formattedString,
-		onClickFill,
 		handleResetString,
+		setValue,
+		editor,
+		setEditor,
 		...rest
 	} = useQuestConfig({ data, refetch, questData });
 
+	const scroll_list = [{ quest_string: editor.toString('html') }];
+
+	// console.log('list::', list);
+
 	return (
-		<>
+		<div className={styles.container_head}>
+			<ScrollAnnouncement id={data?.id} list={scroll_list} />
+			<QuestStringEditor
+				editor={editor}
+				setEditor={setEditor}
+				formattedString={formattedString}
+				handleResetString={handleResetString}
+			/>
 			<div className={styles.heading}>
 				<IcMJobsConfig height={20} width={20} />
 				Set Configurations
 			</div>
 
 			<div className={styles.blocks_container}>
-
-				<div className={styles.generated_string}>
-					<div className={styles.generated_string_heading}>Auto-generate quest:</div>
-					<div className={styles.generated_string_content}>{formattedString}</div>
-				</div>
-
-				<div className={styles.quest_string_label}>
-					Quest String
-					<sup className={styles.sup}>*</sup>
-				</div>
-
-				<div className={styles.input_string_div}>
-
-					<InputController
-						name="quest_string"
-						size="sm"
-						control={control}
-						errors={errors}
-						rules={{ required: 'Required' }}
-						style={{ width: '80%' }}
-						value={data?.quest_string}
-					/>
-					<Button disabled={isEmpty(formattedString)} onClick={onClickFill}>Use Auto-generated </Button>
-					<Button
-						themeType="secondary"
-						disabled={data?.quest_string === watch('quest_string')}
-						onClick={handleResetString}
-					>
-						Reset
-
-					</Button>
-				</div>
 				{fields.map((field, index) => (
 					<Block
 						{...rest}
@@ -112,7 +93,7 @@ function QuestConfigForm(props) {
 					Save Configurations
 				</Button>
 			</div>
-		</>
+		</div>
 	);
 }
 

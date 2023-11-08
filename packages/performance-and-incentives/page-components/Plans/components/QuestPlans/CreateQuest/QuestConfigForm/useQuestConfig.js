@@ -17,6 +17,13 @@ const FIELD_LABEL_MAPPING = {
 	parameter              : 'agent_scoring_parameter_id',
 };
 
+let richTextEditor;
+
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require, import/no-unresolved
+	richTextEditor = require('react-rte').default;
+}
+
 const getFormattedPayload = (formValues) => {
 	const formattedData = (formValues?.blocks || []).reduce((acc, item) => {
 		const { sub_blocks } = item;
@@ -44,6 +51,8 @@ const getFormattedPayload = (formValues) => {
 
 const useQuestConfig = ({ data = {}, questData = {} }) => {
 	const { push } = useRouter();
+
+	const [editor, setEditor] = useState(richTextEditor?.createValueFromString((data?.quest_string || ''), 'html'));
 
 	const [editSubBlock, setEditSubBlock] = useState({});
 
@@ -112,14 +121,12 @@ const useQuestConfig = ({ data = {}, questData = {} }) => {
 	const handleClick = async (formValues) => {
 		const payload = getFormattedPayload(formValues);
 
-		const { quest_string } = formValues;
-
 		try {
 			await trigger({
 				data: {
 					agent_scoring_quest_id             : data?.id,
 					agent_scoring_quest_configurations : payload,
-					quest_string,
+					quest_string                       : editor.toString('html'),
 					name                               : questData?.name || undefined,
 					start_date                         : questData?.date_range?.startDate || undefined,
 					end_date                           : questData?.date_range?.endDate
@@ -134,7 +141,7 @@ const useQuestConfig = ({ data = {}, questData = {} }) => {
 		}
 	};
 
-	const formattedString = getStringFromQuest({ data: labelData, blockId });
+	const formattedString = getStringFromQuest({ data: labelData, blockId, questData });
 
 	const onChangeChild = ({ val, obj, index, name, subBlockName }) => {
 		if (!REQUIRED_FEILDS.includes(name)) return;
@@ -161,12 +168,8 @@ const useQuestConfig = ({ data = {}, questData = {} }) => {
 		setLabelData((label) => ({ ...label, [subBlockName]: newLabelData }));
 	};
 
-	const onClickFill = () => {
-		setValue('quest_string', formattedString);
-	};
-
 	const handleResetString = () => {
-		setValue('quest_string', data?.quest_string);
+		setEditor(richTextEditor?.createValueFromString((data?.quest_string || ''), 'html'));
 	};
 
 	useEffect(() => {
@@ -191,8 +194,10 @@ const useQuestConfig = ({ data = {}, questData = {} }) => {
 		formattedString,
 		setBlockId,
 		prefillValues: formattedDefaultValues,
-		onClickFill,
 		handleResetString,
+		setValue,
+		editor,
+		setEditor,
 	};
 };
 
