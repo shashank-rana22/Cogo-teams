@@ -1,8 +1,29 @@
-import { IcMCross, IcMEdit } from '@cogoport/icons-react';
+import { IcMBooking, IcMCross, IcMEdit, IcMTick } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';
+
+const STATUS_COMPONENT_MAPPING = {
+	active: {
+		update_status : 'active',
+		title         : 'Activate',
+		icon          : IcMTick,
+		showKeys      : ['draft', 'inactive'],
+	},
+	inactive: {
+		update_status : 'inactive',
+		title         : 'De-activate',
+		icon          : IcMCross,
+		showKeys      : ['draft', 'active'],
+	},
+	draft: {
+		update_status : 'draft',
+		title         : 'Draft',
+		icon          : IcMBooking,
+		showKeys      : ['active', 'inactive'],
+	},
+};
 
 function Actions({
 	quest_id = '',
@@ -10,6 +31,8 @@ function Actions({
 	status = 'active',
 }) {
 	const { push } = useRouter();
+
+	const { showKeys = [] } = STATUS_COMPONENT_MAPPING[status] || {};
 
 	return (
 		<div className={styles.action_container}>
@@ -24,19 +47,22 @@ function Actions({
 				</div>
 			</div>
 
-			{status === 'active'
-				? (
+			{showKeys.map((key) => {
+				const { update_status, title, icon: Icon } = STATUS_COMPONENT_MAPPING[key];
+				return (
 					<div
+						key={title}
 						role="presentation"
 						className={styles.workflow_cta}
-						onClick={() => handleUpdate({ id: quest_id, status: 'inactive' })}
+						onClick={() => handleUpdate({ id: quest_id, status: update_status })}
 					>
 						<div className={styles.cta_text}>
-							<IcMCross width={24} height={24} style={{ marginRight: '8px' }} />
-							De-activate
+							<Icon width={24} height={24} style={{ marginRight: '8px' }} />
+							{title}
 						</div>
 					</div>
-				) : null }
+				);
+			})}
 		</div>
 	);
 }
