@@ -1,12 +1,13 @@
 import {
 	Button, Input, Table, Pagination, Popover, Toggle, cl,
 } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useGetJobList from '../hook/useGetJobList';
+import { isFilterApplied } from '../utils/isFilteredApplied';
 
 import EmptyState from './commons/EmptyState';
 import Content from './commons/FiltersContent';
@@ -32,12 +33,12 @@ function ShipmentAuditFunction({
 	const [tradeTab, setTradeTab] = useState('');
 	const [tax, setTax] = useState('Pre');
 	const [filters, setFilters] = useState({
-		Service               : '',
-		Entity                : '',
-		walletUsed            : '',
-		operationalClosedDate : '',
-		creationDate          : '',
-		tradeType             : '',
+		Service               : undefined,
+		Entity                : undefined,
+		walletUsed            : undefined,
+		operationalClosedDate : undefined,
+		creationDate          : undefined,
+		tradeType             : undefined,
 		exclude               : ['cancelled_shipments', 'zero_expense'],
 	});
 
@@ -81,12 +82,12 @@ function ShipmentAuditFunction({
 		setPaginationFilters((prev) => ({ ...prev, page: 1 }));
 		setTradeTab('');
 		setFilters({
-			Service               : '',
-			Entity                : '',
-			walletUsed            : '',
-			operationalClosedDate : '',
-			creationDate          : '',
-			tradeType             : '',
+			Service               : undefined,
+			Entity                : undefined,
+			walletUsed            : undefined,
+			operationalClosedDate : undefined,
+			creationDate          : undefined,
+			tradeType             : undefined,
 			exclude               : ['cancelled_shipments', 'zero_expense'],
 		});
 	}, [activeTab]);
@@ -148,15 +149,19 @@ function ShipmentAuditFunction({
 						)}
 						className={styles.pop_over_style}
 					>
-						<Button
-							themeType="primary"
-							size="md"
-							onClick={() => {
-								setShow(!show);
-							}}
-						>
-							Filters
-						</Button>
+						<div className={styles.button_container}>
+							<Button
+								themeType="primary"
+								size="md"
+								onClick={() => {
+									setShow(!show);
+								}}
+							>
+								{!isFilterApplied(filters) ? <div className={styles.filter_dot} /> : null}
+								<IcMFilter />
+								Filters
+							</Button>
+						</div>
 					</Popover>
 				</div>
 
