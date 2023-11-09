@@ -1,0 +1,26 @@
+{
+  "name": "@cogoport/cogo-one-sme-dashboard",
+  "version": "0.1.0",
+  "description": "Package for Cogo One Sme Dashboard",
+  "private": true,
+  "main": "./index.js",
+  "sideEffects": false,
+  "dependencies": {
+    "@amcharts/amcharts5": "^5.4.1",
+    "@cogoport/charts": "^1.0.1",
+    "@cogoport/components": "^1.0.441",
+    "@cogoport/constants": "workspace:^0.1.0",
+    "@cogoport/context": "workspace:^0.1.0",
+    "@cogoport/error": "workspace:^1.0.0",
+    "@cogoport/forms": "workspace:0.1.0",
+    "@cogoport/globalization": "workspace:^0.0.1",
+    "@cogoport/icons-react": "^1.0.101",
+    "@cogoport/next": "workspace:0.1.0",
+    "@cogoport/request": "workspace:0.1.0",
+    "@cogoport/store": "workspace:0.1.0",
+    "@cogoport/utils": "^1.2.6",
+    "funnel-graph-js": "^1.4.2",
+    "react": "18.2.0",
+    "stylelint": "^14.16.1"
+  }
+}

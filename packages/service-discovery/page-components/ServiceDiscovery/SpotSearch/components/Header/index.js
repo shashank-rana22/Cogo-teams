@@ -1,5 +1,3 @@
-import React from 'react';
-
 import OrganisationForm from '../../../../../common/OrganisationForm';
 
 import styles from './styles.module.css';

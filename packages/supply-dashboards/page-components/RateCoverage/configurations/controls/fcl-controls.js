@@ -7,7 +7,6 @@ import { currencyOptions, rateTypeOptions } from '../helpers/constants';
 const fclControls = ({
 	data,
 	listShippingLineOptions,
-	CommodityOptions,
 	originLocationOptions, destinationLocationOptions,
 	source,
 	serviceIdPresent,
@@ -124,7 +123,6 @@ const fclControls = ({
 			span        : 3,
 			value       : data?.commodity,
 			disabled    : data?.commodity,
-			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
 		{

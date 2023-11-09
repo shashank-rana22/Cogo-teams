@@ -1,6 +1,5 @@
 import { Pagination, Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 
@@ -17,14 +16,11 @@ function TableComponent(props) {
 		restFilters,
 		setFilters = () => {},
 		heading,
-		organization = {},
-		createSearch = () => {},
-		createSearchLoading = false,
 	} = props;
 
 	const { list = [], page, total_count } = data || {};
 
-	const columns = useGetTableColumns({ activeTab, fields, organization, createSearch, createSearchLoading });
+	const columns = useGetTableColumns({ activeTab, fields });
 
 	if (!loading && isEmpty(list)) {
 		return (

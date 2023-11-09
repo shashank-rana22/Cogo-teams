@@ -11,17 +11,18 @@ import styles from './styles.module.css';
 function OrganicCustomer({ item = {}, setScheduleDemo = () => {}, handlePlaceCall = () => {}, initialViewType = '' }) {
 	const {
 		request_type = '', customer = {}, organization = {}, intro_call = {},
-		serial_id = '', escalation_cycle = '',
+		serial_id = '', escalation_cycle = '', metadata = {},
 	} = item || {};
 	const {
-		name = '', mobile_country_code = '', mobile_number = '', lead_user_id = '',
+		name = '', mobile_country_code = '', mobile_number = '',
 		id: pocId = '',
 	} = customer || {};
 	const {
-		account_type = '', tags = [], city = {}, id: orgId = '',
-		preferred_languages = [], business_name = '', demo_requested = false,
+		account_type = '', tags = [], city = {}, id: preferred_languages = [], business_name = '',
+		demo_requested = false,
 	} = organization || {};
 	const { display_name = '' } = city || {};
+	const { lead_organization_id = '', lead_user_id = '', organization_id = '' } = metadata || {};
 
 	return (
 		<div className={styles.card}>
@@ -94,7 +95,8 @@ function OrganicCustomer({ item = {}, setScheduleDemo = () => {}, handlePlaceCal
 							number       : mobile_number,
 							pocId,
 							leadUserId   : lead_user_id,
-							orgId,
+							orgId        : organization_id,
+							leadOrgId    : lead_organization_id,
 							isUnkownUser : true,
 						})}
 					>

@@ -11,13 +11,14 @@ function WalletModal({
 	formProps = {},
 	handleGenerateCode = () => {},
 	createLoading = false,
+	isMobile = false,
 }) {
-	const { handleSubmit } = formProps;
+	const { handleSubmit = () => {} } = formProps;
 
 	return (
 		<Modal
-			style={{ minWidth: 800 }}
-			placement="top"
+			style={{ minWidth: isMobile ? 'auto' : 800 }}
+			placement={isMobile ? 'bottom' : 'top'}
 			show={show}
 			size="md"
 			onClose={onClose}

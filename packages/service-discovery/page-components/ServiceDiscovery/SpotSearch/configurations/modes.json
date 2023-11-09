@@ -7,6 +7,20 @@
 		"type":["seaport"]
 	},
 	{ 
+		"value": "air_freight", 
+		"label": "AIR", 
+		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png",
+		"is_available": true,
+		"type": ["airport"] 
+	},
+	{ 
+		"value": "ftl_freight", 
+		"label": "FTL", 
+		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/12bc32389e72a35152448914b558e2e4.png",
+		"is_available": true,
+		"type": ["seaport", "airport", "pincode","railway_terminal"]  
+	},
+	{ 
 		"value": "lcl_freight", 
 		"label": "LCL", 
 		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/3f7e67408b987cff893ec755108978b9.png",
@@ -14,24 +28,10 @@
 		"type":["seaport"] 
 	},
 	{ 
-		"value": "air_freight", 
-		"label": "AIR", 
-		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png",
-		"is_available": false,
-		"type": ["airport"] 
-	},
-	{ 
-		"value": "ftl_freight", 
-		"label": "FTL", 
-		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/12bc32389e72a35152448914b558e2e4.png",
-		"is_available": false,
-		"type": ["seaport", "airport", "pincode","railway_terminal"]  
-	},
-	{ 
 		"value": "ltl_freight", 
 		"label": "LTL", 
 		"icon": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/b2fc24951d7692249a305f7fa38fe02e.png",
-		"is_available": false,
+		"is_available": true,
 		"type": ["seaport", "airport", "pincode","warehouse"] 
 	},
 	{ 

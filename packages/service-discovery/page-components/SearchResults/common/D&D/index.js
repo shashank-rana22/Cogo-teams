@@ -1,4 +1,4 @@
-import { Button, Popover } from '@cogoport/components';
+import { Button, Modal, Popover } from '@cogoport/components';
 import { IcMFtick, IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -42,6 +42,7 @@ const isAlreadyPresent = (service_details = {}) => {
 function DetentionDemurrage({
 	details = {},
 	refetch = () => {},
+	isMobile = false,
 }) {
 	const [show, setShow] = useState(false);
 
@@ -55,6 +56,41 @@ function DetentionDemurrage({
 	);
 
 	const alreadyAddedServicesCodes = alreadyPresentServices.map((item) => item.code);
+
+	if (isMobile) {
+		return (
+			<div>
+				<Button
+					size={isMobile ? 'sm' : 'md'}
+					themeType="link"
+					className={styles.button}
+					onClick={() => setShow(!show)}
+				>
+					<IcMPlus height={22} width={22} className={styles.add_icon} fill="black" />
+					Add Free Days
+					{alreadyPresentServices && !isEmpty(alreadyPresentServices)
+				&& <IcMFtick width={20} height={20} fill="#ee3425" />}
+				</Button>
+
+				{show ? (
+					<Modal show={show} onClose={() => setShow(false)} placement="bottom">
+						<Modal.Body>
+							<Detention
+								heading="Update No. of Free Days"
+								showReset
+								buttonTitle="Update"
+								alreadyAddedServicesCodes={alreadyAddedServicesCodes}
+								refetch={refetch}
+								detail={details}
+								defaultValues={defaultValues}
+								setShow={setShow}
+							/>
+						</Modal.Body>
+					</Modal>
+				) : null}
+			</div>
+		);
+	}
 
 	return (
 		<Popover
@@ -75,7 +111,7 @@ function DetentionDemurrage({
 			)}
 		>
 			<Button
-				size="md"
+				size={isMobile ? 'sm' : 'md'}
 				themeType="link"
 				className={styles.button}
 				onClick={() => setShow(!show)}

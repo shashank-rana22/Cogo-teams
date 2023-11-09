@@ -3,9 +3,10 @@ import { useForm } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
 
 import getElementController from '../../../../configs/getElementController';
+import useGetIsMobile from '../../../../helpers/useGetIsMobile';
 import useSpotSearchService from '../../../../page-components/SearchResults/hooks/useCreateSpotSearchService';
 import getOptions from '../../../../page-components/SearchResults/utils/getOptions';
-import { getFclPayload } from '../configs';
+import { getServiceWisePayload } from '../configs';
 import findKey from '../utils/findKeyInObject';
 
 import styles from './styles.module.css';
@@ -21,9 +22,10 @@ function AdditionalServicesForm({
 }) {
 	const { addService = () => {}, loading = false } = useSpotSearchService({
 		refetchSearch,
-		rateCardData,
 		checkout_id: detail?.checkout_id,
 	});
+
+	const isMobile = useGetIsMobile();
 
 	const {
 		control,
@@ -46,15 +48,35 @@ function AdditionalServicesForm({
 	});
 
 	const onSubmit = async (values) => {
-		const payload = getFclPayload({
+		const payload = getServiceWisePayload({ primary_service: detail.primary_service || detail.service_type })({
 			rateCardData,
 			detail,
 			additionalFormInfo : values,
 			service_name       : service.name,
 		});
-		await addService(payload);
-		setHeaderProps({});
+		const serviceAdded = await addService(payload);
+
+		if (serviceAdded) {
+			setHeaderProps({});
+		}
 	};
+
+	const fields = service?.controls?.reduce((acc, curr) => ({ ...acc, [curr.name]: curr }), {});
+
+	if (service?.name === 'warehouse') {
+		const { expected_cargo_gated_in, expected_cargo_gated_out } = watch();
+
+		if (expected_cargo_gated_in) {
+			fields.expected_cargo_gated_out.minDate = expected_cargo_gated_in;
+			fields.expected_cargo_gated_out.isPreviousDaysAllowed = true;
+		}
+
+		if (expected_cargo_gated_out) {
+			fields.expected_cargo_gated_in.maxDate = expected_cargo_gated_out;
+		}
+	}
+
+	const controls = Object.values(fields) || [];
 
 	return (
 		<div className={styles.container}>
@@ -65,56 +87,77 @@ function AdditionalServicesForm({
 					style={{ cursor: 'pointer' }}
 				/>
 			</div>
+
 			<div className={styles.control_container}>
-				{service.controls.map((controlItem) => {
-					let newControl = { ...controlItem };
+				<div className={styles.form}>
+					{controls.map((controlItem) => {
+						let newControl = { ...controlItem };
 
-					const { condition = {}, name = '' } = newControl;
+						const {
+							condition = {},
+							name = '',
+							style = {},
+							type = '',
+							optionsListKey = '',
+							label = '',
+							rules = {},
+							showOptional = false,
+						} = newControl;
 
-					const Element = getElementController(newControl.type);
+						const Element = getElementController(type);
 
-					let flag = true;
+						let flag = true;
 
-					Object.keys(condition).forEach((condItem) => {
-						if (WATCH_MAP?.[condItem] !== undefined) {
-							if (
-								!condition?.[condItem].includes(
-									WATCH_MAP?.[condItem],
-								)
-							) {
+						Object.keys(condition).forEach((condItem) => {
+							if (WATCH_MAP?.[condItem] && !condition?.[condItem].includes(
+								WATCH_MAP?.[condItem],
+							)) {
 								flag = false;
 							}
+						});
+
+						if (!flag) {
+							return null;
 						}
-					});
 
-					if (!flag) {
-						return null;
-					}
+						const value = commonControls.includes(name) ? findKey(detail, name) : '';
 
-					const value = commonControls.includes(newControl.name) ? findKey(detail, newControl.name) : '';
+						if (optionsListKey) {
+							const finalOptions = getOptions(optionsListKey, {});
 
-					if (newControl.optionsListKey) {
-						const finalOptions = getOptions(newControl.optionsListKey, {});
+							newControl = { ...newControl, options: finalOptions };
+						}
 
-						newControl = { ...newControl, options: finalOptions };
-					}
+						return (
+							<div key={name} className={styles.control_style}>
+								<div className={styles.label}>
+									{label}
 
-					return (
-						<div key={newControl.name} className={styles.control_style}>
-							<div className={styles.label}>
-								{ newControl.label}
-							</div>
+									{rules?.required && label ? (
+										<div className={styles.required_mark}>*</div>
+									) : null}
 
-							<Element {...newControl} control={control} value={value} />
-
-							{errors[name] && (
-								<div className={styles.error_message}>
-									{errors[name]?.message}
+									{showOptional && label ? (
+										<div className={styles.optional_text}>(Optional)</div>
+									) : null}
 								</div>
-							)}
-						</div>
-					);
-				})}
+
+								<Element
+									{...newControl}
+									control={control}
+									value={value}
+									style={{ ...style, width: isMobile ? '100%' : style.width }}
+								/>
+
+								{errors[name] && (
+									<div className={styles.error_message}>
+										{errors[name]?.message}
+									</div>
+								)}
+							</div>
+						);
+					})}
+				</div>
 
 				<Button
 					onClick={handleSubmit(onSubmit)}
@@ -124,11 +167,9 @@ function AdditionalServicesForm({
 					disabled={loading}
 					loading={loading}
 				>
-					Update Details
+					Add Service
 				</Button>
-
 			</div>
-
 		</div>
 
 	);

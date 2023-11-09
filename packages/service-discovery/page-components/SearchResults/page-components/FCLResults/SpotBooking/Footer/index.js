@@ -121,7 +121,7 @@ function Footer({
 				options : {
 					style                 : 'currency',
 					currencyDisplay       : 'code',
-					maximumFractionDigits : 0,
+					maximumFractionDigits : 2,
 				},
 			})];
 		}

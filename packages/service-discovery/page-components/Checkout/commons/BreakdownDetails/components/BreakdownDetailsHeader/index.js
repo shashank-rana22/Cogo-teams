@@ -22,7 +22,7 @@ function BreakdownDetailsHeader({
 	rateDetails = [],
 	checkoutSource = '',
 }) {
-	const { rate = {}, conversions = {} } = useContext(CheckoutContext);
+	const { rate = {}, conversions = {}, isMobile = false } = useContext(CheckoutContext);
 
 	const { isConditionMatches } = useGetPermission({ navigation: 'service_discovery' });
 
@@ -42,6 +42,7 @@ function BreakdownDetailsHeader({
 				base_currency,
 				currencies,
 				currency_conversion_delta = 0.04,
+				cogofx_currencies = {},
 			} = conversions || {};
 
 			const fxFees = ONE + currency_conversion_delta;
@@ -49,10 +50,10 @@ function BreakdownDetailsHeader({
 				return value;
 			}
 			if (base_currency === fromCurrency) {
-				return (value / currencies[toCurrency]) * fxFees;
+				return (value / (currencies[toCurrency] || cogofx_currencies[toCurrency])) * fxFees;
 			}
-			const inBase = value * currencies[fromCurrency];
-			return (inBase / currencies[toCurrency]) * fxFees;
+			const inBase = value * (currencies[fromCurrency] || cogofx_currencies[fromCurrency]);
+			return (inBase / (currencies[toCurrency] || cogofx_currencies[toCurrency])) * fxFees;
 		},
 		[conversions],
 	);
@@ -142,7 +143,7 @@ function BreakdownDetailsHeader({
 		let percent = (finalMargin / totalPrice) * MAX_PERCENT;
 		percent = parseFloat(percent).toFixed(ROUND_OFF_VALUE);
 
-		setProfitPercent(percent);
+		setProfitPercent(totalPrice ? percent : DEFAULT_VALUE);
 		setLatestDemandMargin(parseFloat(finalMargin).toFixed(ROUND_OFF_VALUE));
 	}, [
 		buyPrice,
@@ -169,6 +170,8 @@ function BreakdownDetailsHeader({
 				profitPercent={profitPercent}
 				latestDemandMargin={latestDemandMargin}
 				condition={condition}
+				isMobile={isMobile}
+				convertCurrencyValue={convertCurrencyValue}
 			/>
 
 			{!disableForm ? (

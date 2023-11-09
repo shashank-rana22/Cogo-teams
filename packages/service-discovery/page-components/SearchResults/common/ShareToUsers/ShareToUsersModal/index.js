@@ -1,11 +1,9 @@
-import { Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 
 import useShareModal from '../../../hooks/useShareModal';
 
-import Footer from './Footer';
-import Header from './Header';
-import InviteUser from './InviteUser';
 import List from './List';
+import styles from './styles.module.css';
 
 function ShareToUsersModal({
 	shareType = '',
@@ -18,16 +16,11 @@ function ShareToUsersModal({
 	comparedRateCardDetails = [],
 }) {
 	const {
-		modalType = '',
-		handleModalType,
 		shareRateCardLoading = false,
 		handleSubmit,
 		onCreate,
 		selectedUser = {},
 		setSelectedUser,
-		errors = {},
-		control,
-		newControls,
 	} = useShareModal({
 		rate,
 		onSuccess,
@@ -46,29 +39,27 @@ function ShareToUsersModal({
 			<Modal.Header title="Share Rate Cards" />
 
 			<Modal.Body>
-				<Header modalType={modalType} onClick={handleModalType} />
+				<div className={styles.title}>
+					Select user from list below
+				</div>
 
-				{modalType === 'select_user' ? (
-					<List
-						selectedId={selectedUser.id}
-						setSelectedUser={setSelectedUser}
-						org_id={org_id}
-					/>
-				) : (
-					<InviteUser
-						errors={errors}
-						control={control}
-						newControls={newControls}
-					/>
-				)}
+				<List
+					selectedId={selectedUser.id}
+					setSelectedUser={setSelectedUser}
+					org_id={org_id}
+				/>
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Footer
-					modalType={modalType}
+				<Button
+					type="button"
+					disabled={shareRateCardLoading}
 					onClick={handleSubmit(onCreate)}
-					loading={shareRateCardLoading}
-				/>
+					size="md"
+					themeType="accent"
+				>
+					Share
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);

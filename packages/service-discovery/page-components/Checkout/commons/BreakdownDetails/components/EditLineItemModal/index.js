@@ -56,7 +56,7 @@ function EditLineItemModal({
 
 					<div className={styles.container_details}>
 						<ContainerDetails
-							primary_service={service_type}
+							service_type={service_type}
 							details={details}
 						/>
 					</div>

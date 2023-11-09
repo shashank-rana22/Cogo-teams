@@ -25,17 +25,16 @@ function SpotBooking({ detail = {}, setScreen = () => {} }) {
 				</p>
 			</div>
 
-			<div className={styles.right_section}>
-				<Button
-					type="button"
-					size="md"
-					themeType="secondary"
-					onClick={() => setScreen('spot_booking')}
-				>
-					<span className={styles.button_text}>Make Spot Line Booking</span>
-					<IcMArrowRight fontSize={15} />
-				</Button>
-			</div>
+			<Button
+				type="button"
+				size="md"
+				themeType="secondary"
+				onClick={() => setScreen('spot_booking')}
+				className={styles.button}
+			>
+				<span className={styles.button_text}>Make Spot Line Booking</span>
+				<IcMArrowRight fontSize={15} />
+			</Button>
 		</div>
 	);
 }
