@@ -1,5 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { Button, Pagination, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty, startOfMonth } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
@@ -15,6 +17,7 @@ import useGetKamWiseOutstandingsStats from '../../../hooks/useGetKamWiseOutstand
 import useGetOrgOutstanding from '../../../hooks/useGetOrgOutstanding';
 import useGetSageArOutstandingsStats from '../../../hooks/useGetSageArOustandingStats';
 import useGetServiceWiseOutstandingsStats from '../../../hooks/useGetServiceWiseOutstandingsStats';
+import useSendOutstandingReport from '../../../hooks/useSendOutstandingReport';
 
 import CcCallList from './CcCallList';
 import Filters from './Filters';
@@ -34,6 +37,11 @@ function OverAllOutstanding({
 	entityCode = '',
 	setSelectedOrgId = () => {},
 }) {
+	const { profile } = useSelector((state) => state);
+	const AUTHORISED_USER_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
+		GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id,
+		'd058d879-8cb2-4071-8bd3-c5807f534dd4',
+		'd058d879-8cb2-4071-8bd3-c5807f534dd4', '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44'];
 	const [formFilters, setFormFilters] = useState({
 		kamId              : '',
 		salesAgentId       : '',
@@ -54,7 +62,7 @@ function OverAllOutstanding({
 		setFilters,
 		filtersApplied,
 	} = useGetOrgOutstanding({ entityCode });
-
+	const { downloadOsReport } = useSendOutstandingReport();
 	const { include_defaulters = false } = filters || {};
 
 	const [dateFilter, setDateFilter] = useState({
@@ -162,6 +170,17 @@ function OverAllOutstanding({
 	return (
 		<>
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				{AUTHORISED_USER_IDS.includes(profile?.user?.id)
+					? (
+						<Button
+							onClick={() => downloadOsReport()}
+							themeType="secondary"
+							size="lg"
+							style={{ marginRight: 10 }}
+						>
+							Send OS Report
+						</Button>
+					) : null}
 				<Filters
 					controls={controls}
 					filters={filters}
