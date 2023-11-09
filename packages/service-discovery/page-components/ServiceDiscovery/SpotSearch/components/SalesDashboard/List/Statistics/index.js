@@ -1,5 +1,3 @@
-import React from 'react';
-
 import StatItem from './StatItem';
 import styles from './styles.module.css';
 
@@ -12,11 +10,13 @@ function Statistics({
 	setBucketParams = () => {},
 	activeStat = {},
 	restFilters = {},
+	loading = false,
 }) {
 	return (
 		<div className={styles.container}>
 			{(statsArray || []).map((stat) => {
-				const { key = '' } = stat;
+				const { key = '', params = {} } = stat;
+
 				const keyValue = statsData?.[key];
 
 				return (
@@ -28,15 +28,19 @@ function Statistics({
 								? keyValue
 								: keyValue - (statsData?.not_sent || ZERO_VALUE)
 						}
-						isActive={activeStat?.key === stat?.key}
+						isActive={activeStat?.key === key}
+						disabled={loading}
 						onClick={() => {
+							if (loading) {
+								return;
+							}
 							setFilters({
 								...(restFilters || {}),
 								activeStat : stat,
 								page       : 1,
 								page_limit : 10,
 							});
-							setBucketParams(stat.params || {});
+							setBucketParams(params);
 						}}
 					/>
 				);

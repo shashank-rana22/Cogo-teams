@@ -81,7 +81,7 @@ function VerifyAccount({
 			placement="fullscreen"
 			closeOnOuterClick={handleClose}
 		>
-			<Modal.Header title="KYC Documents Verification" />
+			<Modal.Header title={`${startCase(verifyType)} verfication`} />
 			<Modal.Body>
 				<div className={styles.container}>
 					<FileViewer

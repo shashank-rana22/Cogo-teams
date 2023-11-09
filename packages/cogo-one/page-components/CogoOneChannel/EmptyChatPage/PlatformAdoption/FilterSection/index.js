@@ -1,12 +1,13 @@
 import { IcMArrowNext } from '@cogoport/icons-react';
 
 import { ACTIVITY_MAPPING } from '../../../../../constants/platformAdoptionConstant';
+import AdoptionFilter from '../AdoptionFilter';
 
 import styles from './styles.module.css';
 
 function FilterSection({
-	unReadChatsCount = 0, setActiveTab = () => {},
-	unReadMailsCount = 0,
+	unReadChatsCount = 0, setActiveTab = () => {}, initialViewType = '',
+	unReadMailsCount = 0, setFilterValues = () => {}, filterValues = {},
 }) {
 	const COUNT_MAPPING = {
 		chat_pending: {
@@ -79,6 +80,12 @@ function FilterSection({
 					);
 				})}
 			</div>
+			<AdoptionFilter
+				filterValues={filterValues}
+				setFilterValues={setFilterValues}
+				initialViewType={initialViewType}
+				pageType="home"
+			/>
 		</div>
 	);
 }

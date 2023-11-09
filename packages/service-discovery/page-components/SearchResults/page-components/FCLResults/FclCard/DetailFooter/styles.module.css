@@ -4,9 +4,15 @@
 	justify-content: space-between;
 	padding: 8px;
 	background-color: #f2f3fa;
+	border-radius: 0 0 8px 8px;
 
 	&.cogo_assured {
 		background: #fef3e9;
+	}
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
 	}
 }
 
@@ -20,6 +26,9 @@
 	@media (max-width: 1080px) {
 		width: fit-content;
 	}
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }
 
 .wrapper {
@@ -32,7 +41,7 @@
 .other_details_tag {
 	min-width: max-content;
 	margin-right: 12px;
-	font-size: 11px;
+	font-size: 10px;
 	font-weight: 500;
 	color: #e47200;
 	cursor: pointer;
@@ -40,6 +49,10 @@
 	&.selected {
 		font-weight: 700;
 		text-decoration: underline;
+	}
+
+	@media (max-width: 768px) {
+		margin-right: 0;
 	}
 }
 

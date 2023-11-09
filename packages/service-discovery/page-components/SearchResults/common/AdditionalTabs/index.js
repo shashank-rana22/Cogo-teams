@@ -1,9 +1,9 @@
-import RequestRate from '../EmptyState/RequestRate';
+import RequestRate from '../RequestRate';
 
 import SpotBooking from './SpotBooking';
 import styles from './styles.module.css';
 
-function AdditionalTabs({ detail = {}, rates = [], loading = false, setScreen = () => {} }) {
+function AdditionalTabs({ detail = {}, rates = [], loading = false, setScreen = () => {}, isMobile = false }) {
 	if (loading) {
 		return null;
 	}
@@ -14,6 +14,7 @@ function AdditionalTabs({ detail = {}, rates = [], loading = false, setScreen = 
 				<RequestRate
 					details={detail}
 					rates={rates}
+					isMobile={isMobile}
 				/>
 			</div>
 

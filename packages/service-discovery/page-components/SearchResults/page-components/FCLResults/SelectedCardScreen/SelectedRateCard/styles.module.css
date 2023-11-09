@@ -1,69 +1,11 @@
 .container {
+	display: flex;
+	flex-direction: column;
 	padding: 0 24px;
 	background-color: #fbfbfb;
 }
 
-.services {
-	display: flex;
-	flex-wrap: wrap; /* Wrap items for smaller screens */
-	justify-content: space-between;
-	padding: 20px 0;
-}
-
-.service_bundling {
-	width: 100%; /* Initially take up the entire width */
-	margin-bottom: 20px; /* Add some spacing between services */
-
-	@media (min-width: 768px) {
-		width: 25%; /* For larger screens, take 25% width */
-	}
-}
-
-.additional_services {
-	width: 100%; /* Initially take up the entire width */
-
-	@media (min-width: 768px) {
-		width: 70%; /* For larger screens, take 70% width */
-	}
-}
-
-.loading_container {
-	padding: 24px;
-}
-
-.loading_heading {
-	margin-bottom: 20px;
-	font-size: 16px;
-	font-weight: 600;
-	color: #000;
-}
-
-.loading_service_item {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	height: 60px;
-	background: #fff;
-	border: 1px dashed #f3eae7;
-	border-radius: 4px;
-
-	&.active {
-		background: #f3fafa;
-		border: 1px solid #eaf2f3;
-	}
-}
-
-.add_icon {
-	margin-right: 25px;
-	cursor: pointer;
-	background: #fff;
-	border: 1.5px solid #221f20;
-	border-radius: 50%;
-}
-
-.cogo_assured_text {
-	margin: 8px 0 12px;
-	font-size: 12px;
-	font-weight: 600;
-	color: #f00;
+.dnd_container {
+	margin: 24px 0 4px;
+	margin-left: auto;
 }

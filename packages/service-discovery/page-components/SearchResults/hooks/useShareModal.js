@@ -20,7 +20,13 @@ const controls = () => [
 		label       : 'User Email',
 		type        : 'email',
 		placeholder : 'Enter user email',
-		rules       : { required: 'Email is required' },
+		rules       : {
+			required : 'Email is required',
+			pattern  : {
+				value   : GLOBAL_CONSTANTS.regex_patterns.email,
+				message : 'Email address in invalid',
+			},
+		},
 	},
 ];
 
@@ -41,7 +47,7 @@ const getModifiedPayload = (rateData = {}) => {
 const useShareModal = ({
 	rate = {},
 	shareType = '',
-	onSuccess,
+	onSuccess = () => {},
 	source,
 	comparedRateCardDetails = [],
 }) => {

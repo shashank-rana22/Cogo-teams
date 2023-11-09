@@ -1,0 +1,41 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 49.5%;
+	padding: 20px;
+	margin: 10px 0;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
+
+	:global {
+		.ui_loading_container {
+			flex: unset;
+			height: 280px;
+		}
+	}
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 10px;
+	font-size: 18px;
+	color: #212121;
+}
+
+.legends {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 10px;
+	color: #212121;
+}
+
+.legends_circle {
+	width: 30px;
+	height: 14px;
+	border-radius: 10px;
+}

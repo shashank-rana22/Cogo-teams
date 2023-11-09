@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 import SuccessModal from './SuccessModal';
 import WalletModal from './WalletModal';
 
-function Wallet({ data = {}, service_key = 'search_type' }) {
+function Wallet({ data = {}, service_key = 'search_type', isMobile = false, style = {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showSuccesModal, setShowSuccessModal] = useState(false);
 
@@ -56,11 +56,12 @@ function Wallet({ data = {}, service_key = 'search_type' }) {
 				role="presentation"
 				className={styles.container}
 				onClick={() => setShowModal(true)}
+				style={{ ...style }}
 			>
 				<span className={styles.heading}>Wallet Balance:</span>
 
 				{getLoading ? (
-					<Placeholder height="20px" width="80px" margin="4px 0 0 0" />
+					<Placeholder height="15px" width="80px" margin="4px 0 0 0" />
 				) : (
 					<span className={styles.amount_value}>
 						{formatAmount({
@@ -70,7 +71,7 @@ function Wallet({ data = {}, service_key = 'search_type' }) {
 								style                 : 'currency',
 								notation              : 'compact',
 								compactDisplay        : 'short',
-								minimumFractionDigits : 2,
+								maximumFractionDigits : 2,
 							},
 						})}
 					</span>
@@ -87,6 +88,7 @@ function Wallet({ data = {}, service_key = 'search_type' }) {
 					formProps={formProps}
 					handleGenerateCode={handleGenerateCode}
 					createLoading={createLoading}
+					isMobile={isMobile}
 				/>
 			) : null}
 
@@ -97,6 +99,7 @@ function Wallet({ data = {}, service_key = 'search_type' }) {
 					promocode={promotionData?.promocode}
 					validityEnd={promotionData?.validity_end}
 					allotedAmountLeft={statsData.alloted_amount_left}
+					isMobile={isMobile}
 				/>
 			) : null}
 		</>

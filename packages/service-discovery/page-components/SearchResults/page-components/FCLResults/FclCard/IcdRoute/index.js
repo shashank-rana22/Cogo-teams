@@ -1,5 +1,3 @@
-import React from 'react';
-
 import getLocationInfo from '../../../../utils/locations-search';
 
 import styles from './styles.module.css';

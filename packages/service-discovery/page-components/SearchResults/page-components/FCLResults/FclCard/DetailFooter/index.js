@@ -1,11 +1,12 @@
 import { cl, Tooltip } from '@cogoport/components';
 import { IcCCogoCoin, IcMInfo } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-import BottomTabs from './BottomTabs';
-import PossibleSchedules from './BottomTabs/PossibleSchedules';
-import PriceBreakup from './BottomTabs/PriceBreakUp';
-import TermsConditions from './BottomTabs/TermsConditions';
+import BottomTabs from '../../../../common/BottomTabs';
+import PossibleSchedules from '../../../../common/PossibleSchedules';
+import PriceBreakup from '../../../../common/PriceBreakUp';
+import TermsConditions from '../../../../common/TermsConditions';
+
 import DetentionDemurrage from './DetentionDemurrage';
 import styles from './styles.module.css';
 
@@ -85,7 +86,7 @@ function DetailFooter({ rateCardData = {}, detail = {}, refetchSearch = () => {}
 									role="presentation"
 									key={item}
 									className={cl`${styles.other_details_tag} 
-								${activeTab === item ? styles.selected : {}}`}
+								${activeTab === item ? styles.selected : null}`}
 									onClick={() => {
 										if (activeTab === item) {
 											setActiveTab('');
@@ -133,11 +134,9 @@ function DetailFooter({ rateCardData = {}, detail = {}, refetchSearch = () => {}
 
 			{activeTab ? (
 				<BottomTabs
-					TABS_MAPPING={TABS_MAPPING}
-					rateCardData={rateCardData}
+					TABS={TABS_MAPPING}
 					activeTab={activeTab}
 					setActiveTab={setActiveTab}
-					detail={detail}
 				/>
 			) : null}
 		</div>
