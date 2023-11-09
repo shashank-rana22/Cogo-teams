@@ -1,0 +1,17 @@
+.type_container {
+	position: absolute;
+	padding: 0 20px;
+	border: 2px solid  #ffb262;
+	border-radius: 10px 0;
+}
+
+.card_container {
+	padding: 30px 20px 20px;
+	border: 2px solid  #ffb262;
+	border-radius: 10px;
+}
+
+.loop_container {
+	display: flex;
+	justify-content: space-between;
+}
