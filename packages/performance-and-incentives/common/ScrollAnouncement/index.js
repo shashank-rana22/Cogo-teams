@@ -13,11 +13,11 @@ function ScrollAnnouncement({ style = {}, loading = false, list = [] }) {
 
 	const [divWidth, setDivWidth] = useState(1200);
 
+	const [isScrolling, setIsScrolling] = useState(false);
+
 	useEffect(() => {
 		if (divWidth !== ref?.current?.offsetWidth) { setDivWidth(ref?.current?.offsetWidth); }
 	}, [ref?.current?.offsetWidth, divWidth]);
-
-	const [isScrolling, setIsScrolling] = useState(false);
 
 	const handleTap = () => {
 		setIsScrolling(!isScrolling);
