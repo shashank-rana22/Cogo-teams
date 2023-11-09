@@ -1,4 +1,4 @@
-import { useRequestBf } from '@cogoport/request';
+import { useRequest } from '@cogoport/request';
 
 import toastApiError from '../../commons/toastApiError';
 
@@ -6,10 +6,10 @@ const useSendOutstandingReport = () => {
 	const [
 		{ loading },
 		trigger,
-	] = useRequestBf(
+	] = useRequest(
 		{
 			url    : '/send_cc_outstanding_report',
-			method : 'post',
+			method : 'POST',
 		},
 		{ manual: true },
 	);
