@@ -11,6 +11,7 @@ import PublicLeaderBoardContext from './context/PublicLeaderBoardContext';
 import useCountDown from './hooks/useCountDown';
 import useReloadCounter from './hooks/useReloadCounter';
 import styles from './styles.module.css';
+import useGetQuests from './useGetQuests';
 
 const { OVERALL, COMPARISION } = SCREEN_CONSTANTS;
 
@@ -43,6 +44,8 @@ function PublicDashboard() {
 
 	const { reloadCounter } = useReloadCounter({ seconds: nextReloadAt, functionToCall: switchScreen });
 
+	const { list, loading: questLoading } = useGetQuests();
+
 	const contextValues = useMemo(() => ({
 		countdown,
 		officeLocation,
@@ -68,7 +71,7 @@ function PublicDashboard() {
 					setOfficeLocation={setOfficeLocation}
 				/>
 
-				<ScrollAnnouncement style={{ margin: '0 16px' }} />
+				<ScrollAnnouncement style={{ margin: '0 16px' }} loading={questLoading} list={list} />
 
 				<Body
 					screen={screen}

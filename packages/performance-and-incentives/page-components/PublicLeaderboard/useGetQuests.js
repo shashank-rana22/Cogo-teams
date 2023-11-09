@@ -1,20 +1,22 @@
-import { useDebounceQuery, useForm } from '@cogoport/forms';
 import { useAllocationRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-const useGetQuestList = ({ manual = true }) => {
+const useGetQuests = () => {
 	const [params, setParams] = useState({
 		page                      : 1,
-		page_limit                : 10,
-		cogo_entity_data_required : true,
-		role_data_required        : true,
+		page_limit                : 10000,
 		sort_by                   : 'created_at',
 		sort_type                 : 'desc',
+		cogo_entity_data_required : true,
+		role_data_required        : true,
+		filters                   : {
+			status                 : 'active',
+			overlapping_date_range : {
+				from_date : new Date(),
+				to_date   : new Date(),
+			},
+		},
 	});
-
-	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
-
-	const { control } = useForm();
 
 	const [{ loading, data }, refetch] = useAllocationRequest(
 		{
@@ -23,7 +25,7 @@ const useGetQuestList = ({ manual = true }) => {
 			authkey : 'get_agent_scoring_quests',
 			params,
 		},
-		{ manual },
+		{ manual: false },
 	);
 
 	const getNextPage = (nextPage) => {
@@ -35,16 +37,6 @@ const useGetQuestList = ({ manual = true }) => {
 
 	const { list = [], ...paginationData } = data || {};
 
-	useEffect(() => {
-		setParams((previousParams) => ({
-			...previousParams,
-			filters: {
-				...(previousParams.filters || {}),
-				q: searchQuery || undefined,
-			},
-		}));
-	}, [searchQuery]);
-
 	return {
 		loading,
 		list,
@@ -53,9 +45,7 @@ const useGetQuestList = ({ manual = true }) => {
 		setParams,
 		getNextPage,
 		refetch,
-		debounceQuery,
-		control,
 	};
 };
 
-export default useGetQuestList;
+export default useGetQuests;
