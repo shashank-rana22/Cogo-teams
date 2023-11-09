@@ -70,6 +70,11 @@ const apis = {
 			service_name : 'saas_subscriptions_v2',
 			access_type  : 'private',
 		},
+		{
+			api          : 'list_saas_checkouts',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
 	],
 	saas_subscription_plan: [
 		{

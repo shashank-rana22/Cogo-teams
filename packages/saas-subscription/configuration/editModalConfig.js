@@ -18,8 +18,9 @@ export const getDetailsConfig = () => [
 
 export const getHeaderConfig = () => [
 	{
-		key   : 'serial_id',
-		label : 'Org Serial Id',
+		key        : 'serial_id',
+		label      : 'Org Serial Id',
+		renderFunc : 'renderOrgId',
 	},
 	{
 		key   : 'business_name',
