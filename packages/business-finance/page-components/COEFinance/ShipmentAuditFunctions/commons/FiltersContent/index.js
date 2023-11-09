@@ -1,8 +1,9 @@
 import {
-	Button, Tabs, TabPanel, RadioGroup, SingleDateRange,
+	Button, Tabs, TabPanel, RadioGroup, SingleDateRange, CheckboxGroup,
 } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import { excludeOptions } from '../../../utils/constants/excludeOptions';
 import { serviceType } from '../../../utils/constants/filterOptions';
 import { walletType } from '../../../utils/constants/walletOptions';
 
@@ -56,6 +57,7 @@ function Content({
 										operationalClosedDate : null,
 										creationDate          : null,
 										tradeType             : '',
+										exclude               : [],
 									});
 									setTradeTab('');
 									refetch({ setShow });
@@ -133,6 +135,16 @@ function Content({
 								onChange={(val) => onChange(val, 'creationDate')}
 								value={filters?.creationDate}
 								maxDate={new Date()}
+							/>
+						</div>
+					</TabPanel>
+					<TabPanel name="Exclude" title="Exclude">
+						<div className={styles.style_radio}>
+							<CheckboxGroup
+								options={excludeOptions}
+								value={filters?.exclude}
+								onChange={(val) => onChange(val, 'exclude')}
+								className={styles.style_radio}
 							/>
 						</div>
 					</TabPanel>

@@ -36,23 +36,22 @@ const useGetJobList = ({
 		{ manual: true },
 	);
 
-	const {
-		Service = '',
-		operationalClosedDate = '', creationDate = '',
-		walletUsed = '', tradeType = '',
-	} = filters || {};
-
 	const { query = '', debounceQuery = () => {} } = useDebounceQuery();
 	const { page = 1, pageLimit = 10 } = paginationFilters || {};
 
 	const refetch = useCallback(({ setShow = () => {} }) => {
 		const func = async () => {
 			const {
+				Service = '', operationalClosedDate = {}, creationDate = {},
+				walletUsed = '', tradeType = '', exclude = [],
+			} = filters || {};
+			const {
 				startDate : creationStartDate = '', endDate : creationEndDate = '',
-			} = creationDate || '';
+			} = creationDate || {};
 			const {
 				startDate : opeerationalClosedStartDate = '', endDate : operationalClosedEndDate = '',
-			} = operationalClosedDate || '';
+			} = operationalClosedDate || {};
+
 			try {
 				await trigger({
 					params: {
@@ -71,8 +70,10 @@ const useGetJobList = ({
 							&& getFormatDate(opeerationalClosedStartDate)) || undefined,
 						operationalClosedEndDate: (opeerationalClosedStartDate && operationalClosedEndDate
 							&& getFormatDate(operationalClosedEndDate)) || undefined,
-						query      : query || undefined,
-						walletUsed : walletUsed || undefined,
+						query              : query || undefined,
+						walletUsed         : walletUsed || undefined,
+						excludeZeroExpense : exclude?.includes('cancelled_shipments'),
+						excludeCancelled   : exclude?.includes('zero_expense'),
 					},
 				});
 				setShow(false);
@@ -80,10 +81,10 @@ const useGetJobList = ({
 				toastApiError(error);
 			}
 		};
+
 		func();
-	}, [creationDate, operationalClosedDate, trigger,
-		CLOSING_STATUS, subActiveTab, page, pageLimit, Service,
-		entityCode, tradeType, query, walletUsed]);
+	}, [trigger, CLOSING_STATUS, subActiveTab, page,
+		pageLimit, entityCode, query, filters]);
 
 	useEffect(() => {
 		debounceQuery(search);
