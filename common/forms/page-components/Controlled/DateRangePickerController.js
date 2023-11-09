@@ -18,7 +18,12 @@ function DateRangePickerController(props) {
 					isPreviousDaysAllowed
 					{...rest}
 					key={rest.id}
-					onChange={onChange}
+					onChange={(e) => {
+						onChange(e);
+						if (typeof rest?.onChange === 'function') {
+							rest?.onChange(e);
+						}
+					}}
 					value={value}
 				/>
 			)}

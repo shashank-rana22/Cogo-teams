@@ -225,6 +225,7 @@ export default {
 		],
 		prod_kam_ie_manager   : 'f9905d33-24d7-48ca-99cd-eeca13a90d5a',
 		prod_kam_ie           : '0bc8c199-09ed-4a85-b3a3-a855f05a2716',
+		ie_owner_sme_demand   : '594be53f-e39a-45d1-a705-57660a4a4a00',
 		portfolio_manager_id  : '46f33843-8f73-45c0-89c8-248aa1698bb0',
 		pre_sales_agent       : 'ad12ce9e-2cc9-4a14-8e36-d3ee2df0cf63',
 		credit_controller_ids : [

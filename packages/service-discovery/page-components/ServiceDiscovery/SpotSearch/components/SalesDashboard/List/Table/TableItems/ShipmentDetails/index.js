@@ -1,4 +1,5 @@
 import { Pill, Tooltip } from '@cogoport/components';
+import { COMMODITY_NAME_MAPPING } from '@cogoport/globalization/constants/commodities';
 import { isEmpty, startCase, upperCase } from '@cogoport/utils';
 
 import getLoadArray from '../../../../../../../../SearchResults/utils/getLoadArray';
@@ -6,34 +7,81 @@ import getLoadArray from '../../../../../../../../SearchResults/utils/getLoadArr
 import styles from './styles.module.css';
 import TruckShipments from './TruckShipments';
 
+const ONE_COUNT = 1;
+
 function LoadDetails({ data = {}, item = {} }) {
+	const {
+		container_size = '',
+		containers_count = 0,
+		container_type = '',
+		total_quantity = 0,
+		total_volume = 0,
+		total_weight = 0,
+		commodity = '',
+		cargo_handling_type = '',
+		packages_count = 0,
+		weight = 0,
+		volume = 0,
+	} = data;
+
 	return (
 		<>
-			{data?.container_size ? (
+			{container_size ? (
 				<Pill size="md" color="#F9F9F9">
-					{data.container_size === '20' || data.container_size === '40'
-						? `${data.container_size}ft`
-						: data.container_size}
+					{container_size === '20' || container_size === '40'
+						? `${container_size}ft`
+						: container_size}
 				</Pill>
 			) : null}
 
-			{data?.containers_count ? (
+			{containers_count ? (
 				<Pill size="md" color="#F9F9F9">
-					{`${data.containers_count} Container`}
+					{`${containers_count} Container`}
 				</Pill>
 			) : null}
 
-			{data?.container_type ? (
-				<Pill size="md" color="#F9F9F9">{startCase(data.container_type)}</Pill>
+			{container_type ? (
+				<Pill size="md" color="#F9F9F9">{startCase(container_type)}</Pill>
 			) : null}
 
-			{(startCase(data.container_type)
-								|| data.container_size
-								|| data.containers_count) && <br />}
+			{total_quantity ? (
+				<Pill size="md" color="#F9F9F9">
+					{`${total_quantity} ${total_quantity <= ONE_COUNT ? 'Package' : 'Packages'}`}
+				</Pill>
+			) : null}
+
+			{packages_count ? (
+				<Pill size="md" color="#F9F9F9">
+					{`${packages_count} ${packages_count <= ONE_COUNT ? 'Package' : 'Packages'}`}
+				</Pill>
+			) : null}
+
+			{total_volume ? (
+				<Pill size="md" color="#F9F9F9">{`${total_volume} CBM`}</Pill>
+			) : null}
+
+			{volume ? (
+				<Pill size="md" color="#F9F9F9">{`${volume} CBM`}</Pill>
+			) : null}
+
+			{total_weight ? (
+				<Pill size="md" color="#F9F9F9">{`${total_weight} KG`}</Pill>
+			) : null}
+
+			{weight ? (
+				<Pill size="md" color="#F9F9F9">{`${weight} KG`}</Pill>
+			) : null}
+
+			{(container_type || container_size || containers_count || total_volume || total_quantity
+				|| weight || volume) && <br />}
 
 			<Pill size="md" color="#F9F9F9">
-				{startCase(data.commodity) || 'All Commodities'}
+				{COMMODITY_NAME_MAPPING[commodity]?.name || startCase(commodity) || 'All Commodities'}
 			</Pill>
+
+			{cargo_handling_type ? (
+				<Pill size="md" color="#F9F9F9">{startCase(cargo_handling_type)}</Pill>
+			) : null}
 
 			{item?.inco_term ? (
 				<Pill size="md" color="#FDEBE9">
@@ -59,7 +107,7 @@ function ShipmentDetails({ item = {}, field = {} }) {
 	) {
 		return (
 			<TruckShipments
-				item={item}
+				itemData={item}
 				commodityKey={commodityKey}
 				shipment_type={shipment_type}
 			/>
@@ -70,10 +118,10 @@ function ShipmentDetails({ item = {}, field = {} }) {
 
 	return (
 		<div className={styles.container}>
-			<LoadDetails data={firstLoadObject} item={item} />
+			<LoadDetails data={firstLoadObject || {}} item={item} />
 
 			{!isEmpty(load) ? (
-				<Pill size="md" color="#F9F9F9">
+				<Pill size="md" color="#E0E0E0">
 					<Tooltip
 						placement="top"
 						content={(
@@ -81,7 +129,7 @@ function ShipmentDetails({ item = {}, field = {} }) {
 								{load.map((loadItem) => (
 									<LoadDetails
 										key={loadItem?.id}
-										data={loadItem}
+										data={loadItem || {}}
 										item={item}
 									/>
 								))}

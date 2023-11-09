@@ -3,6 +3,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
 import Customize from './components/Customize';
@@ -181,7 +182,12 @@ const useHandleQuotationModal = ({
 	const formatEmailValues = (values) => {
 		const NEW_VALUES = {};
 		Object.keys(values || {}).forEach((key) => {
-			const value = values[key];
+			let value = values[key];
+
+			if (Array.isArray(value)) {
+				value = value?.filter((v) => !isEmpty(v));
+			}
+
 			if (value && key === 'attachment_file_urls') {
 				const urls = (value || []).map((item) => item?.finalUrl || item || '');
 
@@ -192,7 +198,14 @@ const useHandleQuotationModal = ({
 				NEW_VALUES[key] = value;
 			}
 		});
-		return NEW_VALUES;
+
+		const formattedValues = Object.entries(NEW_VALUES).reduce((acc, [key, val]) => {
+			if (isEmpty(val)) {
+				return acc;
+			}
+			return { ...acc, [key]: val };
+		}, {});
+		return formattedValues;
 	};
 
 	const handleEmailSend = () => {

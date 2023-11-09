@@ -12,20 +12,33 @@ const useUpdateCheckoutMargin = ({ updateCheckout = () => {}, id = '' }) => {
 		method : 'POST',
 	}, { manual: true });
 
-	const updateCheckoutMargin = async ({ finalPayload }) => {
+	const updateCheckoutMargin = async ({
+		finalPayload,
+		setIsLoadingStateRequired = () => {},
+		serviceRemoved = false,
+		getCheckout = () => {},
+	}) => {
 		try {
 			await trigger({ data: finalPayload });
 
 			Toast.success('Margin updated successfully');
 
-			updateCheckout({
+			await updateCheckout({
 				values: {
 					id,
 					state: 'locked',
 				},
 				scrollToTop: true,
 			});
+
+			setIsLoadingStateRequired(false);
 		} catch (error) {
+			setIsLoadingStateRequired(false);
+
+			if (serviceRemoved) {
+				getCheckout();
+			}
+
 			if (error?.response) {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}

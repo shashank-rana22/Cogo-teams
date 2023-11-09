@@ -1,0 +1,46 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	padding: 20px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.stepper_item {
+	display: flex;
+	align-items: center;
+	padding-left: 10px;
+
+	&:first-child {
+		padding-left: 0;
+	}
+}
+
+.arrow_right {
+	width: 18px;
+	height: 18px;
+	margin-left: 10px;
+}
+
+.label_container {
+	display: flex;
+	align-items: center;
+	color: #034afd;
+	cursor: pointer;
+
+	svg {
+		width: 20px;
+		height: 20px;
+		margin-bottom: 3px;
+		fill: #034afd;
+	}
+}
+
+.active_label {
+	color: #828282;
+	cursor: unset;
+
+	svg {
+		fill: #828282;
+	}
+}

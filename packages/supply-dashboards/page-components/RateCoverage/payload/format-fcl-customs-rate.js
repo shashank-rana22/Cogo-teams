@@ -32,7 +32,7 @@ const formatFclCustomsRate = (data, user_id) => {
 		trade_type          : data?.trade_type,
 		container_size      : data?.container_size,
 		container_type      : data?.container_type,
-		commodity,
+		commodity           : commodity === 'all_commodity' ? null : commodity,
 		service_provider_id : data?.service_provider_id,
 		sourced_by_id       : data?.sourced_by_id,
 		procured_by_id      : data?.procured_by_id || user_id,

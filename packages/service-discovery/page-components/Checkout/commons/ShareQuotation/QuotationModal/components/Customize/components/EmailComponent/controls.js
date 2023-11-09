@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+import { IcMCloudUpload } from '@cogoport/icons-react';
 
 const controls = [
 	{
@@ -45,9 +46,10 @@ const controls = [
 		themeType     : 'secondary',
 		drag          : true,
 		multiple      : true,
-		uploadIcon    : 'ic-upload',
+		uploadIcon    : <IcMCloudUpload style={{ height: 30, width: 30 }} />,
 		defaultValues : '',
-		label         : '',
+		label         : 'Attachment',
+		dropareaProps : { heading: 'Upload Files', subHeading: 'All files are supported' },
 		accept:
 			'image/*,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 		uploadType: 'aws',

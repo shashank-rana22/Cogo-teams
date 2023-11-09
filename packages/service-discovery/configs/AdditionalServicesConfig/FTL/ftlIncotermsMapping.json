@@ -1,0 +1,8 @@
+[
+    {
+        "name": "ftl_freight",
+        "title": "FTL Freight",
+        "service_type": "ftl_freight",
+        "inco_terms": ["cif", "cfr", "cpt", "cip", "dat", "dap", "ddp", "exw", "fca", "fob", "fas"]
+    }
+]
