@@ -1,0 +1,15 @@
+.modal_container {
+	:global {
+		.ui_modal_footer_container {
+			padding: 0 0 10px;
+		}
+
+		.ui_modal_body_container {
+			padding: 0 20px;
+		}
+
+		.ui_modal_header_container {
+			padding: 10px 10px 0 20px;
+		}
+	}
+}

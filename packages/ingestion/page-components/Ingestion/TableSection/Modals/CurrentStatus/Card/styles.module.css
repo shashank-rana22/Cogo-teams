@@ -1,6 +1,6 @@
 .type_container {
 	position: absolute;
-	padding: 0 20px;
+	padding: 0 10px;
 	border: 2px solid  #ffb262;
 	border-radius: 10px 0;
 }
@@ -14,4 +14,22 @@
 .loop_container {
 	display: flex;
 	justify-content: space-between;
+}
+
+.container {
+	padding-bottom: 20px;
+	margin-bottom: 10px;
+	border-bottom: 3px dashed #828282;
+}
+
+.container:last-child {
+	border-bottom: none;
+}
+
+.created_at_container {
+	position: absolute;
+	right: 20px;
+	padding: 0 10px;
+	border: 2px solid  #ffb262;
+	border-radius: 0 10px;
 }

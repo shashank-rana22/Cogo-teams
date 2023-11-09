@@ -3,6 +3,8 @@ import { isEmpty } from '@cogoport/utils';
 
 import Card from '../Card';
 
+import styles from './styles.module.css';
+
 const ERROR_TEXT = 'Error fetching data.Please try again after sometime';
 
 function ModalBody({ mapArray = [], loading = false, data = {}, apiErrors = {} }) {
@@ -27,11 +29,11 @@ function ModalBody({ mapArray = [], loading = false, data = {}, apiErrors = {} }
 	}
 
 	return (
-		<>
+		<div className={styles.container}>
 			{mapArray.map((item) => (
 				<Card key={item.type} {...item} />
 			))}
-		</>
+		</div>
 	);
 }
 

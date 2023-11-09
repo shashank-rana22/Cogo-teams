@@ -1,8 +1,11 @@
 import { Button, Modal } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import ModalBody from './ModalBody';
+import styles from './styles.module.css';
 import useGetIngestionStats from './useGetIngestionStats';
 
 const getUserValueProps = (recently_created_user = {}) => {
@@ -13,6 +16,7 @@ const getUserValueProps = (recently_created_user = {}) => {
 		mobile_country_code = '',
 		email = '',
 		alternate_email = '',
+		created_at,
 	} = recently_created_user || {};
 
 	const valueProps = Object.fromEntries(
@@ -24,6 +28,13 @@ const getUserValueProps = (recently_created_user = {}) => {
 				: null,
 			email,
 			alternate_email,
+			created_at: formatDate({
+				date       : created_at,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+				formatType : 'dateTime',
+				separator  : ' ',
+			}),
 		}).filter(([, v]) => v),
 	);
 
@@ -37,11 +48,23 @@ const getOrganizationValueProps = (recently_created_organization = {}) => {
 		country = '',
 		serial_id = '',
 		registration_number = '',
+		created_at,
 	} = recently_created_organization || {};
 
 	const valueProps = Object.fromEntries(
 		Object.entries({
-			serial_id,	account_type: startCase(account_type), business_name, country, registration_number,
+			serial_id,
+			account_type : startCase(account_type),
+			business_name,
+			country,
+			registration_number,
+			created_at   : formatDate({
+				date       : created_at,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+				formatType : 'dateTime',
+				separator  : ' ',
+			}),
 		}).filter(([, v]) => v),
 	);
 
@@ -80,6 +103,8 @@ function CurrentStatus(props) {
 			show={tableModal === 'current_status'}
 			placement="center"
 			scroll={false}
+			onClose={onClose}
+			className={styles.modal_container}
 		>
 			<Modal.Header title={(
 				<div style={{ display: 'flex', alignItems: 'center' }}>
