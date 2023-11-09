@@ -10,7 +10,7 @@ const columns = [
 	{ Header: 'Container Count' },
 ];
 
-function ShipmentPlan({ selectedCard = [] }) {
+function ShipmentPlan({ selectedCard = {} }) {
 	const {
 		shipment_frequency = '', sailing_period_start_date = '',
 		sailing_period_end_date = '', shipment_plan = [],
@@ -84,7 +84,7 @@ function ShipmentPlan({ selectedCard = [] }) {
 											</div>
 										</div>
 										<div>
-											{value?.containers_count || '-'}
+											{value?.containers_count || 0}
 										</div>
 									</div>
 								))}
