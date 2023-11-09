@@ -38,7 +38,9 @@
 
 	:global {
 		.ui_button_container {
-			height: 30px;
+			height: 24px;
+			font-size: 12px;
+			font-weight: 500;
 		}
 	}
 }
