@@ -32,11 +32,11 @@ function ShipmentAuditFunction({
 	const [tradeTab, setTradeTab] = useState('');
 	const [tax, setTax] = useState('Pre');
 	const [filters, setFilters] = useState({
-		Service               : null,
-		Entity                : null,
-		walletUsed            : null,
-		operationalClosedDate : null,
-		creationDate          : null,
+		Service               : '',
+		Entity                : '',
+		walletUsed            : '',
+		operationalClosedDate : '',
+		creationDate          : '',
 		tradeType             : '',
 		exclude               : ['cancelled_shipments', 'zero_expense'],
 	});
@@ -81,11 +81,11 @@ function ShipmentAuditFunction({
 		setPaginationFilters((prev) => ({ ...prev, page: 1 }));
 		setTradeTab('');
 		setFilters({
-			Service               : null,
-			Entity                : null,
-			walletUsed            : null,
-			operationalClosedDate : null,
-			creationDate          : null,
+			Service               : '',
+			Entity                : '',
+			walletUsed            : '',
+			operationalClosedDate : '',
+			creationDate          : '',
 			tradeType             : '',
 			exclude               : ['cancelled_shipments', 'zero_expense'],
 		});

@@ -51,11 +51,11 @@ function Content({
 								size="sm"
 								onClick={() => {
 									setFilters({
-										Service               : null,
-										Entity                : null,
-										walletUsed            : null,
-										operationalClosedDate : null,
-										creationDate          : null,
+										Service               : '',
+										Entity                : '',
+										walletUsed            : '',
+										operationalClosedDate : '',
+										creationDate          : '',
 										tradeType             : '',
 										exclude               : ['cancelled_shipments', 'zero_expense'],
 									});
