@@ -70,31 +70,40 @@ function EmployeeStatusDetails({ task_list = {}, summaryData = {}, absentData = 
 		<div className={styles.employee_status_details}>
 			<div className={styles.employee_status_compare}>
 
-				{COMPARE_GROWTH.map((item) => (
-					<div className={styles.employee_status_card} key={item?.text}>
-						<div className={styles.employee_status_content} key={item?.text}>
-							<div className={styles.card__title}>
-								<span className={styles.percentage}>{item?.percentage}</span>
-								<span className={styles.growth}>
-									<IcMArrowNext style={{
-										alignContent : 'center',
-										transform    : item?.growth < 0 ? 'rotate(45deg)' : 'rotate(-45deg)',
-										color        : item?.growth < 0 ? 'red' : '#849e4c',
-										marginLeft   : '4px',
-									}}
-									/>
-									<span style={{ color: item?.growth < 0 ? 'red' : '#849e4c' }}>
-										{item?.growth}
+				{COMPARE_GROWTH.map((item) => {
+					const num = item?.growth.length;
+					return (
+						<div className={styles.employee_status_card} key={item?.text}>
+							<div className={styles.employee_status_content} key={item?.text}>
+								<div className={styles.card__title}>
+									<span className={styles.percentage}>{item?.percentage}</span>
+									<span className={styles.growth}>
+										<IcMArrowNext style={{
+											alignContent : 'center',
+											transform    : Number(item?.growth.substring(0, num - 1))
+											< 0 ? 'rotate(45deg)' : 'rotate(-45deg)',
+											color: Number(item?.growth.substring(0, num - 1))
+											< 0 ? 'red' : '#849e4c',
+											marginLeft: '4px',
+										}}
+										/>
+										<span style={{
+											color: Number(item?.growth.substring(0, num - 1))
+											< 0 ? 'red' : '#849e4c',
+										}}
+										>
+											{item?.growth}
+										</span>
+
 									</span>
+									{' '}
 
-								</span>
-								{' '}
-
+								</div>
+								<div className={styles.card_legend}>{item?.text}</div>
 							</div>
-							<div className={styles.card_legend}>{item?.text}</div>
 						</div>
-					</div>
-				))}
+					);
+				})}
 			</div>
 
 			<div className={styles.employee_to_do}>
