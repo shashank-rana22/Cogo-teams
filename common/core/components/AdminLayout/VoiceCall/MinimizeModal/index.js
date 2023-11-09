@@ -1,4 +1,4 @@
-import { IcMProfile, IcMCall, IcMFitView } from '@cogoport/icons-react';
+import { IcMProfile, IcMCall, IcMExpand } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import secsToDurationConverter from '../utils/secsToDurationConverter';
@@ -69,8 +69,17 @@ function MinimizeModal({
 			onMouseMove={handleMouseMove}
 			onMouseUp={handleMouseUp}
 		>
-			<div className={styles.avatar}>
-				<IcMProfile width={20} height={20} />
+			<div className={styles.icon_section}>
+				<div className={styles.maximize_icon}>
+					<IcMExpand onClick={(e) => {
+						e.stopPropagation();
+						setCallState((p) => ({ ...p, showCallModalType: 'fullCallModal' }));
+					}}
+					/>
+				</div>
+				<div className={styles.avatar}>
+					<IcMProfile width={20} height={20} />
+				</div>
 			</div>
 			<div
 				className={styles.details}
@@ -85,13 +94,6 @@ function MinimizeModal({
 						{status ? secsToDurationConverter(status, counter) : 'Connecting...'}
 					</div>
 				</div>
-			</div>
-			<div className={styles.maximize_icon}>
-				<IcMFitView onClick={(e) => {
-					e.stopPropagation();
-					setCallState((p) => ({ ...p, showCallModalType: 'fullCallModal' }));
-				}}
-				/>
 			</div>
 
 			{!callLoading && status && (
