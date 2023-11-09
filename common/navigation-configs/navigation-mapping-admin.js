@@ -1257,7 +1257,7 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/booking-desk/air',
 					type          : 'link',
 					main_apis     : ['list_shipments'],
-					possible_apis : [...apis.shipment],
+					possible_apis : [...apis.shipment, ...apis.cargo_insurance],
 				},
 				{
 					key           : 'coe-bn_salvage',
