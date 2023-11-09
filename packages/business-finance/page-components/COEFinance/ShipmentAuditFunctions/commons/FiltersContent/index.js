@@ -17,6 +17,7 @@ const tabData = [
 ];
 
 function Content({
+	activeTab = '',
 	filters = {},
 	setFilters = () => {},
 	receivables = '',
@@ -125,6 +126,21 @@ function Content({
 							/>
 						</div>
 					</TabPanel>
+					{activeTab === 'financial_close' ? (
+						<TabPanel name="Financial Closed Date" title="Financial Closed Date">
+							<div className={styles.style_radio}>
+								<SingleDateRange
+									placeholder="Select Date"
+									dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
+									name="date"
+									isPreviousDaysAllowed
+									onChange={(val) => onChange(val, 'financialClosedDate')}
+									value={filters?.financialClosedDate}
+									maxDate={new Date()}
+								/>
+							</div>
+						</TabPanel>
+					) : null}
 					<TabPanel name="Creation Date" title="Creation Date">
 						<div className={styles.style_radio}>
 							<SingleDateRange

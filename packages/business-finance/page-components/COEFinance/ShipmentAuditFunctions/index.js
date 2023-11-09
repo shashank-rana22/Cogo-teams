@@ -15,8 +15,6 @@ import getFinancialCloseColumns from './configurations/getFinancialCloseColumns'
 import getJobColumns from './configurations/getJobColumns';
 import styles from './styles.module.css';
 
-const DEFAULT_PAGE_LIMIT = 10;
-
 const TABS = [
 	{ key: 'to_be_audited', label: 'To be Audited' },
 	{ key: 'partially_audited', label: 'Partially Audited' },
@@ -37,6 +35,7 @@ function ShipmentAuditFunction({
 		Entity                : undefined,
 		walletUsed            : undefined,
 		operationalClosedDate : undefined,
+		financialClosedDate   : undefined,
 		creationDate          : undefined,
 		tradeType             : undefined,
 		exclude               : ['cancelled_shipments', 'zero_expense'],
@@ -137,6 +136,7 @@ function ShipmentAuditFunction({
 						onClickOutside={() => setShow(false)}
 						render={(
 							<Content
+								activeTab={activeTab}
 								filters={filters}
 								setFilters={setFilters}
 								receivables={receivables}
@@ -185,7 +185,7 @@ function ShipmentAuditFunction({
 						/>
 					)}
 
-				{!isEmpty(list) && list?.length >= DEFAULT_PAGE_LIMIT
+				{!isEmpty(list)
 					? (
 						<Pagination
 							className={styles.pagination}

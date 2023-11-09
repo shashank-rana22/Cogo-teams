@@ -43,7 +43,7 @@ const useGetJobList = ({
 		const func = async () => {
 			const {
 				Service = '', operationalClosedDate = {}, creationDate = {},
-				walletUsed = '', tradeType = '', exclude = [],
+				walletUsed = '', tradeType = '', exclude = [], financialClosedDate = {},
 			} = filters || {};
 			const {
 				startDate : creationStartDate = '', endDate : creationEndDate = '',
@@ -51,6 +51,10 @@ const useGetJobList = ({
 			const {
 				startDate : opeerationalClosedStartDate = '', endDate : operationalClosedEndDate = '',
 			} = operationalClosedDate || {};
+
+			const {
+				startDate: financialClosedStartDate = '', endDate: financialClosedEndDate = '',
+			} = financialClosedDate || '';
 
 			try {
 				await trigger({
@@ -70,6 +74,10 @@ const useGetJobList = ({
 							&& getFormatDate(opeerationalClosedStartDate)) || undefined,
 						operationalClosedEndDate: (opeerationalClosedStartDate && operationalClosedEndDate
 							&& getFormatDate(operationalClosedEndDate)) || undefined,
+						financialClosedStartDate: (financialClosedStartDate && financialClosedEndDate
+							&& getFormatDate(financialClosedStartDate)) || undefined,
+						financialClosedEndDate: (financialClosedStartDate && financialClosedEndDate
+							&& getFormatDate(financialClosedEndDate)) || undefined,
 						query                     : query || undefined,
 						walletUsed                : walletUsed || undefined,
 						excludeCancelledShipments : exclude?.includes('cancelled_shipments') || undefined,
