@@ -36,6 +36,7 @@ const dashboardFilters = ({ filterParams = {} }) => {
 			valueKey    : 'id',
 			placeholder : 'Office Location',
 			className   : 'office_location',
+			isClearable : true,
 		},
 		{
 			name           : 'role_id',
@@ -64,6 +65,7 @@ const dashboardFilters = ({ filterParams = {} }) => {
 			controlType    : 'asyncSelect',
 			defaultOptions : true,
 			placeholder    : 'Select Reporting Manager',
+			isClearable    : true,
 			params         : {
 				page_limit : 10,
 				filters    : {

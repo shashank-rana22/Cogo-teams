@@ -7,6 +7,8 @@ const getParams = ({ widgetBlocks, filterParams, selectedFilter, page, trend }) 
 		date_range = {},
 		partner_id = '',
 		role_id = [],
+		reporting_manager_id = '',
+		office_location_id = '',
 	} = filterParams || {};
 
 	let blocks;
@@ -20,19 +22,21 @@ const getParams = ({ widgetBlocks, filterParams, selectedFilter, page, trend }) 
 	}
 
 	const endDate = (addDays(date_range?.endDate, 1) > new Date())
-		? new Date() : addDays(date_range?.endDate, 1);
+		? new Date((new Date()).setHours(23, 59, 59, 999)) : addDays(date_range?.endDate, 1);
 
 	return 	{
 		blocks,
 		start_date          : startOfDay(date_range?.startDate || new Date()),
-		end_date            : endDate || new Date(),
+		end_date            : endDate || new Date((new Date()).setHours(23, 59, 59, 999)),
 		trend_data_required : (trend === 'previous'),
 		filters             : {
-			range      : selectedFilter || undefined,
-			page       : page || undefined,
-			page_limit : page ? 5 : undefined,
-			partner_id : partner_id || undefined,
-			role_id    : isEmpty(role_id) ? undefined : role_id,
+			range                : selectedFilter || undefined,
+			page                 : page || undefined,
+			page_limit           : page ? 5 : undefined,
+			partner_id           : partner_id || undefined,
+			role_id              : isEmpty(role_id) ? undefined : role_id,
+			office_location_id   : office_location_id || undefined,
+			reporting_manager_id : reporting_manager_id || undefined,
 		},
 	};
 };
