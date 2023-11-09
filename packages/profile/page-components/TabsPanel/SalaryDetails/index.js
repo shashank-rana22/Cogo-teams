@@ -17,7 +17,7 @@ import TaxStructure from './TaxStructure';
 import useGetColumns from './useGetColumns';
 import useGetIrregularColumns from './useGetIrregularColumns';
 
-function SalaryDetails() {
+function SalaryDetails({ dataDetails = {} }) {
 	const router = useRouter();
 	const { push } = router;
 	const [taxShow, setTaxShow] = useState(false);
@@ -44,6 +44,9 @@ function SalaryDetails() {
 	};
 	const user_id = employee_id || user.id;
 	const { data, loading, getEmployeePaymentDetails } = useGetEmployeeDirectoryPaymentDetail(user_id);
+
+	const { user_role } = dataDetails || {};
+	console.log('data-details', dataDetails);
 	const salary_data = [{
 		ctc_effective    : '23/12/2000',
 		ctc_effective_to : '-',
@@ -86,16 +89,18 @@ function SalaryDetails() {
 								<div className={styles.info_container}>
 									<div className={styles.heading_one}>
 										<div className={styles.head_text}>Payment Information</div>
-										<Button
-											size="md"
-											themeType="secondary"
-											onClick={() => handleOpenModal(bankInfo, data?.employee_bank_details)}
-										>
-											{' '}
-											<IcMEdit />
-											{' '}
-											Edit
-										</Button>
+										{user_role === 'hrbp' && (
+											<Button
+												size="md"
+												themeType="secondary"
+												onClick={() => handleOpenModal(bankInfo, data?.employee_bank_details)}
+											>
+												{' '}
+												<IcMEdit />
+												{' '}
+												Edit
+											</Button>
+										)}
 									</div>
 									<div className={styles.details}>
 										{

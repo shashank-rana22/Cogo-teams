@@ -26,7 +26,7 @@ const useGetTabsMapping = (data = {}, loading = false, getEmployeeDetails = () =
 		{
 			name      : 'payment_details',
 			title     : 'Payment Details',
-			Component : <SalaryDetails data={data} loading={loading} />,
+			Component : <SalaryDetails dataDetails={data} loading={loading} />,
 		},
 		{
 			name      : 'documents',
