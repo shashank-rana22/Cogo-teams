@@ -31,7 +31,8 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 
 	const { hr_meet, application_status, applicant_details, application_process_details } = data || {};
 	const { last_working_day } = applicant_details || {};
-	const { hr_meet:hrMeet } = hr_meet || {};
+	const { hr_meet:hrMeet, process_user_details } = hr_meet || {};
+	const { name } = process_user_details || {};
 	const { sub_process_detail_id, sub_process_data = {}, is_complete, is_ignored } = hrMeet || {};
 	const { lastWorkingDay } = sub_process_data || {};
 	const { updateApplication } = useUpdateAppliationProcessDetails({ refetch, handleNext });
@@ -121,6 +122,7 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 				refetch={refetch}
 				isComplete={is_complete}
 				isIgnored={is_ignored}
+				name={name}
 			/>
 		);
 	}
@@ -145,6 +147,7 @@ function HRMeeting({ data = {}, refetch = () => {}, handleNext = () => {}, loadi
 				refetch={refetch}
 				isComplete={is_complete}
 				isIgnored={is_ignored}
+				name={name}
 			/>
 			{application_status === 'cancellation_requested' ? (
 				<CancellationRequest

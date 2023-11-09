@@ -22,7 +22,8 @@ function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack =
 
 	const { exit_interview, application_process_details } = data || {};
 
-	const { exit_interview_scheduled } = exit_interview || {};
+	const { exit_interview_scheduled, process_user_details } = exit_interview || {};
+	const { name } = process_user_details || {};
 	const { sub_process_detail_id, is_complete, sub_process_data, is_ignored } = exit_interview_scheduled || {};
 	const [visible, setVisible] = useState(is_complete || false);
 	const complete = exit_interview?.exit_interview_scheduled == null;
@@ -63,6 +64,7 @@ function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack =
 				refetch={refetch}
 				isComplete={is_complete}
 				isIgnored={is_ignored}
+				name={name}
 			/>
 		);
 	}
@@ -76,6 +78,7 @@ function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack =
 				refetch={refetch}
 				isComplete={is_complete}
 				isIgnored={is_ignored}
+				name={name}
 			/>
 			{
 			visible

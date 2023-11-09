@@ -73,10 +73,12 @@ function Heading({
 				<div className={styles.logs_button}>
 					{isComplete ? <Pill size="xl" style={{ height: '32px' }} color="green">Completed</Pill>
 						: <Pill size="xl" style={{ height: '32px' }} color="orange">Pending</Pill>}
-					<Button size="md" themeType="accent" onClick={() => setShow(true)}>
-						<IcMTaskCompleted />
-						{!isComplete ? <span style={{ marginLeft: '4px' }}>Skip Certain Tasks</span> : null}
-					</Button>
+					{!isComplete ?	(
+						<Button size="md" themeType="accent" onClick={() => setShow(true)}>
+							<IcMTaskCompleted />
+							<span style={{ marginLeft: '4px' }}>Skip Certain Tasks</span>
+						</Button>
+					) : null}
 				</div>
 			</div>
 
@@ -84,8 +86,8 @@ function Heading({
 				{isComplete ? <IcCFtick width={20} height={20} />
 					: <IcMClock width={20} height={20} style={{ color: '#F68B21' }} />}
 				<span style={{ marginLeft: '10px' }}>
-					{isComplete ? `Cleared by ${name}`
-						: `Awaiting clearance from ${name}`}
+					{isComplete ? `Cleared by ${name || '-'}.`
+						: `Awaiting clearance from ${name || '-'}.`}
 				</span>
 			</div>
 
@@ -99,6 +101,16 @@ function Heading({
 								Tasks once skipped can not be undone
 							</span>
 						</div>
+						<div style={{ marginBottom: '4px' }}>Enter reason for skipping</div>
+						<InputController
+							control={control}
+							name="reason"
+							isClearable
+							rules={{ required: 'this is required' }}
+						/>
+						{errors.reason && (
+							<span className={styles.error}>*This field is Required</span>
+						)}
 						{(application_process_details || []).map((item) => (
 							<div className={styles.checkbox} key={item.id}>
 								<CheckboxController
@@ -110,15 +122,7 @@ function Heading({
 								<div>{startCase(item.process_name)}</div>
 							</div>
 						))}
-						<InputController
-							control={control}
-							name="reason"
-							isClearable
-							rules={{ required: 'this is required' }}
-						/>
-						{errors.reason && (
-							<span className={styles.error}>*This field is Required</span>
-						)}
+
 					</Modal.Body>
 					<Modal.Footer>
 						<Button onClick={handleSubmit(onSubmit)}>OK</Button>

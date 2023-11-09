@@ -58,6 +58,7 @@ function TaskList({
 					<Modal.Header title="Are you sure?" />
 					<Modal.Body>
 
+						<div style={{ marginBottom: '4px' }}>Enter reason for skipping</div>
 						<InputController
 							control={control}
 							name="reason"
