@@ -115,7 +115,7 @@
     "referral": "Referral",
     "chakravyuh": "Chakravyuh",
     "manager_dashboard": "Manager Dashboard",
-    "employee_dashboard": "Employee Dashboard",
+    "employee_dashboard": "Performance Rating",
     "ftl_admin": "FTL Admin",
     "centralised_customer_service_desk": "Centralised Customer Service Desk",
     "api_resource": "Api Resource",
@@ -268,5 +268,7 @@
     "chips_mails_label": "Surat-surat",
     "see_all_button": "Lihat Semua",
     "notifications_empty_label": "Anda tidak memiliki notifikasi baru.",
-    "performance_and_incentives": "Performance and Incentives"
+    "performance_and_incentives": "Performance and Incentives",
+    "sme_dashboard": "SME Dashboard",
+    "handling_fees_configuration": "Handling Fees"
 }

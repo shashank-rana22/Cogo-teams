@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
 
 import useCreateTicketActivity from '../../../../hooks/useCreateTicketActivity';
+import useGetListShipments from '../../../../hooks/useGetListShipments';
 import useGetTicketActivity from '../../../../hooks/useGetTicketActivity';
 import useGetTicketDetails from '../../../../hooks/useGetTicketDetails';
 import useUpdateTicketActivity from '../../../../hooks/useUpdateTicketActivity';
@@ -36,7 +37,7 @@ const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
 
 function TicketChat({
 	modalData = {}, setModalData = () => {}, showReassign = false,
-	setShowReassign = () => {},
+	setShowReassign = () => {}, partnerId = '',
 }) {
 	const { ticketId = '' } = modalData || {};
 
@@ -68,7 +69,8 @@ function TicketChat({
 	});
 
 	const { Ticket: ticket = {}, IsCurrentReviewer: isCurrentReviewer = false } = ticketData || {};
-	const { Status: status = '' } = ticket || {};
+	const { Status: status = '', Data: data = {} } = ticket || {};
+	const { SerialID: serialId } = data || {};
 
 	const {
 		listData = {},
@@ -78,6 +80,7 @@ function TicketChat({
 	} = useGetTicketActivity({
 		ticketId: ticketId || '',
 	});
+	const { shipmentData = {}, listLoading = false } = useGetListShipments({ ticketId, serialId });
 
 	const isEmptyChat = isEmpty(listData?.items);
 
@@ -198,7 +201,13 @@ function TicketChat({
 
 				{doesTicketsExists && (
 					<div className={styles.sub_modal_container}>
-						<TicketSummary {...ticketData} detailsLoading={detailsLoading} />
+						<TicketSummary
+							{...ticketData}
+							detailsLoading={detailsLoading}
+							shipmentData={shipmentData}
+							listLoading={listLoading}
+							partnerId={partnerId}
+						/>
 					</div>
 				)}
 

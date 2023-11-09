@@ -1,0 +1,73 @@
+.container {
+	padding: 10px;
+}
+
+.label {
+	font-size: 16px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.empty_label {
+	margin-top: 10px;
+	font-weight: 600;
+}
+
+.content {
+	display: flex;
+	justify-content: space-between;
+	width: fit-content;
+	padding: 10px;
+	margin-top: 10px;
+	background: #fdfbf6;
+	border-radius: 4px;
+}
+
+.title {
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.value {
+	font-weight: 600;
+	color: #221f20;
+}
+
+.border {
+	width: 0;
+	height: 18px;
+	margin: 0 10px;
+	border: 1px solid #f2e3c3;
+}
+
+.table {
+	margin-top: 10px;
+}
+
+.header {
+	display: flex;
+	padding: 10px 20px;
+	font-weight: 500;
+	color: #c26d1a;
+	background: #fdfbf6;
+}
+
+.head {
+	width: 50%;
+}
+
+.details {
+	display: flex;
+	padding: 10px 20px;
+	border: 1px solid #f8f2e7;
+
+	:hover {
+		font-weight: 500;
+		cursor: pointer;
+	}
+}
+
+.row {
+	max-height: 200px;
+	overflow: scroll;
+}

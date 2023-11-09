@@ -24,6 +24,7 @@ const controls = ({
 		placeholder : 'Select issue type',
 		name        : 'issue_type',
 		type        : 'async-select',
+		initialCall : true,
 		rules       : { required: true },
 		asyncKey    : 'default_types',
 		params      : {

@@ -1,5 +1,5 @@
+/* eslint-disable max-lines-per-function */
 import {
-	commodityOptions,
 	currencyOptions,
 	densityCargoOptions,
 	densityRatioOptions,
@@ -75,15 +75,39 @@ const airControls = ({
 			rules       : { required: 'procured by is required' },
 		},
 		{
-			name        : 'commodity',
+			name        : 'air_commodity',
 			label       : 'Commodity',
 			placeholder : 'Commodity',
 			type        : 'select',
-			value       : data?.commodity || 'general',
-			options     : commodityOptions,
+			value       : data?.commodity,
+			options     : [
+				{ label: 'General Cargo', value: 'general' },
+				{ label: 'Special Consideration', value: 'special_consideration' },
+			],
+			span  : 4,
+			rules : { required: 'commodity is required' },
+		},
+
+		{
+			name        : 'commodity_type',
+			label       : 'Commodity Type',
+			placeholder : 'commodity type',
+			type        : 'select',
+			value       : data?.commodity_type,
 			span        : 4,
 			rules       : { required: 'commodity is required' },
 		},
+
+		{
+			name        : 'commodity_sub_type',
+			label       : 'Commodity Sub Type',
+			placeholder : 'commodity sub type',
+			type        : 'select',
+			value       : data?.commodity_sub_type,
+			span        : 4,
+			rules       : { required: 'commodity is required' },
+		},
+
 		{
 			name        : 'airline_id',
 			label       : 'Airline',

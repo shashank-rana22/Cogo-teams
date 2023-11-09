@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
-// import { useSelector } from '@cogoport/store';
 
 const useUpdateBankDetails = ({ handleModal = () => {}, getEmployeePaymentDetails }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
@@ -9,7 +8,6 @@ const useUpdateBankDetails = ({ handleModal = () => {}, getEmployeePaymentDetail
 		url    : '/update_bank_account_details',
 	}, { manual: true });
 
-	// const { profile } = useSelector((state) => state);
 	const updateBankDetails = async ({ payload }) => {
 		try {
 			await trigger({

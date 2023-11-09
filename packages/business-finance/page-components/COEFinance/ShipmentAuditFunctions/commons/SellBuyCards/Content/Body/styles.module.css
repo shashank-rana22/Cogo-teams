@@ -19,6 +19,11 @@
 	border-radius: 8px;
 }
 
+.invoice_url {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 .accord_body {
 	display: flex;
 	align-items: center;

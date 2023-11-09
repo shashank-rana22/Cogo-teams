@@ -1,5 +1,4 @@
 import { startCase } from '@cogoport/utils';
-import React from 'react';
 
 import getLocationInfo from '../../../../utils/locations-search';
 

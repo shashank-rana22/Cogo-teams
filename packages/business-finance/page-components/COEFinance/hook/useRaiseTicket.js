@@ -3,7 +3,9 @@ import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useRaiseTicket = ({
+	updateBillsTicketId = () => {},
 	setShowTicketModal = () => {},
+	source = '',
 	shipmentData = {},
 	service = {},
 }) => {
@@ -27,10 +29,11 @@ const useRaiseTicket = ({
 		const {
 			serial_id = '',
 			trade_type = '',
+			shipment_type = '',
 		} = shipmentData || {};
 
 		try {
-			await trigger({
+			const response = await trigger({
 				data: {
 					UserID           : profile?.user?.id || undefined,
 					PerformedByID    : profile?.user?.id || undefined,
@@ -38,7 +41,7 @@ const useRaiseTicket = ({
 					UserType         : 'ticket_user',
 					Description      : describe_issue,
 					Type             : issue_type || undefined,
-					TicketReviewerID : raised_to,
+					TicketReviewerID : raised_to || null,
 					RaisedByDesk     : 'Auditor',
 					RaisedToDesk     : raised_to_desk || undefined,
 					CategoryDeskType : 'by_desk',
@@ -47,12 +50,17 @@ const useRaiseTicket = ({
 						RequestType : 'shipment',
 						SerialID    : serial_id || undefined,
 						TradeType   : trade_type || undefined,
-						Service     : service?.value || undefined,
+						Service     : source === 'audit_function' ? service?.value : shipment_type,
 					},
 				},
 			});
+			if (source === 'cost_advocate') {
+				updateBillsTicketId(response);
+			}
+			if (source === 'audit_function') {
+				setShowTicketModal(false);
+			}
 
-			setShowTicketModal(false);
 			Toast.success('Successfully Created');
 		} catch (error) {
 			Toast.error(error?.response?.data);

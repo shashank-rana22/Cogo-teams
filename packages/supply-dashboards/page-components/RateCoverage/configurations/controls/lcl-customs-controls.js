@@ -2,7 +2,6 @@ import { currencyOptions } from '../helpers/constants';
 
 const lclCustomsControls = ({
 	data,
-	CommodityOptions,
 	originLocationOptions,
 	source,
 }) => {
@@ -76,7 +75,6 @@ const lclCustomsControls = ({
 			placeholder : 'Commodity',
 			span        : 4,
 			value       : data?.commodity,
-			options     : CommodityOptions,
 		},
 		source === 'live_booking'
 			? {
@@ -97,9 +95,9 @@ const lclCustomsControls = ({
 			type               : 'fieldArray',
 			showButtons        : true,
 			buttonText         : 'Add Custom Line Items',
-			noDeleteButtonTill : 1,
+			noDeleteButtonTill : 0,
 			value              : [{
-				customs_code : '',
+				code         : '',
 				unit         : '',
 				currency     : '',
 				price        : '',
@@ -108,14 +106,11 @@ const lclCustomsControls = ({
 			}],
 			controls: [
 				{
-					name        : 'customs_code',
-					valueKey    : 'code',
-					type        : 'async_select',
+					name        : 'code',
+					type        : 'select',
 					span        : 2,
-					asyncKey    : 'list_rate_charge_codes',
-					params      : { service_name: 'lcl_customs_charges' },
-					initialCall : true,
-					rules       : { required: 'Code is required' },
+					placeholder : 'Charge Name',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'currency',

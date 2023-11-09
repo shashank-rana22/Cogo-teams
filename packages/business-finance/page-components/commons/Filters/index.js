@@ -9,13 +9,14 @@ function Filter({
 	filters = {},
 	setFilters = () => {},
 	showClearBtn = false,
-	clearFilters,
+	clearFilters = () => {},
 	pageKey = 'pageIndex',
 }) {
-	const getElement = (singlecontrol) => {
+	function GetElement({ singleControl = {} }) {
 		const {
 			span = 0, name = '', type = '', groupby, showlabel = false, label, show = true, ...rest
-		} = singlecontrol || {};
+		} = singleControl || {};
+
 		const customiseControl = {
 			id       : `filter-${name}`,
 			value    : filters?.[name] || '',
@@ -37,15 +38,18 @@ function Filter({
 			filters,
 			...rest,
 		};
+
 		if (!show) {
 			return null;
 		}
+
 		return (
 			<div
 				className={styles.col}
 				style={{
 					'--width': `${(span || 1) * (100 / 12)}%`,
 				}}
+				key={name}
 			>
 				<div>
 					{!showlabel && <div className={styles.showlabel}>{label}</div>}
@@ -53,7 +57,7 @@ function Filter({
 				</div>
 			</div>
 		);
-	};
+	}
 
 	return (
 		<div className={cl`${styles.flex} filter`}>
@@ -70,12 +74,12 @@ function Filter({
 								</div>
 							)}
 							<div className={styles.col} style={{ width: `${(span || 12) * (100 / 12)}%` }}>
-								{(groupBy).map((each) => (getElement(each)))}
+								{(groupBy).map((each) => GetElement({ singleControl: each }))}
 							</div>
 						</>
 					);
 				}
-				return (<>{getElement(control)}</>);
+				return (<>{GetElement({ singleControl: control })}</>);
 			})}
 			{showClearBtn && (
 				<Button

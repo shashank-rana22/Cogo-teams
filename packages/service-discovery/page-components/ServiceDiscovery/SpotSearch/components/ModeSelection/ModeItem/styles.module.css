@@ -33,7 +33,7 @@
 	}
 
 	@media (max-width: 768px) {
-		min-width: 130px;
+		min-width: 43%;
 		padding: 14px 12px;
 	}
 }

@@ -11,17 +11,18 @@
 
 .name_container {
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
 	width: 100%;
 }
 
 .name_sub_container {
 	display: flex;
-	flex-direction: column;
-	max-width: 90%;
+	justify-content: space-between;
 }
 
 .label_name {
+	width: fit-content;
+	margin-right: 4px;
 	margin-bottom: 4px;
 }
 
@@ -31,7 +32,7 @@
 }
 
 .sub_label {
-	min-width: max-content;
-	font-size: 12px;
+	font-size: 10px;
+	font-weight: 600;
 	color: #828282;
 }

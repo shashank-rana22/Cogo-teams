@@ -28,7 +28,7 @@ function QuotationDetails({
 		options  : {
 			style                 : 'currency',
 			currencyDisplay       : 'symbol',
-			maximumFractionDigits : 0,
+			maximumFractionDigits : 2,
 		},
 	});
 
@@ -60,10 +60,10 @@ function QuotationDetails({
 			<Button
 				onClick={handleSelectButtonClick}
 				size="md"
-				themeType="accent"
+				themeType={isSelectedCard ? 'secondary' : 'accent'}
 				className={styles.primary_button}
 			>
-				{!isSelectedCard ? `Select For ${formattedAmount}` : 'Remove'}
+				{!isSelectedCard ? `Select For ${formattedAmount}` : 'Select Another'}
 			</Button>
 
 			{showContract ? (

@@ -1,4 +1,5 @@
 import { Modal } from '@cogoport/components';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -7,6 +8,10 @@ import styles from './styles.module.css';
 import TicketChat from './TicketChat';
 
 function FeedbackModal({ showFeedback = false, setShowFeedback = () => {} }) {
+	const { partnerId = '' } = useSelector(({ profile }) => ({
+		partnerId: profile?.partner?.id,
+	}));
+
 	const [modalData, setModalData] = useState({});
 	const [showReassign, setShowReassign] = useState(false);
 
@@ -33,6 +38,7 @@ function FeedbackModal({ showFeedback = false, setShowFeedback = () => {} }) {
 							setModalData={setModalData}
 							showReassign={showReassign}
 							setShowReassign={setShowReassign}
+							partnerId={partnerId}
 						/>
 					)}
 			</Modal.Body>

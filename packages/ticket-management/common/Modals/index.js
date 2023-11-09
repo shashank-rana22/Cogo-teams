@@ -16,6 +16,10 @@ function Modals(props) {
 
 	const [isInternal, setIsInternal] = useState(true);
 
+	if (isEmpty(modalData)) {
+		return null;
+	}
+
 	return (
 		<Modal
 			size="sm"

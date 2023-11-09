@@ -6,10 +6,10 @@ import React from 'react';
 
 import FieldPair from './RenderFunctions/FiledPair';
 
-const getFormattedAmount = ({ amount, currency, symbol }) => formatAmount({
+const getFormattedAmount = ({ amount, currency }) => formatAmount({
 	amount,
-	currency : currency || symbol,
-	options  : {
+	currency,
+	options: {
 		style                 : 'currency',
 		currencyDisplay       : 'symbol',
 		maximumFractionDigits : 2,
@@ -25,12 +25,22 @@ const commonFunctions = (functions) => {
 			<FieldPair itemData={itemData} field={field} />
 		),
 		renderAmount: (itemData, field) => (
-			<div>
-				{getFormattedAmount({
-					amount   : getByKey(itemData, field?.key),
-					currency : getByKey(itemData, field?.currencyKey),
-					symbol   : itemData?.objectCurrency,
-				})}
+			<div style={{ display: 'flex', flexDirection: 'column' }}>
+				<span>
+					{getFormattedAmount({
+						amount   : getByKey(itemData, field?.key),
+						currency : getByKey(itemData, field?.currencyKey),
+						symbol   : itemData?.objectCurrency,
+					})}
+				</span>
+				<span>
+					{field?.label === 'Payable' ? itemData?.advancedAmount
+							&& `ATH: ${getFormattedAmount({
+								amount   : getByKey(itemData, 'advancedAmount'),
+								currency : getByKey(itemData, field?.currencyKey),
+								symbol   : itemData?.objectCurrency,
+							})}` : null}
+				</span>
 			</div>
 		),
 		renderDate: (itemData, field) => (

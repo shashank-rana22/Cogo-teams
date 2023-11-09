@@ -6,6 +6,7 @@
 
 	@media (max-width: 768px) {
 		flex-direction: column;
+		gap: 20px;
 		width: 100%;
 	}
 }
@@ -84,4 +85,12 @@
 .bold_text {
 	font-size: 14px;
 	font-weight: 700;
+}
+
+.info_text {
+	display: flex;
+	align-items: center;
+	margin-top: 4px;
+	font-size: 11px;
+	color: #404e65;
 }

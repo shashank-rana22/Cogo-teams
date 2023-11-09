@@ -2,17 +2,32 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useHarbourRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
+const months = [
+	'January',
+	'February',
+	'March',
+	'April',
+	'May',
+	'June',
+	'July',
+	'August',
+	'September',
+	'October',
+	'November',
+	'December',
+];
+
 const useMonthlyRating = ({ props }) => {
 	const [page, setPage] = useState(GLOBAL_CONSTANTS.one);
 	const [search, setSearch] = useState('');
-	const [location, setLocation] = useState('');
-	const [department, setDepartment] = useState('');
 	const [showUnrated, setShowUnrated] = useState(false);
-
+	const [filters, setFilters] = useState({});
 	const [{ data, loading }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : '/list_employee_ratings',
 	}, { manual: true });
+
+	const { list, cycle_month, cycle_year, ...paginationData } = data || {};
 
 	const fetch = useCallback(
 		async () => {
@@ -20,13 +35,13 @@ const useMonthlyRating = ({ props }) => {
 				await trigger({
 					params: {
 						level: props?.activeTab === 'functional_manager'
-							? 'functional_manager' : props?.level,
+							? 'functional_manager' : props?.user_role,
 						page,
 						page_limit : 30,
+						month      : filters?.month || months.indexOf(cycle_month) + 1,
+						year       : filters?.year || cycle_year,
 						filters    : {
-							department_id   : department || undefined,
-							office_location : location || undefined,
-							q               : search || undefined,
+							q: search || undefined,
 						},
 						show_unrated_employees: showUnrated ? true : undefined,
 					},
@@ -35,14 +50,17 @@ const useMonthlyRating = ({ props }) => {
 				console.log('error :: ', error);
 			}
 		},
-		[department, location, page, props?.activeTab, props?.level, search, showUnrated, trigger],
+		[cycle_month, cycle_year, filters?.month, filters?.year,
+			page, props?.activeTab, props?.user_role, search, showUnrated, trigger],
 	);
 
 	useEffect(() => {
 		fetch();
-	}, [fetch, page, search, location, department, showUnrated]);
+	}, [fetch, page, search, showUnrated]);
 
-	const { list, ...paginationData } = data || {};
+	useEffect(() => {
+		setFilters({ year: cycle_year, month: months.indexOf(cycle_month) + 1 });
+	}, [cycle_month, cycle_year]);
 
 	return {
 		list,
@@ -52,13 +70,13 @@ const useMonthlyRating = ({ props }) => {
 		setPage,
 		search,
 		setSearch,
-		location,
-		setLocation,
-		department,
-		setDepartment,
 		showUnrated,
 		setShowUnrated,
 		refetch: fetch,
+		cycle_month,
+		cycle_year,
+		setFilters,
+		filters,
 	};
 };
 

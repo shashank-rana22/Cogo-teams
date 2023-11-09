@@ -1,0 +1,9 @@
+.container {
+	margin-top: 50px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}

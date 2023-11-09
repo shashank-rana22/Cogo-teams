@@ -9,6 +9,11 @@
 	justify-content: space-between;
 }
 
+.stats_container {
+	display: flex;
+	margin-top: 16px;
+}
+
 .left_container {
 	display: flex;
 

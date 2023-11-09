@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { IcMCross, IcMEdit } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMCross, IcMEdit } from '@cogoport/icons-react';
 
 import LocationDetails from '../../../LocationDetails';
 import SelectedOrgInfo from '../../../SelectedOrgInfo';
@@ -17,6 +17,10 @@ function SearchDetails({
 	currentScreen = '',
 	setCurrentScreen = () => {},
 	setRouterLoading = () => {},
+	touch_points = {},
+	isMobile = false,
+	show = false,
+	setShow = () => {},
 	...rest
 }) {
 	const { importer_exporter = {}, user = {} } = data || {};
@@ -25,7 +29,7 @@ function SearchDetails({
 
 	const handleEdit = (event) => {
 		event.stopPropagation();
-		setHeaderProps({ key: 'edit_details', data, setShow: setHeaderProps, setRouterLoading });
+		setHeaderProps({ key: 'edit_details', data, setShow: setHeaderProps, setRouterLoading, touch_points });
 	};
 
 	return (
@@ -45,17 +49,31 @@ function SearchDetails({
 				data={data}
 				loading={loading}
 				activePage={activePage}
+				touch_points={touch_points}
 			/>
 
-			{isAllowedToEdit ? (
-				<div className={styles.edit_details}>
-					{showAdditionalHeader ? (
-						<IcMCross height={16} width={16} onClick={() => setHeaderProps({})} />
-					) : (
-						<IcMEdit height={16} width={16} onClick={handleEdit} />
-					)}
-				</div>
-			) : null}
+			<div className={styles.icons_container}>
+				{isAllowedToEdit ? (
+					<div className={styles.edit_details}>
+						{showAdditionalHeader ? (
+							<IcMCross
+								height={16}
+								width={16}
+								onClick={() => setHeaderProps({})}
+							/>
+						) : (
+							<IcMEdit height={16} width={16} onClick={handleEdit} />
+						)}
+					</div>
+				) : null}
+
+				{isMobile ? (
+					<IcMArrowDown
+						className={cl`${styles.down_arrow} ${show && styles.show}`}
+						onClick={() => setShow(!show)}
+					/>
+				) : null}
+			</div>
 		</div>
 	);
 }

@@ -115,7 +115,7 @@
     "referral": "Referral",
     "chakravyuh": "Chakravyuh",
     "manager_dashboard": "Manager Dashboard",
-    "employee_dashboard": "Employee Dashboard",
+    "employee_dashboard": "Performance Rating",
     "ftl_admin": "FTL Admin",
     "centralised_customer_service_desk": "Centralised Customer Service Desk",
     "api_resource": "Api Resource",
@@ -259,7 +259,7 @@
     "warehouse_management": "Warehouse Management",
     "demand_forecast": "Demand Forecast",
     "select_language": "Chọn ngôn ngữ",
-     "default_error_toast": "Ứng dụng đã gặp phải một lỗi không xác định. Đội của chúng tôi đang xem xét vấn đề này với sự cấp bách tối đa. Vui lòng thử lại sau một thời gian. Nếu vấn đề vẫn tiếp tục, vui lòng liên hệ chúng tôi qua cuộc trò chuyện.",
+    "default_error_toast": "Ứng dụng đã gặp phải một lỗi không xác định. Đội của chúng tôi đang xem xét vấn đề này với sự cấp bách tối đa. Vui lòng thử lại sau một thời gian. Nếu vấn đề vẫn tiếp tục, vui lòng liên hệ chúng tôi qua cuộc trò chuyện.",
     "tab_notifications_label": "Thông báo",
     "tab_mails_label": "Thư",
     "mark_all_as_read": "Đánh dấu tất cả là đã đọc",
@@ -268,5 +268,7 @@
     "chips_notifications_label": "Thông báo",
     "chips_mails_label": "Thư",
     "see_all_button": "Xem Tất cả",
-    "notifications_empty_label": "Bạn không có thông báo mới."
+    "notifications_empty_label": "Bạn không có thông báo mới.",
+    "sme_dashboard": "SME Dashboard",
+    "handling_fees_configuration": "Handling Fees"
 }

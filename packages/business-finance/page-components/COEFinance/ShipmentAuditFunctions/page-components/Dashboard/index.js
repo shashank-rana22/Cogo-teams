@@ -3,7 +3,6 @@ import { useRouter } from '@cogoport/next';
 import { useRef, useState } from 'react';
 
 import useUpdateJobAuditStatus from '../../../hook/useUpdateJobAuditStatus';
-import getApproveJobAuditBttnCondition from '../../utils/getApproveJobAuditButtonCondition';
 
 import QuotationCards from './QuotationCards';
 import styles from './styles.module.css';
@@ -25,19 +24,17 @@ function Dashboard() {
 		loading,
 	} = useUpdateJobAuditStatus({ getPrePostShipmentQuote: getPrePostShipmentQuoteRef.current, active_tab });
 
-	const { bttnDisableCondition } = getApproveJobAuditBttnCondition({ quotationsData });
-
 	const handleClick = () => {
 		window.sessionStorage.removeItem('currency');
 		window.sessionStorage.removeItem('audit_status');
 
 		if (active_tab === 'financial_close') {
 			push(
-				'/business-finance/coe-finance/financial_close',
+				'/business-finance/audit-function/financial_close',
 			);
 		} else {
 			push(
-				'/business-finance/coe-finance/operational_close',
+				'/business-finance/audit-function/operational_close',
 			);
 		}
 	};
@@ -61,22 +58,21 @@ function Dashboard() {
 						)}
 					</div>
 					<div className={styles.header_button}>
-						{auditStatus !== 'audited' && (
-							<Button
-								size="md"
-								themeType="primary"
-								disabled={!bttnDisableCondition || loading}
-								onClick={() => updateJobAuditStatus({ jobId: job_id, status: 'AUDITED' })}
-							>
-								Approve
-							</Button>
-						)}
+						<Button
+							size="md"
+							themeType="primary"
+							disabled={loading}
+							onClick={() => updateJobAuditStatus({ jobId: job_id, status: 'AUDITED' })}
+						>
+							Approve
+						</Button>
 					</div>
 				</div>
 			</div>
 
 			<QuotationCards
 				getPrePostShipmentQuoteRef={getPrePostShipmentQuoteRef}
+				quotationsData={quotationsData}
 				setQuotationsData={setQuotationsData}
 			/>
 

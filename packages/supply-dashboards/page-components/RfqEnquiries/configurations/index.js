@@ -3,20 +3,21 @@ import airFields from './air-controls';
 import chargeContolsFunc from './charge-controls';
 import commonControlsFunc from './common-controls';
 import fclControl from './fcl-controls';
+import fclLocalControl from './fcl-local-controls';
 import freeDaysSection from './free-days-section';
 import lclChildControlsFunc from './lcl-child-controls';
 import lclFields from './lcl-controls';
 import locationControls from './locationControls';
 import TrailerControls from './trailer-controls';
 
-const chargeCodeMapping = {
+const CHARGE_CODE_MAPPING = {
 	fcl_cfs         : 'cfs_charge_codes',
 	fcl_customs     : 'customs_charge_codes',
 	haulage_freight : 'haulage_charge_codes',
 	trailer_freight : 'freights_charge_codes',
 };
 
-const Config = ({ data }) => {
+const config = ({ data }) => {
 	const field = commonControlsFunc({ service: data?.service });
 
 	if (data?.service === 'fcl_freight') {
@@ -43,6 +44,8 @@ const Config = ({ data }) => {
 				data,
 			}));
 		}
+	} else if (data?.service === 'fcl_freight_local') {
+		field.push(...fclLocalControl({ data }));
 	} else if (data?.service === 'air_freight') {
 		field.push(...airFields);
 		if (data?.data?.include_destination_local) {
@@ -96,11 +99,11 @@ const Config = ({ data }) => {
 			}));
 		}
 	} else if (['trailer_freight', 'haulage_freight'].includes(data?.service)) {
-		field.push(...TrailerControls({ data, charge_code_name: chargeCodeMapping[data?.service] }));
+		field.push(...TrailerControls({ data, charge_code_name: CHARGE_CODE_MAPPING[data?.service] }));
 	} else if (['ltl_freight', 'ftl_freight'].includes(data?.service)) {
 		field.push(...locationControls(data));
 	} else if (['fcl_cfs', 'fcl_customs'].includes(data?.service)) {
-		field.push(chargeContolsFunc({ heading: '', charge_code_name: chargeCodeMapping[data?.service] }));
+		field.push(chargeContolsFunc({ heading: '', charge_code_name: CHARGE_CODE_MAPPING[data?.service] }));
 	} else if (data?.service === 'lcl_customs') {
 		field.push(lclChildControlsFunc({ heading: '', charge_code_name: 'customs_charge_codes' }));
 	} else if (data?.service === 'air_customs') {
@@ -110,4 +113,4 @@ const Config = ({ data }) => {
 	return field;
 };
 
-export default Config;
+export default config;

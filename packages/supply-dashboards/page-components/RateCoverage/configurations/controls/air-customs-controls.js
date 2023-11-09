@@ -2,7 +2,6 @@ import { currencyOptions } from '../helpers/constants';
 
 const airCustomsControls = ({
 	data,
-	CommodityOptions,
 	originLocationOptions, source,
 }) => {
 	const controls = [
@@ -70,7 +69,6 @@ const airCustomsControls = ({
 			span        : 3,
 			value       : data?.commodity,
 			disabled    : data?.commodity,
-			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
 		source === 'live_booking'
@@ -91,24 +89,14 @@ const airCustomsControls = ({
 			type               : 'fieldArray',
 			showButtons        : true,
 			buttonText         : 'Add Custom Line Items',
-			noDeleteButtonTill : 1,
-			value              : [{
-				code     : '',
-				unit     : '',
-				currency : '',
-				price    : '',
-				remarks  : '',
-			}],
-			controls: [
+			noDeleteButtonTill : 0,
+			controls           : [
 				{
-					name        : 'customs_code',
-					valueKey    : 'code',
-					type        : 'async_select',
+					name        : 'code',
+					type        : 'select',
 					span        : 2,
-					asyncKey    : 'list_rate_charge_codes',
-					params      : { service_name: 'air_customs_charges' },
-					initialCall : true,
-					rules       : { required: 'Code is required' },
+					placeholder : 'Charge Name',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'currency',

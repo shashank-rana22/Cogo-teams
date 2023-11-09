@@ -1,0 +1,41 @@
+.container {
+	display: flex;
+	align-items: end;
+}
+
+.amount_wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.amount {
+	display: flex;
+	align-items: baseline;
+	font-size: 22px;
+	font-weight: 600;
+	color: #000;
+}
+
+.tooltip_content {
+	word-break: keep-all;
+}
+
+.info_icon {
+	width: 12px;
+	height: 12px;
+	margin: 0 0 4px 8px;
+}
+
+.discounted_price {
+	font-size: 14px;
+	font-weight: 600;
+	color: #ee3425;
+	text-decoration: line-through;
+}
+
+.per_truck_label {
+	margin: 0 0 4px 4px;
+	font-size: 10px;
+	font-weight: 600;
+	opacity: 0.4;
+}

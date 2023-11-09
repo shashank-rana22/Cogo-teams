@@ -5,11 +5,6 @@ import { useSelector } from '@cogoport/store';
 
 import toastApiError from '../../../commons/toastApiError';
 
-const DOC_MAPPING = {
-	'Purchase Invoices'  : 'billPdfUrl',
-	'Shipment Documents' : 'shipmentPdfUrl',
-};
-
 const useDeleteTaggedDocuments = ({ generateInvoice = () => {} }) => {
 	const { query = {} } = useSelector(({ general }) => ({ query: general?.query }));
 
@@ -24,18 +19,23 @@ const useDeleteTaggedDocuments = ({ generateInvoice = () => {} }) => {
 		{ manual: true },
 	);
 
-	const deleteTaggedDocuments = async ({ itemData = {} }) => {
-		const key = DOC_MAPPING[itemData?.docName];
-
+	const deleteTaggedDocuments = async () => {
 		try {
 			await trigger({
 				data: {
-					payrunId: payrun,
-					key,
+					payrunId : payrun,
+					key      : 'billPdfUrl',
+				},
+			});
+			await trigger({
+				data: {
+					payrunId : payrun,
+					key      : 'shipmentPdfUrl',
 				},
 			});
 
-			Toast.success(`${itemData.docName} Deleted successfully`);
+			Toast.success('Purchase Invoices Deleted successfully');
+			Toast.success('Shipment Documents Deleted successfully');
 			generateInvoice();
 		} catch (e) {
 			toastApiError(e);

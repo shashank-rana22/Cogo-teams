@@ -22,11 +22,11 @@ const useUpdateJobAuditStatus = ({
 			Toast.success('Success');
 			if (active_tab === 'financial_close') {
 				push(
-					'/business-finance/coe-finance/financial_close',
+					'/business-finance/audit-function/financial_close',
 				);
 			} else {
 				push(
-					'/business-finance/coe-finance/operational_close',
+					'/business-finance/audit-function/operational_close',
 				);
 			}
 		} catch (err) {

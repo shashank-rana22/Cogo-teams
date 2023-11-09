@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 const ONE_VALUE = 1;
 const DEFAULT_COUNT_VALUE = 0;
@@ -56,10 +57,14 @@ const useDislikeFeedback = ({
 		const keyToSend = KEYS_TO_SEND[freight];
 		const keyCurrency = KEYS_TO_SEND_CURR[freight];
 		const {
-			preferred_freight_rate,
-			preferred_freight_rate_currency,
-			file_upload,
-			commodity_description,
+			preferred_airline_ids = undefined,
+			preferred_freight_rate = undefined,
+			preferred_freight_rate_currency = undefined,
+			remarks = undefined,
+			preferred_shipping_line_ids = undefined,
+			preferred_detention_free_days = 0,
+			file_upload = [],
+			commodity_description = undefined,
 			...rest
 		} = values;
 		const attachment_file_urls = (file_upload || []).map((item) => item.finalUrl);
@@ -69,28 +74,33 @@ const useDislikeFeedback = ({
 		ventilation: ${values.ventilation}%` : '';
 
 		try {
-			if (preferred_freight_rate && !preferred_freight_rate_currency) {
-				Toast.error('Please add currency');
+			if ((preferred_freight_rate && !preferred_freight_rate_currency)
+			|| (preferred_freight_rate_currency && !preferred_freight_rate)) {
+				if (!preferred_freight_rate_currency) {
+					Toast.error('Please add currency');
+				} else Toast.error('Please add rate');
+
 				return false;
 			}
+			const commodityDescription = reefer_commodity_description
+				? `${reefer_commodity_description} ${commodity_description}` : commodity_description;
+
 			const body = {
-				id                    : spot_search_id,
-				is_disliked           : true,
-				...rest,
-				preferred_airline_ids : values.preferred_airline_ids || undefined,
-				preferred_shipping_line_ids:
-						values.preferred_shipping_line_ids || undefined,
-				remarks       : values.remarks ? [values.remarks] : undefined,
-				[keyToSend]   : values.preferred_freight_rate || undefined,
-				[keyCurrency] : values.preferred_freight_rate_currency || undefined,
+				id                          : spot_search_id,
+				is_disliked                 : true,
+				...Object.entries(rest).reduce((acc, [key, value]) => ({ ...acc, [key]: value || undefined }), {}),
+				preferred_airline_ids       : !isEmpty(preferred_airline_ids) ? preferred_airline_ids : undefined,
+				preferred_shipping_line_ids : !isEmpty(preferred_shipping_line_ids)
+					? preferred_shipping_line_ids : undefined,
+				remarks       : remarks ? [remarks] : undefined,
+				[keyToSend]   : preferred_freight_rate || undefined,
+				[keyCurrency] : preferred_freight_rate_currency || undefined,
 				preferred_detention_free_days:
-						values.preferred_detention_free_days || undefined,
-				selected_card       : rate.id,
-				performed_by_org_id : details.importer_exporter.id,
-				attachment_file_urls,
-				commodity_description:
-						`${reefer_commodity_description} ${commodity_description}`
-						|| undefined,
+						preferred_detention_free_days || undefined,
+				selected_card         : rate.id,
+				performed_by_org_id   : details.importer_exporter.id,
+				attachment_file_urls  : !isEmpty(attachment_file_urls) ? attachment_file_urls : undefined,
+				commodity_description : commodityDescription,
 			};
 			await trigger({ data: body });
 

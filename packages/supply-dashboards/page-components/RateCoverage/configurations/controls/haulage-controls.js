@@ -6,7 +6,6 @@ import { currencyOptions } from '../helpers/constants';
 
 const haulageControls = ({
 	data,
-	CommodityOptions,
 	originLocationOptions,
 	destinationLocationOptions,
 	source,
@@ -96,7 +95,6 @@ const haulageControls = ({
 			placeholder : 'Commodity',
 			span        : 3,
 			value       : data?.commodity,
-			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
 		{
@@ -181,7 +179,7 @@ const haulageControls = ({
 			buttonText         : 'Add Line Items',
 			noDeleteButtonTill : 1,
 			value              : [{
-				customs_code : '',
+				code         : '',
 				unit         : '',
 				currency     : '',
 				price        : '',
@@ -190,21 +188,18 @@ const haulageControls = ({
 			}],
 			controls: [
 				{
-					name        : 'customs_code',
-					valueKey    : 'code',
-					type        : 'async_select',
+					name        : 'code',
+					type        : 'select',
 					span        : 2,
-					asyncKey    : 'list_rate_charge_codes',
-					params      : { service_name: 'haulage_freight_charges' },
-					initialCall : true,
-					rules       : { required: 'Code is required' },
+					placeholder : 'Charge Name',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'currency',
 					type        : 'select',
 					options     : currencyOptions,
 					span        : 2,
-					placeholder : 'Curr...',
+					placeholder : 'Currency',
 					rules       : { required: 'currency is required' },
 				},
 				{

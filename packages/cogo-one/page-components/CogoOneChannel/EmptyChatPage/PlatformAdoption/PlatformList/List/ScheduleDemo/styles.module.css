@@ -1,0 +1,17 @@
+.modal_body {
+	max-height: 70vh !important;
+
+	:global {
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
+	}
+
+	@media (max-width: 768px) {
+		max-height: 80vh !important;
+	}
+}
+
+.cancel_cta {
+	margin-right: 16px;
+}

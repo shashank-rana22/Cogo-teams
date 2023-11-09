@@ -474,6 +474,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'list_rating_year',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	employee_performance_dashboard: [
 		{
@@ -864,205 +869,59 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 	],
-	payroll: [
+	cogo_store: [
 		{
-			api          : 'update_employee_salary_details',
+			api          : 'list_all_orders',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
 		{
-			api          : 'get_salary_configuration',
+			api          : 'get_order_dates',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
 		{
-			api          : 'create_employee_tax_declarations',
+			api          : 'list_products',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
 		{
-			api          : 'get_calculated_tax',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-
-		{
-			api          : 'list_all_employee_payrolls',
+			api          : 'get_product_filter_details',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
 		{
-			api          : 'list_company_location',
+			api          : 'list_product_variation_details',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
 		{
-			api          : 'list_salary_bands',
+			api          : 'get_order_details',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
 		{
-			api          : 'list_all_bonuses',
+			api          : 'get_order_history',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
 		{
-			api          : 'get_next_payroll_cycle',
+			api          : 'list_cart_items',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
 		{
-			api          : 'list_employee_payrolls',
+			api          : 'update_cart',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
 		{
-			api          : 'update_next_payroll',
+			api          : 'place_order',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
 		{
-			api          : 'list_all_transaction',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'list_salary_configurations',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'list_employee_salary_details',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'list_transaction_type',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'list_payroll',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'update_payroll',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'create_payroll',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'get_salary_structure',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'list_employee_details',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'get_next_payroll_cycle',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'list_all_irregular_payments',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'download_irregular_payments_report',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'upload_irregular_payments_report',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'create_temporary_irregular_payments',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'get_error_report',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'create_irregular_payments',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'list_payslip',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'list_employee_payslip_year',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'get_current_payroll',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'list_payroll_detail',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'list_employee_payslip_year',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'update_salary_details',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'get_payroll_dashboard',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'get_payroll_dashboard_graph',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'get_payroll_overview',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'get_payroll_calculation_date',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'update_payroll_calculation_date',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'download_payroll_details',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'list_employee_roles',
+			api          : 'update_order_details',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},

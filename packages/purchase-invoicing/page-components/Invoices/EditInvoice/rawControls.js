@@ -26,8 +26,9 @@ const rawControls = ({
 		type             : 'edit_service_charges',
 		name             : `${charge?.service_id}:${index}`,
 		service_name     : charge?.service_type,
-		showAddButtons   : false,
+		showAddButtons   : true,
 		shipment_id      : id,
+		path             : 'cross_entity_purchase_invoice',
 		shipment_type,
 		entity_id,
 		trade_type       : primary_service?.trade_type,
@@ -60,7 +61,6 @@ const rawControls = ({
 				span        : 2,
 				handleChange,
 				placeholder : 'Select Line Item',
-				disabled    : true,
 				rules       : { required: 'Required' },
 			},
 			{
@@ -76,7 +76,6 @@ const rawControls = ({
 				),
 				placeholder : 'Enter alias name/code',
 				span        : 2,
-				disabled    : true,
 				rules       : {
 					validate: (v) => {
 						if (isFieldsDisabled || isEmpty(v)) {
@@ -87,13 +86,12 @@ const rawControls = ({
 				},
 			},
 			{
-				label    : 'Unit',
-				type     : 'select',
-				name     : 'unit',
-				options  : convertObjectMappingToArray(FCL_UNITS),
-				disabled : true,
-				span     : 2,
-				rules    : { required: true },
+				label   : 'Unit',
+				type    : 'select',
+				name    : 'unit',
+				options : convertObjectMappingToArray(FCL_UNITS),
+				span    : 2,
+				rules   : { required: true },
 			},
 			{
 				name         : 'currency',
@@ -104,7 +102,6 @@ const rawControls = ({
 				placeholder  : 'Select Currency',
 				rules        : { required: true },
 				span         : 1.5,
-				disabled     : true,
 			},
 			{
 				label       : 'Price',
@@ -124,15 +121,13 @@ const rawControls = ({
 				placeholder : 'enter quantity',
 				rules       : { required: true, min: 1 },
 				span        : 1,
-				disabled    : true,
 			},
 			{
-				label    : 'Amount (Tax Excl.)',
-				type     : 'static',
-				name     : 'total',
-				render   : (item) => <div style={{ marginLeft: '24px' }} className="amount-excl">{item?.total}</div>,
-				span     : 2,
-				disabled : true,
+				label  : 'Amount (Tax Excl.)',
+				type   : 'static',
+				name   : 'total',
+				render : (item) => <div style={{ marginLeft: '24px' }} className="amount-excl">{item?.total}</div>,
+				span   : 2,
 			},
 		],
 	};
