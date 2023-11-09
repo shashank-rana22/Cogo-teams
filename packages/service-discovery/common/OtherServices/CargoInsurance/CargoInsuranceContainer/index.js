@@ -2,7 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcACarriageInsurancePaidTo, IcCFtick, IcMInfo, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import SecureNow from '../../../SecureNow';
 
@@ -12,6 +12,7 @@ function CargoInsuranceContainer({
 	cargoInsuranceDetails = {},
 	setShowDeleteModal = () => {},
 	setShowModal = () => {},
+	isMobile = false,
 }) {
 	const [isHovered, setIsHovered] = useState(false);
 
@@ -61,7 +62,7 @@ function CargoInsuranceContainer({
 							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'code',
-								maximumFractionDigits : 0,
+								maximumFractionDigits : 2,
 							},
 						})}
 					</strong>
@@ -71,15 +72,15 @@ function CargoInsuranceContainer({
 					<SelectedIcon
 						onMouseEnter={handleMouseEnter}
 						onMouseLeave={handleMouseLeave}
-						height={25}
-						width={25}
+						height={isMobile ? 18 : 25}
+						width={isMobile ? 18 : 25}
 						className={styles.tick_icon}
 						onClick={handleDelete}
 					/>
 				) : (
 					<IcMPlus
-						height={22}
-						width={22}
+						height={isMobile ? 16 : 22}
+						width={isMobile ? 16 : 22}
 						className={styles.add_icon}
 						fill="black"
 						onClick={() => setShowModal(true)}

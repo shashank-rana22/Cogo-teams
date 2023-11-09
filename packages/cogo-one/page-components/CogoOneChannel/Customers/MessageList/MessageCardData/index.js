@@ -1,6 +1,6 @@
 import { cl, Tooltip, Checkbox, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcCPin, IcMPin, IcMShip } from '@cogoport/icons-react';
+import { IcCPin, IcMNotifications, IcMPin, IcMShip } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
@@ -52,6 +52,7 @@ function MessageCardData({
 	const lastMessageVar = last_message_document || last_message;
 	const isImportant = chat_tags?.includes('important') || false;
 	const lastActive = new Date(new_message_sent_at);
+	const isUrgent = chat_tags?.includes('urgent') || false;
 
 	const checkActiveCard = activeTab?.data?.id === id;
 
@@ -171,14 +172,18 @@ function MessageCardData({
 					</div>
 				</div>
 
-				{isImportant && (
+				{(isUrgent || isImportant) && (
 					<div className={styles.important_icon}>
-						<Image
-							src={GLOBAL_CONSTANTS.image_url.eclamation_svg}
-							alt="important"
-							width="10"
-							height="10"
-						/>
+						{isUrgent ? (
+							<IcMNotifications className={styles.bell_icon} />
+						) : (
+							<Image
+								src={GLOBAL_CONSTANTS.image_url.eclamation_svg}
+								alt="important"
+								width="10"
+								height="10"
+							/>
+						)}
 					</div>
 				)}
 

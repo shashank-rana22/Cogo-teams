@@ -1,8 +1,9 @@
-import { Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMCross, IcMSearchlight } from '@cogoport/icons-react';
-import { isEmpty, startCase, upperCase } from '@cogoport/utils';
-import React, { useState, useEffect, useMemo } from 'react';
+import { isEmpty, startCase } from '@cogoport/utils';
+import { useState, useEffect, useMemo, useCallback } from 'react';
+
+import useGetIsMobile from '../../../helpers/useGetIsMobile';
+import SearchInput from '../../SearchInput';
 
 import ServiceItem from './ServiceItem';
 import styles from './styles.module.css';
@@ -17,17 +18,16 @@ function SubsidiaryServices({
 	refetch = () => {},
 	checkout_id = '',
 	loading = false,
-	...rest
 }) {
 	const [searchValue, setSearchValue] = useState('');
 	const [disabled, setIsDisabled] = useState('');
 
-	const added_services = Object.values(data.service_details || {})
-		.filter((serviceItem) => serviceItem.service_type === 'subsidiary');
+	const isMobile = useGetIsMobile();
 
-	const SUBSIDIARY_OPTIONS = [];
+	const added_services = useMemo(() => Object.values(data?.service_details || {})
+		.filter((serviceItem) => serviceItem.service_type === 'subsidiary'), [data]);
 
-	(possible_subsidiary_services || []).forEach((item) => {
+	const subsidiaryServices = useMemo(() => possible_subsidiary_services.map((item) => {
 		let tradeType = '';
 		if (item?.trade_type === 'export') {
 			tradeType = 'Origin';
@@ -43,58 +43,37 @@ function SubsidiaryServices({
 			code    : item.code,
 			service : item.service,
 		};
-		SUBSIDIARY_OPTIONS.push(service);
-	});
 
-	const mostPopularArray = slice(SUBSIDIARY_OPTIONS, POPULAR_OPTIONS_COUNT);
+		return service;
+	}), [possible_subsidiary_services]);
+
+	const mostPopularArray = slice(subsidiaryServices, POPULAR_OPTIONS_COUNT);
 	const [popularServices, setPopularServices] = useState(mostPopularArray);
 
-	const removeSelectedOptions = (array) => {
+	const removeSelectedOptions = useCallback((array) => {
 		const finalArray = array.filter((item) => !added_services.some(
 			(selectedItem) => `${selectedItem.code}_${selectedItem.service}_${selectedItem.trade_type}` === item.value,
 		));
 		return slice(finalArray, POPULAR_OPTIONS_COUNT);
-	};
+	}, [added_services]);
 
 	useEffect(() => {
-		let searchArray = SUBSIDIARY_OPTIONS;
+		let searchArray = subsidiaryServices;
 
 		if (!searchValue) {
 			searchArray = removeSelectedOptions(searchArray);
 		} else {
-			searchArray = SUBSIDIARY_OPTIONS.filter(
-				(serviceItem) => serviceItem.value.includes(startCase(searchValue))
-				|| serviceItem.label.includes(startCase(searchValue))
-				|| serviceItem.code.includes(upperCase(searchValue)),
+			const transformedSearchValue = searchValue?.toLowerCase();
+
+			searchArray = subsidiaryServices.filter(
+				(serviceItem) => serviceItem.value.toLowerCase()?.includes(transformedSearchValue)
+				|| serviceItem.label.toLowerCase()?.includes(transformedSearchValue)
+				|| serviceItem.code.toLowerCase()?.includes(transformedSearchValue),
 			);
 			searchArray = removeSelectedOptions(searchArray);
 		}
-		setPopularServices(searchArray);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchValue]);
-
-	const servicesToShow = useMemo(() => [...popularServices], [popularServices]);
-
-	function InputSuffix() {
-		return (
-			<div className={styles.suffix_container}>
-				{searchValue ? (
-					<IcMCross
-						width={20}
-						height={20}
-						className={styles.cross}
-						onClick={() => setSearchValue('')}
-					/>
-				) : null}
-
-				<IcMSearchlight
-					width={20}
-					height={20}
-					className={styles.input_suffix}
-				/>
-			</div>
-		);
-	}
+		setPopularServices(removeSelectedOptions(searchArray));
+	}, [searchValue, added_services, subsidiaryServices, removeSelectedOptions]);
 
 	return (
 		<div className={styles.container}>
@@ -105,12 +84,12 @@ function SubsidiaryServices({
 			<div className={styles.select_container}>
 				<div className={styles.label}>Search Subsidiary Services</div>
 
-				<Input
-					suffix={<InputSuffix />}
+				<SearchInput
 					value={searchValue}
-					onChange={(val) => setSearchValue(val)}
-					size={rest.size || 'md'}
-					placeholder="Eg. - Origin Entry Summary Declaration"
+					onSearch={setSearchValue}
+					placeholder={`Eg. - ${possible_subsidiary_services?.[GLOBAL_CONSTANTS.zeroth_index]?.name}`}
+					showPrefix={false}
+					onReset={() => setSearchValue('')}
 				/>
 			</div>
 
@@ -118,20 +97,19 @@ function SubsidiaryServices({
 				<div className={styles.label}>Our most popular services</div>
 
 				<div key={loading} className={styles.wrapper}>
-					{isEmpty(servicesToShow) ? (
+					{isEmpty(popularServices) ? (
 						<strong>Nothing to show here</strong>
-					) : (servicesToShow || []).map((item) => (
+					) : (popularServices || []).map((item) => (
 						<ServiceItem
 							data={data}
 							itemData={item}
 							key={`${item.label}_${item.value}`}
-							popularServices={popularServices}
-							setPopularServices={setPopularServices}
 							possible_subsidiary_services={possible_subsidiary_services}
 							refetch={refetch}
 							setIsDisabled={setIsDisabled}
 							disabled={disabled && item.value !== disabled}
 							checkout_id={checkout_id}
+							isMobile={isMobile}
 						/>
 					))}
 				</div>

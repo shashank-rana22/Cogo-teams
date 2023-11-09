@@ -5,39 +5,17 @@
 
 .header_wrapper {
 	position: sticky;
-	top: 86px;
-	z-index: 99;
+	top: 85px;
+	z-index: 1;
 	width: 100%;
+
+	@media (max-width: 768px) {
+		top: 62px;
+	}
 }
 
 .header {
 	margin: 0 -20px;
-}
-
-.loading {
-	display: flex;
-	align-items: baseline;
-	justify-content: center;
-	padding-left: 40px;
-	margin: -20px;
-	margin-top: 120px;
-	background: #fff;
-
-	:global {
-		.ui_loader {
-			background-color: #221f20;
-		}
-	}
-}
-
-.loading_text {
-	margin-right: 20px;
-	font-size: 48px;
-	color: #221f20;
-}
-
-.loader {
-	width: 40px;
 }
 
 .pagination {

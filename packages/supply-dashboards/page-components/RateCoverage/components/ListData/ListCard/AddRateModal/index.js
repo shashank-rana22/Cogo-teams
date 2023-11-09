@@ -63,9 +63,17 @@ function AddRateModal({
 		handleSubmit,
 		watch,
 		setValue,
+		resetField,
 	} = useForm({ defaultValues: DEFAULT_VALUES });
 
 	const values = watch();
+
+	useEffect(() => {
+		if (values?.air_commodity) {
+			resetField('commodity_type');
+			resetField('commodity_sub_type');
+		}
+	}, [values?.air_commodity, resetField]);
 
 	const { data:rateData } = useGetFreightRate({ filter, formValues: values, cardData: data });
 	const { createRate, loading } = useCreateFreightRate(filter?.service);

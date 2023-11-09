@@ -265,6 +265,7 @@ function AsyncSelect(props) {
 		microService = '',
 		onOptionsChange,
 		isSingleEntity,
+		onSearch,
 		type,
 		...rest
 	} = props;
@@ -280,6 +281,7 @@ function AsyncSelect(props) {
 		getModifiedOptions,
 		initialCall,
 		onOptionsChange,
+		onSearch,
 		params       : params || defaultParams.params,
 		labelKey     : rest.labelKey || defaultParams.labelKey,
 		valueKey     : rest.valueKey || defaultParams.valueKey,

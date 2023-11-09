@@ -30,9 +30,8 @@ function ModalContent({
 							currency : data?.alloted_budget_currency,
 							options  : {
 								style                 : 'currency',
-								notation              : 'compact',
-								compactDisplay        : 'short',
-								minimumFractionDigits : 2,
+								currencyDisplay       : 'symbol',
+								maximumFractionDigits : 2,
 							},
 						})}
 					</span>
@@ -52,9 +51,8 @@ function ModalContent({
 								currency : data?.alloted_budget_currency,
 								options  : {
 									style                 : 'currency',
-									notation              : 'compact',
-									compactDisplay        : 'short',
-									minimumFractionDigits : 2,
+									currencyDisplay       : 'symbol',
+									maximumFractionDigits : 2,
 								},
 							})}
 						</span>
@@ -75,9 +73,8 @@ function ModalContent({
 								currency : data?.alloted_budget_currency,
 								options  : {
 									style                 : 'currency',
-									notation              : 'compact',
-									compactDisplay        : 'short',
-									minimumFractionDigits : 2,
+									currencyDisplay       : 'symbol',
+									maximumFractionDigits : 2,
 								},
 							})}
 						</span>

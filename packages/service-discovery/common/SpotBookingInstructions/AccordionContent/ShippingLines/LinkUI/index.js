@@ -1,5 +1,4 @@
 import { IcMArrowNext } from '@cogoport/icons-react';
-import React from 'react';
 
 import shippingLineLinks from './shipping-line-links';
 import styles from './styles.module.css';

@@ -15,6 +15,8 @@ function CogoAssuredCard({
 	infoBanner = {},
 	setInfoBanner = () => {},
 	isGuideViewed = false,
+	setRouterLoading = () => {},
+	isMobile = false,
 }) {
 	const [selectedCard, setSelectedCard] = useState(cogoAssuredRates?.[GLOBAL_CONSTANTS.zeroth_index]?.id);
 
@@ -39,6 +41,8 @@ function CogoAssuredCard({
 				selectedCogoAssuredCard={selectedCard}
 				showGuide={!isGuideViewed}
 				cogoAssuredRates={cogoAssuredRates}
+				setRouterLoading={setRouterLoading}
+				isMobile={isMobile}
 			/>
 		</div>
 	);

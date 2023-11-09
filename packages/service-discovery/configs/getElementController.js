@@ -12,6 +12,8 @@ import {
 	InputNumberController,
 	CheckboxGroupController,
 	PriceSelectController,
+	InputGroupController,
+	RangeSliderController,
 } from '@cogoport/forms';
 
 const CONTROLLER_MAPPING = {
@@ -21,6 +23,7 @@ const CONTROLLER_MAPPING = {
 	'multi-select'   : MultiselectController,
 	'async-select'   : AsyncSelectController,
 	datepicker       : DatepickerController,
+	'date-picker '   : DatepickerController,
 	upload           : UploadController,
 	file             : UploadController,
 	textarea         : TextAreaController,
@@ -31,6 +34,8 @@ const CONTROLLER_MAPPING = {
 	number           : InputNumberController,
 	pills            : ChipsController,
 	'price-select'   : PriceSelectController,
+	'input-group'    : InputGroupController,
+	'range-slider'   : RangeSliderController,
 };
 
 const getElementController = (type = 'input') => CONTROLLER_MAPPING?.[type] || InputController;

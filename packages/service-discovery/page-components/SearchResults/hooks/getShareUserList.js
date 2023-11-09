@@ -22,7 +22,6 @@ const useGetShareUserList = ({ org_id }) => {
 			filters: {
 				q               : query || undefined,
 				organization_id : org_id,
-				status          : typeOfUsers,
 			},
 		},
 	}, { manual: true });

@@ -2,12 +2,13 @@ import { Toast, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick, IcMMinusInCircle, IcMPlus } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 
 const getServiceName = (service) => {
 	const { trade_type = '', service_type = '' } = service || {};
+
 	if (trade_type === 'export') {
 		return `origin_${service_type}`;
 	}
@@ -47,7 +48,7 @@ function ServiceItem({
 	return (
 		<div
 			key={service}
-			className={cl`${styles.container} ${isSelected ? styles.selected_service : {}}`}
+			className={cl`${styles.container} ${isSelected ? styles.selected_service : null}`}
 		>
 			<div className={styles.icns_container}>
 				<Icon width={32} height={32} />
@@ -82,7 +83,7 @@ function ServiceItem({
 						options  : {
 							style                 : 'currency',
 							currencyDisplay       : 'symbol',
-							maximumFractionDigits : 0,
+							maximumFractionDigits : 2,
 						},
 					})
 				) : '--'}

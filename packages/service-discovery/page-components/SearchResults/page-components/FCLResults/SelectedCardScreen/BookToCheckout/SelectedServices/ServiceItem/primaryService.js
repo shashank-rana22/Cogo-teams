@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFtick, IcMArrowRight } from '@cogoport/icons-react';
-import React from 'react';
 
 import getLocationInfo from '../../../../../../utils/locations-search';
 
@@ -98,7 +97,7 @@ function PrimaryService({ serviceItem = {}, rateDetails = {}, details = {}, serv
 						options  : {
 							style                 : 'currency',
 							currencyDisplay       : 'symbol',
-							maximumFractionDigits : 0,
+							maximumFractionDigits : 2,
 						},
 					})}
 				</strong>
