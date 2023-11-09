@@ -70,10 +70,10 @@ const useGetJobList = ({
 							&& getFormatDate(opeerationalClosedStartDate)) || undefined,
 						operationalClosedEndDate: (opeerationalClosedStartDate && operationalClosedEndDate
 							&& getFormatDate(operationalClosedEndDate)) || undefined,
-						query              : query || undefined,
-						walletUsed         : walletUsed || undefined,
-						excludeZeroExpense : exclude?.includes('cancelled_shipments'),
-						excludeCancelled   : exclude?.includes('zero_expense'),
+						query                     : query || undefined,
+						walletUsed                : walletUsed || undefined,
+						excludeCancelledShipments : exclude?.includes('cancelled_shipments') || undefined,
+						excludeZeroExpense        : exclude?.includes('zero_expense') || undefined,
 					},
 				});
 				setShow(false);

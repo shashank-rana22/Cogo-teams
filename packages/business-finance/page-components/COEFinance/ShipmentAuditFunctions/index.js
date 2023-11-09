@@ -38,7 +38,7 @@ function ShipmentAuditFunction({
 		operationalClosedDate : null,
 		creationDate          : null,
 		tradeType             : '',
-		exclude               : [],
+		exclude               : ['cancelled_shipments', 'zero_expense'],
 	});
 
 	const [paginationFilters, setPaginationFilters] = useState({
@@ -87,7 +87,7 @@ function ShipmentAuditFunction({
 			operationalClosedDate : null,
 			creationDate          : null,
 			tradeType             : '',
-			exclude               : [],
+			exclude               : ['cancelled_shipments', 'zero_expense'],
 		});
 	}, [activeTab]);
 	return (

@@ -57,7 +57,7 @@ function Content({
 										operationalClosedDate : null,
 										creationDate          : null,
 										tradeType             : '',
-										exclude               : [],
+										exclude               : ['cancelled_shipments', 'zero_expense'],
 									});
 									setTradeTab('');
 									refetch({ setShow });
