@@ -16,7 +16,7 @@ const useGetDownloadDetails = () => {
 				},
 			});
 			window.open(res?.data, '_self');
-			Toast.success('Attendance Report Downloaded successfully');
+			Toast.success('Payroll Batch Data Downloaded successfully');
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 		}
