@@ -1,5 +1,3 @@
-/* eslint-disable custom-eslint/variables-name-check */
-/* eslint-disable max-len */
 import { Button, Modal } from '@cogoport/components';
 import {
 	useForm,
@@ -10,7 +8,10 @@ import { getByKey } from '@cogoport/utils';
 import React, { useCallback } from 'react';
 
 import useUpdateEmployee from '../../../../hooks/useUpdateEmployee';
-import { CONTROL_MAPPING, BASIC_CONTROLS, FAMILY_CONTROLS, ADDRESS_CONTROLS, MEDIA_CONTROLS, PREVIOUS_JOB_HISTORY } from '../../../../utils/configs/personalDetailsControls';
+import {
+	CONTROL_MAPPING, BASIC_CONTROLS, FAMILY_CONTROLS, ADDRESS_CONTROLS,
+	MEDIA_CONTROLS, PREVIOUS_JOB_HISTORY,
+} from '../../../../utils/configs/personalDetailsControls';
 
 import styles from './styles.module.css';
 import { useEditModalValues } from './useEditModalValue';
@@ -89,7 +90,7 @@ function EditModal({ show = false, handleModal = () => {}, data, mappingKey, get
 
 		const finalData = valuesMapping[mappingKey];
 
-		const keyObjMapping = {
+		const KEY_OBJ_MAPPING = {
 			basic       : 'personal_details',
 			family      : 'family_information',
 			address     : 'address_information',
@@ -98,12 +99,15 @@ function EditModal({ show = false, handleModal = () => {}, data, mappingKey, get
 
 		};
 
-		const nestedKeyMapping = {
+		const NESTED_KEY_MAPPING = {
 			family  : 'family_details',
 			address : 'present_address',
 		};
 
-		const finalValuesData = { [keyObjMapping[mappingKey]]: ['basic', 'personal', 'job_history'].includes(mappingKey) ? finalData : { [nestedKeyMapping[mappingKey]]: finalData } };
+		const finalValuesData = {
+			[KEY_OBJ_MAPPING[mappingKey]]: ['basic', 'personal', 'job_history'].includes(mappingKey) ? finalData
+				: { [NESTED_KEY_MAPPING[mappingKey]]: finalData },
+		};
 
 		updateEmployeeDetails(finalValuesData);
 	};
@@ -125,7 +129,11 @@ function EditModal({ show = false, handleModal = () => {}, data, mappingKey, get
 											{val?.label}
 										</div>
 										<div className={styles.controller}>
-											<Element control={control} {...val} disabled={user_role === 'hrbp' ? false : getByKey(data, val?.value_key)} />
+											<Element
+												control={control}
+												{...val}
+												disabled={user_role === 'hrbp' ? false : getByKey(data, val?.value_key)}
+											/>
 										</div>
 									</div>
 								);

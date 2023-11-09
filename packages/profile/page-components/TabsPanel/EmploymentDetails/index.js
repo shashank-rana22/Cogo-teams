@@ -13,7 +13,6 @@ import styles from './styles.module.css';
 function EmploymentDetails({ data = {}, loading = false, getEmployeeDetails }) {
 	const [show, setShow] = useState(false);
 	const info = employmentInfo;
-	console.log('🚀 ~ file: index.js:16 ~ EmploymentDetails ~ info:', info);
 	const otherInfo = otherEmploymentInfo;
 	const handleModal = () => {
 		setShow(!show);
@@ -25,8 +24,6 @@ function EmploymentDetails({ data = {}, loading = false, getEmployeeDetails }) {
 		setDataToEdit(details);
 		setShow(!show);
 	};
-
-	console.log('info', info);
 
 	return (
 		<>

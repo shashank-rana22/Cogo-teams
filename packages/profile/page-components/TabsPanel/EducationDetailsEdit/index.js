@@ -34,7 +34,6 @@ function EducationDetailsEdit({
 }) {
 	const { details } = detailsToEdit || {};
 	const { employee_detail, user_role } = data || {};
-	console.log(user_role, 'check-role');
 	const { employee_education_details } = employee_detail || {};
 	const { handleSubmit, control, setValue } = useForm();
 
@@ -54,7 +53,6 @@ function EducationDetailsEdit({
 		if (educationDetail) {
 			res[detail.label] = educationDetail[valueKey];
 		}
-		console.log(res, '12345657');
 		return res;
 	}, {});
 
@@ -76,18 +74,6 @@ function EducationDetailsEdit({
 
 		await updateEmployeeDetails(education_details);
 	};
-
-	// useEffect(() => {
-	// 	if (!isEmpty(Object.keys(educationDetails))) {
-	// 		Object.keys(educationDetails).forEach((label) => {
-	// 			let value = educationDetails[label];
-	// 			if (label === 'Graduation date') {
-	// 				value = new Date(value);
-	// 			}
-	// 			setValue(label, value);
-	// 		});
-	// 	}
-	// }, [educationDetails]);
 
 	const educationDetailsArray = useMemo(() => Object.keys(educationDetails).map((label) => ({
 		label,
@@ -122,7 +108,6 @@ function EducationDetailsEdit({
 											control={control}
 											name={detail?.label}
 											placeholder={`Enter your ${detail?.label}`}
-											// rules={{ required: 'required' }}
 											disabled={user_role === 'hrbp' ? false : !isEmpty(detail?.value)}
 											options={detail?.label === 'Score type' ? SCORE_TYPE : undefined}
 										/>
@@ -131,7 +116,6 @@ function EducationDetailsEdit({
 											control={control}
 											name={detail?.label}
 											placeholder={`Enter your ${detail?.label}`}
-											// rules={{ required: 'required' }}
 											disabled={user_role === 'hrbp' ? false : !isEmpty(detail?.value)}
 										/>
 									)}

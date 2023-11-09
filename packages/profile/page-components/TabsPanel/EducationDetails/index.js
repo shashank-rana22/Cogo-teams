@@ -14,15 +14,11 @@ import useGetEducationInfo from './useGetEducationInfo';
 
 function EducationDetails({ data = {}, loading = false, getEmployeeDetails = () => {} }) {
 	const { employee_detail } = data || {};
-	console.log('🚀 ~ file: index.js:17 ~ EducationDetails ~ employee_detail:', employee_detail);
 	const { employee_education_details } = employee_detail || {};
 	const [show, setShow] = useState(false);
 	const [visible, setVisible] = useState(false);
 
-	console.log(employee_education_details, 'detailsEmployee');
-
 	const info = useGetEducationInfo(employee_education_details);
-	console.log(info, 'infor');
 	const otherInfo = otherEducationInfo;
 	const [detailsToEdit, setDetailsToEdit] = useState(null);
 
