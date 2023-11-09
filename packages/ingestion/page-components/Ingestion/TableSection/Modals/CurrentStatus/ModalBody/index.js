@@ -17,7 +17,7 @@ function ModalBody({ mapArray = [], loading = false, data = {}, apiErrors = {} }
 		);
 	}
 
-	if (isEmpty(Object.keys(data))) {
+	if (isEmpty(data)) {
 		return (
 			<div style={{ color: '#ee3425' }}>
 				{apiErrors?.response?.status === 403 ? apiErrors?.response?.data?.base

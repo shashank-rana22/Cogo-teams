@@ -19,7 +19,7 @@ function Card({ count = 0, valueProps = {}, type = '' }) {
 				{count}
 			</div>
 
-			{!isEmpty(Object.keys(valueProps)) ? (
+			{!isEmpty(valueProps) ? (
 				<>
 					<div className={styles.type_container}>
 						{' '}
