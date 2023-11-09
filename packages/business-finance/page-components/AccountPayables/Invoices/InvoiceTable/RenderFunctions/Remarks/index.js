@@ -39,6 +39,7 @@ function Remark({ itemData = {}, checkRelease = false, refetch = () => {}, hideI
 				interactive
 				animation="shift-toward"
 				placement="left"
+				className={styles.remark_popover}
 				content={(
 					<RemarkContent
 						remarkData={remarkData}

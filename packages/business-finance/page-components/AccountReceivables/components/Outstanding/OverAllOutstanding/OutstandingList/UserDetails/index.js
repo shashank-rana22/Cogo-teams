@@ -4,13 +4,24 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
+function getUniqueData(dataArray) {
+	const mutatedArray = [...new Set((dataArray || []).map((ele) => ele?.email))].map((email) => {
+		const item = dataArray.find((it) => it.email === email);
+		return { email, name: item?.name };
+	});
+
+	return mutatedArray;
+}
+
 function UserDetails({ item = {} }) {
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
 	const { kam = [], creditController = [], salesAgent = [], portfolioManager = [] } = item || [];
-	const kamData = (kam || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
-	const agentData = (salesAgent || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
-	const ccData = (creditController || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
-	const portfolioManagerData = (portfolioManager || []).map((ele) => ({ email: ele?.email, name: ele?.name }));
+
+	const kamData = getUniqueData(kam);
+	const agentData = getUniqueData(salesAgent);
+	const ccData = getUniqueData(creditController);
+	const portfolioManagerData = getUniqueData(portfolioManager);
+
 	return (
 		<>
 			{(!isEmpty(kamData) || !isEmpty(agentData) || !isEmpty(ccData)
