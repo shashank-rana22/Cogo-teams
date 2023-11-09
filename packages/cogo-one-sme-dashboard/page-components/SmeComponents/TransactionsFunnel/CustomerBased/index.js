@@ -16,9 +16,7 @@ function CustomerBased({ widgetBlocks = null, filterParams = {} }) {
 
 	const data = useMemo(
 		() => {
-			const sortedCustomerData = customer_based_data?.sort(
-				(a, b) => ((b?.total || 0) - (a?.total || 0)),
-			) || [];
+			const sortedCustomerData = customer_based_data;
 
 			return {
 				labels: sortedCustomerData.map(

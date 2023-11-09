@@ -20,7 +20,6 @@ function AccountTypeWise({
 				className={cl`${styles.label} ${cl.ns('label_type')}`}
 			>
 				{label || ''}
-
 			</div>
 
 			<div

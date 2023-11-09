@@ -27,15 +27,14 @@ function CallsReceivedStats({
 	return (
 		<div className={styles.container}>
 			<div className={styles.label}>
-				Total Calls Received -
-				{' '}
-				{current_data?.total_calls || 0}
+				Total Calls Received
+				{dashboardLoading ? '' : ` - ${current_data?.total_calls || 0}`}
 			</div>
 
 			<div className={styles.body}>
 				{dashboardLoading
 					? <LoadingState />
-					: Object.entries(CALL_STATUS_MAPPING).map(
+					: Object.entries(CALL_STATUS_MAPPING || {}).map(
 						([type, itm]) => (
 							<div
 								key={type}
@@ -45,7 +44,7 @@ function CallsReceivedStats({
 									{itm?.icon}
 
 									<div className={styles.count_stats}>
-										{current_data?.[itm?.count]}
+										{current_data?.[itm?.count] || 0}
 									</div>
 								</div>
 

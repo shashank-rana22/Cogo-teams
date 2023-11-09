@@ -12,10 +12,10 @@ const getParams = ({ hierarchyData, dateRange }) => {
 		start_date : startOfDay(dateRange?.startDate || new Date()),
 		end_date   : dateRange?.endDate || new Date(),
 		filters    : {
-			partner_id           : (hierarchyDataType === 'partners' ? id : '') || undefined,
-			office_location_id   : (hierarchyDataType === 'branches' ? id : '') || undefined,
-			reporting_manager_id : (hierarchyDataType === 'managers' ? id : '') || undefined,
-			agent_id             : (hierarchyDataType === 'users' ? id : '') || undefined,
+			partner_id           : (hierarchyDataType === 'partners' ? id : undefined) || undefined,
+			office_location_id   : (hierarchyDataType === 'branches' ? id : undefined) || undefined,
+			reporting_manager_id : (hierarchyDataType === 'managers' ? id : undefined) || undefined,
+			agent_id             : (hierarchyDataType === 'users' ? id : undefined) || undefined,
 		},
 	};
 };
@@ -28,8 +28,7 @@ const useGetPerformanceData = ({
 		url    : '/get_omnichannel_sme_dashboard',
 		method : 'get',
 	}, {
-		manual     : true,
-		autoCancel : false,
+		manual: true,
 	});
 
 	const getPerformanceData = useCallback(
