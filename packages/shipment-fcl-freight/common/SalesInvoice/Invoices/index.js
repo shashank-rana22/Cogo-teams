@@ -41,11 +41,11 @@ function Invoices({
 
 	const invoiceStatuses = invoiceData?.invoicing_parties?.map(
 		(item) => item?.status,
-	);
+	) || [];
 
 	let count = START_COUNT;
 
-	invoiceStatuses.forEach((item) => {
+	invoiceStatuses?.forEach((item) => {
 		if (POST_REVIEWED_INVOICES.includes(item)) {
 			count += INCREMENT_IN_COUNT_BY_FOR_POST_REVIEW_STATUS;
 		}
@@ -53,13 +53,13 @@ function Invoices({
 
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);
 
-	if (invoiceStatuses.length === count) {
+	if (invoiceStatuses?.length === count) {
 		disableAction = true;
 	}
 
 	const showForOldShipments = invoiceData?.invoice_trigger_date
 	&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
-	&& !invoiceStatuses.some((ele) => ['reviewed', 'approved'].includes(ele));
+	&& !invoiceStatuses?.some((ele) => ['reviewed', 'approved'].includes(ele));
 
 	disableAction = showForOldShipments ? false : disableAction;
 

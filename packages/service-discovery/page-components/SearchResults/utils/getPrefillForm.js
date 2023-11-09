@@ -19,6 +19,7 @@ const HAULAGE_KEYS = [
 	'commodity',
 	'cargo_weight_per_container',
 ];
+const FTL_TRUCKS_KEYS = ['truck_type', 'trucks_count'];
 
 const getPrefillForm = (values, service_key) => {
 	const { service_details = {} } = values || {};
@@ -42,6 +43,12 @@ const getPrefillForm = (values, service_key) => {
 		};
 	}
 
+	if (service_type === 'air_freight') {
+		loadData = {
+			...load[GLOBAL_CONSTANTS.zeroth_index],
+		};
+	}
+
 	if (service_type === 'trailer_freight') {
 		loadData = {
 			container: load.map((containerItem) => (
@@ -55,6 +62,26 @@ const getPrefillForm = (values, service_key) => {
 			container: load.map((containerItem) => (
 				HAULAGE_KEYS.reduce((obj, key) => ({ ...obj, [key]: containerItem[key] || 'all_commodity' }), {})
 			)),
+		};
+	}
+
+	if (service_type === 'ftl_freight') {
+		const firstLoadObject = load[GLOBAL_CONSTANTS.zeroth_index];
+
+		const { commodity = '', load_selection_type = '' } = firstLoadObject;
+
+		const finalCommoidty = commodity === null ? 'all' : commodity;
+
+		const isTruck = load_selection_type === 'truck';
+
+		loadData = {
+			...firstLoadObject,
+			commodity: finalCommoidty,
+			...(isTruck ? {
+				trucks: load.map((truckItem) => (
+					FTL_TRUCKS_KEYS.reduce((obj, key) => ({ ...obj, [key]: truckItem[key] }), {})
+				)),
+			} : {}),
 		};
 	}
 

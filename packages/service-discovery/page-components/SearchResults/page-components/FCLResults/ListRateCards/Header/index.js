@@ -1,12 +1,9 @@
-import dynamic from 'next/dynamic';
-
+import CopyUrl from '../../../../common/CopyUrl';
 import DetentionDemurrage from '../../../../common/D&D';
 import Filters from '../../../../common/Filters';
+import RefreshRate from '../../../../common/RefreshRate';
 
-import RefreshRate from './RefreshRate';
 import styles from './styles.module.css';
-
-const CopyUrl = dynamic(() => import('./CopyUrl'), { ssr: false });
 
 function Header({
 	details = {},
@@ -19,6 +16,9 @@ function Header({
 	setOpenAccordian = () => {},
 	showFilterModal = false,
 	setShowFilterModal = () => {},
+	// transitTime = {},
+	setScheduleLoading = () => {},
+	isMobile = false,
 }) {
 	return (
 		<div className={styles.container}>
@@ -27,7 +27,7 @@ function Header({
 			</div>
 
 			<div className={styles.filters_container}>
-				<DetentionDemurrage details={details} refetch={refetch} />
+				<DetentionDemurrage details={details} refetch={refetch} isMobile={isMobile} />
 
 				<Filters
 					showFilterModal={showFilterModal}
@@ -38,6 +38,9 @@ function Header({
 					loading={loading}
 					openAccordian={openAccordian}
 					setOpenAccordian={setOpenAccordian}
+					// transitTime={transitTime}
+					setScheduleLoading={setScheduleLoading}
+					isMobile={isMobile}
 				/>
 
 				<RefreshRate refetch={refetch} details={details} />

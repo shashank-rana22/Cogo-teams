@@ -53,7 +53,7 @@ const CARGO_HANDLING_OPTIONS = [
 	},
 ];
 
-const cfsControls = ({ data, originLocationOptions, CommodityOptions, source }) => {
+const cfsControls = ({ data, originLocationOptions, source }) => {
 	const controls = [
 		{
 			heading      : 'Service Provider Details',
@@ -151,7 +151,6 @@ const cfsControls = ({ data, originLocationOptions, CommodityOptions, source }) 
 			span        : 3,
 			value       : data?.commodity,
 			disabled    : data?.commodity,
-			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
 		{

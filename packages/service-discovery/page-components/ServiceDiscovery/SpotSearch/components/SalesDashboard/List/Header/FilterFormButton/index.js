@@ -2,7 +2,7 @@ import { Button, Popover } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import FilterForm from './renderFilterForm';
 import styles from './styles.module.css';

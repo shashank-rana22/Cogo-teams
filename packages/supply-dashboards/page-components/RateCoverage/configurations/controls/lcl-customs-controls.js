@@ -2,7 +2,6 @@ import { currencyOptions } from '../helpers/constants';
 
 const lclCustomsControls = ({
 	data,
-	CommodityOptions,
 	originLocationOptions,
 	source,
 }) => {
@@ -76,7 +75,6 @@ const lclCustomsControls = ({
 			placeholder : 'Commodity',
 			span        : 4,
 			value       : data?.commodity,
-			options     : CommodityOptions,
 		},
 		source === 'live_booking'
 			? {

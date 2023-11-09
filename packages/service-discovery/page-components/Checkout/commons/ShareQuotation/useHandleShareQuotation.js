@@ -15,7 +15,6 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 
 	const [showWhatsappVerificationModal, setShowWhatsappVerificationModal] = useState(false);
 	const [showShareQuotationModal, setShowShareQuotationModal] = useState(false);
-	const [show, setShow] = useState(false);
 	const [confirmation, setConfirmation] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 	const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -81,11 +80,7 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 			return;
 		}
 
-		if (detail?.is_locked) {
-			handleCopyQuoteLink();
-		} else {
-			setShow(true);
-		}
+		handleCopyQuoteLink();
 	};
 
 	// const getModalSize = () => {    // USE THIS IF YOU WANT TO CONFIGURE WIDTHS
@@ -132,8 +127,6 @@ const useHandleShareQuotation = ({ detail = {}, updateCheckout = () => {}, noRat
 		BUTTON_MAPPING,
 		size   : 'xl',
 		widths : { email: '100%' },
-		show,
-		setShow,
 		quotationOptions,
 		showWhatsappVerificationModal,
 		setShowWhatsappVerificationModal,

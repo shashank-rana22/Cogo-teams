@@ -8,14 +8,18 @@ const SUB_HEADER_COMPONENT_MAPPING = {
 	additional_services_details : AdditionalServicesForm,
 };
 
-function ExtraHeader({ headerProps = {} }) {
+function ExtraHeader({ headerProps = {}, createLoading = false, createSearch = () => {} }) {
 	const ActiveComponent = SUB_HEADER_COMPONENT_MAPPING[headerProps?.key];
 
 	if (!ActiveComponent) return null;
 
 	return (
 		<div className={styles.container}>
-			<ActiveComponent {...headerProps} />
+			<ActiveComponent
+				{...headerProps}
+				createLoading={createLoading}
+				createSearch={createSearch}
+			/>
 		</div>
 	);
 }

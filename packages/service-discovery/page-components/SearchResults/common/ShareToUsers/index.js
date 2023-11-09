@@ -16,7 +16,6 @@ function ShareToUsers({
 
 	const onSuccess = () => {
 		setShowSuccess(true);
-		onClose();
 	};
 
 	const COMPONENT_MAPPING = {
@@ -25,6 +24,7 @@ function ShareToUsers({
 			props     : {
 				show        : showSuccess,
 				setShow     : setShowSuccess,
+				onClose,
 				title       : 'Rate Shared',
 				description : `Rates have been shared to the user. 
 				They will receive an mail to view the rates on platform.`,

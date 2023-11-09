@@ -10,6 +10,7 @@ import CardList from './CardList';
 import NegotiateRate from './NegotiateRate';
 import Remarks from './Remarks';
 import ShipmentDetails from './ShipmentDetails';
+import ShipmentPlan from './ShipmentPlan';
 import styles from './styles.module.css';
 
 function Enquiries() {
@@ -134,6 +135,9 @@ function Enquiries() {
 												<IcMArrowUp />
 											</div>
 								)}
+							</TabPanel>
+							<TabPanel name="shipment_plan" title="Shipment Plan">
+								<ShipmentPlan selectedCard={selectedCard} />
 							</TabPanel>
 						</Tabs>
 					</div>

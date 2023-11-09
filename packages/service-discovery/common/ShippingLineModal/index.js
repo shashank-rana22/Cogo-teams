@@ -92,7 +92,7 @@ function ShippingLineModal({
 				<div className={styles.cogo_assured}>
 					<div className={styles.rate_details}>
 						<div style={{ marginRight: 24 }}>
-							<div className={styles.freight_text}>Basic Freight Price</div>
+							<div className={styles.freight_text}>Freight Price</div>
 							<div style={{ display: 'flex', alignItems: 'end' }}>
 								{(firstTwoRates || []).map((item) => (
 									<FreightPriceDetail

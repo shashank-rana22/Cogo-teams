@@ -1,5 +1,4 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
-import React from 'react';
 
 import Back from '../Header/common/Back';
 
@@ -31,7 +30,7 @@ function SelectedOrgInfo({
 				/>
 			) : null}
 
-			<div style={{ width: activePage !== 'checkout' ? '86%' : '100%' }}>
+			<div>
 				<Tooltip
 					placement="top"
 					className={styles.tooltip}

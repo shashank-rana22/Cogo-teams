@@ -1,53 +1,61 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import AppliedFilters from '../../../page-components/FCLResults/ListRateCards/AppliedFilters';
+import AppliedFilters from '../../AppliedFilters';
 import DetentionDemurrage from '../../D&D';
 import Filters from '../../Filters';
+import Reset from '../../Reset';
 
-import Reset from './Reset';
 import styles from './styles.module.css';
+
+const SERVICES_TO_SHOW_DND = ['fcl_freight'];
 
 function NoRatesFound({
 	details = {},
 	filters = {},
 	setFilters = () => {},
-	refetch = () => {},
-	filtersRef = {},
 	setOpenAccordian = () => {},
 	setShowFilterModal = () => {},
+	refetch = () => {},
 	openAccordian = '',
 	showFilterModal = false,
+	airlines = [],
+	isMobile = false,
 }) {
+	const { service_type } = details || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.top_section}>
-				<div className={styles.applied_filters}>
-					<AppliedFilters
-						filtersRef={filtersRef}
-						filters={filters}
-						setFilters={setFilters}
-						setShowFilterModal={setShowFilterModal}
-						setOpenAccordian={setOpenAccordian}
-					/>
-				</div>
+				<AppliedFilters
+					filters={filters}
+					setFilters={setFilters}
+					setShowFilterModal={setShowFilterModal}
+					setOpenAccordian={setOpenAccordian}
+					service_type={service_type}
+				/>
 
 				<div className={styles.buttons_container}>
-					<DetentionDemurrage
-						details={details}
-						refetch={refetch}
-					/>
+					{SERVICES_TO_SHOW_DND.includes(service_type) ? (
+						<DetentionDemurrage
+							details={details}
+							refetch={refetch}
+							isMobile={isMobile}
+						/>
+					) : null}
 
 					<Filters
-						setFilters={setFilters}
-						data={details}
-						filters={filters}
-						openAccordian={openAccordian}
-						setOpenAccordian={setOpenAccordian}
 						showFilterModal={showFilterModal}
 						setShowFilterModal={setShowFilterModal}
+						data={details}
+						filters={filters}
+						setFilters={setFilters}
+						openAccordian={openAccordian}
+						setOpenAccordian={setOpenAccordian}
+						airlines={airlines}
+						isMobile={isMobile}
 					/>
 
-					<Reset setFilters={setFilters} />
+					<Reset setFilters={setFilters} isMobile={isMobile} />
 				</div>
 			</div>
 

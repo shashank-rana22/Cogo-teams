@@ -1,12 +1,12 @@
-import { Button, Toast } from '@cogoport/components';
+import { Button, Toast, cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import getPrefillForm from '../../../../../../page-components/SearchResults/utils/getPrefillForm';
 import getLocationInfo from '../../../../../../page-components/SearchResults/utils/locations-search';
-import useCreateSearch from '../../../../../../page-components/ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 import OrganisationForm from '../../../../../OrganisationForm';
 import RouteForm from '../../../../../RouteForm';
+import getFtlPrefillValues from '../../../../utils/getFtlPrefillValues';
 
 import styles from './styles.module.css';
 
@@ -16,10 +16,18 @@ function removeItemFromLocalStorage() {
 	localStorage.removeItem('additionalFormInfo');
 }
 
-function EditDetailsHeader({ data = {}, setShow = () => {}, setRouterLoading = () => {}, ...rest }) {
-	const { createSearch, loading } = useCreateSearch();
-
+function EditDetailsHeader({
+	data = {},
+	setShow = () => {},
+	setRouterLoading = () => {},
+	touch_points = {},
+	createLoading = false,
+	createSearch = () => {},
+	...rest
+}) {
 	const router = useRouter();
+
+	const [ftlFormData, setFtlFormData] = useState(getFtlPrefillValues(data, touch_points));
 
 	const {
 		importer_exporter_id = '',
@@ -78,7 +86,7 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, setRouterLoading = (
 				service_type,
 				...organization,
 				...locationValues,
-				formValues: loadValues,
+				formValues: { ...loadValues, ftlFormData, touch_points },
 			},
 		});
 
@@ -98,33 +106,37 @@ function EditDetailsHeader({ data = {}, setShow = () => {}, setRouterLoading = (
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.form}>
-
-				<div className={styles.form_item}>
+			<div className={cl`${styles.form} ${styles[service_type]}`}>
+				<div className={cl`${styles.form_item} ${styles[service_type]} ${styles.organization}`}>
 					<OrganisationForm
 						organization={organization}
 						setOrganization={setOrganization}
-						action="edit"
+						defaultValues={{
+							organization_id        : importer_exporter_id,
+							organization_branch_id : importer_exporter_branch_id,
+							user_id,
+						}}
 					/>
 				</div>
 
-				<div className={styles.form_item}>
+				<div className={cl`${styles.form_item} ${styles[service_type]}`}>
 					<RouteForm
 						mode={service_type}
 						formValues={locationValues}
 						setFormValues={setLocationValues}
 						intent="rate_search"
 						organization={organization}
+						setFtlFormData={setFtlFormData}
+						ftlFormData={ftlFormData}
 					/>
 				</div>
-
 			</div>
 
 			<Button
 				size="lg"
 				themeType="accent"
-				disabled={loading}
-				loading={loading}
+				disabled={createLoading}
+				loading={createLoading}
 				onClick={onClickApply}
 				className={styles.button}
 			>
