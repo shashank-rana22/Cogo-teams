@@ -10,6 +10,19 @@ import getFormattedAmount from '../../../utils/getFormattedAmount';
 import dataFormatter from './dataFormatter';
 import styles from './styles.module.css';
 
+function getLeastNDigitNumber(number) {
+	const numStr = number.toString();
+	const numLength = numStr.length;
+
+	if (numLength < 2) {
+		return 1;
+	}
+
+	const resultStr = `1${'0'.repeat(numLength - 1)}`;
+
+	return +(resultStr);
+}
+
 function CustomerFunnel({
 	widgetBlocks = null,
 	filterParams = {},
@@ -39,19 +52,27 @@ function CustomerFunnel({
 		previousData : previous_data,
 	});
 
+	const maximumValue = Math.max(...(dataFormat?.map((itm) => itm?.value || 0) || []));
+
+	const shadowHeight = getLeastNDigitNumber(maximumValue) / 20;
+
 	const data = useMemo(
-		() => ({
-			labels    : dataFormat.map((itm) => itm?.label),
-			subLabels : ['shadow-top', 'graph-data', 'shadow-bottom'],
-			colors    : [
-				['#e6f7a1', '#f3f5eb', '#b0eef5'],
-				['#9CBC59', '#9EBE59', '#9DBD57', '#A3C45D', '#A3C35C', '#BEE076',
-					'#BDDF75', '#8FDFE8', '#91E0E5', ' #8FE1EA'],
-				['#e6f7a1', '#f3f5eb', '#b0eef5'],
-			],
-			values: dataFormat?.map((itm) => ([50, itm?.value, 50])),
-		}),
-		[dataFormat],
+		() => {
+			const sortedData = dataFormat;
+
+			return {
+				labels    : sortedData.map((itm) => itm?.label),
+				subLabels : ['shadow-top', 'graph-data', 'shadow-bottom'],
+				colors    : [
+					['#e6f7a1', '#f3f5eb', '#b0eef5'],
+					['#9CBC59', '#9EBE59', '#9DBD57', '#A3C45D', '#A3C35C', '#BEE076',
+						'#BDDF75', '#8FDFE8', '#91E0E5', ' #8FE1EA'],
+					['#e6f7a1', '#f3f5eb', '#b0eef5'],
+				],
+				values: sortedData?.map((itm) => ([shadowHeight, itm?.value, shadowHeight])),
+			};
+		},
+		[dataFormat, shadowHeight],
 	);
 
 	useEffect(() => {
@@ -101,7 +122,7 @@ function CustomerFunnel({
 												if (ind !== index) {
 													return curEle;
 												}
-												return [10000, curEle[1], 10000];
+												return [shadowHeight * 4, curEle[1], shadowHeight * 4];
 											},
 										),
 									},

@@ -8,12 +8,12 @@ import styles from './styles.module.css';
 
 function List(props) {
 	const {
-		list = [], paginationData, getNextPage, loading, params = {}, setParams, handleDeactivate, showEmpty = false,
+		list = [], paginationData, getNextPage, loading, params = {}, setParams, handleUpdate, showEmpty = false,
 	} = props;
 
 	const { page, total_count, page_limit } = paginationData || {};
 
-	const LIST_COLUMNS = getListColumns({ params, setParams, handleDeactivate });
+	const LIST_COLUMNS = getListColumns({ params, setParams, handleUpdate });
 
 	if ((!loading && isEmpty(list)) || showEmpty) {
 		return (
