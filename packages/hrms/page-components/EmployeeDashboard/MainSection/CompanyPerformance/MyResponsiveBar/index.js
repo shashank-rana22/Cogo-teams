@@ -13,7 +13,7 @@ function MyResponsiveBar({ depDetails = [] }) {
 					'working_hours',
 				]}
 				indexBy="month"
-				margin={{ top: 50, right: 50, bottom: 30, left: 30 }}
+				margin={{ top: 50, right: 50, bottom: 30, left: 50 }}
 				padding={0.3}
 				valueScale={{ type: 'linear' }}
 				indexScale={{ type: 'band', round: true }}
