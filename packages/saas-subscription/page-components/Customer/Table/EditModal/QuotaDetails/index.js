@@ -17,20 +17,33 @@ function QuotaDetails({ editModalChangeHandler, quotas = [], currentTab }) {
 		<div className={styles.container}>
 
 			<div className={cl`${styles.flex_box} ${styles.card_header}`}>
-				<div>{t('saasSubscription:quota_details_product')}</div>
-				<div>{t('saasSubscription:quota_details_quota')}</div>
+				<div className={styles.product_name}>{t('saasSubscription:quota_details_product')}</div>
+				<div className={styles.addon}>{t('saasSubscription:quota_details_addon')}</div>
+				<div className={styles.total_addon}>{t('saasSubscription:quota_details_quota')}</div>
+				<div className={styles.edit} />
 			</div>
 
 			<div className={styles.scroll_container}>
 				{(quotas || []).map((item) => 	{
-					const { id = '', product = {}, left_limit = 0, addon_limit = 0 } = item;
-					const quotaLeft = +left_limit + +addon_limit;
+					const { id = '', product = {}, left_limit = 0, addon_limit = 0, total_limit = 0 } = item;
+
 					return (
 						<div key={id} className={cl`${styles.flex_box} ${styles.quota_row}`}>
-							<div>{startCase(product?.product_name)}</div>
+							<div className={styles.product_name}>{startCase(product?.product_name)}</div>
 
-							<div className={styles.quota_quantity}>
-								<span>{quotaLeft}</span>
+							<div className={cl`${styles.quota_quantity} ${styles.addon}`}>
+								<span>{addon_limit}</span>
+							</div>
+
+							<div className={cl`${styles.quota_quantity} ${styles.total_addon}`}>
+								<span>
+									{total_limit}
+									/
+									{left_limit}
+								</span>
+							</div>
+
+							<div className={styles.edit}>
 								<IcMEdit
 									className={styles.edit_icon}
 									onClick={() => {

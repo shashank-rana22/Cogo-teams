@@ -28,13 +28,28 @@
 .quota_row {
 	font-size: 12px;
 
-	.quota_quantity {
-		margin-right: 10px;
-	}
-
 	.edit_icon {
 		width: 10px;
 		margin-left: 4px;
 		cursor: pointer;
 	}
+}
+
+.product_name {
+	width: 35%;
+}
+
+.addon {
+	width: 20%;
+	text-align: center;
+}
+
+.total_addon {
+	width: 30%;
+	text-align: center;
+}
+
+.edit {
+	width: 10%;
+	text-align: center;
 }
