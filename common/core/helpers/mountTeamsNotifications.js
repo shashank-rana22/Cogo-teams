@@ -20,7 +20,7 @@ export function mountTeamsNotifications({
 			collection(firestore, `users/${loggedInAgentId}/groups`),
 			where('self_has_unread_messages', '==', true),
 			where('show_floating_notification', '==', true),
-			orderBy('new_message_sent_at', 'desc'),
+			orderBy('new_message_sent_at', 'asc'),
 			limit(PAGE_LIMIT),
 		);
 

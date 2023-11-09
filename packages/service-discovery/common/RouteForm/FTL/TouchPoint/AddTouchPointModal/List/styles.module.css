@@ -1,0 +1,30 @@
+.container {
+	margin-top: 20px;
+}
+
+.count {
+	margin-bottom: 6px;
+	font-weight: 600;
+}
+
+.list_item_wrapper {
+	margin-top: 20px;
+}
+
+.list_item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 16px;
+	list-style-type: none;
+	cursor: move;
+	background: #fff;
+	border: 1px dashed #f3eae7;
+	border-radius: 4px;
+}
+
+.delete_icon {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}

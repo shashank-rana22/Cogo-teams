@@ -4,6 +4,8 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { defaultRateJobFilters, ADMIN_VIEW_REQUIRED_FOR } from '../constants/rateRevertsConstants';
 
+const DEFAULT_PAGE = 1;
+
 const getPayload = ({ params, orgId, triggeredFrom, viewType, query }) => ({
 	all_jobs_required : ADMIN_VIEW_REQUIRED_FOR.includes(viewType) ? params?.relevant_to === 'all' : false,
 	stats_required    : triggeredFrom !== 'sideBar',
@@ -60,6 +62,10 @@ const useListRateJobs = ({
 	useEffect(() => {
 		debounceQuery(searchQuery);
 	}, [searchQuery, debounceQuery]);
+
+	useEffect(() => {
+		setParams((p) => ({ ...p, page: DEFAULT_PAGE }));
+	}, [query]);
 
 	return {
 		loading,

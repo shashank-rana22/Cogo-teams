@@ -7,7 +7,6 @@ import { currencyOptions } from '../helpers/constants';
 const fclCustomsControls = ({
 	data,
 	originLocationOptions,
-	CommodityOptions,
 	source,
 }) => {
 	const controls = [
@@ -85,7 +84,7 @@ const fclCustomsControls = ({
 			label       : 'Container Size',
 			type        : 'select',
 			placeholder : 'Container Size',
-			span        : 3,
+			span        : 4,
 			value       : data?.container_size || '20',
 			disabled    : data?.container_size,
 			options     : containerSizes,
@@ -107,16 +106,15 @@ const fclCustomsControls = ({
 			label       : 'Commodity',
 			type        : 'select',
 			placeholder : 'Commodity',
-			span        : 3,
+			span        : 4,
 			value       : 'general',
-			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
 		{
 			name        : 'rate_type',
 			type        : 'select',
 			label       : 'Rate Type',
-			span        : 3,
+			span        : 4,
 			placeholder : 'Rate Type',
 			options     : [
 				{
@@ -131,6 +129,16 @@ const fclCustomsControls = ({
 			rules: {
 				required: 'rate type is required',
 			},
+		},
+		{
+			label       : 'Cargo handling type',
+			name        : 'cargo_handling_type',
+			type        : 'select',
+			span        : 4,
+			value       : data?.cargo_handling_type,
+			caret       : true,
+			placeholder : 'Cargo handling types',
+			validations : [{ type: 'required', message: 'Cargo handling type is required' }],
 		},
 		source === 'live_booking'
 			? {

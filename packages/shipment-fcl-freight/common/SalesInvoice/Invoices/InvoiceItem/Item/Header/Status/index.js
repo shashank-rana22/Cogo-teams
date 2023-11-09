@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
@@ -41,9 +42,8 @@ function Status({
 		(item) => item?.proformaNumber === invoice?.live_invoice_number,
 	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
-	const showCN = BF_INVOICE_STATUS.includes(
-		bfInvoice?.status,
-	);
+	const showCN = BF_INVOICE_STATUS.includes(bfInvoice?.status)
+	|| (![101, 301, 401, 501].includes(getEntityCode(invoice?.entity_id)) && bfInvoice?.status === 'FINANCE_ACCEPTED');
 
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === invoice?.live_invoice_number

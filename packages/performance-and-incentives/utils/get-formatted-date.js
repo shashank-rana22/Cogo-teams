@@ -1,7 +1,17 @@
-const getFormattedDate = ({ currentDate = '' }) => {
+export const getFormattedDate = ({ currentDate = '' }) => {
 	const originalDate = new Date(currentDate);
 
 	originalDate.setDate(originalDate.getDate() + 1);
+
+	const newDate = originalDate.toISOString();
+
+	return newDate;
+};
+
+export const getPrefillFormattedDate = ({ currentDate = '' }) => {
+	const originalDate = new Date(currentDate);
+
+	originalDate.setDate(originalDate.getDate() - 1);
 
 	const newDate = originalDate.toISOString();
 

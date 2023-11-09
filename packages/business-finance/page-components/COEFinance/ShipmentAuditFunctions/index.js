@@ -73,8 +73,8 @@ function ShipmentAuditFunction({
 		window.sessionStorage.setItem('audit_status', subActiveTab);
 	};
 
-	const operationColumns = getJobColumns({ handleClick, tax });
-	const financeColumns = getFinancialCloseColumns({ handleClick, tax });
+	const operationColumns = getJobColumns({ handleClick, tax, subActiveTab });
+	const financeColumns = getFinancialCloseColumns({ handleClick, tax, subActiveTab });
 
 	useEffect(() => {
 		setPaginationFilters((prev) => ({ ...prev, page: 1 }));

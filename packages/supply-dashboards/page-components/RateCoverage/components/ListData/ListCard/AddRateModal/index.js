@@ -63,16 +63,24 @@ function AddRateModal({
 		handleSubmit,
 		watch,
 		setValue,
+		resetField,
 	} = useForm({ defaultValues: DEFAULT_VALUES });
 
 	const values = watch();
+
+	useEffect(() => {
+		if (values?.air_commodity) {
+			resetField('commodity_type');
+			resetField('commodity_sub_type');
+		}
+	}, [values?.air_commodity, resetField]);
 
 	const { data:rateData } = useGetFreightRate({ filter, formValues: values, cardData: data });
 	const { createRate, loading } = useCreateFreightRate(filter?.service);
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
 	const { deleteRequest } = useDeleteFreightRateRequests(filter?.service);
 	const { deleteFeedbackRequest } = useDeleteFreightRateFeedbacks(filter?.service);
-	const { updateFlashBookingRate } = useUpdateFlashBookingRate({ data, shipment_data, filter });
+	const { updateFlashBookingRate } = useUpdateFlashBookingRate({ data, shipment_data, filter, source });
 
 	const chargeCodesData = [
 		rateData?.freight_charge_codes,
@@ -222,7 +230,7 @@ function AddRateModal({
 	}, [rateData]);
 
 	useEffect(() => {
-		if (spot_data) {
+		if (!isEmpty(spot_data)) {
 			const TOTAL_SERVICES = [];
 			const primary_service_id = spot_data?.primary_service_id;
 			Object.keys(spot_data?.service_details || {})?.forEach((spot) => {

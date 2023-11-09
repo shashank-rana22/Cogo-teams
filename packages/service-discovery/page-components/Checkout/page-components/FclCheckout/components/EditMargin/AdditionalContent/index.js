@@ -2,11 +2,11 @@ import { useContext } from 'react';
 
 import Cancellation from '../../../../../commons/Cancellation';
 import ConfirmationTexts from '../../../../../commons/ConfirmationTexts';
-import DefaultQuotationInfo from '../../../../../commons/DefaultQuotationInfo';
+import EditMarginFooter from '../../../../../commons/EditMarginFooter';
 import { CheckoutContext } from '../../../../../context';
+import AdditionalServices from '../../../commons/AdditionalServices';
+import DefaultQuotationInfo from '../../../commons/DefaultQuotationInfo';
 
-import AdditionalServices from './AdditionalServices';
-import EditMarginFooter from './EditMarginFooter';
 import styles from './styles.module.css';
 
 function AdditionalContent({
@@ -15,6 +15,7 @@ function AdditionalContent({
 	convenience_line_item = {},
 	noRatesPresent = false,
 	state = '',
+	handlingFeeDetails = {},
 }) {
 	const {
 		rate,
@@ -69,6 +70,7 @@ function AdditionalContent({
 				convenienceDetails={convenienceDetails}
 				convenience_line_item={convenience_line_item}
 				state={state}
+				handlingFeeDetails={handlingFeeDetails}
 			/>
 		</div>
 	);

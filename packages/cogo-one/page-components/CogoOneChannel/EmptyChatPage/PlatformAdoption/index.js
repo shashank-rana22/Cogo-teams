@@ -11,6 +11,8 @@ import PlatformHistory from './PlatformHistory';
 import PlatformList from './PlatformList';
 import styles from './styles.module.css';
 
+const MIN_COUNT = 0;
+
 function PlatformAdoption({
 	mailProps = {}, firestore = {}, viewType = '', userId = '',
 	isBotSession = false, setActiveTab = () => {}, initialViewType = '',
@@ -26,6 +28,16 @@ function PlatformAdoption({
 		accountType        : '',
 	});
 	const [showHistory, setShowHistory] = useState(false);
+	const [filterValues, setFilterValues] = useState({
+		show             : false,
+		requestType      : '',
+		assignTo         : '',
+		escalationCycle  : '',
+		requestStatus    : '',
+		start            : null,
+		end              : null,
+		requestCompleted : '',
+	});
 
 	const { unReadChatsCount } = useGetUnreadMessagesCount({
 		firestore,
@@ -45,20 +57,37 @@ function PlatformAdoption({
 	const {
 		loading = false, data = {},
 		onboardingRequest = () => {},
-	} = useListOmnichannelOnboardingRequests({ showHistory, initialViewType });
+	} = useListOmnichannelOnboardingRequests({ showHistory, initialViewType, filterValues, setFilterValues });
 
 	const { list, ...rest } = data || {};
 	const { page, page_limit, total_count } = rest || {};
+
+	const handleViewHistory = () => {
+		setFilterValues({
+			show             : false,
+			requestType      : '',
+			assignTo         : '',
+			escalationCycle  : '',
+			requestStatus    : '',
+			start            : null,
+			end              : null,
+			requestCompleted : '',
+		});
+		setShowHistory((p) => !p);
+	};
 
 	return (
 		<div className={styles.container}>
 			{showHistory ? (
 				<PlatformHistory
-					setShowHistory={setShowHistory}
 					rest={rest}
 					list={list}
 					loading={loading}
 					onboardingRequest={onboardingRequest}
+					setFilterValues={setFilterValues}
+					filterValues={filterValues}
+					initialViewType={initialViewType}
+					handleViewHistory={handleViewHistory}
 				/>
 			) : (
 				<>
@@ -66,14 +95,14 @@ function PlatformAdoption({
 						<div className={styles.title}>
 							Task for the Day
 							{' '}
-							<span>{`(${total_count})`}</span>
+							<span>{`(${total_count || MIN_COUNT})`}</span>
 							{' '}
 							<IcMRefresh className={styles.refresh} onClick={() => onboardingRequest({ page: 1 })} />
 						</div>
 						<div
 							role="presentation"
 							className={styles.history_title}
-							onClick={() => setShowHistory((p) => !p)}
+							onClick={handleViewHistory}
 						>
 							<IcMPlansExpiring fill="#034afd" />
 							View History
@@ -83,6 +112,9 @@ function PlatformAdoption({
 						unReadChatsCount={unReadChatsCount}
 						unReadMailsCount={unReadMailsCount}
 						setActiveTab={setActiveTab}
+						setFilterValues={setFilterValues}
+						filterValues={filterValues}
+						initialViewType={initialViewType}
 					/>
 					<PlatformList
 						list={list}
@@ -92,6 +124,7 @@ function PlatformAdoption({
 						setVerifyAccount={setVerifyAccount}
 						verifyAccount={verifyAccount}
 						mailProps={mailProps}
+						initialViewType={initialViewType}
 					/>
 					{page >= 1 ? (
 						<div className={styles.pagination_info}>

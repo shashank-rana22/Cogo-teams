@@ -1,12 +1,28 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
+import useGetIsMobile from '../../../../../helpers/useGetIsMobile';
+import deepEqual from '../../../utils/deepEqual';
 import FilterContent from '../FilterContent';
-import { FILTERS_DEFAULT_VALUES } from '../FilterContent/extra-filter-controls';
 
 import styles from './styles.module.css';
+
+const removeDefaultValues = (
+	defaultValues,
+	finalValues,
+) => Object.keys(finalValues).reduce((acc, key) => {
+	const filterValue = finalValues[key];
+	const defaultValue = defaultValues[key];
+
+	if (
+		(defaultValue !== undefined && deepEqual(defaultValue, filterValue))
+	) {
+		return acc;
+	}
+
+	return { ...acc, [key]: filterValue };
+}, {});
 
 function FilterModal({
 	show = false,
@@ -14,11 +30,17 @@ function FilterModal({
 	filters = {},
 	setFilters = () => {},
 	loading = false,
-	DEFAULT_VALUES = {},
-	controls = [],
 	openAccordian = '',
+	defaultValues:controlsDefaultValues = {},
+	controls = [],
+	setScheduleLoading = () => {},
 }) {
-	const defaultValues = { ...DEFAULT_VALUES, ...filters };
+	const isMobile = useGetIsMobile();
+
+	const defaultValues = {
+		...controlsDefaultValues,
+		...filters,
+	};
 
 	const {
 		control,
@@ -33,21 +55,15 @@ function FilterModal({
 			return;
 		}
 
-		const { source = '' } = values || {};
-
-		const finalValues = {
-			...values,
-			source: source === 'system_rate' ? ['spot_rates', 'predicted'] : source || DEFAULT_VALUES.source,
-		};
-
-		setFilters({ ...filters, ...finalValues });
+		setFilters(removeDefaultValues(controlsDefaultValues, { ...filters, ...values }) || {});
+		setScheduleLoading(true);
 		setShow(false);
 	};
 
 	const handleReset = (key) => {
 		setFilters((prev) => ({
 			...prev,
-			[key]: FILTERS_DEFAULT_VALUES[key],
+			[key]: controlsDefaultValues[key],
 		}));
 		setShow(false);
 	};
@@ -58,7 +74,7 @@ function FilterModal({
 			size="md"
 			show={show}
 			onClose={() => setShow(false)}
-			placement="right"
+			placement={isMobile ? 'bottom' : 'right'}
 			className={styles.modal}
 		>
 			<Modal.Body>
@@ -72,6 +88,7 @@ function FilterModal({
 					filters={filters}
 					openAccordian={openAccordian}
 					handleReset={handleReset}
+					defaultValues={controlsDefaultValues}
 				/>
 			</Modal.Body>
 

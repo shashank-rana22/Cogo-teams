@@ -1,6 +1,12 @@
 .container {
 	align-self: end;
 
+	@media (max-width: 768px) {
+		align-self: center;
+		margin-top: 12px;
+		transform: rotate(90deg);
+	}
+
 	:global {
 		.ui_disabled {
 			background-color: var(--color-secondary-greyscale-5) !important;

@@ -12,8 +12,8 @@ function ContainerDetails({ services = {}, primary_service = '' }) {
 	);
 
 	const firstContainerDetails = getDetails({
-		item: allContainerDetails[GLOBAL_CONSTANTS.zeroth_index],
-		primary_service,
+		item         : allContainerDetails[GLOBAL_CONSTANTS.zeroth_index],
+		service_type : primary_service,
 	});
 
 	const ToolTipContent = () => allContainerDetails.map((item, index) => {
@@ -23,7 +23,7 @@ function ContainerDetails({ services = {}, primary_service = '' }) {
 
 		return (
 			<div key={item.id}>
-				{getDetails({ item, primary_service }).map((detail) => (
+				{getDetails({ item, service_type: primary_service }).map((detail) => (
 					<Pill
 						key={detail}
 						size="md"

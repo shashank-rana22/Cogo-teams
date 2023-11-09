@@ -1,0 +1,41 @@
+.container {
+	width: 50%;
+	border-right: 1px solid #e0e0e0;
+
+	&:last-child {
+		padding-left: 14px;
+		border-right: unset;
+	}
+}
+
+.label {
+	display: flex;
+	align-items: center;
+	padding: 10px 0 16px;
+	margin: 0 10px 10px;
+	color: #4f4f4f;
+	border-bottom: 1px dashed #e0e0e0;
+}
+
+.profile_icon {
+	width: 18px;
+	height: 18px;
+	margin-right: 8px;
+}
+
+.type_of {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 2px 10px 2px 0;
+}
+
+.account_type {
+	font-size: 12px;
+	color: #828282;
+}
+
+.value {
+	font-weight: 600;
+	color: #4f4f4f;
+}

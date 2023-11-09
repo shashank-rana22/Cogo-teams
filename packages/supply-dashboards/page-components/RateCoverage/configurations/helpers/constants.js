@@ -324,3 +324,62 @@ export const USER_SERVICES = {
 	'0ebebbbc-9823-43a5-b4b7-e52752f32a84' : ['ftl_freight', 'ltl_freight', 'trailer'],
 	'432ddd8c-9bab-4dbd-be33-e91502ecb821' : ['haulage'],
 };
+
+export const cargoHandlingOptions	= [
+	{
+		label     : 'Dock stuffing',
+		value     : 'stuffing_at_dock',
+		tradeType : 'export',
+	},
+	{
+		label     : 'Factory stuffing',
+		value     : 'stuffing_at_factory',
+		tradeType : 'export',
+	},
+	{
+		label     : 'DPD without CFS',
+		value     : 'dpd_without_cfs',
+		tradeType : 'import',
+	},
+	{
+		label     : 'DPD CFS dock stuffing',
+		value     : 'dpd_cfs_dock_destuffing',
+		tradeType : 'import',
+	},
+	{
+		label     : 'DPD CFS factory destuffing',
+		value     : 'dpd_cfs_factory_destuffing',
+		tradeType : 'import',
+	},
+	{
+		label     : 'Enpanelled CFS dock stuffing',
+		value     : 'enpanelled_cfs_dock_destuffing',
+		tradeType : 'import',
+	},
+	{
+		label     : 'Enpanelled CFS factory destuffing',
+		value     : 'enpanelled_cfs_factory_destuffing',
+		tradeType : 'import',
+	},
+	{
+		label     : 'Non enpanelled CFS dock destuffing',
+		value     : 'non_enpanelled_cfs_dock_destuffing',
+		tradeType : 'import',
+	},
+	{
+		label     : 'Non enapnelled CFS factory destuffing',
+		value     : 'non_enpanelled_cfs_factory_destuffing',
+		tradeType : 'import',
+	},
+];
+
+export const COMMODITY_TYPE_OPTIONS = {
+	general: [
+		{ label: 'All', value: 'all' },
+	],
+	special_consideration: [
+		{ label: 'Dangerous Goods', value: 'dangerous' },
+		{ label: 'Temperature Controlled/Pharma', value: 'temp_controlled' },
+		{ label: 'Other Special Commodity Sub Type', value: 'other_special' },
+	],
+};

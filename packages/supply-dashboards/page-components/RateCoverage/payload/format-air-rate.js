@@ -4,7 +4,7 @@ const formatAirRate = (data, user_id) => {
 		destination_airport_id:
 			data?.destination_airport_id,
 		booking_rate_procurement_proof : data?.booking_rate_procurement_proof,
-		commodity                      : data?.commodity || 'all',
+		commodity                      : data?.air_commodity || 'all',
 		commodity_type                 : data?.commodity_type || 'all',
 		commodity_sub_type             : data?.commodity_sub_type || 'all',
 		container_size                 : data?.container_size,

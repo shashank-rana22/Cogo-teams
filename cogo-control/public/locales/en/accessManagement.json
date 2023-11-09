@@ -13,6 +13,7 @@
     "roles_and_permission_select_role_functions_select_operations": "Operations",
     "roles_and_permission_select_role_functions_select_finance": "Finance",
     "roles_and_permission_select_role_functions_select_external": "External",
+    "roles_and_permission_select_role_functions_select_public":"Public",
     "roles_and_permission_select_sub_function_placeholder": "Select Sub-function",
     "roles_and_permission_select_sales_customer_success": "Customer Success",
     "roles_and_permission_select_sales_field_sales": "Field Sales",

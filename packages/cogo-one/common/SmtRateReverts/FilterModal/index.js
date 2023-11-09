@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
 import smtRateRevertsFilters from '../../../configurations/smtRateRevertsFilters';
+import { ADMIN_VIEW_REQUIRED_FOR } from '../../../constants/rateRevertsConstants';
 import { getFieldController } from '../../../utils/getFieldController';
 
 import styles from './styles.module.css';
@@ -25,8 +26,21 @@ function FilterModal({
 	const serviceType = watch('service');
 	const controls = smtRateRevertsFilters({ triggeredFrom, viewType, setFiltersData, serviceType });
 
+	const sourceValue = JSON.parse(localStorage.getItem('smt_rate_data_source'));
+
 	const onSubmit = (val) => {
 		setShowFilters(false);
+
+		localStorage.setItem('smt_rate_data_filter', JSON.stringify({
+			source              : sourceValue?.source,
+			relevant_to         : val?.relevant_to,
+			service             : val?.service,
+			service_provider_id : val?.service_provider_id,
+			shipment_serial_id  : val?.shipment_serial_id,
+			startDate           : val?.dateRange?.startDate,
+			endDate             : val?.dateRange?.endDate,
+			filterApplied       : true,
+		}));
 
 		setParams((prev) => ({
 			...prev,
@@ -36,12 +50,19 @@ function FilterModal({
 	};
 
 	const handleReset = () => {
+		localStorage.setItem('smt_rate_data_filter', JSON.stringify({}));
+
 		reset(defaultValues);
 
 		setParams((prev) => ({
-			...prev,
-			...defaultValues,
-			page: 1,
+			source      : prev?.source,
+			service     : 'fcl_freight',
+			relevant_to : ADMIN_VIEW_REQUIRED_FOR.includes(viewType) ? 'all' : '',
+			page        : 1,
+			dateRange   : {
+				startDate : new Date((new Date()).setHours(0, 0, 0, 0)),
+				endDate   : new Date((new Date()).setHours(23, 59, 59, 59)),
+			},
 		}));
 
 		setShowFilters(false);

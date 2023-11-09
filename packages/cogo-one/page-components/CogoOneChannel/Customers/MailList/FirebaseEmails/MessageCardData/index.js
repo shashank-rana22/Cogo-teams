@@ -5,6 +5,7 @@ import { IcCPin, IcMPin } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
+import getUserNameFromEmail from '../../../../../../helpers/getUserNameFromEmail';
 import updatePin from '../../../../../../helpers/updatePin';
 import getActiveCardDetails from '../../../../../../utils/getActiveCardDetails';
 
@@ -26,7 +27,6 @@ function MessageCardData({
 	const formattedData = getActiveCardDetails(item) || {};
 
 	const {
-		search_user_name = '',
 		chat_tags = [],
 		id = '',
 		channel_type: channelType = '',
@@ -79,6 +79,9 @@ function MessageCardData({
 		});
 	};
 
+	const showRecipientName = mailToBeShown?.map((itm) => (getUserNameFromEmail({ query: itm })));
+	const userNames = showRecipientName?.map((it) => startCase(it?.userName)).join(', ');
+
 	return (
 		<div
 			role="presentation"
@@ -110,9 +113,7 @@ function MessageCardData({
 						)}
 					>
 						<div className={styles.user_name_title}>
-							{search_user_name !== 'website_user'
-								? (startCase(search_user_name) || 'User')
-								: mailToBeShown.join(', ')}
+							{userNames}
 						</div>
 					</Tooltip>
 

@@ -9504,6 +9504,12 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
+		{
+			api         : 'put_payments_outstanding_bulk_update_account_taggings',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
 
 	],
 	compliance: [
@@ -10091,6 +10097,12 @@ const partner = {
 			api          : 'get_exchange_rate',
 			access_type  : 'private',
 			service_name : 'exchange_rate',
+		},
+		{
+			api         : 'post_payments_parent_jv_bulk_post_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
 		},
 	],
 	tracking: [
@@ -13397,6 +13409,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'assign_meeting_agent',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'update_channel_partner_document',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -15259,6 +15276,38 @@ const partner = {
 		},
 		{
 			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+	],
+	cogo_one_sme_dashboard: [
+		{
+			api          : 'list_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'get_partner_user_rm_mapping',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'get_omnichannel_sme_dashboard',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_agent_scoring_reports',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
+		{
+			api          : 'list_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'list_partner_addresses',
 			access_type  : 'private',
 			service_name : 'partner',
 		},

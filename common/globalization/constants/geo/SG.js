@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable custom-eslint/regex-check, custom-eslint/uuid-check */
 export default {
 	country: {
@@ -31,8 +32,7 @@ export default {
 		},
 	},
 	regex: {
-		TAX                                : /((S|T)([\d]{2})([A-Z]{2})([\d]{4})([A-Z])|(\d{9})([A-Z]))/g,
-		// eslint-disable-next-line max-len
+		TAX                                : /(?:(\d{7}[A-Za-z]|\d{8}[A-Za-z]|T\d{2}[A-Za-z0-9]\d{4}[A-Za-z])|((S|T)([\d]{2})([A-Z]{2})([\d]{4})([A-Z])|(\d{9})([A-Z])))\b/gm,
 		GST                                : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
 		ECN                                : '',
 		MOBILE_NUMBER                      : /^[+][0-9]{1,3}[0-9]{10}$/,
@@ -225,6 +225,7 @@ export default {
 		],
 		prod_kam_ie_manager   : 'f9905d33-24d7-48ca-99cd-eeca13a90d5a',
 		prod_kam_ie           : '0bc8c199-09ed-4a85-b3a3-a855f05a2716',
+		ie_owner_sme_demand   : '594be53f-e39a-45d1-a705-57660a4a4a00',
 		portfolio_manager_id  : '46f33843-8f73-45c0-89c8-248aa1698bb0',
 		pre_sales_agent       : 'ad12ce9e-2cc9-4a14-8e36-d3ee2df0cf63',
 		credit_controller_ids : [
@@ -565,7 +566,7 @@ export default {
 	others: {
 		registration_number: {
 			label      : 'UEN',
-			pattern    : /((S|T)([\d]{2})([A-Z]{2})([\d]{4})([A-Z])|(\d{9})([A-Z]))/g,
+			pattern    : /(?:(\d{7}[A-Za-z]|\d{8}[A-Za-z]|T\d{2}[A-Za-z0-9]\d{4}[A-Za-z])|((S|T)([\d]{2})([A-Z]{2})([\d]{4})([A-Z])|(\d{9})([A-Z])))\b/gm,
 			max_length : 10,
 		},
 		banking_code: {
@@ -581,7 +582,7 @@ export default {
 		},
 		identification_number: {
 			label   : 'UEN',
-			pattern : /((S|T)([\d]{2})([A-Z]{2})([\d]{4})([A-Z])|(\d{9})([A-Z]))/g,
+			pattern : /(?:(\d{7}[A-Za-z]|\d{8}[A-Za-z]|T\d{2}[A-Za-z0-9]\d{4}[A-Za-z])|((S|T)([\d]{2})([A-Z]{2})([\d]{4})([A-Z])|(\d{9})([A-Z])))\b/gm,
 		},
 		navigations: {
 			onboard_vendor: {

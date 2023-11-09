@@ -1,5 +1,4 @@
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import SearchInput from '../../../../../../../common/SearchInput';
 

@@ -1,6 +1,7 @@
 import { useRouter } from '@cogoport/next';
 import { useCallback, useMemo, useState } from 'react';
 
+import ScrollAnnouncement from '../../common/ScrollAnouncement';
 import SCREEN_CONSTANTS from '../../constants/screen-constants';
 import { getTodayStartDate } from '../../utils/start-date-functions';
 
@@ -66,6 +67,8 @@ function PublicDashboard() {
 					officeLocation={officeLocation}
 					setOfficeLocation={setOfficeLocation}
 				/>
+
+				<ScrollAnnouncement style={{ margin: '0 16px' }} />
 
 				<Body
 					screen={screen}

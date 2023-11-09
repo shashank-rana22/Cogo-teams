@@ -7,7 +7,7 @@ import SidTypeFilters from './SidTypeFilters';
 import styles from './styles.module.css';
 
 function CategoryType(props) {
-	const { searchParams, setSearchParams, idFilters = {}, setIdFilters = () => {} } = props;
+	const { searchParams, setSearchParams, idFilters = {}, isAdmin, setIdFilters = () => {} } = props;
 	const {
 		show = false, category = '',
 		subcategory = '', raisedBy = '',
@@ -21,6 +21,21 @@ function CategoryType(props) {
 
 	return (
 		<div className={styles.category_container}>
+			{isAdmin && (
+				<AsyncSelect
+					name="user_id"
+					asyncKey="partner_users"
+					valueKey="user_id"
+					initialCall
+					value={searchParams.agent}
+					placeholder={t('myTickets:agent_filter_placeholder_text')}
+					isClearable
+					onChange={(val) => setSearchParams((prev) => ({
+						...prev,
+						agent: val,
+					}))}
+				/>
+			)}
 			<AsyncSelect
 				name="ticket_type"
 				onChange={(val) => setSearchParams((prev) => ({
