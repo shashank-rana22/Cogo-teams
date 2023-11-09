@@ -14,13 +14,13 @@ function SalaryUpdate({ data }) {
 			<div className={styles.summary}>
 				<div className={cl`${styles.avg_data} ${styles.mr_30}`}>
 					<div className={styles.avg_summary}>
-						{payable_days}
+						{payable_days || 0}
 					</div>
 					Payable Days
 				</div>
 				<div className={styles.avg_data}>
 					<div className={styles.avg_summary}>
-						{payroll_status}
+						{payroll_status || 'NA'}
 					</div>
 					Payroll Status
 				</div>

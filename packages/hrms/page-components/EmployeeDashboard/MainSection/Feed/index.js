@@ -33,15 +33,17 @@ function Feed({ data = {}, feedRefetch, setFilters, summaryData, feedLoading }) 
 				: (
 					<>
 						<FeedPosts data={data} feedRefetch={feedRefetch} feedLoading={feedLoading} />
-						<div style={{ marginTop: 12, display: 'flex', justifyContent: 'flex-end' }}>
-							<Pagination
-								type="table"
-								currentPage={page}
-								totalItems={total_count}
-								pageSize={5}
-								onPageChange={(val) => setFilters((prev) => ({ ...prev, page: val }))}
-							/>
-						</div>
+						{total_count > 5 && (
+							<div style={{ marginTop: 12, display: 'flex', justifyContent: 'flex-end' }}>
+								<Pagination
+									type="table"
+									currentPage={page}
+									totalItems={total_count}
+									pageSize={5}
+									onPageChange={(val) => setFilters((prev) => ({ ...prev, page: val }))}
+								/>
+							</div>
+						)}
 					</>
 				) }
 		</div>

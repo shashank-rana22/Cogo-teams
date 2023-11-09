@@ -10,13 +10,13 @@ import styles from './styles.module.css';
 function NotInOffice({ data = {} }) {
 	const { absentee_list } = data || {};
 
-	const [maxVisible, setMaxVisible] = useState(5);
+	const [maxVisible, setMaxVisible] = useState(4);
 
 	useEffect(() => {
 		// Function to update the isMobile state based on viewport width
 		function handleResize() {
 			const isLess = window.innerWidth < 767;
-			setMaxVisible(isLess ? 4 : 5);
+			setMaxVisible(isLess ? 4 : 2);
 		}
 
 		handleResize();
