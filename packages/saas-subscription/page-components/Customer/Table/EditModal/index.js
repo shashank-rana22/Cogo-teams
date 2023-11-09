@@ -32,7 +32,7 @@ function EditModal({ editModal, setEditModal }) {
 
 	return (
 		<Modal show={open} onClose={closeModalHandler} closeOnOuterClick={closeModalHandler} size="lg">
-			<div className={styles.container}>
+			<div key={info?.id} className={styles.container}>
 				{loading && (
 					<div className={styles.loader}>
 						<div className={styles.overlay} />

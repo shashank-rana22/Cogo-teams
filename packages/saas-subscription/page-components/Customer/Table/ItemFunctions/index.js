@@ -8,23 +8,14 @@ import KYC_MAPPING from '../../../../constant/kycMapping';
 
 const itemFunction = ({ setEditModal = () => {}, t = () => {} }) => ({
 	renderId: (item) => {
-		const { id, organization = {} } = item || {};
+		const { organization = {} } = item || {};
 		const { serial_id = '' } = organization || {};
 
-		const copyLinkHandler = () => {
-			navigator.clipboard.writeText(id);
-			Toast.success('Copied Customer Id');
-		};
-
 		return (
-			<div className="flex_box">
-				{serial_id}
-				<Tooltip content={id}>
-					<div className="copy_icon" onClick={copyLinkHandler} role="presentation">
-						<IcMCopy />
-					</div>
-				</Tooltip>
-			</div>
+			<>
+				#
+				<span style={{ textDecoration: 'underline' }}>{serial_id}</span>
+			</>
 		);
 	},
 	renderCompanyName: (item) => {
@@ -131,6 +122,26 @@ const itemFunction = ({ setEditModal = () => {}, t = () => {} }) => ({
 			<Pill color={KYC_MAPPING[kycStatus]}>
 				{startCase(kycStatus)}
 			</Pill>
+		);
+	},
+	renderOrgId: (item, config) => {
+		const { id } = item || {};
+
+		const copyLinkHandler = () => {
+			navigator.clipboard.writeText(id);
+			Toast.success('Copied Customer Id');
+		};
+
+		return (
+			<span className="flex_box">
+				{item?.[config?.key]}
+
+				<Tooltip content={id}>
+					<div className="copy_icon" onClick={copyLinkHandler} role="presentation">
+						<IcMCopy />
+					</div>
+				</Tooltip>
+			</span>
 		);
 	},
 });

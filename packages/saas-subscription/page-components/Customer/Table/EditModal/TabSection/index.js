@@ -7,6 +7,7 @@ import PlanApproval from '../PlanApproval';
 import QuotaDetails from '../QuotaDetails';
 
 import Logs from './Logs';
+import Orders from './Orders';
 import PromotionCancellation from './PromotionCancellation';
 import styles from './styles.module.css';
 import Usages from './Usages';
@@ -19,6 +20,7 @@ const TAB_MAPPING = {
 	cancellation : PromotionCancellation,
 	logs         : Logs,
 	usages       : Usages,
+	orders       : Orders,
 };
 
 function TabSection({ info = {}, subInfo = {}, editModalChangeHandler, setEditModal }) {
