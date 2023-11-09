@@ -1,17 +1,26 @@
 import { dynamic } from '@cogoport/next';
 
-import { LoaderComp } from '../../common/Elements';
+import { LoadingState } from '../../common/Elements';
 
 import Analytics from './Analytics';
 import PerAgentData from './PerAgentData';
 import RevenueContainer from './RevenueContainer';
+import styles from './styles.module.css';
 import UserData from './UserData';
+
+function DynamicLoader() {
+	return (
+		<div className={styles.dynamic_container}>
+			<LoadingState customClassName="dynamic_loader" />
+		</div>
+	);
+}
 
 const CampaignPieChart = dynamic(
 	() => import('./CampaignsData/CampaignPieChart'),
 	{
 		ssr     : false,
-		loading : () => <LoaderComp />,
+		loading : () => <DynamicLoader />,
 	},
 );
 
@@ -19,7 +28,7 @@ const ChannelStats = dynamic(
 	() => import('./ChannelStats'),
 	{
 		ssr     : false,
-		loading : () => <LoaderComp />,
+		loading : () => <DynamicLoader />,
 	},
 );
 
@@ -27,7 +36,7 @@ const AgentsPerformanceView = dynamic(
 	() => import('./AgentsPerformanceView'),
 	{
 		ssr     : false,
-		loading : () => <LoaderComp />,
+		loading : () => <DynamicLoader />,
 	},
 );
 
@@ -35,7 +44,7 @@ const AgentsExceptionList = dynamic(
 	() => import('./AgentsExceptionList'),
 	{
 		ssr     : false,
-		loading : () => <LoaderComp />,
+		loading : () => <DynamicLoader />,
 	},
 );
 
@@ -43,7 +52,7 @@ const CustomerFunnel = dynamic(
 	() => import('./CustomerFunnel'),
 	{
 		ssr     : false,
-		loading : () => <LoaderComp />,
+		loading : () => <DynamicLoader />,
 	},
 );
 
@@ -51,7 +60,7 @@ const CustomerBased = dynamic(
 	() => import('./TransactionsFunnel/CustomerBased'),
 	{
 		ssr     : false,
-		loading : () => <LoaderComp />,
+		loading : () => <DynamicLoader />,
 	},
 );
 
@@ -59,7 +68,7 @@ const ServiceBased = dynamic(
 	() => import('./TransactionsFunnel/ServiceBased'),
 	{
 		ssr     : false,
-		loading : () => <LoaderComp />,
+		loading : () => <DynamicLoader />,
 	},
 );
 
@@ -67,7 +76,7 @@ const CustomerInteractionFunnel = dynamic(
 	() => import('./TransactionsFunnel/CustomerInteractionFunnel'),
 	{
 		ssr     : false,
-		loading : () => <LoaderComp />,
+		loading : () => <DynamicLoader />,
 	},
 );
 
@@ -75,7 +84,7 @@ const ServicesWiseBifurcation = dynamic(
 	() => import('./TransactionsFunnel/ServicesWiseBifurcation'),
 	{
 		ssr     : false,
-		loading : () => <LoaderComp />,
+		loading : () => <DynamicLoader />,
 	},
 );
 
