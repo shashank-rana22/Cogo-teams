@@ -42,7 +42,7 @@
     "change_plan":"Change Plan",
     "cancel_sub":"Cancel Subscription",
     "quota_details_product":"Products",
-    "quota_details_quota":"Quota",
+    "quota_details_quota":"Quota (total/left)",
     "future_plan_title":"Future Plans",
     "future_plan_empty":"No Future Plans Found",
     "edit_feature_title":"Change Plan",
@@ -150,5 +150,6 @@
     "log_control_created_at":"Created at",
     "log_controls_updated_at":"Updated at",
     "plan_status":"Plan Status",
-    "reset_plan":"Reset Plan"
+    "reset_plan":"Reset Plan",
+    "quota_details_addon":"Addon"
 }

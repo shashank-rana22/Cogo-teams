@@ -5,6 +5,7 @@ import { useTranslation } from 'next-i18next';
 
 import CancelSub from './CancelSub';
 import Plan from './Plan';
+import PlanValidity from './PlanValidity';
 import Quota from './Quota';
 import styles from './styles.module.css';
 
@@ -26,6 +27,10 @@ const getComponentMapping = ({ t, product_name }) => ({
 	cancel_subscription: {
 		component : CancelSub,
 		title     : '',
+	},
+	plan_validity: {
+		component : PlanValidity,
+		title     : 'Change Plan Validity',
 	},
 });
 

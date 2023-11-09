@@ -62,7 +62,16 @@ function EditModal({ editModal, setEditModal }) {
 
 								{config.key === 'validity'
 									? (
-										<span className={styles.edit_icon}>
+										<span
+											className={styles.edit_icon}
+											role="presentation"
+											onClick={() => {
+												editModalChangeHandler({
+													activeComp : 'plan_validity',
+													extraInfo  : active,
+												});
+											}}
+										>
 											<IcMEdit width={12} height={12} />
 										</span>
 									)
@@ -82,6 +91,7 @@ function EditModal({ editModal, setEditModal }) {
 
 				<div className={styles.tab_section}>
 					<TabSection
+						info={info}
 						subInfo={subInfo}
 						editModalChangeHandler={editModalChangeHandler}
 						setEditModal={setEditModal}

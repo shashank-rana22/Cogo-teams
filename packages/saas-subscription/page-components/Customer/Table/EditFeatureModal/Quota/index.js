@@ -1,4 +1,5 @@
 import { cl, Button, Tooltip } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useTranslation } from 'next-i18next';
 
@@ -15,9 +16,14 @@ function TooltipContent({ pricings = [] }) {
 				return (
 					<div key={id}>
 						{'1 quota = '}
-						{buy_price}
-						{' '}
-						{currency}
+						{formatAmount({
+							amount  : buy_price,
+							currency,
+							options : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</div>
 				);
 			})}

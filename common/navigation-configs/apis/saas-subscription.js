@@ -60,6 +60,16 @@ const apis = {
 			service_name : 'saas_subscriptions_v2',
 			access_type  : 'private',
 		},
+		{
+			api          : 'update_saas_subscription_validity',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'saas_get_usage_history',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
 	],
 	saas_subscription_plan: [
 		{
@@ -107,7 +117,6 @@ const apis = {
 			service_name : 'saas_subscriptions_v2',
 			access_type  : 'private',
 		},
-
 	],
 };
 
