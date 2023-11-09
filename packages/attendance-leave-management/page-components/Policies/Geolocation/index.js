@@ -48,7 +48,7 @@ function Geolocation({ handlePolicy = () => {} }) {
 					</div>
 				</div>
 				{isEmpty(selectedLocation) && (
-					(tempAccess) ? <EmployeeTempList />
+					tempAccess ? <EmployeeTempList />
 						: (
 							<div className={styles.container}>
 								<div className={styles.above_text}>Temporaray Access</div>
@@ -71,12 +71,6 @@ function Geolocation({ handlePolicy = () => {} }) {
 												</div>
 											</div>
 											<div className={styles.arrow_section}>
-												<div className={styles.below_text}>
-													{/* <IcMTeam /> */}
-													{/* <span>{item.num_people}</span> */}
-													{/* <IcMLocation /> */}
-													{/* <span>{item.location}</span> */}
-												</div>
 												<div><IcMArrowRight width={20} height={20} /></div>
 											</div>
 										</div>

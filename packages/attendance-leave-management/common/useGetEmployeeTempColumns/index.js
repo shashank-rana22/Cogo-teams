@@ -122,7 +122,7 @@ const useGetEmployeeTempColumns = () => {
 		{
 			Header   : <div className={styles.table_header}>ATTACHMENT</div>,
 			accessor : (item) => (
-				<div className={styles.item_data}>
+				<div className={styles.item_data_download}>
 					{item?.attachment_url
 						? (
 							<Button

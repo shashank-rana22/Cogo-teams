@@ -62,9 +62,6 @@ function EmployeeTempList() {
 				loading={loading}
 				filters={filters}
 				getListGeoLocationReq={getListGeoLocationReq}
-				// searchQuery={searchQuery}
-				// selectedLocation={selectedLocation}
-				// refetch={refetch}
 			/>
 			<Pagination
 				className="md"
