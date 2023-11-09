@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { startOfDay } from '@cogoport/utils';
+import { startOfDay, addDays } from '@cogoport/utils';
 import { useCallback, useEffect } from 'react';
 
 const getParams = ({ hierarchyData, dateRange }) => {
@@ -7,10 +7,13 @@ const getParams = ({ hierarchyData, dateRange }) => {
 
 	const { hierarchyDataType = '', id = '' } = lastElement || {};
 
+	const endDate = (addDays(dateRange?.endDate, 1) > new Date())
+		? new Date() : addDays(dateRange?.endDate, 1);
+
 	return 	{
 		blocks     : ['get_performance_data'],
 		start_date : startOfDay(dateRange?.startDate || new Date()),
-		end_date   : dateRange?.endDate || new Date(),
+		end_date   : endDate || new Date(),
 		filters    : {
 			partner_id           : (hierarchyDataType === 'partners' ? id : undefined) || undefined,
 			office_location_id   : (hierarchyDataType === 'branches' ? id : undefined) || undefined,
