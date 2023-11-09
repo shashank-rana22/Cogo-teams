@@ -65,6 +65,10 @@ export const controls = (partnerOptions, t) => [
 				label : t('accessManagement:roles_and_permission_select_role_functions_select_external'),
 				value : 'external',
 			},
+			{
+				label : t('accessManagement:roles_and_permission_select_role_functions_select_public'),
+				value : 'public',
+			},
 		],
 		type        : 'multiSelect',
 		isClearable : true,
