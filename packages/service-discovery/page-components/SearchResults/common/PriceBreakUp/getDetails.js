@@ -23,7 +23,7 @@ const getDetails = ({ item, service = '' }) => {
 	const commonPackageDetails = [
 		(volume || weight) && `${volume} CBM, ${weight} KG`,
 		packages_count && `${packages_count} Package${packages_count > 1 ? 's' : ''}`,
-		COMMODITY_NAME_MAPPING[commodity]?.name || startCase(commodity),
+		commodity && (COMMODITY_NAME_MAPPING[commodity]?.name || startCase(commodity)),
 	].filter(Boolean);
 
 	const commonFTLDetails = [
@@ -80,6 +80,7 @@ const getDetails = ({ item, service = '' }) => {
 		cargo_insurance   : [
 			`${commodity}`, `Cargo Value: ${cargo_value_currency} ${cargo_value}`,
 		],
+		warehouse: commonPackageDetails,
 	};
 
 	return MAPPING[service] || [];

@@ -18,17 +18,21 @@
 	align-items: center;
 
 	.left_content {
-		margin-left: 26px;
+		margin-left: 20px;
+
+		@media (max-width: 768px) {
+			margin-left: 12px;
+		}
 	}
 }
 
 .label {
+	margin-left: 2px;
 	font-size: 14px;
 	font-weight: 600;
 	color: #000;
 
 	@media (max-width: 768px) {
-		margin-left: 14px;
 		font-size: 12px;
 	}
 }

@@ -23,7 +23,7 @@ const getPillData = ({ item = {}, service_type = '' }) => {
 		(volume || weight) && `${volume} CBM, ${weight} KG`,
 		chargeable_weight && `${chargeable_weight} Kg Chargeable Wt.`,
 		packages_count && `${packages_count} Package${packages_count > 1 ? 's' : ''}`,
-		COMMODITY_NAME_MAPPING[commodity]?.name || startCase(commodity),
+		commodity && (COMMODITY_NAME_MAPPING[commodity]?.name || startCase(commodity)),
 	].filter(Boolean);
 
 	const commonFTLDetails = [
@@ -77,6 +77,7 @@ const getPillData = ({ item = {}, service_type = '' }) => {
 		transportation    : [truck_type ? startCase(truck_type) : commonContainerDetails],
 		subsidiary        : SUBSIDIARY_CONTENT_MAPPING[item?.service],
 		haulage_freight   : commonContainerDetails,
+		warehouse         : commonPackageDetails,
 	};
 
 	return MAPPING[service_type] || [];
