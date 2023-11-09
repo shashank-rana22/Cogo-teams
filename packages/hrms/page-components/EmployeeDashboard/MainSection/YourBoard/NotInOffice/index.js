@@ -16,8 +16,7 @@ function NotInOffice({ data = {} }) {
 		// Function to update the isMobile state based on viewport width
 		function handleResize() {
 			const isLess = window.innerWidth < 767;
-			console.log('🚀 ~ file: index.js:19 ~ handleResize ~ window.innerWidth:', window.innerWidth);
-			setMaxVisible(isLess ? 4 : 6);
+			setMaxVisible(isLess ? 4 : 5);
 		}
 
 		handleResize();
