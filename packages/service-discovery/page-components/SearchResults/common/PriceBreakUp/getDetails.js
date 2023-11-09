@@ -63,7 +63,7 @@ const getDetails = ({ item, service = '' }) => {
 			`${cargo_weight_per_container}MT`,
 		],
 		ftl_freight : commonFTLDetails,
-		ltl_freight : [`${volume} cc`, `${weight} kg`, `${COMMODITY_NAME_MAPPING[commodity]?.name}`],
+		ltl_freight : commonPackageDetails,
 		fcl_customs : commonContainerDetails,
 		fcl_cfs     : commonContainerDetails,
 		lcl_customs : [
