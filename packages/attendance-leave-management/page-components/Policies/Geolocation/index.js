@@ -24,7 +24,6 @@ function Geolocation({ handlePolicy = () => {} }) {
 	const [tempAccess, setTempAccess] = useState(false);
 	const { loading, data } = useGetBranchStats();
 
-	console.log(tempAccess, 'tempAccess');
 	const handleBack = () => {
 		if (isEmpty(selectedLocation)) {
 			handlePolicy('');

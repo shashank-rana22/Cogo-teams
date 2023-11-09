@@ -7,10 +7,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const useGetLocationColumn = ({
-	data = [],
-}) => {
-	console.log(data, '::');
+const useGetEmployeeTempColumns = () => {
 	const getStatusColor = (status) => {
 		switch (status) {
 			case 'pending':
@@ -165,4 +162,4 @@ const useGetLocationColumn = ({
 	return columns;
 };
 
-export default useGetLocationColumn;
+export default useGetEmployeeTempColumns;

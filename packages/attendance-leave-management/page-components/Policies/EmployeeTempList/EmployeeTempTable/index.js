@@ -1,6 +1,5 @@
 import React from 'react';
 
-// import useGetEmployee from '../../../../common/useGetLocationColumn';
 import StyledTable from '../../../../common/StyledTable';
 import useGetEmployeeTempColumns from '../../../../common/useGetEmployeeTempColumns';
 
