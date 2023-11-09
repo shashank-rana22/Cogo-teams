@@ -17,10 +17,19 @@ function ShipmentPlan({ selectedCard = [] }) {
 	} = selectedCard || {};
 
 	function formatSailingDateRange(startDate, endDate) {
-		const formattedStartDate = formatDate(startDate, GLOBAL_CONSTANTS.formats.date['MMM, yyyy'], 'date');
-		const formattedEndDate = formatDate(endDate, GLOBAL_CONSTANTS.formats.date['MMM, yyyy'], 'date');
+		const formattedStartDate = formatDate({
+			date       : startDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['MMM, yyyy'],
+			formatType : 'date',
+		});
+		const formattedEndDate = formatDate({
+			date       : endDate,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['MMM, yyyy'],
+			formatType : 'date',
+		});
 		return `${formattedStartDate} - ${formattedEndDate}`;
 	}
+
 	return (
 		<div className={styles.container}>
 			<div>
