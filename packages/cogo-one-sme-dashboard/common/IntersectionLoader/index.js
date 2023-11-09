@@ -37,7 +37,7 @@ function IntersectionLoader({
 						{headerText}
 					</div>
 				)}
-			{isVisible ? children : <LoadingState />}
+			{isVisible ? children : <LoadingState customClassName="intersection_loading" />}
 		</div>
 	);
 }
