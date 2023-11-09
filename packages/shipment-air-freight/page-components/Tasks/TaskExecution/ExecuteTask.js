@@ -79,10 +79,6 @@ function ExecuteTask({
 
 	const Component = exportTradeTypeTasks?.[task?.task];
 
-	console.log(task, 'task');
-	console.log(tradeType, 'tradeType');
-	console.log(services, 'services');
-
 	if (loading || servicesLoading) {
 		return <div><LoadingState /></div>;
 	}

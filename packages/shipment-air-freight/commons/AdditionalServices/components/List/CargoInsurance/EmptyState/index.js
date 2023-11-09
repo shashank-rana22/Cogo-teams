@@ -13,7 +13,7 @@ function EmptyState({ reason = '' }) {
 	return (
 		<div className={styles.sad_container}>
 			<IcMVerySad width={40} height={40} />
-			<p>{TEXT_MAPPING[reason]}</p>
+			<p>{TEXT_MAPPING?.[reason] || ''}</p>
 		</div>
 	);
 }

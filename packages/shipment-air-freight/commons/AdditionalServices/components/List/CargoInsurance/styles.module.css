@@ -1,11 +1,6 @@
 .box_div {
 	display: flex;
 	align-items: center;
-
-	& > div:nth-child(2) {
-		display: flex;
-		margin-left: 4px;
-	}
 }
 
 .btn_wrap {
@@ -22,18 +17,20 @@
 .rate {
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 5px;
 
 	&.final {
-		border-bottom: 1px solid #f2e2c3;
+		padding-top: 5px;
+		font-weight: 600;
+		border-top: 1px solid #f2e2c3;
 	}
-}
-
-.tooltip_container {
-	max-width: 250px;
-	font-size: var(--font-size-sm);
-	font-weight: 300;
 }
 
 .btn_div {
 	margin-left: 16px;
+}
+
+.info_icon {
+	margin-left: 5px;
+	vertical-align: middle;
 }

@@ -4,7 +4,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const getPayload = ({ primary_service = [], getValues, userId }) => {
 	const { destination_country_id	= '', origin_country_id = '' } = primary_service || {};
@@ -24,6 +24,8 @@ const useGetInsuranceRate = ({ primary_service = {}, commodity = {} }) => {
 	const { user } = useSelector((state) => state?.profile);
 	const { id: userId } = user || {};
 
+	const [rate, setRate] = useState({});
+
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const formhook = useForm();
@@ -31,7 +33,7 @@ const useGetInsuranceRate = ({ primary_service = {}, commodity = {} }) => {
 
 	const { cargo_value } = watch();
 
-	const [{ loading, data }, trigger] = useRequestBf({
+	const [{ loading }, trigger] = useRequestBf({
 		authKey : 'get_saas_insurance_v2_rate',
 		url     : 'saas/insurance/v2/rate',
 		method  : 'GET',
@@ -41,10 +43,12 @@ const useGetInsuranceRate = ({ primary_service = {}, commodity = {} }) => {
 		const payload = getPayload({ getValues, primary_service, userId });
 
 		try {
-			await trigger({
+			const resp = await trigger({
 				params: payload,
 			});
+			setRate(resp?.data?.list[GLOBAL_CONSTANTS.zeroth_index]);
 		} catch (err) {
+			setRate({});
 			toastApiError(err);
 		}
 	};
@@ -73,7 +77,7 @@ const useGetInsuranceRate = ({ primary_service = {}, commodity = {} }) => {
 
 	return {
 		premiumLoading : loading,
-		premiumData    : data?.list[GLOBAL_CONSTANTS.zeroth_index],
+		premiumData    : rate,
 		formhook,
 
 	};

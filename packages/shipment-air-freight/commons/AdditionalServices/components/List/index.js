@@ -73,8 +73,6 @@ function List({ isSeller = false, source = '' }) {
 		(service) => service?.service_type === 'cargo_insurance_service',
 	);
 
-	console.log(shipment_data, 'shipment_data');
-
 	return (
 		<div className={styles.container}>
 

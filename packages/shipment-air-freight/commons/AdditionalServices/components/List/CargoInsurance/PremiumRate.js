@@ -1,18 +1,15 @@
 import { Tooltip, cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-const PLATFORM_CHARGES = 1;
-const CONVENIENCE_CHARGES = 2;
 const geo = getGeoConstants();
 
-const formatAmounts = (amount) => formatAmount({
+const getFormattedAmt = ({ amount, currency }) => formatAmount({
 	amount,
-	currency : geo.country.currency.code,
+	currency : currency || geo.country.currency.code,
 	options  : {
 		style                 : 'currency',
 		currencyDisplay       : 'code',
@@ -23,43 +20,51 @@ const formatAmounts = (amount) => formatAmount({
 function PremiumRate({ rateData = {} }) {
 	const {
 		serviceChargeList = [],
-		totalCharges = 0,
+		chargeCurrency,
 	} = rateData || {};
 
 	return (
 		<div>
-			<div className={styles.rate}>
-				<div className={styles.box_div}>
-					<span>Premium:</span>
-					<Tooltip
-						theme="light"
-						placement="bottom"
-						content={(
-							<div className={styles.tooltip_container}>
-								<div>Exclusive of Taxes</div>
+			{
+				(serviceChargeList || []).map((charge) => {
+					const {
+						displayName = '',
+						totalCharges = 0,
+						productCodeId = '',
+						serviceName = '',
+					} = charge || {};
+
+					return (
+						<div key={productCodeId} className={styles.rate}>
+							<div className={styles.box_div}>
+								<span>{displayName}</span>
+
+								{serviceName === 'premium' ? (
+									<Tooltip
+										placement="bottom"
+										content={(
+											<div>Exclusive of Taxes</div>
+										)}
+									>
+										<IcMInfo className={styles.info_icon} />
+									</Tooltip>
+								) : ''}
 							</div>
-						)}
-					>
-						<IcMInfo />
-					</Tooltip>
-				</div>
 
-				<div>{formatAmounts(serviceChargeList?.[GLOBAL_CONSTANTS.zeroth_index]?.totalCharges)}</div>
-			</div>
-
-			<div className={styles.rate}>
-				<div>Platform Charges:</div>
-				<div>{formatAmounts(serviceChargeList?.[PLATFORM_CHARGES]?.totalCharges)}</div>
-			</div>
+							<span>{getFormattedAmt({ amount: totalCharges, currency: chargeCurrency })}</span>
+						</div>
+					);
+				})
+			}
 
 			<div className={cl`${styles.rate} ${styles.final}`}>
-				<div>Convenience Fee:</div>
-				<div>{formatAmounts(serviceChargeList?.[CONVENIENCE_CHARGES]?.totalCharges)}</div>
-			</div>
-
-			<div className={styles.rate}>
 				<div>Amount Payable:</div>
-				<div>{formatAmounts(totalCharges)}</div>
+				<div>
+					{getFormattedAmt({
+						amount   : rateData?.totalCharges,
+						currency : chargeCurrency,
+					})}
+				</div>
 			</div>
 		</div>
 	);
