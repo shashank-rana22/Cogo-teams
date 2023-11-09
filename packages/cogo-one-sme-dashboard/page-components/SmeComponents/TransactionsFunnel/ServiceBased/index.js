@@ -15,9 +15,9 @@ function ServiceBased({ widgetBlocks = null, filterParams = {} }) {
 	const { service_based_data = [] } = dashboardData || {};
 
 	const data = useMemo(() => {
-		const sortedServiceData = service_based_data?.sort(
-			(a, b) => ((b?.total || 0) - (a?.total || 0)),
-		) || [];
+		const sortedServiceData = (service_based_data || [])?.sort(
+			(a, b) => (a?.sr_no || 0) - (b?.sr_no || 0),
+		);
 
 		return {
 			labels: sortedServiceData?.map(

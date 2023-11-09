@@ -5,7 +5,7 @@ function getFormattedAmount({ number = 0 }) {
 		'en',
 		{
 			notation              : 'compact',
-			minimumFractionDigits : 1,
+			minimumFractionDigits : 0,
 			maximumFractionDigits : 2,
 		},
 	).format(Number(number || 0));

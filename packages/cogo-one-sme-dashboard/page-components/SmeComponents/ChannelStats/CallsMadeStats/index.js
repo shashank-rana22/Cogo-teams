@@ -75,55 +75,51 @@ function CallsMadeStats({ filterParams = {} }) {
 			<div className={styles.view_report}>
 				{dashboardLoading
 					? <LoadingState />
-					: (
-						<>
-							{Object.entries(CALL_TYPES).map(
-								([type, itm]) => (
-									<div
-										key={type}
-										className={styles.message_type_stats}
-									>
-										<div className={styles.call_stats}>
-											{itm?.icon}
+					: Object.entries(CALL_TYPES).map(
+						([type, itm]) => (
+							<div
+								key={type}
+								className={styles.message_type_stats}
+							>
+								<div className={styles.call_stats}>
+									{itm?.icon}
 
-											<div className={styles.count_stats}>
-												{current_data?.[itm?.count]}
-											</div>
-										</div>
-
-										<div className={styles.call_status_label}>
-											{itm?.label}
-										</div>
-
-										<div className={styles.segregation}>
-											<AccountTypeWise
-												segregated
-												decimalNotRequired
-												label="Allocated"
-												dataValue={current_data?.[itm?.allocated]}
-												change={calcChange({
-													valueKey     : itm?.allocated,
-													currentData  : current_data,
-													previousData : previous_data,
-												})}
-											/>
-
-											<AccountTypeWise
-												segregated
-												decimalNotRequired
-												label="Not-allocated"
-												dataValue={current_data?.[itm?.non_allocated]}
-												change={calcChange({
-													valueKey     : itm?.non_allocated,
-													currentData  : current_data,
-													previousData : previous_data,
-												})}
-											/>
-										</div>
+									<div className={styles.count_stats}>
+										{current_data?.[itm?.count] || 0}
 									</div>
-								),
-							)}
-						</>
+								</div>
+
+								<div className={styles.call_status_label}>
+									{itm?.label}
+								</div>
+
+								<div className={styles.segregation}>
+									<AccountTypeWise
+										segregated
+										decimalNotRequired
+										label="Allocated"
+										dataValue={current_data?.[itm?.allocated]}
+										change={calcChange({
+											valueKey     : itm?.allocated,
+											currentData  : current_data,
+											previousData : previous_data,
+										})}
+									/>
+
+									<AccountTypeWise
+										segregated
+										decimalNotRequired
+										label="Not-allocated"
+										dataValue={current_data?.[itm?.non_allocated]}
+										change={calcChange({
+											valueKey     : itm?.non_allocated,
+											currentData  : current_data,
+											previousData : previous_data,
+										})}
+									/>
+								</div>
+							</div>
+						),
 					)}
 			</div>
 		</div>

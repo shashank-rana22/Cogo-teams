@@ -65,7 +65,7 @@ function UserData({ widgetBlocks = null, filterParams = {} }) {
 				<div className={styles.total_accounts}>
 					Total Un-verified Users -
 					<span>
-						{getFormattedAmount({ number: accountsData?.total_unverified })}
+						{getFormattedAmount({ number: accountsData?.total_unverified || 0 })}
 					</span>
 				</div>
 

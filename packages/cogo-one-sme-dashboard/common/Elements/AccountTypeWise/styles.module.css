@@ -23,6 +23,7 @@
 
 	:global {
 		.ui_percentage_view {
+			height: 25px;
 			padding-left: unset;
 		}
 	}
@@ -41,6 +42,7 @@
 
 	:global {
 		.ui_percentage_view {
+			height: 16px;
 			font-size: 11px;
 		}
 	}
