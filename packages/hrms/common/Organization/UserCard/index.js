@@ -69,11 +69,11 @@ function UserCard({
 				<div
 					className={cl`${styles.container} ${styles[type]}`}
 				>
-					{user_data.image ? (
+					{user_data.passport_size_photo_url ? (
 						<div className={styles.profile_image_container}>
 							<img
 								className={styles.profile_image}
-								src={user_data.image}
+								src={user_data.passport_size_photo_url}
 								alt={getInitials(user_data?.name)}
 							/>
 						</div>

@@ -21,6 +21,8 @@ function YourBoard({ data, loading }) {
 
 	const { params, setParams, data : hierarchy, loading : hierarchyLoading } = useGetHierarchyDetails();
 
+	console.log('data?.absentee_list', data?.absentee_list, data);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -31,7 +33,7 @@ function YourBoard({ data, loading }) {
 			</div>
 			<OrgData manager_detail={manager_detail} hrbp_detail={hrbp_detail} loading={loading} />
 			<TimeSummary />
-			<NotInOffice data={data} loading={loading} />
+			{!isEmpty(data?.absentee_list) && <NotInOffice data={data} loading={loading} />}
 			{user_role !== 'employee' && !isEmpty(hierarchy)
 			&& <YourTeam data={hierarchy} params={params} setParams={setParams} loading={hierarchyLoading} />}
 			<LeaveBalance />
