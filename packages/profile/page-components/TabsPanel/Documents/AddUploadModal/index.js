@@ -41,14 +41,12 @@ function AddUploadModal({
 		setFlagUpload(false);
 	}
 	const onSubmit = (values) => {
-		console.log('values-added', values);
 		setShowAddUploadModal(false);
 		const valObj = {
 			...values,
 			document_url: values.document_url.finalUrl || values.document_url,
 		};
 		const documents = [valObj];
-		console.log(documents, 'documet');
 		createEmployeeDoc({ documents });
 	};
 

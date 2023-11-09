@@ -2,7 +2,6 @@ import { Toast } from '@cogoport/components';
 import { useHarbourRequest } from '@cogoport/request';
 
 const useCreateEmployeeDoc = ({ getEmployeeDetails, employee_detail_id, reset = () => {} }) => {
-	console.log(employee_detail_id, 'empl_id_create');
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/create_employee_document',

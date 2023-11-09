@@ -2,18 +2,10 @@ import { Button, Modal } from '@cogoport/components';
 import { InputController, SelectController, DatepickerController } from '@cogoport/forms';
 import React from 'react';
 
+import { gender_options, marry_options } from '../../../../utils/constants';
+
 import styles from './styles.module.css';
 
-const options = [
-	{ label: 'Male', value: 'male' },
-	{ label: 'Female', value: 'female' },
-	{ label: 'Others', value: 'others' },
-];
-
-const marry_options = [
-	{ label: 'Married', value: 'married' },
-	{ label: 'Single', value: 'single' },
-];
 function PersonalDetailModal({ control = () => {}, show = false, handleModal = () => {} }) {
 	return (
 		<div>
@@ -81,7 +73,7 @@ function PersonalDetailModal({ control = () => {}, show = false, handleModal = (
 							<SelectController
 								control={control}
 								name="gender"
-								options={options}
+								options={gender_options}
 							/>
 						</div>
 						<div className={styles.form_data}>
@@ -89,7 +81,6 @@ function PersonalDetailModal({ control = () => {}, show = false, handleModal = (
 							<DatepickerController
 								control={control}
 								name="date_of_birth"
-								options={options}
 							/>
 						</div>
 						<div className={styles.form_data}>

@@ -6,15 +6,9 @@ import useUpdateEmployee from '../../../../hooks/useUpdateEmployee';
 
 import styles from './styles.module.css';
 
-// const GETMAP = {
-// 	'Aadhaar Card' : 'aadhar_card',
-// 	'Pan Card'     : 'pan_card',
-// };
-
 function UploadModal({ show = false, handleModal = () => {}, docno, documentUrl, name, getEmployeeDetails }) {
 	const { control, setValue, handleSubmit, reset } = useForm();
 	const { updateEmployeeDetails } = useUpdateEmployee({ handleModal, getEmployeeDetails });
-	console.log(name, 'show-check');
 
 	const onSubmit = (values) => {
 		let PERSONAL_DETAILS = {};
@@ -55,7 +49,6 @@ function UploadModal({ show = false, handleModal = () => {}, docno, documentUrl,
 			};
 		}
 		const personal_details = { personal_documents: PERSONAL_DETAILS };
-		console.log(personal_details, 'personal-details');
 		updateEmployeeDetails(personal_details);
 		reset();
 	};

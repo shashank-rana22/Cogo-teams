@@ -6,15 +6,13 @@ import useUpdateBankDetails from '../../../../hooks/useUpdateBankAccountDetails'
 
 import styles from './styles.module.css';
 
-function GetController(item, control) {
-	console.log('whatshappening');
+function GetController({ item, control }) {
 	if (item?.type === 'input') {
 		return (
 			<InputController
 				control={control}
 				name={item?.value}
 				placeholder="Enter"
-				// defaultValue={modalUpdateData[item?.value]}
 			/>
 		);
 	}
@@ -24,7 +22,6 @@ function GetController(item, control) {
 			name={item?.value}
 			placeholder="Enter"
 			options={item?.options}
-			// defaultValue={modalUpdateData?.[item?.value]}
 		/>
 	);
 }
@@ -63,7 +60,7 @@ function EditModal({ show, handleModal, modalData, modalUpdateData, getEmployeeP
 						modalData?.map((item) => (
 							<div className={styles.form_data} key={item.label}>
 								<div className={styles.modal_heading}>{item.label}</div>
-								{GetController(item, control, modalUpdateData)}
+								<GetController item={item} control={control} modalUpdateData />
 							</div>
 						))
 					}

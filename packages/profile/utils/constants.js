@@ -94,3 +94,14 @@ export const STEPPER_ITEMS = [
 	{ title: 'Exit Interview', key: 'exit_interview' },
 	{ title: 'Exit Completed', key: 'exit_completed' },
 ];
+
+export const gender_options = [
+	{ label: 'Male', value: 'male' },
+	{ label: 'Female', value: 'female' },
+	{ label: 'Others', value: 'others' },
+];
+
+export const marry_options = [
+	{ label: 'Married', value: 'married' },
+	{ label: 'Single', value: 'single' },
+];

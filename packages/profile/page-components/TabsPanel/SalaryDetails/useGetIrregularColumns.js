@@ -3,7 +3,7 @@ import { IcCGreenCircle, IcCRedCircle } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function GetStatus(total_emi, emi_paid) {
+function GetStatus({ total_emi, emi_paid }) {
 	if (total_emi === emi_paid) {
 		return (
 			<span className={cl`${styles.paid}${styles.btn}`}>
@@ -52,7 +52,7 @@ const useGetIrregularColumns = () => (
 			Header   : 'STATUS',
 			accessor : (item) => (
 				<div className={styles.table_item}>
-					{GetStatus(item?.total_emi, item?.emi_paid)}
+					<GetStatus item_emi={item?.total_emi} emi_paid={item?.emi_paid} />
 				</div>
 			),
 			id: 'action',

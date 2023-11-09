@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { Button } from '@cogoport/components';
 import { IcCFtick, IcMCrossInCircle, IcMEdit } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -8,7 +7,6 @@ import React, { useState } from 'react';
 
 import StyledTable from '../../../common/StyledTable';
 import useGetEmployeeDirectoryPaymentDetail from '../../../hooks/useGetEmployeeDirectoryPaymentDetails';
-// import { SalaryData } from '../../../utils/constants';
 import { bankInfo, pfInfo } from '../../../utils/info';
 import { otherSalaryInfo } from '../../../utils/otherInfo';
 
@@ -16,14 +14,12 @@ import EditModal from './EditModal';
 import RightGlancePayment from './RightGlance';
 import styles from './styles.module.css';
 import TaxStructure from './TaxStructure';
-// import useGetSalaryStructure from './TaxStructure/useGetSalaryStructure';
 import useGetColumns from './useGetColumns';
 import useGetIrregularColumns from './useGetIrregularColumns';
 
 function SalaryDetails() {
 	const router = useRouter();
 	const { push } = router;
-	console.log('🚀 ~ file: index.js:25 ~ SalaryDetails ~ router:', router);
 	const [taxShow, setTaxShow] = useState(false);
 	const columns = useGetColumns(setTaxShow);
 	const columnsIrregular = useGetIrregularColumns();
@@ -48,7 +44,6 @@ function SalaryDetails() {
 	};
 	const user_id = employee_id || user.id;
 	const { data, loading, getEmployeePaymentDetails } = useGetEmployeeDirectoryPaymentDetail(user_id);
-	// console.log(data);
 	const salary_data = [{
 		ctc_effective    : '23/12/2000',
 		ctc_effective_to : '-',
@@ -56,7 +51,6 @@ function SalaryDetails() {
 		monthly_ctc      : data?.monthly_ctc,
 	},
 	];
-	// const data = SalaryData;
 	const otherInfo = otherSalaryInfo;
 
 	return (
@@ -92,7 +86,11 @@ function SalaryDetails() {
 								<div className={styles.info_container}>
 									<div className={styles.heading_one}>
 										<div className={styles.head_text}>Payment Information</div>
-										<Button size="md" themeType="secondary" onClick={() => handleOpenModal(bankInfo, data?.employee_bank_details)}>
+										<Button
+											size="md"
+											themeType="secondary"
+											onClick={() => handleOpenModal(bankInfo, data?.employee_bank_details)}
+										>
 											{' '}
 											<IcMEdit />
 											{' '}
@@ -132,7 +130,8 @@ function SalaryDetails() {
 													=== 'active'
 														? <IcCFtick /> : <IcMCrossInCircle />
 }
-													{startCase(data?.employee_salary_details?.statutory_details?.[item.value])}
+													{startCase(data?.employee_salary_details?.statutory_details
+														?.[item.value])}
 												</span>
 											</div>
 										))
@@ -144,7 +143,13 @@ function SalaryDetails() {
 				}
 				{
 	loading ? null
-		:	<TaxStructure taxShow={taxShow} setTaxShow={setTaxShow} employee_id={data?.employee_salary_details?.employee_id} />
+		:	(
+			<TaxStructure
+				taxShow={taxShow}
+				setTaxShow={setTaxShow}
+				employee_id={data?.employee_salary_details?.employee_id}
+			/>
+		)
 }
 				<EditModal
 					getEmployeePaymentDetails={getEmployeePaymentDetails}
