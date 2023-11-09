@@ -18,7 +18,7 @@ function OrganicCustomer({ item = {}, setScheduleDemo = () => {}, handlePlaceCal
 		id: pocId = '',
 	} = customer || {};
 	const {
-		account_type = '', tags = [], city = {}, id: preferred_languages = [], business_name = '',
+		account_type = '', tags = [], city = {}, preferred_languages = [], business_name = '',
 		demo_requested = false,
 	} = organization || {};
 	const { display_name = '' } = city || {};
