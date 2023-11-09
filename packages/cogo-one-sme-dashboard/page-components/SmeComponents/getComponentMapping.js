@@ -24,6 +24,14 @@ const CampaignPieChart = dynamic(
 	},
 );
 
+const DemoPieChart = dynamic(
+	() => import('./CampaignsData/DemoPieChart'),
+	{
+		ssr     : false,
+		loading : () => <DynamicLoader />,
+	},
+);
+
 const ChannelStats = dynamic(
 	() => import('./ChannelStats'),
 	{
@@ -169,12 +177,17 @@ function getComponentMapping({ filterParams = {} }) {
 			initialLoad: false,
 		},
 		{
-			key  : 'campaign_structure',
+			key  : 'campaign_demo_charts',
 			Comp : () => (
-				<CampaignPieChart
-					widgetBlocks={['get_total_campaigns_data']}
-					filterParams={filterParams}
-				/>
+				<>
+					<CampaignPieChart
+						widgetBlocks={['get_total_campaigns_data']}
+						filterParams={filterParams}
+					/>
+					<DemoPieChart
+						filterParams={filterParams}
+					/>
+				</>
 			),
 			initialLoad: false,
 		},

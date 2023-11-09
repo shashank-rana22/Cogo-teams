@@ -1,27 +1,16 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import React from 'react';
 
-import { LoadingState } from '../../../../common/Elements';
-import { campaignChartConstants } from '../../../../constants/campaignConstants';
-import useSmeDashboardStats from '../../../../hooks/useSmeDashboardStats';
+import { DemoConstants } from '../../../../constants/DemoConstants';
 
+import DUMMY_DATA from './dummyData';
 import styles from './styles.module.css';
 
-function CampaignPieChart({
-	widgetBlocks = null,
-	filterParams = {},
-}) {
-	const {
-		dashboardData = {},
-		dashboardLoading = false,
-	} = useSmeDashboardStats({ widgetBlocks, filterParams });
-
-	const { total_campaigns_data = {} } = dashboardData || {};
-
-	const campaignsData = campaignChartConstants.map(
+function DemoPieChart() {
+	const demoData = DemoConstants.map(
 		(itm) => ({
 			...itm,
-			value: total_campaigns_data?.[itm?.id] || 0,
+			value: DUMMY_DATA?.[itm?.id] || 0,
 		}),
 	);
 
@@ -34,22 +23,9 @@ function CampaignPieChart({
 				dominantBaseline="central"
 				className={styles.style_component_text}
 			>
-				{campaignsData.reduce((acc, itm) => acc + (itm?.value || 0), 0)}
+				{demoData.reduce((acc, itm) => acc + (itm?.value || 0), 0)}
 			</text>
 
-		);
-	}
-
-	if (dashboardLoading) {
-		return (
-			<div className={styles.container}>
-				<div className={styles.header}>
-					Total Campaigns
-				</div>
-				<div className={styles.loading_container}>
-					<LoadingState loaderCount={10} />
-				</div>
-			</div>
 		);
 	}
 
@@ -62,7 +38,7 @@ function CampaignPieChart({
 			<div className={styles.pie_chart_container}>
 				<div className={styles.pie_chart_body}>
 					<ResponsivePie
-						data={campaignsData}
+						data={demoData}
 						margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
 						innerRadius={0.55}
 						activeOuterRadiusOffset={8}
@@ -76,12 +52,12 @@ function CampaignPieChart({
 						transitionMode="startAngle"
 						legends={[]}
 						layers={['arcs', 'arcLabels', 'arcLinkLabels', 'legends', CenteredMetric]}
-						colors={campaignsData.map((itm) => itm?.color)}
+						colors={demoData.map((itm) => itm?.color)}
 					/>
 				</div>
 
 				<div className={styles.legends_container}>
-					{campaignsData.map(
+					{demoData.map(
 						(itm) => (
 							<div
 								key={itm?.id}
@@ -100,8 +76,12 @@ function CampaignPieChart({
 					)}
 				</div>
 			</div>
+
+			<div className={styles.coming_soon}>
+				Coming Soon...
+			</div>
 		</div>
 	);
 }
 
-export default CampaignPieChart;
+export default DemoPieChart;
