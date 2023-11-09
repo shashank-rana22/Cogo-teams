@@ -52,30 +52,34 @@ function ScrollAnnouncement({ style = {}, loading = false, list = [] }) {
 				role="presentation"
 			>
 
-				{[...Array(LOOP_SIZE).keys()].map((loop_item, index) => (
-					<span
-						key={loop_item}
-						ref={index === 0 ? ref : null}
-						style={{
-							animationDuration:
+				{[...Array(LOOP_SIZE).keys()].map((loop_item, index) => {
+					let ind = 0;
+					return (
+						<span
+							key={loop_item}
+							ref={index === 0 ? ref : null}
+							style={{
+								animationDuration:
 							`${divWidth / 80}s`,
-						}}
-						className={cl`${styles.bar_content} ${isScrolling && styles.bar_content_scrolling}`}
-					>
-						{(list || []).map((item, ind) => {
-							if (!ref?.current?.offsetWidth || isEmpty(item?.quest_string)) return null;
-							return (
-								<span key={item?.id} className={styles.quest_container}>
-									<span className={styles.quest_heading}>
-										{ind + 1}
-										{'. '}
+							}}
+							className={cl`${styles.bar_content} ${isScrolling && styles.bar_content_scrolling}`}
+						>
+							{(list || []).map((item) => {
+								if (!ref?.current?.offsetWidth || isEmpty(item?.quest_string)) return null;
+								ind += 1;
+								return (
+									<span key={item?.id} className={styles.quest_container}>
+										<span className={styles.quest_heading}>
+											{ind}
+											{'. '}
+										</span>
+										<div dangerouslySetInnerHTML={{ __html: item?.quest_string }} />
 									</span>
-									<div dangerouslySetInnerHTML={{ __html: item?.quest_string }} />
-								</span>
-							);
-						})}
-					</span>
-				))}
+								);
+							})}
+						</span>
+					);
+				})}
 			</div>
 		</div>
 	);
