@@ -58,7 +58,7 @@ const getColumns = ({ setItem = () => {}, setShow = () => {}, handleUpdate = () 
 					className={styles.data}
 				>
 					{
-								`${MONTHS[getMonth(new Date(item?.submitted_on))]}
+								`${MONTHS[getMonth(new Date(item?.submitted_on))].label}
 								${getDate(new Date(item?.submitted_on))}` || '-'
 }
 				</div>

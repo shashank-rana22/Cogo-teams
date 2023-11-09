@@ -34,7 +34,11 @@ function MyPayslips() {
 	const { loading, data: payslipData } = useGetListPayslip(parseInt(year, 10));
 
 	const rightForms = [
-		{ heading: 'Raise Dispute', subheading: 'Have issues with the salary credited?' },
+		{
+			heading    : 'Raise Dispute',
+			subheading : 'Have issues with the salary credited?',
+			redirect   : '/ticket-management/my-tickets',
+		},
 	];
 
 	return (
@@ -66,12 +70,12 @@ function MyPayslips() {
 				</div>
 				<div className={styles.white_container}>
 					{
-						rightForms.map(({ heading, subheading }) => (
+						rightForms.map(({ heading, subheading, redirect }) => (
 							<div
 								className={styles.white_subcontainer}
 								key={heading}
 								aria-hidden
-								onClick={() => router.push('/ticket-management/my-tickets')}
+								onClick={() => router.push(redirect)}
 							>
 								<div className={styles.right}>
 									<span className={styles.heading}>{heading}</span>

@@ -25,7 +25,7 @@ function ActivityModal({ item = {}, onClose = () => {}, show = false }) {
 							<span className={styles.column1}>Approved by L1 Date </span>
 							<span className={styles.column2}>
 								{item?.level1_approved_on
-									? `${MONTHS[getMonth(new Date(item?.level1_approved_on))]} 
+									? `${MONTHS[getMonth(new Date(item?.level1_approved_on))].label} 
 								${getDate(new Date(item?.level1_approved_on))}` : '-'}
 
 							</span>

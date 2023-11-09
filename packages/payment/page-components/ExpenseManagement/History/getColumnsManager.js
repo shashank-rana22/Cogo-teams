@@ -58,7 +58,7 @@ const getColumnsManager = ({ setItem = () => { }, setShow = () => {}, handleUpda
 					className={styles.data}
 				>
 					{
-								`${MONTHS[getMonth(new Date(item?.submitted_on))]}
+								`${MONTHS[getMonth(new Date(item?.submitted_on))].label}
 								${getDate(new Date(item?.submitted_on))}` || '-'
 }
 				</div>

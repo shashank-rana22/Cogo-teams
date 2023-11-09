@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../common/EmptyState';
+import { MONTHS } from '../../../Constants/contants';
 import useGetReimbursementStatus from '../../../hooks/useGetReimbursementStatus';
 import useListReimbursements from '../../../hooks/useListReimbursements';
 import useUpdateReimbursements from '../../../hooks/useUpdateReimbursements';
@@ -11,21 +12,6 @@ import ActivityModal from './ActivityModal';
 import getColumns from './getColumns';
 import getColumnsManager from './getColumnsManager';
 import styles from './styles.module.css';
-
-const MONTHS = [
-	{ label: 'January', value: 1 },
-	{ label: 'February', value: 2 },
-	{ label: 'March', value: 3 },
-	{ label: 'April', value: 4 },
-	{ label: 'May', value: 5 },
-	{ label: 'June', value: 6 },
-	{ label: 'July', value: 7 },
-	{ label: 'August', value: 8 },
-	{ label: 'September', value: 9 },
-	{ label: 'October', value: 10 },
-	{ label: 'November', value: 11 },
-	{ label: 'December', value: 12 },
-];
 
 function ExpenseHistory({ toggleValue = false, hr_view = '', value = '', search_query = '' }) {
 	const {

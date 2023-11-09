@@ -1,12 +1,10 @@
 import { ButtonIcon } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEyeopen, IcMDownload } from '@cogoport/icons-react';
+import { getMonth } from '@cogoport/utils';
+
+import { MONTHS } from '../../Constants/contants';
 
 import styles from './styles.module.css';
-
-const ZERO = GLOBAL_CONSTANTS.zeroth_index;
-const ONE = GLOBAL_CONSTANTS.one;
 
 const useGetColumns = (
 	setShowModal = () => {},
@@ -19,7 +17,6 @@ const useGetColumns = (
 	};
 
 	const handleShow = (url) => {
-		console.log(url);
 		setOpenUrl(url);
 		setModalUrl({});
 		setShowModal(true);
@@ -29,21 +26,13 @@ const useGetColumns = (
 		{
 			Header   : 'MONTH',
 			id       : 'month',
-			accessor : (item) => {
-				let date = formatDate({
-					date       : item?.payroll_date,
-					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-					formatType : 'date',
-				});
+			accessor : (item) => (
+				<div>
+					<span>{MONTHS[getMonth(new Date(item?.payroll_month))].label}</span>
+				</div>
+			)
 
-				const dates = date.split(' ');
-				dates.splice(ZERO, ONE);
-				date = dates.join(' ');
-
-				return (
-					<span>{date}</span>
-				);
-			},
+			,
 		},
 		{
 			Header   : 'PAY SLIP',
