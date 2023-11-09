@@ -112,10 +112,10 @@ function CurrentStatus(props) {
 					<div
 						role="presentation"
 						onClick={() => refetchCurrentStatus()}
-						style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+						className={styles.refresh_container}
 					>
+						Refresh
 						<IcMRefresh style={{ marginLeft: '4px' }} />
-
 					</div>
 				</div>
 			)}
@@ -126,7 +126,7 @@ function CurrentStatus(props) {
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button style={{ margin: '0 8px 0 0' }} themeType="secondary" onClick={onClose}>Close</Button>
+				<Button themeType="secondary" onClick={onClose}>Close</Button>
 			</Modal.Footer>
 		</Modal>
 	);

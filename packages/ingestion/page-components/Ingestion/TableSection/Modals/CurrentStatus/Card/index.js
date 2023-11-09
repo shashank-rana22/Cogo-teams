@@ -2,19 +2,14 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const colors = ['#FFFCE6', '#FDEBE9', '#FEF3E9', '#F9F9F9', '#F7FAEF', '#F3FAFA', '#FDFBF6', '#F2F3FA', '#FFD5CC'];
-
 function Card({ count = 0, valueProps = {}, type = '' }) {
-	const randomIndex = Math.floor(Math.random() * colors.length);
-	const randomColor = colors[randomIndex];
-
 	return (
 		<div className={styles.container}>
-			<h2>
+			<span style={{ fontWeight: 600, fontSize: '20px' }}>
 				Lead
 				{' '}
 				{startCase(type)}
-			</h2>
+			</span>
 
 			<div style={{ marginBottom: '10px' }}>
 				New records added :
@@ -31,13 +26,13 @@ function Card({ count = 0, valueProps = {}, type = '' }) {
 					{valueProps?.created_at
 						? (
 							<div className={styles.created_at_container}>
-								Created At :
+								<span style={{ color: '#828282' }}>	Created At :</span>
 								{' '}
 								{valueProps?.created_at}
 							</div>
 						) : null}
 
-					<div className={styles.card_container} style={{ background: randomColor }}>
+					<div className={styles.card_container}>
 						{Object.entries(valueProps || {}).map(([key, val]) => {
 							if (key === 'created_at') { return null; }
 							return (
@@ -45,7 +40,7 @@ function Card({ count = 0, valueProps = {}, type = '' }) {
 									className={styles.loop_container}
 									key={val}
 								>
-									<div style={{ color: '#222222' }}>
+									<div style={{ color: '#828282' }}>
 										{startCase(key)}
 										{' '}
 										:
