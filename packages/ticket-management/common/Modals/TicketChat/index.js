@@ -2,6 +2,7 @@ import { Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
 
+import { FETCH_API_FOR_REQUEST } from '../../../constants';
 import useCreateTicketActivity from '../../../hooks/useCreateTicketActivity';
 import useListShipments from '../../../hooks/useGetListShipment';
 import useGetTicketActivity from '../../../hooks/useGetTicketActivity';
@@ -72,7 +73,10 @@ function TicketChat({
 	});
 
 	const { Ticket: ticket = {}, IsCurrentReviewer: isCurrentReviewer = false } = ticketData || {};
-	const { Status: status = '', NotifyCustomer: notifyCustomer = false, Data: data = {} } = ticket || {};
+	const {
+		Status: status = '', NotifyCustomer: notifyCustomer = false, Data: data = {},
+		Category: category = '',
+	} = ticket || {};
 	const {
 		SerialID: serialId, Service: service, IDType: idType,
 		RequestType: requestType = '',
@@ -112,7 +116,13 @@ function TicketChat({
 		refreshTickets,
 	});
 
-	const { shipmentsData = {}, listLoading = false } = useListShipments({ idType, serialId, ticketId, requestType });
+	const { shipmentsData = {}, listLoading = false } = useListShipments({
+		idType,
+		serialId,
+		ticketId,
+		requestType,
+		category,
+	});
 	const { serviceLoading = false, serviceData = {} } = useListServiceTypeShipment({
 		idType,
 		serialId,
@@ -124,8 +134,10 @@ function TicketChat({
 	const doesTicketsExists = !isEmpty(ticketData);
 
 	const loading = chatLoading || createLoading;
-	const formatShipmentData = idType !== 'sid' && requestType !== 'shipment' ? serviceData : shipmentsData;
-	const formatShipmentloading = idType !== 'sid' && requestType !== 'shipment' ? serviceLoading : listLoading;
+	const formatShipmentData = idType !== 'sid' && !FETCH_API_FOR_REQUEST.includes(requestType)
+		&& category?.toLowerCase() !== 'shipment' ? serviceData : shipmentsData;
+	const formatShipmentloading = idType !== 'sid' && !FETCH_API_FOR_REQUEST.includes(requestType)
+		&& category?.toLowerCase() !== 'shipment' ? serviceLoading : listLoading;
 
 	const handleSendComment = async () => {
 		if ((message || !isEmpty(file)) && !createLoading) {

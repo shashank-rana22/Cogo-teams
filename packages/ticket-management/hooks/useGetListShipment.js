@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const FETCH_API_FOR_REQUEST = ['shipment', 'feedback'];
+import { FETCH_API_FOR_REQUEST } from '../constants';
 
 const getParams = ({ serialId }) => ({
 	filters: {
@@ -10,7 +10,7 @@ const getParams = ({ serialId }) => ({
 	},
 });
 
-function useListShipments({ serialId = 0, ticketId = 0, idType = '', requestType = '' }) {
+function useListShipments({ serialId = 0, ticketId = 0, idType = '', requestType = '', category = '' }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_shipments',
 		method : 'get',
@@ -22,6 +22,10 @@ function useListShipments({ serialId = 0, ticketId = 0, idType = '', requestType
 				return;
 			}
 
+			if (requestType === 'feedback' && category?.toLowerCase() !== 'shipment') {
+				return;
+			}
+
 			try {
 				trigger({
 					params: getParams({ serialId }),
@@ -30,7 +34,7 @@ function useListShipments({ serialId = 0, ticketId = 0, idType = '', requestType
 				console.error('e:', e);
 			}
 		},
-		[serialId, trigger, idType, requestType],
+		[serialId, trigger, idType, requestType, category],
 	);
 
 	useEffect(() => {
