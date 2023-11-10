@@ -1,0 +1,5 @@
+.container {
+	&:last-child {
+		border-bottom: none;
+	}
+}
