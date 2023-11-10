@@ -12,7 +12,7 @@ export const CALL_STATUS_MAPPING = {
 			alt="answered"
 		/>,
 		non_allocated : 'unallocated_answered_calls',
-		allocated     : 'allocated_missed_calls',
+		allocated     : 'allocated_answered_calls',
 	},
 	missed: {
 		label : 'Call Missed',

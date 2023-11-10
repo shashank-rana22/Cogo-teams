@@ -8,12 +8,12 @@ const getParams = ({ hierarchyData, dateRange }) => {
 	const { hierarchyDataType = '', id = '' } = lastElement || {};
 
 	const endDate = (addDays(dateRange?.endDate, 1) > new Date())
-		? new Date() : addDays(dateRange?.endDate, 1);
+		? new Date((new Date()).setHours(23, 59, 59, 999)) : addDays(dateRange?.endDate, 1);
 
 	return 	{
 		blocks     : ['get_performance_data'],
 		start_date : startOfDay(dateRange?.startDate || new Date()),
-		end_date   : endDate || new Date(),
+		end_date   : endDate || new Date((new Date()).setHours(23, 59, 59, 999)),
 		filters    : {
 			partner_id           : (hierarchyDataType === 'partners' ? id : undefined) || undefined,
 			office_location_id   : (hierarchyDataType === 'branches' ? id : undefined) || undefined,

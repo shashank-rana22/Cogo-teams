@@ -1,4 +1,5 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -63,6 +64,7 @@ function ServicesWiseBifurcation({
 						colors={updatedData.map((itm) => itm?.color)}
 					/>
 				</div>
+
 				<div className={styles.legends_container}>
 					{updatedData.map(
 						(itm) => (
@@ -78,6 +80,30 @@ function ServicesWiseBifurcation({
 							</div>
 						),
 					)}
+				</div>
+			</div>
+
+			<div className={styles.footer}>
+				<div className={styles.footer_item}>
+					<div className={styles.footer_item_label}>
+						Only Primary Service Sold
+					</div>
+
+					<div className={styles.footer_item_value}>
+						{service_wise_bifurcation_data?.[GLOBAL_CONSTANTS?.zeroth_index]?.primary_service_count
+						|| 0}
+					</div>
+				</div>
+
+				<div className={styles.footer_item}>
+					<div className={styles.footer_item_label}>
+						Primary + AddOn Service Sold
+					</div>
+
+					<div className={styles.footer_item_value}>
+						{service_wise_bifurcation_data?.[GLOBAL_CONSTANTS?.zeroth_index]?.primary_plus_add_on_count
+						|| 0}
+					</div>
 				</div>
 			</div>
 		</div>

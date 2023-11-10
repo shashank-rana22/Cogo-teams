@@ -13,7 +13,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 292px;
+	height: 220px;
 }
 
 .header {
@@ -41,27 +41,27 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	width: 100%;
+	width: calc(100% - 220px);
 }
 
 .legend_item {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 	width: 50%;
-	padding: 0 20px;
+	padding-right: 10px;
 }
 
 .legend_item_name {
 	display: flex;
-	align-items: center;
-	font-size: 14px;
+	flex-direction: column;
+	align-items: flex-start;
+	padding-left: 10px;
+	font-size: 12px;
 }
 
 .legends_circle {
 	width: 10px;
 	height: 10px;
-	margin-right: 10px;
 	border-radius: 100%;
 }
 
