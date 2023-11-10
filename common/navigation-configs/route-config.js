@@ -38,6 +38,7 @@ import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
 import governanceManager from './config/governance-manager';
 import groundOps from './config/ground-ops';
 import handlingFees from './config/handling-fees';
+import hrmsDashboard from './config/hrms-dashboard';
 import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
 import ingestion from './config/ingestion';
@@ -195,6 +196,7 @@ const routeConfig = {
 	...cargoInsurance,
 	...cogoStore,
 	...handlingFees,
+	...hrmsDashboard,
 };
 
 export default routeConfig;

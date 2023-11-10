@@ -545,6 +545,8 @@ const GLOBAL_CONSTANTS = {
 		tracking_loader         : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/cogo-animation.gif',
 		origin_map_pointer      : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/map_origin.svg',
 		destination_map_pointer : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/map_destination.svg',
+		rectangle               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rectangle.png',
+		cake                    : 'https://cdn.cogoport.io/cms-prod/cogo_analytics/vault/original/birthday-cake1.png',
 		performance_leaderboard_confetti:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/confetti_svg.svg',
 		performance_leaderboard_ranking_badge: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/badge.svg',
@@ -555,6 +557,8 @@ const GLOBAL_CONSTANTS = {
 		wider_arrow                     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/wide-arrow',
 		public_leaderboard_winner_icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/winner_icon.svg',
 		public_leaderboard_announcement : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/announcement.svg',
+		kpi:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rectangle_126.svg',
 	},
 
 	video_call_ring_tone_url:
