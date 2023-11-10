@@ -3,7 +3,6 @@ import FunnelGraph from 'funnel-graph-js';
 import React, { useRef, useEffect, useMemo } from 'react';
 
 import { LoadingState } from '../../../common/Elements';
-import { Growth } from '../../../common/Elements/PercentageChange';
 import useSmeDashboardStats from '../../../hooks/useSmeDashboardStats';
 import getFormattedAmount from '../../../utils/getFormattedAmount';
 
@@ -37,19 +36,13 @@ function CustomerFunnel({
 	} = useSmeDashboardStats({
 		widgetBlocks,
 		filterParams,
-		trendRequired: true,
+		trendRequired: false,
 	});
 
 	const { customer_funnel_data = {} } = dashboardData || {};
 
-	const {
-		current_data = null,
-		previous_data = null,
-	} = customer_funnel_data || {};
-
 	const dataFormat = dataFormatter({
-		currentData  : current_data,
-		previousData : previous_data,
+		currentData: customer_funnel_data,
 	});
 
 	const maximumValue = Math.max(...(dataFormat?.map((itm) => itm?.value || 0) || []));
@@ -139,9 +132,6 @@ function CustomerFunnel({
 								{getFormattedAmount({
 									number: itm?.value,
 								})}
-								<Growth
-									showGrowth={itm?.change > 0}
-								/>
 							</div>
 						</div>
 					),

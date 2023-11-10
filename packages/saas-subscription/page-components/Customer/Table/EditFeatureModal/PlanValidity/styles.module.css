@@ -1,0 +1,47 @@
+.container {
+	padding: 20px 26px;
+}
+
+.flex_box {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-around;
+	width: 70%;
+	margin-bottom: 16px;
+}
+
+.label {
+	margin: 0;
+	font-weight: 600;
+}
+
+.footer_text {
+	margin: 10px 0;
+	font-size: 12px;
+	font-style: italic;
+}
+
+.col {
+	margin: 0 10px;
+}
+
+.start_date {
+	height: 27px;
+	margin-top: 8px;
+}
+
+.seperator {
+	margin-bottom: 10px;
+}
+
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 12px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.confirm_btn {
+	margin-left: 10px;
+}

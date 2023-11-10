@@ -79,6 +79,7 @@ function RevenueContainer({
 								amount   : Number(current_data?.total_revenue || 0),
 								currency : DEFAULT_ITEMS?.currency || geo.country.currency.code,
 								options  : {
+									currencyWise          : true,
 									style                 : 'currency',
 									currencyDisplay       : 'symbol',
 									notation              : 'compact',

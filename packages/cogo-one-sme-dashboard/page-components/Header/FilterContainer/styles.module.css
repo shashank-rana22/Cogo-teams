@@ -18,5 +18,13 @@
 		.office_location {
 			width: 150px !important;
 		}
+
+		.react-datepicker-wrapper {
+			width: 180px;
+
+			input {
+				height: 34px;
+			}
+		}
 	}
 }

@@ -63,6 +63,7 @@ function CustomerBased({ widgetBlocks = null, filterParams = {} }) {
 						data={data}
 						subLabels={['allocated', 'unallocated']}
 						type="customer"
+						showCurrency
 					/>
 				)}
 		</div>
