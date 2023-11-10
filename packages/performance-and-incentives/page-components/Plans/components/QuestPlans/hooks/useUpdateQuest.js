@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
-const useDeactivateQuest = ({ afterDeactivate = () => {} }) => {
+const useUpdateQuest = ({ afterUpdate = () => {} }) => {
 	const [{ loading }, trigger] = useAllocationRequest(
 		{
 			url     : '/quest_attributes',
@@ -12,17 +12,17 @@ const useDeactivateQuest = ({ afterDeactivate = () => {} }) => {
 		{ manual: true },
 	);
 
-	const handleClick = async ({ id }) => {
+	const handleClick = async ({ id, status }) => {
 		try {
 			await trigger({
 				data: {
-					agent_scoring_quest_id : id,
-					status                 : 'inactive',
+					agent_scoring_quest_id: id,
+					status,
 				},
 			});
 
 			Toast.success('Saved successfully!');
-			afterDeactivate();
+			afterUpdate();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
@@ -34,4 +34,4 @@ const useDeactivateQuest = ({ afterDeactivate = () => {} }) => {
 	};
 };
 
-export default useDeactivateQuest;
+export default useUpdateQuest;

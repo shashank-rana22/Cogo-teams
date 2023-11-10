@@ -6,6 +6,7 @@ import Body from './components/Body';
 import Header from './components/Header';
 import useGetUserProgress from './hooks/useGetUserProgress';
 import useGetLeaderboardView from './useGetLeaderboardView';
+import useGetQuests from './useGetQuests';
 
 function Leaderboard() {
 	const {
@@ -16,6 +17,8 @@ function Leaderboard() {
 		dateRange,
 		setDateRange,
 	} = useGetLeaderboardView();
+
+	const { list, loading: questLoading } = useGetQuests();
 
 	const { kam_progress, manager_progress, getUserProgress } = useGetUserProgress();
 
@@ -46,7 +49,7 @@ function Leaderboard() {
 				manager_progress={manager_progress}
 			/>
 
-			<ScrollAnnouncement />
+			<ScrollAnnouncement loading={questLoading} list={list} />
 
 			<Body dateRange={dateRange} entity={entity} getUserProgress={getUserProgress} />
 		</>
