@@ -4,7 +4,7 @@ import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { useState } from 'react';
 
 import { serviceMappings } from '../../../../configs/AdditionalServicesConfig';
-import getTradeTypeWiseIncoTerms from '../../../../configs/getTradeTypeWiseIncoTerms';
+import incoterms from '../../../../configs/incoterms.json';
 import getAddedServices from '../getAddedServices';
 import getCombinedServiceDetails from '../utils/getCombinedServiceDetails';
 import getNonRemoveableServices from '../utils/getNonRemoveableServices';
@@ -31,22 +31,15 @@ const useAdditionalServices = ({ rateCardData = {}, detail = {}, source = '' }) 
 		service_type:primaryService = '',
 		trade_type = '',
 		inco_term = '',
-		importer_exporter = {},
 		destination_country_id = '',
 		origin_country_id = '',
 	} = detail;
-
-	const { partner = {}	} = importer_exporter;
-
-	const { country_id = ''	} = partner;
 
 	const finalServiceDetails = getCombinedServiceDetails(service_details, service_rates);
 
 	const [incoTermModalData, setIncoTermModalData] = useState({});
 
 	const isSingleLocationService = singleLocationServices.includes(primaryService);
-
-	const isCrossLocationSearch = ![destination_country_id, origin_country_id].includes(country_id);
 
 	const servicesArray = serviceMappings({
 		service    : primaryService,
@@ -184,8 +177,6 @@ const useAdditionalServices = ({ rateCardData = {}, detail = {}, source = '' }) 
 		} else MAIN_SERVICES.push(item);
 	});
 
-	const incoTermOptions = getTradeTypeWiseIncoTerms({ trade_type, isCrossLocationSearch });
-
 	const SERVICES_CANNOT_BE_REMOVED = getNonRemoveableServices({ trade_type, source, main_service: primaryService });
 
 	const SERVICES_LIST_MAPPING = {
@@ -217,7 +208,7 @@ const useAdditionalServices = ({ rateCardData = {}, detail = {}, source = '' }) 
 	};
 
 	return {
-		incoTermOptions,
+		incoTermOptions: incoterms,
 		incoTermModalData,
 		setIncoTermModalData,
 		SERVICES_LIST_MAPPING,
