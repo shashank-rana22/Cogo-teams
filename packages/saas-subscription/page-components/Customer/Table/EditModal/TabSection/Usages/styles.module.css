@@ -1,4 +1,5 @@
-.container {
+.table_container {
+	font-size: 12px;
 	border: 1px solid #fbd1a6;
 	border-radius: 4px;
 
@@ -26,31 +27,30 @@
 	font-weight: 600;
 }
 
-.col {
-	width: 25%;
-	padding: 0 8px;
-
-	>div {
-		margin-right: 0 !important;
-	}
-}
-
-.service_name {
-	width: 30%;
-}
-
-.value,
-.usages_left {
-	width: 23%;
-	text-align: center;
-}
-
-.is_active {
-	width: 24%;
-	text-align: right;
-}
-
 .scroll_container {
 	max-height: 300px;
 	overflow-y: scroll;
+}
+
+.col {
+	width: 25%;
+	padding: 0 8px;
+}
+
+.product_name {
+	width: 30%;
+}
+
+.event_name {
+	width: 30%;
+	text-align: center;
+}
+
+.quantity {
+	width: 15%;
+	text-align: center;
+}
+
+.created_at {
+	text-align: right;
 }

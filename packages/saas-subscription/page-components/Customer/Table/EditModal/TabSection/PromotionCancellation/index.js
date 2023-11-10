@@ -36,15 +36,28 @@ function PromotionCancellation({ currentTab, promotion_discount = [], cancellati
 				))}
 			</div>
 
-			{(data || []).map((discount) => (
-				<div key={discount?.id} className={styles.flex_box}>
-					{promotionCancellationConfig.map((config) => (
-						<div key={config.key} className={cl`${styles.col} ${styles[config?.key]}`}>
-							{getValues({ itemData: discount, config, itemFunction })}
-						</div>
-					))}
-				</div>
-			))}
+			<div className={styles.scroll_container}>
+
+				{(data || []).map((discount) => (
+					<div key={discount?.id} className={styles.flex_box}>
+
+						{promotionCancellationConfig.map((config) => (
+
+							<div
+								key={config.key}
+								className={cl`${styles.col} ${styles[config?.key]}`}
+							>
+								{getValues({
+									itemData: discount,
+									config,
+									itemFunction,
+								})}
+							</div>
+						))}
+					</div>
+				))}
+			</div>
+
 		</div>
 	);
 }
