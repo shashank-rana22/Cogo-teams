@@ -144,5 +144,6 @@ const itemFunction = ({ setEditModal = () => {}, t = () => {} }) => ({
 			</span>
 		);
 	},
+
 });
 export default itemFunction;

@@ -7,7 +7,7 @@ const useGetUsages = ({ info = {}, currentTab = '' }) => {
 	const { organization = {} } = info || {};
 	const { id: orgId } = organization;
 
-	const [page, setPage] = useState('');
+	const [page, setPage] = useState(1);
 
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
@@ -29,17 +29,11 @@ const useGetUsages = ({ info = {}, currentTab = '' }) => {
 	};
 
 	useEffect(() => {
-		if (currentTab === 'usages' && orgId && page) {
+		if (orgId) {
 			getUsages();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [page, currentTab, orgId]);
-
-	useEffect(() => {
-		if (orgId) {
-			setPage(1);
-		}
-	}, [orgId]);
 
 	return {
 		loading, getUsages, setPage, data,

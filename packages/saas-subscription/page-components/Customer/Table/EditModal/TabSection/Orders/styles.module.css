@@ -1,3 +1,58 @@
-.container {
-	display: block;
+.table_container {
+	font-size: 12px;
+	border: 1px solid #fbd1a6;
+	border-radius: 4px;
+}
+
+.flex_box {
+	display: flex;
+	align-items: center;
+	padding: 12px;
+	border-bottom: 1px solid #fbd1a6;
+}
+
+.header {
+	font-weight: 600;
+}
+
+.scroll_container {
+	max-height: 300px;
+	overflow-y: scroll;
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.col {
+	width: 25%;
+
+	:global {
+		.total_amt {
+			display: flex;
+		}
+
+		.info_icon {
+			margin-left: 4px;
+
+			>svg {
+				vertical-align: middle;
+			}
+		}
+	}
+}
+
+.serial_id,
+.created_at {
+	width: 15%;
+}
+
+.performed_by {
+	width: 35%;
+}
+
+.tooltip_content {
+	font-size: 12px;
 }

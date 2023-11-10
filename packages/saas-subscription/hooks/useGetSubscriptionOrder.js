@@ -12,13 +12,13 @@ const useGetSubscriptionOrder = ({ info = {} }) => {
 		url    : 'list_saas_checkouts',
 	}, { manual: true });
 
-	const getOrder = () => {
+	const getOrder = async () => {
 		try {
-			trigger({
+			await trigger({
 				params: {
 					filters: {
-						customer_id  : id,
-						order_placed : true,
+						order_placed                  : true,
+						saas_subscription_customer_id : id,
 					},
 					page,
 					page_limit              : 10,
@@ -31,7 +31,9 @@ const useGetSubscriptionOrder = ({ info = {} }) => {
 	};
 
 	useEffect(() => {
-		getOrder();
+		if (id) {
+			getOrder();
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [page]);
 
