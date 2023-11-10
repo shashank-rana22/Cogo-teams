@@ -2,6 +2,8 @@ import { useRequest } from '@cogoport/request';
 import { addDays, isEmpty, startOfDay } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
+import getDateTime from '../utils/getDateTime';
+
 const getParams = ({ widgetBlocks, filterParams, selectedFilter, page, trend }) => {
 	const {
 		date_range = {},
@@ -11,6 +13,8 @@ const getParams = ({ widgetBlocks, filterParams, selectedFilter, page, trend }) 
 		office_location_id = '',
 		agent_id = '',
 	} = filterParams || {};
+
+	const currentDayEnd = new Date((new Date()).setHours(23, 59, 59, 999));
 
 	let blocks;
 
@@ -22,16 +26,22 @@ const getParams = ({ widgetBlocks, filterParams, selectedFilter, page, trend }) 
 		}
 	}
 
+	let extraFilters = {};
+
+	if (selectedFilter) {
+		extraFilters = getDateTime({ selectedFilter });
+	}
+
 	const endDate = (addDays(date_range?.endDate, 1) > new Date())
-		? new Date((new Date()).setHours(23, 59, 59, 999)) : addDays(date_range?.endDate, 1);
+		? currentDayEnd : addDays(date_range?.endDate, 1);
 
 	return 	{
 		blocks,
-		start_date          : startOfDay(date_range?.startDate || new Date()),
-		end_date            : endDate || new Date((new Date()).setHours(23, 59, 59, 999)),
+		start_date          : extraFilters?.startDate || startOfDay(date_range?.startDate || new Date()),
+		end_date            : extraFilters?.endDate || endDate || currentDayEnd,
 		trend_data_required : (trend === 'previous'),
 		filters             : {
-			range                : selectedFilter || undefined,
+			range                : extraFilters?.range || undefined,
 			page                 : page || undefined,
 			page_limit           : page ? 5 : undefined,
 			partner_id           : partner_id || undefined,
