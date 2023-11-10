@@ -35,7 +35,7 @@ const ONLY_LEFT = true;
 const AUTHORISED_USER_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
 	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id,
 	'd058d879-8cb2-4071-8bd3-c5807f534dd4',
-	'd058d879-8cb2-4071-8bd3-c5807f534dd4', '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44'];
+	'd058d879-8cb2-4071-8bd3-c5807f534dd4'];
 function OverAllOutstanding({
 	entityCode = '',
 	setSelectedOrgId = () => {},
