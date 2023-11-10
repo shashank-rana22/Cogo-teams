@@ -17,7 +17,6 @@ import useGetKamWiseOutstandingsStats from '../../../hooks/useGetKamWiseOutstand
 import useGetOrgOutstanding from '../../../hooks/useGetOrgOutstanding';
 import useGetSageArOutstandingsStats from '../../../hooks/useGetSageArOustandingStats';
 import useGetServiceWiseOutstandingsStats from '../../../hooks/useGetServiceWiseOutstandingsStats';
-import useSendOutstandingReport from '../../../hooks/useSendOutstandingReport';
 
 import CcCallList from './CcCallList';
 import Filters from './Filters';
@@ -26,6 +25,7 @@ import OutstandingFilter from './OutstandingFilter';
 import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
 import OverallOutstandingStats from './OverallOutstandingStats';
+import ReportModal from './ReportModal';
 import ResponsivePieChart from './ResponsivePieChart';
 import ScrollBar from './ScrollBar';
 import styles from './styles.module.css';
@@ -35,7 +35,7 @@ const ONLY_LEFT = true;
 const AUTHORISED_USER_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
 	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id,
 	'd058d879-8cb2-4071-8bd3-c5807f534dd4',
-	'd058d879-8cb2-4071-8bd3-c5807f534dd4'];
+	'd058d879-8cb2-4071-8bd3-c5807f534dd4', '7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44'];
 function OverAllOutstanding({
 	entityCode = '',
 	setSelectedOrgId = () => {},
@@ -47,7 +47,7 @@ function OverAllOutstanding({
 		creditControllerId : '',
 		companyType        : '',
 	});
-
+	const [show, setShow] = useState(false);
 	const {
 		outStandingData,
 		outstandingLoading,
@@ -61,7 +61,6 @@ function OverAllOutstanding({
 		setFilters,
 		filtersApplied,
 	} = useGetOrgOutstanding({ entityCode });
-	const { downloadOsReport = () => {} } = useSendOutstandingReport();
 	const { include_defaulters = false } = filters || {};
 
 	const [dateFilter, setDateFilter] = useState({
@@ -168,11 +167,12 @@ function OverAllOutstanding({
 	const controls = overAllOutstandingcontrols();
 	return (
 		<>
+			{show ? <ReportModal show={show} setShow={setShow} /> : null}
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 				{AUTHORISED_USER_IDS.includes(profile?.user?.id)
 					? (
 						<Button
-							onClick={() => downloadOsReport()}
+							onClick={() => setShow(true)}
 							themeType="secondary"
 							size="lg"
 							style={{ marginRight: 10 }}
