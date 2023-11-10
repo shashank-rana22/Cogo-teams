@@ -32,16 +32,15 @@ import styles from './styles.module.css';
 
 const LOADER_LEN = 7;
 const ONLY_LEFT = true;
-
+const AUTHORISED_USER_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
+	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id,
+	'd058d879-8cb2-4071-8bd3-c5807f534dd4',
+	'd058d879-8cb2-4071-8bd3-c5807f534dd4'];
 function OverAllOutstanding({
 	entityCode = '',
 	setSelectedOrgId = () => {},
 }) {
 	const { profile } = useSelector((state) => state);
-	const AUTHORISED_USER_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
-		GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id,
-		'd058d879-8cb2-4071-8bd3-c5807f534dd4',
-		'd058d879-8cb2-4071-8bd3-c5807f534dd4'];
 	const [formFilters, setFormFilters] = useState({
 		kamId              : '',
 		salesAgentId       : '',
@@ -62,7 +61,7 @@ function OverAllOutstanding({
 		setFilters,
 		filtersApplied,
 	} = useGetOrgOutstanding({ entityCode });
-	const { downloadOsReport } = useSendOutstandingReport();
+	const { downloadOsReport = () => {} } = useSendOutstandingReport();
 	const { include_defaulters = false } = filters || {};
 
 	const [dateFilter, setDateFilter] = useState({
