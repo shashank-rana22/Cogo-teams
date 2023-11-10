@@ -9,6 +9,7 @@ const getParams = ({ widgetBlocks, filterParams, selectedFilter, page, trend }) 
 		role_id = [],
 		reporting_manager_id = '',
 		office_location_id = '',
+		agent_id = '',
 	} = filterParams || {};
 
 	let blocks;
@@ -37,6 +38,7 @@ const getParams = ({ widgetBlocks, filterParams, selectedFilter, page, trend }) 
 			role_id              : isEmpty(role_id) ? undefined : role_id,
 			office_location_id   : office_location_id || undefined,
 			reporting_manager_id : reporting_manager_id || undefined,
+			agent_id             : agent_id || undefined,
 		},
 	};
 };
