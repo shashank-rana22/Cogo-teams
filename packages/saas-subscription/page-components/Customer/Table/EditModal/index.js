@@ -31,8 +31,14 @@ function EditModal({ editModal, setEditModal }) {
 	const { active = {} } = subInfo || {};
 
 	return (
-		<Modal show={open} onClose={closeModalHandler} closeOnOuterClick={closeModalHandler} size="lg">
+		<Modal
+			show={open}
+			onClose={closeModalHandler}
+			closeOnOuterClick={closeModalHandler}
+			size="lg"
+		>
 			<div key={info?.id} className={styles.container}>
+
 				{loading && (
 					<div className={styles.loader}>
 						<div className={styles.overlay} />

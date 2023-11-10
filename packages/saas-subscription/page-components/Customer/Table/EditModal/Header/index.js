@@ -78,7 +78,9 @@ function Header({ info = {}, editModalChangeHandler, closeModalHandler, ...rest 
 							});
 						}}
 					>
-						{is_free_plan ? t('saasSubscription:reset_plan') : t('saasSubscription:cancel_sub')}
+						{is_free_plan
+							? t('saasSubscription:reset_plan')
+							: t('saasSubscription:cancel_sub')}
 					</Button>
 				</div>
 			</div>

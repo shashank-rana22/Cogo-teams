@@ -1,5 +1,6 @@
 import { Pagination, Placeholder, cl } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import getUsagesConfig from '../../../../../../configuration/usagesConfig';
@@ -11,7 +12,9 @@ import EmptyState from '../../EmptyState';
 import styles from './styles.module.css';
 
 function Usages({ info = {}, currentTab = '' }) {
-	const usageConfig = getUsagesConfig();
+	const { t } = useTranslation(['saasSubscription']);
+
+	const usageConfig = getUsagesConfig({ t });
 
 	const { loading, data, setPage } = useGetUsages({ info, currentTab });
 

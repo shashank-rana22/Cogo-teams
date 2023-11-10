@@ -9,7 +9,7 @@ const useGetSubscriptionOrder = ({ info = {} }) => {
 
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
-		url    : 'list_saas_checkouts',
+		url    : '/list_saas_checkouts',
 	}, { manual: true });
 
 	const getOrder = async () => {

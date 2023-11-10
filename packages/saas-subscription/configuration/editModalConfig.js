@@ -1,34 +1,34 @@
-export const getDetailsConfig = () => [
+export const getDetailsConfig = ({ t }) => [
 	{
 		key        : 'plan_details',
-		label      : 'Plan Details',
+		label      : t('saasSubscription:details_plan'),
 		renderFunc : 'renderPlanName',
 	},
 	{
 		key        : 'account_type',
-		label      : 'Family',
+		label      : t('saasSubscription:details_account'),
 		renderFunc : 'renderAccountType',
 	},
 	{
 		key        : 'validity',
-		label      : 'Plan Validity',
+		label      : t('saasSubscription:details_validity'),
 		renderFunc : 'renderValidity',
 	},
 ];
 
-export const getHeaderConfig = () => [
+export const getHeaderConfig = ({ t }) => [
 	{
 		key        : 'serial_id',
-		label      : 'Org Serial Id',
+		label      : t('saasSubscription:header_serial_id'),
 		renderFunc : 'renderOrgId',
 	},
 	{
 		key   : 'business_name',
-		label : 'Business Name',
+		label : t('saasSubscription:header_business_name'),
 	},
 	{
 		key        : 'kyc_status',
-		label      : 'KYC Status',
+		label      : t('saasSubscription:header_kyc'),
 		renderFunc : 'renderKyc',
 	},
 ];

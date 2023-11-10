@@ -2,6 +2,7 @@ import { Button, Datepicker } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { differenceInDays } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import usePlanValidity from '../../../../../hooks/usePlanValidity';
@@ -9,7 +10,9 @@ import usePlanValidity from '../../../../../hooks/usePlanValidity';
 import styles from './styles.module.css';
 
 function PlanValidity({ extraInfo = {}, modalChangeHandler }) {
-	const { id, start_date = '', end_date = '' } = extraInfo || {};
+	const { t } = useTranslation(['saasSubscription']);
+
+	const { id = '', start_date = '', end_date = '' } = extraInfo || {};
 
 	const [endDate, setEndDate] = useState(end_date ? new Date(end_date) : '');
 
@@ -36,9 +39,11 @@ function PlanValidity({ extraInfo = {}, modalChangeHandler }) {
 					</div>
 
 					<div className={styles.col}>
-						<p className={styles.label}>End Date</p>
+						<p className={styles.label}>
+							{t('saasSubscription:end_date')}
+						</p>
 						<Datepicker
-							placeholder="Select End Date"
+							placeholder={t('saasSubscription:select_end_date')}
 							value={endDate}
 							onChange={setEndDate}
 						/>
@@ -46,16 +51,18 @@ function PlanValidity({ extraInfo = {}, modalChangeHandler }) {
 				</div>
 
 				<p className={styles.footer_text}>
-					Extending plan Validity by
+					{t('saasSubscription:extend_plan')}
 					{' '}
 					<b>{differenceInDays(new Date(endDate), new Date(start_date)) || 0}</b>
 					{' '}
-					days
+					{t('saasSubscription:days')}
 				</p>
 
 			</div>
 			<div className={styles.footer}>
-				<Button size="sm" themeType="secondary" disabled={loading}>Cancel</Button>
+				<Button size="sm" themeType="secondary" disabled={loading}>
+					{t('saasSubscription:cancel')}
+				</Button>
 
 				<Button
 					size="sm"
@@ -65,8 +72,7 @@ function PlanValidity({ extraInfo = {}, modalChangeHandler }) {
 						changePlanValidityHandler({ id, endDate });
 					}}
 				>
-					Confirm
-
+					{t('saasSubscription:confirm')}
 				</Button>
 			</div>
 		</>

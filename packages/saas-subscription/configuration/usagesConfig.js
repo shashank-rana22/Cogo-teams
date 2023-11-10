@@ -1,20 +1,20 @@
-const getUsagesConfig = () => [
+const getUsagesConfig = ({ t }) => [
 	{
 		key   : 'product_name',
-		label : 'Product Name',
+		label : t('saasSubscription:usages_product_name'),
 	},
 	{
 		key   : 'event_name',
-		label : 'Event Name',
+		label : t('saasSubscription:usages_event_name'),
 	},
 	{
 		key        : 'quantity',
-		label      : 'Quantity',
+		label      : t('saasSubscription:usages_quantity'),
 		renderFunc : 'renderQuotaQty',
 	},
 	{
 		key        : 'created_at',
-		label      : 'Created At',
+		label      : t('saasSubscription:usages_created_at'),
 		renderFunc : 'renderDate',
 	},
 ];

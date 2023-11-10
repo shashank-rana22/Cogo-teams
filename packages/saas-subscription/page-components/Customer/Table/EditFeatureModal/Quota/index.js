@@ -39,7 +39,10 @@ function Quota({ extraInfo = {}, modalChangeHandler }) {
 
 	const editQuotaControl = getEditQuotaControl({ t });
 
-	const { formHook = {}, submitHandler, loading } = useUpdateQuota({ id, modalChangeHandler });
+	const {
+		formHook = {},
+		submitHandler, loading,
+	} = useUpdateQuota({ id, modalChangeHandler });
 
 	const { control, formState:{ errors }, handleSubmit } = formHook || {};
 
@@ -51,20 +54,31 @@ function Quota({ extraInfo = {}, modalChangeHandler }) {
 					const Element = getFieldController(type);
 					return (
 						<div key={name} className={styles.col}>
+
 							<div className={styles.label_container}>
 								<p className={cl`${styles.label} ${styles.row}`}>
+
 									{label}
 									{name === 'quantity'
 										? (
-											<Tooltip content={<TooltipContent pricings={pricings} />}>
-												<div className={styles.info}><IcMInfo /></div>
+											<Tooltip
+												content={(
+													<TooltipContent
+														pricings={pricings}
+													/>
+												)}
+											>
+												<div className={styles.info}>
+													<IcMInfo />
+												</div>
 											</Tooltip>
 										)
 										: null}
 								</p>
 								{errors?.[name] && (
 									<p className={styles.error}>
-										{errors?.[name]?.message || errors?.[name]?.type}
+										{errors?.[name]?.message
+											|| errors?.[name]?.type}
 									</p>
 								)}
 							</div>

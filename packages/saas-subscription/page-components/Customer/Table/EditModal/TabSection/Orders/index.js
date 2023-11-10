@@ -1,20 +1,30 @@
 import { Pagination, Placeholder, cl } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
+import { useTranslation } from 'next-i18next';
 
-import getOrdesConfig from '../../../../../../configuration/ordersConfig';
+import getOrdersConfig from '../../../../../../configuration/ordersConfig';
 import useGetSubscriptionOrder from '../../../../../../hooks/useGetSubscriptionOrder';
 import getValues from '../../../../../../utils/getValues';
+import EmptyState from '../../EmptyState';
 
 import itemFunction from './itemFunctions';
 import styles from './styles.module.css';
 
-function Orders({ info = {} }) {
+function Orders({ info = {}, currentTab = '' }) {
+	const { t } = useTranslation(['saasSubscription']);
+
 	const { loading, data, setPage } = useGetSubscriptionOrder({ info });
 
-	const orderConfig = getOrdesConfig();
+	const orderConfig = getOrdersConfig({ t });
 	const { list = [], page, total_count, page_limit } = data || {};
 
 	const newList = loading ? [...Array(5).keys()] : list;
+
+	if (isEmpty(list)) {
+		return (
+			<EmptyState currentTab={currentTab} />
+		);
+	}
 
 	return (
 		<>

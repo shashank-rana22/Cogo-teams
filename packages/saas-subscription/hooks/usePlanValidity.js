@@ -1,8 +1,11 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useTranslation } from 'react-i18next';
 
 const usePlanValidity = ({ modalChangeHandler }) => {
+	const { t } = useTranslation(['saasSubscription']);
+
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_saas_subscription_validity',
@@ -16,7 +19,7 @@ const usePlanValidity = ({ modalChangeHandler }) => {
 					validity_date        : endDate,
 				},
 			});
-			Toast.success('Change Plan Validity');
+			Toast.success(t('saasSubscription:change_plan_validity'));
 			modalChangeHandler(true);
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));

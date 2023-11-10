@@ -1,26 +1,26 @@
-const getOrderConfig = () => [
+const getOrderConfig = ({ t }) => [
 	{
 		key   : 'serial_id',
-		label : 'Serial Id',
+		label : t('saasSubscription:orders_serial_id'),
 	},
 	{
 		key        : 'plan_name',
-		label      : 'Plan Name',
+		label      : t('saasSubscription:orders_plan_name'),
 		renderFunc : 'renderOrderPlanName',
 	},
 	{
 		key        : 'performed_by',
-		label      : 'Performed By',
+		label      : t('saasSubscription:orders_performed_by'),
 		renderFunc : 'renderPerformedBy',
 	},
 	{
 		key        : 'total_amt',
-		label      : 'Total',
+		label      : t('saasSubscription:orders_total_amt'),
 		renderFunc : 'renderTotalAmt',
 	},
 	{
 		key        : 'created_at',
-		label      : 'created At',
+		label      : t('saasSubscription:orders_created_at'),
 		renderFunc : 'renderDate',
 	},
 ];
