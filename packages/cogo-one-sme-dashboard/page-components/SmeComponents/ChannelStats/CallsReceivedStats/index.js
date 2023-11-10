@@ -71,7 +71,7 @@ function CallsReceivedStats({
 										label="Not-allocated"
 										dataValue={current_data?.[itm?.non_allocated]}
 										change={calcChange({
-											valueKey     : itm?.non_allocated_change,
+											valueKey     : itm?.non_allocated,
 											currentData  : current_data,
 											previousData : previous_data,
 										})}
