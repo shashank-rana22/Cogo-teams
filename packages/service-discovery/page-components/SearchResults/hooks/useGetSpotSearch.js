@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
-import useGetActiveServices from '../../../helpers/useGetActiveServices';
+import useGetActiveServices from '../../../hooks/useGetActiveServices';
 
 const BANNER_OPTIONS = require('../utils/getBannerOptions');
 

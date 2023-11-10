@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 
 import Wallet from '../../../common/Header/common/Wallet';
 import CustomLoadingState from '../../../common/LoadingState/CustomLoadingState';
-import useGetActiveServices from '../../../helpers/useGetActiveServices';
 import useGetIsMobile from '../../../helpers/useGetIsMobile';
+import useGetActiveServices from '../../../hooks/useGetActiveServices';
 
 import Header from './components/Header';
 import ModeSelection from './components/ModeSelection';
@@ -95,7 +95,7 @@ function SpotSearch() {
 				</div>
 
 				{!isEmpty(selectedMode) ? (
-					<>
+					<div className={styles.animation_div}>
 						<div className={styles.locations}>
 							<Routes
 								mode={selectedMode}
@@ -119,7 +119,7 @@ function SpotSearch() {
 							createSearch={createSearch}
 							createSearchLoading={loading}
 						/>
-					</>
+					</div>
 				) : null}
 
 				<OtherServices

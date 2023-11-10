@@ -93,7 +93,7 @@ const useRequestForRate = ({
 						Number(service_data?.total_rate_quantity) || undefined,
 					preferred_free_days:
 						Number(subsidiary_source?.preferred_free_days) || undefined,
-					cargo_readiness_date,
+					cargo_readiness_date: cargo_readiness_date || undefined,
 					service_id:
 						service_data?.service_type === 'subsidiary'
 						&& SUBSIDIARY_SERVICES.includes(service_data?.code)
@@ -104,10 +104,10 @@ const useRequestForRate = ({
 						&& SUBSIDIARY_SERVICES.includes(service_data?.code)
 							? SERVICE_MAPPING[data?.service_type]
 							: requestService?.service_type || undefined,
-					selected_card           : requestService?.selected_card,
+					selected_card           : requestService?.selected_card || undefined,
 					attachment_file_urls    : !isEmpty(attachment_file_urls) ? attachment_file_urls : undefined,
 					free_days_type          : subsidiary_source?.free_days_type || undefined,
-					subsidiary_service_code : service_data?.code,
+					subsidiary_service_code : service_data?.code || undefined,
 				};
 
 				await trigger({ data: body });

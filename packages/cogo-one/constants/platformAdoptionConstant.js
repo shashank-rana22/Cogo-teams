@@ -1,3 +1,25 @@
+export const ADOPTION_REQUEST_TYPE_OPITIONS = [
+	{ label: 'Kyc Verification', value: 'kyc_verification' },
+	{ label: 'Demo Request', value: 'demo_request' },
+	{ label: 'Trade Party Verification', value: 'trade_party_verification' },
+	{ label: 'Onboarded Customer', value: 'onboarded_customer' },
+	{ label: 'Missed Call', value: 'missed_call' },
+];
+
+export const ADOPTIOIN_ESCALATION_OPTIONS = [
+	{ label: 'Warning', value: 'warning' },
+	{ label: 'Escalated', value: 'escalated' },
+	{ label: 'Assigned', value: 'assigned' },
+	{ label: 'Auto Assigned', value: 'auto_assigned' },
+	{ label: 'Auto Escalated', value: 'auto_escalated' },
+];
+
+export const ADOPTION_REQUEST_STATUS_OPTIONS = [
+	{ label: 'Pending', value: 'pending' },
+	{ label: 'Processing', value: 'processing' },
+	{ label: 'Completed', value: 'completed' },
+];
+
 export const ACTIVITY_MAPPING = [
 	{
 		label : 'Chat Pending',

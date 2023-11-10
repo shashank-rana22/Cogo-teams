@@ -1,0 +1,21 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100%;
+
+	:global {
+		.ui_intersection_loading {
+			flex: unset;
+			width: 100%;
+			margin: 20px 0;
+		}
+	}
+}
+
+.header {
+	width: 100%;
+	padding: 6px 0 16px;
+	font-size: 22px;
+	color: #212121;
+}

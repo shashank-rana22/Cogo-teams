@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-relative-packages
-import countries from '../../../../../.data-store/constants/countries.json';
+import countries from '../../../.data-store/constants/countries.json';
 
 import sort from './sortTabel';
 

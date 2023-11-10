@@ -10,11 +10,15 @@ function hideDetails({
 	countryCode = '',
 }) {
 	let finalString = data;
+	if (!data) {
+		return '';
+	}
+
 	if (type === 'number' && data?.length > CHECK_STRING_LENGTH) {
-		finalString = `${countryCode}${data.substring(
+		finalString = `${countryCode}${data?.substring(
 			GLOBAL_CONSTANTS.zeroth_index,
 			THIRD_STRING_VALUE,
-		)}****${data.substring(
+		)}****${data?.substring(
 			data.length - CHECK_STRING_LENGTH,
 			data.length,
 		)}`;
@@ -22,11 +26,11 @@ function hideDetails({
 
 	if (type === 'mail') {
 		const strings = data?.split('@');
-		finalString = `${strings[GLOBAL_CONSTANTS.zeroth_index].substring(
+		finalString = `${strings?.[GLOBAL_CONSTANTS.zeroth_index]?.substring(
 			GLOBAL_CONSTANTS.zeroth_index,
 			THIRD_STRING_VALUE,
 		)}***@${
-			strings[strings.length - LAST_VARIABLE_IN_STRING]
+			strings?.[strings.length - LAST_VARIABLE_IN_STRING]
 		}`;
 	}
 

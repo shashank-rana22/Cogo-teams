@@ -4,7 +4,7 @@ import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useMemo, useState, useEffect } from 'react';
 
-import useGetActiveServices from '../../../helpers/useGetActiveServices';
+import useGetActiveServices from '../../../hooks/useGetActiveServices';
 import getPrefillForm from '../../SearchResults/utils/getPrefillForm';
 import useCreateSearch from '../../ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 import useGetCheckout from '../hooks/useGetCheckout';

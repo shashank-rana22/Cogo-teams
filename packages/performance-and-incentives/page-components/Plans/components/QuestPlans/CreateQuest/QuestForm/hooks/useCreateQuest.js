@@ -23,8 +23,7 @@ const useCreateQuest = ({
 	setParams = () => {},
 	data = {},
 	setShowOverlapped = () => {},
-	questName = '',
-	setName = () => {},
+	setQuestData = () => {},
 }) => {
 	const router = useRouter();
 
@@ -45,13 +44,12 @@ const useCreateQuest = ({
 
 	const handleClick = async (formValues) => {
 		try {
-			const { name, date_range, agent_scoring_config_id, quest_string } = formValues;
+			const { name, date_range, agent_scoring_config_id } = formValues;
 
 			const { data: res } = await trigger({
 				data: {
 					name,
 					agent_scoring_config_id,
-					quest_string,
 					start_date : date_range?.startDate,
 					end_date   : getFormattedDate({ currentDate: date_range?.endDate }),
 				},
@@ -91,8 +89,8 @@ const useCreateQuest = ({
 	}, [date_range, agent_scoring_config_id, setParams, setShowOverlapped]);
 
 	useEffect(() => {
-		if (questName !== name) setName(name);
-	}, [name, setName, questName]);
+		setQuestData((p) => ({ ...p, name, date_range }));
+	}, [name, setQuestData, date_range]);
 
 	return {
 		loading,

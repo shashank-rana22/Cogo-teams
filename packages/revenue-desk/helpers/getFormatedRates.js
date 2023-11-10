@@ -55,6 +55,7 @@ const getFormatedRates = (type, data, singleServiceData) => {
 				fulfillment_ratio_15                   : element?.fulfillment_data?.day_15 || element?.day_15,
 				fulfillment_ratio_30                   : element?.fulfillment_data?.day_30 || element?.day_30,
 				shipment_type                          : element?.shipment_type,
+				rate_procurement_proof_url             : element?.data?.rate_procurement_proof_url,
 
 			};
 			row.rowData = rowData;

@@ -1,5 +1,6 @@
+import { useDebounceQuery, useForm } from '@cogoport/forms';
 import { useAllocationRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useGetQuestList = ({ manual = true }) => {
 	const [params, setParams] = useState({
@@ -9,10 +10,11 @@ const useGetQuestList = ({ manual = true }) => {
 		role_data_required        : true,
 		sort_by                   : 'created_at',
 		sort_type                 : 'desc',
-		filters                   : {
-			status: 'active',
-		},
 	});
+
+	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
+
+	const { control } = useForm();
 
 	const [{ loading, data }, refetch] = useAllocationRequest(
 		{
@@ -33,6 +35,16 @@ const useGetQuestList = ({ manual = true }) => {
 
 	const { list = [], ...paginationData } = data || {};
 
+	useEffect(() => {
+		setParams((previousParams) => ({
+			...previousParams,
+			filters: {
+				...(previousParams.filters || {}),
+				q: searchQuery || undefined,
+			},
+		}));
+	}, [searchQuery]);
+
 	return {
 		loading,
 		list,
@@ -41,6 +53,8 @@ const useGetQuestList = ({ manual = true }) => {
 		setParams,
 		getNextPage,
 		refetch,
+		debounceQuery,
+		control,
 	};
 };
 
