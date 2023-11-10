@@ -52,26 +52,48 @@ const dashboardFilters = ({ filterParams = {} }) => {
 			params         : {
 				filters: {
 					entity_types   : ['cogoport'],
-					stakeholder_id : filterParams?.partner_id,
+					stakeholder_id : filterParams?.partner_id || undefined,
 				},
 			},
 		},
 		{
 			name           : 'reporting_manager_id',
 			value          : filterParams?.reporting_manager_id || '',
-			valueKey       : 'id',
+			valueKey       : 'user_id',
 			labelKey       : 'name',
 			asyncKey       : 'partner_users',
 			controlType    : 'asyncSelect',
 			defaultOptions : true,
 			placeholder    : 'Select Reporting Manager',
 			isClearable    : true,
+			initialCall    : true,
 			params         : {
 				page_limit : 10,
 				filters    : {
-					status     : 'active',
-					partner_id : filterParams?.partner_id,
-
+					status             : 'active',
+					partner_id         : filterParams?.partner_id || undefined,
+					office_location_id : filterParams?.office_location_id || undefined,
+				},
+			},
+		},
+		{
+			name           : 'agent_id',
+			value          : filterParams?.agent_id || '',
+			valueKey       : 'id',
+			labelKey       : 'name',
+			asyncKey       : 'partner_users',
+			controlType    : 'asyncSelect',
+			defaultOptions : true,
+			placeholder    : 'Select agent',
+			isClearable    : true,
+			initialCall    : true,
+			params         : {
+				page_limit : 10,
+				filters    : {
+					status               : 'active',
+					partner_id           : filterParams?.partner_id || undefined,
+					office_location_id   : filterParams?.office_location_id || undefined,
+					reporting_manager_id : filterParams?.reporting_manager_id || undefined,
 				},
 			},
 		},
@@ -81,8 +103,9 @@ const dashboardFilters = ({ filterParams = {} }) => {
 			isPreviousDaysAllowed : true,
 			maxDate               : new Date(),
 			showTimeSelect        : false,
-			controlType           : 'dateRangePicker',
+			controlType           : 'singleDateRange',
 			isClearable           : false,
+			size                  : 'sm',
 		},
 	];
 };

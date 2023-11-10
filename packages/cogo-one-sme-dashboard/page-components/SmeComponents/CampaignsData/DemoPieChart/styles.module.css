@@ -1,7 +1,6 @@
 .container {
 	position: relative;
 	display: flex;
-	flex-direction: column;
 	width: 49.5%;
 	padding: 20px;
 	margin: 10px 0;
@@ -10,72 +9,59 @@
 	box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
 }
 
-.loading_container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 220px;
+.body {
+	width: 50%;
+	padding: 0 10px;
+
+	&:first-child {
+		padding: 0 10 0 0;
+		border-right: 1px dashed #e0e0e0;
+	}
 }
 
 .header {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	padding-bottom: 10px;
-	font-size: 18px;
-	color: #212121;
-}
-
-.pie_chart_container {
-	display: flex;
-	align-items: center;
 	justify-content: center;
-	width: 100%;
-}
-
-.pie_chart_body {
-	width: 220px;
-	height: 220px;
-}
-
-.legends_container {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	width: calc(100% - 220px);
-}
-
-.legend_item {
-	display: flex;
-	align-items: center;
-	width: 50%;
-	padding-right: 10px;
-}
-
-.legend_item_name {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding-left: 10px;
-	font-size: 12px;
-}
-
-.legends_circle {
-	width: 10px;
-	height: 10px;
-	border-radius: 100%;
-}
-
-.legends_value {
-	font-size: 24px;
+	height: 45px;
+	margin: 0 10px 10px;
+	font-size: 16px;
 	font-weight: 600;
-	text-align: right;
+	color: #4f4f4f;
+	border-bottom: 1px dashed #e0e0e0;
+
+	:global {
+		.platform_demo_icon {
+			width: 22px;
+			height: 22px;
+			margin-right: 10px;
+		}
+
+		.chat_data_icon {
+			width: 35px;
+			height: 35px;
+			margin-right: 4px;
+		}
+	}
 }
 
-.style_component_text {
-	font-size: 26px;
-	font-weight: 700;
-	color: #0c0507;
+.option_styles {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 6px 10px;
+}
+
+.label {
+	color: #828282;
+}
+
+.value {
+	font-size: 20px;
+	font-weight: 600;
+	color: #fff;
+	text-align: right;
 }
 
 .coming_soon {
@@ -85,7 +71,7 @@
 	justify-content: center;
 	width: calc(100% - 40px);
 	height: calc(100% - 40px);
-	backdrop-filter: blur(6px);
-	font-size: 30px;
+	font-size: 20px;
 	font-weight: 600;
+	backdrop-filter: blur(1px);
 }

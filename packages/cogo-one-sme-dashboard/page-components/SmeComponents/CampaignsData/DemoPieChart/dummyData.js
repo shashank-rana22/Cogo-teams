@@ -1,5 +1,5 @@
 const DUMMY_DATA = {
-	bot_sessions   : 120,
+	rates_enquiry  : 30,
 	chats_assigned : 70,
 	demo_conducted : 35,
 	demo_scheduled : 55,
