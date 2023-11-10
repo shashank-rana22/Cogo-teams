@@ -11,7 +11,7 @@ const getFormattedAmt = ({ currency, amount }) => formatAmount({
 	amount,
 	options: {
 		style                 : 'currency',
-		currencyDisplay       : 'code',
+		currencyDisplay       : 'symbol',
 		maximumFractionDigits : 2,
 	},
 });
