@@ -79,7 +79,7 @@ const dashboardFilters = ({ filterParams = {} }) => {
 		{
 			name           : 'agent_id',
 			value          : filterParams?.agent_id || '',
-			valueKey       : 'id',
+			valueKey       : 'user_id',
 			labelKey       : 'name',
 			asyncKey       : 'partner_users',
 			controlType    : 'asyncSelect',
