@@ -2,6 +2,7 @@ import { cl } from '@cogoport/components';
 import { useState } from 'react';
 
 import ComingSoon from '../../../common/ComingSoonTag';
+import NewTag from '../../../common/NewTag';
 
 import styles from './styles.module.css';
 
@@ -16,6 +17,7 @@ function ModeItem({
 	setSelectedService = () => {},
 	setLocation = () => {},
 	bookable_services = {},
+	new_tag_services = [],
 }) {
 	const [bouncing, setBouncing] = useState(false);
 
@@ -73,6 +75,10 @@ function ModeItem({
 
 			{!isServiceAvailable ? (
 				<ComingSoon bouncing={bouncing} />
+			) : null}
+
+			{new_tag_services?.includes(value) ? (
+				<NewTag />
 			) : null}
 		</div>
 	);

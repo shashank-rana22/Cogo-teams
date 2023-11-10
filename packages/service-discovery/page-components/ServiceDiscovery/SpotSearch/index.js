@@ -42,7 +42,7 @@ function SpotSearch() {
 		loading:bookableServicesLoading = false,
 	} = useGetActiveServices();
 
-	const { bookable_services = {} } = service_discovery || {};
+	const { bookable_services = {}, new_tag_services = [] } = service_discovery || {};
 
 	const isMobile = useGetIsMobile();
 
@@ -91,6 +91,7 @@ function SpotSearch() {
 						setSelectedService={setSelectedService}
 						setLocation={setLocation}
 						bookable_services={bookable_services}
+						new_tag_services={new_tag_services}
 					/>
 				</div>
 
