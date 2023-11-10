@@ -14,20 +14,36 @@
 	align-items: center;
 	justify-content: space-between;
 	margin-bottom: 12px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		align-items: flex-start;
+	}
 }
 
 .pills_container {
 	display: flex;
+
+	@media (max-width: 768px) {
+		margin-bottom: 12px;
+	}
 }
 
 .pill {
 	width: max-content;
 	padding: 4px 12px;
+	margin-right: 12px;
 	font-size: 12px;
 	font-weight: 400;
 	color: #1295a3;
 	border: 1px solid #24c7d9;
 	border-radius: 36px;
+
+	@media (max-width: 768px) {
+		padding: 3px 9px;
+		margin-right: 8px;
+		font-size: 10px;
+	}
 }
 
 .total_price {
@@ -39,8 +55,19 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	@media (max-width: 768px) {
+		flex-direction: row;
+		align-self: end;
+		margin-top: 8px;
+	}
 }
 
 .request_rate_button {
 	margin-top: 2px;
+
+	@media (max-width: 768px) {
+		margin-top: 0;
+		margin-left: 12px;
+	}
 }

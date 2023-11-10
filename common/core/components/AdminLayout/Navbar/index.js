@@ -42,6 +42,7 @@ function Navbar({
 		timeLeft,
 		loading,
 		checkIfSessionExpiring,
+		userId,
 	} = useGetUserSessionMappings();
 
 	const showPin = userBasedNavView === nav;
@@ -153,6 +154,7 @@ function Navbar({
 									showPin={showPin}
 									inCall={inCall}
 									ticketCount={ticketCount}
+									userId={userId}
 								/>
 							))}
 						</div>
@@ -168,6 +170,7 @@ function Navbar({
 									showPin={showPin}
 									inCall={inCall}
 									ticketCount={ticketCount}
+									userId={userId}
 								/>
 							))}
 						</div>

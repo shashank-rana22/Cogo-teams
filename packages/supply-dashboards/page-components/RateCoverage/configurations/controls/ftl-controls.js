@@ -7,7 +7,6 @@ import styles from './styles.module.css';
 
 const ftlControls = ({
 	data,
-	CommodityOptions,
 	originLocationOptions, destinationLocationOptions,
 	source,
 }) => {
@@ -96,7 +95,6 @@ const ftlControls = ({
 			placeholder : 'Commodity',
 			span        : 4,
 			value       : data?.commodity,
-			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
 		{

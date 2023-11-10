@@ -13,6 +13,7 @@
     "roles_and_permission_select_role_functions_select_operations": "การดำเนินงาน",
     "roles_and_permission_select_role_functions_select_finance": "การเงิน",
     "roles_and_permission_select_role_functions_select_external": "ภายนอก",
+    "roles_and_permission_select_role_functions_select_public":"สาธารณชน",
     "roles_and_permission_select_sub_function_placeholder": "เลือกฟังก์ชั่นย่อย",
     "roles_and_permission_select_sales_customer_success": "ความสำเร็จของลูกค้า",
     "roles_and_permission_select_sales_field_sales": "ฝ่ายขายสนาม",

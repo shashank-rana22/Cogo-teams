@@ -42,10 +42,10 @@ const useGetAudienceOptions = ({
 	};
 
 	const hiddenElements = useMemo(() => ({
-		work_scope        : watchPlatform === 'admin',
-		persona           : ['app', 'all', 'admin'].includes(watchPlatform),
+		work_scope        : ['admin', 'public'].includes(watchPlatform),
+		persona           : ['app', 'all', 'admin', 'public'].includes(watchPlatform),
 		auth_function     : ['app', 'partner'].includes(watchPlatform),
-		auth_sub_function : ['app', 'partner'].includes(watchPlatform) || watchFunctions === 'all',
+		auth_sub_function : ['app', 'partner', 'public'].includes(watchPlatform) || watchFunctions === 'all',
 	}), [watchFunctions, watchPlatform]);
 
 	const showElements = useMemo(

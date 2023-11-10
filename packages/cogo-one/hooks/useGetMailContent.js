@@ -30,6 +30,7 @@ function useGetMailContent({
 }) {
 	const [fullThread, setFullThread] = useState('');
 	const [expandedStateId, setExpandedStateId] = useState('');
+	const [attachmentData, setAttachmentData] = useState({});
 
 	const [loading, setLoading] = useState(false);
 
@@ -40,7 +41,7 @@ function useGetMailContent({
 		method : 'get',
 	}, { manual: true });
 
-	const [, attachmentTrigger] = useLensRequest({
+	const [{ loading: attachmentLoading }, attachmentTrigger] = useLensRequest({
 		url    : '/get_attachments',
 		method : 'get',
 	}, { manual: true });
@@ -62,10 +63,12 @@ function useGetMailContent({
 				});
 
 				setFullThread(mailResData?.data?.body?.content);
+				setLoading(false);
 
 				const attachmentResData = await attachmentTrigger({
 					params: getParams({ messageId, source }),
 				});
+				setAttachmentData(attachmentResData?.data);
 
 				const newContent = formatBody({ mailResData, attachmentResData });
 
@@ -90,6 +93,7 @@ function useGetMailContent({
 
 		setExpandedStateId('');
 		setFullThread('');
+		setAttachmentData({});
 
 		if (expandedStateIdProp !== messageRoomId) {
 			getEmailBody({ isDraft, messageId, messageRoomId });
@@ -119,6 +123,8 @@ function useGetMailContent({
 		toggleMailBody,
 		fullThread,
 		expandedStateId,
+		attachmentData,
+		attachmentLoading,
 	};
 }
 

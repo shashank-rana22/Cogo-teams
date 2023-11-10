@@ -10,9 +10,15 @@
 .header_section {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	width: 100%;
 	padding: 16px 16px 10px;
 	margin-bottom: 18px;
+}
+
+.home_section {
+	display: flex;
+	align-items: center;
 }
 
 .back {

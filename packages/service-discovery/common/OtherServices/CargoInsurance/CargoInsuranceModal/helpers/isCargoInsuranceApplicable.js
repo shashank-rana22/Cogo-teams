@@ -39,7 +39,7 @@ const isCargoInsuranceApplicable = ({
 	if (!is_applicable) {
 		return {
 			is_applicable : false,
-			type          : 'CARGO_INSURANCE_NOT_AVIALABLE_IN_YOUR_COUNTRY',
+			type          : 'cargo_insurance_not_available_in_this_country',
 		};
 	}
 
@@ -55,10 +55,10 @@ const isCargoInsuranceApplicable = ({
 	});
 
 	if (!is_applicable) {
-		let type = 'OWN_COUNTRY_LOCATION_NOT_SELECTED_IN_ORIGIN_OR_DESTINATION';
+		let type = 'own_country_location_not_selected_in_origin_or_destination';
 
 		if (trade_type === 'domestic') {
-			type = 'OWN_COUNTRY_LOCATION_NOT_SELECTED_IN_ORIGIN_AND_DESTINATION';
+			type = 'own_country_location_not_selected_in_origin_and_destination';
 		}
 
 		return { is_applicable: false, type };

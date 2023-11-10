@@ -18,7 +18,7 @@ const renderContent = (showPreview) => `data:${showPreview?.contentType};base64,
 function RenderTitle({ item = {}, handleDownload = () => {} }) {
 	return (
 		<div className={styles.title}>
-			<div>{decodeURI(item?.fileName)}</div>
+			<div>{decodeURI(item?.name || item?.fileName)}</div>
 
 			<IcMDownload
 				onClick={() => handleDownload({ imgUrl: item?.fileUrl })}

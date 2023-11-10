@@ -1,12 +1,13 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { addDays } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import LocationDetails from '../../../../../common/LocationDetails';
 import getElementController from '../../../../../configs/getElementController';
 import getErrorMessage from '../../../../../configs/getErrorMessage';
 import useCreateContract from '../../../hooks/useCreateContract';
+import useGetPlatformConfigConstant from '../../../hooks/useGetPlatformConfigConstant';
 import LoadDetails from '../common/LoadDetails';
 
 import createContracts from './controls';
@@ -24,8 +25,20 @@ function RequestContract({
 	setShow = () => {},
 	setScreen = () => {},
 	setContractData = () => {},
+	isMobile = false,
 }) {
-	const controls = createContracts();
+	const [minCargoValues, setMinCargoValues] = useState({
+		fcl_freight : { min: 1 },
+		lcl_freight : { min: 1 },
+		air_freight : { min: 1 },
+	});
+
+	const controls = createContracts({ isMobile, minCargoValues });
+
+	const {
+		loading:loadingConfigConstants = false,
+		getPlatformConfigConstant = () => {},
+	} = useGetPlatformConfigConstant({ setMinCargoValues });
 
 	const {
 		control,
@@ -56,6 +69,10 @@ function RequestContract({
 	useEffect(() => {
 		setValue('validity_end', null);
 	}, [setValue, startDate]);
+
+	useEffect(() => {
+		getPlatformConfigConstant();
+	}, [getPlatformConfigConstant]);
 
 	return (
 		<div className={styles.container}>
@@ -89,7 +106,7 @@ function RequestContract({
 						const Element = getElementController(type || 'text');
 						if (!Element) return null;
 
-						const errorOriginal = getErrorMessage({
+						const errorMessage = getErrorMessage({
 							error : errors?.[newControl.name],
 							rules : newControl?.rules,
 							label : newControl?.label,
@@ -129,7 +146,7 @@ function RequestContract({
 
 								{errors[name] && (
 									<div className={styles.error_message}>
-										{errorOriginal}
+										{errorMessage}
 									</div>
 								)}
 							</div>
@@ -153,6 +170,7 @@ function RequestContract({
 						themeType="accent"
 						onClick={handleSubmit(onSubmit)}
 						loading={loading}
+						disabled={loading || loadingConfigConstants}
 					>
 						Next
 					</Button>

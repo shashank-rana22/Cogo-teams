@@ -48,9 +48,13 @@ function TableHeader({ itemsKeys = [], LOGO_MAPPING = {} }) {
 
 				return (
 					<div key={key} className={styles.header_column}>
-						{imageUrl ? (
-							<img src={imageUrl} alt="shipping-line" style={{ objectFit: 'cover', width: 92 }} />
-						) : columnHeader}
+						<img
+							src={imageUrl}
+							height={32}
+							alt="line"
+							style={{ objectFit: 'cover' }}
+						/>
+						<span className={styles.line_name}>{columnHeader}</span>
 					</div>
 				);
 			})}
@@ -68,9 +72,11 @@ function TableBody({ keys = {}, values = {}, mode = '' }) {
 			item            : serviceObj.service,
 		});
 
+		const HIGHLIGHTED_FIELDS = ['total_landed_price', 'validity_end'];
+
 		return (
 			<div key={key} className={cl`${styles.row} ${rowClass}`}>
-				<div className={cl`${styles.column} ${key === 'total_landed_price' ? styles.bold : {}}`}>
+				<div className={cl`${styles.column} ${HIGHLIGHTED_FIELDS.includes(key) ? styles.bold : null}`}>
 					<div style={{ display: 'flex', flexDirection: 'column' }}>
 						<div>{value.name}</div>
 
@@ -105,7 +111,7 @@ function TableBody({ keys = {}, values = {}, mode = '' }) {
 						);
 					}
 
-					if (key === 'total_landed_price') {
+					if (HIGHLIGHTED_FIELDS.includes(key)) {
 						return (
 							<div
 								key={`${key}_${shipping_line}`}
@@ -137,13 +143,19 @@ function Table({
 }) {
 	const itemsKeys = Object.keys({ ...staticLineItems, ...dynamicLineitems });
 
+	const { validity_end = {}, ...restStaticKeys } = staticKeys;
+
 	return (
 		<div className={styles.table}>
 			<TableHeader itemsKeys={itemsKeys} LOGO_MAPPING={LOGO_MAPPING} />
 
 			<div className={styles.table_body}>
+				{isEmpty(validity_end) ? null : (
+					<TableBody keys={{ validity_end }} values={staticLineItems} mode={mode} />
+				)}
+
 				<TableBody keys={dynamicKeys} values={dynamicLineitems} mode={mode} />
-				<TableBody keys={staticKeys} values={staticLineItems} mode={mode} />
+				<TableBody keys={restStaticKeys} values={staticLineItems} mode={mode} />
 			</div>
 		</div>
 	);
