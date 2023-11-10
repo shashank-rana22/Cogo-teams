@@ -8988,6 +8988,14 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api          : 'send_cc_outstanding_report',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'sage',
+
+		},
+		{
 			api          : 'list_cogo_entities',
 			access_type  : 'private',
 			service_name : 'partner',
