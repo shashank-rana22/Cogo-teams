@@ -40,6 +40,7 @@ function MessageConversations({
 	supportAgentId = '',
 	userId = '',
 	setActiveTab = () => {},
+	isMobile = false,
 }) {
 	const conversationsDivRef = useRef(null);
 
@@ -146,6 +147,7 @@ function MessageConversations({
 					</div>
 				) : (
 					<ActiveComponent
+						isMobile={isMobile}
 						getNextData={getNextData}
 						lastPage={lastPage}
 						loadingPrevMessages={loadingPrevMessages}

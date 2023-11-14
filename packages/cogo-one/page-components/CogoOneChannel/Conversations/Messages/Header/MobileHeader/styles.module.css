@@ -1,0 +1,13 @@
+.header {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 8px;
+	border-radius: 4px 4px 0 0;
+}
+
+.arrow_back {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+}

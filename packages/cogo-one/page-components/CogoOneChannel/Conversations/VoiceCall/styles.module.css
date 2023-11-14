@@ -1,13 +1,14 @@
 .container {
+	display: flex;
+	flex-direction: column;
 	width: 100%;
-	margin-right: 10px;
 	background: #fff;
 	border-radius: 8px;
 }
 
 .message_container {
+	flex: 1;
 	width: 100%;
-	height: calc(100% - 104px);
 	overflow-y: scroll;
 	background: #f9f9f9;
 }

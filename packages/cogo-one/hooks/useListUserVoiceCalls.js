@@ -16,9 +16,10 @@ const getPayload = ({ pagination, userId, userNumber }) => ({
 
 const useListUserVoiceCalls = ({ userId = '', userNumber = '' }) => {
 	const [listData, setListData] = useState({
-		list  : [],
-		total : 0,
-		page  : 1,
+		list        : [],
+		total       : 0,
+		page        : 1,
+		initialLoad : false,
 	});
 
 	const [{ loading }, trigger] = useRequest({
@@ -33,7 +34,11 @@ const useListUserVoiceCalls = ({ userId = '', userNumber = '' }) => {
 			});
 			if (res.data) {
 				const { list = [], ...paginationData } = res?.data || {};
-				setListData((p) => ({ list: [...(p.list || []), ...(list || [])], ...paginationData }));
+				setListData((p) => ({
+					list        : [...(p.list || []), ...(list || [])],
+					...paginationData,
+					initialLoad : true,
+				}));
 			}
 		} catch (error) {
 			console.error(error);

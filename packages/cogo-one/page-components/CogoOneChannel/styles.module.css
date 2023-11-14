@@ -4,11 +4,20 @@
 	width: 100%;
 	height: 90vh;
 	margin-top: 8px;
+
+	@media (max-width: 576px) {
+		height: calc(100vh - 115px);
+	}
 }
 
 .customers_layout {
 	width: 25%;
 	padding-right: 10px;
+}
+
+.mobile_customer_layout {
+	width: 100%;
+	padding-right: 0;
 }
 
 .chat_body {
@@ -30,6 +39,10 @@
 
 .nosidebar_layout {
 	width: 75%;
+}
+
+.mobile_nosidebar_layout {
+	width: 100%;
 }
 
 .user_profile_layout {

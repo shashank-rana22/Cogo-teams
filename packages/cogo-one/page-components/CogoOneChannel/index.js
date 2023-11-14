@@ -15,6 +15,7 @@ import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useGetAgentPreference from '../../hooks/useGetAgentPreference';
 import useGetAgentTimeline from '../../hooks/useGetAgentTimeline';
+import useGetIsMobile from '../../hooks/useGetIsMobile';
 import useGetSignature from '../../hooks/useGetSignature';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
@@ -71,7 +72,7 @@ function CogoOne() {
 	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
-
+	const { isMobile = false } = useGetIsMobile();
 	const { group_id = '' } = activeTab?.data || {};
 
 	const {
@@ -113,6 +114,9 @@ function CogoOne() {
 		selectedAutoAssign,
 		setAutoAssignChats,
 		queryAssignedChat: assigned_chat,
+		isMobile,
+		setSelectedAutoAssign,
+		viewType,
 	};
 
 	const teamsSideBarCheck = (activeTab?.tab === 'teams' && (!!activeTab?.data?.id || !!activeTab?.data?.group_id));
@@ -137,59 +141,53 @@ function CogoOne() {
 		}
 	}, [token]);
 
-	useEffect(
-		() => { setViewType(initialViewType); },
-		[initialViewType],
-	);
+	useEffect(() => setViewType(initialViewType), [initialViewType]);
 
 	return (
 		<>
 			<HeaderBar
 				firestore={firestore}
-				viewType={viewType}
 				fetchWorkStatus={fetchWorkStatus}
 				agentStatus={agentWorkStatus}
 				data={data}
 				agentTimeline={agentTimeline}
-				preferenceLoading={preferenceLoading}
 				timelineLoading={timelineLoading}
 				userId={userId}
 				initialViewType={initialViewType}
 				setViewType={setViewType}
+				{...commonProps}
 			/>
 			<div className={styles.layout_container}>
-				<div className={styles.customers_layout}>
-					<Customers
-						setIsBotSession={setIsBotSession}
-						isBotSession={isBotSession}
-						viewType={viewType}
-						activeTab={activeTab}
-						userId={userId}
-						setModalType={setModalType}
-						modalType={modalType}
-						tagOptions={tagOptions}
-						mailProps={mailProps}
-						firestore={firestore}
-						suggestions={suggestions}
-						workPrefernceLoading={workPrefernceLoading}
-						setOpenKamContacts={setOpenKamContacts}
-						agentStatus={agentWorkStatus}
-						fetchworkPrefernce={fetchWorkStatus}
-						agentTimeline={agentTimeline}
-						setSelectedAutoAssign={setSelectedAutoAssign}
-						autoAssignChats={autoAssignChats}
-						{...commonProps}
-					/>
-				</div>
+				{(!isMobile || isEmpty(activeTab?.data)) ? (
+					<div className={isMobile ? styles.mobile_customer_layout : styles.customers_layout}>
+						<Customers
+							setIsBotSession={setIsBotSession}
+							isBotSession={isBotSession}
+							activeTab={activeTab}
+							userId={userId}
+							setModalType={setModalType}
+							modalType={modalType}
+							tagOptions={tagOptions}
+							mailProps={mailProps}
+							firestore={firestore}
+							suggestions={suggestions}
+							workPrefernceLoading={workPrefernceLoading}
+							setOpenKamContacts={setOpenKamContacts}
+							agentStatus={agentWorkStatus}
+							fetchworkPrefernce={fetchWorkStatus}
+							agentTimeline={agentTimeline}
+							autoAssignChats={autoAssignChats}
+							{...commonProps}
+						/>
+					</div>
+				) : null}
 				{sendBulkTemplates ? (
 					<PortPairOrgFilters
-						setSelectedAutoAssign={setSelectedAutoAssign}
 						sendBulkTemplates={sendBulkTemplates}
-						viewType={viewType}
 						{...commonProps}
 					/>
 				) : null}
-				{isEmpty(activeTab?.data)
+				{(isEmpty(activeTab?.data) && !isMobile)
 					? (
 						<div className={styles.empty_page}>
 							<EmptyChatPage
@@ -203,19 +201,22 @@ function CogoOne() {
 								initialViewType={initialViewType}
 							/>
 						</div>
-					) : (
+					) : null}
+				{isEmpty(activeTab?.data)
+					? null
+					: (
 						<>
 							<div
 								className={cl`${styles.chat_body} ${expandedSideBar ? styles.chats_layout : ''} 
 								${collapsedSideBar ? styles.mail_layout : ''} 
-								${!expandedSideBar && !collapsedSideBar ? styles.nosidebar_layout : ''}`}
+								${!expandedSideBar && !collapsedSideBar ? styles.nosidebar_layout : ''}
+								${isMobile ? styles.mobile_nosidebar_layout : ''}`}
 							>
 								<Conversations
 									activeTab={activeTab}
 									firestore={firestore}
 									userId={userId}
 									setRaiseTicketModal={setRaiseTicketModal}
-									viewType={viewType}
 									setActiveRoomLoading={setActiveRoomLoading}
 									mailProps={mailProps}
 									setActiveTab={setActiveTab}
@@ -223,12 +224,13 @@ function CogoOne() {
 									setModalType={setModalType}
 									listCogooneGroupMembers={listCogooneGroupMembers}
 									membersList={membersList}
+									{...commonProps}
 								/>
 							</div>
 							{(
-								ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
+								(ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
 								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
-								|| teamsSideBarCheck
+								|| teamsSideBarCheck) && !isMobile
 							) ? (
 								<div className={cl`${styles.user_profile_layout} 
 								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}

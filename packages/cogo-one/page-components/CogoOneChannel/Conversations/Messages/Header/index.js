@@ -14,6 +14,7 @@ import ChatControls from './ChatControls';
 import Assignes from './HeaderFuncs/assignes';
 import ShowContent from './HeaderFuncs/showContent';
 import TagsPopOver from './HeaderFuncs/tagsPopOver';
+import MobileHeader from './MobileHeader';
 import RightButton from './RightButton';
 import styles from './styles.module.css';
 
@@ -44,6 +45,7 @@ function Header({
 	setActiveTab = () => {},
 	supplierLoading = false,
 	hasNoFireBaseRoom = false,
+	isMobile = false,
 }) {
 	const {
 		updateRoomLoading = false,
@@ -87,6 +89,16 @@ function Header({
 	const isPartOfGroup = group_members?.includes(userId);
 	const isManager = managers_ids?.includes(userId);
 
+	if (isMobile) {
+		return (
+			<MobileHeader
+				formattedData={formattedData}
+				setActiveTab={setActiveTab}
+				channelType={channelType}
+			/>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex_space_between}>
@@ -95,6 +107,7 @@ function Header({
 						className={styles.home_button}
 						onClick={() => setActiveTab((prev) => ({ ...prev, data: {} }))}
 					/>
+
 					<TagsPopOver
 						prevTags={chat_tags}
 						updateChat={updateChat}
