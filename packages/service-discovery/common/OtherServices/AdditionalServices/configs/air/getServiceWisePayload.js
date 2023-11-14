@@ -82,17 +82,11 @@ const getServiceWisePayload = ({
 					? commodity
 					: null,
 			trade_type : tradeType,
-			packages   : (packages || []).map((item) => ({
-				...item,
-				height         : 1,
-				width          : 1,
-				length         : volume,
-				package_weight : weight,
-			})),
-			status  : 'active',
+			packages,
+			status     : 'active',
 			weight,
 			volume,
-			address : address || undefined,
+			address    : address || undefined,
 		}],
 		air_customs: [
 			{

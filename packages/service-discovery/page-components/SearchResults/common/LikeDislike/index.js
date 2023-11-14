@@ -2,7 +2,7 @@ import { Button, cl } from '@cogoport/components';
 import { IcCLike } from '@cogoport/icons-react';
 import { useState, useEffect } from 'react';
 
-import DislikeModal from './DislikeModal';
+import NewDislikeModal from './NewDislikeModal';
 import styles from './styles.module.css';
 
 function LikeDislike({ rateCardData = {}, detail = {}, isMobile = false }) {
@@ -54,7 +54,7 @@ function LikeDislike({ rateCardData = {}, detail = {}, isMobile = false }) {
 			</div>
 
 			{showFeedbackModal ? (
-				<DislikeModal
+				<NewDislikeModal
 					show={showFeedbackModal}
 					rate={rateCardData}
 					details={detail}
