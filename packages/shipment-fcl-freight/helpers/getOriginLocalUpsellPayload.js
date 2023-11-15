@@ -7,7 +7,7 @@ const getOriginLocalUpsellPayload = ({ userData, primary_service, shipment_data 
 
 		importer_exporter_id        : userData?.organization_id,
 		importer_exporter_branch_id : userData?.organization_branch_id,
-		user_id                     : userData?.id,
+		user_id                     : userData?.user_id,
 		search_type                 : 'fcl_freight_local',
 		source_id                   : shipment_data?.id,
 

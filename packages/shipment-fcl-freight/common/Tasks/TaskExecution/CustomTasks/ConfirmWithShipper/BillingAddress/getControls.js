@@ -1,4 +1,4 @@
-function getControls({ countryValidation = {}, setCountryId = () => {} }) {
+function getControls({ countryValidation = {}, setCountryId = () => {}, isSez = false }) {
 	const controls = [
 		{
 			name        : 'business_name',
@@ -77,6 +77,16 @@ function getControls({ countryValidation = {}, setCountryId = () => {} }) {
 			rules: {
 				required: 'Required',
 			},
+		},
+		{
+			name   : 'sez_proof',
+			label  : 'Sez Proof',
+			type   : 'upload',
+			styles : { flexBasis: '100%' },
+			rules  : {
+				required: 'Document is Required',
+			},
+			show: isSez,
 		},
 		{
 			name   : 'tax_number_document_url',

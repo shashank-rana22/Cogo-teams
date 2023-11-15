@@ -11,9 +11,12 @@ const getCreateOrgBillingAddr = ({
 		tax_number_document_url = '',
 		mobile_number = {},
 		email = '', is_sez = '',
+		sez_proof,
 	} = values || {};
 
 	// const { task_field_id = '' } = task || {};
+
+	const isSez = is_sez === 'yes';
 
 	const payload = {
 		address,
@@ -24,7 +27,8 @@ const getCreateOrgBillingAddr = ({
 		tax_number_document_url : tax_number_document_url?.finalUrl,
 		// organization_trade_party_id : task_field_id,
 		country_id              : countryId,
-		is_sez                  : is_sez === 'yes',
+		is_sez                  : isSez,
+		...(isSez ? { sez_proof: sez_proof?.finalUrl } : {}),
 		poc_details             : [{
 			name,
 			email,
