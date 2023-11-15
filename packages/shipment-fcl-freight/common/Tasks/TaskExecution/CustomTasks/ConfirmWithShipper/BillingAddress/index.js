@@ -12,7 +12,7 @@ import {
 } from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 
-import useCreateAutoUpsellService from '../../../../../../hooks/useCreateAutoUpsellService';
+import useCreateUpsellOriginLocalService from '../../../../../../hooks/useCreateUpsellOriginLocalService';
 import useListOrganizationUsers from '../../../../../../hooks/useListOrganizationUsers';
 
 import getControls from './getControls';
@@ -40,17 +40,27 @@ function BillingAddress({
 	refetchServices = () => {},
 	shipment_data = {},
 	consigneeId = '',
+	primary_service = {},
 }) {
 	const { control, reset = () => {}, formState:{ errors = {} }, handleSubmit = () => {} } = useForm();
 
-	const { loading = false } = useListOrganizationUsers({ shipment_data, reset, consigneeId });
+	const { loading = false, data:userData } = useListOrganizationUsers({ shipment_data, reset, consigneeId });
 
 	const {
 		onSubmit = () => {},
 		loading: upsellLoading = false,
 		countryId = '',
 		setCountryId = () => {},
-	} = useCreateAutoUpsellService({ task, refetch, onCancel, refetchServices, shipment_data, consigneeId });
+	} = useCreateUpsellOriginLocalService({
+		task,
+		refetch,
+		onCancel,
+		refetchServices,
+		shipment_data,
+		consigneeId,
+		userData,
+		primary_service,
+	});
 
 	const countryValidation = getCountryConstants({
 		country_id    : countryId,
