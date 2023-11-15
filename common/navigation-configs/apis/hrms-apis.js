@@ -946,6 +946,48 @@ const HRMS = {
 			service_name : 'hrms',
 		},
 	],
+	payment: [
+		{
+			api          : 'get_expense_data',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_reimbursement',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_reimbursement',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_reimbursement',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_reimbursement_approval_data',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_payslip',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_employee_payslip_year',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_reimbursement_statuses',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+	],
 };
 
 export default HRMS;
