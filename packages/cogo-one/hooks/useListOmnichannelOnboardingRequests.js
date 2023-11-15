@@ -18,7 +18,7 @@ const getParams = ({
 		request_status          : !showHistory ? 'pending' : requestStatus || undefined,
 		request_type            : requestType || undefined,
 		escalation_cycle        : escalationCycle || undefined,
-		requested_completed_by  : requestCompleted || undefined,
+		request_completed_by    : requestCompleted || undefined,
 		created_at_greater_than : start || undefined,
 		created_at_less_than    : end || undefined,
 	},

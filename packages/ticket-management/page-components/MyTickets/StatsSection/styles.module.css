@@ -1,4 +1,5 @@
 .stats_section_container {
 	display: flex;
 	margin-bottom: 12px;
+	overflow: auto;
 }

@@ -29,9 +29,16 @@
 }
 
 .tab_switch {
+	overflow: auto;
+
 	@media screen and (max-width: 768px) {
 		margin-bottom: 10px;
 	}
+}
+
+.tab_switch::-webkit-scrollbar {
+	width: 0;
+	height: 0;
 }
 
 .filters {

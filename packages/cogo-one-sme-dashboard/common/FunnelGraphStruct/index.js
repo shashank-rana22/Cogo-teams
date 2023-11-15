@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 import FunnelGraph from 'funnel-graph-js';
 import React, { useRef, useEffect, useState } from 'react';
@@ -14,6 +15,7 @@ function DataContainer({
 	showSegregation = false,
 	subLabels = [],
 	hoverIndex = '',
+	showCurrency = false,
 }) {
 	return (
 		<>
@@ -21,12 +23,27 @@ function DataContainer({
 				<div>{itm}</div>
 
 				<div className={styles.graph_values}>
-					{getFormattedAmount({
-						number: data.values[index].reduce(
-							(acc, item) => acc + item,
-							0,
-						),
-					})}
+					{showCurrency
+						? formatAmount({
+							amount: data.values[index].reduce(
+								(acc, item) => acc + item,
+								0,
+							),
+							currency : 'USD',
+							options  : {
+								currencyWise          : true,
+								style                 : 'currency',
+								currencyDisplay       : 'symbol',
+								notation              : 'compact',
+								maximumFractionDigits : 2,
+							},
+						})
+						: getFormattedAmount({
+							number: data.values[index].reduce(
+								(acc, item) => acc + item,
+								0,
+							),
+						})}
 				</div>
 			</div>
 
@@ -57,6 +74,7 @@ function FunnelGraphStruct({
 	showSegregation = true,
 	subLabels = [],
 	showDataBelow = false,
+	showCurrency = false,
 }) {
 	const [hoverIndex, setHoverIndex] = useState('');
 	const funnelContainer = useRef();
@@ -107,6 +125,7 @@ function FunnelGraphStruct({
 										showSegregation={showSegregation}
 										subLabels={subLabels}
 										hoverIndex={hoverIndex}
+										showCurrency={showCurrency}
 									/>
 								</div>
 							),

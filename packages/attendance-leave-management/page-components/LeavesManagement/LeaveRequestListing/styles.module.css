@@ -21,12 +21,20 @@
 	color: #849e4c;
 }
 
+.rejected_color {
+	color: red;
+}
+
 .pending_color_bg {
 	background-color: #f68b21;
 }
 
 .approved_color_bg {
 	background-color: #abcd62;
+}
+
+.rejected_color_bg {
+	background-color: red;
 }
 
 .pending_dot {

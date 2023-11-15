@@ -22,7 +22,7 @@
 
 	:global {
 		.ui_loading_container {
-			margin-top: 20px;
+			margin: 20px 0;
 		}
 	}
 }

@@ -10,7 +10,7 @@ export const FILTER_CONTROLS = {
 		dateFormat : GLOBAL_CONSTANTS?.formats?.date?.['eee dd'],
 	},
 	'1M': {
-		valueKey   : 'week',
+		valueKey   : 'day',
 		dateFormat : GLOBAL_CONSTANTS?.formats?.date?.['yyyy-MM-dd'],
 	},
 	'6M': {

@@ -5,6 +5,8 @@ import { useRouter } from '@cogoport/next';
 import { useAllocationRequest } from '@cogoport/request';
 import { useEffect, useMemo, useState } from 'react';
 
+import { getFormattedDate } from '../../../../../../utils/get-formatted-date';
+
 import getQuestFormattedData from './configurations/getQuestFormattedData';
 import getStringFromQuest from './configurations/getStringFromQuest';
 
@@ -14,6 +16,13 @@ const FIELD_LABEL_MAPPING = {
 	agent_scoring_block_id : 'sub_block_name',
 	parameter              : 'agent_scoring_parameter_id',
 };
+
+let richTextEditor;
+
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require, import/no-unresolved
+	richTextEditor = require('react-rte').default;
+}
 
 const getFormattedPayload = (formValues) => {
 	const formattedData = (formValues?.blocks || []).reduce((acc, item) => {
@@ -40,8 +49,10 @@ const getFormattedPayload = (formValues) => {
 	return formattedData;
 };
 
-const useQuestConfig = ({ data = {}, questName = null }) => {
+const useQuestConfig = ({ data = {}, questData = {} }) => {
 	const { push } = useRouter();
+
+	const [editor, setEditor] = useState(richTextEditor?.createValueFromString((data?.quest_string || ''), 'html'));
 
 	const [editSubBlock, setEditSubBlock] = useState({});
 
@@ -110,15 +121,16 @@ const useQuestConfig = ({ data = {}, questName = null }) => {
 	const handleClick = async (formValues) => {
 		const payload = getFormattedPayload(formValues);
 
-		const { quest_string } = formValues;
-
 		try {
 			await trigger({
 				data: {
 					agent_scoring_quest_id             : data?.id,
 					agent_scoring_quest_configurations : payload,
-					name                               : questName,
-					quest_string,
+					quest_string                       : editor.toString('html'),
+					name                               : questData?.name || undefined,
+					start_date                         : questData?.date_range?.startDate || undefined,
+					end_date                           : questData?.date_range?.endDate
+						? getFormattedDate({ currentDate: questData?.date_range?.endDate }) : undefined,
 				},
 			});
 
@@ -129,7 +141,7 @@ const useQuestConfig = ({ data = {}, questName = null }) => {
 		}
 	};
 
-	const formattedString = getStringFromQuest({ data: labelData, blockId });
+	const formattedString = getStringFromQuest({ data: labelData, blockId, questData });
 
 	const onChangeChild = ({ val, obj, index, name, subBlockName }) => {
 		if (!REQUIRED_FEILDS.includes(name)) return;
@@ -156,12 +168,8 @@ const useQuestConfig = ({ data = {}, questName = null }) => {
 		setLabelData((label) => ({ ...label, [subBlockName]: newLabelData }));
 	};
 
-	const onClickFill = () => {
-		setValue('quest_string', formattedString);
-	};
-
 	const handleResetString = () => {
-		setValue('quest_string', data?.quest_string);
+		setEditor(richTextEditor?.createValueFromString((data?.quest_string || ''), 'html'));
 	};
 
 	useEffect(() => {
@@ -186,8 +194,10 @@ const useQuestConfig = ({ data = {}, questName = null }) => {
 		formattedString,
 		setBlockId,
 		prefillValues: formattedDefaultValues,
-		onClickFill,
 		handleResetString,
+		setValue,
+		editor,
+		setEditor,
 	};
 };
 
