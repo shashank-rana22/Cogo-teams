@@ -10,10 +10,10 @@ import Heading from '../HRMeeting/Heading';
 import styles from './styles.module.css';
 
 function ManagerClearance({ data = {}, refetch = () => {}, handleBack = () => {}, handleNext = () => {} }) {
-	const { manager_clearance, application_status } = data || {};
+	const { manager_clearance, application_status, application_process_details } = data || {};
 	const { review_request, assign_hoto, process_user_details } = manager_clearance || {};
 	let { name } = process_user_details || {};
-	const { sub_process_data, is_complete } = review_request || {};
+	const { sub_process_data, is_complete, is_ignored } = review_request || {};
 	const { notes_shared_with_you, name:approver_name } = sub_process_data || {};
 	name = approver_name === undefined ? name : approver_name;
 
@@ -35,6 +35,19 @@ function ManagerClearance({ data = {}, refetch = () => {}, handleBack = () => {}
 		assign_hoto?.sub_process_data?.last_working_day, assign_hoto?.sub_process_data?.takeover_by,
 		data, setValue, sub_process_data]);
 
+	if (is_ignored) {
+		return (
+			<Heading
+				title="MANAGER CLEARANCE"
+				subTitle="Summary from manager interaction"
+				isComplete={is_complete}
+				name={name}
+				refetch={refetch}
+				application_process_details={application_process_details}
+				isIgnored={is_ignored}
+			/>
+		);
+	}
 	return (
 		<>
 			<Heading
@@ -42,6 +55,9 @@ function ManagerClearance({ data = {}, refetch = () => {}, handleBack = () => {}
 				subTitle="Summary from manager interaction"
 				isComplete={is_complete}
 				name={name}
+				refetch={refetch}
+				application_process_details={application_process_details}
+				isIgnored={is_ignored}
 			/>
 			{application_status === 'cancellation_requested' ? (
 				<CancellationRequest
