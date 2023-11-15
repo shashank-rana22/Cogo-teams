@@ -52,6 +52,7 @@ function Customers({
 	preferenceLoading = false,
 	setIsBotSession = () => {},
 	isBotSession = false,
+	isMobile = false,
 }) {
 	const {
 		userEmailAddress = '',
@@ -245,6 +246,7 @@ function Customers({
 				setSendBulkTemplates={setSendBulkTemplates}
 				firestore={firestore}
 				activeSelect={activeTab?.tab || ''}
+				isMobile={isMobile}
 			/>
 		</div>
 	);
