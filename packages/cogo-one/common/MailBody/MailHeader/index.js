@@ -22,6 +22,7 @@ function MailHeader({
 	setModalData = () => {},
 	activeMessageCard = {},
 	viewType = '',
+	isMobile = false,
 }) {
 	const {
 		response, send_by = '',
@@ -81,9 +82,9 @@ function MailHeader({
 				</div>
 			</div>
 
-			<div>
+			<div className={styles.minimize_screen}>
 				<div className={styles.icon_flex}>
-					{hasPermissionToEdit ? (
+					{hasPermissionToEdit && !isMobile ? (
 						<RightButtonsMapping
 							isDraft={isDraft}
 							handleClick={handleClick}
@@ -126,7 +127,7 @@ function MailHeader({
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 						formatType : 'dateTime',
-						separator  : ' | ',
+						separator  : isMobile ? ' ' : ' | ',
 					})}
 				</div>
 			</div>

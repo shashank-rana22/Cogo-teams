@@ -146,6 +146,7 @@ function CogoOne() {
 	return (
 		<>
 			<HeaderBar
+				isMobile={isMobile}
 				firestore={firestore}
 				fetchWorkStatus={fetchWorkStatus}
 				agentStatus={agentWorkStatus}
@@ -265,7 +266,7 @@ function CogoOne() {
 						</>
 					)}
 			</div>
-			<Calender firestore={firestore} />
+			{!isMobile ? <Calender firestore={firestore} /> : null}
 			<ModalComp
 				raiseTicketModal={raiseTicketModal}
 				setRaiseTicketModal={setRaiseTicketModal}

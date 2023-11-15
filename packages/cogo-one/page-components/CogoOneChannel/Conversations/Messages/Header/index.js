@@ -185,6 +185,8 @@ function Header({
 				supplierLoading={supplierLoading}
 				hasPermissionToEdit={hasPermissionToEdit}
 				canMessageOnBotSession={canMessageOnBotSession}
+				isMobile={isMobile}
+				setActiveTab={setActiveTab}
 			/>
 		</div>
 	);

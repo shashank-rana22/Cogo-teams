@@ -59,6 +59,11 @@
 	font-size: 12px;
 	color: #424242;
 	text-align: right;
+
+	@media (max-width: 576px) {
+		width: 70px;
+		text-align: left;
+	}
 }
 
 .icon_styles {
@@ -77,8 +82,22 @@
 	display: flex;
 	justify-content: flex-end;
 	margin-bottom: 4px;
+
+	@media (max-width: 576px) {
+		width: 100%;
+	}
 }
 
 .tool_tip {
 	max-width: 500px !important;
+}
+
+.minimize_screen {
+	@media (max-width: 576px) {
+		display: flex;
+		flex-direction: column-reverse;
+		align-items: center;
+		justify-content: space-between;
+		width: 20%;
+	}
 }

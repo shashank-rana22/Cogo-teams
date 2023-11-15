@@ -65,6 +65,7 @@ function MailBody({
 	activeMessageCard = {},
 	attachmentData = {},
 	attachmentLoading = false,
+	isMobile = false,
 }) {
 	const [loading, setLoading] = useState(false);
 	const [modalData, setModalData] = useState(null);
@@ -160,6 +161,7 @@ function MailBody({
 					modalData={modalData}
 					activeMessageCard={activeMessageCard}
 					viewType={viewType}
+					isMobile={isMobile}
 				/>
 
 				{(!isDraft && expandedState && !isSentFromPlatform)

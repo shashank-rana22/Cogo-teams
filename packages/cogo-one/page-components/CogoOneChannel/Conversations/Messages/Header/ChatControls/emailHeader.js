@@ -1,9 +1,10 @@
 import { Tooltip } from '@cogoport/components';
+import { IcMArrowLeft } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function EmailHeader({ formattedData = {} }) {
+function EmailHeader({ formattedData = {}, isMobile = false, setActiveTab = () => {} }) {
 	const {
 		last_message_document = {},
 	} = formattedData || {};
@@ -13,6 +14,17 @@ function EmailHeader({ formattedData = {} }) {
 
 	return (
 		<div className={styles.email_header}>
+			{isMobile ? (
+				<IcMArrowLeft
+					className={styles.arrow_back}
+					onClick={() => setActiveTab(
+						(prev) => ({
+							...prev,
+							data: {},
+						}),
+					)}
+				/>
+			) : null}
 			<Tooltip
 				placement="bottom"
 				content={subject || ''}

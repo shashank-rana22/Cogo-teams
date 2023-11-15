@@ -38,8 +38,19 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
+
+	@media (max-width: 576px) {
+		width: 94%;
+	}
 }
 
 .tooltip_container {
 	max-width: 60vw !important;
+}
+
+.arrow_back {
+	width: 16px;
+	height: 16px;
+	margin-right: 8px;
+	cursor: pointer;
 }

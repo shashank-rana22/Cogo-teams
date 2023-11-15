@@ -21,6 +21,7 @@ function TeamChats(props) {
 		activeTab = {},
 		listCogooneGroupMembers = () => {},
 		membersList = [],
+		isMobile = false,
 	} = props || {};
 
 	const conversationsDivRef = useRef(null);
@@ -73,6 +74,7 @@ function TeamChats(props) {
 					hasPermissionToEdit={hasPermissionToEdit}
 					setLoadingDraft={setLoadingDraft}
 					loadingDraft={loadingDraft}
+					isMobile={isMobile}
 				/>
 			</div>
 			<div className={styles.messages}>

@@ -1,6 +1,6 @@
 import { Popover, Avatar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMAppDelete } from '@cogoport/icons-react';
+import { IcMAppDelete, IcMArrowLeft, IcMHome } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
@@ -23,6 +23,7 @@ function Header({
 	loggedInUserId = '',
 	setLoadingDraft = () => {},
 	loadingDraft = false,
+	isMobile = false,
 }) {
 	const {
 		is_draft = false,
@@ -56,6 +57,7 @@ function Header({
 				viewType={viewType}
 				setLoadingDraft={setLoadingDraft}
 				loadingDraft={loadingDraft}
+				isMobile={isMobile}
 			/>
 		);
 	}
@@ -63,6 +65,22 @@ function Header({
 	return (
 		<div className={styles.container}>
 			<div className={styles.common_flex}>
+				{isMobile ? (
+					<IcMArrowLeft
+						className={styles.arrow_back}
+						onClick={() => setActiveTab(
+							(prev) => ({
+								...prev,
+								data: {},
+							}),
+						)}
+					/>
+				) : (
+					<IcMHome
+						className={styles.arrow_back}
+						onClick={() => setActiveTab((prev) => ({ ...prev, data: {} }))}
+					/>
+				)}
 				{isGroup ? (
 					<Image
 						src={GLOBAL_CONSTANTS.image_url.teams}

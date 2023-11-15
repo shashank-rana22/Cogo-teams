@@ -25,6 +25,7 @@ function HeaderBar({
 	userId = '',
 	initialViewType = '',
 	setViewType = () => {},
+	isMobile = false,
 }) {
 	const {
 		flash_revert_logs : flashRevertLogs = false,
@@ -138,7 +139,7 @@ function HeaderBar({
 					</div>
 				</div>
 			</div>
-			{!showFeedback && (
+			{!showFeedback && !isMobile && (
 				<div
 					role="presentation"
 					className={styles.feedback}
