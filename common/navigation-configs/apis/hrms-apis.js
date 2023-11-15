@@ -162,6 +162,16 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'ignore_application_process',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'ignore_all_process',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	employee_portal: [
 		{
@@ -818,6 +828,16 @@ const HRMS = {
 		},
 		{
 			api          : 'download_team_attendance',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_geo_location_requests',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_geo_location_request',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
