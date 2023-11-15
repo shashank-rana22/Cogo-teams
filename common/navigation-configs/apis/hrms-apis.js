@@ -848,6 +848,46 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'get_employee_directory_payment_detail',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_employee_directory',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_salary_structure',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_bank_account_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_employee_statutory_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_bank_account_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_employee_detail',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_employee_document',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	cogo_store: [
 		{
