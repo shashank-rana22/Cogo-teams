@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 
 function TaskList({
 	view_type = 'hrbp_clearance', apiData = {},
-	getData = {}, setCurrentComponent = () => {}, refetch = () => [],
+	getData = {}, setCurrentComponent = () => {}, refetch = () => {},
 }) {
 	const [show, setShow] = useState(false);
 	const { ignoreApplications } = useIgnoreAllProcess({ refetch });
