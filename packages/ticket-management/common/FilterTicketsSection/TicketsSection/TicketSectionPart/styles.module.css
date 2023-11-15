@@ -10,6 +10,11 @@
 	&:last-child {
 		margin-right: 0;
 	}
+
+	@media screen and (max-width: 768px) {
+		width: 100%;
+		margin-bottom: 12px;
+	}
 }
 
 .admin_ticket_view {

@@ -13,22 +13,11 @@ function RenderLabel({ label = '' }) {
 }
 
 const getCreateControls = ({
-	t,
-	checkRequest,
-	ticketTypeOptions = {},
-	organizationUserOptions = {},
-	organizationOptions = {},
-	categoryDeskOptions = {},
-	resetField = () => {},
-	setAdditionalInfo = () => {},
-	setValue = () => {},
-	formattedSubCategories = [],
-	setRaiseToDesk = () => {},
-	setSubCategories = () => {},
-	formatRaiseToDeskOptions = [],
-	setDefaultTypeId = () => {},
-	isOperation = false,
-	watchIdType = '',
+	t, checkRequest, ticketTypeOptions = {}, organizationUserOptions = {},
+	organizationOptions = {}, categoryDeskOptions = {}, resetField = () => {},
+	setAdditionalInfo = () => {}, setValue = () => {}, formattedSubCategories = [],
+	setRaiseToDesk = () => {}, setSubCategories = () => {}, formatRaiseToDeskOptions = [],
+	setDefaultTypeId = () => {}, isOperation = false, watchIdType = '', watchRequestType = '',
 }) => {
 	let controls = [];
 
@@ -43,6 +32,13 @@ const getCreateControls = ({
 			options        : getRequestTypeOptions({ t }),
 			isClearable    : true,
 			visible        : true,
+			onChange       : (val) => {
+				if (val === 'rate') {
+					setValue('id_type', 'sid');
+					return;
+				}
+				setValue('id_type', '');
+			},
 		},
 		{
 			...(organizationOptions || {}),
@@ -92,6 +88,22 @@ const getCreateControls = ({
 			},
 		},
 		{
+			...(categoryDeskOptions || {}),
+			label          : <RenderLabel label={t('myTickets:select_category')} />,
+			name           : 'platform_category',
+			controllerType : 'select',
+			placeholder    : t('myTickets:select_category'),
+			isClearable    : true,
+			defaultOptions : true,
+			onChange       : (_, val) => {
+				setSubCategories(val?.subcategories);
+				resetField('serial_id');
+				resetField('service');
+				resetField('trade_type');
+			},
+			visible: true,
+		},
+		{
 			...(checkRequest || {}),
 			label          : <RenderLabel label={t('myTickets:select_sid')} />,
 			placeholder    : t('myTickets:select_sid'),
@@ -116,19 +128,17 @@ const getCreateControls = ({
 			name           : 'service',
 			controllerType : 'select',
 			placeholder    : t('myTickets:select_service'),
-			rules          : { required: true },
+			rules          : { required: watchRequestType !== 'platform_issue' },
 			options        : GLOBAL_CONSTANTS.shipment_types,
 			isClearable    : true,
 			disabled       : true,
 			visible        : true,
 		},
 		{
-			label          : <RenderLabel label={t('myTickets:select_trade_type')} />,
+			label          : t('myTickets:select_trade_type'),
 			name           : 'trade_type',
 			controllerType : 'select',
 			placeholder    : t('myTickets:select_trade_type'),
-			rules          : { required: true },
-			disabled       : true,
 			options        : GLOBAL_CONSTANTS.trade_types,
 			isClearable    : true,
 			visible        : true,
@@ -231,10 +241,13 @@ const getCreateControls = ({
 			visible   : true,
 		},
 		{
-			label          : t('myTickets:upload_supporting_document'),
+			label: watchRequestType === 'platform_issue'
+				? <RenderLabel label={t('myTickets:upload_supporting_document')} />
+				: t('myTickets:upload_supporting_document'),
 			name           : 'file_url',
 			controllerType : 'uploader',
 			visible        : true,
+			rules          : { required: watchRequestType === 'platform_issue' },
 		},
 		{
 			label          : t('myTickets:notify_customer'),

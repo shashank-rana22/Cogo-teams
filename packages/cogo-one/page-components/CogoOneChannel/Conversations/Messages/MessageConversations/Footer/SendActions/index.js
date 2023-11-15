@@ -4,11 +4,11 @@ import { isEmpty } from '@cogoport/utils';
 import { forwardRef } from 'react';
 
 import CustomFileUploader from '../../../../../../../common/CustomFileUploader';
+import EmojisBody from '../../../../../../../common/EmojisBody';
 import { ACCEPT_FILE_MAPPING } from '../../../../../../../constants';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../../../../../constants/viewTypeMapping';
 import useGetEmojiList from '../../../../../../../hooks/useGetEmojis';
 import useSendPromotionalRate from '../../../../../../../hooks/useSendPromotionalRate';
-import EmojisBody from '../../EmojisBody';
 
 import styles from './styles.module.css';
 
@@ -94,6 +94,7 @@ function SendActions({
 							emojisList={emojisList}
 							setOnClicked={setOnClicked}
 							updateMessage={handleUpdateMessage}
+							onClicked={onClicked}
 						/>
 					)}
 					visible={onClicked}

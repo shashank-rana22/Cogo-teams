@@ -37,21 +37,16 @@ function getColumns({
 			id       : 'company_name',
 			Cell     : ({ row: { original } }) => {
 				const { data = {} } = original || {};
-				const { organization = '' } = data || {};
+				const { organization = '', concorPdaApprovalRequest = {} } = data || {};
 				const { interCompanyJournalVoucherRequest } = data || {};
 				const { list } = interCompanyJournalVoucherRequest || {};
-				const getList = () => (list || [{}]).map(
-					(item) => item?.tradePartyName,
-				);
+				const getList = () => (list || [{}]).map((item) => item?.tradePartyName);
 				const companyName = getList()?.[GLOBAL_CONSTANTS.zeroth_index];
 				const bankTradePartyName = data?.bankRequest && data?.organization?.tradePartyType;
 				const tdsTradePartyName = data?.tdsRequest && data?.organization?.tradePartyType;
 				return list ? (
 					<div className={cl`${styles.company_name} ${styles.common}`}>
-						<ShowOverflowingNumber
-							value={toTitleCase(companyName)}
-							maxLength={OVERFLOW_NUMBER}
-						/>
+						<ShowOverflowingNumber value={toTitleCase(companyName)} maxLength={OVERFLOW_NUMBER} />
 					</div>
 				) : (
 					<div>
@@ -66,12 +61,12 @@ function getColumns({
 						) : (
 							<div className={cl`${styles.company_name} ${styles.common}`}>
 								<ShowOverflowingNumber
-									value={toTitleCase(organization?.businessName)}
+									value={toTitleCase(organization?.businessName
+										|| concorPdaApprovalRequest?.supplierName)}
 									maxLength={OVERFLOW_NUMBER}
 								/>
 							</div>
 						)}
-
 					</div>
 				);
 			},
@@ -106,13 +101,12 @@ function getColumns({
 								<span>
 									{t('incidentManagement:icjv_approval')}
 								</span>
-							)
-								: (
-									<ShowOverflowingNumber
-										value={toTitleCase(startCase(requestType))}
-										maxLength={OVERFLOW_NUMBER}
-									/>
-								)}
+							) : (
+								<ShowOverflowingNumber
+									value={toTitleCase(startCase(requestType))}
+									maxLength={OVERFLOW_NUMBER}
+								/>
+							)}
 						</div>
 						<span>
 							{typeof (revoked) === 'boolean' && (
@@ -160,8 +154,13 @@ function getColumns({
 			accessor : 'source',
 			id       : 'source',
 			Cell     : ({ row: { original } }) => {
-				const { source = '' } = original || {};
-				return <div className={cl`${styles.source} ${styles.common}`}>{startCase(source || '-')}</div>;
+				const { source = '', data: { concorPdaApprovalRequest = {} } } = original || {};
+				return (
+					<div className={cl`${styles.source} ${styles.common}`}>
+						<span>{startCase(source || '-')}</span>
+						{concorPdaApprovalRequest?.sid ? <span>{`#${concorPdaApprovalRequest?.sid}`}</span> : null}
+					</div>
+				);
 			},
 		},
 		{

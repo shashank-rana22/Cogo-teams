@@ -55,28 +55,29 @@ export 	const powerControls = (newControls, bankData, accountMode) => newControl
 
 	if (name === 'docType') {
 		if (accountMode === 'AP') {
-			const currentOptions = [...controlValue.options];
-			const mutatedOptions = currentOptions.slice(1);
-
 			return {
 				...controlValue,
 				options: [
 					{ label: 'Payment', value: 'PAYMENT' },
-					...mutatedOptions,
+					{ label: 'Tds', value: 'TDS' },
 				],
 			};
 		}
-		if (accountMode === 'CSD' || accountMode === 'PDA') {
+		if (accountMode === 'AR') {
 			return {
 				...controlValue,
 				options: [
-					{ label: 'Payment', value: 'PAYMENT' },
+					{ label: 'Receipt', value: 'RECEIPT' },
+					{ label: 'Tds', value: 'TDS' },
 				],
 			};
 		}
 		return {
 			...controlValue,
-			options: [...controlValue.options],
+			options: [
+				{ label: 'Payment', value: 'PAYMENT' },
+				{ label: 'Receipt', value: 'RECEIPT' },
+			],
 		};
 	}
 

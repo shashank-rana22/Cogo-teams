@@ -19,6 +19,7 @@ const SUB_ACTIVE_TAB_STATUS_MAPPING = {
 };
 
 const useGetJobList = ({
+	filters = {},
 	paginationFilters = {},
 	search = '',
 	activeTab = '',
@@ -38,19 +39,23 @@ const useGetJobList = ({
 	const { query = '', debounceQuery = () => {} } = useDebounceQuery();
 	const { page = 1, pageLimit = 10 } = paginationFilters || {};
 
-	const refetch = useCallback(({ filters = {}, setShow = () => {} }) => {
+	const refetch = useCallback(({ setShow = () => {} }) => {
 		const func = async () => {
 			const {
-				Service = '',
-				operationalClosedDate = '', creationDate = '',
-				walletUsed = '', tradeType = '',
+				Service = '', operationalClosedDate = {}, creationDate = {},
+				walletUsed = '', tradeType = '', exclude = [], financialClosedDate = {},
 			} = filters || {};
 			const {
 				startDate : creationStartDate = '', endDate : creationEndDate = '',
-			} = creationDate || '';
+			} = creationDate || {};
 			const {
 				startDate : opeerationalClosedStartDate = '', endDate : operationalClosedEndDate = '',
-			} = operationalClosedDate || '';
+			} = operationalClosedDate || {};
+
+			const {
+				startDate: financialClosedStartDate = '', endDate: financialClosedEndDate = '',
+			} = financialClosedDate || '';
+
 			try {
 				await trigger({
 					params: {
@@ -69,8 +74,14 @@ const useGetJobList = ({
 							&& getFormatDate(opeerationalClosedStartDate)) || undefined,
 						operationalClosedEndDate: (opeerationalClosedStartDate && operationalClosedEndDate
 							&& getFormatDate(operationalClosedEndDate)) || undefined,
-						query      : query || undefined,
-						walletUsed : walletUsed || undefined,
+						financialClosedStartDate: (financialClosedStartDate && financialClosedEndDate
+							&& getFormatDate(financialClosedStartDate)) || undefined,
+						financialClosedEndDate: (financialClosedStartDate && financialClosedEndDate
+							&& getFormatDate(financialClosedEndDate)) || undefined,
+						query                     : query || undefined,
+						walletUsed                : walletUsed || undefined,
+						excludeCancelledShipments : exclude?.includes('cancelled_shipments') || undefined,
+						excludeZeroExpense        : exclude?.includes('zero_expense') || undefined,
 					},
 				});
 				setShow(false);
@@ -78,8 +89,10 @@ const useGetJobList = ({
 				toastApiError(error);
 			}
 		};
+
 		func();
-	}, [CLOSING_STATUS, page, pageLimit, query, trigger, subActiveTab, entityCode]);
+	}, [trigger, CLOSING_STATUS, subActiveTab, page,
+		pageLimit, entityCode, query, filters]);
 
 	useEffect(() => {
 		debounceQuery(search);

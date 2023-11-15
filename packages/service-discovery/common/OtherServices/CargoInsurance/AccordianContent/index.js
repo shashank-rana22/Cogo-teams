@@ -1,5 +1,3 @@
-import React from 'react';
-
 import LineItems from '../../common/LineItems';
 
 import styles from './styles.module.css';

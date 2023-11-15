@@ -4,8 +4,39 @@ import { VALUE_TWO, VALUE_ZERO, VALUE_ONE, PERCENTAGE_CHECK } from '../../../con
 
 import styles from './styles.module.css';
 
+const options = [
+	{
+		label : 'To improve customer relations.',
+		value : 'to_improve_customer_relations',
+	},
+	{
+		label : 'To improve supplier relations',
+		value : 'to_improve_supplier_relations',
+	},
+	{
+		label : 'To honor platform rates.',
+		value : 'to_honor_platform_rates',
+	},
+	{
+		label : 'To honor contract booking.',
+		value : 'to_honor_contract_booking',
+	},
+	{
+		label : 'overall profitable but individual service loss.',
+		value : 'overall_profitable_but_individual_service_loss',
+	},
+];
+
 function ReasonModal({
-	modalStep, setModalStep, updateTrigger, reason, setReason, othertext, setOthertext, supplierPayload,
+	modalStep,
+	setModalStep,
+	updateTrigger,
+	reason,
+	setReason,
+	othertext,
+	setOthertext,
+	supplierPayload,
+	isSpotLineBooking = false,
 }) {
 	let hasNegativeProfitability = false;
 	Object.values(supplierPayload).forEach((rates) => {
@@ -23,28 +54,13 @@ function ReasonModal({
 			setReason(val);
 		}
 	};
-	const options = [
-		{
-			label : 'To improve customer relations.',
-			value : 'to_improve_customer_relations',
-		},
-		{
-			label : 'To improve supplier relations',
-			value : 'to_improve_supplier_relations',
-		},
-		{
-			label : 'To honor platform rates.',
-			value : 'to_honor_platform_rates',
-		},
-		{
-			label : 'To honor contract booking.',
-			value : 'to_honor_contract_booking',
-		},
-		{
-			label : 'overall profitable but individual service loss.',
-			value : 'overall_profitable_but_individual_service_loss',
-		},
-	];
+
+	const finalOptions = options.filter(
+		({ value }) => !(['to_honor_platform_rates', 'to_honor_contract_booking'].includes(
+			value,
+		) && isSpotLineBooking),
+	);
+
 	return (
 		<Modal size="lg" show={modalStep === VALUE_TWO} onClose={() => setModalStep(VALUE_ZERO)} placement="center">
 			<Modal.Header title="PREVIEW" />
@@ -55,7 +71,7 @@ function ReasonModal({
 							*You have used Revenue Desk wallet to apply discount.
 							Please provide a reason for approving this booking at this rate.
 						</div>
-						{options.map((option) => (
+						{finalOptions.map((option) => (
 							<Radio
 								key={option.value}
 								label={option.label}

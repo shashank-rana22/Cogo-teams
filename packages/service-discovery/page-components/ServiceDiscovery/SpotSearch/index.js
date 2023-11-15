@@ -1,7 +1,14 @@
-import { useRouter } from '@cogoport/next';
+import { cl } from '@cogoport/components';
+import Insurance from '@cogoport/insurance-form';
+import { useRouter, Router } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import Wallet from '../../../common/Header/common/Wallet';
+import CustomLoadingState from '../../../common/LoadingState/CustomLoadingState';
+import useGetIsMobile from '../../../helpers/useGetIsMobile';
+import useGetActiveServices from '../../../hooks/useGetActiveServices';
 
 import Header from './components/Header';
 import ModeSelection from './components/ModeSelection';
@@ -24,61 +31,87 @@ function SpotSearch() {
 		return {};
 	});
 
-	const [selectedMode, setSelectedMode] = useState({
-		mode_label : 'FCL',
-		mode_value : 'fcl_freight',
-	});
+	const [selectedMode, setSelectedMode] = useState(query?.service_type);
 	const [selectedService, setSelectedService] = useState({});
 	const [location, setLocation] = useState({});
 	const [errors, setErrors] = useState({});
+	const [routerLoading, setRouterLoading] = useState(false);
 
-	const { createSearch, loading } = useCreateSearch();
+	const {
+		data:{ service_discovery = {} } = {},
+		loading:bookableServicesLoading = false,
+	} = useGetActiveServices();
+
+	const { bookable_services = {} } = service_discovery || {};
+
+	const isMobile = useGetIsMobile();
+
+	const { createSearch = () => {}, loading = false } = useCreateSearch();
+
+	useEffect(() => {
+		Router.events.on('routeChangeStart', () => {
+			setRouterLoading(true);
+		});
+		Router.events.on('routeChangeComplete', () => {
+			setRouterLoading(false);
+		});
+	}, [setRouterLoading]);
+
+	if (bookableServicesLoading) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
+			{loading || routerLoading ? (
+				<CustomLoadingState />
+			) : null}
 
-			<div className={styles.header}>
-				<div className={styles.scope_select}>
-					<div className={styles.label}>Select Scope: </div>
-					<ScopeSelect size="md" />
-				</div>
+			<div className={cl`${styles.wrapper} ${(loading || routerLoading) && styles.disabled}`}>
+				<div className={styles.header}>
+					<div className={styles.scope_select}>
+						<div className={styles.label}>Select Scope: </div>
+						<ScopeSelect size="md" />
 
-				<Header
-					organization={organization}
-					setOrganization={setOrganization}
-					errors={errors}
-					setErrors={setErrors}
-				/>
-			</div>
-
-			<div className={styles.mode_selection}>
-				<ModeSelection
-					selectedMode={selectedMode}
-					setSelectedMode={setSelectedMode}
-					setSelectedService={setSelectedService}
-					setLocation={setLocation}
-				/>
-			</div>
-
-			{!isEmpty(selectedMode) ? (
-				<>
-					<div className={styles.locations}>
-						<Routes
-							mode={selectedMode}
-							formValues={location}
-							setFormValues={setLocation}
-							organization={organization}
-							errors={errors}
-							createSearch={createSearch}
-							createSearchLoading={loading}
-							setErrors={setErrors}
-						/>
+						<Wallet style={{ background: '#fff', marginLeft: 24 }} isMobile={isMobile} />
 					</div>
 
-					<div className={styles.sales_dashboard}>
+					<Header
+						organization={organization}
+						setOrganization={setOrganization}
+						errors={errors}
+						setErrors={setErrors}
+					/>
+				</div>
+
+				<div className={styles.mode_selection}>
+					<ModeSelection
+						selectedMode={selectedMode}
+						setSelectedMode={setSelectedMode}
+						setSelectedService={setSelectedService}
+						setLocation={setLocation}
+						bookable_services={bookable_services}
+					/>
+				</div>
+
+				{!isEmpty(selectedMode) ? (
+					<div className={styles.animation_div}>
+						<div className={styles.locations}>
+							<Routes
+								mode={selectedMode}
+								formValues={location}
+								setFormValues={setLocation}
+								organization={organization}
+								errors={errors}
+								createSearch={createSearch}
+								createSearchLoading={loading}
+								setErrors={setErrors}
+							/>
+						</div>
+
 						<SalesDashboard
 							importer_exporter_id={organization?.organization_id}
-							service_type={selectedMode?.mode_value}
+							service_type={selectedMode}
 							origin_location_id={location?.origin?.id}
 							destination_location_id={location?.destination?.id}
 							setLocation={setLocation}
@@ -87,31 +120,34 @@ function SpotSearch() {
 							createSearchLoading={loading}
 						/>
 					</div>
-				</>
-			) : null}
+				) : null}
 
-			<div className={styles.other_services}>
 				<OtherServices
 					selectedService={selectedService}
 					setSelectedService={setSelectedService}
 					setSelectedMode={setSelectedMode}
+					bookable_services={bookable_services}
 				/>
-			</div>
 
-			{isEmpty(selectedService) ? null : (
-				<div className={styles.locations}>
-					<Routes
-						mode={selectedService}
-						formValues={location}
-						setFormValues={setLocation}
-						organization={organization}
-						errors={errors}
-						createSearch={createSearch}
-						createSearchLoading={loading}
-						setErrors={setErrors}
-					/>
-				</div>
-			)}
+				{isEmpty(selectedService) ? null : (
+					<div className={styles.locations}>
+						{selectedService.mode_value === 'insurance'
+							? <Insurance organization={organization} />
+							: (
+								<Routes
+									mode={selectedService}
+									formValues={location}
+									setFormValues={setLocation}
+									organization={organization}
+									errors={errors}
+									createSearch={createSearch}
+									createSearchLoading={loading}
+									setErrors={setErrors}
+								/>
+							)}
+					</div>
+				)}
+			</div>
 		</div>
 	);
 }

@@ -1,8 +1,9 @@
 import {
-	Button, Tabs, TabPanel, RadioGroup, SingleDateRange,
+	Button, Tabs, TabPanel, RadioGroup, SingleDateRange, CheckboxGroup,
 } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import { excludeOptions } from '../../../utils/constants/excludeOptions';
 import { serviceType } from '../../../utils/constants/filterOptions';
 import { walletType } from '../../../utils/constants/walletOptions';
 
@@ -16,6 +17,7 @@ const tabData = [
 ];
 
 function Content({
+	activeTab = '',
 	filters = {},
 	setFilters = () => {},
 	receivables = '',
@@ -50,12 +52,13 @@ function Content({
 								size="sm"
 								onClick={() => {
 									setFilters({
-										Service               : null,
-										Entity                : null,
-										walletUsed            : null,
-										operationalClosedDate : null,
-										creationDate          : null,
-										tradeType             : '',
+										Service               : undefined,
+										Entity                : undefined,
+										walletUsed            : undefined,
+										operationalClosedDate : undefined,
+										creationDate          : undefined,
+										tradeType             : undefined,
+										exclude               : ['cancelled_shipments', 'zero_expense'],
 									});
 									setTradeTab('');
 									refetch({ setShow });
@@ -68,7 +71,7 @@ function Content({
 							themeType="primary"
 							size="sm"
 							onClick={() => {
-								refetch({ filters, setShow });
+								refetch({ setShow });
 							}}
 						>
 							APPLY
@@ -123,6 +126,21 @@ function Content({
 							/>
 						</div>
 					</TabPanel>
+					{activeTab === 'financial_close' ? (
+						<TabPanel name="Financial Closed Date" title="Financial Closed Date">
+							<div className={styles.style_radio}>
+								<SingleDateRange
+									placeholder="Select Date"
+									dateFormat={GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy']}
+									name="date"
+									isPreviousDaysAllowed
+									onChange={(val) => onChange(val, 'financialClosedDate')}
+									value={filters?.financialClosedDate}
+									maxDate={new Date()}
+								/>
+							</div>
+						</TabPanel>
+					) : null}
 					<TabPanel name="Creation Date" title="Creation Date">
 						<div className={styles.style_radio}>
 							<SingleDateRange
@@ -133,6 +151,16 @@ function Content({
 								onChange={(val) => onChange(val, 'creationDate')}
 								value={filters?.creationDate}
 								maxDate={new Date()}
+							/>
+						</div>
+					</TabPanel>
+					<TabPanel name="Exclude" title="Exclude">
+						<div className={styles.style_radio}>
+							<CheckboxGroup
+								options={excludeOptions}
+								value={filters?.exclude}
+								onChange={(val) => onChange(val, 'exclude')}
+								className={styles.style_radio}
 							/>
 						</div>
 					</TabPanel>

@@ -11,6 +11,7 @@ import { PRIORITY_LABEL_MAPPING, STATUS_ITEMS_MAPPING, getStatusLabelMapping } f
 import useGetCountdown from '../../../../../hooks/useGetCountdown';
 
 import ConfigDetails from './ConfigDetails';
+import ShipmentDetails from './ShipmentDetails';
 import styles from './styles.module.css';
 
 function TicketSummary({
@@ -18,7 +19,7 @@ function TicketSummary({
 	TicketReviewer: ticketReviewer = {}, IsCurrentReviewer: isCurrentReviewer = false,
 	TicketStatus: ticketStatus = '', AgentName: agentName = '',
 	detailsLoading = false, TicketConfiguration: ticketConfiguration = {},
-	OrganizationData: organizationData = {},
+	OrganizationData: organizationData = {}, shipmentData = {}, listLoading = false, partnerId = '',
 }) {
 	const {
 		Name: name = '', Email: email = '',
@@ -210,15 +211,14 @@ function TicketSummary({
 					raisedByDesk={raisedByDesk}
 					isCategoryConfig={isCategoryConfig}
 				/>
-				{serialId && (
-					<div className={styles.ticket_data}>
-						{t('myTickets:sid')}
-						:
-						<span className={styles.updated_at}>
-							{serialId}
-						</span>
-					</div>
-				)}
+				<ShipmentDetails
+					t={t}
+					serialId={serialId}
+					shipmentData={shipmentData}
+					listLoading={listLoading}
+					partnerId={partnerId}
+					service={service}
+				/>
 				{service && (
 					<div className={styles.ticket_data}>
 						{t('myTickets:service')}

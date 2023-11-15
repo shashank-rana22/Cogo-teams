@@ -15,6 +15,7 @@ const SLICE_END_INDEX = 5;
 
 function Items({
 	isPinned, item, resetSubnavs, partner_user_id,	setPinnedNavKeys, showPin, inCall = false, ticketCount = 0,
+	userId = '',
 }) {
 	const router = useRouter();
 	const { query, asPath } = router;
@@ -119,6 +120,8 @@ function Items({
 		</div>
 	);
 
+	const ALLOW_SME_DASHBOARD_FOR = GLOBAL_CONSTANTS.uuid.allow_sme_dashboard_for;
+
 	return (
 		<div className={showSubNav ? styles.outer_container : ''}>
 			<li key={item.title} className={styles.list_item}>
@@ -126,6 +129,12 @@ function Items({
 			</li>
 			{showSubNav && options?.map((singleOption) => {
 				const isHrefMatch = pathWithoutPartnerId === singleOption.as?.replace('/v2', '');
+
+				if (singleOption.key === 'cogo_one-sme_dashboard'
+					&& !ALLOW_SME_DASHBOARD_FOR.includes(userId)) {
+					return null;
+				}
+
 				return (
 					<li key={singleOption.title} className={styles.list_sub_item}>
 						<div

@@ -55,6 +55,10 @@ function InfoBannerContent({ popoverComponentData = {}, totalBanners = 1, setInf
 					{buttons.map((item) => {
 						const { label, name, ...restProps } = item;
 
+						if (name === 'next' && totalBanners === sequence_number) {
+							return null;
+						}
+
 						return (
 							<Button key={name} {...restProps} onClick={() => onButtonClick({ name })}>
 								{label}

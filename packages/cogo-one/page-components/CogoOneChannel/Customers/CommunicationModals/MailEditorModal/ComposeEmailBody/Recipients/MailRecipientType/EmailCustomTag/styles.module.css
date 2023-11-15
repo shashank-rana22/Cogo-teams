@@ -1,0 +1,24 @@
+.email_tag_container {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	margin: 4px 4px 0;
+	border-radius: 6px;
+}
+
+.input_container {
+	align-items: center;
+	padding: 2px 6px;
+	overflow: hidden;
+	font-size: 12px;
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.cross_icon {
+	height: 22px;
+	padding: 2px 4px;
+	cursor: pointer;
+	border-radius: 0 4px 4px 0;
+}

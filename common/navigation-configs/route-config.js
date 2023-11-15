@@ -14,12 +14,14 @@ import business from './config/business';
 import businessFinance from './config/business-finance';
 import byodDashboard from './config/byod-dashboard';
 import cancellationPolicies from './config/cancellation-policies';
+import cargoInsurance from './config/cargo-insurance';
 import centralisedCustomerService from './config/centralised-customer-service';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
 import cogoAssured from './config/cogo-assured';
 import cogoOne from './config/cogo-one';
+import cogoStore from './config/cogo-store';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
 import controlledBooking from './config/controlled-booking';
@@ -35,6 +37,8 @@ import ftlAdmin from './config/ftl-admin';
 import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
 import governanceManager from './config/governance-manager';
 import groundOps from './config/ground-ops';
+import handlingFees from './config/handling-fees';
+import hrmsDashboard from './config/hrms-dashboard';
 import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
 import ingestion from './config/ingestion';
@@ -189,6 +193,10 @@ const routeConfig = {
 	...margins,
 	...saas,
 	...serviceManagement,
+	...cargoInsurance,
+	...cogoStore,
+	...handlingFees,
+	...hrmsDashboard,
 };
 
 export default routeConfig;

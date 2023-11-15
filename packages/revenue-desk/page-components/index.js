@@ -29,6 +29,7 @@ function RevenueDesk() {
 		setFilters,
 		fetchShipments,
 	} = useGetRDShipmentList();
+
 	return (
 		<div>
 			{showDetailPage ? (

@@ -2,12 +2,12 @@ import { Modal } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import useGetIsMobile from '../../../../helpers/useGetIsMobile';
+
 import LandingPage from './LandingPage';
 import RequestContract from './RequestContract';
 import styles from './styles.module.css';
 import Submitted from './SubmittedPage';
-
-const SCREENS_TO_SHOW_CROSS_IN = ['landing', 'request_contract', 'submitted'];
 
 function Contract({
 	data = {},
@@ -18,36 +18,44 @@ function Contract({
 	const [screen, setScreen] = useState('landing');
 	const [contractData, setContractData] = useState({});
 
+	const isMobile = useGetIsMobile();
+
 	const COMPONENTS_MAPPING = {
 		landing: {
 			component : LandingPage,
+			closable  : false,
 			props     : {
+				service: detail?.search_type,
 				setShow,
 				setScreen,
 			},
 		},
 		request_contract: {
 			component : RequestContract,
+			closable  : true,
 			props     : {
 				rateCardId: data?.id,
 				detail,
 				setShow,
 				setScreen,
 				setContractData,
+				isMobile,
 			},
 		},
 		submitted: {
 			component : Submitted,
+			closable  : true,
 			props     : {
 				detail,
 				contractData,
+				isMobile,
 			},
 		},
 	};
 
 	const onClose = () => setShow(false);
 
-	const { component: ActiveComponent, props = {} } = COMPONENTS_MAPPING[screen];
+	const { component: ActiveComponent, props = {}, closable = true } = COMPONENTS_MAPPING[screen] || {};
 
 	if (!ActiveComponent) return null;
 
@@ -56,13 +64,13 @@ function Contract({
 			size="lg"
 			show={show}
 			onClose={onClose}
-			placement="top"
-			closeOnOuterClick={false}
+			placement={isMobile ? 'bottom' : 'top'}
+			closeOnOuterClick={isMobile}
 		>
 			<div className={styles.container}>
-				{SCREENS_TO_SHOW_CROSS_IN.includes(screen) ? (
+				{closable ? (
 					<IcMCross
-						className={styles.cross_icn}
+						className={styles.cross_button}
 						width={20}
 						height={20}
 						onClick={onClose}

@@ -303,23 +303,20 @@ function Summery({
 	});
 	return (
 		<div className={styles.container}>
+			{(isEmpty(level1) && isEmpty(level2) && isEmpty(level3)) ? (
+				null
+			) : (
+				<div className={styles.timeline}>
+					<StakeHolderTimeline
+						timeline={stakeHolderTimeLineData({ level1, level2, level3 })}
+					/>
+				</div>
+			)}
 			<div>Expense Details</div>
 			<div className={styles.header} />
 			{summeryMapping.map(({ key, val }) => (
 				<RenderSummaryData key={key} summary={val} />
 			))}
-			{(isEmpty(level1) && isEmpty(level2) && isEmpty(level3)) ? (
-				null
-			) : (
-				<div>
-					<div className={styles.title}>To be Approved by</div>
-					<div className={styles.steeper}>
-						<StakeHolderTimeline
-							timeline={stakeHolderTimeLineData({ level1, level2, level3 })}
-						/>
-					</div>
-				</div>
-			)}
 		</div>
 	);
 }

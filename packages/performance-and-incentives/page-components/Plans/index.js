@@ -1,13 +1,14 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
 
 import IncentivePlans from './components/IncentivePlans';
+import QuestPlans from './components/QuestPlans';
 import ScoringPlans from './components/ScoringPlans';
 import TAB_PANNEL_KEYS from './constants/tab-pannel-keys-mapping';
 import styles from './styles.module.css';
 
-const { SCORING_PLANS, INCENTIVE_PLANS } = TAB_PANNEL_KEYS;
+const { SCORING_PLANS, INCENTIVE_PLANS, QUEST_PLANS } = TAB_PANNEL_KEYS;
 
 const TAB_PANNEL_COMPONENT_MAPPING = {
 	[SCORING_PLANS]: {
@@ -20,16 +21,26 @@ const TAB_PANNEL_COMPONENT_MAPPING = {
 		title     : startCase(INCENTIVE_PLANS),
 		Component : IncentivePlans,
 	},
+	[QUEST_PLANS]: {
+		name      : QUEST_PLANS,
+		title     : startCase(QUEST_PLANS),
+		Component : QuestPlans,
+	},
 };
 
 function Plans() {
-	const [activeTab, setActiveTab] = useState(SCORING_PLANS);
+	const router = useRouter();
+	const { query: { tab = SCORING_PLANS } } = router;
+
+	const handleTabChange = (value) => {
+		router.push(`/performance-and-incentives/plans?tab=${value}`);
+	};
 
 	return (
 		<section className={styles.container}>
 			<Tabs
-				activeTab={activeTab}
-				onChange={setActiveTab}
+				activeTab={tab}
+				onChange={handleTabChange}
 				fullWidth
 				themeType="primary"
 			>

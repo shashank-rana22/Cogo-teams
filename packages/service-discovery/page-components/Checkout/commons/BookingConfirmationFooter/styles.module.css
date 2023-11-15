@@ -57,8 +57,8 @@
 
 .error {
 	position: absolute;
-	top: 4px;
-	left: 24px;
+	right: 24px;
+	bottom: 0;
 	font-size: 12px;
 	font-weight: 600;
 	color: #f00;
@@ -68,4 +68,12 @@
 	width: 18px;
 	height: 18px;
 	margin-left: 6px;
+}
+
+.quotation_expired {
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+	margin-left: 4px;
+	color: #eb3425;
 }

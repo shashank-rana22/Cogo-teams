@@ -23,6 +23,7 @@ function SelfInvoice({
 		business_name = '',
 		trade_party_type = '',
 		registration_number = '',
+		verification_status = '',
 	} = item;
 
 	const { is_tax_applicable = false } = organization;
@@ -48,6 +49,8 @@ function SelfInvoice({
 						is_sez = false,
 						verification_status: is_sez_verification_status = 'pending',
 					} = billingAddress;
+
+					const disabled = ['rejected', 'pending'].includes(verification_status);
 
 					return (
 						<div
@@ -78,7 +81,7 @@ function SelfInvoice({
 							}}
 							className={cl`${styles.main_container} ${
 								value.includes(id) && styles.active
-							} ${disabledIds.includes(id) && styles.disabled}`}
+							} ${(disabledIds.includes(id) || disabled) && styles.disabled}`}
 							key={id}
 						>
 							<div className={styles.address_container}>

@@ -55,7 +55,7 @@ const NON_RECURRING_TABS = [
 ];
 
 function ExpenseComponent() {
-	const [recurringState, setRecurringState] = useState('recurring');
+	const [recurringState, setRecurringState] = useState('nonRecurring');
 	const [createExpenseType, setCreateExpenseType] = useState('');
 	const [subActiveTab, setSubActiveTab] = useState('ALL_EXPENSE_CONFIGURATION');
 	const [showModal, setShowModal] = useState(false);
@@ -549,9 +549,9 @@ function ExpenseComponent() {
 			return <div>{showOverflowingNumber(amount || '', 12)}</div>;
 		},
 		renderTds: (itemData) => {
-			const { payableTds, billCurrency = '' } = itemData || {};
+			const { tdsAmount, billCurrency = '' } = itemData || {};
 			const amount = formatAmount({
-				amount   : payableTds,
+				amount   : tdsAmount,
 				currency : billCurrency,
 				options  : {
 					style           : 'currency',

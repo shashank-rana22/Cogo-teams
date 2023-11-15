@@ -3,10 +3,9 @@ import React from 'react';
 
 import ProgressBar from './ProgressBar';
 import styles from './styles.module.css';
-import useGetUserProgress from './useGetUserProgress';
 
-function ProgreeBars() {
-	const { kam_progress, manager_progress } = useGetUserProgress();
+function ProgreeBars(props) {
+	const { kam_progress, manager_progress } = props;
 
 	return (
 		<div className={styles.container}>

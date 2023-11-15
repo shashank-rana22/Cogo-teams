@@ -1,11 +1,12 @@
 import validate from '../../utils/validateNumber';
 
-const fclControls = () => {
+const fclControls = ({ setValue = () => {} }) => {
 	const controls = [
 		{
 			name               : 'container',
 			type               : 'field-array',
 			buttonText         : 'Add Another Container',
+			childLabel         : 'Container',
 			noDeleteButtonTill : 1,
 			controls           : [
 				{
@@ -22,9 +23,12 @@ const fclControls = () => {
 					label          : 'Type of Container',
 					type           : 'chips',
 					optionsListKey : 'container-types',
-					span           : 12,
-					value          : 'standard',
-					rules          : { required: 'Container type is required' },
+					onChange       : (val, obj, index) => {
+						setValue(`container[${index}].commodity`, '');
+					},
+					span  : 12,
+					value : 'standard',
+					rules : { required: 'Container type is required' },
 				},
 				{
 					label          : 'Commodity',

@@ -1,6 +1,9 @@
 /* eslint-disable max-lines-per-function */
 import { Select, Modal, RadioGroup, Input, DateRangepicker } from '@cogoport/components';
-import { asyncFieldsLocations, asyncFieldsOperators, useGetAsyncOptions } from '@cogoport/forms';
+import {
+	asyncFieldsLocations, asyncFieldsOperators, asyncFieldsOrganization,
+	useGetAsyncOptions,
+} from '@cogoport/forms';
 import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
 import { merge, startCase } from '@cogoport/utils';
 
@@ -39,6 +42,23 @@ function Filter({
 		asyncFieldsOperators(),
 		{ params: { filters: { operator_type: lineOptions?.[filter?.service] || 'shipping_line' } } },
 	));
+
+	const serviceProviders = useGetAsyncOptions(
+		merge(
+			asyncFieldsOrganization(),
+			{
+				params: {
+					filters: {
+						status       : 'active',
+						kyc_status   : 'verified',
+						account_type : 'service_provider',
+						service      : `${filter?.service}${['haulage',
+							'trailer'].includes(filter.service) ? '_freight' : ''}`,
+					},
+				},
+			},
+		),
+	);
 
 	const FCL_COMMODITY_OPTIONS = [];
 	(Object.keys(FREIGHT_CONTAINER_COMMODITY_MAPPINGS) || []).forEach((containerType) => {
@@ -106,43 +126,81 @@ function Filter({
 								}}
 							/>
 						</div>
+					</div>
+					<div className={styles.details}>
+						<div>
+							<p>Service Provider</p>
+							<Select
+								placeholder="Select Service Provider"
+								{...serviceProviders}
+								value={filter?.service_provider_id}
+								style={{ width: '250px' }}
+								isClearable
+								onChange={(val) => {
+									setFilter((prevFilters) => ({ ...prevFilters, service_provider_id: val, page: 1 }));
+								}}
+							/>
+						</div>
 						<div>
 							{DateRange()}
 						</div>
 					</div>
 
-					<div className={styles.details}>
-						<div>
-							<p>Origin</p>
-							<Select
-								placeholder="Port Pair"
-								{...originLocationOptions}
-								value={filter?.origin_location}
-								style={{ width: '250px' }}
-								isClearable
-								onChange={(val) => {
-									setFilter((prevFilters) => ({ ...prevFilters, origin_location: val, page: 1 }));
-								}}
-							/>
-						</div>
+					{['ftl_freight', 'haulage', 'air_freight', 'ltl_freight', 'trailer_freight',
+						'lcl_freight', 'fcl_freight'].includes(filter?.service) && (
+							<div className={styles.details}>
+								<div>
+									<p>Origin</p>
+									<Select
+										placeholder="Port Pair"
+										{...originLocationOptions}
+										value={filter?.origin_location}
+										style={{ width: '250px' }}
+										isClearable
+										onChange={(val) => {
+											setFilter((prevFilters) => (
+												{ ...prevFilters, origin_location: val, page: 1 }));
+										}}
+									/>
+								</div>
+
+								<div>
+									<p>Destination</p>
+									<Select
+										placeholder="Port Pair"
+										{...destinationLocationOptions}
+										value={filter?.destination_location}
+										isClearable
+										onChange={(val) => {
+											setFilter((prevFilters) => ({
+												...prevFilters,
+												destination_location : val,
+												page                 : 1,
+											}));
+										}}
+									/>
+								</div>
+							</div>
+					)}
+					{['fcl_customs', 'fcl_cfs', 'lcl_customs', 'air_customs'].includes(filter?.service) && (
 
 						<div>
-							<p>Destination</p>
+							<p>Location</p>
 							<Select
 								placeholder="Port Pair"
 								{...destinationLocationOptions}
-								value={filter?.destination_location}
+								value={filter?.location}
 								isClearable
 								onChange={(val) => {
 									setFilter((prevFilters) => ({
 										...prevFilters,
-										destination_location : val,
-										page                 : 1,
+										location : val,
+										page     : 1,
 									}));
 								}}
 							/>
 						</div>
-					</div>
+					)}
 
 					{(source === 'live_booking')
 					&& (

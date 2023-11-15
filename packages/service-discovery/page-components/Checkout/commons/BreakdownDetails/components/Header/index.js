@@ -49,8 +49,18 @@ function Header() {
 			{HEADER_COMPONENTS.map((item) => {
 				const { label, key, flexBasis } = item;
 
+				const percentage = `${parseFloat(flexBasis.replace('%', '')) * 8}px`;
+
 				return (
-					<div key={key} style={{ flexBasis }} className={styles.item}>
+					<div
+						key={key}
+						style={{
+							flexBasis,
+							minWidth     : percentage,
+							paddingRight : '12px',
+						}}
+						className={styles.item}
+					>
 						{label}
 					</div>
 				);

@@ -2,6 +2,30 @@
 	:global {
 		.ui_modal_body_container {
 			max-height: 80vh;
+
+			@media screen and (max-width: 768px) {
+				height: calc(100vh - 106px);
+				max-height: none;
+			}
 		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.styled_ui_modal_dialog {
+		width: 100% !important;
+		height: 100% !important;
+		max-height: none;
+		animation-name: fade-in !important;
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
 	}
 }

@@ -19,7 +19,13 @@ function Outstanding({
 
 		<div className={styles.container}>
 			{!isEmpty(selectedOrgId)
-				? <ViewOrganizationDetails selectedOrgId={selectedOrgId} setSelectedOrgId={setSelectedOrgId} />
+				? (
+					<ViewOrganizationDetails
+						entityCode={entityCode}
+						selectedOrgId={selectedOrgId}
+						setSelectedOrgId={setSelectedOrgId}
+					/>
+				)
 				: (
 					<>
 						<div className={styles.select}>

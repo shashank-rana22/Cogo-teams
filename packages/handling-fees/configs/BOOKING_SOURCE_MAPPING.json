@@ -1,0 +1,30 @@
+[
+    {
+        "label": "Contract",
+        "value": "contract"
+    },
+    {
+        "label": "Quick Checkout",
+        "value": "quick_checkout"
+    },
+    {
+        "label": "Direct",
+        "value": "direct"
+    },
+    {
+        "label": "Quotation",
+        "value": "quotation"
+    },
+    {
+        "label": "Roll Over",
+        "value": "rollover"
+    },
+    {
+        "label": "Spot Booking",
+        "value": "spot_booking"
+    },
+    {
+        "label": "Spot Line Booking",
+        "value": "spot_line_booking"
+    }
+]

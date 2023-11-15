@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useGetCheckout = ({ checkout_id, setIsLoadingStateRequired = () => {} }) => {
-	const [{ data, loading }, trigger] = useRequest({
+	const [{ data, loading, error = {} }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_checkout',
 		params : { id: checkout_id },
@@ -14,9 +14,9 @@ const useGetCheckout = ({ checkout_id, setIsLoadingStateRequired = () => {} }) =
 			await trigger({ params: { id: checkout_id } });
 
 			setIsLoadingStateRequired(false);
-		} catch (error) {
-			if (error?.response) {
-				Toast.error(getApiErrorString(error?.response?.data));
+		} catch (err) {
+			if (err?.response) {
+				Toast.error(getApiErrorString(err?.response?.data));
 			}
 		}
 	};
@@ -26,6 +26,7 @@ const useGetCheckout = ({ checkout_id, setIsLoadingStateRequired = () => {} }) =
 		loading,
 		getCheckout,
 		trigger,
+		error,
 	};
 };
 

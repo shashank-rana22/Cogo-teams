@@ -2,11 +2,12 @@ import { cl, Button } from '@cogoport/components';
 import { dynamic } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import ApproveInvoice from './ApproveInvoice';
 import KebabContent from './Components/KebabContent';
 import styles from './styles.module.css';
 
 const EditInvoice = dynamic(() => import('../../../../../EditInvoice/index'), { ssr: false });
+const MarkInactive = dynamic(() => import('./MarkInactive'), { ssr: false });
+const ApproveInvoice = dynamic(() => import('./ApproveInvoice'), { ssr: false });
 
 function Actions({
 	invoice = {},
@@ -37,6 +38,15 @@ function Actions({
 				/>
 
 			</div>
+
+			{showModal === 'mark_inactive' ? (
+				<MarkInactive
+					show={showModal === 'mark_inactive'}
+					onClose={onModalClose}
+					invoice={invoice}
+					refetch={refetch}
+				/>
+			) : null}
 
 			{(invoice?.services || []).length && showModal === 'edit_invoice' ? (
 				<EditInvoice

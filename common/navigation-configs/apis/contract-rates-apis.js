@@ -83,6 +83,12 @@ const apis = [
 		service_name : 'contract',
 	},
 	{
+		api          : 'list_contract_fcl_freight_local_services',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
 		api          : 'update_contract_ftl_freight_service_rate',
 		access_type  : 'private',
 		feature      : 'contract_rates',

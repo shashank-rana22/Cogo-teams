@@ -16,17 +16,53 @@ const API_NAME = {
 	fcl_cfs     : 'list_fcl_cfs_rate_jobs',
 };
 
-const FCL_PARAMS_MAPPING = {
-	origin_location      : 'origin_port_id',
-	destination_location : 'destination_port_id',
-	operater_type        : 'shipping_line_id',
+const PARAM_MAPPING = {
+	fcl_freight: {
+		origin_location      : 'origin_port_id',
+		destination_location : 'destination_port_id',
+		operater_type        : 'shipping_line_id',
 
-};
+	},
+	lcl_freight: {
+		origin_location      : 'origin_port_id',
+		destination_location : 'destination_port_id',
+	},
+	lcl_customs: {
+		location: 'location_id',
+	},
+	air_customs: {
+		location: 'airport_id',
+	},
+	trailer: {
+		origin_location      : 'origin_location_id',
+		destination_location : 'destination_location_id',
+		operater_type        : 'shipping_line_id',
+	},
+	ltl_freight: {
+		origin_location      : 'origin_location_id',
+		destination_location : 'destination_location_id',
+	},
+	air_freight: {
+		origin_location      : 'origin_airport_id',
+		destination_location : 'destination_airport_id',
+		operater_type        : 'airline_id',
 
-const AIR_PARAMS_MAPPING = {
-	origin_location      : 'origin_airport_id',
-	destination_location : 'destination_airport_id',
-	operater_type        : 'airline_id',
+	},
+	haulage: {
+		origin_location      : 'origin_location_id',
+		destination_location : 'destination_location_id',
+		operater_type        : 'shipping_line_id',
+	},
+	fcl_customs: {
+		location: 'location_id',
+	},
+	ftl_freight: {
+		origin_location      : 'origin_location_id',
+		destination_location : 'destination_location_id',
+	},
+	fcl_cfs: {
+		location: 'location_id',
+	},
 
 };
 
@@ -53,6 +89,8 @@ const useGetListCoverage = ({ userService }) => {
 		cogo_entity_id            : '',
 		shipment_id               : '',
 		trade_type                : '',
+		start_date                : '',
+		end_date                  : '',
 	});
 	const endPoint = API_NAME[filter?.service || 'fcl_freight'];
 
@@ -66,9 +104,7 @@ const useGetListCoverage = ({ userService }) => {
 
 		const FINAL_FILTERS = {};
 
-		const paramsMapping = ['air_freight', 'air_customs']?.includes(filter?.service)
-			? AIR_PARAMS_MAPPING : FCL_PARAMS_MAPPING;
-
+		const paramsMapping = PARAM_MAPPING[filter?.service];
 		Object.keys(restFilters).forEach((ele) => {
 			if (restFilters[ele]) {
 				if (ele in paramsMapping) {
@@ -101,11 +137,11 @@ const useGetListCoverage = ({ userService }) => {
 			if (filter?.is_flash_booking_reverted) {
 				is_flash_booking_reverted = filter?.is_flash_booking_reverted === 'reverted';
 			}
-
 			await trigger({
 				params: {
 					filters: {
 						...FINAL_FILTERS,
+						status         : filter?.status === 'completed' ? ['completed', 'aborted'] : filter?.status,
 						[idToUse]      : idValue || undefined,
 						source         : source || undefined,
 						user_id        : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,

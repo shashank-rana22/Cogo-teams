@@ -5,7 +5,7 @@ import ApplyCoupoun from './components/ApplyCoupoun';
 import PromocodesModal from './components/PromocodesModal';
 import styles from './styles.module.css';
 
-function Promocodes({ checkout_id = '', refetch = () => {}, promotions = [] }) {
+function Promocodes({ checkout_id = '', refetch = () => {}, promotions = [], source = '' }) {
 	const appliedPromotion = (promotions || []).find(
 		(x) => x.consumption_mode === 'manual',
 	);
@@ -32,6 +32,7 @@ function Promocodes({ checkout_id = '', refetch = () => {}, promotions = [] }) {
 			<ApplyCoupoun
 				isCouponApplied={isCouponApplied}
 				setShowCoupons={setShowCoupons}
+				source={source}
 			/>
 
 			<PromocodesModal

@@ -1,0 +1,20 @@
+.loader {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100%;
+	padding: 0 24px;
+	margin-top: 16px;
+	margin-right: 12px;
+}
+
+.circle {
+	display: flex;
+}
+
+.loader_cont {
+	width: 31%;
+	padding: 12px;
+	margin-bottom: 36px;
+	box-shadow: 0 0 8px 0 rgb(98 127 172 / 20%);
+}

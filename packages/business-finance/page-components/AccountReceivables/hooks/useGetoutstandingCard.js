@@ -17,7 +17,7 @@ const useGetOutstandingCard = ({ organizationId, entityCode_in_use:entityCode, l
 		page              : 1,
 		pageLimit         : limit,
 		orgId             : organizationId,
-		paymentStatusList : [],
+		paymentStatusList : ['unpaid', 'partial_paid'],
 	});
 
 	const [sort, setSort] = useState({
@@ -49,6 +49,7 @@ const useGetOutstandingCard = ({ organizationId, entityCode_in_use:entityCode, l
 		migrated,
 		paymentStatusList,
 		invoiceStatus,
+		flag,
 		services,
 		search,
 		dueDate,
@@ -122,6 +123,7 @@ const useGetOutstandingCard = ({ organizationId, entityCode_in_use:entityCode, l
 						migrated          : migrated || undefined,
 						paymentStatusList : paymentStatusList || undefined,
 						invoiceStatus     : invoiceStatus || undefined,
+						flag              : flag || undefined,
 						services          : filters?.services || undefined,
 						query             : query !== '' ? query : undefined,
 						orgId             : orgId || undefined,
@@ -158,6 +160,7 @@ const useGetOutstandingCard = ({ organizationId, entityCode_in_use:entityCode, l
 			paymentStatusList,
 			invoiceStatus,
 			query,
+			flag,
 			orgId,
 			entityCode,
 			sort.sortBy,

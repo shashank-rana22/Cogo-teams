@@ -474,6 +474,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'list_rating_year',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	employee_performance_dashboard: [
 		{
@@ -830,6 +835,63 @@ const HRMS = {
 	profile: [
 		{
 			api          : 'get_employee_directory',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+	],
+	cogo_store: [
+		{
+			api          : 'list_all_orders',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_order_dates',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_products',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_product_filter_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_product_variation_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_order_details',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'get_order_history',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_cart_items',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_cart',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'place_order',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_order_details',
 			access_type  : 'private',
 			service_name : 'hrms',
 		},

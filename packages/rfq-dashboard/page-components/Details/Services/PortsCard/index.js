@@ -12,15 +12,19 @@ import LocationDetails from './LocationDetails';
 import PriceFreightCtr from './PriceFrieghtCtr';
 import styles from './styles.module.css';
 
+const SINGLE_PORT_SERVICES = ['fcl_freight_local', 'lcl_freight_local'];
+
 function PortsCard(props) {
 	const {
-		loading, Component, origin_port, destination_port, commodity_array,
+		loading, Component, service_type, single_port, origin_port, destination_port, commodity_array,
 		stats, freight_price_currency, freight_price_discounted,
 		total_price_discounted, priceBreakDown, setPriceBreakDown, id, rfq_card_loading, rate_card_details_data,
 		rate, rate_card_details, currency_conversion, editedMargins, setEditedMargins, primaryService,
 		convenienceDetails, setConvenienceDetails, updateMargin, refetchRateCards, getRfqsForApproval,
-		margin_limit, rfq_state, iconText,
+		margin_limit, rfq_state, iconText, at_actuals,
 	} = useGetPortCard({ props });
+
+	const isSinglePort = SINGLE_PORT_SERVICES.includes(service_type);
 
 	return (
 		<div className={styles.main_container}>
@@ -31,13 +35,17 @@ function PortsCard(props) {
 							<>
 								<div className={styles.service}>
 									{Component && <Component className={styles.icmfcl_icon} />}
-									<span className={`${styles[iconText]}`}>{iconText}</span>
+									<span className={`${styles[service_type]}`}>{iconText}</span>
 								</div>
 								<div className={styles.ports_tags_container}>
 									<div className={styles.location_box}>
-										<LocationDetails data={origin_port} source="origin" />
-										<IcMPortArrow className={styles.icmportarrow_icon} />
-										<LocationDetails data={destination_port} source="destination" />
+										{isSinglePort ? <LocationDetails data={single_port} source="single" /> : (
+											<>
+												<LocationDetails data={origin_port} source="origin" />
+												<IcMPortArrow className={styles.icmportarrow_icon} />
+												<LocationDetails data={destination_port} source="destination" />
+											</>
+										)}
 									</div>
 									<CommodityMapping commodity_array={commodity_array} />
 								</div>
@@ -49,6 +57,7 @@ function PortsCard(props) {
 										freight_price_currency={freight_price_currency}
 										freight_price_discounted={freight_price_discounted}
 										total_price_discounted={total_price_discounted}
+										at_actuals={at_actuals && isSinglePort}
 									/>
 								</div>
 							</>

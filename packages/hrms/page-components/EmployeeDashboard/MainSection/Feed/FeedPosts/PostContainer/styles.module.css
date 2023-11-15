@@ -1,0 +1,289 @@
+.container {
+	padding: 16px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 16px;
+}
+
+.header_flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.name_avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	font-size: 20px;
+	font-weight: 600;
+	background: #ffdfdf;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.user_data {
+	display: flex;
+	align-items: center;
+}
+
+.user_name {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-left: 12px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #0a0a0a;
+}
+
+.designation {
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #757575;
+}
+
+.post_time_flex {
+	display: flex;
+	align-items: center;
+}
+
+.post_time {
+	display: flex;
+	align-items: center;
+	margin-right: 12px;
+	font-size: 12px;
+	color: #0a0a0a;
+}
+
+.main_post_data {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 16px 0;
+}
+
+.feed_type {
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	border: 2px solid #fff;
+	border-radius: 100px;
+	object-fit: cover;
+}
+
+.profile_circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 65px;
+	height: 65px;
+	border: 2px solid #fff;
+	border-radius: 100px;
+	object-fit: cover;
+}
+
+.circle1_bg {
+	font-size: 24px;
+	background-color: #f2f3fa;
+}
+
+.circle2_bg {
+	font-size: 20px;
+	color: #fff;
+	background-color: #f68b21;
+}
+
+.circle3_bg {
+	margin-left: -12px;
+	font-size: 24px;
+	color: #fff;
+	background-color: #f68b21;
+}
+
+.main_post_text {
+	font-size: 16px;
+	color: #221f20;
+}
+
+.normal_post_text {
+	margin: 16px 0;
+	font-size: 16px;
+	color: #221f20;
+}
+
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.comments_data {
+	display: flex;
+	align-items: center;
+	padding: 4px 16px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #0a0a0a;
+	background: #f5f5f5;
+	border-radius: 50px;
+}
+
+.user_comments {
+	display: flex;
+	align-items: center;
+	margin-right: 12px;
+}
+
+.comments_circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	font-size: 10px;
+	font-weight: 600;
+	background-color: #e0e5f2;
+	border: 3px solid #fff;
+	border-radius: 100px;
+
+	&:not(:first-child) {
+		margin-left: -10px;
+	}
+}
+
+.like_and_comment {
+	display: flex;
+	align-items: center;
+}
+
+.like_circle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+	background: #f5f5f5;
+	border-radius: 50px;
+
+	:global {
+		.tippy-box {
+			padding: 0;
+			margin-bottom: 8px;
+			margin-left: 130px;
+		}
+	}
+}
+
+.like_circle > div > svg {
+	width: 25px;
+	height: 25px;
+	color: #318ce7;
+}
+
+.comment_input {
+	display: inline-block;
+	padding: 8px 16px;
+	margin-left: 12px;
+	vertical-align: bottom;
+	cursor: pointer;
+	background: #f5f5f5;
+	border-radius: 50px;
+}
+
+.label_flex {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
+.popover_content {
+	display: flex;
+	transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+.popover_item {
+	padding: 4px;
+	transition: transform 0.2s;
+}
+
+.popover_item:hover {
+	transform: scale(1.5);
+}
+
+.like_circle:hover .popover_content {
+	visibility: visible;
+	opacity: 1;
+	animation: bounce 1.5s;
+}
+
+@keyframes bounce {
+	0%,
+	20%,
+	50%,
+	80%,
+	100% {
+		transform: translateY(0);
+	}
+
+	40% {
+		transform: translateY(-20px);
+	}
+
+	60% {
+		transform: translateY(-5px);
+	}
+}
+
+.likes_n_comment {
+	display: flex;
+	justify-content: flex-end;
+}
+
+@media (max-width: 767px) {
+	.post_time_flex {
+		display: none;
+	}
+
+	.circle {
+		width: 35px;
+		height: 35px;
+		font-size: 16px;
+	}
+
+	.name_avatar {
+		width: 35px;
+		height: 35px;
+		font-size: 18px;
+
+		.user_name {
+			font-size: 18px;
+
+			.designation {
+				font-size: 12px;
+			}
+		}
+	}
+
+	.main_post_text {
+		font-size: 14px;
+	}
+}
+
+.circle_profile {
+	margin-left: -12px;
+}

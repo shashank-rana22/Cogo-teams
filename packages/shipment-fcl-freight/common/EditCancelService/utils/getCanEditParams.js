@@ -10,7 +10,10 @@ const EDIT_PARAMS_STAKEHOLDERS = {
 	consignee_shipper_booking_agent: {
 		idToMatch: 'consignee_shipper_id',
 	},
-	superadmin: {},
+	superadmin : {},
+	coe_head   : {
+		idToMatch: 'importer_exporter_id',
+	},
 };
 
 const CONTROLS_EDITABLE_CONDITIONS = [

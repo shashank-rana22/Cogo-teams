@@ -21,6 +21,8 @@ function SellBuyCards({
 	type = '',
 	data = [],
 	loading = false,
+	invoicesMap = {},
+	billsMap = {},
 	shipment_id = '',
 	getClosedTasks = () => {},
 }) {
@@ -31,8 +33,12 @@ function SellBuyCards({
 	let grandTotal = 0;
 
 	data?.forEach((i) => {
-		profitabilityData += i.profitability;
-		grandTotal += i.grand_total;
+		profitabilityData = i.profitability;
+		if (i?.document_type === 'CREDIT_NOTE') {
+			grandTotal -= (i.grand_total * i.exchange_rate);
+		} else {
+			grandTotal += (i.grand_total * i.exchange_rate);
+		}
 	});
 
 	return (
@@ -89,6 +95,8 @@ function SellBuyCards({
 							income={grandTotal}
 							source={source}
 							type={type}
+							invoicesMap={invoicesMap}
+							billsMap={billsMap}
 							shipment_id={shipment_id}
 							profitability={profitabilityData}
 							getClosedTasks={getClosedTasks}
