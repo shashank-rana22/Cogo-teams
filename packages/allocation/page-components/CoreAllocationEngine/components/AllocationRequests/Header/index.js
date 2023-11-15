@@ -40,7 +40,7 @@ function Header(props) {
 					size="md"
 					offLabel={t('allocation:allocation_type_off_label')}
 					onLabel={t('allocation:allocation_type_on_label')}
-					value={toggleValue}
+					checked={toggleValue === 'partner'}
 					onChange={(e) => onChangeParams({
 						filters:
 					{
