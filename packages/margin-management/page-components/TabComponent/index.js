@@ -178,7 +178,9 @@ function TabComponent({
 						<Button
 							size="md"
 							themeType="secondary"
-							onClick={() => setShowFunnelModal(false)}
+							onClick={() => {
+								setShowFunnelModal(false);
+							}}
 						>
 							Close
 						</Button>
