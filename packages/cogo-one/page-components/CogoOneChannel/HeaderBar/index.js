@@ -101,7 +101,7 @@ function HeaderBar({
 							)}
 					</div>
 
-					{(isPunchPresent && !preferenceLoading) ? (
+					{(isPunchPresent && !preferenceLoading && !isMobile) ? (
 						<PunchInOut
 							timelineLoading={timelineLoading}
 							preferenceLoading={preferenceLoading}
@@ -120,7 +120,7 @@ function HeaderBar({
 					) : null}
 
 					<div className={cl`${styles.configs} ${showDetails ? styles.hide_section : ''}`}>
-						{flashRevertLogs ? (
+						{(flashRevertLogs && !isMobile) ? (
 							<FlashRevertLogs />
 						) : null}
 
@@ -133,6 +133,7 @@ function HeaderBar({
 								viewType={viewType}
 								showDetails={showDetails}
 								activeCard={activeCard}
+								isMobile={isMobile}
 								setActiveCard={setActiveCard}
 							/>
 						) : null}

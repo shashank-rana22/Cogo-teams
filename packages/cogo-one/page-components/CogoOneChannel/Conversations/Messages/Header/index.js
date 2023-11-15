@@ -95,6 +95,28 @@ function Header({
 				formattedData={formattedData}
 				setActiveTab={setActiveTab}
 				channelType={channelType}
+				activeMessageCard={activeMessageCard}
+				updateChat={updateChat}
+				loading={loading}
+				tagOptions={tagOptions}
+				hasPermissionToEdit={hasPermissionToEdit}
+				filteredSpectators={filteredSpectators}
+				activeAgentName={activeAgentName}
+				assignChat={assignChat}
+				openAssignModal={openAssignModal}
+				requestToJoinGroup={requestToJoinGroup}
+				requestForAssignChat={requestForAssignChat}
+				userId={userId}
+				assignLoading={assignLoading}
+				requestAssignLoading={requestAssignLoading}
+				showBotMessages={showBotMessages}
+				viewType={viewType}
+				supportAgentId={supportAgentId}
+				isGroupFormed={isGroupFormed}
+				accountType={account_type}
+				isPartOfGroup={isPartOfGroup}
+				isManager={isManager}
+				hasNoFireBaseRoom={hasNoFireBaseRoom}
 			/>
 		);
 	}

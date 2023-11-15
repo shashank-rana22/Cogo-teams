@@ -1,5 +1,4 @@
 .mid_section {
-	max-height: 240px;
 	padding: 0 10px 30px;
 
 	&::-webkit-scrollbar {
@@ -11,6 +10,10 @@
 	display: flex;
 	justify-content: space-around;
 	width: calc(100% - 150px);
+
+	@media (max-width: 576px) {
+		width: 100%;
+	}
 }
 
 .error {
@@ -23,6 +26,16 @@
 	display: flex;
 	justify-content: space-between;
 	margin: 16px 0 12px;
+
+	@media (max-width: 400px) {
+		>div {
+			text-align: center;
+
+			&:first-child {
+				display: none;
+			}
+		}
+	}
 }
 
 .header_label {
@@ -39,6 +52,14 @@
 	width: 150px;
 	margin-left: 10px;
 	font-size: 16px;
+
+	@media (max-width: 576px) {
+		font-size: 12px;
+	}
+	@media (max-width: 400px) {
+		margin-bottom: 4px;
+		font-size: 16px;
+	}
 }
 
 .shift_details {
@@ -57,10 +78,25 @@
 			width: 150px;
 		}
 	}
+
+	@media (max-width: 400px) {
+		flex-direction: column;
+
+		:global {
+			.ui_time_display_container {
+				width: unset;
+				min-width: 100px;
+			}
+
+			.ui_datepicker_container {
+				width: fit-content;
+			}
+		}
+	}
 }
 
 .button_section {
-	position: absolute;
+	position: sticky;
 	bottom: 0;
 	left: 0;
 	display: flex;
@@ -76,4 +112,8 @@
 
 .fields_styles {
 	width: 50%;
+
+	@media (max-width: 576px) {
+		width: fit-content;
+	}
 }

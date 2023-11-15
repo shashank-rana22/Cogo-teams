@@ -1,16 +1,20 @@
-import { IcMArrowLeft } from '@cogoport/icons-react';
+import { Popover } from '@cogoport/components';
+import { IcMArrowLeft, IcMOverflowDot } from '@cogoport/icons-react';
 import React from 'react';
 
 import HeaderName from '../../../../../../common/HeaderName';
 import EmailHeader from '../ChatControls/emailHeader';
 
+import OptionsContainer from './OptionsContainer';
 import styles from './styles.module.css';
 
-function MobileHeader({
-	formattedData = {},
-	setActiveTab = () => {},
-	channelType = '',
-}) {
+function MobileHeader(props) {
+	const {
+		formattedData = {},
+		setActiveTab = () => {},
+		channelType = '',
+	} = props || {};
+
 	return (
 		<div className={styles.header}>
 			<IcMArrowLeft
@@ -30,6 +34,17 @@ function MobileHeader({
 						isMobile
 					/>
 				)}
+
+			<Popover
+				placement="bottom-end"
+				render={(
+					<OptionsContainer
+						{...props}
+					/>
+				)}
+			>
+				<IcMOverflowDot className={styles.overflow_menu} />
+			</Popover>
 		</div>
 	);
 }

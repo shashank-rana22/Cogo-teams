@@ -30,7 +30,7 @@ function ChatControls({
 		support_agent_id: chatAssignTo = '',
 	} = formattedData || {};
 
-	const handleEsclateClick = () => {
+	const handleEscalateClick = () => {
 		escalateToSupplyRm({
 			payload: {
 				organization_id,
@@ -59,7 +59,7 @@ function ChatControls({
 						themeType="secondary"
 						size="sm"
 						disabled={!hasPermissionToEdit || canMessageOnBotSession}
-						onClick={handleEsclateClick}
+						onClick={handleEscalateClick}
 						loading={supplierLoading}
 						className={styles.escalate_button}
 					>

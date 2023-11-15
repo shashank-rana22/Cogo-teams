@@ -42,8 +42,18 @@
 .last_button {
 	width: 130px;
 	margin-left: 80px;
+
+	@media (max-width: 576px) {
+		margin-left: 20px;
+	}
 }
 
 .styled_modal {
-	top: 40px !important;
+	@media (min-width: 576px) {
+		top: 40px !important;
+	}
+	@media (max-width: 576px) {
+		width: 100% !important;
+		min-height: 280px;
+	}
 }

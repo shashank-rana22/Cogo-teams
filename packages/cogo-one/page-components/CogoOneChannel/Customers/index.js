@@ -52,6 +52,7 @@ function Customers({
 	preferenceLoading = false,
 	setIsBotSession = () => {},
 	isBotSession = false,
+	isMobile = false,
 }) {
 	const {
 		userEmailAddress = '',
@@ -194,6 +195,7 @@ function Customers({
 					userId={userId}
 					firestore={firestore}
 					preferenceLoading={preferenceLoading}
+					isMobile={isMobile}
 				/>
 			</div>
 
