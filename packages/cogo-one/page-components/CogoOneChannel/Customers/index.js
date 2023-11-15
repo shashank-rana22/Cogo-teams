@@ -247,6 +247,7 @@ function Customers({
 				setSendBulkTemplates={setSendBulkTemplates}
 				firestore={firestore}
 				activeSelect={activeTab?.tab || ''}
+				isMobile={isMobile}
 			/>
 		</div>
 	);
