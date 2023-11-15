@@ -1,34 +1,44 @@
-import { IcMAirport, IcMLocation, IcMPort } from '@cogoport/icons-react';
+import { IcAWarehouse, IcMAirport, IcMLocation, IcMPort } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
 function Location(props) {
 	const { data = {}, returnOnlyIcon } = props || {};
 
-	const { display_name = '', country = {} } = data || {};
+	const {
+		display_name = '',
+		country = {},
+		port_code = '',
+		type = '',
+		is_icd = false,
+		postal_code = '',
+		name = '',
+		site_code = '',
+	} = data || {};
 
-	const { name: countryName = '' } = country || {};
+	const { country_code: countryName = '' } = country || {};
 
 	const [firstElement = '', secondElement = ''] = display_name.split(',').reverse() || [];
 
 	const cityAndCountryName = `${secondElement},${firstElement}`;
 
-	let portCode = null;
+	let portCode = '';
 	let iconToShow = IcMLocation;
 
-	if (data.type === 'seaport' && data.is_icd) {
-		portCode = countryName ? `${data.port_code}, ${countryName}` : data.port_code;
+	if (type === 'seaport' && is_icd) {
+		portCode = countryName ? `${port_code}, ${countryName}` : port_code;
 		iconToShow = IcMLocation;
-	} else if (data.type === 'seaport') {
-		portCode = countryName ? `${data.port_code}, ${countryName}` : data.port_code;
+	} else if (type === 'seaport') {
+		portCode = countryName ? `${port_code}, ${countryName}` : port_code;
 		iconToShow = IcMPort;
-	} else if (data.type === 'airport') {
-		portCode = countryName ? `${data.port_code}, ${countryName}` : data.port_code;
+	} else if (type === 'airport') {
+		portCode = countryName ? `${port_code}, ${countryName}` : port_code;
 		iconToShow = IcMAirport;
-	} else if (data.type === 'pincode') {
-		portCode = countryName
-			? `${data.postal_code}, ${countryName}`
-			: data.postal_code;
+	} else if (type === 'pincode') {
+		portCode = countryName ? `${postal_code}, ${countryName}` : postal_code;
+	} else if (type === 'warehouse') {
+		iconToShow = IcAWarehouse;
+		portCode = site_code || countryName;
 	} else if (countryName) {
 		portCode = countryName;
 	}
@@ -42,25 +52,26 @@ function Location(props) {
 	return (
 		<div className={styles.label_container}>
 			<div className={styles.label_icon}>
-				<IconElement fill="#333333" />
+				<IconElement fill="#333" />
 			</div>
 
 			<div className={styles.name_container}>
 				<div className={styles.name_sub_container}>
-					<div className={styles.label_name}>
-						{data.name}
-					</div>
+					<span className={styles.label_name}>
+						{name}
+					</span>
 
-					<div className={styles.city_country_name}>
-						{cityAndCountryName || ''}
-					</div>
+					{portCode ? (
+						<span className={styles.sub_label}>
+							{portCode}
+						</span>
+					) : null}
+
 				</div>
 
-				{portCode ? (
-					<div className={styles.sub_label}>
-						{portCode}
-					</div>
-				) : null}
+				<div className={styles.city_country_name}>
+					{cityAndCountryName || ''}
+				</div>
 			</div>
 		</div>
 	);

@@ -1,10 +1,11 @@
 import { Pill } from '@cogoport/components';
 
-import getDetails from './getDetails';
+import getDetails from '../../../../../../common/ContainerDetails/getDetails';
+
 import styles from './styles.module.css';
 
-function ContainerDetails({ details = {}, primary_service = '' }) {
-	const containerDetails = getDetails({ item: details, primary_service });
+function ContainerDetails({ details = {}, service_type = '' }) {
+	const containerDetails = getDetails({ item: details, service_type });
 
 	return (
 		<div className={styles.container}>

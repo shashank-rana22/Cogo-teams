@@ -19,6 +19,10 @@ const redirectPath = (link) => {
 };
 
 function useGetIngestionList() {
+	const {
+		general: { query = {} },
+	} = useSelector((reduxState) => reduxState);
+
 	const [rowData, setRowData] = useState({});
 
 	const [tableModal, setTableModal] = useState('');
@@ -34,10 +38,6 @@ function useGetIngestionList() {
 		params,
 	}, { manual: false });
 
-	const {
-		general: { query = {} },
-	} = useSelector((reduxState) => reduxState);
-
 	const { partner_id = '' } = query;
 
 	const formProps = useForm();
@@ -50,6 +50,11 @@ function useGetIngestionList() {
 	const reUploadFiles = (row) => {
 		setRowData(row);
 		setTableModal('re_upload');
+	};
+
+	const currentStatusCta = (id) => {
+		setRowData(id);
+		setTableModal('current_status');
 	};
 
 	const columns = [
@@ -164,6 +169,25 @@ function useGetIngestionList() {
 						</Button>
 					</Tooltip>
 
+				</div>
+			),
+
+		},
+		{
+			key      : 'stats',
+			Header   : 'STATS',
+			id       : 'stats',
+			accessor : (item) => (
+				<div className={styles.current_status}>
+					<Button onClick={() => { currentStatusCta(item); }} size="md" themeType="tertiary">
+						{item?.request_files?.stage === 'uploaded' ? (
+							<>
+								Live Summary
+								<div className={styles.red_dot} />
+							</>
+						) : 'Stats' }
+
+					</Button>
 				</div>
 			),
 

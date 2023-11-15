@@ -7,7 +7,7 @@ const PAGE_DECREMENT = 1;
 export const getPayload = ({
 	performerId, pageIndex, agent, searchQuery, category, spectatorType, startDate, endDate, sortType = '',
 	sortOrder = '', idType = '', serialId = '', filterCategory = '', subcategory = '', raisedBy = '',
-	raisedTo = '', service = '', trade = '', requestType = '',
+	raisedTo = '', service = '', trade = '', requestType = '', adminSpectator = '',
 }) => ({
 	PerformedByID : performerId,
 	size          : 10,
@@ -15,7 +15,7 @@ export const getPayload = ({
 	AgentID       : agent || undefined,
 	QFilter       : searchQuery || undefined,
 	Type          : category || undefined,
-	SpectatorType : spectatorType || undefined,
+	SpectatorType : agent ? adminSpectator : spectatorType || undefined,
 	SortBy        : sortType || undefined,
 	SortType      : sortOrder || undefined,
 	StartDate     : formatDate({

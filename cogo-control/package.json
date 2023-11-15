@@ -127,11 +127,14 @@
     "@cogoport/saas": "workspace:0.1.0",
     "@cogoport/cogo-assured": "workspace:0.1.0",
     "@cogoport/finance-payroll":"workspace:0.1.0",
+	"@cogoport/payment" : "workspace:0.1.0",
+    "@cogoport/cogo-one-sme-dashboard": "workspace:0.1.0",
     "@cogoport/shipment-insurance": "workspace:0.1.0",
     "@cogoport/cargo-insurance": "workspace:0.1.0",
     "@cogoport/insurance-form": "workspace:0.1.0",
     "@cogoport/cogo-store": "workspace:0.1.0",
-	  "@cogoport/handling-fees": "workspace:0.1.0"
+    "@cogoport/handling-fees": "workspace:0.1.0",
+    "@cogoport/hrms": "workspace:0.1.0"
   },
   "browserslist": [
     "defaults"

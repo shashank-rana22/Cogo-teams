@@ -29,7 +29,7 @@ function Layout({ controls = [], control = () => {}, errors = {} }) {
 
 				return (
 					<div key={`${name}_${label}`} className={styles.form_item} style={{ width: `${flex}%` }}>
-						<div className={cl`${styles.label} ${newControl?.boldLabel ? styles.bold_label : {}}`}>
+						<div className={cl`${styles.label} ${newControl?.boldLabel && styles.bold_label}`}>
 							{newControl?.boldLabel || label || ''}
 							{' '}
 							{newControl?.rules?.required ? (

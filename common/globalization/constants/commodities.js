@@ -222,6 +222,30 @@ export const COMMODITY_NAME_MAPPING = {
 		is_reefer   : false,
 		is_haz      : false,
 	},
+	temp_controlled: {
+		name        : 'Temp. Controlled',
+		description : '',
+		is_reefer   : false,
+		is_haz      : false,
+	},
+	valuables: {
+		name        : 'Valuables',
+		description : '',
+		is_reefer   : false,
+		is_haz      : false,
+	},
+	dangerous: {
+		name        : 'Dangerous',
+		description : '',
+		is_reefer   : false,
+		is_haz      : false,
+	},
+	others: {
+		name        : 'Others',
+		description : '',
+		is_reefer   : false,
+		is_haz      : false,
+	},
 };
 
 export const HAZ_CLASSES = [

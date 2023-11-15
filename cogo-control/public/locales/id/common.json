@@ -106,7 +106,7 @@
     "analytics_dashboard": "Analytics Dashboard",
     "ihls": "IHLS",
     "air_repository": "Air Repository",
-    "saas_tools": "Saas Tools",
+    "saas_tools": "SaaS",
     "new_hire_dashboard": "New Hire Dashboard",
     "ingestion": "Ingestion",
     "performance_management": "Performance Management",
@@ -227,7 +227,7 @@
     "kra_management": "KRA Management",
     "kra_assignment": "KRA Assignment",
     "performance_rating_review": "Performance Rating Review",
-    "customer": "Customer",
+    "customer": "Subscription CRM",
     "plan": "Plan",
     "simulation": "Simulation",
     "analytics": "Analytics",
@@ -269,5 +269,6 @@
     "see_all_button": "Lihat Semua",
     "notifications_empty_label": "Anda tidak memiliki notifikasi baru.",
     "performance_and_incentives": "Performance and Incentives",
+    "sme_dashboard": "SME Dashboard",
     "handling_fees_configuration": "Handling Fees"
 }

@@ -14,16 +14,37 @@ function AdminClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => 
 		formState:{ errors = {} },
 	} = useForm();
 
-	const { admin_clearance, application_status } = data || {};
+	const { admin_clearance, application_status, application_process_details } = data || {};
 	const { process_user_details, admin_clearance:adminClearance } = admin_clearance || {};
 	let { name } = process_user_details || {};
-	const { sub_process_data, is_complete } = adminClearance || {};
+	const { sub_process_data, is_complete, is_ignored } = adminClearance || {};
 	const { name:approver_name } = sub_process_data || {};
 	name = !approver_name ? name : approver_name;
 
+	if (is_ignored) {
+		return (
+			<Heading
+				title="ADMIN CLEARANCE"
+				subTitle="FNF & other settlements "
+				isComplete={is_complete}
+				name={name}
+				isIgnored={is_ignored}
+				application_process_details={application_process_details}
+			/>
+		);
+	}
+
 	return (
 		<>
-			<Heading title="ADMIN CLEARANCE" subTitle="FNF & other settlements " isComplete={is_complete} name={name} />
+			<Heading
+				title="ADMIN CLEARANCE"
+				subTitle="FNF & other settlements "
+				isComplete={is_complete}
+				name={name}
+				isIgnored={is_ignored}
+				application_process_details={application_process_details}
+				refetch={refetch}
+			/>
 			{application_status === 'cancellation_requested' ? (
 				<CancellationRequest
 					data={data}

@@ -5,7 +5,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMManufacturing, IcMProfile } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import React, { useMemo, useEffect, useCallback } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useMemo, useEffect, useCallback } from 'react';
 
 import CustomSelectOption from '../CustomSelectOption';
 
@@ -26,14 +27,18 @@ function OrganisationForm({
 	organization = {},
 	setOrganization = () => {},
 	errors = {},
+	defaultValues = {},
 	...rest
 }) {
 	const { query = {} } = useRouter();
 
 	const { user_id = '' } = query;
 
+	const source = isEmpty(defaultValues) ? 'create' : 'edit';
+
 	const USER_PARAMS = useMemo(() => (
 		{
+			page_limit               : 1000,
 			pagination_data_required : false,
 			filters                  : {
 				status                 : 'active',
@@ -88,8 +93,8 @@ function OrganisationForm({
 		const { list = [] } = userData || {};
 
 		const finalOptions = list.map((item) => ({
-			label : item.name,
-			value : item.user_id,
+			label : item?.name || '',
+			value : item?.user_id || '',
 		}));
 
 		return finalOptions;
@@ -103,16 +108,27 @@ function OrganisationForm({
 
 	useEffect(() => {
 		if (!user_id) {
+			let userIdValue = organization?.user_id;
+
+			if (defaultValues?.user_id === organization?.user_id) {
+				userIdValue = defaultValues?.user_id;
+			}
+
+			if (!organization?.user_id) {
+				userIdValue = userOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value;
+			}
+
 			setOrganization((prev) => ({
 				...prev,
-				user_id: userOptions?.[GLOBAL_CONSTANTS.zeroth_index]?.value,
+				user_id: userIdValue,
 			}));
 		}
-	}, [setOrganization, userOptions, user_id]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [defaultValues?.user_id, setOrganization, userOptions, user_id]);
 
 	return (
-		<div className={styles.container} style={rest.style}>
-			<div className={styles.form_item}>
+		<div className={cl`${styles.container} ${styles[source]}`} style={rest.style}>
+			<div className={cl`${styles.form_item} ${styles[source]}`}>
 				<div className={styles.label}>
 					Select an organisation
 					{' '}
@@ -123,7 +139,7 @@ function OrganisationForm({
 					name="organization_id"
 					placeholder="Select Organisation"
 					asyncKey="organizations"
-					initialCall={rest.action !== 'edit'}
+					initialCall={!organization?.organization_id}
 					isClearable
 					params={ORG_PARAMS}
 					value={organization?.organization_id}
@@ -141,7 +157,7 @@ function OrganisationForm({
 				)}
 			</div>
 
-			<div key={loading} className={cl`${styles.form_item} ${styles.user}`}>
+			<div key={loading} className={cl`${styles.form_item} ${styles[source]} ${styles.user}`}>
 				<div className={styles.label}>
 					Select an User
 					{' '}
@@ -152,7 +168,7 @@ function OrganisationForm({
 					name="user_id"
 					placeholder="Select User"
 					value={organization?.user_id}
-					options={organization?.organization_id ? userOptions : []}
+					options={organization?.organization_id ? userOptions || [] : []}
 					onChange={(val) => {
 						handleUserChange(val);
 					}}

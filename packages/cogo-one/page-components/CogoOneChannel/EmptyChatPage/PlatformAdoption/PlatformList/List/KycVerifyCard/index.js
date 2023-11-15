@@ -14,15 +14,16 @@ function KycVerifyCard({
 	initialViewType = '',
 }) {
 	const {
-		organization = {}, request_type = '', requesting_user = {}, performed_by_type = '',
+		organization = {}, request_type = '', requesting_user = {}, performed_by_type = '', metadata = {},
 		updated_at = '', customer = {}, serial_id = '', escalation_cycle = null, documents = [],
 	} = item || {};
-	const { account_type = '', business_name = '', tags = [], id: orgId = '' } = organization || {};
+	const { account_type = '', business_name = '', tags = [] } = organization || {};
 	const { name = '' } = requesting_user || {};
 	const {
 		name:pocName = '', mobile_country_code = '', mobile_number = '', id: pocId = '',
 		lead_user_id = '',
 	} = customer || {};
+	const { lead_organization_id = '', organization_id = '' } = metadata || {};
 
 	return (
 		<div className={styles.card}>
@@ -51,7 +52,7 @@ function KycVerifyCard({
 								showAccountDetails : false,
 								accountData        : documents,
 								orgData            : item,
-								verifyType         : '',
+								verifyType         : 'kyc_verify',
 								accountType        : formatAccountType({ tags })?.[account_type]?.shortName,
 							}));
 						}}
@@ -107,8 +108,9 @@ function KycVerifyCard({
 							number       : mobile_number,
 							pocId,
 							leadUserId   : lead_user_id,
-							orgId,
+							orgId        : organization_id,
 							isUnkownUser : true,
+							leadOrgId    : lead_organization_id,
 						})}
 					>
 						<IcMCall width={18} height={18} fill="#fff" />

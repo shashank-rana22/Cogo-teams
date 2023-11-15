@@ -1,5 +1,5 @@
-import useDeactivateQuest from '../hooks/useDeactivateQuest';
 import useGetQuestList from '../hooks/useGetQuestList';
+import useUpdateQuest from '../hooks/useUpdateQuest';
 
 import Header from './Header';
 import List from './List';
@@ -10,13 +10,15 @@ function ListQuests() {
 		list,
 		paginationData, getNextPage, params, setParams,
 		refetch,
+		debounceQuery,
+		control,
 	} = useGetQuestList({ manual: false });
 
-	const { handleClick } = useDeactivateQuest({ afterDeactivate: refetch });
+	const { handleClick } = useUpdateQuest({ afterUpdate: refetch });
 
 	return (
 		<>
-			<Header />
+			<Header control={control} debounceQuery={debounceQuery} />
 
 			<List
 				loading={loading}
@@ -25,7 +27,7 @@ function ListQuests() {
 				params={params}
 				setParams={setParams}
 				getNextPage={getNextPage}
-				handleDeactivate={handleClick}
+				handleUpdate={handleClick}
 			/>
 		</>
 	);

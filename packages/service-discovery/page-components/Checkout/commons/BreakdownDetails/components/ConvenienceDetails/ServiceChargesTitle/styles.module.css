@@ -14,6 +14,10 @@
 .flex {
 	display: flex;
 	align-items: center;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 }
 
 .price_display {

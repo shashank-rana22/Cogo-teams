@@ -7,10 +7,7 @@ const getLoadArray = (search_type, serviceDetails) => {
 		const service = serviceDetails[serviceId];
 
 		if (search_type === service.service_type) {
-			if (
-				service.service_type === 'fcl_freight'
-				|| service.service_type === 'fcl_freight_local'
-			) {
+			if (['fcl_freight', 'fcl_freight_local'].includes(service.service_type)) {
 				LOAD.push({
 					cargo_weight_per_container : service.cargo_weight_per_container,
 					commodity                  : service.commodity,
@@ -18,7 +15,7 @@ const getLoadArray = (search_type, serviceDetails) => {
 					container_type             : service.container_type,
 					containers_count           : service.containers_count,
 				});
-			} else if (service.service_type === 'lcl_freight') {
+			} else if (['lcl_freight', 'lcl_freight_local'].includes(service.service_type)) {
 				LOAD.push({
 					packages_count : service.packages_count,
 					commodity      : service.commodity,
@@ -27,12 +24,16 @@ const getLoadArray = (search_type, serviceDetails) => {
 				});
 			} else if (service.service_type === 'ftl_freight') {
 				LOAD.push({
-					volume       : service.volume,
-					weight       : service.weight,
-					packages     : service.packages,
-					trip_type    : service.trip_type,
-					truck_type   : service.truck_type,
-					trucks_count : service.trucks_count,
+					volume               : service.volume,
+					weight               : service.weight,
+					packages             : service.packages,
+					trip_type            : service.trip_type,
+					truck_type           : service.truck_type,
+					trucks_count         : service.trucks_count,
+					id                   : service.id,
+					load_selection_type  : service.load_selection_type,
+					commodity            : service.commodity,
+					cargo_readiness_date : service.cargo_readiness_date,
 				});
 			} else if (service.service_type === 'ltl_freight') {
 				LOAD.push({
@@ -43,18 +44,35 @@ const getLoadArray = (search_type, serviceDetails) => {
 					height               : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].height,
 					length               : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].length,
 					width                : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].width,
-					package_type         : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].packing_type,
+					packing_type         : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].packing_type,
 					packages_count       : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].packages_count,
-					stackability         : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].handling_type,
+					handling_type        : service.packages?.[GLOBAL_CONSTANTS.zeroth_index].handling_type,
 				});
-			} else if (service.service_type === 'air_freight') {
+			} else if (['air_freight', 'air_freight_local'].includes(service.service_type)) {
 				LOAD.push({
-					packages             : service?.packages,
-					commodity_details    : service?.commodity_details,
+					packages             : service.packages,
+					commodity_details    : service.commodity_details,
 					commodity            : service.commodity,
 					cargo_clearance_date : service.cargo_clearance_date,
-					weight               : service.weight,
-					volume               : service.volume,
+					total_weight         : service.weight,
+					total_volume         : service.volume,
+					load_selection_type  : service.load_selection_type,
+					packing_list         : service.packing_list,
+					total_quantity       : service.packages_count,
+				});
+			} else if (service.service_type === 'air_customs') {
+				LOAD.push({
+					packages_count : service.packages_count,
+					commodity      : service.commodity,
+					weight         : service.weight,
+					volume         : service.volume,
+				});
+			} else if (service.service_type === 'lcl_customs') {
+				LOAD.push({
+					packages_count : service.packages_count,
+					commodity      : service.commodity,
+					weight         : service.weight,
+					volume         : service.volume,
 				});
 			} else if (service.service_type === 'trailer_freight') {
 				LOAD.push({
@@ -73,6 +91,14 @@ const getLoadArray = (search_type, serviceDetails) => {
 					container_type             : service.container_type,
 					containers_count           : service.containers_count,
 					trip_type                  : service.trip_type,
+				});
+			} else if (service.service_type === 'fcl_customs') {
+				LOAD.push({
+					commodity           : service.commodity,
+					container_size      : service.container_size,
+					container_type      : service.container_type,
+					containers_count    : service.containers_count,
+					cargo_handling_type : service.cargo_handling_type,
 				});
 			}
 		}

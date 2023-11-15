@@ -15,9 +15,11 @@ import styles from './styles.module.css';
 
 function LeaveRequest({ setShowInbox = () => {}, isManager = false }) {
 	const [activeTab, setActiveTab] = useState('employee');
-	const { push } = useRouter();
+	const { push, query:queryParams } = useRouter();
 	const { loading, data } = useGetLeaveGroupings(activeTab);
 	const { query = '', debounceQuery } = useDebounceQuery();
+
+	const { back } = queryParams;
 
 	const { total_self_pending_count, list, total_employees_pending_count } = data || {};
 
@@ -28,8 +30,12 @@ function LeaveRequest({ setShowInbox = () => {}, isManager = false }) {
 	};
 
 	const handleGoBack = () => {
-		setShowInbox(false);
-		push('/attendance-leave-management');
+		if (back === 'hrms') {
+			push('/hrms');
+		} else {
+			push('/attendance-leave-management');
+			setShowInbox(false);
+		}
 	};
 
 	return (

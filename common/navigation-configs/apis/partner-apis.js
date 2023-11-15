@@ -8988,6 +8988,14 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api          : 'send_cc_outstanding_report',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'sage',
+
+		},
+		{
 			api          : 'list_cogo_entities',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -15276,6 +15284,38 @@ const partner = {
 		},
 		{
 			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+	],
+	cogo_one_sme_dashboard: [
+		{
+			api          : 'list_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'get_partner_user_rm_mapping',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'get_omnichannel_sme_dashboard',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_agent_scoring_reports',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
+		{
+			api          : 'list_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'list_partner_addresses',
 			access_type  : 'private',
 			service_name : 'partner',
 		},

@@ -11,7 +11,7 @@ const getOptions = (data = []) => (
 	}))
 );
 
-function Plan({ featureInfo = {}, modalChangeHandler }) {
+function Plan({ extraInfo: featureInfo = {}, modalChangeHandler }) {
 	const { t } = useTranslation(['saasSubscription']);
 	const [planId, setPlanId] = useState('');
 

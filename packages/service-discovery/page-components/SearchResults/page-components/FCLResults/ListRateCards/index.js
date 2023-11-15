@@ -1,21 +1,20 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
-import { Router } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import DotLoader from '../../../../../common/LoadingState/DotLoader';
 import AdditionalTabs from '../../../common/AdditionalTabs';
+import AppliedFilters from '../../../common/AppliedFilters';
+import ComparisonHeader from '../../../common/Comparison/ComparisonHeader';
+import ContractAd from '../../../common/ContractAd';
 import EmptyState from '../../../common/EmptyState';
+import Schedules from '../../../common/Schedules';
 import CogoAssuredCard from '../CogoAssuredCard';
 import FclCard from '../FclCard';
 
-import AppliedFilters from './AppliedFilters';
-import ComparisonHeader from './ComparisonHeader';
-import ContractAd from './ContractAd';
 import Header from './Header';
-import Schedules from './Schedules';
 import styles from './styles.module.css';
 
 const ONE = 1;
@@ -32,6 +31,8 @@ function RateCard({
 	setInfoBanner = () => {},
 	showGuide = false,
 	cogoAssuredRates = [],
+	setRouterLoading = () => {},
+	isMobile = false,
 }) {
 	return (
 		<FclCard
@@ -47,6 +48,8 @@ function RateCard({
 			setInfoBanner={setInfoBanner}
 			showGuide={showGuide}
 			cogoAssuredRates={cogoAssuredRates}
+			setRouterLoading={setRouterLoading}
+			isMobile={isMobile}
 		/>
 	);
 }
@@ -62,8 +65,6 @@ function ListRateCards({
 	filters = {},
 	setFilters = () => {},
 	refetchSearch = () => {},
-	selectedWeek = {},
-	setSelectedWeek = () => {},
 	paginationProps = {},
 	loading = false,
 	infoBanner = {},
@@ -71,8 +72,12 @@ function ListRateCards({
 	isGuideViewed = false,
 	cogoAssuredRates = [],
 	marketplaceRates = [],
-	routerLoading = false,
 	setRouterLoading = () => {},
+	setScheduleLoading = () => {},
+	scheduleLoading = false,
+	setSelectedSchedule = () => {},
+	selectedSchedule = () => {},
+	isMobile = false,
 }) {
 	const [showFilterModal, setShowFilterModal] = useState(false);
 	const [openAccordian, setOpenAccordian] = useState('');
@@ -87,11 +92,17 @@ function ListRateCards({
 
 	const { total_count, page_limit, page } = paginationProps;
 
-	useEffect(() => {
-		Router.events.on('routeChangeComplete', () => {
-			setRouterLoading(false);
-		});
-	}, [setRouterLoading]);
+	// const transitTime = (rates || []).reduce((acc, rate) => {  //COMMENTED FOR FUTURE USE
+	// 	if (!acc.min || rate.transit_time < acc.min) {
+	// 		acc.min = rate.transit_time;
+	// 	}
+
+	// 	if (!acc.max || rate.transit_time > acc.max) {
+	// 		acc.max = rate.transit_time;
+	// 	}
+
+	// 	return acc;
+	// }, { min: null, max: null });
 
 	if (!primary_service) {
 		return null;
@@ -110,16 +121,9 @@ function ListRateCards({
 				openAccordian={openAccordian}
 				setScreen={setScreen}
 				rates={rates}
+				isMobile={isMobile}
+				// transitTime={transitTime}
 			/>
-		);
-	}
-
-	if (routerLoading) {
-		return (
-			<div className={styles.loading}>
-				<span className={styles.loading_text}>Loading Rates</span>
-				<DotLoader />
-			</div>
 		);
 	}
 
@@ -138,7 +142,10 @@ function ListRateCards({
 						setShowFilterModal={setShowFilterModal}
 						openAccordian={openAccordian}
 						setOpenAccordian={setOpenAccordian}
+						setScheduleLoading={setScheduleLoading}
 						setRouterLoading={setRouterLoading}
+						isMobile={isMobile}
+						// transitTime={transitTime}
 					/>
 
 					{showComparison ? (
@@ -146,6 +153,7 @@ function ListRateCards({
 							comparisonRates={comparisonRates}
 							setComparisonRates={setComparisonRates}
 							setScreen={setScreen}
+							isMobile={isMobile}
 						/>
 					) : null}
 				</div>
@@ -154,11 +162,12 @@ function ListRateCards({
 			<Schedules
 				paginationProps={paginationProps}
 				filters={filters}
-				setFilters={setFilters}
 				setComparisonRates={setComparisonRates}
-				setSelectedWeek={setSelectedWeek}
-				selectedWeek={selectedWeek}
 				loading={loading}
+				setScheduleLoading={setScheduleLoading}
+				setSelectedSchedule={setSelectedSchedule}
+				selectedSchedule={selectedSchedule}
+				isMobile={isMobile}
 			/>
 
 			<AppliedFilters
@@ -166,6 +175,7 @@ function ListRateCards({
 				setOpenAccordian={setOpenAccordian}
 				filters={filters}
 				setFilters={setFilters}
+				service_type="fcl_freight"
 			/>
 
 			{isEmpty(cogoAssuredRates) ? null : (
@@ -181,6 +191,8 @@ function ListRateCards({
 					infoBanner={infoBanner}
 					setInfoBanner={setInfoBanner}
 					isGuideViewed={isGuideViewed}
+					setRouterLoading={setRouterLoading}
+					isMobile={isMobile}
 				/>
 			)}
 
@@ -189,6 +201,8 @@ function ListRateCards({
 					loading={loading}
 					importerExporterId={detail.importer_exporter_id}
 					contractDetail={contract_detail}
+					isMobile={isMobile}
+					style={{ marginBottom: 40 }}
 				/>
 			)}
 
@@ -208,13 +222,16 @@ function ListRateCards({
 						setInfoBanner={setInfoBanner}
 						showGuide={isEmpty(cogoAssuredRates) && !index && !isGuideViewed}
 						cogoAssuredRates={cogoAssuredRates}
-						routerLoading={routerLoading}
+						setRouterLoading={setRouterLoading}
+						isMobile={isMobile}
 					/>
 					{index === GLOBAL_CONSTANTS.zeroth_index && isEmpty(cogoAssuredRates) ? (
 						<ContractAd
 							loading={loading}
 							importerExporterId={detail.importer_exporter_id}
 							contractDetail={contract_detail}
+							isMobile={isMobile}
+							style={{ marginTop: 40 }}
 						/>
 					) : null}
 				</>
@@ -234,7 +251,7 @@ function ListRateCards({
 				</div>
 			) : null}
 
-			{loading && (
+			{loading && !scheduleLoading && (
 				<div className={styles.spinner_container}>
 					<DotLoader size="lg" />
 					<div className={styles.text}>Fetching rates, please wait</div>
@@ -246,6 +263,7 @@ function ListRateCards({
 				rates={rates}
 				loading={loading}
 				setScreen={setScreen}
+				isMobile={isMobile}
 			/>
 		</div>
 	);

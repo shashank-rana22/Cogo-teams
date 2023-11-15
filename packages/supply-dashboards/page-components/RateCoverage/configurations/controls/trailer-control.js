@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 
 const trailerControls = ({
 	data,
-	CommodityOptions,
 	originLocationOptions, destinationLocationOptions,
 	user_id,
 	listPartnerUserOptions,
@@ -135,7 +134,6 @@ const trailerControls = ({
 			placeholder : 'Commodity',
 			span        : 4,
 			value       : data?.commodity,
-			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
 		{

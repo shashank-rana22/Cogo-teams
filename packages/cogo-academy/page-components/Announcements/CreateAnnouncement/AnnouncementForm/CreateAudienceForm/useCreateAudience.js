@@ -7,9 +7,10 @@ const handlePersona = ({ platform = '', personaValue = '' }) => {
 		admin   : 'admin_user',
 		app     : 'importer_exporter',
 		all     : 'all',
+		public  : 'all',
 		partner : personaValue,
-
 	};
+
 	return PERSONA_MAPPING[platform];
 };
 
