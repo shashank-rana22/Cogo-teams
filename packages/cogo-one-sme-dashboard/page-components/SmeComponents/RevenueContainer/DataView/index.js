@@ -49,6 +49,7 @@ function DataView({
 								amount   : Number(amount) || FALLBACK_AMOUNT,
 								currency : currency || geo.country.currency.code,
 								options  : {
+									currencyWise          : true,
 									style                 : 'currency',
 									currencyDisplay       : 'symbol',
 									notation              : 'compact',

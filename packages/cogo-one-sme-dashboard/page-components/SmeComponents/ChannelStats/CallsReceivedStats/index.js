@@ -27,15 +27,14 @@ function CallsReceivedStats({
 	return (
 		<div className={styles.container}>
 			<div className={styles.label}>
-				Total Calls Received -
-				{' '}
-				{current_data?.total_calls || 0}
+				Total Calls Received
+				{dashboardLoading ? '' : ` - ${current_data?.total_calls || 0}`}
 			</div>
 
 			<div className={styles.body}>
 				{dashboardLoading
 					? <LoadingState />
-					: Object.entries(CALL_STATUS_MAPPING).map(
+					: Object.entries(CALL_STATUS_MAPPING || {}).map(
 						([type, itm]) => (
 							<div
 								key={type}
@@ -45,7 +44,7 @@ function CallsReceivedStats({
 									{itm?.icon}
 
 									<div className={styles.count_stats}>
-										{current_data?.[itm?.count]}
+										{current_data?.[itm?.count] || 0}
 									</div>
 								</div>
 
@@ -72,7 +71,7 @@ function CallsReceivedStats({
 										label="Not-allocated"
 										dataValue={current_data?.[itm?.non_allocated]}
 										change={calcChange({
-											valueKey     : itm?.non_allocated_change,
+											valueKey     : itm?.non_allocated,
 											currentData  : current_data,
 											previousData : previous_data,
 										})}

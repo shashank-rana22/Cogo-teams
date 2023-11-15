@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import { SINGLE_LOCATIONS } from '../../../../constants';
 import { formatRouteData } from '../../../../utils/routeDataHelpers';
@@ -40,7 +41,10 @@ function ShipmentDetails({
 	handleRouteBooking = () => {}, service = '', partnerId = '',
 	shipmentsData = {}, handleRouteSupply = () => {}, listLoading = false,
 }) {
-	const { shipment_type = '', trade_type: tradeType = '', id = '' } = shipmentsData || {};
+	const {
+		shipment_type = '', trade_type: tradeType = '', id = '',
+		origin_location = {}, destination_location = {},
+	} = shipmentsData || {};
 
 	const {
 		originDetails = {},
@@ -64,6 +68,8 @@ function ShipmentDetails({
 	};
 
 	const isSingleLocation = SINGLE_LOCATIONS?.includes(shipmentType);
+	const defaultPol = isEmpty(origin_location) ? 'Destination' : 'Origin';
+	const defaultData = isEmpty(origin_location) ? destination_location : origin_location;
 
 	return (
 		<>
@@ -88,11 +94,11 @@ function ShipmentDetails({
 			{isSingleLocation ? (
 				<div className={styles.port_container}>
 					<div className={styles.trade_type}>
-						{TRADE_TYPE_MAPPING[tradeType]}
+						{TRADE_TYPE_MAPPING[tradeType] || defaultPol}
 					</div>
 					:
 					<PortDetails
-						details={DISPLAY_DATA_MAPPING[tradeType]}
+						details={DISPLAY_DATA_MAPPING[tradeType] || defaultData}
 					/>
 				</div>
 			) : (

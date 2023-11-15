@@ -17,6 +17,18 @@
 .header_value {
 	margin-left: 6px;
 	font-weight: 600;
+
+	:global {
+		.flex_box {
+			display: inline-flex;
+			align-items: center;
+		}
+
+		.copy_icon {
+			margin: 0 5px;
+			cursor: pointer;
+		}
+	}
 }
 
 .cancel_btn {

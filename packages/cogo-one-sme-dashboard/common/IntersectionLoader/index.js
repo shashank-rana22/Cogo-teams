@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-import { LoaderComp } from '../Elements';
+import { LoadingState } from '../Elements';
 
 import styles from './styles.module.css';
 
@@ -37,7 +37,7 @@ function IntersectionLoader({
 						{headerText}
 					</div>
 				)}
-			{isVisible ? children : <LoaderComp />}
+			{isVisible ? children : <LoadingState customClassName="intersection_loading" />}
 		</div>
 	);
 }

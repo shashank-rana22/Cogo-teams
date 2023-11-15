@@ -62,13 +62,6 @@ function UserData({ widgetBlocks = null, filterParams = {} }) {
 			</div>
 
 			<div className={styles.unverified_accounts}>
-				<div className={styles.total_accounts}>
-					Total Un-verified Users -
-					<span>
-						{getFormattedAmount({ number: accountsData?.total_unverified })}
-					</span>
-				</div>
-
 				<div className={styles.categorize_accounts}>
 					{Object.entries(UNVERIFIED_TYPES).map(
 						([name, valueKey]) => (

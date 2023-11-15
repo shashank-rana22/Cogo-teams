@@ -264,3 +264,4 @@ export const CLOSED_TICKET_STATUS = ['closed', 'overdue'];
 
 export const EMPLOYEE_LEVEL = [0, 1, 2, 3, 4, 5];
 export const MY_TEAM_LEVEL = ['assigned_to_my_team', 'raised_by_my_team'];
+export const FETCH_API_FOR_REQUEST = ['shipment', 'feedback'];

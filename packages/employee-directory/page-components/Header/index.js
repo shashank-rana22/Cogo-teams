@@ -1,5 +1,5 @@
-import { Tabs, TabPanel, Button } from '@cogoport/components';
-import { IcMProfile, IcMDownload } from '@cogoport/icons-react';
+import { Tabs, TabPanel } from '@cogoport/components';
+import { IcMProfile } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -11,7 +11,7 @@ function Header({
 	activeTab = 'confirmed', setFilters = () => {}, data = {},
 	totalEmployeeCount = 0,
 	employeeFilters = {},
-	getEmployeeList = () => {},
+	// getEmployeeList = () => {},
 	setSelectedIds = () => {},
 }) {
 	const handleTabChange = (e) => {
@@ -19,11 +19,11 @@ function Header({
 		setSelectedIds([]);
 	};
 
-	const handleDownload = async () => {
-		const res = await getEmployeeList(true);
+	// const handleDownload = async () => {
+	// 	const res = await getEmployeeList(true);
 
-		window.open(res.data, '_self');
-	};
+	// 	window.open(res.data, '_self');
+	// };
 
 	const isEmptyFilters = isEmpty(employeeFilters);
 
@@ -47,11 +47,11 @@ function Header({
 					/>
 				))}
 			</Tabs>
-			<Button size="md" className={styles.download_btn} themeType="accent" onClick={handleDownload}>
+			{/* <Button size="md" className={styles.download_btn} themeType="accent" onClick={handleDownload}>
 				<IcMDownload />
 				{' '}
 				<span className={styles.download_text}>Download Current View</span>
-			</Button>
+			</Button> */}
 		</div>
 	);
 }

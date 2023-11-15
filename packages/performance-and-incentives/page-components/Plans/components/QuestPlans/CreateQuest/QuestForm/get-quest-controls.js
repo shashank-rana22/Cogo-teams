@@ -23,12 +23,6 @@ const controls = [
 		placeholder           : 'Enter Name',
 		rules                 : { required: 'Date range is required' },
 	},
-	{
-		name        : 'quest_string',
-		label       : 'Quest String',
-		type        : 'text',
-		placeholder : 'Enter text',
-	},
 ];
 
 export default controls;

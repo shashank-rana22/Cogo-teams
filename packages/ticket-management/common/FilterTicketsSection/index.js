@@ -63,6 +63,7 @@ function FilterTicketsSection({
 				refreshList={refreshList}
 				setIdFilters={setIdFilters}
 				idFilters={idFilters}
+				adminSpectator={isAdmin ? 'reviewer' : null}
 			/>
 			<Modals
 				modalData={modalData}
