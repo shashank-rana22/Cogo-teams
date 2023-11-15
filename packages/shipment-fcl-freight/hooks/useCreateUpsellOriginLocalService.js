@@ -25,7 +25,7 @@ function useCreateUpsellOriginLocalService({
 	}, { manual: true });
 
 	const [{ loading:upsellLoading }, upsellTrigger] = useRequest({
-		url    : 'fcl_freight/create_upsell',
+		url    : '/create_spot_search',
 		method : 'POST',
 	}, { manual: true });
 
@@ -56,7 +56,12 @@ function useCreateUpsellOriginLocalService({
 			});
 
 			if ([res?.status, taskRes?.status].every((s) => s === 200)) {
-				const upsellRes = await upsellTrigger(getOriginLocalUpsellPayload({ primary_service, userData }));
+				const upsellPayload = getOriginLocalUpsellPayload({
+					primary_service,
+					userData,
+					shipment_data,
+				});
+				const upsellRes = await upsellTrigger({ data: upsellPayload });
 
 				let newHref = `${window.location.origin}/${router?.query?.partner_id}/book/`;
 				newHref += `${upsellRes.data?.id}/${upsellRes.data?.importer_exporter_id}/${shipment_data?.id}
@@ -71,7 +76,7 @@ function useCreateUpsellOriginLocalService({
 
 	const onSubmit = (values) => {
 		const payload = getCreateOrgBillingAddr({
-			task,
+			// task,
 			values,
 			countryId,
 			// organization_id: shipment_data?.consignee_shipper_id || consigneeId,

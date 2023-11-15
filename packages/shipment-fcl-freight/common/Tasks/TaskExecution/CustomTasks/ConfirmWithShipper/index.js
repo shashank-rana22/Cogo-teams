@@ -1,4 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState, useContext } from 'react';
 
 import BillingAddress from './BillingAddress';
@@ -18,7 +19,7 @@ function ConfirmWithShipper({
 }) {
 	const { shipment_data = {}, refetchServices = () => {}, primary_service = {} } = useContext(ShipmentDetailContext);
 
-	const [step, setStep] = useState(0);
+	const [step, setStep] = useState(task?.tags?.[GLOBAL_CONSTANTS.zeroth_index]);
 	const [consigneeId, setConsigneeId] = useState(shipment_data?.consignee_shipper_id);
 
 	const componentProps = {
@@ -29,7 +30,7 @@ function ConfirmWithShipper({
 			task, refetch, onCancel, refetchServices, shipment_data, consigneeId, primary_service,
 		},
 		2: {
-			task, refetch, onCancel,
+			task, refetch, onCancel, setStep,
 		},
 	};
 

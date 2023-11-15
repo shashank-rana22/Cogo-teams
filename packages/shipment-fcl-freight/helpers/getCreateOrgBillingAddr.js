@@ -1,5 +1,6 @@
 const getCreateOrgBillingAddr = ({
-	task = {}, values = {}, countryId = '', userData,
+	// task = {},
+	values = {}, countryId = '', userData,
 }) => {
 	const {
 		name = '',
@@ -12,19 +13,19 @@ const getCreateOrgBillingAddr = ({
 		email = '', is_sez = '',
 	} = values || {};
 
-	const { task_field_id = '' } = task || {};
+	// const { task_field_id = '' } = task || {};
 
 	const payload = {
 		address,
 		pincode,
 		tax_number,
-		organization_branch_id      : userData?.organization_branch_id,
-		name                        : business_name,
-		tax_number_document_url     : tax_number_document_url?.finalUrl,
-		organization_trade_party_id : task_field_id,
-		country_id                  : countryId,
-		is_sez                      : is_sez === 'yes',
-		poc_details                 : [{
+		organization_branch_id  : userData?.organization_branch_id,
+		name                    : business_name,
+		tax_number_document_url : tax_number_document_url?.finalUrl,
+		// organization_trade_party_id : task_field_id,
+		country_id              : countryId,
+		is_sez                  : is_sez === 'yes',
+		poc_details             : [{
 			name,
 			email,
 			mobile_number       : mobile_number?.number,
