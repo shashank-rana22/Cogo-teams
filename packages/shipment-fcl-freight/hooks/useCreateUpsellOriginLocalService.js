@@ -69,8 +69,6 @@ function useCreateUpsellOriginLocalService({
 		}
 	};
 
-	console.log({ shipment_data });
-
 	const onSubmit = (values) => {
 		const payload = getCreateOrgBillingAddr({
 			task,
@@ -80,8 +78,6 @@ function useCreateUpsellOriginLocalService({
 			// shipment_data,
 			userData,
 		});
-
-		console.log({ userData });
 
 		createOrgBillingAddress({ payload, cargo_readiness_date: values?.cargo_readiness_date });
 	};
