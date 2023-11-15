@@ -49,3 +49,8 @@
 	width: 24%;
 	text-align: right;
 }
+
+.scroll_container {
+	max-height: 300px;
+	overflow-y: scroll;
+}

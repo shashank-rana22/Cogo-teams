@@ -12,8 +12,7 @@ const { CREATE, EDIT } = QUEST_MODE_KEYS;
 
 function QuestForm({
 	setParams = () => {}, data = {}, setShowOverlapped = () => {},
-	name: questName = {},
-	setName = () => {},
+	setQuestData = () => {},
 }) {
 	const {
 		loading,
@@ -22,7 +21,7 @@ function QuestForm({
 		reset,
 		handleClick,
 		handleSubmit,
-	} = useCreateQuest({ setParams, data, setShowOverlapped, questName, setName });
+	} = useCreateQuest({ setParams, data, setShowOverlapped, setQuestData });
 
 	const MODE = isEmpty(data) ? CREATE : EDIT;
 

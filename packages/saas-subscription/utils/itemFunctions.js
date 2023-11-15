@@ -8,6 +8,11 @@ const STATUS_MAPPING = {
 	false : 'grey',
 };
 
+const QUOTA_EVENT_MAPPING = {
+	true  : 'green',
+	false : 'red',
+};
+
 const UNIT_MAPPING = {
 	percentage: '%',
 };
@@ -63,6 +68,23 @@ const itemFunctions = {
 
 		</span>
 	),
+	renderQuotaQty: (item) => {
+		const { is_credit, quantity } = item || {};
+
+		return (
+			<Legend
+				size="sm"
+				hasBackground={false}
+				direction="horizontal"
+				items={[{
+					label : quantity,
+					color : QUOTA_EVENT_MAPPING[is_credit] || 'grey',
+					key   : quantity,
+				}]}
+			/>
+		);
+	},
+
 };
 
 export default itemFunctions;

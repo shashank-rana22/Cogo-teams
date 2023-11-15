@@ -31,11 +31,10 @@
 }
 
 .details_container {
-	justify-content: flex-start;
 	margin-bottom: 35px;
 
 	.details {
-		width: 45%;
+		width: 33%;
 	}
 
 	.detail_title {
@@ -67,4 +66,13 @@
 .tab_section {
 	padding: 20px 10px;
 	border-top: 1px solid #c3c3c3;
+}
+
+.edit_icon {
+	cursor: pointer;
+
+	> svg {
+		margin-left: 4px;
+		vertical-align: middle;
+	}
 }

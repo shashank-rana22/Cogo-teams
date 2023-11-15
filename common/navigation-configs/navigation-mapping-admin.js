@@ -2770,7 +2770,17 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.cogo_store,
 			icon          : IcAWarehouse,
 		},
-
+		hrms: {
+			key           : 'hrms',
+			title         : 'HRMS',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			href          : '/v2/hrms',
+			as            : '/v2/hrms',
+			possible_apis : apis.HRMS_DASHBOARD,
+			icon          : IcAWarehouse,
+		},
 	};
 
 	return navigationMappingAdmin;

@@ -24,7 +24,7 @@ const handleSort = ({ params = {}, setParams = () => {}, sortBy }) => {
 
 const getListColumns = (props) => {
 	const {
-		params = {}, setParams = () => {}, handleDeactivate = () => {},
+		params = {}, setParams = () => {}, handleUpdate = () => {},
 	} = props;
 	const LIST_COLUMNS = [
 		{
@@ -133,7 +133,7 @@ const getListColumns = (props) => {
 						placement="left"
 						interactive
 						render={(
-							<Actions status={status} quest_id={id} handleDeactivate={handleDeactivate} />
+							<Actions status={status} quest_id={id} handleUpdate={handleUpdate} />
 						)}
 					>
 						<div className={styles.action_icon_container}>

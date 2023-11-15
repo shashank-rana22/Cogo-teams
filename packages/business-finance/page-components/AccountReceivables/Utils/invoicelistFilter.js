@@ -36,6 +36,19 @@ export const invoiceFilter = ({ profile = {} }) => {
 			options     : selectedOption,
 
 		},
+		{
+			name        : 'flag',
+			placeholder : 'Defaulters',
+			size        : 'sm',
+			type        : 'select',
+			caret       : true,
+			isClearable : true,
+			options     : [
+				{ value: 'defaulters', label: 'Defaulters' },
+				{ value: 'non_defaulters', label: 'Non Defaulters' },
+			],
+
+		},
 	];
 };
 

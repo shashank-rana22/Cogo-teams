@@ -3,9 +3,12 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function LoadingState({ loaderCount = 10 }) {
+function LoadingState({
+	loaderCount = 10,
+	customClassName = 'loading_container',
+}) {
 	return (
-		<div className={cl`${styles.loading_container} ${cl.ns('loading_container')}`}>
+		<div className={cl`${styles.loading_container} ${cl.ns(customClassName)}`}>
 			{[...Array(loaderCount).keys()].map(
 				(idx) =>	(
 					<div

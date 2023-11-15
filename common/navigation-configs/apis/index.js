@@ -27,6 +27,7 @@ import ff_cost_booking from './ff-cost-booking-apis';
 import ftl_field_service_ops_apis from './ftl_field_service_ops_app_apis';
 import governance_manager from './governance-manager-apis';
 import HRMS from './hrms-apis';
+import HRMS_DASHBOARD from './hrms-dashboard';
 import igm_desk from './igm-desk-apis';
 import igm_shipment from './igm-shipment-apis';
 import ihls from './ihls-apis';
@@ -181,6 +182,7 @@ const apis = {
 	ssr,
 	...performance_and_incentives,
 	service_discovery,
+	HRMS_DASHBOARD,
 };
 
 export default apis;

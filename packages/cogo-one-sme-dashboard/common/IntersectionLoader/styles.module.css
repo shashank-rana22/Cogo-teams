@@ -3,6 +3,14 @@
 	flex-wrap: wrap;
 	justify-content: space-between;
 	width: 100%;
+
+	:global {
+		.ui_intersection_loading {
+			flex: unset;
+			width: 100%;
+			margin: 20px 0;
+		}
+	}
 }
 
 .header {

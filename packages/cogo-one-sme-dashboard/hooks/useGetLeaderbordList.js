@@ -8,8 +8,8 @@ const getParams = ({ partnerId, officeLocationId }) => ({
 	filters            : {
 		report_view_type   : 'manager_wise',
 		report_type        : 'manager_report',
-		office_location_id : officeLocationId,
-		partner_id         : partnerId,
+		office_location_id : officeLocationId || undefined,
+		partner_id         : partnerId || undefined,
 	},
 	additional_stat_required: false,
 });
