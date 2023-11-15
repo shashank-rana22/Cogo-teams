@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 function HeaderName({
 	formattedData = {},
 	isMobile = false,
+	setActiveTab = () => {},
 }) {
 	const {
 		user_name = '',
@@ -32,7 +33,20 @@ function HeaderName({
 	};
 
 	return (
-		<div className={styles.align_channel_type}>
+		<div
+			role="presentation"
+			className={styles.align_channel_type}
+			onClick={() => {
+				if (isMobile) {
+					setActiveTab(
+						(prev) => ({
+							...prev,
+							showSidebar: true,
+						}),
+					);
+				}
+			}}
+		>
 			<UserAvatar
 				type={channel_type}
 				event={last_message_document?.source}

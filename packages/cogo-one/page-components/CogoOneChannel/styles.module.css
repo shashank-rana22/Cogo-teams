@@ -66,6 +66,10 @@
 	pointer-events: none;
 }
 
+.mobile_user_profile_layout {
+	width: 100% !important;
+}
+
 .overlay_div {
 	position: absolute;
 	top: 0;

@@ -203,13 +203,12 @@ function CogoOne() {
 							/>
 						</div>
 					) : null}
-				{isEmpty(activeTab?.data)
-					? null
-					: (
-						<>
+				{isEmpty(activeTab?.data) ? null : (
+					<>
+						{(!isMobile || !activeTab?.showSidebar) ? (
 							<div
 								className={cl`${styles.chat_body} ${expandedSideBar ? styles.chats_layout : ''} 
-								${collapsedSideBar ? styles.mail_layout : ''} 
+									${collapsedSideBar ? styles.mail_layout : ''} 
 								${!expandedSideBar && !collapsedSideBar ? styles.nosidebar_layout : ''}
 								${isMobile ? styles.mobile_nosidebar_layout : ''}`}
 							>
@@ -220,7 +219,6 @@ function CogoOne() {
 									setRaiseTicketModal={setRaiseTicketModal}
 									setActiveRoomLoading={setActiveRoomLoading}
 									mailProps={mailProps}
-									setActiveTab={setActiveTab}
 									suggestions={suggestions}
 									setModalType={setModalType}
 									listCogooneGroupMembers={listCogooneGroupMembers}
@@ -228,14 +226,16 @@ function CogoOne() {
 									{...commonProps}
 								/>
 							</div>
-							{(
-								(ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
+						) : null}
+
+						{((ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
 								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
-								|| teamsSideBarCheck) && !isMobile
-							) ? (
+								|| teamsSideBarCheck) && (!isMobile || activeTab?.showSidebar))
+							? (
 								<div className={cl`${styles.user_profile_layout} 
 								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}
-								${expandedSideBar ? styles.expanded_side_bar : styles.collapsed_side_bar}`}
+								${expandedSideBar ? styles.expanded_side_bar : styles.collapsed_side_bar}
+								${isMobile ? styles.mobile_user_profile_layout : null}`}
 								>
 									<ProfileDetails
 										activeMessageCard={activeTab?.data}
@@ -246,10 +246,8 @@ function CogoOne() {
 										activeRoomLoading={activeRoomLoading}
 										setRaiseTicketModal={setRaiseTicketModal}
 										zippedTicketsData={zippedTicketsData}
-										viewType={viewType}
 										firestore={firestore}
 										userId={userId}
-										setActiveTab={setActiveTab}
 										formattedMessageData={formattedMessageData}
 										orgId={orgId}
 										mailProps={mailProps}
@@ -258,13 +256,14 @@ function CogoOne() {
 										teamsSideBarCheck={teamsSideBarCheck}
 										groupMembersLoading={groupMembersLoading}
 										userName={userName}
+										{...commonProps}
 									/>
 									{(hasNoFireBaseRoom && !user_id && !lead_user_id)
 									&& <div className={styles.overlay_div} />}
 								</div>
-								) : null}
-						</>
-					)}
+							) : null}
+					</>
+				)}
 			</div>
 			{!isMobile ? <Calender firestore={firestore} /> : null}
 			<ModalComp

@@ -32,6 +32,7 @@ function MobileHeader(props) {
 					<HeaderName
 						formattedData={formattedData}
 						isMobile
+						setActiveTab={setActiveTab}
 					/>
 				)}
 
