@@ -7,13 +7,9 @@
 .tags_container {
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	width: 100%;
 	padding: 6px 0;
-	border-top: 1px solid #e0e0e0;
-
-	&:first-child {
-		border-top: unset;
-	}
 }
 
 .button_container {

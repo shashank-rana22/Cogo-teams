@@ -61,6 +61,21 @@ function OptionsContainer({
 	return (
 		<div className={styles.container}>
 			<div className={styles.tags_container}>
+				{!isEmpty(filteredSpectators) && (
+					<Assignes filteredSpectators={filteredSpectators} />
+				)}
+
+				{activeAgentName && (
+					<div className={styles.active_agent}>
+						<AssigneeAvatar
+							name={activeAgentName}
+							type="active"
+						/>
+					</div>
+				)}
+			</div>
+
+			<div className={styles.tags_container}>
 				<TagsPopOver
 					prevTags={chat_tags}
 					updateChat={updateChat}
@@ -77,21 +92,6 @@ function OptionsContainer({
 					updateChat={updateChat}
 					isMobile
 				/>
-			</div>
-
-			<div className={styles.tags_container}>
-				{!isEmpty(filteredSpectators) && (
-					<Assignes filteredSpectators={filteredSpectators} />
-				)}
-
-				{activeAgentName && (
-					<div className={styles.active_agent}>
-						<AssigneeAvatar
-							name={activeAgentName}
-							type="active"
-						/>
-					</div>
-				)}
 			</div>
 
 			<div className={styles.button_container}>
