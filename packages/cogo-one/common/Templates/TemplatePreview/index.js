@@ -10,7 +10,7 @@ function TemplatePreview({
 	setShipmentData = () => {}, html_template = null, variables = null, isDefaultOpen = false,
 	customizableData = {}, setCustomizableData = () => {}, setFileValue = () => {}, fileValue = '', fileName = '',
 	communicationLoading = false, setActiveCard = () => {}, handleClick = () => {},
-	name = '', isAllKeysAndValuesPresent = null,
+	name = '', isAllKeysAndValuesPresent = null, setTemplateView = () => {}, isMobile = false,
 }) {
 	return (
 		<div className={styles.create_container}>
@@ -49,6 +49,9 @@ function TemplatePreview({
 						className={styles.button_styles}
 						onClick={() => {
 							setActiveCard({ show: false, data: {} });
+							if (isMobile) {
+								setTemplateView({ listView: true, preview: false });
+							}
 						}}
 						disabled={communicationLoading}
 					>

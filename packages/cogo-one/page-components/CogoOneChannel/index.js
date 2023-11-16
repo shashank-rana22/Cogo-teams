@@ -274,9 +274,8 @@ function CogoOne() {
 				userId={userId}
 				openKamContacts={openKamContacts}
 				setOpenKamContacts={setOpenKamContacts}
-				setActiveTab={setActiveTab}
 				orgId={orgId}
-				viewType={viewType}
+				{...commonProps}
 			/>
 		</>
 	);

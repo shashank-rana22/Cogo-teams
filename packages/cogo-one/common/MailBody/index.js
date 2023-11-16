@@ -169,12 +169,14 @@ function MailBody({
 						<MailAttachments
 							attachmentData={attachmentData}
 							loading={expandLoading || attachmentLoading}
+							isMobile={isMobile}
 						/>
 					) : null}
 
 				{(isDraft || isSentFromPlatform)
 					? (
 						<DraftMailAttachments
+							isMobile={isMobile}
 							mediaUrls={isEmpty(media_url) ? attachments : media_url}
 						/>
 					) : null}

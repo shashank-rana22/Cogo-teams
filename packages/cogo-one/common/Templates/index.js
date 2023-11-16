@@ -175,6 +175,8 @@ function Templates({
 							name={name}
 							communicationLoading={communicationLoading}
 							isAllKeysAndValuesPresent={isAllKeysAndValuesPresent}
+							setTemplateView={setTemplateView}
+							isMobile={isMobile}
 						/>
 					) : null}
 				</div>

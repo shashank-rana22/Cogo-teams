@@ -31,8 +31,14 @@
 	width: fit-content;
 
 	@media (max-width: 576px) {
-		width: 76%;
+		width: 100%;
 		overflow: hidden;
+	}
+}
+
+.to_cc_data {
+	@media (max-width: 576px) {
+		width: calc(100% - 38px);
 	}
 }
 
@@ -53,6 +59,8 @@
 }
 
 .sender_name {
+	display: flex;
+	justify-content: space-between;
 	font-size: 14px;
 	color: #424242;
 
@@ -61,14 +69,19 @@
 		font-style: oblique;
 		color: #c26d1a;
 	}
+}
+
+.user_name_styles {
+	flex: 1;
 
 	@media (max-width: 576px) {
-		width: 160px;
-		overflow: hidden;
 		font-size: 12px;
-		text-overflow: ellipsis;
-		white-space: nowrap;
 	}
+}
+
+.mobile_time_styles {
+	width: fit-content;
+	font-size: 9px;
 }
 
 .label {
@@ -85,12 +98,6 @@
 	font-size: 12px;
 	color: #424242;
 	text-align: right;
-
-	@media (max-width: 576px) {
-		width: 70px;
-		font-size: 9px;
-		text-align: left;
-	}
 }
 
 .icon_styles {
@@ -109,22 +116,8 @@
 	display: flex;
 	justify-content: flex-end;
 	margin-bottom: 4px;
-
-	@media (max-width: 576px) {
-		width: 100%;
-	}
 }
 
 .tool_tip {
 	max-width: 500px !important;
-}
-
-.minimize_screen {
-	@media (max-width: 576px) {
-		display: flex;
-		flex-direction: column-reverse;
-		align-items: center;
-		justify-content: space-between;
-		width: 24%;
-	}
 }

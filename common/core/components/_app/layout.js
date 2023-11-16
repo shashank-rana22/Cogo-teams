@@ -7,6 +7,7 @@ import React from 'react';
 
 import AdminLayout from '../AdminLayout';
 
+import styles from './styles.module.css';
 import useGetFaqNotifications from './useGetFaqNotifications';
 
 const ChatFAQs = dynamic(() => import('../AdminLayout/FAQs'), { ssr: true });
@@ -56,8 +57,10 @@ function Layout({ children, layout }) {
 			showTopbar
 			navbar={navigationMappingAdmin}
 		>
-			<div style={NO_PADDING_LAYOUT_MAPPING.includes(pathname)
-				? { margin: 0, padding: 0 } : { margin: 0, padding: '24px 20px' }}
+			<div
+				className={styles.body_container}
+				style={NO_PADDING_LAYOUT_MAPPING.includes(pathname)
+					? { margin: 0, padding: 0 } : {}}
 			>
 				{!role_functions.some((r) => FAQ_BUBBLE_EXCLUSION_LIST.includes(r))
 				&& !HIDE_FAQ_CHAT.includes(pathname) && (

@@ -188,6 +188,7 @@ function MessageConversations({
 						assignChat={assignChat}
 						assignLoading={assignLoading}
 						scrollToBottom={scrollToLastMessage}
+						isMobile={isMobile}
 					/>
 				)}
 			</div>

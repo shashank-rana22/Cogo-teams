@@ -38,6 +38,7 @@ function OptionsContainer({
 	canMessageOnBotSession = false,
 	escalateToSupplyRm = () => {},
 	setOpenModal = () => {},
+	setShowPopover = () => {},
 }) {
 	const { chat_tags = [] } = activeMessageCard || {};
 	const {
@@ -48,6 +49,7 @@ function OptionsContainer({
 	} = formattedData || {};
 
 	const handleEscalateClick = () => {
+		setShowPopover(false);
 		escalateToSupplyRm({
 			payload: {
 				organization_id,
@@ -132,13 +134,16 @@ function OptionsContainer({
 						themeType="primary"
 						size="sm"
 						disabled={!hasPermissionToEdit || canMessageOnBotSession}
-						onClick={() => setOpenModal({
-							type : 'mark_as_closed',
-							data : {
-								updateChat,
-								loading,
-							},
-						})}
+						onClick={() => {
+							setShowPopover(false);
+							setOpenModal({
+								type : 'mark_as_closed',
+								data : {
+									updateChat,
+									loading,
+								},
+							});
+						}}
 					>
 						Mark as Closed
 					</Button>

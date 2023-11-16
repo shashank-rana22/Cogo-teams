@@ -38,6 +38,7 @@ const handleDownload = (data) => {
 function MailAttachments({
 	attachmentData = {},
 	loading = false,
+	isMobile = false,
 }) {
 	const [activeAttachmentData, setActiveAttachmentData] = useState(null);
 
@@ -83,6 +84,7 @@ function MailAttachments({
 					handleDownload={handleDownload}
 					activeAttachmentData={activeAttachmentData}
 					setActiveAttachmentData={setActiveAttachmentData}
+					isMobile={isMobile}
 				/>
 			)}
 		</div>

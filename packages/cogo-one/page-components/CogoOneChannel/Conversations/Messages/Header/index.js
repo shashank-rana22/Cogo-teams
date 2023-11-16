@@ -117,6 +117,11 @@ function Header({
 				isPartOfGroup={isPartOfGroup}
 				isManager={isManager}
 				hasNoFireBaseRoom={hasNoFireBaseRoom}
+				setOpenModal={setOpenModal}
+				canMessageOnBotSession={canMessageOnBotSession}
+				supplierLoading={supplierLoading}
+				escalateToSupplyRm={escalateToSupplyRm}
+				isMobile={isMobile}
 			/>
 		);
 	}

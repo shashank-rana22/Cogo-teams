@@ -234,6 +234,7 @@ function Customers({
 					setActiveTab={setActiveTab}
 					activeTab={activeTab}
 					fetchUnreadCall={fetchUnreadCall}
+					isMobile={isMobile}
 				/>
 			)}
 

@@ -1,6 +1,6 @@
 import { Popover } from '@cogoport/components';
 import { IcMArrowLeft, IcMOverflowDot } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import HeaderName from '../../../../../../common/HeaderName';
 import EmailHeader from '../ChatControls/emailHeader';
@@ -14,6 +14,7 @@ function MobileHeader(props) {
 		setActiveTab = () => {},
 		channelType = '',
 	} = props || {};
+	const [showPopover, setShowPopover] = useState(false);
 
 	return (
 		<div className={styles.header}>
@@ -41,10 +42,16 @@ function MobileHeader(props) {
 				render={(
 					<OptionsContainer
 						{...props}
+						setShowPopover={setShowPopover}
 					/>
 				)}
+				visible={showPopover}
+				onClickOutside={() => setShowPopover(false)}
 			>
-				<IcMOverflowDot className={styles.overflow_menu} />
+				<IcMOverflowDot
+					className={styles.overflow_menu}
+					onClick={() => setShowPopover((prev) => !prev)}
+				/>
 			</Popover>
 		</div>
 	);

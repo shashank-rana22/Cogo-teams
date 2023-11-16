@@ -182,6 +182,7 @@ function Messages({
 				assignLoading={assignLoading}
 				viewType={viewType}
 				formattedData={formattedData}
+				isMobile={isMobile}
 			/>
 		</>
 	);

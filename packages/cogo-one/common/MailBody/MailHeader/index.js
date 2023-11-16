@@ -66,11 +66,25 @@ function MailHeader({
 					className={styles.avatar}
 				/>
 
-				<div>
+				<div className={styles.to_cc_data}>
 					<div className={styles.sender_name}>
-						{startCase(senderName)}
-						{' '}
-						{isDraft ? <span>[DRAFT]</span> : null}
+						<div className={styles.user_name_styles}>
+							{startCase(senderName)}
+							{' '}
+							{isDraft ? <span>[DRAFT]</span> : null}
+						</div>
+
+						{isMobile ? (
+							<div className={styles.mobile_time_styles}>
+								{formatDate({
+									date       : rightTime,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+									timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+									formatType : 'dateTime',
+									separator  : ' ',
+								})}
+							</div>
+						) : null }
 					</div>
 
 					{RECEIPIENT_MAPPING.map((item) => (
@@ -120,16 +134,18 @@ function MailHeader({
 						) : null}
 				</div>
 
-				<div className={styles.time_stamp}>
-					{isDraft ? <span>Saved: </span> : null}
-					{formatDate({
-						date       : rightTime,
-						dateFormat : GLOBAL_CONSTANTS.formats.date[isMobile ? 'dd MMM' : 'dd MMM yyyy'],
-						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-						formatType : 'dateTime',
-						separator  : isMobile ? ' ' : ' | ',
-					})}
-				</div>
+				{isMobile ? null : (
+					<div className={styles.time_stamp}>
+						{isDraft ? <span>Saved: </span> : null}
+						{formatDate({
+							date       : rightTime,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType : 'dateTime',
+							separator  : ' | ',
+						})}
+					</div>
+				)}
 			</div>
 		</div>
 	);
