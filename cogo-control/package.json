@@ -126,6 +126,8 @@
     "@cogoport/business":"workspace:1.0.0",
     "@cogoport/saas": "workspace:0.1.0",
     "@cogoport/cogo-assured": "workspace:0.1.0",
+    "@cogoport/finance-payroll":"workspace:0.1.0",
+	  "@cogoport/payment" : "workspace:0.1.0",
     "@cogoport/cogo-one-sme-dashboard": "workspace:0.1.0",
     "@cogoport/shipment-insurance": "workspace:0.1.0",
     "@cogoport/cargo-insurance": "workspace:0.1.0",

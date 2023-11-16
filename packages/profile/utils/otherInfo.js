@@ -27,10 +27,10 @@ export const otherStatuoryInfo = [
 ];
 
 export const otherSalaryInfo = [
-	{ label: 'Monthly Gross', value: '79654' },
-	{ label: 'Monthly CTC', value: '82999' },
-	{ label: 'Annual CTC', value: '1000000' },
-	{ label: 'Tax Regime', value: 'Old Regime' },
+	{ label: 'Monthly Gross', key: 'details', value: 'monthly_gross' },
+	{ label: 'Monthly CTC', key: 'details', value: 'monthly_ctc' },
+	{ label: 'Annual CTC', value: 'annual_ctc' },
+	{ label: 'Tax Regime', value: 'tax_regime' },
 ];
 
 export const otherDocumentsInfo = [
