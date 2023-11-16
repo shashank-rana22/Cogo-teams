@@ -33,6 +33,7 @@ import employeeDashboard from './config/employee-dashboard';
 import employeeDirectory from './config/employee-directory';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
+import financePayroll from './config/finance-payroll';
 import ftlAdmin from './config/ftl-admin';
 import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
 import governanceManager from './config/governance-manager';
@@ -55,6 +56,7 @@ import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
 import notifications from './config/notifications';
+import payment from './config/payments';
 import performanceAndIncentives from './config/performance-and-incentives';
 import PERFORMANCE_MANAGEMENT from './config/performance-management';
 import printingDesk from './config/printing-desk';
@@ -193,6 +195,8 @@ const routeConfig = {
 	...margins,
 	...saas,
 	...serviceManagement,
+	...financePayroll,
+	...payment,
 	...cargoInsurance,
 	...cogoStore,
 	...handlingFees,

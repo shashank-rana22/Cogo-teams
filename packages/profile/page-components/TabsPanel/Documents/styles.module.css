@@ -3,7 +3,7 @@
 }
 
 .table_item > :first-child {
-	margin-right: 8px;
+	margin-right: 4px;
 }
 
 .tab_content {
@@ -16,7 +16,7 @@
 }
 
 .tab_content > :first-child {
-	margin-right: 13px;
+	margin-right: 4px;
 }
 
 .main_container {
@@ -81,6 +81,7 @@
 .view_button {
 	display: flex;
 	align-items: center;
+	margin: 0 2px;
 }
 
 .download_button {

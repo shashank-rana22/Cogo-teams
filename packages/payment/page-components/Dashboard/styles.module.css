@@ -1,0 +1,55 @@
+.main {
+	display: flex;
+	flex-direction: column;
+}
+
+.head_flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 12px;
+}
+
+.heading {
+	font-size: 24px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.buttons {
+	display: flex;
+}
+
+.buttons > :first-child {
+	margin-right: 12px;
+}
+
+.button_text_container {
+	display: flex;
+	align-items: center;
+}
+
+.button_text_container > :first-child {
+	margin-right: 4px;
+}
+
+.button_text {
+	font-weight: 500;
+	text-transform: capitalize;
+}
+
+.tabs_container {
+	:global {
+		.ui_tab_list_container {
+			margin-bottom: 15px;
+		}
+
+		.ui_tab_container {
+			padding-block: 8px;
+		}
+	}
+}
+
+.bread {
+	margin-bottom: 12px;
+}
