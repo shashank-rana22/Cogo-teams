@@ -35,9 +35,9 @@ function TeamChats(props) {
 		is_draft = false,
 	} = data || {};
 
-	const { group_members_ids = [], last_group_updated_at = 0 } = groupData || {};
+	const { group_members_ids = [], last_group_updated_at = 0, is_group = false } = groupData || {};
 
-	const isGroup = group_members_ids?.length > GROUP_MEMBERS_MIN;
+	const isGroup = (group_members_ids?.length > GROUP_MEMBERS_MIN) || is_group;
 
 	const hasPermissionToEdit = (id || group_id) && (is_draft || group_members_ids?.includes(loggedInUserId));
 
