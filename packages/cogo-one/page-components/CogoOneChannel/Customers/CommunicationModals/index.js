@@ -139,6 +139,7 @@ function CommunicationModals({
 					viewType={viewType}
 					firestore={firestore}
 					resetEmailState={resetEmailState}
+					isMobile={isMobile}
 				/>
 			)}
 

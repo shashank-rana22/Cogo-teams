@@ -1,9 +1,16 @@
 .styled_ui_modal_dialog {
-	top: 30px !important;
-	display: flex;
-	flex-direction: column;
-	height: 88vh;
-	border-top: none !important;
+	@media (max-width: 576px) {
+		width: 100% !important;
+		height: 88vh;
+		max-height: unset;
+	}
+	@media (min-width: 576px) {
+		top: 30px !important;
+		display: flex;
+		flex-direction: column;
+		height: 88vh;
+		border-top: none !important;
+	}
 
 	:global {
 		.ui_modal_header_title {
@@ -29,6 +36,7 @@
 			padding-top: 0;
 			overflow-y: auto;
 			border-top: none !important;
+			border-bottom: none !important;
 		}
 	}
 }
@@ -63,6 +71,12 @@
 	background: #fff;
 	border: 1px solid #ff5655;
 	border-radius: 8px 8px 0 0;
+
+	@media (max-width: 576px) {
+		bottom: 18px;
+		left: 3%;
+		width: 90%;
+	}
 }
 
 .title {

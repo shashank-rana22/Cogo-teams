@@ -43,7 +43,7 @@
 		transform: scale(1.2);
 	}
 
-	@media (max-width: 567px) {
+	@media (max-width: 576px) {
 		display: flex;
 		align-items: center;
 		padding: 2px 4px;

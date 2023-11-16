@@ -83,4 +83,8 @@
 .empty_page {
 	width: 75%;
 	height: 100%;
+
+	@media (max-width: 576px) {
+		display: none;
+	}
 }

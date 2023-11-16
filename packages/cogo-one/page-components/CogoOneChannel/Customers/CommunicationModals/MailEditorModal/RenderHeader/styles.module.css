@@ -176,5 +176,8 @@
 
 .from_address {
 	padding-left: 16px;
+	overflow: hidden;
 	font-size: 12px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

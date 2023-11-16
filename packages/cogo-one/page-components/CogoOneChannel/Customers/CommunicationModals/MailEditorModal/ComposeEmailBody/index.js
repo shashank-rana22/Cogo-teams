@@ -1,4 +1,4 @@
-import { Input, Select } from '@cogoport/components';
+import { Input, Select, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
@@ -48,6 +48,7 @@ function ComposeEmailBody(props) {
 		viewType = '',
 		restrictMailToOrganizations = false,
 		firestore = {},
+		isMobile = false,
 	} = props || {};
 
 	const { onImageUploadBefore, disableRTE } = useImageUploader();
@@ -68,7 +69,7 @@ function ComposeEmailBody(props) {
 	);
 
 	const handleRTEChange = (val) => {
-		const rawText = sunEditorRef.current?.getText();
+		const rawText = isMobile ? val : sunEditorRef.current?.getText();
 
 		setEmailState((p) => ({
 			...p,
@@ -137,6 +138,7 @@ function ComposeEmailBody(props) {
 				restrictMailToOrganizations={restrictMailToOrganizations}
 				buttonType={buttonType}
 				firestore={firestore}
+				isMobile={isMobile}
 			/>
 
 			<div className={styles.type_to}>
@@ -170,21 +172,33 @@ function ComposeEmailBody(props) {
 				: null }
 
 			<div className={styles.rte_container}>
-				<SunEditor
-					key={emailState?.reloadKey}
-					onImageUploadBefore={onImageUploadBefore}
-					defaultValue={emailState?.rteContent}
-					onChange={handleRTEChange}
-					setOptions={{
-						buttonList    : RTE_TOOL_BAR_CONFIG,
-						defaultTag    : 'div',
-						minHeight     : '300px',
-						showPathLabel : false,
-					}}
-					disable={disableRTE}
-					autoFocus
-					getSunEditorInstance={getSunEditorInstance}
-				/>
+				{isMobile
+					? (
+						<Textarea
+							name="email_content"
+							value={emailState?.rteContent}
+							size="lg"
+							rows={15}
+							onChange={handleRTEChange}
+						/>
+					)
+					: (
+						<SunEditor
+							key={emailState?.reloadKey}
+							onImageUploadBefore={onImageUploadBefore}
+							defaultValue={emailState?.rteContent}
+							onChange={handleRTEChange}
+							setOptions={{
+								buttonList    : RTE_TOOL_BAR_CONFIG,
+								defaultTag    : 'div',
+								minHeight     : '300px',
+								showPathLabel : false,
+							}}
+							disable={disableRTE}
+							autoFocus
+							getSunEditorInstance={getSunEditorInstance}
+						/>
+					)}
 
 				<div className={styles.attachments_scroll}>
 					{uploading && (
