@@ -60,12 +60,13 @@ function SelectServices({
 }) {
 	const { service_rates = {} } = rate;
 
+	console.log('rate', rate);
+
 	const servicesArray = Object.entries(service_rates).reduce(
 		(acc, [service_id, cur]) => {
 			const {
 				service_type = '',
 				is_rate_available = false,
-				id = '',
 				rate_id = '',
 				total_price_discounted = 0,
 				total_price_currency = '',
@@ -81,13 +82,15 @@ function SelectServices({
 					{
 						feedback_type : 'feedback',
 						service_type,
-						rate_id       : id || rate_id,
+						rate_id,
 						total_price_currency,
 						total_price_discounted,
 						service_id,
 						container_size,
 						is_added      : false,
 						label,
+						selected_card : rate.id,
+						service_data  : cur,
 					},
 				];
 			}
@@ -98,13 +101,15 @@ function SelectServices({
 					{
 						feedback_type : 'request_rate',
 						service_type,
-						rate_id       : id || rate_id,
+						rate_id,
 						total_price_currency,
 						total_price_discounted,
 						service_id,
 						container_size,
 						is_added      : false,
 						label,
+						selected_card : rate.id,
+						service_data  : cur,
 					},
 				];
 			}
