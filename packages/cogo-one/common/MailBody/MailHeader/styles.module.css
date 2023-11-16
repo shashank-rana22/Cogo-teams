@@ -19,11 +19,27 @@
 			background-color: #fef199;
 		}
 	}
+
+	@media (max-width: 576px) {
+		min-width: 30px !important;
+		min-height: 30px !important;
+	}
 }
 
 .left_container {
 	display: flex;
 	width: fit-content;
+
+	@media (max-width: 576px) {
+		width: 100%;
+		overflow: hidden;
+	}
+}
+
+.to_cc_data {
+	@media (max-width: 576px) {
+		width: calc(100% - 38px);
+	}
 }
 
 .receipients {
@@ -36,9 +52,15 @@
 	margin: 0 4px;
 	font-size: 12px;
 	color: #424242;
+
+	@media (max-width: 576px) {
+		font-size: 10px;
+	}
 }
 
 .sender_name {
+	display: flex;
+	justify-content: space-between;
 	font-size: 14px;
 	color: #424242;
 
@@ -49,9 +71,29 @@
 	}
 }
 
+.user_name_styles {
+	flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	@media (max-width: 576px) {
+		font-size: 12px;
+	}
+}
+
+.mobile_time_styles {
+	width: fit-content;
+	font-size: 9px;
+}
+
 .label {
 	font-size: 12px;
 	color: #424242;
+
+	@media (max-width: 576px) {
+		font-size: 10px;
+	}
 }
 
 .time_stamp {

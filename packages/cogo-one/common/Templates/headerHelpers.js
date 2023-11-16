@@ -1,12 +1,15 @@
 import SelectMobileNumber from '@cogoport/forms/page-components/Business/SelectMobileNumber';
-import { IcCSendWhatsapp } from '@cogoport/icons-react';
+import { IcCSendWhatsapp, IcMArrowLeft } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+
+import { DEFAULT_OPTIONS } from '../../constants';
 
 import styles from './styles.module.css';
 
 function MobileNumberInput({
-	dialNumber = {},
-	setDialNumber = () => {},
+	dialNumber = {}, type = '', selectedTemplateId = '',
+	setDialNumber = () => {}, setTemplateView = () => {},
+	isMobile = false, setActiveCard = () => {},
 }) {
 	return (
 		<>
@@ -22,6 +25,21 @@ function MobileNumberInput({
 				/>
 			</div>
 			<div className={styles.template_heading}>
+				{(isMobile && selectedTemplateId) ? (
+					<IcMArrowLeft
+						className={styles.arrow_back}
+						onClick={() => {
+							setActiveCard(() => ({
+								show : DEFAULT_OPTIONS.includes(type),
+								data : {},
+							}));
+							setTemplateView(() => ({
+								preview  : false,
+								listView : true,
+							}));
+						}}
+					/>
+				) : null}
 				<div>Select a template</div>
 			</div>
 		</>
@@ -55,12 +73,24 @@ export function Header({
 	setDialNumber = () => {},
 	maskedMobileNumber = '',
 	userName = '',
+	isMobile = false,
+	setActiveCard = () => {},
+	setTemplateView = () => {},
+	selectedTemplateId = '',
 }) {
 	const Component = HEADER_COMPONENT_MAPPING[type] || null;
 
 	const PROPS_MAPPING = {
-		whatsapp_new_message_modal : { dialNumber, setDialNumber },
-		voice_call_component       : {
+		whatsapp_new_message_modal: {
+			dialNumber,
+			setDialNumber,
+			isMobile,
+			setActiveCard,
+			type,
+			setTemplateView,
+			selectedTemplateId,
+		},
+		voice_call_component: {
 			maskedMobileNumber,
 			type: 'showMobileNumber',
 		},

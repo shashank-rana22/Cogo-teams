@@ -5,4 +5,14 @@
 
 .styled_button {
 	height: 27px !important;
+
+	@media (max-width: 576px) {
+		width: 100%;
+	}
+}
+
+.popover_styles {
+	@media (max-width: 576px) {
+		width: 100%;
+	}
 }

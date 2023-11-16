@@ -1,6 +1,6 @@
 import { cl, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMSend, IcMAttach, IcMArrowBack, IcMMinus, IcMCross } from '@cogoport/icons-react';
+import { IcMSend, IcMAttach, IcMArrowBack, IcMMinus, IcMCross, IcASave } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
@@ -44,6 +44,7 @@ function RenderHeader({
 	activeMailAddress = '',
 	hideFromMail = false,
 	userActiveMails = [],
+	isMobile = false,
 }) {
 	return (
 		<div className={styles.mail_modal_header}>
@@ -126,30 +127,46 @@ function RenderHeader({
 								) : null}
 
 								<div className={styles.actions_container}>
-									<div className={styles.template_button}>
+									{isMobile ? null : (
+										<div className={styles.template_button}>
+											<Button
+												size="sm"
+												themeType="accent"
+												disabled={replyLoading || sendLoading}
+												onClick={() => setEmailTemplate(
+													(prev) => ({
+														...prev,
+														isTemplateView: true,
+													}),
+												)}
+											>
+												Add Template
+											</Button>
+										</div>
+									)}
+
+									{isMobile ? (
+										<IcASave
+											className={styles.save_icon}
+											size="sm"
+											themeType="secondary"
+											disabled={replyLoading || sendLoading}
+											onClick={handleSaveDraft}
+											style={{
+												cursor: (replyLoading || sendLoading)
+													? 'not-allowed' : 'pointer',
+											}}
+										/>
+									) : (
 										<Button
 											size="sm"
-											themeType="accent"
+											themeType="secondary"
 											disabled={replyLoading || sendLoading}
-											onClick={() => setEmailTemplate(
-												(prev) => ({
-													...prev,
-													isTemplateView: true,
-												}),
-											)}
+											onClick={handleSaveDraft}
 										>
-											Add Template
+											Save as draft
 										</Button>
-									</div>
-
-									<Button
-										size="sm"
-										themeType="secondary"
-										disabled={replyLoading || sendLoading}
-										onClick={handleSaveDraft}
-									>
-										Save as draft
-									</Button>
+									)}
 
 									{DISABLE_ATTACHMENTS_FOR.includes(buttonType) ? null : (
 										<div className={styles.file_uploader_div} title="attachment">

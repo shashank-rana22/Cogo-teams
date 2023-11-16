@@ -22,6 +22,7 @@ function MailEditorModal({
 	activeMail = {},
 	viewType = '',
 	firestore = {},
+	isMobile = false,
 }) {
 	const {
 		buttonType = '',
@@ -144,9 +145,9 @@ function MailEditorModal({
 		<Modal
 			show={buttonType}
 			onClose={handleClose}
-			size="lg"
+			size={isMobile ? 'md' : 'lg'}
 			className={styles.styled_ui_modal_dialog}
-			placement="top"
+			placement={isMobile ? 'bottom' : 'top'}
 			scroll
 			animate={false}
 			showCloseIcon={false}
@@ -174,6 +175,7 @@ function MailEditorModal({
 						hideFromMail={hideFromMail}
 						userActiveMails={userActiveMails}
 						activeMailAddress={activeFromMail}
+						isMobile={isMobile}
 					/>
 				)}
 				className={styles.modal_header}
@@ -199,6 +201,7 @@ function MailEditorModal({
 						firestore={firestore}
 						showOrgSpecificMail={showOrgSpecificMail}
 						restrictMailToOrganizations={restrictMailToOrganizations}
+						isMobile={isMobile}
 					/>
 				) : (
 					<EmailTemplateList

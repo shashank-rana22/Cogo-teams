@@ -22,11 +22,24 @@
 	display: flex;
 	align-items: center;
 	margin-bottom: 10px;
+
+	@media (max-width: 576px) {
+		flex-direction: column;
+
+		>div {
+			justify-content: flex-end;
+			width: 100%;
+		}
+	}
 }
 
 .select_styles {
 	width: 40%;
-	margin-left: 30px;
+	margin: 0 0 0 30px;
+
+	@media (max-width: 576px) {
+		margin: 10px 0 0;
+	}
 }
 
 .back_icon {

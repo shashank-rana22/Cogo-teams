@@ -3,12 +3,32 @@ import React from 'react';
 
 import { BUTTON_MAPPING, BUTTON_KEYS_MAPPING } from '../../constants/mailConstants';
 
+import RightButtonsMapping from './MailHeader/RightButtonsMapping';
 import styles from './styles.module.css';
 
 function MailActions({
 	handleClick = () => {},
 	isDraft = false,
+	isMobile = false,
+	loading = false,
+	isDraftAlreadySent = false,
+	emailStatus = '',
 }) {
+	if (isMobile) {
+		return (
+			<div className={styles.buttons_flex}>
+				<RightButtonsMapping
+					isDraft={isDraft}
+					handleClick={handleClick}
+					emailStatus={emailStatus}
+					isDraftAlreadySent={isDraftAlreadySent}
+					loading={loading}
+					isMobile={isMobile}
+				/>
+			</div>
+		);
+	}
+
 	if (isDraft) {
 		return null;
 	}
