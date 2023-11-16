@@ -15,7 +15,7 @@ const MAX_PREVIEW_LIMIT = 2;
 const MIN_PREVIEW_LIMIT = 0;
 const REMOVE_PLUS_SIGN = 1;
 
-function OrganizationUsers({ user = {}, hasVoiceCallAccess = false, setActiveTab = () => {} }) {
+function OrganizationUsers({ user = {}, hasVoiceCallAccess = false, setActiveTab = () => {}, isMobile = false }) {
 	const dispatch = useDispatch();
 
 	const [maskConfig, setMaskConfig] = useState({
@@ -109,17 +109,17 @@ function OrganizationUsers({ user = {}, hasVoiceCallAccess = false, setActiveTab
 
 				<div className={styles.content}>
 					<div className={styles.agent_type}>Name : </div>
-					<div className={styles.name}>
+					<div className={isMobile ? styles.minimize : styles.name}>
 						{name || 'NA'}
 					</div>
 				</div>
 				<div className={styles.content}>
 					<div className={styles.type}>Email : </div>
-					<div className={styles.name}>{email || '-'}</div>
+					<div className={isMobile ? styles.minimize : styles.email}>{email || '-'}</div>
 				</div>
 				<div className={styles.content}>
 					<div className={styles.type}>Mobile No : </div>
-					<div className={styles.name}>
+					<div className={isMobile ? styles.minimize_number : styles.name}>
 						{showNumber ? (
 							<span>
 								{`${mobile_country_code || ''} ${

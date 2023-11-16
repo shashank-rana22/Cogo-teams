@@ -94,7 +94,7 @@ function MailHeader({
 						/>
 					) : null}
 
-					{viewType === 'cogoone_admin'
+					{(viewType === 'cogoone_admin' && !isMobile)
 						? (
 							<Popover
 								placement="bottom"
@@ -124,7 +124,7 @@ function MailHeader({
 					{isDraft ? <span>Saved: </span> : null}
 					{formatDate({
 						date       : rightTime,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						dateFormat : GLOBAL_CONSTANTS.formats.date[isMobile ? 'dd MMM' : 'dd MMM yyyy'],
 						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 						formatType : 'dateTime',
 						separator  : isMobile ? ' ' : ' | ',

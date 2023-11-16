@@ -16,6 +16,10 @@
 	font-size: 14px;
 	font-weight: 600;
 	color: #4f4f4f;
+
+	@media (max-width: 576px) {
+		font-size: 12px;
+	}
 }
 
 .content {
@@ -30,12 +34,20 @@
 	width: 80%;
 	text-overflow: ellipsis;
 	word-break: break-all;
+
+	@media (max-width: 576px) {
+		width: 68%;
+	}
 }
 
 .name {
 	font-size: 14px;
 	font-weight: 600;
 	color: #221f20;
+
+	@media (max-width: 576px) {
+		font-size: 12px;
+	}
 }
 
 .location {

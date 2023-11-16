@@ -79,6 +79,10 @@
 	margin-left: 4px;
 	font-size: 13px;
 	color: #221f20;
+
+	@media (max-width: 576px) {
+		font-size: 10px;
+	}
 }
 
 .send_by_name {
@@ -123,6 +127,7 @@
 
 	@media (max-width: 576px) {
 		bottom: 42px;
+		font-size: 10px;
 	}
 }
 

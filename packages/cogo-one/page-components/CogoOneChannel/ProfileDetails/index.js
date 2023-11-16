@@ -109,6 +109,7 @@ function ProfileDetails({
 							chatsConfig={chatsConfig}
 							groupMembersLoading={groupMembersLoading}
 							userName={userName}
+							isMobile={isMobile}
 						/>
 					)}
 				</div>
