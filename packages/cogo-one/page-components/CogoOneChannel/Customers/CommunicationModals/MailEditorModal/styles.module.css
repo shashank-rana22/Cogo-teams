@@ -1,7 +1,7 @@
 .styled_ui_modal_dialog {
 	@media (max-width: 576px) {
 		width: 100% !important;
-		height: 88vh;
+		height: 84vh;
 		max-height: unset;
 	}
 	@media (min-width: 576px) {

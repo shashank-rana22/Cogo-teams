@@ -39,6 +39,8 @@ function OptionsContainer({
 	escalateToSupplyRm = () => {},
 	setOpenModal = () => {},
 	setShowPopover = () => {},
+	isEmail = false,
+	setActiveTab = () => {},
 }) {
 	const { chat_tags = [] } = activeMessageCard || {};
 	const {
@@ -146,6 +148,24 @@ function OptionsContainer({
 						}}
 					>
 						Mark as Closed
+					</Button>
+				) : null}
+
+				{isEmail ? (
+					<Button
+						themeType="secondary"
+						size="sm"
+						onClick={() => {
+							setActiveTab(
+								(prev) => ({
+									...prev,
+									showSidebar   : true,
+									expandSideBar : true,
+								}),
+							);
+						}}
+					>
+						Details
 					</Button>
 				) : null}
 

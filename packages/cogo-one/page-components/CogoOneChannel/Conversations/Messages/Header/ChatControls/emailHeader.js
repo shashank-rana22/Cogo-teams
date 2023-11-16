@@ -6,7 +6,6 @@ import styles from './styles.module.css';
 function EmailHeader({
 	formattedData = {},
 	isMobile = false,
-	setActiveTab = () => {},
 }) {
 	const {
 		last_message_document = {},
@@ -17,21 +16,7 @@ function EmailHeader({
 
 	if (isMobile) {
 		return (
-			<div
-				role="presentation"
-				className={styles.mobil_email_header}
-				onClick={() => {
-					if (isMobile) {
-						setActiveTab(
-							(prev) => ({
-								...prev,
-								showSidebar   : true,
-								expandSideBar : true,
-							}),
-						);
-					}
-				}}
-			>
+			<div className={styles.mobil_email_header}>
 				Sub:
 				{' '}
 				{subject || ''}

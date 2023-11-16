@@ -50,6 +50,7 @@ function MobileHeader(props) {
 					<OptionsContainer
 						{...props}
 						setShowPopover={setShowPopover}
+						isEmail={channelType === 'email'}
 					/>
 				)}
 				visible={showPopover}

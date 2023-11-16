@@ -167,7 +167,7 @@ function ComposeEmailBody(props) {
 					)}
 			</div>
 
-			{showOrgSpecificMail
+			{(showOrgSpecificMail && !isMobile)
 				? <EmailTemplates mailProps={mailProps} />
 				: null }
 
