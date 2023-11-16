@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-import { COGO_PARTNER_LIST } from '../../../../../constants/cogo-partners-list';
+import { COGO_PARTNER_LIST } from '../../../../../constants/cogoPartnersList';
 import getBranchesData from '../../../../../utils/getBranchesData';
 import getCountriesData from '../../../../../utils/getCountriesData';
 

@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-import { PARTNER_OPTIONS } from '../constants/cogo-partners-list';
+import { PARTNER_OPTIONS } from '../constants/cogoPartnersList';
 import getBranchesData from '../utils/getBranchesData';
 
 const dashboardFilters = ({ filterParams = {} }) => {
