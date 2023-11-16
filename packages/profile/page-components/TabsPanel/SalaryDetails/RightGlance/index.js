@@ -14,7 +14,6 @@ function RightGlancePayment({ otherInfo = {}, data = {}, loading = false }) {
 				loading ? null : otherInfo.map((item) => (
 					<div key={item.label} className={styles.side_label_value}>
 						<span className={styles.side_label}>{item.label}</span>
-						<span className={styles.side_value}>{data[item.value]}</span>
 						{(item.value) !== 'tax_regime'
 							? <span className={styles.side_value}>{`₹${data[item.value]}`}</span>
 							: <span className={styles.side_value}>{`${data[item.value]}`}</span>}
