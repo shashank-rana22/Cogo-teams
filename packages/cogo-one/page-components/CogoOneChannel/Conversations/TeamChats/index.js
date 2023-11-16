@@ -97,6 +97,7 @@ function TeamChats(props) {
 					firestore={firestore}
 					internalRoomId={group_id}
 					scrollToLastMessage={scrollToLastMessage}
+					isMobile={isMobile}
 				/>
 			</div>
 		</div>

@@ -198,6 +198,9 @@ function MailBody({
 						handleClick={handleClick}
 						isDraft={isDraft}
 						loading={loading}
+						emailStatus={emailStatus}
+						isMobile={isMobile}
+						isDraftAlreadySent={!!eachMessage?.communication_id}
 					/>
 				) : null}
 

@@ -78,7 +78,9 @@ function RightSideNav({
 			openNewTab({ crm: 'searches', prm: 'searches' });
 		} else if (val === 'user_chat') {
 			setActiveTab((prev) => ({
-				...prev, showSidebar: false,
+				...prev,
+				showSidebar   : false,
+				expandSideBar : false,
 			}));
 		} else if (val === 'help_desk') {
 			check();
@@ -88,7 +90,8 @@ function RightSideNav({
 
 				return {
 					...prev,
-					expandSideBar: !prev?.expandSideBar,
+					expandSideBar : !prev?.expandSideBar,
+					showSidebar   : !prev?.showSidebar,
 				};
 			});
 		} else if (activeTab === 'teams') {

@@ -17,7 +17,6 @@ function ChatControls({
 	hasPermissionToEdit = false,
 	canMessageOnBotSession = false,
 	channelType = '',
-	isMobile = false,
 	setActiveTab = () => {},
 }) {
 	const {
@@ -42,7 +41,7 @@ function ChatControls({
 	};
 
 	if (channel_type === 'email') {
-		return <EmailHeader formattedData={formattedData} isMobile={isMobile} setActiveTab={setActiveTab} />;
+		return <EmailHeader formattedData={formattedData} setActiveTab={setActiveTab} />;
 	}
 
 	return (

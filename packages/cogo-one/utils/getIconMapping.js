@@ -8,7 +8,6 @@ import {
 	IcMCrossInCircle,
 	IcMArrowDoubleLeft,
 	IcMEmail,
-	IcMLiveChat,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
@@ -33,8 +32,8 @@ const HIDE_CONTROLS_FOR_MOBILE = ['help_desk'];
 const iconMapping = ({ expandSideBar = false }) => [
 	{
 		name    : 'user_chat',
-		content : 'Chat',
-		icon    : <IcMLiveChat width={20} height={20} />,
+		content : 'Close',
+		icon    : <IcMCrossInCircle width={20} height={20} />,
 	},
 	{
 		name    : 'sidebar_control',
@@ -161,12 +160,14 @@ const getIconMapping = ({
 		(eachNav) => (!isMobile ? eachNav : !HIDE_CONTROLS_FOR_MOBILE.includes(eachNav)),
 	);
 
-	const CHANNEL_WISE_NAV_MAPPING = isTeams ? ['teams_profile'] : [
-		...COMMON_NAVIGATIONS,
-		...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.extra_side_bar_navs_access || []),
-		...(ENABLE_EXPAND_SIDE_BAR.includes(channelType) ? SIDEBAR_CONTROLS : []),
-		...(isMobile ? MOBILE_CONTROLS : []),
-	];
+	const CHANNEL_WISE_NAV_MAPPING = isTeams
+		? [...(isMobile ? MOBILE_CONTROLS : []), 'teams_profile']
+		: [
+			...COMMON_NAVIGATIONS,
+			...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.extra_side_bar_navs_access || []),
+			...(ENABLE_EXPAND_SIDE_BAR.includes(channelType) && !isMobile ? SIDEBAR_CONTROLS : []),
+			...(isMobile ? MOBILE_CONTROLS : []),
+		];
 
 	return iconMapping({ expandSideBar })?.filter(
 		(eachIcon) => CHANNEL_WISE_NAV_MAPPING.includes(eachIcon.name),

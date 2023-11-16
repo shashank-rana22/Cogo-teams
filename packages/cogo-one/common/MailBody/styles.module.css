@@ -67,12 +67,6 @@
 	display: flex;
 	align-items: center;
 	margin-right: 4px;
-
-	@media (max-width: 576px) {
-		.icon {
-			display: none;
-		}
-	}
 }
 
 .icon {

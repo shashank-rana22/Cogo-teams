@@ -27,8 +27,15 @@ function MobileHeader(props) {
 					}),
 				)}
 			/>
+
 			{channelType === 'email'
-				? <EmailHeader formattedData={formattedData} />
+				? (
+					<EmailHeader
+						formattedData={formattedData}
+						isMobile
+						setActiveTab={setActiveTab}
+					/>
+				)
 				: (
 					<HeaderName
 						formattedData={formattedData}

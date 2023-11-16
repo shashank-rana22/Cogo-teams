@@ -73,6 +73,9 @@
 
 .user_name_styles {
 	flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 
 	@media (max-width: 576px) {
 		font-size: 12px;

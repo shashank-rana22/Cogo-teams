@@ -96,7 +96,19 @@ function Header({
 						className={styles.styled_avatar}
 					/>
 				)}
-				<div className={styles.name}>
+				<div
+					role="presentation"
+					className={styles.name}
+					onClick={() => {
+						if (isMobile) {
+							setActiveTab((prev) => ({
+								...prev,
+								showSidebar   : true,
+								expandSideBar : true,
+							}));
+						}
+					}}
+				>
 					<EditName
 						searchName={search_name}
 						isGroup={isGroup}
@@ -106,6 +118,7 @@ function Header({
 					/>
 				</div>
 			</div>
+
 			<div className={styles.buttons_flex}>
 				{isGroup ? (
 					<>
