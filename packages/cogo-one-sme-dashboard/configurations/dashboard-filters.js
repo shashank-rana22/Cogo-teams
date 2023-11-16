@@ -1,5 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
+import { PARTNER_OPTIONS } from '../constants/cogo-partners-list';
 import getBranchesData from '../utils/getBranchesData';
 
 const dashboardFilters = ({ filterParams = {} }) => {
@@ -7,24 +8,13 @@ const dashboardFilters = ({ filterParams = {} }) => {
 
 	return [
 		{
-			name           : 'partner_id',
-			value          : filterParams?.partner_id || '',
-			defaultOptions : true,
-			caret          : true,
-			scope          : 'partner',
-			controlType    : 'asyncSelect',
-			initialCall    : true,
-			asyncKey       : 'partners',
-			placeholder    : 'partner',
-			params         : {
-				filters: {
-					entity_types : ['cogoport'],
-					status       : 'active',
-				},
-				page_limit          : 1000,
-				roles_data_required : false,
-				page                : 1,
-			},
+			name        : 'partner_id',
+			value       : filterParams?.partner_id || '',
+			caret       : true,
+			controlType : 'select',
+			options     : PARTNER_OPTIONS,
+			placeholder : 'partner',
+			isClearable : true,
 		},
 		{
 			name        : 'office_location_id',
