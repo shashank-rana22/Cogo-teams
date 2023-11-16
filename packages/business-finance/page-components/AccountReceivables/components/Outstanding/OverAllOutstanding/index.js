@@ -17,6 +17,7 @@ import useGetKamWiseOutstandingsStats from '../../../hooks/useGetKamWiseOutstand
 import useGetOrgOutstanding from '../../../hooks/useGetOrgOutstanding';
 import useGetSageArOutstandingsStats from '../../../hooks/useGetSageArOustandingStats';
 import useGetServiceWiseOutstandingsStats from '../../../hooks/useGetServiceWiseOutstandingsStats';
+import useSyncSageArOutstanding from '../../../hooks/useSyncSageArOutstanding';
 
 import CcCallList from './CcCallList';
 import Filters from './Filters';
@@ -29,11 +30,12 @@ import ReportModal from './ReportModal';
 import ResponsivePieChart from './ResponsivePieChart';
 import ScrollBar from './ScrollBar';
 import styles from './styles.module.css';
+import SyncModal from './SyncModal';
 
 const LOADER_LEN = 7;
 const ONLY_LEFT = true;
 const AUTHORISED_USER_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
-	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id,
+	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id, GLOBAL_CONSTANTS.uuid.hk_user_id,
 	'd058d879-8cb2-4071-8bd3-c5807f534dd4',
 	'd058d879-8cb2-4071-8bd3-c5807f534dd4'];
 function OverAllOutstanding({
@@ -48,6 +50,7 @@ function OverAllOutstanding({
 		companyType        : '',
 	});
 	const [show, setShow] = useState(false);
+	const [syncShow, setSyncShow] = useState(false);
 	const {
 		outStandingData,
 		outstandingLoading,
@@ -61,6 +64,7 @@ function OverAllOutstanding({
 		setFilters,
 		filtersApplied,
 	} = useGetOrgOutstanding({ entityCode });
+	const { syncSageArOutstanding = () => {} } = useSyncSageArOutstanding();
 	const { include_defaulters = false } = filters || {};
 
 	const [dateFilter, setDateFilter] = useState({
@@ -87,6 +91,12 @@ function OverAllOutstanding({
 
 	const handleChange = (val) => {
 		setoutStandingFilters({ ...outStandingFilters, search: val });
+	};
+	const onSubmit = async () => {
+		try {
+			await syncSageArOutstanding(false);
+			setSyncShow(true);
+		} catch { setSyncShow(false); }
 	};
 
 	const clearFilter = () => {
@@ -168,6 +178,7 @@ function OverAllOutstanding({
 	return (
 		<>
 			{show ? <ReportModal show={show} setShow={setShow} /> : null}
+			{syncShow ? <SyncModal show={syncShow} setShow={setSyncShow} /> : null}
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 				{AUTHORISED_USER_IDS.includes(profile?.user?.id)
 					? (
@@ -178,6 +189,17 @@ function OverAllOutstanding({
 							style={{ marginRight: 10 }}
 						>
 							Send OS Report
+						</Button>
+					) : null}
+				{AUTHORISED_USER_IDS.includes(profile?.user?.id)
+					? (
+						<Button
+							onClick={() => onSubmit()}
+							themeType="secondary"
+							size="lg"
+							style={{ marginRight: 10 }}
+						>
+							Sync Data
 						</Button>
 					) : null}
 				<Filters
