@@ -31,22 +31,18 @@ function useCreateUpsellOriginLocalService({
 
 	const { apiTrigger = () => {} } = useUpdateShipmentPendingTask({});
 
-	const createOrgBillingAddress = async ({ payload, cargo_readiness_date }) => {
+	const createOrgBillingAddress = async ({ payload }) => {
 		try {
 			const res =	await trigger({ data: payload });
 
 			const taskRes =	await apiTrigger({
 				id     : task?.id,
 				status : 'pending',
-				tags   : ['2'],
+				tags   : ['3'],
 				data   : {
 					pending_task: {
 						id              : task?.id,
 						organization_id : shipment_data?.consignee_shipper_id || consigneeId,
-					},
-					fcl_freight_service: {
-						shipment_id: shipment_data?.id,
-						cargo_readiness_date,
 					},
 					shipment: {
 						id                   : shipment_data?.id,
@@ -83,7 +79,7 @@ function useCreateUpsellOriginLocalService({
 			// shipment_data,
 			userData,
 		});
-		createOrgBillingAddress({ payload, cargo_readiness_date: values?.cargo_readiness_date });
+		createOrgBillingAddress({ payload });
 	};
 
 	return {

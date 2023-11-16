@@ -1,0 +1,4 @@
+.not_ready {
+	display: flex;
+	justify-content: flex-end;
+}
