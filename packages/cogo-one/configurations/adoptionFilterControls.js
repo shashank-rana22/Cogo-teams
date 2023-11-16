@@ -36,8 +36,7 @@ const getAdoptionControls = ({ initialViewType = '', pageType = '' }) => {
 			asyncKey       : 'list_chat_agents',
 			params         : {
 				filters: {
-					status     : 'active',
-					agent_type : ['support', 'support_supply'],
+					agent_type: ['support', 'support_supply'],
 				},
 				sort_by: 'agent_type',
 			},

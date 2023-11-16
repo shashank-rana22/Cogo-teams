@@ -7,3 +7,11 @@
 .release_button {
 	margin-left: 4px;
 }
+
+.remark_popover {
+	overflow-y: auto;
+
+	:global(.tippy-content) {
+		max-height: 550px;
+	}
+}

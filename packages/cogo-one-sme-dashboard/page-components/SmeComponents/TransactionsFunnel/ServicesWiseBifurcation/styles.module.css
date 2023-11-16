@@ -11,7 +11,7 @@
 	:global {
 		.ui_loading_container {
 			flex: unset;
-			height: 240px;
+			height: 280px;
 		}
 	}
 }
@@ -33,7 +33,7 @@
 .graph_container {
 	display: flex;
 	align-items: center;
-	height: 280px;
+	height: 220px;
 }
 
 .pie_chart {
@@ -46,7 +46,7 @@
 	flex-wrap: wrap;
 	align-items: center;
 	width: calc(100% - 250px);
-	max-height: 100%;
+	max-height: 96%;
 	overflow-y: scroll;
 
 	&::-webkit-scrollbar {
@@ -78,14 +78,13 @@
 .footer {
 	display: flex;
 	padding: 10px;
-	margin-top: 20px;
 	background: #f9f9f9;
 	border-radius: 6px;
 }
 
 .footer_item {
-	width: 33.3%;
-	padding: 0 6px;
+	width: 50%;
+	padding: 0 10px;
 	border-right: 1px solid #bdbdbd;
 
 	&:last-child {

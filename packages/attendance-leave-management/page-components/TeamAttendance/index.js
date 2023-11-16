@@ -1,12 +1,12 @@
-import { Button, Select, Input, ButtonIcon, cl, Loader as SpinLoader } from '@cogoport/components';
-import { IcMDownload, IcMProfile, IcMAppSearch, IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
+import { Select, Input, ButtonIcon, cl } from '@cogoport/components';
+import { IcMProfile, IcMAppSearch, IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import EmptyState from '../../common/EmptyState';
 import Loader from '../../common/Loader';
 import useGetCycles from '../../hooks/useGetCycles';
-import useGetDownloadTeamAttendance from '../../hooks/useGetDownloadTeamAttendance';
+// import useGetDownloadTeamAttendance from '../../hooks/useGetDownloadTeamAttendance';
 import useGetTeamAttendance from '../../hooks/useGetTeamAttendance';
 
 import AttendanceData from './AttendanceData';
@@ -19,10 +19,10 @@ function TeamAttendance() {
 	const [searchQuery, setSearchQuery] = useState('');
 	const [month, setMonth] = useState('');
 	const { loading, formattedData } = useGetCycles();
-	const {
-		createDownload,
-		loading: downloadLoading,
-	} = useGetDownloadTeamAttendance({ cycleId: month });
+	// const {
+	// 	createDownload,
+	// 	loading: downloadLoading,
+	// } = useGetDownloadTeamAttendance({ cycleId: month });
 
 	const { data, setFilters, debounceQuery, loading : statsLoading } = useGetTeamAttendance(month);
 
@@ -65,9 +65,9 @@ function TeamAttendance() {
 		}
 	}, [formattedData]);
 
-	const handleDownload = () => {
-		createDownload();
-	};
+	// const handleDownload = () => {
+	// 	createDownload();
+	// };
 
 	return (
 		<>
@@ -85,7 +85,7 @@ function TeamAttendance() {
 							/>
 						)}
 					</div>
-					<Button className={styles.download} themeType="secondary" size="lg" onClick={handleDownload}>
+					{/* <Button className={styles.download} themeType="secondary" size="lg" onClick={handleDownload}>
 						<span className={styles.download_text}>
 							Download Report
 						</span>
@@ -94,7 +94,7 @@ function TeamAttendance() {
 								<SpinLoader />
 							</div>
 						) : <IcMDownload />}
-					</Button>
+					</Button> */}
 					<Input
 						className={styles.input_search}
 						prefix={<IcMProfile size="md" />}

@@ -66,6 +66,7 @@ import {
 	IcASecureCloudStorage,
 	IcMUpwardGraph,
 	IcMAppProfile,
+	IcMAppPayment,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -2736,6 +2737,29 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.profile,
 			icon          : IcMAppProfile,
 		},
+		finance_payroll: {
+			key           : 'finance_payroll',
+			title         : 'Finance Payroll',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			href          : '/v2/finance-payroll',
+			as            : '/v2/finance-payroll',
+			possible_apis : apis.finance_payroll,
+			icon          : IcMMoney,
+		},
+		payment: {
+			key           : 'payment',
+			title         : 'Payment',
+			icon          : IcMAppPayment,
+			href          : '/v2/payment',
+			as            : '/v2/payment',
+			type          : 'link',
+			module_type   : 'dashboards',
+			possible_apis : apis.payment,
+			isSubNavs     : false,
+			main_apis     : [],
+		},
 		cargo_insurance: {
 			key           : 'cargo_insurance',
 			title         : 'Cargo Insurance',
@@ -2757,7 +2781,17 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.cogo_store,
 			icon          : IcAWarehouse,
 		},
-
+		hrms: {
+			key           : 'hrms',
+			title         : 'HRMS',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			href          : '/v2/hrms',
+			as            : '/v2/hrms',
+			possible_apis : apis.HRMS_DASHBOARD,
+			icon          : IcAWarehouse,
+		},
 	};
 
 	return navigationMappingAdmin;

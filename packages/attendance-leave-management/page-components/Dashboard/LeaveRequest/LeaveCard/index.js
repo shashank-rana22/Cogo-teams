@@ -58,7 +58,7 @@ function LeaveCard({ isManager = false, data = null, activeTab = ' ', searchQuer
 							</div>
 						</div>
 						<div className={styles.yes_no}>
-							{isManager && request_label !== 'OFFBOARDING REQUESTS' && (
+							{isManager && request_label === 'LEAVE REQUESTS' && (
 								<Button
 									size="md"
 									themeType="link"

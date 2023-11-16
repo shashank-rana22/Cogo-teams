@@ -17,8 +17,8 @@ function CustomerBased({ widgetBlocks = null, filterParams = {} }) {
 	const data = useMemo(
 		() => {
 			const sortedCustomerData = customer_based_data?.sort(
-				(a, b) => ((b?.total || 0) - (a?.total || 0)),
-			) || [];
+				(a, b) => (a?.sr_no || 0) - (b?.sr_no || 0),
+			);
 
 			return {
 				labels: sortedCustomerData.map(
@@ -63,6 +63,7 @@ function CustomerBased({ widgetBlocks = null, filterParams = {} }) {
 						data={data}
 						subLabels={['allocated', 'unallocated']}
 						type="customer"
+						showCurrency
 					/>
 				)}
 		</div>

@@ -7,8 +7,10 @@ import PlanApproval from '../PlanApproval';
 import QuotaDetails from '../QuotaDetails';
 
 import Logs from './Logs';
+import Orders from './Orders';
 import PromotionCancellation from './PromotionCancellation';
 import styles from './styles.module.css';
+import Usages from './Usages';
 
 const TAB_MAPPING = {
 	quotas       : QuotaDetails,
@@ -17,9 +19,11 @@ const TAB_MAPPING = {
 	promotion    : PromotionCancellation,
 	cancellation : PromotionCancellation,
 	logs         : Logs,
+	usages       : Usages,
+	orders       : Orders,
 };
 
-function TabSection({ subInfo = {}, editModalChangeHandler, setEditModal }) {
+function TabSection({ info = {}, subInfo = {}, editModalChangeHandler, setEditModal }) {
 	const [activeTab, setActiveTab] = useState('quotas');
 
 	const Component = TAB_MAPPING?.[activeTab];
@@ -39,6 +43,7 @@ function TabSection({ subInfo = {}, editModalChangeHandler, setEditModal }) {
 			<div className={styles.component_sec}>
 				<Component
 					{...subInfo}
+					info={info}
 					editModalChangeHandler={editModalChangeHandler}
 					setEditModal={setEditModal}
 					currentTab={activeTab}

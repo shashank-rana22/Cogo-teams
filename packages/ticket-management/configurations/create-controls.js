@@ -135,12 +135,10 @@ const getCreateControls = ({
 			visible        : true,
 		},
 		{
-			label          : <RenderLabel label={t('myTickets:select_trade_type')} />,
+			label          : t('myTickets:select_trade_type'),
 			name           : 'trade_type',
 			controllerType : 'select',
 			placeholder    : t('myTickets:select_trade_type'),
-			rules          : { required: watchRequestType !== 'platform_issue' },
-			disabled       : true,
 			options        : GLOBAL_CONSTANTS.trade_types,
 			isClearable    : true,
 			visible        : true,

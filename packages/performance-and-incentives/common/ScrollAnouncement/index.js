@@ -1,21 +1,23 @@
 import { Placeholder, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './styles.module.css';
-import useGetQuests from './useGetQuests';
 
 const LOOP_SIZE = 2;
 
-function ScrollAnnouncement({ style = {} }) {
+function ScrollAnnouncement({ style = {}, loading = false, list = [] }) {
 	const ref = useRef(null);
+
+	const [divWidth, setDivWidth] = useState(1200);
 
 	const [isScrolling, setIsScrolling] = useState(false);
 
-	const { loading, list } = useGetQuests();
+	useEffect(() => {
+		if (divWidth !== ref?.current?.offsetWidth) { setDivWidth(ref?.current?.offsetWidth); }
+	}, [ref?.current?.offsetWidth, divWidth]);
 
 	const handleTap = () => {
 		setIsScrolling(!isScrolling);
@@ -50,56 +52,34 @@ function ScrollAnnouncement({ style = {} }) {
 				role="presentation"
 			>
 
-				{[...Array(LOOP_SIZE).keys()].map((loop_item, index) => (
-					<span
-						key={loop_item}
-						ref={index === 0 ? ref : null}
-						style={{
-							animationDuration: `${(ref?.current?.offsetWidth || 1200) / 80}s`,
-						}}
-						className={cl`${styles.bar_content} ${isScrolling && styles.bar_content_scrolling}`}
-					>
-						{(list || []).map((item, ind) => {
-							const { name, quest_string, start_date, end_date } = item || {};
-							if (ref?.current?.offsetWidth === undefined) return null;
-							return (
-								<span key={item?.id} className={styles.quest_container}>
-									<span className={styles.quest_heading}>
-										{ind + 1}
-										{'. '}
-										{name}
-										:
-									</span>
-									<span>
-										from
-										{' '}
-										<span className={styles.date_text}>
-											{formatDate({
-												date       : start_date,
-												dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-												formatType : 'date',
-											})}
+				{[...Array(LOOP_SIZE).keys()].map((loop_item, index) => {
+					let ind = 0;
+					return (
+						<span
+							key={loop_item}
+							ref={index === 0 ? ref : null}
+							style={{
+								animationDuration:
+							`${divWidth / 80}s`,
+							}}
+							className={cl`${styles.bar_content} ${isScrolling && styles.bar_content_scrolling}`}
+						>
+							{(list || []).map((item) => {
+								if (!ref?.current?.offsetWidth || isEmpty(item?.quest_string)) return null;
+								ind += 1;
+								return (
+									<span key={item?.id} className={styles.quest_container}>
+										<span className={styles.quest_heading}>
+											{ind}
+											{'. '}
 										</span>
-										{' '}
-										to
-										{' '}
-										<span className={styles.date_text}>
-											{formatDate({
-												date       : end_date,
-												dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-												formatType : 'date',
-											})}
-										</span>
-
+										<div dangerouslySetInnerHTML={{ __html: item?.quest_string }} />
 									</span>
-									{quest_string}
-
-									<span className={styles.div_end} />
-								</span>
-							);
-						})}
-					</span>
-				))}
+								);
+							})}
+						</span>
+					);
+				})}
 			</div>
 		</div>
 	);

@@ -1,0 +1,174 @@
+.container {
+	padding: 16px 12px;
+	background: #f9f9f9;
+	border-radius: 16px;
+}
+
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.title {
+	font-weight: 600;
+	color: #221f20;
+	text-transform: uppercase;
+}
+
+.sub_title {
+	margin-top: 2px;
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.performance_achievement {
+	display: flex;
+	align-items: center;
+}
+
+.claps_flex {
+	display: flex;
+	align-items: center;
+	color: #4f4f4f;
+}
+
+.claps {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	margin-right: 8px;
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 100px;
+}
+
+.performance_flex {
+	display: flex;
+	align-items: center;
+}
+
+.mr_12 {
+	margin-right: 12px;
+}
+
+.kpi_flex {
+	display: flex;
+	align-items: stretch;
+	margin-top: 12px;
+}
+
+.kpi_data {
+	flex: 1 0 45%;
+	padding-right: 6px;
+}
+
+.kpi_okr {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	padding: 14px 14px 18px 20px;
+	color: #221f20;
+	background-color: #f8f2e7;
+	border-radius: 16px;
+}
+
+.happiness_index {
+	position: relative;
+	padding: 14px 14px 18px 20px;
+	color: #221f20;
+	background-color: #f2f3fa;
+	border-radius: 16px;
+
+	/* height: 100%; */
+}
+
+.kpi_okr_title {
+	font-size: 16px;
+}
+
+.kpi_okr_count {
+	font-size: 32px;
+	font-weight: 600;
+}
+
+.view_okr_flex {
+	display: flex;
+	align-items: center;
+	margin-top: 38px;
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: capitalize;
+}
+
+.kpi_img {
+	position: absolute;
+	top: 20px;
+	right: -10px;
+}
+
+.kpi_img_2 {
+	position: absolute;
+	top: 40px;
+	right: -10px;
+}
+
+.story_points_data {
+	flex: 1 0 55%;
+	padding-left: 6px;
+}
+
+.leaderboard_data {
+	display: flex;
+	width: 100%;
+	margin-top: 12px;
+}
+
+.leaderboard {
+	flex: 1 0 50%;
+	padding-right: 6px;
+}
+
+.working_hrs {
+	flex: 1 0 50%;
+	padding-left: 6px;
+}
+
+.company_feed {
+	padding: 16px 12px;
+	margin-top: 12px;
+	background: #f9f9f9;
+	border-radius: 16px;
+}
+
+.company_feed_title {
+	font-weight: 600;
+	color: #221f20;
+	text-transform: uppercase;
+}
+
+.leaderboard_container {
+	display: flex;
+}
+
+@media (max-width: 768px) {
+	.kpi_flex {
+		flex-wrap: wrap;
+	}
+
+	.kpi_data {
+		flex: 1 0 100%;
+		margin-bottom: 12px;
+	}
+
+	.leaderboard_container {
+		flex-wrap: wrap;
+	}
+}
+
+/* new addition */
