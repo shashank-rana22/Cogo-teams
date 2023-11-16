@@ -1,9 +1,22 @@
 .container {
 	display: flex;
 	align-items: center;
-	min-height: 104px;
-	padding: 0 15px 5px;
+	justify-content: space-between;
+	width: 100%;
+	padding: 10px 15px;
 	box-shadow: 0 4px 16px 0 #627fac33;
+}
+
+.main_body {
+	display: flex;
+	align-items: center;
+	width: calc(100% - 35px);
+}
+
+.back_button {
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
 }
 
 .flex {
@@ -12,6 +25,10 @@
 
 	svg {
 		cursor: pointer;
+	}
+
+	@media (max-width: 576px) {
+		width: calc(100% - 20px);
 	}
 }
 
@@ -26,4 +43,11 @@
 	font-size: 12px;
 	color: #828282;
 	text-align: left;
+}
+
+.call_icon {
+	width: 26px;
+	height: 26px;
+	cursor: pointer;
+	fill: #00da5f;
 }

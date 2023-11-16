@@ -6,7 +6,11 @@ import UserAvatar from '../UserAvatar';
 
 import styles from './styles.module.css';
 
-function HeaderName({ formattedData = {} }) {
+function HeaderName({
+	formattedData = {},
+	isMobile = false,
+	setActiveTab = () => {},
+}) {
 	const {
 		user_name = '',
 		business_name = '',
@@ -22,14 +26,33 @@ function HeaderName({ formattedData = {} }) {
 		if (user_name?.includes('anonymous')) {
 			return PLATFORM_MAPPING[user_type] || '';
 		}
+
 		return mobile_no
 			? `+${hideDetails({ data: mobile_no, type: 'number' })}`
 			: business_name;
 	};
 
 	return (
-		<div className={styles.align_channel_type}>
-			<UserAvatar type={channel_type} event={last_message_document?.source} />
+		<div
+			role="presentation"
+			className={styles.align_channel_type}
+			onClick={() => {
+				if (isMobile) {
+					setActiveTab(
+						(prev) => ({
+							...prev,
+							showSidebar: true,
+						}),
+					);
+				}
+			}}
+		>
+			<UserAvatar
+				type={channel_type}
+				event={last_message_document?.source}
+				isMobile={isMobile}
+			/>
+
 			<div className={styles.parent}>
 				<div className={styles.name}>
 					{startCase(search_user_name || user_name || 'user')}
@@ -41,6 +64,7 @@ function HeaderName({ formattedData = {} }) {
 						</span>
 					) : null}
 				</div>
+
 				<div className={styles.phone_number}>
 					{getLowerLabel()}
 				</div>

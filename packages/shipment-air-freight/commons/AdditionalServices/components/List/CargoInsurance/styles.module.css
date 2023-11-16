@@ -1,0 +1,36 @@
+.box_div {
+	display: flex;
+	align-items: center;
+}
+
+.btn_wrap {
+	display: flex;
+	justify-content: center;
+}
+
+.text {
+	margin-bottom: 10px;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.rate {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 5px;
+
+	&.final {
+		padding-top: 5px;
+		font-weight: 600;
+		border-top: 1px solid #f2e2c3;
+	}
+}
+
+.btn_div {
+	margin-left: 16px;
+}
+
+.info_icon {
+	margin-left: 5px;
+	vertical-align: middle;
+}

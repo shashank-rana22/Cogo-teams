@@ -14,6 +14,10 @@
 	text-align: center;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	@media (max-width: 576px) {
+		max-width: 210px;
+	}
 }
 
 .cross_icon {
