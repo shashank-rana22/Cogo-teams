@@ -46,24 +46,46 @@ function Info({ data = {} }) {
 			) : null}
 
 			{margin_applied_on ? (
-				<div className={styles.pill}>{startCase(margin_applied_on)}</div>
+				<div className={styles.pill}>
+					{startCase(margin_applied_on)}
+				</div>
 			) : null}
 
 			{data?.organization?.business_name ? (
-				<div className={styles.pill}>{data?.organization?.business_name}</div>
+				<div className={styles.pill}>
+					{data?.organization?.business_name}
+				</div>
 			) : null}
 
 			{shipping_line ? (
-				<div className={styles.pill}>{shipping_line?.business_name}</div>
+				<div className={styles.pill}>
+					{shipping_line?.business_name}
+				</div>
 			) : null}
 
 			{airline ? (
-				<div className={styles.pill}>{airline?.business_name}</div>
+				<div className={styles.pill}>
+					{airline?.business_name}
+				</div>
 			) : null}
 
-			{container_size ? <div className={styles.pill}>{startCase(container_size)}</div> : null}
-			{container_type ? <div className={styles.pill}>{startCase(container_type)}</div> : null}
-			{commodity ? <div className={styles.pill}>{startCase(commodity)}</div> : null}
+			{container_size ? (
+				<div className={styles.pill}>
+					{startCase(container_size)}
+				</div>
+			) : null}
+
+			{container_type ? (
+				<div className={styles.pill}>
+					{startCase(container_type)}
+				</div>
+			) : null}
+
+			{commodity ? (
+				<div className={styles.pill}>
+					{startCase(commodity)}
+				</div>
+			) : null}
 		</div>
 	);
 }
