@@ -130,6 +130,12 @@ const apis = [
 		module      : 'insurance',
 		feature     : 'insurance',
 	},
+	{
+		api         : 'get_saas_insurance_v2_country_supported',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
 ];
 
 export default apis;
