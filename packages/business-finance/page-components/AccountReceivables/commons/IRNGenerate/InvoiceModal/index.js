@@ -9,6 +9,7 @@ function InvoiceModal({
 	setUploadInvoice,
 	uploadEInvoice,
 	loading,
+	showXml,
 }) {
 	const {
 		handleSubmit,
@@ -118,6 +119,7 @@ function InvoiceModal({
 									</span>
 								)}
 							</div>
+							{ showXml &&
 							<div className={styles.upload_Width}>
 								<div className={styles.lable_style}>E-invoice xml file</div>
 								<UploadController
@@ -132,7 +134,7 @@ function InvoiceModal({
 										{E_INVOICE_XML_FILE_MESSAGE.toString()}
 									</span>
 								)}
-							</div>
+							</div>}
 						</div>
 					</div>
 				</Modal.Body>
