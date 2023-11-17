@@ -1,46 +1,67 @@
-import { Placeholder, Pagination, Input } from '@cogoport/components';
+import { Placeholder, Pagination, Input, Button } from '@cogoport/components';
+import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
-import { CARDS_MAPPING, HEADINGS } from '../../configurations/helpers/constants';
+import {
+	CARDS_MAPPING, DEFAULT_VALUE, HEADINGS,
+	LIST_CARD_LOADER_COUNT, VALUE_ONE,
+} from '../../configurations/helpers/constants';
+import Filter from '../Filter';
 import Card from '../TasksOverview/OverviewContent/Card';
 
+import FilterTags from './filterTags';
 import ListCard from './ListCard';
 import styles from './styles.module.css';
-
-const DEFAULT_VALUE = 0;
-
-const DEFAULT_PAGE_VALUE = 1;
-const LIST_CARD_LOADER_COUNT = 5;
 
 function ListData({
 	data = {},
 	statsData = {},
 	getListCoverage = () => {},
 	filter = {},
+	setFilter = () => {},
 	source = null,
 	setSource = () => {},
 	listLoading = false,
 	page = 1,
 	setPage = () => {},
-	serialId = '',
-	setSerialId = () => {},
 	getStats = () => {},
+	setShowWeekData = () => {},
+	userService = undefined,
 }) {
+	const [serialId, setSerialId] = useState('');
+	const [shipmentId, setShipmentId] = useState('');
+	const [showFilters, setShowFilters] = useState(false);
+
 	const { statistics = {} } = statsData;
 	const { list = [] } = data;
+
 	const { dynamic_statistics = {} } = statsData;
 
-	useEffect(() => {
-		getListCoverage(serialId);
-	}, [getListCoverage, serialId]);
+	const idToUse = source === 'live_booking' ? shipmentId : serialId;
 
 	const handleClick = (card) => {
 		setSource(card);
-		setPage(DEFAULT_PAGE_VALUE);
+		setPage(VALUE_ONE);
 		setSerialId('');
 	};
+
+	const handelFilter = (val) => {
+		if (source === 'live_booking') {
+			setShipmentId(val);
+		} else {
+			setSerialId(val);
+		}
+	};
+
+	useEffect(() => {
+		if (source === 'live_booking') {
+			getListCoverage(shipmentId);
+		} else {
+			getListCoverage(serialId);
+		}
+	}, [getListCoverage, serialId, shipmentId, source]);
 
 	return (
 		<div className={styles.main_container}>
@@ -60,22 +81,37 @@ function ListData({
 				))}
 			</div>
 			<div className={styles.container}>
-				{source
+				<div style={{ display: 'flex' }}>
+					{source
 				&& (
-					<span>
+					<span style={{ marginTop: '4px' }}>
 						{dynamic_statistics[source] || DEFAULT_VALUE}
 						{' '}
 						{HEADINGS[source] || 'Critical Port Pairs'}
 					</span>
 				)}
-				<div style={{ display: 'flex', alignItems: 'center' }}>
 					<Input
 						size="sm"
-						value={serialId}
-						onChange={(val) => setSerialId(val)}
-						placeholder="Search by TID"
+						value={idToUse}
+						onChange={(val) => handelFilter(val)}
+						placeholder={source === 'live_booking' ? 'Search by SID' : 'Search by TID'}
+						style={{ width: '200px', marginLeft: '10px' }}
 					/>
 				</div>
+				<div style={{ display: 'flex' }}>
+					<div className={styles.tags}>
+						<FilterTags filter={filter} setFilter={setFilter} source={source} setSource={setSource} />
+					</div>
+					<Button
+						themeType="secondary"
+						onClick={() => { setShowFilters((prev) => !prev); }}
+						style={{ width: '100px' }}
+					>
+						<IcMFilter style={{ marginRight: '6px', width: 'auto', height: '16px' }} />
+						<span className={styles.filter_text}> Filter </span>
+					</Button>
+				</div>
+
 			</div>
 			<div>
 				{listLoading && [...new Array(LIST_CARD_LOADER_COUNT).keys()].map((ind) => (
@@ -85,39 +121,56 @@ function ListData({
 						style={{ marginTop: '10px' }}
 					/>
 				))}
-				{(!isEmpty(list) && !listLoading) && (
-					<>
-						{(list || []).map((list_data) => (
-							<ListCard
-								data={list_data}
-								key={list_data?.id}
-								getListCoverage={getListCoverage}
-								filter={filter}
-								getStats={getStats}
-								source={source}
+				<div>
+					{(!isEmpty(list) && !listLoading) && (
+						<>
+							{(list || []).map((list_data) => (
+								<div key={list_data?.id}>
+									<ListCard
+										data={list_data}
+										key={list_data?.id}
+										getListCoverage={getListCoverage}
+										filter={filter}
+										getStats={getStats}
+									/>
+								</div>
+							))}
+							<div className={styles.pagination}>
+								<Pagination
+									type="table"
+									currentPage={page}
+									totalItems={dynamic_statistics[source] || statistics[filter?.status]}
+									pageSize={10}
+									onPageChange={(pageNumber) => { setPage(pageNumber); }}
+								/>
+							</div>
+						</>
+					)}
+					{(isEmpty(list) && !listLoading)
+						&& (
+							<EmptyState
+								height={220}
+								width={380}
+								flexDirection="column"
+								textSize="20px"
 							/>
-						))}
-						<div className={styles.pagination}>
-							<Pagination
-								type="table"
-								currentPage={page}
-								totalItems={dynamic_statistics[source] || statistics[filter?.status]}
-								pageSize={10}
-								onPageChange={(pageNumber) => { setPage(pageNumber); }}
-							/>
-						</div>
-					</>
-				)}
-				{(isEmpty(list) && !listLoading)
-				&& (
-					<EmptyState
-						height={220}
-						width={380}
-						flexDirection="column"
-						textSize="20px"
-					/>
-				)}
+						)}
+				</div>
+
 			</div>
+
+			{showFilters
+			&& (
+				<Filter
+					source={source}
+					filter={filter}
+					showFilters={showFilters}
+					setShowFilters={setShowFilters}
+					setFilter={setFilter}
+					setShowWeekData={setShowWeekData}
+					userService={userService}
+				/>
+			)}
 		</div>
 	);
 }

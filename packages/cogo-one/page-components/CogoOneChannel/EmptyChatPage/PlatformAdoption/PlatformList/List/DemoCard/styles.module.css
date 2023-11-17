@@ -1,0 +1,129 @@
+.card {
+	width: 31%;
+	height: 280px;
+	margin: 10px 8px;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+	box-shadow: 0 0 8px 0 #627fac33;
+}
+
+.body_info {
+	display: flex;
+	flex-direction: column;
+	height: calc(100% - 124px);
+	padding: 10px 16px;
+}
+
+.each_row {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 10px;
+
+	span {
+		margin-left: 4px;
+		font-size: 10px;
+		color: #4f4f4f;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.title {
+	align-self: flex-start;
+	font-size: 12px;
+}
+
+.name_section {
+	display: flex;
+	align-items: center;
+}
+
+.request_name {
+	max-width: 74%;
+	margin-left: 6px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.agent_type {
+	margin-left: 6px;
+	font-size: 10px;
+	color: #4f4f4f;
+}
+
+.source {
+	display: flex;
+	flex-direction: column;
+	margin-left: 6px;
+}
+
+.schedule_time {
+	display: flex;
+	align-items: center;
+	margin-left: 4px;
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.seperator {
+	width: 1px;
+	height: 15px;
+	margin: 0 8px;
+	background: #e0e0e0;
+}
+
+.calendar_icon {
+	margin-right: 4px;
+	fill: #4f4f4f;
+}
+
+.line_break {
+	width: 88%;
+	margin: 0 16px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.footer_container {
+	display: flex;
+	align-items: stretch;
+	justify-content: space-between;
+	padding: 10px 16px;
+}
+
+.schedule_demo_icon {
+	margin-right: 4px;
+}
+
+.content {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 2px 8px;
+	background: #ddebc0;
+	border-radius: 6px;
+}
+
+.text {
+	max-width: 82%;
+	overflow: hidden;
+	font-size: 12px;
+	color: #221f20;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	span {
+		margin-left: 2px;
+		color: #4f4f4f;
+	}
+}
+
+.merge_button {
+	font-size: 12px;
+	color: #034afd;
+	text-decoration: underline;
+}

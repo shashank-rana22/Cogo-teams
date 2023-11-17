@@ -1,8 +1,10 @@
 const MAPPING = {
-	'10th'          : '10th',
-	'12th'          : '12th',
-	graduate_degree : 'GRADUATE DEGREE',
-	master_degree   : 'MASTERS DEGREE',
+	'10th'                : '10th',
+	'12th'                : '12th',
+	graduate_degree       : 'GRADUATE DEGREE',
+	master_degree         : 'MASTERS DEGREE',
+	post_graduates_degree : 'POST GRADUATES DEGREE',
+	doctorate_degree      : 'Doctorate Degree',
 };
 
 const useGetEducationInfo = (employee_education_details = []) => ((employee_education_details || []).map((detail) => ({

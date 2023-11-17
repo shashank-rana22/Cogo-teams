@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import StyledTabs from '../../common/StyledTabs';
 import StyledTabPanel from '../../common/StyledTabs/StyledTabPanel';
@@ -18,7 +18,10 @@ function SalesDashboard({
 	createSearch = () => {},
 	createSearchLoading = false,
 }) {
-	const { query = {} } = useRouter();
+	const router = useRouter();
+
+	const { query = {} } = router;
+
 	const { activeTab: selectedActiveTab = '' } = query;
 
 	const [activeTab, setActiveTab] = useState(selectedActiveTab || configurations[GLOBAL_CONSTANTS.zeroth_index].type);
@@ -27,6 +30,12 @@ function SalesDashboard({
 		renderPortPair: {
 			setLocation,
 			service_type,
+		},
+		renderButton: {
+			router,
+			organization,
+			createSearch,
+			createSearchLoading,
 		},
 	};
 
@@ -79,9 +88,6 @@ function SalesDashboard({
 							origin_location_id={origin_location_id || undefined}
 							destination_location_id={destination_location_id || undefined}
 							dashboard="sales"
-							organization={organization}
-							createSearch={createSearch}
-							createSearchLoading={createSearchLoading}
 						/>
 					</StyledTabPanel>
 				);

@@ -42,7 +42,7 @@ function AssignToForm({
 	const { assignChat = () => {}, support_agent_id = null, accountType = '' } = data || {};
 
 	const { allow_user } = controls;
-	const watchCondtion = watch('assign_condition') || null;
+	const watchCondition = watch('assign_condition') || null;
 
 	const resetForm = () => {
 		reset({
@@ -86,7 +86,7 @@ function AssignToForm({
 								<GetAssignTypeComp
 									control={control}
 									errors={errors}
-									watchCondtion={watchCondtion}
+									watchCondition={watchCondition}
 									assignType={assignType}
 									accountType={accountType}
 									options={options}

@@ -1,11 +1,9 @@
 .container {
 	display: flex;
-	align-items: baseline;
+	align-items: flex-end;
 	margin-right: 20px;
-	font-size: 22px;
-	font-weight: 600;
-	line-height: 150%;
 	color: #000;
+	white-space: nowrap;
 }
 
 .tooltip_content {
@@ -15,5 +13,30 @@
 .info_icon {
 	width: 12px;
 	height: 12px;
-	margin-left: 6px;
+	margin: 0 0 4px 6px;
+}
+
+.amount_wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.amount {
+	font-size: 22px;
+	font-weight: 600;
+}
+
+.discounted_price {
+	font-size: 14px;
+	font-weight: 600;
+	color: #ee3425;
+	text-decoration: line-through;
+}
+
+.per_container_label {
+	width: max-content;
+	margin: 0 0 4px 4px;
+	font-size: 12px;
+	font-weight: 600;
+	opacity: 0.4;
 }

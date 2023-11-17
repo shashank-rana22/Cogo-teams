@@ -1,3 +1,5 @@
+import ShipmentInsurance from '@cogoport/shipment-insurance';
+
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import LoadingState from '../LoadingState';
 
@@ -6,7 +8,6 @@ import {
 	MarkConfirmServices,
 	UploadDraftBL,
 } from './CustomTasks';
-import CargoInsurance from './CustomTasks/CargoInsurance';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -85,7 +86,7 @@ function ExecuteTask({
 
 	if (
 		task?.task === 'generate_cargo_insurance') {
-		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
+		return <ShipmentInsurance onCancel={onCancel} refetch={taskListRefetch} servicesList={services} />;
 	}
 
 	return (

@@ -8,9 +8,11 @@ import { getFirestore } from 'firebase/firestore';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
-import useGetUnreadMails from '../../helpers/useGetUnreadMails';
+import useGetUnreadMails from '../../hooks/useGetUnreadMails';
 
 import AnnouncementModal from './Announcements/AnnouncementModal';
+import GroupCall from './GroupCall';
+import useGetUnreadMessagesCount from './helpers/useGetUnreadMessageCount';
 import LeadFeedBackVoiceCallForm from './LeadFeedBackVoiceCallForm';
 import { LockScreen } from './LockScreen';
 import { FIREBASE_CONFIG } from './LockScreen/configurations/firebase-config';
@@ -90,6 +92,11 @@ function AdminLayout({
 
 	useGetUnreadMails({ firestore, agentId: user_id });
 
+	const { unReadChatsCount = 0 } = useGetUnreadMessagesCount({
+		firestore,
+		userId: user_id,
+	});
+
 	return (
 		<div className={cl`
 			${styles.container} 
@@ -97,7 +104,6 @@ function AdminLayout({
 			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg} 
 			${showNavbar ? styles.has_navbar : ''}`}
 		>
-			<main className={styles.children_container}>{children}</main>
 			{showTopbar ? (
 				<Topbar
 					className={topbar.className}
@@ -108,6 +114,7 @@ function AdminLayout({
 					showMobileNavbar={showMobileNavbar}
 				/>
 			) : null}
+			<main className={styles.children_container}>{children}</main>
 			{showNavbar ? (
 				<Navbar
 					className={navbar.className}
@@ -119,9 +126,8 @@ function AdminLayout({
 					pinnedNavs={pinnedNavs}
 					mobileShow={showMobileNavbar}
 					inCall={inCall}
-					userId={user_id}
-					firestore={firestore}
 					ticketCount={data}
+					unReadChatsCount={unReadChatsCount}
 				/>
 			) : null}
 			<VoiceCall
@@ -143,6 +149,7 @@ function AdminLayout({
 				inCall={inCall}
 			/>
 			<LeadFeedBackVoiceCallForm />
+			<GroupCall agentId={user_id} firestore={firestore} />
 		</div>
 	);
 }

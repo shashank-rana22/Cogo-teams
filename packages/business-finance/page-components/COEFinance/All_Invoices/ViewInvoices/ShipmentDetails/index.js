@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Loader, Accordion, Button } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';

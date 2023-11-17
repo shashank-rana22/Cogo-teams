@@ -7,9 +7,13 @@ import { useEffect, useState } from 'react';
 
 import getPayload from '../utils/getPayload';
 
-const useCreateExpense = ({ formData, setShowModal, getList }) => {
-	const [addressData, setAddressData] = useState({});
+const useCreateExpense = ({
+	taxNumber = '',
+	formData = {},
+	setShowModal = () => {}, getList = () => {},
+}) => {
 	const { profile } = useSelector((state) => state);
+	const [addressData, setAddressData] = useState({});
 
 	const {
 		stakeholderId,
@@ -34,6 +38,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 	} = formData || {};
 
 	const {
+		id: tradePartyMappingId = '',
 		entity_code: entityCodeTradeParty,
 		cogo_entity_id: entityIdTradeParty,
 		organization_id: orgIdTradeParty,
@@ -118,6 +123,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 	);
 
 	const payload = getPayload({
+		taxNumber,
 		vendorID,
 		vendorName,
 		vendorSerialId,
@@ -129,6 +135,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		uploadedInvoice,
 		invoiceNumber,
 		tradePartyMappingIdFromTradeParty,
+		tradePartyMappingId,
 		entityCodeTradeParty,
 		entityIdTradeParty,
 		orgIdTradeParty,
@@ -181,7 +188,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 				data: payload,
 			});
 		} catch (err) {
-			Toast.error(err?.message || 'Something went wrong');
+			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}
 	};
 

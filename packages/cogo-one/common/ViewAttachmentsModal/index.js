@@ -18,7 +18,7 @@ const renderContent = (showPreview) => `data:${showPreview?.contentType};base64,
 function RenderTitle({ item = {}, handleDownload = () => {} }) {
 	return (
 		<div className={styles.title}>
-			<div>{decodeURI(item?.fileName)}</div>
+			<div className={styles.title_flex}>{decodeURI(item?.name || item?.fileName)}</div>
 
 			<IcMDownload
 				onClick={() => handleDownload({ imgUrl: item?.fileUrl })}
@@ -33,6 +33,7 @@ function ViewAttachmentsModal({
 	activeAttachmentData = {},
 	setActiveAttachmentData = () => {},
 	urlType = '',
+	isMobile = false,
 }) {
 	let activeAttachmentContent;
 	let activeAttachmentType;
@@ -51,8 +52,8 @@ function ViewAttachmentsModal({
 		<Modal
 			show={!isEmpty(activeAttachmentData)}
 			onClose={() => setActiveAttachmentData(null)}
-			size="xl"
-			placement="center"
+			size={isMobile ? 'md' : 'xl'}
+			placement={isMobile ? 'bottom' : 'center'}
 			onOuterClick={() => setActiveAttachmentData(null)}
 			className={styles.styled_ui_modal_dialog}
 		>

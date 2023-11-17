@@ -73,32 +73,34 @@ const useTableView = ({ props, list, refetch, isVerticalHead }) => {
 	};
 
 	useEffect(() => {
-		let defaultRating = {};
-		let defaultFeedback = {};
+		if (!isEmpty(list)) {
+			let defaultRating = {};
+			let defaultFeedback = {};
 
-		(list || []).forEach((element) => {
-			if (element?.rating) {
-				defaultRating = {
-					...defaultRating,
-					[element?.id]: {
-						value    : element.rating,
-						disabled : true,
-					},
-				};
-			}
-			if (element?.comments) {
-				defaultFeedback = {
-					...defaultFeedback,
-					[element?.id]: {
-						value    : element.comments,
-						disabled : true,
-					},
-				};
-			}
-		});
+			(list || []).forEach((element) => {
+				if (element?.rating) {
+					defaultRating = {
+						...defaultRating,
+						[element?.id]: {
+							value    : element.rating,
+							disabled : true,
+						},
+					};
+				}
+				if (element?.comments) {
+					defaultFeedback = {
+						...defaultFeedback,
+						[element?.id]: {
+							value    : element.comments,
+							disabled : true,
+						},
+					};
+				}
+			});
 
-		setRating((prev) => ({ ...prev, ...defaultRating }));
-		setFeedback((prev) => ({ ...prev, ...defaultFeedback }));
+			setRating((prev) => ({ ...prev, ...defaultRating }));
+			setFeedback((prev) => ({ ...prev, ...defaultFeedback }));
+		}
 	}, [list]);
 
 	return {

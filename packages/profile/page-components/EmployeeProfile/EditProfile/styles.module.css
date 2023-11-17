@@ -1,0 +1,13 @@
+.edit_profile {
+	position: relative;
+}
+
+.file_uploader {
+	position: relative;
+}
+
+.delete_icon {
+	position: absolute;
+	right: 30px;
+	bottom: 100px;
+}

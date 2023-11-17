@@ -1,11 +1,25 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable custom-eslint/function-name-check */
-import { asyncFieldsOrganization, asyncFieldsOrganizationUsers, useGetAsyncOptions } from '@cogoport/forms';
+import {
+	asyncFieldsOrganization, asyncFieldsOrganizationUsers,
+	useGetAsyncOptions, asyncFieldsLocations,
+} from '@cogoport/forms';
+import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 import { merge, startCase } from '@cogoport/utils';
 
 import useGetMainPortsOptions from '../../../RfqEnquiries/hooks/useGetMainPortsOptions';
+import {
+	DANGEROUS_COMMODITY_OPTIONS, OTHER_SPECIAL_INTERNATIONAL_OPTIONS,
+	TEMP_CONTROLLED_RANGE_OPTIONS,
+} from '../air-subType';
 
-function FieldMutation({ fields, values, chargeCodes, filter }) {
+import { cargoHandlingOptions, COMMODITY_TYPE_OPTIONS } from './constants';
+
+function FieldMutation({
+	fields, values, filter, chargeCodes, fclCfsChargeCodes,
+}) {
+	let finalFilteredOptions = [];
+	const dataTradeType = values?.trade_type;
 	const organizationUsers = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganizationUsers(),
@@ -25,12 +39,32 @@ function FieldMutation({ fields, values, chargeCodes, filter }) {
 						status       : 'active',
 						kyc_status   : 'verified',
 						account_type : 'service_provider',
-						service      : filter?.service,
+						service      : `${filter?.service}${['haulage',
+							'trailer'].includes(filter.service) ? '_freight' : ''}`,
 					},
 				},
 			},
 		),
 	);
+
+	const origin = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params   : { filters: { type: values?.origin_type } },
+		includes : { default_params_required: true },
+		labelKey : 'display_name',
+	}));
+	const destination = useGetAsyncOptions(merge(asyncFieldsLocations(), {
+		params   : { filters: { type: values?.destination_type } },
+		includes : { default_params_required: true },
+		labelKey : 'display_name',
+	}));
+
+	const CommodityOptions = getCommodityList(filter?.service, values?.container_type);
+
+	const COMMODITY_SUB_TYPE_MAPPING = {
+		dangerous       : DANGEROUS_COMMODITY_OPTIONS,
+		temp_controlled : TEMP_CONTROLLED_RANGE_OPTIONS,
+		other_special   : OTHER_SPECIAL_INTERNATIONAL_OPTIONS,
+	};
 
 	const finalFields = (fields || []).map((control) => {
 		const { name } = control;
@@ -49,6 +83,29 @@ function FieldMutation({ fields, values, chargeCodes, filter }) {
 		if (name === 'destination_main_port_id') {
 			newControl = { ...newControl, ...mainPortOptions2 };
 		}
+		if (name === 'origin_location_id') {
+			newControl = { ...newControl, ...origin };
+		}
+		if (name === 'destination_location_id') {
+			newControl = { ...newControl, ...destination };
+		}
+		if (name === 'cargo_handling_type') {
+			finalFilteredOptions = cargoHandlingOptions.filter((option) => option.tradeType === dataTradeType);
+			newControl = { ...newControl, options: finalFilteredOptions };
+		}
+		if (name === 'commodity') {
+			newControl = { ...newControl, options: CommodityOptions };
+		}
+		if (name === 'commodity_type') {
+			newControl = { ...newControl, options: COMMODITY_TYPE_OPTIONS[values?.air_commodity] };
+		}
+		if (name === 'commodity_sub_type') {
+			newControl = {
+				...newControl,
+				options: values?.air_commodity === 'special_consideration'
+					? COMMODITY_SUB_TYPE_MAPPING[values?.commodity_type] : [{ label: 'All', value: 'all' }],
+			};
+		}
 
 		if (control?.controls) {
 			control.controls.forEach((childCtrl) => {
@@ -57,7 +114,8 @@ function FieldMutation({ fields, values, chargeCodes, filter }) {
 					const chargeValues = values[control.name];
 					chargeValues?.forEach((item, i) => {
 						UNIT_OPTIONS[i] = (
-							chargeCodes?.[item.code]?.units || ['per_container']
+							chargeCodes?.[item.code]?.units || fclCfsChargeCodes?.[item.cfs_line_items]?.units
+							|| ['per_container']
 						).map((unit) => ({
 							label : startCase(unit),
 							value : unit,
@@ -71,6 +129,13 @@ function FieldMutation({ fields, values, chargeCodes, filter }) {
 					const OPTIONS = [];
 					Object.keys(chargeCodes || {}).forEach((code) => {
 						OPTIONS.push({ label: `${code} ${chargeCodes[code]?.name}`, value: code });
+					});
+					childCtrl.options =	OPTIONS;
+				}
+				if (childCtrl.name === 'cfs_line_items') {
+					const OPTIONS = [];
+					Object.keys(fclCfsChargeCodes || {}).forEach((code) => {
+						OPTIONS.push({ label: `${code} ${fclCfsChargeCodes[code]?.name}`, value: code });
 					});
 					childCtrl.options =	OPTIONS;
 				}

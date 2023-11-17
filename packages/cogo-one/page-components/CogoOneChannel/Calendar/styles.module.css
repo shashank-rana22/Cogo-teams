@@ -1,0 +1,41 @@
+.title {
+	display: none;
+	margin-left: 6px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.icon {
+	display: flex;
+	align-items: center;
+	padding: 5px;
+	background: #5a88fb;
+	border-radius: 50%;
+}
+
+.calender {
+	position: absolute;
+	right: 0;
+	bottom: 50px;
+	display: flex;
+	align-items: center;
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	cursor: pointer;
+	background-color: #5a88fb;
+	border-radius: 20px 0 0 20px;
+	transition: 0.5s;
+
+	&:hover {
+		width: 110px;
+		background: #fff;
+		box-shadow: 0 4px 16px 0 rgb(98 127 172 / 20%);
+		transition: 0.5s ease-in-out;
+
+		.title {
+			display: block;
+		}
+	}
+}

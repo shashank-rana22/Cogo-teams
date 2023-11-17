@@ -28,6 +28,7 @@ function RightSideNav({
 	formattedMessageData = {},
 	expandSideBar = false,
 	setActiveTab = () => {},
+	isMobile = false,
 }) {
 	const { profileData } = useSelector(({ profile }) => ({
 		profileData: profile,
@@ -51,6 +52,7 @@ function RightSideNav({
 		expandSideBar,
 		channelType : formattedMessageData?.channel_type,
 		isTeams     : activeTab === 'teams',
+		isMobile,
 	}) || [];
 
 	const check = () => {
@@ -74,6 +76,12 @@ function RightSideNav({
 			}
 
 			openNewTab({ crm: 'searches', prm: 'searches' });
+		} else if (val === 'user_chat') {
+			setActiveTab((prev) => ({
+				...prev,
+				showSidebar   : false,
+				expandSideBar : false,
+			}));
 		} else if (val === 'help_desk') {
 			check();
 		} else if (val === 'sidebar_control') {
@@ -82,7 +90,8 @@ function RightSideNav({
 
 				return {
 					...prev,
-					expandSideBar: !prev?.expandSideBar,
+					expandSideBar : !prev?.expandSideBar,
+					showSidebar   : !prev?.showSidebar,
 				};
 			});
 		} else if (activeTab === 'teams') {
@@ -105,7 +114,7 @@ function RightSideNav({
 					const showDocumentCount = activeSelect !== 'documents' && name === 'documents'
 				&& !!documentsCount && !checkConditions;
 
-					const showquotationSentData = orgId && activeSelect !== 'organization'
+					const showQuotationSentData = orgId && activeSelect !== 'organization'
 				&& name === 'organization' && !!quotationEmailSentAt;
 
 					return (
@@ -129,7 +138,7 @@ function RightSideNav({
 									)}
 								</div>
 							)}
-							{showquotationSentData && (
+							{showQuotationSentData && (
 								<div className={styles.quotation} />
 							)}
 							<div title={content}>

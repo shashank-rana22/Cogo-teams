@@ -6,8 +6,8 @@ import {
 import React, { useState, useEffect } from 'react';
 
 import useUpdateAppliationProcessDetails from '../../hooks/useUpdateAppliationProcessDetails';
+import Heading from '../HRMeeting/Heading';
 
-import ExitHeading from './ExitHeading';
 import ScheduleInterview from './Schedule';
 import styles from './styles.module.css';
 
@@ -20,10 +20,11 @@ function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack =
 		setValue,
 	} = useForm();
 
-	const { exit_interview } = data || {};
+	const { exit_interview, application_process_details } = data || {};
 
-	const { exit_interview_scheduled } = exit_interview || {};
-	const { sub_process_detail_id, is_complete, sub_process_data } = exit_interview_scheduled || {};
+	const { exit_interview_scheduled, process_user_details } = exit_interview || {};
+	const { name } = process_user_details || {};
+	const { sub_process_detail_id, is_complete, sub_process_data, is_ignored } = exit_interview_scheduled || {};
 	const [visible, setVisible] = useState(is_complete || false);
 	const complete = exit_interview?.exit_interview_scheduled == null;
 
@@ -54,9 +55,31 @@ function ExitInterview({ refetch = () => {}, handleNext = () => {}, handleBack =
 		}
 	}, [is_complete, setValue, sub_process_data]);
 
+	if (is_ignored) {
+		return (
+			<Heading
+				title="EXIT INTERVIEW"
+				subTitle="Schedule interview the the employee"
+				application_process_details={application_process_details}
+				refetch={refetch}
+				isComplete={is_complete}
+				isIgnored={is_ignored}
+				name={name}
+			/>
+		);
+	}
+
 	return (
 		<>
-			<ExitHeading title="EXIT INTERVIEW" subTitle="Schedule interview the the employee" />
+			<Heading
+				title="EXIT INTERVIEW"
+				subTitle="Schedule interview the the employee"
+				application_process_details={application_process_details}
+				refetch={refetch}
+				isComplete={is_complete}
+				isIgnored={is_ignored}
+				name={name}
+			/>
 			{
 			visible
 				? (

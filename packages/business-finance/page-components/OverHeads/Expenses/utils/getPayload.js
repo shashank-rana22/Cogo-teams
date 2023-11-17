@@ -22,13 +22,14 @@ const getPayload = ({
 	tradePartyMappingIdFromTradeParty,
 	entityCodeTradeParty,
 	entityIdTradeParty,
-	orgIdTradeParty,
 	sidTradeParty,
 	isTaxApplicable,
 	nameTradeParty,
 	pincode,
 	cityName,
 	countryNameTradeParty,
+	taxNumber,
+	tradePartyMappingId,
 	countryCodeTradeParty,
 	countryIdTradeParty,
 	registrationType,
@@ -136,14 +137,14 @@ const getPayload = ({
 					exchangeRate    : null,
 					ledgerCurrency,
 					billDocumentUrl : uploadedInvoice,
-					billNumber      : invoiceNumber,
+					billNumber      : invoiceNumber?.trim(),
 				},
 				sellerDetail: {
 					// tradeParty
-					tradePartyMappingId  : tradePartyMappingIdFromTradeParty,
+					tradePartyMappingId,
 					entityCode           : entityCodeTradeParty,
 					entityCodeId         : entityIdTradeParty,
-					organizationId       : orgIdTradeParty,
+					organizationId       : tradePartyMappingIdFromTradeParty,
 					organizationSerialId : sidTradeParty,
 					isTaxApplicable:
 						isTaxApplicable === null ? true : isTaxApplicable,
@@ -161,7 +162,7 @@ const getPayload = ({
 					taxNumber:
 						registrationType === 'tax'
 							? registrationNumberTradeParty
-							: null,
+							: taxNumber,
 					tdsRate    : tdsTradeParty || DEFAULT_TDS_RATE,
 					bankDetail : {
 						bankName,
@@ -194,7 +195,7 @@ const getPayload = ({
 				},
 				serviceProviderDetail: {
 					// vendor
-					tradePartyMappingId  : tradePartyMappingIdFromTradeParty,
+					tradePartyMappingId,
 					entityCode,
 					entityCodeId         : vendorCogoEntityId,
 					organizationId       : idFromVendor || vendorID,
@@ -209,7 +210,7 @@ const getPayload = ({
 					countryCode          : countryCodeTradeParty,
 					countryId            : vendorCountryId,
 					registrationNumber   : vendorRegistrationNumber,
-					taxNumber            : vendorRegistrationNumber,
+					taxNumber,
 					tdsRate              : tdsTradeParty || DEFAULT_TDS_RATE,
 				},
 				lineItems: lineItemsData,

@@ -108,3 +108,16 @@
 	color: #000;
 	background-color: var(--color-tertiary-blue-4);
 }
+
+.ribbon_accepted {
+	background-color: #a8e88b;
+}
+
+.ribbon_rejected {
+	color: white;
+	background-color: #ed9d8e;
+}
+
+.ribbon_pending {
+	background-color: #dce1ff;
+}

@@ -8,7 +8,7 @@ on:
     inputs:
       platform:
         description: 'Platform'
-        default: 'ubuntu-latest'
+        default: 'cogo-action-runner'
         required: false
         type: string
 

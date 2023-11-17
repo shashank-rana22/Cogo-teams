@@ -35,7 +35,7 @@
 		&-consigner {
 			display: flex;
 			flex-direction: column;
-			height: 113px;
+			height: fit-content;
 			padding: 8px;
 			border-bottom: 1px solid black;
 		}
@@ -207,7 +207,7 @@
 
 .section_three {
 	display: flex;
-	height: 55px;
+	height: fit-content;
 	border: 1px solid black;
 
 	&-element {

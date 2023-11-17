@@ -1,8 +1,9 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import getCountryCode from '../../../helpers/getCountryCode';
+import useGetIsMobile from '../../../helpers/useGetIsMobile';
 import getCombinedServiceDetails from '../AdditionalServices/utils/getCombinedServiceDetails';
 import AccordionView from '../common/AccordionView';
 import DeleteServiceModal from '../common/DeleteServiceModal';
@@ -11,7 +12,6 @@ import AccordianContent from './AccordianContent';
 import CargoInsuranceContainer from './CargoInsuranceContainer';
 import CargoInsuranceModal from './CargoInsuranceModal';
 import useDeleteCargoInsurance from './CargoInsuranceModal/hooks/useDeleteCargoInsurance';
-import styles from './styles.module.css';
 
 const DELETE_TITLE = `Customers have lost around $10 billion worth of goods in just last 1 
 year due to various reasons. We recommend keeping your cargo insurance.`;
@@ -28,6 +28,8 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [active, setActive] = useState('');
+
+	const isMobile = useGetIsMobile();
 
 	const primary_service = data?.search_type || data?.primary_service;
 
@@ -72,9 +74,7 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 	}
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.heading}>Other Services</div>
-
+		<>
 			<AccordionView
 				itemKey="cargo_insurance"
 				active={active}
@@ -85,6 +85,7 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 						cargoInsuranceDetails={cargoInsuranceAlreadyTaken}
 						setShowDeleteModal={setShowDeleteModal}
 						setShowModal={setShowModal}
+						isMobile={isMobile}
 					/>
 				)}
 			>
@@ -106,6 +107,7 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 					setAddCargoInsurance={setShowModal}
 					// setDone={setIsSelected}
 					checkout_id={checkout_id}
+					isMobile={isMobile}
 				/>
 			)}
 
@@ -119,7 +121,7 @@ function CargoInsurance({ data = {}, refetch = () => {}, rateCardData = {} }) {
 					title={DELETE_TITLE}
 				/>
 			) : null}
-		</div>
+		</>
 	);
 }
 

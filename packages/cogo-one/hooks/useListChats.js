@@ -1,11 +1,13 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import {
 	collectionGroup,
 	updateDoc,
 	doc,
 	where, orderBy,
 } from 'firebase/firestore';
+import { getFunctions, httpsCallable } from 'firebase/functions';
 import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
@@ -34,10 +36,12 @@ function useListChats({
 	activeFolder = '',
 	sidFilters = '',
 	mailsToBeShown = [],
+	throttledGetCount = () => {},
 }) {
 	const snapshotListener = useRef(null);
 	const pinSnapshotListener = useRef(null);
 	const flashMessagesSnapShotListener = useRef(null);
+	const searchMessage = useMemo(() => httpsCallable(getFunctions(), 'searchMessage'), []);
 
 	const [loadingState, setLoadingState] = useState({
 		pinnedChatsLoading   : false,
@@ -80,23 +84,29 @@ function useListChats({
 			activeFolder, sidFilters, mailsToBeShown],
 	);
 
+	const searchMsg = useCallback(() => {
+		searchMessage({ search: searchQuery, filters: appliedFilters, query: omniChannelQuery })
+			.then((result) => {
+				const { data } = result;
+				setListData((prev) => ({
+					...prev,
+					messagesListData : data,
+					isLastPage       : true,
+				}));
+			}).catch((error) => {
+				console.error(error);
+			});
+	}, [appliedFilters, omniChannelQuery, searchMessage, searchQuery]);
+
 	const queryForSearch = useMemo(() => {
-		if (!searchQuery) {
+		if (!searchQuery || listOnlyMails) {
 			return [];
 		}
 
-		if (!listOnlyMails) {
-			return [
-				where('user_name', '>=', searchQuery),
-				where('user_name', '<=', `${searchQuery}\\uf8ff`),
-				orderBy('user_name', 'asc'),
-			];
-		}
-
 		return [
-			where('q', '>=', searchQuery),
-			where('q', '<=', `${searchQuery}\\uf8ff`),
-			orderBy('q', 'asc'),
+			where('user_name', '>=', searchQuery),
+			where('user_name', '<=', `${searchQuery}\\uf8ff`),
+			orderBy('user_name', 'asc'),
 		];
 	}, [listOnlyMails, searchQuery]);
 
@@ -110,11 +120,12 @@ function useListChats({
 				);
 				updateDoc(messageDoc, { new_message_count: 0, has_admin_unread_messages: false });
 				setActiveTab((prev) => ({ ...prev, hasNoFireBaseRoom: false, data: val }));
+				throttledGetCount();
 			} catch (e) {
 				Toast.error('Chat Not Found');
 			}
 		}
-	}, [firestore, setActiveTab]);
+	}, [firestore, setActiveTab, throttledGetCount]);
 
 	const updateLoadingState = useCallback((key) => {
 		setLoadingState((prev) => {
@@ -171,20 +182,26 @@ function useListChats({
 		updateLoadingState, workPrefernceLoading, listOnlyMails]);
 
 	useEffect(() => {
-		mountSnapShot({
-			setLoadingState,
-			setListData,
-			snapshotListener,
-			omniChannelCollection,
-			queryForSearch,
-			omniChannelQuery,
-			updateLoadingState,
-			workPrefernceLoading,
-		});
+		if (!isEmpty(searchQuery) && listOnlyMails) {
+			searchMsg();
+		} else {
+			mountSnapShot({
+				setLoadingState,
+				setListData,
+				snapshotListener,
+				omniChannelCollection,
+				queryForSearch,
+				omniChannelQuery,
+				updateLoadingState,
+				workPrefernceLoading,
+			});
+		}
+
 		return () => {
 			snapshotCleaner({ ref: snapshotListener });
 		};
-	}, [omniChannelCollection, omniChannelQuery, queryForSearch, updateLoadingState, workPrefernceLoading]);
+	}, [searchMsg, omniChannelCollection, omniChannelQuery, searchQuery,
+		updateLoadingState, workPrefernceLoading, listOnlyMails, queryForSearch]);
 
 	useEffect(() => {
 		mountFlashChats({
@@ -215,6 +232,8 @@ function useListChats({
 		appliedFilters,
 		handleScroll,
 		loadingState,
+		searchMsg,
+		listData,
 	};
 }
 

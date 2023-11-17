@@ -5,15 +5,12 @@ import { IcMArrowRight, IcMArrowLeft } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 
 import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../../../constants/leaderboard-reporttype-constants';
-import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../../../constants/leaderboard-viewtype-constants';
+import isExpandedAllowed from '../../../../helpers/getIsExpandedAllowed';
 import getLeftPanelHeading from '../../../../helpers/getLeftPanelHeading';
 
 import styles from './styles.module.css';
 
-const { MANAGER_REPORT, AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
-const { ADMIN, OWNER } = LEADERBOARD_VIEWTYPE_CONSTANTS;
-
-const MIN_LENGTH = 1;
+const { AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
 
 function Header(props) {
 	const { levelStack, setLevelStack, currLevel, setCurrLevel, entity, lastUpdatedAt } = props;
@@ -68,9 +65,7 @@ function Header(props) {
 						<i>{HEADING}</i>
 					</div>
 
-					{(!currLevel.isExpanded && (
-						(viewType === ADMIN || (viewType === OWNER && levelStack?.length === MIN_LENGTH))
-					&& (![MANAGER_REPORT, AGENT_REPORT].includes(currLevel.report_type)))) && (
+					{isExpandedAllowed({ currLevel, viewType }) && (
 						<Button type="button" size="md" themeType="linkUi" onClick={handleExpandAll}>
 							Expand All
 							{' '}

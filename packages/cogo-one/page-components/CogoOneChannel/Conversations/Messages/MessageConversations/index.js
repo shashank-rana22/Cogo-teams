@@ -7,6 +7,7 @@ import useGetMessages from '../../../../../hooks/useGetMessages';
 
 import ChatRequests from './ChatRequests';
 import Footer from './Footer';
+import MailsThread from './MailsThread';
 import MessagesThread from './MessagesThread';
 import styles from './styles.module.css';
 
@@ -39,6 +40,7 @@ function MessageConversations({
 	supportAgentId = '',
 	userId = '',
 	setActiveTab = () => {},
+	isMobile = false,
 }) {
 	const conversationsDivRef = useRef(null);
 
@@ -46,6 +48,10 @@ function MessageConversations({
 	const { emailState = {}, setEmailState = () => {} } = mailProps || {};
 	const { scrollToTop = false } = emailState || {};
 	const latestMessagesAtTop = LATEST_MESSAGES_AT_TOP_FOR.includes(channel_type);
+
+	const isNotEmail = channel_type !== 'email';
+
+	const ActiveComponent = latestMessagesAtTop ? MailsThread : MessagesThread;
 
 	const {
 		getNextData = () => {}, lastPage, firstLoadingMessages,
@@ -58,6 +64,7 @@ function MessageConversations({
 		firestore,
 		channel_type,
 		setActiveTab,
+		addTimeline: isNotEmail,
 	});
 
 	const handleScroll = (e) => {
@@ -139,7 +146,8 @@ function MessageConversations({
 						/>
 					</div>
 				) : (
-					<MessagesThread
+					<ActiveComponent
+						isMobile={isMobile}
 						getNextData={getNextData}
 						lastPage={lastPage}
 						loadingPrevMessages={loadingPrevMessages}
@@ -160,6 +168,7 @@ function MessageConversations({
 						latestMessagesAtTop={latestMessagesAtTop}
 						deleteMessage={deleteMessage}
 						roomId={id}
+						key={id}
 					/>
 				)}
 			</div>
@@ -179,6 +188,7 @@ function MessageConversations({
 						assignChat={assignChat}
 						assignLoading={assignLoading}
 						scrollToBottom={scrollToLastMessage}
+						isMobile={isMobile}
 					/>
 				)}
 			</div>

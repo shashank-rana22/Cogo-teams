@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 const useGetRates = ({ service }) => {
-	const apiMapping = {
+	const API_MAPPING = {
 		lcl_freight     : '/list_lcl_freight_rates',
 		fcl_freight     : '/list_fcl_freight_rates',
 		air_freight     : '/list_air_freight_rates',
@@ -16,7 +16,7 @@ const useGetRates = ({ service }) => {
 		fcl_cfs         : './list_fcl_cfs_rates',
 	};
 
-	const api = apiMapping[service?.service];
+	const api = API_MAPPING[service?.service];
 
 	const [systemPage, setSystemPage] = useState(1);
 	const [revertedPage, setRevertedPage] = useState(1);
@@ -64,7 +64,7 @@ const useGetRates = ({ service }) => {
 				params: {
 					audit_data_required : true,
 					filters             : {
-						past_similar_negotiation_reverts_for_negotiation_id: service?.id,
+						spot_negotiation_id: service?.id,
 					},
 					page_limit : 5,
 					page       : revertedPage,

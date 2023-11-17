@@ -1,5 +1,7 @@
 import { startCase } from '@cogoport/utils';
 
+import SecureNow from '../../../../common/SecureNow';
+
 import shippingLine from './shippingLine';
 
 const getServiceType = (item, service_details) => {
@@ -34,12 +36,13 @@ const getServiceType = (item, service_details) => {
 	return startCase(serviceName || '');
 };
 
-const renderServiceType = (item, service_details) => {
+function RenderServiceType({ item, service_details }) {
+	const { service_type } = item || {};
 	const serviceName = getServiceType(item, service_details);
 
 	const allWords = serviceName.split(' ');
 
-	const wordsToConvert = ['Fcl', 'Cfs'];
+	const wordsToConvert = ['Fcl', 'Cfs', 'Ftl', 'Ltl', 'Lcl'];
 
 	const convertedWords = allWords.map((currWord) => {
 		if (wordsToConvert.includes(currWord)) {
@@ -49,7 +52,16 @@ const renderServiceType = (item, service_details) => {
 		return currWord;
 	});
 
-	return convertedWords.join(' ');
-};
+	if (service_type === 'cargo_insurance') {
+		return (
+			<>
+				{serviceName}
+				<SecureNow />
+			</>
+		);
+	}
 
-export default renderServiceType;
+	return convertedWords.join(' ');
+}
+
+export default RenderServiceType;

@@ -5,8 +5,8 @@ import { isEmpty } from '@cogoport/utils';
 import useReplyMail from '../hooks/useReplyMail';
 import useSaveDraft from '../hooks/useSaveDraft';
 import useSendOmnichannelMail from '../hooks/useSendOmnichannelMail';
+import { getTimeZone } from '../utils/timeLineFunctions';
 
-import getFormattedEmailBody from './getFormattedEmailBody';
 import getRenderEmailBody from './getRenderEmailBody';
 
 const LIMIT_FOR_BODY_PREVIEW = 200;
@@ -64,15 +64,16 @@ function useMailEditorFunctions({
 		const emailBody = getRenderEmailBody({ html: `${rteContent}<br/>${body}` });
 
 		return {
-			sender  : from_mail || activeMailAddress,
+			sender    : from_mail || activeMailAddress,
 			toUserEmail,
 			ccrecipients,
 			bccrecipients,
-			subject : subjectToSend,
-			content : emailBody,
-			msgId   : buttonType !== 'send_mail' ? activeMail?.id : undefined,
+			subject   : subjectToSend,
+			content   : emailBody,
+			msgId     : buttonType !== 'send_mail' ? activeMail?.id : undefined,
 			attachments,
 			userId,
+			time_zone : getTimeZone(),
 		};
 	};
 
@@ -120,8 +121,6 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		// const isEmptyMail = getFormattedEmailBody({ emailState });
-
 		if (!subjectToSend) {
 			Toast.error('Subject is Required.');
 			return;
@@ -158,13 +157,6 @@ function useMailEditorFunctions({
 
 		if (uploading) {
 			Toast.error('Files are uploading...');
-			return;
-		}
-
-		const isEmptyMail = getFormattedEmailBody({ emailState });
-
-		if (isEmptyMail && isEmpty(attachments)) {
-			Toast.error('There is nothing in email body to save as draft');
 			return;
 		}
 

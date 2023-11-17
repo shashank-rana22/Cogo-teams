@@ -1,10 +1,10 @@
-import { Input, Select } from '@cogoport/components';
+import { Input, Select, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import dynamic from 'next/dynamic';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
 import getRenderEmailBody from '../../../../../../helpers/getRenderEmailBody';
@@ -46,12 +46,37 @@ function ComposeEmailBody(props) {
 		userActiveMails = [],
 		hideFromMail = false,
 		viewType = '',
+		restrictMailToOrganizations = false,
+		firestore = {},
+		isMobile = false,
 	} = props || {};
-	const { onImageUploadBefore, disablRTE } = useImageUploader();
+
+	const { onImageUploadBefore, disableRTE } = useImageUploader();
+	const sunEditorRef = useRef();
 
 	const userActiveMailOptions = (userActiveMails || []).map(
 		(curr) => ({ label: curr, value: curr }),
 	);
+
+	const getSunEditorInstance = (sunEditor) => {
+		sunEditorRef.current = sunEditor;
+	};
+
+	const restrictMailToSingle = (
+		buttonType === 'send_mail'
+			&& restrictMailToOrganizations
+			&& !emailState?.mailView
+	);
+
+	const handleRTEChange = (val) => {
+		const rawText = isMobile ? val : sunEditorRef.current?.getText();
+
+		setEmailState((p) => ({
+			...p,
+			rawRTEContent : rawText,
+			rteContent    : val,
+		}));
+	};
 
 	useEffect(() => {
 		if (buttonType === 'send_mail' && !activeMailAddress) {
@@ -69,7 +94,7 @@ function ComposeEmailBody(props) {
 					alt="email"
 				/>
 				<div className={styles.no_permission_text}>
-					Oops you don&apos;t have Mail Access or you don&apos;t have active Mails
+					Sorry, You don&apos;t have active mails to send Mail.
 				</div>
 			</div>
 		);
@@ -109,6 +134,11 @@ function ComposeEmailBody(props) {
 				showOrgSpecificMail={showOrgSpecificMail}
 				hideFromMail={hideFromMail}
 				viewType={viewType}
+				restrictMailToSingle={restrictMailToSingle}
+				restrictMailToOrganizations={restrictMailToOrganizations}
+				buttonType={buttonType}
+				firestore={firestore}
+				isMobile={isMobile}
 			/>
 
 			<div className={styles.type_to}>
@@ -137,25 +167,38 @@ function ComposeEmailBody(props) {
 					)}
 			</div>
 
-			{showOrgSpecificMail
+			{(showOrgSpecificMail && !isMobile)
 				? <EmailTemplates mailProps={mailProps} />
 				: null }
 
 			<div className={styles.rte_container}>
-				<SunEditor
-					onImageUploadBefore={onImageUploadBefore}
-					defaultValue={emailState?.rteContent}
-					onChange={(val) => setEmailState((p) => ({ ...p, rteContent: val }))}
-					setOptions={{
-						buttonList    : RTE_TOOL_BAR_CONFIG,
-						defaultTag    : 'div',
-						minHeight     : '300px',
-						showPathLabel : false,
-					}}
-					disable={disablRTE}
-					autoFocus
-
-				/>
+				{isMobile
+					? (
+						<Textarea
+							name="email_content"
+							value={emailState?.rteContent}
+							size="lg"
+							rows={15}
+							onChange={handleRTEChange}
+						/>
+					)
+					: (
+						<SunEditor
+							key={emailState?.reloadKey}
+							onImageUploadBefore={onImageUploadBefore}
+							defaultValue={emailState?.rteContent}
+							onChange={handleRTEChange}
+							setOptions={{
+								buttonList    : RTE_TOOL_BAR_CONFIG,
+								defaultTag    : 'div',
+								minHeight     : '300px',
+								showPathLabel : false,
+							}}
+							disable={disableRTE}
+							autoFocus
+							getSunEditorInstance={getSunEditorInstance}
+						/>
+					)}
 
 				<div className={styles.attachments_scroll}>
 					{uploading && (

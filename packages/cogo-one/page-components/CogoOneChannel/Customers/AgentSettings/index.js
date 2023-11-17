@@ -17,6 +17,7 @@ function AgentSettings({
 	userId = '',
 	firestore = {},
 	preferenceLoading = false,
+	isMobile = false,
 }) {
 	return (
 		<>
@@ -38,6 +39,7 @@ function AgentSettings({
 					agentTimeline={agentTimeline}
 					userId={userId}
 					firestore={firestore}
+					isMobile={isMobile}
 				/>
 			)}
 

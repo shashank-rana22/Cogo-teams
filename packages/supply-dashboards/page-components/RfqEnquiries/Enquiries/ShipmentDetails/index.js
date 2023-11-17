@@ -6,64 +6,92 @@ import ContainerDetails from '../ContainerDetails';
 
 import styles from './styles.module.css';
 
+const ZEROVALUE = 0;
+
+const SINGLE_PORT_SERVICES = ['fcl_freight_local', 'lcl_freight_local'];
+
+const destructureDetails = (serviceLocation) => {
+	const origin = (
+		serviceLocation?.origin_port
+    || serviceLocation?.origin_airport
+    || serviceLocation?.port
+    || serviceLocation?.origin_location
+	);
+	const destination = (
+		serviceLocation?.destination_port
+    || serviceLocation?.destination_airport
+    || serviceLocation?.port
+    || serviceLocation?.destination_location
+	);
+
+	const originCode = origin?.port_code;
+	const originName = origin?.name.split('(')?.[ZEROVALUE];
+	const originCountry = origin?.display_name.split(' ').pop();
+
+	const destinationCode = destination?.port_code;
+	const destinationName = destination?.name.split('(')?.[ZEROVALUE];
+	const destinationCountry = destination?.display_name.split(' ').pop();
+
+	const singlePortCode = serviceLocation?.port?.port_code;
+	const singlePortName = serviceLocation?.port?.name.split('(')?.[ZEROVALUE];
+	const singlePortCountry = serviceLocation?.port?.display_name.split(' ').pop();
+
+	return {
+		singlePortCode,
+		singlePortName,
+		singlePortCountry,
+		originCode,
+		originName,
+		originCountry,
+		destinationCode,
+		destinationName,
+		destinationCountry,
+	};
+};
+
+function LocationDetails({ name = '', code = '', country = '', isLocalService = false }) {
+	return (
+		<div>
+			<div className={styles.code}>
+				(
+				{code}
+				)
+			</div>
+			<div className={styles.name}>
+				<Tooltip content={name}>
+					<div className={isLocalService ? styles.subnameFull : styles.subname}>
+						{name}
+						,
+					</div>
+				</Tooltip>
+				<div className={styles.country}>{country}</div>
+			</div>
+		</div>
+	);
+}
+
 function ShipmentDetails({ selectedCard = {} }) {
-	const ZEROVALUE = 0;
 	const serviceLocation = selectedCard?.detail;
 
-	const originCode = (
-		serviceLocation?.origin_port
-			|| serviceLocation?.origin_airport
-			|| serviceLocation?.port
-			|| serviceLocation?.origin_location
-	)?.port_code;
-
-	const originName = (
-		serviceLocation?.origin_port
-			|| serviceLocation?.origin_airport
-			|| serviceLocation?.port
-			|| serviceLocation?.origin_location
-			|| serviceLocation?.location
-			|| serviceLocation?.airport
-	)?.name.split('(')?.[ZEROVALUE];
-
-	const originCountry = (
-		serviceLocation?.origin_port
-			|| serviceLocation?.origin_airport
-			|| serviceLocation?.port
-			|| serviceLocation?.origin_location
-			|| serviceLocation?.location
-			|| serviceLocation?.airport
-	)?.display_name
-		.split(' ')
-		.pop();
-
-	const destinationCode = (
-		serviceLocation?.destination_port
-			|| serviceLocation?.destination_airport
-			|| serviceLocation?.port
-			|| serviceLocation?.destination_location
-	)?.port_code;
-
-	const destinationName = (
-		serviceLocation?.destination_port
-			|| serviceLocation?.destination_airport
-			|| serviceLocation?.port
-			|| serviceLocation?.destination_location
-	)?.name.split('(')?.[ZEROVALUE];
-
-	const destinationCountry = (
-		serviceLocation?.destination_port
-			|| serviceLocation?.destination_airport
-			|| serviceLocation?.port
-			|| serviceLocation?.destination_location
-	)?.display_name
-		.split(' ')
-		.pop();
+	const {
+		singlePortCode,
+		singlePortName,
+		singlePortCountry,
+		originCode,
+		originName,
+		originCountry,
+		destinationCode,
+		destinationName,
+		destinationCountry,
+	} = destructureDetails(serviceLocation);
 
 	const containerCount = selectedCard?.search_params?.fcl_freight_services_attributes?.[ZEROVALUE]?.containers_count
-		|| selectedCard?.search_params?.lcl_freight_services_attributes?.[ZEROVALUE]?.volume;
+		|| selectedCard?.search_params?.lcl_freight_services_attributes?.[ZEROVALUE]?.volume
+    || selectedCard?.search_params?.fcl_freight_local_services_attributes?.[ZEROVALUE]?.containers_count;
 
 	const airService = selectedCard?.search_params?.air_freight_services_attributes?.[ZEROVALUE];
+
+	const isLocalService = SINGLE_PORT_SERVICES.includes(serviceLocation?.service_type);
 
 	return (
 
@@ -71,44 +99,35 @@ function ShipmentDetails({ selectedCard = {} }) {
 			<div className={styles.details}>
 				<div className={styles.info}>
 					<div className={styles.upper_body}>
-						<div>
-							<div className={styles.code}>
-								(
-								{originCode}
-								)
-							</div>
-							<div className={styles.name}>
-								<Tooltip content={originName}>
-									<div className={styles.subname}>
-										{originName}
-										,
-									</div>
-								</Tooltip>
-								<div className={styles.country}>{originCountry}</div>
-							</div>
-						</div>
-						<div>
-							<IcMPortArrow width={40} />
-						</div>
-						<div>
-							<div className={styles.code}>
-								(
-								{destinationCode}
-								)
-							</div>
-							<div className={styles.name}>
-								<Tooltip content={destinationName}>
-									<div className={styles.subname}>
-										{destinationName}
-										,
-									</div>
-								</Tooltip>
-								<div className={styles.country}>{destinationCountry}</div>
-							</div>
-						</div>
+						{isLocalService ? (
+							<LocationDetails
+								name={singlePortName}
+								code={singlePortCode}
+								country={singlePortCountry}
+								isLocalService={isLocalService}
+							/>
+						) : (
+							<>
+								<LocationDetails
+									name={originName}
+									code={originCode}
+									country={originCountry}
+									isLocalService={isLocalService}
+								/>
+								<div>
+									<IcMPortArrow width={40} />
+								</div>
+								<LocationDetails
+									name={destinationName}
+									code={destinationCode}
+									country={destinationCountry}
+									isLocalService={isLocalService}
+								/>
+							</>
+						)}
 					</div>
 
-					{(selectedCard?.search_type === 'fcl_freight' || selectedCard?.search_type === 'lcl_freight')
+					{['fcl_freight', 'lcl_freight', 'fcl_freight_local'].includes(selectedCard?.search_type)
 						&& (
 							<>
 								<div className={styles.border} />
@@ -125,8 +144,10 @@ function ShipmentDetails({ selectedCard = {} }) {
 										Container Count
 										<div className={styles.color}>
 											{containerCount}
-						&nbsp;
-											{selectedCard.search_type === 'fcl_freight' ? 'Ctr' : 'cbm'}
+											{' '}
+											{['fcl_freight', 'fcl_freight_local'].includes(selectedCard?.search_type)
+												? 'Ctr' : 'cbm'}
+											{' '}
 											{`(Divided Into  ${
 												selectedCard?.predicted_number_of_shipments || ZEROVALUE
 											} Shipment)`}

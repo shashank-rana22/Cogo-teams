@@ -24,6 +24,10 @@
 	border-radius: 4px;
 }
 
+.is_loading {
+	cursor: not-allowed;
+}
+
 .custom_tag_margin {
 	display: flex;
 	padding: 4px 8px;
@@ -165,4 +169,13 @@
 
 .country {
 	margin-left: 4px;
+}
+
+.more_options {
+	display: flex;
+	flex-direction: column;
+}
+
+.btn_margin {
+	margin-bottom: 8px;
 }

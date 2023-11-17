@@ -1,10 +1,14 @@
 import { Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
-import React from 'react';
+import { useSelector } from '@cogoport/store';
+import React, { useState } from 'react';
 
 import IRNCancel from '../IRNCancel';
 import IRNGenerate from '../IRNGenerate';
 import RefetchPdfs from '../RefetchPdf';
+
+import Content from './Content';
 
 const IS_ELIGIBLE_CHECK = ['FINANCE_ACCEPTED', 'POSTED', 'IRN_FAILED'];
 const IS_CANCELLABLE_CHECK = [
@@ -14,10 +18,13 @@ const IS_CANCELLABLE_CHECK = [
 	'IRN_CANCELLED',
 ];
 const REFETCH_STATUS = ['IRN_GENERATED', 'IRN_CANCELLED'];
+const USER_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id, GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id];
+const ENTITY_CODES = ['101', '301', '501'];
 
 function RenderIRNGenerated({
 	itemData = { invoiceStatus: '' },
 	refetch = () => {},
+	entityCode = '',
 }) {
 	const statusComponentMap = [
 		{
@@ -36,28 +43,43 @@ function RenderIRNGenerated({
 
 	const showoverflow = statusComponentMap.some((item) => item.status.includes(itemData?.invoiceStatus));
 
+	const { user_id } = useSelector(({ profile }) => ({
+		user_id: profile?.user?.id,
+	}));
+
+	const [show, setShow] = useState(false);
+
+	const showPopover = (ENTITY_CODES.includes(entityCode) || (USER_IDS.includes(user_id)));
+
 	return (
-		<Popover
-			placement="left"
-			render={statusComponentMap.map((item) => {
-				const Element = item.component;
-				return item.status.includes(itemData?.invoiceStatus) ? (
-					<React.Fragment key={itemData}>
-						<Element itemData={itemData} refetch={refetch} />
-					</React.Fragment>
-				) : null;
-			})}
+		<div
+			role="presentation"
+			onClick={() => setShow(true)}
 		>
-			{showoverflow
-				? (
-					<IcMOverflowDot
-						cursor="pointer"
-						width="16px"
-						height="16px"
+			<Popover
+				placement="left"
+				interactive
+				visible={show}
+				onClickOutside={() => setShow(false)}
+				render={(
+					<Content
+						statusComponentMap={statusComponentMap}
+						itemData={itemData}
+						refetch={refetch}
 					/>
-				)
-				: null}
-		</Popover>
+				)}
+			>
+				{showoverflow && showPopover
+					? (
+						<IcMOverflowDot
+							cursor="pointer"
+							width="16px"
+							height="16px"
+						/>
+					)
+					: null}
+			</Popover>
+		</div>
 	);
 }
 

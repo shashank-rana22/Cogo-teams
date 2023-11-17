@@ -25,9 +25,8 @@ function Navbar({
 	setPinnedNavKeys = () => {},
 	mobileShow = false,
 	inCall = false,
-	userId = '',
-	firestore = {},
 	ticketCount = 0,
+	unReadChatsCount = 0,
 }) {
 	const ref = useRef(null);
 	const navRef = useRef(null);
@@ -43,6 +42,7 @@ function Navbar({
 		timeLeft,
 		loading,
 		checkIfSessionExpiring,
+		userId,
 	} = useGetUserSessionMappings();
 
 	const showPin = userBasedNavView === nav;
@@ -126,9 +126,8 @@ function Navbar({
 						setNotificationPopover={setNotificationPopover}
 						timeLeft={timeLeft}
 						refetch={refetch}
-						userId={userId}
-						firestore={firestore}
 						mobileShow={mobileShow}
+						unReadChatsCount={unReadChatsCount}
 					/>
 
 					<div className={styles.search_container}>
@@ -155,6 +154,7 @@ function Navbar({
 									showPin={showPin}
 									inCall={inCall}
 									ticketCount={ticketCount}
+									userId={userId}
 								/>
 							))}
 						</div>
@@ -170,6 +170,7 @@ function Navbar({
 									showPin={showPin}
 									inCall={inCall}
 									ticketCount={ticketCount}
+									userId={userId}
 								/>
 							))}
 						</div>

@@ -32,7 +32,7 @@ pipeline {
                 echo "Branch name: ${BRANCH_NAME}"
                 echo "Commit id: ${COMMIT_ID}"
                 echo "Commit message: ${COMMIT_MESSAGE}"
-                checkout scmGit(branches: [[name: "${BRANCH_NAME}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'cogo-dev-github-app', url: 'https://github.com/Cogoport/cogo-admin.git']])
+                checkout scmGit(branches: [[name: "${BRANCH_NAME}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'cogo-dev-github-app', url: 'https://github.com/cogouniverse/cogo-admin.git']])
             }
         }
         stage("Acquire lock"){ //avoid concurrent deployments
@@ -71,14 +71,9 @@ pipeline {
 					sh "sed -i '/NODE_ENV=production/d' .env"
 					}
 
-                // build docker image for admin site and push to ecr
+                // build docker image for admin site 
                 script {
-                    sh "docker image build --build-arg NPM_TOKEN=${NPM_TOKEN} -t ${ECR_URL}/admin:${COMMIT_ID} -t ${ECR_URL}/admin:latest-dev --target runner ."
-                    sh "aws ecr get-login-password --region ap-south-1 | docker login --username ${ECR_USERNAME} --password-stdin ${ECR_URL}"
-                    sh "docker image push ${ECR_URL}/admin:${COMMIT_ID}"
-                    sh "docker image push ${ECR_URL}/admin:latest-dev || true"
-                    sh "docker image rm ${ECR_URL}/admin:latest-dev || true"
-                    sh "docker image rm ${ECR_URL}/admin:${COMMIT_ID}"
+                    sh "DOCKER_HOST=ssh://ubuntu@${SERVER_IP}:${SSH_PORT}  docker image build --build-arg NPM_TOKEN=${NPM_TOKEN} -t ${ECR_URL}/admin:${COMMIT_ID} --target runner ."
                 }
             }
         }

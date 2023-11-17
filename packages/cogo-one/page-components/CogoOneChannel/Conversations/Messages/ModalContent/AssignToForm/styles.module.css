@@ -27,6 +27,10 @@
 .styled_controller {
 	width: 60%;
 	padding: 0 8px 10px;
+
+	@media (max-width: 576px) {
+		width: 100%;
+	}
 }
 
 .label {
@@ -96,6 +100,10 @@
 .flex_div {
 	display: flex;
 	width: 100%;
+
+	@media (max-width: 576px) {
+		flex-direction: column;
+	}
 }
 
 .lower_label {

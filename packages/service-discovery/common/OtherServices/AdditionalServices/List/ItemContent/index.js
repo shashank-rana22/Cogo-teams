@@ -1,14 +1,14 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-import FeedBackModal from '../../../../../page-components/SearchResults/common/EmptyState/RequestRate/FeedBackModal';
+import FeedBackModal from '../../../../../page-components/SearchResults/common/RequestRate/FeedBackModal';
 import LineItems from '../../../common/LineItems';
 
+import getPillData from './getPillData';
 import styles from './styles.module.css';
 
-function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
+function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {}, isMobile = false }) {
 	const [showRequestRateModal, setShowRequestRateModal] = useState(false);
 	const [requestService, setRequestService] = useState({
 		service_id    : undefined,
@@ -21,14 +21,10 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 
 	function RenderRateItem({ service = {} }) {
 		const {
-			container_size = '',
-			container_type = '',
-			commodity = '',
 			line_items = [],
 			total_price_currency = '',
 			total_price_discounted = 0,
 			is_rate_available = false,
-			truck_type,
 		} = service;
 
 		const handleRateFeedback = () => {
@@ -42,24 +38,20 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 		};
 
 		function RenderPill() {
-			const commonDetails = `${['20', '40'].includes(container_size) ? `${container_size}ft.`
-				: container_size} ${startCase(container_type)} ${startCase(commodity)}`;
+			const formattedService = { ...(service || {}), chargeable_weight: detail?.chargeable_weight };
 
-			const PILL_DATA = {
-				transportation    : truck_type ? startCase(truck_type) : commonDetails,
-				fcl_customs       : commonDetails,
-				fcl_cfs           : commonDetails,
-				fcl_freight_local : commonDetails,
-				fcl_freight       : commonDetails,
-				haulage_freight   : commonDetails,
-				subsidiary        : commonDetails,
-			};
+			const pillData = getPillData({ item: formattedService, service_type: service.service_type });
 
 			return (
 				<div className={styles.pills_container}>
-					<span className={styles.pill}>
-						{PILL_DATA[serviceItem.service_type] || '-'}
-					</span>
+					{(pillData || []).map((pillItem) => (
+						<span
+							key={pillItem}
+							className={styles.pill}
+						>
+							{pillItem}
+						</span>
+					))}
 				</div>
 			);
 		}
@@ -70,7 +62,7 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 			const showRequestRateButton = serviceItem.service_type !== 'subsidiary';
 
 			if (conditionToRequestRate) {
-				if (serviceItem.service_type === 'fcl_freight_local') {
+				if (['fcl_freight_local', 'air_freight_local'].includes(serviceItem.service_type)) {
 					if (serviceItem.source === 'cogo_assured_rate') {
 						return 'No Rates';
 					} return 'At Actuals';
@@ -104,7 +96,7 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'symbol',
-								maximumFractionDigits : 0,
+								maximumFractionDigits : 2,
 							},
 						})}
 					</div>
@@ -129,6 +121,7 @@ function ItemContent({ serviceItem = {}, detail = {}, rateCardData = {} }) {
 						details={detail}
 						data={rateCardData}
 						requestService={requestService}
+						isMobile={isMobile}
 					/>
 				) : null}
 			</div>

@@ -26,7 +26,7 @@ const CONVERSATION_TYPE_MAPPING = {
 
 const MESSAGE_CONVERSATION_TYPES = ['sent', 'received'];
 
-function LoadPrevMessages({
+export function LoadPrevMessages({
 	loadingPrevMessages = false,
 	lastPage = false,
 	getNextData = () => {},
@@ -75,6 +75,7 @@ function MessagesThread(
 		latestMessagesAtTop = false,
 		deleteMessage = () => {},
 		roomId = '',
+		isMobile = false,
 	},
 	messageRef,
 ) {
@@ -200,6 +201,7 @@ function MessagesThread(
 						firestore={firestore}
 						isTheFirstMessageId={isTheFirstMessageId?.id}
 						roomId={roomId}
+						isMobile={isMobile}
 					/>
 				);
 			})}

@@ -3,9 +3,10 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 
+import { ICONS_MAPPING } from '../../constants/shipmentConstants';
+
 import CargoDetails from './CargoDetails';
 import HeaderBlock from './HeaderBlock';
-import { ICONS_MAPPING } from './iconsMapping';
 import ShippingRoute from './ShippingRoute';
 import styles from './styles.module.css';
 

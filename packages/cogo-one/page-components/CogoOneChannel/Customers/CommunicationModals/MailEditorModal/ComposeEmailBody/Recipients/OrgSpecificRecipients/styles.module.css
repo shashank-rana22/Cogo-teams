@@ -8,15 +8,28 @@
 			display: flex;
 		}
 	}
+
+	@media (max-width: 576px) {
+		flex-direction: column;
+	}
 }
 
 .org_select {
 	width: 47% !important;
+
+	@media (max-width: 576px) {
+		width: 100% !important;
+	}
 }
 
 .users_select {
-	width: 60% !important;
-	margin-left: 10px;
+	width: 53% !important;
+	margin: 0 0 0 10px;
+
+	@media (max-width: 576px) {
+		width: 100% !important;
+		margin: 4px 0 0;
+	}
 }
 
 .users_cc_select {

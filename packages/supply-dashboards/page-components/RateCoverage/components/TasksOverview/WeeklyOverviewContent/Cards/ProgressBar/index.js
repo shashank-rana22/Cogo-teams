@@ -1,10 +1,9 @@
 import { cl } from '@cogoport/components';
 import React from 'react';
 
-import styles from './styles.module.css';
+import { HUNDRED, VALUE_TWO } from '../../../../../configurations/helpers/constants';
 
-const VALUE_TWO = 2;
-const HUNDRED = 100;
+import styles from './styles.module.css';
 
 function CircularProgressBar({
 	sqSize = 80,
@@ -33,9 +32,7 @@ function CircularProgressBar({
 				r={radius}
 				strokeWidth={`${strokeWidth}px`}
 				transform={`rotate(-90 ${sqSize / VALUE_TWO} ${sqSize / VALUE_TWO})`}
-				style={{
-					strokeDasharray: dashArray, strokeDashoffset: dashOffset,
-				}}
+				style={{ strokeDasharray: dashArray, strokeDashoffset: dashOffset }}
 			/>
 			<text
 				className={styles.circle_text}

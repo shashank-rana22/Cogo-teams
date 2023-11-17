@@ -1,0 +1,21 @@
+.container {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	width: 100%;
+	height: calc(100% - 64px);
+	padding-top: 10px;
+	overflow: auto;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.loader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: calc(100% - 64px);
+}

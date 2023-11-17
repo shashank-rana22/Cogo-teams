@@ -3,11 +3,14 @@ import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useRaiseTicket = ({
-	shipmentData = {},
 	updateBillsTicketId = () => {},
+	setShowTicketModal = () => {},
+	source = '',
+	shipmentData = {},
+	service = {},
 }) => {
 	const { profile } = useSelector((state) => state);
-	const [{ loading }, trigger] = useTicketsRequest({
+	const [{ loading = false }, trigger] = useTicketsRequest({
 		url     : '/ticket',
 		method  : 'post',
 		authkey : 'post_tickets_ticket',
@@ -24,9 +27,9 @@ const useRaiseTicket = ({
 		const { finalUrl = '' } = supporting_document || {};
 
 		const {
-			serial_id,
-			trade_type,
-			shipment_type,
+			serial_id = '',
+			trade_type = '',
+			shipment_type = '',
 		} = shipmentData || {};
 
 		try {
@@ -38,29 +41,36 @@ const useRaiseTicket = ({
 					UserType         : 'ticket_user',
 					Description      : describe_issue,
 					Type             : issue_type || undefined,
-					TicketReviewerID : raised_to,
-					RaisedByDesk     : 'Auditor' || undefined,
+					TicketReviewerID : raised_to || null,
+					RaisedByDesk     : 'Auditor',
 					RaisedToDesk     : raised_to_desk || undefined,
 					CategoryDeskType : 'by_desk',
 					Data             : {
 						Attachment  : [finalUrl] || [],
-						RequestType : 'shipment' || undefined,
+						RequestType : 'shipment',
 						SerialID    : serial_id || undefined,
 						TradeType   : trade_type || undefined,
-						Service     : shipment_type || undefined,
+						Service     : source === 'audit_function' ? service?.value : shipment_type,
 					},
 				},
 			});
+			if (source === 'cost_advocate') {
+				updateBillsTicketId(response);
+			}
+			if (source === 'audit_function') {
+				setShowTicketModal(false);
+			}
 
 			Toast.success('Successfully Created');
-
-			updateBillsTicketId(response);
 		} catch (error) {
 			Toast.error(error?.response?.data);
 		}
 	};
 
-	return { raiseTickets, loading };
+	return {
+		raiseTickets,
+		loading,
+	};
 };
 
 export default useRaiseTicket;

@@ -9,7 +9,6 @@ import { getTicketActionLabel } from '../../constants';
 import ActionConfirmation from './ActionConfirmation';
 import styles from './styles.module.css';
 
-const OPEN_TICKETS_CHECK = ['escalated', 'unresolved'];
 const OPEN_TICKETS_VALUES = ['resolve', 'reassign', 'escalate'];
 const AUTHORISER_TICKETS_VALUES = ['resolve_request', 'reassign', 'escalate'];
 
@@ -21,11 +20,17 @@ const TICKET_STATUS_REOPEN = ['closed', 'overdue'];
 const MODAL_ACTIONS = ['reassign', 'escalate'];
 
 function getActionType({ ticketStatus, isClosureAuthorizer }) {
-	if (OPEN_TICKETS_CHECK.includes(ticketStatus)) {
+	if (ticketStatus === 'unresolved') {
 		if (isClosureAuthorizer) {
 			return OPEN_TICKETS_VALUES;
 		}
 		return AUTHORISER_TICKETS_VALUES;
+	}
+	if (ticketStatus === 'escalated') {
+		if (isClosureAuthorizer) {
+			return OPEN_TICKETS_VALUES;
+		}
+		return MODAL_ACTIONS;
 	}
 
 	if ((PENDING_TICKETS_CHECK.includes(ticketStatus) && isClosureAuthorizer)) {

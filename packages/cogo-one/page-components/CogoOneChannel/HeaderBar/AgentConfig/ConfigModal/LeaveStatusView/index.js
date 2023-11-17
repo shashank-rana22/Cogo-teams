@@ -19,6 +19,7 @@ function LeaveAgentModal({
 	paramsState = {},
 	getListChatAgents = () => {},
 	setActiveCard = () => {},
+	isMobile = false,
 }) {
 	const [openLeaveModal, setOpenLeaveModal] = useState(false);
 	const [shiftData, setShiftData] = useState({});
@@ -127,6 +128,7 @@ function LeaveAgentModal({
 					loading={statusLoading}
 					userId={openLeaveModal}
 					updateUserStatus={updateUserStatus}
+					isMobile={isMobile}
 				/>
 			)}
 		</div>

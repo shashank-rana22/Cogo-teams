@@ -1,9 +1,10 @@
 import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMPaymentmade, IcMProvisional, IcMRealisedPayment } from '@cogoport/icons-react';
+import { IcMJobsView, IcMPaymentmade, IcMProvisional, IcMRealisedPayment } from '@cogoport/icons-react';
 
 import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../../constants/leaderboard-reporttype-constants';
 import INCENTIVE_SNAPSHOT_CONSTANTS from '../../../constants/incentive-snapshot-constants';
+import useReloadCounter from '../../../hooks/useReloadCounter';
 
 import styles from './styles.module.css';
 
@@ -31,12 +32,19 @@ const COMPONENT_MAPPING = {
 
 const ZERO_INCENTIVE = 0;
 
+const getClock = (number) => {
+	if (number < 10) return `00:0${number}`;
+	return `00:${number}`;
+};
+
 function Snapshot(props) {
 	const { stage, currLevel, userIncentiveData, userIncentiveStatsLoading } = props;
 
 	const { incentive_currency } = userIncentiveData || {};
 
 	const { Icon, heading, key } = COMPONENT_MAPPING[stage] || {};
+
+	const { reloadCounter, startTimer } = useReloadCounter();
 
 	let content = null;
 
@@ -46,10 +54,21 @@ function Snapshot(props) {
 		content = <div className={styles.cmg_soon}>Coming Soon!</div>;
 	} else {
 		content = (
-			<h3>
-				{`${GLOBAL_CONSTANTS.currency_symbol
-					?.[incentive_currency || 'INR']}${userIncentiveData?.[key] || ZERO_INCENTIVE}`}
-			</h3>
+			<div className={styles.amount_div}>
+				<h3 className={`${reloadCounter === 0 ? styles.blurred : ''}`}>
+					{`${GLOBAL_CONSTANTS.currency_symbol
+						?.[incentive_currency || 'INR']}${userIncentiveData?.[key] || ZERO_INCENTIVE}`}
+				</h3>
+				<span className={styles.counter_div}>
+					{reloadCounter === 0 ? (
+						<IcMJobsView
+							height={24}
+							width={24}
+							onClick={() => startTimer(10)}
+						/>
+					) : getClock(reloadCounter)}
+				</span>
+			</div>
 		);
 	}
 

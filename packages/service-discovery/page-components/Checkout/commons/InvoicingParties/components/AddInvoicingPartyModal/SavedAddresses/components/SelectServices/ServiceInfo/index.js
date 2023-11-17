@@ -52,7 +52,7 @@ function AmountDisplay({ rateObject = {}, conversions = {}, currency = '' }) {
 					options : {
 						style                 : 'currency',
 						currencyDisplay       : 'code',
-						maximumFractionDigits : 0,
+						maximumFractionDigits : 2,
 					},
 				})}
 				{' '}

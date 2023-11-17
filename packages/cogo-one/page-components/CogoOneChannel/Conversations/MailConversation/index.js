@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 const MAIL_LOADING_SKELETON_LENGTH = 5;
 
-function MailConversation({ mailProps = {} }) {
+function MailConversation({ mailProps = {}, isMobile = false }) {
 	const {
 		activeMail,
 		activeMailAddress = '',
@@ -119,6 +119,7 @@ function MailConversation({ mailProps = {} }) {
 							<MailAttachments
 								attachmentData={attachmentData}
 								loading={loading || attachmentLoading}
+								isMobile={isMobile}
 							/>
 						</>
 					)}

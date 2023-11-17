@@ -4,22 +4,29 @@ import styles from './styles.module.css';
 function ContainerDetails({ selectedCard = {} }) {
 	const ZEROVALUE = 0;
 
-	const { search_params = {}, search_type: searchType = '' } = selectedCard || {};
+	const { search_params = {}, search_type: searchType = '', at_actuals: atActuals = false } = selectedCard || {};
 
 	const {
 		lcl_freight_services_attributes = {},
 		fcl_freight_services_attributes = {},
 		air_freight_services_attributes = {},
+		fcl_freight_local_services_attributes = {},
+		lcl_freight_local_services_attributes = {},
 		search_type = '',
 	} = search_params || {};
 
-	const serviceTypeMapping = lcl_freight_services_attributes?.[ZEROVALUE]
-	|| fcl_freight_services_attributes?.[ZEROVALUE] || air_freight_services_attributes?.[ZEROVALUE];
+	const serviceTypeMapping = fcl_freight_services_attributes?.[ZEROVALUE]
+  || lcl_freight_services_attributes?.[ZEROVALUE]
+  || fcl_freight_local_services_attributes?.[ZEROVALUE]
+  || lcl_freight_local_services_attributes?.[ZEROVALUE]
+  || air_freight_services_attributes?.[ZEROVALUE];
 
 	const {
 		containers_count, container_size, weight, volume, packages_count,
 		commodity, inco_term, container_type, payment_type,
 	} = serviceTypeMapping || {};
+
+	const hsCode = selectedCard?.hs_code?.[ZEROVALUE]?.name || undefined;
 
 	return (
 		<div>
@@ -28,7 +35,12 @@ function ContainerDetails({ selectedCard = {} }) {
 			</div>
 
 			<div className={styles.shipment_specification}>
-				{search_type === 'fcl_freight' && (
+				{atActuals && (
+					<span className={styles.tag}>
+						At Actuals
+					</span>
+				)}
+				{['fcl_freight', 'fcl_freight_local'].includes(search_type) && (
 					<>
 						<span className={styles.tag}>{CONTAINER_SIZE_MAPPING[container_size]}</span>
 						<span className={styles.tag}>
@@ -36,7 +48,7 @@ function ContainerDetails({ selectedCard = {} }) {
 						</span>
 					</>
 				)}
-				{search_type !== 'fcl_freight' && (
+				{!['fcl_freight', 'fcl_freight_local'].includes(search_type) && (
 					<>
 						<span className={styles.tag}>
 							{weight ? `${weight || '-'} kg` : ''}
@@ -60,10 +72,9 @@ function ContainerDetails({ selectedCard = {} }) {
 						{`Inco - ${inco_term?.toUpperCase()}`}
 					</span>
 				)}
-				{container_type
-					&& <span className={styles.tag}>{container_type?.toUpperCase()}</span>}
-				{payment_type
-							&& <span className={styles.tag}>{payment_type}</span>}
+				{container_type && <span className={styles.tag}>{container_type?.toUpperCase()}</span>}
+				{payment_type && <span className={styles.tag}>{payment_type}</span>}
+				{hsCode && <span className={styles.tag}>{hsCode}</span>}
 			</div>
 		</div>
 	);

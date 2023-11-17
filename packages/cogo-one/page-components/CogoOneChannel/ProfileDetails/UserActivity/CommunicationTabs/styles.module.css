@@ -1,3 +1,12 @@
 .communication_options {
 	margin-top: 10px;
+
+	:global {
+		.ui_tab_container,
+		.ui_tab_active {
+			@media (max-width: 576px) {
+				font-size: 11px;
+			}
+		}
+	}
 }

@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import { SINGLE_LOCATIONS } from '../../../../constants';
 import { formatRouteData } from '../../../../utils/routeDataHelpers';
@@ -36,11 +37,14 @@ function PortDetails({ details = {}, listLoading = false }) {
 }
 
 function ShipmentDetails({
-	idType = '', serialId = 0, t = () => {},
+	idType = '', serialId = 0, t = () => {}, requestType = '',
 	handleRouteBooking = () => {}, service = '', partnerId = '',
 	shipmentsData = {}, handleRouteSupply = () => {}, listLoading = false,
 }) {
-	const { shipment_type = '', trade_type: tradeType = '', id = '' } = shipmentsData || {};
+	const {
+		shipment_type = '', trade_type: tradeType = '', id = '',
+		origin_location = {}, destination_location = {},
+	} = shipmentsData || {};
 
 	const {
 		originDetails = {},
@@ -54,6 +58,8 @@ function ShipmentDetails({
 		export : singleDestinationDisplay,
 	};
 
+	const shipmentType = idType !== 'sid' && requestType !== 'shipment' ? service : shipment_type;
+
 	const ROUTE_PAGE_MAPPING = {
 		sid        : handleRouteBooking,
 		missing_id : handleRouteSupply,
@@ -61,7 +67,9 @@ function ShipmentDetails({
 		default    : handleRouteBooking,
 	};
 
-	const isSingleLocation = SINGLE_LOCATIONS?.includes(shipment_type);
+	const isSingleLocation = SINGLE_LOCATIONS?.includes(shipmentType);
+	const defaultPol = isEmpty(origin_location) ? 'Destination' : 'Origin';
+	const defaultData = isEmpty(origin_location) ? destination_location : origin_location;
 
 	return (
 		<>
@@ -74,6 +82,7 @@ function ShipmentDetails({
 					service,
 					partnerId,
 					endPoint: QUERY_PATH?.[idType],
+					serialId,
 				})}
 			>
 				{t(LABEL_MAPPING[idType] || LABEL_MAPPING.sid)}
@@ -85,11 +94,11 @@ function ShipmentDetails({
 			{isSingleLocation ? (
 				<div className={styles.port_container}>
 					<div className={styles.trade_type}>
-						{TRADE_TYPE_MAPPING[tradeType]}
+						{TRADE_TYPE_MAPPING[tradeType] || defaultPol}
 					</div>
 					:
 					<PortDetails
-						details={DISPLAY_DATA_MAPPING[tradeType]}
+						details={DISPLAY_DATA_MAPPING[tradeType] || defaultData}
 					/>
 				</div>
 			) : (

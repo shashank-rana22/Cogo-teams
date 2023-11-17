@@ -63,7 +63,7 @@ function PromocodeThumbnail({
 								|| geo.country.currency.code,
 							options: {
 								style                 : 'currency',
-								maximumFractionDigits : 0,
+								maximumFractionDigits : 2,
 							},
 						})}
 						<span className={cl`${styles.amount} ${styles.space_left}`} style={textStyle}>Off</span>
