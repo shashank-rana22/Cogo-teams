@@ -1,6 +1,5 @@
 import { Modal, Button, Table } from '@cogoport/components';
 
-// import { IcMInfo } from '@cogoport/icons-react';
 import useSyncSageArOutstanding from '../../../../hooks/useSyncSageArOutstanding';
 
 import getColumns from './getColumns';
