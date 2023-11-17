@@ -724,6 +724,8 @@ const GLOBAL_CONSTANTS = {
 		iframe_html_tag_text        : /<iframe([\s\S]*?)<\/iframe>/gm,
 		html_class_regex            : /class="([^"]+)"/g,
 		html_td_regex               : /<td/g,
+		html_img_regex              : /data:image\/[a-zA-Z]*;base64,[^'"]*/g,
+		htm_img_filename_regex      :	/data-file-name="[^"]*"/g,
 		static_url                  : /([^:]\/)\/+/g,
 		gst_number                  : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 		otp                         : /[^0-9]/g,
