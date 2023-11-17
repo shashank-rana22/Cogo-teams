@@ -31,11 +31,11 @@ const priceDisabled = (
 		(shipment_type === 'fcl_freight'
 		&& service_name !== 'fcl_freight_local_service'
 		&& !isEmpty(field?.code)
-		&& (!FIELDS_CAN_BE_CHANGED.includes(controlItem?.name) && !unEditable)
+		&& (!FIELDS_CAN_BE_CHANGED.includes(controlItem?.name) || unEditable)
 		&& path === 'sales_invoice'
 		&& disable_edit_invoice
 		&& !isAuthorised)
-		|| (field?.code === 'BookingCONV' && !FIELDS_CAN_BE_CHANGED.includes(controlItem?.name) && !unEditable)
+		|| (field?.code === 'BookingCONV' && (!FIELDS_CAN_BE_CHANGED.includes(controlItem?.name) || unEditable))
 	) {
 		return true;
 	}
