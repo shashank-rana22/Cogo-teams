@@ -1,0 +1,27 @@
+.main_container {
+	padding: 24px;
+	background: #fff;
+	border-radius: 25px 25px 0 0;
+}
+
+.grey_container {
+	width: 70%;
+	padding: 16px 12px;
+	background: #f9f9f9;
+	border-radius: 24px;
+}
+
+.upload_div {
+	display: flex;
+	align-items: center;
+	margin: 16px;
+}
+
+.name {
+	width: 300px;
+}
+
+.btns_div {
+	display: flex;
+	justify-content: flex-end;
+}

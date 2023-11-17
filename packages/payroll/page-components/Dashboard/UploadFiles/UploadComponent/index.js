@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { InputController } from '@cogoport/forms';
 import { useDropzone } from 'react-dropzone';
 import * as XLSX from 'xlsx';
 
-import DownloadPDF from './Base61ToPdf';
+import styles from './styles.module.css';
 
 const DROPZONESTYLES = {
 	border       : '2px dashed #cccccc',
@@ -11,9 +11,7 @@ const DROPZONESTYLES = {
 	textAlign    : 'center',
 	cursor       : 'pointer',
 };
-function FileUploader() {
-	const [base64Data, setBase64Data] = useState(null);
-
+function FileUploader({ control = {}, name = '', setFileArray = () => {}, filearray = {} }) {
 	const onDrop = (acceptedFiles) => {
 		const file = acceptedFiles[0];
 
@@ -29,7 +27,7 @@ function FileUploader() {
 
 			// Convert data to base64
 			const base64 = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
-			setBase64Data(base64);
+			setFileArray((prev) => ({ ...prev, [name]: base64 }));
 		};
 
 		reader.readAsBinaryString(file);
@@ -38,22 +36,23 @@ function FileUploader() {
 	const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
 	return (
-		<div>
-			<div {...getRootProps()} style={DROPZONESTYLES}>
-				<input {...getInputProps()} />
+		<div className={styles.upload_container}>
+			<div {...getRootProps()} style={DROPZONESTYLES} className={styles.uploader}>
+				<InputController control={control} name={name} {...getInputProps()} />
 				{isDragActive ? (
 					<p>Drop the files here ...</p>
 				) : (
-					<p>Drag n drop an XLSX file here, or click to select one</p>
+					<p>upload XLSX file here</p>
 				)}
 			</div>
-			{base64Data && (
-				<div>
-					<h4>Data in Base64:</h4>
-					<textarea value={base64Data} readOnly rows={10} cols={50} />
-				</div>
+			{filearray?.[name] && (
+				<span>
+					{name}
+					{' '}
+					-- done
+					{' '}
+				</span>
 			)}
-			<DownloadPDF />
 		</div>
 	);
 }

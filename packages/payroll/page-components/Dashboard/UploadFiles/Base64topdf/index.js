@@ -15,7 +15,7 @@ function DownloadPDF({ base64String = '', fileName = '' }) {
 		const byteCharacters = atob(base64String);
 		const byteNumbers = new Array(byteCharacters.length);
 
-		for (let i = 0; i < byteCharacters.length; i++) {
+		for (let i = 0; i < byteCharacters.length; i += 1) {
 			byteNumbers[i] = byteCharacters.charCodeAt(i);
 		}
 
