@@ -1,18 +1,28 @@
-import { Modal, Button } from '@cogoport/components';
-import { IcMInfo } from '@cogoport/icons-react';
+import { Modal, Button, Table } from '@cogoport/components';
 
+// import { IcMInfo } from '@cogoport/icons-react';
 import useSyncSageArOutstanding from '../../../../hooks/useSyncSageArOutstanding';
 
+import getColumns from './getColumns';
 import styles from './style.module.css';
 
-function SyncModal({ show = {}, setShow = () => {} }) {
+function SyncModal({ show = {}, setShow = () => {}, data = {} }) {
+	const columns = getColumns();
 	const { syncSageArOutstanding = () => {}, loading = false } = useSyncSageArOutstanding();
 	return (
 		<div>
-			<Modal show={show} onClose={() => setShow(false)} placement="center" size="sm">
+			<Modal show={show} onClose={() => setShow(false)} placement="top" size="XL">
 				<Modal.Body className={styles.approve_body}>
-					<IcMInfo height={20} width={20} className={styles.infoIcon} />
-					<div className={styles.approve_text}>Are you sure  to kkkk send the Email  ?</div>
+					<div style={{ marginBottom: '20px' }}><b> Last Synced Stats</b></div>
+
+					<Table
+						columns={columns}
+						data={[data]}
+						loading={loading}
+					/>
+					<div className={styles.approve_text}>
+						Are you sure you want to sync data?
+					</div>
 					<div className={styles.flex}>
 						<Button
 							size="sm"
@@ -23,6 +33,7 @@ function SyncModal({ show = {}, setShow = () => {} }) {
 							No
 
 						</Button>
+
 						<Button
 							size="sm"
 							themeType="primary"
@@ -33,6 +44,7 @@ function SyncModal({ show = {}, setShow = () => {} }) {
 							Yes
 
 						</Button>
+
 					</div>
 				</Modal.Body>
 

@@ -64,7 +64,7 @@ function OverAllOutstanding({
 		setFilters,
 		filtersApplied,
 	} = useGetOrgOutstanding({ entityCode });
-	const { syncSageArOutstanding = () => {} } = useSyncSageArOutstanding();
+	const { syncSageArOutstanding = () => {}, data = {} } = useSyncSageArOutstanding();
 	const { include_defaulters = false } = filters || {};
 
 	const [dateFilter, setDateFilter] = useState({
@@ -178,7 +178,7 @@ function OverAllOutstanding({
 	return (
 		<>
 			{show ? <ReportModal show={show} setShow={setShow} /> : null}
-			{syncShow ? <SyncModal show={syncShow} setShow={setSyncShow} /> : null}
+			{syncShow ? <SyncModal show={syncShow} setShow={setSyncShow} data={data} /> : null}
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 				{AUTHORISED_USER_IDS.includes(profile?.user?.id)
 					? (

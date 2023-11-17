@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import toastApiError from '../../commons/toastApiError';
 
 const useSyncSageArOutstanding = () => {
-	const [{ loading }, trigger] = useRequest({
+	const [{ data, loading }, trigger] = useRequest({
 		url    : '/sync_sage_ar_outstanding',
 		method : 'POST',
 	},	{ manual: true });
@@ -11,7 +11,7 @@ const useSyncSageArOutstanding = () => {
 	const syncSageArOutstanding = async (val) => {
 		try {
 			await trigger({
-				data: { sync_report: val || false },
+				data: { sync_data: val || false },
 
 			});
 		} catch (err) {
@@ -22,6 +22,7 @@ const useSyncSageArOutstanding = () => {
 	return {
 		syncSageArOutstanding,
 		loading,
+		data,
 	};
 };
 
