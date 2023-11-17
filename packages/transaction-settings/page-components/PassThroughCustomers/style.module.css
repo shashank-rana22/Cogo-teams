@@ -35,3 +35,11 @@
 	gap: 8px;
 	align-items: center;
 }
+
+.wrapper {
+	width: 100%;
+}
+
+.without_sidebar {
+	width: 100%;
+}

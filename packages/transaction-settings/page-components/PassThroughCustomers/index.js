@@ -1,6 +1,5 @@
 import { Button, Toggle } from '@cogoport/components';
 import { useHandleVersionChangeToOld } from '@cogoport/next';
-import SmartComponents from '@cogoport/smart-components';
 import React, { useState } from 'react';
 
 import ListPagination from '../../common/ListPagination';
@@ -25,7 +24,7 @@ function PassThroughCustomers() {
 			{
 				showAddModal ? <Add show={showAddModal} setShow={setShowAddModal} refetch={refetch} /> : null
 			}
-			<SmartComponents>
+			<div className={styles.wrapper}>
 				<div className={styles.header}>
 					<h2>Pass Through Customers</h2>
 					<div className={styles.header_right_section}>
@@ -44,7 +43,7 @@ function PassThroughCustomers() {
 					data={tableData?.list || []}
 					loading={loading}
 				/>
-			</SmartComponents>
+			</div>
 		</div>
 	);
 }
