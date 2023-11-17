@@ -51,6 +51,8 @@ const GLOBAL_CONSTANTS = {
 
 	platform_supported_country_codes: ['IN', 'VN', 'SG', 'ID', 'TH', 'CN'],
 
+	service_charge_uneditable_country_code: ['CN', 'ID'],
+
 	currency_code   : CURRENCY_CODE,
 	currency_locale : {
 		INR : 'en-IN',
