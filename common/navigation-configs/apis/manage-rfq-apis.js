@@ -197,6 +197,21 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'rfq',
 	},
+	{
+		api          : 'create_rfq_shipment_plan',
+		access_type  : 'private',
+		service_name : 'rfq',
+	},
+	{
+		api          : 'update_rfq_shipment_plan',
+		access_type  : 'private',
+		service_name : 'rfq',
+	},
+	{
+		api          : 'list_rfq_shipment_plans',
+		access_type  : 'private',
+		service_name : 'rfq',
+	},
 ];
 
 export default apis;
