@@ -47,3 +47,31 @@
 	background: #f0f2f4;
 	border-radius: 8px;
 }
+
+.prompt {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 12px 16px;
+	margin-top: 16px;
+	margin-bottom: 16px;
+	background: #fdebe9;
+	border-radius: 8px;
+}
+
+.prompt_text {
+	flex: 1 0 0;
+	margin-left: 16px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.checkbox {
+	display: flex;
+	align-items: center;
+}
+
+.error {
+	font-size: 12px;
+	color: red;
+}

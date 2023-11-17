@@ -22,6 +22,7 @@ function MailHeader({
 	setModalData = () => {},
 	activeMessageCard = {},
 	viewType = '',
+	isMobile = false,
 }) {
 	const {
 		response, send_by = '',
@@ -65,11 +66,25 @@ function MailHeader({
 					className={styles.avatar}
 				/>
 
-				<div>
+				<div className={styles.to_cc_data}>
 					<div className={styles.sender_name}>
-						{startCase(senderName)}
-						{' '}
-						{isDraft ? <span>[DRAFT]</span> : null}
+						<div className={styles.user_name_styles}>
+							{startCase(senderName)}
+							{' '}
+							{isDraft ? <span>[DRAFT]</span> : null}
+						</div>
+
+						{isMobile ? (
+							<div className={styles.mobile_time_styles}>
+								{formatDate({
+									date       : rightTime,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+									timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+									formatType : 'dateTime',
+									separator  : ' ',
+								})}
+							</div>
+						) : null }
 					</div>
 
 					{RECEIPIENT_MAPPING.map((item) => (
@@ -81,9 +96,9 @@ function MailHeader({
 				</div>
 			</div>
 
-			<div>
+			<div className={styles.minimize_screen}>
 				<div className={styles.icon_flex}>
-					{hasPermissionToEdit ? (
+					{hasPermissionToEdit && !isMobile ? (
 						<RightButtonsMapping
 							isDraft={isDraft}
 							handleClick={handleClick}
@@ -93,7 +108,7 @@ function MailHeader({
 						/>
 					) : null}
 
-					{viewType === 'cogoone_admin'
+					{(viewType === 'cogoone_admin' && !isMobile)
 						? (
 							<Popover
 								placement="bottom"
@@ -119,16 +134,18 @@ function MailHeader({
 						) : null}
 				</div>
 
-				<div className={styles.time_stamp}>
-					{isDraft ? <span>Saved: </span> : null}
-					{formatDate({
-						date       : rightTime,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-						formatType : 'dateTime',
-						separator  : ' | ',
-					})}
-				</div>
+				{isMobile ? null : (
+					<div className={styles.time_stamp}>
+						{isDraft ? <span>Saved: </span> : null}
+						{formatDate({
+							date       : rightTime,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType : 'dateTime',
+							separator  : ' | ',
+						})}
+					</div>
+				)}
 			</div>
 		</div>
 	);

@@ -86,7 +86,7 @@ function ExecuteTask({
 
 	if (
 		task?.task === 'generate_cargo_insurance') {
-		return <ShipmentInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
+		return <ShipmentInsurance onCancel={onCancel} refetch={taskListRefetch} servicesList={services} />;
 	}
 
 	return (

@@ -20,7 +20,7 @@ function Analytics({ widgetBlocks = null, filterParams = {} }) {
 	} = useSmeDashboardStats({
 		widgetBlocks,
 		filterParams,
-		selectedFilter: xKey,
+		selectedFilter,
 	});
 
 	const { analytics_data = [] } = dashboardData || {};

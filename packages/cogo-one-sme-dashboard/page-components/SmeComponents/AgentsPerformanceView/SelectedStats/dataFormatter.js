@@ -11,6 +11,7 @@ const dataFormatter = ({ performance_data = {} }) => (
 				+ (performance_data?.invoiced_revenue || 0)),
 				currency : 'USD',
 				options  : {
+					currencyWise          : true,
 					style                 : 'currency',
 					currencyDisplay       : 'symbol',
 					maximumFractionDigits : 2,

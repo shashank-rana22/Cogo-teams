@@ -1,37 +1,55 @@
-import { Button, Placeholder, Popover } from '@cogoport/components';
+import { Button, Placeholder, Popover, Breadcrumb } from '@cogoport/components';
 import {
 	IcMArrowBack,
 	IcMArrowDown,
 	IcMArrowRight,
+	IcMImage,
 } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import React from 'react';
+import React, { useState } from 'react';
 
 import EmptyState from '../../common/EmptyState';
 import useGetEmployeeDetails from '../../hooks/useGetEmployeeData';
 import { getEmployeeData } from '../../utils/constants';
 import TabsPanel from '../TabsPanel';
 
+import EditProfile from './EditProfile';
 import styles from './styles.module.css';
 
 function EmployeeProfile() {
 	const router = useRouter();
+
 	const employee_id = router.query?.employee_id;
 
 	const { profile: { user } } = useSelector((state) => ({
 		profile: state?.profile,
 	}));
 
+	const [openEditProfile, setOpenEditProfile] = useState(false);
+
 	const user_id = employee_id || user.id;
 
-	const { loading, data } = useGetEmployeeDetails(user_id);
+	const { loading, data, getEmployeeDetails } = useGetEmployeeDetails(user_id);
 
 	const { employee_detail } = data || {};
 	const employeeData = getEmployeeData(employee_detail);
 
 	return (
 		<div className={styles.main_container}>
+			<Breadcrumb>
+				<Breadcrumb.Item label={(
+					<div
+						aria-hidden
+						onClick={() => router.push('/hrms')}
+						style={{ cursor: 'pointer' }}
+					>
+						HRMS
+					</div>
+				)}
+				/>
+				<Breadcrumb.Item label="Employee Profile" />
+			</Breadcrumb>
 			{!loading && employee_id ? (
 				<div className={styles.back_container}>
 					<div className={styles.top_text}>
@@ -53,7 +71,20 @@ function EmployeeProfile() {
 			{(data || loading) ? (
 				<div className={styles.profile_container}>
 					<div className={styles.profile_flex}>
-						<div className={styles.left_image} />
+						<div className={styles.left_image}>
+							<img
+								className={styles.profile_img}
+								src={employee_detail?.passport_size_photo_url}
+								alt="profile"
+							/>
+							<div
+								className={styles.profile_img_icon}
+								onClick={() => setOpenEditProfile(true)}
+								aria-hidden
+							>
+								<IcMImage fill="#FFFFFF" width={50} height={50} />
+							</div>
+						</div>
 						<div className={styles.cover}>
 							<div className={styles.flex}>
 								<div className={styles.left_text}>
@@ -105,20 +136,32 @@ function EmployeeProfile() {
 										<Popover
 											placement="left"
 											render={(
-												<Button
-													onClick={() => {
-														if (employee_id) {
-															router.push(
-																`/apply-resignation?employee_id=
+												<>
+													<Button
+														onClick={() => {
+															if (employee_id) {
+																router.push(
+																	`/apply-resignation?employee_id=
 																${employee_id}`,
-															);
-														} else {
-															router.push('/apply-resignation');
-														}
-													}}
-												>
-													{employee_id ? 'Initiate Separation' : 'Apply for Resignation'}
-												</Button>
+																);
+															} else {
+																router.push('/apply-resignation');
+															}
+														}}
+													>
+														{employee_id ? 'Initiate Separation' : 'Apply for Resignation'}
+													</Button>
+													<Button
+														style={{
+															marginTop : '6px',
+															width     : '160px',
+														}}
+														onClick={() => router.push('/ticket-management/my-tickets')}
+													>
+														Raise a ticket
+
+													</Button>
+												</>
 											)}
 										>
 											<Button size="md" themeType="accent">
@@ -143,7 +186,14 @@ function EmployeeProfile() {
 							</div>
 						</div>
 					</div>
-					<TabsPanel data={data} loading={loading} />
+					{ openEditProfile && (
+						<EditProfile
+							show={openEditProfile}
+							onHide={() => setOpenEditProfile(false)}
+							getEmployeeDetails={getEmployeeDetails}
+						/>
+					) }
+					<TabsPanel data={data} loading={loading} getEmployeeDetails={getEmployeeDetails} />
 				</div>
 			) : (<EmptyState height={250} width={450} />)}
 		</div>

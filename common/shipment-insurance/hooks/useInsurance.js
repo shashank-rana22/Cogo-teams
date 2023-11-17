@@ -51,7 +51,7 @@ const useInsurance = ({ draftData = {}, formHook, setBillingType, formRef }) => 
 				setValue(controlKey, value);
 			});
 
-			setBillingType(BILLING_TYPE_MAPPING[billingDetails?.billingType]);
+			setBillingType(BILLING_TYPE_MAPPING[billingDetails?.billingType] || 'Corporate');
 		}
 	}, [draftData, setBillingType, setValue]);
 

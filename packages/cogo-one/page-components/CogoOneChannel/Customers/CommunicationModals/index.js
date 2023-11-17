@@ -28,6 +28,7 @@ function CommunicationModals({
 	setSendBulkTemplates = () => {},
 	firestore = {},
 	activeSelect = '',
+	isMobile = false,
 }) {
 	const [isChecked, setIsChecked] = useState(false);
 	const [showDialModal, setShowDialModal] = useState(false);
@@ -35,6 +36,8 @@ function CommunicationModals({
 	const { buttonType, setButtonType, activeMail, resetEmailState = () => {} } = mailProps;
 
 	const ACCESSIBLE_BUTTONS = VIEW_TYPE_GLOBAL_MAPPING[viewType]?.accessible_new_communications || [];
+
+	const MOBILE_ACCESSIBLE_BUTTONS = ACCESSIBLE_BUTTONS?.filter((itm) => (isMobile ? itm !== 'sp_contacts' : itm));
 
 	const CLICK_FUNCTIONS = {
 		new_call     : () => setShowDialModal(true),
@@ -57,8 +60,8 @@ function CommunicationModals({
 		},
 	};
 
-	const Component = ICONS_MAPPING[ACCESSIBLE_BUTTONS[GLOBAL_CONSTANTS.zeroth_index]] || null;
-	const clickFunction = CLICK_FUNCTIONS[ACCESSIBLE_BUTTONS[GLOBAL_CONSTANTS.zeroth_index]] || null;
+	const Component = ICONS_MAPPING[MOBILE_ACCESSIBLE_BUTTONS[GLOBAL_CONSTANTS.zeroth_index]] || null;
+	const clickFunction = CLICK_FUNCTIONS[MOBILE_ACCESSIBLE_BUTTONS[GLOBAL_CONSTANTS.zeroth_index]] || null;
 
 	if (HIDE_NEW_COMMUNICATIONS.includes(activeSelect)) {
 		return null;
@@ -67,7 +70,7 @@ function CommunicationModals({
 	return (
 		<>
 			<div className={styles.wrapper}>
-				{ACCESSIBLE_BUTTONS.length === NO_EXPANDABLE_MENU_IF_LENGTH ? (
+				{MOBILE_ACCESSIBLE_BUTTONS?.length === NO_EXPANDABLE_MENU_IF_LENGTH ? (
 					<div className={styles.plus_circle}>
 						<div className={styles.action}>
 							{Component ? <Component onClick={clickFunction} /> : null}
@@ -95,7 +98,7 @@ function CommunicationModals({
 								/>
 
 								<div className={styles.wheel}>
-									{ACCESSIBLE_BUTTONS.map((buttonKey, index) => {
+									{MOBILE_ACCESSIBLE_BUTTONS?.map((buttonKey, index) => {
 										const Comp = ICONS_MAPPING[buttonKey] || null;
 
 										const clickFunc = CLICK_FUNCTIONS[buttonKey] || null;
@@ -125,6 +128,7 @@ function CommunicationModals({
 				setModalType={setModalType}
 				modalType={modalType}
 				viewType={viewType}
+				isMobile={isMobile}
 			/>
 
 			{!!buttonType && (
@@ -135,6 +139,7 @@ function CommunicationModals({
 					viewType={viewType}
 					firestore={firestore}
 					resetEmailState={resetEmailState}
+					isMobile={isMobile}
 				/>
 			)}
 

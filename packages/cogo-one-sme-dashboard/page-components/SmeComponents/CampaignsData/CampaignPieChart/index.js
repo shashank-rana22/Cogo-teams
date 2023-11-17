@@ -79,23 +79,26 @@ function CampaignPieChart({
 						colors={campaignsData.map((itm) => itm?.color)}
 					/>
 				</div>
-			</div>
 
-			<div className={styles.legends_container}>
-				{campaignsData.map(
-					(itm) => (
-						<div
-							key={itm?.id}
-							className={styles.legend_item}
-						>
-							<div className={styles.legend_item_name}>
-								<div className={styles.legends_circle} style={{ backgroundColor: itm?.color }} />
-								<div>{itm?.label}</div>
+				<div className={styles.legends_container}>
+					{campaignsData.map(
+						(itm) => (
+							<div
+								key={itm?.id}
+								className={styles.legend_item}
+							>
+								<div
+									className={styles.legends_circle}
+									style={{ backgroundColor: itm?.color }}
+								/>
+								<div className={styles.legend_item_name}>
+									<div>{itm?.label}</div>
+									<div className={styles.legends_value}>{itm?.value}</div>
+								</div>
 							</div>
-							<div className={styles.legends_value}>{itm?.value}</div>
-						</div>
-					),
-				)}
+						),
+					)}
+				</div>
 			</div>
 		</div>
 	);

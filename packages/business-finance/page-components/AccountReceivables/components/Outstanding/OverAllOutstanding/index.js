@@ -1,5 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { Button, Pagination, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty, startOfMonth } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
@@ -23,24 +25,29 @@ import OutstandingFilter from './OutstandingFilter';
 import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
 import OverallOutstandingStats from './OverallOutstandingStats';
+import ReportModal from './ReportModal';
 import ResponsivePieChart from './ResponsivePieChart';
 import ScrollBar from './ScrollBar';
 import styles from './styles.module.css';
 
 const LOADER_LEN = 7;
 const ONLY_LEFT = true;
-
+const AUTHORISED_USER_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
+	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id,
+	'd058d879-8cb2-4071-8bd3-c5807f534dd4',
+	'd058d879-8cb2-4071-8bd3-c5807f534dd4'];
 function OverAllOutstanding({
 	entityCode = '',
 	setSelectedOrgId = () => {},
 }) {
+	const { profile } = useSelector((state) => state);
 	const [formFilters, setFormFilters] = useState({
 		kamId              : '',
 		salesAgentId       : '',
 		creditControllerId : '',
 		companyType        : '',
 	});
-
+	const [show, setShow] = useState(false);
 	const {
 		outStandingData,
 		outstandingLoading,
@@ -54,7 +61,6 @@ function OverAllOutstanding({
 		setFilters,
 		filtersApplied,
 	} = useGetOrgOutstanding({ entityCode });
-
 	const { include_defaulters = false } = filters || {};
 
 	const [dateFilter, setDateFilter] = useState({
@@ -161,7 +167,19 @@ function OverAllOutstanding({
 	const controls = overAllOutstandingcontrols();
 	return (
 		<>
+			{show ? <ReportModal show={show} setShow={setShow} /> : null}
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				{AUTHORISED_USER_IDS.includes(profile?.user?.id)
+					? (
+						<Button
+							onClick={() => setShow(true)}
+							themeType="secondary"
+							size="lg"
+							style={{ marginRight: 10 }}
+						>
+							Send OS Report
+						</Button>
+					) : null}
 				<Filters
 					controls={controls}
 					filters={filters}

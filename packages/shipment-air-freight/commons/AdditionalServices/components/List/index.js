@@ -10,6 +10,7 @@ import AddRate from '../AddRate';
 import Loader from '../Loader';
 
 import AddService from './AddService';
+import CargoInsurance from './CargoInsurance';
 import Info from './Info';
 import ItemAdded from './ItemAdded';
 import actions from './ItemAdded/actions';
@@ -24,13 +25,20 @@ const THC_DISABLE_STATE = ['init', 'awaiting', 'confirmed_by_service_provider',
 	'awaiting_service_provider_confirmation'];
 
 function List({ isSeller = false, source = '' }) {
-	const { servicesList, refetchServices, shipment_data, stakeholderConfig } = useContext(
+	const { servicesList, refetchServices, shipment_data, stakeholderConfig, primary_service } = useContext(
 		ShipmentDetailContext,
 	);
 
-	const mainFreightService = (servicesList || []).find((service) => service?.service_type === 'air_freight_service');
+	const mainFreightService = (servicesList || []).find(
+		(service) => service?.service_type === 'air_freight_service',
+	);
 
-	const { id = '', is_job_closed_financially = false, inco_term = '' } = shipment_data || {};
+	const {
+		id = '',
+		is_job_closed = false,
+		is_job_closed_financially = false,
+		inco_term = '',
+	} = shipment_data || {};
 
 	const tradeType = GLOBAL_CONSTANTS.options.inco_term?.[inco_term]?.trade_type;
 
@@ -60,6 +68,10 @@ function List({ isSeller = false, source = '' }) {
 		item,
 		refetch: refetchForUpdateSubService,
 	});
+
+	const isCargoInsured = servicesList?.some(
+		(service) => service?.service_type === 'cargo_insurance_service',
+	);
 
 	return (
 		<div className={styles.container}>
@@ -144,6 +156,15 @@ function List({ isSeller = false, source = '' }) {
 					<div className={styles.add_icon}>+</div>
 					Add Additional Services
 				</Button>
+
+				<Button
+					onClick={() => setShowModal('cargo_insurance_service')}
+					className={styles.btn_div}
+					disabled={!!isCargoInsured || is_job_closed}
+				>
+					<span className={styles.add_icon}>+</span>
+					Add Cargo Insurance
+				</Button>
 			</div>
 
 			{showModal === 'add_sell_price' && (
@@ -181,6 +202,16 @@ function List({ isSeller = false, source = '' }) {
 					source={source}
 				/>
 			)}
+
+			{showModal === 'cargo_insurance_service' ? (
+				<CargoInsurance
+					data={shipment_data}
+					refetch={refetch}
+					setShowModal={setShowModal}
+					primary_service={primary_service}
+				/>
+			) : null}
+
 			{terminalChargeModal
 				? (
 					<ConfirmTerminalChargeModal

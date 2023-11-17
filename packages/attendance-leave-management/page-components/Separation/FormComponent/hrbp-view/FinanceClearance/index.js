@@ -17,9 +17,9 @@ function FinanceClearance({ data = {}, handleBack = () => {}, handleNext = () =>
 	const { updateApplication = () => {} } = useUpdateFnfStatus({ refetch });
 	const fnfColumns = getFnfColumns({ onStatusChange: updateApplication });
 
-	const { finance_clearance, application_status } = data || {};
+	const { finance_clearance, application_status, application_process_details } = data || {};
 	const { finance_clearance:financeClearance, process_user_details } = finance_clearance || {};
-	const { sub_process_data, is_complete } = financeClearance || {};
+	const { sub_process_data, is_complete, is_ignored } = financeClearance || {};
 	const {
 		fnf_details,
 		fnf_excel_sheet_url,
@@ -47,12 +47,28 @@ function FinanceClearance({ data = {}, handleBack = () => {}, handleNext = () =>
 	const parts = fnf_excel_sheet_url?.split('/');
 	const lastPart = parts?.[(parts || []).length - NUM];
 
+	if (is_ignored) {
+		return (
+			<Heading
+				title="FINANCE CLEARANCE"
+				name={process_user_details?.name}
+				isComplete={is_complete}
+				refetch={refetch}
+				isIgnored={is_ignored}
+				application_process_details={application_process_details}
+			/>
+		);
+	}
+
 	return (
 		<>
 			<Heading
 				title="FINANCE CLEARANCE"
 				name={process_user_details?.name}
 				isComplete={is_complete}
+				refetch={refetch}
+				isIgnored={is_ignored}
+				application_process_details={application_process_details}
 			/>
 			{application_status === 'cancellation_requested' ? (
 				<CancellationRequest

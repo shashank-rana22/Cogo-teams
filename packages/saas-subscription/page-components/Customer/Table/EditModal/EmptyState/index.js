@@ -14,6 +14,7 @@ function EmptyState({ currentTab = '' }) {
 				src={GLOBAL_CONSTANTS.image_url.ticket_not_found}
 				width={150}
 				height={150}
+				alt="empty_state"
 			/>
 			<p style={{ textAlign: 'center' }}>
 				{`${t('saasSubscription:empty_state_1')} ${startCase(currentTab)}

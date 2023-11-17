@@ -23,7 +23,7 @@ function EditName({
 	return (
 		<>
 			<div className={styles.name_display}>
-				{!isDraftName ? startCase(searchName?.toLowerCase() || 'Unkown User') : searchName}
+				{!isDraftName ? startCase(searchName?.toLowerCase() || 'Unknown User') : searchName}
 			</div>
 			<div className={styles.popover_container}>
 				{isGroup ? (

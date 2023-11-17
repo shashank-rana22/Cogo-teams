@@ -65,6 +65,7 @@ function ServiceBased({ widgetBlocks = null, filterParams = {} }) {
 						data={data}
 						type="service"
 						subLabels={['ocean', 'air', 'surface']}
+						showCurrency
 					/>
 				)}
 		</div>

@@ -73,16 +73,41 @@ const getColumns = ({ handleOpenModal, handleDeleteModal }) => [
 	},
 	{
 		Header   : 'STATUS',
-		accessor : (item) => (
-			<div className={cl`${styles.pending_flex}
-			${styles[item.leave_status === 'pending' ? 'pending_color' : 'approved_color']}`}
-			>
-				<div className={cl`${styles.pending_dot} 
-				${styles[item.leave_status === 'pending' ? 'pending_color_bg' : 'approved_color_bg']}`}
-				/>
-				{startCase(item?.leave_status) || '-'}
-			</div>
-		),
+		accessor : (item) => {
+			const getStatusClass = (status) => {
+				if (status === 'approved') {
+					return {
+						colorClass   : styles.approved_color,
+						bgColorClass : styles.approved_color_bg,
+					};
+				}
+				if (status === 'rejected') {
+					return {
+						colorClass   : styles.rejected_color,
+						bgColorClass : styles.rejected_color_bg,
+					};
+				}
+				return {
+					colorClass   : styles.pending_color,
+					bgColorClass : styles.pending_color_bg,
+				};
+			};
+
+			const { colorClass, bgColorClass } = getStatusClass(item.leave_status);
+
+			return (
+				<div className={cl`
+					${styles.pending_flex}
+					${colorClass}`}
+				>
+					<div className={cl`
+					${styles.pending_dot}
+					${bgColorClass}`}
+					/>
+					{startCase(item?.leave_status) || '-'}
+				</div>
+			);
+		},
 		id: 'status',
 	},
 	{
@@ -95,7 +120,7 @@ const getColumns = ({ handleOpenModal, handleDeleteModal }) => [
 						onClick={() => handleOpenModal(item)}
 					/>
 				) : <div style={{ marginRight: 26 }} />}
-				{item.leave_status === 'approved' ? '-'
+				{(item.leave_status === 'approved' || item.leave_status === 'rejected') ? '-'
 					: <IcMDelete className={styles.cursor} onClick={() => handleDeleteModal(item)} />}
 			</div>
 		),

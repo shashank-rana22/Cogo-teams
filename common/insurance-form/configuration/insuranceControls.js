@@ -55,7 +55,7 @@ const getInsuranceControls = ({ activeTab = 'ocean', t }) => [
 		placeholder        : t('cargoInsurance:form_control_hscode_placeholder'),
 		prefix             : <IcMProductCodeMapping width={14} height={14} />,
 		type               : 'asyncSelect',
-		asyncKey           : 'list_saas_hs_codes',
+		asyncKey           : 'list_insurance_hs_code',
 		initialCall        : true,
 		rules              : { required: true },
 		params             : { codeType: 'FINAL' },

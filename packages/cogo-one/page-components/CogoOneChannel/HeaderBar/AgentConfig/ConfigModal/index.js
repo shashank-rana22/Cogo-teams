@@ -53,6 +53,7 @@ function ConfigModal({
 	setActiveCard = () => {},
 	setViewType = () => {},
 	initialViewType = '',
+	isMobile = false,
 }) {
 	const [switchViewType, setSwitchViewType] = useState(viewType);
 	const {
@@ -146,8 +147,9 @@ function ConfigModal({
 			size="md"
 			show
 			onClose={handleClose}
-			placement="top"
+			placement={isMobile ? 'bottom' : 'top'}
 			scroll={activeCard !== 'shift_configuration'}
+			style={{ width: isMobile ? '100%' : '600px' }}
 		>
 			<Modal.Header
 				className={styles.modal_header}
@@ -174,6 +176,7 @@ function ConfigModal({
 					? (
 						<Component
 							key={activeCard}
+							isMobile={isMobile}
 							{...COMPONENT_PROPS[activeCard]}
 						/>
 					) : (

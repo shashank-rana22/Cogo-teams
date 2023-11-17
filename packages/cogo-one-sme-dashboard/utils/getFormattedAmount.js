@@ -2,7 +2,7 @@ function getFormattedAmount({ number = 0 }) {
 	let formattedNumber = '';
 
 	formattedNumber = new Intl.NumberFormat(
-		'en',
+		'en-US',
 		{
 			notation              : 'compact',
 			minimumFractionDigits : 0,
