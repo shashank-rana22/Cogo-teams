@@ -107,7 +107,7 @@ function MultiEntityMargin() {
 														<div className={styles.btn_wrapper}>
 															{colItem?.[GLOBAL_CONSTANTS.zeroth_index]?.id
 																		=== colItem?.[1]?.id ? (
-																	null
+																			<div>--</div>
 																) : (
 																	<div
 																		role="presentation"

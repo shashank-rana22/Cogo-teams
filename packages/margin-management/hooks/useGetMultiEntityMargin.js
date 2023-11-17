@@ -49,7 +49,12 @@ function useGetMultiEntityMargin() {
 		{
 			url    : '/list_cogo_entities',
 			method : 'GET',
-			params : { pagination_data_required: false, filters: { status: 'active' } },
+			params : {
+				pagination_data_required : false,
+				filters                  : {
+					status: 'active',
+				},
+			},
 		},
 		{ manual: false },
 	);
@@ -59,9 +64,10 @@ function useGetMultiEntityMargin() {
 			url    : '/list_entity_margins',
 			method : 'GET',
 			params : {
-				pagination_data_required : false,
-				filters                  : { status: 'active' },
-				service_type             : activeService,
+				filters: {
+					status       : 'active',
+					service_type : activeService,
+				},
 			},
 		},
 		{ manual: false },
