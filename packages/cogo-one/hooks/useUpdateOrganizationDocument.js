@@ -3,13 +3,12 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const getPayload = ({
-	document_type = '', id = '', status = '', organization_trade_party_id = '', rejectReason = '',
+	document_type = '', id = '', status = '', organization_trade_party_id = '',
 }) => ({
 	document_type,
 	id,
-	verification_status : status,
+	verification_status: status,
 	organization_trade_party_id,
-	rejection_reason    : rejectReason || undefined,
 });
 
 const useUpdateOrganizationDocument = ({
@@ -23,15 +22,16 @@ const useUpdateOrganizationDocument = ({
 
 	}, { manual: true });
 
-	const updateDocument = async ({ val = {}, status = '', rejectReason = '' }) => {
+	const updateDocument = async ({ val = {}, status = '' }) => {
 		const { document_type = '', id = '', organization_trade_party_id = '' } = val || {};
 		try {
 			await trigger({
-				data: getPayload({ document_type, id, status, organization_trade_party_id, rejectReason }),
+				data: getPayload({ document_type, id, status, organization_trade_party_id }),
 			});
 			setRejectAccount({
 				show         : false,
-				rejectReason : '',
+				rejectReason : [],
+				otherReason  : '',
 			});
 			setVerifyAccount({
 				show               : false,
