@@ -21,8 +21,8 @@ function DemoPieChart({
 	if (dashboardLoading) {
 		return (
 			<div className={styles.container}>
-				<div className={styles.header}>
-					Total Campaigns
+				<div className={styles.loading_header}>
+					Chat and Demo
 				</div>
 				<div className={styles.loading_container}>
 					<LoadingState loaderCount={10} />
