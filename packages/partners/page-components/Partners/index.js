@@ -1,5 +1,6 @@
-import { Input, Button, Popover } from '@cogoport/components';
+import { Input, Button, Popover, Toggle } from '@cogoport/components';
 import { IcMSearchlight, IcMFilter } from '@cogoport/icons-react';
+import { useHandleVersionChangeToOld } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
 import { useState } from 'react';
 
@@ -18,10 +19,17 @@ function Partners() {
 	const { filters, setFilters, loading, data, q, setQ, refetch } = useGetPartner();
 	const paginationProps = { setFilters, filters, data };
 	const [visible, setVisible] = useState(false);
+	const { handleRouteChange } = useHandleVersionChangeToOld({});
 	return (
 		<div className={styles.body}>
 			<div className={styles.table}>
 				<div className={styles.filters}>
+					<Toggle
+						size="md"
+						onLabel="Old"
+						offLabel="New"
+						onChange={handleRouteChange}
+					/>
 					<Popover
 						placement="bottom"
 						visible={visible}
@@ -45,6 +53,7 @@ function Partners() {
 
 						</Button>
 					</Popover>
+
 					<Input
 						size="sm"
 						placeholder="Search by Name Email"
@@ -52,6 +61,7 @@ function Partners() {
 						onChange={setQ}
 						suffix={<IcMSearchlight />}
 					/>
+
 					<Button
 						className={styles.create_btn}
 						onClick={() => { setView('create'); setEntityType('channel_partner'); }}
