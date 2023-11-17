@@ -10,7 +10,7 @@ function SyncModal({ show = {}, setShow = () => {}, data = {} }) {
 	const { syncSageArOutstanding = () => {}, loading = false } = useSyncSageArOutstanding({ setShow });
 	return (
 		<div>
-			<Modal show={show} onClose={() => setShow(false)} placement="top" size="XL">
+			<Modal show={show} onClose={() => setShow(false)} placement="top" size="xl">
 				<Modal.Body className={styles.approve_body}>
 					<div style={{ marginBottom: '20px' }}><b> Last Synced Stats</b></div>
 

@@ -37,7 +37,7 @@ const ONLY_LEFT = true;
 const AUTHORISED_USER_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
 	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id,
 	'd058d879-8cb2-4071-8bd3-c5807f534dd4',
-	'd058d879-8cb2-4071-8bd3-c5807f534dd4'];
+	'438de4d8-c9b2-4835-a23b-0b871b18d434'];
 function OverAllOutstanding({
 	entityCode = '',
 	setSelectedOrgId = () => {},
@@ -197,7 +197,7 @@ function OverAllOutstanding({
 				{AUTHORISED_USER_IDS.includes(profile?.user?.id)
 					? (
 						<Button
-							onClick={() => onSubmit()}
+							onClick={onSubmit}
 							themeType="secondary"
 							size="lg"
 							loading={sageArOutstandingloading}

@@ -1,10 +1,10 @@
+const dateToIst = (date) => {
+	const ISTDATE = new Date(date)
+		.toLocaleString(undefined, { timeZone: 'IST' });
+	if (ISTDATE === 'Invalid Date') { return false; }
+	return ISTDATE;
+};
 const getColumns = () => {
-	const dateToIst = (date) => {
-		const ISTDATE = new Date(date)
-			.toLocaleString(undefined, { timeZone: 'IST' });
-		if (ISTDATE === 'Invalid Date') { return false; }
-		return ISTDATE;
-	};
 	const columns = [
 		{
 			Header   : 'Snapshot Organization Outstandings',

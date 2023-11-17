@@ -11,7 +11,7 @@ const useSyncSageArOutstanding = ({ setShow = () => {} }) => {
 	const syncSageArOutstanding = async (val) => {
 		try {
 			await trigger({
-				data: { sync_data: val || false },
+				data: { sync_data: val },
 
 			});
 			setShow(false);
