@@ -51,16 +51,12 @@ export const getPayload = ({
 		lead_organization_id,
 		organization_id,
 	},
-	frequency       : 'daily',
+	frequency       : 'one_time',
 	tags            : ['demo_request'],
-	recurrence_rule : {
-		type         : 'normal',
-		repeat_after : 1,
-		unit         : 'day',
-	},
-	validity_start : start_date,
+	recurrence_rule : { type: 'normal' },
+	validity_start  : start_date,
 	start_time,
-	validity_end   : end_date,
+	validity_end    : end_date,
 	end_time,
 
 });
