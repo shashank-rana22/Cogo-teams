@@ -43,7 +43,7 @@ function MarginForm({ showModal = {}, setShowModal = () => { } }, ref) {
 							action: showModal?.action === 'create' ? 'view' : 'create',
 						}))}
 					>
-						{showModal?.action === 'create' ? 'View' : '+ Add New Slab'}
+						{showModal?.action === 'create' ? 'View' : '+ Add/Edit Slab'}
 					</Button>
 				</div>
 			</div>

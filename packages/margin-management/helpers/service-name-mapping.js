@@ -37,7 +37,7 @@ const SERVICE_NAME_MAPPING = {
 	},
 	air_customs: {
 		label : 'AIR Customs',
-		value : 'lcl_customs',
+		value : 'air_customs',
 	},
 	air_freight_local: {
 		label : 'AIR Local',

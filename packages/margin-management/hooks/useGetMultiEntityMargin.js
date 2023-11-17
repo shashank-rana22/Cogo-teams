@@ -16,7 +16,7 @@ const options = Object.values(SERVICE_NAME_MAPPING);
 
 options.unshift({
 	label           : 'GLOBAL SETTING',
-	value           : 'global',
+	value           : 'default',
 	backgroundColor : '#393f70',
 	color           : '#fff',
 });
@@ -58,7 +58,11 @@ function useGetMultiEntityMargin() {
 		{
 			url    : '/list_entity_margins',
 			method : 'GET',
-			params : { pagination_data_required: false, filters: { status: 'active' } },
+			params : {
+				pagination_data_required : false,
+				filters                  : { status: 'active' },
+				service_type             : activeService,
+			},
 		},
 		{ manual: false },
 	);
