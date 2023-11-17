@@ -12,7 +12,6 @@ import styles from './styles.module.css';
 
 const INDEX_UPTO_REMOVE_ITEM = 1;
 const FIELDS_CAN_BE_CHANGED = ['alias', 'price_discounted'];
-// const UNEDITABLE_FOR_COUNTRY_CODE = ['CN', 'ID'];
 const AUTHORISED_USER_IDS = [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id, GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id,
 	GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id];
 
