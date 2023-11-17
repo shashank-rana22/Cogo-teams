@@ -1,16 +1,18 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { dynamic } from '@cogoport/next';
 import { Layout } from '@cogoport/ocean-modules';
 import { useState } from 'react';
 
 import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
-import CargoNotReady from './CargoNotReady';
 import getUpdateTaskPayload from './getUpdateTaskPayload';
 import readinessControls from './readinessControls';
 import styles from './styles.module.css';
 
-function CargoReadiness({ setStep, task, shipment_data }) {
+const CargoNotReady = dynamic(() => import('./CargoNotReady'), { ssr: false });
+
+function CargoReadiness({ setStep = () => {}, task = {}, shipment_data = {}, onCancel = () => {} }) {
 	const [showNotReady, setShowNotReady] = useState(false);
 
 	const { control, handleSubmit, formState:{ errors } = {} } = useForm();
@@ -37,7 +39,14 @@ function CargoReadiness({ setStep, task, shipment_data }) {
 				<Layout control={control} fields={readinessControls} errors={errors} />
 			</div>
 
-			<div>
+			<div className={styles.action_buttons}>
+				<Button
+					themeType="secondary"
+					onClick={onCancel}
+					disabled={loading}
+				>
+					Cancel
+				</Button>
 				<Button
 					onClick={handleSubmit(onSubmit)}
 					disabled={loading}

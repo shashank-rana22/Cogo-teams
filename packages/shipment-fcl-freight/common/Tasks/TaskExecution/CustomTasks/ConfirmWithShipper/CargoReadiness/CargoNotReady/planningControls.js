@@ -25,7 +25,7 @@ const planningControls = ({ fclServices = [] }) => [
 
 			},
 			{
-				name  : 'cargo_readiness_date',
+				name  : 'readiness_date',
 				label : 'Estimated Cargo Readiness Date',
 				type  : 'datepicker',
 				span  : 4,

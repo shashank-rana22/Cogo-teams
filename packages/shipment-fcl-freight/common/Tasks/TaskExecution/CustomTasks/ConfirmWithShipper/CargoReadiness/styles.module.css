@@ -2,3 +2,12 @@
 	display: flex;
 	justify-content: flex-end;
 }
+
+.action_buttons {
+	display: flex;
+	justify-content: flex-end;
+
+	& > button {
+		margin-left: 6px;
+	}
+}

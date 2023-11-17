@@ -1,25 +1,34 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/ocean-modules';
 import { useContext } from 'react';
 
+import useCreateShipmentPlan from '../../../../../../../hooks/useCreateShipmentPlan';
+
+import checkContainerNumbers from './checkContainerNumbers';
+import getCreateContractPayload from './getCreateContractPayload';
 import renderLabel from './getServiceLabel';
 import planningControls from './planningControls';
 import styles from './styles.module.css';
 
 function CargoNotReady({ show, setShow }) {
 	const {
-		// shipment_data,
-		servicesList,
-		//  refetch:getShipment = () => {}
+		shipment_data = {},
+		servicesList = [],
+		refetch = () => {}, // getShipment
 	} = useContext(ShipmentDetailContext);
+
 	const onClose = () => setShow(false);
+
+	const { onCreate = () => {}, loading } = useCreateShipmentPlan({ refetch });
 
 	const fclServices = servicesList?.filter((s) => s?.service_type === 'fcl_freight_service')?.map((service) => ({
 		...service,
 		label: renderLabel(service),
 	}));
+
+	// const totalContainers = fclServices?.reduce((res, service) => res + (service?.containers_count || 0), 0);
 
 	const { control, formState:{ errors }, handleSubmit } = useForm({
 		defaultValues: { planning: [{ service_id: '' }] },
@@ -27,7 +36,18 @@ function CargoNotReady({ show, setShow }) {
 
 	const controls = planningControls({ fclServices });
 
-	const onSubmit = () => {};
+	const onSubmit = (values) => {
+		const check = checkContainerNumbers({ fclServices, formValues: values });
+
+		if (!check) {
+			Toast.error('Container Number can\'t be increased');
+			return;
+		}
+
+		const payload = getCreateContractPayload({ fclServices, formValues: values, shipment_data });
+
+		onCreate(payload);
+	};
 
 	return show ? (
 		<Modal
@@ -72,8 +92,20 @@ function CargoNotReady({ show, setShow }) {
 
 			<Modal.Footer>
 				<div className={styles.footer}>
-					<Button themeType="secondary" onClick={onClose}>Cancel</Button>
-					<Button onClick={handleSubmit(onSubmit)}>Create Plan</Button>
+					<Button
+						themeType="secondary"
+						onClick={onClose}
+						disabled={loading}
+					>
+						Cancel
+					</Button>
+
+					<Button
+						onClick={handleSubmit(onSubmit)}
+						disabled={loading}
+					>
+						Create Plan
+					</Button>
 				</div>
 			</Modal.Footer>
 		</Modal>

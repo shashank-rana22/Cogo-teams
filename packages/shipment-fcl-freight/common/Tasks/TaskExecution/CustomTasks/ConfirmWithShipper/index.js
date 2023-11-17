@@ -20,7 +20,7 @@ function ConfirmWithShipper({
 	refetch = () => {},
 }) {
 	const {
-		shipment_data = {}, refetchServices = () => {}, primary_service = {},
+		shipment_data = {}, refetchServices = () => {}, primary_service = {}, servicesList,
 	} = useContext(ShipmentDetailContext);
 
 	const [step, setStep] = useState(task?.tags?.[GLOBAL_CONSTANTS.zeroth_index]);
@@ -37,7 +37,7 @@ function ConfirmWithShipper({
 			task, refetch, onCancel, refetchServices, shipment_data, consigneeId, primary_service,
 		},
 		3: {
-			task, refetch, onCancel, setStep,
+			task, refetch, onCancel, setStep, servicesList, primary_service,
 		},
 	};
 
