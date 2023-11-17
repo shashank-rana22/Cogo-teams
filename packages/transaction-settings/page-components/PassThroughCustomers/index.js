@@ -1,4 +1,5 @@
-import { Button } from '@cogoport/components';
+import { Button, Toggle } from '@cogoport/components';
+import { useHandleVersionChangeToOld } from '@cogoport/next';
 import SmartComponents from '@cogoport/smart-components';
 import React, { useState } from 'react';
 
@@ -17,6 +18,8 @@ function PassThroughCustomers() {
 		filters = {}, setFilters = () => {}, refetch = () => {},
 	} = 	useListOrganizationSettings();
 
+	const { handleRouteChange } = useHandleVersionChangeToOld({});
+
 	return (
 		<div>
 			{
@@ -25,7 +28,15 @@ function PassThroughCustomers() {
 			<SmartComponents>
 				<div className={styles.header}>
 					<h2>Pass Through Customers</h2>
-					<Button onClick={() => setShowAddModal((prev) => !prev)}>ADD PASS THROUGH CUSTMER</Button>
+					<div className={styles.header_right_section}>
+						<Button onClick={() => setShowAddModal((prev) => !prev)}>ADD PASS THROUGH CUSTMER</Button>
+						<Toggle
+							size="md"
+							onLabel="Old"
+							offLabel="New"
+							onChange={handleRouteChange}
+						/>
+					</div>
 				</div>
 				<ListPagination data={tableData} filters={filters} setFilters={setFilters} />
 				<ViewTable
