@@ -1,17 +1,20 @@
 import { InputController, SelectController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 const salarytype = [
-	{ label: 'Less Than 6 Lakh', value: 'e6a12dd0-7a4c-4dce-8ba8-e7375903fe38' },
-	{ label: 'Greater Than 6 Lakh', value: '9f120839-0c61-45e9-828f-365e62ab80a8' },
+	{ label: 'Less Than 6 Lakh', value: GLOBAL_CONSTANTS.less_lpa },
+	{ label: 'Greater Than 6 Lakh', value: GLOBAL_CONSTANTS.great_lpa },
 ];
 const regimes = [
-	{ label: 'old', value: '88902852-7534-4e02-bbb0-b49603f325a0' },
-	{ label: 'new', value: '5087c6fa-1b10-4c22-acc8-b300c5350e6a' },
+	{ label: 'old', value: GLOBAL_CONSTANTS.old_regime },
+	{ label: 'new', value: GLOBAL_CONSTANTS.new_regime },
 ];
 export default function TaxInput({ control = {}, errors = {} }) {
+	const { calculator } = GLOBAL_CONSTANTS;
+	console.log(calculator, 'calculator');
 	return (
 		<div className={styles.container}>
 			<div className={styles.input_cont}>

@@ -5,7 +5,7 @@ import CustomPill from '../../commons/CutomPill';
 
 import styles from './styles.module.css';
 
-function GetStatus(employee) {
+function GetStatus({ employee }) {
 	if (employee?.salary_on_hold === null) {
 		return '-';
 	}
@@ -109,7 +109,7 @@ const getColumns = ({ router }) => {
 			Header   : <div className={styles.header}>STATUS</div>,
 			accessor : (item) => (
 				<div>
-					{ GetStatus(item) }
+					<GetStatus item={item} />
 				</div>
 			),
 			id: 'status',
