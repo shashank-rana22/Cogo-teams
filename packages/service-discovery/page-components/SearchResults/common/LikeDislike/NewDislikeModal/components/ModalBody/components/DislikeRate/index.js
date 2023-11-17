@@ -7,7 +7,7 @@ import SelectedReasonsForm from './components/SelectedReasonsForm';
 import { getServiceWiseOptions, getServiceWiseConfig } from './configs';
 import styles from './styles.module.css';
 
-function DislikeRate({ selectedSevice = {}, setSelectedSevice = () => {}, rate = {} }) {
+function DislikeRate({ selectedSevice = {}, setSelectedSevice = () => {} }) {
 	const [selectedReasons, setSelectedReasons] = useState([]);
 
 	const formProps = useForm();
@@ -46,7 +46,8 @@ function DislikeRate({ selectedSevice = {}, setSelectedSevice = () => {}, rate =
 				allControls={allControls}
 				selectedReasons={selectedReasons}
 				setSelectedSevice={setSelectedSevice}
-				rate={rate}
+				service_type={service_type}
+				selectedSevice={selectedSevice}
 			/>
 		</div>
 	);

@@ -37,7 +37,8 @@ function SelectedReasonsForm({
 	formProps = {},
 	allControls = [],
 	setSelectedSevice = () => {},
-	rate = {},
+	service_type = '',
+	selectedSevice = {},
 }) {
 	const { control, handleSubmit = () => {}, formState:{ errors = {} } } = formProps;
 
@@ -53,11 +54,11 @@ function SelectedReasonsForm({
 			trigger({
 				data: {
 					feedbacks : selectedReasons,
-					rate_id   : rate.id,
+					rate_id   : selectedSevice.rate_id,
+					service_type,
 				},
 			});
 		} catch (error) {
-			console.log('error', error);
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
@@ -84,7 +85,7 @@ function SelectedReasonsForm({
 								const {
 									label,
 									elementStyles = {},
-									divWidth = 'calc(50% - 12px',
+									divWidth = 'calc(50% - 12px)',
 									...restProps
 								} = item;
 

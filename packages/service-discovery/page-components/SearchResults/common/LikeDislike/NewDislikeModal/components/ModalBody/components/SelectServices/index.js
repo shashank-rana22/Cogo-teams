@@ -27,8 +27,9 @@ const SERVICE_NAME_MAPPING = {
 function PriceComponent({
 	feedback_type = '',
 	is_added = false,
-	total_price_discounted = 0,
-	total_price_currency = '',
+	freight_price_discounted = 0,
+	freight_price_currency = '',
+	service_type = '',
 }) {
 	if (feedback_type === 'request_rate' && is_added) {
 		return <div className={styles.price}>Rate Requested</div>;
@@ -37,18 +38,30 @@ function PriceComponent({
 	if (feedback_type === 'request_rate') {
 		return <div className={styles.price}>Request Rates</div>;
 	}
-	return (
 
+	const formattedAmount = formatAmount({
+		amount   : freight_price_discounted,
+		currency : freight_price_currency,
+		options  : {
+			style                 : 'currency',
+			currencyDisplay       : 'symbol',
+			maximumFractionDigits : 2,
+		},
+	});
+
+	if (service_type === 'fcl_freight') {
+		return (
+			<div className={styles.price}>
+				@
+				{formattedAmount}
+				/Ctr
+			</div>
+		);
+	}
+
+	return (
 		<div className={styles.price}>
-			{formatAmount({
-				amount   : total_price_discounted,
-				currency : total_price_currency,
-				options  : {
-					style                 : 'currency',
-					currencyDisplay       : 'symbol',
-					maximumFractionDigits : 2,
-				},
-			})}
+			{formattedAmount}
 		</div>
 	);
 }
@@ -57,10 +70,13 @@ function SelectServices({
 	rate = {},
 	setSelectedSevice = () => {},
 	selectedSevice = {},
+	// data = {},
 }) {
-	const { service_rates = {} } = rate;
-
-	console.log('rate', rate);
+	const {
+		service_rates = {},
+		freight_price_discounted = 0,
+		freight_price_currency = '',
+	} = rate;
 
 	const servicesArray = Object.entries(service_rates).reduce(
 		(acc, [service_id, cur]) => {
@@ -71,6 +87,7 @@ function SelectServices({
 				total_price_discounted = 0,
 				total_price_currency = '',
 				container_size = '',
+				id = '',
 			} = cur;
 
 			const label = `${SERVICE_NAME_MAPPING[service_type] || startCase(service_type)}
@@ -80,17 +97,19 @@ function SelectServices({
 				return [
 					...acc,
 					{
-						feedback_type : 'feedback',
+						feedback_type            : 'feedback',
 						service_type,
-						rate_id,
-						total_price_currency,
-						total_price_discounted,
+						rate_id                  : rate_id || id,
 						service_id,
 						container_size,
-						is_added      : false,
+						is_added                 : false,
 						label,
-						selected_card : rate.id,
-						service_data  : cur,
+						selected_card            : rate.id,
+						service_data             : cur,
+						freight_price_discounted : service_type === 'fcl_freight'
+							? freight_price_discounted : total_price_discounted,
+						freight_price_currency: service_type === 'fcl_freight'
+							? freight_price_currency : total_price_currency,
 					},
 				];
 			}
@@ -101,9 +120,7 @@ function SelectServices({
 					{
 						feedback_type : 'request_rate',
 						service_type,
-						rate_id,
-						total_price_currency,
-						total_price_discounted,
+						rate_id       : rate_id || id,
 						service_id,
 						container_size,
 						is_added      : false,
@@ -129,13 +146,14 @@ function SelectServices({
 				{servicesArray.map((item) => {
 					const {
 						is_added = false,
-						// service_type = '',
-						// container_size = '',
+						service_type = '',
 						service_id = '',
 						total_price_currency = '',
 						total_price_discounted = 0,
 						label = '',
 						feedback_type = '',
+						freight_price_discounted: price,
+						freight_price_currency: currency,
 					} = item;
 
 					const IconElement = is_added ? IcCFtick : IcMPlus;
@@ -158,6 +176,9 @@ function SelectServices({
 								is_added={is_added}
 								total_price_discounted={total_price_discounted}
 								total_price_currency={total_price_currency}
+								freight_price_discounted={price}
+								freight_price_currency={currency}
+								service_type={service_type}
 							/>
 
 							<IconElement
