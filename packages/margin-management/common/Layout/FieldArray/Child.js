@@ -24,6 +24,7 @@ function Child({
 	error = {},
 	remove = () => {},
 	formValues = {},
+	showElements = {},
 }) {
 	const total_fields = getTotalFields({ controls });
 
@@ -42,6 +43,8 @@ function Child({
 							const flex = getWidthPercent(span || TOTAL_SPAN);
 							const element_name = `${name}.${index}.${ctrlItemName}`;
 
+							const show = !(controlItem.name in showElements) || showElements[controlItem.name];
+
 							let options = [];
 
 							if (controlItem?.options_key) {
@@ -51,6 +54,10 @@ function Child({
 									name         : element_name,
 									formValues,
 								});
+							}
+
+							if (!show) {
+								return null;
 							}
 
 							return (

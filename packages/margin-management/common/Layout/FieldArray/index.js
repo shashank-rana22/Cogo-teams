@@ -4,10 +4,21 @@ import { useFieldArray } from '@cogoport/forms';
 import Child from './Child';
 import styles from './styles.module.css';
 
-function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {} }) {
-	const { controls = [], name } = ctrl || {};
+function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, formValues = {}, ...rest }) {
+	const { controls = [], name, buttonText = '', showAddIcon = true } = ctrl || {};
+
+	const { showElements = {} } = rest || {};
 
 	const { fields, append, remove } = useFieldArray({ control, name });
+
+	const CHILD_EMPTY_VALUES = {};
+	controls.forEach((controlItem) => {
+		CHILD_EMPTY_VALUES[controlItem.name] = controlItem.value || '';
+	});
+
+	const handleAppendChild = () => {
+		append(CHILD_EMPTY_VALUES);
+	};
 
 	return (
 		<div className={styles.field_array}>
@@ -22,6 +33,7 @@ function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, f
 					index={index}
 					name={name}
 					formValues={formValues}
+					showElements={showElements[index]}
 				/>
 			))}
 
@@ -29,10 +41,10 @@ function FieldArray({ ctrl = {}, control = {}, error = {}, showButtons = true, f
 				<div>
 					<Button
 						size="sm"
-						// themeType="tertiary"
-						onClick={append}
+						onClick={handleAppendChild}
 					>
-						Add
+						{showAddIcon ? '+' : ''}
+						{buttonText || 'ADD'}
 					</Button>
 				</div>
 			) : null}
