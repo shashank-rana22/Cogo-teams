@@ -1,12 +1,14 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { useSelector } from '@cogoport/store';
 import { useContext } from 'react';
 
 import EditInvoicePreference from './EditInvoicePreference';
 import ExchangeRate from './ExchangeRate';
 import styles from './styles.module.css';
+
+const INDONESIA_CHINA_COUNTRY_ID = [GLOBAL_CONSTANTS.country_ids.ID, GLOBAL_CONSTANTS.country_ids.CN];
 
 function Header({
 	invoiceData = {},
@@ -22,11 +24,13 @@ function Header({
 		reviewed_invoices,
 	} = invoiceData;
 
+	const { partner } = useSelector(({ profile }) => ({
+		partner: profile?.partner,
+	}));
+
 	const { shipment_data } = useContext(ShipmentDetailContext) || {};
 
-	const isAllowedEntity = ['701', '801'].includes(Object.values(ENTITY_MAPPING).filter(
-		(item) => item?.id === shipment_data?.entity_id,
-	)?.[GLOBAL_CONSTANTS.zeroth_index]?.code);
+	const isAllowedEntity = INDONESIA_CHINA_COUNTRY_ID.includes(partner?.country_id);
 
 	const showExchangeRate = !!shipment_data?.end_to_end_shipment?.is_possible && isAllowedEntity;
 

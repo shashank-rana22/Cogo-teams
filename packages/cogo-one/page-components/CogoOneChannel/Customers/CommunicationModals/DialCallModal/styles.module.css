@@ -57,6 +57,10 @@
 			inset 9px 9px 3px #f1f1f1,
 			inset -9px -9px 3px #f1f1f1;
 	}
+
+	@media (max-width: 576px) {
+		width: 96px;
+	}
 }
 
 .number {

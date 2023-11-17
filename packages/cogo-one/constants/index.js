@@ -273,6 +273,8 @@ export const ACCOUNT_TYPE_MAPPING = {
 	service_provider  : 'twin_service_provider_id',
 };
 
+export const DEFAULT_OPTIONS = ['whatsapp_new_message_modal', 'bulk_communication'];
+
 export const DOCUMENT_FILTERS_MAPPING = [
 	{
 		label : 'KYC Document',

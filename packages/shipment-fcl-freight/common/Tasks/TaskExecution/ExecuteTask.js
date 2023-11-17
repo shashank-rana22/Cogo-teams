@@ -144,7 +144,7 @@ function ExecuteTask({
 	}
 
 	if (task?.task === 'generate_cargo_insurance' && SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)) {
-		return <ShipmentInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
+		return <ShipmentInsurance onCancel={onCancel} refetch={taskListRefetch} servicesList={servicesList} />;
 	}
 
 	if (task.task === 'mark_confirmed' && task.service_type === 'fcl_freight_service'

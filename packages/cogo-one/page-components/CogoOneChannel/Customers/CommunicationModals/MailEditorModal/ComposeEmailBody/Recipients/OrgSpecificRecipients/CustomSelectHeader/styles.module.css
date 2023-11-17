@@ -5,5 +5,13 @@
 		.ui_tabs_container {
 			width: 100%;
 		}
+
+		.ui_tab_list_container {
+			overflow: auto;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+		}
 	}
 }

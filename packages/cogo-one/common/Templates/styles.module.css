@@ -1,5 +1,10 @@
 .container {
+	width: 60%;
 	padding: 10px 10px 0;
+
+	@media (max-width: 576px) {
+		width: 100%;
+	}
 }
 
 .message_container {
@@ -54,13 +59,18 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	width: 360px;
+	width: 700px;
+
+	@media (max-width: 576px) {
+		width: 360px;
+	}
 }
 
-.create_footer {
-	display: flex;
-	justify-content: flex-end;
-	padding: 10px 0;
+.arrow_back {
+	width: 18px;
+	height: 18px;
+	margin-right: 6px;
+	cursor: pointer;
 }
 
 .create_container {
@@ -70,10 +80,6 @@
 	width: 360px;
 	padding: 0 20px;
 	border-left: 1px solid #e0e0e0;
-}
-
-.button_styles {
-	margin-right: 10px;
 }
 
 .loader_div {
@@ -91,56 +97,14 @@
 
 .wrap {
 	display: flex;
-	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-}
-
-.preview {
-	display: flex;
-	flex-direction: column;
-	flex-grow: 2;
-	align-items: flex-start;
-	justify-content: center;
-	width: max-content;
-	padding: 12px;
-}
-
-.whatsapp {
-	position: relative;
-	width: 220px;
-	height: 380px;
-	background-image: url("https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/mobile_sm.svg");
-	background-repeat: no-repeat;
 }
 
 .back_icon {
 	position: absolute;
 	top: 89px;
 	left: 34px;
-}
-
-.overflow_div {
-	position: absolute;
-	top: 68px;
-	left: 16px;
-	max-height: 250px;
-	overflow-y: scroll;
-	font-size: 12px;
-	background: #fff;
-	border-radius: 6px;
-	box-shadow: 0 0 1px rgb(98 127 172 / 20%);
-
-	&::-webkit-scrollbar {
-		display: none;
-	}
-}
-
-.preview_div {
-	max-width: 182px;
-	padding: 5px;
-	background: #fff;
-	border-radius: 4px;
 }
 
 .active {
@@ -169,7 +133,6 @@
 	align-items: center;
 	max-width: 361px;
 	padding: 6px 10px;
-	border-right: 1px solid #e0e0e0;
 
 	:global {
 		.ui_select_display_container {
@@ -188,7 +151,6 @@
 	max-width: 361px;
 	padding: 6px 10px;
 	font-size: 16px;
-	border-right: 1px solid #e0e0e0;
 }
 
 .flex_div {

@@ -12,6 +12,7 @@ function TagsPopOver({
 	hasPermissionToEdit = false,
 	tagOptions = [],
 	loading = false,
+	isMobile = false,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 
@@ -25,7 +26,7 @@ function TagsPopOver({
 
 	return (
 		<Popover
-			placement="bottom"
+			placement={isMobile ? 'bottom-end' : 'bottom'}
 			interactive
 			render={(
 				isVisible && (

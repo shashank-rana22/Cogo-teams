@@ -65,6 +65,7 @@ function MailBody({
 	activeMessageCard = {},
 	attachmentData = {},
 	attachmentLoading = false,
+	isMobile = false,
 }) {
 	const [loading, setLoading] = useState(false);
 	const [modalData, setModalData] = useState(null);
@@ -160,6 +161,7 @@ function MailBody({
 					modalData={modalData}
 					activeMessageCard={activeMessageCard}
 					viewType={viewType}
+					isMobile={isMobile}
 				/>
 
 				{(!isDraft && expandedState && !isSentFromPlatform)
@@ -167,12 +169,14 @@ function MailBody({
 						<MailAttachments
 							attachmentData={attachmentData}
 							loading={expandLoading || attachmentLoading}
+							isMobile={isMobile}
 						/>
 					) : null}
 
 				{(isDraft || isSentFromPlatform)
 					? (
 						<DraftMailAttachments
+							isMobile={isMobile}
 							mediaUrls={isEmpty(media_url) ? attachments : media_url}
 						/>
 					) : null}
@@ -194,6 +198,9 @@ function MailBody({
 						handleClick={handleClick}
 						isDraft={isDraft}
 						loading={loading}
+						emailStatus={emailStatus}
+						isMobile={isMobile}
+						isDraftAlreadySent={!!eachMessage?.communication_id}
 					/>
 				) : null}
 
