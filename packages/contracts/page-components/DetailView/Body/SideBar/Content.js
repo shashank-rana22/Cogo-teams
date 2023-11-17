@@ -1,11 +1,13 @@
-import { Pill } from '@cogoport/components';
+import { Button, Pill } from '@cogoport/components';
 import { IcMAir, IcMFcl, IcMLcl, IcMLocalCharges } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import SureModal from '../../../../common/SureModal';
+import useGetContractServiceShipment from '../../../../hooks/useGetContractServiceShipment';
 import PortPair from '../../../PageView/List/Card/PortPair';
 
 import Footer from './Footer';
+import ShipmentDataModal from './ShowShipmentDetailModal';
 import styles from './styles.module.css';
 
 const SERVICE_MAPPING = {
@@ -26,6 +28,10 @@ function Content({
 	data,
 }) {
 	const [showModal, setShowModal] = useState(null);
+	const [showShipmentDetialData, setShipmentDetailData] = useState(false);
+
+	const { data: shipmentDetailData, getShipmentServiceData, loading } = useGetContractServiceShipment();
+
 	const handleCloseModal = () => {
 		setShowModal(null);
 	};
@@ -46,6 +52,11 @@ function Content({
 		});
 	};
 
+	const handelShipmentServiceDetails = () => {
+		getShipmentServiceData({ portPair, data });
+		setShipmentDetailData(!showShipmentDetialData);
+	};
+
 	const Element = SERVICE_MAPPING[portPair?.service_type || 'fcl_freight'].icon;
 	return (
 		<div
@@ -63,6 +74,13 @@ function Content({
 							<Element width={30} height={30} style={{ padding: '4px' }} />
 							{SERVICE_MAPPING[portPair?.service_type]?.label}
 						</div>
+						<Button
+							size="md"
+							themeType="accent"
+							onClick={handelShipmentServiceDetails}
+						>
+							Shipment Plan
+						</Button>
 						<div className={styles.information}>
 							{(portPair?.status === 'quoted' || portPair?.status === 'pending')
 						&& data?.status === 'pending_approval' ? (
@@ -128,6 +146,14 @@ function Content({
 				handleCloseModal={handleCloseModal}
 				handleFinalSubmit={handleFinalSubmit}
 			/>
+			{showShipmentDetialData && (
+				<ShipmentDataModal
+					shipmentDetailData={shipmentDetailData}
+					showShipmentDetialData={showShipmentDetialData}
+					setShipmentDetailData={setShipmentDetailData}
+					loading={loading}
+				/>
+			)}
 		</div>
 	);
 }

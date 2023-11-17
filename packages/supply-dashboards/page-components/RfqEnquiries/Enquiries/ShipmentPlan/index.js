@@ -10,11 +10,11 @@ const columns = [
 	{ Header: 'Container Count' },
 ];
 
-function ShipmentPlan({ selectedCard = {} }) {
+function ShipmentPlan({ value }) {
 	const {
 		shipment_frequency = '', sailing_period_start_date = '',
-		sailing_period_end_date = '', shipment_plan = [],
-	} = selectedCard || {};
+		sailing_period_end_date = '', rfq_shipment_plan_details = [],
+	} = value || {};
 
 	function formatSailingDateRange(startDate, endDate) {
 		const formattedStartDate = formatDate({
@@ -48,20 +48,18 @@ function ShipmentPlan({ selectedCard = {} }) {
 					&& (
 						<>
 							<div className={styles.border} />
+
 							<div className={styles.title}>
-								Sailing Period:
+								Sailing Period :
+								{' '}
 								<span className={styles.value}>
-									{sailing_period_start_date}
-									{' '}
-									<span className={styles.title}>to</span>
-									{' '}
-									{sailing_period_end_date}
+									{formatSailingDateRange(sailing_period_start_date, sailing_period_end_date)}
 								</span>
 							</div>
 						</>
 					)}
 				</div>
-				{!isEmpty(shipment_plan)
+				{!isEmpty(rfq_shipment_plan_details)
 					&& (
 						<div className={styles.table}>
 							<div className={styles.header}>
@@ -73,18 +71,18 @@ function ShipmentPlan({ selectedCard = {} }) {
 							</div>
 
 							<div className={styles.row}>
-								{shipment_plan?.map((value) => (
-									<div className={styles.details} key={value}>
+								{rfq_shipment_plan_details?.map((data) => (
+									<div className={styles.details} key={data?.id}>
 										<div className={styles.head}>
 											<div className={styles.head}>
 												{formatSailingDateRange(
-													value?.sailing_start_date,
-													value?.sailing_end_date,
+													data?.sailing_start_date,
+													data?.sailing_end_date,
 												)}
 											</div>
 										</div>
 										<div>
-											{value?.containers_count || 0}
+											{data?.containers_count || 0}
 										</div>
 									</div>
 								))}
