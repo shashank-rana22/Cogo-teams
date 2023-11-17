@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 const INDEX_UPTO_REMOVE_ITEM = 1;
 const FIELDS_CAN_BE_CHANGED = ['alias', 'price_discounted'];
-const UNEDITABLE_FOR_COUNTRY_CODE = ['CN', 'ID'];
+// const UNEDITABLE_FOR_COUNTRY_CODE = ['CN', 'ID'];
 const AUTHORISED_USER_IDS = [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id, GLOBAL_CONSTANTS.uuid.linh_nguyen_duy_user_id,
 	GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id];
 
@@ -68,7 +68,8 @@ function Child({
 	);
 
 	const isAuthorised = AUTHORISED_USER_IDS.includes(profileData?.user?.id);
-	const unEditable = UNEDITABLE_FOR_COUNTRY_CODE.includes(profileData?.partner?.country?.country_code);
+	const unEditable = GLOBAL_CONSTANTS.service_charge_uneditable_country_code
+		.includes(profileData?.partner?.country?.country_code);
 
 	// can delete  only new added line items for FCL
 	const isLineItemRemovable = (shipment_type === 'fcl_freight' && service_name !== 'fcl_freight_local_service'
