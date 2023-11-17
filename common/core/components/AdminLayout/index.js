@@ -8,7 +8,7 @@ import { getFirestore } from 'firebase/firestore';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
-import useGetUnreadMails from '../../helpers/useGetUnreadMails';
+import useGetUnreadMails from '../../hooks/useGetUnreadMails';
 
 import AnnouncementModal from './Announcements/AnnouncementModal';
 import GroupCall from './GroupCall';
@@ -104,7 +104,6 @@ function AdminLayout({
 			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg} 
 			${showNavbar ? styles.has_navbar : ''}`}
 		>
-			<main className={styles.children_container}>{children}</main>
 			{showTopbar ? (
 				<Topbar
 					className={topbar.className}
@@ -115,6 +114,7 @@ function AdminLayout({
 					showMobileNavbar={showMobileNavbar}
 				/>
 			) : null}
+			<main className={styles.children_container}>{children}</main>
 			{showNavbar ? (
 				<Navbar
 					className={navbar.className}

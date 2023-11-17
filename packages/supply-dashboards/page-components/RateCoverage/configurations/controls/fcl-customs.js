@@ -7,7 +7,6 @@ import { currencyOptions } from '../helpers/constants';
 const fclCustomsControls = ({
 	data,
 	originLocationOptions,
-	CommodityOptions,
 	source,
 }) => {
 	const controls = [
@@ -48,7 +47,7 @@ const fclCustomsControls = ({
 			type        : 'select',
 			placeholder : 'Origin Location',
 			span        : 4,
-			value       : data?.location.id,
+			value       : data?.location?.id,
 			disabled    : data?.location?.id,
 			...originLocationOptions,
 			rules       : { required: 'origin location is required' },
@@ -85,7 +84,7 @@ const fclCustomsControls = ({
 			label       : 'Container Size',
 			type        : 'select',
 			placeholder : 'Container Size',
-			span        : 3,
+			span        : 4,
 			value       : data?.container_size || '20',
 			disabled    : data?.container_size,
 			options     : containerSizes,
@@ -107,16 +106,15 @@ const fclCustomsControls = ({
 			label       : 'Commodity',
 			type        : 'select',
 			placeholder : 'Commodity',
-			span        : 3,
+			span        : 4,
 			value       : 'general',
-			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
 		{
 			name        : 'rate_type',
 			type        : 'select',
 			label       : 'Rate Type',
-			span        : 3,
+			span        : 4,
 			placeholder : 'Rate Type',
 			options     : [
 				{
@@ -132,7 +130,17 @@ const fclCustomsControls = ({
 				required: 'rate type is required',
 			},
 		},
-		source === 'live_booking'
+		{
+			label       : 'Cargo handling type',
+			name        : 'cargo_handling_type',
+			type        : 'select',
+			span        : 4,
+			value       : data?.cargo_handling_type,
+			caret       : true,
+			placeholder : 'Cargo handling types',
+			validations : [{ type: 'required', message: 'Cargo handling type is required' }],
+		},
+		['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
 			? {
 				name  : 'is_shipper_specific',
 				label : 'Shipper Specific Rate',
@@ -153,7 +161,7 @@ const fclCustomsControls = ({
 			buttonText         : 'Add Custom Line Items',
 			noDeleteButtonTill : 1,
 			value              : [{
-				customs_code : '',
+				code         : '',
 				unit         : '',
 				currency     : '',
 				price        : '',
@@ -162,14 +170,11 @@ const fclCustomsControls = ({
 			}],
 			controls: [
 				{
-					name        : 'customs_code',
-					valueKey    : 'code',
-					type        : 'async_select',
+					name        : 'code',
+					type        : 'select',
 					span        : 2,
-					asyncKey    : 'list_rate_charge_codes',
-					params      : { service_name: 'fcl_customs_charges' },
-					initialCall : true,
-					rules       : { required: 'Code is required' },
+					placeholder : 'Charge Name',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'currency',
@@ -221,13 +226,10 @@ const fclCustomsControls = ({
 			controls           : [
 				{
 					name        : 'cfs_line_items',
-					valueKey    : 'code',
-					type        : 'async_select',
+					type        : 'select',
 					span        : 2,
-					asyncKey    : 'list_rate_charge_codes',
-					params      : { service_name: 'fcl_cfs_charges' },
-					initialCall : true,
-					rules       : { required: 'Code is required' },
+					placeholder : 'Charge Name',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'currency',

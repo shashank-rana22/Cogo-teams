@@ -9,18 +9,40 @@ import Heading from '../HRMeeting/Heading';
 import styles from './styles.module.css';
 
 function TechClearanceHrbp({ data = {}, refetch = () => {}, handleBack = () => {}, handleNext = () => {} }) {
-	const { tech_clearance, application_status } = data || {};
+	const { tech_clearance, application_status, application_process_details } = data || {};
 	const { process_user_details, tech_clearance:techClearance } = tech_clearance || {};
 	let { name } = process_user_details || {};
-	const { sub_process_data, is_complete } = techClearance || {};
+	const { sub_process_data, is_complete, is_ignored } = techClearance || {};
 	const { serviceList, name:approver_name } = sub_process_data || {};
 	name = !approver_name ? name : approver_name;
 
 	const [show, setShow] = useState(false);
 
+	if (is_ignored) {
+		return (
+			<Heading
+				title="TECH CLEARANCE"
+				subTitle="Access Removal"
+				isComplete={is_complete}
+				name={name}
+				refetch={refetch}
+				application_process_details={application_process_details}
+				isIgnored={is_ignored}
+			/>
+		);
+	}
+
 	return (
 		<>
-			<Heading title="TECH CLEARANCE" subTitle="Access Removal" isComplete={is_complete} name={name} />
+			<Heading
+				title="TECH CLEARANCE"
+				subTitle="Access Removal"
+				isComplete={is_complete}
+				name={name}
+				refetch={refetch}
+				application_process_details={application_process_details}
+				isIgnored={is_ignored}
+			/>
 
 			{application_status === 'cancellation_requested' ? (
 				<CancellationRequest

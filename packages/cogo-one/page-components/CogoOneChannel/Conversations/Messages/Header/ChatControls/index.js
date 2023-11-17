@@ -17,6 +17,7 @@ function ChatControls({
 	hasPermissionToEdit = false,
 	canMessageOnBotSession = false,
 	channelType = '',
+	setActiveTab = () => {},
 }) {
 	const {
 		channel_type,
@@ -28,7 +29,7 @@ function ChatControls({
 		support_agent_id: chatAssignTo = '',
 	} = formattedData || {};
 
-	const handleEsclateClick = () => {
+	const handleEscalateClick = () => {
 		escalateToSupplyRm({
 			payload: {
 				organization_id,
@@ -40,7 +41,7 @@ function ChatControls({
 	};
 
 	if (channel_type === 'email') {
-		return <EmailHeader formattedData={formattedData} />;
+		return <EmailHeader formattedData={formattedData} setActiveTab={setActiveTab} />;
 	}
 
 	return (
@@ -57,7 +58,7 @@ function ChatControls({
 						themeType="secondary"
 						size="sm"
 						disabled={!hasPermissionToEdit || canMessageOnBotSession}
-						onClick={handleEsclateClick}
+						onClick={handleEscalateClick}
 						loading={supplierLoading}
 						className={styles.escalate_button}
 					>

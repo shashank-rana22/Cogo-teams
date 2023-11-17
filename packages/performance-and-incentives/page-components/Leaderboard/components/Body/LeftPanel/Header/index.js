@@ -65,7 +65,7 @@ function Header(props) {
 						<i>{HEADING}</i>
 					</div>
 
-					{isExpandedAllowed({ levelStack, currLevel, viewType }) && (
+					{isExpandedAllowed({ currLevel, viewType }) && (
 						<Button type="button" size="md" themeType="linkUi" onClick={handleExpandAll}>
 							Expand All
 							{' '}

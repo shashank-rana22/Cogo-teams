@@ -2,7 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMInfo } from '@cogoport/icons-react';
 
-import currencyOptions from './helpers/currencies';
+import currencyOptions from '../../../../helpers/currencies';
 
 const geo = getGeoConstants();
 

@@ -215,6 +215,7 @@ const useGetUserSessionMappings = () => {
 		setTimeLeft,
 		timeLeft,
 		refetch : listApi,
+		userId  : profile?.user?.id,
 	};
 };
 

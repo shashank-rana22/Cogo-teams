@@ -12,9 +12,14 @@ const COUNT_THREE_HUNDRED = 300;
 const COUNT_ZERO = 0;
 const COUNT_TEN = 10;
 
-function VoiceCall({ activeVoiceCard = {} }) {
+function VoiceCall({
+	activeVoiceCard = {},
+	isMobile = false,
+	setActiveTab = () => {},
+}) {
 	const { user_id = null, user_number = '' } = activeVoiceCard || {};
 	const messageRef = useRef(null);
+
 	const scrollBottom = () => {
 		setTimeout(() => {
 			messageRef?.current?.scrollTo({
@@ -23,25 +28,29 @@ function VoiceCall({ activeVoiceCard = {} }) {
 			});
 		}, COUNT_THREE_HUNDRED);
 	};
+
 	const {
 		loading,
-		listData: { list = [] },
+		listData: { list = [], initialLoad = false } = {},
 		handleScroll,
 	} = useListUserVoiceCalls({
 		userId     : user_id,
 		userNumber : user_number,
 	});
+
 	useEffect(() => {
-		if (!loading) {
+		if (initialLoad) {
 			scrollBottom();
 		}
-	}, [messageRef, activeVoiceCard, loading]);
+	}, [activeVoiceCard, initialLoad]);
 
 	return (
-		<>
-			<div className={styles.container}>
-				<Header activeVoiceCard={activeVoiceCard} />
-			</div>
+		<div className={styles.container}>
+			<Header
+				activeVoiceCard={activeVoiceCard}
+				isMobile={isMobile}
+				setActiveTab={setActiveTab}
+			/>
 
 			<div
 				className={styles.message_container}
@@ -55,7 +64,7 @@ function VoiceCall({ activeVoiceCard = {} }) {
 					<SentDiv key={eachList?.created_at} eachList={eachList} />
 				)))}
 			</div>
-		</>
+		</div>
 	);
 }
 

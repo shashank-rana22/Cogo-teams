@@ -1,6 +1,7 @@
 .container {
 	display: flex;
-	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-between;
 	width: 100%;
 
 	:global {
@@ -19,14 +20,34 @@
 	width: 50%;
 
 	:global {
-		.ui_select_container:first-child {
+		.ui_select_container {
 			width: 30%;
 			margin-right: 4px;
+
+			@media screen and (max-width: 768px) {
+				width: 100% !important;
+				margin-bottom: 8px;
+			}
 		}
 
-		.ui_select_container:last-child {
-			width: 50%;
-			margin-left: 8px;
+		.ui_select_display_container {
+			height: 34px !important;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		display: block;
+		width: 100% !important;
+	}
+}
+
+.sub_container {
+	display: flex;
+
+	:global {
+		.ui_select_container {
+			width: 100%;
+			margin-right: 4px;
 		}
 	}
 }
@@ -35,8 +56,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 40px;
-	height: 40px;
+	width: 34px;
+	height: 34px;
 	padding: 4px;
 	margin-left: 2px;
 	cursor: pointer;
@@ -45,6 +66,8 @@
 }
 
 .wrap {
+	display: flex;
+	flex-direction: column;
 	margin-bottom: 10px;
 }
 
@@ -66,7 +89,15 @@
 .footer_section {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
 	width: 100%;
 	margin-top: 18px;
+}
+
+.styled_popover {
+	max-width: 380px !important;
+}
+
+.reset_button {
+	margin-right: 8px;
 }

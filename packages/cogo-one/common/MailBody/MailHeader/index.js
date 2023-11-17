@@ -1,10 +1,12 @@
-import { Avatar } from '@cogoport/components';
+import { Avatar, Popover, ButtonGroup } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import getUserNameFromEmail from '../../../helpers/getUserNameFromEmail';
 
+import buttonOptions from './buttonOptions';
 import ReceipientComp from './receipientComp';
 import RightButtonsMapping from './RightButtonsMapping';
 import styles from './styles.module.css';
@@ -16,6 +18,11 @@ function MailHeader({
 	hasPermissionToEdit = false,
 	isDraft = false,
 	emailStatus = '',
+	loading = false,
+	setModalData = () => {},
+	activeMessageCard = {},
+	viewType = '',
+	isMobile = false,
 }) {
 	const {
 		response, send_by = '',
@@ -59,11 +66,25 @@ function MailHeader({
 					className={styles.avatar}
 				/>
 
-				<div>
+				<div className={styles.to_cc_data}>
 					<div className={styles.sender_name}>
-						{startCase(senderName)}
-						{' '}
-						{isDraft ? <span>[DRAFT]</span> : null}
+						<div className={styles.user_name_styles}>
+							{startCase(senderName)}
+							{' '}
+							{isDraft ? <span>[DRAFT]</span> : null}
+						</div>
+
+						{isMobile ? (
+							<div className={styles.mobile_time_styles}>
+								{formatDate({
+									date       : rightTime,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+									timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+									formatType : 'dateTime',
+									separator  : ' ',
+								})}
+							</div>
+						) : null }
 					</div>
 
 					{RECEIPIENT_MAPPING.map((item) => (
@@ -75,28 +96,56 @@ function MailHeader({
 				</div>
 			</div>
 
-			<div>
-				{hasPermissionToEdit ? (
-					<div className={styles.icon_flex}>
+			<div className={styles.minimize_screen}>
+				<div className={styles.icon_flex}>
+					{hasPermissionToEdit && !isMobile ? (
 						<RightButtonsMapping
 							isDraft={isDraft}
 							handleClick={handleClick}
 							emailStatus={emailStatus}
 							isDraftAlreadySent={!!communication_id}
+							loading={loading}
 						/>
-					</div>
-				) : null}
+					) : null}
 
-				<div className={styles.time_stamp}>
-					{isDraft ? <span>Saved: </span> : null}
-					{formatDate({
-						date       : rightTime,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-						formatType : 'dateTime',
-						separator  : ' | ',
-					})}
+					{(viewType === 'cogoone_admin' && !isMobile)
+						? (
+							<Popover
+								placement="bottom"
+								render={(
+									<ButtonGroup
+										size="sm"
+										options={buttonOptions({
+											setModalData,
+											eachMessage,
+											activeMessageCard,
+										})}
+										disabled={false}
+									/>
+								)}
+							>
+								<IcMOverflowDot
+									height={16}
+									width={16}
+									className={styles.icon_styles}
+									onClick={(e) => e.stopPropagation()}
+								/>
+							</Popover>
+						) : null}
 				</div>
+
+				{isMobile ? null : (
+					<div className={styles.time_stamp}>
+						{isDraft ? <span>Saved: </span> : null}
+						{formatDate({
+							date       : rightTime,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType : 'dateTime',
+							separator  : ' | ',
+						})}
+					</div>
+				)}
 			</div>
 		</div>
 	);

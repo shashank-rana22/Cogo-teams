@@ -14,6 +14,7 @@ import SUPPLY from './viewTypes/supply';
 import SUPPLY_ADMIN from './viewTypes/supplyAdmin';
 import SUPPORT from './viewTypes/support';
 import SUPPORT_ADMIN from './viewTypes/supportAdmin';
+import SUPPORT_SUPPLY from './viewTypes/supportSupply';
 
 export const VIEW_TYPE_GLOBAL_MAPPING = {
 	sales                     : SALES,
@@ -32,4 +33,5 @@ export const VIEW_TYPE_GLOBAL_MAPPING = {
 	admin                     : ADMIN,
 	hr                        : HR,
 	service_ops               : SERVICE_OPS,
+	support_supply            : SUPPORT_SUPPLY,
 };

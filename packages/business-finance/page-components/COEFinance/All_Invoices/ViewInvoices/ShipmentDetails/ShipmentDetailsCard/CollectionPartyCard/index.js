@@ -136,7 +136,7 @@ function CollectionPartyCard({
 
 				<div className={styles.billing_party_container}>
 					{collectionPartyRejectionList?.map((item) => {
-						const [labelText, valueText] = (item?.label || '').split(' - ');
+						const [labelText, valueText] = (item?.label || '').split(' : ');
 						return (
 							<div
 								key={item?.label}

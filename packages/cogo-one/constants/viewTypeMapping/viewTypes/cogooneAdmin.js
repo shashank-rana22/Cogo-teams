@@ -26,6 +26,7 @@ const COGOONE_ADMIN = {
 	configurations_to_be_shown    : ['fire_base_configuration', 'list_agents', 'switch_views', 'shift_configuration'],
 	shift_view_default_type       : 'shipment_specialist',
 	accessible_new_communications : ['new_call', 'new_whatsapp', 'new_mail', 'global_contacts', 'sp_contacts'],
+	adoption_assign_buttons       : ['assign_to_agent', 'auto_assign', 'marks_as_completed'],
 	permissions                   : {
 		auto_assign                                 : true,
 		bot_message_toggle                          : true,

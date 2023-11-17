@@ -1,9 +1,11 @@
 import {
 	AsyncSelectController,
+	ChipsController,
 	InputController,
 	RadioGroupController,
 	SelectController,
 	TextAreaController,
+	ToggleController,
 } from '@cogoport/forms';
 
 const controlTypeControllerMapping = {
@@ -13,6 +15,8 @@ const controlTypeControllerMapping = {
 	radioGroup  : RadioGroupController,
 	asyncSelect : AsyncSelectController,
 	textarea    : TextAreaController,
+	toggle      : ToggleController,
+	chips       : ChipsController,
 };
 
 export const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;

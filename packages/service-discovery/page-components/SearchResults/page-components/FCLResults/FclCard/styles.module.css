@@ -3,6 +3,22 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 20px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		padding: 0 14px;
+	}
+}
+
+.rates_container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+
+	@media (max-width: 768px) {
+		justify-content: space-between;
+		width: 100%;
+	}
 }
 
 .container {
@@ -24,6 +40,11 @@
 	&.cogo_assured {
 		background: #fff;
 	}
+
+	&.compared_rate {
+		background: #fcffff;
+		border: 1px solid #88cad1;
+	}
 }
 
 .middle {
@@ -44,19 +65,47 @@
 }
 
 .freight_text {
+	width: max-content;
 	margin-bottom: 4px;
-	font-size: 10px;
+	font-size: 12px;
 	color: #000;
 
 	&.total {
 		margin-right: 6px;
-		font-size: 12px;
 	}
 }
 
 .freight_details {
 	display: flex;
 	flex-wrap: wrap;
+}
+
+.pill {
+	display: flex;
+	align-items: center;
+	padding: 2px 8px;
+	margin-right: 2px;
+	margin-bottom: 6px;
+	color: #221f20;
+	cursor: pointer;
+	background: #f9f9f9;
+	border: 1px solid #e0e0e0;
+	border-radius: 24px;
+}
+
+.amount_container {
+	display: flex;
+	margin-right: 16px;
+}
+
+.price_item {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	&.total {
+		margin-left: 20px;
+	}
 }
 
 @media (max-width: 768px) {
@@ -71,17 +120,10 @@
 		margin-right: 0;
 		margin-bottom: 24px;
 	}
-}
 
-.pill {
-	display: flex;
-	align-items: center;
-	padding: 2px 8px;
-	margin-right: 2px;
-	margin-bottom: 6px;
-	color: #221f20;
-	cursor: pointer;
-	background: #f9f9f9;
-	border: 1px solid #e0e0e0;
-	border-radius: 24px;
+	.amount_container {
+		justify-content: space-between;
+		width: 100%;
+		margin-right: 0;
+	}
 }

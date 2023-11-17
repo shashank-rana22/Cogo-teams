@@ -36,3 +36,35 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+.subnameFull {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.actuals_wrapper {
+	display: flex;
+	flex-direction: column;
+	color: #221f20;
+}
+
+.actuals_label {
+	line-height: 1;
+}
+
+.actuals_value {
+	display: flex;
+	align-items: center;
+	font-size: 13px;
+	font-weight: 700;
+}
+
+.actuals_pill {
+	width: 0;
+	height: 0;
+	margin-right: 3px;
+	font-size: 13px;
+	border: solid 4px #88cad1;
+	border-radius: 50%;
+}

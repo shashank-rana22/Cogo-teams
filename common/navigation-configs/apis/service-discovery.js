@@ -388,6 +388,23 @@ const apis = [
 		service_name : 'location',
 		feature      : 'search',
 	},
+	{
+		api          : 'get_service_discovery_configuration',
+		access_type  : 'private',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'create_checkout',
+		access_type  : 'private',
+		service_name : 'checkout',
+		feature      : 'spot_booking',
+	},
+	{
+		api          : 'get_sailing_schedules',
+		access_type  : 'private',
+		feature      : 'spot_booking',
+		service_name : 'sailing_schedule',
+	},
 ];
 
 export default apis;

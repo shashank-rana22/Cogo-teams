@@ -19,7 +19,11 @@ function ShowMessage({ restData = {} }) {
 	});
 
 	return (
-		<div dangerouslySetInnerHTML={{ __html: getUrlFormatedText(newMessage) }} />
+		<div dangerouslySetInnerHTML={{
+			__html:
+			getUrlFormatedText(newMessage?.replace(GLOBAL_CONSTANTS.regex_patterns.occurrences_of_line_breaks, '<br>')),
+		}}
+		/>
 	);
 }
 
@@ -43,7 +47,14 @@ function MessageBody({ message = '', mediaUrls = [], restData = {} }) {
 				})}
 			</div>
 			<div className={styles.message_section}>
-				{message ? <div>{message}</div> : null}
+				{message ? (
+					<div dangerouslySetInnerHTML={{
+						__html: getUrlFormatedText(
+							message?.replace(GLOBAL_CONSTANTS.regex_patterns.occurrences_of_line_breaks, '<br>'),
+						),
+					}}
+					/>
+				) : null}
 				<ShowMessage message={message} restData={restData} />
 			</div>
 		</>

@@ -1,50 +1,66 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Image } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
+import { Select } from '@cogoport/components';
+import { useState } from 'react';
 
-import LoadingState from '../../../../../common/LoadingState';
+import {
+	getThisMonthStartDate,
+	getLastMonthStartAndEndDates, getThisMonthLastDate,
+} from '../../../../../utils/start-date-functions';
+import DURATION_OPTIONS from '../../../../Leaderboard/configurations/get-duration-filter-options';
+import onChangeDuration from '../../../utils/changeDuration';
 
-import Block from './Block';
+import LeaderBoard from './LeaderBoard';
 import styles from './styles.module.css';
-import useGetActivityCount from './useGetActivityCount';
+
+const durationOptions = DURATION_OPTIONS.filter((item) => item.value !== 'custom');
 
 function RightPanel(props) {
-	const { view, dateRange } = props;
+	const { view, updatedAt } = props;
 
-	const { data, loading } = useGetActivityCount({ view, dateRange });
+	const { startDate, endDate } = getLastMonthStartAndEndDates();
 
-	const { block_wise_stats: activityData } = data || {};
+	const [topDateRange, setTopDateRange] = useState({
+		startDate : getThisMonthStartDate(),
+		endDate   : getThisMonthLastDate(),
+	});
 
-	if (loading) {
-		return <div className={styles.container}><LoadingState /></div>;
-	}
+	const [bottomDateRange, setBottomDateRange] = useState({
+		startDate,
+		endDate,
+	});
 
-	if (isEmpty(activityData)) {
-		return (
-			<div className={styles.container}>
-				<Image
-					src={GLOBAL_CONSTANTS.image_url.empty_chart}
-					width={350}
-					height={400}
-					alt="Empty Chart"
-					className={styles.empty_img}
-				/>
-			</div>
-		);
-	}
+	const [topSelect, setTopSelect] = useState('this_month');
+	const [bottomSelect, setBottomSelect] = useState('last_month');
 
 	return (
 		<div className={styles.container}>
-			{/* <p className={styles.heading}>ACTIVITY COUNT</p> */}
+			<div className={styles.inner_container}>
+				<Select
+					value={topSelect}
+					onChange={(selectedDuration) => onChangeDuration({
+						selectedDuration,
+						setDateRange : setTopDateRange,
+						setDuration  : setTopSelect,
+					})}
+					size={window.innerWidth >= 2560 ? 'md' : 'sm'}
+					options={durationOptions}
+					className={styles.period_selector}
+				/>
+				<LeaderBoard view={view} dateRange={topDateRange} updatedAt={updatedAt} />
+			</div>
 
-			<div className={styles.blocks}>
-				{Object.entries(activityData || {}).map(([activity, block_data]) => (
-					<Block
-						key={activity}
-						activity={activity}
-						data={block_data}
-					/>
-				))}
+			<div className={styles.inner_container}>
+				<Select
+					value={bottomSelect}
+					onChange={(selectedDuration) => onChangeDuration({
+						selectedDuration,
+						setDateRange : setBottomDateRange,
+						setDuration  : setBottomSelect,
+					})}
+					size={window.innerWidth >= 2560 ? 'md' : 'sm'}
+					options={durationOptions}
+					className={styles.period_selector}
+				/>
+				<LeaderBoard view={view} dateRange={bottomDateRange} updatedAt={updatedAt} />
 			</div>
 		</div>
 	);

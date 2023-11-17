@@ -7,7 +7,11 @@ import styles from './styles.module.css';
 
 const OVERFLOW_LENGTH = 11;
 
-const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
+const getJobColumns = ({
+	handleClick = () => {},
+	tax = '',
+	subActiveTab = '',
+}) => {
 	const columns = [
 		{
 			id     : 'jobId',
@@ -151,16 +155,18 @@ const getJobColumns = ({ handleClick = () => {}, tax = '' }) => {
 			accessor : (row) => (
 
 				<div>
-					<Button
-						themeType="secondary"
-						onClick={() => handleClick({
-							jobId     : row?.jobId,
-							jobNumber : row?.jobNumber,
-							currency  : row?.currency,
-						})}
-					>
-						Audit
-					</Button>
+					{subActiveTab !== 'audited' ? (
+						<Button
+							themeType="secondary"
+							onClick={() => handleClick({
+								jobId     : row?.jobId,
+								jobNumber : row?.jobNumber,
+								currency  : row?.currency,
+							})}
+						>
+							Audit
+						</Button>
+					) : null}
 				</div>
 			),
 		},

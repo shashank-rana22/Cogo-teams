@@ -1,7 +1,6 @@
 import { Table } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -35,7 +34,7 @@ const getPriceBreakUpColumn = [
 					options : {
 						style                 : 'currency',
 						currencyDisplay       : 'symbol',
-						maximumFractionDigits : 0,
+						maximumFractionDigits : 2,
 					},
 				})}
 			</strong>
@@ -70,7 +69,7 @@ const getPriceBreakUpColumn = [
 					options : {
 						style                 : 'currency',
 						currencyDisplay       : 'symbol',
-						maximumFractionDigits : 0,
+						maximumFractionDigits : 2,
 					},
 				})}
 			</strong>
@@ -82,10 +81,12 @@ function LineItems({ line_items = [] }) {
 	if (isEmpty(line_items)) return null;
 
 	return (
-		<Table
-			columns={getPriceBreakUpColumn}
-			data={line_items}
-		/>
+		<div className={styles.table}>
+			<Table
+				columns={getPriceBreakUpColumn}
+				data={line_items}
+			/>
+		</div>
 	);
 }
 

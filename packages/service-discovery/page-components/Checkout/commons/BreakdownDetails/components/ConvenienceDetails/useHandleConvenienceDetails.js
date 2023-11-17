@@ -15,11 +15,8 @@ const useHandleConvenienceDetails = ({
 	total = '',
 	convenienceRateOptions = [],
 	rate = {},
-	setConvenienceDetails = () => {},
 	detail = {},
 }) => {
-	const subTotal = total;
-
 	const { convenience_rate = {} } = convenienceDetails || {};
 
 	const { currency = '', price = '', quantity = 1 } = convenience_rate;
@@ -27,6 +24,8 @@ const useHandleConvenienceDetails = ({
 	const totalBeforeDiscount = rate?.tax_total_price || DEFAULT_VALUE;
 	const totalPrice = rate?.tax_total_price_discounted || DEFAULT_VALUE;
 	const discount = totalPrice - totalBeforeDiscount;
+
+	const subTotal = total - discount;
 
 	const [{ loading }, trigger] = useRequest(
 		{
@@ -64,10 +63,11 @@ const useHandleConvenienceDetails = ({
 		};
 	}
 
-	const onChange = ({ value, itemKey }) => {
-		setConvenienceDetails((prev) => ({
-			convenience_rate: {
-				...prev.convenience_rate,
+	const onChange = ({ value, itemKey, stateFun = () => {}, stateKey = '' }) => {
+		stateFun((prev) => ({
+			...prev,
+			[stateKey]: {
+				...(prev[stateKey] || {}),
 				[itemKey]: value,
 			},
 		}));
@@ -116,12 +116,12 @@ const useHandleConvenienceDetails = ({
 
 	const exchange_rate_source = detail?.importer_exporter?.exchange_rate_preference?.exchange_rate_source;
 
-	const onChangeCurrency = async (val) => {
+	const onChangeCurrency = async (val, priceValue, fromCurrency, stateFun, stateKey) => {
 		if (val) {
 			try {
 				const res = await trigger({
 					params: {
-						from_currency : convenience_line_item?.currency,
+						from_currency : fromCurrency,
 						to_currency   : val,
 						source        : exchange_rate_source || 'cogofx',
 					},
@@ -130,13 +130,15 @@ const useHandleConvenienceDetails = ({
 				const { data: conversion } = res;
 
 				onChange({
-					value: (convenience_line_item.price * conversion).toFixed(
+					value: (priceValue * conversion).toFixed(
 						ROUND_OFF_VALUE,
 					),
 					itemKey: 'price',
+					stateFun,
+					stateKey,
 				});
 
-				onChange({ value: val, itemKey: 'currency' });
+				onChange({ value: val, itemKey: 'currency', stateFun, stateKey });
 			} catch (err) {
 				Toast.error(
 					getApiErrorString(err.response?.data) || 'something went wrong',

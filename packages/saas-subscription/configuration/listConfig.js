@@ -16,21 +16,20 @@ const getListConfig = ({ t }) => [
 		key        : 'plan_name',
 		title      : t('saasSubscription:customer_table_plan_name'),
 		renderFunc : 'renderPlan',
-		width      : '20%',
+		width      : '18%',
 
 	},
 	{
-		key        : 'end_date',
-		title      : t('saasSubscription:customer_table_end_date'),
-		renderFunc : 'renderEndDate',
-		width      : '12%',
-
+		key        : 'validity_date',
+		title      : t('saasSubscription:customer_table_validity_date'),
+		renderFunc : 'renderValidity',
+		width      : '16%',
 	},
 	{
 		key        : 'family',
 		title      : t('saasSubscription:customer_table_family'),
 		renderFunc : 'renderFamily',
-		width      : '19%',
+		width      : '18%',
 
 	},
 	{

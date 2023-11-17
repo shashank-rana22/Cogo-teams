@@ -1,0 +1,49 @@
+.schedules {
+	display: flex;
+	flex-direction: column;
+}
+
+.schedule_date {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: auto;
+	text-align: center;
+}
+
+.transit_time {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 12px;
+
+	&.top {
+		margin-bottom: 8px;
+	}
+
+	&.bottom {
+		margin-top: 8px;
+	}
+}
+
+.dates {
+	display: flex;
+	align-items: center;
+	padding: 0 6px;
+	font-size: 12px;
+	font-weight: normal;
+	color: #333;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+}
+
+.line {
+	width: 108px;
+	height: 1px;
+	margin: 0 2px;
+	border: 0.5px dashed #bdbdbd;
+}
+
+.text {
+	font-size: 12px;
+}

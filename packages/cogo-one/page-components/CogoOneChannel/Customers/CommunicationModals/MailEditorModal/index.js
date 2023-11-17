@@ -22,6 +22,7 @@ function MailEditorModal({
 	activeMail = {},
 	viewType = '',
 	firestore = {},
+	isMobile = false,
 }) {
 	const {
 		buttonType = '',
@@ -82,7 +83,11 @@ function MailEditorModal({
 		VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.permissions?.restrict_mail_to_organizations || false
 	);
 
-	const showOrgSpecificMail = buttonType === 'send_mail' && restrictMailToOrganizations;
+	const showOrgSpecificMail = (
+		buttonType === 'send_mail'
+			&& restrictMailToOrganizations
+			&& emailState?.mailView === 'orgSpecific'
+	);
 
 	const activeFromMail = emailState?.from_mail || activeMailAddress;
 
@@ -140,9 +145,9 @@ function MailEditorModal({
 		<Modal
 			show={buttonType}
 			onClose={handleClose}
-			size="lg"
+			size={isMobile ? 'md' : 'lg'}
 			className={styles.styled_ui_modal_dialog}
-			placement="top"
+			placement={isMobile ? 'bottom' : 'top'}
 			scroll
 			animate={false}
 			showCloseIcon={false}
@@ -167,10 +172,10 @@ function MailEditorModal({
 						setMinimizeModal={setMinimizeModal}
 						resetEmailState={resetEmailState}
 						sendLoading={sendLoading}
-						showOrgSpecificMail={showOrgSpecificMail}
 						hideFromMail={hideFromMail}
 						userActiveMails={userActiveMails}
 						activeMailAddress={activeFromMail}
+						isMobile={isMobile}
 					/>
 				)}
 				className={styles.modal_header}
@@ -193,7 +198,10 @@ function MailEditorModal({
 						showControl={showControl}
 						uploading={uploading}
 						mailProps={mailProps}
+						firestore={firestore}
 						showOrgSpecificMail={showOrgSpecificMail}
+						restrictMailToOrganizations={restrictMailToOrganizations}
+						isMobile={isMobile}
 					/>
 				) : (
 					<EmailTemplateList

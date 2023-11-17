@@ -1,21 +1,31 @@
 import { IcMArrowRotateLeft, IcMProfile } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
+function getUniqueData(dataArray) {
+	const mutatedArray = [...new Set((dataArray || []).map((ele) => ele?.email))].map((email) => {
+		const item = dataArray.find((it) => it.email === email);
+		return { email, name: item?.name };
+	});
+
+	return mutatedArray;
+}
+
 function UserDetails({ item = {} }) {
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
-	const { kam = {}, salesAgent = {}, creditController = {} } = item || {};
-	const data = [
-		{ stakeholder_type: 'KAM Owner', email: kam?.email, name: kam?.name },
-		{ stakeholder_type: 'AGENT', email: salesAgent?.email, name: salesAgent?.name },
-		{ stakeholder_type: 'CC', email: creditController?.email, name: creditController?.name },
-	];
-	const allEmpty = data.every((el) => !el.email && !el.name);
+	const { kam = [], creditController = [], salesAgent = [], portfolioManager = [] } = item || [];
+
+	const kamData = getUniqueData(kam);
+	const agentData = getUniqueData(salesAgent);
+	const ccData = getUniqueData(creditController);
+	const portfolioManagerData = getUniqueData(portfolioManager);
+
 	return (
 		<>
-			{!allEmpty && (
+			{(!isEmpty(kamData) || !isEmpty(agentData) || !isEmpty(ccData)
+			|| !isEmpty(portfolioManagerData)) && (
 				<div className={styles.download_icon_div}>
 					<IcMProfile
 						onClick={() => setShowDetailsCard(true)}
@@ -42,21 +52,75 @@ function UserDetails({ item = {} }) {
 									DETAILS
 								</div>
 							</div>
-							<div className={styles.body_details}>
-								{(data || []).map((singleagent) => (
-									<div key={singleagent?.name} className={styles.containers}>
-										<div className={styles.stakeholder}>
-											{startCase(singleagent?.stakeholder_type || '-')}
-										</div>
-										<div className={styles.email}>
-											{singleagent?.email || '-'}
-										</div>
-										<div className={styles.name}>
-											{singleagent?.name || '-'}
-										</div>
+							{!isEmpty(kamData) ? (
+								<div className={styles.body_details}>
+									<div className={styles.stakeholder}>
+										{startCase('KAM OWNER')}
 									</div>
-								))}
-							</div>
+									{(kamData || []).map((singleagent) => (
+										<div key={singleagent?.name} className={styles.containers}>
+											<div className={styles.email}>
+												{singleagent?.email || '-'}
+											</div>
+											<div className={styles.name}>
+												{singleagent?.name || '-'}
+											</div>
+										</div>
+									))}
+								</div>
+							) : null}
+							{!isEmpty(agentData) ? (
+								<div className={styles.body_details}>
+									<div className={styles.stakeholder}>
+										{startCase('AGENT')}
+									</div>
+									{(agentData || []).map((singleagent) => (
+										<div key={singleagent?.name} className={styles.containers}>
+											<div className={styles.email}>
+												{singleagent?.email || '-'}
+											</div>
+											<div className={styles.name}>
+												{singleagent?.name || '-'}
+											</div>
+										</div>
+									))}
+								</div>
+							) : null}
+							{!isEmpty(ccData) ? (
+								<div className={styles.body_details}>
+									<div className={styles.stakeholder}>
+										{startCase('CC')}
+									</div>
+									{(ccData || []).map((singleagent) => (
+										<div key={singleagent?.name} className={styles.containers}>
+											<div className={styles.email}>
+												{singleagent?.email || '-'}
+											</div>
+											<div className={styles.name}>
+												{singleagent?.name || '-'}
+											</div>
+										</div>
+									))}
+								</div>
+							) : null}
+							{!isEmpty(portfolioManagerData) ? (
+								<div className={styles.body_details}>
+									<div className={styles.stakeholder}>
+										{startCase('Portfolio Manager')}
+
+									</div>
+									{(portfolioManagerData || []).map((singleagent) => (
+										<div key={singleagent?.name} className={styles.containers}>
+											<div className={styles.email}>
+												{singleagent?.email || '-'}
+											</div>
+											<div className={styles.name}>
+												{singleagent?.name || '-'}
+											</div>
+										</div>
+									))}
+								</div>
+							) : null}
 						</div>
 					</div>
 				</>

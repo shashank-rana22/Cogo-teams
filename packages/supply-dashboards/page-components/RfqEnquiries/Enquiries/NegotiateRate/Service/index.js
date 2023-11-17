@@ -11,6 +11,11 @@ import AddRate from './AddRate';
 import RateModal from './RatesModal';
 import styles from './styles.module.css';
 
+const LOCALS_SERVICE_LABEL = {
+	fcl_freight_local : 'FCL Freight Local',
+	lcl_freight_local : 'LCL Freight Local',
+};
+
 function Service({
 	selectedCard,
 	service,
@@ -88,12 +93,12 @@ function Service({
 						<IcMArrowRotateRight />
 					)}
 					{selectedCard?.detail.service_type === service?.service
-						? 'Freight Rate'
+						? LOCALS_SERVICE_LABEL[service?.service] || 'Freight Rate'
 						: `${tradetype} ${startCase(service?.service)}`}
 				</div>
 				<div className={styles.location}>
 					<Tooltip interactive content={originAddress}>
-						<div className={styles.port}>{origin}</div>
+						<div className={destination ? styles.port : styles.singlePort}>{origin}</div>
 					</Tooltip>
 					{destination ? (
 						<>

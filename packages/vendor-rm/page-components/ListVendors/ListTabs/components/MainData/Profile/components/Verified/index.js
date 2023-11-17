@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCFtick, IcMCrossInCircle } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -33,7 +34,7 @@ const COMPONENT_PROPS_MAPPING = {
 		},
 		color : '#F68B21',
 		icon  : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg"
+			src={GLOBAL_CONSTANTS.image_url.kyc_pending_png}
 			alt="pending"
 		/>,
 	},
@@ -45,7 +46,19 @@ const COMPONENT_PROPS_MAPPING = {
 		},
 		color : '#F68B21',
 		icon  : <img
-			src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-pending-icon.svg"
+			src={GLOBAL_CONSTANTS.image_url.kyc_pending_png}
+			alt="pending"
+		/>,
+	},
+
+	bank_approval_pending: {
+		style: {
+			background : '#fdd9b5',
+			border     : '1px solid #F68B21',
+		},
+		color : '#F68B21',
+		icon  : <img
+			src={GLOBAL_CONSTANTS.image_url.kyc_pending_png}
 			alt="pending"
 		/>,
 	},
@@ -93,7 +106,7 @@ function Verified({ vendor_details = {} }) {
 						Feedbacks -
 						{'  '}
 						{(kyc_rejection_feedbacks || []).map((reason, index) => (
-							<span>
+							<span key={`${reason}_${index - 0}`}>
 								<b>
 									{' '}
 									{startCase(reason)}

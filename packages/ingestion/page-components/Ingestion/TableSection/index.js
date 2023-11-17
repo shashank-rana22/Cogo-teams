@@ -2,6 +2,7 @@ import { CONSTANT_KEYS } from '../../../constants/table-modal-mapping';
 
 import Filters from './Filters';
 import List from './List';
+import CurrentStatus from './Modals/CurrentStatus';
 import ReUploadModal from './Modals/ReUploadModal';
 import UploadListModal from './Modals/UploadListModal';
 
@@ -21,12 +22,13 @@ function TableSection(props) {
 	} = props;
 
 	const {
-		REUPLOAD, UPLOAD_LIST,
+		REUPLOAD, UPLOAD_LIST, CURRENT_STATUS,
 	} = CONSTANT_KEYS;
 
 	const TABLE_MODAL_MAPPING = {
-		[REUPLOAD]    : ReUploadModal,
-		[UPLOAD_LIST] : UploadListModal,
+		[REUPLOAD]       : ReUploadModal,
+		[UPLOAD_LIST]    : UploadListModal,
+		[CURRENT_STATUS] : CurrentStatus,
 
 	};
 	const Component = TABLE_MODAL_MAPPING[tableModal] || null;

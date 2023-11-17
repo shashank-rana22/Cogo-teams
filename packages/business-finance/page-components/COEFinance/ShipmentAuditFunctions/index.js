@@ -1,20 +1,19 @@
 import {
 	Button, Input, Table, Pagination, Popover, Toggle, cl,
 } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useGetJobList from '../hook/useGetJobList';
+import { isFilterApplied } from '../utils/isFilteredApplied';
 
 import EmptyState from './commons/EmptyState';
 import Content from './commons/FiltersContent';
 import getFinancialCloseColumns from './configurations/getFinancialCloseColumns';
 import getJobColumns from './configurations/getJobColumns';
 import styles from './styles.module.css';
-
-const DEFAULT_PAGE_LIMIT = 10;
 
 const TABS = [
 	{ key: 'to_be_audited', label: 'To be Audited' },
@@ -32,13 +31,16 @@ function ShipmentAuditFunction({
 	const [tradeTab, setTradeTab] = useState('');
 	const [tax, setTax] = useState('Pre');
 	const [filters, setFilters] = useState({
-		Service               : null,
-		Entity                : null,
-		walletUsed            : null,
-		operationalClosedDate : null,
-		creationDate          : null,
-		tradeType             : '',
+		Service               : undefined,
+		Entity                : undefined,
+		walletUsed            : undefined,
+		operationalClosedDate : undefined,
+		financialClosedDate   : undefined,
+		creationDate          : undefined,
+		tradeType             : undefined,
+		exclude               : ['cancelled_shipments', 'zero_expense'],
 	});
+
 	const [paginationFilters, setPaginationFilters] = useState({
 		page      : 1,
 		pageLimit : 10,
@@ -51,7 +53,7 @@ function ShipmentAuditFunction({
 		data = {},
 		loading = false,
 		refetch = () => {},
-	} =	 useGetJobList({ paginationFilters, search, activeTab, subActiveTab, entityCode });
+	} =	 useGetJobList({ filters, paginationFilters, search, activeTab, subActiveTab, entityCode });
 	const { list = [] } = data || {};
 
 	const handlePrePostChange = () => {
@@ -72,19 +74,20 @@ function ShipmentAuditFunction({
 		window.sessionStorage.setItem('audit_status', subActiveTab);
 	};
 
-	const operationColumns = getJobColumns({ handleClick, tax });
-	const financeColumns = getFinancialCloseColumns({ handleClick, tax });
+	const operationColumns = getJobColumns({ handleClick, tax, subActiveTab });
+	const financeColumns = getFinancialCloseColumns({ handleClick, tax, subActiveTab });
 
 	useEffect(() => {
 		setPaginationFilters((prev) => ({ ...prev, page: 1 }));
 		setTradeTab('');
 		setFilters({
-			Service               : null,
-			Entity                : null,
-			walletUsed            : null,
-			operationalClosedDate : null,
-			creationDate          : null,
-			tradeType             : '',
+			Service               : undefined,
+			Entity                : undefined,
+			walletUsed            : undefined,
+			operationalClosedDate : undefined,
+			creationDate          : undefined,
+			tradeType             : undefined,
+			exclude               : ['cancelled_shipments', 'zero_expense'],
 		});
 	}, [activeTab]);
 	return (
@@ -133,6 +136,7 @@ function ShipmentAuditFunction({
 						onClickOutside={() => setShow(false)}
 						render={(
 							<Content
+								activeTab={activeTab}
 								filters={filters}
 								setFilters={setFilters}
 								receivables={receivables}
@@ -145,15 +149,19 @@ function ShipmentAuditFunction({
 						)}
 						className={styles.pop_over_style}
 					>
-						<Button
-							themeType="primary"
-							size="md"
-							onClick={() => {
-								setShow(!show);
-							}}
-						>
-							Filters
-						</Button>
+						<div className={styles.button_container}>
+							<Button
+								themeType="primary"
+								size="md"
+								onClick={() => {
+									setShow(!show);
+								}}
+							>
+								{!isFilterApplied(filters) ? <div className={styles.filter_dot} /> : null}
+								<IcMFilter />
+								Filters
+							</Button>
+						</div>
 					</Popover>
 				</div>
 
@@ -177,7 +185,7 @@ function ShipmentAuditFunction({
 						/>
 					)}
 
-				{!isEmpty(list) && list?.length >= DEFAULT_PAGE_LIMIT
+				{!isEmpty(list)
 					? (
 						<Pagination
 							className={styles.pagination}

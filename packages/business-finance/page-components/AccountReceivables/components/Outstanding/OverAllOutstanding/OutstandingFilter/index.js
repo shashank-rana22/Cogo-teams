@@ -1,6 +1,5 @@
-import { Input, Placeholder, Popover } from '@cogoport/components';
+import { Button, Input, Placeholder, Popover } from '@cogoport/components';
 import ENTITY_FEATURE_MAPPING from '@cogoport/globalization/constants/entityFeatureMapping';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMArrowRotateUp,
 	IcMArrowRotateDown,
@@ -11,6 +10,7 @@ import { useState } from 'react';
 
 import { SORTBY_OPTION } from '../../../../constants/index';
 
+import BulkPostModal from './BulkPostModal';
 import CallPriorityModal from './CallPriorityModal';
 import FilterpopOver from './FilterpopOver/index';
 import styles from './styles.module.css';
@@ -33,6 +33,7 @@ function Filters({
 }) {
 	const [showSortPopover, setShowSortPopover] = useState(false);
 	const [showCallPriority, setShowCallPriority] = useState(false);
+	const [showBulkPostModal, setShowBulkPostModal] = useState(false);
 
 	const sortStyleAsc = orderBy.order === 'Asc' ? '#303B67' : '#BDBDBD';
 
@@ -68,7 +69,7 @@ function Filters({
 
 	let placeholder;
 	if (queryKey === 'q') {
-		placeholder = ENTITY_FEATURE_MAPPING[entityCode].placeholder.tax_number;
+		placeholder = ENTITY_FEATURE_MAPPING[entityCode]?.placeholder.tax_number;
 	} else if (queryKey === 'tradePartySerialId') {
 		placeholder = 'Search By Trade Party';
 	} else if (queryKey === 'sageId') {
@@ -133,6 +134,13 @@ function Filters({
 						clearFilter={clearFilter}
 						refetch={refetch}
 					/>
+
+					<Button
+						className={styles.bulk_btn}
+						onClick={() => setShowBulkPostModal(true)}
+					>
+						Update Tags
+					</Button>
 				</div>
 				<div className={styles.flex_wrap}>
 					<div className={styles.call}>
@@ -145,7 +153,7 @@ function Filters({
 								{callPriorityLoading ? (
 									<Placeholder width="60px" />
 								) : (
-									callPriorityData?.list?.[GLOBAL_CONSTANTS.zeroth_index]
+									callPriorityData
 										?.businessName
 								)}
 							</div>
@@ -177,7 +185,14 @@ function Filters({
 				<CallPriorityModal
 					showCallPriority={showCallPriority}
 					setShowCallPriority={setShowCallPriority}
-					data={callPriorityData?.list?.[GLOBAL_CONSTANTS.zeroth_index]}
+					data={callPriorityData}
+				/>
+			) : null}
+			{showBulkPostModal ? (
+				<BulkPostModal
+					showBulkPostModal={showBulkPostModal}
+					setShowBulkPostModal={setShowBulkPostModal}
+					refetch={refetch}
 				/>
 			) : null}
 		</div>

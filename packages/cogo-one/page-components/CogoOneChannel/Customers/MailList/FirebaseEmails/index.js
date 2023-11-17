@@ -27,6 +27,8 @@ function FirebaseEmails(messageProps) {
 		setIsBotSession = () => {},
 		workPrefernceLoading = false,
 		mailsToBeShown = [],
+		throttledGetCount = () => {},
+		isMobile = false,
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
@@ -53,6 +55,7 @@ function FirebaseEmails(messageProps) {
 		activeFolder,
 		sidFilters    : activeTab?.hiddenFilters?.sid || '',
 		mailsToBeShown,
+		throttledGetCount,
 	});
 
 	const setActiveSubTab = (val) => {
@@ -161,6 +164,7 @@ function FirebaseEmails(messageProps) {
 				setActiveAttachmentData={setActiveAttachmentData}
 				urlType="urlBased"
 				handleDownload={getDownloadFiles}
+				isMobile={isMobile}
 			/>
 		</div>
 	);

@@ -4,15 +4,25 @@
 	width: 100%;
 	padding-bottom: 20px;
 	background: #fff;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .form {
 	display: flex;
-	width: 80%;
+	width: 85%;
 	margin-right: 32px;
+
+	&.ftl_freight {
+		flex-direction: column;
+	}
 
 	@media (max-width: 768px) {
 		flex-direction: column;
+		width: 100%;
+		margin-right: 0;
 	}
 }
 
@@ -22,8 +32,22 @@
 	width: 48%;
 	margin-right: 20px;
 
+	&.ftl_freight {
+		width: 100%;
+		margin-right: 0;
+
+		&.organization {
+			width: 80%;
+
+			@media (max-width: 768px) {
+				width: 100%;
+			}
+		}
+	}
+
 	@media (max-width: 768px) {
 		width: 100%;
+		margin-right: 0;
 	}
 }
 
@@ -48,4 +72,9 @@
 
 .button {
 	display: flex;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-top: 8px;
+	}
 }

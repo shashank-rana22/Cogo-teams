@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useGetSalesDashboardData from '../../../hooks/useGetSalesDashboardData';
 
@@ -15,12 +15,9 @@ function List({
 	api = '',
 	stats = [],
 	placement = 'center',
-	organization = {},
-	createSearch = () => {},
-	createSearchLoading = false,
 	...rest
 }) {
-	const [serviceType, setServiceType] = useState(() => (service_type || 'fcl_freight'));
+	const [serviceType, setServiceType] = useState(service_type || 'fcl_freight');
 
 	const {
 		statsData,
@@ -33,6 +30,10 @@ function List({
 
 	const { page, page_limit, activeStat, ...restFilters } = filters || {};
 
+	useEffect(() => {
+		setServiceType(service_type || 'fcl_freight');
+	}, [service_type]);
+
 	return (
 		<div className={styles.container}>
 			{['most_searched', 'most_booked'].includes(rest.type) ? null : (
@@ -44,6 +45,7 @@ function List({
 						setBucketParams={setBucketParams}
 						activeStat={activeStat}
 						restFilters={restFilters}
+						loading={listLoading}
 					/>
 
 					<Header
@@ -76,9 +78,6 @@ function List({
 					setFilters={setFilters}
 					heading={heading}
 					placement={placement}
-					organization={organization}
-					createSearchLoading={createSearchLoading}
-					createSearch={createSearch}
 				/>
 			</div>
 		</div>

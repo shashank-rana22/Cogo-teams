@@ -25,7 +25,16 @@ const COMMON_ACCESIBLE_NAVIGATIONS = [
 ];
 const SIDEBAR_CONTROLS = ['sidebar_control'];
 
+const MOBILE_CONTROLS = ['user_chat'];
+
+const HIDE_CONTROLS_FOR_MOBILE = ['help_desk'];
+
 const iconMapping = ({ expandSideBar = false }) => [
+	{
+		name    : 'user_chat',
+		content : 'Close',
+		icon    : <IcMCrossInCircle width={20} height={20} />,
+	},
 	{
 		name    : 'sidebar_control',
 		content : expandSideBar ? 'Close' : 'Expand',
@@ -145,12 +154,20 @@ const getIconMapping = ({
 	expandSideBar = false,
 	channelType = '',
 	isTeams = false,
+	isMobile = false,
 }) => {
-	const CHANNEL_WISE_NAV_MAPPING = isTeams ? ['teams_profile'] : [
-		...COMMON_ACCESIBLE_NAVIGATIONS,
-		...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.extra_side_bar_navs_access || []),
-		...(ENABLE_EXPAND_SIDE_BAR.includes(channelType) ? SIDEBAR_CONTROLS : []),
-	];
+	const COMMON_NAVIGATIONS = COMMON_ACCESIBLE_NAVIGATIONS?.filter(
+		(eachNav) => (!isMobile ? eachNav : !HIDE_CONTROLS_FOR_MOBILE.includes(eachNav)),
+	);
+
+	const CHANNEL_WISE_NAV_MAPPING = isTeams
+		? [...(isMobile ? MOBILE_CONTROLS : []), 'teams_profile']
+		: [
+			...COMMON_NAVIGATIONS,
+			...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.extra_side_bar_navs_access || []),
+			...(ENABLE_EXPAND_SIDE_BAR.includes(channelType) && !isMobile ? SIDEBAR_CONTROLS : []),
+			...(isMobile ? MOBILE_CONTROLS : []),
+		];
 
 	return iconMapping({ expandSideBar })?.filter(
 		(eachIcon) => CHANNEL_WISE_NAV_MAPPING.includes(eachIcon.name),

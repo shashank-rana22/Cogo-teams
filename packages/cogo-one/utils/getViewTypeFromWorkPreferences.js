@@ -32,6 +32,7 @@ export const COGOVERSE_AGENT_MAPPINGS = {
 	service_ops               : ['service_ops', 'service_ops_admin'],
 	hr                        : ['hr', 'hr_admin'],
 	admin                     : ['admin'],
+	support_supply            : ['support_supply'],
 };
 
 const DEFAULT_VIEW_TYPE = 'default';

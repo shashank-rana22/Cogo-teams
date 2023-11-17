@@ -65,8 +65,8 @@ function RenderLabel({ item = {}, activeTab = '' }) {
 				<div className={styles.lower_label}>
 					{(item?.label)}
 					{' '}
-					{item?.value?.includes('cogoport')
-						? <Pill size="sm" color="orange">internal</Pill>
+					{item?.tag
+						? <Pill size="sm" color="orange">{item?.tag}</Pill>
 						: null}
 				</div>
 			</div>

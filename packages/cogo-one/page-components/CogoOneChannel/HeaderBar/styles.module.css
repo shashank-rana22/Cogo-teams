@@ -5,6 +5,11 @@
 	z-index: 999;
 	width: 100%;
 	overflow: hidden;
+
+	@media (max-width: 576px) {
+		top: calc(var(--layout-topbar) + 4px);
+		z-index: unset;
+	}
 }
 
 .navigation_bar {
@@ -21,6 +26,10 @@
 	font-size: 12px;
 	font-weight: 500;
 	color: #4f4f4f;
+
+	@media (max-width: 576px) {
+		margin: 4px 0 0;
+	}
 }
 
 .hide_stats_section {
@@ -160,7 +169,7 @@
 .feedback {
 	position: absolute;
 	right: 0;
-	bottom: 47px;
+	bottom: 110px;
 	z-index: 99;
 	display: flex;
 	align-items: center;

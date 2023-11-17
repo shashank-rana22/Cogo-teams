@@ -46,6 +46,8 @@ export const DEFAULT_EMAIL_STATE = {
 	user_ids      : {},
 	orgId         : '',
 	rteContent    : '',
+	reloadKey     : '',
+	mailView      : '',
 	customSubject : {
 		activeTab   : 'shipment',
 		serialId    : '',
@@ -91,7 +93,7 @@ export const BUTTON_MAPPING = [
 		key: 'forward',
 	},
 	{
-		buttonName : 'Preview',
+		buttonName : 'Edit',
 		icon       : <IcMEdit
 			width={20}
 			height={20}

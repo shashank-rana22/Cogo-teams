@@ -1,27 +1,61 @@
 export const personalInfo = [
 	{
 		heading : 'BASIC INFORMATION',
+		key     : 'basic',
 		details : [
-			{ label: 'First Name', key: 'processed', value: 'first_name' },
-			{ label: 'Last Name', key: 'processed', value: 'last_name' },
-			{ label: 'Email', key: 'details', value: 'cogoport_email' },
-			{ label: 'Phone Number', key: 'details', value: ['mobile_country_code', 'mobile_number'] },
-			{ label: 'Personal Email', key: 'details', value: 'personal_email' },
+			{ label: 'First Name', key: 'processed', value: 'first_name', inputtype: 'input' },
+			{ label: 'Middle Name', key: 'processed', value: 'middle_name', inputtype: 'input' },
+			{ label: 'Last Name', key: 'processed', value: 'last_name', inputtype: 'input' },
+			{ label: 'Legal Name', key: 'personal', value: 'legal_name', inputtype: 'input' },
+			{ label: 'Email', key: 'details', value: 'cogoport_email', inputtype: 'input' },
+
 			{
-				label : 'Alternate Number',
-				key   : 'personal',
-				value : ['alternate_mobile_country_code', 'alternate_mobile_number'],
+				label     : 'Phone Number',
+				key       : 'details',
+				value     : ['mobile_country_code', 'mobile_number'],
+				inputtype : 'mobile',
 			},
-			{ label: 'Gender', key: 'details', value: 'gender' },
-			{ label: 'Date of Birth', key: 'details', value: 'date_of_birth' },
-			{ label: 'Marital Status', key: 'personal', value: 'marital_status' },
-			{ label: 'Blood Group', key: 'personal', value: 'blood_group' },
-			{ label: 'Disability Level', key: 'personal', value: 'disability_level' },
-			{ label: 'Allergies', key: 'personal', value: 'allergies' },
+			{ label: 'Personal Email', key: 'details', value: 'personal_email', inputtype: 'input' },
+			{
+				label     : 'Alternate Number',
+				key       : 'personal',
+				value     : ['alternate_mobile_country_code', 'alternate_mobile_number'],
+				inputtype : 'mobile',
+
+			},
+			{
+				label     : 'Emergency Contact Number',
+				key       : 'details',
+				value     : ['emergency_contact_details.country_code', 'emergency_contact_details.number'],
+				inputtype : 'mobile',
+
+			},
+			{
+				label     : 'Gender',
+				key       : 'details',
+				value     : 'gender',
+				inputtype : 'select',
+				options   : [{ label: 'Male', value: 'male' },
+					{ label: 'Female', value: 'female' },
+					{ label: 'Others', value: 'others' }],
+			},
+			{ label: 'Date of Birth', key: 'details', value: 'date_of_birth', inputtype: 'date' },
+			{
+				label     : 'Marital Status',
+				key       : 'personal',
+				value     : 'marital_status',
+				inputtype : 'select',
+				options   : [{ label: 'Married', value: 'married' },
+					{ label: 'Single', value: 'single' }],
+			},
+			{ label: 'Blood Group', key: 'personal', value: 'blood_group', inputtype: 'input' },
+			{ label: 'Disability Level', key: 'personal', value: 'disability_level', inputtype: 'input' },
+			{ label: 'Allergies', key: 'personal', value: 'allergies', inputtype: 'input' },
 		],
 	},
 	{
 		heading : 'FAMILY INFORMATION',
+		key     : 'family',
 		details : [
 			{ label: 'Fathers Name', key: 'family', value: 'father_name' },
 			{ label: 'Mothers Name', key: 'family', value: 'mother_name' },
@@ -53,10 +87,22 @@ export const personalInfo = [
 		],
 	},
 	{
-		heading : 'ADDRESS INFORMATION',
+		heading : 'SOCIAL MEDIA LINKS',
+		key     : 'personal',
 		details : [
-			{ label: 'Address Line 1', key: 'address', value: 'address' },
-			{ label: 'Address Line 2', key: 'address', value: '-' },
+			{ label: 'Linkedin', key: 'personal', value: 'social_media_links.linkedin' },
+			{ label: 'Instagram', key: 'personal', value: 'social_media_links.instagram' },
+			{ label: 'Github', key: 'personal', value: 'social_media_links.github' },
+			{ label: 'Facebook', key: 'personal', value: 'social_media_links.facebook' },
+			{ label: 'Figma', key: 'personal', value: 'social_media_links.figma' },
+			{ label: 'Twitter', key: 'personal', value: 'social_media_links.twitter' },
+		],
+	},
+	{
+		heading : 'ADDRESS INFORMATION',
+		key     : 'address',
+		details : [
+			{ label: 'Address Line', key: 'address', value: 'address' },
 			{ label: 'City', key: 'address', value: 'city' },
 			{ label: 'State', key: 'address', value: 'state' },
 			{ label: 'Pincode', key: 'address', value: 'pincode' },
@@ -88,22 +134,40 @@ export const employmentInfo = [
 			{ label: 'PMS', key: 'details', value: 'Set C' },
 		],
 	},
+	{
+		heading : 'PREVIOUS JOB  INFORMATION',
+		key     : 'job_history',
+		details : [
+			{ label: 'Company Name', key: 'job_history', value: 'company_name' },
+			{ label: 'Role', key: 'job_history', value: 'role' },
+			{ label: 'Type', key: 'job_history', value: 'type' },
+
+		],
+	},
+	{
+		heading : 'JOB SQUADS',
+		details : [
+			{ label: 'Chapter Name', key: 'employee_squad', value: 'chapter_name', isStartCase: true },
+			{ label: 'Squad Name', key: 'employee_squad', value: 'squad_name', isStartCase: true },
+			{ label: 'Sub Chapter Name', key: 'employee_squad', value: 'sub_chapter_name', isStartCase: true },
+			{ label: 'Tribe Name', key: 'employee_squad', value: 'tribe_name', isStartCase: true },
+		],
+	},
 ];
 
 export const statutoryInfo = {
 	heading : 'BASIC DETAILS',
 	details : [
-		{ label: 'PF Applicable', value: true },
+		{ label: 'PF Applicable', key: 'statutory', value: 'pf_applicable' },
 		{ label: 'PF Pension Applicable', value: true },
 		{ label: 'Employee PF Ceiling Applicable', value: true },
-		{ label: 'Employer PF Ceiling Applicable', value: true },
 		{ label: 'PF Joining Date', value: '23/03/2022' },
 		{ label: 'PF Number', value: '00125510' },
 		{ label: 'UAN Number', value: '54893120051' },
 		{ label: 'PF Wage', value: 0 },
 		{ label: 'VPF', value: '0.0%' },
-		{ label: 'ESIC Applicable', value: true },
-		{ label: 'PT Applicable', value: true },
+		{ label: 'ESIC Applicable', key: 'statutory', value: 'esic' },
+		{ label: 'PT Applicable', key: 'statutory', value: 'professional_tax' },
 		{ label: 'LWF Applicable', value: true },
 		{ label: 'IT Applicable', value: true },
 		{ label: 'Gratuity Applicable', value: true },
@@ -123,3 +187,32 @@ export const otherInfo = {
 		{ label: 'Medical Policy Number', value: '24646154' },
 	],
 };
+
+export const bankInfo = [
+	{ label: 'Account Holder Name', value: 'account_holder_name', type: 'input' },
+	{ label: 'Account Number', value: 'account_number', type: 'input' },
+	{ label: 'Branch Name', value: 'bank_branch_name', type: 'input' },
+	{ label: 'Bank Name', value: 'bank_name', type: 'input' },
+	{ label: 'IFSC CODE', value: 'ifsc_code', type: 'input' },
+];
+
+export const pfInfo = [
+	{
+		label   : 'ESIC',
+		value   : 'esic',
+		type    : 'select',
+		options : [{ label: 'Active', value: 'active' }, { label: 'Non-Active', value: 'nonactive' }],
+	},
+	{
+		label   : 'PF APPLICABLE',
+		value   : 'pf_applicable',
+		type    : 'select',
+		options : [{ label: 'Active', value: 'active' }, { label: 'Non-Active', value: 'nonactive' }],
+	},
+	{
+		label   : 'PROFESSIONAL TAX',
+		value   : 'professional_tax',
+		type    : 'select',
+		options : [{ label: 'Active', value: 'active' }, { label: 'Non-Active', value: 'nonactive' }],
+	},
+];

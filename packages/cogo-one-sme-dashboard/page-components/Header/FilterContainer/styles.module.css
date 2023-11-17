@@ -1,0 +1,30 @@
+.field_container {
+	display: flex;
+}
+
+.each_element {
+	padding-right: 8px;
+
+	&:last-child {
+		padding-right: unset;
+	}
+
+	:global {
+		.ui_select_container,
+		.ui_multiselect_container {
+			width: 200px;
+		}
+
+		.office_location {
+			width: 150px !important;
+		}
+
+		.react-datepicker-wrapper {
+			width: 180px;
+
+			input {
+				height: 34px;
+			}
+		}
+	}
+}

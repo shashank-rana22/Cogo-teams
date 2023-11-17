@@ -20,6 +20,7 @@ function BookingParamsMapping({ bookingParams = [] }) {
 					? (
 						<div style={{ width: 'fit-content' }}>
 							{`${item.packages_count} Pkg`}
+							{' '}
 							{dimension ? `(${dimension}) ` : ''}
 							{startCase(item.packing_type || '')}
 						</div>

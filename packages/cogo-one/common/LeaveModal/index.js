@@ -14,6 +14,7 @@ function LeaveModal({
 	setOpenLeaveModal = () => {},
 	loading = false,
 	userId = '',
+	isMobile = false,
 }) {
 	const {
 		control = {},
@@ -43,7 +44,7 @@ function LeaveModal({
 			size="sm"
 			show
 			onClose={handleClose}
-			placement="top"
+			placement={isMobile ? 'bottom' : 'top'}
 			className={styles.styled_modal}
 		>
 			<Modal.Header title="Update Leave Status" />
@@ -73,6 +74,7 @@ function LeaveModal({
 						control={control}
 						rules={{ required: true }}
 						showTimeSelect
+						placement="bottom"
 					/>
 
 					<div className={styles.actions}>

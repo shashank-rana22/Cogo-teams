@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCopy } from '@cogoport/icons-react';
-import React from 'react';
 
 import copyToClipboard from '../../../../../helpers/copyToClipboard';
 
@@ -15,6 +14,7 @@ function SuccessModal({
 	promocode = '',
 	validityEnd = '',
 	allotedAmountLeft = 0,
+	isMobile = false,
 }) {
 	const onClose = () => setShow(false);
 
@@ -27,7 +27,7 @@ function SuccessModal({
 			size="md"
 			show={show}
 			onClose={onClose}
-			placement="top"
+			placement={isMobile ? 'bottom' : 'top'}
 		>
 			<div className={styles.container}>
 				<div className={styles.title}>Congratulations!</div>
@@ -57,9 +57,8 @@ function SuccessModal({
 							currency : GLOBAL_CONSTANTS.currency_code.USD,
 							options  : {
 								style                 : 'currency',
-								notation              : 'compact',
-								compactDisplay        : 'short',
-								minimumFractionDigits : 2,
+								currencyDisplay       : 'symbol',
+								maximumFractionDigits : 2,
 							},
 						})}
 					</strong>
