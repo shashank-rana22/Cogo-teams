@@ -50,21 +50,6 @@ const getTableColumns = () => {
 		{
 			Header   : 'Validity Start Date',
 			accessor : (item) => {
-				const validity_end = format(
-					new Date(item?.setting_config?.validity_end_date),
-					GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-				);
-
-				return (
-					<div className={styles.container}>
-						{startCase(validity_end) || '-' }
-					</div>
-				);
-			},
-		},
-		{
-			Header   : 'Validity End Date',
-			accessor : (item) => {
 				const validity_start = format(
 					new Date(item?.setting_config?.validity_start_date),
 					GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -73,6 +58,21 @@ const getTableColumns = () => {
 				return (
 					<div className={styles.container}>
 						{startCase(validity_start) || '-' }
+					</div>
+				);
+			},
+		},
+		{
+			Header   : 'Validity End Date',
+			accessor : (item) => {
+				const validity_end = format(
+					new Date(item?.setting_config?.validity_end_date),
+					GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				);
+
+				return (
+					<div className={styles.container}>
+						{startCase(validity_end) || '-' }
 					</div>
 				);
 			},
