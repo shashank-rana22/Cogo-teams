@@ -1,19 +1,15 @@
+import { getPlanningContainerServiceWise } from './checkContainerNumbers';
+
 const SERVICE_KEY_DELAYED = ['commodity', 'container_type', 'container_size'];
-// const SERVICE_KEY_UPDATED = ['service_type', 'containers_count'];
 
 const getCreateContractPayload = ({ fclServices, formValues, shipment_data }) => {
 	const payload = {
-		shipment_id        : shipment_data?.id,
-		delayed_containers : [],
-		// updated_containers : [],
+		shipment_id                : shipment_data?.id,
+		delayed_containers         : [],
+		updated_containers_details : [],
 	};
 
 	const { planning = [] } = formValues || {};
-
-	// fclServices?.forEach((service) => {
-	// 	const serviceKeys = SERVICE_KEY_UPDATED.reduce((res, key) => ({ ...res, [key]: service?.[key] }), {});
-	// 	payload.updated_containers.push({});
-	// });
 
 	planning.forEach((planService) => {
 		const { service_id, containers_count, ...rest } = planService || {};
@@ -30,6 +26,21 @@ const getCreateContractPayload = ({ fclServices, formValues, shipment_data }) =>
 
 		};
 		payload.delayed_containers.push(planPayload);
+	});
+
+	const planningContainerServiceWise = getPlanningContainerServiceWise({ planning });
+
+	fclServices?.forEach((service) => {
+		const updatePayload = {
+			service_id       : service?.id,
+			containers_count : service?.containers_count,
+		};
+
+		if (planningContainerServiceWise?.[service?.id]) {
+			updatePayload.containers_count -= planningContainerServiceWise?.[service?.id] || 0;
+		}
+
+		payload.updated_containers_details.push(updatePayload);
 	});
 
 	return payload;
