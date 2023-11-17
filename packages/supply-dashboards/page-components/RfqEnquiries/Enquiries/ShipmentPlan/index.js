@@ -10,7 +10,7 @@ const columns = [
 	{ Header: 'Container Count' },
 ];
 
-function ShipmentPlan({ value }) {
+function ShipmentPlan({ value = {} }) {
 	const {
 		shipment_frequency = '', sailing_period_start_date = '',
 		sailing_period_end_date = '', rfq_shipment_plan_details = [],
@@ -32,6 +32,7 @@ function ShipmentPlan({ value }) {
 
 	return (
 		<div className={styles.container}>
+
 			<div>
 				<div className={styles.content}>
 					<div className={styles.title}>

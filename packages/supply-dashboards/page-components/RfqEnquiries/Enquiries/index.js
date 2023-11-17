@@ -1,9 +1,10 @@
 import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { IcMArrowBack, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { format } from '@cogoport/utils';
+import { format, isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import EmptyState from '../../../common/EmptyState';
 import useGetRfqSearches from '../hooks/useGetRfqSearches';
 import useListShipmentPlans from '../hooks/useGetShipmentPlan';
 
@@ -31,6 +32,7 @@ function Enquiries() {
 	} = useGetRfqSearches({ rfqId, relevantToUser });
 
 	const { data: shipmentplanData, listShipmentPlans } = useListShipmentPlans({ selectedCard });
+	const { list } = shipmentplanData || [];
 
 	const negotiation_remarks = data?.data[ZEROVALUE]?.negotiation_remarks;
 	const onChange = () => {
@@ -150,12 +152,13 @@ function Enquiries() {
 								<div
 									className={styles.shipment_details}
 								>
-									{(shipmentplanData?.list || [])?.map((value) => (
-										<ShipmentPlan
-											value={value}
-											key={value?.id}
-										/>
-									))}
+									{isEmpty(list) ? <EmptyState />
+										: (list || []).map((value) => (
+											<ShipmentPlan
+												value={value}
+												key={value?.id}
+											/>
+										))}
 								</div>
 							</TabPanel>
 

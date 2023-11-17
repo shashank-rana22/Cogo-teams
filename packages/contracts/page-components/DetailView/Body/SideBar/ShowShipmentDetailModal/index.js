@@ -13,7 +13,7 @@ function ShipmentDataModal({
 	loading = false,
 }) {
 	const { data } = shipmentDetailData || {};
-	const { shipment_plan_data } = data || {};
+	const { shipment_plan_data } = data || [];
 
 	const formatDateAccessor = (dateField) => (row) => {
 		const dateValue = row?.[dateField];
@@ -45,7 +45,7 @@ function ShipmentDataModal({
 		>
 			<Modal.Header title="Shipment Plan Data" />
 			{loading && <Header />}
-			{(!loading && shipment_plan_data)?.map((value) => (
+			{!loading && (shipment_plan_data || []).map((value) => (
 				<Modal.Body key={value?.id}>
 					<div className={styles.heading}>{value?.trade_party_data?.display_name}</div>
 					<Table columns={columns} data={value?.plan_details} />
