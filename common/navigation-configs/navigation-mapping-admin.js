@@ -652,8 +652,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		margin: {
 			key           : 'margin',
 			title         : t('common:margin_management'),
-			href          : '/margins',
-			as            : '/margins',
+			href          : '/v2/margins',
+			as            : '/v2/margins',
 			type          : 'link',
 			possible_apis : apis.margin,
 			icon          : IcMMarginManagement,

@@ -1,21 +1,40 @@
 import { Popover } from '@cogoport/components';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { IcMDoubleFilter } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import SearchForm from './SearchForm';
 
-function Search({ activeTab = '', setFilterParams = () => {}, filterParams = {} }) {
+function Search({ activeTab = '', activeService = '', setFilterParams = () => { }, filterParams = {} }) {
+	const [showPopver, setShowPopver] = useState(false);
+
 	return (
 		<Popover
+			visible={showPopver}
 			content={(
 				<SearchForm
 					activeTab={activeTab}
+					activeService={activeService}
 					setFilterParams={setFilterParams}
 					filterParams={filterParams}
+					setShowPopver={setShowPopver}
 				/>
 			)}
 			placement="bottom"
 		>
-			<IcMSearchlight style={{ width: '2rem', height: '2rem', cursor: 'pointer', marginRight: 10 }} />
+			<div
+				style={{
+					display         : 'flex',
+					alignItems      : 'center',
+					backgroundColor : '#fff',
+					borderRadius    : '4px',
+					padding         : '8px 16px',
+				}}
+				role="presentation"
+				onClick={() => setShowPopver(!showPopver)}
+			>
+				<IcMDoubleFilter height={24} width={24} />
+				Filter
+			</div>
 		</Popover>
 	);
 }

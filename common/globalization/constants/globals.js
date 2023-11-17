@@ -561,6 +561,14 @@ const GLOBAL_CONSTANTS = {
 		public_leaderboard_announcement : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/announcement.svg',
 		kpi:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rectangle_126.svg',
+		cogo_lite:
+		'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/CogoLite.png',
+		cogo_anchor:
+		'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/CogoAnchor.png',
+		cogo_captain:
+		'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/CogoCaptain.png',
+		cogo_freighter:
+		'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/Cogo-Freighter.png',
 	},
 
 	video_call_ring_tone_url:

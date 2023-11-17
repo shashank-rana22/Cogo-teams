@@ -1,10 +1,13 @@
 import { Toast } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
 const useCreateMargin = () => {
+	const router = useRouter();
+
 	const [{ loading }, trigger] = useRequest(
 		{
 			method : 'post',
@@ -16,10 +19,11 @@ const useCreateMargin = () => {
 		try {
 			await trigger({ data });
 			Toast.success('Margin created successfully');
+			router.push('/margins');
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [trigger]);
+	}, [router, trigger]);
 
 	return {
 		loading,
