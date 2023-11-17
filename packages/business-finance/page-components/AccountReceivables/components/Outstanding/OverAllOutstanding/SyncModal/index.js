@@ -8,7 +8,7 @@ import styles from './style.module.css';
 
 function SyncModal({ show = {}, setShow = () => {}, data = {} }) {
 	const columns = getColumns();
-	const { syncSageArOutstanding = () => {}, loading = false } = useSyncSageArOutstanding();
+	const { syncSageArOutstanding = () => {}, loading = false } = useSyncSageArOutstanding({ setShow });
 	return (
 		<div>
 			<Modal show={show} onClose={() => setShow(false)} placement="top" size="XL">

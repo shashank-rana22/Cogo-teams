@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 
 import toastApiError from '../../commons/toastApiError';
 
-const useSyncSageArOutstanding = () => {
+const useSyncSageArOutstanding = ({ setShow = () => {} }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/sync_sage_ar_outstanding',
 		method : 'POST',
@@ -14,6 +14,7 @@ const useSyncSageArOutstanding = () => {
 				data: { sync_data: val || false },
 
 			});
+			setShow(false);
 		} catch (err) {
 			toastApiError(err);
 		}

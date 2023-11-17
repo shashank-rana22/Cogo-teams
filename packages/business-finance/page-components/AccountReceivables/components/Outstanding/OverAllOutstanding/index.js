@@ -64,7 +64,10 @@ function OverAllOutstanding({
 		setFilters,
 		filtersApplied,
 	} = useGetOrgOutstanding({ entityCode });
-	const { syncSageArOutstanding = () => {}, data = {} } = useSyncSageArOutstanding();
+	const {
+		syncSageArOutstanding = () => {}, data = {},
+		loading:sageArOutstandingloading = false,
+	}	= useSyncSageArOutstanding({});
 	const { include_defaulters = false } = filters || {};
 
 	const [dateFilter, setDateFilter] = useState({
@@ -197,6 +200,7 @@ function OverAllOutstanding({
 							onClick={() => onSubmit()}
 							themeType="secondary"
 							size="lg"
+							loading={sageArOutstandingloading}
 							style={{ marginRight: 10 }}
 						>
 							Sync Data
