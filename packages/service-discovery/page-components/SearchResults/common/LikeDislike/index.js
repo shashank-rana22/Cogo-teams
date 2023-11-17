@@ -17,13 +17,6 @@ function LikeDislike({ rateCardData = {}, detail = {}, isMobile = false }) {
 		dislikes_count : is_disliked ? dislikes_count + 1 : dislikes_count,
 	});
 
-	const handleDislikeAction = () => {
-		if (likeState.is_disliked) {
-			return;
-		}
-		setShowFeedbackModal(true);
-	};
-
 	const onCloseFeedbackModal = () => { setShowFeedbackModal(false); };
 
 	useEffect(() => {
@@ -45,7 +38,7 @@ function LikeDislike({ rateCardData = {}, detail = {}, isMobile = false }) {
 				/>
 
 				<Button
-					onClick={handleDislikeAction}
+					onClick={() => setShowFeedbackModal(true)}
 					themeType="link"
 					size="md"
 				>

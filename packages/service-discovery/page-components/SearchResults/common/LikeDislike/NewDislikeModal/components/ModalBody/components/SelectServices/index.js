@@ -70,7 +70,7 @@ function SelectServices({
 	rate = {},
 	setSelectedSevice = () => {},
 	selectedSevice = {},
-	// data = {},
+	data = {},
 }) {
 	const {
 		service_rates = {},
@@ -102,7 +102,7 @@ function SelectServices({
 						rate_id                  : rate_id || id,
 						service_id,
 						container_size,
-						is_added                 : false,
+						is_added                 : data[service_id],
 						label,
 						selected_card            : rate.id,
 						service_data             : cur,
@@ -164,6 +164,8 @@ function SelectServices({
 							role="presentation"
 							className={cl`${styles.tile_container} ${
 								selectedSevice.service_id === service_id && styles.active
+							} ${
+								is_added && styles.added
 							}`}
 							onClick={() => setSelectedSevice(item)}
 						>

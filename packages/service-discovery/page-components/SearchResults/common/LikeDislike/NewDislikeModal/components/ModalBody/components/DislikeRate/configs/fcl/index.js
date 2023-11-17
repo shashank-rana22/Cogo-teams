@@ -4,10 +4,10 @@ import missingLineItemsControls from './missing-line-items-controls';
 import rateNotSatisfactoryControls from './rate-not-satisfactory-controls';
 
 export const getFclServiceControls = () => ({
-	unsatisfactory_rate                  : rateNotSatisfactoryControls(),
-	unsatisfactory_destination_detention : detentionNotSatisfactoryControls(),
-	has_additional_line_items            : hasAdditionalLineItemsControls(),
-	has_missing_line_items               : missingLineItemsControls(),
+	unsatisfactory_rate       : rateNotSatisfactoryControls(),
+	unsatisfactory_free_days  : detentionNotSatisfactoryControls(),
+	has_additional_line_items : hasAdditionalLineItemsControls(),
+	has_missing_line_items    : missingLineItemsControls(),
 });
 
 export const fclReasonOptions = [
@@ -17,7 +17,7 @@ export const fclReasonOptions = [
 	},
 	{
 		label : 'Detention not satisfactory',
-		value : 'unsatisfactory_destination_detention',
+		value : 'unsatisfactory_free_days',
 	},
 	{
 		label : 'Has Additional Line Items',

@@ -17,7 +17,7 @@ function ModalBody({ rate = {}, details = {} }) {
 	const [selectedSevice, setSelectedSevice] = useState({});
 
 	const {
-		// getSpotSearchRateFeedback,
+		getSpotSearchRateFeedback,
 		loading,
 		data,
 	} = useGetSpotSearchRateFeedback({ rate_card_id: rate.id });
@@ -26,7 +26,7 @@ function ModalBody({ rate = {}, details = {} }) {
 		return <LoadingState />;
 	}
 
-	console.log('data', data);
+	console.log('data', data, details);
 	const { feedback_type = '', service_id = '' } = selectedSevice;
 
 	const ActiveComponent = MAPPING[feedback_type] || DislikeRate;
@@ -46,6 +46,8 @@ function ModalBody({ rate = {}, details = {} }) {
 					details={details}
 					rate={rate}
 					setSelectedSevice={setSelectedSevice}
+					data={data}
+					getSpotSearchRateFeedback={getSpotSearchRateFeedback}
 				/>
 			</div>
 		</div>

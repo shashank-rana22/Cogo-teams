@@ -34,6 +34,14 @@
 
 	&.active {
 		background: #fde74d;
+
+		&.added {
+			background: #ddebc0;
+		}
+	}
+
+	&.added {
+		border: 1px solid #ddebc0;
 	}
 }
 

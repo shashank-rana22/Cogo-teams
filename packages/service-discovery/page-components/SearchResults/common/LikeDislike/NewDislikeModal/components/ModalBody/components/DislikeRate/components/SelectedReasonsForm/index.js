@@ -1,35 +1,17 @@
-import { Button, Toast, cl } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useRequest } from '@cogoport/request';
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import getElementController from '../../../../../../../../../../../configs/getElementController';
+import FormComponent from '../FormComponent';
 
 import styles from './styles.module.css';
+import useHandleSelectedReasonsForm from './useHandleSelectedReasonsForm';
 
 const NAME_MAPPING = {
-	unsatisfactory_rate                  : 'RATE NOT SATISFACTORY',
-	unsatisfactory_destination_detention : 'DETENTION NOT SATISFACTORY',
-	has_additional_line_items            : 'HAS ADDITIONAL LINE ITEMS',
-	has_missing_line_items               : 'THERE ARE MISSING LINE ITEMS',
-};
-
-const getErrorMessage = (error, name) => {
-	if (!['preferred_freight_rate'].includes(name)) {
-		return error.message || 'This is Required';
-	}
-
-	if (isEmpty(error)) {
-		return null;
-	}
-
-	if (error.price?.type === 'min') {
-		return 'price should be greater than 0';
-	}
-
-	return `${startCase(Object.keys(error)[GLOBAL_CONSTANTS.zeroth_index])} is Required`;
+	unsatisfactory_rate       : 'RATE NOT SATISFACTORY',
+	unsatisfactory_free_days  : 'DETENTION NOT SATISFACTORY',
+	has_additional_line_items : 'HAS ADDITIONAL LINE ITEMS',
+	has_missing_line_items    : 'THERE ARE MISSING LINE ITEMS',
 };
 
 function SelectedReasonsForm({
@@ -37,31 +19,30 @@ function SelectedReasonsForm({
 	formProps = {},
 	allControls = [],
 	setSelectedSevice = () => {},
-	service_type = '',
 	selectedSevice = {},
+	details = {},
+	rate = {},
+	prefilledData = {},
+	getSpotSearchRateFeedback = () => {},
 }) {
-	const { control, handleSubmit = () => {}, formState:{ errors = {} } } = formProps;
+	const {
+		control,
+		handleSubmit = () => {},
+		formState: { errors = {} },
+	} = formProps;
 
-	const [{ loading = false }, trigger] = useRequest({
-		method : 'POST',
-		url    : '/validate_rate_feedback',
-	}, { manual: true });
+	const { feedbacks = []	} = prefilledData;
 
-	const onSubmit = (values) => {
-		console.log('values', values);
+	const isFeedbackSubmitted = !isEmpty(prefilledData);
 
-		try {
-			trigger({
-				data: {
-					feedbacks : selectedReasons,
-					rate_id   : selectedSevice.rate_id,
-					service_type,
-				},
-			});
-		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
-		}
-	};
+	const { onSubmit, loading, unsatisfiedFeedbacks = {}, createTrigger = () => {} } = useHandleSelectedReasonsForm({
+		selectedSevice,
+		details,
+		rate,
+		selectedReasons,
+		feedbacks,
+		getSpotSearchRateFeedback,
+	});
 
 	return (
 		<form className={styles.main_container} onSubmit={handleSubmit(onSubmit)}>
@@ -80,67 +61,40 @@ function SelectedReasonsForm({
 					<div key={reason} className={styles.container}>
 						<div className={styles.title}>{title}</div>
 
-						<div className={styles.form_container}>
-							{selectedControls.map((item) => {
-								const {
-									label,
-									elementStyles = {},
-									divWidth = 'calc(50% - 12px)',
-									...restProps
-								} = item;
-
-								const { name, type = '', rules } = restProps;
-
-								const ActiveElement = getElementController(type);
-
-								const [, controlName] = name.split('.');
-
-								return (
-									<div
-										key={name}
-										className={styles.ind_container}
-										style={{ width: divWidth }}
-									>
-										<div className={styles.label}>
-											{label}
-											{rules ? <sup className={styles.superscipt}>*</sup> : null}
-										</div>
-
-										<div className={cl`${styles.element} ${styles[type]}`} style={elementStyles}>
-											<ActiveElement
-												control={control}
-												{...restProps}
-												type={type === 'upload' ? 'input' : type}
-											/>
-
-											{currErrros?.[controlName] && (
-												<div className={styles.error_message}>
-													{getErrorMessage(currErrros[controlName] || {}, controlName)}
-												</div>
-											)}
-										</div>
-									</div>
-								);
-							})}
-						</div>
+						<FormComponent
+							currErrros={currErrros}
+							control={control}
+							selectedControls={selectedControls}
+							prefilledData={prefilledData}
+							reason={reason}
+							unsatisfiedFeedbacks={unsatisfiedFeedbacks}
+							createTrigger={createTrigger}
+							getSpotSearchRateFeedback={getSpotSearchRateFeedback}
+						/>
 					</div>
 				);
 			})}
 
-			<div className={cl`${styles.container} ${styles.commodity_description}`} style={{ paddingTop: '20px' }}>
-				<div className={styles.label}>
-					Commodity Description
-					<span className={styles.second_text}>
-						(Write carefully, this cannot be edited and will be used for the other services as well)
-					</span>
-				</div>
+			{!isFeedbackSubmitted ? (
+				<div
+					className={cl`${styles.container} ${styles.commodity_description}`}
+					style={{ paddingTop: '20px' }}
+				>
+					<div className={styles.label}>
+						Commodity Description
+						<span className={styles.second_text}>
+							(Write carefully, this cannot be edited and will be used for the
+							other services as well)
+						</span>
+					</div>
 
-				<InputController
-					placeholder="You may give description to get accurate Rate Revert"
-					control={control}
-					name="commodity_description"
-				/>
-			</div>
+					<InputController
+						placeholder="You may give description to get accurate Rate Revert"
+						control={control}
+						name="commodity_description"
+					/>
+				</div>
+			) : null}
 
 			<div className={styles.buttons}>
 				<div className={styles.button_container}>
@@ -155,7 +109,7 @@ function SelectedReasonsForm({
 					<Button
 						type="submit"
 						themeType="accent"
-						disabled={isEmpty(selectedReasons)}
+						disabled={isEmpty(selectedReasons.filter((item) => !feedbacks.includes(item)))}
 						loading={loading}
 					>
 						Submit Feedback for Service

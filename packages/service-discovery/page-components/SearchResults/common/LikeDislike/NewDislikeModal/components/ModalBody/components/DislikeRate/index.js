@@ -7,16 +7,23 @@ import SelectedReasonsForm from './components/SelectedReasonsForm';
 import { getServiceWiseOptions, getServiceWiseConfig } from './configs';
 import styles from './styles.module.css';
 
-function DislikeRate({ selectedSevice = {}, setSelectedSevice = () => {} }) {
-	const [selectedReasons, setSelectedReasons] = useState([]);
+function DislikeRate({
+	selectedSevice = {},
+	setSelectedSevice = () => {},
+	details = {},
+	rate = {},
+	data = {},
+	getSpotSearchRateFeedback = () => {},
+}) {
+	const { label = '', service_type, service_id = '' } = selectedSevice;
+
+	const [selectedReasons, setSelectedReasons] = useState(data[service_id]?.feedbacks || []);
 
 	const formProps = useForm();
 
 	if (isEmpty(selectedSevice)) {
 		return null;
 	}
-
-	const { label = '', service_type } = selectedSevice;
 
 	const reasonOptions = getServiceWiseOptions({ service_type });
 	const allControls = getServiceWiseConfig({ service_type })();
@@ -46,8 +53,11 @@ function DislikeRate({ selectedSevice = {}, setSelectedSevice = () => {} }) {
 				allControls={allControls}
 				selectedReasons={selectedReasons}
 				setSelectedSevice={setSelectedSevice}
-				service_type={service_type}
 				selectedSevice={selectedSevice}
+				details={details}
+				rate={rate}
+				prefilledData={data[service_id] || {}}
+				getSpotSearchRateFeedback={getSpotSearchRateFeedback}
 			/>
 		</div>
 	);

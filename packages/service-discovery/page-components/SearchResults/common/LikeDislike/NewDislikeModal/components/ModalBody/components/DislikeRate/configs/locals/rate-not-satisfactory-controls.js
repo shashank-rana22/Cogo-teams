@@ -1,8 +1,11 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const rateNotSatisfactoryControls = () => [
 	{
 		label         : 'Indicative Rate',
 		type          : 'price-select',
 		name          : 'unsatisfactory_rate.preferred_freight_rate',
+		value         : { currency: GLOBAL_CONSTANTS.currency_code.USD },
 		rules         : { required: 'Enter valid Rate', min: 1 },
 		divWidth      : '100%',
 		elementStyles : { width: 'calc(50% - 12px)' },
