@@ -10,6 +10,8 @@ const API_NAME = {
 	lcl_freight : 'get_lcl_freight_rate',
 	lcl_customs : 'get_lcl_customs_rate',
 	fcl_cfs     : 'get_fcl_cfs_rate',
+	fcl_local   : 'get_fcl_freight_rate_local',
+	air_local   : 'get_air_freight_rate_local',
 };
 
 const useGetFreightRate = ({ filter, formValues, cardData }) => {
@@ -59,6 +61,23 @@ const useGetFreightRate = ({ filter, formValues, cardData }) => {
 			cargo_handling_type : cardData?.cargo_handling_type || formValues?.cargo_handling_type,
 		};
 
+		const fclLocalParams = {
+			port_id             : cardData?.port_id,
+			trade_type          : cardData?.trade_type,
+			shipping_line_id    : cardData?.shipping_line_id,
+			service_provider_id : cardData?.service_provider_id,
+			rate_type           : cardData?.rate_type || formValues?.rate_type || 'market_place',
+			commodity           : cardData?.commodity || formValues?.commodity || undefined,
+		};
+
+		const airLocalParmas = {
+			airport_id          : cardData?.airport_id,
+			airline_id          : cardData?.airline_id,
+			trade_type          : cardData?.trade_type,
+			commodity           : cardData?.commodity,
+			service_provider_id : cardData?.service_provider_id,
+		};
+
 		const paramsMapping = () => {
 			if (['fcl_freight', 'lcl_freight'].includes(filter?.service)) {
 				return Params;
@@ -72,6 +91,12 @@ const useGetFreightRate = ({ filter, formValues, cardData }) => {
 			if (['fcl_customs', 'lcl_customs', 'air_customs'].includes(filter?.service)) {
 				return customsParams;
 			}
+			if (filter?.service === 'fcl_local') {
+				return fclLocalParams;
+			}
+			if (filter?.service === 'air_local') {
+				return airLocalParmas;
+			}
 			return Params;
 		};
 
@@ -80,7 +105,6 @@ const useGetFreightRate = ({ filter, formValues, cardData }) => {
 		try {
 			await trigger({
 				params: {
-					id             : cardData?.id,
 					commodity      : formValues?.commodity || cardData?.commodity,
 					container_size : formValues?.container_size || cardData?.container_size,
 					container_type : formValues?.container_type || cardData?.container_type,
@@ -91,15 +115,15 @@ const useGetFreightRate = ({ filter, formValues, cardData }) => {
 		} catch (err) {
 			// console.log(err);
 		}
-	}, [cardData?.airport_id, cardData?.cargo_handling_type, cardData?.commodity, cardData?.container_size,
-		cardData?.container_type, cardData?.destination_location_id, cardData?.destination_port_id,
-		cardData?.haulage_type, cardData?.id, cardData?.location_id, cardData?.origin_location_id,
-		cardData?.origin_port_id, cardData?.rate_type, cardData?.service_provider_id, cardData?.trade_type,
-		cardData?.transport_modes, filter?.service, formValues?.cargo_handling_type, formValues?.commodity,
-		formValues?.container_size, formValues?.container_type, formValues?.haulage_type,
-		formValues?.payment_term, formValues?.rate_type, formValues?.service_provider_id,
-		formValues?.shipping_line_id, formValues?.trade_type, formValues?.transport_modes,
-		formValues?.validity_end, formValues?.validity_start, id, trigger]);
+	}, [cardData?.airline_id, cardData?.airport_id, cardData?.cargo_handling_type, cardData?.commodity,
+		cardData?.container_size, cardData?.container_type, cardData?.destination_location_id,
+		cardData?.destination_port_id, cardData?.haulage_type, cardData?.location_id, cardData?.origin_location_id,
+		cardData?.origin_port_id, cardData?.port_id, cardData?.rate_type, cardData?.service_provider_id,
+		cardData?.shipping_line_id, cardData?.trade_type, cardData?.transport_modes, filter?.service,
+		formValues?.cargo_handling_type, formValues?.commodity, formValues?.container_size,
+		formValues?.container_type, formValues?.haulage_type, formValues?.payment_term, formValues?.rate_type,
+		formValues?.service_provider_id, formValues?.shipping_line_id, formValues?.trade_type,
+		formValues?.transport_modes, formValues?.validity_end, formValues?.validity_start, id, trigger]);
 
 	useEffect(() => {
 		getFreightRate();

@@ -14,6 +14,8 @@ const API_NAME = {
 	ltl_freight : 'delete_ltl_freight_rate_job',
 	ftl_freight : 'delete_ftl_freight_rate_job',
 	fcl_cfs     : 'delete_fcl_cfs_rate_job',
+	fcl_local   : 'delete_fcl_freight_rate_local_job',
+	air_local   : 'delete_air_freight_rate_local_job',
 };
 
 const useDeleteRateJob = (service) => {

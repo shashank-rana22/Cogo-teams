@@ -89,6 +89,7 @@ function AddRateModal({
 		rateData?.air_customs_charge_codes,
 		rateData?.haulage_freight_charge_codes,
 		rateData?.fcl_cfs_charge_codes,
+		rateData?.local_charge_codes,
 	].find(Boolean);
 
 	const { finalFields } = FieldMutation({
@@ -98,6 +99,7 @@ function AddRateModal({
 		chargeCodes,
 		rateData,
 		fclCfsChargeCodes,
+		setValue,
 	});
 
 	const handleSuccessActions = () => {

@@ -5,7 +5,8 @@ import {
 	useGetAsyncOptions, asyncFieldsLocations,
 } from '@cogoport/forms';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
-import { merge, startCase } from '@cogoport/utils';
+import { isEmpty, merge, startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import useGetMainPortsOptions from '../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 import {
@@ -16,10 +17,14 @@ import {
 import { cargoHandlingOptions, COMMODITY_TYPE_OPTIONS } from './constants';
 
 function FieldMutation({
-	fields, values, filter, chargeCodes, fclCfsChargeCodes,
+	fields, values, filter, chargeCodes, fclCfsChargeCodes, setValue,
 }) {
 	let finalFilteredOptions = [];
 	const dataTradeType = values?.trade_type;
+	const detentionSlabs = values?.detention_days;
+	const freeDetentionDays = values?.detention_free_days;
+	const demurrageSlabs = values?.demurrage_days;
+	const freeDemurrageDays = values?.demurrage_free_days;
 	const organizationUsers = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganizationUsers(),
@@ -97,7 +102,11 @@ function FieldMutation({
 			newControl = { ...newControl, options: CommodityOptions };
 		}
 		if (name === 'commodity_type') {
-			newControl = { ...newControl, options: COMMODITY_TYPE_OPTIONS[values?.air_commodity] };
+			newControl = {
+				...newControl,
+				options: isEmpty(newControl?.options)
+					? COMMODITY_TYPE_OPTIONS[values?.air_commodity] : newControl?.options,
+			};
 		}
 		if (name === 'commodity_sub_type') {
 			newControl = {
@@ -144,6 +153,39 @@ function FieldMutation({
 
 		return { ...newControl };
 	});
+
+	useEffect(() => {
+		if (freeDetentionDays) {
+			detentionSlabs.forEach((obj, index) => {
+				if (!index) {
+					setValue(
+						'detention_days.0.lower_limit',
+						Number(freeDetentionDays) + 1,
+					);
+				} else {
+					setValue(
+						`detention_days.${index}.lower_limit`,
+						Number(detentionSlabs[index - 1].upper_limit) + 1,
+					);
+				}
+			});
+		}
+		if (freeDemurrageDays) {
+			demurrageSlabs.forEach((obj, index) => {
+				if (!index) {
+					setValue(
+						'demurrage_days.0.lower_limit',
+						Number(freeDemurrageDays) + 1,
+					);
+				} else {
+					setValue(
+						`demurrage_days.${index}.lower_limit`,
+						Number(demurrageSlabs[index - 1].upper_limit) + 1,
+					);
+				}
+			});
+		}
+	}, [freeDetentionDays, freeDemurrageDays, detentionSlabs, setValue, demurrageSlabs]);
 
 	return {
 		finalFields,

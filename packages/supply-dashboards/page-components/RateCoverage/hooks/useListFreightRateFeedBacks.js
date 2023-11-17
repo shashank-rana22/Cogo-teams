@@ -13,6 +13,8 @@ const API = {
 	ltl_freight : 'list_ltl_freight_rate_feedbacks',
 	ftl_freight : 'list_ftl_freight_rate_feedbacks',
 	fcl_cfs     : 'list_fcl_cfs_rate_feedbacks',
+	fcl_local   : 'list_fcl_freight_rate_local_feedbacks',
+	air_local   : 'list_air_freight_rate_local_feedbacks',
 };
 
 const useListFreightRateFeedBacks = ({ filter = {}, source_id }) => {

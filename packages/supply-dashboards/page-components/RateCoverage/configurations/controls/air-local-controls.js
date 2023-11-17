@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { currencyOptions } from '../helpers/constants';
 
 const THRESHOLD = 0;
 const COMMODITY_TYPE_OPTIONS = {
@@ -11,15 +11,33 @@ const COMMODITY_TYPE_OPTIONS = {
 		{ label: 'Other Special Commodity Sub Type', value: 'other_special' },
 	],
 };
-const airLocalChargesControls = (payload) => {
+const airLocalControls = ({ data, serviceIdPresent }) => {
 	const controls = [
+		{
+			name        : 'service_provider_id',
+			label       : 'Service Provider',
+			type        : 'select',
+			placeholder : 'Service Provider',
+			span        : 4,
+			value       : serviceIdPresent || data?.service_provider_id,
+			rules       : { required: 'service provider is required' },
+		},
+		{
+			name        : 'sourced_by_id',
+			label       : 'Rate Provided by user',
+			type        : 'select',
+			placeholder : 'Rate Provided by user',
+			value       : data?.sourced_by_id,
+			span        : 4,
+			rules       : { required: 'rate provided by user is required' },
+		},
 		{
 			name        : 'commodity_type',
 			type        : 'select',
 			label       : 'Commodity Type',
 			placeholder : 'Select Commodity Type',
 			span        : 4,
-			options     : COMMODITY_TYPE_OPTIONS[payload?.commodity],
+			options     : COMMODITY_TYPE_OPTIONS[data?.commodity],
 			rules       : {
 				required: true,
 			},
@@ -43,14 +61,10 @@ const airLocalChargesControls = (payload) => {
 			controls: [
 				{
 					name        : 'code',
-					caret       : true,
 					type        : 'select',
-					valueKey    : 'code',
-					labelKey    : 'label',
-					placeholder : 'Select Charge',
-					className   : 'primary lg',
 					span        : 2,
-					rules       : { required: 'This is required' },
+					placeholder : 'Charge Name',
+					rules       : { required: 'is required' },
 				},
 				{
 					name        : 'unit',
@@ -61,14 +75,12 @@ const airLocalChargesControls = (payload) => {
 					rules       : { required: 'This is required' },
 				},
 				{
-					placeholder    : 'Currency',
-					name           : 'currency',
-					type           : 'select',
-					value          : GLOBAL_CONSTANTS.currency_code.USD,
-					span           : 1.5,
-					optionsListKey : 'currencies',
-					className      : 'primary lg',
-					rules          : { required: 'This is required' },
+					name        : 'currency',
+					span        : 1.5,
+					type        : 'select',
+					placeholder : 'Currency',
+					options     : currencyOptions,
+					rules       : { required: 'Currency is required' },
 				},
 				{
 					name        : 'price',
@@ -102,4 +114,4 @@ const airLocalChargesControls = (payload) => {
 	];
 	return controls.filter((control) => control !== null);
 };
-export default airLocalChargesControls;
+export default airLocalControls;

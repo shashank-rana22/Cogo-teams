@@ -10,9 +10,11 @@ import { filterOption } from '../helpers/constants';
 
 import airControls from './air-controls';
 import airCustomsControls from './air-customs-controls';
+import airLocalControls from './air-local-controls';
 import cfsControls from './fcl-cfs-controls';
 import fclControls from './fcl-controls';
 import fclCustomsControls from './fcl-customs';
+import fclLocalControls from './fcl-local-controls';
 import ftlControls from './ftl-controls';
 import haulageControls from './haulage-controls';
 import lclControls from './lcl-controls';
@@ -32,6 +34,8 @@ const serviceControlsMap = {
 	ftl_freight : ftlControls,
 	ltl_freight : ltlControls,
 	fcl_cfs     : cfsControls,
+	fcl_local   : fclLocalControls,
+	air_local   : airLocalControls,
 };
 
 const getDefaultValues = (oldfields) => {
@@ -63,7 +67,6 @@ function useControls({ data = {}, user_id = {}, filter = {}, source = {}, servic
 		includes : { default_params_required: true },
 		labelKey : 'display_name',
 	}));
-
 	const listShippingLineOptions = useGetAsyncOptions(
 		merge(
 			asyncFieldsListOperators(),

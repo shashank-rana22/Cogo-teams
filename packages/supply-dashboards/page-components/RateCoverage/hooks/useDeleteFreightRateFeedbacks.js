@@ -13,6 +13,8 @@ const API_MAPPING = {
 	haulage     : 'delete_haulage_freight_rate_feedback',
 	trailer     : 'delete_trailer_freight_rate_feedback',
 	fcl_cfs     : 'delete_fcl_cfs_rate_feedback',
+	fcl_local   : 'delete_fcl_freight_rate_local_feedback',
+	air_local   : 'delete_air_freight_rate_local_feedback',
 };
 
 const KEY_TO_SEND = {
@@ -27,6 +29,8 @@ const KEY_TO_SEND = {
 	haulage     : 'haulage_freight_rate_feedback_ids',
 	trailer     : 'trailer_freight_rate_feedback_ids',
 	fcl_cfs     : 'fcl_cfs_rate_feedback_ids',
+	fcl_local   : 'fcl_freight_rate_local_feedback_ids',
+	air_local   : 'air_freight_rate_local_feedback_ids',
 };
 
 const useDeleteFreightRateFeedbacks = (service = 'fcl_freight') => {

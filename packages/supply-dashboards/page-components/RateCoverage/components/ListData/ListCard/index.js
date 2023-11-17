@@ -72,9 +72,9 @@ function ListCard({
 
 	const originName = (origin_port || origin_airport || port || origin_location || location || airport)?.name;
 
-	const destinationCode = (destination_port || destination_airport || port || destination_location)?.port_code;
+	const destinationCode = (destination_port || destination_airport || destination_location)?.port_code;
 
-	const destinationName = (destination_port || destination_airport || port || destination_location)?.name;
+	const destinationName = (destination_port || destination_airport || destination_location)?.name;
 
 	const service = filter?.service;
 

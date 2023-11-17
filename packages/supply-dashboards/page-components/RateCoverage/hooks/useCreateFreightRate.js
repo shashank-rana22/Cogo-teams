@@ -4,9 +4,11 @@ import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
 import formatAirCustomsRate from '../payload/format-air-customs-rate';
+import formatAirLocal from '../payload/format-air-local';
 import formatAirRate from '../payload/format-air-rate';
 import formatFclCfs from '../payload/format-fcl-cfs-custom-rate';
 import formatFclCustomsRate from '../payload/format-fcl-customs-rate';
+import formatFclLocal from '../payload/format-fcl-local';
 import formatFclRate from '../payload/format-fcl-rate';
 import formatFtlRate from '../payload/format-ftl-rate';
 import formatHaulageFreightRate from '../payload/format-haulage-freight-rate';
@@ -27,6 +29,8 @@ const API_NAME = {
 	ltl_freight : 'create_ltl_freight_rate',
 	ftl_freight : 'create_ftl_freight_rate',
 	fcl_cfs     : 'create_fcl_cfs_rate',
+	fcl_local   : 'create_fcl_freight_rate_local',
+	air_local   : 'create_air_freight_rate_local',
 };
 
 const KEYS_TO_SEND = {
@@ -40,6 +44,8 @@ const KEYS_TO_SEND = {
 	air_customs     : 'air_customs_rate_request_id',
 	haulage_freight : 'haulage_freight_rate_request_id',
 	trailer_freight : 'trailer_freight_rate_request_id',
+	fcl_local       : 'fcl_freight_rate_local_request_id',
+	air_local       : 'air_freight_rate_local_request_id',
 };
 
 const getPayload = (service, data, user_id, listData) => {
@@ -75,6 +81,12 @@ const getPayload = (service, data, user_id, listData) => {
 	}
 	if (service === 'fcl_cfs') {
 		return formatFclCfs(data, user_id);
+	}
+	if (service === 'fcl_local') {
+		return formatFclLocal(data, user_id, listData);
+	}
+	if (service === 'air_local') {
+		return formatAirLocal(data, user_id, listData);
 	}
 	return data;
 };
