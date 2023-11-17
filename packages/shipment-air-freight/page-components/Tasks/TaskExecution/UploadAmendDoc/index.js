@@ -51,7 +51,7 @@ function UploadAmendDoc({
 	const { control, formState: { errors }, handleSubmit } = useForm({ defaultValues });
 
 	const handleSubmitFinal = (values) => {
-		const documentPayloadData = payloadData || {};
+		const documentPayloadData = JSON.parse(payloadData) || {};
 
 		const finalPayload = {
 			shipment_id         : task.shipment_id,
