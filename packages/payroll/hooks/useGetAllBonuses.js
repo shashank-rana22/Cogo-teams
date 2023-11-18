@@ -25,8 +25,8 @@ const useGetAllBonuses = () => {
 					params: {
 						filters: {
 							...rest,
-							q              : query,
-							payment_status : payment_status === 'all' ? undefined : payment_status,
+							q: query,
+							payment_status,
 						},
 						page_limit,
 						page,

@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useHarbourRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
@@ -14,7 +15,7 @@ const useCreateDeclarations = ({ refetch = () => {}, getCalculatedTax = () => {}
 			try {
 				await trigger({
 					params: {
-						employee_id  : 'dfca5d91-8906-d146-2970-202eace33a66',
+						employee_id  : GLOBAL_CONSTANTS.calculator.emp_id,
 						declarations : {
 							hra   : datasent?.hra,
 							'80C' : datasent?.EightyC,

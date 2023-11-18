@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function GetInsightsData(item) {
+function GetInsightsData({ item }) {
 	if (item?.total_payout_insights > 0) {
 		return (
 			<div className={cl`${styles.positive}`}>
@@ -153,7 +153,7 @@ const getColumnsEarning = ({ handleOpenModal }) => {
 			Header   : 'TOTAL PAYOUT',
 			accessor : (item) => (
 				<div>
-					{GetInsightsData(item)}
+					<GetInsightsData item={item} />
 				</div>
 			),
 			id: 'total_payout_insights',

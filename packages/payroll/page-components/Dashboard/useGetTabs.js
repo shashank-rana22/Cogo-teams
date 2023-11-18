@@ -3,6 +3,7 @@ import Manage from './Manage/index';
 import DashboardPayroll from './PayrollDashboard/DashboardPayroll/index';
 import Payroll from './PayrollDashboard/Payroll';
 import Transactions from './Transactions';
+import UploadFiles from './UploadFiles';
 
 const tabs = [
 	{
@@ -29,6 +30,11 @@ const tabs = [
 		name      : 'expense_management',
 		title     : 'Expense Management',
 		Component : <ExpenseManagement />,
+	},
+	{
+		name      : 'file_uploader',
+		title     : 'File Uploader',
+		Component : <UploadFiles />,
 	},
 ];
 

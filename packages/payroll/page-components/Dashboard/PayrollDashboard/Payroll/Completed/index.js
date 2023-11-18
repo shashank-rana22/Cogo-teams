@@ -22,7 +22,7 @@ const tabData = {
 const CIRCLE = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Clock_orange.svg';
 const PROFILE_SHADOW = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/profile_shadow.svg';
 
-function GetStatus(activeTab, status) {
+function GetStatus({ activeTab, status }) {
 	if (activeTab === null) {
 		return <div />;
 	}
@@ -153,9 +153,7 @@ function CompletedTab({
 						}}
 					/>
 				) : null}
-				{
-						GetStatus(activeTab, item.status)
-					}
+				<GetStatus activeTab={activeTab} status={item.status} />
 				<IcMArrowRight
 					width="16px"
 					height="16px"

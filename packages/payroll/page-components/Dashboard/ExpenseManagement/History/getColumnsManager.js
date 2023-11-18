@@ -16,7 +16,7 @@ const statusmap = {
 	pending         : { label: 'Pending', color: '#C26D1A', background: '#FEF3E9' },
 };
 
-function GetStatus(name) {
+function GetStatus({ name }) {
 	if (name === null) return '-';
 	const ele = statusmap[name];
 	return (
@@ -115,7 +115,7 @@ const getColumnsManager = ({ setItem, setShow, handleUpdate, hr_view }) => {
 				<div
 					className={styles.data}
 				>
-					{GetStatus(item?.reimbursement_status)}
+					<GetStatus name={item?.reimbursement_status} />
 				</div>
 			),
 			id: 'status',

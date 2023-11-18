@@ -2749,15 +2749,6 @@ const navigationMapping = ({ t = () => {} }) => {
 			isSubNavs     : true,
 			options       : [
 				{
-					key         	 : 'payroll-calculator',
-					title         : t('common:calculator'),
-					href          : '/v2/calculator',
-					as            : '/v2/calculator',
-					type          : 'link',
-					possible_apis : apis.payroll,
-					main_apis     : [],
-				},
-				{
 					key           : 'payroll',
 					title         : 'Payroll',
 					icon          : IcMAppPayment,

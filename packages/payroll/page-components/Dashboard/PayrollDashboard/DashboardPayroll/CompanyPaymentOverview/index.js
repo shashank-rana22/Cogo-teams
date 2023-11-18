@@ -12,8 +12,8 @@ const HUNDRED = 100;
 
 function CompanyPaymentOverview({ graphItem = [] }) {
 	const {
-		Others,
-		Salary,
+		Others: others,
+		Salary: salary,
 		'Total Cost':total_cost,
 		percent_others_increase,
 		percent_salary_increase,
@@ -65,7 +65,7 @@ function CompanyPaymentOverview({ graphItem = [] }) {
 						<div className={styles.legend_item_value}>
 							<div className={styles.profit_value}>
 								{formatAmount({
-									amount  : Salary,
+									amount  : salary,
 									options : {
 										style                 : 'currency',
 										currencyDisplay       : 'symbol',
@@ -96,7 +96,7 @@ function CompanyPaymentOverview({ graphItem = [] }) {
 						<div className={styles.legend_item_value}>
 							<div className={styles.profit_value}>
 								{formatAmount({
-									amount  : Others,
+									amount  : others,
 									options : {
 										style                 : 'currency',
 										currencyDisplay       : 'symbol',
