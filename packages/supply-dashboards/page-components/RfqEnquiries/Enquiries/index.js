@@ -1,10 +1,12 @@
 import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { IcMArrowBack, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { format } from '@cogoport/utils';
+import { format, isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import EmptyState from '../../../common/EmptyState';
 import useGetRfqSearches from '../hooks/useGetRfqSearches';
+import useListShipmentPlans from '../hooks/useGetShipmentPlan';
 
 import CardList from './CardList';
 import NegotiateRate from './NegotiateRate';
@@ -29,6 +31,9 @@ function Enquiries() {
 		setPage,
 	} = useGetRfqSearches({ rfqId, relevantToUser });
 
+	const { data: shipmentplanData, listShipmentPlans } = useListShipmentPlans({ selectedCard });
+	const { list } = shipmentplanData || [];
+
 	const negotiation_remarks = data?.data[ZEROVALUE]?.negotiation_remarks;
 	const onChange = () => {
 		setRelevantToUser((prev) => !prev);
@@ -43,6 +48,12 @@ function Enquiries() {
 			setRevertCounts(OBJ);
 		}
 	}, [data]);
+
+	useEffect(() => {
+		if (activeTab === 'shipment_plan') {
+			listShipmentPlans();
+		}
+	}, [activeTab, listShipmentPlans]);
 
 	return (
 		<div className={styles.enquirypage}>
@@ -136,9 +147,21 @@ function Enquiries() {
 											</div>
 								)}
 							</TabPanel>
+
 							<TabPanel name="shipment_plan" title="Shipment Plan">
-								<ShipmentPlan selectedCard={selectedCard} />
+								<div
+									className={styles.shipment_details}
+								>
+									{isEmpty(list) ? <EmptyState />
+										: (list || []).map((value) => (
+											<ShipmentPlan
+												value={value}
+												key={value?.id}
+											/>
+										))}
+								</div>
 							</TabPanel>
+
 						</Tabs>
 					</div>
 					{selectedCard ? (
