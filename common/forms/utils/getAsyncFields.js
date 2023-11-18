@@ -200,7 +200,7 @@ function asyncFieldsListAgents() {
 		initialCall : true,
 		params      : {
 			page_limit : 20,
-			sort_by    : 'active_assigned_chats',
+			sort_by    : 'chat_assigned_at',
 			sort_type  : 'asc',
 		},
 	};
