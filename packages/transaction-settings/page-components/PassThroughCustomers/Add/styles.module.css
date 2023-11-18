@@ -3,3 +3,11 @@
 	gap: 1rem;
 	justify-content: flex-end;
 }
+
+.modal_body {
+	:global {
+		.react-datepicker-wrapper {
+			width: 100%;
+		}
+	}
+}

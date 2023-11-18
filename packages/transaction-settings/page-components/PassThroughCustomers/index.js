@@ -43,6 +43,7 @@ function PassThroughCustomers() {
 					data={tableData?.list || []}
 					loading={loading}
 				/>
+				<ListPagination data={tableData} filters={filters} setFilters={setFilters} />
 			</div>
 		</div>
 	);

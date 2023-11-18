@@ -43,7 +43,7 @@ function Add({ show = false, setShow = () => {}, refetch = () => {} }) {
 		>
 			<Modal.Header title="Upload Rate Sheet" />
 
-			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
+			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }} className={styles.modal_body}>
 				<Layout controls={controls} control={control} errors={errors} />
 			</Modal.Body>
 			<Modal.Footer>
