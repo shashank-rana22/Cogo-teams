@@ -2,11 +2,12 @@ import { getPlanningContainerServiceWise } from './checkContainerNumbers';
 
 const SERVICE_KEY_DELAYED = ['commodity', 'container_type', 'container_size'];
 
-const getCreateContractPayload = ({ fclServices, formValues, shipment_data }) => {
+const getCreateContractPayload = ({ fclServices, formValues, shipment_data, task = {} }) => {
 	const payload = {
 		shipment_id                : shipment_data?.id,
 		delayed_containers         : [],
 		updated_containers_details : [],
+		trade_partner_id           : task?.task_field_id,
 	};
 
 	const { planning = [] } = formValues || {};

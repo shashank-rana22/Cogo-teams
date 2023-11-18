@@ -26,15 +26,17 @@ function CargoReadiness({ setStep = () => {}, task = {}, shipment_data = {}, onC
 
 	return (
 		<div>
-			{shipment_data?.source ==='contract'?<div className={styles.not_ready}>
-				<Button
-					themeType="accent"
-					onClick={() => setShowNotReady(true)}
-					disabled={loading}
-				>
-					Cargo Not Ready ?
-				</Button>
-			</div>:null}
+			{shipment_data?.source === 'contract' ? (
+				<div className={styles.not_ready}>
+					<Button
+						themeType="accent"
+						onClick={() => setShowNotReady(true)}
+						disabled={loading}
+					>
+						Cargo Not Ready ?
+					</Button>
+				</div>
+			) : null}
 			<div>
 				<Layout control={control} fields={readinessControls} errors={errors} />
 			</div>
@@ -60,6 +62,7 @@ function CargoReadiness({ setStep = () => {}, task = {}, shipment_data = {}, onC
 				<CargoNotReady
 					show={showNotReady}
 					setShow={setShowNotReady}
+					task={task}
 				/>
 			) : null}
 		</div>

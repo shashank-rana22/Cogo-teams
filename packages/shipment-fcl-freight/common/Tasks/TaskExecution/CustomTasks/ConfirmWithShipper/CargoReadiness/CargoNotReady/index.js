@@ -1,6 +1,7 @@
 import { Button, Modal, Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
+import { useRouter } from '@cogoport/next';
 import { Layout } from '@cogoport/ocean-modules';
 import { useContext } from 'react';
 
@@ -12,14 +13,19 @@ import renderLabel from './getServiceLabel';
 import planningControls from './planningControls';
 import styles from './styles.module.css';
 
-function CargoNotReady({ show, setShow }) {
+function CargoNotReady({ show = false, setShow = () => {}, task = {} }) {
+	const router = useRouter();
 	const {
 		shipment_data = {},
 		servicesList = [],
-		refetch = () => {}, // getShipment
+
 	} = useContext(ShipmentDetailContext);
 
 	const onClose = () => setShow(false);
+
+	const refetch = () => {
+		router.reload();
+	};
 
 	const { onCreate = () => {}, loading } = useCreateShipmentPlan({ refetch });
 
@@ -44,7 +50,7 @@ function CargoNotReady({ show, setShow }) {
 			return;
 		}
 
-		const payload = getCreateContractPayload({ fclServices, formValues: values, shipment_data });
+		const payload = getCreateContractPayload({ fclServices, formValues: values, shipment_data, task });
 
 		onCreate(payload);
 	};
