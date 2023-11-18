@@ -38,6 +38,11 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 	const watchCategory = watch('category');
 	const watchDescription = watch('additional_information');
 	const watchSubCategory = watch('sub_category');
+	const watchIdType = watch('id_type');
+	const watchServiceType = watch('service_type');
+	const watchTradeType = watch('trade_type');
+	const watchService = watch('service');
+
 	const { options = [], subCatId = null } = subCategories || {};
 
 	const { addFeedback, loading } = useAddFeedback({
@@ -63,25 +68,16 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 		setSubCategories,
 		watchSubCategory,
 		setValue,
+		t,
+		watchTradeType,
+		watchService,
+		watchServiceType,
+		watchIdType,
 	});
-
-	const additionalControls = (additionalInfo || []).map((item) => ({
-		label: (
-			<div>
-				{item}
-				<span style={{ color: '#ee3425', marginLeft: '2px' }}>*</span>
-			</div>
-		),
-		name           : item,
-		controllerType : 'text',
-		placeholder    : `${t('myTickets:add')} ${item?.toLowerCase()}`,
-		showOptional   : false,
-		rules          : { required: true },
-	}));
 
 	const fileUploader = defaultControls.pop();
 
-	const controls = defaultControls?.concat(additionalControls, fileUploader);
+	const controls = defaultControls?.concat(fileUploader);
 
 	return (
 		<div className={styles.container}>
@@ -106,12 +102,15 @@ function FeedbackForm({ getFeedbacks = () => {}, setShowAddFeedback = () => {} }
 					const { name, label, controllerType } = elementItem || {};
 					const Element = getFieldController(controllerType);
 
-					const hideSid = name === 'serial_id' && watchCategory?.toLowerCase() !== 'shipment';
+					const checkRates = !['shipment', 'rates']?.includes(watchCategory?.toLowerCase());
+					const hideSid = name === 'serial_id' && checkRates;
 					const hideService = name === 'service' && watchCategory?.toLowerCase() !== 'shipment';
-					const hideTradeType = name === 'trade_type' && watchCategory?.toLowerCase() !== 'shipment';
+					const hideTradeType = name === 'trade_type' && checkRates;
 					const hideSubCategory = name === 'sub_category' && watchCategory !== 'Tech';
+					const hideRateRequest = ['service_type', 'id_type'].includes(name)
+					&& watchCategory?.toLowerCase() !== 'rates';
 
-					if (hideService || hideTradeType || hideSubCategory || hideSid) {
+					if (hideService || hideTradeType || hideSubCategory || hideSid || hideRateRequest) {
 						return null;
 					}
 

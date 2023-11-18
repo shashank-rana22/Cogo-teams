@@ -1,7 +1,11 @@
 import { Placeholder } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
-import { ROUTES_MAPPING, SINGLE_LOCATIONS, TRADE_TYPE_MAPPING } from '../../../../../../constants/shipmentConstants';
-import { formatRouteData } from '../../../../../../utils/routeDataHelpers';
+import {
+	ID_TYPE_OPTIONS, QUERY_PATH,
+	SINGLE_LOCATIONS, TRADE_TYPE_MAPPING,
+} from '../../../../../../constants/shipmentConstants';
+import { formatRouteData, handleRouteBooking, handleRouteSupply } from '../../../../../../utils/routeDataHelpers';
 
 import styles from './styles.module.css';
 
@@ -20,37 +24,35 @@ function PortDetails({ details = {}, listLoading = false }) {
 
 function ShipmentDetails({
 	serialId = '', t = () => {}, service = '', partnerId = '',
-	shipmentData = {}, listLoading = false,
+	updateShipmentData = {}, updateShipmentLoading = false, idType = '',
 }) {
-	const { shipment_type = '', trade_type: tradeType = '', id = '' } = shipmentData || {};
+	const {
+		shipment_type = '', trade_type: tradeType = '', id = '',
+		origin_location = {}, destination_location = {},
+	} = updateShipmentData || {};
 
 	const {
 		originDetails = {},
 		destinationDetails = {},
 		singleOriginDisplay = {},
 		singleDestinationDisplay = {},
-	} = formatRouteData({ item: shipmentData });
+	} = formatRouteData({ item: updateShipmentData });
 
 	const DISPLAY_DATA_MAPPING = {
 		import : singleOriginDisplay,
 		export : singleDestinationDisplay,
 	};
+	const shipmentType = ID_TYPE_OPTIONS?.includes(idType) ? service : shipment_type;
 
-	const handleRouteBooking = ({ e }) => {
-		e.stopPropagation();
-		let shipmentDetailsPage;
-		if (Object.keys(ROUTES_MAPPING || {}).includes(service)) {
-			const route = ROUTES_MAPPING?.[service];
+	const isSingleLocation = SINGLE_LOCATIONS?.includes(shipmentType);
+	const defaultPol = isEmpty(origin_location) ? 'Destination' : 'Origin';
+	const defaultData = isEmpty(origin_location) ? destination_location : origin_location;
 
-			shipmentDetailsPage = `${window.location.origin}/v2/${partnerId}/booking/${route}/${id}`;
-		} else {
-			shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${id}`;
-		}
-
-		window.open(shipmentDetailsPage, '_blank');
+	const ROUTE_PAGE_MAPPING = {
+		missing_id : handleRouteSupply,
+		dislike_id : handleRouteSupply,
+		default    : handleRouteBooking,
 	};
-
-	const isSingleLocation = SINGLE_LOCATIONS?.includes(shipment_type);
 
 	if (!serialId) {
 		return null;
@@ -58,7 +60,18 @@ function ShipmentDetails({
 
 	return (
 		<>
-			<div role="presentation" className={styles.sid} onClick={(e) => handleRouteBooking({ e })}>
+			<div
+				role="presentation"
+				className={styles.sid}
+				onClick={(e) => (ROUTE_PAGE_MAPPING[idType] || ROUTE_PAGE_MAPPING?.default)?.({
+					e,
+					id,
+					service,
+					partnerId,
+					endPoint: QUERY_PATH?.[idType],
+					serialId,
+				})}
+			>
 				{t('myTickets:sid')}
 				:
 				<span className={styles.number}>
@@ -68,11 +81,11 @@ function ShipmentDetails({
 			{isSingleLocation ? (
 				<div className={styles.port_container}>
 					<div className={styles.trade_type}>
-						{TRADE_TYPE_MAPPING?.[tradeType]}
+						{TRADE_TYPE_MAPPING?.[tradeType] || defaultPol}
 					</div>
 					:
 					<PortDetails
-						details={DISPLAY_DATA_MAPPING[tradeType]}
+						details={DISPLAY_DATA_MAPPING[tradeType] || defaultData}
 					/>
 				</div>
 			) : (
@@ -82,7 +95,7 @@ function ShipmentDetails({
 						:
 						<PortDetails
 							details={originDetails}
-							listLoading={listLoading}
+							listLoading={updateShipmentLoading}
 						/>
 					</div>
 					<div className={styles.port_content}>
@@ -90,7 +103,7 @@ function ShipmentDetails({
 						:
 						<PortDetails
 							details={destinationDetails}
-							listLoading={listLoading}
+							listLoading={updateShipmentLoading}
 						/>
 					</div>
 				</>
