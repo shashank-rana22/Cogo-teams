@@ -2,6 +2,8 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useState } from 'react';
 
+import useBulkUploadPayloadData from '../../../hooks/useBulkUploadPayrollData';
+
 import styles from './styles.module.css';
 import FileUploader from './UploadComponent';
 
@@ -18,9 +20,11 @@ const FILESLABEL = [
 function UploadFiles() {
 	const { control, handleSubmit } = useForm();
 	const [filearray, setFileArray] = useState({});
+	const { uploadBulkPayrollData } = useBulkUploadPayloadData();
 
-	const onSubmit = () => {
+	const onSubmit = (values) => {
 		console.log('filearray', filearray);
+		uploadBulkPayrollData({ payload: values });
 	};
 	return (
 		<div className={styles.main_container}>

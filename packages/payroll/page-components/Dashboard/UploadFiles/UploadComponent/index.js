@@ -68,11 +68,11 @@ function FileUploader({ control = {}, name = '', setFileArray = () => {}, filear
 					<p>upload XLSX file here</p>
 				)}
 			</div>
-			{filearray?.[name] && (
+			{filearray?.[name] && isError && (
 				<span>
 					{name}
 					{' '}
-					-- done
+					upload done
 					{' '}
 				</span>
 			)}
