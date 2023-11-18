@@ -1,29 +1,11 @@
 import { Pill, RadioGroup, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
 
 import getElementController from '../../../../../../../../../../../configs/getElementController';
-import getPayload from '../../../../../../utils/getPayload';
 
 import styles from './styles.module.css';
-
-const getErrorMessage = (error, name) => {
-	if (!['preferred_freight_rate'].includes(name)) {
-		return error.message || 'This is Required';
-	}
-
-	if (isEmpty(error)) {
-		return null;
-	}
-
-	if (error.price?.type === 'min') {
-		return 'price should be greater than 0';
-	}
-
-	return `${startCase(Object.keys(error)[GLOBAL_CONSTANTS.zeroth_index])} is Required`;
-};
+import useHandleFormComponent from './useHandleFormComponent';
 
 function FormComponent({
 	currErrros = {},
@@ -31,55 +13,45 @@ function FormComponent({
 	selectedControls = [],
 	prefilledData = {},
 	reason = '',
-	unsatisfiedFeedbacks = {},
-	createTrigger = () => {},
-	getSpotSearchRateFeedback = () => {},
+	...restHookProps
 }) {
-	const { feedbacks = [], serial_id = '', unsatisfactory_free_days = {}, unsatisfactory_rate = {} } = prefilledData;
+	const {
+		feedbacks = [],
+		serial_id = '',
+		unsatisfactory_free_days = {},
+		unsatisfactory_rate = {},
+	} = prefilledData;
 
 	const { preferred_freight_rate = 0, preferred_freight_rate_currency = '' } = unsatisfactory_rate;
 
 	const { destination_detention = 0, origin_detention = 0 } = unsatisfactory_free_days;
 
 	const {
+		handleValidateFeedback,
 		data = {},
-		values,
-		details,
-		rate,
-		selectedSevice,
-		spot_search_id,
-	} = unsatisfiedFeedbacks;
+		getErrorMessage = () => {},
+	} = useHandleFormComponent({ reason, ...restHookProps });
 
 	if (Object.keys(data).includes(reason)) {
+		const { message = '' } = data[reason];
+
 		return (
 			<div className={styles.card_container}>
 				<div className={styles.custom_shape}>BEST PRICE</div>
 
 				<div className={styles.validate_text}>
-					<b> This is the best available rate for this Port Pair.</b>
+					<b>{message}</b>
 					{' '}
 					Are you satisfied with the rate available?
 				</div>
 
 				<RadioGroup
 					size="sm"
-					options={[{ label: 'Yes', name: 'yes', value: 'yes' }, { label: 'No', name: 'no', value: 'no' }]}
-					onChange={async (value) => {
-						if (value === 'yes') {
-							const finalPayload = getPayload({
-								satisfiedfeedbacks: [reason],
-								values,
-								details,
-								rate,
-								selectedSevice,
-								spot_search_id,
-							});
-
-							await createTrigger({ data: finalPayload });
-
-							getSpotSearchRateFeedback();
-						}
-					}}
+					options={[
+						{ label: 'Yes', name: 'yes', value: 'yes' },
+						{ label: 'No', name: 'no', value: 'no' },
+					]}
+					onChange={handleValidateFeedback}
 				/>
 			</div>
 		);
@@ -107,43 +79,36 @@ function FormComponent({
 							{serial_id}
 						</Pill>
 
-						{reason === 'unsatisfactory_free_days'
-							? (
-								<div className={styles.text}>
-									Preferred Origin Detention Days:
+						{reason === 'unsatisfactory_free_days' ? (
+							<div className={styles.text}>
+								Preferred Origin Detention Days:
+								<b className={styles.value}>{origin_detention}</b>
+							</div>
+						) : null}
 
-									<b className={styles.value}>{origin_detention}</b>
-								</div>
-							) : null}
+						{reason === 'unsatisfactory_free_days' ? (
+							<div className={styles.text}>
+								Preferred Dest. Detention Days:
+								<b className={styles.value}>{destination_detention}</b>
+							</div>
+						) : null}
 
-						{reason === 'unsatisfactory_free_days'
-							? (
-								<div className={styles.text}>
-									Preferred Dest. Detention Days:
-
-									<b className={styles.value}>{destination_detention}</b>
-								</div>
-							) : null}
-
-						{reason === 'unsatisfactory_rate'
-							? (
-								<div className={styles.text}>
-									Indicative Rate:
-
-									<b className={styles.value}>
-										{formatAmount({
-											amount   : preferred_freight_rate,
-											currency : preferred_freight_rate_currency,
-											options  : {
-												style                 : 'currency',
-												currencyDisplay       : 'symbol',
-												maximumFractionDigits : 2,
-											},
-										})}
-
-									</b>
-								</div>
-							) : null}
+						{reason === 'unsatisfactory_rate' ? (
+							<div className={styles.text}>
+								Indicative Rate:
+								<b className={styles.value}>
+									{formatAmount({
+										amount   : preferred_freight_rate,
+										currency : preferred_freight_rate_currency,
+										options  : {
+											style                 : 'currency',
+											currencyDisplay       : 'symbol',
+											maximumFractionDigits : 2,
+										},
+									})}
+								</b>
+							</div>
+						) : null}
 					</div>
 				) : null}
 			</div>
@@ -174,9 +139,7 @@ function FormComponent({
 					>
 						<div className={styles.label}>
 							{label}
-							{rules ? (
-								<sup className={styles.superscipt}>*</sup>
-							) : null}
+							{rules ? <sup className={styles.superscipt}>*</sup> : null}
 						</div>
 
 						<div
@@ -191,10 +154,7 @@ function FormComponent({
 
 							{currErrros?.[controlName] && (
 								<div className={styles.error_message}>
-									{getErrorMessage(
-										currErrros[controlName] || {},
-										controlName,
-									)}
+									{getErrorMessage(currErrros[controlName] || {}, controlName)}
 								</div>
 							)}
 						</div>

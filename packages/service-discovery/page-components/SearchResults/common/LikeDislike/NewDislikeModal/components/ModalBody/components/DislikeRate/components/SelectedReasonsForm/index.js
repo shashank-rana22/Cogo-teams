@@ -2,6 +2,7 @@ import { Button, cl } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
 import { isEmpty, startCase } from '@cogoport/utils';
 
+import DeleteConfirmationModal from '../DeleteConfirmationModal';
 import FormComponent from '../FormComponent';
 
 import styles from './styles.module.css';
@@ -23,6 +24,8 @@ function SelectedReasonsForm({
 	rate = {},
 	prefilledData = {},
 	getSpotSearchRateFeedback = () => {},
+	setSelectedReasons = () => {},
+	setSelectedSevice = () => {},
 }) {
 	const {
 		control,
@@ -40,6 +43,10 @@ function SelectedReasonsForm({
 		unsatisfiedFeedbacks = {},
 		createTrigger = () => {},
 		onDeleteServiceFeedback = () => {},
+		setUnsatisfiedFeedbacks = () => {},
+		deleteServiceFeedback,
+		showDiscardModal,
+		setShowDiscardModal,
 	} = useHandleSelectedReasonsForm({
 		selectedSevice,
 		details,
@@ -48,6 +55,7 @@ function SelectedReasonsForm({
 		feedbacks,
 		getSpotSearchRateFeedback,
 		isFeedbackSubmitted,
+		setSelectedSevice,
 	});
 
 	return (
@@ -76,10 +84,23 @@ function SelectedReasonsForm({
 							unsatisfiedFeedbacks={unsatisfiedFeedbacks}
 							createTrigger={createTrigger}
 							getSpotSearchRateFeedback={getSpotSearchRateFeedback}
+							setUnsatisfiedFeedbacks={setUnsatisfiedFeedbacks}
+							setSelectedReasons={setSelectedReasons}
 						/>
 					</div>
 				);
 			})}
+
+			<DeleteConfirmationModal
+				show={showDiscardModal}
+				loading={loading}
+				onClickDelete={deleteServiceFeedback}
+				cancelText="Cancel"
+				deleteText="Delete"
+				title="Are you sure you want to discard the feedback for this service?"
+				modalSize="sm"
+				setShow={setShowDiscardModal}
+			/>
 
 			{!isFeedbackSubmitted ? (
 				<div

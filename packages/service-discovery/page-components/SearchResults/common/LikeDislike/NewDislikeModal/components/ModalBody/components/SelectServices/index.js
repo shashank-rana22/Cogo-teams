@@ -2,6 +2,9 @@ import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick, IcMPlus } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useMemo } from 'react';
+
+import reorderServiceRates from '../../../../../../../../../helpers/reorderServiceRates';
 
 import styles from './styles.module.css';
 
@@ -34,8 +37,44 @@ const MAPPING = {
 	lcl_freight     : 'per Cont',
 	air_freight     : 'per Kg',
 	ftl_freight     : 'per Truck',
-	ltl_freight     : 'per Truck',
-	trailer_freight : 'per Truck',
+	trailer_freight : 'per Trailer',
+};
+
+const getFreightprice = ({
+	service_type = '',
+	primary_service = '',
+	freight_price_discounted = 0,
+	cur = {},
+	chargeable_weight = 0,
+}) => {
+	const {
+		total_price_discounted = 0,
+		containers_count = 1,
+		trucks_count,
+		trailer_count,
+	} = cur;
+
+	if (service_type !== primary_service && ['ftl_freight', 'trailer_freight'].includes(service_type)) {
+		return total_price_discounted / (trucks_count || trailer_count || 1);
+	}
+
+	if (service_type !== primary_service) {
+		return total_price_discounted;
+	}
+
+	if (['fcl_freight', 'lcl_freight'].includes(service_type)) {
+		return freight_price_discounted / containers_count;
+	}
+
+	if (['ftl_freight', 'trailer_freight'].includes(service_type)) {
+		return freight_price_discounted / (trucks_count || trailer_count || 1);
+	}
+
+	if (service_type === 'air_freight') {
+		return freight_price_discounted / chargeable_weight;
+	}
+
+	return freight_price_discounted;
 };
 
 function PriceComponent({
@@ -43,8 +82,7 @@ function PriceComponent({
 	is_added = false,
 	freight_price_discounted = 0,
 	freight_price_currency = '',
-	service_type = '',
-	primary_service = '',
+	unit = '',
 }) {
 	if (feedback_type === 'request_rate' && is_added) {
 		return <div className={styles.price}>Rate Requested</div>;
@@ -64,23 +102,13 @@ function PriceComponent({
 		},
 	});
 
-	if (service_type === primary_service) {
-		return (
-			<div className={styles.price}>
-				{formattedAmount}
-				{' '}
-				(
-				{MAPPING[service_type] || 'Total'}
-				)
-			</div>
-		);
-	}
-
 	return (
 		<div className={styles.price}>
 			{formattedAmount}
 			{' '}
-			(Total)
+			(
+			{unit}
+			)
 		</div>
 	);
 }
@@ -92,6 +120,7 @@ function SelectServices({
 	data = {},
 	rateRequestedFor = [],
 	primary_service = '',
+	chargeable_weight = 1,
 }) {
 	const {
 		service_rates = {},
@@ -99,17 +128,26 @@ function SelectServices({
 		freight_price_currency = '',
 	} = rate;
 
-	const servicesArray = Object.entries(service_rates).reduce(
-		(acc, [service_id, cur]) => {
+	const updatedServiceRates = useMemo(
+		() => reorderServiceRates({
+			service_type   : primary_service,
+			service_rates,
+			tradeTypeOrder : ['main', 'export', 'import', 'other'],
+		}),
+		[service_rates, primary_service],
+	);
+
+	const servicesArray = updatedServiceRates.reduce(
+		(acc, cur) => {
 			const {
 				service_type = '',
 				is_rate_available = false,
 				rate_id = '',
-				total_price_discounted = 0,
 				total_price_currency = '',
 				container_size = '',
 				id = '',
 				trade_type = '',
+				key: service_id = '',
 			} = cur;
 
 			let label = `${SERVICE_NAME_MAPPING[service_type] || startCase(service_type)}
@@ -118,6 +156,14 @@ function SelectServices({
 			if (trade_type) {
 				label = `${TRADE_TYPE_MAPPING[trade_type]} ${label}`;
 			}
+
+			const finalPrice = getFreightprice({
+				service_type,
+				primary_service,
+				freight_price_discounted,
+				cur,
+				chargeable_weight,
+			});
 
 			if (is_rate_available) {
 				return [
@@ -132,9 +178,9 @@ function SelectServices({
 						label,
 						selected_card            : rate.id,
 						service_data             : cur,
-						freight_price_discounted : service_type === primary_service
-							? freight_price_discounted : total_price_discounted,
-						freight_price_currency: service_type === primary_service
+						unit                     : MAPPING[service_type] || 'Total',
+						freight_price_discounted : finalPrice,
+						freight_price_currency   : service_type === primary_service
 							? freight_price_currency : total_price_currency,
 					},
 				];
@@ -172,7 +218,6 @@ function SelectServices({
 				{servicesArray.map((item) => {
 					const {
 						is_added = false,
-						service_type = '',
 						service_id = '',
 						total_price_currency = '',
 						total_price_discounted = 0,
@@ -180,6 +225,7 @@ function SelectServices({
 						feedback_type = '',
 						freight_price_discounted: price,
 						freight_price_currency: currency,
+						unit,
 					} = item;
 
 					const IconElement = is_added ? IcCFtick : IcMPlus;
@@ -206,8 +252,7 @@ function SelectServices({
 								total_price_currency={total_price_currency}
 								freight_price_discounted={price}
 								freight_price_currency={currency}
-								service_type={service_type}
-								primary_service={primary_service}
+								unit={unit}
 							/>
 
 							<IconElement

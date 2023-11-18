@@ -13,8 +13,9 @@ function DislikeRate({
 	rate = {},
 	data = {},
 	getSpotSearchRateFeedback = () => {},
+	setSelectedSevice = () => {},
 }) {
-	const { label = '', service_type, service_id = '' } = selectedSevice;
+	const { label = '', service_type, service_id = '', freight_price_currency = '', unit = '' } = selectedSevice;
 
 	const [selectedReasons, setSelectedReasons] = useState(data[service_id]?.feedbacks || []);
 
@@ -25,7 +26,7 @@ function DislikeRate({
 	}
 
 	const reasonOptions = getServiceWiseOptions({ service_type });
-	const allControls = getServiceWiseConfig({ service_type })();
+	const allControls = getServiceWiseConfig({ service_type })({ freight_price_currency, unit });
 
 	return (
 		<div className={styles.container}>
@@ -56,6 +57,8 @@ function DislikeRate({
 				rate={rate}
 				prefilledData={data[service_id] || {}}
 				getSpotSearchRateFeedback={getSpotSearchRateFeedback}
+				setSelectedReasons={setSelectedReasons}
+				setSelectedSevice={setSelectedSevice}
 			/>
 		</div>
 	);

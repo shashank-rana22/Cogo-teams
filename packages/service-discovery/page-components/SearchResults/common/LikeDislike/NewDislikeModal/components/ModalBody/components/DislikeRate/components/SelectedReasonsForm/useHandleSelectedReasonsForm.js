@@ -15,6 +15,7 @@ const useHandleSelectedReasonsForm = ({
 	feedbacks = [],
 	getSpotSearchRateFeedback = () => {},
 	isFeedbackSubmitted = false,
+	setSelectedSevice = () => {},
 }) => {
 	const {
 		general: { query = {} },
@@ -23,6 +24,7 @@ const useHandleSelectedReasonsForm = ({
 	const { spot_search_id = '' } = query;
 
 	const [unsatisfiedFeedbacks, setUnsatisfiedFeedbacks] = useState({});
+	const [showDiscardModal, setShowDiscardModal] = useState(false);
 
 	const [{ loading = false }, trigger] = useRequest(
 		{
@@ -106,18 +108,15 @@ const useHandleSelectedReasonsForm = ({
 		}
 	};
 
-	const onDeleteServiceFeedback = async () => {
+	const deleteServiceFeedback = async () => {
 		try {
-			if (!isFeedbackSubmitted) {
-				return;
-			}
-
 			await deleteTrigger({
 				data: {
 					selected_card_id : rate.id,
 					service_id       : selectedSevice.service_id,
 				},
 			});
+			setShowDiscardModal(false);
 
 			getSpotSearchRateFeedback();
 
@@ -127,12 +126,25 @@ const useHandleSelectedReasonsForm = ({
 		}
 	};
 
+	const onDeleteServiceFeedback = () => {
+		if (!isFeedbackSubmitted) {
+			setSelectedSevice({});
+			return;
+		}
+
+		setShowDiscardModal(true);
+	};
+
 	return {
 		onSubmit,
 		loading: loading || createLoading || deleteLoading,
 		unsatisfiedFeedbacks,
 		createTrigger,
 		onDeleteServiceFeedback,
+		setUnsatisfiedFeedbacks,
+		deleteServiceFeedback,
+		showDiscardModal,
+		setShowDiscardModal,
 	};
 };
 

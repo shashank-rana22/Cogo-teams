@@ -43,12 +43,15 @@ function ModalBody({ rate = {}, details = {} }) {
 			rate,
 			data,
 			getSpotSearchRateFeedback,
+			setSelectedSevice,
 		},
 	};
 
 	const activeComponentProps = propsMapping[feedback_type] || {};
 
 	const ActiveComponent = MAPPING[feedback_type] || DislikeRate;
+
+	const { chargeable_weight = 1	} = details;
 
 	return (
 		<div className={styles.container}>
@@ -59,6 +62,7 @@ function ModalBody({ rate = {}, details = {} }) {
 				data={data}
 				rateRequestedFor={rateRequestedFor}
 				primary_service={details?.service_type}
+				chargeable_weight={chargeable_weight}
 			/>
 
 			<div key={service_id} className={styles.form_container}>
