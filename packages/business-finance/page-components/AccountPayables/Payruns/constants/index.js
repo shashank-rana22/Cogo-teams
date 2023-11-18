@@ -1,4 +1,4 @@
-export const TAB_NAME = ['AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'];
+export const TAB_NAME = ['INITIATED', 'AUDITED', 'PAYMENT_INITIATED', 'COMPLETED'];
 export const INNER_TAB_MAPPING = [
 	{ title: 'Domestic', name: 'NORMAL' },
 	{ title: 'Overseas', name: 'OVERSEAS' },
