@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
 
 import useGetExpenseData from '../../../hooks/useGetExpenseData';
@@ -8,7 +9,8 @@ import styles from './styles.module.css';
 
 function ExpenseManagement() {
 	const [toggleValue, setToggleValue] = useState(false);
-	const [value, setValue] = useState('2023-2024');
+	const currentYear = new Date().getFullYear();
+	const [value, setValue] = useState(`${currentYear}-${currentYear + GLOBAL_CONSTANTS.one}`);
 	const handleSetToggle = (e) => {
 		setToggleValue(e?.target?.checked);
 	};
