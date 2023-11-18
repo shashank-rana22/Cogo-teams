@@ -824,6 +824,30 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'contract',
 	},
+	{
+		api          : 'create_contract_shipment_plan',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'create_contract_shipment_plan_detail',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'update_contract_shipment_plan',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
+	{
+		api          : 'update_contract_shipment_plan_detail',
+		access_type  : 'private',
+		feature      : 'contract_rates',
+		service_name : 'contract',
+	},
 ];
 
 export default apis;
