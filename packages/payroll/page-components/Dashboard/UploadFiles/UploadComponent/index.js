@@ -7,7 +7,8 @@ import { useDropzone } from 'react-dropzone';
 import * as XLSX from 'xlsx';
 
 // import DownloadPDF from '../Base64topdf';
-import useUploadPayrollData from '../../../../hooks/useUploadPayrollData';
+import useBulkUploadPayloadData from '../../../../hooks/useBulkUploadPayrollData';
+// import useUploadPayrollData from '../../../../hooks/useUploadPayrollData';
 import { STRING111 } from '../string';
 
 import styles from './styles.module.css';
@@ -20,7 +21,8 @@ const DROPZONESTYLES = {
 	cursor       : 'pointer',
 };
 function FileUploader({ control = {}, name = '', setFileArray = () => {}, filearray = {} }) {
-	const { updatePayrollData } = useUploadPayrollData();
+	// const { updatePayrollData } = useUploadPayrollData();
+	const { uploadBulkPayrollData } = useBulkUploadPayloadData();
 	const [isError, setIsError] = useState(null);
 	const onDrop = (acceptedFiles) => {
 		const file = acceptedFiles[0];
@@ -36,7 +38,7 @@ function FileUploader({ control = {}, name = '', setFileArray = () => {}, filear
 
 			// Convert data to base64
 			const base64 = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
-			const res = updatePayrollData({
+			const res = uploadBulkPayrollData({
 				payload: base64,
 			});
 			setIsError(res);
