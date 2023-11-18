@@ -1,0 +1,55 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	width: 100%;
+	padding: 16px 12px;
+	background: #fff;
+	border-radius: 16px;
+}
+
+.flex {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 24px;
+
+	:global {
+		.ui_input_container {
+			width: 28%;
+		}
+
+		.ui_input_control::placeholder {
+			color: #bdbdbd;
+		}
+	}
+}
+
+.heading {
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.table_item {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_avatar_text {
+			font-size: 12px !important;
+			font-weight: 400;
+			background-color: #849e4c;
+			border-radius: 50%;
+		}
+	}
+}
+
+.table_item :first-child {
+	margin-right: 6px;
+}
+
+.pagination {
+	display: flex;
+	padding-left: 20px;
+	margin-top: 20px;
+}

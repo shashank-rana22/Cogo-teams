@@ -2737,6 +2737,30 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.profile,
 			icon          : IcMAppProfile,
 		},
+		payroll: {
+			key           : 'payroll',
+			title         : 'Payroll',
+			icon          : IcMAppPayment,
+			href          : '/v2/payroll',
+			as            : '/v2/payroll',
+			type          : 'link',
+			module_type   : 'dashboards',
+			possible_apis : apis.payroll,
+			isSubNavs     : true,
+			options       : [
+				{
+					key           : 'payroll',
+					title         : 'Payroll',
+					icon          : IcMAppPayment,
+					href          : '/v2/payroll',
+					as            : '/v2/payroll',
+					type          : 'link',
+					module_type   : 'dashboards',
+					possible_apis : apis.payroll,
+
+				},
+			],
+		},
 		finance_payroll: {
 			key           : 'finance_payroll',
 			title         : 'Finance Payroll',
