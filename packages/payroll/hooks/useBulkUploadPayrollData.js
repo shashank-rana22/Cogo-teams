@@ -10,11 +10,12 @@ const useBulkUploadPayloadData = () => {
 	}, { manual: true });
 
 	const uploadBulkPayrollData = useCallback(
-		async ({ payload }) => {
+		async ({ payload, value = 'file' }) => {
 			let res = {};
+			console.log('payloadName', value);
 			try {
 				res = await trigger({
-					data: { payload },
+					data: { [value]: payload },
 				});
 			} catch (error) {
 				Toast.error(getApiErrorString(error?.response?.data));

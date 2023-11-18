@@ -8,15 +8,14 @@ import styles from './styles.module.css';
 import FileUploader from './UploadComponent';
 
 const FILESLABEL = [
-	{ name: 'file A' },
-	{ name: 'file B' },
-	{ name: 'file C' },
-	{ name: 'file D' },
-	{ name: 'file E' },
-	{ name: 'file F' },
-	{ name: 'file G' },
-	{ name: 'file H' },
+	{ name: 'Byod Template', value: 'byod_template' },
+	{ name: 'Expense Management Template', value: 'expense_management_template' },
+	{ name: 'Irregular Payments Template', value: 'irregular_payments_template' },
+	{ name: 'CTC Template', value: 'ctc_current_template' },
+	{ name: 'Declaration Template', value: 'declaration_template' },
+	{ name: 'Monthly Payroll Template', value: 'monthly_payroll_template' },
 ];
+
 function UploadFiles() {
 	const { control, handleSubmit } = useForm();
 	const [filearray, setFileArray] = useState({});
@@ -42,6 +41,7 @@ function UploadFiles() {
 							filearray={filearray}
 							setFileArray={setFileArray}
 							name={item.name}
+							value={item.value}
 						/>
 					</div>
 				))}

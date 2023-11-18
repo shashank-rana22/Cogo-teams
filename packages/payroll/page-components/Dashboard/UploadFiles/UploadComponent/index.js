@@ -20,8 +20,9 @@ const DROPZONESTYLES = {
 	textAlign    : 'center',
 	cursor       : 'pointer',
 };
-function FileUploader({ control = {}, name = '', setFileArray = () => {}, filearray = {} }) {
+function FileUploader({ control = {}, name = '', value = '', setFileArray = () => {}, filearray = {} }) {
 	// const { updatePayrollData } = useUploadPayrollData();
+	console.log(name, value, 'name');
 	const { uploadBulkPayrollData } = useBulkUploadPayloadData();
 	const [isError, setIsError] = useState(null);
 	const onDrop = (acceptedFiles) => {
@@ -40,6 +41,7 @@ function FileUploader({ control = {}, name = '', setFileArray = () => {}, filear
 			const base64 = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
 			const res = uploadBulkPayrollData({
 				payload: base64,
+				value,
 			});
 			setIsError(res);
 			setFileArray((prev) => ({ ...prev, [name]: base64 }));
