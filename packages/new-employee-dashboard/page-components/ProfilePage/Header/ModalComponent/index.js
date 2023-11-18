@@ -29,6 +29,7 @@ function ModalComponent({
 	setOfferLetterError,
 }) {
 	const { salaryData, debounceQuery } = useGetSalaryStructure();
+	console.log(ctcStructure, 'ctc-structure');
 	// Do not delete
 
 	// const [salaryConfig, setSalaryConfig] = useState('');
@@ -104,34 +105,31 @@ function ModalComponent({
                 </div>
             </div> */
             }
-			{ctcStructure?.basic?.yearlyValue !== 0
-				?	(
-					<div className={styles.table_container}>
-						{ctcStructure?.basic?.yearlyValue !== 0
-							? (
-								<div className={styles.heading}>
-									<h4 style={{ width: '60%' }}>Components</h4>
-									<h4 style={{ width: '20%' }}>Annual Salary</h4>
-									<h4 style={{ width: '20%' }}>Monthly Salary</h4>
-								</div>
-							)
-							: null}
-						{Object.entries(ctcStructure).map(([key, value]) => {
-							const { heading, yearlyValue, monthlyValue } = value;
-							return (
-								<div className={styles.list} key={key}>
-									<div style={{ width: '60%' }}>{heading ?? '___'}</div>
-									<div style={{ width: '20%' }}>
-										{Number(yearlyValue || DEFAULT_VALUE).toFixed(TOFIXED_NUMBER) ?? '___'}
-									</div>
-									<div style={{ width: '20%' }}>
-										{(Number(monthlyValue || DEFAULT_VALUE).toFixed(TOFIXED_NUMBER)) ?? '___'}
-									</div>
-								</div>
-							);
-						})}
-					</div>
-				) : null}
+			<div className={styles.table_container}>
+				{ctcStructure?.basic
+					? (
+						<div className={styles.heading}>
+							<h4 style={{ width: '60%' }}>Components</h4>
+							<h4 style={{ width: '20%' }}>Annual Salary</h4>
+							<h4 style={{ width: '20%' }}>Monthly Salary</h4>
+						</div>
+					)
+					: null}
+				{Object.entries(ctcStructure).map(([key, value]) => {
+					const { heading, yearlyValue, monthlyValue } = value;
+					return (
+						<div className={styles.list} key={key}>
+							<div style={{ width: '60%' }}>{heading ?? '___'}</div>
+							<div style={{ width: '20%' }}>
+								{Number(yearlyValue || DEFAULT_VALUE).toFixed(TOFIXED_NUMBER) ?? '___'}
+							</div>
+							<div style={{ width: '20%' }}>
+								{(Number(monthlyValue || DEFAULT_VALUE).toFixed(TOFIXED_NUMBER)) ?? '___'}
+							</div>
+						</div>
+					);
+				})}
+			</div>
 			<IncentivesComponent control={control} error={error} formProps={formProps} />
 		</div>
 	);
