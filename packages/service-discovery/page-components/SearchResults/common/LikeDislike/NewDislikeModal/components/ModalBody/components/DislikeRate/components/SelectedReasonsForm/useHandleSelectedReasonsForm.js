@@ -45,7 +45,7 @@ const useHandleSelectedReasonsForm = ({
 	const [{ loading: deleteLoading = false }, deleteTrigger] = useRequest(
 		{
 			method : 'POST',
-			url    : '/delete_spot_search_feedback',
+			url    : '/delete_spot_search_rate_feedback',
 		},
 		{ manual: true },
 	);

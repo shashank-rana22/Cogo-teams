@@ -424,7 +424,7 @@ const apis = [
 		service_name : 'spot_search',
 	},
 	{
-		api          : 'delete_spot_search_feedback',
+		api          : 'delete_spot_search_rate_feedback',
 		access_type  : 'private',
 		feature      : 'rate_feedback',
 		service_name : 'spot_search',
