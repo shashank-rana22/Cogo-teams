@@ -1116,6 +1116,16 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'upload_payroll_data',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'bulk_upload_payroll_data',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	finance_payroll: [
 		{
