@@ -33,3 +33,17 @@
 	border-bottom-right-radius: 8px;
 	border-bottom-left-radius: 8px;
 }
+
+.pill {
+	height: fit-content;
+	padding: 2px 6px;
+	margin-right: 6px;
+	font-size: 10px;
+	font-weight: 400;
+	background: rgb(241 239 255);
+	border-radius: 4px;
+
+	&.grey {
+		background: #e0e0e0;
+	}
+}

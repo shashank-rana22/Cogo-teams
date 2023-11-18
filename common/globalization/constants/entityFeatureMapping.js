@@ -91,6 +91,7 @@ const ENTITY_FEATURE_MAPPING = {
 			'freight_cross_entity_purchase_invoice_restricted_entity',
 			'cancel_e_invoice',
 			'upload_invoice',
+			'upload_xml',
 			'refetch-pdfs',
 			'dunning',
 			'create_payrun',

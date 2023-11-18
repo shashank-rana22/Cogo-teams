@@ -20,9 +20,9 @@ function ListHeader({ item = {} }) {
 		is_cogo_assured = '',
 		is_job_closed = false,
 		is_job_closed_financially = false,
-	} = item;
+	} = item || {};
 
-	const { tags:importer_exporter_tags = [] } = importer_exporter;
+	const { tags:importer_exporter_tags = [] } = importer_exporter || {};
 
 	const tradeType = trade_type || INCO_TERM_MAPING[inco_term];
 

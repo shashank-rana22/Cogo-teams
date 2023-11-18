@@ -6,20 +6,35 @@ import Layout from '../../../common/Layout';
 import getControls from './controls';
 import styles from './styles.module.css';
 
-function SearchForm({ activeTab = '', setFilterParams = () => {}, filterParams = {} }) {
+function SearchForm({
+	activeTab = '', activeService = '', setFilterParams = () => { }, filterParams = {},
+	setShowPopver = () => { },
+}) {
 	const { controls = {} } = getControls({ activeTab });
+
 	const { control, handleSubmit, reset } = useForm({ defaultValues: filterParams });
+
 	const onSubmit = (values) => {
 		setFilterParams((prev) => ({ ...prev, ...values }));
+		setShowPopver(false);
 	};
+
 	const onReset = (values) => {
 		const obj = values;
+
 		Object.keys(values).forEach((key) => {
-			obj[key] = '';
+			obj[key] = undefined;
 		});
-		setFilterParams((prev) => ({ ...prev, ...obj, margin_type: activeTab }));
+
+		setFilterParams((prev) => ({
+			...prev, ...obj, margin_type: activeTab, service: activeService, status: 'active',
+		}));
+
 		reset();
+
+		setShowPopver(false);
 	};
+
 	return (
 		<div className={styles.form}>
 			<div className={styles.flex_space}>
@@ -32,7 +47,6 @@ function SearchForm({ activeTab = '', setFilterParams = () => {}, filterParams =
 						onClick={handleSubmit(onReset)}
 					>
 						RESET FORM
-
 					</Button>
 					<Button size="sm" onClick={handleSubmit(onSubmit)}>SHOW RESULTS</Button>
 				</div>

@@ -2,22 +2,22 @@ import containerSize from '@cogoport/constants/container-sizes.json';
 import containertypes from '@cogoport/constants/container-types.json';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
 
-import SERVICE_OPTIONS from '../../../config/SERVICE_OPTIONS.json';
+// import SERVICE_OPTIONS from '../../../config/SERVICE_OPTIONS.json';
 
 const getControls = ({ activeTab = '' }) => {
 	const account_type = (activeTab === 'supply' ? 'service_provider' : 'importer_exporter');
 	const commoditiesOptions = getCommodityList('freight');
 	const controls = [
-		{
-			label       : 'Select any Service',
-			name        : 'service',
-			placeholder : 'Drop down to select',
-			type        : 'select',
-			multiple    : false,
-			watch       : true,
-			options     : SERVICE_OPTIONS?.service,
-			span        : 12,
-		},
+		// {
+		// 	label       : 'Select any Service',
+		// 	name        : 'service',
+		// 	placeholder : 'Drop down to select',
+		// 	type        : 'select',
+		// 	multiple    : false,
+		// 	watch       : true,
+		// 	options     : SERVICE_OPTIONS?.service,
+		// 	span        : 12,
+		// },
 		{
 			label       : 'Select any Organization',
 			name        : 'organization_id',

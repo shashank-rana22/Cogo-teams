@@ -652,8 +652,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		margin: {
 			key           : 'margin',
 			title         : t('common:margin_management'),
-			href          : '/margins',
-			as            : '/margins',
+			href          : '/v2/margins',
+			as            : '/v2/margins',
 			type          : 'link',
 			possible_apis : apis.margin,
 			icon          : IcMMarginManagement,
@@ -1258,7 +1258,7 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/booking-desk/air',
 					type          : 'link',
 					main_apis     : ['list_shipments'],
-					possible_apis : [...apis.shipment],
+					possible_apis : [...apis.shipment, ...apis.cargo_insurance],
 				},
 				{
 					key           : 'coe-bn_salvage',

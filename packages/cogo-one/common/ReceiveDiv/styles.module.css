@@ -29,6 +29,10 @@
 	background-color: #fff;
 	border-radius: 0 6px 6px;
 	box-shadow: 0 0 4px 0 #627fac33;
+
+	@media (max-width: 576px) {
+		max-width: 100%;
+	}
 }
 
 .hamburger_styles {

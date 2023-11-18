@@ -13,6 +13,7 @@ function AgentConfig({
 	setViewType = () => {},
 	activeCard = '',
 	setActiveCard = () => {},
+	isMobile = false,
 }) {
 	return (
 		<>
@@ -29,6 +30,7 @@ function AgentConfig({
 				setActiveCard={setActiveCard}
 				activeCard={activeCard}
 				setViewType={setViewType}
+				isMobile={isMobile}
 			/>
 		</>
 	);

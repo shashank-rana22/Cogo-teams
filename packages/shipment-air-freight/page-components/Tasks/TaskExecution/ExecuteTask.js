@@ -1,4 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import ShipmentInsurance from '@cogoport/shipment-insurance';
 
 import incoTermArray from '../../../constants/inco-terms.json';
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
@@ -200,6 +201,12 @@ function ExecuteTask({
 				onCancel={onCancel}
 				type="gatepass"
 			/>
+		);
+	}
+
+	if (task?.task === 'generate_cargo_insurance') {
+		return (
+			<ShipmentInsurance onCancel={onCancel} refetch={taskListRefetch} servicesList={services} />
 		);
 	}
 

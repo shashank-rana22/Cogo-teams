@@ -1,17 +1,26 @@
 .nested_field_array {
 	width: 100%;
+	margin-bottom: 24px;
 }
 
 .field_container {
 	margin-bottom: 6px;
-	border: 1px solid #dedede;
+
+	/* border: 1px solid #dedede; */
 	border-radius: 4px;
 }
 
 .field_header {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 	padding: 4px;
+}
+
+.top_label {
+	font-size: 16px;
+	font-weight: 500;
+	text-decoration: underline;
 }
 
 .element {
@@ -21,8 +30,7 @@
 
 .label {
 	margin-bottom: 6px;
-	font-size: var(--font-size-md);
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .nested_container {
@@ -30,5 +38,6 @@
 }
 
 .error {
-	color: #cb6464;
+	font-size: 12px;
+	color: #ee3425;
 }

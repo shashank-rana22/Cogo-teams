@@ -49,7 +49,7 @@ const useGetAudit = () => {
 				params: {
 					payrunId : payrun_id,
 					pageSize,
-					query    : q || undefined,
+					q        : q || undefined,
 					pageIndex,
 				},
 			});

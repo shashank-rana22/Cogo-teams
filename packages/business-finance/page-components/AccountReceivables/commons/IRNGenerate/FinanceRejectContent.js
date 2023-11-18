@@ -82,6 +82,8 @@ function FinanceRejectContent({ itemData, refetch }) {
 
 	const UPLOAD_INVOICE_PERMISSION = ENTITY_FEATURE_MAPPING[entityCode]
 		?.feature_supported.includes('upload_invoice');
+	const XML_REQUIRED = ENTITY_FEATURE_MAPPING[entityCode]
+		?.feature_supported.includes('upload_xml');
 	const REFRESH_ALLOWED = ENTITY_FEATURE_MAPPING[entityCode]
 		?.feature_supported.includes('refresh');
 
@@ -135,6 +137,7 @@ function FinanceRejectContent({ itemData, refetch }) {
 						setUploadInvoice={setUploadInvoice}
 						uploadEInvoice={uploadEInvoice}
 						loading={invoiceLoading}
+						showXml={XML_REQUIRED}
 					/>
 				)}
 				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost)

@@ -3,18 +3,21 @@
 	height: 30px;
 	margin: 8px 0;
 	overflow: hidden;
-	border-bottom: 1px solid #f0c289;
+	border-bottom: 1px solid #f8f2e7;
 }
 
 .heading {
 	display: flex;
 	margin: 8px 0;
+	font-size: 16px;
 }
 
 .control_container {
 	display: flex;
 	flex-basis: 18%;
 	margin: 12px 4px;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .control_label {
@@ -34,7 +37,6 @@
 
 .field {
 	width: 100%;
-	margin: 0 8px;
 }
 
 .table_container {
@@ -42,11 +44,10 @@
 }
 
 .error {
-	padding-left: 8px;
 	margin: 0;
 	font-size: 12px;
 	line-height: 16px;
-	color: #cb6464;
+	color: #f00;
 }
 
 .header_field {
@@ -59,7 +60,7 @@
 .field_heading {
 	justify-content: flex-end;
 	width: 50%;
-	margin: 0 8px;
+	margin: 4px 0;
 }
 
 .text_container {
@@ -70,4 +71,12 @@
 .button_container {
 	margin-top: 10px;
 	margin-left: 20px;
+}
+
+.salary_config_cont {
+	display: flex;
+	align-items: "center";
+	justify-content: space-between;
+	width: 100%;
+	margin: 24px 0;
 }

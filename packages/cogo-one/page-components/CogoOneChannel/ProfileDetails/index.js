@@ -32,6 +32,7 @@ function ProfileDetails({
 	teamsSideBarCheck = false,
 	groupMembersLoading = false,
 	userName = '',
+	isMobile = false,
 }) {
 	const customerId = (FIREBASE_TABS.includes(activeTab) ? activeMessageCard : activeVoiceCard)?.id;
 
@@ -108,6 +109,7 @@ function ProfileDetails({
 							chatsConfig={chatsConfig}
 							groupMembersLoading={groupMembersLoading}
 							userName={userName}
+							isMobile={isMobile}
 						/>
 					)}
 				</div>
@@ -129,6 +131,7 @@ function ProfileDetails({
 				formattedMessageData={formattedMessageData}
 				setActiveTab={setActiveTab}
 				expandSideBar={chatsConfig?.expandSideBar}
+				isMobile={isMobile}
 			/>
 		</div>
 	);

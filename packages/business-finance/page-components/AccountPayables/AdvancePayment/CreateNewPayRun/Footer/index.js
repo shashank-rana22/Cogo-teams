@@ -1,23 +1,24 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import SavePayRunModal from './SavePayRunModal';
 import styles from './styles.module.css';
 
 function Footer({
-	apiData,
-	viewSelectedInvoice,
-	setViewSelectedInvoice,
-	submitSelectedInvoices,
-	getViewSelectedInvoices,
-	getAdvancedPayment,
-	viewSelectedData,
-	selectedPayRunId,
-	selectedDataLoading,
-	loading,
-	viewSelectedDataLoading,
-	selectedCurrency,
+	apiData = {},
+	viewSelectedInvoice = false,
+	setViewSelectedInvoice = () => {},
+	submitSelectedInvoices = () => {},
+	getViewSelectedInvoices = () => {},
+	getAdvancedPayment = () => {},
+	viewSelectedData = {},
+	selectedPayRunId = '',
+	selectedDataLoading = false,
+	loading = false,
+	viewSelectedDataLoading = false,
+	selectedCurrency = '',
 }) {
 	const {
 		list = [],
@@ -29,7 +30,7 @@ function Footer({
 	const listLength = viewSelectedList.length;
 	const isChecked = (list || []).filter((item) => item.checked);
 	const totalInvoiceAmount = isChecked.reduce((acc, obj) => +acc + +obj.payableAmount, 0);
-	const showAddToSelected = isChecked?.length === 0;
+	const showAddToSelected = isEmpty(isChecked);
 	const buttonDisabled = showAddToSelected || selectedDataLoading || loading;
 	const handleView = () => {
 		setViewSelectedInvoice(true);

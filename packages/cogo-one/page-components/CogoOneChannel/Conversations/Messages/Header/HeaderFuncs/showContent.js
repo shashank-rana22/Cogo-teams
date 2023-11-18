@@ -7,7 +7,8 @@ import { TAGS_COLORS } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 
-const MAX_SHOW_LENGTH = 2;
+const MAX_SHOW_LENGTH_NON_MOBILE = 2;
+const MAX_SHOW_LENGTH_MOBILE = 1;
 
 function ToolTipContent({ moreList = [], handleRemoveTags = () => {} }) {
 	return (
@@ -25,7 +26,11 @@ function ToolTipContent({ moreList = [], handleRemoveTags = () => {} }) {
 	);
 }
 
-function ToolTipComp({ moreList = [], handleRemoveTags = () => {} }) {
+function ToolTipComp({
+	moreList = [],
+	handleRemoveTags = () => {},
+	isMobile = false,
+}) {
 	return (
 		<Tooltip
 			content={(
@@ -35,7 +40,7 @@ function ToolTipComp({ moreList = [], handleRemoveTags = () => {} }) {
 				/>
 			)}
 			theme="light"
-			placement="bottom"
+			placement={isMobile ? 'bottom-end' : 'bottom'}
 			interactive
 		>
 			<div className={styles.more_tags}>
@@ -51,7 +56,9 @@ function ShowContent({
 	showMorePlacement = 'right',
 	hasPermissionToEdit = false,
 	updateChat = () => {},
+	isMobile = false,
 }) {
+	const MAX_SHOW_LENGTH = isMobile ? MAX_SHOW_LENGTH_MOBILE : MAX_SHOW_LENGTH_NON_MOBILE;
 	const showMoreList = (list || []).length > MAX_SHOW_LENGTH;
 	const lessList = (list || []).slice(GLOBAL_CONSTANTS.zeroth_index, MAX_SHOW_LENGTH);
 	const moreList = (list || []).slice(MAX_SHOW_LENGTH);
@@ -77,7 +84,7 @@ function ShowContent({
 	return (
 		<div className={styles.flex_container_add}>
 			{(showMoreList && showMorePlacement !== 'right')
-				? <ToolTipComp moreList={moreList} handleRemoveTags={handleRemoveTags} />
+				? <ToolTipComp isMobile={isMobile} moreList={moreList} handleRemoveTags={handleRemoveTags} />
 				: null}
 
 			{(lessList || []).map(
@@ -94,7 +101,7 @@ function ShowContent({
 			)}
 
 			{(showMoreList && showMorePlacement === 'right')
-				? <ToolTipComp moreList={moreList} handleRemoveTags={handleRemoveTags} />
+				? <ToolTipComp isMobile={isMobile} moreList={moreList} handleRemoveTags={handleRemoveTags} />
 				: null}
 		</div>
 	);

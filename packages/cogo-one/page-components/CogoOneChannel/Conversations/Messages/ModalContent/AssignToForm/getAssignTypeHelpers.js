@@ -71,7 +71,7 @@ function AssignUsers({
 function ShipmentInvoice({
 	control = {},
 	assignCondition = {},
-	watchCondtion = {},
+	watchCondition = {},
 	errors = {},
 	conditionValue = {},
 }) {
@@ -83,14 +83,14 @@ function ShipmentInvoice({
 					{...assignCondition}
 				/>
 			</div>
-			{watchCondtion && (
+			{watchCondition && (
 				<div
 					className={cl`${styles.styled_controller} ${errors?.condition_value ? styles.error_class : ''}`}
 				>
 					<InputController
 						control={control}
 						{...conditionValue}
-						placeholder={PLACEHOLDER_MAPPING[watchCondtion] || ''}
+						placeholder={PLACEHOLDER_MAPPING[watchCondition] || ''}
 					/>
 					<div className={styles.error_text}>{errors?.condition_value && 'This is Required'}</div>
 				</div>
@@ -132,7 +132,7 @@ function Entity({
 	);
 }
 
-const COMPONENT_MAPPPING = {
+const COMPONENT_MAPPING = {
 	assign_user                : AssignUsers,
 	assign_on_shipment_invoice : ShipmentInvoice,
 	assign_on_entity           : Entity,
@@ -141,7 +141,7 @@ const COMPONENT_MAPPPING = {
 export function GetAssignTypeComp({
 	control = {},
 	errors = {},
-	watchCondtion = '',
+	watchCondition = '',
 	assignType = '',
 	accountType = '',
 	viewType = '',
@@ -170,7 +170,7 @@ export function GetAssignTypeComp({
 		},
 		assign_on_shipment_invoice: {
 			assignCondition : assign_condition,
-			watchCondtion,
+			watchCondition,
 			conditionValue  : condition_value,
 		},
 		assign_on_entity: {
@@ -181,7 +181,7 @@ export function GetAssignTypeComp({
 		},
 	};
 
-	const Component = COMPONENT_MAPPPING[assignType] || null;
+	const Component = COMPONENT_MAPPING[assignType] || null;
 
 	if (!Component) {
 		return null;

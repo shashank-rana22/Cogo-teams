@@ -96,6 +96,12 @@
 	width: 25px;
 	height: 25px;
 	cursor: pointer;
+
+	@media (max-width: 576px) {
+		>div[data-tippy-root] {
+			z-index: 999999 !important;
+		}
+	}
 }
 
 .source_types {
