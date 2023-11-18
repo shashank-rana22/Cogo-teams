@@ -4,10 +4,9 @@ import { useRequest } from '@cogoport/request';
 import getPayload from '../page-components/Tasks/TaskExecution/utils/format-payload-consolidated-invoice';
 
 const useCreateShipmentAirFreightConsolidatedInvoice = ({
-	type = 'terminal', sheetData = {}, mainServicesData = {},
-	entityData = {},
-	collectionPartyData = {},
-	createShipmentAdditionalService = () => {},
+	type = 'terminal', index = 0, sheetData = {}, mainServicesData = {},
+	entityData = {}, setTerminalChargeState = () => {},
+	collectionPartyData = {}, setInvoiceData = () => {},
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/create_shipment_air_freight_consolidated_invoice',
@@ -25,10 +24,11 @@ const useCreateShipmentAirFreightConsolidatedInvoice = ({
 		});
 
 		try {
-			await trigger({
+			const res = await trigger({
 				data: additionalServicePayload,
 			});
-			createShipmentAdditionalService(values);
+			setInvoiceData(res?.data);
+			setTerminalChargeState((prev) => ({ ...prev, [index]: 'irn_generate' }));
 		} catch (err) {
 			toastApiError(err);
 		}

@@ -5,8 +5,6 @@ const DEFAULT_VALUE = 0;
 
 const useCreateShipmentAdditionalService = ({
 	shipmentData = {},
-	setIRNGenerated = () => {},
-	setShowConfirm = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_shipment_additional_service',
@@ -48,8 +46,6 @@ const useCreateShipmentAdditionalService = ({
 		};
 		try {
 			await trigger({ data: payload });
-			setIRNGenerated(false);
-			setShowConfirm(false);
 		} catch (err) {
 			toastApiError(err);
 		}

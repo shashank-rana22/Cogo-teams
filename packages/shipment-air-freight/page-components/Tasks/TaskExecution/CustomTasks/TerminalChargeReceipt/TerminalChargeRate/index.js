@@ -5,19 +5,20 @@ import {
 } from '@cogoport/forms';
 import { useState } from 'react';
 
-import useUpdateShipmentTerminalServiceTask from '../../../../../../hooks/useUpdateShipmentTerminalServiceTask';
+import useUpdateTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 import ChargeInformations from './ChargeInformations';
 import styles from './styles.module.css';
 import getTerminalChargeRateControl from './terminalChargeRateControl';
+import useCreateShipmentAdditionalService from './useCreateShipmentAdditionalService';
 
 function TerminalChargeRate({
 	mainServicesData = {},
-	localServiceId = '',
 	refetch = () => {},
 	onCancel = () => {},
 	task_id = '',
 	type = 'terminal',
+	shipmentData = {},
 }) {
 	const [entityData, setEntityData] = useState({});
 
@@ -35,32 +36,25 @@ function TerminalChargeRate({
 
 	const { formState:{ errors }, control, handleSubmit, setValue } = useForm();
 
-	const {
-		updateShipmentTerminalServiceTask = () => {},
-		loading: terminalServiceLoading = false,
-	} = useUpdateShipmentTerminalServiceTask({
-		type,
-		task_id,
-		refetch,
-		onCancel,
-		mainServicesData,
-		localServiceId,
-		sheetData,
-		entityData,
-		collectionPartyData,
+	const { createShipmentAdditionalService = () => {} } = useCreateShipmentAdditionalService({
+		shipmentData,
 	});
 
-	const handleUpload = (values) => {
-		updateShipmentTerminalServiceTask(values);
-	};
+	const {
+		apiTrigger = () => {},
+		loading:updateLoading = false,
+	} = useUpdateTask({ refetch, onCancel });
 
 	return (
-		<div>
-			<Layout
-				fields={controls}
-				control={control}
-				errors={errors}
-			/>
+		<div className={styles.tc_container}>
+			<fieldset>
+				<legend>Enter basic details</legend>
+				<Layout
+					fields={controls}
+					control={control}
+					errors={errors}
+				/>
+			</fieldset>
 			{(Object.keys(terminalChargeState)).map((i) => (
 				<div key={i}>
 					<ChargeInformations
@@ -74,6 +68,10 @@ function TerminalChargeRate({
 						mainServicesData={mainServicesData}
 						terminalChargeState={terminalChargeState}
 						setTerminalChargeState={setTerminalChargeState}
+						handleSubmit={handleSubmit}
+						entityData={entityData}
+						collectionPartyData={collectionPartyData}
+						createShipmentAdditionalService={createShipmentAdditionalService}
 					/>
 				</div>
 			))}
@@ -94,14 +92,14 @@ function TerminalChargeRate({
 
 			<div className={styles.button_container}>
 				<div style={{ margin: '0 10px 0 0' }}>
-					<Button onClick={onCancel} themeType="secondary" disabled={terminalServiceLoading}>
+					<Button onClick={onCancel} themeType="secondary" disabled={updateLoading}>
 						Cancel
 					</Button>
 				</div>
 
 				<Button
-					onClick={handleSubmit(handleUpload)}
-					disabled={terminalServiceLoading || Object.values(terminalChargeState).includes('fetching_data')}
+					onClick={() => apiTrigger(task_id)}
+					disabled={updateLoading || Object.values(terminalChargeState).includes('fetching_data')}
 				>
 					Submit
 				</Button>

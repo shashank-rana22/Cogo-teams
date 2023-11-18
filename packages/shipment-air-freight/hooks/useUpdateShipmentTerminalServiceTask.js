@@ -7,8 +7,6 @@ import getPayload from '../page-components/Tasks/TaskExecution/utils/format-payl
 function useUpdateShipmentTerminalServiceTask({
 	type = 'terminal',
 	task_id = '',
-	refetch = () => {},
-	onCancel = () => {},
 	localServiceId = '',
 	mainServicesData = {},
 	sheetData = {},
@@ -37,8 +35,6 @@ function useUpdateShipmentTerminalServiceTask({
 				await trigger({
 					data: additionalServicePayload,
 				});
-				refetch();
-				onCancel();
 			}
 		} catch (err) {
 			toastApiError(err);
