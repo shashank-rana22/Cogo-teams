@@ -39,7 +39,9 @@ function ProfilePage() {
 		error = false,
 		shareOfferLetter = '',
 		setShareOfferLetter = () => { },
+		setCtcStructure = () => {},
 		setError = () => { },
+		watch = () => {},
 	} = useProfileDetails();
 
 	const {
@@ -67,20 +69,20 @@ function ProfilePage() {
 			<div className={styles.tab_container}>
 				<Tabs activeTab={activeTab} themeType="primary" onChange={setActiveTab}>
 					{(Object.keys(TABS_MAPPING) || []).map((tab) => {
-						const Component = TABS_MAPPING[tab];
-						return (
-							<TabPanel name={tab} title={startCase(tab)} key={tab}>
-								<Component
-									profileData={profileData}
-									loading={loading}
-									getEmployeeDetails={getEmployeeDetails}
-									getEmployeeDetailsLoading={getEmployeeDetailsLoading}
-									offerLetter={offerLetter}
-									setShowCtcBreakupModal={setShowCtcBreakupModal}
-									offerLetterApiLoading={offerLetterApiLoading}
-								/>
-							</TabPanel>
-						);
+                    	const Component = TABS_MAPPING[tab];
+                    	return (
+	<TabPanel name={tab} title={startCase(tab)} key={tab}>
+		<Component
+			profileData={profileData}
+			loading={loading}
+			getEmployeeDetails={getEmployeeDetails}
+			getEmployeeDetailsLoading={getEmployeeDetailsLoading}
+			offerLetter={offerLetter}
+			setShowCtcBreakupModal={setShowCtcBreakupModal}
+			offerLetterApiLoading={offerLetterApiLoading}
+		/>
+	</TabPanel>
+                    	);
 					})}
 				</Tabs>
 			</div>
@@ -88,9 +90,11 @@ function ProfilePage() {
 			{showCtcBreakupModal && (
 				<CtcBreakupModal
 					detail={detail}
+					watch={watch}
 					showCtcBreakupModal={showCtcBreakupModal}
 					setShowCtcBreakupModal={setShowCtcBreakupModal}
 					ctcStructure={ctcStructure}
+					setCtcStructure={setCtcStructure}
 					initialQuestion={initialQuestion}
 					setInitialQuestion={setInitialQuestion}
 					formProps={formProps}
@@ -99,7 +103,6 @@ function ProfilePage() {
 					setError={setError}
 					shareOfferLetter={shareOfferLetter}
 					setShareOfferLetter={setShareOfferLetter}
-
 				/>
 			)}
 		</div>
