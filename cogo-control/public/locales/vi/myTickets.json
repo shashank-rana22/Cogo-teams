@@ -175,5 +175,6 @@
     "reset": "Cài lại",
     "serial_id": "ID nối tiếp",
     "id_creator": "Người tạo ID",
-    "messaged_at":"Nhắn tin tại"
+    "messaged_at":"Nhắn tin tại",
+    "unread_message": "Tin nhắn chưa đọc"
 }

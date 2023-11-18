@@ -1,0 +1,6 @@
+.outer_section {
+	display: inline-block;
+	max-width: 100px;
+	padding: 4px;
+	border-radius: 6px;
+}

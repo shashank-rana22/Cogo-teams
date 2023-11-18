@@ -186,6 +186,7 @@ function getComponentMapping({ filterParams = {} }) {
 					/>
 					<DemoPieChart
 						filterParams={filterParams}
+						widgetBlocks={['get_chat_and_demo_data']}
 					/>
 				</>
 			),

@@ -22,8 +22,8 @@ const PAYLOAD_MAPPING = {
 
 const getPaylaod = ({
 	accountType = '', type = '',
-	orgId = '', rejectReason = '',
-}) => PAYLOAD_MAPPING[accountType]?.({ accountType, type, orgId, rejectReason });
+	orgId = '', rejectReason = [], otherReason = '',
+}) => PAYLOAD_MAPPING[accountType]?.({ accountType, type, orgId, rejectReason, otherReason });
 
 const useVerificationKyc = ({
 	setRejectAccount = () => {},
@@ -38,10 +38,13 @@ const useVerificationKyc = ({
 
 	const { requestLoader = false, updateRequest = () => {} } = useUpdateOnboardingRequest();
 
-	const verifyKyc = async ({ type = '', orgId = '', rejectReason = '', requestId, requestStatus }) => {
+	const verifyKyc = async ({
+		type = '', orgId = '', rejectReason = [], otherReason = '',
+		requestId, requestStatus,
+	}) => {
 		try {
 			const res = await trigger({
-				data: getPaylaod({ type, orgId, accountType, rejectReason }),
+				data: getPaylaod({ type, orgId, accountType, rejectReason, otherReason }),
 			});
 
 			if (res?.data?.id) {
@@ -49,7 +52,8 @@ const useVerificationKyc = ({
 			}
 			setRejectAccount({
 				show         : false,
-				rejectReason : '',
+				rejectReason : [],
+				otherReason  : '',
 			});
 			setVerifyAccount({
 				show               : false,

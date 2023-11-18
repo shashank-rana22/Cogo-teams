@@ -1,0 +1,169 @@
+.main_container {
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+	width: 73%;
+}
+
+.main_container > :not(:last-child) {
+	margin-bottom: 16px;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	padding: 16px 12px;
+	background: #fff;
+	border-radius: 16px;
+}
+
+.container > :not(:last-child) {
+	margin-bottom: 24px;
+}
+
+.head_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.head_container > :not(:last-child) {
+	margin-bottom: 4px;
+}
+
+.heading {
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.subheading {
+	font-size: 12px;
+	color: #828282;
+}
+
+.step {
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+	color: #4f4f4f;
+}
+
+.step > :first-child {
+	margin-right: 4px;
+}
+
+.step_text {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.download_flex {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.download_excel {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.button_container {
+	display: flex;
+	align-items: center;
+}
+
+.button_container > :not(:last-child) {
+	margin-right: 4px;
+}
+
+.button_text {
+	font-weight: 500;
+	color: #221f20;
+	text-transform: capitalize;
+}
+
+.bottom_container {
+	display: flex;
+	flex-direction: column;
+	padding: 16px 12px;
+	background: #fff;
+	border-radius: 16px;
+}
+
+.upload_container {
+	margin-block: 8px;
+}
+
+.upload {
+	:global {
+		.ui_input_container,
+		.ui_input_label {
+			width: 100%;
+		}
+	}
+}
+
+.upload > :last-child {
+	width: 100% !important;
+}
+
+.upload_text {
+	font-size: 14px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.error_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 16px;
+	margin-top: 8px;
+	background-color: #fdebe9;
+	border-radius: 8px;
+}
+
+.right {
+	display: flex;
+}
+
+.right > :first-child {
+	margin-right: 8px;
+	color: white;
+	background-color: #ee3425;
+	border-radius: 50%;
+}
+
+.error {
+	display: flex;
+	flex-direction: column;
+}
+
+.error > :not(:last-child) {
+	margin-bottom: 4px;
+}
+
+.error_found {
+	font-size: 14px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.solve_steps {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.error_button_text {
+	font-size: 12px;
+	color: #221f20;
+	text-transform: capitalize;
+}
+
+.icon {
+	color: white;
+	background-color: #4f4f4f;
+	border-radius: 7px;
+}

@@ -6,6 +6,7 @@ import useCreateTicketActivity from '../../../../hooks/useCreateTicketActivity';
 import useGetListShipments from '../../../../hooks/useGetListShipments';
 import useGetTicketActivity from '../../../../hooks/useGetTicketActivity';
 import useGetTicketDetails from '../../../../hooks/useGetTicketDetails';
+import useListServiceTypeShipment from '../../../../hooks/useListServiceShipment';
 import useUpdateTicketActivity from '../../../../hooks/useUpdateTicketActivity';
 
 import ChatBody from './ChatBody';
@@ -69,8 +70,8 @@ function TicketChat({
 	});
 
 	const { Ticket: ticket = {}, IsCurrentReviewer: isCurrentReviewer = false } = ticketData || {};
-	const { Status: status = '', Data: data = {} } = ticket || {};
-	const { SerialID: serialId } = data || {};
+	const { Status: status = '', Data: data = {}, Category: category = '' } = ticket || {};
+	const { SerialID: serialId, Service: service, IDType: idType } = data || {};
 
 	const {
 		listData = {},
@@ -80,7 +81,14 @@ function TicketChat({
 	} = useGetTicketActivity({
 		ticketId: ticketId || '',
 	});
-	const { shipmentData = {}, listLoading = false } = useGetListShipments({ ticketId, serialId });
+	const { shipmentData = {}, listLoading = false } = useGetListShipments({ ticketId, serialId, idType });
+	const { serviceLoading = false, serviceData = {} } = useListServiceTypeShipment({
+		idType,
+		serialId,
+		ticketId,
+		category,
+		service,
+	});
 
 	const isEmptyChat = isEmpty(listData?.items);
 
@@ -116,6 +124,8 @@ function TicketChat({
 	const doesTicketsExists = !isEmpty(ticketData);
 
 	const loading = chatLoading || createLoading;
+	const updateShipmentData = category?.toLowerCase() === 'rates' ? serviceData : shipmentData;
+	const updateShipmentLoading = category?.toLowerCase() === 'rates' ? serviceLoading : listLoading;
 
 	const handleSendComment = async () => {
 		if ((message || !isEmpty(file)) && !createLoading) {
@@ -204,8 +214,8 @@ function TicketChat({
 						<TicketSummary
 							{...ticketData}
 							detailsLoading={detailsLoading}
-							shipmentData={shipmentData}
-							listLoading={listLoading}
+							updateShipmentData={updateShipmentData}
+							updateShipmentLoading={updateShipmentLoading}
 							partnerId={partnerId}
 						/>
 					</div>

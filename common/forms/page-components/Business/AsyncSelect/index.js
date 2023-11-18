@@ -108,6 +108,9 @@ import {
 	asyncListHaulageRateFeedback,
 	asyncListAirCustomFeedback,
 	asyncInsuranceHsCode,
+	asyncListSalaryBands,
+	asyncListTransactionType,
+	asyncListSalaryConfigurations,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -234,6 +237,9 @@ const keyAsyncFieldsParamsMapping = {
 	list_haulage_freight_rate_feedbacks  : asyncListHaulageRateFeedback,
 	list_air_customs_rate_feedbacks      : asyncListAirCustomFeedback,
 	list_insurance_hs_code               : asyncInsuranceHsCode,
+	list_salary_bands                    : asyncListSalaryBands,
+	list_transaction_type                : asyncListTransactionType,
+	list_salary_configurations           : asyncListSalaryConfigurations,
 };
 
 const SINGLE_ENTITY = 1;

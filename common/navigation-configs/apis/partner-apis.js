@@ -5368,6 +5368,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'margin',
 		},
+		{
+			api          : 'create_entity_margin',
+			access_type  : 'private',
+			service_name : 'margin',
+		},
+		{
+			api          : 'get_cogo_entity_margin',
+			access_type  : 'private',
+			service_name : 'margin',
+		},
+		{
+			api          : 'list_entity_margins',
+			access_type  : 'private',
+			service_name : 'margin',
+		},
 	],
 	rate_sheet: [
 		{

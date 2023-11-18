@@ -175,5 +175,6 @@
     "reset": "Mengatur ulang",
     "serial_id": "idSerial",
     "id_creator": "Pencipta id",
-    "messaged_at":"Pesan di"
+    "messaged_at":"Pesan di",
+    "unread_message": "Pesan yang belum dibaca"
 }

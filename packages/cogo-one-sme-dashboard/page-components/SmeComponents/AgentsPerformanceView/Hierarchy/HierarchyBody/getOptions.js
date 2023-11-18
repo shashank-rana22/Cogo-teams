@@ -1,12 +1,12 @@
 import { isEmpty } from '@cogoport/utils';
 
+import { COGO_PARTNER_LIST } from '../../../../../constants/cogoPartnersList';
 import getBranchesData from '../../../../../utils/getBranchesData';
 import getCountriesData from '../../../../../utils/getCountriesData';
 
 function getOptions({
 	nextViewType = '',
 	hierarchyData = [],
-	partnersList = [],
 	leaderBoardData = {},
 	userHierarchyData = {},
 	loading = false,
@@ -19,12 +19,12 @@ function getOptions({
 		return getCountriesData();
 	}
 	if (nextViewType === 'partners') {
-		return partnersList.map(
+		return COGO_PARTNER_LIST.map(
 			(itm) => ({
-				id           : itm?.id,
-				name         : itm?.business_name,
-				country_id   : itm?.country_id,
-				country_code : itm?.country?.country_code,
+				id           : itm?.partnerId,
+				name         : itm?.label,
+				country_id   : itm?.countryId,
+				country_code : itm?.countryCode,
 			}),
 		);
 	}
