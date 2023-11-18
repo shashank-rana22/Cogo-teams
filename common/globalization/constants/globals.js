@@ -1010,13 +1010,6 @@ const GLOBAL_CONSTANTS = {
 		{ label: 'Saturday', value: 'saturday' },
 		{ label: 'Sunday', value: 'sunday' },
 	],
-	calculator: {
-		less_lpa   : 'e6a12dd0-7a4c-4dce-8ba8-e7375903fe38',
-		great_lpa  : '9f120839-0c61-45e9-828f-365e62ab80a8',
-		old_regime : '88902852-7534-4e02-bbb0-b49603f325a0',
-		new_regime : '5087c6fa-1b10-4c22-acc8-b300c5350e6a',
-		emp_id     : 'dfca5d91-8906-d146-2970-202eace33a66',
-	},
 };
 
 export default GLOBAL_CONSTANTS;

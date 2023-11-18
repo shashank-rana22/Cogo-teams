@@ -13,8 +13,6 @@ const regimes = [
 	{ label: 'new', value: GLOBAL_CONSTANTS.new_regime },
 ];
 export default function TaxInput({ control = {}, errors = {} }) {
-	const { calculator } = GLOBAL_CONSTANTS;
-	console.log(calculator, 'calculator');
 	return (
 		<div className={styles.container}>
 			<div className={styles.input_cont}>
