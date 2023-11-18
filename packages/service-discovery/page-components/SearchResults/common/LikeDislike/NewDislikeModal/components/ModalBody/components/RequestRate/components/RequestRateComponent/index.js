@@ -43,6 +43,7 @@ function RequestRateComponent({
 	selectedSevice = {},
 	rate = {},
 	setSelectedSevice = () => {},
+	setRateRequestedFor = () => {},
 }) {
 	const router = useRouter();
 
@@ -102,6 +103,11 @@ function RequestRateComponent({
 
 			const commodityDescription = reefer_commodity_description || undefined;
 
+			const serviceId = service_data?.service_type === 'subsidiary'
+			&& SUBSIDIARY_SERVICES.includes(service_data?.code)
+				? subsidiary_source?.service_id || undefined
+				: service_id || undefined;
+
 			const body = {
 				id                              : spot_search_id || details?.source_id,
 				remarks                         : remarks ? [remarks] : undefined,
@@ -118,11 +124,7 @@ function RequestRateComponent({
 							Number(service_data?.total_rate_quantity) || undefined,
 				preferred_free_days:
 							Number(subsidiary_source?.preferred_free_days) || undefined,
-				service_id:
-					service_data?.service_type === 'subsidiary'
-					&& SUBSIDIARY_SERVICES.includes(service_data?.code)
-						? subsidiary_source?.service_id || undefined
-						: service_id || undefined,
+				service_id: serviceId,
 				service_type:
 					service_data?.service_type === 'subsidiary'
 					&& SUBSIDIARY_SERVICES.includes(service_data?.code)
@@ -134,6 +136,9 @@ function RequestRateComponent({
 			};
 
 			await trigger({ data: body });
+
+			setSelectedSevice({});
+			setRateRequestedFor((prev) => ([...prev, serviceId]));
 
 			Toast.success('Rate requested successfully');
 		} catch (error) {

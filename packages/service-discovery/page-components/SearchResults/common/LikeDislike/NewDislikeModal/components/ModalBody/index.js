@@ -15,6 +15,7 @@ const MAPPING = {
 
 function ModalBody({ rate = {}, details = {} }) {
 	const [selectedSevice, setSelectedSevice] = useState({});
+	const [rateRequestedFor, setRateRequestedFor] = useState([]);
 
 	const {
 		getSpotSearchRateFeedback,
@@ -26,8 +27,26 @@ function ModalBody({ rate = {}, details = {} }) {
 		return <LoadingState />;
 	}
 
-	console.log('data', data, details);
 	const { feedback_type = '', service_id = '' } = selectedSevice;
+
+	const propsMapping = {
+		request_rate: {
+			selectedSevice,
+			details,
+			rate,
+			setSelectedSevice,
+			setRateRequestedFor,
+		},
+		feedback: {
+			selectedSevice,
+			details,
+			rate,
+			data,
+			getSpotSearchRateFeedback,
+		},
+	};
+
+	const activeComponentProps = propsMapping[feedback_type] || {};
 
 	const ActiveComponent = MAPPING[feedback_type] || DislikeRate;
 
@@ -38,17 +57,12 @@ function ModalBody({ rate = {}, details = {} }) {
 				setSelectedSevice={setSelectedSevice}
 				selectedSevice={selectedSevice}
 				data={data}
+				rateRequestedFor={rateRequestedFor}
+				primary_service={details?.service_type}
 			/>
 
 			<div key={service_id} className={styles.form_container}>
-				<ActiveComponent
-					selectedSevice={selectedSevice}
-					details={details}
-					rate={rate}
-					setSelectedSevice={setSelectedSevice}
-					data={data}
-					getSpotSearchRateFeedback={getSpotSearchRateFeedback}
-				/>
+				<ActiveComponent {...activeComponentProps} />
 			</div>
 		</div>
 	);

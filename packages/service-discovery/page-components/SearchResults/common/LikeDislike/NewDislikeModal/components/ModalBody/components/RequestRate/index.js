@@ -3,7 +3,13 @@ import { useForm } from '@cogoport/forms';
 import RequestRateComponent from './components/RequestRateComponent';
 import styles from './styles.module.css';
 
-function RequestRate({ selectedSevice = {}, details = {}, rate = {}, setSelectedSevice = () => {} }) {
+function RequestRate({
+	selectedSevice = {},
+	details = {},
+	rate = {},
+	setSelectedSevice = () => {},
+	setRateRequestedFor = () => {},
+}) {
 	const { label = '', service_type } = selectedSevice;
 
 	const formProps = useForm();
@@ -25,6 +31,7 @@ function RequestRate({ selectedSevice = {}, details = {}, rate = {}, setSelected
 				selectedSevice={selectedSevice}
 				rate={rate}
 				setSelectedSevice={setSelectedSevice}
+				setRateRequestedFor={setRateRequestedFor}
 			/>
 		</div>
 	);

@@ -9,19 +9,33 @@ const SERVICE_NAME_MAPPING = {
 	fcl_freight           : 'Basic Freight',
 	lcl_freight           : 'Basic Freight',
 	air_freight           : 'Basic Freight',
-	fcl_customs           : 'Customs',
-	lcl_customs           : 'Customs',
-	air_customs           : 'Customs',
+	fcl_customs           : 'FCL Customs',
+	lcl_customs           : 'LCL Customs',
+	air_customs           : 'AIR Customs',
 	ftl_freight           : 'FTL Freight',
 	ltl_freight           : 'LTL Freight',
 	haulage_freight       : 'Haulage Freight',
 	trailer_freight       : 'Trailer Freight',
-	fcl_freight_local     : 'Locals',
-	lcl_freight_local     : 'Locals',
-	air_freight_local     : 'Locals',
+	fcl_freight_local     : 'FCL Local',
+	lcl_freight_local     : 'LCL Local',
+	air_freight_local     : 'AIR Local',
 	rail_domestic_freight : 'Basic Freight',
-	fcl_cfs               : 'CFS',
+	fcl_cfs               : 'FCL CFS',
 	subsidiary            : 'Subsidiary',
+};
+
+const TRADE_TYPE_MAPPING = {
+	import : 'Destination',
+	export : 'Origin',
+};
+
+const MAPPING = {
+	fcl_freight     : 'per Cont',
+	lcl_freight     : 'per Cont',
+	air_freight     : 'per Kg',
+	ftl_freight     : 'per Truck',
+	ltl_freight     : 'per Truck',
+	trailer_freight : 'per Truck',
 };
 
 function PriceComponent({
@@ -30,6 +44,7 @@ function PriceComponent({
 	freight_price_discounted = 0,
 	freight_price_currency = '',
 	service_type = '',
+	primary_service = '',
 }) {
 	if (feedback_type === 'request_rate' && is_added) {
 		return <div className={styles.price}>Rate Requested</div>;
@@ -49,12 +64,14 @@ function PriceComponent({
 		},
 	});
 
-	if (service_type === 'fcl_freight') {
+	if (service_type === primary_service) {
 		return (
 			<div className={styles.price}>
-				@
 				{formattedAmount}
-				/Ctr
+				{' '}
+				(
+				{MAPPING[service_type] || 'Total'}
+				)
 			</div>
 		);
 	}
@@ -62,6 +79,8 @@ function PriceComponent({
 	return (
 		<div className={styles.price}>
 			{formattedAmount}
+			{' '}
+			(Total)
 		</div>
 	);
 }
@@ -71,6 +90,8 @@ function SelectServices({
 	setSelectedSevice = () => {},
 	selectedSevice = {},
 	data = {},
+	rateRequestedFor = [],
+	primary_service = '',
 }) {
 	const {
 		service_rates = {},
@@ -88,10 +109,15 @@ function SelectServices({
 				total_price_currency = '',
 				container_size = '',
 				id = '',
+				trade_type = '',
 			} = cur;
 
-			const label = `${SERVICE_NAME_MAPPING[service_type] || startCase(service_type)}
+			let label = `${SERVICE_NAME_MAPPING[service_type] || startCase(service_type)}
 			${container_size ? `${container_size} Ft` : ''}`;
+
+			if (trade_type) {
+				label = `${TRADE_TYPE_MAPPING[trade_type]} ${label}`;
+			}
 
 			if (is_rate_available) {
 				return [
@@ -106,9 +132,9 @@ function SelectServices({
 						label,
 						selected_card            : rate.id,
 						service_data             : cur,
-						freight_price_discounted : service_type === 'fcl_freight'
+						freight_price_discounted : service_type === primary_service
 							? freight_price_discounted : total_price_discounted,
-						freight_price_currency: service_type === 'fcl_freight'
+						freight_price_currency: service_type === primary_service
 							? freight_price_currency : total_price_currency,
 					},
 				];
@@ -123,7 +149,7 @@ function SelectServices({
 						rate_id       : rate_id || id,
 						service_id,
 						container_size,
-						is_added      : false,
+						is_added      : rateRequestedFor.includes(service_id),
 						label,
 						selected_card : rate.id,
 						service_data  : cur,
@@ -181,6 +207,7 @@ function SelectServices({
 								freight_price_discounted={price}
 								freight_price_currency={currency}
 								service_type={service_type}
+								primary_service={primary_service}
 							/>
 
 							<IconElement

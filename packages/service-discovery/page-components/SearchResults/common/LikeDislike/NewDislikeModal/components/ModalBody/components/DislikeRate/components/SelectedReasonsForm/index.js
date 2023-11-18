@@ -18,7 +18,6 @@ function SelectedReasonsForm({
 	selectedReasons = [],
 	formProps = {},
 	allControls = [],
-	setSelectedSevice = () => {},
 	selectedSevice = {},
 	details = {},
 	rate = {},
@@ -35,13 +34,20 @@ function SelectedReasonsForm({
 
 	const isFeedbackSubmitted = !isEmpty(prefilledData);
 
-	const { onSubmit, loading, unsatisfiedFeedbacks = {}, createTrigger = () => {} } = useHandleSelectedReasonsForm({
+	const {
+		onSubmit,
+		loading = false,
+		unsatisfiedFeedbacks = {},
+		createTrigger = () => {},
+		onDeleteServiceFeedback = () => {},
+	} = useHandleSelectedReasonsForm({
 		selectedSevice,
 		details,
 		rate,
 		selectedReasons,
 		feedbacks,
 		getSpotSearchRateFeedback,
+		isFeedbackSubmitted,
 	});
 
 	return (
@@ -101,7 +107,7 @@ function SelectedReasonsForm({
 					<Button
 						type="button"
 						themeType="secondary"
-						onClick={() => setSelectedSevice({})}
+						onClick={onDeleteServiceFeedback}
 					>
 						Discard
 					</Button>

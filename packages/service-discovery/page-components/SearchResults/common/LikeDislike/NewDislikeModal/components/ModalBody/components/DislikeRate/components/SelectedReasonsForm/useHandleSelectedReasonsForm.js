@@ -14,6 +14,7 @@ const useHandleSelectedReasonsForm = ({
 	selectedReasons,
 	feedbacks = [],
 	getSpotSearchRateFeedback = () => {},
+	isFeedbackSubmitted = false,
 }) => {
 	const {
 		general: { query = {} },
@@ -39,9 +40,17 @@ const useHandleSelectedReasonsForm = ({
 		{ manual: true },
 	);
 
+	const [{ loading: deleteLoading = false }, deleteTrigger] = useRequest(
+		{
+			method : 'POST',
+			url    : '/delete_spot_search_feedback',
+		},
+		{ manual: true },
+	);
+
 	const onSubmit = async (values) => {
 		const {
-			// freight_price_discounted,
+			freight_price_discounted,
 			freight_price_currency = '',
 			rate_id = '',
 			service_type = '',
@@ -61,7 +70,7 @@ const useHandleSelectedReasonsForm = ({
 					rate_id,
 					service_type,
 					currency  : freight_price_currency,
-					price     : 95, // freight_price_discounted
+					price     : freight_price_discounted,
 				},
 			});
 
@@ -97,11 +106,33 @@ const useHandleSelectedReasonsForm = ({
 		}
 	};
 
+	const onDeleteServiceFeedback = async () => {
+		try {
+			if (!isFeedbackSubmitted) {
+				return;
+			}
+
+			await deleteTrigger({
+				data: {
+					selected_card_id : rate.id,
+					service_id       : selectedSevice.service_id,
+				},
+			});
+
+			getSpotSearchRateFeedback();
+
+			Toast.success('Service discarded successfully');
+		} catch (error) {
+			Toast.error(getApiErrorString(error.response?.data));
+		}
+	};
+
 	return {
 		onSubmit,
-		loading: loading || createLoading,
+		loading: loading || createLoading || deleteLoading,
 		unsatisfiedFeedbacks,
 		createTrigger,
+		onDeleteServiceFeedback,
 	};
 };
 

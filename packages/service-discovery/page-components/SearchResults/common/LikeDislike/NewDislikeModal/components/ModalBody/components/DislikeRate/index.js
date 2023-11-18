@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 
 function DislikeRate({
 	selectedSevice = {},
-	setSelectedSevice = () => {},
 	details = {},
 	rate = {},
 	data = {},
@@ -52,7 +51,6 @@ function DislikeRate({
 				formProps={formProps}
 				allControls={allControls}
 				selectedReasons={selectedReasons}
-				setSelectedSevice={setSelectedSevice}
 				selectedSevice={selectedSevice}
 				details={details}
 				rate={rate}
