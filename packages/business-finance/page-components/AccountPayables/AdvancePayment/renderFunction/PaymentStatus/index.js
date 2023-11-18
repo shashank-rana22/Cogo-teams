@@ -5,8 +5,9 @@ function PaymentStatus({ itemData = {} }) {
 	const paymentStatus = itemData?.paymentStatus;
 	return (
 		<div>
-			{paymentStatus === 'PENDING' ? <Pill size="md" color="yellow">{paymentStatus}</Pill>
-				: <Pill size="md" color="green">{paymentStatus}</Pill>}
+			<Pill size="md" color={paymentStatus === 'PENDING' ? 'yellow' : 'green'}>
+				{paymentStatus}
+			</Pill>
 		</div>
 	);
 }

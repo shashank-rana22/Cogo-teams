@@ -18,7 +18,7 @@ const useGetAdvancePaymentList = ({
 		user_data: profile || {},
 	}));
 	const { query: urlQuery } = useSelector(({ general }) => ({
-		query: general.query,
+		query: general.query || {},
 	}));
 
 	const { user, session_type: sessionType } = UserData;
