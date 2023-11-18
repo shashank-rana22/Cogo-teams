@@ -26,7 +26,7 @@ function CargoReadiness({ setStep = () => {}, task = {}, shipment_data = {}, onC
 
 	return (
 		<div>
-			<div className={styles.not_ready}>
+			{shipment_data?.source ==='contract'?<div className={styles.not_ready}>
 				<Button
 					themeType="accent"
 					onClick={() => setShowNotReady(true)}
@@ -34,7 +34,7 @@ function CargoReadiness({ setStep = () => {}, task = {}, shipment_data = {}, onC
 				>
 					Cargo Not Ready ?
 				</Button>
-			</div>
+			</div>:null}
 			<div>
 				<Layout control={control} fields={readinessControls} errors={errors} />
 			</div>
