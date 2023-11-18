@@ -6,7 +6,7 @@ function PaymentStatus({ itemData = {} }) {
 	return (
 		<div>
 			{paymentStatus === 'PENDING' ? <Pill size="md" color="yellow">{paymentStatus}</Pill>
-				: <Pill size="sm" color="green">{paymentStatus}</Pill>}
+				: <Pill size="md" color="green">{paymentStatus}</Pill>}
 		</div>
 	);
 }

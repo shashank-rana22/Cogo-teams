@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Toast, Checkbox } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
@@ -8,13 +9,18 @@ import { useCallback, useEffect, useState } from 'react';
 import styles from './styles.module.css';
 
 const useGetAdvancePaymentList = ({
-	activeEntity,
-	sort,
-	viewSelectedInvoice,
+	activeEntity = '',
+	sort = [],
+	viewSelectedInvoice = false,
+	paymentStatus = '',
 }) => {
 	const { user_data: UserData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
+	const { query: urlQuery } = useSelector(({ general }) => ({
+		query: general.query,
+	}));
+
 	const { user, session_type: sessionType } = UserData;
 	const { id: userId = '', name } = user || {};
 	const [filters, setFilters] = useState({
@@ -29,9 +35,6 @@ const useGetAdvancePaymentList = ({
 	const { search, service, documentType, dateRange, pageIndex } = filters || {};
 	const { startDate = '', endDate = '' } = dateRange;
 	const { query = '', debounceQuery } = useDebounceQuery();
-	const { query: urlQuery } = useSelector(({ general }) => ({
-		query: general.query,
-	}));
 
 	const {
 		entity = '',
@@ -122,6 +125,7 @@ const useGetAdvancePaymentList = ({
 						entityCode          : activeEntity || entity,
 						serviceType         : service || undefined,
 						advanceDocumentType : documentType || undefined,
+						paymentStatus       : paymentStatus || undefined,
 						startDate           : startDate && endDate
 							? format(startDate, "yyyy-MM-dd'T'HH:mm:sso", {}, false) : undefined,
 
@@ -145,6 +149,7 @@ const useGetAdvancePaymentList = ({
 		entity,
 		currency,
 		documentType,
+		paymentStatus,
 		startDate,
 		endDate,
 	]);
