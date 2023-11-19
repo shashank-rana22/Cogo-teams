@@ -1,4 +1,5 @@
 import { Breadcrumb, Button, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowBack, IcMInfo } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
@@ -50,7 +51,10 @@ function CreateNewPayRun() {
 	} = useGetCreatePayRunType({ selectedPayRunId });
 
 	const { list = [] } = existpayRunData || {};
-	const { name = '', totalValue = '', currency = '', invoiceCount = '', createdAt = '' } = list[0] || {};
+	const {
+		name = '', totalValue = '', currency = '',
+		invoiceCount = '', createdAt = '',
+	} = list[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { pageIndex } = data || {};
 	const { list:dataList = [] } = data || {};
 	const dataListLength = dataList.length;

@@ -25,21 +25,19 @@
 	justify-content: center;
 	height: 45px;
 	margin: 0 10px 10px;
-	font-size: 16px;
-	font-weight: 600;
-	color: #4f4f4f;
+	font-size: 22px;
 	border-bottom: 1px dashed #e0e0e0;
 
 	:global {
 		.platform_demo_icon {
-			width: 22px;
-			height: 22px;
+			width: 23px;
+			height: 23px;
 			margin-right: 10px;
 		}
 
 		.chat_data_icon {
-			width: 35px;
-			height: 35px;
+			width: 40px;
+			height: 40px;
 			margin-right: 4px;
 		}
 	}
@@ -60,18 +58,23 @@
 .value {
 	font-size: 20px;
 	font-weight: 600;
-	color: #fff;
+	color: #000;
 	text-align: right;
 }
 
-.coming_soon {
-	position: absolute;
+.loading_container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: calc(100% - 40px);
-	height: calc(100% - 40px);
-	font-size: 20px;
-	font-weight: 600;
-	backdrop-filter: blur(1px);
+	height: 220px;
+}
+
+.loading_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 45px;
+	padding-bottom: 10px;
+	font-size: 18px;
+	color: #212121;
 }

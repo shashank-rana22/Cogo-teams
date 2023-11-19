@@ -1,11 +1,36 @@
 import React from 'react';
 
+import { LoadingState } from '../../../../common/Elements';
 import { demoConstants } from '../../../../constants/DemoConstants';
+import useSmeDashboardStats from '../../../../hooks/useSmeDashboardStats';
+import getFormattedAmount from '../../../../utils/getFormattedAmount';
 
-import DUMMY_DATA from './dummyData';
 import styles from './styles.module.css';
 
-function DemoPieChart() {
+function DemoPieChart({
+	widgetBlocks = null,
+	filterParams = {},
+}) {
+	const {
+		dashboardData = {},
+		dashboardLoading = false,
+	} = useSmeDashboardStats({ widgetBlocks, filterParams });
+
+	const { chat_and_demo_data = {} } = dashboardData || {};
+
+	if (dashboardLoading) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.loading_header}>
+					Chat and Demo
+				</div>
+				<div className={styles.loading_container}>
+					<LoadingState loaderCount={10} />
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			{demoConstants.map(
@@ -26,7 +51,7 @@ function DemoPieChart() {
 										{option?.label}
 									</div>
 									<div className={styles.value}>
-										{DUMMY_DATA?.[option?.id] || 0}
+										{getFormattedAmount({ number: chat_and_demo_data?.[option?.count] || 0 })}
 									</div>
 								</div>
 							),
@@ -34,10 +59,6 @@ function DemoPieChart() {
 					</div>
 				),
 			)}
-
-			<div className={styles.coming_soon}>
-				Coming Soon...
-			</div>
 		</div>
 	);
 }

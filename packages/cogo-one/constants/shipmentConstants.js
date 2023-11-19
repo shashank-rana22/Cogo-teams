@@ -84,6 +84,7 @@ export const SINGLE_LOCATIONS = [
 	'fcl_freight_local',
 	'air_freight_local',
 	'lcl_freight_local',
+	'ltl_freight',
 ];
 
 export const ROUTES_MAPPING = {
@@ -95,3 +96,11 @@ export const TRADE_TYPE_MAPPING = {
 	import : 'Origin',
 	export : 'Destination',
 };
+
+export const QUERY_PATH = {
+	missing_id : 'trade-enquiry',
+	dislike_id : 'disliked-rates',
+	sid        : undefined,
+};
+
+export const ID_TYPE_OPTIONS = ['missing_id', 'dislike_id'];

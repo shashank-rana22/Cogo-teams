@@ -5,7 +5,6 @@ import React from 'react';
 
 import { LoadingState } from '../../../../../common/Elements';
 import useGetLeaderbordList from '../../../../../hooks/useGetLeaderbordList';
-import useListPartners from '../../../../../hooks/useListPartners';
 import useOrganizationRMMapping from '../../../../../hooks/useOrganizationRMMapping';
 
 import getOptions from './getOptions';
@@ -32,8 +31,6 @@ function HierarchyBody({
 	const nextViewType = (selectedPartnerId !== indiaEntityId && currentView === 'partners')
 		? 'managers' : NEXT_DATA_VIEW_TYPE?.[currentView] || 'partners';
 
-	const { partnersList = [], partnersLoading = false } = useListPartners({ nextViewType });
-
 	const { leaderBoardData = {}, leaderBoardLoading = false } = useGetLeaderbordList({
 		partnerId        : selectedPartnerId,
 		officeLocationId : hierarchyData?.[1]?.hierarchyDataType === 'branches' ? hierarchyData?.[1]?.id : '',
@@ -49,12 +46,11 @@ function HierarchyBody({
 		nextViewType,
 	});
 
-	const showLoading = (userHierarchyLoading || partnersLoading || leaderBoardLoading);
+	const showLoading = (userHierarchyLoading || leaderBoardLoading);
 
 	const userOptions = getOptions({
 		hierarchyData,
 		nextViewType,
-		partnersList,
 		leaderBoardData,
 		userHierarchyData,
 		loading: showLoading,

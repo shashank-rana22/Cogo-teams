@@ -120,21 +120,21 @@ function InvoiceModal({
 								)}
 							</div>
 							{ showXml ? (
-							<div className={styles.upload_Width}>
-								<div className={styles.lable_style}>E-invoice xml file</div>
-								<UploadController
-									control={control}
-									name="E_invoice_xml_file"
-									rules={{
-										required: 'E-invoice xml file is required',
-									}}
-								/>
-								{E_INVOICE_XML_FILE && (
-									<span className={styles.errors}>
-										{E_INVOICE_XML_FILE_MESSAGE.toString()}
-									</span>
-								)}
-							</div> 
+								<div className={styles.upload_Width}>
+									<div className={styles.lable_style}>E-invoice xml file</div>
+									<UploadController
+										control={control}
+										name="E_invoice_xml_file"
+										rules={{
+											required: 'E-invoice xml file is required',
+										}}
+									/>
+									{E_INVOICE_XML_FILE && (
+										<span className={styles.errors}>
+											{E_INVOICE_XML_FILE_MESSAGE.toString()}
+										</span>
+									)}
+								</div>
 							) : null}
 						</div>
 					</div>
