@@ -21,14 +21,14 @@ const getParams = ({
 		request_completed_by    : requestCompleted || undefined,
 		created_at_greater_than : start || undefined,
 		created_at_less_than    : end || undefined,
-		serial_id           				: taskId || undefined,
+		task_id                 : taskId || undefined,
 	},
 	page,
 
 });
 
-const useListOmnichannelOnboardingRequests = ({
-	showHistory = false, initialViewType = '',
+const useListOmnichannelOnboardingTimelines = ({
+	showHistory = true, initialViewType = '',
 	filterValues = {}, setFilterValues = () => {},
 }) => {
 	const {
@@ -50,7 +50,7 @@ const useListOmnichannelOnboardingRequests = ({
 	const dispatch = useDispatch();
 
 	const [{ data, loading }, trigger] = useRequest({
-		url    : '/list_omnichannel_onboarding_requests',
+		url    : '/list_omnichannel_onboarding_timelines',
 		method : 'get',
 	}, { manual: true });
 
@@ -96,4 +96,4 @@ const useListOmnichannelOnboardingRequests = ({
 	};
 };
 
-export default useListOmnichannelOnboardingRequests;
+export default useListOmnichannelOnboardingTimelines;
