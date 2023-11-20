@@ -30,7 +30,6 @@ function ModalComponent({
 }) {
 	const { salaryData, debounceQuery } = useGetSalaryStructure();
 	// Do not delete
-	console.log(typeof initialQuestion, 'ctcStruct');
 
 	// const [salaryConfig, setSalaryConfig] = useState('');
 	// const callApi = useCallback(async (values = {}) => {
