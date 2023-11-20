@@ -12,7 +12,7 @@ import {
 } from '@cogoport/forms';
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 
-import useCreateAutoUpsellService from '../../../../../../hooks/useCreateAutoUpsellService';
+import useCreateUpsellOriginLocalService from '../../../../../../hooks/useCreateUpsellOriginLocalService';
 import useListOrganizationUsers from '../../../../../../hooks/useListOrganizationUsers';
 
 import getControls from './getControls';
@@ -40,34 +40,44 @@ function BillingAddress({
 	refetchServices = () => {},
 	shipment_data = {},
 	consigneeId = '',
+	primary_service = {},
 }) {
-	const { control, reset = () => {}, formState:{ errors = {} }, handleSubmit = () => {} } = useForm();
+	const { control, reset = () => {}, formState:{ errors = {} }, handleSubmit = () => {}, watch } = useForm();
+	const isSez = watch('is_sez') === 'yes';
 
-	const { loading = false } = useListOrganizationUsers({ shipment_data, reset, consigneeId });
+	const { loading = false, data:userData } = useListOrganizationUsers({ shipment_data, reset, consigneeId });
 
 	const {
 		onSubmit = () => {},
 		loading: upsellLoading = false,
 		countryId = '',
 		setCountryId = () => {},
-	} = useCreateAutoUpsellService({ task, refetch, onCancel, refetchServices, shipment_data, consigneeId });
+	} = useCreateUpsellOriginLocalService({
+		task,
+		refetch,
+		onCancel,
+		refetchServices,
+		shipment_data,
+		consigneeId,
+		userData,
+		primary_service,
+	});
 
 	const countryValidation = getCountryConstants({
 		country_id    : countryId,
 		isDefaultData : false,
 	});
 
-	const { controls = [] } = getControls({ setCountryId, countryValidation });
+	const { controls = [] } = getControls({ setCountryId, countryValidation, isSez });
 
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.flex_container}>
 				{controls?.map((formControl) => {
-					const { type = '', name = '', styles: style = {}, label = '' } = formControl;
-
+					const { type = '', name = '', styles: style = {}, label = '', show = true } = formControl;
 					const Element = INPUT_MAPPING[type];
 
-					if (!Element) return null;
+					if (!Element || !show) return null;
 
 					return (
 						<div
