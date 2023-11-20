@@ -5,10 +5,9 @@ import styles from './styles.module.css';
 
 function Confirmation(
 	{
-		showConfirm,
-		setShowConfirm,
-		bulkPostJV = () => {
-		},
+		showConfirm = false,
+		setShowConfirm = () => {},
+		bulkPostJV = () => {},
 		selectedJV = {},
 		setSelectedJV = () => {},
 

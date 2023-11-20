@@ -6,7 +6,7 @@ import RenderTradeParty from './RenderTradeParty';
 const geo = getGeoConstants();
 const ALLOWABLE_ENTITY_CODES = ['101', '401', '301'];
 const handleModifiedOptions = ({ options:tradeData = [] }) => {
-	const opt = (tradeData || []).map((item) => {
+	const opt = (tradeData || [])?.map((item) => {
 		if (item?.sage_organization_id !== null) {
 			return item;
 		}

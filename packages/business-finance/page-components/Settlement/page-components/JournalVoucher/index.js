@@ -10,7 +10,7 @@ import useGetJvList from '../../hooks/useGetJvList';
 import usePostBulkJV from '../../hooks/usePostBulkJV';
 
 import BulkJvUpload from './BulkJvUploadModal/index';
-import Confirmation from './Conformation';
+import Confirmation from './Confirmation';
 import CreateJvModal from './CreateJvModal';
 import styles from './styles.module.css';
 

@@ -6,7 +6,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function Header({ setFilters = () => {}, filters = {}, selectedJV = [], setSelectedJV = () => {}, list = [] }) {
-	const allChecked = (list || []).map((item) => {
+	const allChecked = (list || [])?.map((item) => {
 		if (item?.status !== 'POSTED') return item;
 		return [];
 	}).flat().length === selectedJV.length;
