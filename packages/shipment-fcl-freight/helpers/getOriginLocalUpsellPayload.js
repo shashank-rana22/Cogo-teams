@@ -4,14 +4,13 @@ const getOriginLocalUpsellPayload = ({ userData, primary_service, shipment_data 
 		? primary_service?.destination_port?.id : primary_service?.origin_port?.id;
 	const { cargo_details = [] } = primary_service;
 	return {
-
-		importer_exporter_id        : userData?.organization_id,
-		importer_exporter_branch_id : userData?.organization_branch_id,
-		user_id                     : userData?.user_id,
-		search_type                 : 'fcl_freight_local',
-		source_id                   : shipment_data?.id,
-
-		fcl_freight_local_services_attributes: cargo_details.map((cargo) => ({
+		importer_exporter_id                  : userData?.organization_id,
+		importer_exporter_branch_id           : userData?.organization_branch_id,
+		user_id                               : userData?.user_id,
+		search_type                           : 'fcl_freight_local',
+		source_id                             : shipment_data?.id,
+		source                                : 'cross_country_upsell',
+		fcl_freight_local_services_attributes : cargo_details.map((cargo) => ({
 			trade_type,
 			port_id,
 			...(cargo || {}),
