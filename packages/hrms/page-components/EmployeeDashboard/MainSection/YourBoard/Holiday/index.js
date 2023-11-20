@@ -63,8 +63,8 @@ function Holiday({ data = {}, loading = false }) {
 					{holiday_occassion || ''}
 				</div>
 				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/diwali.gif"
-					alt="diwali"
+					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/VectorG.svg"
+					alt="holiday"
 					width={100}
 				/>
 			</div>
