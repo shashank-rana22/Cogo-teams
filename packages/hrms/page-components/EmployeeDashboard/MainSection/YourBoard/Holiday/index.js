@@ -63,7 +63,7 @@ function Holiday({ data = {}, loading = false }) {
 					{holiday_occassion || ''}
 				</div>
 				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/VectorG.svg"
+					src={GLOBAL_CONSTANTS.image_url.HOLIDAY_FLIGHT}
 					alt="holiday"
 					width={100}
 				/>
