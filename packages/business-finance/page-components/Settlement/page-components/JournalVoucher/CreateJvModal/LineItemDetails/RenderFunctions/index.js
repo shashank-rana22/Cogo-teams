@@ -109,6 +109,7 @@ export const renderLineItemFunctions = {
 	},
 	entity: ({ control, index, errors, entity, watch, setValue, getGlCode }) => {
 		const { accMode = '' } = watch(`line_items.${index}`);
+		const disabled = index === 0;
 
 		return (
 			<div
@@ -118,7 +119,7 @@ export const renderLineItemFunctions = {
 					control={control}
 					name={`line_items.${index}.entityCode`}
 					finalValue={entity}
-					disabled={isEmpty(entity)}
+					disabled={isEmpty(entity) || disabled}
 					asyncKey="list_cogo_entity"
 					placeholder="Select Entity"
 					onChange={(val) => {
@@ -207,7 +208,8 @@ export const renderLineItemFunctions = {
 		);
 	},
 	business_partner: ({ control, index, errors, setValue, watch, entity }) => {
-		const modifiedOptions = ALLOWABLE_ENTITY_CODES.includes(entity) ? {
+		const entityValue = watch(`line_items.${index}.entityCode`) || entity;
+		const modifiedOptions = ALLOWABLE_ENTITY_CODES.includes(entityValue) ? {
 			getModifiedOptions: handleModifiedOptions,
 		} : {};
 
