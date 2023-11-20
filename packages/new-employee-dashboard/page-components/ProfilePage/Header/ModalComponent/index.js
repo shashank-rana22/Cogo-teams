@@ -30,6 +30,7 @@ function ModalComponent({
 }) {
 	const { salaryData, debounceQuery } = useGetSalaryStructure();
 	// Do not delete
+	console.log(typeof initialQuestion, 'ctcStruct');
 
 	// const [salaryConfig, setSalaryConfig] = useState('');
 	// const callApi = useCallback(async (values = {}) => {
@@ -75,6 +76,7 @@ function ModalComponent({
 							debounceQuery(e);
 						}}
 						type="number"
+						name="offered_ctc_input"
 						className={styles.field}
 					/>
 					{error ? <div className={styles.error}>*required</div> : null}
@@ -105,7 +107,7 @@ function ModalComponent({
             </div> */
             }
 			<div className={styles.table_container}>
-				{ctcStructure?.basic.yearlyValue !== 0
+				{ctcStructure?.basic?.yearlyValue !== 0 && initialQuestion !== ''
 					? (
 						<>
 							<div className={styles.heading}>
