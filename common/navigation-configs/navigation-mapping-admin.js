@@ -652,8 +652,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		margin: {
 			key           : 'margin',
 			title         : t('common:margin_management'),
-			href          : '/margins',
-			as            : '/margins',
+			href          : '/v2/margins',
+			as            : '/v2/margins',
 			type          : 'link',
 			possible_apis : apis.margin,
 			icon          : IcMMarginManagement,
@@ -2736,6 +2736,30 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/profile',
 			possible_apis : apis.profile,
 			icon          : IcMAppProfile,
+		},
+		payroll: {
+			key           : 'payroll',
+			title         : 'Payroll',
+			icon          : IcMAppPayment,
+			href          : '/v2/payroll',
+			as            : '/v2/payroll',
+			type          : 'link',
+			module_type   : 'dashboards',
+			possible_apis : apis.payroll,
+			isSubNavs     : true,
+			options       : [
+				{
+					key           : 'payroll',
+					title         : 'Payroll',
+					icon          : IcMAppPayment,
+					href          : '/v2/payroll',
+					as            : '/v2/payroll',
+					type          : 'link',
+					module_type   : 'dashboards',
+					possible_apis : apis.payroll,
+
+				},
+			],
 		},
 		finance_payroll: {
 			key           : 'finance_payroll',

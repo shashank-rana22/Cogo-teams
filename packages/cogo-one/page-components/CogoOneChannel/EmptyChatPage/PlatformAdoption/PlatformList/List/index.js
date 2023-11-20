@@ -52,7 +52,8 @@ function List({
 	});
 	const [rejectAccount, setRejectAccount] = useState({
 		show         : false,
-		rejectReason : '',
+		rejectReason : [],
+		otherReason  : '',
 	});
 	const [selectDoc, setSelectDoc] = useState({
 		docType : '',

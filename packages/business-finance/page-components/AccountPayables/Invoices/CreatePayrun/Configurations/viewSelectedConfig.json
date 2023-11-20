@@ -37,7 +37,7 @@
 				"redirectKey": "documentUrl"
 			},
 			"lowerKey": {
-				"key": "invoiceType",
+				"key": "typeOfInvoice",
 				"type": "tag"
 			}
 		},

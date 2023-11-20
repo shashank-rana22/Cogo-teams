@@ -26,6 +26,7 @@ function Layout({ controls = [], control = {}, errors = {}, showElements = {}, f
 							control={control}
 							error={errors?.[ctrl.name]}
 							formValues={formValues}
+							showElements={showElements[ctrl.name]}
 						/>
 					);
 				}

@@ -7,6 +7,7 @@ const NUMBER_OF_MONTHS = 12;
 
 function usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterApiRefetch }) {
 	const [shareOfferLetter, setShareOfferLetter] = useState(false);
+	const [offerLetterError, setOfferLetterError] = useState(false);
 
 	const [{ loading }, trigger] = useHarbourRequest(
 		{
@@ -16,7 +17,7 @@ function usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterA
 		{ manual: true },
 	);
 
-	const onFinalSubmit = async (joiningBonus, salaryDetails, ctc, id) => {
+	const onFinalSubmit = async (values, salaryDetails, ctc, id) => {
 		if (typeof shareOfferLetter === 'boolean') {
 			Toast.error('Kindly fill Share Offer Letter before submitting');
 			return;
@@ -24,7 +25,7 @@ function usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterA
 
 		try {
 			const combinedObject = {
-				...joiningBonus,
+				...values,
 				...salaryDetails,
 				init         : ctc,
 				init_monthly : ctc / NUMBER_OF_MONTHS,
@@ -35,6 +36,9 @@ function usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterA
 				metadata                   : combinedObject,
 				status                     : 'active',
 				is_offer_letter_applicable : shareOfferLetter === 'yes',
+				retention                  : values.retention,
+				joining_bonus              : values.JoiningBonus,
+				base_ctc                   : ctc,
 			};
 
 			await trigger({
@@ -56,6 +60,8 @@ function usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterA
 		onFinalSubmit,
 		setShareOfferLetter,
 		shareOfferLetter,
+		offerLetterError,
+		setOfferLetterError,
 	};
 }
 

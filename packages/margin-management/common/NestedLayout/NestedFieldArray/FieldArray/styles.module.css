@@ -27,12 +27,10 @@
 .child,
 .field_array {
 	width: 100%;
-	margin-bottom: 10px;
 }
 
 .field_array {
-	padding: 10px;
-	border: 1px solid #dedede;
+	border-bottom: 1px solid #dedede;
 	border-radius: 4px;
 }
 
@@ -46,5 +44,9 @@
 }
 
 .nested_container {
-	margin: 4px;
+	padding: 6px;
+}
+
+.nested_container:hover {
+	background-color: #f9f9f9;
 }

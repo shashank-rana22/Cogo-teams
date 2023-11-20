@@ -45,6 +45,10 @@ const LEAVE_CONTROLS = [
 				label : 'Paternity Leave',
 				value : 'paternity_leave',
 			},
+			{
+				label : 'Maternity Leave',
+				value : 'maternity_leave',
+			},
 		],
 		rules: {
 			required: {

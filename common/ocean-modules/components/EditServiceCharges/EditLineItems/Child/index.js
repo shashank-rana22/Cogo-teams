@@ -23,16 +23,18 @@ const priceDisabled = (
 	path,
 	disable_edit_invoice = true,
 	isAuthorised = false,
+	unEditable = false,
 	service_name = '',
 ) => {
 	if (
 		(shipment_type === 'fcl_freight'
 		&& service_name !== 'fcl_freight_local_service'
 		&& !isEmpty(field?.code)
-		&& !FIELDS_CAN_BE_CHANGED.includes(controlItem?.name)
+		&& (!FIELDS_CAN_BE_CHANGED.includes(controlItem?.name) || unEditable)
 		&& path === 'sales_invoice'
 		&& disable_edit_invoice
-		&& !isAuthorised) || (field?.code === 'BookingCONV' && !FIELDS_CAN_BE_CHANGED.includes(controlItem?.name))
+		&& !isAuthorised)
+		|| (field?.code === 'BookingCONV' && (!FIELDS_CAN_BE_CHANGED.includes(controlItem?.name) || unEditable))
 	) {
 		return true;
 	}
@@ -65,6 +67,8 @@ function Child({
 	);
 
 	const isAuthorised = AUTHORISED_USER_IDS.includes(profileData?.user?.id);
+	const unEditable = GLOBAL_CONSTANTS.service_charge_uneditable_country_code
+		.includes(profileData?.partner?.country?.country_code);
 
 	// can delete  only new added line items for FCL
 	const isLineItemRemovable = (shipment_type === 'fcl_freight' && service_name !== 'fcl_freight_local_service'
@@ -108,6 +112,7 @@ function Child({
 								path,
 								disable_edit_invoice,
 								isAuthorised,
+								unEditable,
 								service_name,
 							)}
 							label={controlItem?.label}

@@ -46,7 +46,6 @@ function SalaryDetails({ dataDetails = {} }) {
 	const { data, loading, getEmployeePaymentDetails } = useGetEmployeeDirectoryPaymentDetail(user_id);
 
 	const { user_role } = dataDetails || {};
-	console.log('data-details', dataDetails);
 	const salary_data = [{
 		ctc_effective    : '23/12/2000',
 		ctc_effective_to : '-',
