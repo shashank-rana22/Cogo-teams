@@ -34,10 +34,13 @@ const TRADE_TYPE_MAPPING = {
 
 const MAPPING = {
 	fcl_freight     : 'per Cont',
-	lcl_freight     : 'per Cont',
 	air_freight     : 'per Kg',
 	ftl_freight     : 'per Truck',
 	trailer_freight : 'per Trailer',
+	ltl_freight     : 'per Truck',
+	haulage_freight : 'per Cont',
+	fcl_cfs         : 'per Cont', // need to check
+	fcl_customs     : 'per Cont',
 };
 
 const getFreightprice = ({
@@ -54,27 +57,21 @@ const getFreightprice = ({
 		trailer_count,
 	} = cur;
 
-	if (service_type !== primary_service && ['ftl_freight', 'trailer_freight'].includes(service_type)) {
-		return total_price_discounted / (trucks_count || trailer_count || 1);
+	const priceToTake = service_type !== primary_service ? total_price_discounted : freight_price_discounted;
+
+	if (['fcl_freight', 'haulage_freight', 'fcl_cfs', 'fcl_customs'].includes(service_type)) {
+		return priceToTake / containers_count;
 	}
 
-	if (service_type !== primary_service) {
-		return total_price_discounted;
+	if (['ftl_freight', 'trailer_freight', 'ltl_freight'].includes(service_type)) {
+		return priceToTake / (trucks_count || trailer_count || 1);
 	}
 
-	if (['fcl_freight', 'lcl_freight'].includes(service_type)) {
-		return freight_price_discounted / containers_count;
+	if (['air_freight'].includes(service_type)) {
+		return priceToTake / chargeable_weight;
 	}
 
-	if (['ftl_freight', 'trailer_freight'].includes(service_type)) {
-		return freight_price_discounted / (trucks_count || trailer_count || 1);
-	}
-
-	if (service_type === 'air_freight') {
-		return freight_price_discounted / chargeable_weight;
-	}
-
-	return freight_price_discounted;
+	return priceToTake;
 };
 
 function PriceComponent({
