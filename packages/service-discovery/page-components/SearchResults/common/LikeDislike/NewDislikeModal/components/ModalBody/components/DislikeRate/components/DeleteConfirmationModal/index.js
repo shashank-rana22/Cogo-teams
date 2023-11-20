@@ -1,4 +1,5 @@
 import { Modal, Button, CheckboxGroup, Input } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -15,6 +16,8 @@ function DeleteConfirmationModal({
 	closingRemarks = {},
 	setClosingRemarks = () => {},
 }) {
+	const { closing_remarks = [], other_reason = ''	} = closingRemarks;
+
 	const BUTTONS_MAPPING = {
 		cancel: {
 			themeType : 'secondary',
@@ -29,10 +32,9 @@ function DeleteConfirmationModal({
 			onClick   : onClickDelete,
 			loading,
 			label     : deleteText,
+			disabled  : isEmpty(closing_remarks),
 		},
 	};
-
-	const { closing_remarks = [], other_reason = ''	} = closingRemarks;
 
 	return (
 		<Modal
