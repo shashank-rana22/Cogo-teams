@@ -25,6 +25,9 @@ const useHandleSelectedReasonsForm = ({
 
 	const [unsatisfiedFeedbacks, setUnsatisfiedFeedbacks] = useState({});
 	const [showDiscardModal, setShowDiscardModal] = useState(false);
+	const [closingRemarks, setClosingRemarks] = useState({ closing_remarks: [], other_reason: '' });
+
+	const { closing_remarks = [], other_reason = '' } = closingRemarks;
 
 	const [{ loading = false }, trigger] = useRequest(
 		{
@@ -110,10 +113,22 @@ const useHandleSelectedReasonsForm = ({
 
 	const deleteServiceFeedback = async () => {
 		try {
+			if (closing_remarks.includes('other_reason') && !other_reason) {
+				Toast.error('Please give the reason for closing');
+				return;
+			}
+
 			await deleteTrigger({
 				data: {
 					selected_card_id : rate.id,
 					service_id       : selectedSevice.service_id,
+					closing_remarks  : closing_remarks.reduce((acc, cur) => {
+						if (cur === 'other_reason') {
+							return [...acc, other_reason];
+						}
+
+						return [...acc, cur];
+					}, []),
 				},
 			});
 			setShowDiscardModal(false);
@@ -145,6 +160,8 @@ const useHandleSelectedReasonsForm = ({
 		deleteServiceFeedback,
 		showDiscardModal,
 		setShowDiscardModal,
+		closingRemarks,
+		setClosingRemarks,
 	};
 };
 

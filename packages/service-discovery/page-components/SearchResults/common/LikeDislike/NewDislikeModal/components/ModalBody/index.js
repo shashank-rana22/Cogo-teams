@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useGetSpotSearchRateFeedback from '../../hooks/useGetSpotSearchRateFeedback';
@@ -23,7 +24,7 @@ function ModalBody({ rate = {}, details = {} }) {
 		data,
 	} = useGetSpotSearchRateFeedback({ rate_card_id: rate.id });
 
-	if (loading) {
+	if (loading && !isEmpty(data)) {
 		return <LoadingState />;
 	}
 

@@ -47,6 +47,8 @@ function SelectedReasonsForm({
 		deleteServiceFeedback,
 		showDiscardModal,
 		setShowDiscardModal,
+		closingRemarks = {},
+		setClosingRemarks = () => {},
 	} = useHandleSelectedReasonsForm({
 		selectedSevice,
 		details,
@@ -97,9 +99,11 @@ function SelectedReasonsForm({
 				onClickDelete={deleteServiceFeedback}
 				cancelText="Cancel"
 				deleteText="Delete"
-				title="Are you sure you want to discard the feedback for this service?"
+				title="Please select reason for closing"
 				modalSize="sm"
 				setShow={setShowDiscardModal}
+				setClosingRemarks={setClosingRemarks}
+				closingRemarks={closingRemarks}
 			/>
 
 			{!isFeedbackSubmitted ? (

@@ -1,4 +1,6 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, CheckboxGroup, Input } from '@cogoport/components';
+
+import styles from './styles.module.css';
 
 function DeleteConfirmationModal({
 	show = false,
@@ -10,6 +12,8 @@ function DeleteConfirmationModal({
 	modalSize = 'sm',
 	isMobile = false,
 	setShow = () => {},
+	closingRemarks = {},
+	setClosingRemarks = () => {},
 }) {
 	const BUTTONS_MAPPING = {
 		cancel: {
@@ -28,6 +32,8 @@ function DeleteConfirmationModal({
 		},
 	};
 
+	const { closing_remarks = [], other_reason = ''	} = closingRemarks;
+
 	return (
 		<Modal
 			size={modalSize}
@@ -38,6 +44,46 @@ function DeleteConfirmationModal({
 			placement={isMobile ? 'bottom' : 'center'}
 		>
 			<Modal.Header title={title || 'Are you sure you want to delete'} />
+
+			<Modal.Body className={styles.container}>
+				<CheckboxGroup
+					value={closing_remarks || []}
+					onChange={(value) => {
+						setClosingRemarks((prev) => ({ ...prev, closing_remarks: value }));
+					}}
+					options={[
+						{
+							label : 'Request not serviceable',
+							value : 'request_not_serviceable',
+						},
+						{
+							label : 'No space with service provider',
+							value : 'no_space_with_service_provider',
+						},
+						{
+							label : 'Wrong request',
+							value : 'wrong_request',
+						},
+						{
+							label : 'Lowest rate already available on platform',
+							value : 'lowest_rate_already_available_on_platform',
+						},
+						{
+							label : 'Other Reason',
+							value : 'other_reason',
+						},
+					]}
+				/>
+
+				{closing_remarks.includes('other_reason') ? (
+					<Input
+						value={other_reason}
+						onChange={(value) => {
+							setClosingRemarks((prev) => ({ ...prev, other_reason: value }));
+						}}
+					/>
+				) : null}
+			</Modal.Body>
 
 			<Modal.Footer>
 				{Object.entries(BUTTONS_MAPPING).map(([key, buttonObj]) => {
