@@ -9,7 +9,7 @@ import getServiceStateMapping from '../../../helpers/getServiceStateMapping';
 import ServiceIDGroup from './ServiceIDGroup';
 import styles from './styles.module.css';
 
-const ALLOWED_STAKEHOLDERS = ['admin', 'superadmin'];
+const ALLOWED_STAKEHOLDERS = ['admin', 'superadmin', 'tech_super_admin', 'prod_process_owner'];
 const AWAITING_SERVICES_STATE = ['init', 'awaiting_service_provider_confirmation'];
 
 function Internal({
