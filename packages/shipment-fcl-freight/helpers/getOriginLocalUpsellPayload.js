@@ -15,8 +15,7 @@ const getOriginLocalUpsellPayload = ({ userData, primary_service, shipment_data 
 			trade_type,
 			port_id,
 			...(cargo || {}),
-			bls_count: primary_service?.bls_count,
-
+			bls_count        : primary_service?.bls_count,
 			status           : 'active',
 			shipping_line_id : primary_service?.shipping_line_id,
 		})),
