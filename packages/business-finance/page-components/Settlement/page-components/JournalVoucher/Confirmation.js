@@ -28,7 +28,7 @@ function Confirmation(
 				{' '}
 				{unqIds?.length || 0}
 				{' '}
-				Payments. Are you sure you want to post?
+				JV. Are you sure you want to post?
 			</div>
 			<div className={styles.buttons}>
 				<Button
@@ -41,7 +41,7 @@ function Confirmation(
 				</Button>
 				<Button
 					themeType="primary"
-					onClick={() => bulkPostJV({ selectedJV, setSelectedJV })}
+					onClick={() => bulkPostJV({ selectedJV, setSelectedJV, setShowConfirm })}
 					className={styles.post}
 				>
 					Post

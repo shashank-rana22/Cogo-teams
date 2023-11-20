@@ -14,10 +14,12 @@ function RenderTradeParty({
 				<span className={styles.label}>Reg.Number :</span>
 				{option?.registration_number || ''}
 			</div>
-			<div>
-				<span className={styles.label}>Company Type :</span>
-				{option?.company_type || ''}
-			</div>
+			{option?.company_type ? (
+				<div>
+					<span className={styles.label}>Company Type :</span>
+					{option?.company_type || ''}
+				</div>
+			) : null}
 		</div>
 	);
 }
