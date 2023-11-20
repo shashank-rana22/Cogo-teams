@@ -19,7 +19,7 @@ const getOmniChannelLink = ({ id, channel_type }) => {
 	return `${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`;
 };
 
-export const getCommunicationPayload = ({
+export const getCommunicationPayload = async ({
 	userId = '',
 	formattedData = {},
 	draftMessage = '',
@@ -54,7 +54,7 @@ export const getCommunicationPayload = ({
 		ccrecipients,
 		bccrecipients,
 		subject,
-		content           : getRenderEmailBody({ html: draftMessage }),
+		content           : await getRenderEmailBody({ html: draftMessage }),
 		msgId             : message_id,
 		userId,
 		attachments       : isEmpty(uploadedFiles) ? undefined : uploadedFiles,

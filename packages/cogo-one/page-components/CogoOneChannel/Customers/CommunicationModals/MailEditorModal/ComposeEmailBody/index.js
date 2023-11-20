@@ -7,7 +7,6 @@ import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
 
 import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
-import getRenderEmailBody from '../../../../../../helpers/getRenderEmailBody';
 import useImageUploader from '../../../../../../hooks/useImageUploader';
 
 import EmailTemplates from './EmailTemplates';
@@ -250,7 +249,7 @@ function ComposeEmailBody(props) {
 					<div
 						className={styles.preview_body}
 						dangerouslySetInnerHTML={{
-							__html: getRenderEmailBody({ html: signature }),
+							__html: signature,
 						}}
 					/>
 				</div>
