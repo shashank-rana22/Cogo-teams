@@ -59,9 +59,11 @@ function useCreateUpsellOriginLocalService({
 				});
 				const upsellRes = await upsellTrigger({ data: upsellPayload });
 
+				const SOURCE = 'cross_country_upsell';
+
 				let newHref = `${window.location.origin}/${router?.query?.partner_id}/book/`;
 				newHref += `${upsellRes.data?.id}/${userData?.organization_id}/${shipment_data?.id}
-				?shipment_type=${shipment_data?.shipment_type}&navigation=${navigation}`;
+				?shipment_type=${shipment_data?.shipment_type}&navigation=${navigation}&source=${SOURCE}`;
 
 				window.location.href = newHref;
 			}
