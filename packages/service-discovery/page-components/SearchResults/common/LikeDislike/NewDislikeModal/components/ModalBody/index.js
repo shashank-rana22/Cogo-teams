@@ -1,4 +1,3 @@
-import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useGetSpotSearchRateFeedback from '../../hooks/useGetSpotSearchRateFeedback';
@@ -17,6 +16,7 @@ const MAPPING = {
 function ModalBody({ rate = {}, details = {} }) {
 	const [selectedSevice, setSelectedSevice] = useState({});
 	const [rateRequestedFor, setRateRequestedFor] = useState([]);
+	const [unsatisfiedFeedbacks, setUnsatisfiedFeedbacks] = useState({});
 
 	const {
 		getSpotSearchRateFeedback,
@@ -24,7 +24,7 @@ function ModalBody({ rate = {}, details = {} }) {
 		data,
 	} = useGetSpotSearchRateFeedback({ rate_card_id: rate.id });
 
-	if (loading && !isEmpty(data)) {
+	if (loading) {
 		return <LoadingState />;
 	}
 
@@ -45,6 +45,8 @@ function ModalBody({ rate = {}, details = {} }) {
 			data,
 			getSpotSearchRateFeedback,
 			setSelectedSevice,
+			unsatisfiedFeedbacks,
+			setUnsatisfiedFeedbacks,
 		},
 	};
 

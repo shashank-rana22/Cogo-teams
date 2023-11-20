@@ -26,6 +26,8 @@ function SelectedReasonsForm({
 	getSpotSearchRateFeedback = () => {},
 	setSelectedReasons = () => {},
 	setSelectedSevice = () => {},
+	unsatisfiedFeedbacks = {},
+	setUnsatisfiedFeedbacks = () => {},
 }) {
 	const {
 		control,
@@ -40,10 +42,8 @@ function SelectedReasonsForm({
 	const {
 		onSubmit,
 		loading = false,
-		unsatisfiedFeedbacks = {},
 		createTrigger = () => {},
 		onDeleteServiceFeedback = () => {},
-		setUnsatisfiedFeedbacks = () => {},
 		deleteServiceFeedback,
 		showDiscardModal,
 		setShowDiscardModal,
@@ -58,11 +58,16 @@ function SelectedReasonsForm({
 		getSpotSearchRateFeedback,
 		isFeedbackSubmitted,
 		setSelectedSevice,
+		setUnsatisfiedFeedbacks,
 	});
+
+	const { data = {} } = unsatisfiedFeedbacks;
+
+	const allReasons = [...new Set([...selectedReasons, ...(Object.keys(data))])];
 
 	return (
 		<form className={styles.main_container} onSubmit={handleSubmit(onSubmit)}>
-			{selectedReasons.map((reason) => {
+			{allReasons.map((reason) => {
 				const selectedControls = allControls[reason] || [];
 
 				if (isEmpty(selectedControls)) {
@@ -140,7 +145,11 @@ function SelectedReasonsForm({
 					<Button
 						type="submit"
 						themeType="accent"
-						disabled={isEmpty(selectedReasons.filter((item) => !feedbacks.includes(item)))}
+						disabled={isEmpty(
+							selectedReasons.filter(
+								(item) => ![...new Set([...feedbacks, ...Object.keys(data)])].includes(item),
+							),
+						)}
 						loading={loading}
 					>
 						Submit Feedback for Service

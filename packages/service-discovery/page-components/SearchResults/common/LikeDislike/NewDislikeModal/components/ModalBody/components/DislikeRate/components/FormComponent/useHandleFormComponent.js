@@ -54,7 +54,17 @@ const useHandleFormComponent = ({
 
 				await createTrigger({ data: finalPayload });
 
-				getSpotSearchRateFeedback();
+				await getSpotSearchRateFeedback();
+
+				setUnsatisfiedFeedbacks((prev) => ({
+					...prev,
+					data: Object.entries(prev.data || {}).reduce((acc, [key, keyValue]) => {
+						if (reason === key) {
+							return acc;
+						}
+						return { ...acc, [key]: keyValue };
+					}, {}),
+				}));
 			} else {
 				setUnsatisfiedFeedbacks((prev) => ({
 					...prev,

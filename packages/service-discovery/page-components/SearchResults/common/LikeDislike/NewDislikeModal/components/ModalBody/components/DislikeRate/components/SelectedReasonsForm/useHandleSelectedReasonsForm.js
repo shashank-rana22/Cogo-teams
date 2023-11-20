@@ -16,6 +16,7 @@ const useHandleSelectedReasonsForm = ({
 	getSpotSearchRateFeedback = () => {},
 	isFeedbackSubmitted = false,
 	setSelectedSevice = () => {},
+	setUnsatisfiedFeedbacks = () => {},
 }) => {
 	const {
 		general: { query = {} },
@@ -23,7 +24,6 @@ const useHandleSelectedReasonsForm = ({
 
 	const { spot_search_id = '' } = query;
 
-	const [unsatisfiedFeedbacks, setUnsatisfiedFeedbacks] = useState({});
 	const [showDiscardModal, setShowDiscardModal] = useState(false);
 	const [closingRemarks, setClosingRemarks] = useState({ closing_remarks: [], other_reason: '' });
 
@@ -153,10 +153,8 @@ const useHandleSelectedReasonsForm = ({
 	return {
 		onSubmit,
 		loading: loading || createLoading || deleteLoading,
-		unsatisfiedFeedbacks,
 		createTrigger,
 		onDeleteServiceFeedback,
-		setUnsatisfiedFeedbacks,
 		deleteServiceFeedback,
 		showDiscardModal,
 		setShowDiscardModal,

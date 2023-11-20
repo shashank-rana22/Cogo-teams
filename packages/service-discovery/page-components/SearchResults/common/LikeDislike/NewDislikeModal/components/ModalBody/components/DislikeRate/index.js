@@ -14,6 +14,8 @@ function DislikeRate({
 	data = {},
 	getSpotSearchRateFeedback = () => {},
 	setSelectedSevice = () => {},
+	unsatisfiedFeedbacks = {},
+	setUnsatisfiedFeedbacks = () => {},
 }) {
 	const { label = '', service_type, service_id = '', freight_price_currency = '', unit = '' } = selectedSevice;
 
@@ -27,6 +29,8 @@ function DislikeRate({
 
 	const reasonOptions = getServiceWiseOptions({ service_type });
 	const allControls = getServiceWiseConfig({ service_type })({ freight_price_currency, unit });
+
+	const { data: unsatisfiedFeedbacksObj = {} } = unsatisfiedFeedbacks;
 
 	return (
 		<div className={styles.container}>
@@ -45,7 +49,12 @@ function DislikeRate({
 					<sup className={styles.asterisk_mark}>*</sup>
 				</div>
 
-				<MultiSelect options={reasonOptions} value={selectedReasons} onChange={setSelectedReasons} />
+				<MultiSelect
+					options={reasonOptions}
+					value={selectedReasons}
+					onChange={setSelectedReasons}
+					disabled={!isEmpty(unsatisfiedFeedbacksObj)}
+				/>
 			</div>
 
 			<SelectedReasonsForm
@@ -59,6 +68,8 @@ function DislikeRate({
 				getSpotSearchRateFeedback={getSpotSearchRateFeedback}
 				setSelectedReasons={setSelectedReasons}
 				setSelectedSevice={setSelectedSevice}
+				unsatisfiedFeedbacks={unsatisfiedFeedbacks}
+				setUnsatisfiedFeedbacks={setUnsatisfiedFeedbacks}
 			/>
 		</div>
 	);
