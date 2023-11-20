@@ -1,18 +1,24 @@
 import { Tabs, TabPanel, Button, Modal } from '@cogoport/components';
 import { useGetPermission } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
 import { useMemo, useCallback, useState } from 'react';
 
-import EmptyState from '../../common/EmptyStateMargins';
 import conditions from '../../utils/condition-constants';
 import Search from '../Search';
 
-import Details from './Details';
-import ListPagination from './ListPagination';
+import ApprovalPendingMargins from './ApprovalPendingMargins';
+import GeneralMargins from './GeneralMargins';
 import COMPONENT_MAPPING from './marginTypeComponentMapping';
 import MultiEntityMargin from './MultiEntityMargin';
 import SERVICE_TYPE_MAPPING from './service-name-mapping';
 import TransactionFunnelData from './TransactionFunnelData';
+
+const MAIN_COMPONENT_MAPPING = {
+	demand              : GeneralMargins,
+	supply              : GeneralMargins,
+	cogoport            : GeneralMargins,
+	approval_pending    : ApprovalPendingMargins,
+	multi_entity_margin : MultiEntityMargin,
+};
 
 function TabComponent({
 	marginBreakupData = {},
@@ -56,6 +62,8 @@ function TabComponent({
 			setFilterParams({ ...filterParams, margin_type: val, status: 'active' });
 		}
 	};
+
+	const MainComponent = MAIN_COMPONENT_MAPPING[activeTab] || GeneralMargins;
 
 	return (
 		<div>
@@ -103,64 +111,16 @@ function TabComponent({
 				</div>
 			) : null}
 
-			{!['approval_pending', 'multi_entity_margin'].includes(activeTab) ? (
-				<div>
-					{!loading && isEmpty(data?.list) ? <EmptyState /> : (
-						<div>
-							{(data?.list || []).map((item) => (
-								<Details
-									showContainerDetails
-									marginBreakupData={marginBreakupData}
-									setMarginBreakupData={setMarginBreakupData}
-									key={item?.id}
-									data={item}
-									activeTab={activeTab}
-									refetch={refetch}
-								/>
-							))}
-							<ListPagination
-								paginationProps={{
-									data,
-									filterParams,
-									setFilterParams,
-								}}
-							/>
-						</div>
-					)}
-				</div>
-			) : (
-				<div>
-					{activeTab !== 'multi_entity_margin' ? (
-						<div>
-							{!loading && isEmpty(data?.list) ? <EmptyState /> : (
-								<div>
-									{(data?.list || []).map((service) => (
-										<Details
-											marginBreakupData={marginBreakupData}
-											setMarginBreakupData={setMarginBreakupData}
-											key={service?.id}
-											data={service}
-											activeTab={activeTab}
-											refetch={refetch}
-										/>
-									))}
-									<ListPagination
-										paginationProps={{
-											data,
-											filterParams,
-											setFilterParams,
-										}}
-									/>
-								</div>
-							)}
-						</div>
-					) : null}
-				</div>
-			)}
-
-			{activeTab === 'multi_entity_margin' ? (
-				<MultiEntityMargin />
-			) : null}
+			<MainComponent
+				loading={loading}
+				data={data}
+				marginBreakupData={marginBreakupData}
+				setMarginBreakupData={setMarginBreakupData}
+				activeTab={setActivetab}
+				refetch={refetch}
+				filterParams={filterParams}
+				setFilterParams={setFilterParams}
+			/>
 
 			{showFunnelModal ? (
 				<Modal
