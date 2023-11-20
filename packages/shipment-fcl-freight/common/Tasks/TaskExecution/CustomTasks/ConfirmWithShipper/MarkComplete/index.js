@@ -8,10 +8,11 @@ import styles from './styles.module.css';
 
 const checkIsLocalUpsell = ({ primaryTradeType, servicesList = [] }) => {
 	const localTradeType = primaryTradeType === 'export' ? 'import' : 'export';
+
 	const local = servicesList?.find((s) => s?.service_type === 'fcl_freight_local_service'
 	&& s?.trade_type === localTradeType);
 
-	return isEmpty(local);
+	return !isEmpty(local);
 };
 function MarkComplete({
 	task = {}, refetch = () => {}, onCancel = () => {},
