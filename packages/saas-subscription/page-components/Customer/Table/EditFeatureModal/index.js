@@ -37,7 +37,7 @@ const getComponentMapping = ({ t, product_name }) => ({
 function EditFeatureModal({ editModal = {}, setEditModal }) {
 	const { activeComp = '', extraInfo = {}, openEditFeatureModal = false } = editModal;
 
-	const { product = {} } = extraInfo || {};
+	const { product = {}, id: subscriptionId } = extraInfo || {};
 	const { product_name = '' } = product || {};
 
 	const { t } = useTranslation(['saasSubscription']);
@@ -78,6 +78,7 @@ function EditFeatureModal({ editModal = {}, setEditModal }) {
 			<Component
 				extraInfo={extraInfo}
 				modalChangeHandler={modalChangeHandler}
+				subscriptionId={subscriptionId}
 			/>
 		</Modal>
 	);
