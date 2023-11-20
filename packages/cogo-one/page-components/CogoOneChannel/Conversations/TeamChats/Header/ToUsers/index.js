@@ -1,4 +1,5 @@
 import { AsyncSelect } from '@cogoport/forms';
+import { IcMArrowLeft, IcMHome } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef, useEffect } from 'react';
 
@@ -27,6 +28,7 @@ function ToUser({
 	setActiveTab = () => {},
 	setLoadingDraft = () => {},
 	loadingDraft = false,
+	isMobile = false,
 }) {
 	const selectRef = useRef(null);
 
@@ -85,6 +87,22 @@ function ToUser({
 	return (
 		<div className={styles.wrapper} ref={selectRef}>
 			<div className={styles.flex_common}>
+				{isMobile ? (
+					<IcMArrowLeft
+						className={styles.arrow_back}
+						onClick={() => setActiveTab(
+							(prev) => ({
+								...prev,
+								data: {},
+							}),
+						)}
+					/>
+				) : (
+					<IcMHome
+						className={styles.arrow_back}
+						onClick={() => setActiveTab((prev) => ({ ...prev, data: {} }))}
+					/>
+				)}
 				To:
 				{loadingDraft ? <div className={styles.loading}>loading...</div> : (
 					<AsyncSelect

@@ -16,6 +16,7 @@ function Footer({
 	firestore = {},
 	scrollToLastMessage = () => {},
 	internalRoomId = '',
+	isMobile = false,
 }) {
 	const uploaderRef = useRef(null);
 
@@ -107,6 +108,7 @@ function Footer({
 						ref={uploaderRef}
 						internalRoomId={internalRoomId}
 						draftRoomId={draftId}
+						isMobile={isMobile}
 					/>
 				</div>
 				{!hasPermissionToEdit ? <div className={styles.overlay_div} /> : null}

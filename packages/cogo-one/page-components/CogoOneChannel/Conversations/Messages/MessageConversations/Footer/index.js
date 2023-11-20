@@ -31,6 +31,7 @@ function Footer({
 	communicationLoading = false,
 	assignChat = () => {},
 	assignLoading = false,
+	isMobile = false,
 }) {
 	const uploaderRef = useRef(null);
 
@@ -144,7 +145,7 @@ function Footer({
 					hasPermissionToEdit ? '' : styles.opacity
 				}`}
 			>
-				{!isEmpty(suggestions) && (
+				{(!isEmpty(suggestions) && !isMobile) ? (
 					<div className={styles.suggestions_div}>
 						<div className={styles.flex_container}>
 							<div className={styles.suggestions_text}>
@@ -170,7 +171,7 @@ function Footer({
 							))}
 						</div>
 					</div>
-				)}
+				) : null}
 				<TextAreaComponent
 					rows={5}
 					placeholder={getPlaceHolder({ hasPermissionToEdit, canMessageOnBotSession })}
@@ -201,6 +202,7 @@ function Footer({
 						hasUploadedFiles={hasUploadedFiles}
 						draftUploadedFiles={draftUploadedFiles}
 						ref={uploaderRef}
+						isMobile={isMobile}
 					/>
 				</div>
 			</div>

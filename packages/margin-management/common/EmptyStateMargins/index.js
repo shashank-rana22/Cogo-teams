@@ -2,10 +2,14 @@ import constants from '@cogoport/globalization/constants/globals';
 
 import styles from './styles.module.css';
 
-function EmptyState() {
+function EmptyState({
+	emptyDataText = 'NO MARGINS PRESENT !!!',
+}) {
 	return (
 		<div className={styles.container}>
-			<h3>NO MARGINS PRESENT !!!</h3>
+			<h3>
+				{emptyDataText}
+			</h3>
 			<img
 				src={constants?.image_url?.empty_state_margins_url}
 				alt="empty"

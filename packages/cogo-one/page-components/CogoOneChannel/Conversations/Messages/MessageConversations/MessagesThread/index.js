@@ -75,6 +75,7 @@ function MessagesThread(
 		latestMessagesAtTop = false,
 		deleteMessage = () => {},
 		roomId = '',
+		isMobile = false,
 	},
 	messageRef,
 ) {
@@ -200,6 +201,7 @@ function MessagesThread(
 						firestore={firestore}
 						isTheFirstMessageId={isTheFirstMessageId?.id}
 						roomId={roomId}
+						isMobile={isMobile}
 					/>
 				);
 			})}

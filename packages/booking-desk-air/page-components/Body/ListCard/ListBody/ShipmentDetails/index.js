@@ -23,7 +23,7 @@ function ShipmentDetails({ item = {} }) {
 		airline = {},
 	} = item;
 
-	const { business_name = '' } = importer_exporter;
+	const { business_name = '' } = importer_exporter || {};
 
 	const { business_name:airline_business_name = '' } = airline || {};
 

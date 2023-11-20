@@ -11,12 +11,20 @@
 			background: none;
 		}
 	}
+
+	@media (max-width: 576px) {
+		padding: 0 10px;
+	}
 }
 
 .common_flex {
 	display: flex;
 	align-items: center;
 	width: calc(100% - 140px);
+
+	@media (max-width: 576px) {
+		width: calc(100% - 120px);
+	}
 }
 
 .actions {
@@ -36,6 +44,10 @@
 	width: calc(100% - 30px);
 	padding-left: 8px;
 	font-size: 14px;
+
+	@media (max-width: 576px) {
+		width: calc(100% - 54px);
+	}
 }
 
 .image_styles {
@@ -80,4 +92,11 @@
 		fill: red;
 		transform: scale(1.2);
 	}
+}
+
+.arrow_back {
+	width: 18px;
+	height: 18px;
+	margin-right: 6px;
+	cursor: pointer;
 }

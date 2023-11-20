@@ -1,4 +1,3 @@
-import MailConversation from './MailConversation';
 import MessageComponent from './MessageComponent';
 import styles from './styles.module.css';
 import TeamChats from './TeamChats';
@@ -7,7 +6,6 @@ import VoiceCall from './VoiceCall';
 const CONVERSATION_COMPONENT_MAPPING = {
 	message         : MessageComponent,
 	voice           : VoiceCall,
-	outlook         : MailConversation,
 	firebase_emails : MessageComponent,
 	teams           : TeamChats,
 };
@@ -25,13 +23,13 @@ function Conversations({
 	setModalType = () => {},
 	listCogooneGroupMembers = () => {},
 	membersList = [],
+	isMobile = false,
 }) {
 	const componentPropsMapping = {
 		message: {
 			firestore,
 			activeTab,
 			userId,
-			viewType,
 			setRaiseTicketModal,
 			setActiveRoomLoading,
 			setActiveTab,
@@ -41,15 +39,12 @@ function Conversations({
 		},
 		voice: {
 			activeVoiceCard: activeTab?.data || {},
-		},
-		outlook: {
-			mailProps,
+			setActiveTab,
 		},
 		firebase_emails: {
 			firestore,
 			activeTab,
 			userId,
-			viewType,
 			setRaiseTicketModal,
 			setActiveRoomLoading,
 			setActiveTab,
@@ -60,7 +55,6 @@ function Conversations({
 		teams: {
 			activeTeamCard : activeTab?.data || {},
 			suggestions,
-			viewType,
 			loggedInUserId : userId,
 			firestore,
 			setActiveTab,
@@ -80,6 +74,8 @@ function Conversations({
 		<div className={styles.container}>
 			<Component
 				key={activeTab?.tab}
+				viewType={viewType}
+				isMobile={isMobile}
 				{...(componentPropsMapping[activeTab?.tab] || {})}
 			/>
 		</div>

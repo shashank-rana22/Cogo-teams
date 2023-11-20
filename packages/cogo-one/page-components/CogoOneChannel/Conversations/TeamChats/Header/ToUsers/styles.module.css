@@ -43,3 +43,10 @@
 .loading {
 	padding-left: 6px;
 }
+
+.arrow_back {
+	width: 18px;
+	height: 18px;
+	margin-right: 6px;
+	cursor: pointer;
+}

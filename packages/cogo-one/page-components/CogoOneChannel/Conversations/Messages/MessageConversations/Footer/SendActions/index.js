@@ -26,6 +26,7 @@ function SendActions({
 	setDraftUploadedFiles = () => {},
 	setDraftMessages = () => {},
 	hasUploadedFiles = false,
+	isMobile = false,
 }, ref) {
 	const { channel_type = '' } = formattedData;
 
@@ -87,34 +88,36 @@ function SendActions({
 						ref={ref}
 					/>
 				)}
-				<Popover
-					placement="top"
-					render={(
-						<EmojisBody
-							emojisList={emojisList}
-							setOnClicked={setOnClicked}
-							updateMessage={handleUpdateMessage}
-							onClicked={onClicked}
-						/>
-					)}
-					visible={onClicked}
-					maxWidth={355}
-					onClickOutside={() => {
-						if (hasPermissionToEdit) {
-							setOnClicked(false);
-						}
-					}}
-				>
-					<IcMHappy
-						fill="#828282"
-						style={{ cursor: hasPermissionToEdit ? 'pointer' : 'not-allowed' }}
-						onClick={() => {
+				{isMobile ? null :	(
+					<Popover
+						placement="top"
+						render={(
+							<EmojisBody
+								emojisList={emojisList}
+								setOnClicked={setOnClicked}
+								updateMessage={handleUpdateMessage}
+								onClicked={onClicked}
+							/>
+						)}
+						visible={onClicked}
+						maxWidth={355}
+						onClickOutside={() => {
 							if (hasPermissionToEdit) {
-								setOnClicked((prev) => !prev);
+								setOnClicked(false);
 							}
 						}}
-					/>
-				</Popover>
+					>
+						<IcMHappy
+							fill="#828282"
+							style={{ cursor: hasPermissionToEdit ? 'pointer' : 'not-allowed' }}
+							onClick={() => {
+								if (hasPermissionToEdit) {
+									setOnClicked((prev) => !prev);
+								}
+							}}
+						/>
+					</Popover>
+				)}
 			</div>
 			<div className={styles.send_messages}>
 				{isSendPromotionalRate && (

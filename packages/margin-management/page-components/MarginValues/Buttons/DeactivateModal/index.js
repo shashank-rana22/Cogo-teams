@@ -11,9 +11,12 @@ function DeactiveModal({
 	id = '', setMarginBreakupData = () => {}, type = '', openModal = false,
 }) {
 	const router = useRouter();
-	const { loading = false, onSubmit = () => {} } = useUpdateMargin();
+
+	const { loading = false, onSubmit = () => { } } = useUpdateMargin();
+
 	const handleSave = useCallback(async () => {
 		const success = await onSubmit({ params: { id, status: 'inactive' } });
+
 		if (success) {
 			setOpenModal(false);
 			setMarginBreakupData({});
@@ -23,6 +26,7 @@ function DeactiveModal({
 			}
 		}
 	}, [id, onSubmit, refetch, router, setMarginBreakupData, setOpenModal, type]);
+
 	return (
 		<Modal show={openModal} onClose={setOpenModal} placement="top" showCloseIcon={false}>
 			<Modal.Header title="Deactivate" />

@@ -175,5 +175,6 @@
     "reset": "รีเซ็ต",
     "serial_id": "ID อนุกรม",
     "id_creator": "ผู้สร้าง ID",
-    "messaged_at":"ส่งข้อความที่"
+    "messaged_at":"ส่งข้อความที่",
+    "unread_message": "ข้อความที่ยังไม่ได้อ่าน"
 }

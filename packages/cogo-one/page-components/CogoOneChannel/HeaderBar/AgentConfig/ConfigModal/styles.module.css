@@ -7,6 +7,10 @@
 	height: 344px;
 	padding: 8px 0;
 	border-top: 1px solid #dedede;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .footer_styles {
@@ -49,6 +53,10 @@
 
 	&:hover {
 		border: 1px solid #f68b21;
+	}
+
+	@media (max-width: 576px) {
+		width: 50%;
 	}
 }
 

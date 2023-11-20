@@ -6,6 +6,10 @@
 	height: 400px;
 	padding-top: 20px;
 	overflow-y: scroll;
+
+	@media (max-width: 576px) {
+		height: 300px;
+	}
 }
 
 .each_message {

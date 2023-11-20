@@ -111,8 +111,8 @@ const getCustomTaskComponent = ({
 			refetch: taskListRefetch,
 		},
 		[GENERATE_CARGO_INSURANCE]: {
-			task,
 			onCancel,
+			servicesList,
 			refetch: taskListRefetch,
 		},
 		[UPLOAD_COMPLIANCE_DOCUMENTS]: {
