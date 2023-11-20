@@ -66,10 +66,12 @@ function ColumnCard({ item = {}, refetch = () => {}, selectedJV = [], setSelecte
 		<div className={styles.column}>
 			<div className={styles.flex}>
 				<div className={styles.checkbox}>
-					<Checkbox
-						checked={selectedJV.includes(item?.jvNum)}
-						onChange={onSelect}
-					/>
+					{(item?.status !== 'POSTED') ? (
+						<Checkbox
+							checked={selectedJV.includes(item?.jvNum)}
+							onChange={onSelect}
+						/>
+					) : '       '}
 				</div>
 				<div className={styles.jvnumb}><ToolTipWrapper text={item?.jvNum} maxlength={16} /></div>
 				<div className={styles.jvtype}>{item?.category || ''}</div>
