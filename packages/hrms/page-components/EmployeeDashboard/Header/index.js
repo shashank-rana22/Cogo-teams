@@ -179,14 +179,6 @@ function Header({ summaryData }) {
 				</div>
 			</div>
 
-			<div className={styles.diwali_png}>
-				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/diwali1.png"
-					className={styles.diwali_png_img}
-					alt="img"
-				/>
-			</div>
-
 			{/* <div className={styles.rectangle1}>
 				<img src={rectangle} alt="img" />
 			</div>
