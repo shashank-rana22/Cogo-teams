@@ -8,6 +8,7 @@ import TabController from '../ControlledTab';
 
 import styles from './styles.module.css';
 
+const ALLOWABLE_ENTITY_CODES = ['101', '401', '301'];
 function RenderButtons({
 	lineitemvalue = {},
 	insert = () => {},
@@ -62,6 +63,15 @@ function RenderTradeParty({
 		</div>
 	);
 }
+const handleModifiedOptions = ({ options:tradeData = [] }) => {
+	const opt = (tradeData || []).map((item) => {
+		if (item?.sage_organization_id !== null) {
+			return item;
+		}
+		return [];
+	}).flat();
+	return opt;
+};
 
 const handleModeChange = ({
 	index = 0,
@@ -196,46 +206,54 @@ export const renderLineItemFunctions = {
 			</div>
 		);
 	},
-	business_partner: ({ control, index, errors, setValue, watch }) => (
-		<div
-			className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}
-		>
-			<AsyncSelectController
-				control={control}
-				name={`line_items.${index}.tradePartyId`}
-				placeholder="Select Partner"
-				asyncKey="list_trade_parties"
-				renderLabel={(option) => <RenderTradeParty option={option} />}
-				isClearable
-				initialCall
-				params={{
-					sage_organization_id_required : true,
-					filters                       : {
-						status: 'active',
-						account_type:
+	business_partner: ({ control, index, errors, setValue, watch, entity }) => {
+		const modifiedOptions = ALLOWABLE_ENTITY_CODES.includes(entity) ? {
+			getModifiedOptions: handleModifiedOptions,
+		} : {};
+
+		return (
+
+			<div
+				className={cl`${styles.selectcontainer} ${styles.paddingleft} ${styles.menuwidth}`}
+			>
+				<AsyncSelectController
+					control={control}
+					name={`line_items.${index}.tradePartyId`}
+					placeholder="Select Partner"
+					asyncKey="list_trade_parties"
+					renderLabel={(option) => <RenderTradeParty option={option} />}
+					isClearable
+					initialCall
+					params={{
+						sage_organization_id_required : true,
+						filters                       : {
+							status: 'active',
+							account_type:
 							ACCOUNT_TYPE_MAPPINGS[
 								watch(`line_items.${index}.accMode`)
 							] || undefined,
-					},
-				}}
-				onChange={(val, obj) => {
-					setValue(
-						`line_items.${index}.sageOrgId`,
-						obj?.sage_organization_id,
-					);
-				}}
-				rules={{
-					required: !isEmpty(watch(`line_items.${index}.accMode`)),
-				}}
-			/>
-			<div className={styles.sageid}>
-				{watch(`line_items.${index}.sageOrgId`) || ''}
+						},
+					}}
+					{...modifiedOptions}
+					onChange={(val, obj) => {
+						setValue(
+							`line_items.${index}.sageOrgId`,
+							obj?.sage_organization_id,
+						);
+					}}
+					rules={{
+						required: !isEmpty(watch(`line_items.${index}.accMode`)),
+					}}
+				/>
+				<div className={styles.sageid}>
+					{watch(`line_items.${index}.sageOrgId`) || ''}
+				</div>
+				{errors?.line_items?.[index]?.tradePartyId ? (
+					<div className={styles.errors}>* Required</div>
+				) : null}
 			</div>
-			{errors?.line_items?.[index]?.tradePartyId ? (
-				<div className={styles.errors}>* Required</div>
-			) : null}
-		</div>
-	),
+		);
+	},
 
 	type: ({ control, index, errors }) => (
 		<div className={cl`${styles.inputcontainer} ${styles.paddingleft}`}>
