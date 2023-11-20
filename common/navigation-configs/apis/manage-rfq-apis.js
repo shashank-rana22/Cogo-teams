@@ -212,6 +212,12 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'rfq',
 	},
+	{
+		api          : 'list_organization_trade_parties',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+
 ];
 
 export default apis;
