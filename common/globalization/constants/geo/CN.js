@@ -119,6 +119,7 @@ export default {
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
+			'da86318c-8d32-4ba3-beee-5e9466396dc5', // China KAM
 		],
 		kam_manager_ids: [
 			'0ad0034e-da18-49d2-b35c-36e08e8bcdcd', // Prod_KAM ES Manager,
@@ -182,12 +183,14 @@ export default {
 			'e18774d7-54b3-41e8-af04-3b44bd3a3fe2', // SO1 Executive
 			'582391da-3d9b-423f-a5af-df1da84b1c5a',
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
+			'c0e42c54-c888-4283-92e9-705271910a20', // SO1 + SO2 CHINA
 		],
 		service_ops2_role_id: [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'8b04b2b9-baa1-4913-bf4c-b11effecef0b', // SO2 Executive
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 			'123951fe-78aa-4ad1-b2da-fa6191e3a876', // SO2
+			'c0e42c54-c888-4283-92e9-705271910a20', // SO1 + SO2
 		],
 		service_ops3_role_ids: [
 			'60869bd4-5f18-4400-a003-411eb49dcd4a', // Prod_COE_Finance_Executive
@@ -199,7 +202,7 @@ export default {
 			'1f7b1fd3-5c5b-4009-9cb5-c712436bc071', // Corporate Owner Fintech
 			'b5e1c496-9d2c-47bc-b9c2-a24ce7ba1cd0', 	//	Prod Overseas Desk
 		],
-		so1_so2_ops_role_id              : 'd974d323-b777-47a8-b14a-64df2e59df84',
+		so1_so2_ops_role_id              : 'c0e42c54-c888-4283-92e9-705271910a20',
 		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
 		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
 		account_receivable_executive     : 'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3',
@@ -254,7 +257,7 @@ export default {
 		cogo_one_kam_agent_ids: [
 			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse Kam
 		],
-		so1_so2_role_id     : '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
+		so1_so2_role_id     : 'c0e42c54-c888-4283-92e9-705271910a20', // SO1 and SO2 CN
 		fortigo_network_ids : [
 			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
@@ -286,7 +289,7 @@ export default {
 		service_ops3              : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
 		data_superadmin           : 'df340ea2-91b5-4cbc-80ab-d11cec21f040',
 		kam_admin                 : 'df6591f0-f41b-4283-9966-7d0225e1df00', // Kam Admin Vietnam
-		so2_executive             : '12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)'
+		so2_executive             : 'c0e42c54-c888-4283-92e9-705271910a20', // SO2 Executive (LCL)'
 	},
 	options: {
 		registration_types: [
