@@ -1,0 +1,246 @@
+const config = {
+	heading     : 'Disliked Rates',
+	api         : 'list_fcl_freight_rate_feedbacks',
+	placement   : 'center',
+	type        : 'disliked_rates',
+	apiPrefix   : 'list',
+	apiSuffix   : 'rate_feedbacks',
+	extraParams : {
+		customer_details_required : true,
+		is_stats_required         : false,
+		booking_details_required  : true,
+	},
+	fields: [
+		{
+			label : 'Serial Id',
+			key   : 'serial_id',
+			func  : 'renderSerialId',
+			span  : 1,
+		},
+		{
+			label  : 'Shipper',
+			key    : 'performed_by_org.business_name',
+			topKey : {
+				key: 'performed_by_org.business_name',
+			},
+			lowerKey: {
+				key         : 'performed_by.name',
+				popoverKey  : 'performed_by',
+				withPopover : true,
+			},
+			func: 'renderFieldPair',
+		},
+		{
+			label     : 'Port pair',
+			key       : 'service_type',
+			pair_type : 'service_type',
+			func      : 'renderDislikePortPair',
+			span      : 1.5,
+		},
+		{
+			label : 'Preferred Price',
+			key   : 'preferred_freight_rate',
+			func  : 'renderPrice',
+			span  : 1,
+		},
+		{
+			label : 'Cargo Details',
+			key   : '',
+			func  : 'renderContainerInfo',
+			span  : 2,
+		},
+		{
+			label : 'Remarks',
+			key   : 'remarks',
+			func  : 'renderRemarks',
+			span  : 1.5,
+		},
+		{
+			label : 'Status',
+			key   : 'status',
+			func  : 'renderStatus',
+			span  : 1.5,
+		},
+		{
+			label : 'Created At',
+			key   : 'created_at',
+			func  : 'renderCreatedAt',
+			span  : 1,
+		},
+	],
+	// filterProps: {
+	// 	showDateWrapper : true,
+	// 	controls        : [
+	// 		{
+	// 			name    : 'trade_type',
+	// 			label   : 'Trade Type',
+	// 			type    : 'select',
+	// 			span    : 4,
+	// 			options : [
+	// 				{
+	// 					label : 'Import',
+	// 					value : 'import',
+	// 				},
+	// 				{
+	// 					label : 'Export',
+	// 					value : 'export',
+	// 				},
+	// 			],
+	// 		},
+	// 		{
+	// 			name           : 'location_id',
+	// 			label          : 'Location',
+	// 			multiple       : false,
+	// 			type           : 'location-select',
+	// 			optionsListKey : 'locations',
+	// 			params         : { filters: { type: ['seaport', 'country', 'pincode'] } },
+	// 			placeholder    : 'Select',
+	// 		},
+	// 		{
+	// 			type           : 'location-select',
+	// 			optionsListKey : 'locations',
+	// 			params         : { filters: { type: ['seaport'] } },
+	// 			caret          : true,
+	// 			name           : 'port_id',
+	// 			label          : 'Port',
+	// 			span           : 4,
+	// 			countryType    : 'country',
+	// 		},
+	// 		{
+	// 			name           : 'airport_id',
+	// 			label          : 'Airport',
+	// 			type           : 'location-select',
+	// 			optionsListKey : 'locations',
+	// 			defaultOptions : true,
+	// 			params         : { filters: { type: ['airport'] } },
+	// 			caret          : true,
+	// 		},
+	// 		{
+	// 			label             : 'Origin Airport',
+	// 			name              : 'origin_airport_id',
+	// 			placeholder       : 'Search via name',
+	// 			includedInOptions : false,
+	// 			type              : 'location-select',
+	// 			optionsListKey    : 'locations',
+	// 			grouped           : ['city', 'country'],
+	// 			params            : { filters: { type: ['airport', 'country', 'city'] } },
+	// 		},
+	// 		{
+	// 			label             : 'Destination Airport',
+	// 			name              : 'destination_airport_id',
+	// 			placeholder       : 'Search via name',
+	// 			includedInOptions : false,
+	// 			type              : 'location-select',
+	// 			optionsListKey    : 'locations',
+	// 			grouped           : ['city', 'country'],
+	// 			params            : { filters: { type: ['airport', 'country', 'city'] } },
+	// 		},
+	// 		{
+	// 			type   : 'location-select',
+	// 			params : {
+	// 				filters: {
+	// 					type: ['seaport'],
+	// 				},
+	// 			},
+	// 			name              : 'origin_port_id',
+	// 			label             : 'Origin Port',
+	// 			span              : 4,
+	// 			isClearable       : true,
+	// 			includedInOptions : false,
+	// 			optionsListKey    : 'locations',
+	// 			grouped           : ['city', 'country'],
+	// 			placeholder       : 'Search location...',
+	// 		},
+	// 		{
+	// 			type   : 'location-select',
+	// 			params : {
+	// 				filters: {
+	// 					type: ['seaport'],
+	// 				},
+	// 			},
+	// 			name              : 'destination_port_id',
+	// 			label             : 'Destination Port',
+	// 			includedInOptions : false,
+	// 			span              : 4,
+	// 			isClearable       : true,
+	// 			optionsListKey    : 'locations',
+	// 			grouped           : ['city', 'country'],
+	// 			placeholder       : 'Search location...',
+	// 		},
+	// 		{
+	// 			type        : 'location-select',
+	// 			isClearable : true,
+	// 			params      : {
+	// 				filters: {
+	// 					type: ['seaport', 'country', 'pincode'],
+	// 				},
+	// 			},
+	// 			caret          : true,
+	// 			multiple       : false,
+	// 			name           : 'origin_location_id',
+	// 			label          : 'Origin Location',
+	// 			optionsListKey : 'locations',
+	// 			placeholder    : 'Origin..',
+	// 			span           : 4,
+	// 		},
+	// 		{
+	// 			type        : 'location-select',
+	// 			isClearable : true,
+	// 			params      : {
+	// 				filters: {
+	// 					type: ['seaport', 'country', 'pincode'],
+	// 				},
+	// 			},
+	// 			name           : 'destination_location_id',
+	// 			label          : 'Destination Location',
+	// 			span           : 4,
+	// 			optionsListKey : 'locations',
+	// 			placeholder    : 'Destination..',
+	// 		},
+	// 		{
+	// 			type   : 'location-select',
+	// 			params : {
+	// 				filters: {
+	// 					type: ['trade'],
+	// 				},
+	// 			},
+	// 			name           : 'trade_id',
+	// 			label          : ' Trade',
+	// 			span           : 4,
+	// 			isClearable    : true,
+	// 			optionsListKey : 'locations',
+	// 			placeholder    : 'Search location...',
+	// 		},
+	// 		{
+	// 			type   : 'location-select',
+	// 			params : {
+	// 				filters: {
+	// 					type: ['trade'],
+	// 				},
+	// 			},
+	// 			name           : 'origin_trade_id',
+	// 			label          : 'Trade',
+	// 			span           : 4,
+	// 			isClearable    : true,
+	// 			optionsListKey : 'locations',
+	// 			placeholder    : 'Search location...',
+	// 		},
+	// 		{
+	// 			type   : 'location-select',
+	// 			params : {
+	// 				filters: {
+	// 					type: ['trade'],
+	// 				},
+	// 			},
+	// 			name           : 'destination_trade_id',
+	// 			label          : 'Destination Trade',
+	// 			span           : 4,
+	// 			isClearable    : true,
+	// 			optionsListKey : 'locations',
+	// 			placeholder    : 'Search location...',
+	// 		},
+	// 	],
+	// },
+};
+
+export default config;

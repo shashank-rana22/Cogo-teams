@@ -18,7 +18,11 @@ function SearchType({ item = {}, field = {}, type = '' }) {
 	}
 	const service_type = getValue(item, field);
 
-	const { icon: Icon, color, label = '' } = SERVICE_TYPE_ICON_MAPPING[service_type] || {};
+	const { icon: Icon, color, label = '' } = SERVICE_TYPE_ICON_MAPPING?.[service_type] || {};
+
+	if (!Icon) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
