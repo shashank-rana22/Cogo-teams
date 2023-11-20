@@ -28,17 +28,6 @@ function Child({
 	customField = {},
 }) {
 	const total_fields = getTotalFields({ controls });
-	// const codeName = watch(`${name}.${index}.code`);
-
-	// // useEffect(() => {
-	// // 	setSelectedList((previousSelectedList) => {
-	// // 		if (!previousSelectedList.includes(codeName) && !isEmpty(codeName) && source === 'air_customs') {
-	// // 			return [...previousSelectedList, codeName];
-	// // 		}
-
-	// // 		return previousSelectedList;
-	// // 	});
-	// // }, [codeName, setSelectedList, source]);
 
 	return (
 		<div key={field.id} className={styles.child}>
@@ -67,13 +56,6 @@ function Child({
 									formValues,
 								});
 							}
-
-							// if (ctrlItemName === 'code' && source === 'air_customs') {
-							// 	options = (controlItem?.options || []).filter(
-							// 		(option) => !selectedList.includes(option.value)
-							// 		|| watch(element_name) === option.value,
-							// 	);
-							// }
 
 							return (
 								<div className={styles.element} style={{ width: `${flex}%` }} key={ctrlItemName}>
