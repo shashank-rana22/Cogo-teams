@@ -13,7 +13,6 @@ function NotInOffice({ data = {} }) {
 	const [maxVisible, setMaxVisible] = useState(4);
 
 	useEffect(() => {
-		// Function to update the isMobile state based on viewport width
 		function handleResize() {
 			const isLess = window.innerWidth < 767;
 			setMaxVisible(isLess ? 4 : 5);
@@ -21,10 +20,8 @@ function NotInOffice({ data = {} }) {
 
 		handleResize();
 
-		// Add a resize event listener
 		window.addEventListener('resize', handleResize);
 
-		// Remove the event listener when the component unmounts
 		return () => {
 			window.removeEventListener('resize', handleResize);
 		};
