@@ -15,7 +15,12 @@ function SearchForm({
 	const { control, handleSubmit, reset } = useForm({ defaultValues: filterParams });
 
 	const onSubmit = (values) => {
-		setFilterParams((prev) => ({ ...prev, ...values }));
+		setFilterParams((prev) => ({
+			...prev,
+			...values,
+			margin_type: activeTab,
+		}));
+
 		setShowPopver(false);
 	};
 
@@ -27,7 +32,11 @@ function SearchForm({
 		});
 
 		setFilterParams((prev) => ({
-			...prev, ...obj, margin_type: activeTab, service: activeService, status: 'active',
+			...prev,
+			...obj,
+			margin_type : activeTab,
+			service     : activeService,
+			status      : 'active',
 		}));
 
 		reset();

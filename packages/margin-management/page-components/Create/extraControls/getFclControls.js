@@ -160,6 +160,7 @@ export default function getFclControls({ type = '' }) {
 			options  : [
 				{ label: 'Import', value: 'import' },
 				{ label: 'Export', value: 'export' },
+				{ label: 'Domestic', value: 'domestic' },
 			],
 		},
 		{
