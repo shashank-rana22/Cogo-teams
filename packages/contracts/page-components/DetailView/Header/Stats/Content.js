@@ -41,6 +41,7 @@ function Content({
 				<Price data={statsData?.projected_consolidated_revenue?.toFixed(2)} />
 				<Line />
 			</div>
+
 			{data?.status === 'pending_approval' ? (
 				<div className={styles.button_container}>
 					<Button
@@ -61,6 +62,7 @@ function Content({
 					) : null}
 				</div>
 			) : null}
+
 			<SureModal
 				showModal={showModal}
 				handleCloseModal={handleCloseModal}

@@ -95,9 +95,9 @@ const ENTITY_MAPPING = {
 	801: {
 		country_code        : 'CN',
 		name                : 'Cogoport China',
-		id                  : 'ff9a7145-b1b6-46ff-8de7-a348de635574',
+		id                  : 'd39c9a59-93e3-4823-b85f-c72139cf138f',
 		icon                : IcCChina,
-		default_entity_code : '81',
+		default_entity_code : '801',
 		currency            : 'CNY',
 		code                : '801',
 		GSTIN               : [],

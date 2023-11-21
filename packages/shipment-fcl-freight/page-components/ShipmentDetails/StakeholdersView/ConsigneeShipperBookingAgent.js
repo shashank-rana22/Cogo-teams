@@ -1,5 +1,6 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import ShipmentPageContainer from '@cogoport/ocean-modules/components/ShipmentPageContainer';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { isEmpty } from '@cogoport/utils';
@@ -11,6 +12,7 @@ import Documents from '../../../common/Documents';
 import JobStatus from '../../../common/JobStatus';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import PurchaseInvoice from '../../../common/PurchaseInvoice';
 import RolloverDetails from '../../../common/RolloverDetails';
 import RolloverActionModal from '../../../common/RolloverModal/RolloverActionModal';
 import SalesInvoice from '../../../common/SalesInvoice';
@@ -32,6 +34,10 @@ function ConsigneeShipperBookingAgent({ get = {} }) {
 		shipment_data = {}, isGettingShipment = false, getShipmentStatusCode = '',
 		container_details = [],
 	} = get || {};
+
+	const geo = getGeoConstants();
+
+	const { is_purchase_visible_to_kam = false } = geo.others?.navigations?.bookings?.invoicing || {};
 
 	const rollover_containers = (container_details || []).filter(
 		(c) => c?.rollover_status === 'requested',
@@ -98,6 +104,12 @@ function ConsigneeShipperBookingAgent({ get = {} }) {
 						<TabPanel name="invoice" title="Sales Invoice">
 							<SalesInvoice />
 						</TabPanel>
+
+						{is_purchase_visible_to_kam && (
+							<TabPanel name="purchase_live_invoice" title="Purchase Live Invoices">
+								<PurchaseInvoice activeTab={activeTab} />
+							</TabPanel>
+						)}
 
 						<TabPanel name="documents" title="Documents">
 							<Documents />
