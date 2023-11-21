@@ -1,23 +1,23 @@
 import styles from './styles.module.css';
 
-function RenderTradeParty({
-	option = {
-		legal_business_name : '',
-		registration_number : '',
-		company_type        : '',
-	},
-}) {
+function RenderTradeParty({ option = {} }) {
+	const {
+		legal_business_name = '',
+		registration_number = '',
+		company_type = '',
+	} = option || {};
+
 	return (
 		<div className={styles.tradeparty}>
-			<div>{option?.legal_business_name || ''}</div>
+			<div>{legal_business_name || ''}</div>
 			<div>
 				<span className={styles.label}>Reg.Number :</span>
-				{option?.registration_number || ''}
+				{registration_number || ''}
 			</div>
-			{option?.company_type ? (
+			{company_type ? (
 				<div>
 					<span className={styles.label}>Company Type :</span>
-					{option?.company_type || ''}
+					{company_type || ''}
 				</div>
 			) : null}
 		</div>

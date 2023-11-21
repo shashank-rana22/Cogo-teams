@@ -71,7 +71,7 @@ function ColumnCard({ item = {}, refetch = () => {}, selectedJV = [], setSelecte
 							checked={selectedJV.includes(item?.jvNum)}
 							onChange={onSelect}
 						/>
-					) : '       '}
+					) : null}
 				</div>
 				<div className={styles.jvnumb}><ToolTipWrapper text={item?.jvNum} maxlength={16} /></div>
 				<div className={styles.jvtype}>{item?.category || ''}</div>
