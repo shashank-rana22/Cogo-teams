@@ -270,23 +270,30 @@ export default {
 			'447c2b70-90c9-4e9d-a0df-49bb803b0314',	// Enterprise Sales
 			'5f79d531-50e0-4843-995f-71057e659e0f', // Channel Partner
 		],
-		igm_desk                  : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
-		document_control_manager  : '123951fe-78aa-4ad1-b2da-fa6191e3a876',
-		document_control_lead     : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
-		finops_credit_controller  : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
-		finance_head              : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
-		so1_revenue_desk          : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
-		supply_fulfillment        : 'd86b05c2-0b60-46ba-9585-bfcd9ea17b6e',
-		ftl_ground_ops_role_id    : 'd2275231-30ad-4df9-8451-daf03b766f8a',
-		field_service_ops_role_id : '6ebacc3c-05c9-43fd-8a51-e7aad9751d9b',
-		kam_service_ops1_role_id  : '4c6f6036-2383-4c40-9b84-fa2b598031e1',
-		finops                    : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
-		cogo_one_kyc              : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
-		finance_branch_accounts   : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
-		service_ops3              : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
-		data_superadmin           : 'df340ea2-91b5-4cbc-80ab-d11cec21f040',
-		kam_admin                 : 'df6591f0-f41b-4283-9966-7d0225e1df00', // Kam Admin Vietnam
-		so2_executive             : '12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)'
+		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		document_control_manager : '123951fe-78aa-4ad1-b2da-fa6191e3a876',
+		document_control_lead    : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		finops_credit_controller : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
+		finance_head             : [
+			'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
+			'635658c1-8d6b-4ab5-83a4-bd4989287193',
+		],
+		so1_revenue_desk: [
+			'348bc262-64c3-4667-a23c-908ceca80233',
+			'f896df94-f77d-4e6d-b5dd-3a4b936f8401',
+		],
+		supply_fulfillment             : 'd86b05c2-0b60-46ba-9585-bfcd9ea17b6e',
+		ftl_ground_ops_role_id         : 'd2275231-30ad-4df9-8451-daf03b766f8a',
+		field_service_ops_role_id      : '6ebacc3c-05c9-43fd-8a51-e7aad9751d9b',
+		kam_service_ops1_role_id       : '4c6f6036-2383-4c40-9b84-fa2b598031e1',
+		finops                         : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
+		cogo_one_kyc                   : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
+		finance_branch_accounts        : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
+		service_ops3                   : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
+		data_superadmin                : 'df340ea2-91b5-4cbc-80ab-d11cec21f040',
+		kam_admin                      : 'df6591f0-f41b-4283-9966-7d0225e1df00', // Kam Admin Vietnam
+		so2_executive                  : '12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)'
+		prod_data_operations_associate : 'dcdcb3d8-4dca-42c2-ba87-1a54bc4ad7fb', // Prod_Data Operations Associate
 	},
 	options: {
 		registration_types: [
