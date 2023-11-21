@@ -1,6 +1,8 @@
 import { Modal, Table } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import Header from '../../../Loader/Header';
@@ -46,7 +48,13 @@ function ShipmentDataModal({
 			<Modal.Header title="Shipment Plan Data" />
 			<Modal.Body>
 				{loading && <Header />}
-				{!loading && (shipment_plan_data || []).map((value) => (
+				{!loading && isEmpty(shipment_plan_data) && (
+					<div className={styles.empty_state}>
+						<Image src={GLOBAL_CONSTANTS.image_url.empty_state} width={293} height={192} />
+						<span>No Shipment Plans Found!</span>
+					</div>
+				)}
+				{!loading && !isEmpty(shipment_plan_data) && (shipment_plan_data || []).map((value) => (
 					<div className={styles.plan_card} key={value?.id}>
 						<div className={styles.heading}>{value?.trade_party_data?.display_name}</div>
 						<Table columns={columns} data={value?.plan_details} />
