@@ -106,7 +106,7 @@ function ModalComponent({
             </div> */
             }
 			<div className={styles.table_container}>
-				{ctcStructure?.basic?.yearlyValue !== 0 && !initialQuestion
+				{ctcStructure?.basic?.yearlyValue !== 0 && initialQuestion !== ''
 					? (
 						<>
 							<div className={styles.heading}>

@@ -402,3 +402,23 @@
 	font-size: 14px;
 	color: #221f20;
 }
+
+.profile_img_1 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	:global {
+		.ui_avatar_container {
+			width: 140px !important;
+			height: 140px !important;
+			margin-right: 0 !important;
+			border-radius: 100px !important;
+		}
+
+		.ui_avatar_text {
+			font-size: 50px !important;
+			background: #5b1d2c;
+		}
+	}
+}
