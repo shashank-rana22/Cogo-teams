@@ -55,8 +55,8 @@ const COLUMNS = [
 		accessor : (item) => <div className={styles.label}>{startCase(item?.request_completed_by?.name) || '-'}</div>,
 	},
 	{
-		id       : 'request_on',
-		Header   : 'REQUEST ON',
+		id       : 'performed_at',
+		Header   : 'PERFORMED AT',
 		accessor : (item) => (
 			<div className={styles.date_content}>
 				<div>
