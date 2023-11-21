@@ -592,6 +592,15 @@ export default {
 				template_default_language   : 'english',
 				supply_sender_mobile_number : '918069195980',
 			},
+			bookings: {
+				invoicing: {
+					is_invoice_mergeable              : true,
+					disable_edit_invoice              : false,
+					stakeholder_wise_invoice_required : false,
+					is_purchase_visible_to_kam        : true,
+					is_task_visible_to_so2_executive  : true,
+				},
+			},
 			partner: {
 				common: {
 					validate_registration_number : false,
