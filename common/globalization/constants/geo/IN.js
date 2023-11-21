@@ -752,6 +752,7 @@ export default {
 					disable_edit_invoice              : true,
 					stakeholder_wise_invoice_required : true,
 					is_purchase_visible_to_kam        : false,
+					is_task_visible_to_so2_executive  : false,
 				},
 			},
 			business_finance: {
