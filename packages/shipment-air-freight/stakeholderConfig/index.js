@@ -4,6 +4,7 @@ import bookingAgentManagerConfig from './bookingAgentManager.json';
 import bookingDeskConfig from './bookingDesk.json';
 import bookingDeskManagerConfig from './bookingDeskManager.json';
 import costBookingManagerConfig from './costBookingManager.json';
+import dataOperationsConfig from './dataOperations.json';
 import defaultConfig from './default.json';
 import documentDeskConfig from './documentDesk.json';
 import ffCostBooking from './ffCostBooking.json';
@@ -34,6 +35,7 @@ const CONFIG_MAPPING = {
 	so1_revenue_desk             : ffCostBooking,
 	kam_admin                    : kamAdminConfig,
 	so2_executive                : so2ExecutiveConfig,
+	data_associate               : dataOperationsConfig,
 };
 
 const stakeholderConfig = ({ stakeholder }) => CONFIG_MAPPING[stakeholder] || defaultConfig;
