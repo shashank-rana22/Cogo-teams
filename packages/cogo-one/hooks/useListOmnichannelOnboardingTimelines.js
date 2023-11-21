@@ -11,6 +11,7 @@ const getParams = ({
 	assignTo = '', requestStatus = '', escalationCycle = '', requestType = '',
 	end = null, requestCompleted = '', start = null, taskId = '',
 }) => ({
+	sort_by	   : 'task_id',
 	page_limit : !showHistory ? DEFAULT_PAGE_LIMIT : LIST_PAGE_LIMIT,
 	filters    : {
 		agent_id                : initialViewType !== 'cogoone_admin' ? agentId : assignTo || undefined,
