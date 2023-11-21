@@ -1,0 +1,14 @@
+.container {
+	min-height: 160px;
+	padding: 20px 16px;
+	background: linear-gradient(180deg, #f3f3f3, #fff);
+	border: 1px solid #f9f7f7;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%);
+
+	&.selected_card {
+		margin-top: 10px !important;
+		background: #f5ffff;
+		border: 1px solid #e6f3f3;
+	}
+}

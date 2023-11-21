@@ -7,5 +7,19 @@
 
 .source_icon {
 	position: absolute;
-	top: -5px;
+	bottom: 22px;
+
+	@media (max-width: 576px) {
+		bottom: 14px;
+
+		img {
+			width: 16px;
+			height: 16px;
+		}
+
+		svg {
+			width: 16px;
+			height: 16px;
+		}
+	}
 }

@@ -1,0 +1,59 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	align-items: flex-start;
+	align-self: stretch;
+	padding: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.section_heading {
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 150%;
+	color: #221f20;
+}
+
+.sub_heading_section {
+	font-weight: 400;
+	line-height: 150%;
+	color: #4f4f4f;
+}
+
+.head_text_section {
+	display: flex;
+	flex-direction: column;
+	margin: 0 0 0 8px;
+}
+
+.head_text_section2 {
+	display: flex;
+	flex-direction: column;
+	margin: 32px 36px;
+}
+
+.head_section {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	align-self: stretch;
+}
+
+.step_view_btn {
+	padding: 8px;
+	background-color: #fffce6;
+	border-radius: 100px;
+}
+
+.cards_section {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+
+	@media (max-width: 768px) {
+		display: flex;
+		flex-direction: column;
+	}
+}

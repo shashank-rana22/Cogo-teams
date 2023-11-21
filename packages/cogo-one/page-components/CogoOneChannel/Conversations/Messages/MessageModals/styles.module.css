@@ -4,6 +4,10 @@
 			padding: 10px !important;
 		}
 	}
+
+	@media (max-width: 576px) {
+		width: 100% !important;
+	}
 }
 
 .modal_header_title {

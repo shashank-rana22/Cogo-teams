@@ -38,8 +38,26 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
+
+	@media (max-width: 576px) {
+		width: calc(100% - 50px);
+	}
+}
+
+.mobil_email_header {
+	width: 100%;
+	overflow: hidden;
+	font-size: 12px;
+	white-space: pre-wrap;
 }
 
 .tooltip_container {
 	max-width: 60vw !important;
+}
+
+.arrow_back {
+	width: 16px;
+	height: 16px;
+	margin-right: 8px;
+	cursor: pointer;
 }

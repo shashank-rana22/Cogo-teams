@@ -1,13 +1,18 @@
 import { Datepicker, Input, Select, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import currencies from '../../helpers/currencies';
+import getCurrencyOptions from '../../../../helpers/getCurrencyOptions';
 
 import styles from './styles.module.css';
 import useGetCommodityOptions from './useGetCommodityOptions';
 
 function CargoDetails({ cargoDetails = {}, setCargoDetails = () => {}, detail = {}, primaryService = {} }) {
 	const { commodityTypeOptions = [], loading = false } = useGetCommodityOptions({ detail });
+
+	const ALLOWED_CURRENCY = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
+		.common.services.preview_booking_checkout.allowed_currency;
+
+	const CURRENCY_OPTIONS = getCurrencyOptions({ ALLOWED_CURRENCY });
 
 	const MAPPING = [
 		{
@@ -40,7 +45,7 @@ function CargoDetails({ cargoDetails = {}, setCargoDetails = () => {}, detail = 
 				type        : 'select',
 				style       : { width: '40%', paddingRight: '12px' },
 				placeholder : 'currency',
-				options     : currencies,
+				options     : CURRENCY_OPTIONS,
 			},
 			component2Props: {
 				type        : 'number',

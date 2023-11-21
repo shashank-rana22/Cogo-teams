@@ -34,6 +34,7 @@ function CargoInsuranceModal({
 	setShowAddInvoicingParty = () => {},
 	setDone = () => {},
 	defaultValues = {},
+	isMobile = false,
 }) {
 	const [commodity, setCommodity] = useState('');
 	const [rateData, setRateData] = useState({});
@@ -142,6 +143,12 @@ function CargoInsuranceModal({
 				reason: 'blocked_country',
 			},
 		},
+		something_went_wrong: {
+			Component : EmptyState,
+			props     : {
+				reason: 'something_went_wrong',
+			},
+		},
 		not_applicable: {
 			Component : EmptyState,
 			props     : {
@@ -173,6 +180,8 @@ function CargoInsuranceModal({
 		let key = 'allowed';
 		if (countrySupportedLoading) {
 			key = 'loading';
+		} else if (isEmpty(isEligible)) {
+			key = 'something_went_wrong';
 		} else if (!isEligible) {
 			key = 'not_eligible';
 		} else if (!is_applicable) {
@@ -195,6 +204,7 @@ function CargoInsuranceModal({
 			show={addCargoInsurance}
 			onClose={() => setAddCargoInsurance(false)}
 			closeOnOuterClick={false}
+			placement={isMobile ? 'bottom' : 'center'}
 		>
 			<Modal.Header title="Add Cargo Insurance" />
 

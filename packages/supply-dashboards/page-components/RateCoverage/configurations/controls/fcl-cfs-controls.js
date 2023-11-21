@@ -53,7 +53,7 @@ const CARGO_HANDLING_OPTIONS = [
 	},
 ];
 
-const cfsControls = ({ data, originLocationOptions, CommodityOptions, source }) => {
+const cfsControls = ({ data, originLocationOptions, source }) => {
 	const controls = [
 		{
 			heading      : 'Service Provider Details',
@@ -151,7 +151,6 @@ const cfsControls = ({ data, originLocationOptions, CommodityOptions, source }) 
 			span        : 3,
 			value       : data?.commodity,
 			disabled    : data?.commodity,
-			options     : CommodityOptions,
 			rules       : { required: 'commodity is required' },
 		},
 		{
@@ -200,8 +199,8 @@ const cfsControls = ({ data, originLocationOptions, CommodityOptions, source }) 
 			placeholder  : 'Free Limit Days',
 			rules        : { required: 'This is required' },
 		},
-		source === 'live_booking'
-			? 			{
+		['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
+			? {
 				name  : 'is_shipper_specific',
 				label : 'Shipper Specific Rate',
 				type  : 'checkbox',

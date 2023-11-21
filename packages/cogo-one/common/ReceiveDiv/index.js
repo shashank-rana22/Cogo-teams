@@ -120,8 +120,10 @@ function ReceiveDiv({
 				<div className={styles.time_stamp}>
 					{date || ''}
 				</div>
-				<div className={cl`${message_type === 'contacts' ? '' : styles.receive_message_container} 
-			${hasRepliedMessage ? styles.replied_messages : ''}`}
+				<div className={cl`
+				${message_type === 'contacts' ? '' : styles.receive_message_container} 
+				${hasRepliedMessage ? styles.replied_messages : ''}
+				`}
 				>
 					{hasRepliedMessage && (
 						<RepliedMessage user_name={user_name} reply_metadata={reply_metadata} />

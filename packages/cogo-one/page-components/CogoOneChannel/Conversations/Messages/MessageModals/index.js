@@ -14,6 +14,7 @@ function MessageModals({
 	assignLoading = false,
 	viewType = '',
 	formattedData = {},
+	isMobile = false,
 }) {
 	const {
 		comp: ActiveModalComp = null,
@@ -30,7 +31,7 @@ function MessageModals({
 			size={modalSize}
 			show
 			onClose={closeModal}
-			placement="center"
+			placement={isMobile ? 'bottom' : 'center'}
 			className={styles.styled_ui_modal_container}
 		>
 			{name && (
@@ -52,6 +53,7 @@ function MessageModals({
 				loading={loading}
 				viewType={viewType}
 				formattedData={formattedData}
+				isMobile={isMobile}
 			/>
 		</Modal>
 

@@ -21,6 +21,7 @@ function useCreateAudience({
 			admin   : 'admin_user',
 			app     : 'importer_exporter',
 			all     : 'all',
+			public  : 'all',
 			partner : personaValue,
 
 		};

@@ -1,37 +1,40 @@
-import { Button, FunnelStepper } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+/* eslint-disable max-lines-per-function */
+import { Button } from '@cogoport/components';
+import { CheckboxController, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack, IcMDelete } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
 import { useGetPermission } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import Layout from '../../common/Layout';
+import getModifiedControls from '../../helpers/getModifiedControls';
 import getShowElements from '../../helpers/getShowElements';
 import useCreateMargin from '../../hooks/useCreateMargin';
+import useGetActiveSubscription from '../../hooks/useGetActiveSubscription';
+import useGetChargeCodes from '../../hooks/useGetChargeCodes';
 import useUpdateMargin from '../../hooks/useUpdateMargin';
 import DeactiveModal from '../MarginValues/Buttons/DeactivateModal';
 
+import AdvancedLabel from './components/AdvancedLabel';
+import SubscriptionDiscounts from './components/SubscriptionDiscounts';
 import DEFAULT_MARGIN_SLABS from './DEFAULT_MARGIN_SLABS';
 import getFclControls from './extraControls/getFclControls';
 import getFclCustomsControls from './extraControls/getFclCustomsControls';
 import getLclFreightControls from './extraControls/getLclFreightControls';
 import getLtlFreight from './extraControls/getLtlFreight';
 import getControls from './getControls';
-import getHandleFormSubmit from './getHandleFormSubmit';
 import Margin from './Margin';
 import getMarginControls from './marginControls';
 import styles from './styles.module.css';
+import useGetHandleFormSubmit from './useGetHandleFormSubmit';
 
 const agent_view = ['margin', 'across_all'];
-const ZERO = 0; const ONE = 1;
-const items = [
-	{ title: <div className={styles.stepper}>CUSTOMIZE YOUR DETAILS</div>, key: 'customize' },
-	{ title: <div className={styles.stepper}>ADD THE MARGINS</div>, key: 'add' },
-];
-
+const ONE = 1;
 let initialCall = false;
+
 function Create({ type = 'create', item = {} }) {
 	const { filters = {}, ...rest } = item;
 	const router = useRouter();
@@ -45,49 +48,93 @@ function Create({ type = 'create', item = {} }) {
 	const { onSubmit: submitForm } = useCreateMargin();
 	const { onSubmit: updateForm } = useUpdateMargin();
 	const [openModal, setOpenModal] = useState(false);
+	const [showAdvancedForm, setShowAdvancedForm] = useState(false);
+	const [chargeCodes, setChargeCodes] = useState([]);
+
 	const {
 		control,
 		watch,
-		handleSubmit,
 		fields,
 		setValue,
 		formState: { errors = {} } = {},
-	} = useForm({ defaultValues: { margin_slabs: DEFAULT_MARGIN_SLABS, ...rest, ...filters } });
+		handleSubmit,
+	} = useForm({
+		defaultValues: { margin_slabs: DEFAULT_MARGIN_SLABS, ...rest, ...filters },
+	});
 
 	const formValues = watch();
+
+	const { saasPlansData = {} } =	useGetActiveSubscription({
+		organization_id   : formValues?.organization_id,
+		organization_type : formValues?.organization_type,
+		formValues,
+	});
+
 	const initialControls = getControls({
 		type,
 		marginType : formValues?.margin_type,
 		partnerId  : formValues?.partner_id,
 		item,
+		setValue,
 	});
-	const marginControls = getMarginControls({ service: formValues?.service });
 
-	const getAllControls = useCallback(() => {
-		let extraControls = (getFclControls({ type })[formValues?.service] || []);
-		extraControls = (getFclCustomsControls({ type })[formValues?.service] || extraControls);
-		extraControls = (getLclFreightControls({ type })[formValues?.service] || extraControls);
-		extraControls = (getLtlFreight({ type })[formValues?.service] || extraControls);
-		const controls = [...(initialControls || []), ...(extraControls || [])];
-		return controls;
-	}, [initialControls, formValues?.service, type]);
-	const controls = useMemo(() => getAllControls(), [getAllControls]);
+	const { loading = false } = useGetChargeCodes({
+		service: formValues?.service, setChargeCodes,
+	});
+
+	const marginControls = getMarginControls({ service: formValues?.service, chargeCodes });
+
+	const extraControls = useMemo(() => {
+		let result = getFclControls({ type })[formValues?.service] || [];
+		result = getFclCustomsControls({ type })[formValues?.service] || result;
+		result = getLclFreightControls({ type })[formValues?.service] || result;
+		result = getLtlFreight({ type })[formValues?.service] || result;
+		return result;
+	}, [type, formValues?.service]);
+
+	const controls = useMemo(
+		() => [...(initialControls || []), ...(extraControls || [])],
+		[initialControls, extraControls],
+	);
+
+	const newControls = getModifiedControls({ controls, formValues });
 
 	const showElements = getShowElements({
-		allPresentControls : controls,
+		allPresentControls : [...newControls, ...marginControls],
 		formValues,
 		item               : { ...(item || {}), ...(item?.filters || {}) },
 		isConditionMatches,
 		agent_view,
 	});
+
 	const { margin_slabs = [] } = formValues;
 	const customFieldArrayControls = { margin_slabs: [] };
+
+	useEffect(() => {
+		if (!isEmpty(item)) {
+			const newItem = { ...(item || {}), ...(item?.filters || {}) };
+			extraControls.forEach((elem) => {
+				setValue(elem?.name, newItem?.[elem.name]);
+			});
+			setValue('margin_slabs', item?.margin_slabs);
+		}
+	}, [extraControls, item, setValue, showAdvancedForm, loading]);
+
 	useEffect(() => {
 		margin_slabs?.forEach((_o, index) => {
-			setValue(`margin_slabs.${index}.limit_currency`, margin_slabs[index]?.margin_values?.[ZERO]?.currency);
-			if (index > ZERO) {
-				setValue(`margin_slabs.${index}.lower_limit`, Number(margin_slabs[index - ONE].upper_limit) + ONE);
-				setValue(`margin_slabs.${index}.limit_currency`, margin_slabs[index - ONE].limit_currency);
+			setValue(
+				`margin_slabs.${index}.limit_currency`,
+				margin_slabs[index]?.margin_values?.[GLOBAL_CONSTANTS.zeroth_index]?.currency,
+			);
+			if (index > GLOBAL_CONSTANTS.zeroth_index) {
+				setValue(
+					`margin_slabs.${index}.lower_limit`,
+					Number(margin_slabs[index - ONE].upper_limit) + ONE,
+				);
+				setValue(
+					`margin_slabs.${index}.limit_currency`,
+					margin_slabs[index - ONE].limit_currency,
+				);
 			} else {
 				setValue(`margin_slabs.${index}.lower_limit`, '0');
 			}
@@ -96,13 +143,13 @@ function Create({ type = 'create', item = {} }) {
 
 	useEffect(() => {
 		margin_slabs?.forEach((_o, index) => {
-			if (index === ZERO) {
+			if (index === GLOBAL_CONSTANTS.zeroth_index) {
 				customFieldArrayControls.margin_slabs[index] = {
 					lower_limit: { disabled: true },
 				};
 			}
 
-			if (index > ZERO) {
+			if (index > GLOBAL_CONSTANTS.zeroth_index) {
 				customFieldArrayControls.margin_slabs[index] = {
 					lower_limit: { disabled: true },
 				};
@@ -121,7 +168,7 @@ function Create({ type = 'create', item = {} }) {
 		}
 	}, [controls, setIdValues, formValues?.service]);
 
-	const handleFormSubmit = getHandleFormSubmit({
+	const { handleFormSubmit = () => { } } = useGetHandleFormSubmit({
 		activeKey,
 		setActiveKey,
 		formValues,
@@ -134,38 +181,122 @@ function Create({ type = 'create', item = {} }) {
 		submitForm,
 	});
 
-	const handleSetActive = (key) => {
-		if (key === 'customize') {
-			setActiveKey(key);
-		} else handleSubmit(() => setActiveKey(key))();
-	};
+	const basicControls = newControls.filter(
+		(ctrl) => !extraControls.some((ctrl2) => ctrl2.name === ctrl.name),
+	);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_wrap}>
-				<div style={{ alignItems: 'center', margin: '16px 0px 32px 0px' }}>
-					<Link href="/margins">
-						<Button themeType="link">
-							<IcMArrowBack style={{ width: '2em', height: '2em', marginRight: '4px' }} />
-							<div className={styles.heading}>Margin Management</div>
-						</Button>
-					</Link>
-
-				</div>
-
-			</div>
-			<div className={styles.heading_button}>
-				{type === 'edit' ? <div className={styles.text}>EDIT MARGIN</div>
-					: <div className={styles.text}>CREATE NEW MARGIN</div>}
+				<Link href="/margins">
+					<Button themeType="link">
+						<IcMArrowBack style={{ width: '2em', height: '2em', marginRight: '4px' }} />
+						<div className={styles.text}>
+							{type === 'edit' ? 'EDIT MARGIN' : 'CREATE MARGIN'}
+						</div>
+					</Button>
+				</Link>
 				{type === 'edit' && (
 					<Button themeType="secondary" onClick={() => setOpenModal(true)}>
 						<IcMDelete
 							style={{ width: '2em', height: '2em', marginRight: '4px' }}
 						/>
-						deactivate
+						DEACTIVATE
 					</Button>
 				)}
 			</div>
+
+			<form onSubmit={handleSubmit(handleFormSubmit)} className={styles.sub_container}>
+				<div className={styles.basic_layout_ontainer}>
+					<Layout
+						controls={basicControls}
+						control={control}
+						fields={fields}
+						errors={errors}
+						showElements={showElements}
+						// customFieldArrayControls={customFieldArrayControls}
+					/>
+
+					{showAdvancedForm ? (
+						<>
+							<Layout
+								controls={extraControls}
+								control={control}
+								fields={fields}
+								errors={errors}
+								showElements={showElements}
+							/>
+							{formValues?.margin_type === 'cogoport' ? (
+								<div style={{ display: 'flex' }}>
+									<CheckboxController
+										control={control}
+										name="is_sales_discount_allowed"
+										label="Is Sales Discount Allowed"
+										disabled={type === 'edit'}
+										value
+										rules={{ required: 'Required' }}
+									/>
+									<CheckboxController
+										control={control}
+										name="is_marketing_discount_allowed"
+										label="Is Marketing Discount Allowed"
+										disabled={type === 'edit'}
+										value
+										rules={{ required: 'Required' }}
+									/>
+								</div>
+							) : null}
+						</>
+					) : null}
+
+					<div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '12px' }}>
+						<Button
+							onClick={() => setShowAdvancedForm(!showAdvancedForm)}
+							disabled={!formValues?.service}
+						>
+							<AdvancedLabel showAdvancedForm={showAdvancedForm} />
+						</Button>
+					</div>
+				</div>
+
+				<div className={styles.hr_line} />
+
+				{formValues.organization_type === 'channel_partner'
+					&& formValues?.service ? (
+						<SubscriptionDiscounts
+							saasPlansData={saasPlansData}
+							selectedService={formValues?.service}
+						/>
+					) : null}
+
+				<Margin
+					key={`${item.id}_${loading}`}
+					idValues={idValues}
+					type={type}
+					service={formValues?.service}
+					marginControls={marginControls}
+					control={control}
+					data={item}
+					watch={watch}
+					setValue={setValue}
+					errors={errors}
+					formValues={formValues}
+					// customFieldArrayControls={customFieldArrayControls}
+					showElements={showElements}
+					loading={loading}
+				/>
+
+				<div className={styles.btn_wrapper}>
+					<Button
+						size="lg"
+						type="submit"
+						onClick={handleSubmit(handleFormSubmit)}
+					>
+						{type === 'edit' ? 'Update margin' : 'Create margin'}
+					</Button>
+				</div>
+			</form>
+
 			{openModal && (
 				<DeactiveModal
 					type="edit"
@@ -174,56 +305,6 @@ function Create({ type = 'create', item = {} }) {
 					openModal={openModal}
 				/>
 			)}
-			<div className={styles.sub_container}>
-				<FunnelStepper
-					className={styles.stepper_container}
-					active={activeKey}
-					setActive={handleSetActive}
-					items={items}
-				/>
-				{
-					activeKey === 'customize' ? (
-						<div>
-							<Layout
-								controls={controls}
-								control={control}
-								fields={fields}
-								errors={errors}
-								showElements={showElements}
-								customFieldArrayControls={customFieldArrayControls}
-							/>
-							<Button
-								onClick={handleSubmit(handleFormSubmit)}
-							>
-								Save and proceed
-							</Button>
-						</div>
-					)
-						: (
-							<div>
-								<Margin
-									idValues={idValues}
-									type={type}
-									service={formValues?.service}
-									marginControls={marginControls}
-									control={control}
-									data={item}
-									watch={watch}
-									errors={errors}
-									customFieldArrayControls={customFieldArrayControls}
-								/>
-								<div className={styles.margin_button}>
-									<Button
-										onClick={handleSubmit(handleFormSubmit)}
-									>
-										{type === 'edit' ? 'update margin' : 'create margin'}
-									</Button>
-								</div>
-							</div>
-						)
-				}
-			</div>
-
 		</div>
 	);
 }

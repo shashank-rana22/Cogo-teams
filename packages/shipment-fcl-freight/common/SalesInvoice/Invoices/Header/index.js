@@ -8,6 +8,8 @@ import EditInvoicePreference from './EditInvoicePreference';
 import ExchangeRate from './ExchangeRate';
 import styles from './styles.module.css';
 
+const INDONESIA_CHINA_COUNTRY_ID = [GLOBAL_CONSTANTS.country_ids.ID, GLOBAL_CONSTANTS.country_ids.CN];
+
 function Header({
 	invoiceData = {},
 	bfInvoiceRefetch = () => {},
@@ -21,11 +23,16 @@ function Header({
 		invoicing_parties,
 		reviewed_invoices,
 	} = invoiceData;
-	const user_data = useSelector(({ profile }) => profile || {});
+
+	const { partner } = useSelector(({ profile }) => ({
+		partner: profile?.partner,
+	}));
+
 	const { shipment_data } = useContext(ShipmentDetailContext) || {};
 
-	const showExchangeRate = [GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id,
-		GLOBAL_CONSTANTS.uuid.santram_gurjar_user_id].includes(user_data?.user?.id);
+	const isAllowedEntity = INDONESIA_CHINA_COUNTRY_ID.includes(partner?.country_id);
+
+	const showExchangeRate = !!shipment_data?.end_to_end_shipment?.is_possible && isAllowedEntity;
 
 	const refetch = () => {
 		bfInvoiceRefetch();

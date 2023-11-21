@@ -81,14 +81,18 @@ function UpdateModal({
 						/>
 					</div>
 					<div className={styles.controller}>
-						<div className={styles.label}>
-							Allowed Locations
-						</div>
-						<AsyncSelect
-							{...EMPLOYEE_LIST_CONTROLS.location}
-							onChange={(e) => setFilters((prev) => ({ ...prev, location_ids: e }))}
-							value={filters.location_ids}
-						/>
+						{filters.is_active !== 'inactive' ?	(
+							<>
+								<div className={styles.label}>
+									Allowed Locations
+								</div>
+								<AsyncSelect
+									{...EMPLOYEE_LIST_CONTROLS.location}
+									onChange={(e) => setFilters((prev) => ({ ...prev, location_ids: e }))}
+									value={filters.location_ids}
+								/>
+							</>
+						) : null}
 					</div>
 				</div>
 			</Modal.Body>

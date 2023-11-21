@@ -7,45 +7,72 @@
 .header {
 	min-height: 300px;
 	padding: 24px 40px;
+	margin: -24px -40px;
 	background: #f7f9f9;
 
-	@media (max-width: 950px) {
-		min-height: 320px;
-	}
 	@media (max-width: 768px) {
-		min-height: 400px;
+		min-height: 440px;
+		padding: 70px 24px 24px;
+		margin: -24px;
+	}
+}
+
+.wrapper {
+	padding: 24px 40px;
+
+	&.disabled {
+		pointer-events: none;
+		opacity: 0.5;
+	}
+
+	@media (max-width: 768px) {
+		padding: 24px;
 	}
 }
 
 .mode_selection {
-	display: inline-block;
-	padding: 24px 40px;
-	margin-top: -100px;
+	margin-top: -80px;
 
-	@media (max-width: 950px) {
-		margin-top: -120px;
+	@media (max-width: 768px) {
+		margin-top: -70px;
 	}
 }
 
 .locations {
-	padding: 24px 40px;
-}
-
-.sales_dashboard {
-	padding: 24px 40px;
-}
-
-.other_services {
-	padding: 24px 40px;
+	margin: 40px 0 60px;
 }
 
 .scope_select {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+
+	@media (max-width: 768px) {
+		justify-content: space-between;
+	}
 }
 
 .label {
 	margin-right: 8px;
 	font-weight: 600;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.animation_div {
+	animation: top-animation 0.5s ease-in-out;
+}
+
+@keyframes top-animation {
+	0% {
+		opacity: 0;
+		transform: translateY(-40px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }

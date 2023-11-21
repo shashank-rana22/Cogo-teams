@@ -21,6 +21,7 @@ function TeamChats(props) {
 		activeTab = {},
 		listCogooneGroupMembers = () => {},
 		membersList = [],
+		isMobile = false,
 	} = props || {};
 
 	const conversationsDivRef = useRef(null);
@@ -32,14 +33,13 @@ function TeamChats(props) {
 	const {
 		group_id = '',
 		id = '',
-		is_draft = false,
 	} = data || {};
 
-	const { group_members_ids = [], last_group_updated_at = 0 } = groupData || {};
+	const { group_members_ids = [], last_group_updated_at = 0, is_group = false } = groupData || {};
 
-	const isGroup = group_members_ids?.length > GROUP_MEMBERS_MIN;
+	const isGroup = (group_members_ids?.length > GROUP_MEMBERS_MIN) || is_group;
 
-	const hasPermissionToEdit = (id || group_id) && (is_draft || group_members_ids?.includes(loggedInUserId));
+	const hasPermissionToEdit = (id || group_id);
 
 	const { loading = false } = useFetchGlobalRoom({
 		firestore,
@@ -73,6 +73,7 @@ function TeamChats(props) {
 					hasPermissionToEdit={hasPermissionToEdit}
 					setLoadingDraft={setLoadingDraft}
 					loadingDraft={loadingDraft}
+					isMobile={isMobile}
 				/>
 			</div>
 			<div className={styles.messages}>
@@ -95,6 +96,7 @@ function TeamChats(props) {
 					firestore={firestore}
 					internalRoomId={group_id}
 					scrollToLastMessage={scrollToLastMessage}
+					isMobile={isMobile}
 				/>
 			</div>
 		</div>

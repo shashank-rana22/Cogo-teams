@@ -24,6 +24,11 @@ const ingestion = [
 		access_type  : 'private',
 		service_name : 'ingestion',
 	},
+	{
+		api          : 'get_ingestion_stats',
+		access_type  : 'private',
+		service_name : 'ingestion',
+	},
 ];
 
 export default ingestion;

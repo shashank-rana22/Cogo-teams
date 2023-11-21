@@ -1,0 +1,193 @@
+.container {
+	padding: 60px 24px 75px;
+	overflow: hidden;
+	color: #fff;
+	background: url("https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/BackgroundGi.svg");
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	/* background: #21212c; */
+	border-radius: 4px;
+}
+
+.data_container {
+	position: relative;
+	z-index: 2;
+	overflow: hidden;
+}
+
+.header_flex {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header_right_flex {
+	display: flex;
+	align-items: center;
+	overflow: auto;
+}
+
+.header_right_flex::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+
+.header_title {
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.user_left_flex {
+	display: flex;
+	align-items: center;
+}
+
+.header_data_flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
+
+	@media (max-width: 768px) {
+		display: block;
+	}
+}
+
+.name_avatar_photo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 50px;
+	height: 50px;
+	border-radius: 100px;
+}
+
+.name_avatar {
+	padding: 10px;
+	font-size: 20px;
+	color: #fff;
+	background: #f68b21;
+	background-color: #f68b21;
+	border-radius: 100px;
+}
+
+.user_name_text {
+	font-size: 20px;
+}
+
+.date_text {
+	font-size: 14px;
+	color: #e0e0e0;
+}
+
+.greetings {
+	margin-left: 12px;
+}
+
+.header_data_right_flex {
+	display: flex;
+	align-items: center;
+	overflow: auto;
+
+	:global {
+		.ui_button_container {
+			min-width: 85px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			background-color: transparent;
+			border: 1px solid #e0e0e0;
+			border-radius: 6px;
+		}
+
+		.ui_button_container:hover {
+			background-color: transparent;
+		}
+	}
+
+	.mr_12:not(:last-child) {
+		margin-right: 12px;
+	}
+
+	@media (max-width: 768px) {
+		margin-top: 20px;
+	}
+}
+
+.header_data_right_flex::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+
+.rectangle1 {
+	position: absolute;
+	top: 14%;
+	left: 50%;
+	transform: translate(-88%, -50%);
+}
+
+.rectangle2 {
+	position: absolute;
+	top: 2%;
+	left: 50%;
+	transform: translate(30%, -50%);
+}
+
+.rectangle3 {
+	position: absolute;
+	top: 15%;
+	right: 22%;
+}
+
+.rectangle4 {
+	position: absolute;
+	top: 3%;
+	right: 0;
+	overflow: hidden;
+}
+
+.diwali_png {
+	position: absolute;
+	top: 50px;
+	right: 32px;
+	z-index: 3;
+	width: 90px;
+}
+
+.diwali_png_img {
+	width: 100%;
+}
+
+@media (max-width: 767px) {
+	.header_data_flex,
+	.header_data_right_flex {
+		flex-direction: column;
+		gap: 12px;
+
+		button {
+			width: 100%;
+		}
+	}
+
+	.header_data_right_flex {
+		width: 100%;
+
+		.mr_12:not(:last-child) {
+			margin-right: 0;
+		}
+	}
+
+	.rectangle1,
+	.rectangle2,
+	.rectangle3,
+	.rectangle4 {
+		display: none;
+	}
+
+	.header_title {
+		margin-bottom: 8px;
+	}
+}

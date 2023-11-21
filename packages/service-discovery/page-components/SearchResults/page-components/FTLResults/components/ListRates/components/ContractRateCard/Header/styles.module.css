@@ -1,0 +1,59 @@
+.contract {
+	position: relative;
+	display: flex;
+	align-items: center;
+	padding-top: 20px;
+	margin-bottom: 14px;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.contract_tag {
+	padding: 4px 6px;
+	margin-right: 12px;
+	font-size: 11px;
+	background: #fef199;
+	border-radius: 4px;
+}
+
+.trip_type_container {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.ui_checkbox_container {
+			padding-left: 0;
+		}
+	}
+}
+
+.trip_type_icon {
+	font-size: 20px;
+
+	&.one_way {
+		transform: rotate(90deg);
+	}
+}
+
+.trip_type_label {
+	margin-left: 8px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.rate_type_pill {
+	position: absolute;
+	top: -20px;
+	left: -16px;
+	padding: 3px 6px;
+	font-size: 12px;
+	font-weight: 400;
+	background: #f9f9f9;
+	border-right: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e0e0e0;
+	border-radius: 8px 0;
+
+	@media (max-width: 768px) {
+		font-size: 10px;
+	}
+}

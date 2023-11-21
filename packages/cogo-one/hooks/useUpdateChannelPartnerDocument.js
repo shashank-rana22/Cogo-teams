@@ -2,11 +2,11 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const getPayload = ({ status = '', id = '', rejectReason = '', partnerId = '' }) => ({
+const getPayload = ({ status = '', id = '', otherReason = '', partnerId = '' }) => ({
 	document_id         : id,
 	partner_id          : partnerId,
 	verification_status : status,
-	rejection_reason    : rejectReason || undefined,
+	rejection_reason    : otherReason || undefined,
 });
 
 const useUpdateChannelPartnerDocument = ({
@@ -19,14 +19,15 @@ const useUpdateChannelPartnerDocument = ({
 		method : 'POST',
 	}, { manual: true });
 
-	const updateCpDocument = async ({ id = '', status = '', rejectReason = '', partnerId = '' }) => {
+	const updateCpDocument = async ({ id = '', status = '', otherReason = '', partnerId = '' }) => {
 		try {
 			await trigger({
-				data: getPayload({ id, status, rejectReason, partnerId }),
+				data: getPayload({ id, status, otherReason, partnerId }),
 			});
 			setRejectAccount({
 				show         : false,
-				rejectReason : '',
+				rejectReason : [],
+				otherReason  : '',
 			});
 			setVerifyAccount({
 				show               : false,

@@ -66,6 +66,7 @@ import {
 	IcASecureCloudStorage,
 	IcMUpwardGraph,
 	IcMAppProfile,
+	IcMAppPayment,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -651,8 +652,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		margin: {
 			key           : 'margin',
 			title         : t('common:margin_management'),
-			href          : '/margins',
-			as            : '/margins',
+			href          : '/v2/margins',
+			as            : '/v2/margins',
 			type          : 'link',
 			possible_apis : apis.margin,
 			icon          : IcMMarginManagement,
@@ -1257,7 +1258,7 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/booking-desk/air',
 					type          : 'link',
 					main_apis     : ['list_shipments'],
-					possible_apis : [...apis.shipment],
+					possible_apis : [...apis.shipment, ...apis.cargo_insurance],
 				},
 				{
 					key           : 'coe-bn_salvage',
@@ -2140,6 +2141,15 @@ const navigationMapping = ({ t = () => {} }) => {
 					main_apis     : [],
 					possible_apis : apis.cogo_one_dashboard,
 				},
+				{
+					key           : 'cogo_one-sme_dashboard',
+					title         : t('common:sme_dashboard'),
+					href          : '/v2/cogo-one/sme-dashboard',
+					as            : '/v2/cogo-one/sme-dashboard',
+					type          : 'link',
+					main_apis     : [],
+					possible_apis : apis.cogo_one_sme_dashboard,
+				},
 			],
 			module_type: 'dashboards',
 		},
@@ -2727,6 +2737,53 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.profile,
 			icon          : IcMAppProfile,
 		},
+		payroll: {
+			key           : 'payroll',
+			title         : 'Payroll',
+			icon          : IcMAppPayment,
+			href          : '/v2/payroll',
+			as            : '/v2/payroll',
+			type          : 'link',
+			module_type   : 'dashboards',
+			possible_apis : apis.payroll,
+			isSubNavs     : true,
+			options       : [
+				{
+					key           : 'payroll',
+					title         : 'Payroll',
+					icon          : IcMAppPayment,
+					href          : '/v2/payroll',
+					as            : '/v2/payroll',
+					type          : 'link',
+					module_type   : 'dashboards',
+					possible_apis : apis.payroll,
+
+				},
+			],
+		},
+		finance_payroll: {
+			key           : 'finance_payroll',
+			title         : 'Finance Payroll',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			href          : '/v2/finance-payroll',
+			as            : '/v2/finance-payroll',
+			possible_apis : apis.finance_payroll,
+			icon          : IcMMoney,
+		},
+		payment: {
+			key           : 'payment',
+			title         : 'Payment',
+			icon          : IcMAppPayment,
+			href          : '/v2/payment',
+			as            : '/v2/payment',
+			type          : 'link',
+			module_type   : 'dashboards',
+			possible_apis : apis.payment,
+			isSubNavs     : false,
+			main_apis     : [],
+		},
 		cargo_insurance: {
 			key           : 'cargo_insurance',
 			title         : 'Cargo Insurance',
@@ -2748,7 +2805,17 @@ const navigationMapping = ({ t = () => {} }) => {
 			possible_apis : apis.cogo_store,
 			icon          : IcAWarehouse,
 		},
-
+		hrms: {
+			key           : 'hrms',
+			title         : 'HRMS',
+			isSubNavs     : false,
+			module_type   : 'dashboards',
+			main_apis     : [],
+			href          : '/v2/hrms',
+			as            : '/v2/hrms',
+			possible_apis : apis.HRMS_DASHBOARD,
+			icon          : IcAWarehouse,
+		},
 	};
 
 	return navigationMappingAdmin;

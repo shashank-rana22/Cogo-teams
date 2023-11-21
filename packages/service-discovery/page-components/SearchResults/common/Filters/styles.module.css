@@ -1,4 +1,6 @@
 .container {
+	position: relative;
+
 	:global {
 		.ui_button_container.ui_disabled {
 			color: var(--color-secondary-greyscale-4) !important;
@@ -12,6 +14,10 @@
 	align-items: center;
 	margin-right: 10px;
 	margin-left: 10px;
+
+	@media (max-width: 768px) {
+		margin: 0;
+	}
 }
 
 .tick_icon {
@@ -19,4 +25,18 @@
 	height: 20px;
 	margin-left: 2px;
 	color: #ee3425;
+}
+
+.count {
+	position: absolute;
+	top: 80%;
+	left: 38%;
+	width: max-content;
+	font-size: 10px;
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-3);
+
+	@media (max-width: 768px) {
+		font-size: 8px;
+	}
 }

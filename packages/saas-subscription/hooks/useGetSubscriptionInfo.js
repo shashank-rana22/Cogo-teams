@@ -41,12 +41,12 @@ const useGetSubscriptionInfo = ({ editModal = {}, setEditModal }) => {
 		}
 	}, [apiCall, customerSubId, refetchSubscriptionInfo]);
 
-	const editModalChangeHandler = (key, value) => {
+	const editModalChangeHandler = ({ activeComp, extraInfo }) => {
 		setEditModal((prev) => ({
 			...prev,
 			openEditFeatureModal : true,
-			[key]                : true,
-			featureInfo          : value,
+			activeComp,
+			extraInfo,
 			apiCall              : false,
 		}));
 	};

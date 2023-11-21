@@ -6,6 +6,11 @@
 	svg {
 		cursor: pointer;
 	}
+
+	@media (max-width: 576px) {
+		width: calc(100% - 50px);
+		cursor: pointer;
+	}
 }
 
 .name {

@@ -6,9 +6,10 @@ import { useState } from 'react';
 
 import { getRecipientData } from '../../helpers/getRecipientData';
 import useGetSignature from '../../hooks/useGetSignature';
+import MailAttachments from '../../page-components/CogoOneChannel/Conversations/MailConversation/MailAttachment';
 
 import MailActions from './mailActions';
-import MailAttachments from './MailAttachments';
+import DraftMailAttachments from './MailAttachments';
 import MailHeader from './MailHeader';
 import MessageDetails from './MessageDetails';
 import styles from './styles.module.css';
@@ -62,6 +63,9 @@ function MailBody({
 	fullThread = '',
 	expandedStateId = '',
 	activeMessageCard = {},
+	attachmentData = {},
+	attachmentLoading = false,
+	isMobile = false,
 }) {
 	const [loading, setLoading] = useState(false);
 	const [modalData, setModalData] = useState(null);
@@ -77,6 +81,7 @@ function MailBody({
 		is_draft: isDraft = false,
 		email_status: emailStatus = '',
 		id = '',
+		conversation_type = '',
 	} = eachMessage || {};
 
 	const {
@@ -129,6 +134,8 @@ function MailBody({
 
 	const expandedState = expandedStateId === id;
 
+	const isSentFromPlatform = conversation_type === 'received';
+
 	return (
 		<div className={styles.email_container}>
 			<div className={styles.send_by_name}>
@@ -154,9 +161,25 @@ function MailBody({
 					modalData={modalData}
 					activeMessageCard={activeMessageCard}
 					viewType={viewType}
+					isMobile={isMobile}
 				/>
 
-				<MailAttachments mediaUrls={isEmpty(media_url) ? attachments : media_url} />
+				{(!isDraft && expandedState && !isSentFromPlatform)
+					? (
+						<MailAttachments
+							attachmentData={attachmentData}
+							loading={expandLoading || attachmentLoading}
+							isMobile={isMobile}
+						/>
+					) : null}
+
+				{(isDraft || isSentFromPlatform)
+					? (
+						<DraftMailAttachments
+							isMobile={isMobile}
+							mediaUrls={isEmpty(media_url) ? attachments : media_url}
+						/>
+					) : null}
 
 				{(!expandLoading && expandedState && fullThread) ? (
 					<div
@@ -175,6 +198,9 @@ function MailBody({
 						handleClick={handleClick}
 						isDraft={isDraft}
 						loading={loading}
+						emailStatus={emailStatus}
+						isMobile={isMobile}
+						isDraftAlreadySent={!!eachMessage?.communication_id}
 					/>
 				) : null}
 

@@ -1,5 +1,5 @@
 import { Popover, Button, cl } from '@cogoport/components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import useCreateNewUser from '../../../../../../../hooks/useCreateNewUser';
 import getElementController from '../../../../../../forms/getElementController';

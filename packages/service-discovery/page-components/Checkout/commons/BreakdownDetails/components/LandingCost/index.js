@@ -44,7 +44,7 @@ function LandingCost({
 		handlingFeesCurrency,
 		total_price_currency,
 		conversions,
-	);
+	) || 0;
 
 	const otherChargesPrice = otherCharges.reduce((acc, { total_price_discounted = 0, currency: chargesCurrency }) => {
 		if (total_price_discounted) {

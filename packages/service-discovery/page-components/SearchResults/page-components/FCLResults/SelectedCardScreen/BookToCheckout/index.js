@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick } from '@cogoport/icons-react';
-import React from 'react';
 
 import useCreateCheckout from '../../../../hooks/useCreateCheckout';
 
@@ -39,7 +38,7 @@ function BookCheckout({ data = {} }) {
 								options  : {
 									style                 : 'currency',
 									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
+									maximumFractionDigits : 2,
 								},
 							})}
 						</strong>

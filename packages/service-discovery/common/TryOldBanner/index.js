@@ -1,7 +1,7 @@
 import { Button, cl } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 

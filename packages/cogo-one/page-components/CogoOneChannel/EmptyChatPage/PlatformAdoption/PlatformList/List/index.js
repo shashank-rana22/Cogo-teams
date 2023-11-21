@@ -52,7 +52,8 @@ function List({
 	});
 	const [rejectAccount, setRejectAccount] = useState({
 		show         : false,
-		rejectReason : '',
+		rejectReason : [],
+		otherReason  : '',
 	});
 	const [selectDoc, setSelectDoc] = useState({
 		docType : '',
@@ -84,7 +85,7 @@ function List({
 		onboardingRequest,
 	});
 
-	const handlePlaceCall = ({ number, code, userName, leadUserId, pocId }) => {
+	const handlePlaceCall = ({ number, code, userName, leadUserId, pocId, leadOrgId, orgId }) => {
 		if (!number) {
 			Toast.error('Mobile number is invalid');
 			return;
@@ -95,14 +96,14 @@ function List({
 				is_in_voice_call          : true,
 				voice_call_recipient_data : {
 					startTime            : new Date(),
-					orgId                : null,
+					orgId,
 					userId               : pocId,
 					mobile_number        : number,
 					mobile_country_code  : code,
 					userName,
 					isUnkownUser         : !pocId,
 					lead_user_id         : leadUserId,
-					lead_organization_id : null,
+					lead_organization_id : leadOrgId,
 				},
 			}),
 		);

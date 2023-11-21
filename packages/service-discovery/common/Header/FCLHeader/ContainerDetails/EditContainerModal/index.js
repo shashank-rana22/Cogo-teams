@@ -5,7 +5,6 @@ import { useRouter } from '@cogoport/next';
 import fclControls from '../../../../../page-components/SearchResults/configurations/fcl/form-controls';
 import getPrefillForm from '../../../../../page-components/SearchResults/utils/getPrefillForm';
 import getLocationInfo from '../../../../../page-components/SearchResults/utils/locations-search';
-import useCreateSearch from '../../../../../page-components/ServiceDiscovery/SpotSearch/hooks/useCreateSearch';
 
 import Form from './Form';
 import styles from './styles.module.css';
@@ -18,12 +17,11 @@ function EditContainerModal({
 	setShow = () => {},
 	setRouterLoading = () => {},
 	data = {},
+	createLoading = false,
+	createSearch = () => {},
+	isMobile = false,
 }) {
-	const { createSearch, loading } = useCreateSearch();
-
 	const router = useRouter();
-
-	const controls = fclControls();
 
 	const defaultValues = getPrefillForm(data, SERVICE_KEY);
 
@@ -34,6 +32,8 @@ function EditContainerModal({
 		handleSubmit,
 		setValue,
 	} = useForm({ defaultValues });
+
+	const controls = fclControls({ setValue });
 
 	const { origin = {}, destination = {} } = getLocationInfo(data, {}, SERVICE_KEY);
 
@@ -70,13 +70,15 @@ function EditContainerModal({
 		setShow(false);
 	};
 
+	const onClose = () => setShow(false);
+
 	return (
 		<Modal
 			animate
 			size="md"
 			show={show}
-			onClose={() => setShow(false)}
-			placement="right"
+			onClose={onClose}
+			placement={isMobile ? 'bottom' : 'right'}
 			className={styles.modal}
 		>
 			<Modal.Body>
@@ -87,6 +89,8 @@ function EditContainerModal({
 					errors={errors}
 					watch={watch}
 					setValue={setValue}
+					onClose={onClose}
+					isMobile={isMobile}
 				/>
 			</Modal.Body>
 
@@ -96,8 +100,8 @@ function EditContainerModal({
 					size="xl"
 					themeType="accent"
 					className={styles.button}
-					loading={loading}
-					disabled={loading}
+					loading={createLoading}
+					disabled={createLoading}
 					onClick={handleSubmit(handleApply)}
 				>
 					Apply Changes

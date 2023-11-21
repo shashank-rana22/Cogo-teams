@@ -200,7 +200,7 @@ function asyncFieldsListAgents() {
 		initialCall : true,
 		params      : {
 			page_limit : 20,
-			sort_by    : 'active_assigned_chats',
+			sort_by    : 'chat_assigned_at',
 			sort_type  : 'asc',
 		},
 	};
@@ -1355,6 +1355,33 @@ function asyncInsuranceHsCode() {
 	};
 }
 
+function asyncListSalaryBands() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_salary_bands',
+		initialCall : true,
+	};
+}
+
+function asyncListTransactionType() {
+	return {
+		valueKey    : 'name',
+		labelKey    : 'name',
+		endpoint    : 'list_transaction_type',
+		initialCall : true,
+	};
+}
+function asyncListSalaryConfigurations() {
+	return {
+		initialCall : true,
+		valueKey    : 'id',
+		labelKey    : 'description',
+		endpoint    : 'list_salary_configurations',
+
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1467,4 +1494,7 @@ export {
 	asyncListHaulageRateFeedback,
 	asyncListAirCustomFeedback,
 	asyncInsuranceHsCode,
+	asyncListSalaryConfigurations,
+	asyncListSalaryBands,
+	asyncListTransactionType,
 };

@@ -15,6 +15,7 @@ function NewWhatsappMessage({
 	setModalType = () => {},
 	modalType = {},
 	viewType = '',
+	isMobile = false,
 }) {
 	const [openCreateReply, setOpenCreateReply] = useState(false);
 
@@ -92,6 +93,7 @@ function NewWhatsappMessage({
 				key={type}
 				userName={userName}
 				viewType={viewType}
+				isMobile={isMobile}
 			/>
 		</Modal>
 	);

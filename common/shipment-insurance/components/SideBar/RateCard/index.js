@@ -51,7 +51,15 @@ function RateCard({ rateResponse = [], cargoDetails = {}, formHook = {} }) {
 							alt={serviceProvider}
 						/>
 						<h3 className={styles.total_price}>
-							{getFormatedAmount({ currency: chargeCurrency, value: netCharges })}
+							{loading
+								? (
+									<Image
+										width={60}
+										height={30}
+										alt="loading"
+										src={GLOBAL_CONSTANTS.image_url.loading}
+									/>
+								) : getFormatedAmount({ currency: chargeCurrency, value: netCharges })}
 						</h3>
 					</div>
 				</div>

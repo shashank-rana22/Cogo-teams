@@ -29,7 +29,7 @@ function SalesFunnel({
 		settledPercentage = '',
 	} = salesFunnelData || {};
 
-	const { irn_label: irnLabel } = ENTITY_FEATURE_MAPPING[entityCode].labels;
+	const { irn_label: irnLabel } = ENTITY_FEATURE_MAPPING[entityCode]?.labels || {};
 
 	const salesFunnel = [
 		{

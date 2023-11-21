@@ -1,0 +1,16 @@
+.sad_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 12px 0;
+	margin-top: 20px;
+	border-radius: 4px;
+	box-shadow: 0 0 6px rgb(0 0 0 / 15%);
+
+	p {
+		margin-top: 8px;
+		color: var(--color-secondary-1);
+	}
+}

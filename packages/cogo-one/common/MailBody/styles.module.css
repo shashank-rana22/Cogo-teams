@@ -5,6 +5,10 @@
 	background: #fff;
 	border: 1px solid #e0e0e0;
 	border-radius: 6px;
+
+	@media (max-width: 576px) {
+		padding: 10px 8px;
+	}
 }
 
 .draft {
@@ -73,6 +77,10 @@
 	margin-left: 4px;
 	font-size: 13px;
 	color: #221f20;
+
+	@media (max-width: 576px) {
+		font-size: 10px;
+	}
 }
 
 .send_by_name {
@@ -113,6 +121,11 @@
 
 	&:hover {
 		font-weight: 500;
+	}
+
+	@media (max-width: 576px) {
+		bottom: 42px;
+		font-size: 10px;
 	}
 }
 

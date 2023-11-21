@@ -1,0 +1,45 @@
+.grey_container {
+	padding: 16px 12px;
+	background: #f9f9f9;
+	border-radius: 16px;
+}
+
+.grey_container > :not(:last-child) {
+	margin-bottom: 24px;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.flex > :not(:last-child) {
+	margin-right: 12px;
+}
+
+.top_text_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.top_bold_text {
+	font-size: 24px;
+	font-weight: 500;
+	color: #221f20;
+	text-align: center;
+}
+
+.top_grey_text {
+	font-style: normal;
+	color: #4f4f4f;
+}
+
+.buttons_div {
+	display: flex;
+	flex-direction: row;
+}
+
+.header_button {
+	margin: 0 8px;
+}

@@ -1,0 +1,18 @@
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 320px;
+	height: 250px;
+	overflow: auto;
+}
+
+.container::-webkit-scrollbar {
+	display: none;
+}
+
+.emoji_button {
+	margin: 3px;
+	font-size: 20px;
+	cursor: pointer;
+}

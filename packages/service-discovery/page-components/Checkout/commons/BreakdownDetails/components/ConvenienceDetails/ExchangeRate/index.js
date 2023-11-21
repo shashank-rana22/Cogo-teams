@@ -34,7 +34,7 @@ function ExchangeRate({ conversions = {}, rate = {}, detail = {}, getCheckout = 
 		cogofx_currencies = {},
 		cogofx_supporting_doc = '',
 		source_supporting_doc = '',
-	} = conversions;
+	} = conversions || {};
 
 	const main_service = Object.values(services).find(
 		(item) => item.service_type === primary_service,
@@ -61,7 +61,8 @@ function ExchangeRate({ conversions = {}, rate = {}, detail = {}, getCheckout = 
 	}
 
 	if (currency === base_currency) {
-		currency_conversion = currencies?.USD || cogofx_currencies?.USD || '';
+		currency_conversion = currencies[geo.country.currency.code]
+		|| cogofx_currencies[geo.country.currency.code] || '';
 	}
 
 	let options = [];
@@ -82,20 +83,18 @@ function ExchangeRate({ conversions = {}, rate = {}, detail = {}, getCheckout = 
 				{' '}
 				{currency !== base_currency
 					? currency
-					: GLOBAL_CONSTANTS.currency_code.USD}
+					: geo.country.currency.code}
 				{' '}
 				=
 				{' '}
 				{formatAmount({
-					amount: Number(currency_conversion).toFixed(ROUNDOFF_VALUE),
-					currency:
-							currency !== base_currency
-								? base_currency
-								: geo.country.currency.code,
-					options: {
+					amount   : Number(currency_conversion).toFixed(ROUNDOFF_VALUE),
+					currency : base_currency,
+					options  : {
 						style                 : 'currency',
 						currencyDisplay       : 'code',
-						minimumFractionDigits : 2,
+						minimumFractionDigits : 0,
+						maximumFractionDigits : 4,
 					},
 				})}
 			</div>

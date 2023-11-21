@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
-import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
-import { useContext, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import FormItem from '../common/FormItems';
 import { getRegistrationControls } from '../configurations/insuranceControls';
@@ -15,11 +14,7 @@ import FormFields from './FormFields';
 import SideBar from './SideBar';
 import styles from './styles.module.css';
 
-function CargoInsurance({ onCancel = () => {}, refetch = () => {} }) {
-	const { servicesList } = useContext(
-		ShipmentDetailContext,
-	);
-
+function CargoInsurance({ onCancel = () => {}, refetch = () => {}, servicesList = [] }) {
 	const [billingType, setBillingType] = useState('Corporate');
 
 	const formRef = useRef({});
@@ -66,7 +61,6 @@ function CargoInsurance({ onCancel = () => {}, refetch = () => {} }) {
 					<Address
 						draftData={draftData}
 						billingType={billingType}
-						setBillingType={setBillingType}
 						orgId={draftData?.organizationId}
 						ref={(r) => { formRef.current.address = r; }}
 					/>
