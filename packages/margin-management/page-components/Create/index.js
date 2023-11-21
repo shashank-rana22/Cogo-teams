@@ -78,7 +78,9 @@ function Create({ type = 'create', item = {} }) {
 		setValue,
 	});
 
-	const { loading = false } = useGetChargeCodes({ service: formValues?.service, setChargeCodes });
+	const { loading = false } = useGetChargeCodes({
+		service: formValues?.service, setChargeCodes,
+	});
 
 	const marginControls = getMarginControls({ service: formValues?.service, chargeCodes });
 
@@ -114,8 +116,9 @@ function Create({ type = 'create', item = {} }) {
 			extraControls.forEach((elem) => {
 				setValue(elem?.name, newItem?.[elem.name]);
 			});
+			setValue('margin_slabs', item?.margin_slabs);
 		}
-	}, [extraControls, item, setValue, showAdvancedForm]);
+	}, [extraControls, item, setValue, showAdvancedForm, loading]);
 
 	useEffect(() => {
 		margin_slabs?.forEach((_o, index) => {
@@ -267,7 +270,7 @@ function Create({ type = 'create', item = {} }) {
 					) : null}
 
 				<Margin
-					key={item.id}
+					key={`${item.id}_${loading}`}
 					idValues={idValues}
 					type={type}
 					service={formValues?.service}
