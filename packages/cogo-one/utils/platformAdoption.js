@@ -39,7 +39,7 @@ export const getTradePartyPayload = ({ orgId = '', type = '', otherReason = '' }
 });
 
 export const getPayload = ({
-	description = '', end_time = '',
+	description = '', end_date = '', end_time = '', start_date = '',
 	start_time = '', subject = '', lead_organization_id = '',
 	lead_user_id = '', user_id = '', organization_id = '',
 }) => ({
@@ -55,9 +55,9 @@ export const getPayload = ({
 	frequency       : 'one_time',
 	tags            : ['demo_request'],
 	recurrence_rule : { type: 'normal' },
-	validity_start  : start_time,
+	validity_start  : start_date,
 	start_time,
-	validity_end    : end_time,
+	validity_end    : end_date,
 	end_time,
 
 });
