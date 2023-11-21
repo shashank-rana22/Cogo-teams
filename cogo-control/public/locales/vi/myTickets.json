@@ -176,5 +176,7 @@
     "serial_id": "ID nối tiếp",
     "id_creator": "Người tạo ID",
     "messaged_at":"Nhắn tin tại",
-    "unread_message": "Tin nhắn chưa đọc"
+    "unread_message": "Tin nhắn chưa đọc",
+    "select_missing_id":"Chọn Thiếu ID",
+    "select_dislike_id":"Chọn ID không thích"
 }
