@@ -28,8 +28,16 @@ const COLUMNS = [
 	},
 	{
 		id       : 'organization_name',
-		Header   : 'ORGANIZATION NAME',
-		accessor : (item) => <div className={styles.label}>{startCase(item?.organization?.business_name) || '-'}</div>,
+		Header   : 'ORGANIZATION/USER',
+		accessor : (item) => (
+			<div className={styles.label}>
+				{startCase(item?.organization?.business_name)
+				|| startCase(item?.lead_organization?.business_name)
+				|| startCase(item?.user?.name)
+				|| startCase(item?.lead_user?.name)
+				|| '-'}
+			</div>
+		),
 	},
 	{
 		id       : 'request_type',
