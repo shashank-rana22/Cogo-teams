@@ -589,6 +589,7 @@ export default {
 					is_invoice_mergeable              : true,
 					disable_edit_invoice              : false,
 					stakeholder_wise_invoice_required : false,
+					is_purchase_visible_to_kam        : false,
 				},
 			},
 
