@@ -28,7 +28,7 @@ function DefaultMargins({
 	}
 
 	return (
-		<div>
+		<div key={filterParams}>
 			{(data?.list || []).map((item) => (
 				<Details
 					showContainerDetails

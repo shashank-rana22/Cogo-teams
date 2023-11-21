@@ -21,6 +21,7 @@ function useGetDefaultMargins({
 					agent_id              : selected_agent_id || undefined,
 					status                : 'active',
 					...(filterParams),
+					margin_type           : filterParams?.margin_type,
 					service               : activeService,
 					is_partner_id_present : false,
 					page                  : undefined,
@@ -45,6 +46,7 @@ function useGetDefaultMargins({
 		apiTrigger();
 	}, [
 		apiTrigger,
+		filterParams,
 		authParams,
 		selected_agent_id,
 		activeService,

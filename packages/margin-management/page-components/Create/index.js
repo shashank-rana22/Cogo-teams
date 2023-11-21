@@ -116,9 +116,8 @@ function Create({ type = 'create', item = {} }) {
 			extraControls.forEach((elem) => {
 				setValue(elem?.name, newItem?.[elem.name]);
 			});
-			setValue('margin_slabs', item?.margin_slabs);
 		}
-	}, [extraControls, item, setValue, showAdvancedForm, loading]);
+	}, [extraControls, item, setValue, loading]);
 
 	useEffect(() => {
 		margin_slabs?.forEach((_o, index) => {
