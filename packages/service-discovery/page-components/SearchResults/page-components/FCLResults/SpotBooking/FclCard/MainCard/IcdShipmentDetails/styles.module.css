@@ -1,0 +1,54 @@
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	padding: 12px 24px 6px 6px;
+	margin-left: 20px;
+	font-size: 12px;
+	border: 1px dashed #6fa5ab;
+	border-radius: 4px;
+
+	&.error {
+		border: 1px dashed #ee3425;
+		animation: bounce 2s infinite;
+	}
+}
+
+.item {
+	display: flex;
+	align-items: center;
+	font-size: 10px;
+}
+
+.value {
+	margin-right: 4px;
+}
+
+.edit_container {
+	position: absolute;
+	top: 2px;
+	right: 4px;
+	display: flex;
+	align-items: center;
+	font-size: 10px;
+	color: #888fd1;
+	cursor: pointer;
+}
+
+@keyframes bounce {
+	0%,
+	20%,
+	50%,
+	80%,
+	100% {
+		transform: translateY(0);
+	}
+
+	40% {
+		transform: translateY(-10px);
+	}
+
+	60% {
+		transform: translateY(-5px);
+	}
+}

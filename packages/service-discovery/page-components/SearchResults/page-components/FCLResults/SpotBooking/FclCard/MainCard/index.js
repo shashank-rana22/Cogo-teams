@@ -11,6 +11,7 @@ import useGetSailingSchedules from '../../hooks/useGetSailingSchedules';
 
 import { fclControls } from './controls';
 import getDetails from './getDetails';
+import IcdShipmentDetails from './IcdShipmentDetails';
 import StyledLabel from './StyledLabel';
 import styles from './styles.module.css';
 
@@ -134,6 +135,13 @@ function MainCard({ shippingLines = [], detail = {}, formProps = {}, watch = () 
 						label="Add custom departure & arrival"
 						style={{ marginLeft: '24px' }}
 						value={false}
+					/>
+
+					<IcdShipmentDetails
+						detail={detail}
+						control={control}
+						errors={errors}
+						watch={watch}
 					/>
 				</div>
 
