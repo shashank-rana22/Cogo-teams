@@ -44,13 +44,15 @@ function ShipmentDataModal({
 			placement="top"
 		>
 			<Modal.Header title="Shipment Plan Data" />
-			{loading && <Header />}
-			{!loading && (shipment_plan_data || []).map((value) => (
-				<Modal.Body key={value?.id}>
-					<div className={styles.heading}>{value?.trade_party_data?.display_name}</div>
-					<Table columns={columns} data={value?.plan_details} />
-				</Modal.Body>
-			))}
+			<Modal.Body>
+				{loading && <Header />}
+				{!loading && (shipment_plan_data || []).map((value) => (
+					<div className={styles.plan_card} key={value?.id}>
+						<div className={styles.heading}>{value?.trade_party_data?.display_name}</div>
+						<Table columns={columns} data={value?.plan_details} />
+					</div>
+				))}
+			</Modal.Body>
 		</Modal>
 	);
 }

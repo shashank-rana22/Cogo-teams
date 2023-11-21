@@ -74,13 +74,15 @@ function Content({
 							<Element width={30} height={30} style={{ padding: '4px' }} />
 							{SERVICE_MAPPING[portPair?.service_type]?.label}
 						</div>
-						<Button
-							size="md"
-							themeType="accent"
-							onClick={handelShipmentServiceDetails}
-						>
-							Shipment Plan
-						</Button>
+						{['fcl_freight', 'lcl_freight', 'air_freight'].includes(portPair.service_type) && (
+							<Button
+								size="md"
+								themeType="accent"
+								onClick={handelShipmentServiceDetails}
+							>
+								Shipment Plan
+							</Button>
+						)}
 						<div className={styles.information}>
 							{(portPair?.status === 'quoted' || portPair?.status === 'pending')
 						&& data?.status === 'pending_approval' ? (
