@@ -1,4 +1,5 @@
 import dislikedRates from './disliked-rates';
+import missingRates from './missing-rates';
 import mostBooked from './most-booked.json';
 import mostSearched from './most-searched.json';
 import salesQuotations from './sales-quotations.json';
@@ -10,6 +11,7 @@ export const salesDashboard = [
 	mostBooked,
 	salesSpotSearches,
 	dislikedRates,
+	missingRates,
 	salesQuotations,
 	savedForLater,
 ];

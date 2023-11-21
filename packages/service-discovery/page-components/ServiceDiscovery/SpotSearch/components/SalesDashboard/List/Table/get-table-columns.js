@@ -3,6 +3,7 @@ import getTableColumnFunction from './get-table-column-function';
 const useGetTableColumns = ({
 	activeTab = 'spot_searches',
 	fields = [],
+	serviceType = '',
 }) => {
 	const columns = fields.map((field) => ({
 		Header   : field.label,
@@ -22,7 +23,7 @@ const useGetTableColumns = ({
 				data = { ...quotationData };
 			}
 
-			return func(data, field);
+			return func(data, field, serviceType);
 		},
 	}));
 

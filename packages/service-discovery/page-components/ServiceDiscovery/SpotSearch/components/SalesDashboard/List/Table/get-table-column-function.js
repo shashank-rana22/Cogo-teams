@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Pill, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
@@ -39,18 +40,26 @@ const getTableColumnFunction = (key) => {
 			<SearchType item={itemData} field={field} />
 		),
 		renderFieldPair: (itemData, field) => (
-			<FieldPair item={{ ...itemData, ...(itemData.booking_params?.rate_card || {}) }} field={field} />
+			<FieldPair
+				item={{
+					...itemData,
+					...(itemData.booking_params?.rate_card || {}),
+					...(itemData.spot_search || {}),
+				}}
+				field={field}
+			/>
 		),
-		renderPortPair: (item, field) => (
-			<PortPair item={item} field={field} />
+		renderPortPair: (item, field, serviceType) => (
+			<PortPair item={item} field={field} serviceType={serviceType} />
 		),
 		renderShipment: (item, field) => (
 			<ShipmentDetails item={item} field={field} />
 		),
-		renderDislikePortPair: (item, field) => (
+		renderDislikePortPair: (item, field, serviceType) => (
 			<PortPair
 				item={{ ...item, ...item.booking_params?.rate_card }}
 				field={field}
+				serviceType={serviceType}
 			/>
 		),
 		renderCreated: (itemData) => (
@@ -250,6 +259,26 @@ const getTableColumnFunction = (key) => {
 					)}
 				>
 					<Button type="button" themeType="linkUi">See remarks</Button>
+				</Tooltip>
+			);
+		},
+		renderClosingRemarks: ({ closing_remarks = [] }) => {
+			if (isEmpty(closing_remarks)) {
+				return <b>--</b>;
+			}
+
+			return (
+				<Tooltip
+					interactive
+					content={(
+						<ul style={{ paddingLeft: '8px' }}>
+							{closing_remarks.map((string) => (
+								<li style={{ margin: '8px 0' }} key={string}>{string}</li>
+							))}
+						</ul>
+					)}
+				>
+					<Button type="button" themeType="linkUi">See closing remarks</Button>
 				</Tooltip>
 			);
 		},

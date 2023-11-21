@@ -75,6 +75,7 @@ function List({
 								page: 1,
 							});
 						}}
+						isRateList={isRateList}
 					/>
 				</div>
 			)}
@@ -89,6 +90,7 @@ function List({
 					restFilters={restFilters}
 					setFilters={setFilters}
 					heading={heading}
+					serviceType={serviceType}
 					placement={placement}
 				/>
 			</div>

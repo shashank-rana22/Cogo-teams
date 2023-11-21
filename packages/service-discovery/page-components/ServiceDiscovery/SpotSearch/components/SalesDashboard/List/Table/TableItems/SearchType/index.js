@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 const ZERO_DAYS_TO_EXPIRE = 0;
 const DAYS_TO_EXPIRE = 4;
 
-function SearchType({ item = {}, field = {}, type = '' }) {
+function SearchType({ item = {}, field = {}, type = '', serviceType = '' }) {
 	if (type === 'expiry') {
 		const daysToExpire = differenceInDays(item?.expiration_time, new Date());
 		if (daysToExpire < ZERO_DAYS_TO_EXPIRE || item?.expired) {
@@ -18,7 +18,7 @@ function SearchType({ item = {}, field = {}, type = '' }) {
 	}
 	const service_type = getValue(item, field);
 
-	const { icon: Icon, color, label = '' } = SERVICE_TYPE_ICON_MAPPING?.[service_type] || {};
+	const { icon: Icon, color, label = '' } = SERVICE_TYPE_ICON_MAPPING?.[service_type || serviceType] || {};
 
 	if (!Icon) {
 		return null;

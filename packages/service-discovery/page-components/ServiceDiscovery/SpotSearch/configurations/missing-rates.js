@@ -1,10 +1,10 @@
 const config = {
-	heading     : 'Disliked Rates',
-	api         : 'list_fcl_freight_rate_feedbacks',
+	heading     : 'Missing Rates',
+	api         : 'list_fcl_freight_rate_requests',
 	placement   : 'center',
-	type        : 'disliked_rates',
+	type        : 'missing_rates',
 	apiPrefix   : 'list',
-	apiSuffix   : 'rate_feedbacks',
+	apiSuffix   : 'rate_requests',
 	extraParams : {
 		customer_details_required : true,
 		is_stats_required         : false,
@@ -19,9 +19,9 @@ const config = {
 		},
 		{
 			label  : 'Shipper',
-			key    : 'performed_by_org.business_name',
+			key    : 'spot_search.importer_exporter.business_name',
 			topKey : {
-				key: 'performed_by_org.business_name',
+				key: 'spot_search.importer_exporter.business_name',
 			},
 			lowerKey: {
 				key         : 'performed_by.name',
@@ -34,7 +34,7 @@ const config = {
 			label     : 'Port pair',
 			key       : 'service_type',
 			pair_type : 'service_type',
-			func      : 'renderDislikePortPair',
+			func      : 'renderPortPair',
 			span      : 1.5,
 		},
 		{
@@ -44,16 +44,23 @@ const config = {
 			span  : 1,
 		},
 		{
-			label : 'Cargo Detail',
-			key   : '',
-			func  : 'renderContainerInfo',
-			span  : 2,
+			label        : 'Cargo Detail',
+			key          : '',
+			func         : 'renderContainerInfo',
+			commodityKey : 'spot_search_cargo_details',
+			span         : 2,
 		},
 		{
 			label : 'Remarks',
 			key   : 'remarks',
 			func  : 'renderRemarks',
 			span  : 1.5,
+		},
+		{
+			label : 'Closing Remarks',
+			key   : 'closing_remarks',
+			func  : 'renderClosingRemarks',
+			span  : 1,
 		},
 		{
 			label : 'Status',
@@ -106,8 +113,8 @@ const config = {
 				name        : 'port_id',
 				label       : 'Port',
 				span        : 12,
-				countryType : 'country',
 				isClearable : true,
+				countryType : 'country',
 			},
 			{
 				name           : 'airport_id',
@@ -115,9 +122,9 @@ const config = {
 				type           : 'async-select',
 				asyncKey       : 'list_locations',
 				defaultOptions : true,
+				isClearable    : true,
 				params         : { filters: { type: ['airport'] } },
 				caret          : true,
-				isClearable    : true,
 			},
 			{
 				label             : 'Origin Airport',
@@ -125,8 +132,8 @@ const config = {
 				placeholder       : 'Search via name',
 				includedInOptions : false,
 				type              : 'async-select',
-				asyncKey          : 'list_locations',
 				isClearable       : true,
+				asyncKey          : 'list_locations',
 				grouped           : ['city', 'country'],
 				params            : { filters: { type: ['airport', 'country', 'city'] } },
 			},
@@ -156,6 +163,20 @@ const config = {
 				asyncKey          : 'list_locations',
 				grouped           : ['city', 'country'],
 				placeholder       : 'Search location...',
+			},
+			{
+				type   : 'async-select',
+				params : {
+					filters: {
+						type: ['trade'],
+					},
+				},
+				name        : 'trade_id',
+				label       : ' Trade',
+				span        : 12,
+				isClearable : true,
+				asyncKey    : 'list_locations',
+				placeholder : 'Search location...',
 			},
 			{
 				type   : 'async-select',
@@ -210,22 +231,8 @@ const config = {
 						type: ['trade'],
 					},
 				},
-				name        : 'trade_id',
-				label       : ' Trade',
-				span        : 12,
-				isClearable : true,
-				asyncKey    : 'list_locations',
-				placeholder : 'Search location...',
-			},
-			{
-				type   : 'async-select',
-				params : {
-					filters: {
-						type: ['trade'],
-					},
-				},
 				name        : 'origin_trade_id',
-				label       : 'Trade',
+				label       : 'Origin Trade',
 				span        : 12,
 				isClearable : true,
 				asyncKey    : 'list_locations',

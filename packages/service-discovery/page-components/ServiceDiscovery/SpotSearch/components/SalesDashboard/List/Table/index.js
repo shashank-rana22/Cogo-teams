@@ -16,11 +16,12 @@ function TableComponent(props) {
 		restFilters,
 		setFilters = () => {},
 		heading,
+		serviceType = '',
 	} = props;
 
 	const { list = [], page, total_count } = data || {};
 
-	const columns = useGetTableColumns({ activeTab, fields });
+	const columns = useGetTableColumns({ activeTab, fields, serviceType });
 
 	if (!loading && isEmpty(list)) {
 		return (
