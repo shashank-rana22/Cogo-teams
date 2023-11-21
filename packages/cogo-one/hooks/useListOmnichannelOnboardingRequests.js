@@ -55,6 +55,7 @@ const useListOmnichannelOnboardingRequests = ({
 	}, { manual: true });
 
 	const onboardingRequest = useCallback(({ page = 1 }) => {
+		if (showHistory) return;
 		try {
 			trigger({
 				params: getParams({
