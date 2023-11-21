@@ -61,9 +61,10 @@ function useListTasks({
 
 	let showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
 
-	if (updatedActiveStakeholder === 'lastmile_ops' && !showOnlyMyTasks) {
+	if ((updatedActiveStakeholder === 'lastmile_ops' || is_task_visible_to_so2_executive) && !showOnlyMyTasks) {
 		showTaskFilters = {};
 	}
+
 	SHOW_ALL_TASKS.forEach((item) => {
 		if (updatedActiveStakeholder?.includes(item)) {
 			showOnlyMyTasks = false;
