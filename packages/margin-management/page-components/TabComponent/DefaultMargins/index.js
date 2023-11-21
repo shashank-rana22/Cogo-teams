@@ -1,9 +1,10 @@
-import { isEmpty } from '@cogoport/utils';
+import { Loader } from '@cogoport/components';
 import React from 'react';
 
-import EmptyState from '../../../common/EmptyStateMargins';
 import useGetDefaultMargins from '../../../hooks/useGetDefaultMargins';
 import Details from '../Details';
+
+import styles from './styles.module.css';
 
 function DefaultMargins({
 	activeService = '',
@@ -13,14 +14,16 @@ function DefaultMargins({
 	activeTab = '',
 	refetch = () => { },
 }) {
-	const { data = {} } = useGetDefaultMargins({
+	const { data = {}, loading = false } = useGetDefaultMargins({
 		activeService,
 		filterParams,
 	});
 
-	if (isEmpty(data?.list)) {
+	if (loading) {
 		return (
-			<EmptyState />
+			<div className={styles.spinner}>
+				<Loader width="90px" height="90px" />
+			</div>
 		);
 	}
 

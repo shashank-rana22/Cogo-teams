@@ -1,7 +1,7 @@
 import serviceOptions from '../../config/SERVICE_OPTIONS.json';
 
 const getControls = ({ type = '', marginType = '', partnerId = '', item = {}, setValue = () => { } }) => {
-	const defaultEntityPlaceholder = type === 'edit' && !item?.partner_id ? 'ALL' : 'Selectt';
+	const defaultEntityPlaceholder = type === 'edit' && !item?.partner_id ? 'ALL' : 'Select';
 
 	const controls = [
 		{
