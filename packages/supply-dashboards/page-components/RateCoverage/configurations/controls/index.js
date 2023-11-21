@@ -23,19 +23,19 @@ import ltlControls from './ltl-controls';
 import trailerControls from './trailer-control';
 
 const serviceControlsMap = {
-	fcl_freight : fclControls,
-	air_freight : airControls,
-	air_customs : airCustomsControls,
-	haulage     : haulageControls,
-	fcl_customs : fclCustomsControls,
-	lcl_freight : lclControls,
-	lcl_customs : lclCustomsControls,
-	trailer     : trailerControls,
-	ftl_freight : ftlControls,
-	ltl_freight : ltlControls,
-	fcl_cfs     : cfsControls,
-	fcl_local   : fclLocalControls,
-	air_local   : airLocalControls,
+	fcl_freight       : fclControls,
+	air_freight       : airControls,
+	air_customs       : airCustomsControls,
+	haulage           : haulageControls,
+	fcl_customs       : fclCustomsControls,
+	lcl_freight       : lclControls,
+	lcl_customs       : lclCustomsControls,
+	trailer           : trailerControls,
+	ftl_freight       : ftlControls,
+	ltl_freight       : ltlControls,
+	fcl_cfs           : cfsControls,
+	fcl_freight_local : fclLocalControls,
+	air_freight_local : airLocalControls,
 };
 
 const getDefaultValues = (oldfields) => {

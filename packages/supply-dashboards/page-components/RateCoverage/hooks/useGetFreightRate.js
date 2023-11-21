@@ -3,15 +3,15 @@ import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect } from 'react';
 
 const API_NAME = {
-	fcl_freight : 'get_fcl_freight_rate',
-	air_customs : 'get_air_customs_rate',
-	fcl_customs : 'get_fcl_customs_rate',
-	haulage     : 'get_haulage_freight_rate',
-	lcl_freight : 'get_lcl_freight_rate',
-	lcl_customs : 'get_lcl_customs_rate',
-	fcl_cfs     : 'get_fcl_cfs_rate',
-	fcl_local   : 'get_fcl_freight_rate_local',
-	air_local   : 'get_air_freight_rate_local',
+	fcl_freight       : 'get_fcl_freight_rate',
+	air_customs       : 'get_air_customs_rate',
+	fcl_customs       : 'get_fcl_customs_rate',
+	haulage           : 'get_haulage_freight_rate',
+	lcl_freight       : 'get_lcl_freight_rate',
+	lcl_customs       : 'get_lcl_customs_rate',
+	fcl_cfs           : 'get_fcl_cfs_rate',
+	fcl_freight_local : 'get_fcl_freight_rate_local',
+	air_freight_local : 'get_air_freight_rate_local',
 };
 
 const useGetFreightRate = ({ filter, formValues, cardData }) => {
@@ -91,10 +91,10 @@ const useGetFreightRate = ({ filter, formValues, cardData }) => {
 			if (['fcl_customs', 'lcl_customs', 'air_customs'].includes(filter?.service)) {
 				return customsParams;
 			}
-			if (filter?.service === 'fcl_local') {
+			if (filter?.service === 'fcl_freight_local') {
 				return fclLocalParams;
 			}
-			if (filter?.service === 'air_local') {
+			if (filter?.service === 'air_freight_local') {
 				return airLocalParmas;
 			}
 			return Params;

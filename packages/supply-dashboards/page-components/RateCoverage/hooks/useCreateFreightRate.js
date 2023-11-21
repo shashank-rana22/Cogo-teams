@@ -18,34 +18,34 @@ import formatLtlRate from '../payload/format-ltl-rate';
 import formatTrailerFreight from '../payload/format-trailer-freight';
 
 const API_NAME = {
-	fcl_freight : 'create_fcl_freight_rate',
-	air_freight : 'create_air_freight_rate',
-	fcl_customs : 'create_fcl_customs_rate',
-	haulage     : 'create_haulage_freight_rate',
-	lcl_freight : 'create_lcl_freight_rate',
-	lcl_customs : 'create_lcl_customs_rate',
-	air_customs : 'create_air_customs_rate',
-	trailer     : 'create_haulage_freight_rate',
-	ltl_freight : 'create_ltl_freight_rate',
-	ftl_freight : 'create_ftl_freight_rate',
-	fcl_cfs     : 'create_fcl_cfs_rate',
-	fcl_local   : 'create_fcl_freight_rate_local',
-	air_local   : 'create_air_freight_rate_local',
+	fcl_freight       : 'create_fcl_freight_rate',
+	air_freight       : 'create_air_freight_rate',
+	fcl_customs       : 'create_fcl_customs_rate',
+	haulage           : 'create_haulage_freight_rate',
+	lcl_freight       : 'create_lcl_freight_rate',
+	lcl_customs       : 'create_lcl_customs_rate',
+	air_customs       : 'create_air_customs_rate',
+	trailer           : 'create_haulage_freight_rate',
+	ltl_freight       : 'create_ltl_freight_rate',
+	ftl_freight       : 'create_ftl_freight_rate',
+	fcl_cfs           : 'create_fcl_cfs_rate',
+	fcl_freight_local : 'create_fcl_freight_rate_local',
+	air_freight_local : 'create_air_freight_rate_local',
 };
 
 const KEYS_TO_SEND = {
-	fcl_freight     : 'fcl_freight_rate_request_id',
-	air_freight     : 'air_freight_rate_request_id',
-	ftl_freight     : 'ftl_freight_rate_request_id',
-	lcl_freight     : 'lcl_freight_rate_request_id',
-	ltl_freight     : 'ltl_freight_rate_request_id',
-	fcl_customs     : 'fcl_customs_rate_request_id',
-	lcl_customs     : 'lcl_customs_rate_request_id',
-	air_customs     : 'air_customs_rate_request_id',
-	haulage_freight : 'haulage_freight_rate_request_id',
-	trailer_freight : 'trailer_freight_rate_request_id',
-	fcl_local       : 'fcl_freight_rate_local_request_id',
-	air_local       : 'air_freight_rate_local_request_id',
+	fcl_freight       : 'fcl_freight_rate_request_id',
+	air_freight       : 'air_freight_rate_request_id',
+	ftl_freight       : 'ftl_freight_rate_request_id',
+	lcl_freight       : 'lcl_freight_rate_request_id',
+	ltl_freight       : 'ltl_freight_rate_request_id',
+	fcl_customs       : 'fcl_customs_rate_request_id',
+	lcl_customs       : 'lcl_customs_rate_request_id',
+	air_customs       : 'air_customs_rate_request_id',
+	haulage_freight   : 'haulage_freight_rate_request_id',
+	trailer_freight   : 'trailer_freight_rate_request_id',
+	fcl_freight_local : 'fcl_freight_rate_local_request_id',
+	air_freight_local : 'air_freight_rate_local_request_id',
 };
 
 const getPayload = (service, data, user_id, listData) => {
@@ -82,10 +82,10 @@ const getPayload = (service, data, user_id, listData) => {
 	if (service === 'fcl_cfs') {
 		return formatFclCfs(data, user_id);
 	}
-	if (service === 'fcl_local') {
+	if (service === 'fcl_freight_local') {
 		return formatFclLocal(data, user_id, listData);
 	}
-	if (service === 'air_local') {
+	if (service === 'air_freight_local') {
 		return formatAirLocal(data, user_id, listData);
 	}
 	return data;

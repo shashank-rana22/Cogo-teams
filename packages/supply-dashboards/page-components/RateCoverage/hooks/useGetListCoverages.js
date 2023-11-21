@@ -5,19 +5,19 @@ import { useCallback, useEffect, useState } from 'react';
 import { PARAM_MAPPING } from '../payload/jobs_and_stats_paramsMapping';
 
 const API_NAME = {
-	fcl_freight : 'list_fcl_freight_rate_jobs',
-	lcl_freight : 'list_lcl_freight_rate_jobs',
-	lcl_customs : 'list_lcl_customs_rate_jobs',
-	air_customs : 'list_air_customs_rate_jobs',
-	trailer     : 'list_trailer_freight_rate_jobs',
-	ltl_freight : 'list_ltl_freight_rate_jobs',
-	air_freight : 'list_air_freight_rate_jobs',
-	haulage     : 'list_haulage_freight_rate_jobs',
-	fcl_customs : 'list_fcl_customs_rate_jobs',
-	ftl_freight : 'list_ftl_freight_rate_jobs',
-	fcl_cfs     : 'list_fcl_cfs_rate_jobs',
-	fcl_local   : 'list_fcl_freight_rate_local_jobs',
-	air_local   : 'list_air_freight_rate_local_jobs',
+	fcl_freight       : 'list_fcl_freight_rate_jobs',
+	lcl_freight       : 'list_lcl_freight_rate_jobs',
+	lcl_customs       : 'list_lcl_customs_rate_jobs',
+	air_customs       : 'list_air_customs_rate_jobs',
+	trailer           : 'list_trailer_freight_rate_jobs',
+	ltl_freight       : 'list_ltl_freight_rate_jobs',
+	air_freight       : 'list_air_freight_rate_jobs',
+	haulage           : 'list_haulage_freight_rate_jobs',
+	fcl_customs       : 'list_fcl_customs_rate_jobs',
+	ftl_freight       : 'list_ftl_freight_rate_jobs',
+	fcl_cfs           : 'list_fcl_cfs_rate_jobs',
+	fcl_freight_local : 'list_fcl_freight_rate_local_jobs',
+	air_freight_local : 'list_air_freight_rate_local_jobs',
 };
 
 const DEFAULT_PAGE = 1;

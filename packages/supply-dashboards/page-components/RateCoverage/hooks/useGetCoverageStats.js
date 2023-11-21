@@ -5,19 +5,19 @@ import { useCallback, useEffect } from 'react';
 import { PARAM_MAPPING } from '../payload/jobs_and_stats_paramsMapping';
 
 const API_END_POINT_MAPPING = {
-	fcl_freight : 'get_fcl_freight_rate_job_stats',
-	air_freight : 'get_air_freight_rate_job_stats',
-	fcl_customs : 'get_fcl_customs_rate_job_stats',
-	haulage     : 'get_haulage_freight_rate_job_stats',
-	lcl_freight : 'get_lcl_freight_rate_job_stats',
-	lcl_customs : 'get_lcl_customs_rate_job_stats',
-	air_customs : 'get_air_customs_rate_job_stats',
-	trailer     : 'get_trailer_freight_rate_job_stats',
-	ltl_freight : 'get_ltl_freight_rate_job_stats',
-	ftl_freight : 'get_ftl_freight_rate_job_stats',
-	fcl_cfs     : 'get_fcl_cfs_rate_job_stats',
-	fcl_local   : 'get_fcl_freight_rate_local_job_stats',
-	air_local   : 'get_air_freight_rate_local_job_stats',
+	fcl_freight       : 'get_fcl_freight_rate_job_stats',
+	air_freight       : 'get_air_freight_rate_job_stats',
+	fcl_customs       : 'get_fcl_customs_rate_job_stats',
+	haulage           : 'get_haulage_freight_rate_job_stats',
+	lcl_freight       : 'get_lcl_freight_rate_job_stats',
+	lcl_customs       : 'get_lcl_customs_rate_job_stats',
+	air_customs       : 'get_air_customs_rate_job_stats',
+	trailer           : 'get_trailer_freight_rate_job_stats',
+	ltl_freight       : 'get_ltl_freight_rate_job_stats',
+	ftl_freight       : 'get_ftl_freight_rate_job_stats',
+	fcl_cfs           : 'get_fcl_cfs_rate_job_stats',
+	fcl_freight_local : 'get_fcl_freight_rate_local_job_stats',
+	air_freight_local : 'get_air_freight_rate_local_job_stats',
 };
 
 const useGetCoverageStats = ({ filter, source, showWeekData }) => {

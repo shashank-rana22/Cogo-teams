@@ -35,6 +35,17 @@ function FieldMutation({
 
 	const mainPortOptions2 = useGetMainPortsOptions({ location_id: values?.destination_location_id });
 
+	const filterService = () => {
+		if (['haulage', 'trailer']?.includes(filter.service)) {
+			return `${filter.service}_freight`;
+		}
+		if (['fcl_freight_local', 'air_freight_local']?.includes(filter.service)) {
+			return filter.service?.replace('_local', '');
+		}
+		return filter.service;
+	};
+
+	const service = filterService();
 	const serviceProviders = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganization(),
@@ -44,8 +55,7 @@ function FieldMutation({
 						status       : 'active',
 						kyc_status   : 'verified',
 						account_type : 'service_provider',
-						service      : `${filter?.service}${['haulage',
-							'trailer'].includes(filter.service) ? '_freight' : ''}`,
+						service,
 					},
 				},
 			},

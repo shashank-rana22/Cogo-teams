@@ -75,6 +75,23 @@ function Filter({
 
 	const finalFilter = filter?.releventToMeValue ? filteredServiceOptions : serviceOptions;
 
+	let dynamicLocalOptions = [];
+
+	if (source === 'rate_feedback') {
+		dynamicLocalOptions = [
+			{
+				label : 'FCL Local',
+				value : 'fcl_freight_local',
+			},
+			{
+				label : 'AIR Local',
+				value : 'air_freight_local',
+			},
+		];
+	}
+
+	const finalService = [...finalFilter, ...dynamicLocalOptions];
+
 	function DateRange() {
 		return (
 			<div>
@@ -111,7 +128,7 @@ function Filter({
 							<p>Service</p>
 							<Select
 								placeholder="select"
-								options={finalFilter}
+								options={finalService}
 								value={filter?.service}
 								style={{ width: '250px' }}
 								onChange={(value) => {

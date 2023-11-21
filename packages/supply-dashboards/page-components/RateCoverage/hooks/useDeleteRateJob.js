@@ -3,19 +3,19 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const API_NAME = {
-	fcl_freight : 'delete_fcl_freight_rate_job',
-	air_freight : 'delete_air_freight_rate_job',
-	fcl_customs : 'delete_fcl_customs_rate_job',
-	haulage     : 'delete_haulage_freight_rate_job',
-	lcl_freight : 'delete_lcl_freight_rate_job',
-	lcl_customs : 'delete_lcl_customs_rate_job',
-	air_customs : 'delete_air_customs_rate_job',
-	trailer     : 'delete_trailer_freight_rate_job',
-	ltl_freight : 'delete_ltl_freight_rate_job',
-	ftl_freight : 'delete_ftl_freight_rate_job',
-	fcl_cfs     : 'delete_fcl_cfs_rate_job',
-	fcl_local   : 'delete_fcl_freight_rate_local_job',
-	air_local   : 'delete_air_freight_rate_local_job',
+	fcl_freight       : 'delete_fcl_freight_rate_job',
+	air_freight       : 'delete_air_freight_rate_job',
+	fcl_customs       : 'delete_fcl_customs_rate_job',
+	haulage           : 'delete_haulage_freight_rate_job',
+	lcl_freight       : 'delete_lcl_freight_rate_job',
+	lcl_customs       : 'delete_lcl_customs_rate_job',
+	air_customs       : 'delete_air_customs_rate_job',
+	trailer           : 'delete_trailer_freight_rate_job',
+	ltl_freight       : 'delete_ltl_freight_rate_job',
+	ftl_freight       : 'delete_ftl_freight_rate_job',
+	fcl_cfs           : 'delete_fcl_cfs_rate_job',
+	fcl_freight_local : 'delete_fcl_freight_rate_local_job',
+	air_freight_local : 'delete_air_freight_rate_local_job',
 };
 
 const useDeleteRateJob = (service) => {

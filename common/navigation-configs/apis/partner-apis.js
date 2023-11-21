@@ -4837,6 +4837,18 @@ const partner = {
 			feature      : 'disliked_rates',
 		},
 		{
+			api          : 'delete_fcl_freight_rate_local_feedback',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'delete_air_freight_rate_local_feedback',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
 			api          : 'list_ltl_freight_rate_feedbacks',
 			access_type  : 'private',
 			service_name : 'ltl_freight_rate',
