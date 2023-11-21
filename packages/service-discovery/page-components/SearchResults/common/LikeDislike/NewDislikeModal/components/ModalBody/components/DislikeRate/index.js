@@ -16,6 +16,8 @@ function DislikeRate({
 	setSelectedSevice = () => {},
 	unsatisfiedFeedbacks = {},
 	setUnsatisfiedFeedbacks = () => {},
+	chargeable_weight = '',
+	refetchSearch = () => {},
 }) {
 	const { label = '', service_type, service_id = '', freight_price_currency = '', unit = '' } = selectedSevice;
 
@@ -70,6 +72,8 @@ function DislikeRate({
 				setSelectedSevice={setSelectedSevice}
 				unsatisfiedFeedbacks={unsatisfiedFeedbacks}
 				setUnsatisfiedFeedbacks={setUnsatisfiedFeedbacks}
+				chargeable_weight={chargeable_weight}
+				refetchSearch={refetchSearch}
 			/>
 		</div>
 	);

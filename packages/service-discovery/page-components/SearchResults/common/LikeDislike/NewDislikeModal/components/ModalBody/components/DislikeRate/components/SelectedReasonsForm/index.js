@@ -28,6 +28,8 @@ function SelectedReasonsForm({
 	setSelectedSevice = () => {},
 	unsatisfiedFeedbacks = {},
 	setUnsatisfiedFeedbacks = () => {},
+	chargeable_weight = '',
+	refetchSearch = () => {},
 }) {
 	const {
 		control,
@@ -59,6 +61,8 @@ function SelectedReasonsForm({
 		isFeedbackSubmitted,
 		setSelectedSevice,
 		setUnsatisfiedFeedbacks,
+		chargeable_weight,
+		refetchSearch,
 	});
 
 	const { data = {} } = unsatisfiedFeedbacks;

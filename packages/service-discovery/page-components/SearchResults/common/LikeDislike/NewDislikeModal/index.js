@@ -9,13 +9,14 @@ function NewDislikeModal({
 	show = false,
 	onClose = () => {},
 	details = {},
+	refetchSearch = () => {},
 }) {
 	return (
 		<Modal size="lg" show={show} onClose={onClose} animate className={styles.modal_container}>
 			<Modal.Header title={<ModalHeader />} />
 
 			<Modal.Body>
-				<ModalBody rate={rate} details={details} />
+				<ModalBody rate={rate} details={details} refetchSearch={refetchSearch} />
 			</Modal.Body>
 
 			<Modal.Footer>

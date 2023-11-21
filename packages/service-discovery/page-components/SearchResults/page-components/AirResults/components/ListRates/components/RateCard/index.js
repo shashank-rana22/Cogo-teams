@@ -21,6 +21,7 @@ function RateCard({
 	showGuide = false,
 	setInfoBanner = () => {},
 	isMobile = false,
+	refetch = () => {},
 }) {
 	const selectedCardIDs = Object.keys(comparisonRates);
 
@@ -46,6 +47,7 @@ function RateCard({
 				showGuide={showGuide}
 				setInfoBanner={setInfoBanner}
 				isMobile={isMobile}
+				refetch={refetch}
 			/>
 
 			<Body

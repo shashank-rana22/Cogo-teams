@@ -17,6 +17,8 @@ const useHandleSelectedReasonsForm = ({
 	isFeedbackSubmitted = false,
 	setSelectedSevice = () => {},
 	setUnsatisfiedFeedbacks = () => {},
+	chargeable_weight,
+	refetchSearch = () => {},
 }) => {
 	const {
 		general: { query = {} },
@@ -71,11 +73,12 @@ const useHandleSelectedReasonsForm = ({
 
 			const { data: validateData = {} } = await trigger({
 				data: {
-					feedbacks : restFeedbacks,
+					feedbacks         : restFeedbacks,
 					rate_id,
 					service_type,
-					currency  : freight_price_currency,
-					price     : freight_price_discounted,
+					currency          : freight_price_currency,
+					price             : freight_price_discounted,
+					chargeable_weight : chargeable_weight || undefined,
 				},
 			});
 
@@ -106,6 +109,8 @@ const useHandleSelectedReasonsForm = ({
 			await createTrigger({ data: finalPayload });
 
 			getSpotSearchRateFeedback();
+
+			refetchSearch();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

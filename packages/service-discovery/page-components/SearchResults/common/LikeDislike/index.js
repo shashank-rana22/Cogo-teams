@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import NewDislikeModal from './NewDislikeModal';
 import styles from './styles.module.css';
 
-function LikeDislike({ rateCardData = {}, detail = {}, isMobile = false }) {
+function LikeDislike({ rateCardData = {}, detail = {}, isMobile = false, refetchSearch = () => {} }) {
 	const [showFeedbackModal, setShowFeedbackModal] = useState(false);
 
 	const { is_liked = false, likes_count = 0, is_disliked = false, dislikes_count = 0 } = rateCardData || {};
@@ -55,6 +55,7 @@ function LikeDislike({ rateCardData = {}, detail = {}, isMobile = false }) {
 					setLikeState={setLikeState}
 					onClose={onCloseFeedbackModal}
 					isMobile={isMobile}
+					refetchSearch={refetchSearch}
 				/>
 			) : null}
 		</div>

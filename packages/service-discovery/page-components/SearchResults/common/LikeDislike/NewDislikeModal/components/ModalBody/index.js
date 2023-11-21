@@ -13,7 +13,7 @@ const MAPPING = {
 	feedback     : DislikeRate,
 };
 
-function ModalBody({ rate = {}, details = {} }) {
+function ModalBody({ rate = {}, details = {}, refetchSearch = () => {} }) {
 	const [selectedSevice, setSelectedSevice] = useState({});
 	const [rateRequestedFor, setRateRequestedFor] = useState([]);
 	const [unsatisfiedFeedbacks, setUnsatisfiedFeedbacks] = useState({});
@@ -29,6 +29,8 @@ function ModalBody({ rate = {}, details = {} }) {
 	}
 
 	const { feedback_type = '', service_id = '' } = selectedSevice;
+
+	const { chargeable_weight = ''	} = details;
 
 	const propsMapping = {
 		request_rate: {
@@ -47,14 +49,14 @@ function ModalBody({ rate = {}, details = {} }) {
 			setSelectedSevice,
 			unsatisfiedFeedbacks,
 			setUnsatisfiedFeedbacks,
+			chargeable_weight,
+			refetchSearch,
 		},
 	};
 
 	const activeComponentProps = propsMapping[feedback_type] || {};
 
 	const ActiveComponent = MAPPING[feedback_type] || DislikeRate;
-
-	const { chargeable_weight = 1	} = details;
 
 	return (
 		<div className={styles.container}>

@@ -84,6 +84,7 @@ function RateCardTop({
 	showGuide = false,
 	cogoAssuredRates = [],
 	isMobile = false,
+	refetchSearch = () => {},
 }) {
 	const { shipping_line = {}, id: card_id, source = '' } = rateCardData;
 
@@ -160,7 +161,12 @@ function RateCardTop({
 			</div>
 
 			<div className={styles.right_section}>
-				<LikeDislike rateCardData={rateCardData} detail={detail} isMobile={isMobile} />
+				<LikeDislike
+					rateCardData={rateCardData}
+					detail={detail}
+					isMobile={isMobile}
+					refetchSearch={refetchSearch}
+				/>
 			</div>
 		</div>
 	);

@@ -91,6 +91,7 @@ function ListRates({
 					index={index}
 					setRouterLoading={setRouterLoading}
 					isMobile={isMobile}
+					refetch={refetch}
 				/>
 			))}
 

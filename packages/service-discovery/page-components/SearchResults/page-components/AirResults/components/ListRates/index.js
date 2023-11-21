@@ -132,6 +132,7 @@ function ListRates({
 						setInfoBanner={setInfoBanner}
 						setRouterLoading={setRouterLoading}
 						isMobile={isMobile}
+						refetch={refetch}
 					/>
 
 					{index === GLOBAL_CONSTANTS.zeroth_index ? (
