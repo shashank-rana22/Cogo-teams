@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Toggle } from '@cogoport/components';
+import { Tabs, TabPanel, Toggle, Placeholder } from '@cogoport/components';
 import { IcMArrowBack, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { format, isEmpty } from '@cogoport/utils';
@@ -14,6 +14,18 @@ import Remarks from './Remarks';
 import ShipmentDetails from './ShipmentDetails';
 import ShipmentPlan from './ShipmentPlan';
 import styles from './styles.module.css';
+
+function ShipmentPlanLoadState() {
+	const PLACEHOLDER_COUNT = 3;
+	return (
+		<div style={{ padding: '20px', display: 'flex', flexDirection: 'column' }}>
+			<Placeholder style={{ width: '60%', height: '30px', marginBottom: '14px' }} />
+			{[...Array(PLACEHOLDER_COUNT).keys()].map((i) => (
+				<Placeholder key={i} style={{ width: '100%', height: '20px', marginBottom: '12px' }} />
+			))}
+		</div>
+	);
+}
 
 function Enquiries() {
 	const ZEROVALUE = 0;
@@ -31,7 +43,10 @@ function Enquiries() {
 		setPage,
 	} = useGetRfqSearches({ rfqId, relevantToUser });
 
-	const { data: shipmentplanData, listShipmentPlans } = useListShipmentPlans({ selectedCard });
+	const {
+		loading: shipmentPlansLoading = false,
+		data: shipmentplanData = {}, listShipmentPlans = () => {},
+	} = useListShipmentPlans({ selectedCard });
 	const { list } = shipmentplanData || [];
 
 	const negotiation_remarks = data?.data[ZEROVALUE]?.negotiation_remarks;
@@ -152,7 +167,8 @@ function Enquiries() {
 								<div
 									className={styles.shipment_details}
 								>
-									{isEmpty(list) ? <EmptyState />
+									{shipmentPlansLoading && <ShipmentPlanLoadState />}
+									{!shipmentPlansLoading && isEmpty(list) ? <EmptyState />
 										: (list || []).map((value) => (
 											<ShipmentPlan
 												value={value}
