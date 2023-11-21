@@ -91,6 +91,7 @@ function ServiceDetailsContent({
 			volume,
 			commodity_sub_type,
 			cargo_handling_type,
+			spot_search_serial_id,
 		} = val;
 
 		const formatLine = (label, value) => (value ? `${label} ${startCase(value)}\n` : '');
@@ -126,6 +127,7 @@ function ServiceDetailsContent({
 		textToCopy += formatLine('OPERATION TYPE:', operation_type);
 		textToCopy += formatLine('VOL WEIGHT:', formatVolume);
 		textToCopy += formatLine('CARGO HANDLING TYPE:', cargo_handling_type);
+		textToCopy += formatLine('SPOT SEARCH SERIAL ID:', spot_search_serial_id);
 		textToCopy += formatLine('No of Packages:', !isEmpty(bookingParams) ? (bookingParams || []).map((item) => {
 			const { length = 0, width = 0, height = 0 } = item || {};
 			const dimension = length
@@ -259,6 +261,19 @@ function ServiceDetailsContent({
 												</div>
 											</div>
 										)}
+
+									{!isEmpty(feedbackData?.spot_search_serial_id) && (
+										<div className={styles.content}>
+											<div className={styles.label}> Spot Search Serial Id : </div>
+											<Pill
+												size="md"
+												color="#F8F2E7"
+											>
+												{feedbackData?.spot_search_serial_id}
+											</Pill>
+										</div>
+									)}
+
 									{(resultLineName)
 										&& (
 											<div className={styles.content}>
