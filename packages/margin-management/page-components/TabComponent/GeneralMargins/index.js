@@ -2,6 +2,7 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../common/EmptyStateMargins';
+import DefaultMargins from '../DefaultMargins';
 import Details from '../Details';
 import ListPagination from '../ListPagination';
 
@@ -14,11 +15,23 @@ function GeneralMargins({
 	refetch = () => { },
 	filterParams = {},
 	setFilterParams = () => { },
+	activeService = '',
 }) {
 	return (
-		<div>
-			{!loading && isEmpty(data?.list) ? <EmptyState /> : (
-				<div>
+		<>
+			{activeTab === 'cogoport' ? (
+				<DefaultMargins
+					activeService={activeService}
+					filterParams={filterParams}
+					marginBreakupData={marginBreakupData}
+					setMarginBreakupData={setMarginBreakupData}
+					activeTab={activeTab}
+					refetch={refetch}
+				/>
+			) : null}
+
+			{!loading && isEmpty(data?.list) ? <EmptyState emptyDataText="No Custom margins found!" /> : (
+				<>
 					{(data?.list || []).map((item) => (
 						<Details
 							showContainerDetails
@@ -37,9 +50,9 @@ function GeneralMargins({
 							setFilterParams,
 						}}
 					/>
-				</div>
+				</>
 			)}
-		</div>
+		</>
 	);
 }
 

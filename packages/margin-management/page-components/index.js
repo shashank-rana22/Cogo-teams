@@ -24,7 +24,7 @@ function MarginManagement() {
 		setActiveService = () => { },
 	} = useListMargins({
 		defaultParams  : { margin_stats_required: true, page_limit: 10 },
-		defaultFilters : { margin_type: 'demand', service: '', status: 'active' },
+		defaultFilters : { margin_type: 'demand', service: '', status: 'active', is_partner_id_present: true },
 	});
 
 	return (

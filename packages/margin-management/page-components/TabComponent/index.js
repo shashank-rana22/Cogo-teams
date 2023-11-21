@@ -116,10 +116,11 @@ function TabComponent({
 				data={data}
 				marginBreakupData={marginBreakupData}
 				setMarginBreakupData={setMarginBreakupData}
-				activeTab={setActivetab}
+				activeTab={activeTab}
 				refetch={refetch}
 				filterParams={filterParams}
 				setFilterParams={setFilterParams}
+				activeService={activeService}
 			/>
 
 			{showFunnelModal ? (
