@@ -1,8 +1,7 @@
 .container {
 	padding: 16px;
 	margin-top: 16px;
-	color: #fff;
-	background-image: url("https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/diwali.png");
+	background-color: #fff;
 	background-repeat: no-repeat;
 	background-size: cover;
 	border-radius: 8px;
@@ -12,7 +11,6 @@
 	margin-bottom: 16px;
 	font-size: 16px;
 	font-weight: 600;
-	color: #fff;
 }
 
 .holiday_summary {
@@ -33,7 +31,6 @@
 .holiday_date {
 	font-size: 36px;
 	font-weight: 600;
-	color: #fff;
 }
 
 .holiday_month {
@@ -41,7 +38,7 @@
 	flex-direction: column;
 	margin-left: 16px;
 	font-size: 12px;
-	color: #fff;
+	color: #828282;
 }
 
 .view_calendar {
@@ -50,7 +47,6 @@
 	justify-content: flex-end;
 	font-size: 12px;
 	font-weight: 600;
-	color: #fff;
 	text-transform: capitalize;
 	cursor: pointer;
 }
