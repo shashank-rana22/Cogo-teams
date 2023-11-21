@@ -11,14 +11,14 @@ function usePostBulkJV() {
 		{ manual: true },
 	);
 
-	const bulkPostJV = async ({ selectedJV = [], setSelectedJV = () => {} }) => {
+	const bulkPostJV = async ({ selectedJV = [], setSelectedJV = () => {}, setShowConfirm = () => {} }) => {
 		try {
 			await trigger({
 				data: selectedJV,
 			});
 
 			setSelectedJV([]);
-
+			setShowConfirm(false);
 			Toast.success('Processing your request. Please come back later.');
 
 			setTimeout(() => {
