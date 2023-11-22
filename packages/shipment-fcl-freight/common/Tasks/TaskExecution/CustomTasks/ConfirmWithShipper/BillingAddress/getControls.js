@@ -1,4 +1,4 @@
-function getControls({ countryValidation = {}, setCountryId = () => {} }) {
+function getControls({ countryValidation = {}, setCountryId = () => {}, isSez = false }) {
 	const controls = [
 		{
 			name        : 'business_name',
@@ -51,15 +51,6 @@ function getControls({ countryValidation = {}, setCountryId = () => {} }) {
 			},
 		},
 		{
-			name   : 'cargo_readiness_date',
-			label  : 'Cargo Readiness Date',
-			type   : 'date',
-			styles : { flexBasis: '10%' },
-			rules  : {
-				required: 'Date is required',
-			},
-		},
-		{
 			name    : 'is_sez',
 			label   : 'Is your Address SEZ ?',
 			type    : 'chips',
@@ -77,6 +68,16 @@ function getControls({ countryValidation = {}, setCountryId = () => {} }) {
 			rules: {
 				required: 'Required',
 			},
+		},
+		{
+			name   : 'sez_proof',
+			label  : 'Sez Proof',
+			type   : 'upload',
+			styles : { flexBasis: '100%' },
+			rules  : {
+				required: 'Document is Required',
+			},
+			show: isSez,
 		},
 		{
 			name   : 'tax_number_document_url',

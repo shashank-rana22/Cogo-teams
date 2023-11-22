@@ -1,5 +1,7 @@
 import { Button, Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
+import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import { useContext } from 'react';
 
@@ -9,16 +11,30 @@ import getServiceStateMapping from '../../../helpers/getServiceStateMapping';
 import ServiceIDGroup from './ServiceIDGroup';
 import styles from './styles.module.css';
 
-const ALLOWED_STAKEHOLDERS = ['admin', 'superadmin', 'tech_super_admin', 'prod_process_owner'];
+const ALLOWED_STAKEHOLDERS = [
+	'admin',
+	'superadmin',
+	'tech_super_admin',
+	'prod_process_owner',
+	'booking_desk_manager',
+	'document_desk_manager',
+	'document_control_lead',
+	'so2_executive',
+];
+
 const AWAITING_SERVICES_STATE = ['init', 'awaiting_service_provider_confirmation'];
 
 function Internal({
 	data = [], setAddPoc = () => { }, loading = false,
 	rolesPermission = {}, shipment_data = {}, activeStakeholder = '',
 }) {
+	const { partnerId = ''	} = useSelector(({ profile }) => ({ partnerId: profile?.partner?.id }));
+
 	const { servicesList = [] } = useContext(ShipmentDetailContext);
 	const internalData = getInternalPocData(data);
 	const canAddPoc = !!rolesPermission?.add_internal_poc;
+	const showServicePOCs = ALLOWED_STAKEHOLDERS.includes(activeStakeholder)
+	|| [501, 701, 801].includes(getEntityCode(partnerId));
 
 	const SERVICES_STATE_MAPPING = getServiceStateMapping(servicesList);
 
@@ -49,7 +65,7 @@ function Internal({
 								</div>
 
 								{!AWAITING_SERVICES_STATE.includes(SERVICES_STATE_MAPPING[key])
-								|| ALLOWED_STAKEHOLDERS.includes(activeStakeholder)
+								|| showServicePOCs
 									? (
 										<ServiceIDGroup
 											data={internalData[key]}

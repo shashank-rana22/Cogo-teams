@@ -176,5 +176,7 @@
     "serial_id": "串行ID",
     "id_creator": "ID创建者",
     "messaged_at":"发出的",
-    "unread_message": "未读消息"
+    "unread_message": "未读消息",
+    "select_missing_id":"选择缺少的 ID",
+    "select_dislike_id":"选择您不喜欢的 ID"
 }

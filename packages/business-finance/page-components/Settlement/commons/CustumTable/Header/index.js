@@ -6,14 +6,17 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function Header({ setFilters = () => {}, filters = {}, selectedJV = [], setSelectedJV = () => {}, list = [] }) {
-	const allChecked = list?.length === selectedJV.length;
+	const allChecked = (list || []).map((item) => {
+		if (item?.status !== 'POSTED') return item;
+		return [];
+	}).flat().length === selectedJV.length;
 
 	const checkAllJV = () => {
 		if (allChecked) {
 			setSelectedJV([]);
 		} else {
 			list?.forEach((item) => {
-				if (!selectedJV.includes(item?.jvNum)) {
+				if (!selectedJV.includes(item?.jvNum) && item?.status !== 'POSTED') {
 					setSelectedJV((pv) => [
 						...pv,
 						item.jvNum,
