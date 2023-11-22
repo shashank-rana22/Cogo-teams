@@ -41,7 +41,7 @@ export const getTradePartyPayload = ({ orgId = '', type = '', otherReason = '' }
 export const getPayload = ({
 	description = '', end_date = '', end_time = '', start_date = '',
 	start_time = '', subject = '', lead_organization_id = '',
-	lead_user_id = '', user_id = '', organization_id = '',
+	lead_user_id = '', user_id = '', organization_id = '', agentId = '',
 }) => ({
 	subject,
 	description,
@@ -59,5 +59,9 @@ export const getPayload = ({
 	start_time,
 	validity_end    : end_date,
 	end_time,
-
+	agent_id        : agentId,
+	participants   	: {
+		user_ids      : user_id ? [user_id] : [],
+		lead_user_ids : lead_user_id ? [lead_user_id] : [],
+	},
 });

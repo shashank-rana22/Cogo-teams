@@ -14,7 +14,7 @@ const useScheduleCalendar = ({ reset = () => {}, setScheduleDemo = () => {}, onb
 
 	const { requestLoader = false, updateRequest = () => {} } = useUpdateOnboardingRequest();
 
-	const createMeeting = async ({ val = {}, metadata = {}, requestId = '', requestStatus = '' }) => {
+	const createMeeting = async ({ val = {}, metadata = {}, requestId = '', requestStatus = '', agentId = '' }) => {
 		const {
 			lead_organization_id = '', customer = {}, user_id = '', organization_id = '',
 		} = metadata || {};
@@ -37,6 +37,7 @@ const useScheduleCalendar = ({ reset = () => {}, setScheduleDemo = () => {}, onb
 					lead_user_id,
 					user_id,
 					organization_id,
+					agentId,
 				}),
 			});
 
