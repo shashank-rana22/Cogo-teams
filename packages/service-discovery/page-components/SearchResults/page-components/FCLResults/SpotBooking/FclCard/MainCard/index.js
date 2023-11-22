@@ -136,14 +136,13 @@ function MainCard({ shippingLines = [], detail = {}, formProps = {}, watch = () 
 						style={{ marginLeft: '24px' }}
 						value={false}
 					/>
-
-					<IcdShipmentDetails
-						detail={detail}
-						control={control}
-						errors={errors}
-						watch={watch}
-					/>
 				</div>
+
+				<IcdShipmentDetails
+					detail={detail}
+					control={control}
+					errors={errors}
+				/>
 
 				<div className={styles.time_div}>
 					{(!sailing_schedule ? scheduleControl : restControls).map((currControls) => {

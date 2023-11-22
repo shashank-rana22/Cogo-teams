@@ -1,73 +1,80 @@
 import { cl } from '@cogoport/components';
-import { IcMEdit, IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
-import { useState } from 'react';
+import { useMemo } from 'react';
 
-import getControls from './getControls';
-import PortDetailsModal from './PortDetailsModal';
+import getControls from '../../../../../../../../common/RouteForm/getControls';
+import getElementController from '../../../../../../../../configs/getElementController';
+
 import styles from './styles.module.css';
 
-function IcdShipmentDetails({ detail = {}, control = () => {}, errors = {}, watch = () => {} }) {
-	const [showModal, setShowModal] = useState(false);
-
+function IcdShipmentDetails({ detail = {}, control = () => {}, errors = {} }) {
 	const { origin_port = {}, destination_port = {} } = detail;
 
 	const { is_icd:isOriginIcd = false } = origin_port;
 	const { is_icd:isDestinationIcd = false } = destination_port;
 
-	const controls = getControls({ isOriginIcd, isDestinationIcd });
+	const controls = [
+		{
+			label       : 'Origin Main Port',
+			show        : isOriginIcd,
+			type        : 'async-select',
+			rules       : { required: 'Origin Main port is required' },
+			name        : 'origin_main_port_id',
+			asyncKey    : 'list_locations',
+			placeholder : 'Select',
+			size        : 'md',
+		},
+		{
+			label       : 'Destination Main Port',
+			show        : isDestinationIcd,
+			type        : 'async-select',
+			rules       : { required: 'Destination Main port is required' },
+			name        : 'destination_main_port_id',
+			asyncKey    : 'list_locations',
+			placeholder : 'Select',
+			size        : 'md',
+		},
+	];
+
+	const finalControls = getControls(controls, 'fcl_freight');
+
+	const updatedControls = useMemo(() => finalControls.reduce((acc, cur) => [...acc, {
+		...cur,
+		params: {
+			...cur.params,
+			fields  : cur.params.fields.filter((item) => item !== 'is_icd'),
+			filters : { ...cur.params.filters, is_icd: false },
+		},
+	}], []), [finalControls]);
 
 	if (!isOriginIcd && !isDestinationIcd) {
 		return null;
 	}
 
-	const { destination_main_port_id = '', origin_main_port_id = '' } = watch();
-
-	const isErrorPresent = ['destination_main_port_id', 'origin_main_port_id']
-		.some((item) => Object.keys(errors).includes(item));
-
 	return (
-		<div className={cl`${styles.container} ${isErrorPresent && styles.error}`}>
-			{isOriginIcd ? (
-				<div className={styles.item}>
-					{origin_main_port_id ? (
-						<IcCFtick
-							className={styles.value}
-						/>
-					) : <IcCFcrossInCircle className={styles.value} />}
+		<div className={styles.container}>
+			{updatedControls.map((currControls) => {
+				const ActiveElement = getElementController(currControls.type);
 
-					Origin Main Port
-				</div>
-			) : null}
+				if (!currControls.show) {
+					return null;
+				}
 
-			{isDestinationIcd ? (
-				<div className={styles.item}>
-					{destination_main_port_id ? (
-						<IcCFtick
-							className={styles.value}
-						/>
-					) : <IcCFcrossInCircle className={styles.value} />}
-
-					Destination Main Port
-				</div>
-			) : null}
-
-			<div
-				role="presentation"
-				className={styles.edit_container}
-				onClick={() => setShowModal(true)}
-			>
-				<IcMEdit style={{ marginRight: '2px' }} />
-
-				Edit
-			</div>
-
-			<PortDetailsModal
-				controls={controls}
-				control={control}
-				showModal={showModal}
-				setShowModal={setShowModal}
-				errors={errors}
-			/>
+				return (
+					<div
+						key={currControls.name}
+						className={cl`${styles.element_div} ${styles[currControls.name]}`}
+					>
+						<div className={styles.label}>{currControls.label}</div>
+						<ActiveElement {...currControls} control={control} />
+						{errors?.[currControls.name] && (
+							<div className={styles.error_message}>
+								{' '}
+								{errors?.[currControls.name]?.message}
+							</div>
+						)}
+					</div>
+				);
+			})}
 		</div>
 	);
 }
