@@ -25,6 +25,9 @@ function FieldMutation({
 	const freeDetentionDays = values?.detention_free_days;
 	const demurrageSlabs = values?.demurrage_days;
 	const freeDemurrageDays = values?.demurrage_free_days;
+	const freeDaysSlabs = values?.add_slabs;
+	const freeDaysLimit = values?.free_limit_days;
+
 	const organizationUsers = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganizationUsers(),
@@ -195,7 +198,19 @@ function FieldMutation({
 				}
 			});
 		}
-	}, [freeDetentionDays, freeDemurrageDays, detentionSlabs, setValue, demurrageSlabs]);
+		if (freeDaysSlabs) {
+			freeDaysSlabs.forEach((obj, index) => {
+				if (index === 0) {
+					setValue('add_slabs.0.lower_limit', Number(freeDaysLimit) + 1 || 0);
+				} else {
+					setValue(
+						`add_slabs.${index}.lower_limit`,
+						Number(freeDaysSlabs?.[index - 1].upper_limit) + 1,
+					);
+				}
+			});
+		}
+	}, [freeDetentionDays, freeDemurrageDays, detentionSlabs, setValue, demurrageSlabs, freeDaysSlabs, freeDaysLimit]);
 
 	return {
 		finalFields,

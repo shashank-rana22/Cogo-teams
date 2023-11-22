@@ -21,8 +21,7 @@ const isSingleLocation = (search_type) => {
 };
 
 const getLocationDetails = (data, type, service_key) => {
-	const service_type = data[service_key] || data.service_type;
-
+	const service_type = data[service_key];
 	const SUFFIX_MAPPING = {
 		lcl_freight                 : 'port',
 		fcl_freight                 : 'port',
@@ -63,20 +62,20 @@ const getLocationDetails = (data, type, service_key) => {
 
 const getLocationInfo = (
 	data,
+	service_key = 'primary_service',
 	keys = {
 		origin           : null,
 		origin_main      : null,
 		destination      : null,
 		destination_main : null,
 	},
-	service_key = 'primary_service',
 ) => {
 	if (keys?.destination || keys?.origin) {
-		const origin = getByKey(data, keys?.origin) || getByKey(data, keys?.alternateOrigin);
+		const origin =	getByKey(data, keys?.origin) || getByKey(data, keys?.alternateOrigin);
 
 		const origin_main = getByKey(data, keys?.origin_main);
 
-		const destination = getByKey(data, keys?.destination)
+		const destination =	getByKey(data, keys?.destination)
 			|| getByKey(data, keys?.alternateDestination);
 
 		const destination_main = getByKey(data, keys?.destination_main);

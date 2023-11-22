@@ -1,17 +1,8 @@
-import { currencyOptions } from '../helpers/constants';
+import { COMMODITY_TYPE_OPTIONS, currencyOptions } from '../helpers/constants';
 
 const THRESHOLD = 0;
-const COMMODITY_TYPE_OPTIONS = {
-	general: [
-		{ label: 'All', value: 'all' },
-	],
-	special_consideration: [
-		{ label: 'Dangerous Goods', value: 'dangerous' },
-		{ label: 'Temperature Controlled/Pharma', value: 'temp_controlled' },
-		{ label: 'Other Special Commodity Sub Type', value: 'other_special' },
-	],
-};
-const airLocalControls = ({ data, serviceIdPresent }) => {
+
+const airLocalControls = ({ data, serviceIdPresent, listAirLineOptions }) => {
 	const controls = [
 		{
 			name        : 'service_provider_id',
@@ -30,6 +21,29 @@ const airLocalControls = ({ data, serviceIdPresent }) => {
 			value       : data?.sourced_by_id,
 			span        : 4,
 			rules       : { required: 'rate provided by user is required' },
+		},
+		{
+			name        : 'airline_id',
+			label       : 'Airline',
+			placeholder : 'AirLine Line',
+			type        : 'select',
+			span        : 4,
+			value       : data?.airline_id,
+			...listAirLineOptions,
+			rules       : { required: 'airline is required' },
+		},
+		{
+			name        : 'commodity',
+			type        : 'select',
+			label       : 'Commodity',
+			placeholder : 'Select Commodity',
+			span        : 4,
+			value       : data?.commodity,
+			disabled    : data?.commodity,
+			rules       : {
+				required: true,
+			},
+			isClearable: true,
 		},
 		{
 			name        : 'commodity_type',

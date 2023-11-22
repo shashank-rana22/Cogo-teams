@@ -5,7 +5,8 @@ import { IcMCopy } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { DEFAULT_VALUE, INCO_TERM_MAPPING, LOADER_COUNT } from '../../../../../configurations/helpers/constants';
+import { DEFAULT_VALUE, INCO_TERM_MAPPING, LOADER_COUNT, UNIT_MAPPING }
+	from '../../../../../configurations/helpers/constants';
 import copyToClipboard from '../../../../../utilis/copyToClipboard';
 import NewServiceProviderModal from '../ServiceProviderModal';
 import styles from '../styles.module.css';
@@ -62,9 +63,16 @@ function ServiceDetailsContent({
 	|| (Array.isArray(airLineName) ? airLineName.join(', ') : ''));
 
 	const formattedDislikeRates = rate_card?.line_items[DEFAULT_VALUE]?.buy_price
-	&& `${rate_card?.line_items[DEFAULT_VALUE]?.currency} 
-		${rate_card?.line_items[DEFAULT_VALUE]?.buy_price} 
-		${['air_freight', 'air_customs']?.includes(filter?.service) ? 'per kg' : ''}`;
+	&& `${formatAmount({
+		amount   : rate_card?.line_items[DEFAULT_VALUE]?.buy_price,
+		currency : rate_card?.line_items[DEFAULT_VALUE]?.currency,
+		options  : {
+			style                 : 'currency',
+			currencyDisplay       : 'symbol',
+			maximumFractionDigits : 0,
+		},
+	})}
+		${UNIT_MAPPING[rate_card?.line_items[DEFAULT_VALUE]?.service_name]}`;
 
 	const handelNewServiceProvider = () => {
 		setServiceModal(!serviceModal);
@@ -296,20 +304,8 @@ function ServiceDetailsContent({
 												<div className={styles.label}>
 													Disliked Rate:
 													<div className={styles.price_value}>
-														{formatAmount({
-															amount   : rate_card?.line_items[0]?.buy_price,
-															currency : rate_card?.line_items[0]?.currency,
-															options  : {
-																style                 : 'currency',
-																currencyDisplay       : 'symbol',
-																maximumFractionDigits : 0,
-															},
-														})}
+														{formattedDislikeRates}
 													</div>
-													{' '}
-													{' '}
-													{['air_freight', 'air_customs']?.includes(filter?.service)
-													&& 'Per Kg' }
 												</div>
 											</div>
 										)}

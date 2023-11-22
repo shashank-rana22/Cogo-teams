@@ -384,3 +384,14 @@ export const COMMODITY_TYPE_OPTIONS = {
 		{ label: 'Other Special Commodity Sub Type', value: 'other_special' },
 	],
 };
+
+export const UNIT_MAPPING = {
+	fcl_freight     : 'per Cont',
+	air_freight     : 'per Kg',
+	ftl_freight     : 'per Truck',
+	trailer_freight : 'per Trailer',
+	ltl_freight     : 'per Truck',
+	haulage_freight : 'per Cont',
+	fcl_cfs         : 'per Cont',
+	fcl_customs     : 'per Cont',
+};
