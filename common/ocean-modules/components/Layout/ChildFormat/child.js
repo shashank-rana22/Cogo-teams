@@ -27,6 +27,8 @@ function Child({
 	error = {},
 	formValues = {},
 	showElements = {},
+	showHeading = true,
+
 }) {
 	const { TOTAL_FIELDS } = getTotalFields({ fields: controls, showElements });
 
@@ -47,11 +49,13 @@ function Child({
 
 	return (
 		<fieldset className={styles.fieldarray} key={field.id}>
-			<legend className={styles.heading}>
-				{startCase(name)}
+			{showHeading ?	(
+				<legend className={styles.heading}>
+					{startCase(name)}
 				&nbsp;
-				{index + INDEX_INCR_BY}
-			</legend>
+					{index + INDEX_INCR_BY}
+				</legend>
+			) : null}
 			{TOTAL_FIELDS.map((rowFields, i) => (
 				<div className={styles.row} key={keysForFields[i]}>
 					{rowFields.map((controlItem) => {
@@ -92,7 +96,7 @@ function Child({
 									index={index}
 									control={control}
 									size="sm"
-									disabled={disabled || disable}
+									disabled={disabled || disable || controlItem?.disabled}
 								/>
 								<p className={styles.errors}>
 									{errorOriginal}

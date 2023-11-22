@@ -4902,6 +4902,12 @@ const partner = {
 			feature      : 'rfq',
 		},
 		{
+			api          : 'list_rfq_shipment_plans',
+			access_type  : 'private',
+			service_name : 'rfq',
+			feature      : 'rfq',
+		},
+		{
 			api          : 'get_contract_previous_service_providers',
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
@@ -9004,6 +9010,14 @@ const partner = {
 		},
 		{
 			api          : 'send_cc_outstanding_report',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'sage',
+
+		},
+		{
+			api          : 'sync_sage_ar_outstanding',
 			access_type  : 'private',
 			module       : 'outstanding',
 			feature      : 'outstanding',
@@ -13280,6 +13294,11 @@ const partner = {
 		},
 	],
 	contracts: [
+		{
+			api          : 'get_contract_service_shipment_data',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
 		{
 			api          : 'get_contract_projected_stats',
 			access_type  : 'private',
