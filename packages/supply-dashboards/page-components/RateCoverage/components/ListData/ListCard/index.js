@@ -68,6 +68,13 @@ function ListCard({
 		loadingSpotSearch,
 	} = useGetSpoetSearches({ feedbackData, requestData, showPopover });
 
+	let filterServiceList = serviceList.filter(
+		(item) => item.service_type === filter?.service,
+	);
+	filterServiceList = ['fcl_freight', 'air_freight'].includes(filter?.service)
+		? serviceList
+		: filterServiceList;
+
 	const originCode = (origin_port || origin_airport || port || origin_location || location)?.port_code;
 
 	const originName = (origin_port || origin_airport || port || origin_location || location || airport)?.name;
@@ -322,7 +329,7 @@ function ListCard({
 							setServiceIdPresent={setServiceIdPresent}
 							getRequest={getRequest}
 							requestData={requestData}
-							serviceList={serviceList}
+							serviceList={filterServiceList}
 							loadingSpotSearch={loadingSpotSearch}
 							spot_data={spot_data}
 							showServicePopover={showPopover}
