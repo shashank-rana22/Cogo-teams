@@ -60,8 +60,6 @@ function Footer({
 				...basicFreightValues
 			} = values;
 
-			console.log('values', values);
-
 			const [exisArrival, exisDeparture, transit_time, exisNumberOfStops] = suitable_schedule.split('_');
 
 			const servicePayload = getServicePayload({
