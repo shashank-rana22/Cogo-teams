@@ -16,8 +16,8 @@ const COLUMNS = [
 		accessor : (item) => <div>{item?.task_id}</div>,
 	},
 	{
-		id       : 'request_by',
-		Header   : 'Request By',
+		id       : 'performed_by',
+		Header   : 'PERFORMED BY',
 		accessor : (item) => (
 			<div className={styles.label}>
 				{startCase(item?.request_submitted_by?.name) || '-'}
