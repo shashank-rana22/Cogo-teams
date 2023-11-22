@@ -1,6 +1,7 @@
-const SERVICE_TYPE = 'fcl_freight_local';
-
-const getAutoUpsellPayload = ({ task = {}, values = {}, countryId = '', consigneeId = '' }) => {
+const getCreateOrgBillingAddr = ({
+	// task = {},
+	values = {}, countryId = '', userData,
+}) => {
 	const {
 		name = '',
 		business_name = '',
@@ -9,31 +10,35 @@ const getAutoUpsellPayload = ({ task = {}, values = {}, countryId = '', consigne
 		address = '',
 		tax_number_document_url = '',
 		mobile_number = {},
-		email = '',
+		email = '', is_sez = '',
+		sez_proof,
 	} = values || {};
 
-	const { shipment_id = '', task_field_id = '' } = task || {};
+	// const { task_field_id = '' } = task || {};
+
+	const isSez = is_sez === 'yes';
 
 	const payload = {
-		shipment_id,
 		address,
 		pincode,
 		tax_number,
+		organization_branch_id  : userData?.organization_branch_id,
 		name                    : business_name,
 		tax_number_document_url : tax_number_document_url?.finalUrl,
-		service_type            : SERVICE_TYPE,
-		trade_partner_id        : task_field_id,
+		// organization_trade_party_id : task_field_id,
 		country_id              : countryId,
+		is_sez                  : isSez,
+		...(isSez ? { sez_proof: sez_proof?.finalUrl } : {}),
 		poc_details             : [{
 			name,
 			email,
 			mobile_number       : mobile_number?.number,
 			mobile_country_code : mobile_number?.country_code,
 		}],
-		organization_id: consigneeId || undefined,
+		organization_id: userData?.organization_id,
 	};
 
 	return payload;
 };
 
-export default getAutoUpsellPayload;
+export default getCreateOrgBillingAddr;

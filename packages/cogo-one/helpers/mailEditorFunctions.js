@@ -82,9 +82,9 @@ function useMailEditorFunctions({
 		firestore,
 		draftMessageData,
 		buttonType,
-		rteEditorPayload  : handlePayload(),
-		roomData          : formattedData,
-		parentMessageData : eachMessage,
+		getRteEditorPayload : handlePayload,
+		roomData            : formattedData,
+		parentMessageData   : eachMessage,
 		setEmailState,
 		body,
 		emailState,
@@ -141,6 +141,7 @@ function useMailEditorFunctions({
 			});
 			return;
 		}
+
 		replyMailApi({
 			payload,
 			bodyPreview: rawRTEContent?.slice(

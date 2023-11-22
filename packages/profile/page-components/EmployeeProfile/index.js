@@ -1,4 +1,4 @@
-import { Button, Placeholder, Popover, Breadcrumb } from '@cogoport/components';
+import { Button, Placeholder, Popover, Breadcrumb, Avatar } from '@cogoport/components';
 import {
 	IcMArrowBack,
 	IcMArrowDown,
@@ -72,11 +72,18 @@ function EmployeeProfile() {
 				<div className={styles.profile_container}>
 					<div className={styles.profile_flex}>
 						<div className={styles.left_image}>
-							<img
-								className={styles.profile_img}
-								src={employee_detail?.passport_size_photo_url}
-								alt="profile"
-							/>
+							{employee_detail?.passport_size_photo_url
+								? (
+									<img
+										className={styles.profile_img}
+										src={employee_detail?.passport_size_photo_url}
+										alt="profile"
+									/>
+								) : (
+									<div className={styles.profile_img_1}>
+										<Avatar personName={employee_detail?.name} style={{ marginRight: 4 }} />
+									</div>
+								)}
 							<div
 								className={styles.profile_img_icon}
 								onClick={() => setOpenEditProfile(true)}
