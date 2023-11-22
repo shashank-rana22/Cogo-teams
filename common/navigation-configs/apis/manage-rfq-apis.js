@@ -217,7 +217,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'organization',
 	},
-
+	{
+		api          : 'create_organization_trade_parties',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
 ];
 
 export default apis;
