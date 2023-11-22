@@ -73,7 +73,7 @@ request.interceptors.request.use((oldConfig) => {
 		}
 	}
 	if (PEEWEE_SERVICES.includes(serviceName) && isDevMode) {
-		newConfig.baseURL = process.env.NEXT_PUBLIC_STAGE_URL;
+		newConfig.baseURL = 'https://f5b4-2401-4900-1c96-b097-91c4-19eb-d800-f060.ngrok-free.app'; // Remove this later
 	}
 	if (serviceName === ATHENA_SERVICE) {
 		newConfig.auth_token = process.env.DATA_PIPELINE_SECRET_KEY;
