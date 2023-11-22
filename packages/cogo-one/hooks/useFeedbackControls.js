@@ -15,6 +15,12 @@ function RenderLabel({ label = '' }) {
 		</div>
 	);
 }
+const SERIAL_ID_LABEL_MAPPING = {
+	dislike_id : 'select_dislike_id',
+	default    : 'select_sid',
+	missing_id : 'select_missing_id',
+};
+
 const useFeedbackControls = ({
 	watchCategory = '',
 	setAdditionalInfo = () => {},
@@ -139,10 +145,12 @@ const useFeedbackControls = ({
 		},
 		{
 			...(checkRequest || {}),
-			label          : <RenderLabel label={t('myTickets:select_sid')} />,
+			label: <RenderLabel
+				label={t(`myTickets:${SERIAL_ID_LABEL_MAPPING[watchIdType] || SERIAL_ID_LABEL_MAPPING.default}`)}
+			/>,
 			name           : 'serial_id',
 			controllerType : 'asyncSelect',
-			placeholder    : t('myTickets:select_sid'),
+			placeholder    : t(`myTickets:${SERIAL_ID_LABEL_MAPPING[watchIdType] || SERIAL_ID_LABEL_MAPPING.default}`),
 			rules          : { required: true },
 			initialCall    : true,
 			isClearable    : true,
