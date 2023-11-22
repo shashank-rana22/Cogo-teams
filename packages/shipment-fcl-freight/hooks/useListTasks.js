@@ -1,4 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -6,7 +7,7 @@ import { useContext, useEffect, useCallback } from 'react';
 
 const SHOW_ALL_TASKS = ['manager', 'admin', 'coe_head'];
 
-const STAKEHOLDER_MAPPING = {
+const getStakeHolderMapping = ({ isVisible }) => ({
 	booking_desk                    : 'service_ops',
 	lastmile_ops                    : 'lastmile_ops',
 	document_desk                   : 'service_ops',
@@ -15,7 +16,8 @@ const STAKEHOLDER_MAPPING = {
 	booking_agent_manager           : 'booking_agent',
 	sales_agent                     : 'sales_agent',
 	consignee_shipper_booking_agent : 'booking_agent',
-};
+	so2_executive                   : isVisible ? 'service_ops' : undefined,
+});
 
 function useListTasks({
 	filters = {},
@@ -29,6 +31,10 @@ function useListTasks({
 	const { refetchServices = () => { }, shipment_data = {} } = useContext(ShipmentDetailContext);
 
 	const { stakeholders = [] } = shipment_data || {};
+
+	const geo = getGeoConstants();
+
+	const { is_task_visible_to_so2_executive = false } = geo.others?.navigations?.bookings?.invoicing || {};
 
 	let updatedActiveStakeholder = activeStakeholder;
 
@@ -49,13 +55,16 @@ function useListTasks({
 
 	const user_id = profile?.user?.id;
 
-	const stakeholder = STAKEHOLDER_MAPPING[updatedActiveStakeholder] || '';
+	const stakeHolderMapping = getStakeHolderMapping({ isVisible: is_task_visible_to_so2_executive });
+
+	const stakeholder = stakeHolderMapping[updatedActiveStakeholder] || '';
 
 	let showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
 
-	if (updatedActiveStakeholder === 'lastmile_ops' && !showOnlyMyTasks) {
+	if ((updatedActiveStakeholder === 'lastmile_ops' || is_task_visible_to_so2_executive) && !showOnlyMyTasks) {
 		showTaskFilters = {};
 	}
+
 	SHOW_ALL_TASKS.forEach((item) => {
 		if (updatedActiveStakeholder?.includes(item)) {
 			showOnlyMyTasks = false;

@@ -125,7 +125,7 @@ const useProfileDetails = () => {
 		},
 	);
 
-	const [initialQuestion, setInitialQuestion] = useState(GLOBAL_CONSTANTS.zeroth_index);
+	const [initialQuestion, setInitialQuestion] = useState('');
 
 	const formProps = useForm({
 		defaultValues: {
