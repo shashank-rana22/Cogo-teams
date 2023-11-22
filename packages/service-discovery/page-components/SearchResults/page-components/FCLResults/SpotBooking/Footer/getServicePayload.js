@@ -4,7 +4,13 @@ const geo = getGeoConstants();
 
 const INCO_TERM_EXPORT = ['cif', 'cfr', 'cpt', 'cip', 'dat', 'dap', 'ddp'];
 
-const getServiceWisePayload = ({ service = {}, values = {} }) => {
+const getServiceWisePayload = ({
+	service = {},
+	values = {},
+	haulageOriginLocationId = '',
+	haulageDestinationLocationId = '',
+	tradeType = '',
+}) => {
 	const default_service_provider_id = geo.uuid.cogo_freight_supplier;
 
 	const free_days = INCO_TERM_EXPORT.includes(service?.inco_term) ? 4 : 10;
@@ -96,6 +102,20 @@ const getServiceWisePayload = ({ service = {}, values = {} }) => {
 			bls_count : 1,
 			status    : 'active',
 		},
+		haulage_freight: {
+			cargo_weight_per_container : service?.cargo_weight_per_container,
+			container_size             : service?.container_size,
+			container_type             : service?.container_type,
+			commodity                  : service?.commodity,
+			containers_count           : service?.containers_count,
+			destination_location_id    : haulageDestinationLocationId,
+			origin_location_id         : haulageOriginLocationId,
+			status                     : 'active',
+			trade_type                 : tradeType,
+			transport_mode             : 'rail',
+			haulage_type               : 'carrier',
+			service_type               : 'haulage_freight',
+		},
 	};
 
 	return MAPPING[service?.service_type] || undefined;
@@ -105,18 +125,52 @@ const getServicePayload = ({
 	fclServices = [],
 	formValues = {},
 	detentionValues = {},
-}) => fclServices.reduce(
-	(acc, cur) => ({
-		...acc,
-		[`${cur.service_type}_services_attributes`]: [
-			...(acc[`${cur.service_type}_services_attributes`] || []),
-			getServiceWisePayload({
-				service : cur,
-				values  : { ...formValues, ...detentionValues },
-			}),
-		],
-	}),
-	{},
-);
+	primaryServices = [],
+}) => {
+	const fclServiceAttributes = fclServices.reduce(
+		(acc, cur) => ({
+			...acc,
+			[`${cur.service_type}_services_attributes`]: [
+				...(acc[`${cur.service_type}_services_attributes`] || []),
+				getServiceWisePayload({
+					service : cur,
+					values  : { ...formValues, ...detentionValues },
+				}),
+			],
+		}),
+		{},
+	);
+
+	const haulageServiceAttributes = primaryServices.reduce((acc, cur) => {
+		const HAULAGE_ARRAY = [];
+
+		if (cur.destination_port.is_icd) {
+			HAULAGE_ARRAY.push(getServiceWisePayload({
+				service                      : { ...cur, service_type: 'haulage_freight' },
+				values                       : { ...formValues, ...detentionValues },
+				haulageOriginLocationId      : formValues.destination_main_port_id,
+				haulageDestinationLocationId : cur.destination_port_id,
+				tradeType                    : 'import',
+			}));
+		}
+
+		if (cur.origin_port.is_icd) {
+			HAULAGE_ARRAY.push(getServiceWisePayload({
+				service                      : { ...cur, service_type: 'haulage_freight' },
+				values                       : { ...formValues, ...detentionValues },
+				haulageOriginLocationId      : cur.origin_port_id,
+				haulageDestinationLocationId : formValues.origin_main_port_id,
+				tradeType                    : 'export',
+			}));
+		}
+
+		return {
+			...acc,
+			haulage_freight_services_attributes: [...(acc.haulage_freight_services_attributes || []), ...HAULAGE_ARRAY],
+		};
+	}, {});
+
+	return { ...fclServiceAttributes, ...haulageServiceAttributes };
+};
 
 export default getServicePayload;

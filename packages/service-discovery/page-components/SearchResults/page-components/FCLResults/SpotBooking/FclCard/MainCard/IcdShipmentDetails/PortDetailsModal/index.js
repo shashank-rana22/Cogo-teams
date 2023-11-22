@@ -35,6 +35,10 @@ function PortDetailsModal({
 					{updatedControls.map((currControls) => {
 						const ActiveElement = getElementController(currControls.type);
 
+						if (!currControls.show) {
+							return null;
+						}
+
 						return (
 							<div
 								key={currControls.name}

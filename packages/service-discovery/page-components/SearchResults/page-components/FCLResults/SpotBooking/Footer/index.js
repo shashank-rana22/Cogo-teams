@@ -25,6 +25,10 @@ function Footer({
 		(item) => (item.service_type === service_type) || item.service_type.includes('local'),
 	);
 
+	const primaryServices = Object.values(service_details).filter(
+		(item) => (item.service_type === service_type),
+	);
+
 	const [, triggerCreateCheckout] = useRequest({
 		method : 'POST',
 		url    : '/create_checkout',
@@ -51,8 +55,12 @@ function Footer({
 				arrival = '',
 				sailing_schedule = false,
 				suitable_schedule = '',
+				origin_main_port_id = '',
+				destination_main_port_id = '',
 				...basicFreightValues
 			} = values;
+
+			console.log('values', values);
 
 			const [exisArrival, exisDeparture, transit_time, exisNumberOfStops] = suitable_schedule.split('_');
 
@@ -63,14 +71,19 @@ function Footer({
 					number_of_stops,
 					departure,
 					arrival,
+					origin_main_port_id,
+					destination_main_port_id,
 				} : {
 					shipping_line_id,
 					number_of_stops : exisNumberOfStops,
 					departure       : exisDeparture,
 					arrival         : exisArrival,
 					transit_time,
+					origin_main_port_id,
+					destination_main_port_id,
 				},
 				detentionValues,
+				primaryServices,
 			});
 
 			const payload = {

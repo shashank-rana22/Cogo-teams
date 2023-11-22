@@ -35,7 +35,7 @@ function IcdShipmentDetails({ detail = {}, control = () => {}, errors = {}, watc
 						/>
 					) : <IcCFcrossInCircle className={styles.value} />}
 
-					Origin Main Port:
+					Origin Main Port
 				</div>
 			) : null}
 
@@ -47,7 +47,7 @@ function IcdShipmentDetails({ detail = {}, control = () => {}, errors = {}, watc
 						/>
 					) : <IcCFcrossInCircle className={styles.value} />}
 
-					Destination Main Port:
+					Destination Main Port
 				</div>
 			) : null}
 
