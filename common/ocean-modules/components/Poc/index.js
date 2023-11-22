@@ -114,7 +114,12 @@ function Poc({
 
 						{shipment_data?.end_to_end_shipment?.is_possible
 						&& primary_service?.trade_type === 'import'
-						&& <Agent primary_service={primary_service} />}
+						&& (
+							<Agent
+								primary_service={primary_service}
+								shipmentStakeholderData={shipmentStakeholderData}
+							/>
+						)}
 
 						{!isEmpty(addCompany) && (
 							<AddCompanyModal
