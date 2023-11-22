@@ -68,6 +68,10 @@
 	align-items: center;
 	justify-content: flex-start;
 	padding: 8px 0;
+
+	@media (max-width: 768px) {
+		min-width: 50%;
+	}
 }
 
 .small_title {

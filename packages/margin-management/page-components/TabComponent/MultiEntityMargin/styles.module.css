@@ -2,6 +2,12 @@
 	width: fit-content;
 }
 
+.square {
+	margin: 12px 0;
+	overflow: auto;
+	cursor: pointer;
+}
+
 .column {
 	display: flex;
 	flex: 1;
@@ -12,6 +18,10 @@
 	font-size: 14px;
 	text-overflow: ellipsis;
 	border-radius: 6px;
+
+	@media (max-width: 768px) {
+		width: 200px;
+	}
 }
 
 .column .core-ui-input-root {
@@ -27,11 +37,24 @@
 	padding: 12px;
 	font-size: 12px;
 	font-weight: bold;
+
+	@media (max-width: 768px) {
+		display: flex;
+		justify-content: center;
+		width: 200px;
+	}
 }
 
-.square {
-	margin: 12px 0;
-	cursor: pointer;
+.column_name {
+	padding: 12px;
+	font-size: 12px;
+	font-weight: bold;
+
+	@media (max-width: 768px) {
+		display: flex;
+		justify-content: center;
+		width: 200px;
+	}
 }
 
 .btn_wrapper {
@@ -48,10 +71,20 @@
 	flex-direction: row;
 	justify-content: space-between;
 	padding: 0 24px;
+
+	@media (max-width: 768px) {
+		width: 200px;
+	}
 }
 
 .view_btn {
 	font-size: 12px;
+
+	@media (max-width: 768px) {
+		display: flex;
+		justify-content: center;
+		width: 200px;
+	}
 }
 
 .view_btn:hover {
@@ -65,4 +98,9 @@
 	align-items: center;
 	justify-content: center;
 	height: 300px;
+}
+
+.row_item {
+	display: flex;
+	flex-direction: row;
 }

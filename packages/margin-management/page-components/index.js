@@ -30,10 +30,10 @@ function MarginManagement() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex}>
-				<h1 className={styles.heading}>
-					Margin Management
+				<div className={styles.heading}>
+					<h1>Margin Management</h1>
 					<ScopeSelect size="md" apisToConsider={['list_margins']} />
-				</h1>
+				</div>
 				<Button
 					onClick={() => router.push('/margins/create')}
 					size="lg"
