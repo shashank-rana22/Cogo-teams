@@ -8,25 +8,15 @@ import styles from './styles.module.css';
 function LikeDislike({ rateCardData = {}, detail = {}, isMobile = false, refetchSearch = () => {} }) {
 	const [showFeedbackModal, setShowFeedbackModal] = useState(false);
 
-	const { is_liked = false, likes_count = 0, is_disliked = false, dislikes_count = 0 } = rateCardData || {};
+	const { is_disliked = false } = rateCardData || {};
 
-	const [likeState, setLikeState] = useState({
-		is_liked,
-		likes_count    : is_liked ? likes_count + 1 : likes_count,
-		is_disliked,
-		dislikes_count : is_disliked ? dislikes_count + 1 : dislikes_count,
-	});
+	const [isDisliked, setIsDisliked] = useState(is_disliked);
 
-	const onCloseFeedbackModal = () => { setShowFeedbackModal(false); };
+	const onCloseFeedbackModal = () => setShowFeedbackModal(false);
 
 	useEffect(() => {
-		setLikeState({
-			is_liked,
-			likes_count    : is_liked ? likes_count + 1 : likes_count,
-			is_disliked,
-			dislikes_count : is_disliked ? dislikes_count + 1 : dislikes_count,
-		});
-	}, [dislikes_count, is_disliked, is_liked, likes_count]);
+		setIsDisliked(is_disliked);
+	}, [is_disliked]);
 
 	return (
 		<div className={styles.container}>
@@ -34,7 +24,7 @@ function LikeDislike({ rateCardData = {}, detail = {}, isMobile = false, refetch
 				<IcCLike
 					width="20px"
 					height="16px"
-					className={cl`${styles.dislike} ${likeState.is_disliked ? styles.active : ''}`}
+					className={cl`${styles.dislike} ${isDisliked ? styles.active : ''}`}
 				/>
 
 				<Button
@@ -51,8 +41,6 @@ function LikeDislike({ rateCardData = {}, detail = {}, isMobile = false, refetch
 					show={showFeedbackModal}
 					rate={rateCardData}
 					details={detail}
-					likeState={likeState}
-					setLikeState={setLikeState}
 					onClose={onCloseFeedbackModal}
 					isMobile={isMobile}
 					refetchSearch={refetchSearch}

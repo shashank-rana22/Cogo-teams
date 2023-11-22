@@ -39,8 +39,6 @@ const MAPPING = {
 	trailer_freight : 'per Trailer',
 	ltl_freight     : 'per Truck',
 	haulage_freight : 'per Cont',
-	fcl_cfs         : 'per Cont', // need to check
-	fcl_customs     : 'per Cont',
 };
 
 const getFreightprice = ({
@@ -59,7 +57,7 @@ const getFreightprice = ({
 
 	const priceToTake = service_type !== primary_service ? total_price_discounted : freight_price_discounted;
 
-	if (['fcl_freight', 'haulage_freight', 'fcl_cfs', 'fcl_customs'].includes(service_type)) {
+	if (['fcl_freight', 'haulage_freight'].includes(service_type)) {
 		return priceToTake / containers_count;
 	}
 
