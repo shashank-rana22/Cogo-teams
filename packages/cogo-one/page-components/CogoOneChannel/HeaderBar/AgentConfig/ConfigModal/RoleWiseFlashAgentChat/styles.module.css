@@ -31,6 +31,12 @@
 		padding: 8px 20px 8px 10px;
 		border-right: 1px solid #d3d3d3;
 	}
+
+	@media (max-width: 576px) {
+		width: 100%;
+		padding: 8px 20px 8px 10px;
+		border-right: unset !important;
+	}
 }
 
 .select_section {

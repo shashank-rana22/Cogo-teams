@@ -1,7 +1,19 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 
+import RenderTradeParty from './RenderTradeParty';
+
 const geo = getGeoConstants();
+const ALLOWABLE_ENTITY_CODES = ['101', '401', '301'];
+const handleModifiedOptions = ({ options:tradeData = [] }) => {
+	const opt = (tradeData || []).map((item) => {
+		if (item?.sage_organization_id !== null) {
+			return item;
+		}
+		return [];
+	}).flat();
+	return opt;
+};
 
 const controls = [
 	{
@@ -43,6 +55,7 @@ const controls = [
 		type        : 'async-select',
 		asyncKey    : 'list_trade_parties',
 		initialCall : true,
+		renderLabel : (option) => <RenderTradeParty option={option} />,
 		valueKey    : 'id',
 		labelKey    : 'legal_business_name',
 		span        : 4,
@@ -157,12 +170,16 @@ const getControls = ({
 	isEdit = false,
 	entityType,
 	setEditMode,
+	entityValue,
 	setLedgerCurrency,
 	setTradeId,
 	setShowBprNumber,
 	itemData,
 	docTypeValue,
 }) => controls.map((control) => {
+	const modifiedOptions = ALLOWABLE_ENTITY_CODES.includes(entityValue) ? {
+		getModifiedOptions: handleModifiedOptions,
+	} : {};
 	const { name } = control;
 	if (name === 'entityType' && isEdit) {
 		return {
@@ -247,6 +264,7 @@ const getControls = ({
 		return {
 			...control,
 			disabled : true,
+			...modifiedOptions,
 			onChange : (e, obj) => {
 				setTradeId(obj?.id);
 				setShowBprNumber(obj);
@@ -256,6 +274,7 @@ const getControls = ({
 	if (name === 'customerId') {
 		return {
 			...control,
+			...modifiedOptions,
 			onChange: (e, obj) => {
 				setTradeId(obj?.id);
 				setShowBprNumber(obj);

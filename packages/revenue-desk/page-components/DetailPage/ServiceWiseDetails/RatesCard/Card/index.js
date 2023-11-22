@@ -1,5 +1,5 @@
 import { Pill, Toast } from '@cogoport/components';
-import { IcMOverflowDot } from '@cogoport/icons-react';
+import { IcMOpenlink, IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
 import Footer from './Footer';
@@ -177,6 +177,26 @@ function Card({
 							<div>
 								<SoOneUpdatedRates data={data} singleServiceData={singleServiceData} />
 							</div>
+						) : null
+					}
+					{
+						data?.rowData?.rate_procurement_proof_url ? (
+							<Pill size="md" color="#F7FAEF">
+								<div
+									role="presentation"
+									style={{ color: '#849E4C', cursor: 'pointer' }}
+									onClick={(e) => { e.stopPropagation(); }}
+								>
+									<a
+										href={data?.rowData?.rate_procurement_proof_url}
+										target="_blank"
+										rel="noreferrer"
+									>
+										Procurement Proof
+										<IcMOpenlink />
+									</a>
+								</div>
+							</Pill>
 						) : null
 					}
 					<div style={{ display: 'flex', alignItems: 'center' }}>

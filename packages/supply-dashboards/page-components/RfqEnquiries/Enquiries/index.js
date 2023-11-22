@@ -1,16 +1,31 @@
-import { Tabs, TabPanel, Toggle } from '@cogoport/components';
+import { Tabs, TabPanel, Toggle, Placeholder } from '@cogoport/components';
 import { IcMArrowBack, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { format } from '@cogoport/utils';
+import { format, isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import EmptyState from '../../../common/EmptyState';
 import useGetRfqSearches from '../hooks/useGetRfqSearches';
+import useListShipmentPlans from '../hooks/useGetShipmentPlan';
 
 import CardList from './CardList';
 import NegotiateRate from './NegotiateRate';
 import Remarks from './Remarks';
 import ShipmentDetails from './ShipmentDetails';
+import ShipmentPlan from './ShipmentPlan';
 import styles from './styles.module.css';
+
+function ShipmentPlanLoadState() {
+	const PLACEHOLDER_COUNT = 3;
+	return (
+		<div style={{ padding: '20px', display: 'flex', flexDirection: 'column' }}>
+			<Placeholder style={{ width: '60%', height: '30px', marginBottom: '14px' }} />
+			{[...Array(PLACEHOLDER_COUNT).keys()].map((i) => (
+				<Placeholder key={i} style={{ width: '100%', height: '20px', marginBottom: '12px' }} />
+			))}
+		</div>
+	);
+}
 
 function Enquiries() {
 	const ZEROVALUE = 0;
@@ -28,6 +43,12 @@ function Enquiries() {
 		setPage,
 	} = useGetRfqSearches({ rfqId, relevantToUser });
 
+	const {
+		loading: shipmentPlansLoading = false,
+		data: shipmentplanData = {}, listShipmentPlans = () => {},
+	} = useListShipmentPlans({ selectedCard });
+	const { list } = shipmentplanData || [];
+
 	const negotiation_remarks = data?.data[ZEROVALUE]?.negotiation_remarks;
 	const onChange = () => {
 		setRelevantToUser((prev) => !prev);
@@ -42,6 +63,12 @@ function Enquiries() {
 			setRevertCounts(OBJ);
 		}
 	}, [data]);
+
+	useEffect(() => {
+		if (activeTab === 'shipment_plan') {
+			listShipmentPlans();
+		}
+	}, [activeTab, listShipmentPlans]);
 
 	return (
 		<div className={styles.enquirypage}>
@@ -135,6 +162,22 @@ function Enquiries() {
 											</div>
 								)}
 							</TabPanel>
+
+							<TabPanel name="shipment_plan" title="Shipment Plan">
+								<div
+									className={styles.shipment_details}
+								>
+									{shipmentPlansLoading && <ShipmentPlanLoadState />}
+									{!shipmentPlansLoading && isEmpty(list) ? <EmptyState />
+										: (list || []).map((value) => (
+											<ShipmentPlan
+												value={value}
+												key={value?.id}
+											/>
+										))}
+								</div>
+							</TabPanel>
+
 						</Tabs>
 					</div>
 					{selectedCard ? (

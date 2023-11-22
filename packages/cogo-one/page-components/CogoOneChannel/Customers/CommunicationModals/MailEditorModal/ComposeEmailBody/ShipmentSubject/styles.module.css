@@ -10,6 +10,10 @@
 			}
 		}
 	}
+
+	@media (max-width: 576px) {
+		flex-direction: column;
+	}
 }
 
 .agent_label {
@@ -34,10 +38,18 @@
 
 .subject_select {
 	width: 60% !important;
+
+	@media (max-width: 576px) {
+		width: 100% !important;
+	}
 }
 
 .subject_input {
-	margin-left: 10px;
+	margin: 0 0 0 10px;
+
+	@media (max-width: 576px) {
+		margin: 4px 0 0;
+	}
 }
 
 .created_at {

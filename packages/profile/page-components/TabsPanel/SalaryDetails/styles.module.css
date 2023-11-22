@@ -32,7 +32,8 @@
 
 .heading {
 	display: flex;
-	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .personal {
@@ -58,4 +59,59 @@
 
 .info_container > :not(:last-child) {
 	margin-bottom: 16px;
+}
+
+.head_text {
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.side_label {
+	color: #828282;
+}
+
+.side_value {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.details {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.bank_detail {
+	display: flex;
+	flex-basis: 50%;
+	flex-direction: column;
+	margin-bottom: 16px;
+}
+
+.btn {
+	display: flex;
+	align-items: center;
+}
+
+.paid {
+	color: greenyellow;
+}
+
+.progress {
+	color: #c26d1a;
+}
+
+.heading_one {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.flex {
+	display: flex;
+	flex-direction: column;
 }

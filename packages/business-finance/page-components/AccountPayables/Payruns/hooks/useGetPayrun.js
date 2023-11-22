@@ -5,7 +5,7 @@ import { useCallback } from 'react';
 const getPayrunListPayload = ({ activePayrunTab, overseasData, query, pageIndex, pageSize, activeEntity = '' }) => ({
 	pageSize,
 	state              : activePayrunTab,
-	type               : activePayrunTab !== 'INITIATED' ? overseasData : undefined,
+	type               : overseasData || undefined,
 	uploadDateSortType : 'desc',
 	dueDateSortType    : 'asc',
 	createdAtSortType  : 'desc',

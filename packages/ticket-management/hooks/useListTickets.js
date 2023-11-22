@@ -29,6 +29,7 @@ const useListTickets = ({
 	sortBy,
 	idFilters = {},
 	setIdFilters = () => {},
+	adminSpectator = '',
 }) => {
 	const { startDate, endDate } = date || {};
 	const { agent, category } = searchParams || {};
@@ -74,9 +75,10 @@ const useListTickets = ({
 			service,
 			trade,
 			requestType,
+			adminSpectator,
 		});
 		return { ...payload, ...(TICKET_SECTION_MAPPING?.[status] || {}) };
-	}, [performerId, agent, searchQuery, category, spectatorType,
+	}, [performerId, agent, searchQuery, category, spectatorType, adminSpectator,
 		startDate, endDate, sortType, sortOrder, idType, serialId, requestType,
 		filterCategory, subcategory, raisedBy, raisedTo, service, trade, status]);
 

@@ -17,7 +17,7 @@
 }
 
 .total_accounts {
-	padding-bottom: 4px;
+	padding-bottom: 20px;
 	font-size: 16px;
 	color: #212121;
 
@@ -30,19 +30,19 @@
 .category_accounts {
 	display: flex;
 	width: 100%;
-	padding-bottom: 20px;
+	padding-bottom: 26px;
 	border-bottom: 1px solid #e0e0e0;
 }
 
 .unverified_accounts {
-	padding: 10px 0;
+	padding: 20px 0 10px;
 }
 
 .categorize_accounts {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-	padding-top: 10px;
+	padding-top: 7px;
 }
 
 .unverified {

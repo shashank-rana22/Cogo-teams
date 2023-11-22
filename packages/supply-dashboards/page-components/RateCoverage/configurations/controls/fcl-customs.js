@@ -140,7 +140,7 @@ const fclCustomsControls = ({
 			placeholder : 'Cargo handling types',
 			validations : [{ type: 'required', message: 'Cargo handling type is required' }],
 		},
-		source === 'live_booking'
+		['live_booking', 'rate_feedback', 'rate_request']?.includes(source)
 			? {
 				name  : 'is_shipper_specific',
 				label : 'Shipper Specific Rate',

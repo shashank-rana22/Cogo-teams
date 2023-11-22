@@ -1,7 +1,5 @@
 import { CustomOptions } from '@cogoport/air-modules';
 
-const SPLIT_SERVICE_TEXT = 2;
-
 const getLocalControls = (service_type, formattedRate, shipment_data) => {
 	const formattedValue = formattedRate?.[formattedRate?.primary_service?.id];
 	const exportValue	= (shipment_data?.all_services || [])
@@ -11,8 +9,6 @@ const getLocalControls = (service_type, formattedRate, shipment_data) => {
 	const importValue	= (shipment_data?.all_services || [])
 		.find((serviceObj) => serviceObj?.service_type.includes('air_freight_local_service')
 		&& serviceObj?.trade_type === 'import');
-
-	const serviceType = service_type?.split('_', SPLIT_SERVICE_TEXT)?.join('_');
 
 	const controlMapping = {
 		air_freight_service: [
@@ -45,7 +41,6 @@ const getLocalControls = (service_type, formattedRate, shipment_data) => {
 						account_type : 'service_provider',
 						status       : 'active',
 						kyc_status   : 'verified',
-						service      : serviceType,
 					},
 				},
 				rules       : { required: 'Service Provider is Required' },
@@ -80,7 +75,6 @@ const getLocalControls = (service_type, formattedRate, shipment_data) => {
 						account_type : 'service_provider',
 						status       : 'active',
 						kyc_status   : 'verified',
-						service      : serviceType,
 					},
 				},
 				rules       : { required: 'Service Provider is Required' },

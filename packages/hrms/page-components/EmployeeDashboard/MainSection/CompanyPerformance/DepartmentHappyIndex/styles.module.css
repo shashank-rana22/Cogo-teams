@@ -1,0 +1,36 @@
+.employee_abs {
+	position: relative;
+	padding: 14px 14px 18px 20px;
+	color: #221f20;
+	background-color: #fef199;
+	border-radius: 16px;
+
+	/* height: 100%; */
+}
+
+.employee_abs_title {
+	font-size: 16px;
+}
+
+.employee_tot_count {
+	font-size: 40px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.employee_abs_img {
+	position: absolute;
+	top: 40px;
+	right: -24px;
+	width: 180px;
+	height: 180px;
+}
+
+.view_abs_flex {
+	display: flex;
+	align-items: center;
+	margin-top: 38px;
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: capitalize;
+}

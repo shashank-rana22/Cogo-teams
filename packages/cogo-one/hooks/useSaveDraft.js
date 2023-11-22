@@ -279,7 +279,7 @@ const useSaveDraft = ({
 	draftMessageData = {},
 	buttonType = '',
 	firestore = {},
-	rteEditorPayload = {},
+	getRteEditorPayload = () => {},
 	parentMessageData = {},
 	setEmailState = () => {},
 	setSendLoading = () => {},
@@ -312,6 +312,8 @@ const useSaveDraft = ({
 		const { is_draft = false, id = '' } = draftMessageData || {};
 
 		let roomIdNew = newComposeRoomId || roomId;
+
+		const rteEditorPayload = await getRteEditorPayload();
 
 		if (!roomIdNew) {
 			roomIdNew = await createDraftRoom({

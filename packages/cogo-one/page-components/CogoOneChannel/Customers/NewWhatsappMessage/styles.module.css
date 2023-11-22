@@ -9,4 +9,9 @@
 			padding: 16px 10px !important;
 		}
 	}
+
+	@media (max-width: 576px) {
+		left: 50% !important;
+		width: 320px !important;
+	}
 }

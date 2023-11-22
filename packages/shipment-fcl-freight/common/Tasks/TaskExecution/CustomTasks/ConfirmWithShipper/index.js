@@ -3,11 +3,15 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState, useContext } from 'react';
 
 import BillingAddress from './BillingAddress';
+import CargoReadiness from './CargoReadiness';
 import CustomerContacts from './CustomerContacts';
+import MarkComplete from './MarkComplete';
 
 const COMPONENT_MAPPING = {
-	0 : CustomerContacts,
-	1 : BillingAddress,
+	0 : CargoReadiness,
+	1 : CustomerContacts,
+	2 : BillingAddress,
+	3 : MarkComplete,
 };
 
 function ConfirmWithShipper({
@@ -15,17 +19,25 @@ function ConfirmWithShipper({
 	onCancel = () => {},
 	refetch = () => {},
 }) {
-	const { shipment_data = {}, refetchServices = () => {} } = useContext(ShipmentDetailContext);
+	const {
+		shipment_data = {}, refetchServices = () => {}, primary_service = {}, servicesList,
+	} = useContext(ShipmentDetailContext);
 
 	const [step, setStep] = useState(task?.tags?.[GLOBAL_CONSTANTS.zeroth_index]);
 	const [consigneeId, setConsigneeId] = useState(shipment_data?.consignee_shipper_id);
 
 	const componentProps = {
 		0: {
-			setStep, task, onCancel, shipment_data, setConsigneeId,
+			setStep, task, onCancel, shipment_data,
 		},
 		1: {
-			task, refetch, onCancel, refetchServices, shipment_data, consigneeId,
+			setStep, task, onCancel, shipment_data, setConsigneeId,
+		},
+		2: {
+			task, refetch, onCancel, refetchServices, shipment_data, consigneeId, primary_service,
+		},
+		3: {
+			task, refetch, onCancel, setStep, servicesList, primary_service,
 		},
 	};
 

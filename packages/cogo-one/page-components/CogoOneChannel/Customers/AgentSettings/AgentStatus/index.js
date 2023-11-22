@@ -14,6 +14,7 @@ function AgentStatus({
 	agentTimeline = () => {},
 	userId = '',
 	firestore = {},
+	isMobile = false,
 }) {
 	const { status = '' } = agentStatus || {};
 
@@ -87,6 +88,7 @@ function AgentStatus({
 					setOpenModal={setOpenInactiveModal}
 					loading={statusLoading}
 					updateUserStatus={updateUserStatus}
+					isMobile={isMobile}
 				/>
 			)}
 		</div>

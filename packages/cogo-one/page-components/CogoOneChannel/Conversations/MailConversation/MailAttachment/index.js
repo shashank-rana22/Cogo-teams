@@ -1,6 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMDownload } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import ViewAttachmentsModal from '../../../../../common/ViewAttachmentsModal';
@@ -37,11 +38,16 @@ const handleDownload = (data) => {
 function MailAttachments({
 	attachmentData = {},
 	loading = false,
+	isMobile = false,
 }) {
 	const [activeAttachmentData, setActiveAttachmentData] = useState(null);
 
 	const allAttachements = attachmentData?.value || [];
 	const externalAttachements = allAttachements.filter((att) => !att.isInline);
+
+	if (isEmpty(externalAttachements)) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
@@ -78,6 +84,7 @@ function MailAttachments({
 					handleDownload={handleDownload}
 					activeAttachmentData={activeAttachmentData}
 					setActiveAttachmentData={setActiveAttachmentData}
+					isMobile={isMobile}
 				/>
 			)}
 		</div>

@@ -24,6 +24,8 @@ function Separation() {
 					<TaskList
 						apiData={stepperStatusMapping}
 						view_type={process_name}
+						getData={data}
+						refetch={refetchApplicationDetails}
 						setCurrentComponent={setCurrentComponent}
 					/>
 				</div>

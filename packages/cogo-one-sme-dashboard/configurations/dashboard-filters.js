@@ -1,5 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
+import { PARTNER_OPTIONS } from '../constants/cogoPartnersList';
 import getBranchesData from '../utils/getBranchesData';
 
 const dashboardFilters = ({ filterParams = {} }) => {
@@ -7,24 +8,13 @@ const dashboardFilters = ({ filterParams = {} }) => {
 
 	return [
 		{
-			name           : 'partner_id',
-			value          : filterParams?.partner_id || '',
-			defaultOptions : true,
-			caret          : true,
-			scope          : 'partner',
-			controlType    : 'asyncSelect',
-			initialCall    : true,
-			asyncKey       : 'partners',
-			placeholder    : 'partner',
-			params         : {
-				filters: {
-					entity_types : ['cogoport'],
-					status       : 'active',
-				},
-				page_limit          : 1000,
-				roles_data_required : false,
-				page                : 1,
-			},
+			name        : 'partner_id',
+			value       : filterParams?.partner_id || '',
+			caret       : true,
+			controlType : 'select',
+			options     : PARTNER_OPTIONS,
+			placeholder : 'partner',
+			isClearable : true,
 		},
 		{
 			name        : 'office_location_id',
@@ -36,6 +26,7 @@ const dashboardFilters = ({ filterParams = {} }) => {
 			valueKey    : 'id',
 			placeholder : 'Office Location',
 			className   : 'office_location',
+			isClearable : true,
 		},
 		{
 			name           : 'role_id',
@@ -51,25 +42,48 @@ const dashboardFilters = ({ filterParams = {} }) => {
 			params         : {
 				filters: {
 					entity_types   : ['cogoport'],
-					stakeholder_id : filterParams?.partner_id,
+					stakeholder_id : filterParams?.partner_id || undefined,
 				},
 			},
 		},
 		{
 			name           : 'reporting_manager_id',
 			value          : filterParams?.reporting_manager_id || '',
-			valueKey       : 'id',
+			valueKey       : 'user_id',
 			labelKey       : 'name',
 			asyncKey       : 'partner_users',
 			controlType    : 'asyncSelect',
 			defaultOptions : true,
 			placeholder    : 'Select Reporting Manager',
+			isClearable    : true,
+			initialCall    : true,
 			params         : {
 				page_limit : 10,
 				filters    : {
-					status     : 'active',
-					partner_id : filterParams?.partner_id,
-
+					status             : 'active',
+					partner_id         : filterParams?.partner_id || undefined,
+					office_location_id : filterParams?.office_location_id || undefined,
+				},
+			},
+		},
+		{
+			name           : 'agent_id',
+			value          : filterParams?.agent_id || '',
+			valueKey       : 'user_id',
+			labelKey       : 'name',
+			asyncKey       : 'partner_users',
+			controlType    : 'asyncSelect',
+			defaultOptions : true,
+			placeholder    : 'Select agent',
+			isClearable    : true,
+			initialCall    : true,
+			params         : {
+				page_limit : 10,
+				filters    : {
+					status               : 'active',
+					partner_id           : filterParams?.partner_id || undefined,
+					office_location_id   : filterParams?.office_location_id || undefined,
+					reporting_manager_id : filterParams?.reporting_manager_id || undefined,
 				},
 			},
 		},
@@ -79,8 +93,9 @@ const dashboardFilters = ({ filterParams = {} }) => {
 			isPreviousDaysAllowed : true,
 			maxDate               : new Date(),
 			showTimeSelect        : false,
-			controlType           : 'dateRangePicker',
+			controlType           : 'singleDateRange',
 			isClearable           : false,
+			size                  : 'sm',
 		},
 	];
 };

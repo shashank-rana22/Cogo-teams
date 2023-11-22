@@ -2,13 +2,15 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
+import { FETCH_API_FOR_REQUEST } from '../constants';
+
 const getParams = ({ serialId }) => ({
 	filters: {
 		serial_id: serialId || undefined,
 	},
 });
 
-function useListShipments({ serialId = 0, ticketId = 0, idType = '', requestType = '' }) {
+function useListShipments({ serialId = 0, ticketId = 0, idType = '', requestType = '', category = '' }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_shipments',
 		method : 'get',
@@ -16,7 +18,11 @@ function useListShipments({ serialId = 0, ticketId = 0, idType = '', requestType
 
 	const getShipmentsList = useCallback(
 		() => {
-			if (idType !== 'sid' && requestType !== 'shipment') {
+			if (idType !== 'sid' && !FETCH_API_FOR_REQUEST.includes(requestType)) {
+				return;
+			}
+
+			if (requestType === 'feedback' && category?.toLowerCase() !== 'shipment') {
 				return;
 			}
 
@@ -28,7 +34,7 @@ function useListShipments({ serialId = 0, ticketId = 0, idType = '', requestType
 				console.error('e:', e);
 			}
 		},
-		[serialId, trigger, idType, requestType],
+		[serialId, trigger, idType, requestType, category],
 	);
 
 	useEffect(() => {

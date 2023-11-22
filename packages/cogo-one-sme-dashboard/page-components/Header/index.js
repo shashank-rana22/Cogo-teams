@@ -9,7 +9,7 @@ function Header({
 }) {
 	return (
 		<div className={styles.header_container}>
-			<h3>SME Transactions Dashboard</h3>
+			<h3>SME Dashboard</h3>
 			<FilterContainer
 				setFilterParams={setFilterParams}
 				filterParams={filterParams}

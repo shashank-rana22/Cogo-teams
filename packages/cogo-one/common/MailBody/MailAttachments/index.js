@@ -8,7 +8,7 @@ import ViewAttachmentsModal from '../../ViewAttachmentsModal';
 
 import styles from './styles.module.css';
 
-function MailAttachments({ mediaUrls = [] }) {
+function MailAttachments({ mediaUrls = [], isMobile = false }) {
 	const [activeAttachmentData, setActiveAttachmentData] = useState({});
 
 	const formattedFiles = formatFileAttributes({ uploadedFiles: mediaUrls });
@@ -50,6 +50,7 @@ function MailAttachments({ mediaUrls = [] }) {
 				setActiveAttachmentData={setActiveAttachmentData}
 				urlType="urlBased"
 				handleDownload={getDownloadFiles}
+				isMobile={isMobile}
 			/>
 		</div>
 	);
