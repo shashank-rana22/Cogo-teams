@@ -1,4 +1,4 @@
-import { MultiSelect } from '@cogoport/components';
+import { MultiSelect, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -21,7 +21,9 @@ function DislikeRate({
 }) {
 	const { label = '', service_type, service_id = '', freight_price_currency = '', unit = '' } = selectedSevice;
 
-	const [selectedReasons, setSelectedReasons] = useState(data[service_id]?.feedbacks || []);
+	const { feedbacks = [] } = data[service_id] || {};
+
+	const [selectedReasons, setSelectedReasons] = useState(feedbacks);
 
 	const formProps = useForm();
 
@@ -54,7 +56,16 @@ function DislikeRate({
 				<MultiSelect
 					options={reasonOptions}
 					value={selectedReasons}
-					onChange={setSelectedReasons}
+					onChange={(value) => {
+						const servicesDeleted = selectedReasons.filter((item) => !value.includes(item));
+
+						if (feedbacks.some((item) => servicesDeleted.includes(item))) {
+							Toast.warn('You cannot unselect submitted feedback');
+							return;
+						}
+
+						setSelectedReasons(value);
+					}}
 					disabled={!isEmpty(unsatisfiedFeedbacksObj)}
 				/>
 			</div>
