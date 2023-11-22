@@ -24,16 +24,16 @@ function MarginManagement() {
 		setActiveService = () => { },
 	} = useListMargins({
 		defaultParams  : { margin_stats_required: true, page_limit: 10 },
-		defaultFilters : { margin_type: 'demand', service: '', status: 'active' },
+		defaultFilters : { margin_type: 'demand', service: '', status: 'active', is_partner_id_present: true },
 	});
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex}>
-				<h1 className={styles.heading}>
-					Margin Management
+				<div className={styles.heading}>
+					<h1>Margin Management</h1>
 					<ScopeSelect size="md" apisToConsider={['list_margins']} />
-				</h1>
+				</div>
 				<Button
 					onClick={() => router.push('/margins/create')}
 					size="lg"
