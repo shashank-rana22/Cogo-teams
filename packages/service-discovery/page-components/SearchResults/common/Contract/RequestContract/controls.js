@@ -12,9 +12,9 @@ const renderAirlinesLabel = (data) => CustomSelectOption({ data, key: 'airlines'
 
 const createContracts = ({ isMobile = false, minCargoValues = {} }) => {
 	const {
-		fcl_freight: { min: minContainerCount },
-		air_freight: { min: minWeight },
-	} = minCargoValues;
+		fcl_freight: { min: minContainerCount } = {},
+		air_freight: { min: minWeight } = {},
+	} = minCargoValues || {};
 
 	return [
 		{
