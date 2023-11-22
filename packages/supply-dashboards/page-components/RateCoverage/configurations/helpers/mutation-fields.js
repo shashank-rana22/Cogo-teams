@@ -130,7 +130,7 @@ function FieldMutation({
 		}
 
 		if (control?.controls) {
-			control.controls.forEach((childCtrl) => {
+			control.controls?.forEach((childCtrl) => {
 				if (childCtrl.name === 'unit') {
 					const UNIT_OPTIONS = {};
 					const chargeValues = values[control.name];
@@ -149,14 +149,14 @@ function FieldMutation({
 
 				if (childCtrl.name === 'code') {
 					const OPTIONS = [];
-					Object.keys(chargeCodes || {}).forEach((code) => {
+					Object.keys(chargeCodes || {})?.forEach((code) => {
 						OPTIONS.push({ label: `${code} ${chargeCodes[code]?.name}`, value: code });
 					});
 					childCtrl.options =	OPTIONS;
 				}
 				if (childCtrl.name === 'cfs_line_items') {
 					const OPTIONS = [];
-					Object.keys(fclCfsChargeCodes || {}).forEach((code) => {
+					Object.keys(fclCfsChargeCodes || {})?.forEach((code) => {
 						OPTIONS.push({ label: `${code} ${fclCfsChargeCodes[code]?.name}`, value: code });
 					});
 					childCtrl.options =	OPTIONS;
@@ -169,7 +169,7 @@ function FieldMutation({
 
 	useEffect(() => {
 		if (freeDetentionDays) {
-			detentionSlabs.forEach((obj, index) => {
+			detentionSlabs?.forEach((obj, index) => {
 				if (!index) {
 					setValue(
 						'detention_days.0.lower_limit',
@@ -184,7 +184,7 @@ function FieldMutation({
 			});
 		}
 		if (freeDemurrageDays) {
-			demurrageSlabs.forEach((obj, index) => {
+			demurrageSlabs?.forEach((obj, index) => {
 				if (!index) {
 					setValue(
 						'demurrage_days.0.lower_limit',
@@ -199,7 +199,7 @@ function FieldMutation({
 			});
 		}
 		if (freeDaysSlabs) {
-			freeDaysSlabs.forEach((obj, index) => {
+			freeDaysSlabs?.forEach((obj, index) => {
 				if (index === 0) {
 					setValue('add_slabs.0.lower_limit', Number(freeDaysLimit) + 1 || 0);
 				} else {
