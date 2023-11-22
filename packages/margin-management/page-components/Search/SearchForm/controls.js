@@ -51,9 +51,8 @@ const getControls = ({ activeTab = '' }) => {
 		{
 			label       : 'Select Rate Type',
 			name        : 'rate_type',
-			type        : 'select',
+			type        : 'multi_select',
 			placeholder : 'Drop down to select',
-			multiple    : false,
 			watch       : true,
 			options     : [
 				{ label: 'Marketplace Rate', value: 'marketplace_rate' },

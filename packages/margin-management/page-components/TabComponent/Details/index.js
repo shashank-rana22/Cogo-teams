@@ -88,7 +88,7 @@ function Details({
 	return (
 		<div className={styles.container}>
 			<div role="presentation">
-				<Info data={data} isDefaultMargin={isDefaultMargin} />
+				<Info data={data} isDefaultMargin={isDefaultMargin} activeTab={activeTab} />
 				<div className={styles.styled_flex}>
 					{!isMobile ? (
 						<div className={styles.slab}>
