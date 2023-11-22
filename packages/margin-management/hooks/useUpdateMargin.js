@@ -22,7 +22,7 @@ const useUpdateMargin = ({ onSuccess } = {}) => {
 			if (isEmpty(params)) {
 				await trigger({ data });
 
-				Toast.success('Margin has been edited sucessfully');
+				Toast.success('Margin Updated sucessfully');
 
 				if (typeof onSuccess === 'function') {
 					onSuccess();

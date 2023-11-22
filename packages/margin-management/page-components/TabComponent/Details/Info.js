@@ -2,7 +2,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function Info({ data = {} }) {
+function Info({ data = {}, isDefaultMargin = false, activeTab = '' }) {
 	const { margin_applied_on = '' } = data || {};
 
 	const {
@@ -35,6 +35,10 @@ function Info({ data = {} }) {
 
 	return (
 		<div style={{ display: 'flex', gap: '4px' }}>
+			{isDefaultMargin && activeTab === 'cogoport' ? (
+				<div className={styles.default_pill}>Default</div>
+			) : null}
+
 			{origin() ? (
 				<div className={styles.pill}>{origin() && `Origin: ${origin()}`}</div>
 			) : null}
