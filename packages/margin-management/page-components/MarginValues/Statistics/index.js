@@ -41,7 +41,7 @@ function Statistics({ marginId = '' }) {
 						/>
 					</div>
 				) : (
-					<div style={{ display: 'flex', gap: '8px' }}>
+					<div className={styles.tiles_container}>
 						{!loading && isEmpty(data) ? (
 							<EmptyState />
 						) : (
