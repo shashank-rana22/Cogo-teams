@@ -19,7 +19,7 @@ function TicketSummary({
 	TicketReviewer: ticketReviewer = {}, IsCurrentReviewer: isCurrentReviewer = false,
 	TicketStatus: ticketStatus = '', AgentName: agentName = '',
 	detailsLoading = false, TicketConfiguration: ticketConfiguration = {},
-	OrganizationData: organizationData = {}, shipmentData = {}, listLoading = false, partnerId = '',
+	OrganizationData: organizationData = {}, updateShipmentData = {}, updateShipmentLoading = false, partnerId = '',
 }) {
 	const {
 		Name: name = '', Email: email = '',
@@ -53,7 +53,7 @@ function TicketSummary({
 
 	const {
 		SerialID: serialId, Service: service, TradeType: tradeType,
-		RequestType: requestType,
+		RequestType: requestType, IDType: idType,
 	} = data || {};
 
 	const authorizers = (closureAuthorizers || []).map((item) => item.Name);
@@ -214,10 +214,11 @@ function TicketSummary({
 				<ShipmentDetails
 					t={t}
 					serialId={serialId}
-					shipmentData={shipmentData}
-					listLoading={listLoading}
+					updateShipmentData={updateShipmentData}
+					updateShipmentLoading={updateShipmentLoading}
 					partnerId={partnerId}
 					service={service}
+					idType={idType}
 				/>
 				{service && (
 					<div className={styles.ticket_data}>

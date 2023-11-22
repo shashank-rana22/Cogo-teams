@@ -11,31 +11,33 @@ const useGetUnreadMails = ({ firestore = {} }) => {
 	const unreadCountSnapshotListener = useRef({});
 
 	useEffect(() => {
-		Notification?.requestPermission()
-			.then(
-				(permissionStatus) => {
-					if (permissionStatus === 'denied') {
-						console.error('Notifications are blocked by the user.');
-					} else if (permissionStatus === 'granted') {
-						mountEmailNotifications({
-							unreadCountSnapshotListener,
-							firestore,
-							loggedInAgentId,
-						});
+		if (window?.Notification) {
+			Notification?.requestPermission()
+				.then(
+					(permissionStatus) => {
+						if (permissionStatus === 'denied') {
+							console.error('Notifications are blocked by the user.');
+						} else if (permissionStatus === 'granted') {
+							mountEmailNotifications({
+								unreadCountSnapshotListener,
+								firestore,
+								loggedInAgentId,
+							});
 
-						mountTeamsNotifications({
-							unreadCountSnapshotListener,
-							loggedInAgentId,
-							firestore,
-						});
-					} else {
-						Toast.error('Notification permission not granted.');
-					}
-				},
-			)
-			.catch(() => {
-				Toast.error('Browser does not support notifications.');
-			});
+							mountTeamsNotifications({
+								unreadCountSnapshotListener,
+								loggedInAgentId,
+								firestore,
+							});
+						} else {
+							Toast.error('Notification permission not granted.');
+						}
+					},
+				)
+				.catch(() => {
+					Toast.error('Browser does not support notifications.');
+				});
+		}
 
 		const unSubMails = unreadCountSnapshotListener.current?.mailNotifications;
 		const unSubTeams = unreadCountSnapshotListener.current?.teamsNotifications;

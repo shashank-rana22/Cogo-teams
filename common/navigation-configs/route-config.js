@@ -57,6 +57,7 @@ import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
 import notifications from './config/notifications';
 import payment from './config/payments';
+import payroll from './config/payroll';
 import performanceAndIncentives from './config/performance-and-incentives';
 import PERFORMANCE_MANAGEMENT from './config/performance-management';
 import printingDesk from './config/printing-desk';
@@ -195,6 +196,7 @@ const routeConfig = {
 	...margins,
 	...saas,
 	...serviceManagement,
+	...payroll,
 	...financePayroll,
 	...payment,
 	...cargoInsurance,

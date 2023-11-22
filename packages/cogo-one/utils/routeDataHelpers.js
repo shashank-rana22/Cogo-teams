@@ -1,5 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+import { ROUTES_MAPPING } from '../constants/shipmentConstants';
+
 const splitByBrackets = (name) => name?.split('(')[GLOBAL_CONSTANTS.zeroth_index] || '';
 
 const popLastName = (name) => name?.split(' ').pop() || '';
@@ -99,3 +101,26 @@ export function formatRouteData({ item = {} }) {
 		},
 	};
 }
+
+export const handleRouteSupply = ({ e, endPoint = '', partnerId = '', service = '', serialId = '' }) => {
+	e.stopPropagation();
+
+	const supplyPage = `${window.location.origin}/${partnerId}/supply/dashboards/${endPoint}
+	?service=${service}&serialId=${serialId}`;
+
+	window.open(supplyPage, '_blank');
+};
+
+export const handleRouteBooking = ({ e, id = '', service = '', partnerId = '' }) => {
+	e.stopPropagation();
+	let shipmentDetailsPage;
+	if (Object.keys(ROUTES_MAPPING || {}).includes(service)) {
+		const route = ROUTES_MAPPING?.[service];
+
+		shipmentDetailsPage = `${window.location.origin}/v2/${partnerId}/booking/${route}/${id}`;
+	} else {
+		shipmentDetailsPage = `${window.location.origin}/${partnerId}/shipments/${id}`;
+	}
+
+	window.open(shipmentDetailsPage, '_blank');
+};

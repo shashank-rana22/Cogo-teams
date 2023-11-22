@@ -5,9 +5,9 @@ import {
 	IcCCountryNetherland,
 	IcCCountrySingapore,
 	IcCCountryVietnam,
-	IcCIndonesia,
-	IcCThailand,
-	IcCChina,
+	IcCIndonesiaCircular,
+	IcCThailandCircular,
+	IcCChinaCircular,
 } from '@cogoport/icons-react';
 
 export const COUNTRIES_TO_SHOW = ['IN', 'NL', 'SG', 'VN', 'TH', 'ID', 'CN'];
@@ -19,9 +19,9 @@ export const ICONS_MAPPING = {
 	NL       : IcCCountryNetherland,
 	SG       : IcCCountrySingapore,
 	VN       : IcCCountryVietnam,
-	TH       : IcCThailand,
-	ID       : IcCIndonesia,
-	CN       : IcCChina,
+	TH       : IcCThailandCircular,
+	ID       : IcCIndonesiaCircular,
+	CN       : IcCChinaCircular,
 	emails   : IcMEmail,
 };
 

@@ -175,5 +175,8 @@
     "reset": "Reset",
     "serial_id": "Serial ID",
     "id_creator": "ID creator",
-    "messaged_at":"Messaged At"
+    "messaged_at":"Messaged At",
+    "unread_message": "Unread Message",
+    "select_missing_id":"Select Missing ID",
+    "select_dislike_id":"Select Dislike ID"
 }

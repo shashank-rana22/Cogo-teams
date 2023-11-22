@@ -31,6 +31,15 @@ const RadioGroupController = dynamic(
 	() => import('@cogoport/forms').then((module) => module.RadioGroupController),
 	{ ssr: false },
 );
+const CheckboxGroupController = dynamic(
+	() => import('@cogoport/forms').then((module) => module.CheckboxGroupController),
+	{ ssr: false },
+);
+
+const CheckboxController = dynamic(
+	() => import('@cogoport/forms').then((module) => module.CheckboxController),
+	{ ssr: false },
+);
 
 function FormElement({ type = '', ...rest }) {
 	if (type === 'select') return <SelectController {...rest} />;
@@ -44,6 +53,10 @@ function FormElement({ type = '', ...rest }) {
 	if (type === 'multi_select') return <MultiSelectController {...rest} />;
 
 	if (type === 'radio') return <RadioGroupController {...rest} />;
+
+	if (type === 'checkboxGroup') return <CheckboxGroupController {...rest} />;
+
+	if (type === 'checkbox') return <CheckboxController {...rest} />;
 
 	return <InputController {...rest} type={type} />;
 }
