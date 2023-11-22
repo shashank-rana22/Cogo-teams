@@ -23,6 +23,7 @@ function NewDislikeModal({
 				<Button
 					type="button"
 					themeType="secondary"
+					onClick={onClose}
 				>
 					Close
 				</Button>
