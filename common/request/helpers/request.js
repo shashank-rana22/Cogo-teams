@@ -82,10 +82,11 @@ request.interceptors.request.use((oldConfig) => {
 	return {
 		...newConfig,
 		headers: {
-			authorizationscope : 'partner',
-			authorization      : `Bearer: ${token}`,
+			authorizationscope           : 'partner',
+			authorization                : `Bearer: ${token}`,
 			authorizationparameters,
-			'auth-token'       : newConfig.auth_token || undefined,
+			'auth-token'                 : newConfig.auth_token || undefined,
+			'ngrok-skip-browser-warning' : '*', // Remove this later
 		},
 	};
 });
