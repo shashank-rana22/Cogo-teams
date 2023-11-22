@@ -52,7 +52,7 @@ function TaskDetails({
 						{taskName}
 						{' '}
 						{service_type && service_type !== 'fcl_freight_service'
-							? `(${startCase(task?.service_type)})` : null}
+							? `(${startCase(service_type)})` : null}
 					</span>
 
 					<div className={styles.task_date_details}>
