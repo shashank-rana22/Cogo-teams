@@ -83,16 +83,18 @@ function Details({
 		setOpenModal(true);
 	};
 
+	const isDefaultMargin = !data?.partner_id;
+
 	return (
 		<div className={styles.container}>
 			<div role="presentation">
-				<Info data={data} />
+				<Info data={data} isDefaultMargin={isDefaultMargin} activeTab={activeTab} />
 				<div className={styles.styled_flex}>
 					{!isMobile ? (
 						<div className={styles.slab}>
 							<div className={styles.small_title}>Partner Entity</div>
 							<div className={styles.small_title_value}>
-								{startCase(business_name) || '--'}
+								{isDefaultMargin ? 'All' : startCase(business_name) || '--'}
 							</div>
 						</div>
 					) : null}
@@ -207,6 +209,7 @@ function Details({
 									setOpenUpdateModal={setOpenUpdateModal}
 									handleDeactivateModal={handleDeactivateModal}
 									setUpdateDiscountSetting={setUpdateDiscountSetting}
+									isDefaultMargin={isDefaultMargin}
 								/>
 							)}
 						>

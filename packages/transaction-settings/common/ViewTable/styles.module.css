@@ -1,0 +1,24 @@
+.table_container {
+	width: 100%;
+	padding: 10px;
+	margin-top: 10px;
+	background-color: #fff;
+
+	:global {
+		.ui_table_body_cell {
+			max-width: 300px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			font-size: 14px;
+		}
+
+		.ui_table_head_cell {
+			max-width: 100px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			font-size: 14px;
+			color: black;
+			white-space: "normal";
+		}
+	}
+}

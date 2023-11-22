@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
-const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
+const useListMargins = ({ defaultParams = {}, defaultFilters = {}, type = '' }) => {
 	const { authParams, selected_agent_id } = useSelector(({ profile }) => ({
 		authParams        : profile?.authParams,
 		selected_agent_id : profile?.selected_agent_id,
@@ -31,7 +31,7 @@ const useListMargins = ({ defaultParams = {}, defaultFilters = {} }) => {
 					status   : 'active',
 					...(defaultFilters || {}),
 					...(restFilters || {}),
-					service  : activeTab !== 'approval_pending' ? activeService : undefined,
+					service  : activeTab !== 'approval_pending' && type !== 'edit' ? activeService : undefined,
 				},
 				...(defaultParams || {}),
 				page,
