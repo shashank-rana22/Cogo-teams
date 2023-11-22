@@ -1,13 +1,23 @@
 import { Button, Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
 import getServicePayload from './getServicePayload';
 import getUpdatePayload from './getUpdatePayload';
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
+
+const cogoVerseTeamIDS = [
+	geo.uuid.cogoverse_admin_id,
+	geo.uuid.cogoverse_executive_id,
+	geo.uuid.cogoverse_kam_id,
+];
 
 function Footer({
 	detentionValues = {},
@@ -19,6 +29,12 @@ function Footer({
 	setScreen = () => {},
 }) {
 	const router = useRouter();
+
+	const { query = {}, userRoleIDs = [] } = useSelector(({ profile, general }) => ({
+		query       : general?.query,
+		userRoleIDs : profile?.partner?.user_role_ids,
+	}));
+
 	const { service_details = {}, service_type = ''	} = detail;
 
 	const fclServices = Object.values(service_details).filter(
@@ -62,6 +78,14 @@ function Footer({
 
 			const [exisArrival, exisDeparture, transit_time, exisNumberOfStops] = suitable_schedule.split('_');
 
+			const isCogoVerseMember = userRoleIDs.some((elem) => cogoVerseTeamIDS.includes(elem));
+
+			const tags = ['version2'];
+
+			if (query?.source === 'communication' || isCogoVerseMember) {
+				tags.push('cogoverse');
+			}
+
 			const servicePayload = getServicePayload({
 				fclServices,
 				formValues: sailing_schedule ? {
@@ -93,7 +117,7 @@ function Footer({
 				user_id                     : detail?.user?.id,
 				quotation_type              : 'customize',
 				existing_shipment_id        : detail?.source === 'upsell' ? detail?.source_id : undefined,
-				tags                        : ['version2'],
+				tags,
 				...servicePayload,
 			};
 
