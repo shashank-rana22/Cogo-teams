@@ -30,16 +30,35 @@ const getPriceError = (error = {}) => {
 function MainCard({ shippingLines = [], detail = {}, formProps = {}, watch = () => {} }) {
 	const geo = getGeoConstants();
 
-	const { service_type = '', service_details = {}, destination_port_id = '', origin_port_id = '' } = detail;
+	const {
+		service_type = '',
+		service_details = {},
+		destination_port_id = '',
+		origin_port_id = '',
+		origin_port = {},
+		destination_port = {},
+	} = detail;
 
-	const { shipping_line_id = '', sailing_schedule = false } = watch() || {};
+	const { is_icd: isOriginIcd = false } = origin_port;
+	const { is_icd: isDestinationIcd = false } = destination_port;
+
+	const { control, formState: { errors }, setValue = () => {} } = formProps;
+
+	const { sailing_schedule = false } = watch() || {};
 
 	const shippingLineOptions = shippingLines.map((item) => ({
 		value : item?.id,
 		label : item?.short_name,
 	}));
 
-	const { sailingSchedules = [] } = useGetSailingSchedules({ shipping_line_id, destination_port_id, origin_port_id });
+	const { sailingSchedules = [] } = useGetSailingSchedules({
+		destination_port_id,
+		origin_port_id,
+		watch,
+		isOriginIcd,
+		isDestinationIcd,
+		setValue,
+	});
 
 	const sailingSchedulesOptions = useMemo(() => sailingSchedules.reduce((acc, listObj) => {
 		const present_date = formatDate({
@@ -80,8 +99,6 @@ function MainCard({ shippingLines = [], detail = {}, formProps = {}, watch = () 
 	}, []), [geo.formats.date.default, sailingSchedules]);
 
 	const controls = fclControls({ shippingLineOptions });
-
-	const { control, formState: { errors } } = formProps;
 
 	const [shippingLineControl, ...restControls] = controls;
 
@@ -139,9 +156,10 @@ function MainCard({ shippingLines = [], detail = {}, formProps = {}, watch = () 
 				</div>
 
 				<IcdShipmentDetails
-					detail={detail}
 					control={control}
 					errors={errors}
+					isOriginIcd={isOriginIcd}
+					isDestinationIcd={isDestinationIcd}
 				/>
 
 				<div className={styles.time_div}>

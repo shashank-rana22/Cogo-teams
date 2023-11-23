@@ -6,13 +6,13 @@ import getElementController from '../../../../../../../../configs/getElementCont
 
 import styles from './styles.module.css';
 
-function IcdShipmentDetails({ detail = {}, control = () => {}, errors = {} }) {
-	const { origin_port = {}, destination_port = {} } = detail;
-
-	const { is_icd:isOriginIcd = false } = origin_port;
-	const { is_icd:isDestinationIcd = false } = destination_port;
-
-	const controls = [
+function IcdShipmentDetails({
+	control = () => {},
+	errors = {},
+	isDestinationIcd = false,
+	isOriginIcd = false,
+}) {
+	const controls = useMemo(() => [
 		{
 			label       : 'Origin Main Port',
 			show        : isOriginIcd,
@@ -33,18 +33,20 @@ function IcdShipmentDetails({ detail = {}, control = () => {}, errors = {} }) {
 			placeholder : 'Select',
 			size        : 'md',
 		},
-	];
+	], [isDestinationIcd, isOriginIcd]);
 
-	const finalControls = getControls(controls, 'fcl_freight');
+	const updatedControls = useMemo(() => {
+		const finalControls = getControls(controls, 'fcl_freight');
 
-	const updatedControls = useMemo(() => finalControls.reduce((acc, cur) => [...acc, {
-		...cur,
-		params: {
-			...cur.params,
-			fields  : cur.params.fields.filter((item) => item !== 'is_icd'),
-			filters : { ...cur.params.filters, is_icd: false },
-		},
-	}], []), [finalControls]);
+		return finalControls.reduce((acc, cur) => [...acc, {
+			...cur,
+			params: {
+				...cur.params,
+				fields  : cur.params.fields.filter((item) => item !== 'is_icd'),
+				filters : { ...cur.params.filters, is_icd: false },
+			},
+		}], []);
+	}, [controls]);
 
 	if (!isOriginIcd && !isDestinationIcd) {
 		return null;
