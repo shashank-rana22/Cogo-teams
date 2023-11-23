@@ -1,0 +1,11 @@
+.tradeparty {
+	display: flex;
+	flex-direction: column;
+	padding: 4px;
+	font-weight: 600;
+}
+
+.label {
+	font-size: var(--font-size-lg);
+	font-weight: 500;
+}

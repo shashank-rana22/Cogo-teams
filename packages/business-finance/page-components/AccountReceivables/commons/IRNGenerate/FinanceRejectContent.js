@@ -137,7 +137,7 @@ function FinanceRejectContent({ itemData, refetch }) {
 						setUploadInvoice={setUploadInvoice}
 						uploadEInvoice={uploadEInvoice}
 						loading={invoiceLoading}
-						showXml = {XML_REQUIRED}
+						showXml={XML_REQUIRED}
 					/>
 				)}
 				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost)

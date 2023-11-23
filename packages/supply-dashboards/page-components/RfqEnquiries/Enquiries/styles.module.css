@@ -156,3 +156,8 @@
 	min-width: 82px;
 	text-transform: capitalize;
 }
+
+.shipment_details {
+	height: 300px;
+	overflow: scroll;
+}

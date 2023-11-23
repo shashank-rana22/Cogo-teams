@@ -10,12 +10,14 @@ import useGetJvList from '../../hooks/useGetJvList';
 import usePostBulkJV from '../../hooks/usePostBulkJV';
 
 import BulkJvUpload from './BulkJvUploadModal/index';
+import Confirmation from './Confirmation';
 import CreateJvModal from './CreateJvModal';
 import styles from './styles.module.css';
 
 function JournalVoucher({ entityCode }) {
 	const [filters, setFilters] = useState({});
 	const [show, setShow] = useState(false);
+	const [showConfirm, setShowConfirm] = useState(false);
 	const [showBulkJV, setShowBulkJV] = useState(false);
 	const [selectedJV, setSelectedJV] = useState([]);
 	const { data, loading, refetch } = useGetJvList({ filters, entityCode });
@@ -65,7 +67,7 @@ function JournalVoucher({ entityCode }) {
 					<Button
 						size="md"
 						themeType="primary"
-						onClick={() => bulkPostJV({ selectedJV, setSelectedJV })}
+						onClick={() => setShowConfirm(true)}
 						disabled={isEmpty(selectedJV) || bulkPostLoading}
 						loading={bulkPostLoading}
 						style={{ marginLeft: '10px', padding: '18px' }}
@@ -84,6 +86,16 @@ function JournalVoucher({ entityCode }) {
 				selectedJV={selectedJV}
 				setSelectedJV={setSelectedJV}
 			/>
+			{showConfirm ? (
+				<Confirmation
+					showConfirm={showConfirm}
+					setShowConfirm={setShowConfirm}
+					bulkPostJV={bulkPostJV}
+					selectedJV={selectedJV}
+					setSelectedJV={setSelectedJV}
+				/>
+			) : null}
+
 			{show ? (
 				<CreateJvModal
 					show={show}

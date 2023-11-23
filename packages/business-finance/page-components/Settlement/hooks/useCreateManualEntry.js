@@ -1,3 +1,5 @@
+/* eslint-disable max-lines-per-function */
+
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
@@ -54,18 +56,20 @@ const useCreateManualEntry = ({
 		accMode: accountMode,
 		paymentDate: paymentDateValue,
 		docType: docTypeValue,
+		entityType:entityValue,
 	} = formValues || {};
 
 	const controls = useMemo(() => getControls({
 		isEdit,
 		entityType,
+		entityValue,
 		setEditMode,
 		setLedgerCurrency,
 		setTradeId,
 		setShowBprNumber,
 		itemData,
 		docTypeValue,
-	}), [docTypeValue, entityType, isEdit, itemData]);
+	}), [docTypeValue, entityType, entityValue, isEdit, itemData]);
 	const [processedControls, setProcessedControls] = useState(controls);
 
 	const { vender, venderLoading } = useVender({ setVenderDataValue, tpId, accountMode });

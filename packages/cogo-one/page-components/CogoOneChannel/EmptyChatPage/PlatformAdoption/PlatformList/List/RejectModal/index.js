@@ -11,13 +11,14 @@ function RejectAccount({
 	verifyAccount = {}, setVerifyAccount = () => {}, selectDoc = {},
 	verifyKyc = () => {}, loading = false, updateCpDocument = () => {},
 }) {
-	const { show = false, rejectReason = '' } = rejectAccount || {};
+	const { show = false, rejectReason = [], otherReason = '' } = rejectAccount || {};
 	const { accountType = '', orgData = {}, showAccountDetails = false } = verifyAccount || {};
 	const { id = '' } = orgData || {};
 
 	const handleClose = () => {
 		setRejectAccount(() => ({
-			rejectReason : '',
+			rejectReason : [],
+			otherReason  : '',
 			show         : false,
 		}));
 		setVerifyAccount((prev) => ({
@@ -33,6 +34,7 @@ function RejectAccount({
 				status,
 				partnerId : getOrgId({ orgData })?.[accountType],
 				rejectReason,
+				otherReason,
 			});
 		} else {
 			verifyKyc({
@@ -41,6 +43,7 @@ function RejectAccount({
 				rejectReason,
 				requestId     : id,
 				requestStatus : 'processing',
+				otherReason,
 			});
 		}
 	};
@@ -54,27 +57,30 @@ function RejectAccount({
 			<Modal.Header title="Reject Verification" />
 			<Modal.Body>
 				<div className={styles.verification}>
-					<div className={styles.title}>
-						Please provide rejection details
-					</div>
-					{['CP', 'SP', 'trade_party'].includes(accountType) ? (
-						<Textarea
-							size="md"
-							placeholder="Enter remark here"
-							value={rejectReason}
-							onChange={(val) => setRejectAccount((prev) => ({ ...prev, rejectReason: val }))}
-						/>
-					) : (
-						<AsyncSelect
-							asyncKey="allocation_rejection_type"
-							placeholder="Select reasons"
-							isClearable
-							value={rejectReason}
-							onChange={(val) => setRejectAccount((prev) => ({ ...prev, rejectReason: val }))}
-							initialCall
-							renderLabel={(item) => <>{startCase(item?.reason)}</>}
-						/>
-					)}
+					{['CP', 'SP'].includes(accountType) && showAccountDetails ? (
+						<>
+							<div className={styles.title}>
+								Please provide rejection details
+							</div>
+							<AsyncSelect
+								asyncKey="allocation_rejection_type"
+								placeholder="Select reasons"
+								isClearable
+								value={rejectReason}
+								onChange={(val) => setRejectAccount((prev) => ({ ...prev, rejectReason: val }))}
+								initialCall
+								multiple
+								renderLabel={(item) => <>{startCase(item?.reason)}</>}
+							/>
+						</>
+					) : null}
+					<div className={styles.title}>Enter Remark</div>
+					<Textarea
+						size="md"
+						placeholder="Enter remark here"
+						value={otherReason}
+						onChange={(val) => setRejectAccount((prev) => ({ ...prev, otherReason: val }))}
+					/>
 				</div>
 			</Modal.Body>
 			<Modal.Footer>

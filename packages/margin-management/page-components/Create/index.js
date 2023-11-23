@@ -78,7 +78,9 @@ function Create({ type = 'create', item = {} }) {
 		setValue,
 	});
 
-	const { loading = false } = useGetChargeCodes({ service: formValues?.service, setChargeCodes });
+	const { loading = false } = useGetChargeCodes({
+		service: formValues?.service, setChargeCodes,
+	});
 
 	const marginControls = getMarginControls({ service: formValues?.service, chargeCodes });
 
@@ -115,7 +117,7 @@ function Create({ type = 'create', item = {} }) {
 				setValue(elem?.name, newItem?.[elem.name]);
 			});
 		}
-	}, [extraControls, item, setValue, showAdvancedForm]);
+	}, [extraControls, item, setValue, loading]);
 
 	useEffect(() => {
 		margin_slabs?.forEach((_o, index) => {
@@ -182,6 +184,8 @@ function Create({ type = 'create', item = {} }) {
 		(ctrl) => !extraControls.some((ctrl2) => ctrl2.name === ctrl.name),
 	);
 
+	const isDefaultMargin = !item?.partner_id;
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_wrap}>
@@ -193,14 +197,14 @@ function Create({ type = 'create', item = {} }) {
 						</div>
 					</Button>
 				</Link>
-				{type === 'edit' && (
+				{type === 'edit' && !isDefaultMargin ? (
 					<Button themeType="secondary" onClick={() => setOpenModal(true)}>
 						<IcMDelete
 							style={{ width: '2em', height: '2em', marginRight: '4px' }}
 						/>
 						DEACTIVATE
 					</Button>
-				)}
+				) : null}
 			</div>
 
 			<form onSubmit={handleSubmit(handleFormSubmit)} className={styles.sub_container}>
@@ -267,7 +271,7 @@ function Create({ type = 'create', item = {} }) {
 					) : null}
 
 				<Margin
-					key={item.id}
+					key={`${item.id}_${loading}`}
 					idValues={idValues}
 					type={type}
 					service={formValues?.service}

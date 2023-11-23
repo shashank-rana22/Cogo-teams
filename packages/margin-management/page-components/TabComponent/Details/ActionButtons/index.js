@@ -10,6 +10,7 @@ function ActionButtons({
 	setOpenUpdateModal = () => {},
 	handleDeactivateModal = () => { },
 	setUpdateDiscountSetting = () => { },
+	isDefaultMargin = false,
 }) {
 	return (
 		<div className={styles.container}>
@@ -25,17 +26,19 @@ function ActionButtons({
 				/>
 			</Button>
 
-			<Button
-				themeType="secondary"
-				className={styles.btn}
-				onClick={handleDeactivateModal}
-				size="sm"
-			>
-				{activeTab === 'approval_pending' ? 'Reject' : 'Deactivate'}
-				<IcMDelete
-					style={{ width: '1em', height: '1em', marginRight: '4px' }}
-				/>
-			</Button>
+			{!isDefaultMargin ? (
+				<Button
+					themeType="secondary"
+					className={styles.btn}
+					onClick={handleDeactivateModal}
+					size="sm"
+				>
+					{activeTab === 'approval_pending' ? 'Reject' : 'Deactivate'}
+					<IcMDelete
+						style={{ width: '1em', height: '1em', marginRight: '4px' }}
+					/>
+				</Button>
+			) : null}
 
 			{activeTab === 'approval_pending' ? (
 				<Button

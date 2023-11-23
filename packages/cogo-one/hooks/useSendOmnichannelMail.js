@@ -42,7 +42,7 @@ const useSendOmnichannelMail = ({
 			const { roomId, messageId } = await saveDraft();
 
 			const response = await trigger({
-				data: getCommunicationPayload({
+				data: await getCommunicationPayload({
 					userId,
 					formattedData,
 					draftMessage: `${emailState?.rteContent}<br/>${emailState?.body}`,
