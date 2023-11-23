@@ -7,7 +7,11 @@ export const handleBillType = (billType, isProforma) => {
 			invoiceType = 'Purchase Invoice';
 		}
 	} else if (billType === 'REIMBURSEMENT') {
-		invoiceType = 'Reimbursement';
+		if (isProforma) {
+			invoiceType = 'Reimb. Proforma';
+		} else {
+			invoiceType = 'Reimb. Invoice';
+		}
 	} else if (billType === 'EXPENSE') {
 		invoiceType = 'Expense';
 	} else if (billType === 'CREDIT_NOTE') {
