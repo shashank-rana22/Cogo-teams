@@ -11,14 +11,6 @@ import getServicePayload from './getServicePayload';
 import getUpdatePayload from './getUpdatePayload';
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
-
-const cogoVerseTeamIDS = [
-	geo.uuid.cogoverse_admin_id,
-	geo.uuid.cogoverse_executive_id,
-	geo.uuid.cogoverse_kam_id,
-];
-
 function Footer({
 	detentionValues = {},
 	handleSubmit = () => {},
@@ -34,6 +26,14 @@ function Footer({
 		query       : general?.query,
 		userRoleIDs : profile?.partner?.user_role_ids,
 	}));
+
+	const geo = getGeoConstants();
+
+	const cogoVerseTeamIDS = [
+		geo.uuid.cogoverse_admin_id,
+		geo.uuid.cogoverse_executive_id,
+		geo.uuid.cogoverse_kam_id,
+	];
 
 	const { service_details = {}, service_type = ''	} = detail;
 
