@@ -1,7 +1,7 @@
 import { Pagination, Table, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMArrowRight, IcMHome } from '@cogoport/icons-react';
+import { IcMArrowRight, IcMHome, IcMRefresh } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
@@ -114,6 +114,7 @@ function PlatformHistory({
 						</div>
 						<IcMArrowRight className={styles.side_arrow} />
 						<div className={styles.title}>Task History</div>
+						<IcMRefresh className={styles.refresh} onClick={() => onboardingRequest({ page: 1 })} />
 					</div>
 					<AdoptionFilter
 						setFilterValues={setFilterValues}
