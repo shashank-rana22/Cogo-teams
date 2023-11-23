@@ -115,6 +115,7 @@ const getServiceWisePayload = ({
 			transport_mode             : 'rail',
 			haulage_type               : 'carrier',
 			service_type               : 'haulage_freight',
+			shipping_line_id           : values?.shipping_line_id,
 		},
 	};
 
