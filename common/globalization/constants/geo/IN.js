@@ -754,6 +754,7 @@ export default {
 					stakeholder_wise_invoice_required : true,
 					is_purchase_visible_to_kam        : false,
 					is_task_visible_to_so2_executive  : false,
+					edit_internal_poc                 : false,
 				},
 			},
 			business_finance: {

@@ -607,6 +607,7 @@ export default {
 					stakeholder_wise_invoice_required : false,
 					is_purchase_visible_to_kam        : true,
 					is_task_visible_to_so2_executive  : true,
+					edit_internal_poc                 : true,
 				},
 			},
 			partner: {
