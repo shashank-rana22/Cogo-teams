@@ -28,7 +28,8 @@ const config = {
 				popoverKey  : 'performed_by',
 				withPopover : true,
 			},
-			func: 'renderFieldPair',
+			span : 1.5,
+			func : 'renderFieldPair',
 		},
 		{
 			label     : 'Port pair',
@@ -57,12 +58,6 @@ const config = {
 			span  : 1.5,
 		},
 		{
-			label : 'Closing Remarks',
-			key   : 'closing_remarks',
-			func  : 'renderClosingRemarks',
-			span  : 1,
-		},
-		{
 			label : 'Status',
 			key   : 'status',
 			func  : 'renderStatus',
@@ -71,7 +66,13 @@ const config = {
 		{
 			label : 'Created At',
 			key   : 'created_at',
-			func  : 'renderCreatedAt',
+			func  : 'renderDate',
+			span  : 1,
+		},
+		{
+			label : 'Updated At',
+			key   : 'updated_at',
+			func  : 'renderDate',
 			span  : 1,
 		},
 	],

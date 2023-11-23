@@ -64,7 +64,13 @@ const config = {
 		{
 			label : 'Created At',
 			key   : 'created_at',
-			func  : 'renderCreatedAt',
+			func  : 'renderDate',
+			span  : 1,
+		},
+		{
+			label : 'Updated At',
+			key   : 'updated_at',
+			func  : 'renderDate',
 			span  : 1,
 		},
 	],

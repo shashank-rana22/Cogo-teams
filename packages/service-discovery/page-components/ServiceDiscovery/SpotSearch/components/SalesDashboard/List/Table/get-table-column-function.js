@@ -202,10 +202,10 @@ const getTableColumnFunction = (key) => {
 				</strong>
 			);
 		},
-		renderCreatedAt: ({ created_at = '' }) => (
+		renderDate: (item, field) => (
 			<span>
 				{formatDate({
-					date       : created_at,
+					date       : item[field.key] || '',
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 					formatType : 'date',
 				})}
