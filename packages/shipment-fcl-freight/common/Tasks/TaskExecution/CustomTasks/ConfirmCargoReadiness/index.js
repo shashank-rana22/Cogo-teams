@@ -59,8 +59,7 @@ function ConfirmCargoReadiness({ task = {}, onCancel = () => {},	refetch = () =>
 					onClick={handleSubmit(onSubmit)}
 					disabled={loading}
 				>
-					Next
-
+					Submit
 				</Button>
 			</div>
 
