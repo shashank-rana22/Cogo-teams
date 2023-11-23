@@ -20,7 +20,7 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 		status = '', serial_id, selected_schedule_arrival, selected_schedule_departure,
 		preferred_freight_rate, preferred_freight_rate_currency, commodity_type = '', price_type = '',
 		payment_term, booking_params = {}, preferred_airlines = [], operation_type = '', packages, volume,
-		chargeable_weight, trade_type,
+		chargeable_weight, trade_type, remarks = [],
 	} = primary_service_detail || feedbackData || requestData || {};
 
 	const { cargo_weight_per_container, inco_term: dislike_rates_inco } = booking_params || {};
@@ -138,20 +138,31 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 
 		closing_remarks?.length > DEFAULT_VALUE && (
 			{
-				label: 'Closing Remarks',
-				value:
-	<div className={styles.pointer}>
-		{closing_remarks?.length > 1
-			? (
-				<Tooltip content={startCase(closing_remarks)}>
-					{startCase(closing_remarks?.[GLOBAL_CONSTANTS.zeroth_index])}
-					, +
-					{closing_remarks.length - 1}
-					more
-				</Tooltip>
-			) : startCase(closing_remarks)}
-		<IcMCopy style={{ marginLeft: '4px' }} onClick={() => handleCopy(closing_remarks)} />
-	</div>,
+				label : 'Closing Remarks',
+				value : (
+					<div className={styles.pointer}>
+						{closing_remarks?.length > 1
+							? (
+								<Tooltip content={startCase(closing_remarks)}>
+									{startCase(closing_remarks?.[GLOBAL_CONSTANTS.zeroth_index])}
+									, +
+									{closing_remarks.length - 1}
+									more
+								</Tooltip>
+							) : startCase(closing_remarks)}
+						<IcMCopy style={{ marginLeft: '4px' }} onClick={() => handleCopy(closing_remarks)} />
+					</div>),
+			}
+		),
+
+		!isEmpty(remarks) && (
+			{
+				label : 'Remarks',
+				value : (
+					<div className={styles.pointer}>
+						{remarks.map(startCase).join(', ')}
+						<IcMCopy style={{ marginLeft: '4px' }} onClick={() => handleCopy(remarks)} />
+					</div>),
 			}
 		),
 	];

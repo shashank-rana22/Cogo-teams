@@ -53,7 +53,7 @@ const useGetListCoverage = ({ userService }) => {
 		method : 'GET',
 	}, { manual: true });
 
-	const getListCoverage = useCallback(async (sid) => {
+	const getListCoverage = useCallback(async (serial_id, source_serial_id) => {
 		const { assign_to_id, releventToMeValue, daily_stats, start_date, end_date, ...restFilters } = filter;
 
 		const FINAL_FILTERS = {};
@@ -73,10 +73,6 @@ const useGetListCoverage = ({ userService }) => {
 
 		const DATE_PARAMS = {};
 
-		const idToUse = source === 'live_booking' ? 'shipment_serial_id' : 'serial_id';
-
-		const idValue = sid ? parseInt(sid, 10) : undefined;
-
 		if (isTodayDateRequired) {
 			DATE_PARAMS.start_date = new Date();
 		}
@@ -95,11 +91,12 @@ const useGetListCoverage = ({ userService }) => {
 				params: {
 					filters: {
 						...FINAL_FILTERS,
-						status         : filter?.status === 'completed' ? ['completed', 'aborted'] : filter?.status,
-						[idToUse]      : idValue || undefined,
-						source         : source || undefined,
-						user_id        : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
-						cogo_entity_id : filter?.cogo_entity_id === 'cogo_entity_id'
+						status           : filter?.status === 'completed' ? ['completed', 'aborted'] : filter?.status,
+						source_serial_id : source_serial_id || undefined,
+						serial_id        : serial_id || undefined,
+						source           : source || undefined,
+						user_id          : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
+						cogo_entity_id   : filter?.cogo_entity_id === 'cogo_entity_id'
 							? user_data?.partner?.id : undefined,
 						is_flash_booking_reverted,
 						...DATE_PARAMS,

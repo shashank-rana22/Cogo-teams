@@ -44,8 +44,8 @@ function ListCard({
 		destination_location = '',
 		shipment_id = '',
 		reverted_status = '',
-		shipment_serial_id = '',
 		serial_id = '',
+		source_serial_id = '',
 		assigned_to = {},
 		service_provider = {},
 		reverted_count,
@@ -125,11 +125,10 @@ function ListCard({
 					<div className={styles.head}>
 						{data?.updated_at && (
 							<div style={{ display: 'flex' }}>
-								{!isEmpty(shipment_serial_id) && 	(
+								{!isEmpty(source_serial_id) && 	(
 									<div className={styles.pill}>
-										Shipment Id:
-										{' '}
-										{shipment_serial_id}
+										{`${source === 'live_booking' ? 'Shipment Id: ' : 'Serial Id: '}
+										${source_serial_id}`}
 									</div>
 								)}
 								<div className={styles.pill}>
