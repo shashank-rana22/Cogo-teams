@@ -5,7 +5,7 @@ import { useRouter } from '@cogoport/next';
 import { Layout } from '@cogoport/ocean-modules';
 import { useContext } from 'react';
 
-import useCreateShipmentPlan from '../../../../../../../hooks/useCreateShipmentPlan';
+import useCreateShipmentPlan from '../../../../../../hooks/useCreateShipmentPlan';
 
 import checkContainerNumbers from './checkContainerNumbers';
 import getCreateContractPayload from './getCreateContractPayload';
@@ -18,7 +18,6 @@ function CargoNotReady({ show = false, setShow = () => {}, task = {} }) {
 	const {
 		shipment_data = {},
 		servicesList = [],
-
 	} = useContext(ShipmentDetailContext);
 
 	const onClose = () => setShow(false);

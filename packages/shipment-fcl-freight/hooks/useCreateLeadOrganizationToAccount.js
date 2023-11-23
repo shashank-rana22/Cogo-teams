@@ -34,7 +34,7 @@ function useCreateLeadOrganizationToAccount({
 
 			const updatePendingTaskPayload = {
 				id     : task?.id,
-				tags   : ['2'],
+				tags   : ['1'],
 				status : 'pending',
 				data   : {
 					shipment: {
@@ -52,7 +52,7 @@ function useCreateLeadOrganizationToAccount({
 
 			setConsigneeId(res?.data?.organization_id);
 
-			setStep(2);
+			setStep(1);
 		} catch (error) {
 			toastApiError(error);
 		}

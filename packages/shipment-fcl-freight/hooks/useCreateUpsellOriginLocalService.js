@@ -38,7 +38,7 @@ function useCreateUpsellOriginLocalService({
 			const taskRes =	await apiTrigger({
 				id     : task?.id,
 				status : 'pending',
-				tags   : ['3'],
+				tags   : ['2'],
 				data   : {
 					pending_task: {
 						id              : task?.id,
