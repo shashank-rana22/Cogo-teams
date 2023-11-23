@@ -179,8 +179,9 @@ function ListCard({
 							{(data?.shipping_line?.short_name || data?.airline?.short_name) && (
 								<div>
 									<Pill size="md" color="orange">
+										{source === 'live_booking' && 'Preferred '}
 										{(filter?.service === 'air_freight' || filter?.service === 'air_customs')
-											? 'Preferred Air Line :' : ' Preferred Shipping Line :'}
+											? 'Air Line :' : 'Shipping Line :'}
 										{' '}
 										{filter?.service === 'air_freight' || filter?.service === 'air_customs'
 											? data?.airline?.short_name : data?.shipping_line?.short_name }
