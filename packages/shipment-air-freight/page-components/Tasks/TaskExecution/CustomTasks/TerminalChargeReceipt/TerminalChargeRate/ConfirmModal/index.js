@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import useListShipmentAirFreightConsolidatedInvoices
@@ -25,8 +25,15 @@ function ConfirmModal({
 
 	const finalSubmit = () => {
 		listShipmentConsolidatedInvoices().then(() => {
-			if (!isEmpty(data?.list)) {
-				apiTrigger(taskId);
+			if (isEmpty(data?.list)) {
+				Toast.error('Please generate atleast one IRN');
+			} else {
+				const financeStatus = (data?.list || []).filter((item) => item.status === 'finance_approved');
+				if (!isEmpty(financeStatus)) {
+					apiTrigger(taskId);
+				} else {
+					Toast.error('IRN generation is pending');
+				}
 			}
 		});
 	};

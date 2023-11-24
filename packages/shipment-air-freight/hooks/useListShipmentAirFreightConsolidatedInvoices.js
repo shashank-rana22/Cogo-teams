@@ -11,25 +11,22 @@ const useListShipmentAirFreightConsolidatedInvoices = ({
 		method : 'GET',
 	}, { manual: true });
 
-	const listShipmentConsolidatedInvoices = useCallback(() => {
-		(
-			async () => {
-				try {
-					await trigger({
-						params: {
-							filters: {
-								shipment_id  : mainServicesData?.shipment_id,
-								service_id   : localServiceId,
-								service_type : 'air_freight_local_service',
-								code         : type === 'terminal' ? 'THC' : 'GIC',
-							},
-						},
-					});
-				} catch (err) {
-					toastApiError(err);
-				}
-			}
-		)();
+	const listShipmentConsolidatedInvoices = useCallback(async () => {
+		try {
+			await trigger({
+				params: {
+					filters: {
+						shipment_id  : mainServicesData?.shipment_id,
+						service_id   : localServiceId,
+						service_type : 'air_freight_local_service',
+						code         : type === 'terminal' ? 'THC' : 'GIC',
+						status       : ['init', 'finance_approved'],
+					},
+				},
+			});
+		} catch (err) {
+			toastApiError(err);
+		}
 	}, [localServiceId, mainServicesData?.shipment_id, trigger, type]);
 
 	useEffect(() => {
