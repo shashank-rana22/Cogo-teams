@@ -10,10 +10,12 @@ import Header from './Headers';
 import styles from './styles.module.css';
 
 function ChargeModal({
-	openCharge = false, setOpenCharge = () => {}, data = [], openRateForm = false,
+	openCharge = false, setOpenCharge = () => {}, importRatesData = [],
+	exportRatesData = [], openRateForm = false,
 	setRateValue = () => {}, PortName = {}, portNameValue = {}, rateValue = {}, setOpenRateForm = () => {},
 	selectRequired = false,
 }) {
+	const combinedRatesData = [...importRatesData, ...exportRatesData];
 	const [isChecked, setIsChecked] = useState(false);
 
 	const handelChangeData = (val) => {
@@ -38,7 +40,7 @@ function ChargeModal({
 			/>
 			<Modal.Body>
 				<div>
-					{(data || []).map((val) => (
+					{(combinedRatesData || []).map((val) => (
 						<div className={styles.container} key={val?.id}>
 							<div className={styles.header}>
 								<Checkbox checked={val?.id === isChecked} onChange={() => handelChangeData(val)} />
