@@ -11,6 +11,7 @@ export const CUSTOM_TASKS = [
 	'upload_booking_note',
 	'add_consignee_details',
 	'add_shipper_details',
+	'confirm_cargo_readiness',
 ];
 
 export const CUSTOM_TASK_MAPPING = {
@@ -26,4 +27,5 @@ export const CUSTOM_TASK_MAPPING = {
 	UPLOAD_BOOKING_NOTE             : 'upload_booking_note',
 	ADD_CONSIGNEE_DETAILS           : 'add_consignee_details',
 	ADD_SHIPPER_DETAILS             : 'add_shipper_details',
+	CONFIRM_CARGO_READINESS         : 'confirm_cargo_readiness',
 };

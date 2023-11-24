@@ -44,7 +44,7 @@ function CreateNewPayRun() {
 		deleteInvoices,
 		selectedDataLoading,
 		currency:selectedCurrency,
-	} = useGetAdvancePaymentList({ sort, viewSelectedInvoice });
+	} = useGetAdvancePaymentList({ sort, viewSelectedInvoice, paymentStatus: 'PENDING' });
 	const {
 		data:existpayRunData, loading:existingPayRunLoading,
 		getAdvancedPayment,
@@ -52,8 +52,8 @@ function CreateNewPayRun() {
 
 	const { list = [] } = existpayRunData || {};
 	const {
-		name = '', totalValue = '', currency = '',
-		invoiceCount = '', createdAt = '',
+		name = '', totalValue = '',
+		currency = '', invoiceCount = '', createdAt = '',
 	} = list[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { pageIndex } = data || {};
 	const { list:dataList = [] } = data || {};

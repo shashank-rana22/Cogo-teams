@@ -3,7 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTaskCompleted, IcMTaskNotCompleted, IcMFtick } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
+import { format, startCase } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import CargoDetails from '../../../CargoDetails';
@@ -17,6 +17,7 @@ function TaskDetails({
 	isTaskOpen = false,
 }) {
 	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
+	const { service_type = '' } = task || {};
 
 	const REQUIRED_SERVICE_ARR = [];
 	(task.task_field_ids || []).forEach((id) => {
@@ -47,7 +48,12 @@ function TaskDetails({
 
 			<div className={styles.details_container}>
 				<div className={styles.details}>
-					<span className={styles.task_name}>{taskName}</span>
+					<span className={styles.task_name}>
+						{taskName}
+						{' '}
+						{service_type && service_type !== 'fcl_freight_service'
+							? `(${startCase(service_type)})` : null}
+					</span>
 
 					<div className={styles.task_date_details}>
 						<Tooltip

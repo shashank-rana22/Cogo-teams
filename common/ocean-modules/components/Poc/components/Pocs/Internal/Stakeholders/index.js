@@ -1,4 +1,5 @@
 import { Button, Popover } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMCall, IcMEdit, IcMEmail } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -12,6 +13,10 @@ function Stakeholders({
 	data = [], setAddPoc = () => {}, rolesPermission = {},
 	shipment_data = {}, activeStakeholder = '',
 }) {
+	const geo = getGeoConstants();
+
+	const { edit_internal_poc = false } = geo.others?.navigations?.bookings?.invoicing || {};
+
 	const editInternalPoc = rolesPermission?.edit_internal_poc || [];
 
 	const { is_rate_reverted = false, shipment_type = '' } = shipment_data;
@@ -59,7 +64,7 @@ function Stakeholders({
 						</div>
 
 						<div className={styles.action_container}>
-							{editInternalPoc?.includes(stakeholder_type) ? (
+							{(editInternalPoc?.includes(stakeholder_type) || edit_internal_poc) ? (
 								<Button
 									themeType="linkUi"
 									onClick={() => setAddPoc({

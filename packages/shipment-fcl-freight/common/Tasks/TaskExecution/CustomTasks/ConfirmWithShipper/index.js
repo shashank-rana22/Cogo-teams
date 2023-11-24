@@ -3,15 +3,13 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState, useContext } from 'react';
 
 import BillingAddress from './BillingAddress';
-import CargoReadiness from './CargoReadiness';
 import CustomerContacts from './CustomerContacts';
 import MarkComplete from './MarkComplete';
 
 const COMPONENT_MAPPING = {
-	0 : CargoReadiness,
-	1 : CustomerContacts,
-	2 : BillingAddress,
-	3 : MarkComplete,
+	0 : CustomerContacts,
+	1 : BillingAddress,
+	2 : MarkComplete,
 };
 
 function ConfirmWithShipper({
@@ -28,15 +26,12 @@ function ConfirmWithShipper({
 
 	const componentProps = {
 		0: {
-			setStep, task, onCancel, shipment_data,
-		},
-		1: {
 			setStep, task, onCancel, shipment_data, setConsigneeId,
 		},
-		2: {
+		1: {
 			task, refetch, onCancel, refetchServices, shipment_data, consigneeId, primary_service,
 		},
-		3: {
+		2: {
 			task, refetch, onCancel, setStep, servicesList, primary_service,
 		},
 	};

@@ -13,6 +13,7 @@ import {
 	UploadComplianceDocs,
 	UploadContainerDetails,
 	ConfirmWithShipper,
+	ConfirmCargoReadiness,
 } from './CustomTasks';
 
 const TRADE_PARTY_TYPE = {
@@ -33,6 +34,7 @@ const {
 	UPLOAD_BOOKING_NOTE,
 	ADD_CONSIGNEE_DETAILS,
 	ADD_SHIPPER_DETAILS,
+	CONFIRM_CARGO_READINESS,
 } = CUSTOM_TASK_MAPPING;
 
 const COMPONENT_MAPPING = {
@@ -48,6 +50,7 @@ const COMPONENT_MAPPING = {
 	[UPLOAD_BOOKING_NOTE]             : UploadBookingNote,
 	[ADD_CONSIGNEE_DETAILS]           : AddCompanyModal,
 	[ADD_SHIPPER_DETAILS]             : AddCompanyModal,
+	[CONFIRM_CARGO_READINESS]         : ConfirmCargoReadiness,
 };
 
 const getCustomTaskComponent = ({
@@ -146,6 +149,11 @@ const getCustomTaskComponent = ({
 			withModal            : false,
 			setAddCompany        : onCancel,
 			getShipmentRefetch,
+		},
+		[CONFIRM_CARGO_READINESS]: {
+			task,
+			onCancel,
+			refetch: taskListRefetch,
 		},
 	};
 
