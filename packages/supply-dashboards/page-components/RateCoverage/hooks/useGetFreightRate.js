@@ -13,7 +13,6 @@ const API_NAME = {
 };
 
 const useGetFreightRate = ({ filter, formValues, cardData }) => {
-	console.log(cardData, formValues, 'cardData');
 	const endPoint = API_NAME[filter?.service];
 
 	const { profile = {} } = useSelector((state) => state);
