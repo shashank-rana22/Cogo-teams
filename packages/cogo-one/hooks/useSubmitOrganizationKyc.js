@@ -51,6 +51,7 @@ const useSubmitOrganizationKyc = ({
 					registration_number,
 					utility_bill_document_url : finalUrl,
 					id                        : orgId,
+					kyc_submitted_from        : 'cogo_one',
 				},
 			});
 			updateNewDocument({ data });

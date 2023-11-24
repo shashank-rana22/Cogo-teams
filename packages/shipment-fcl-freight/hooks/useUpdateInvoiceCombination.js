@@ -11,7 +11,6 @@ import isAllServicesTaken from './IsAllServicesTaken';
 const useUpdateInvoiceCombination = ({
 	refetch = () => {},
 	successMessage = 'Invoice Preference edited!',
-	servicesList,
 	selectedParties,
 	INITIAL_SERVICE_INVOICE_ID,
 	allServiceLineitemsCount,
@@ -31,9 +30,7 @@ const useUpdateInvoiceCombination = ({
 	const handleEditPreferences = async () => {
 		try {
 			const { isAllMainServicesTaken } = isAllServicesTaken(
-				servicesList,
 				selectedParties,
-				shipment_data,
 				allServiceLineitemsCount,
 			);
 

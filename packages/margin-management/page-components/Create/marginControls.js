@@ -78,7 +78,7 @@ export default function getMarginControls({ chargeCodes = [] }) {
 					{
 						name        : 'value',
 						label       : 'Margin value',
-						type        : 'number',
+						type        : 'input',
 						span        : 2,
 						placeholder : 'Enter value',
 						className   : 'code-value',
