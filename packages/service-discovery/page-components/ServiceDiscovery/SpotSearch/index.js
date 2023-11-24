@@ -128,6 +128,7 @@ function SpotSearch() {
 					setSelectedService={setSelectedService}
 					setSelectedMode={setSelectedMode}
 					bookable_services={bookable_services}
+					newly_added_services={newly_added_services}
 				/>
 
 				{isEmpty(selectedService) ? null : (

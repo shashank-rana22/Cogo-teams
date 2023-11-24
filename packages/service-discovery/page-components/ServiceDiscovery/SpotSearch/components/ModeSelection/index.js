@@ -9,7 +9,7 @@ function ModeSelection({
 	setSelectedService = () => {},
 	setLocation = () => {},
 	bookable_services = {},
-	newly_added_services = [],
+	newly_added_services = {},
 }) {
 	return (
 		<div className={styles.container}>

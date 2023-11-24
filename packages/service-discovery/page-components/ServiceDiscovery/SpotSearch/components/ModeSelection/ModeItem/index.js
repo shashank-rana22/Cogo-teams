@@ -17,13 +17,15 @@ function ModeItem({
 	setSelectedService = () => {},
 	setLocation = () => {},
 	bookable_services = {},
-	newly_added_services = [],
+	newly_added_services = {},
 }) {
 	const [bouncing, setBouncing] = useState(false);
 
 	const { label, value, icon } = data;
 
 	const isServiceAvailable = value in bookable_services && bookable_services?.[value];
+
+	const isNewlyAdded = value in newly_added_services && newly_added_services?.[value];
 
 	const handleClick = () => {
 		if (!isServiceAvailable) {
@@ -77,9 +79,7 @@ function ModeItem({
 				<ComingSoon bouncing={bouncing} />
 			) : null}
 
-			{newly_added_services?.includes(value) ? (
-				<NewTag />
-			) : null}
+			{isNewlyAdded ? <NewTag /> : null}
 		</div>
 	);
 }
