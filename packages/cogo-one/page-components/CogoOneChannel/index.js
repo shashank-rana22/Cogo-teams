@@ -134,13 +134,14 @@ function CogoOne() {
 	const collapsedSideBar = (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type) || teamsSideBarCheck)
 								&& !activeTab?.expandSideBar;
 	useEffect(() => {
-		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
-			const auth = getAuth();
-			signInWithCustomToken(auth, token).catch((error) => {
-				console.error(error.message);
-			});
-		}
+		// if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
+		const auth = getAuth();
+		signInWithCustomToken(auth, token).catch((error) => {
+			console.error(error.message);
+		});
+		// }
 	}, [token]);
+	console.log('token:', token);
 
 	useEffect(() => setViewType(initialViewType), [initialViewType]);
 
