@@ -180,7 +180,7 @@ function ListCard({
 								<div>
 									<Pill size="md" color="orange">
 										{source === 'live_booking' && 'Preferred '}
-										{(filter?.service === 'air_freight' || filter?.service === 'air_customs')
+										{['air_freight', 'air_customs', 'air_freight_local'].includes(filter?.service)
 											? 'Air Line :' : 'Shipping Line :'}
 										{' '}
 										{filter?.service === 'air_freight' || filter?.service === 'air_customs'
