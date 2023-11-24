@@ -5,6 +5,7 @@ const DEFAULT_VALUE = 0;
 
 const useCreateShipmentAdditionalService = ({
 	shipmentData = {},
+	type = 'terminal',
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_shipment_additional_service',
@@ -28,8 +29,8 @@ const useCreateShipmentAdditionalService = ({
 		) => item?.service_type === 'air_freight_local_service');
 
 		const payload = {
-			name                  : 'Terminal HandlingCharges',
-			code                  : 'THC',
+			name                  : type === 'terminal' ? 'Terminal Handling Charges' : 'Gatepass Charges',
+			code                  : type === 'terminal' ? 'THC' : 'GIC',
 			shipment_id           : id,
 			service_type          : 'air_freight_local_service',
 			is_rate_available     : true,

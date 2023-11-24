@@ -1,7 +1,7 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-import getPayload from '../page-components/Tasks/TaskExecution/utils/format-payload-consolidated-invoice';
+import getPayload from '../page-components/Tasks/TaskExecution/utils/format-payload-terminal-service-task';
 
 const useCreateShipmentAirFreightConsolidatedInvoice = ({
 	type = 'terminal', index = 0, sheetData = {}, mainServicesData = {},
@@ -16,6 +16,7 @@ const useCreateShipmentAirFreightConsolidatedInvoice = ({
 	const createShipmentAirFreightConsolidatedInvoice = async (values) => {
 		const additionalServicePayload = getPayload({
 			type,
+			index,
 			values,
 			mainServicesData,
 			sheetData,
@@ -24,11 +25,12 @@ const useCreateShipmentAirFreightConsolidatedInvoice = ({
 		});
 
 		try {
-			const res = await trigger({
+			await trigger({
 				data: additionalServicePayload,
+			}).then((res) => {
+				setInvoiceData(res?.data);
+				setTerminalChargeState((prev) => ({ ...prev, [index]: 'irn_generate' }));
 			});
-			setInvoiceData(res?.data);
-			setTerminalChargeState((prev) => ({ ...prev, [index]: 'irn_generate' }));
 		} catch (err) {
 			toastApiError(err);
 		}

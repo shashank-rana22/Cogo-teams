@@ -1,17 +1,35 @@
 import { Button, Modal } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+
+import useListShipmentAirFreightConsolidatedInvoices
+	from '../../../../../../../hooks/useListShipmentAirFreightConsolidatedInvoices';
 
 import styles from './styles.module.css';
 
 function ConfirmModal({
 	showConfirm = {},
 	setShowConfirm = () => {},
-	handleSubmit = () => {},
-	handleCreateProforma = () => {},
-	loading = false,
+	type = 'terminal',
+	localServiceId = '',
+	mainServicesData = {},
+	apiTrigger = () => {},
 	updateLoading = false,
-	irnGenerated = false,
-	csrCreateLoading = false,
+	taskId = '',
 }) {
+	const {
+		data = {}, loading = false,
+		listShipmentConsolidatedInvoices = () => {},
+	} = useListShipmentAirFreightConsolidatedInvoices({
+		type, localServiceId, mainServicesData,
+	});
+
+	const finalSubmit = () => {
+		listShipmentConsolidatedInvoices().then(() => {
+			if (!isEmpty(data?.list)) {
+				apiTrigger(taskId);
+			}
+		});
+	};
 	return (
 		<Modal
 			show={showConfirm}
@@ -27,15 +45,15 @@ function ConfirmModal({
 					<Button
 						themeType="secondary"
 						onClick={() => { setShowConfirm(false); }}
-						disabled={updateLoading}
+						disabled={updateLoading || loading}
 					>
 						Cancel
 					</Button>
 				</div>
 				<div className={styles.button_head}>
 					<Button
-						onClick={handleSubmit(handleCreateProforma)}
-						disabled={loading || updateLoading || !irnGenerated || csrCreateLoading}
+						onClick={() => finalSubmit()}
+						disabled={updateLoading || loading}
 					>
 						Confirm
 					</Button>

@@ -10,12 +10,12 @@ const useUpdateShipmentAirFreightConsolidatedInvoice = ({
 		method : 'POST',
 	}, { manual: true });
 
-	const updateShipmentAirFreightConsolidatedInvoice = async (values) => {
+	const updateShipmentAirFreightConsolidatedInvoice = async ({ values = {}, status = '' }) => {
 		try {
 			await trigger({
 				params: {
-					status : 'finance_approved',
-					id     : invoiceData[GLOBAL_CONSTANTS.zeroth_index],
+					status,
+					id: invoiceData[GLOBAL_CONSTANTS.zeroth_index],
 				},
 			});
 			createShipmentAdditionalService(values);

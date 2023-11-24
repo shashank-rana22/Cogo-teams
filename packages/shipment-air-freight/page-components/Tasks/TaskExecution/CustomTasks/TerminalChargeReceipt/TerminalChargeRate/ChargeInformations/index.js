@@ -1,17 +1,19 @@
 import { ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcCFtick, IcMDelete } from '@cogoport/icons-react';
+import { IcMDelete } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
 
 import useGetShipmentAirCSROCRSheetData from '../../../../../../../hooks/useGetShipmentAirCSROCRSheetData';
 import UploadTerminalCharge from '../../UploadTerminalCharge';
 import ChargeReceiptInformations from '../ChargeReceiptInformations';
 import GenerateIRN from '../GenerateIRN';
+import IRNSuccess from '../IRNSuccess';
 
 import styles from './styles.module.css';
 
 const TIME_TO_FETCH_CSR_DATA = 15000;
 const INCREMENT_BY_ONE = 1;
+const DELETE_STATES = ['create', 'fetching_data', 'data_fetched'];
 
 function ChargeInformations({
 	index = 0, type = 'terminal', sheetData = {}, control = {}, errors = {}, setValue = () => {}, entityData = {},
@@ -98,12 +100,13 @@ function ChargeInformations({
 						createShipmentAdditionalService={createShipmentAdditionalService}
 						setTerminalChargeState={setTerminalChargeState}
 						index={index}
+						sheetId={sheetData?.id}
 					/>
 				) : null}
 				{terminalChargeState[index] === 'irn_success' ? (
-					<IcCFtick />
+					<IRNSuccess />
 				) : null}
-				{index > GLOBAL_CONSTANTS.zeroth_index ? (
+				{index > GLOBAL_CONSTANTS.zeroth_index && DELETE_STATES.includes(terminalChargeState[index]) ? (
 					<div className={styles.delete_button}>
 						<ButtonIcon
 							size="xl"
