@@ -1,5 +1,5 @@
 const formatFclRate = (data, user_id) => {
-	const isEmpty = data?.weight_slabs.every((slab) => (
+	const isEmpty = data?.weight_slabs?.every((slab) => (
 		slab.lower_limit === '' && slab.upper_limit === '' && slab.currency === '' && slab.price === ''
 	));
 	const weightSlabs = isEmpty ? [] : data?.weight_slabs?.map((slab) => ({
@@ -10,8 +10,8 @@ const formatFclRate = (data, user_id) => {
 	}));
 
 	const payload = {
-		origin_port_id           : data?.origin_location_id,
-		destination_port_id      : data?.destination_location_id,
+		origin_port_id           : data?.origin_location_id || data?.origin_port_id,
+		destination_port_id      : data?.destination_location_id || data?.destination_port_id,
 		origin_main_port_id      : data?.origin_main_port_id || undefined,
 		destination_main_port_id : data?.destination_main_port_id || undefined,
 		container_size           : data?.container_size,
@@ -30,7 +30,7 @@ const formatFclRate = (data, user_id) => {
 			...charge,
 			price: Number(charge.price),
 			slabs:
-				data?.container_slabs.length && charge.code === 'BAS'
+				data?.container_slabs?.length && charge.code === 'BAS'
 					? (data?.container_slabs || [])?.map((slab) => ({
 						...slab,
 						price       : Number(slab.price),
@@ -50,6 +50,7 @@ const formatFclRate = (data, user_id) => {
 			}
 			: undefined,
 	};
+
 	return payload;
 };
 

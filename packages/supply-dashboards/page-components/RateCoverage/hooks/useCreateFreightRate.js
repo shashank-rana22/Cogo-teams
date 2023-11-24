@@ -48,7 +48,7 @@ const KEYS_TO_SEND = {
 	air_freight_local : 'air_freight_rate_local_request_id',
 };
 
-const getPayload = (service, data, user_id, listData) => {
+const getPayload = (service, data, user_id, listData, PortName) => {
 	if (service === 'fcl_freight') {
 		return formatFclRate(data, user_id);
 	}
@@ -83,15 +83,15 @@ const getPayload = (service, data, user_id, listData) => {
 		return formatFclCfs(data, user_id);
 	}
 	if (service === 'fcl_freight_local') {
-		return formatFclLocal(data, user_id, listData);
+		return formatFclLocal(data, user_id, listData, PortName);
 	}
 	if (service === 'air_freight_local') {
 		return formatAirLocal(data, user_id, listData);
 	}
-	return data;
+	return formatFclRate(data, user_id);
 };
 
-const useCreateFreightRate = (service) => {
+const useCreateFreightRate = ({ service, PortName }) => {
 	const { user_data } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
@@ -103,7 +103,7 @@ const useCreateFreightRate = (service) => {
 	}, { manual: true });
 
 	const createRate = async (data, listData, triggeredFrom) => {
-		const newPayload = getPayload(service, data, user_id, listData);
+		const newPayload = getPayload(service, data, user_id, listData, PortName);
 		const keyToSend = listData?.sources?.includes('rate_request') && KEYS_TO_SEND[service];
 
 		try {
@@ -112,6 +112,7 @@ const useCreateFreightRate = (service) => {
 					...newPayload,
 					source      : triggeredFrom || undefined,
 					[keyToSend] : listData?.id || undefined,
+					trade_type  : 'export',
 				},
 			});
 			if (resp?.data) { return resp?.data?.id; }

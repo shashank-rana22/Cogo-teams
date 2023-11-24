@@ -5,6 +5,7 @@ import Layout from '../../../../../../RfqEnquiries/Layout';
 import { DEFAULT_VALUE } from '../../../../../configurations/helpers/constants';
 import AddAdditionalRates from '../../AddRate/AddAdditionalRate';
 import ServiceDetailsContent from '../../DetailsView/Content';
+import SelectLocalCharges from '../../LocalCharges';
 import styles from '../styles.module.css';
 
 function AddRate({
@@ -113,6 +114,12 @@ function AddRate({
 							</div>
 						</Modal.Footer>
 					</TabPanel>
+					{filter?.service === 'fcl_freight'
+						&& (
+							<TabPanel name="local_charges" title="ADD RATE SPECIFIC LOCAL">
+								<SelectLocalCharges data={data} />
+							</TabPanel>
+						)}
 
 					{addLocalServices && (
 						<TabPanel name="additional_freight" title="ADD OTHER SERVICES RATES">
@@ -139,6 +146,7 @@ function AddRate({
 							</Modal.Footer>
 						</TabPanel>
 					)}
+
 				</Tabs>
 			</div>
 		</Modal>

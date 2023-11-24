@@ -76,7 +76,7 @@ function AddRateModal({
 	}, [values?.air_commodity, resetField]);
 
 	const { data:rateData } = useGetFreightRate({ filter, formValues: values, cardData: data });
-	const { createRate, loading } = useCreateFreightRate(filter?.service);
+	const { createRate, loading } = useCreateFreightRate({ service: filter?.service });
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
 	const { deleteRequest } = useDeleteFreightRateRequests(filter?.service);
 	const { deleteFeedbackRequest } = useDeleteFreightRateFeedbacks(filter?.service);
