@@ -9,7 +9,7 @@ function ModeSelection({
 	setSelectedService = () => {},
 	setLocation = () => {},
 	bookable_services = {},
-	new_tag_services = [],
+	newly_added_services = [],
 }) {
 	return (
 		<div className={styles.container}>
@@ -25,7 +25,7 @@ function ModeSelection({
 						setSelectedService={setSelectedService}
 						setLocation={setLocation}
 						bookable_services={bookable_services}
-						new_tag_services={new_tag_services}
+						newly_added_services={newly_added_services}
 					/>
 				))}
 			</div>

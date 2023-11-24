@@ -17,7 +17,7 @@ function ModeItem({
 	setSelectedService = () => {},
 	setLocation = () => {},
 	bookable_services = {},
-	new_tag_services = [],
+	newly_added_services = [],
 }) {
 	const [bouncing, setBouncing] = useState(false);
 
@@ -77,7 +77,7 @@ function ModeItem({
 				<ComingSoon bouncing={bouncing} />
 			) : null}
 
-			{new_tag_services?.includes(value) ? (
+			{newly_added_services?.includes(value) ? (
 				<NewTag />
 			) : null}
 		</div>
