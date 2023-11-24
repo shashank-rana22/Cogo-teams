@@ -13,6 +13,7 @@ const API_NAME = {
 };
 
 const useGetFreightRate = ({ filter, formValues, cardData }) => {
+	console.log(cardData, formValues, 'cardData');
 	const endPoint = API_NAME[filter?.service];
 
 	const { profile = {} } = useSelector((state) => state);
@@ -28,7 +29,7 @@ const useGetFreightRate = ({ filter, formValues, cardData }) => {
 			origin_port_id      : cardData?.origin_port_id,
 			destination_port_id : cardData?.destination_port_id,
 			shipping_line_id    : formValues?.shipping_line_id || undefined,
-			service_provider_id : formValues?.service_provider_id,
+			service_provider_id : formValues?.service_provider_id || formValues?.service_provider_id,
 			payment_term        : formValues?.payment_term,
 			validity_end        : formValues?.validity_end,
 			validity_start      : formValues?.validity_start,
@@ -36,7 +37,7 @@ const useGetFreightRate = ({ filter, formValues, cardData }) => {
 		};
 
 		const customsParams = {
-			service_provider_id : cardData?.service_provider_id,
+			service_provider_id : cardData?.service_provider_id || formValues?.service_provider_id,
 			location_id         : cardData?.location_id || undefined,
 			trade_type          : cardData?.trade_type || formValues?.trade_type,
 			commodity           : cardData?.commodity || formValues?.commodity || undefined,
@@ -45,7 +46,7 @@ const useGetFreightRate = ({ filter, formValues, cardData }) => {
 		};
 
 		const haulageParams = {
-			service_provider_id     : cardData?.service_provider_id,
+			service_provider_id     : cardData?.service_provider_id || formValues?.service_provider_id,
 			origin_location_id      : cardData?.origin_location_id,
 			destination_location_id : cardData?.destination_location_id,
 			haulage_type            : cardData?.haulage_type || formValues?.haulage_type,
@@ -53,7 +54,7 @@ const useGetFreightRate = ({ filter, formValues, cardData }) => {
 		};
 
 		const fclCfsParams = {
-			service_provider_id : cardData?.service_provider_id,
+			service_provider_id : cardData?.service_provider_id || formValues?.service_provider_id,
 			location_id         : cardData?.location_id || undefined,
 			trade_type          : cardData?.trade_type,
 			cargo_handling_type : cardData?.cargo_handling_type || formValues?.cargo_handling_type,
