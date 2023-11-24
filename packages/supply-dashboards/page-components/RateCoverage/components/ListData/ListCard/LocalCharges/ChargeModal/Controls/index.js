@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Toast } from '@cogoport/components';
 import {
 	useForm, useGetAsyncOptions,
 	asyncFieldsListOperators,
@@ -38,20 +38,24 @@ function Controls({
 
 	const { data: getChargeCode } = useGetFreightRate({ cardData, filter: { service: 'fcl_freight' } });
 	const service = isEmpty(rateValue) ? 'fcl_freight_local' : 'fcl_freight';
-	const { createRate = () => {} } = useCreateFreightRate({ service, PortName });
+	const { createRate = () => {}, loading = false } = useCreateFreightRate({ service, PortName });
 
 	const chargeCodesData = [getChargeCode?.origin_local_charge_codes, getChargeCode
 		?.destination_local_charge_codes,
 	].find(Boolean);
 
-	const { control, errors, watch, handleSubmit, setValue } = useForm();
+	const { control, formState: { errors }, watch, handleSubmit, setValue } = useForm();
 	const values = watch();
 
-	const onSubmit = (val) => {
+	const onSubmit = async (val) => {
 		const data = {
 			...cardData, ...val,
 		};
-		createRate(data);
+		const resp = await	createRate(data);
+		if (!isEmpty(resp)) {
+			Toast.success('Added Succesfully');
+			setOpenRateForm(!openRateForm);
+		}
 	};
 
 	const handelClose = () => {
@@ -142,6 +146,7 @@ function Controls({
 					control={control}
 					errors={errors}
 				/>
+
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
@@ -155,6 +160,7 @@ function Controls({
 					size="md"
 					onClick={handleSubmit(onSubmit)}
 					style={{ marginLeft: '10px' }}
+					disabled={loading}
 				>
 					<IcMPlus />
 					Add
