@@ -22,7 +22,7 @@ function GeneratedTHC({ type = 'terminal', index = 0, item = {}, createShipmentA
 					{' '}
 					{index + INCREMENT_BY_ONE}
 				</legend>
-				{status === 'init' ? (
+				{status === 'init' && terminalChargeState[index] !== 'irn_success' ? (
 					<GenerateIRN
 						invoiceData={[id]}
 						tcValues={{

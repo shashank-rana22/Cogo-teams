@@ -34,7 +34,7 @@ const useUpdateShipmentAirFreightConsolidatedInvoice = ({
 
 				setTerminalChargeState(SHIFTED_OBJ);
 			} else {
-				createShipmentAdditionalService(values);
+				createShipmentAdditionalService(values, index);
 				setTerminalChargeState((prev) => ({ ...prev, [index]: 'irn_success' }));
 			}
 		} catch (err) {

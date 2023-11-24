@@ -40,7 +40,7 @@ function GenerateIRN({
 				<div className={styles.values}>
 					<span>Amount : </span>
 					{' '}
-					{tcValues?.tax_price || tcValues?.[`price_${index}`] || 0}
+					{tcValues?.price || tcValues?.[`price_${index}`] || 0}
 				</div>
 				<div className={styles.values}>
 					<span>Total Amount : </span>
