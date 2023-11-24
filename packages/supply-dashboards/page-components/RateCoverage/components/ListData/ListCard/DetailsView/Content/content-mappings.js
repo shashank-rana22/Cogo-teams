@@ -20,7 +20,8 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 		status = '', serial_id, selected_schedule_arrival, selected_schedule_departure,
 		preferred_freight_rate, preferred_freight_rate_currency, commodity_type = '', price_type = '',
 		payment_term, booking_params = {}, preferred_airlines = [], operation_type = '', packages, volume,
-		chargeable_weight, trade_type, remarks = [],
+		chargeable_weight, trade_type, remarks = [], preferred_rate,
+		preferred_rate_currency, preferred_customs_rate_currency, preferred_customs_rate,
 	} = primary_service_detail || feedbackData || requestData || {};
 
 	const { cargo_weight_per_container, inco_term: dislike_rates_inco } = booking_params || {};
@@ -172,8 +173,9 @@ function contentMapping({ requestData = {}, feedbackData = {}, filter = {}, ship
 		summary,
 		status,
 		preferred_shipping_lines,
-		preferred_freight_rate,
-		preferred_freight_rate_currency,
+		preferred_freight_rate          : preferred_freight_rate || preferred_rate || preferred_customs_rate,
+		preferred_freight_rate_currency : preferred_freight_rate_currency || preferred_rate_currency
+		|| preferred_customs_rate_currency,
 		preferred_airlines,
 		booking_params,
 		transitTime,
