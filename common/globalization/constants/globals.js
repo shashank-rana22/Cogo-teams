@@ -51,6 +51,8 @@ const GLOBAL_CONSTANTS = {
 
 	platform_supported_country_codes: ['IN', 'VN', 'SG', 'ID', 'TH', 'CN'],
 
+	service_charge_uneditable_country_code: ['CN', 'ID'],
+
 	currency_code   : CURRENCY_CODE,
 	currency_locale : {
 		INR : 'en-IN',
@@ -275,7 +277,8 @@ const GLOBAL_CONSTANTS = {
 		'August', 'September', 'October', 'November', 'December'],
 
 	image_url: {
-		CAROUSEL_ONE: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/carousel1.svg',
+		HOLIDAY_FLIGHT : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/VectorG.svg',
+		CAROUSEL_ONE   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/carousel1.svg',
 		CAROUSEL_TWO:
 		'https://cogoport-testing.sgp1.digitaloceanspaces.com/882784d0c199f841e0bf0ef95ff6d8c0/Group%201000010473.svg',
 		CAROUSEL_THREE:
@@ -559,6 +562,14 @@ const GLOBAL_CONSTANTS = {
 		public_leaderboard_announcement : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/announcement.svg',
 		kpi:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rectangle_126.svg',
+		cogo_lite:
+		'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/CogoLite.png',
+		cogo_anchor:
+		'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/CogoAnchor.png',
+		cogo_captain:
+		'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/CogoCaptain.png',
+		cogo_freighter:
+		'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/Cogo-Freighter.png',
 	},
 
 	video_call_ring_tone_url:
@@ -714,6 +725,8 @@ const GLOBAL_CONSTANTS = {
 		iframe_html_tag_text        : /<iframe([\s\S]*?)<\/iframe>/gm,
 		html_class_regex            : /class="([^"]+)"/g,
 		html_td_regex               : /<td/g,
+		html_img_regex              : /data:image\/[a-zA-Z]*;base64,[^'"]*/g,
+		htm_img_filename_regex      :	/data-file-name="[^"]*"/g,
 		static_url                  : /([^:]\/)\/+/g,
 		gst_number                  : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
 		otp                         : /[^0-9]/g,

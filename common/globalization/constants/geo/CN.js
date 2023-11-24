@@ -119,6 +119,7 @@ export default {
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
+			'da86318c-8d32-4ba3-beee-5e9466396dc5', // China KAM
 		],
 		kam_manager_ids: [
 			'0ad0034e-da18-49d2-b35c-36e08e8bcdcd', // Prod_KAM ES Manager,
@@ -129,6 +130,7 @@ export default {
 			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
 			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
 			'dc5e8695-c30e-4350-9de9-8218ed1abfc4', // CCS Manager - Enterprise
+			'2aa607a9-4f92-47b0-963f-be18c215e88d',
 		],
 		supply_relations_head_role_id    : '0a623fc0-bd23-4990-b2ec-0115d3f1095b',
 		fin_ops_manager_role_id          : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
@@ -182,12 +184,14 @@ export default {
 			'e18774d7-54b3-41e8-af04-3b44bd3a3fe2', // SO1 Executive
 			'582391da-3d9b-423f-a5af-df1da84b1c5a',
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
+			'c0e42c54-c888-4283-92e9-705271910a20', // SO1 + SO2 CHINA
 		],
 		service_ops2_role_id: [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'8b04b2b9-baa1-4913-bf4c-b11effecef0b', // SO2 Executive
 			'd974d323-b777-47a8-b14a-64df2e59df84', // SO1 + SO2
 			'123951fe-78aa-4ad1-b2da-fa6191e3a876', // SO2
+			'c0e42c54-c888-4283-92e9-705271910a20', // SO1 + SO2
 		],
 		service_ops3_role_ids: [
 			'60869bd4-5f18-4400-a003-411eb49dcd4a', // Prod_COE_Finance_Executive
@@ -199,7 +203,7 @@ export default {
 			'1f7b1fd3-5c5b-4009-9cb5-c712436bc071', // Corporate Owner Fintech
 			'b5e1c496-9d2c-47bc-b9c2-a24ce7ba1cd0', 	//	Prod Overseas Desk
 		],
-		so1_so2_ops_role_id              : 'd974d323-b777-47a8-b14a-64df2e59df84',
+		so1_so2_ops_role_id              : 'c0e42c54-c888-4283-92e9-705271910a20',
 		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
 		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
 		account_receivable_executive     : 'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3',
@@ -254,7 +258,7 @@ export default {
 		cogo_one_kam_agent_ids: [
 			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse Kam
 		],
-		so1_so2_role_id     : '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
+		so1_so2_role_id     : 'c0e42c54-c888-4283-92e9-705271910a20', // SO1 and SO2 CN
 		fortigo_network_ids : [
 			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
@@ -270,23 +274,30 @@ export default {
 			'447c2b70-90c9-4e9d-a0df-49bb803b0314',	// Enterprise Sales
 			'5f79d531-50e0-4843-995f-71057e659e0f', // Channel Partner
 		],
-		igm_desk                  : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
-		document_control_manager  : '123951fe-78aa-4ad1-b2da-fa6191e3a876',
-		document_control_lead     : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
-		finops_credit_controller  : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
-		finance_head              : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
-		so1_revenue_desk          : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
-		supply_fulfillment        : 'd86b05c2-0b60-46ba-9585-bfcd9ea17b6e',
-		ftl_ground_ops_role_id    : 'd2275231-30ad-4df9-8451-daf03b766f8a',
-		field_service_ops_role_id : '6ebacc3c-05c9-43fd-8a51-e7aad9751d9b',
-		kam_service_ops1_role_id  : '4c6f6036-2383-4c40-9b84-fa2b598031e1',
-		finops                    : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
-		cogo_one_kyc              : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
-		finance_branch_accounts   : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
-		service_ops3              : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
-		data_superadmin           : 'df340ea2-91b5-4cbc-80ab-d11cec21f040',
-		kam_admin                 : 'df6591f0-f41b-4283-9966-7d0225e1df00', // Kam Admin Vietnam
-		so2_executive             : '12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)'
+		igm_desk                 : '8eba8e1a-2d76-430b-a7f0-87198e9dae8c',
+		document_control_manager : '123951fe-78aa-4ad1-b2da-fa6191e3a876',
+		document_control_lead    : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		finops_credit_controller : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
+		finance_head             : [
+			'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
+			'635658c1-8d6b-4ab5-83a4-bd4989287193',
+		],
+		so1_revenue_desk: [
+			'348bc262-64c3-4667-a23c-908ceca80233',
+			'f896df94-f77d-4e6d-b5dd-3a4b936f8401',
+		],
+		supply_fulfillment             : 'd86b05c2-0b60-46ba-9585-bfcd9ea17b6e',
+		ftl_ground_ops_role_id         : 'd2275231-30ad-4df9-8451-daf03b766f8a',
+		field_service_ops_role_id      : '6ebacc3c-05c9-43fd-8a51-e7aad9751d9b',
+		kam_service_ops1_role_id       : '4c6f6036-2383-4c40-9b84-fa2b598031e1',
+		finops                         : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
+		cogo_one_kyc                   : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
+		finance_branch_accounts        : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
+		service_ops3                   : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
+		data_superadmin                : 'df340ea2-91b5-4cbc-80ab-d11cec21f040',
+		kam_admin                      : 'df6591f0-f41b-4283-9966-7d0225e1df00', // Kam Admin Vietnam
+		so2_executive                  : 'c0e42c54-c888-4283-92e9-705271910a20', // SO2 Executive (LCL)'
+		prod_data_operations_associate : 'dcdcb3d8-4dca-42c2-ba87-1a54bc4ad7fb', // Prod_Data Operations Associate
 	},
 	options: {
 		registration_types: [
@@ -588,6 +599,16 @@ export default {
 				has_voice_call_access       : false,
 				template_default_language   : 'english',
 				supply_sender_mobile_number : '918069195980',
+			},
+			bookings: {
+				invoicing: {
+					is_invoice_mergeable              : true,
+					disable_edit_invoice              : false,
+					stakeholder_wise_invoice_required : false,
+					is_purchase_visible_to_kam        : true,
+					is_task_visible_to_so2_executive  : true,
+					edit_internal_poc                 : true,
+				},
 			},
 			partner: {
 				common: {

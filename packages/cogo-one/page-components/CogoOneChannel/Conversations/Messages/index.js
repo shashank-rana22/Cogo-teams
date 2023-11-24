@@ -30,6 +30,7 @@ function Messages({
 	newUserRoomLoading = false,
 	setModalType = () => {},
 	mailProps = {},
+	isMobile = false,
 }) {
 	const activeRoomSnapshotListener = useRef(null);
 
@@ -121,6 +122,7 @@ function Messages({
 		supportAgentId,
 		activeMessageCard: activeTab?.data,
 		setActiveTab,
+		isMobile,
 	};
 
 	useEffect(() => {
@@ -180,6 +182,7 @@ function Messages({
 				assignLoading={assignLoading}
 				viewType={viewType}
 				formattedData={formattedData}
+				isMobile={isMobile}
 			/>
 		</>
 	);

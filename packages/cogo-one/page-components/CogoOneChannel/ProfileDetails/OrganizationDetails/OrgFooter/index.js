@@ -29,6 +29,7 @@ function OrgFooter({
 	total_redeemable = 0,
 	promoLoading = false,
 	list = [],
+	isMobile = false,
 }) {
 	return (
 		<>
@@ -71,6 +72,7 @@ function OrgFooter({
 										key={item.id}
 										hasVoiceCallAccess={hasVoiceCallAccess}
 										setActiveTab={setActiveTab}
+										isMobile={isMobile}
 									/>
 								))}
 							</>

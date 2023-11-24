@@ -59,6 +59,7 @@ const useGetActiveStakeholder = () => {
 		{ role_ids: geo.uuid.operation_manager, stakeholder: 'operation_manager' },
 		{ role_ids: geo.uuid.so1_revenue_desk, stakeholder: 'so1_revenue_desk' },
 		{ role_ids: geo.uuid.cogo_auditor_id, stakeholder: 'cogo_auditor_id' },
+		{ role_ids: geo.uuid.prod_data_operations_associate, stakeholder: 'data_associate' },
 	];
 	const matchingStakeholders = stakeholderMap
 		.filter(({ role_ids: ids }) => (role_ids || [])

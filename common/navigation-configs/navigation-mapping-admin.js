@@ -652,8 +652,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		margin: {
 			key           : 'margin',
 			title         : t('common:margin_management'),
-			href          : '/margins',
-			as            : '/margins',
+			href          : '/v2/margins',
+			as            : '/v2/margins',
 			type          : 'link',
 			possible_apis : apis.margin,
 			icon          : IcMMarginManagement,
@@ -1258,7 +1258,7 @@ const navigationMapping = ({ t = () => {} }) => {
 					as            : '/v2/booking-desk/air',
 					type          : 'link',
 					main_apis     : ['list_shipments'],
-					possible_apis : [...apis.shipment],
+					possible_apis : [...apis.shipment, ...apis.cargo_insurance],
 				},
 				{
 					key           : 'coe-bn_salvage',
@@ -1780,8 +1780,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'transaction_setting-pass_through_customers',
 					title         : t('common:pass_through_customers'),
-					href          : '/pass-through-customers',
-					as            : '/pass-through-customers',
+					href          : '/v2/pass-through-customers',
+					as            : '/v2/pass-through-customers',
 					main_apis     : [],
 					possible_apis : apis.pass_through_customers,
 				},
@@ -2736,6 +2736,30 @@ const navigationMapping = ({ t = () => {} }) => {
 			as            : '/v2/profile',
 			possible_apis : apis.profile,
 			icon          : IcMAppProfile,
+		},
+		payroll: {
+			key           : 'payroll',
+			title         : 'Payroll',
+			icon          : IcMAppPayment,
+			href          : '/v2/payroll',
+			as            : '/v2/payroll',
+			type          : 'link',
+			module_type   : 'dashboards',
+			possible_apis : apis.payroll,
+			isSubNavs     : true,
+			options       : [
+				{
+					key           : 'payroll',
+					title         : 'Payroll',
+					icon          : IcMAppPayment,
+					href          : '/v2/payroll',
+					as            : '/v2/payroll',
+					type          : 'link',
+					module_type   : 'dashboards',
+					possible_apis : apis.payroll,
+
+				},
+			],
 		},
 		finance_payroll: {
 			key           : 'finance_payroll',

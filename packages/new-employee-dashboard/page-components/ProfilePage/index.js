@@ -39,7 +39,9 @@ function ProfilePage() {
 		error = false,
 		shareOfferLetter = '',
 		setShareOfferLetter = () => { },
+		setCtcStructure = () => {},
 		setError = () => { },
+		watch = () => {},
 	} = useProfileDetails();
 
 	const {
@@ -88,9 +90,11 @@ function ProfilePage() {
 			{showCtcBreakupModal && (
 				<CtcBreakupModal
 					detail={detail}
+					watch={watch}
 					showCtcBreakupModal={showCtcBreakupModal}
 					setShowCtcBreakupModal={setShowCtcBreakupModal}
 					ctcStructure={ctcStructure}
+					setCtcStructure={setCtcStructure}
 					initialQuestion={initialQuestion}
 					setInitialQuestion={setInitialQuestion}
 					formProps={formProps}
@@ -99,7 +103,6 @@ function ProfilePage() {
 					setError={setError}
 					shareOfferLetter={shareOfferLetter}
 					setShareOfferLetter={setShareOfferLetter}
-
 				/>
 			)}
 		</div>

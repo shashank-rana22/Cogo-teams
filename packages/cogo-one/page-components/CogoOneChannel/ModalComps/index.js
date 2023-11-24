@@ -15,6 +15,7 @@ function ModalComp({
 	setActiveTab = () => {},
 	orgId = '',
 	viewType = '',
+	isMobile = false,
 }) {
 	return (
 		<>
@@ -29,11 +30,15 @@ function ModalComp({
 				/>
 			)}
 
-			<ReminderModal
-				firestore={firestore}
-				agentId={userId}
-				viewType={viewType}
-			/>
+			{isMobile
+				? null
+				: (
+					<ReminderModal
+						firestore={firestore}
+						agentId={userId}
+						viewType={viewType}
+					/>
+				)}
 
 			{openKamContacts && (
 				<OrgUsers

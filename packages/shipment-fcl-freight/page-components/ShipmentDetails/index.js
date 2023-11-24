@@ -18,6 +18,7 @@ const DocumentDeskManager = dynamic(() => import('./StakeholdersView/DocumentDes
 const So1So2Ops = dynamic(() => import('./StakeholdersView/So1So2Ops'), { ssr: false });
 const BookingDeskManager = dynamic(() => import('./StakeholdersView/BookingDeskManager'), { ssr: false });
 const LastMileDeskManager = dynamic(() => import('./StakeholdersView/LastMileDeskManager'), { ssr: false });
+const DataOperations = dynamic(() => import('./StakeholdersView/DataOperations'), { ssr: false });
 
 const SHIPMENT_ADDITIONAL_METHODS = ['main_service',
 	'documents',
@@ -67,6 +68,7 @@ function ShipmentDetails() {
 		data_superadmin          : Superadmin,
 		kam_admin                : Kam,
 		so2_executive            : DocumentDesk,
+		data_associate           : DataOperations,
 		default                  : () => (
 			<h1 className={styles.not_allowed}>
 				You are not allowed to visit this page!

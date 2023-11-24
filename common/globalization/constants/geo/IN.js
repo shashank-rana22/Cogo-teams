@@ -155,7 +155,7 @@ export default {
 			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
 			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
 			'dc5e8695-c30e-4350-9de9-8218ed1abfc4', // CCS Manager - Enterprise
-
+			'2aa607a9-4f92-47b0-963f-be18c215e88d',
 		],
 		cp_program_manager               : '122c2266-6c55-4b97-9f61-1056f87b53a7',
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
@@ -305,19 +305,20 @@ export default {
 			'447c2b70-90c9-4e9d-a0df-49bb803b0314',	// Enterprise Sales
 			'5f79d531-50e0-4843-995f-71057e659e0f', // Channel Partner
 		],
-		document_control_lead    : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
-		corporate_owner_demand   : '14fe1423-3c2d-4f66-bc33-89bed08b92ee',
-		finops_credit_controller : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
-		finance_head             : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
-		so1_revenue_desk         : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
-		supply_fulfillment       : 'd86b05c2-0b60-46ba-9585-bfcd9ea17b6e',
-		finops                   : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
-		cogo_one_kyc             : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
-		finance_branch_accounts  : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
-		service_ops3             : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
-		data_superadmin          : 'df340ea2-91b5-4cbc-80ab-d11cec21f040',
-		kam_admin                : 'df6591f0-f41b-4283-9966-7d0225e1df00', // Kam Admin Vietnam
-		so2_executive            : '12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)'
+		document_control_lead          : 'ce9831f7-5e5b-419a-8420-679e5ef9c9e9',
+		corporate_owner_demand         : '14fe1423-3c2d-4f66-bc33-89bed08b92ee',
+		finops_credit_controller       : '8ab56d1b-b6c1-41e3-9c83-63278380aec7',
+		finance_head                   : ['a8a175c5-fec2-4c08-8e6b-0fb5c7951c86', '635658c1-8d6b-4ab5-83a4-bd4989287193'],
+		so1_revenue_desk               : ['348bc262-64c3-4667-a23c-908ceca80233', 'f896df94-f77d-4e6d-b5dd-3a4b936f8401'],
+		supply_fulfillment             : 'd86b05c2-0b60-46ba-9585-bfcd9ea17b6e',
+		finops                         : 'a0343e2b-1b69-4d18-931e-fa473c152b56',
+		cogo_one_kyc                   : 'b70ad8e8-fb0a-4af9-8821-b804e0da5a2d',
+		finance_branch_accounts        : '1cfe962d-3274-4a48-b1ed-8baecac3f4af',
+		service_ops3                   : '726e644b-9dfa-4a6f-ac9c-f830d26e33e5', // SO3 Vietnam
+		data_superadmin                : 'df340ea2-91b5-4cbc-80ab-d11cec21f040',
+		kam_admin                      : 'df6591f0-f41b-4283-9966-7d0225e1df00', // Kam Admin Vietnam
+		so2_executive                  : '12dd0f6f-7256-403f-bfd1-913bc466c775', // SO2 Executive (LCL)'
+		prod_data_operations_associate : 'dcdcb3d8-4dca-42c2-ba87-1a54bc4ad7fb', // Prod_Data Operations Associate
 	},
 	options: {
 		registration_types: [
@@ -751,6 +752,9 @@ export default {
 					is_invoice_mergeable              : false,
 					disable_edit_invoice              : true,
 					stakeholder_wise_invoice_required : true,
+					is_purchase_visible_to_kam        : false,
+					is_task_visible_to_so2_executive  : false,
+					edit_internal_poc                 : false,
 				},
 			},
 			business_finance: {

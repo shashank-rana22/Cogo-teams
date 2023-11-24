@@ -1,0 +1,21 @@
+.container {
+	display: flex;
+	gap: 40px;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.error_message {
+	margin-top: 2px;
+	font-size: 10px;
+	color: #ee3425;
+}
+
+.label {
+	margin-bottom: 2px;
+	font-size: 12px;
+}
+
+.element_div {
+	width: 200px;
+}

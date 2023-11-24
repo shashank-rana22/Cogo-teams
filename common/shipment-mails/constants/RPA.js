@@ -15,6 +15,7 @@ const RPA = {
 	AIR_BOOKINGS_RECEIVE_EMAIL: [
 		'operations.air@cogoport.com',
 		'operations.vn@cogoport.com',
+		'operations.cn@cogoport.com',
 	],
 };
 

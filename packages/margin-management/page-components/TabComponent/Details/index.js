@@ -1,108 +1,278 @@
-import { Pill, Button } from '@cogoport/components';
+import { Button, Tooltip, Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMOverflowDot } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
+import { useState } from 'react';
 
-import getOriginMarginType from '../../../helpers/getOriginMarginType';
+// import getOriginMarginType from '../../../helpers/getOriginMarginType';
+import MarginValues from '../../MarginValues';
+import DeactiveModal from '../../MarginValues/Buttons/DeactivateModal';
+import StatusUpdateModal from '../../MarginValues/Buttons/StatusUpdateModal';
+import UpdateDicountSetting from '../../MarginValues/Buttons/UpdateDicountSetting';
 
+import ActionButtons from './ActionButtons';
+import Info from './Info';
 import styles from './styles.module.css';
 
-function Details({ data = {}, setMarginBreakupData = () => {}, showContainerDetails = true }) {
-	const { service = '', margin_type = '', margin_slabs_currency = '', filters = {}, partner = {} } = data || {};
+function DisplayContent({ typeValues = [] }) {
+	if (typeof typeValues === 'string') {
+		return typeValues;
+	}
+
+	const newRateType = (typeValues || [])?.slice(1) || [];
+
+	return (
+		<>
+			{(newRateType || []).map((it) => <li key={it}>{startCase(it)}</li>)}
+		</>
+	);
+}
+
+function Details({
+	data = {}, marginBreakupData = {}, activeTab = '', refetch = () => { },
+	setMarginBreakupData = () => { },
+	// showContainerDetails = true,
+	isMobile = false,
+}) {
+	const router = useRouter();
 	const {
-		commodity = '',
-		container_type = '',
-		container_size = '',
-		location = {},
-		origin_location = {},
-		destination_location = {},
+		margin_type = '', filters = {}, partner = {}, updated_at,
+		// service = '', margin_slabs_currency = '',
+	} = data || {};
+
+	const {
+		// commodity = '', container_type = '', container_size = '', destination_location = {},
+		// origin_location = {}, location = {},
 		trade_type = '',
+		organization_type = '',
+		organization_sub_type = '',
+		rate_type = '',
 	} = filters || {};
+
 	const { business_name } = partner || {};
-	const { origin } = getOriginMarginType({ origin_location, location });
+
+	const [showPopover, setShowPopover] = useState(false);
+
+	const [openModal, setOpenModal] = useState(false);
+
+	const [openUpdateModal, setOpenUpdateModal] = useState(false);
+
+	const [showMarginDetails, setShowMarginDetails] = useState('');
+
+	const [updateDiscountSetting, setUpdateDiscountSetting] = useState(false);
+
+	// const { origin } = getOriginMarginType({ origin_location, location });
+
 	const setData = () => {
-		setMarginBreakupData(data);
+		if (showMarginDetails === marginBreakupData?.id) {
+			setShowMarginDetails('');
+			setMarginBreakupData({});
+		} else {
+			setShowMarginDetails(data?.id);
+			setMarginBreakupData(data);
+		}
 	};
+
+	const handleEdit = () => {
+		router.push('/margins/edit/[id]', `/margins/edit/${marginBreakupData?.id}`);
+	};
+
+	const handleDeactivateModal = () => {
+		setOpenModal(true);
+	};
+
+	const isDefaultMargin = !data?.partner_id;
+
 	return (
 		<div className={styles.container}>
-			<div>
-				<div className={styles.flex}>
-					<Pill size="md" color="yellow">{startCase(service)}</Pill>
-					<div className={styles.origin_destination}>
-						{origin && (
-							<Pill size="md" color="yellow">{origin}</Pill>
-						) }
-						{destination_location?.display_name && (
-							<Pill size="md" color="yellow">{destination_location?.display_name}</Pill>
-						) }
+			<div role="presentation">
+				<Info data={data} isDefaultMargin={isDefaultMargin} activeTab={activeTab} />
+				<div className={styles.styled_flex}>
+					{!isMobile ? (
+						<div className={styles.slab}>
+							<div className={styles.small_title}>Partner Entity</div>
+							<div className={styles.small_title_value}>
+								{isDefaultMargin ? 'All' : startCase(business_name) || '--'}
+							</div>
+						</div>
+					) : null}
+					{!isMobile ? (
+						<div className={styles.slab}>
+							<div className={styles.small_title}>Margin Type</div>
+							<div className={styles.small_title_value}>
+								{startCase(margin_type) || '--'}
+							</div>
+						</div>
+					) : null}
+					{!isMobile ? (
+						<div className={styles.slab}>
+							<div className={styles.small_title}>Rate Type</div>
+							<div className={styles.small_title_value}>
+								{startCase(rate_type?.[GLOBAL_CONSTANTS.zeroth_index]) || 'All Rate Types'}
+								<Tooltip
+									theme="light"
+									placement="top"
+									content={<DisplayContent typeValues={rate_type} />}
+									style={{ padding: 16 }}
+								>
+									<div className={styles.description}>
+										{rate_type?.length > 1 ? `+${rate_type.length - 1} More` : ''}
+									</div>
+								</Tooltip>
+							</div>
+						</div>
+					) : null}
+					{!isMobile ? (
+						<div className={styles.slab}>
+							<div className={styles.small_title}>Organization Type</div>
+							<div className={styles.small_title_value}>
+								{startCase(organization_type) || '--'}
+							</div>
+						</div>
+					) : null}
+					{!isMobile ? (
+						<div className={styles.slab}>
+							<div className={styles.small_title}>Organization Sub Type</div>
+							<div className={styles.small_title_value}>
+								{typeof organization_sub_type === 'string'
+									? startCase(organization_sub_type) || '--'
+									: startCase(organization_sub_type?.[GLOBAL_CONSTANTS.zeroth_index]) || '--'}
+								{typeof organization_sub_type === 'string' ? (
+									''
+								) : (
+									<Tooltip
+										theme="light"
+										placement="top"
+										content={<DisplayContent typeValues={organization_sub_type} />}
+										style={{ padding: 16 }}
+									>
+										<div className={styles.description}>
+											{organization_sub_type?.length > 1
+												? `+${organization_sub_type.length - 1} More` : ''}
+										</div>
+									</Tooltip>
+								)}
+							</div>
+						</div>
+					) : null}
+					{!isMobile ? (
+						<div className={styles.slab}>
+							<div className={styles.small_title}>Trade Type</div>
+							<div className={styles.small_title_value}>
+								{startCase(trade_type) || '--'}
+							</div>
+						</div>
+					) : null}
+					{data?.agent?.name ? (
+						<div className={styles.slab}>
+							<div className={styles.small_title}>Agent</div>
+							<div className={styles.small_title_value}>{data?.agent?.name}</div>
+						</div>
+					) : null}
+					{!isMobile ? (
+						<div className={styles.slab}>
+							<div className={styles.small_title}>Updated at</div>
+							<div className={styles.small_title_value}>
+								{formatDate({
+									date       : updated_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									separator  : ' ',
+									timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm:aaa'],
+									formatType : 'dateTime',
+								})}
+							</div>
+						</div>
+					) : null}
+					<div
+						role="presentation"
+						className={styles.slab}
+						onClick={(e) => {
+							e.stopPropagation();
+							setShowPopover(true);
+							setMarginBreakupData(data);
+						}}
+					>
+						<Popover
+							show={showPopover}
+							visible={showPopover}
+							onClickOutside={() => setShowPopover(false)}
+							placement="left"
+							theme="light"
+							interactive
+							content={(
+								<ActionButtons
+									handleEdit={handleEdit}
+									setOpenModal={setOpenModal}
+									activeTab={activeTab}
+									setOpenUpdateModal={setOpenUpdateModal}
+									handleDeactivateModal={handleDeactivateModal}
+									setUpdateDiscountSetting={setUpdateDiscountSetting}
+									isDefaultMargin={isDefaultMargin}
+								/>
+							)}
+						>
+							<div className={styles.small_title}>
+								<IcMOverflowDot height={20} width={20} />
+							</div>
+						</Popover>
 					</div>
 				</div>
-
-				<div className={styles.flex}>
-					{trade_type && <Pill size="md">{startCase(trade_type)}</Pill>}
-					<div style={{ marginLeft: '10px' }}>{data?.organization?.business_name}</div>
-				</div>
-				<div className={styles.flex}>
-					{data?.partner?.business_name ? (
-						<Pill size="md" color="blue">
-							Partner Entity:
-							{' '}
-							{startCase(business_name)}
-						</Pill>
-					) : null}
-					{data?.margin_type ? (
-						<Pill size="md" color="blue">
-							Margin Type:
-							{' '}
-							{startCase(margin_type)}
-						</Pill>
-					) : null}
-					{data?.margin_slabs_currency ? (
-						<Pill size="md" color="blue">
-							Margin Currency:
-							{' '}
-							{startCase(margin_slabs_currency)}
-						</Pill>
-					) : null}
-				</div>
-				{showContainerDetails && (
-					<div className={styles.flex}>
-						{container_size ? (
-							<Pill size="md">
-								Container Size:
-								{' '}
-								{startCase(container_size)}
-							</Pill>
-						) : null}
-						{container_type ? (
-							<Pill size="md">
-								Container Type:
-								{' '}
-								{startCase(container_type)}
-							</Pill>
-						) : null }
-						{commodity ? (
-							<Pill size="md">
-								Commodity:
-								{' '}
-								{startCase(commodity)}
-							</Pill>
-						) : null }
-					</div>
-				)}
-				{data?.agent?.name ? (
-					<div className={styles.agent_name}>
-						{`Agent: ${data?.agent?.name} ${data?.agent?.email ? `(${data?.agent?.email})` : ''
-						}`}
-					</div>
-				) : null}
-
 			</div>
-			<Button
-				themeType="secondary"
-				onClick={setData}
-			>
-				View details
-			</Button>
 
+			{showMarginDetails === marginBreakupData?.id ? (
+				<MarginValues
+					data={marginBreakupData}
+					setMarginBreakupData={setMarginBreakupData}
+					activeTab={activeTab}
+					refetch={refetch}
+				/>
+			) : null}
+
+			<div className={styles.btn_container}>
+				<Button
+					style={{ display: 'block' }}
+					size="sm"
+					themeType="secondary"
+					onClick={() => {
+						setShowPopover(false);
+						setData();
+					}}
+				>
+					{showMarginDetails === marginBreakupData?.id ? 'Hide Details' : 'View details'}
+				</Button>
+			</div>
+
+			{openModal && (
+				<DeactiveModal
+					setOpenModal={setOpenModal}
+					id={data?.id}
+					refetch={refetch}
+					setMarginBreakupData={setMarginBreakupData}
+					openModal={openModal}
+				/>
+			)}
+
+			{openUpdateModal && (
+				<StatusUpdateModal
+					show={openUpdateModal}
+					setShow={setOpenUpdateModal}
+					id={data?.id}
+					refetch={refetch}
+					setMarginBreakupData={setMarginBreakupData}
+				/>
+			)}
+
+			{updateDiscountSetting ? (
+				<UpdateDicountSetting
+					id={data?.id}
+					show={updateDiscountSetting}
+					setShow={setUpdateDiscountSetting}
+					marginBreakupData={marginBreakupData}
+					refetch={refetch}
+				/>
+			) : null}
 		</div>
 
 	);
