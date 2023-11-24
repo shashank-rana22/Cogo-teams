@@ -18,7 +18,7 @@ const DELETE_STATES = ['create', 'fetching_data', 'data_fetched'];
 function ChargeInformations({
 	index = 0, type = 'terminal', sheetData = {}, control = {}, errors = {}, setValue = () => {}, entityData = {},
 	setSheetData = () => {}, mainServicesData = {}, terminalChargeState = {}, setTerminalChargeState = () => {},
-	handleSubmit = () => {}, collectionPartyData = {}, createShipmentAdditionalService = () => {},
+	handleSubmit = () => {}, collectionPartyData = {}, createShipmentAdditionalService = () => {}, list = [],
 }) {
 	const [invoiceData, setInvoiceData] = useState([]);
 	const [tcValues, setTcValues] = useState({});
@@ -32,7 +32,7 @@ function ChargeInformations({
 		const newObj = { ...terminalChargeState };
 		delete newObj[keyToDelete];
 		const SHIFTED_OBJ = {};
-		let newIndex = 0;
+		let newIndex = list.length;
 
 		Object.keys(newObj).forEach((key) => {
 			SHIFTED_OBJ[newIndex] = newObj[key];

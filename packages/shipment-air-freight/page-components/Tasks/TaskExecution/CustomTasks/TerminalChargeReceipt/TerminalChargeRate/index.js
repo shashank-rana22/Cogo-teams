@@ -91,6 +91,7 @@ function TerminalChargeRate({
 					<ChargeInformations
 						index={Number(i)}
 						type={type}
+						list={list}
 						sheetData={sheetData}
 						control={control}
 						errors={errors}
@@ -113,7 +114,7 @@ function TerminalChargeRate({
 				onClick={() => {
 					setTerminalChargeState((prev) => ({
 						...prev,
-						[Number(Object.keys(prev)[Object.keys(prev).length - 1]) + 1]: 'create',
+						[(Number(Object.keys(prev)[Object.keys(prev).length - 1]) + 1) || list.length]: 'create',
 					}));
 				}}
 				className={styles.add_button}
