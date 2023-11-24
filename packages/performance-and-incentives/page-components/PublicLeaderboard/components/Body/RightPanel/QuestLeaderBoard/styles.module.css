@@ -1,0 +1,26 @@
+.container {
+	display: flex;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.heading {
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.quest_selector {
+	width: 200px;
+
+	:global {
+		.ui_select_option_item span {
+			width: 100%;
+		}
+	}
+}

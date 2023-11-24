@@ -11,7 +11,18 @@ const { OVERALL, COMPARISION } = SCREEN_CONSTANTS;
 
 function Body(props) {
 	const {
-		screen, view, dateRange, updatedAt, setUpdatedAt, setDateRange, duration, setDuration, setNextReloadAt,
+		screen,
+		view,
+		dateRange,
+		updatedAt,
+		setUpdatedAt,
+		setDateRange,
+		duration,
+		setDuration,
+		setNextReloadAt,
+		questId,
+		setQuestId,
+		officeLocation,
 	} = props;
 
 	const [score, setScore] = useState({});
@@ -33,7 +44,15 @@ function Body(props) {
 				setNextReloadAt={setNextReloadAt}
 			/>
 
-			{screen === OVERALL ? <RightPanel view={view} updatedAt={updatedAt} /> : (
+			{screen === OVERALL ? (
+				<RightPanel
+					view={view}
+					updatedAt={updatedAt}
+					questId={questId}
+					setQuestId={setQuestId}
+					officeLocation={officeLocation}
+				/>
+			) : (
 				<LeftPanel
 					screen={screen}
 					view={view}

@@ -16,7 +16,7 @@
 .list_row {
 	display: flex;
 	align-items: center;
-	padding: 12px;
+	padding: 8px 12px;
 	background-color: #fff;
 	border: 1px solid #ebebeb;
 	border-radius: 4px;
@@ -50,7 +50,7 @@
 
 .rank {
 	margin-left: 4px;
-	font-size: 18px;
+	font-size: 14px;
 	font-weight: 600;
 
 	@media (min-width: 2560px) {
@@ -59,7 +59,7 @@
 }
 
 .name {
-	font-size: 18px;
+	font-size: 14px;
 
 	@media (min-width: 2560px) {
 		font-size: 40px;
@@ -94,7 +94,7 @@
 
 .badge_icon {
 	width: 30px;
-	height: 30px;
+	height: 24px;
 	margin-right: 8px;
 	animation: bounce 2s linear infinite;
 
