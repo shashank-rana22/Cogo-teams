@@ -1,6 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
+import paramsFeedbacksMapping from '../utilis/formatListFeedbacksParams';
+
 const API = {
 	fcl_freight       : 'list_fcl_freight_rate_feedbacks',
 	air_freight       : 'list_air_freight_rate_feedbacks',
@@ -26,72 +28,7 @@ const useListFreightRateFeedBacks = ({ filter = {}, source_id, payload, addition
 	}, { manual: true });
 
 	const getFeedback = useCallback(async () => {
-		const parmas = {
-			port_id             : payload?.port_id,
-			trade_type          : payload?.trade_type,
-			container_size      : payload?.container_size,
-			container_type      : payload?.container_type,
-			commodity           : payload?.commodity,
-			rate_type           : payload?.rate_type,
-			cargo_handling_type : payload?.cargo_handling_type,
-		};
-
-		const fcl_local_paramas = {
-			port_id             : payload?.port_id,
-			trade_type          : payload?.trade_type,
-			shipping_line_id    : payload?.shipping_line_id,
-			container_size      : payload?.container_size,
-			container_type      : payload?.container_type,
-			commodity           : payload?.commodity,
-			service_provider_id : payload?.service_provider_id,
-		};
-
-		const air_local_paramas = {
-			airport_id          : payload?.airport_id,
-			trade_type          : payload?.trade_type,
-			airline_id          : payload?.airline_id,
-			commodity           : payload?.commodity,
-			service_provider_id : payload?.service_provider_id,
-		};
-
-		const haulage_params = {
-			shipping_line_id        : payload?.shipping_line_id,
-			origin_location_id      : payload?.origin_location_id,
-			destination_location_id : payload?.destination_location_id,
-			container_size          : payload?.container_size,
-			container_type          : payload?.container_type,
-			commodity               : payload?.commodity,
-			haulage_type            : payload?.haulage_type,
-			transport_modes         : payload?.transport_modes,
-		};
-
-		const air_customs = {
-			airport_id          : payload?.airport_id,
-			trade_type          : payload?.trade_type,
-			commodity           : payload?.commodity,
-			service_provider_id : payload?.service_provider_id,
-		};
-
-		const paramsMapping = () => {
-			if (['fcl_freight_local'].includes(filter?.service)) {
-				return fcl_local_paramas;
-			}
-			if (['air_freight_local'].includes(filter?.service)) {
-				return air_local_paramas;
-			}
-			if (['haulage'].includes(filter?.service)) {
-				return haulage_params;
-			}
-			if (['air_customs'].includes(filter?.service)) {
-				return air_customs;
-			}
-			if (['fcl_customs', 'fcl_cfs'].includes(filter?.service)) {
-				return parmas;
-			}
-			return fcl_local_paramas;
-		};
-
-		const paramsMappingResult = paramsMapping();
+		const paramsMappingResult = paramsFeedbacksMapping({ payload, filter });
 
 		try {
 			await trigger(
@@ -105,11 +42,7 @@ const useListFreightRateFeedBacks = ({ filter = {}, source_id, payload, addition
 		} catch (err) {
 			// console.log(err);
 		}
-	}, [additionalPayload, filter?.service, payload?.airline_id, payload?.airport_id, payload?.cargo_handling_type,
-		payload?.commodity, payload?.container_size, payload?.container_type, payload?.destination_location_id,
-		payload?.haulage_type, payload?.origin_location_id, payload?.port_id, payload?.rate_type,
-		payload?.service_provider_id, payload?.shipping_line_id, payload?.trade_type,
-		payload?.transport_modes, source_id, trigger]);
+	}, [additionalPayload, filter, payload, source_id, trigger]);
 
 	return {
 		loading,
