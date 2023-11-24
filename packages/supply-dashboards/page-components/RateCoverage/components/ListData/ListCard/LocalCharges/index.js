@@ -9,9 +9,14 @@ import ChargeModal from './ChargeModal';
 import Controls from './ChargeModal/Controls';
 import styles from './styles.module.css';
 
+const IMPORT_DATA = 'import';
+const EXPORT_DATA = 'export';
+
+const NO_ORIGIN_DATA = 'You must add origin local charges for port in order for your rates to be visible for the following incoterms: ABC, DEF, GHI';
+
+const NO_DESTINATION_DATA = 'You must add destination local charges for port in order for your rates to be visible for the following incoterms: ABC, DEF, GHI';
+
 function SelectLocalCharges({ data: cardData = {} }) {
-	const IMPORT_DATA = 'import';
-	const EXPORT_DATA = 'export';
 	const ORIGIN_PORT_ID = cardData?.origin_port_id;
 	const DESTINATION_PORT_ID = cardData?.destination_port_id;
 
@@ -30,10 +35,6 @@ function SelectLocalCharges({ data: cardData = {} }) {
 
 	const destinationTitle = `You have [${importRatesData?.length}]
 	 destination local charges available for this combination`;
-
-	const NO_ORIGIN_DATA = 'You must add origin local charges for port in order for your rates to be visible for the following incoterms: ABC, DEF, GHI';
-
-	const NO_DESTINATION_DATA = 'You must add destination local charges for port in order for your rates to be visible for the following incoterms: ABC, DEF, GHI';
 
 	const PortName = portValue ? 'Origin' : 'Destination';
 	const portNameValue = portValue ? cardData?.origin_port?.name : cardData?.destination_port?.name;
