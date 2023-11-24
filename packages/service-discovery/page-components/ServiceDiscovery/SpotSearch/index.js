@@ -42,7 +42,7 @@ function SpotSearch() {
 		loading:bookableServicesLoading = false,
 	} = useGetActiveServices();
 
-	const { bookable_services = {}, newly_added_services = [] } = service_discovery || {};
+	const { bookable_services = {}, newly_added_services = {} } = service_discovery || {};
 
 	const isMobile = useGetIsMobile();
 
