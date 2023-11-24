@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function GenerateIRN({
 	invoiceData = [], createShipmentAdditionalService = () => {}, tcValues = {}, index = 0,
-	setTerminalChargeState = () => {}, sheetId = '',
+	terminalChargeState = {}, setTerminalChargeState = () => {}, sheetId = '', listLength = 0,
 }) {
 	const {
 		loading = false,
@@ -18,6 +18,8 @@ function GenerateIRN({
 		invoiceData,
 		createShipmentAdditionalService,
 		index,
+		listLength,
+		terminalChargeState,
 		setTerminalChargeState,
 	});
 

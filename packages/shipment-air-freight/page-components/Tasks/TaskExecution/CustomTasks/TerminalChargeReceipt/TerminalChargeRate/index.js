@@ -1,5 +1,5 @@
 import Layout from '@cogoport/air-modules/components/Layout';
-import { Button } from '@cogoport/components';
+import { Button, Loader } from '@cogoport/components';
 import {
 	useForm,
 } from '@cogoport/forms';
@@ -49,7 +49,7 @@ function TerminalChargeRate({
 		type,
 	});
 
-	const { data = {} } = useListShipmentAirFreightConsolidatedInvoices({
+	const { data = {}, loading = false } = useListShipmentAirFreightConsolidatedInvoices({
 		type, localServiceId, mainServicesData,
 	});
 
@@ -64,7 +64,7 @@ function TerminalChargeRate({
 
 	useEffect(() => {
 		if (!isEmpty(list)) {
-			setTerminalChargeState({ [list.length]: 'create' });
+			setTerminalChargeState({ [list?.length]: 'create' });
 		}
 	}, [list]);
 
@@ -78,49 +78,59 @@ function TerminalChargeRate({
 					errors={errors}
 				/>
 			</fieldset>
-			{isEdit ? (list).map((item, i) => (
-				<GeneratedTHC
-					key={item?.id}
-					index={i}
-					item={item}
-					createShipmentAdditionalService={createShipmentAdditionalService}
-				/>
-			)) : null}
-			{(Object.keys(terminalChargeState)).map((i) => (
-				<div key={i}>
-					<ChargeInformations
-						index={Number(i)}
-						type={type}
-						list={list}
-						sheetData={sheetData}
-						control={control}
-						errors={errors}
-						setValue={setValue}
-						setSheetData={setSheetData}
-						mainServicesData={mainServicesData}
-						terminalChargeState={terminalChargeState}
-						setTerminalChargeState={setTerminalChargeState}
-						handleSubmit={handleSubmit}
-						entityData={entityData}
-						collectionPartyData={collectionPartyData}
-						createShipmentAdditionalService={createShipmentAdditionalService}
-					/>
-				</div>
-			))}
-
-			<Button
-				size="sm"
-				themeType="secondary"
-				onClick={() => {
-					setTerminalChargeState((prev) => ({
-						...prev,
-						[(Number(Object.keys(prev)[Object.keys(prev).length - 1]) + 1) || list.length]: 'create',
-					}));
-				}}
-				className={styles.add_button}
-			>
-				+ Add
-			</Button>
+			{loading
+				? (
+					<div className={styles.loader}>
+						<Loader />
+					</div>
+				)
+				: (
+					<div>
+						{isEdit ? (list).map((item, i) => (
+							<GeneratedTHC
+								key={item?.id}
+								index={i}
+								item={item}
+								createShipmentAdditionalService={createShipmentAdditionalService}
+							/>
+						)) : null}
+						{(Object.keys(terminalChargeState)).map((i) => (
+							<div key={i}>
+								<ChargeInformations
+									index={Number(i)}
+									type={type}
+									list={list}
+									sheetData={sheetData}
+									control={control}
+									errors={errors}
+									setValue={setValue}
+									setSheetData={setSheetData}
+									mainServicesData={mainServicesData}
+									terminalChargeState={terminalChargeState}
+									setTerminalChargeState={setTerminalChargeState}
+									handleSubmit={handleSubmit}
+									entityData={entityData}
+									collectionPartyData={collectionPartyData}
+									createShipmentAdditionalService={createShipmentAdditionalService}
+								/>
+							</div>
+						))}
+						<Button
+							size="sm"
+							themeType="secondary"
+							onClick={() => {
+								setTerminalChargeState((prev) => ({
+									...prev,
+									[(Number(Object.keys(prev)[Object.keys(prev).length - 1]) + 1)
+									|| list?.length]: 'create',
+								}));
+							}}
+							className={styles.add_button}
+						>
+							+ Add
+						</Button>
+					</div>
+				)}
 
 			<div className={styles.button_container}>
 				<div style={{ margin: '0 10px 0 0' }}>

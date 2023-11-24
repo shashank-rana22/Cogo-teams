@@ -38,6 +38,11 @@ function ChargeReceiptInformations({
 		setInvoiceData,
 	});
 
+	const handleUpload = (values) => {
+		setTcValues(values);
+		createShipmentAirFreightConsolidatedInvoice(values);
+	};
+
 	useEffect(() => {
 		const { ocr_data = {} } = csr_data || {};
 		const { amount = 0, tax = 0, total_amount = 0, invoice_number = 0 } = ocr_data || {};
@@ -46,11 +51,6 @@ function ChargeReceiptInformations({
 		setValue(`total_tax_price_${index}`, total_amount ? Number(total_amount) : null);
 		setValue(`csr_reference_number_${index}`, invoice_number ? Number(invoice_number) : null);
 	}, [csr_data, index, setValue]);
-
-	const handleUpload = (values) => {
-		setTcValues(values);
-		createShipmentAirFreightConsolidatedInvoice(values);
-	};
 
 	return (
 		<div>

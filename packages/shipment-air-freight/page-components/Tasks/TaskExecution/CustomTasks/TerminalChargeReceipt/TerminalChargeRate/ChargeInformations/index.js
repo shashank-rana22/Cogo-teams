@@ -32,7 +32,7 @@ function ChargeInformations({
 		const newObj = { ...terminalChargeState };
 		delete newObj[keyToDelete];
 		const SHIFTED_OBJ = {};
-		let newIndex = list.length;
+		let newIndex = list?.length;
 
 		Object.keys(newObj).forEach((key) => {
 			SHIFTED_OBJ[newIndex] = newObj[key];
@@ -98,9 +98,11 @@ function ChargeInformations({
 						invoiceData={invoiceData}
 						tcValues={tcValues}
 						createShipmentAdditionalService={createShipmentAdditionalService}
+						terminalChargeState={terminalChargeState}
 						setTerminalChargeState={setTerminalChargeState}
 						index={index}
 						sheetId={sheetData?.id}
+						listLength={list?.length}
 					/>
 				) : null}
 				{terminalChargeState[index] === 'irn_success' ? (
