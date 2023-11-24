@@ -4,7 +4,7 @@ import ModalHeader from './components/Header';
 import ModalBody from './components/ModalBody';
 import styles from './styles.module.css';
 
-function NewDislikeModal({
+function DislikeModal({
 	rate = {},
 	show = false,
 	onClose = () => {},
@@ -32,4 +32,4 @@ function NewDislikeModal({
 	);
 }
 
-export default NewDislikeModal;
+export default DislikeModal;
