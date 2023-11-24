@@ -1,3 +1,5 @@
+import getTradeType from '../getTradeType';
+
 import getServiceWisePayload from './getServiceWisePayload';
 
 const getSearchResultsPayload = ({
@@ -14,7 +16,7 @@ const getSearchResultsPayload = ({
 
 	const rate_card_id = rateCardData?.id;
 
-	const tradeType = service_name.includes('export') ? 'export' : 'import';
+	const tradeType = getTradeType({ service_name, trade_type: detail?.trade_type });
 
 	if (service_name === 'export_transportation') {
 		return {
