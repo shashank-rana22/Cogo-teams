@@ -82,8 +82,18 @@ const useHandleSelectedReasonsForm = ({
 				},
 			});
 
+			const unSatisfiedFeedbacks = Object.entries(validateData).reduce((acc, [key, value]) => {
+				const { is_valid_feedback = true } = value || {};
+
+				if (!is_valid_feedback) {
+					return { ...acc, [key]: value };
+				}
+
+				return acc;
+			}, {});
+
 			setUnsatisfiedFeedbacks({
-				data: validateData,
+				data: unSatisfiedFeedbacks,
 				values,
 				details,
 				rate,
@@ -91,7 +101,9 @@ const useHandleSelectedReasonsForm = ({
 				spot_search_id,
 			});
 
-			const satisfiedfeedbacks = restFeedbacks.filter((item) => !Object.keys(validateData).includes(item));
+			const satisfiedfeedbacks = restFeedbacks.filter(
+				(item) => !Object.keys(unSatisfiedFeedbacks).includes(item),
+			);
 
 			if (isEmpty(satisfiedfeedbacks)) {
 				return;
