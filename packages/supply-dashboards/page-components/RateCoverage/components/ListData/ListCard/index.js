@@ -183,7 +183,7 @@ function ListCard({
 										{['air_freight', 'air_customs', 'air_freight_local'].includes(filter?.service)
 											? 'Air Line :' : 'Shipping Line :'}
 										{' '}
-										{filter?.service === 'air_freight' || filter?.service === 'air_customs'
+										{['air_freight', 'air_customs', 'air_freight_local'].includes(filter?.service)
 											? data?.airline?.short_name : data?.shipping_line?.short_name }
 									</Pill>
 								</div>
