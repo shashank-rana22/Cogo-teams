@@ -1,5 +1,7 @@
 import { ProgressBar } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 import useGetQuestWinner from './useGetQuestWinner';
@@ -26,13 +28,27 @@ const getProgressClassName = ({ parameters_fulfilled = 0, parameters_required = 
 function List(props) {
 	const { questId } = props;
 
-	const { loading, data } = useGetQuestWinner({ questId });
+	const { loading = false, data = [] } = useGetQuestWinner({ questId });
 
 	if (loading) return <WinnerLoader />;
 
+	if (isEmpty(data)) {
+		return (
+			<div className={styles.empty_container}>
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.empty_customer_card}
+					width={350}
+					height={200}
+					alt="Empty List"
+					className={styles.empty_img}
+				/>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.winner_container}>
-			{(data || []).slice(0, 6).map((item) => {
+			{(data).slice(0, 6).map((item) => {
 				const {
 					rank = '',
 					total_score = '',
@@ -50,7 +66,7 @@ function List(props) {
 
 				return (
 					<div key={item?.agent_id} className={styles.winner_item}>
-						{rank === 1
+						{rank === 1 && progress === 100
 							? (
 								<div className={styles.rank_container}>
 									<img
@@ -63,6 +79,7 @@ function List(props) {
 						<div className={styles.user_details}>
 							<div className={styles.rank}>{rank}</div>
 							<div className={styles.user_data}>
+
 								<div className={styles.user_name}>Ananya Majumdar</div>
 								<div className={styles.score}>
 									<span className={styles.score_heading}>Score</span>

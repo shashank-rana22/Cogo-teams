@@ -2,7 +2,7 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function WinnerLoader({ rows = 3 }) {
+function WinnerLoader({ rows = 6 }) {
 	return (
 		<div className={styles.container}>
 			{[...Array(rows)].map((item) => (
