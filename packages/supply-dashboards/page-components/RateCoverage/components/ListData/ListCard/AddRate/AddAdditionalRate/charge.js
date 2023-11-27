@@ -6,6 +6,8 @@ import {
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import useListFreightRateFeedBacks from '../../../../../hooks/useListFreightRateFeedBacks';
+
 import AdditionalCharges from './additionalCharges';
 import styles from './styles.module.css';
 
@@ -28,6 +30,10 @@ function Charge({
 
 	const showContent = additionalCharge === charge;
 
+	const { data: feedbackData = [], getFeedback = () => {} } =	 useListFreightRateFeedBacks({
+		filter: { service: charge.split(':')[1] || '' }, payload, additionalPayload: true,
+	});
+
 	useEffect(() => {
 		if (payload) setMessageToShow('');
 	}, [payload]);
@@ -37,6 +43,7 @@ function Charge({
 			setMessageToShow(message);
 		} else {
 			setAdditionalCharge((prev) => (prev === charge ? null : charge));
+			getFeedback();
 		}
 	};
 
@@ -70,6 +77,7 @@ function Charge({
 					data={data}
 					source={source}
 					triggeredFrom={triggeredFrom}
+					feedbackData={feedbackData?.list}
 				/>
 			)}
 		</div>

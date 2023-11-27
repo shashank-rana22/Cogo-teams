@@ -4855,6 +4855,24 @@ const partner = {
 			feature      : 'disliked_rates',
 		},
 		{
+			api          : 'list_fcl_cfs_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'fcl_cfs_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'list_fcl_freight_rate_local_feedbacks',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'list_air_freight_rate_local_feedbacks',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
 			api         : 'list_rate_charge_codes',
 			access_type : 'private',
 			feature     : 'missing_rates',
@@ -4865,9 +4883,22 @@ const partner = {
 			feature     : 'disliked_rates',
 		},
 		{
-			api         : 'delete_fcl_cfs_rate_feedback',
-			access_type : 'private',
-			feature     : 'disliked_rates',
+			api          : 'delete_fcl_cfs_rate_feedback',
+			access_type  : 'private',
+			service_name : 'fcl_cfs_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'delete_fcl_freight_rate_local_feedback',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'delete_air_freight_rate_local_feedback',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+			feature      : 'disliked_rates',
 		},
 		{
 			api          : 'get_expertise_locations_for_rate',

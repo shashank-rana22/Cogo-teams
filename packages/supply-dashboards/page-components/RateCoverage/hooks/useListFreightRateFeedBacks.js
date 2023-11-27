@@ -1,6 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
+import paramsFeedbacksMapping from '../utilis/formatListFeedbacksParams';
+
 const API = {
 	fcl_freight       : 'list_fcl_freight_rate_feedbacks',
 	air_freight       : 'list_air_freight_rate_feedbacks',
@@ -17,7 +19,7 @@ const API = {
 	air_freight_local : 'list_air_freight_rate_local_feedbacks',
 };
 
-const useListFreightRateFeedBacks = ({ filter = {}, source_id }) => {
+const useListFreightRateFeedBacks = ({ filter = {}, source_id, payload, additionalPayload }) => {
 	const apiName = API[filter?.service];
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -26,11 +28,13 @@ const useListFreightRateFeedBacks = ({ filter = {}, source_id }) => {
 	}, { manual: true });
 
 	const getFeedback = useCallback(async () => {
+		const paramsMappingResult = paramsFeedbacksMapping({ payload, filter });
+
 		try {
 			await trigger(
 				{
 					params: {
-						filters                  : { id: source_id },
+						filters                  : additionalPayload ? { ...paramsMappingResult } : { id: source_id },
 						booking_details_required : true,
 					},
 				},
@@ -38,7 +42,7 @@ const useListFreightRateFeedBacks = ({ filter = {}, source_id }) => {
 		} catch (err) {
 			// console.log(err);
 		}
-	}, [source_id, trigger]);
+	}, [additionalPayload, filter, payload, source_id, trigger]);
 
 	return {
 		loading,
