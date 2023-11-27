@@ -37,7 +37,7 @@ function FormComponent({
 
 		return (
 			<div className={styles.card_container}>
-				<div className={styles.custom_shape}>BEST PRICE</div>
+				<div className={styles.custom_shape}>BEST PRICE AVAILABLE</div>
 
 				<div className={styles.validate_text}>
 					<b>{message}</b>
