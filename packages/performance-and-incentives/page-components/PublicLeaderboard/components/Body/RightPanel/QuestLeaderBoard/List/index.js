@@ -1,4 +1,4 @@
-import { ProgressBar } from '@cogoport/components';
+import { ProgressBar, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
@@ -55,6 +55,7 @@ function List(props) {
 					parameters_fulfilled = 0,
 					parameters_required
 					= 1,
+					user = {},
 				} = item;
 
 				const progress = (parameters_fulfilled * 100) / (parameters_required || 1);
@@ -79,8 +80,15 @@ function List(props) {
 						<div className={styles.user_details}>
 							<div className={styles.rank}>{rank}</div>
 							<div className={styles.user_data}>
+								<Tooltip
+									placement="bottom"
+									content={user?.name}
+								>
+									<div className={styles.user_name}>
+										{user?.name}
+									</div>
 
-								<div className={styles.user_name}>Ananya Majumdar</div>
+								</Tooltip>
 								<div className={styles.score}>
 									<span className={styles.score_heading}>Score</span>
 									{' '}
