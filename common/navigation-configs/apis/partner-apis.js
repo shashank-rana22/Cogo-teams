@@ -14039,16 +14039,6 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api          : 'create_organization_trade_party',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
-			api          : 'create_organization_trade_party_poc',
-			access_type  : 'private',
-			service_name : 'organization',
-		},
-		{
 			api          : 'bulk_assign_chat',
 			access_type  : 'private',
 			service_name : 'communication',

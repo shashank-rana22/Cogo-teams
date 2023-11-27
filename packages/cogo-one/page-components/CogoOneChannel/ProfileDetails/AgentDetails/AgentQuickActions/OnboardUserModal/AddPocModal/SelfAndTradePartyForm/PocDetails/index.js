@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import { InputController, MobileNumberController } from '@cogoport/forms';
 
 import FORM_VALUE_PATTERNS from '../../utils/formValuePatterns';
