@@ -19,7 +19,8 @@
 
 	:global {
 		.ui_radiogroup_container {
-			flex-direction: column;
+			display: flex;
+			flex-flow: wrap;
 			font-size: var(--font-size-md);
 		}
 

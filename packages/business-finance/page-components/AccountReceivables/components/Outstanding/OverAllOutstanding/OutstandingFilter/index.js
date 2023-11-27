@@ -12,7 +12,6 @@ import { SORTBY_OPTION } from '../../../../constants/index';
 
 import BulkPostModal from './BulkPostModal';
 import CallPriorityModal from './CallPriorityModal';
-import FilterpopOver from './FilterpopOver/index';
 import styles from './styles.module.css';
 
 function Filters({
@@ -22,9 +21,6 @@ function Filters({
 	orderBy = { key: '', order: '', label: '' },
 	setParams = () => {},
 	params = {},
-	formFilters = {},
-	setFormFilters = () => {},
-	clearFilter = () => {},
 	queryKey = '',
 	entityCode = '',
 	refetch = () => {},
@@ -127,13 +123,6 @@ function Filters({
 
 						<IcMArrowRotateDown style={{ color: sortStyleDesc }} />
 					</div>
-
-					<FilterpopOver
-						filters={formFilters}
-						setFilters={setFormFilters}
-						clearFilter={clearFilter}
-						refetch={refetch}
-					/>
 
 					<Button
 						className={styles.bulk_btn}

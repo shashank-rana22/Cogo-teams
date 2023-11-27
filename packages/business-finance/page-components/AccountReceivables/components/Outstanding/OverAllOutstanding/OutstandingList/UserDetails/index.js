@@ -73,16 +73,14 @@ function UserDetails({ item = {} }) {
 									<div className={styles.stakeholder}>
 										{startCase('CC')}
 									</div>
-									{(creditController || []).map((singleagent) => (
-										<div key={singleagent?.name} className={styles.containers}>
-											<div className={styles.email}>
-												{singleagent?.email || '-'}
-											</div>
-											<div className={styles.name}>
-												{singleagent?.name || '-'}
-											</div>
+									<div key={creditController?.name} className={styles.containers}>
+										<div className={styles.email}>
+											{creditController?.email || '-'}
 										</div>
-									))}
+										<div className={styles.name}>
+											{creditController?.name || '-'}
+										</div>
+									</div>
 								</div>
 							) : null}
 							{!isEmpty(portfolioManager) ? (

@@ -1,6 +1,6 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 
-import { companyType } from '../../../../constants';
+import { companyType, taggedState } from '../../../../constants';
 
 const geo = getGeoConstants();
 
@@ -141,6 +141,13 @@ const overAllOutstandingcontrols = () => [
 		label   : 'Company Type',
 		name    : 'companyType',
 		options : companyType,
+		type    : 'radio',
+	},
+
+	{
+		label   : 'Tagged State',
+		name    : 'taggedState',
+		options : taggedState,
 		type    : 'radio',
 	},
 
