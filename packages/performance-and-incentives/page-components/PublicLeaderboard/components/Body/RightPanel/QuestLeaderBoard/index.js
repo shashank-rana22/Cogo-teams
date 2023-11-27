@@ -1,18 +1,13 @@
 import { AsyncSelect } from '@cogoport/forms';
 
+import List from './List';
 import styles from './styles.module.css';
-import useGetQuestWinner from './useGetQuestWinner';
 
 function QuestLeaderBoard(props) {
 	const { questId, setQuestId } = props;
 
-	const { loading, data } = useGetQuestWinner({ questId });
-
-	console.log('loading::', loading);
-	console.log('data::', data);
-
 	return (
-		<div className={styles.container}>
+		<div>
 			<div className={styles.header}>
 				<div className={styles.heading}>Quest Leaderboard</div>
 				<AsyncSelect
@@ -26,6 +21,7 @@ function QuestLeaderBoard(props) {
 					className={styles.quest_selector}
 				/>
 			</div>
+			<List questId={questId} />
 		</div>
 	);
 }
