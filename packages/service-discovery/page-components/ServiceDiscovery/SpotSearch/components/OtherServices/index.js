@@ -8,6 +8,7 @@ function OtherServices({
 	setSelectedService = () => {},
 	setSelectedMode = () => {},
 	bookable_services = {},
+	newly_added_services = {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -22,6 +23,7 @@ function OtherServices({
 						setSelectedService={setSelectedService}
 						setSelectedMode={setSelectedMode}
 						bookable_services={bookable_services}
+						newly_added_services={newly_added_services}
 					/>
 				))}
 			</div>
