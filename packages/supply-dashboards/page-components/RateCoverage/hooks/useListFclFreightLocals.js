@@ -26,7 +26,7 @@ function useListFclLocals({ cardData }) {
 						commodity           : [cardData?.commodity],
 						trade_type          : tradeType,
 						cogo_entity_id      : user_data?.partner?.id || undefined,
-						main_port_id        : cardData?.trade_type === 'exportr'
+						main_port_id        : cardData?.trade_type === 'export'
 							? cardData?.origin_main_port_id
 							: cardData?.destination_main_port_id,
 						is_rate_available   : true,

@@ -106,7 +106,6 @@ function SelectLocalCharges({ data: cardData = {} }) {
 					portValue={portValue}
 					PortName={PortName}
 					portNameValue={portNameValue}
-					rateValue={rateValue}
 					setRateValue={setRateValue}
 					selectRequired
 				/>
@@ -121,6 +120,10 @@ function SelectLocalCharges({ data: cardData = {} }) {
 					PortName={PortName}
 					portNameValue={portNameValue}
 					backRequired
+					getExportData={getExportData}
+					getImportData={getImportData}
+					IMPORT_DATA={IMPORT_DATA}
+					EXPORT_DATA={EXPORT_DATA}
 				/>
 			)}
 		</div>

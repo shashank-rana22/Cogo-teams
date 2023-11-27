@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function Header({
 	setOpenRateForm = () => {},
-	openRateForm = false, PortName = {}, portNameValue = {}, rateValue = {}, selectRequired = false,
+	openRateForm = false, PortName = {}, portNameValue = {}, selectRequired = false, isChecked = {},
 }) {
 	const handelForm = () => {
 		setOpenRateForm(!openRateForm);
@@ -30,7 +30,7 @@ function Header({
 					themeType="accent"
 					style={{ marginLeft: '10px' }}
 					onClick={handelForm}
-					disabled={isEmpty(rateValue)}
+					disabled={isEmpty(isChecked) || isChecked === false}
 				>
 					Select
 				</Button>

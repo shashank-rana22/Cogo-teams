@@ -17,6 +17,9 @@ import Header from '../Headers';
 function Controls({
 	openRateForm = false, setOpenRateForm = () => {}, rateValue = {}, mandatoryChargeCnt,
 	cardData = {}, PortName = {}, portNameValue = {}, setRateValue = () => {}, backRequired = false,
+	getExportData = () => {},
+	getImportData = () => {},
+	IMPORT_DATA = '', EXPORT_DATA = '',
 }) {
 	const listShippingLineOptions = useGetAsyncOptions(
 		merge(
@@ -51,10 +54,15 @@ function Controls({
 		const data = {
 			...cardData, ...val,
 		};
+
 		const resp = await	createRate(data);
+		const Origin_id = cardData?.origin_port_id;
+		const destination_id = cardData?.destination_port_id;
 		if (!isEmpty(resp)) {
 			Toast.success('Added Succesfully');
 			setOpenRateForm(!openRateForm);
+			getImportData(IMPORT_DATA, Origin_id);
+			getExportData(EXPORT_DATA, destination_id);
 		}
 	};
 
@@ -139,7 +147,7 @@ function Controls({
 
 	return (
 		<Modal size="md" show={openRateForm} onClose={() => setOpenRateForm(!openRateForm)} placement="top">
-			<Header PortName={PortName} portNameValue={portNameValue} rateValue={rateValue} />
+			<Header PortName={PortName} portNameValue={portNameValue} />
 			<Modal.Body>
 				<Layout
 					fields={finalFields}

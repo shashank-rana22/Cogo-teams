@@ -12,15 +12,14 @@ import styles from './styles.module.css';
 function ChargeModal({
 	openCharge = false, setOpenCharge = () => {}, importRatesData = [],
 	exportRatesData = [], openRateForm = false,
-	setRateValue = () => {}, PortName = {}, portNameValue = {}, rateValue = {}, setOpenRateForm = () => {},
+	setRateValue = () => {}, PortName = {}, portNameValue = {}, setOpenRateForm = () => {},
 	selectRequired = false,
 }) {
-	const combinedRatesData = [...importRatesData, ...exportRatesData];
 	const [isChecked, setIsChecked] = useState(false);
 
 	const handelChangeData = (val) => {
 		setRateValue(val);
-		setIsChecked(val?.id);
+		setIsChecked((prevState) => (prevState === val.id ? null : val.id));
 	};
 
 	const handelForm = () => {
@@ -33,17 +32,21 @@ function ChargeModal({
 			<Header
 				PortName={PortName}
 				portNameValue={portNameValue}
-				rateValue={rateValue}
 				openRateForm={openRateForm}
 				setOpenRateForm={setOpenRateForm}
 				selectRequired={selectRequired}
+				isChecked={isChecked}
 			/>
 			<Modal.Body>
 				<div>
-					{(combinedRatesData || []).map((val) => (
+					{(exportRatesData || importRatesData || []).map((val) => (
 						<div className={styles.container} key={val?.id}>
 							<div className={styles.header}>
-								<Checkbox checked={val?.id === isChecked} onChange={() => handelChangeData(val)} />
+								<Checkbox
+									checked={val?.id === isChecked}
+									value={val?.id}
+									onChange={() => handelChangeData(val)}
+								/>
 								<div className={styles.provider_name}>
 									Service Provider :
 									{' '}
@@ -88,7 +91,12 @@ function ChargeModal({
 						Close
 					</Button>
 
-					<Button size="md" onClick={handelForm} style={{ marginLeft: '10px' }}>
+					<Button
+						size="md"
+						onClick={handelForm}
+						style={{ marginLeft: '10px' }}
+						disabled={isChecked}
+					>
 						{' '}
 						<IcMPlus />
 						{' '}
