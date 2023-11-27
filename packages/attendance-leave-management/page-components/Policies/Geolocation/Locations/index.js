@@ -24,7 +24,6 @@ function Locations({
 
 	const handleSearch = (val) => {
 		debounceQuery(val);
-		setFilters((prev) => ({ ...prev, search: val, page: 1 }));
 		setSearchQuery(val);
 	};
 
