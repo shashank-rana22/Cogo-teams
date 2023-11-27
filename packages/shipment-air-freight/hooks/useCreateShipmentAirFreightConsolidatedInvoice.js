@@ -1,13 +1,12 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-import getPayload from '../page-components/Tasks/TaskExecution/utils/format-payload-consolidated-invoice';
+import getPayload from '../page-components/Tasks/TaskExecution/utils/format-payload-terminal-service-task';
 
 const useCreateShipmentAirFreightConsolidatedInvoice = ({
-	type = 'terminal', sheetData = {}, mainServicesData = {},
-	entityData = {},
-	collectionPartyData = {},
-	createShipmentAdditionalService = () => {},
+	type = 'terminal', index = 0, sheetData = {}, mainServicesData = {},
+	entityData = {}, setTerminalChargeState = () => {},
+	collectionPartyData = {}, setInvoiceData = () => {},
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/create_shipment_air_freight_consolidated_invoice',
@@ -17,6 +16,7 @@ const useCreateShipmentAirFreightConsolidatedInvoice = ({
 	const createShipmentAirFreightConsolidatedInvoice = async (values) => {
 		const additionalServicePayload = getPayload({
 			type,
+			index,
 			values,
 			mainServicesData,
 			sheetData,
@@ -27,8 +27,10 @@ const useCreateShipmentAirFreightConsolidatedInvoice = ({
 		try {
 			await trigger({
 				data: additionalServicePayload,
+			}).then((res) => {
+				setInvoiceData(res?.data);
+				setTerminalChargeState((prev) => ({ ...prev, [index]: 'irn_generate' }));
 			});
-			createShipmentAdditionalService(values);
 		} catch (err) {
 			toastApiError(err);
 		}
