@@ -16,7 +16,7 @@ const API_NAME = {
 	air_freight_local : 'get_air_freight_rate_local',
 };
 
-const useGetFreightRate = ({ filter, formValues, cardData }) => {
+const useGetFreightRate = ({ filter, formValues, cardData, PortName }) => {
 	const endPoint = API_NAME[filter?.service];
 
 	const { profile = {} } = useSelector((state) => state);
@@ -27,7 +27,7 @@ const useGetFreightRate = ({ filter, formValues, cardData }) => {
 		method : 'GET',
 	}, { manual: true });
 
-	const formattedParams = paramsMapping({ filter, cardData, formValues });
+	const formattedParams = paramsMapping({ filter, cardData, formValues, PortName });
 
 	const getFreightRate = useCallback(async () => {
 		try {

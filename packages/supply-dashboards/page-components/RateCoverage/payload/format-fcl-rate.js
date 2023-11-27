@@ -1,4 +1,9 @@
-const formatFclRate = (data, user_id) => {
+const formatFclRate = ({
+	data,
+	user_id,
+	storeLocalImportData,
+	storeLocalExportData,
+}) => {
 	const isEmpty = data?.weight_slabs?.every((slab) => (
 		slab.lower_limit === '' && slab.upper_limit === '' && slab.currency === '' && slab.price === ''
 	));
@@ -40,15 +45,26 @@ const formatFclRate = (data, user_id) => {
 					: undefined,
 			remarks: charge.remarks ? [charge.remarks] : undefined,
 		})),
+		origin_local: {
+			line_items: storeLocalImportData?.line_items?.map((charges) => ({
+				...charges,
+				price  : Number(charges.price),
+				remark : charges?.remark ? [charges.remark] : undefined,
+			})),
+		},
+
 		weight_limit: data?.free_weight ? {
 			free_limit : Number(data?.free_weight),
 			slabs      : weightSlabs,
 		} : undefined,
-		destination_local: data?.detention_free_days
-			? {
-				detention: { free_limit: Number(data?.detention_free_days) },
-			}
-			: undefined,
+		destination_local: {
+			line_items: storeLocalExportData?.line_items?.map((charges) => ({
+				...charges,
+				price  : Number(charges.price),
+				remark : charges?.remark ? [charges.remark] : undefined,
+			})),
+			detention: { free_limit: Number(data?.detention_free_days) },
+		},
 	};
 
 	return payload;

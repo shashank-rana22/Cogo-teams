@@ -34,6 +34,13 @@ function AddRate({
 	filter = {},
 	getStats = () => {},
 	triggeredFrom = '',
+	values = {},
+	portValue = {},
+	setPortValue = () => {},
+	storeLocalImportData = {},
+	setStoreLocalImportData = () => {},
+	storeLocalExportData = {},
+	setStoreLocalExportData = () => {},
 }) {
 	const onCloseHandel = () => {
 		setShowModal((prev) => !prev);
@@ -90,6 +97,19 @@ function AddRate({
 								showElements={showElements}
 								source={source}
 							/>
+							{filter?.service === 'fcl_freight'
+						&& (
+							<SelectLocalCharges
+								data={data}
+								values={values}
+								portValue={portValue}
+								setPortValue={setPortValue}
+								storeLocalImportData={storeLocalImportData}
+								setStoreLocalImportData={setStoreLocalImportData}
+								storeLocalExportData={storeLocalExportData}
+								setStoreLocalExportData={setStoreLocalExportData}
+							/>
+						)}
 						</Modal.Body>
 						<Modal.Footer>
 							<div className={styles.submit_button}>
@@ -114,13 +134,6 @@ function AddRate({
 							</div>
 						</Modal.Footer>
 					</TabPanel>
-					{filter?.service === 'fcl_freight'
-						&& (
-							<TabPanel name="local_charges" title="ADD RATE SPECIFIC LOCAL">
-								<SelectLocalCharges data={data} />
-							</TabPanel>
-						)}
-
 					{addLocalServices && (
 						<TabPanel name="additional_freight" title="ADD OTHER SERVICES RATES">
 							<Modal.Body>

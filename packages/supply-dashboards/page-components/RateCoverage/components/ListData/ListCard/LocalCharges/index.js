@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import { Button } from '@cogoport/components';
+import { IcCTick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
 
@@ -16,14 +17,16 @@ const NO_ORIGIN_DATA = 'You must add origin local charges for port in order for 
 
 const NO_DESTINATION_DATA = 'You must add destination local charges for port in order for your rates to be visible for the following incoterms: ABC, DEF, GHI';
 
-function SelectLocalCharges({ data: cardData = {} }) {
+function SelectLocalCharges({
+	data: cardData = {}, values = {}, portValue = {}, setPortValue = () => {}, storeLocalImportData = {}, setStoreLocalImportData = () => {}, setStoreLocalExportData = () => {}, storeLocalExportData = {},
+}) {
 	const ORIGIN_PORT_ID = cardData?.origin_port_id;
 	const DESTINATION_PORT_ID = cardData?.destination_port_id;
 
 	const [openCharge, setOpenCharge] = useState(false);
 	const [openRateForm, setOpenRateForm] = useState(false);
-	const [portValue, setPortValue] = useState({});
 	const [rateValue, setRateValue] = useState({});
+	const [isChecked, setIsChecked] = useState({});
 
 	const { data: exportData, getData: getExportData } = useListFclLocals({ cardData });
 	const { data: importData, getData: getImportData } = useListFclLocals({ cardData });
@@ -84,14 +87,26 @@ function SelectLocalCharges({ data: cardData = {} }) {
 
 	return (
 		<div className={styles.container}>
+
 			{!isEmpty(exportRatesData) ? OriginTitle : NO_ORIGIN_DATA}
 			<div className={styles.button}>
-				<RenderButtons data={exportRatesData} isExport />
+				{isEmpty(storeLocalExportData) ? <RenderButtons data={exportRatesData} isExport /> : (
+					<div>
+						<IcCTick />
+						You have selected the local charges
+					</div>
+				)}
 			</div>
 
 			{!isEmpty(importRatesData) ? destinationTitle : NO_DESTINATION_DATA}
 			<div className={styles.button}>
-				<RenderButtons data={importRatesData} />
+				{isEmpty(storeLocalImportData) ? <RenderButtons data={importRatesData} /> : (
+					<div>
+						<IcCTick />
+						You have selected the local charges
+					</div>
+				)}
+
 			</div>
 
 			{!openRateForm && openCharge && (
@@ -108,6 +123,8 @@ function SelectLocalCharges({ data: cardData = {} }) {
 					portNameValue={portNameValue}
 					setRateValue={setRateValue}
 					selectRequired
+					isChecked={isChecked}
+					setIsChecked={setIsChecked}
 				/>
 			)}
 			{openRateForm && (
@@ -124,6 +141,10 @@ function SelectLocalCharges({ data: cardData = {} }) {
 					getImportData={getImportData}
 					IMPORT_DATA={IMPORT_DATA}
 					EXPORT_DATA={EXPORT_DATA}
+					values={values}
+					setStoreLocalImportData={setStoreLocalImportData}
+					setStoreLocalExportData={setStoreLocalExportData}
+					isChecked={isChecked}
 				/>
 			)}
 		</div>

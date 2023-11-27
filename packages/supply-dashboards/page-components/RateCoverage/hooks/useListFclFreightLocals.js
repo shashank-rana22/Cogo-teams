@@ -1,8 +1,11 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
 
 function useListFclLocals({ cardData }) {
+	const geo = getGeoConstants();
+
 	const [{ loading, data }, trigger] = useRequest({
 		url          : 'list_fcl_freight_rate_locals',
 		method       : 'GET',
@@ -18,12 +21,11 @@ function useListFclLocals({ cardData }) {
 			await trigger({
 				params: {
 					filters: {
+						service_provider_id : geo.uuid.cogoxpress_id,
 						port_id             : portId,
 						shipping_line_id    : cardData?.shipping_line_id,
-						service_provider_id : cardData?.service_provider_id,
 						container_size      : cardData?.container_size,
 						container_type      : cardData?.container_type,
-						// commodity           : [cardData?.commodity],
 						trade_type          : tradeType,
 						cogo_entity_id      : user_data?.partner?.id || undefined,
 						main_port_id        : cardData?.trade_type === 'export'
@@ -37,7 +39,9 @@ function useListFclLocals({ cardData }) {
 		} catch (err) {
 			// console.log(err);
 		}
-	}, [cardData, trigger, user_data]);
+	}, [cardData?.container_size, cardData?.container_type,
+		cardData?.destination_main_port_id, cardData?.origin_main_port_id,
+		cardData?.shipping_line_id, cardData?.trade_type, geo.uuid.cogoxpress_id, trigger, user_data?.partner?.id]);
 
 	return {
 		loading,

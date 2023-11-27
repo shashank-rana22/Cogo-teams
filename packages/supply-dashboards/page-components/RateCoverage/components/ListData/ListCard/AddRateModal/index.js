@@ -43,6 +43,9 @@ function AddRateModal({
 	const [activeTab, setActiveTab] = useState('main_freight');
 	const [dependentMainFreight, setDependentMainFreight] = useState([{ service: 'main_freight' }]);
 	const [payload, setPayload] = useState(null);
+	const [portValue, setPortValue] = useState({});
+	const [storeLocalImportData, setStoreLocalImportData] = useState({});
+	const [storeLocalExportData, setStoreLocalExportData] = useState({});
 
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 
@@ -76,7 +79,12 @@ function AddRateModal({
 	}, [values?.air_commodity, resetField]);
 
 	const { data:rateData } = useGetFreightRate({ filter, formValues: values, cardData: data });
-	const { createRate, loading } = useCreateFreightRate({ service: filter?.service });
+	const { createRate, loading } = useCreateFreightRate({
+		service: filter?.service,
+		portValue,
+		storeLocalImportData,
+		storeLocalExportData,
+	});
 	const { deleteRateJob } = useDeleteRateJob(filter?.service);
 	const { deleteRequest } = useDeleteFreightRateRequests(filter?.service);
 	const { deleteFeedbackRequest } = useDeleteFreightRateFeedbacks(filter?.service);
@@ -283,6 +291,13 @@ function AddRateModal({
 			filter={filter}
 			getStats={getStats}
 			triggeredFrom={triggeredFrom}
+			values={values}
+			storeLocalImportData={storeLocalImportData}
+			setStoreLocalImportData={setStoreLocalImportData}
+			storeLocalExportData={storeLocalExportData}
+			setStoreLocalExportData={setStoreLocalExportData}
+			portValue={portValue}
+			setPortValue={setPortValue}
 		/>
 	);
 }

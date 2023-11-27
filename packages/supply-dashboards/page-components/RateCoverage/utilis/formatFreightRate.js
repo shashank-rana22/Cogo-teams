@@ -1,4 +1,4 @@
-const paramsMapping = ({ filter, cardData, formValues }) => {
+const paramsMapping = ({ filter, cardData, formValues, PortName }) => {
 	const Params = {
 		origin_port_id      : cardData?.origin_port_id,
 		destination_port_id : cardData?.destination_port_id,
@@ -35,10 +35,10 @@ const paramsMapping = ({ filter, cardData, formValues }) => {
 	};
 
 	const fclLocalParams = {
-		port_id             : cardData?.port_id,
-		trade_type          : cardData?.trade_type,
-		shipping_line_id    : cardData?.shipping_line_id,
-		service_provider_id : cardData?.service_provider_id,
+		port_id             : PortName === 'Origin' ? cardData?.origin_port_id : cardData?.destination_port_id,
+		trade_type          : PortName === 'Origin' ? 'export' : 'import',
+		shipping_line_id    : cardData?.shipping_line_id || undefined,
+		service_provider_id : cardData?.service_provider_id || undefined,
 		rate_type           : cardData?.rate_type || formValues?.rate_type || 'market_place',
 		commodity           : cardData?.commodity || formValues?.commodity || undefined,
 	};

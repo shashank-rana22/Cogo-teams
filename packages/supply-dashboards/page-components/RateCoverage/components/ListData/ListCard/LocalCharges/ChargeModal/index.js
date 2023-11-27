@@ -4,7 +4,6 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
 
 import Header from './Headers';
 import styles from './styles.module.css';
@@ -14,9 +13,8 @@ function ChargeModal({
 	exportRatesData = [], openRateForm = false,
 	setRateValue = () => {}, PortName = {}, portNameValue = {}, setOpenRateForm = () => {},
 	selectRequired = false,
+	isChecked = {}, setIsChecked = () => {},
 }) {
-	const [isChecked, setIsChecked] = useState(false);
-
 	const handelChangeData = (val) => {
 		setRateValue(val);
 		setIsChecked((prevState) => (prevState === val.id ? null : val.id));
@@ -95,7 +93,7 @@ function ChargeModal({
 						size="md"
 						onClick={handelForm}
 						style={{ marginLeft: '10px' }}
-						disabled={isChecked}
+						disabled={!isEmpty(isChecked)}
 					>
 						{' '}
 						<IcMPlus />

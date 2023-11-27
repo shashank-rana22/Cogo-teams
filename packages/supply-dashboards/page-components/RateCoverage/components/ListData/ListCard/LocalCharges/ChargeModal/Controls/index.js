@@ -3,8 +3,6 @@ import { Button, Modal, Toast } from '@cogoport/components';
 import {
 	useForm, useGetAsyncOptions,
 	asyncFieldsListOperators,
-	asyncFieldsOrganization,
-	asyncFieldsOrganizationUsers,
 } from '@cogoport/forms';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty, merge, startCase } from '@cogoport/utils';
@@ -17,12 +15,18 @@ import useGetFreightRate from '../../../../../../hooks/useGetFreightRate';
 import Header from '../Headers';
 
 function Controls({
-	openRateForm = false, setOpenRateForm = () => {}, rateValue = {}, mandatoryChargeCnt,
-	cardData = {}, PortName = {}, portNameValue = {}, setRateValue = () => {}, backRequired = false,
+	openRateForm = false, setOpenRateForm = () => {}, rateValue = {}, cardData = {}, PortName = {},
+	portNameValue = {}, setRateValue = () => {}, backRequired = false,
 	getExportData = () => {},
 	getImportData = () => {},
 	IMPORT_DATA = '', EXPORT_DATA = '',
+	values: formValues = {},
+	setStoreLocalImportData = () => {},
+	isChecked = {},
+	setStoreLocalExportData = () => {},
 }) {
+	const [chargeCodes, setChargeCodes] = useState(null);
+
 	const listShippingLineOptions = useGetAsyncOptions(
 		merge(
 			asyncFieldsListOperators(),
@@ -37,17 +41,17 @@ function Controls({
 		),
 	);
 
-	const [chargeCodes, setChargeCodes] = useState(null);
-
 	const fieldControls = fclRateSpecificLocal({ data: rateValue, cardData, listShippingLineOptions });
 
-	const { data: getChargeCode } = useGetFreightRate({ cardData, filter: { service: 'fcl_freight' } });
-	const service = isEmpty(rateValue) ? 'fcl_freight_local' : 'fcl_freight';
-	const { createRate = () => {}, loading = false } = useCreateFreightRate({ service, PortName });
+	const { data: getChargeCode } = useGetFreightRate({ cardData, PortName, filter: { service: 'fcl_freight_local' } });
 
-	const chargeCodesData = [getChargeCode?.origin_local_charge_codes, getChargeCode
-		?.destination_local_charge_codes,
-	].find(Boolean);
+	const { createRate = () => {}, loading = false } = useCreateFreightRate({
+		service: 'fcl_freight_local',
+		PortName,
+		formValues,
+	});
+
+	const chargeCodesData = [getChargeCode?.local_charge_codes].find(Boolean);
 
 	const { control, formState: { errors }, watch, handleSubmit, setValue } = useForm();
 	const values = watch();
@@ -57,14 +61,26 @@ function Controls({
 			...cardData, ...val,
 		};
 
-		const resp = await	createRate(data);
-		const Origin_id = cardData?.origin_port_id;
-		const destination_id = cardData?.destination_port_id;
-		if (!isEmpty(resp)) {
+		if (isEmpty(isChecked)) {
+			const resp = await createRate(data);
+			const Origin_id = cardData?.origin_port_id;
+			const destination_id = cardData?.destination_port_id;
+			if (!isEmpty(resp)) {
+				Toast.success('Added Succesfully');
+				setOpenRateForm(!openRateForm);
+				getImportData(IMPORT_DATA, destination_id);
+				getExportData(EXPORT_DATA, Origin_id);
+			}
+		}
+		if (PortName === 'Origin') {
+			setStoreLocalExportData(val);
 			Toast.success('Added Succesfully');
 			setOpenRateForm(!openRateForm);
-			getImportData(IMPORT_DATA, destination_id);
-			getExportData(EXPORT_DATA, Origin_id);
+		}
+		if (PortName === 'Destination') {
+			setStoreLocalImportData(val);
+			Toast.success('Added Succesfully');
+			setOpenRateForm(!openRateForm);
 		}
 	};
 
@@ -87,6 +103,7 @@ function Controls({
 						flag = charge;
 					}
 				});
+
 				if (Object.keys(flag).length) {
 					prefillFreightCodes = prefillFreightCodes.filter((item) => item.code !== flag.code);
 					mandatoryFreightCodes = [...mandatoryFreightCodes,
@@ -109,45 +126,21 @@ function Controls({
 		}
 	}, [chargeCodesData]);
 
-	const serviceProviders = useGetAsyncOptions(
-		merge(
-			asyncFieldsOrganization(),
-			{
-				params: {
-					filters: {
-						status       : 'active',
-						kyc_status   : 'verified',
-						account_type : 'service_provider',
-						service      : 'fcl_freight',
-					},
-				},
-			},
-		),
-	);
-
-	const organizationUsers = useGetAsyncOptions(
-		merge(
-			asyncFieldsOrganizationUsers(),
-			{ params: { filters: { organization_id: values?.service_provider_id } } },
-		),
-	);
-
 	const finalFields = (fieldControls || []).map((fields) => {
 		const { name, type } = fields;
-		let newControl = { ...fields };
-
-		if (name === 'service_provider_id') {
-			newControl = { ...newControl, ...serviceProviders };
-		}
-		if (name === 'sourced_by_id') {
-			newControl = { ...newControl, ...organizationUsers };
-		}
-
+		const newControl = { ...fields };
 		if (type === 'fieldArray' && name.includes('line_items')) {
-			const codeMapping = PortName === 'Origin'
-				? getChargeCode?.origin_local_charge_codes : getChargeCode?.destination_local_charge_codes;
+			const codeMapping = getChargeCode?.local_charge_codes;
 
 			const codeKeys = Object.keys(codeMapping || {});
+			let count = 0;
+			Object.keys(chargeCodesData || {}).forEach((code) => {
+				if (chargeCodesData?.[code].tags?.includes('mandatory')) {
+					count += 1;
+				}
+			});
+
+			newControl.noDeleteButtonTill = count;
 
 			newControl.controls = newControl.controls.map((childCtrl) => {
 				const newChildCtrl = { ...childCtrl };
@@ -170,7 +163,7 @@ function Controls({
 					newChildCtrl.options = (codeKeys).map((code) => (
 						{ label: codeMapping[code]?.name, value: code }));
 				}
-				newControl.noDeleteButtonTill = mandatoryChargeCnt;
+
 				return newChildCtrl;
 			});
 		}

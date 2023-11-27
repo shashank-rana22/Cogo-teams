@@ -10,25 +10,6 @@ const fclRateSpecificLocal = ({
 }) => {
 	const controls = [
 		{
-			name        : 'service_provider_id',
-			label       : 'Service Provider',
-			type        : 'select',
-			placeholder : 'Service Provider',
-			span        : 4,
-			value       : cardData?.service_provider_id,
-			disabled    : cardData?.service_provider_id,
-			rules       : { required: 'service provider is required' },
-		},
-		{
-			name        : 'sourced_by_id',
-			label       : 'Rate Provided by user',
-			type        : 'select',
-			placeholder : 'Rate Provided by user',
-			value       : cardData?.sourced_by_id,
-			span        : 4,
-			rules       : { required: 'rate provided by user is required' },
-		},
-		{
 			heading : 'Basic Details',
 			name    : 'basic_details',
 			span    : 12,

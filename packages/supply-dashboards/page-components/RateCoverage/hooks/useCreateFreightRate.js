@@ -48,9 +48,28 @@ const KEYS_TO_SEND = {
 	air_freight_local : 'air_freight_rate_local_request_id',
 };
 
-const getPayload = (service, data, user_id, listData, PortName) => {
+const getPayload = (
+	service,
+	data,
+	user_id,
+	listData,
+	PortName,
+	portValue,
+	storeLocalImportData,
+	storeLocalExportData,
+) => {
 	if (service === 'fcl_freight') {
-		return formatFclRate(data, user_id);
+		return formatFclRate(
+			{
+				data,
+				user_id,
+				listData,
+				PortName,
+				portValue,
+				storeLocalImportData,
+				storeLocalExportData,
+			},
+		);
 	}
 	if (service === 'air_freight') {
 		return formatAirRate(data, user_id);
@@ -88,10 +107,21 @@ const getPayload = (service, data, user_id, listData, PortName) => {
 	if (service === 'air_freight_local') {
 		return formatAirLocal(data, user_id, listData);
 	}
-	return formatFclRate(data, user_id);
+	return formatFclRate({
+		data,
+		user_id,
+		listData,
+		PortName,
+		portValue,
+		storeLocalImportData,
+		storeLocalExportData,
+	});
 };
 
-const useCreateFreightRate = ({ service, PortName }) => {
+const useCreateFreightRate = ({
+	service, PortName, portValue, storeLocalImportData,
+	storeLocalExportData,
+}) => {
 	const { user_data } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
@@ -103,7 +133,16 @@ const useCreateFreightRate = ({ service, PortName }) => {
 	}, { manual: true });
 
 	const createRate = async (data, listData, triggeredFrom) => {
-		const newPayload = getPayload(service, data, user_id, listData, PortName);
+		const newPayload = getPayload(
+			service,
+			data,
+			user_id,
+			listData,
+			PortName,
+			portValue,
+			storeLocalImportData,
+			storeLocalExportData,
+		);
 		const keyToSend = listData?.sources?.includes('rate_request') && KEYS_TO_SEND[service];
 
 		try {

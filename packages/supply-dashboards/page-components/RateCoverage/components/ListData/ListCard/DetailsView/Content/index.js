@@ -51,6 +51,7 @@ function ServiceDetailsContent({
 		filter,
 		shipment_data,
 	});
+
 	const tradeType = INCO_TERM_MAPPING[inco_term_trade_type] || startCase(trade_type);
 
 	const { rate_card } = booking_params || {};
@@ -278,6 +279,29 @@ function ServiceDetailsContent({
 												color="#F8F2E7"
 											>
 												{feedbackData?.spot_search_serial_id}
+											</Pill>
+										</div>
+									)}
+									{feedbackData?.preferred_free_days?.origin_detention && (
+										<div className={styles.content}>
+											<div className={styles.label}> Preferred Origin Detention </div>
+											<Pill
+												size="md"
+												color="#F8F2E7"
+											>
+												{feedbackData?.preferred_free_days?.origin_detention}
+											</Pill>
+										</div>
+									)}
+
+									{feedbackData?.preferred_free_days?.destination_detention && (
+										<div className={styles.content}>
+											<div className={styles.label}> Preferred Destination Detention </div>
+											<Pill
+												size="md"
+												color="#F8F2E7"
+											>
+												{feedbackData?.preferred_free_days?.destination_detention}
 											</Pill>
 										</div>
 									)}
