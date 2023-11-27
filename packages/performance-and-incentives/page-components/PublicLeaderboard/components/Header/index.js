@@ -26,7 +26,7 @@ const handleLocationChange = ({ location, push, setOfficeLocation }) => {
 
 function Header(props) {
 	const {
-		screen, view, setView, dateRange, setDateRange, countdown, duration, setDuration, switchScreen,
+		screen, view, setView, dateRange, setDateRange, updatedAt, countdown, duration, setDuration, switchScreen,
 		reloadCounter, nextReloadAt,
 		officeLocation,
 		setOfficeLocation,
@@ -100,7 +100,7 @@ function Header(props) {
 					className={styles.user_selector}
 				/>
 
-				<CountDownTimer countdown={countdown} />
+				<CountDownTimer updatedAt={updatedAt} countdown={countdown} />
 
 			</div>
 
