@@ -9,6 +9,8 @@ import {
 import { useState } from 'react';
 
 import { SORTBY_OPTION } from '../../../../constants/index';
+import FiltersPopOver from '../Filters';
+import overAllOutstandingcontrols from '../Filters/overAllOutstandingcontrols';
 
 import BulkPostModal from './BulkPostModal';
 import CallPriorityModal from './CallPriorityModal';
@@ -20,6 +22,10 @@ function Filters({
 	setOrderBy = () => {},
 	orderBy = { key: '', order: '', label: '' },
 	setParams = () => {},
+	filters = {},
+	setFilters = () => {},
+	clearFilter = () => {},
+	filtersApplied = false,
 	params = {},
 	queryKey = '',
 	entityCode = '',
@@ -32,6 +38,7 @@ function Filters({
 	const [showBulkPostModal, setShowBulkPostModal] = useState(false);
 
 	const sortStyleAsc = orderBy.order === 'Asc' ? '#303B67' : '#BDBDBD';
+	const controls = overAllOutstandingcontrols();
 
 	const sortStyleDesc = orderBy.order === 'Desc' ? '#303B67' : '#BDBDBD';
 
@@ -123,6 +130,14 @@ function Filters({
 
 						<IcMArrowRotateDown style={{ color: sortStyleDesc }} />
 					</div>
+
+					<FiltersPopOver
+						controls={controls}
+						filters={filters}
+						setFilters={setFilters}
+						clearFilter={clearFilter}
+						filtersApplied={filtersApplied}
+					/>
 
 					<Button
 						className={styles.bulk_btn}

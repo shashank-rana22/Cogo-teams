@@ -20,8 +20,6 @@ import useGetServiceWiseOutstandingsStats from '../../../hooks/useGetServiceWise
 import useSyncSageArOutstanding from '../../../hooks/useSyncSageArOutstanding';
 
 import CcCallList from './CcCallList';
-import Filters from './Filters';
-import overAllOutstandingcontrols from './Filters/overAllOutstandingcontrols';
 import OutstandingFilter from './OutstandingFilter';
 import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
@@ -177,7 +175,6 @@ function OverAllOutstanding({
 			},
 		},
 	};
-	const controls = overAllOutstandingcontrols();
 	return (
 		<>
 			{show ? <ReportModal show={show} setShow={setShow} /> : null}
@@ -206,13 +203,6 @@ function OverAllOutstanding({
 							Sync Data
 						</Button>
 					) : null}
-				<Filters
-					controls={controls}
-					filters={filters}
-					setFilters={setFilters}
-					clearFilter={clearFilter}
-					filtersApplied={filtersApplied}
-				/>
 
 			</div>
 			<OverallOutstandingStats item={statsData} statsLoading={statsLoading} />
@@ -287,6 +277,9 @@ function OverAllOutstanding({
 				setParams={setoutStandingFilters}
 				orderBy={orderBy}
 				setOrderBy={setOrderBy}
+				filters={filters}
+				filtersApplied={filtersApplied}
+				setFilters={setFilters}
 				handleChange={handleChange}
 				formFilters={formFilters}
 				setFormFilters={setFormFilters}

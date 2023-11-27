@@ -6,7 +6,8 @@ import ShowFilterOptions from './ShowFilterOptions';
 import styles from './styles.module.css';
 
 function Filters({
-	controls = [], filters = {},
+	controls = [],
+	filters = {},
 	setFilters = () => {},
 	clearFilter = () => {},
 	filtersApplied = false,
