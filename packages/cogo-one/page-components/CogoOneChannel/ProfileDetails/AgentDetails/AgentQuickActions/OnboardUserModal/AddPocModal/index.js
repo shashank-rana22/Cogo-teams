@@ -2,7 +2,8 @@ import { Button, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useRef, useState } from 'react';
 
-import useCreateShipmentTradePartner from '../../../../../../../hooks/useCreateShipmentTradePartner';
+import useCreateOrganizationTradePartnerPoc from '../../../../../../../hooks/useCreateOrganizationTradePartnerPoc';
+import useCreateOrganizationTradeParty from '../../../../../../../hooks/useCreateOrganizationTradeParty';
 
 import getCreateTradePartnerPocParams from './helpers/getCreateTradePartnerPocParams';
 import SelfAndTradePartyForm from './SelfAndTradePartyForm';
@@ -18,6 +19,8 @@ function AddPocModal({
 	email = '',
 }) {
 	const [showAdditionalDetail, setShowAdditionalDetail] = useState(false);
+	const [importerExporterId, setImporterExporterId] = useState(null);
+
 	const formRef = useRef(null);
 
 	const onClose = () => {
@@ -29,13 +32,20 @@ function AddPocModal({
 		onClose();
 	};
 
-	const { apiTrigger:createTrigger, loading:createLoading } = useCreateShipmentTradePartner({
+	const { apiTrigger:createTrigger, loading:createLoading } = useCreateOrganizationTradePartnerPoc({
 		refetch: createRefetch,
 	});
 
+	const { createTradeParty } = useCreateOrganizationTradeParty({ createPoc: createTrigger });
+
 	const onSubmit = (formValues) => {
-		const params = getCreateTradePartnerPocParams({ ...formValues });
-		createTrigger(params);
+		const params = getCreateTradePartnerPocParams({ ...formValues, importerExporterId });
+		const { trade_party_id = '' } = params;
+		if (isEmpty(trade_party_id)) {
+			createTradeParty(params);
+		} else {
+			createTrigger(params);
+		}
 	};
 
 	const formSubmit = () => formRef?.current?.handleSubmit(onSubmit)();
@@ -54,6 +64,7 @@ function AddPocModal({
 						email={email}
 						showAdditionalDetail={showAdditionalDetail}
 						setShowAdditionalDetail={setShowAdditionalDetail}
+						setImporterExporterId={setImporterExporterId}
 					/>
 				</div>
 

@@ -16,6 +16,7 @@ function CompanyDetails({
 	Error = () => {},
 	control = {},
 	errors = {},
+	onShipmentChange = () => {},
 }) {
 	return (
 		<>
@@ -38,13 +39,14 @@ function CompanyDetails({
 					<label className={styles.form_label}>Shipment ID</label>
 					<AsyncSelectController
 						size="sm"
-						name="importer_exporter_id"
+						name="shipment_id"
 						placeholder="Shipment ID"
 						control={control}
 						rules={{ required: { value: true, message: 'Shipment is Required' } }}
 						asyncKey="list_shipments"
+						onChange={onShipmentChange}
 					/>
-					{Error('importer_exporter_id', errors)}
+					{Error('shipment_id', errors)}
 				</div>
 			</div>
 
@@ -80,17 +82,18 @@ function CompanyDetails({
 			</div>
 			<div className={styles.row}>
 				<div className={styles.form_item_container}>
-					<label className={styles.form_label}>Select Company (Optional)</label>
+					<label className={styles.form_label}>Select Country</label>
 					<AsyncSelectController
 						size="sm"
 						name="country_id"
-						placeholder="Select Company"
+						placeholder="Select Country"
 						control={control}
 						asyncKey="list_locations"
 						isClearable
 						params={{ filters: { type: 'country' } }}
+						rules={{ required: { value: true, message: 'Country is required' } }}
 					/>
-					{Error('trade_party_id', errors)}
+					{Error('country_id', errors)}
 				</div>
 			</div>
 		</>

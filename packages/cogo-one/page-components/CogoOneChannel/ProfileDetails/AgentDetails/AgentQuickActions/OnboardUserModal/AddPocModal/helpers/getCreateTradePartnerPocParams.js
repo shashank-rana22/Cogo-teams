@@ -5,13 +5,14 @@ const getCreateTradePartnerPocParams = (values) => {
 		address = '',
 		alternate_mobile_number,
 		mobile_number,
-		organization_id,
+		importerExporterId,
 		email,
 		name,
 		trade_party_id,
 		trade_party_type,
 		country_id,
 		tradePartyId,
+		business_name,
 	} = values || {};
 
 	const [addressValue] = (address || '').split('::');
@@ -26,12 +27,13 @@ const getCreateTradePartnerPocParams = (values) => {
 			alternate_mobile_country_code : alternate_mobile_number?.country_code,
 			alternate_mobile_number       : alternate_mobile_number?.number,
 		}),
-		organization_id,
+		organization_id : importerExporterId,
 		email,
 		name,
-		trade_party_id: trade_party_id || tradePartyId,
+		trade_party_id  : trade_party_id || tradePartyId,
 		trade_party_type,
 		country_id,
+		business_name,
 	};
 
 	return params;

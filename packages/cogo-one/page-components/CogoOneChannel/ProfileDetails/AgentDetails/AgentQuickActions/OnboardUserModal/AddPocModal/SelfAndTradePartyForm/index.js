@@ -15,6 +15,7 @@ function Error(key, errors) {
 function SelfAndTradePartyForm({
 	showAdditionalDetail = false,
 	setShowAdditionalDetail = () => {},
+	setImporterExporterId = () => {},
 	mobileNumber = '',
 	username = '',
 	email = '',
@@ -34,6 +35,7 @@ function SelfAndTradePartyForm({
 	const { trade_party_type = '', address = '' } = watch() || {};
 
 	const onTradePartnerChange = (_, obj) => setTradeParty(obj);
+	const onShipmentChange = (_, obj) => setImporterExporterId(obj?.importer_exporter_id);
 
 	useEffect(() => {
 		const selectedTradeParty = tradeParty;
@@ -59,6 +61,7 @@ function SelfAndTradePartyForm({
 					Error={Error}
 					control={control}
 					errors={errors}
+					onShipmentChange={onShipmentChange}
 				/>
 				POC DETAILS
 				<PocDetails

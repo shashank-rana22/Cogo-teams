@@ -28,20 +28,22 @@ function OnboardUserModal({
 				<Modal.Header title="Onboard User" />
 
 				<Modal.Body>
-					<Button
-						size="sm"
-						themeType="secondary"
-						onClick={handleRoute}
-					>
-						Onboard User On CRM
-					</Button>
-					<Button
-						size="sm"
-						themeType="secondary"
-						onClick={() => { setShowAddPocModal(true); }}
-					>
-						Poc Shipment
-					</Button>
+					<div className={styles.button_style}>
+						<Button
+							size="lg"
+							themeType="secondary"
+							onClick={handleRoute}
+						>
+							Onboard User On CRM
+						</Button>
+						<Button
+							size="lg"
+							themeType="secondary"
+							onClick={() => { setShowAddPocModal(true); }}
+						>
+							Add Shipment Poc
+						</Button>
+					</div>
 				</Modal.Body>
 
 			</Modal>
