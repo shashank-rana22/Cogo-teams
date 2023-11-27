@@ -48,7 +48,7 @@
 
 .score_heading {
 	font-weight: 400;
-	color: #bdbdbd;
+	color: #808080;
 }
 
 .progress_container :global {
@@ -86,7 +86,7 @@
 .parameters {
 	font-size: 8px;
 	font-weight: 400;
-	color: #bdbdbd;
+	color: #808080;
 }
 
 .parameters_ratio {
