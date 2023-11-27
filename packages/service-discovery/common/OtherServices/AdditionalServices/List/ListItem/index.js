@@ -76,7 +76,7 @@ function ListItem({
 		const SelectedIcon = isHovered && isServiceRemovable ? IcMMinusInCircle : IcCFtick;
 
 		if (loading) {
-			return <Loader style={{ marginRight: 24 }} themeType="primary" />;
+			return <Loader className={styles.loader} themeType="primary" />;
 		}
 
 		if (isSelected) {

@@ -34,3 +34,12 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.tiles_container {
+	display: flex;
+	gap: 8px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}

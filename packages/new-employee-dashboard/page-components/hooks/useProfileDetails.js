@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useCallback } from 'react';

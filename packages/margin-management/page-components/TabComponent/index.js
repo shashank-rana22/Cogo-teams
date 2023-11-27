@@ -1,18 +1,28 @@
-import { Tabs, TabPanel, Button, Modal } from '@cogoport/components';
+import { Tabs, TabPanel, Button, Modal, Select } from '@cogoport/components';
+import { IcMUpwardGraph } from '@cogoport/icons-react';
 import { useGetPermission } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
-import { useMemo, useCallback, useState } from 'react';
+import { useMemo, useCallback, useState, useEffect } from 'react';
 
-import EmptyState from '../../common/EmptyStateMargins';
 import conditions from '../../utils/condition-constants';
 import Search from '../Search';
 
-import Details from './Details';
-import ListPagination from './ListPagination';
+import ApprovalPendingMargins from './ApprovalPendingMargins';
+import GeneralMargins from './GeneralMargins';
 import COMPONENT_MAPPING from './marginTypeComponentMapping';
 import MultiEntityMargin from './MultiEntityMargin';
 import SERVICE_TYPE_MAPPING from './service-name-mapping';
+import styles from './styles.module.css';
 import TransactionFunnelData from './TransactionFunnelData';
+
+const MAIN_COMPONENT_MAPPING = {
+	demand              : GeneralMargins,
+	supply              : GeneralMargins,
+	cogoport            : GeneralMargins,
+	approval_pending    : ApprovalPendingMargins,
+	multi_entity_margin : MultiEntityMargin,
+};
+
+const MOBILE_SCREEN_SIZE = 768;
 
 function TabComponent({
 	marginBreakupData = {},
@@ -24,6 +34,16 @@ function TabComponent({
 	const { isConditionMatches } = useGetPermission();
 
 	const [showFunnelModal, setShowFunnelModal] = useState(false);
+
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		function handleResize() {
+			setIsMobile(window.innerWidth < MOBILE_SCREEN_SIZE);
+		}
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
 
 	const checkConditions = useCallback(() => ({
 		demand: isConditionMatches(
@@ -57,110 +77,100 @@ function TabComponent({
 		}
 	};
 
-	return (
-		<div>
-			<div style={{ display: 'flex', justifyContent: 'space-between', margin: '12px 0', cursor: 'pointer' }}>
-				<Tabs
-					themeType="tertiary"
-					activeTab={activeTab}
-					onChange={setActive}
-				>
-					{Object.values(COMPONENT_MAPPING).map((item) => {
-						const { title = '', name = '' } = item;
-						return condition[activeTab]
-							? <TabPanel themeType="primary" key={name} name={name} title={title} /> : null;
-					})}
-				</Tabs>
-				<Search
-					activeTab={activeTab}
-					activeService={activeService}
-					setFilterParams={setFilterParams}
-					filterParams={filterParams}
-				/>
-			</div>
+	const MainComponent = MAIN_COMPONENT_MAPPING[activeTab] || GeneralMargins;
 
-			{!['approval_pending', 'multi_entity_margin'].includes(activeTab) ? (
-				<div style={{ display: 'flex', gap: '4px', margin: '12px 0' }}>
+	return (
+		<>
+			{isMobile ? (
+				<>
+					<h5>Select Margin Type</h5>
+					<Select
+						value={activeTab}
+						onChange={setActive}
+						options={Object.values(COMPONENT_MAPPING).map((i) => condition[activeTab] && {
+							label : i?.title,
+							value : i?.name,
+						})}
+					/>
+				</>
+			) : (
+				<div style={{ display: 'flex', justifyContent: 'space-between', margin: '12px 0', cursor: 'pointer' }}>
 					<Tabs
 						themeType="tertiary"
-						activeTab={activeService}
-						onChange={setActiveService}
+						activeTab={activeTab}
+						onChange={setActive}
 					>
-						{Object.keys(SERVICE_TYPE_MAPPING).map(
-							(key) => (
-								<TabPanel
-									themeType="primary"
-									key={key}
-									name={key}
-									title={SERVICE_TYPE_MAPPING[key]}
-								/>
-							),
-						)}
+						{Object.values(COMPONENT_MAPPING).map((item) => {
+							const { title = '', name = '' } = item;
+							return condition[activeTab]
+								? <TabPanel themeType="primary" key={name} name={name} title={title} /> : null;
+						})}
 					</Tabs>
-					<Button onClick={() => setShowFunnelModal(!showFunnelModal)}>
-						Show Transaction funnel
-					</Button>
-				</div>
-			) : null}
-
-			{!['approval_pending', 'multi_entity_margin'].includes(activeTab) ? (
-				<div>
-					{!loading && isEmpty(data?.list) ? <EmptyState /> : (
-						<div>
-							{(data?.list || []).map((item) => (
-								<Details
-									showContainerDetails
-									marginBreakupData={marginBreakupData}
-									setMarginBreakupData={setMarginBreakupData}
-									key={item?.id}
-									data={item}
-									activeTab={activeTab}
-									refetch={refetch}
-								/>
-							))}
-							<ListPagination
-								paginationProps={{
-									data,
-									filterParams,
-									setFilterParams,
-								}}
-							/>
-						</div>
-					)}
-				</div>
-			) : (
-				<div>
-					{activeTab !== 'multi_entity_margin' ? (
-						<div>
-							{!loading && isEmpty(data?.list) ? <EmptyState /> : (
-								<div>
-									{(data?.list || []).map((service) => (
-										<Details
-											marginBreakupData={marginBreakupData}
-											setMarginBreakupData={setMarginBreakupData}
-											key={service?.id}
-											data={service}
-											activeTab={activeTab}
-											refetch={refetch}
-										/>
-									))}
-									<ListPagination
-										paginationProps={{
-											data,
-											filterParams,
-											setFilterParams,
-										}}
-									/>
-								</div>
-							)}
-						</div>
-					) : null}
+					<Search
+						activeTab={activeTab}
+						activeService={activeService}
+						setFilterParams={setFilterParams}
+						filterParams={filterParams}
+					/>
 				</div>
 			)}
 
-			{activeTab === 'multi_entity_margin' ? (
-				<MultiEntityMargin />
+			{!['approval_pending', 'multi_entity_margin'].includes(activeTab) ? (
+				<div>
+					{isMobile ? (
+						<div className={styles.mobile_service_container}>
+							<div style={{ width: '100%' }}>
+								<h5>Select Service</h5>
+								<Select
+									value={activeService}
+									onChange={setActiveService}
+									options={Object.keys(SERVICE_TYPE_MAPPING).map((i) => ({
+										label : SERVICE_TYPE_MAPPING[i],
+										value : i,
+									}))}
+								/>
+							</div>
+							<Button onClick={() => setShowFunnelModal(!showFunnelModal)}>
+								<IcMUpwardGraph />
+							</Button>
+						</div>
+					) : (
+						<div style={{ display: 'flex', gap: '4px', margin: '12px 0', justifyContent: 'space-between' }}>
+							<Tabs
+								themeType="tertiary"
+								activeTab={activeService}
+								onChange={setActiveService}
+							>
+								{Object.keys(SERVICE_TYPE_MAPPING).map(
+									(key) => (
+										<TabPanel
+											themeType="primary"
+											key={key}
+											name={key}
+											title={SERVICE_TYPE_MAPPING[key]}
+										/>
+									),
+								)}
+							</Tabs>
+							<Button onClick={() => setShowFunnelModal(!showFunnelModal)}>
+								Show Transaction funnel
+							</Button>
+						</div>
+					)}
+				</div>
 			) : null}
+
+			<MainComponent
+				loading={loading}
+				data={data}
+				marginBreakupData={marginBreakupData}
+				setMarginBreakupData={setMarginBreakupData}
+				activeTab={activeTab}
+				refetch={refetch}
+				filterParams={filterParams}
+				setFilterParams={setFilterParams}
+				activeService={activeService}
+			/>
 
 			{showFunnelModal ? (
 				<Modal
@@ -187,7 +197,7 @@ function TabComponent({
 					</Modal.Footer>
 				</Modal>
 			) : null}
-		</div>
+		</>
 	);
 }
 export default TabComponent;

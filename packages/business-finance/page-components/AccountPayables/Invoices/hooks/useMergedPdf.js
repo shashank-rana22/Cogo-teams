@@ -11,7 +11,7 @@ const useMergedPdf = ({ generateInvoice = () => {} }) => {
 		{
 			url     : `/purchase/payrun/merged-pdf/${payrun}`,
 			method  : 'post',
-			authKey : 'post_purchase_payrun_merged_pdf',
+			authKey : 'post_purchase_payrun_merged_pdf_by_id',
 		},
 		{ manual: true },
 	);

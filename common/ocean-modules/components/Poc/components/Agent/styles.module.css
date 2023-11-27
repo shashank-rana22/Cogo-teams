@@ -7,3 +7,17 @@
 	font-size: 12px;
 	color: var(--color-secondary-greyscale-3);
 }
+
+.stakeholder_container {
+	margin: 20px 0;
+}
+
+.stakeholder_type {
+	margin-right: 4px;
+	color: var(--color-secondary-greyscale-3);
+}
+
+.stakeholder {
+	display: flex;
+	color: var(--color-secondary-greyscale-2);
+}

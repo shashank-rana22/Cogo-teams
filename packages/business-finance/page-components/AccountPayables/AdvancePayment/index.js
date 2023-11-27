@@ -10,12 +10,13 @@ import ApprovedBy from './renderFunction/ApprovedBy';
 import Entity from './renderFunction/Entity';
 import IncidentNumber from './renderFunction/IncidentNumber';
 import OrganizationName from './renderFunction/OrganizationName';
+import PaymentStatus from './renderFunction/PaymentStatus';
 import RequestedBy from './renderFunction/RequestedBy';
 import SIDnumber from './renderFunction/SIDnumber';
 import SelectFilters from './SelectFilters';
 import styles from './styles.module.css';
 
-function AdvancePayment({ activeEntity }) {
+function AdvancePayment({ activeEntity = '' }) {
 	const [sort, setSort] = useState({});
 	const { filters, setFilters, data, loading } = useGetAdvancePaymentList({ activeEntity, sort });
 	const { pageIndex, list = [] } = data || {};
@@ -41,6 +42,9 @@ function AdvancePayment({ activeEntity }) {
 		),
 		renderEntityCode: (itemData) => (
 			<Entity itemData={itemData} />
+		),
+		renderPaymentStatus: (itemData) => (
+			<PaymentStatus itemData={itemData} />
 		),
 	};
 

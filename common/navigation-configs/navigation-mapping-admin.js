@@ -1780,8 +1780,8 @@ const navigationMapping = ({ t = () => {} }) => {
 				{
 					key           : 'transaction_setting-pass_through_customers',
 					title         : t('common:pass_through_customers'),
-					href          : '/pass-through-customers',
-					as            : '/pass-through-customers',
+					href          : '/v2/pass-through-customers',
+					as            : '/v2/pass-through-customers',
 					main_apis     : [],
 					possible_apis : apis.pass_through_customers,
 				},

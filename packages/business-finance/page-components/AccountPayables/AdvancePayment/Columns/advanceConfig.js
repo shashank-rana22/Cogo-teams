@@ -42,6 +42,12 @@ export const ADVANCE_CONFIG = {
 			span : 1.2,
 		},
 		{
+			label : 'Payment Status',
+			key   : 'paymentStatus',
+			func  : 'renderPaymentStatus',
+			span  : 1.2,
+		},
+		{
 			label : 'Entity',
 			key   : 'entityCode',
 			func  : 'renderEntityCode',

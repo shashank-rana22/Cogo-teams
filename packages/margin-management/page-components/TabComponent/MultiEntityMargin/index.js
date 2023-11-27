@@ -68,7 +68,7 @@ function MultiEntityMargin() {
 				activeTab={activeService}
 				themeType="tertiary"
 				onChange={setActiveService}
-				style={{ marginTop: 12 }}
+				style={{ marginTop: 12, overflow: 'scroll' }}
 			>
 				{options.map((option) => (
 					<TabPanel key={option.value} name={option.value} title={option.label} />
@@ -78,7 +78,7 @@ function MultiEntityMargin() {
 				{(newCogoEntitiesList || []).map((rowItem, rowIdx) => (
 					<div
 						key={rowItem[GLOBAL_CONSTANTS.zeroth_index].id}
-						style={{ display: 'flex', flexDirection: 'row' }}
+						className={styles.row_item}
 					>
 						{(rowItem || []).map((colItem, colIdx) => (
 							<div
@@ -100,14 +100,14 @@ function MultiEntityMargin() {
 											: (
 												<div>
 													{!colIdx ? (
-														<div className={styles.name}>
+														<div className={styles.column_name}>
 															{colItem.business_name}
 														</div>
 													) : (
 														<div className={styles.btn_wrapper}>
 															{colItem?.[GLOBAL_CONSTANTS.zeroth_index]?.id
 																		=== colItem?.[1]?.id ? (
-																			<div>--</div>
+																			<div className={styles.view_btn}>--</div>
 																) : (
 																	<div
 																		role="presentation"
