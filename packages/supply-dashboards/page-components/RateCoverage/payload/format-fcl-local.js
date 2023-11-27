@@ -7,6 +7,7 @@ const formatFclLocal = (data, user_id, listData, PortName) => {
 	const finalPortId = (PortName === 'Origin' ? data?.origin_port_id : data?.destination_port_id) || undefined;
 
 	const payloadRequired = {
+		// commodity,
 		trade_type,
 		container_size,
 		container_type,

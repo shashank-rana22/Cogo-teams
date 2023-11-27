@@ -23,7 +23,7 @@ function useListFclLocals({ cardData }) {
 						service_provider_id : cardData?.service_provider_id,
 						container_size      : cardData?.container_size,
 						container_type      : cardData?.container_type,
-						commodity           : [cardData?.commodity],
+						// commodity           : [cardData?.commodity],
 						trade_type          : tradeType,
 						cogo_entity_id      : user_data?.partner?.id || undefined,
 						main_port_id        : cardData?.trade_type === 'export'

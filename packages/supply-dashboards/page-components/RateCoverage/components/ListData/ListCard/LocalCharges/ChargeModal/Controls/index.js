@@ -3,6 +3,8 @@ import { Button, Modal, Toast } from '@cogoport/components';
 import {
 	useForm, useGetAsyncOptions,
 	asyncFieldsListOperators,
+	asyncFieldsOrganization,
+	asyncFieldsOrganizationUsers,
 } from '@cogoport/forms';
 import { IcMPlus } from '@cogoport/icons-react';
 import { isEmpty, merge, startCase } from '@cogoport/utils';
@@ -37,7 +39,7 @@ function Controls({
 
 	const [chargeCodes, setChargeCodes] = useState(null);
 
-	const fieldControls = fclRateSpecificLocal({ data: rateValue, listShippingLineOptions });
+	const fieldControls = fclRateSpecificLocal({ data: rateValue, cardData, listShippingLineOptions });
 
 	const { data: getChargeCode } = useGetFreightRate({ cardData, filter: { service: 'fcl_freight' } });
 	const service = isEmpty(rateValue) ? 'fcl_freight_local' : 'fcl_freight';
@@ -61,8 +63,8 @@ function Controls({
 		if (!isEmpty(resp)) {
 			Toast.success('Added Succesfully');
 			setOpenRateForm(!openRateForm);
-			getImportData(IMPORT_DATA, Origin_id);
-			getExportData(EXPORT_DATA, destination_id);
+			getImportData(IMPORT_DATA, destination_id);
+			getExportData(EXPORT_DATA, Origin_id);
 		}
 	};
 
@@ -107,9 +109,39 @@ function Controls({
 		}
 	}, [chargeCodesData]);
 
+	const serviceProviders = useGetAsyncOptions(
+		merge(
+			asyncFieldsOrganization(),
+			{
+				params: {
+					filters: {
+						status       : 'active',
+						kyc_status   : 'verified',
+						account_type : 'service_provider',
+						service      : 'fcl_freight',
+					},
+				},
+			},
+		),
+	);
+
+	const organizationUsers = useGetAsyncOptions(
+		merge(
+			asyncFieldsOrganizationUsers(),
+			{ params: { filters: { organization_id: values?.service_provider_id } } },
+		),
+	);
+
 	const finalFields = (fieldControls || []).map((fields) => {
 		const { name, type } = fields;
-		const newControl = { ...fields };
+		let newControl = { ...fields };
+
+		if (name === 'service_provider_id') {
+			newControl = { ...newControl, ...serviceProviders };
+		}
+		if (name === 'sourced_by_id') {
+			newControl = { ...newControl, ...organizationUsers };
+		}
 
 		if (type === 'fieldArray' && name.includes('line_items')) {
 			const codeMapping = PortName === 'Origin'

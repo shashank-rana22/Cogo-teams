@@ -5,9 +5,29 @@ import { currencyOptions, rateTypeOptions } from '../helpers/constants';
 
 const fclRateSpecificLocal = ({
 	data,
+	cardData,
 	listShippingLineOptions,
 }) => {
 	const controls = [
+		{
+			name        : 'service_provider_id',
+			label       : 'Service Provider',
+			type        : 'select',
+			placeholder : 'Service Provider',
+			span        : 4,
+			value       : cardData?.service_provider_id,
+			disabled    : cardData?.service_provider_id,
+			rules       : { required: 'service provider is required' },
+		},
+		{
+			name        : 'sourced_by_id',
+			label       : 'Rate Provided by user',
+			type        : 'select',
+			placeholder : 'Rate Provided by user',
+			value       : cardData?.sourced_by_id,
+			span        : 4,
+			rules       : { required: 'rate provided by user is required' },
+		},
 		{
 			heading : 'Basic Details',
 			name    : 'basic_details',
@@ -51,8 +71,7 @@ const fclRateSpecificLocal = ({
 			type        : 'select',
 			placeholder : 'Commodity',
 			span        : 12,
-			value       : data?.commodity || 'all_commodities',
-			disabled    : true,
+			value       : data?.commodity,
 		},
 		{
 			name        : 'shipping_line_id',
@@ -60,7 +79,8 @@ const fclRateSpecificLocal = ({
 			type        : 'select',
 			placeholder : 'Shipping Line',
 			span        : 12,
-			value       : data?.shipping_line_id,
+			value       : cardData?.shipping_line_id,
+			disabled    : cardData?.shipping_line_id,
 			...listShippingLineOptions,
 			rules       : { required: 'shipping line is required' },
 		},
