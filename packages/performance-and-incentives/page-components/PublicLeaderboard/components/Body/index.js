@@ -21,8 +21,8 @@ function Body(props) {
 		duration,
 		setDuration,
 		setNextReloadAt,
-		questId,
-		setQuestId,
+		quest,
+		setQuest,
 		officeLocation,
 		isQuestPresent,
 	} = props;
@@ -50,8 +50,8 @@ function Body(props) {
 				<RightPanel
 					view={view}
 					updatedAt={updatedAt}
-					questId={questId}
-					setQuestId={setQuestId}
+					quest={quest}
+					setQuest={setQuest}
 					officeLocation={officeLocation}
 				/>
 			) : (

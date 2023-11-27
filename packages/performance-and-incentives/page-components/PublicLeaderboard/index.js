@@ -25,7 +25,7 @@ function PublicDashboard() {
 	const [nextReloadAt, setNextReloadAt] = useState(100);
 	const [duration, setDuration] = useState('today');
 	const [officeLocation, setOfficeLocation] = useState(location);
-	const [questId, setQuestId] = useState('');
+	const [quest, setQuest] = useState({});
 
 	const [dateRange, setDateRange] = useState({
 		startDate : getTodayStartDate(),
@@ -85,8 +85,8 @@ function PublicDashboard() {
 					duration={duration}
 					setDuration={setDuration}
 					setNextReloadAt={setNextReloadAt}
-					questId={questId}
-					setQuestId={setQuestId}
+					quest={quest}
+					setQuest={setQuest}
 					officeLocation={officeLocation}
 					isQuestPresent={!isEmpty(list)}
 				/>

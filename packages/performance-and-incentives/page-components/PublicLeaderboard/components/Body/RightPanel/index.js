@@ -18,8 +18,8 @@ const durationOptions = DURATION_OPTIONS.filter((item) => item.value !== 'custom
 function RightPanel(props) {
 	const {
 		view, updatedAt,
-		questId,
-		setQuestId,
+		quest,
+		setQuest,
 		officeLocation,
 	} = props;
 
@@ -58,8 +58,8 @@ function RightPanel(props) {
 
 			<div className={styles.inner_container}>
 				<QuestLeaderBoard
-					questId={questId}
-					setQuestId={setQuestId}
+					quest={quest}
+					setQuest={setQuest}
 					officeLocation={officeLocation}
 				/>
 			</div>

@@ -6,9 +6,13 @@ import List from './List';
 import styles from './styles.module.css';
 
 function QuestLeaderBoard(props) {
-	const { questId, setQuestId, officeLocation } = props;
+	const { quest, setQuest, officeLocation } = props;
 
 	const renderQuestLabel = (data) => CustomSelectOption({ data, key: 'quests' });
+
+	const handleChange = (val, obj) => {
+		setQuest(obj);
+	};
 
 	return (
 		<div>
@@ -18,15 +22,15 @@ function QuestLeaderBoard(props) {
 					name="id"
 					asyncKey="agent_scoring_quests"
 					valueKey="id"
-					onChange={setQuestId}
-					value={questId}
+					onChange={handleChange}
+					value={quest?.id}
 					placeholder="Select quest"
 					size={window.innerWidth >= 2560 ? 'md' : 'sm'}
 					className={styles.quest_selector}
 					renderLabel={renderQuestLabel}
 				/>
 			</div>
-			<List questId={questId} officeLocation={officeLocation} />
+			<List questId={quest?.id} officeLocation={officeLocation} />
 		</div>
 	);
 }
