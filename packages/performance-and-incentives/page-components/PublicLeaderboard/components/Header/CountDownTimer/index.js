@@ -5,7 +5,7 @@ import useCountDown from '../../../hooks/useCountDown';
 
 import styles from './styles.module.css';
 
-function CountDownTimer({ updatedAt = '2023-11-27T08:50:00Z' }) {
+function CountDownTimer({ updatedAt = '2023-11-27T11:50:00Z' }) {
 	const { countdown } = useCountDown({ updatedAt });
 
 	if (countdown < 0 || Number.isNaN(countdown)) return null;
