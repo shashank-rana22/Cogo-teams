@@ -46,7 +46,7 @@ function PublicDashboard() {
 
 	const { reloadCounter } = useReloadCounter({ seconds: nextReloadAt, functionToCall: switchScreen });
 
-	const { list, loading: questLoading } = useGetQuests();
+	const { list, loading: questLoading } = useGetQuests({ setQuest });
 
 	const contextValues = useMemo(() => ({
 		countdown,
