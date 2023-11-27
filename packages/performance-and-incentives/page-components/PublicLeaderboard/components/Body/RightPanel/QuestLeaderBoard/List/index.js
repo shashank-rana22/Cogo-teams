@@ -26,9 +26,9 @@ const getProgressClassName = ({ parameters_fulfilled = 0, parameters_required = 
 };
 
 function List(props) {
-	const { questId } = props;
+	const { questId, officeLocation } = props;
 
-	const { loading = false, data = [] } = useGetQuestWinner({ questId });
+	const { loading = false, data = [] } = useGetQuestWinner({ questId, officeLocation });
 
 	if (loading) return <WinnerLoader />;
 

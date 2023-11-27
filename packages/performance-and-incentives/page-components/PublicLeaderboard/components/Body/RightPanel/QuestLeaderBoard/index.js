@@ -4,7 +4,7 @@ import List from './List';
 import styles from './styles.module.css';
 
 function QuestLeaderBoard(props) {
-	const { questId, setQuestId } = props;
+	const { questId, setQuestId, officeLocation } = props;
 
 	return (
 		<div>
@@ -21,7 +21,7 @@ function QuestLeaderBoard(props) {
 					className={styles.quest_selector}
 				/>
 			</div>
-			<List questId={questId} />
+			<List questId={questId} officeLocation={officeLocation} />
 		</div>
 	);
 }
