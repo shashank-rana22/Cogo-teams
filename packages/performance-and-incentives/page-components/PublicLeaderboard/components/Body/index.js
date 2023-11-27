@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { useState } from 'react';
 
 import SCREEN_CONSTANTS from '../../../../constants/screen-constants';
@@ -23,12 +24,13 @@ function Body(props) {
 		questId,
 		setQuestId,
 		officeLocation,
+		isQuestPresent,
 	} = props;
 
 	const [score, setScore] = useState({});
 
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${!isQuestPresent ? styles.container_height : null}`}>
 			<LeftPanel
 				screen={screen}
 				view={view}

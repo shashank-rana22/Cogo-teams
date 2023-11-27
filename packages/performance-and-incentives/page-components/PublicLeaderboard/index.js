@@ -1,4 +1,5 @@
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback, useMemo, useState } from 'react';
 
 import ScrollAnnouncement from '../../common/ScrollAnouncement';
@@ -87,6 +88,7 @@ function PublicDashboard() {
 					questId={questId}
 					setQuestId={setQuestId}
 					officeLocation={officeLocation}
+					isQuestPresent={!isEmpty(list)}
 				/>
 			</div>
 		</PublicLeaderBoardContext.Provider>
