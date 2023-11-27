@@ -13507,6 +13507,11 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'list_omnichannel_onboarding_timelines',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'post_allocation_request_status',
 			access_type  : 'private',
 			feature      : 'allocation',
