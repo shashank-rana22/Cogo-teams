@@ -4,28 +4,14 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function getUniqueData(dataArray) {
-	const mutatedArray = [...new Set((dataArray || []).map((ele) => ele?.email))].map((email) => {
-		const item = dataArray.find((it) => it.email === email);
-		return { email, name: item?.name };
-	});
-
-	return mutatedArray;
-}
-
 function UserDetails({ item = {} }) {
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
-	const { kam = [], creditController = [], salesAgent = [], portfolioManager = [] } = item || [];
-
-	const kamData = getUniqueData(kam);
-	const agentData = getUniqueData(salesAgent);
-	const ccData = getUniqueData(creditController);
-	const portfolioManagerData = getUniqueData(portfolioManager);
+	const { kam = {}, creditController = {}, salesAgent = {}, portfolioManager = {} } = item || [];
 
 	return (
 		<>
-			{(!isEmpty(kamData) || !isEmpty(agentData) || !isEmpty(ccData)
-			|| !isEmpty(portfolioManagerData)) && (
+			{(!isEmpty(kam) || !isEmpty(salesAgent) || !isEmpty(creditController)
+			|| !isEmpty(portfolioManager)) && (
 				<div className={styles.download_icon_div}>
 					<IcMProfile
 						onClick={() => setShowDetailsCard(true)}
@@ -52,46 +38,42 @@ function UserDetails({ item = {} }) {
 									DETAILS
 								</div>
 							</div>
-							{!isEmpty(kamData) ? (
+							{!isEmpty(kam) ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
 										{startCase('KAM OWNER')}
 									</div>
-									{(kamData || []).map((singleagent) => (
-										<div key={singleagent?.name} className={styles.containers}>
-											<div className={styles.email}>
-												{singleagent?.email || '-'}
-											</div>
-											<div className={styles.name}>
-												{singleagent?.name || '-'}
-											</div>
+									<div key={kam?.name} className={styles.containers}>
+										<div className={styles.email}>
+											{kam?.email || '-'}
 										</div>
-									))}
+										<div className={styles.name}>
+											{kam?.name || '-'}
+										</div>
+									</div>
 								</div>
 							) : null}
-							{!isEmpty(agentData) ? (
+							{!isEmpty(salesAgent) ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
 										{startCase('AGENT')}
 									</div>
-									{(agentData || []).map((singleagent) => (
-										<div key={singleagent?.name} className={styles.containers}>
-											<div className={styles.email}>
-												{singleagent?.email || '-'}
-											</div>
-											<div className={styles.name}>
-												{singleagent?.name || '-'}
-											</div>
+									<div key={salesAgent?.name} className={styles.containers}>
+										<div className={styles.email}>
+											{salesAgent?.email || '-'}
 										</div>
-									))}
+										<div className={styles.name}>
+											{salesAgent?.name || '-'}
+										</div>
+									</div>
 								</div>
 							) : null}
-							{!isEmpty(ccData) ? (
+							{!isEmpty(creditController) ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
 										{startCase('CC')}
 									</div>
-									{(ccData || []).map((singleagent) => (
+									{(creditController || []).map((singleagent) => (
 										<div key={singleagent?.name} className={styles.containers}>
 											<div className={styles.email}>
 												{singleagent?.email || '-'}
@@ -103,22 +85,19 @@ function UserDetails({ item = {} }) {
 									))}
 								</div>
 							) : null}
-							{!isEmpty(portfolioManagerData) ? (
+							{!isEmpty(portfolioManager) ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
 										{startCase('Portfolio Manager')}
-
 									</div>
-									{(portfolioManagerData || []).map((singleagent) => (
-										<div key={singleagent?.name} className={styles.containers}>
-											<div className={styles.email}>
-												{singleagent?.email || '-'}
-											</div>
-											<div className={styles.name}>
-												{singleagent?.name || '-'}
-											</div>
+									<div key={portfolioManager?.name} className={styles.containers}>
+										<div className={styles.email}>
+											{portfolioManager?.email || '-'}
 										</div>
-									))}
+										<div className={styles.name}>
+											{portfolioManager?.name || '-'}
+										</div>
+									</div>
 								</div>
 							) : null}
 						</div>
