@@ -160,6 +160,27 @@ function SelectServices({
 				chargeable_weight,
 			});
 
+			if (!is_rate_available && !service_type.includes('local')) {
+				return [
+					...acc,
+					{
+						feedback_type : 'request_rate',
+						service_type,
+						rate_id       : rate_id || id,
+						service_id,
+						container_size,
+						is_added      : rateRequestedFor.includes(service_id),
+						label,
+						selected_card : rate.id,
+						service_data  : cur,
+					},
+				];
+			}
+
+			if (!(rate_id || id)) {
+				return acc;
+			}
+
 			if (is_rate_available) {
 				return [
 					...acc,
@@ -177,23 +198,6 @@ function SelectServices({
 						freight_price_discounted : finalPrice,
 						freight_price_currency   : service_type === primary_service
 							? freight_price_currency : total_price_currency,
-					},
-				];
-			}
-
-			if (!is_rate_available && !service_type.includes('local')) {
-				return [
-					...acc,
-					{
-						feedback_type : 'request_rate',
-						service_type,
-						rate_id       : rate_id || id,
-						service_id,
-						container_size,
-						is_added      : rateRequestedFor.includes(service_id),
-						label,
-						selected_card : rate.id,
-						service_data  : cur,
 					},
 				];
 			}

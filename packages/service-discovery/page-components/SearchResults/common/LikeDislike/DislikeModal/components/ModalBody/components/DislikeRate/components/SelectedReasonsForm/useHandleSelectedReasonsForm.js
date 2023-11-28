@@ -72,7 +72,7 @@ const useHandleSelectedReasonsForm = ({
 			}
 
 			const { data: validateData = {} } = await trigger({
-				data: {
+				params: {
 					feedbacks         : restFeedbacks,
 					rate_id,
 					service_type,
