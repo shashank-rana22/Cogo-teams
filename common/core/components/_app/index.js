@@ -63,4 +63,6 @@ function MyApp({ Component, pageProps }) {
 	);
 }
 
+MyApp.getInitialProps = async () => ({ pageProps: { layout: 'none' } });
+
 export default appWithTranslation(MyApp);
