@@ -49,8 +49,7 @@ function List({
 	const getListPayload = {
 		page,
 		filters: {
-			subscribe_user_id : user_id,
-			status            : STATUS_MAPPING[status],
+			status: STATUS_MAPPING[status],
 			q,
 		},
 	};
