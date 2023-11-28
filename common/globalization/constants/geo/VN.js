@@ -231,6 +231,7 @@ export default {
 			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
 			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
 			'dc5e8695-c30e-4350-9de9-8218ed1abfc4', // CCS Manager - Enterprise
+			'2aa607a9-4f92-47b0-963f-be18c215e88d',
 		],
 		cp_program_manager    : '122c2266-6c55-4b97-9f61-1056f87b53a7',
 		prod_kam_ie_manager   : 'f9905d33-24d7-48ca-99cd-eeca13a90d5a',
@@ -598,6 +599,7 @@ export default {
 					stakeholder_wise_invoice_required : false,
 					is_purchase_visible_to_kam        : false,
 					is_task_visible_to_so2_executive  : false,
+					edit_internal_poc                 : false,
 				},
 			},
 

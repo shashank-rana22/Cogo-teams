@@ -1,3 +1,5 @@
+import getTradeType from '../getTradeType';
+
 import getServiceWisePayload from './getServiceWisePayload';
 
 const getCheckoutPayload = ({
@@ -69,7 +71,7 @@ const getCheckoutPayload = ({
 
 	finalServiceName = finalServiceName.replace('export_', '');
 
-	const tradeType = service_name.includes('export') ? 'export' : 'import';
+	const tradeType = getTradeType({ service_name, trade_type: detail?.trade_type });
 
 	const serviceWiseValues = getServiceWisePayload({
 		additionalFormInfo,

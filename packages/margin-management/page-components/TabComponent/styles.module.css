@@ -1,0 +1,19 @@
+.tabs_container {
+	width: 90%;
+	overflow-x: scroll;
+
+	:global {
+		.ui_tab_list_container {
+			width: 100%;
+			overflow-x: scroll;
+		}
+	}
+}
+
+.mobile_service_container {
+	display: flex;
+	gap: 4px;
+	align-items: flex-end;
+	width: 100%;
+	margin: 12px 0;
+}

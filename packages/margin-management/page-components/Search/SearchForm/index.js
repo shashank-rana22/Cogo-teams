@@ -34,9 +34,10 @@ function SearchForm({
 		setFilterParams((prev) => ({
 			...prev,
 			...obj,
-			margin_type : activeTab,
-			service     : activeService,
-			status      : 'active',
+			status                : 'active',
+			margin_type           : activeTab,
+			service               : activeService,
+			is_partner_id_present : true,
 		}));
 
 		reset();

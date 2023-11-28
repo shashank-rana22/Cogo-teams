@@ -28,9 +28,9 @@ function useCreateShipmentAirCSRSheet({
 					airline_id          : mainServicesData?.airline_id,
 				},
 			});
-			setSheetData((prev) => ({
-				...prev, [index]: { ...response?.data || {} },
-			}));
+			setSheetData({
+				...response?.data,
+			});
 			setTerminalChargeState((prev) => ({ ...prev, [index]: 'fetching_data' }));
 		} catch (err) {
 			toastApiError(err);

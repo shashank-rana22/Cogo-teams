@@ -127,7 +127,7 @@ export default {
 			'a3d802b5-4fc2-4cea-8c97-2a329ba463b1', // ES Owner Enterprise-Demand
 			'41590453-f7c9-44b2-ba2c-f37d57e57e5a', // CCS Manager - Channel Partner
 			'dc5e8695-c30e-4350-9de9-8218ed1abfc4', // CCS Manager - Enterprise
-
+			'2aa607a9-4f92-47b0-963f-be18c215e88d',
 		],
 		supply_relations_head_role_id    : '0a623fc0-bd23-4990-b2ec-0115d3f1095b',
 		fin_ops_manager_role_id          : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
@@ -602,6 +602,7 @@ export default {
 					stakeholder_wise_invoice_required : false,
 					is_purchase_visible_to_kam        : false,
 					is_task_visible_to_so2_executive  : false,
+					edit_internal_poc                 : false,
 				},
 			},
 			partner: {
@@ -609,7 +610,7 @@ export default {
 					invoicing: {
 						request_cancel_invoice  : false,
 						request_replace_invoice : false,
-						request_credit_note     : false,
+						request_credit_note     : true,
 					},
 				},
 				common: {

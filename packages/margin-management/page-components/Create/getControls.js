@@ -1,6 +1,8 @@
 import serviceOptions from '../../config/SERVICE_OPTIONS.json';
 
 const getControls = ({ type = '', marginType = '', partnerId = '', item = {}, setValue = () => { } }) => {
+	const defaultEntityPlaceholder = type === 'edit' && !item?.partner_id ? 'ALL' : 'Select';
+
 	const controls = [
 		{
 			name           : 'partner_id',
@@ -17,6 +19,7 @@ const getControls = ({ type = '', marginType = '', partnerId = '', item = {}, se
 			valueKey       : 'id',
 			params         : { filters: { status: 'active' } },
 			disabled       : type === 'edit',
+			placeholder    : defaultEntityPlaceholder,
 		},
 		{
 			label    : 'Select Margin Type',
