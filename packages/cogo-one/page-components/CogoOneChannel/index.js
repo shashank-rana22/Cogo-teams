@@ -36,10 +36,10 @@ const PortPairOrgFilters = dynamic(() => import('./PortPairOrgFilters'));
 
 function CogoOne() {
 	const { query: { assigned_chat = '', channel_type = '' } } = useRouter();
-	const { userId = '', token = '', userEmailAddress = '', userName = '' } = useSelector(({ profile, general }) => ({
+	const { userId = '', token = '', userEmailAddress = '', userName = '' } = useSelector(({ profile }) => ({
 		userId           : profile?.user?.id,
 		userName         : profile?.user?.name,
-		token            : general.firestoreToken,
+		token            : profile?.user?.firestore_custom_token,
 		userEmailAddress : profile?.user?.email,
 	}));
 
