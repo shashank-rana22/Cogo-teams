@@ -39,7 +39,7 @@ const useGetSpotSearch = ({
 	const { bookable_services = {} } = service_discovery || {};
 
 	const getSearch = useCallback(
-		async ({ show_more = false } = {}) => {
+		async ({ show_more = false, setIsFetching = () => {} } = {}) => {
 			if (!spot_search_id || (page > ONE && !show_more)) return;
 
 			const finalFilters = Object.entries(filters).reduce((acc, [key, value]) => {
@@ -122,12 +122,14 @@ const useGetSpotSearch = ({
 
 				setComparisonRates({});
 				setScheduleLoading(false);
+				setIsFetching(false);
 			} catch (error) {
 				if (error?.response?.data) {
 					Toast.error(getApiErrorString(error.response?.data));
 				}
 
 				setScheduleLoading(false);
+				setIsFetching(false);
 			}
 		},
 		[

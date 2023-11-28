@@ -29,7 +29,7 @@ function Error(key, errors) {
 	return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 }
 
-function CreateNewCompanyForm({ tradePartyType = '', primary_service = {} }, ref) {
+function CreateNewCompanyForm({ tradePartyType = '', primary_service = {}, poc_required = false }, ref) {
 	const { data, setFilters } = useListOrganizationTradeParties({
 		defaultParams  : DEFAULT_ORG_TRADE_PARTIES_PARAMS,
 		defaultFilters : { organization_status: 'active' },
@@ -198,8 +198,10 @@ function CreateNewCompanyForm({ tradePartyType = '', primary_service = {} }, ref
 							control={control}
 							name="name"
 							placeholder="Enter your POC Name"
+							rules={poc_required ? { required: 'POC Name is required' } : {}}
 							options={pocNameOptions}
 						/>
+						{Error('name', errors)}
 					</div>
 				</div>
 
@@ -224,6 +226,7 @@ function CreateNewCompanyForm({ tradePartyType = '', primary_service = {} }, ref
 							size="sm"
 							rules={{
 								pattern: { value: countryValidation?.regex?.EMAIL, message: 'Enter valid email' },
+								...(poc_required ? { required: 'POC Name is required' } : {}),
 							}}
 							placeholder="Enter Email Address"
 						/>
@@ -239,6 +242,7 @@ function CreateNewCompanyForm({ tradePartyType = '', primary_service = {} }, ref
 							size="sm"
 							control={control}
 							name="mobile_number"
+							rules={poc_required ? { required: 'Mobile Number is required' } : {}}
 
 						/>
 						{Error('mobile_number', errors)}

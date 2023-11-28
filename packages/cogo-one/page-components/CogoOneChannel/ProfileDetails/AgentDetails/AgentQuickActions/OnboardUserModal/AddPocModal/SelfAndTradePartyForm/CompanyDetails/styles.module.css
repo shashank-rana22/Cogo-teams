@@ -1,0 +1,60 @@
+.form_item_container {
+	margin: 6px 0;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.trade_party {
+	display: flex;
+	justify-content: space-between;
+	width: 50%;
+}
+
+.basic_details {
+	display: flex;
+	justify-content: start;
+}
+
+.basic_details_item_container {
+	margin: 6px 22px;
+}
+
+.select_company {
+	width: 40%;
+	margin: 6px 0;
+}
+
+.select_country {
+	width: 38%;
+	margin: 6px 0;
+}
+
+.add_company {
+	width: 60%;
+	margin: 6px 0;
+}
+
+.errors {
+	font-size: 12px;
+	color: red;
+}
+
+.form_label {
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.additionDetail {
+	display: flex;
+	flex-direction: row-reverse;
+}
+
+.or {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 30px 0;
+}

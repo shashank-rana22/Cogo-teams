@@ -9,7 +9,7 @@ const LIST_PAGE_LIMIT = 10;
 const getParams = ({
 	agentId = '', showHistory = false, page = 1, initialViewType = '',
 	assignTo = '', requestStatus = '', escalationCycle = '', requestType = '',
-	end = null, requestCompleted = '', start = null,
+	end = null, requestCompleted = '', start = null, taskId = '',
 }) => ({
 	page_limit : !showHistory ? DEFAULT_PAGE_LIMIT : LIST_PAGE_LIMIT,
 	filters    : {
@@ -21,6 +21,7 @@ const getParams = ({
 		request_completed_by    : requestCompleted || undefined,
 		created_at_greater_than : start || undefined,
 		created_at_less_than    : end || undefined,
+		serial_id           				: taskId || undefined,
 	},
 	page,
 
@@ -38,6 +39,7 @@ const useListOmnichannelOnboardingRequests = ({
 		start = null,
 		end = null,
 		requestCompleted = '',
+		taskId = '',
 	} = filterValues || {};
 
 	const { agentId = '', requestApi = false } = useSelector(({ profile }) => ({
@@ -53,6 +55,7 @@ const useListOmnichannelOnboardingRequests = ({
 	}, { manual: true });
 
 	const onboardingRequest = useCallback(({ page = 1 }) => {
+		if (showHistory) return;
 		try {
 			trigger({
 				params: getParams({
@@ -67,6 +70,7 @@ const useListOmnichannelOnboardingRequests = ({
 					escalationCycle,
 					start,
 					end,
+					taskId,
 				}),
 			});
 			setFilterValues((prev) => ({ ...prev, show: false }));
@@ -80,7 +84,7 @@ const useListOmnichannelOnboardingRequests = ({
 			);
 		}
 	}, [trigger, agentId, showHistory, initialViewType, requestStatus, requestCompleted,
-		requestType, assignTo, escalationCycle, start, end, dispatch, setFilterValues]);
+		requestType, assignTo, escalationCycle, start, end, dispatch, setFilterValues, taskId]);
 
 	useEffect(() => {
 		onboardingRequest({ page: 1 });

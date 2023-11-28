@@ -3,9 +3,11 @@ import { getMobilePrefixFromCountryCode } from '@cogoport/forms/utils/getMobileP
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
+import { useState } from 'react';
 
 import useSubmitOmniChannelKyc from '../../../../../hooks/useSubmitOmniChannelKyc';
 
+import OnboardUserModal from './OnboardUserModal';
 import styles from './styles.module.css';
 
 const COUNTRY_CODE_PREFIX = '%2B';
@@ -18,6 +20,7 @@ function AgentQuickActions({
 	fetchOrganization = () => {},
 	partnerId = '',
 	formattedMessageData = {},
+	name = '',
 }) {
 	const dispatch = useDispatch();
 
@@ -28,6 +31,8 @@ function AgentQuickActions({
 	} = formattedMessageData || {};
 
 	const mobileCountryCode = getMobilePrefixFromCountryCode({ countryCode });
+
+	const [showUserModal, setShowUserModal] = useState(false);
 
 	const mobileNumber = (
 		mobileNo?.substr(GLOBAL_CONSTANTS.zeroth_index, mobileCountryCode.length) === mobileCountryCode
@@ -94,13 +99,14 @@ function AgentQuickActions({
 					<Button
 						size="sm"
 						themeType="secondary"
-						onClick={handleRoute}
+						onClick={() => { setShowUserModal(true); }}
 					>
 						Onboard User
 					</Button>
 				))
 			)
 			}
+
 			{(lead_organization_id && !orgId) ? (
 				<Button
 					size="sm"
@@ -111,6 +117,18 @@ function AgentQuickActions({
 					Create Feedback
 				</Button>
 			) : null}
+			{showUserModal
+				? (
+					<OnboardUserModal
+						handleRoute={handleRoute}
+						showUserModal={showUserModal}
+						setShowUserModal={setShowUserModal}
+						mobileNumber={mobileNumber}
+						mobileCountryCode={mobileCountryCode}
+						name={name}
+						email={email}
+					/>
+				) : null}
 		</div>
 
 	);

@@ -1,8 +1,8 @@
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import DotLoader from '../../../../../../common/LoadingState/DotLoader';
+import useInfiniteScroll from '../../../../../../hooks/useInfiniteScroll';
 import AppliedFilters from '../../../../common/AppliedFilters';
 import ContractAd from '../../../../common/ContractAd';
 import EmptyState from '../../../../common/EmptyState';
@@ -28,6 +28,11 @@ function ListRates({
 	const [openAccordian, setOpenAccordian] = useState('');
 
 	const { total_count, page_limit, page } = paginationProps;
+
+	const { isFetching } = useInfiniteScroll({
+		hasMore       : page < Math.ceil(total_count / page_limit),
+		refetchSearch : refetch,
+	});
 
 	if (!loading && isEmpty(rates)) {
 		return (
@@ -95,28 +100,14 @@ function ListRates({
 				/>
 			))}
 
-			{!loading && page < Math.ceil(total_count / page_limit) ? (
-				<div className={styles.show_more_button}>
-					<div
-						role="presentation"
-						onClick={() => refetch({ show_more: true })}
-						className={styles.button}
-					>
-						Show more results
-						{' '}
-						<IcMArrowRotateDown style={{ marginLeft: '8px' }} />
-					</div>
-				</div>
-			) : null}
-
-			{loading && (
+			{isFetching && (
 				<div className={styles.spinner_container}>
 					<DotLoader size="lg" />
 					<div className={styles.text}>Fetching rates, please wait</div>
 				</div>
 			)}
 
-			{loading ? null : (
+			{loading && !isFetching ? null : (
 				<div className={styles.request_rate}>
 					<RequestRate details={detail} isMobile={isMobile} />
 				</div>
