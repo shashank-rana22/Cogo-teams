@@ -73,7 +73,6 @@ const useFieldMutation = ({
 		if (type === 'fieldArray') {
 			newControl.controls = newControl.controls.map((ctrl) => {
 				const newCtrl = { ...ctrl };
-				// newControl.noDeleteButtonTill = count;
 				if (ctrl.optionsListKey) {
 					newCtrl.options = getOptions(ctrl.optionsListKey, ctrl, values);
 				}
