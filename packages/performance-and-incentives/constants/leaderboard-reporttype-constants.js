@@ -5,4 +5,6 @@ const LEADERBOARD_REPORT_TYPE_CONSTANTS = {
 	AGENT_REPORT   : 'kam_report',
 };
 
+export const MANAGER_KAM_REPORT = 'manager_kam_report';
+
 export default LEADERBOARD_REPORT_TYPE_CONSTANTS;
