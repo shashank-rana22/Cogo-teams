@@ -52,7 +52,7 @@ function AddPocModal({
 
 	return (
 		<Modal show={!isEmpty(showModal)} placement="top" size="md" onClose={onClose}>
-			<Modal.Header title="Add Shipment Poc" />
+			<Modal.Header title="Add Shipment Stakeholder" />
 
 			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
 				<div className={styles.modal_body_container}>

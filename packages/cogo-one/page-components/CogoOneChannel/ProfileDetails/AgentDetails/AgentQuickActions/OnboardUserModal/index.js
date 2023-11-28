@@ -34,14 +34,14 @@ function OnboardUserModal({
 							themeType="secondary"
 							onClick={handleRoute}
 						>
-							Onboard User On CRM
+							Create User On CRM
 						</Button>
 						<Button
 							size="lg"
 							themeType="secondary"
 							onClick={() => { setShowAddPocModal(true); }}
 						>
-							Add Shipment Poc
+							Add Shipment Stakeholder
 						</Button>
 					</div>
 				</Modal.Body>
