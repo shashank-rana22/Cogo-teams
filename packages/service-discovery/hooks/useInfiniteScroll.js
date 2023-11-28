@@ -23,7 +23,7 @@ function useInfiniteScroll({ hasMore, refetchSearch = () => {} }) {
 		return () => window.removeEventListener('scroll', handleScroll);
 	}, [isFetching, hasMore, refetchSearch]);
 
-	return { isFetching, hasMore };
+	return { isFetching };
 }
 
 export default useInfiniteScroll;
