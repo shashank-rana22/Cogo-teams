@@ -1,7 +1,8 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const useGetQuests = () => {
+const useGetQuests = ({ setQuest = () => {} }) => {
 	const [params, setParams] = useState({
 		page                      : 1,
 		page_limit                : 10000,
@@ -36,6 +37,10 @@ const useGetQuests = () => {
 	};
 
 	const { list = [], ...paginationData } = data || {};
+
+	useEffect(() => {
+		setQuest(list[GLOBAL_CONSTANTS.zeroth_index]);
+	}, [list, setQuest]);
 
 	return {
 		loading,

@@ -8,6 +8,15 @@ import {
 const getAdoptionControls = ({ initialViewType = '', pageType = '' }) => {
 	const controls = [
 		{
+			label          : 'Task',
+			name           : 'task_id',
+			controllerType : 'input',
+			placeholder    : 'input task id',
+			isClearable    : true,
+			viewType       : ['cogoone_admin', 'support', 'support_supply'],
+			pageType       : ['history', 'home'],
+		},
+		{
 			label          : 'Request Type',
 			name           : 'request_type',
 			controllerType : 'select',

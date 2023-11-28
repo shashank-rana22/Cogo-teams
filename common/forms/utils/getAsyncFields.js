@@ -958,6 +958,17 @@ function asyncAgentScoringParameters() {
 	};
 }
 
+function asyncAgentScoringQuests() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/quests',
+		authkey      : 'get_agent_scoring_quests',
+		microService : 'agent_scoring',
+		initialCall  : true,
+	};
+}
+
 function asyncListUserShipments() {
 	return {
 		labelKey    : 'serial_id',
@@ -1461,6 +1472,7 @@ export {
 	asyncAgentScoringConfigs,
 	asyncAgentScoringBlocks,
 	asyncAgentScoringParameters,
+	asyncAgentScoringQuests,
 	asyncListUserShipments,
 	asyncFieldsOrganizationOnCall,
 	asyncListSaasHsCodes,
