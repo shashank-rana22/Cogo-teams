@@ -30,6 +30,7 @@ function RateCardTopSection({
 	showGuide = false,
 	cogoAssuredRates = [],
 	isMobile = false,
+	refetchSearch = () => {},
 }) {
 	return (
 		<div className={styles.top}>
@@ -48,6 +49,7 @@ function RateCardTopSection({
 				showGuide={showGuide}
 				cogoAssuredRates={cogoAssuredRates}
 				isMobile={isMobile}
+				refetchSearch={refetchSearch}
 			/>
 		</div>
 	);
@@ -279,6 +281,7 @@ function FclCard({
 				showGuide={showGuide}
 				cogoAssuredRates={cogoAssuredRates}
 				isMobile={isMobile}
+				refetchSearch={refetchSearch}
 			/>
 
 			<MiddleSection

@@ -86,6 +86,7 @@ function FCLResults({
 			cogoAssuredRates,
 			setRouterLoading,
 			isMobile,
+			refetchSearch,
 		},
 		spot_booking: {
 			setScreen,

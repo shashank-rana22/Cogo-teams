@@ -8,6 +8,10 @@
 		.ui_table_body_cell {
 			white-space: normal;
 		}
+
+		.ui_ps_themeType_linkUi {
+			padding: 0;
+		}
 	}
 }
 

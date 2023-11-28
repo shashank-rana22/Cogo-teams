@@ -94,10 +94,11 @@ const getLocationName = (data, pair_type, type, key) => {
 	return location;
 };
 
-function PortPair({ item = {}, field = {} }) {
+function PortPair({ item = {}, field = {}, serviceType = '' }) {
 	const { pair_type = 'fcl_freight', key = '-', props = {}, showPortsName = false } = field || {};
 	const { setLocation = () => {}, service_type:selected_service = '' } = props;
-	const service_type = item[pair_type];
+	const service_type = item[pair_type] || serviceType;
+
 	const [origin, origin_display_name] = getLocationName(
 		item,
 		service_type,
@@ -139,7 +140,7 @@ function PortPair({ item = {}, field = {} }) {
 	return (
 		<div className={styles.container}>
 			<span className={styles.service_type}>
-				<SearchType item={item} field={field} />
+				<SearchType item={item} field={field} serviceType={serviceType} />
 			</span>
 
 			<div>

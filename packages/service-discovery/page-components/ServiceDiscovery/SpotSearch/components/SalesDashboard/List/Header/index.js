@@ -13,6 +13,7 @@ function Header({
 	type = '',
 	serviceType = '',
 	setServiceType = () => {},
+	isRateList = false,
 }) {
 	const {
 		controls = [],
@@ -69,7 +70,10 @@ function Header({
 				<FilterButton
 					controls={controls}
 					filters={filters}
+					isRateList={isRateList}
 					setFilters={setFilters}
+					type={type}
+					serviceType={serviceType}
 				/>
 			) : null}
 		</div>

@@ -11,6 +11,7 @@ function SelectedCardScreen({
 	headerProps = {},
 	cogoAssuredRates = [],
 	isMobile = false,
+	refetchSearch = () => {},
 }) {
 	const [screen, setScreen] = useState('selectedCard');
 	const [showShippingLineModal, setShowShippingLineModal] = useState(false);
@@ -42,6 +43,7 @@ function SelectedCardScreen({
 				setShowShippingLineModal,
 				setRouterLoading,
 				isMobile,
+				refetchSearch,
 			},
 		},
 		bookCheckout: {

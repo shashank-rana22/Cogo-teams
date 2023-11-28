@@ -5,6 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import FilterForm from './renderFilterForm';
+import showElements from './showElements';
 import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
@@ -18,7 +19,14 @@ const isObjEmpty = (obj) => {
 	return isEmpty(obj) || objIsEmpty;
 };
 
-function FilterButton({ controls = [], filters = {}, setFilters = () => {} }) {
+function FilterButton({
+	controls = [],
+	filters = {},
+	setFilters = () => {},
+	isRateList = false,
+	type = '',
+	serviceType = '',
+}) {
 	const [filtersCount, setFiltersCount] = useState(ZERO_VALUE);
 	const [visible, setVisible] = useState(false);
 
@@ -75,7 +83,6 @@ function FilterButton({ controls = [], filters = {}, setFilters = () => {} }) {
 
 	return (
 		<div className={styles.container}>
-
 			<Popover
 				placement="bottom"
 				render={(
@@ -85,6 +92,7 @@ function FilterButton({ controls = [], filters = {}, setFilters = () => {} }) {
 						handleApply={handleApply}
 						handleReset={handleReset}
 						control={control}
+						showElements={isRateList ? showElements(serviceType, type) : {}}
 					/>
 				)}
 				onClickOutside={onClickOutside}
