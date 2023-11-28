@@ -33,16 +33,19 @@ const KEY_TO_SEND = {
 	air_freight_local : 'air_freight_rate_local_feedback_ids',
 };
 
-const useDeleteFreightRateFeedbacks = (service = 'fcl_freight') => {
+const useDeleteFreightRateFeedbacks = (service) => {
 	const apiName = API_MAPPING[service];
 
-	const [{ loading }, trigger] = useRequest({ url: `/${apiName}`, method: 'post' }, { manual: true });
+	const [{ loading }, trigger] = useRequest({
+		url    : `${apiName}`,
+		method : 'post',
+	}, { manual: true });
 
 	const deleteFeedbackRequest = async ({ id, closing_remarks, checkboxValue, remarks }) => {
 		const keyToSend = KEY_TO_SEND[service];
 		try {
 			const body = {
-				[keyToSend]     : [id],
+				[keyToSend]     : id,
 				closing_remarks : [checkboxValue || closing_remarks || 'Rate Created'],
 				remarks         : remarks || undefined,
 			};
@@ -50,8 +53,9 @@ const useDeleteFreightRateFeedbacks = (service = 'fcl_freight') => {
 			const resp = await trigger({
 				data: body,
 			});
+
 			if (resp) { return resp?.status; }
-		} catch (e) {
+		} catch (err) {
 			Toast.error('Failed To Cancel');
 		}
 		return null;

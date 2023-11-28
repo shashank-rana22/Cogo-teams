@@ -66,19 +66,18 @@ function Controls({
 			const Origin_id = cardData?.origin_port_id;
 			const destination_id = cardData?.destination_port_id;
 			if (!isEmpty(resp)) {
-				Toast.success('Added Succesfully');
 				setOpenRateForm(!openRateForm);
 				getImportData(IMPORT_DATA, destination_id);
 				getExportData(EXPORT_DATA, Origin_id);
 			}
 		}
 		if (PortName === 'Origin') {
-			setStoreLocalExportData(val);
+			setStoreLocalImportData(val);
 			Toast.success('Added Succesfully');
 			setOpenRateForm(!openRateForm);
 		}
 		if (PortName === 'Destination') {
-			setStoreLocalImportData(val);
+			setStoreLocalExportData(val);
 			Toast.success('Added Succesfully');
 			setOpenRateForm(!openRateForm);
 		}

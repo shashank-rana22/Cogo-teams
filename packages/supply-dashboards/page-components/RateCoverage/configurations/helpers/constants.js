@@ -282,15 +282,17 @@ export const INCO_TERM_MAPPING = {
 };
 
 export const filterOption = {
-	fcl_freight : ['seaport'],
-	lcl_freight : ['seaport'],
-	air_freight : ['airport'],
-	fcl_customs : ['seaport'],
-	lcl_customs : ['seaport'],
-	air_customs : ['airport'],
-	haulage     : ['pincode', 'seaport'],
-	trailer     : ['pincode', 'seaport'],
-	ftl_freight : ['pincode', 'seaport'],
+	fcl_freight       : ['seaport'],
+	lcl_freight       : ['seaport'],
+	air_freight       : ['airport'],
+	fcl_customs       : ['seaport'],
+	lcl_customs       : ['seaport'],
+	air_customs       : ['airport'],
+	fcl_freight_local : ['seaport'],
+	air_freight_local : ['airport'],
+	haulage           : ['pincode', 'seaport'],
+	trailer           : ['pincode', 'seaport'],
+	ftl_freight       : ['pincode', 'seaport'],
 };
 
 export const lineOptions = {

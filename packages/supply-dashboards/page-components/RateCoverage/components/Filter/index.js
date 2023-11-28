@@ -188,6 +188,7 @@ function Filter({
 										{...destinationLocationOptions}
 										value={filter?.destination_location}
 										isClearable
+										style={{ width: '250px' }}
 										onChange={(val) => {
 											setFilter((prevFilters) => ({
 												...prevFilters,
@@ -199,24 +200,25 @@ function Filter({
 								</div>
 							</div>
 					)}
-					{['fcl_customs', 'fcl_cfs', 'lcl_customs', 'air_customs'].includes(filter?.service) && (
+					{['fcl_customs', 'fcl_cfs', 'lcl_customs', 'air_customs',
+						'air_freight_local', 'fcl_freight_local'].includes(filter?.service) && (
 
-						<div>
-							<p>Location</p>
-							<Select
-								placeholder="Port Pair"
-								{...destinationLocationOptions}
-								value={filter?.location}
-								isClearable
-								onChange={(val) => {
-									setFilter((prevFilters) => ({
-										...prevFilters,
-										location : val,
-										page     : 1,
-									}));
-								}}
-							/>
-						</div>
+							<div>
+								<p>Location</p>
+								<Select
+									placeholder="Port Pair"
+									{...destinationLocationOptions}
+									value={filter?.location}
+									isClearable
+									onChange={(val) => {
+										setFilter((prevFilters) => ({
+											...prevFilters,
+											location : val,
+											page     : 1,
+										}));
+									}}
+								/>
+							</div>
 					)}
 
 					{(source === 'live_booking')

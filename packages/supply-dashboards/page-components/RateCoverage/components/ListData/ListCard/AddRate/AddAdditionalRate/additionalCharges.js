@@ -48,15 +48,18 @@ function AdditionalCharges({
 		feedbackModal,
 		feedbackData,
 	});
+
 	const service = charge.split(':')[1];
 	const { deleteFeedbackRequest = () => {} } = useDeleteFreightRateFeedbacks(service);
 
 	const idArray = (feedbackData || []).map((item) => item.id);
 
-	const handelTick = () => {
-		deleteFeedbackRequest({ id: idArray });
-		setChargeAdded((prev) => [...prev, `${charge}${message}`]);
-		setAdditionalCharge(null);
+	const handelTick = async () => {
+		const resp = await deleteFeedbackRequest({ id: idArray });
+		if (resp === 200) {
+			setChargeAdded((prev) => [...prev, `${charge}${message}`]);
+			setAdditionalCharge(null);
+		}
 	};
 
 	const handelCancel = () => {

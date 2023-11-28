@@ -34,17 +34,20 @@ function SelectLocalCharges({
 	const exportRatesData = exportData?.list || [];
 	const importRatesData = importData?.list || [];
 
-	const OriginTitle = `You have [${exportRatesData?.length}] origin local charges available for this combination`;
+	const exportsCount = exportRatesData?.length;
+	const importCount = importRatesData?.length;
 
-	const destinationTitle = `You have [${importRatesData?.length}]
+	const OriginTitle = `You have [${importCount}] origin local charges available for this combination`;
+
+	const destinationTitle = `You have [${exportsCount}]
 	 destination local charges available for this combination`;
 
 	const PortName = portValue ? 'Origin' : 'Destination';
 	const portNameValue = portValue ? cardData?.origin_port?.name : cardData?.destination_port?.name;
 
 	useEffect(() => {
-		getExportData(EXPORT_DATA, ORIGIN_PORT_ID);
 		getImportData(IMPORT_DATA, DESTINATION_PORT_ID);
+		getExportData(EXPORT_DATA, ORIGIN_PORT_ID);
 	}, [DESTINATION_PORT_ID, ORIGIN_PORT_ID, getExportData, getImportData]);
 
 	const handelLocal = (isOrigin) => {
@@ -85,28 +88,34 @@ function SelectLocalCharges({
 		);
 	}
 
+	function Tick() {
+		return (
+			<div>
+				<IcCTick />
+				You have selected the local charges
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 
-			{!isEmpty(exportRatesData) ? OriginTitle : NO_ORIGIN_DATA}
+			{!isEmpty(importRatesData) ? OriginTitle : NO_ORIGIN_DATA}
 			<div className={styles.button}>
-				{isEmpty(storeLocalExportData) ? <RenderButtons data={exportRatesData} isExport /> : (
+				{isEmpty(storeLocalImportData) ? <RenderButtons data={importRatesData} isExport /> : (
 					<div>
-						<IcCTick />
-						You have selected the local charges
+						{Tick()}
 					</div>
 				)}
 			</div>
 
-			{!isEmpty(importRatesData) ? destinationTitle : NO_DESTINATION_DATA}
+			{!isEmpty(exportRatesData) ? destinationTitle : NO_DESTINATION_DATA}
 			<div className={styles.button}>
-				{isEmpty(storeLocalImportData) ? <RenderButtons data={importRatesData} /> : (
+				{isEmpty(storeLocalExportData) ? <RenderButtons data={exportRatesData} /> : (
 					<div>
-						<IcCTick />
-						You have selected the local charges
+						{Tick()}
 					</div>
 				)}
-
 			</div>
 
 			{!openRateForm && openCharge && (
