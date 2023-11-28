@@ -1,16 +1,47 @@
-import { Placeholder } from '@cogoport/components';
-import { IcMArrowRight, IcMTeam } from '@cogoport/icons-react';
-import React from 'react';
+import { Placeholder, Pagination, Input } from '@cogoport/components';
+import { IcMArrowRight, IcMTeam, IcMSearchlight } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState } from 'react';
+
+import EmptyState from '../../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
-function Locations({ data = {}, setSelectedLocation = () => {}, loading = false }) {
-	const { list } = data || {};
+function Locations({
+	data = {}, setSelectedLocation = () => {},
+	loading = false, setFilters = () => {},
+	debounceQuery,
+}) {
+	const [searchQuery, setSearchQuery] = useState('');
+	const { page, page_limit, total_count, list } = data || {};
+
+	const onPageChange = (pageNumber) => {
+		setFilters((prev) => ({
+			...prev,
+			page: pageNumber,
+		}));
+	};
+
+	const handleSearch = (val) => {
+		debounceQuery(val);
+		setSearchQuery(val);
+	};
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.above_text}>BRANCHES</div>
+			<div className={styles.header}>
+				<div className={styles.above_text}>BRANCHES</div>
+				<Input
+					size="md"
+					prefix={<IcMSearchlight />}
+					placeholder="Search"
+					onChange={(e) => handleSearch(e)}
+					value={searchQuery}
+					style={{ width: '200px' }}
+				/>
+			</div>
 			<div className={styles.branches_container}>
-				{(list || []).map((item) => (
+				{isEmpty(list || []) ? <EmptyState /> : (list || []).map((item) => (
 					loading ? <Placeholder height="50px" width="100%" margin="0px 0px 20px 0px" key={item.id} /> : (
 						<div
 							key={item.id}
@@ -38,6 +69,17 @@ function Locations({ data = {}, setSelectedLocation = () => {}, loading = false 
 					)
 				))}
 			</div>
+			{!isEmpty(list || [])	? (
+				<div className={styles.pagination}>
+					<Pagination
+						type="compact"
+						currentPage={page}
+						totalItems={total_count}
+						pageSize={page_limit}
+						onPageChange={onPageChange}
+					/>
+				</div>
+			) : null}
 		</div>
 	);
 }
