@@ -2,11 +2,13 @@
 import { Input, Select, Accordion, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import getCurrencyOptions from '../../../../../../helpers/getCurrencyOptions';
+import useUpdateConvenienceFeeBillingService from '../../../../hooks/useUpdateConvenienceFeeBillingService';
 import Promocodes from '../../../Promocodes';
 import Spinner from '../../../Spinner';
+import StyledSelect from '../../../StyledSelect';
 
 import ExchangeRate from './ExchangeRate';
 import ServiceChargesTitle from './ServiceChargesTitle';
@@ -32,11 +34,17 @@ function ConvenienceDetails({
 }) {
 	const { convenience_rate = {} } = convenienceDetails || {};
 
+	const convenience_fee_billing_service =	rate?.booking_charges?.convenience_rate?.line_items?.[
+		GLOBAL_CONSTANTS.zeroth_index]?.convenience_fee_billing_service;
+
 	const { unit = '', currency = '', price = '' } = convenience_rate;
 
 	const { promotions = {} } = rate;
 
 	const { handling_fees = {}, is_available = false } = handlingFeeDetails;
+
+	const billingServicesOptions = detail?.convenience_rate_configurations
+		?.convenience_rate_billing_services || [];
 
 	const {
 		onChangeCurrency = () => {},
@@ -56,10 +64,18 @@ function ConvenienceDetails({
 		detail,
 	});
 
+	const { handleUpdateBillingService } = useUpdateConvenienceFeeBillingService({
+		convenienceDetails,
+		refetch : getCheckout,
+		id      : checkout_id,
+	});
+
 	const ALLOWED_CURRENCY = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
 		.common.services.convenience_fee_checkout.allowed_currency;
 
 	const CURRENCY_OPTIONS = getCurrencyOptions({ ALLOWED_CURRENCY });
+
+	const finalOptions = billingServicesOptions.map((item) => ({ label: startCase(item), value: item }));
 
 	return (
 		<Accordion
@@ -138,7 +154,29 @@ function ConvenienceDetails({
 
 					<div className={styles.item_container}>
 						<div className={cl`${styles.convenience_container} ${styles.convenience}`}>
-							<div className={styles.text}>Convenience Fee</div>
+							<div className={styles.text}>
+								Convenience Fee
+
+								{!isEmpty(billingServicesOptions) && (
+									<div className={styles.bill_with_flex}>
+										<div className={styles.content}>Bill With: </div>
+
+										{source === 'contract' ? (
+											<div className={styles.styled_text}>
+												{startCase(convenience_fee_billing_service)}
+											</div>
+										) : (
+											<StyledSelect
+												defaultValue={convenience_fee_billing_service}
+												onChange={handleUpdateBillingService}
+												options={finalOptions}
+												size="xsm"
+											/>
+										)}
+									</div>
+								)}
+
+							</div>
 
 							{loading ? <Spinner width="24px" height="24px" /> : null}
 
