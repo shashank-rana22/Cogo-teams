@@ -22,7 +22,7 @@ const tempaccess = [
 function Geolocation({ handlePolicy = () => {} }) {
 	const [selectedLocation, setSelectedLocation] = useState('');
 	const [tempAccess, setTempAccess] = useState(false);
-	const { loading, data } = useGetBranchStats();
+	const { loading, data, setFilters, debounceQuery } = useGetBranchStats();
 
 	const handleBack = () => {
 		if (isEmpty(selectedLocation)) {
@@ -85,6 +85,8 @@ function Geolocation({ handlePolicy = () => {} }) {
 						data={data}
 						setSelectedLocation={setSelectedLocation}
 						loading={loading}
+						setFilters={setFilters}
+						debounceQuery={debounceQuery}
 					/>
 				))}
 			</div>
