@@ -10,6 +10,10 @@
                 "value":"confirm_with_shipper"
             },
             {
+                "label":"Confirm Cargo Readiness",
+                "value":"confirm_cargo_readiness"
+            },
+            {
                 "value":"upload_booking_note",
                 "label":"Waiting for BN/SO"
             },
