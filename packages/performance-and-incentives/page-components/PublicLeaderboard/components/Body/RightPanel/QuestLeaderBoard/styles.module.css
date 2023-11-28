@@ -10,6 +10,10 @@
 	margin-bottom: 20px;
 }
 
+.header_left_side {
+	width: 70%;
+}
+
 .heading {
 	font-size: 16px;
 	font-weight: 700;
@@ -134,4 +138,14 @@
 	justify-content: flex-start;
 	font-size: 12px;
 	color: #808080;
+}
+
+.quest_row {
+	max-width: 40%;
+}
+
+.quest_name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

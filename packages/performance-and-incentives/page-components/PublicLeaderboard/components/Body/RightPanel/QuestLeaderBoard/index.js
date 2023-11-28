@@ -1,3 +1,4 @@
+import { Tooltip } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -20,14 +21,24 @@ function QuestLeaderBoard(props) {
 	return (
 		<div>
 			<div className={styles.header}>
-				<div>
+				<div className={styles.header_left_side}>
 					<div className={styles.heading}>
 						Contest Leaderboard
 					</div>
 					{!isEmpty(quest)
 						? (
 							<div className={styles.quest_title}>
-								{quest?.name}
+								<div className={styles.quest_row}>
+									<Tooltip
+										placement="bottom"
+										content={quest?.name}
+									>
+										<div className={styles.quest_name}>
+											{quest?.name}
+										</div>
+
+									</Tooltip>
+								</div>
 								{':  '}
 								<span className={styles.date_range}>
 									{formatDate({
@@ -56,6 +67,11 @@ function QuestLeaderBoard(props) {
 						size={window.innerWidth >= 2560 ? 'md' : 'sm'}
 						className={styles.quest_selector}
 						renderLabel={renderQuestLabel}
+						params={{
+							filters: {
+								status: 'active',
+							},
+						}}
 					/>
 				</div>
 			</div>
