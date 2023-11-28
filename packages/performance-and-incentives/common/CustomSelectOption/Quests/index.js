@@ -9,22 +9,20 @@ function Quests(props) {
 	const { name = '', start_date = '', end_date = '' } = data || option || {};
 
 	return (
-		<div className={styles.option_container}>
-			<div className={styles.option_name_container}>
-				<div className={styles.business_name}>{name}</div>
-				<div className={styles.date_range}>
-					{formatDate({
-						date       : start_date,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						formatType : 'date',
-					})}
-					{' - '}
-					{formatDate({
-						date       : end_date,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						formatType : 'date',
-					})}
-				</div>
+		<div>
+			{name}
+			<div className={styles.date_range}>
+				{formatDate({
+					date       : start_date,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					formatType : 'date',
+				})}
+				{' - '}
+				{formatDate({
+					date       : end_date,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					formatType : 'date',
+				})}
 			</div>
 		</div>
 	);

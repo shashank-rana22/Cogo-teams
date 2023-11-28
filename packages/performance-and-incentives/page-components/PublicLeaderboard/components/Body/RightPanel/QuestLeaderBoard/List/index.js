@@ -15,6 +15,14 @@ const RATIO_COLOR_MAPPING = {
 
 const THRESHOLD = 1 / 2;
 
+const WINNER_START_INDEX = 0;
+
+const WINNER_END_INDEX = 6;
+
+const WINNER_RANK = 1;
+
+const MAX_PROGRESS = 100;
+
 const getProgressClassName = ({ parameters_fulfilled = 0, parameters_required = 1 }) => {
 	const ratio = parameters_fulfilled / parameters_required;
 
@@ -48,13 +56,12 @@ function List(props) {
 
 	return (
 		<div className={styles.winner_container}>
-			{(data).slice(0, 6).map((item) => {
+			{(data).slice(WINNER_START_INDEX, WINNER_END_INDEX).map((item) => {
 				const {
 					rank = '',
 					total_score = '',
 					parameters_fulfilled = 0,
-					parameters_required
-					= 1,
+					parameters_required = 1,
 					user = {},
 				} = item;
 
@@ -67,7 +74,7 @@ function List(props) {
 
 				return (
 					<div key={item?.agent_id} className={styles.winner_item}>
-						{rank === 1 && progress === 100
+						{rank === WINNER_RANK && progress === MAX_PROGRESS
 							? (
 								<div className={styles.rank_container}>
 									<img
