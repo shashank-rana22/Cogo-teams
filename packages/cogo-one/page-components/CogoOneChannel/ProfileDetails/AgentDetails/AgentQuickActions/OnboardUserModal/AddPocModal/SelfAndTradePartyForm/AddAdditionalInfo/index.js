@@ -25,7 +25,7 @@ function AddAddtionalInfo({
 				<div className={styles.form_item_container}>
 					<label className={styles.form_label}>Select Address</label>
 					<CreatableSelectController
-						size="sm"
+						size="xs"
 						name="address"
 						placeholder="Select Address"
 						control={control}
@@ -40,7 +40,7 @@ function AddAddtionalInfo({
 						control={control}
 						name="pincode"
 						placeholder="Enter Pincode"
-						size="sm"
+						size="xs"
 					/>
 					{Error('pincode', errors)}
 				</div>
@@ -52,7 +52,7 @@ function AddAddtionalInfo({
 						PAN Number / Registration Number
 					</label>
 					<InputController
-						size="sm"
+						size="xs"
 						name="registration_number"
 						control={control}
 						placeholder="Enter Registration Number"
@@ -62,7 +62,7 @@ function AddAddtionalInfo({
 				<div className={styles.form_item_container}>
 					<label className={styles.form_label}>Workscopes</label>
 					<MultiselectController
-						size="sm"
+						size="xs"
 						control={control}
 						name="work_scopes"
 						placeholder="Choose workscope Type"
@@ -77,7 +77,7 @@ function AddAddtionalInfo({
 						Alternate Mobile Number (optional)
 					</label>
 					<MobileNumberController
-						size="sm"
+						size="xs"
 						control={control}
 						name="alternate_mobile_number"
 					/>

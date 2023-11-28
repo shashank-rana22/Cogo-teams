@@ -36,7 +36,7 @@ function AddPocModal({
 		refetch: createRefetch,
 	});
 
-	const { createTradeParty } = useCreateOrganizationTradeParty({ createPoc: createTrigger });
+	const { createTradeParty, createTradePartyLoading } = useCreateOrganizationTradeParty({ createPoc: createTrigger });
 
 	const onSubmit = (formValues) => {
 		const params = getCreateTradePartnerPocParams({ ...formValues, importerExporterId });
@@ -51,7 +51,7 @@ function AddPocModal({
 	const formSubmit = () => formRef?.current?.handleSubmit(onSubmit)();
 
 	return (
-		<Modal show={!isEmpty(showModal)} placement="top" size="lg" onClose={onClose}>
+		<Modal show={!isEmpty(showModal)} placement="top" size="md" onClose={onClose}>
 			<Modal.Header title="Add Shipment Poc" />
 
 			<Modal.Body style={{ maxHeight: '500px', minHeight: '300px' }}>
@@ -64,6 +64,7 @@ function AddPocModal({
 						email={email}
 						showAdditionalDetail={showAdditionalDetail}
 						setShowAdditionalDetail={setShowAdditionalDetail}
+						importerExporterId={importerExporterId}
 						setImporterExporterId={setImporterExporterId}
 					/>
 				</div>
@@ -76,7 +77,7 @@ function AddPocModal({
 						<Button
 							themeType="secondary"
 							onClick={onClose}
-							disabled={createLoading}
+							disabled={createLoading || createTradePartyLoading}
 						>
 							Cancel
 						</Button>
@@ -87,7 +88,7 @@ function AddPocModal({
 						<Button
 							themeType="accent"
 							onClick={formSubmit}
-							disabled={createLoading}
+							disabled={createLoading || createTradePartyLoading}
 						>
 							Submit
 						</Button>

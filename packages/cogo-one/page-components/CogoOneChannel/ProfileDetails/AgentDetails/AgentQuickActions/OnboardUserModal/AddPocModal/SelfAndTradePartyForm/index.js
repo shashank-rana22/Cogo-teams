@@ -15,6 +15,7 @@ function Error(key, errors) {
 function SelfAndTradePartyForm({
 	showAdditionalDetail = false,
 	setShowAdditionalDetail = () => {},
+	importerExporterId = '',
 	setImporterExporterId = () => {},
 	mobileNumber = '',
 	username = '',
@@ -62,16 +63,19 @@ function SelfAndTradePartyForm({
 					control={control}
 					errors={errors}
 					onShipmentChange={onShipmentChange}
+					watch={watch}
+					importerExporterId={importerExporterId}
 				/>
-				POC DETAILS
+
 				<PocDetails
 					mobileNumber={mobileNumber}
 					Error={Error}
 					control={control}
 					errors={errors}
-					email={email}
+					userEmail={email}
 					username={username}
 					mobileCountryCode={mobileCountryCode}
+					watch={watch}
 				/>
 				<div className={styles.additionDetail}>
 					<Button

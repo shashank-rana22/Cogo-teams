@@ -45,7 +45,7 @@ const useCreateOrganizationTradeParty = ({
 
 	return {
 		createTradeParty,
-		createLoading: loading,
+		createTradePartyLoading: loading,
 	};
 };
 
