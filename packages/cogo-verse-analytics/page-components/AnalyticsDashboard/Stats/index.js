@@ -17,17 +17,16 @@ function Stats(props = {}) {
 	const { token } = useSelector(({ profile }) => ({
 		token: profile?.user?.firestore_custom_token,
 	}));
-	console.log('token:', token);
 
 	useEffect(() => {
 		getUserSats();
-		// if (process.env.NODE_ENV === 'production') {
-		const auth = getAuth();
-		signInWithCustomToken(auth, token)
-			.catch((error) => {
-				console.log('firestore_auth_error:', error.message);
-			});
-		// }
+		if (process.env.NODE_ENV === 'production') {
+			const auth = getAuth();
+			signInWithCustomToken(auth, token)
+				.catch((error) => {
+					console.log('firestore_auth_error:', error.message);
+				});
+		}
 	}, [getUserSats, token]);
 
 	const {
