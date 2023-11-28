@@ -1,10 +1,10 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import DotLoader from '../../../../../common/LoadingState/DotLoader';
+import useInfiniteScroll from '../../../../../hooks/useInfiniteScroll';
 import AdditionalTabs from '../../../common/AdditionalTabs';
 import AppliedFilters from '../../../common/AppliedFilters';
 import ComparisonHeader from '../../../common/Comparison/ComparisonHeader';
@@ -74,7 +74,6 @@ function ListRateCards({
 	marketplaceRates = [],
 	setRouterLoading = () => {},
 	setScheduleLoading = () => {},
-	scheduleLoading = false,
 	setSelectedSchedule = () => {},
 	selectedSchedule = () => {},
 	isMobile = false,
@@ -91,6 +90,8 @@ function ListRateCards({
 	const showComparison = !isEmpty(comparisonRates);
 
 	const { total_count, page_limit, page } = paginationProps;
+
+	const { isFetching } = useInfiniteScroll({ hasMore: page < Math.ceil(total_count / page_limit), refetchSearch });
 
 	// const transitTime = (rates || []).reduce((acc, rate) => {  //COMMENTED FOR FUTURE USE
 	// 	if (!acc.min || rate.transit_time < acc.min) {
@@ -237,21 +238,7 @@ function ListRateCards({
 				</>
 			))}
 
-			{!loading && page < Math.ceil(total_count / page_limit) ? (
-				<div className={styles.show_more_button}>
-					<div
-						role="presentation"
-						onClick={() => refetchSearch({ show_more: true })}
-						className={styles.button}
-					>
-						Show more results
-						{' '}
-						<IcMArrowRotateDown style={{ marginLeft: '8px' }} />
-					</div>
-				</div>
-			) : null}
-
-			{loading && !scheduleLoading && (
+			{isFetching && (
 				<div className={styles.spinner_container}>
 					<DotLoader size="lg" />
 					<div className={styles.text}>Fetching rates, please wait</div>
@@ -261,7 +248,7 @@ function ListRateCards({
 			<AdditionalTabs
 				detail={detail}
 				rates={rates}
-				loading={loading}
+				loading={loading && !isFetching}
 				setScreen={setScreen}
 				isMobile={isMobile}
 			/>
