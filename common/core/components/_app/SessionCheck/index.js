@@ -2,8 +2,8 @@ import useGetAuthorizationChecked from '@cogoport/authentication/hooks/useGetAut
 
 import styles from './styles.module.css';
 
-function SessionCheck({ children, firestoreToken }) {
-	const { sessionInitialized } = useGetAuthorizationChecked({ firestoreToken });
+function SessionCheck({ children }) {
+	const { sessionInitialized } = useGetAuthorizationChecked();
 	if (!sessionInitialized) {
 		return (
 			<div className={styles.container}>

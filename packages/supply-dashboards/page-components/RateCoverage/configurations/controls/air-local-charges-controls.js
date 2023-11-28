@@ -19,7 +19,7 @@ const airLocalChargesControls = (payload) => {
 			label       : 'Commodity Type',
 			placeholder : 'Select Commodity Type',
 			span        : 6,
-			options     : COMMODITY_TYPE_OPTIONS[payload?.commodity],
+			options     : COMMODITY_TYPE_OPTIONS[payload?.air_commodity],
 			rules       : {
 				required: true,
 			},

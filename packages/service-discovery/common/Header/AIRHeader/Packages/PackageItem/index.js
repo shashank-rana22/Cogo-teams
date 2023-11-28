@@ -79,7 +79,7 @@ function PackageItem({
 					Commodity Subtype:
 					{' '}
 					<strong>
-						{COMMODITY_NAME_MAPPING[commodity_subtype] || startCase(commodity_subtype) || 'All'}
+						{COMMODITY_NAME_MAPPING[commodity_subtype]?.name || startCase(commodity_subtype) || 'All'}
 					</strong>
 				</span>
 			)}

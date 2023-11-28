@@ -1,83 +1,32 @@
 import { Modal, Button } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 
-import useDislikeFeedback from '../../../hooks/useDislikeFeedback';
-
-import DislikeFeedbackForm from './DislikeFeedbackForm';
+import ModalHeader from './components/Header';
+import ModalBody from './components/ModalBody';
 import styles from './styles.module.css';
 
 function DislikeModal({
-	details = {},
 	rate = {},
 	show = false,
 	onClose = () => {},
-	setLikeState = () => {},
-	setShowSuccessModal = () => {},
-	likeState = {},
-	isMobile = false,
+	details = {},
+	refetchSearch = () => {},
 }) {
-	const { control, formState:{ errors }, handleSubmit, watch, setValue } = useForm();
-
-	const { onSubmitFeedback, loading } = useDislikeFeedback({ details, rate, onClose, setLikeState, likeState });
-
-	const formValues = watch();
-
-	const onSubmit = async (values) => {
-		const done = await onSubmitFeedback(values);
-
-		if (done) {
-			setShowSuccessModal(true);
-		}
-	};
-
-	const BUTTONS_MAPPING = [
-		{
-			label     : 'Cancel',
-			onClick   : onClose,
-			themeType : 'secondary',
-			disabled  : loading,
-		},
-		{
-			label     : 'Submit',
-			onClick   : handleSubmit(onSubmit),
-			themeType : 'primary',
-			loading,
-		},
-	];
-
 	return (
-		<Modal size="md" show={show} onClose={onClose} placement={isMobile ? 'bottom' : 'right'}>
-			<Modal.Header title="Reason for dislike" />
+		<Modal size="lg" show={show} onClose={onClose} animate className={styles.modal_container}>
+			<Modal.Header title={<ModalHeader />} />
 
 			<Modal.Body>
-				<DislikeFeedbackForm
-					details={details}
-					rate={rate}
-					control={control}
-					errors={errors}
-					formValues={formValues}
-					watch={watch}
-					setValue={setValue}
-				/>
+				<ModalBody rate={rate} details={details} refetchSearch={refetchSearch} />
 			</Modal.Body>
 
 			<Modal.Footer>
-				<div className={styles.buttons_container}>
-					{BUTTONS_MAPPING.map((buttonItem, index) => {
-						const { label, ...restProps } = buttonItem;
-
-						return (
-							<Button
-								key={label}
-								type="button"
-								style={{ marginRight: !index ? '12px' : '0px' }}
-								{...restProps}
-							>
-								{label}
-							</Button>
-						);
-					})}
-				</div>
+				<Button
+					type="button"
+					themeType="secondary"
+					onClick={onClose}
+				>
+					Close
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);

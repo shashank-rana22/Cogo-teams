@@ -25,6 +25,7 @@ function Details({
 	postTaxData = {},
 	preTaxLoading = false,
 	postTaxLoading = false,
+	jobData = {},
 }) {
 	const { query } = useRouter();
 	const { partner_id } = query || {};
@@ -44,14 +45,19 @@ function Details({
 		buyCurrency = '',
 		sellCurrency = '',
 		jobNumber = '',
-		estimatedSell = 0,
-		totalSell = 0,
-		estimatedBuy = 0,
-		totalBuy = 0,
-		profitMargin = 0,
 		id: jobOpenId = '',
 	} = row?.data?.jobOpenRequest || {};
 	const { tradePartyName = '', businessName = '' } = row?.data?.organization || {};
+
+	const {
+		income = 0,
+		expense = 0,
+		buyQuotationPostTax = 0,
+		sellQuotationPostTax = 0,
+	} = jobData || {};
+
+	const jobProfitMargin = Number(income || 0) - Number(expense || 0);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.display_box}>
@@ -114,31 +120,31 @@ function Details({
 				<div>
 					<div className={styles.heading}>Estimated Sell</div>
 					<div className={styles.text}>
-						{getFormatAmount(estimatedSell, sellCurrency)}
+						{getFormatAmount(sellQuotationPostTax, sellCurrency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Sell</div>
 					<div className={styles.text}>
-						{getFormatAmount(totalSell, 'INR')}
+						{getFormatAmount(income, 'INR')}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Estimated Buy</div>
 					<div className={styles.text}>
-						{getFormatAmount(estimatedBuy, buyCurrency)}
+						{getFormatAmount(buyQuotationPostTax, buyCurrency)}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Operational Buy</div>
 					<div className={styles.text}>
-						{getFormatAmount(totalBuy, 'INR')}
+						{getFormatAmount(expense, 'INR')}
 					</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Profit Margin</div>
 					<div className={styles.text}>
-						{getFormatAmount(profitMargin, sellCurrency)}
+						{getFormatAmount(jobProfitMargin, sellCurrency)}
 					</div>
 				</div>
 			</div>

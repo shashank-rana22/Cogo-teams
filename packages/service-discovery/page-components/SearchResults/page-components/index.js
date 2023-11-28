@@ -178,7 +178,6 @@ function SearchResults() {
 					isGuideViewed={isGuideViewed}
 					setRouterLoading={setRouterLoading}
 					setScheduleLoading={setScheduleLoading}
-					scheduleLoading={scheduleLoading}
 					setSelectedSchedule={setSelectedSchedule}
 					selectedSchedule={selectedSchedule}
 					isMobile={isMobile}

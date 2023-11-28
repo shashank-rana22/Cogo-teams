@@ -22,6 +22,7 @@ function SelectedRateCard({
 	// setShowShippingLineModal = () => {},  // will be used in future
 	setRouterLoading = () => {},
 	isMobile = false,
+	refetchSearch = () => {},
 }) {
 	const [cargoModal, setCargoModal] = useState('pending'); // pending,progress,success
 
@@ -55,6 +56,7 @@ function SelectedRateCard({
 				isSelectedCard
 				setScreen={setScreen}
 				setRouterLoading={setRouterLoading}
+				refetchSearch={refetchSearch}
 			/>
 
 			{source === 'cogo_assured_rate' ? (

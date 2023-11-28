@@ -405,6 +405,30 @@ const apis = [
 		feature      : 'spot_booking',
 		service_name : 'sailing_schedule',
 	},
+	{
+		api          : 'get_spot_search_rate_feedback',
+		access_type  : 'private',
+		feature      : 'rate_feedback',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'validate_rate_feedback',
+		access_type  : 'private',
+		feature      : 'rate_feedback',
+		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'create_spot_search_rate_card_feedback',
+		access_type  : 'private',
+		feature      : 'rate_feedback',
+		service_name : 'spot_search',
+	},
+	{
+		api          : 'delete_spot_search_rate_feedback',
+		access_type  : 'private',
+		feature      : 'rate_feedback',
+		service_name : 'spot_search',
+	},
 ];
 
 export default apis;

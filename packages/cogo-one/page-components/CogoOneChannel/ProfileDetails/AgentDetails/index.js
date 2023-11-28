@@ -218,6 +218,7 @@ function AgentDetails({
 					fetchOrganization={fetchOrganization}
 					partnerId={partnerId}
 					formattedMessageData={formattedMessageData}
+					name={name}
 				/>
 			)}
 

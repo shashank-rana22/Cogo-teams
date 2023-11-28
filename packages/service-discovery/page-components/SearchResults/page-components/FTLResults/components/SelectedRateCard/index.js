@@ -13,6 +13,7 @@ import styles from './styles.module.css';
 function SelectedRateCard({
 	setRouterLoading = () => {},
 	isMobile = false,
+	refetch: refetchSearch = () => {},
 }) {
 	const { query = {} } = useSelector(({ general }) => ({
 		query: general?.query,
@@ -48,6 +49,7 @@ function SelectedRateCard({
 				detail={detail}
 				setRouterLoading={setRouterLoading}
 				isMobile={isMobile}
+				refetch={refetchSearch}
 			/>
 
 			<Services

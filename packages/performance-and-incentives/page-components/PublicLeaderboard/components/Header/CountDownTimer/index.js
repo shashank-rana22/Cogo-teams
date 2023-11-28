@@ -1,3 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+
 import useCountDown from '../../../hooks/useCountDown';
 
 import styles from './styles.module.css';
@@ -12,7 +15,20 @@ function CountDownTimer({ updatedAt = '' }) {
 
 	return (
 		<div className={styles.container}>
-			<div> Next Update in</div>
+			<div>
+				<div> Next Update in</div>
+				<div className={styles.last_updated_at}>
+					Last updated:
+					{' '}
+					{formatDate({
+						date       : updatedAt,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+						formatType : 'dateTime',
+						separator  : '@',
+					})}
+				</div>
+			</div>
 
 			<div className={styles.timer_container}>
 				<div className={styles.digit}>{String(minutes).padStart(2, '0')}</div>

@@ -36,9 +36,17 @@ function JobOpenDetailsModal({ row = {}, setDetailsModal = () => {}, refetch = (
 		apiloading,
 		sellData,
 		buyData,
+		jobData,
+		jobLoading,
 	} = useGetShipmentCostSheet({ shipmentId, jobNumber, JOB_SOURCE, JOB_TYPE });
+
 	return (
 		<div className={styles.containerDisplay}>
+			<div className={styles.job_number}>
+				Job no. #
+				{jobNumber}
+			</div>
+
 			<div className={styles.heading}>
 				{t('incidentManagement:shipment_re_open_request')}
 			</div>
@@ -71,6 +79,8 @@ function JobOpenDetailsModal({ row = {}, setDetailsModal = () => {}, refetch = (
 					postTaxData={postTaxData}
 					preTaxLoading={preTaxLoading}
 					postTaxLoading={postTaxLoading}
+					jobData={jobData}
+					jobLoading={jobLoading}
 				/>
 			</div>
 

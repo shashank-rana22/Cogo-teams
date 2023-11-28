@@ -47,3 +47,22 @@
 		color: #ee3425;
 	}
 }
+
+.delete_button {
+	display: flex;
+	justify-content: center;
+}
+
+.modal_body {
+	text-align: center;
+}
+
+.font_style {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.icon {
+	margin-top: 10px;
+	cursor: pointer;
+}

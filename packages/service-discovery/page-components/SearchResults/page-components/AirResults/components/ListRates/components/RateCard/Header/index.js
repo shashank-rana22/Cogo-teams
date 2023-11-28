@@ -27,6 +27,7 @@ function Header({
 	showGuide = false,
 	setInfoBanner = () => {},
 	isMobile = false,
+	refetch = () => {},
 }) {
 	const {
 		airline = {},
@@ -126,7 +127,12 @@ function Header({
 			</div>
 
 			<div className={styles.right_section}>
-				<LikeDislike rateCardData={rate} detail={detail} isMobile={isMobile} />
+				<LikeDislike
+					rateCardData={rate}
+					detail={detail}
+					isMobile={isMobile}
+					refetchSearch={refetch}
+				/>
 			</div>
 		</div>
 	);
