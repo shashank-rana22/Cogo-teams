@@ -33,7 +33,7 @@ const useHandleSelectedReasonsForm = ({
 
 	const [{ loading = false }, trigger] = useRequest(
 		{
-			method : 'POST',
+			method : 'GET',
 			url    : '/validate_rate_feedback',
 		},
 		{ manual: true },
