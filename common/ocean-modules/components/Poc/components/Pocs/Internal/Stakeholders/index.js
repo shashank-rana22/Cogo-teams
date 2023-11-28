@@ -1,6 +1,8 @@
 import { Button, Popover } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
 import { IcMCall, IcMEdit, IcMEmail } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 
 import STAKEHOLDER_MAPPING, { DEFAULT_STAKEHOLDERS } from '../../../../../../constants/STAKEHOLDER_MAPPING';
@@ -13,6 +15,8 @@ function Stakeholders({
 	data = [], setAddPoc = () => {}, rolesPermission = {},
 	shipment_data = {}, activeStakeholder = '',
 }) {
+	const { partnerId = ''	} = useSelector(({ profile }) => ({ partnerId: profile?.partner?.id }));
+
 	const geo = getGeoConstants();
 
 	const { edit_internal_poc = false } = geo.others?.navigations?.bookings?.invoicing || {};
@@ -27,6 +31,8 @@ function Stakeholders({
 	const isPocStakeholdersVisible = checkForStakeholders && shipment_type === 'fcl_freight'
 		? is_rate_reverted
 		: true;
+
+	const isIndianEntity = [101, 301].includes(getEntityCode(partnerId));
 
 	let mapping = DEFAULT_STAKEHOLDERS;
 
@@ -48,7 +54,8 @@ function Stakeholders({
 					id,
 				} = item || {};
 
-				if (rolesPermission?.hidden_poc?.includes(stakeholder_type) || !mapping[stakeholder_type]) {
+				if ((rolesPermission?.hidden_poc?.includes(stakeholder_type) && isIndianEntity)
+				|| !mapping[stakeholder_type]) {
 					return null;
 				}
 

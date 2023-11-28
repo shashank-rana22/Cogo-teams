@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { useState } from 'react';
 
 import SCREEN_CONSTANTS from '../../../../constants/screen-constants';
@@ -11,13 +12,25 @@ const { OVERALL, COMPARISION } = SCREEN_CONSTANTS;
 
 function Body(props) {
 	const {
-		screen, view, dateRange, updatedAt, setUpdatedAt, setDateRange, duration, setDuration, setNextReloadAt,
+		screen,
+		view,
+		dateRange,
+		updatedAt,
+		setUpdatedAt,
+		setDateRange,
+		duration,
+		setDuration,
+		setNextReloadAt,
+		quest,
+		setQuest,
+		officeLocation,
+		isQuestPresent,
 	} = props;
 
 	const [score, setScore] = useState({});
 
 	return (
-		<div className={styles.container}>
+		<div className={cl`${styles.container} ${!isQuestPresent ? styles.container_height : null}`}>
 			<LeftPanel
 				screen={screen}
 				view={view}
@@ -33,7 +46,15 @@ function Body(props) {
 				setNextReloadAt={setNextReloadAt}
 			/>
 
-			{screen === OVERALL ? <RightPanel view={view} updatedAt={updatedAt} /> : (
+			{screen === OVERALL ? (
+				<RightPanel
+					view={view}
+					updatedAt={updatedAt}
+					quest={quest}
+					setQuest={setQuest}
+					officeLocation={officeLocation}
+				/>
+			) : (
 				<LeftPanel
 					screen={screen}
 					view={view}

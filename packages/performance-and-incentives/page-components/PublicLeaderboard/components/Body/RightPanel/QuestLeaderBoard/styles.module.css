@@ -1,0 +1,151 @@
+.container {
+	display: flex;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.header_left_side {
+	width: 70%;
+}
+
+.heading {
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.quest_selector {
+	width: 200px;
+
+	:global {
+		.ui_select_option_item span {
+			width: 100%;
+		}
+	}
+}
+
+.winner_container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+
+.winner_item {
+	position: relative;
+	width: calc((100% - 32px) / 3);
+	padding: 16px;
+	border: 1px solid #f2f2f2;
+	border-radius: 8px;
+}
+
+.user_details {
+	display: flex;
+}
+
+.rank {
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.user_data {
+	padding: 0 6px;
+	margin: 0 6px;
+	border-left: 1px solid #f2f2f2;
+}
+
+.user_name {
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.score {
+	margin-top: 2px;
+	font-size: 10px;
+}
+
+.score_heading {
+	font-weight: 400;
+	color: #bdbdbd;
+}
+
+.progress_container :global {
+	.ui_progressbar_filename {
+		display: none;
+	}
+
+	.ui_progressbar_bar {
+		height: 4px;
+	}
+
+	.ui_progressbar_progress {
+		height: 4px;
+	}
+}
+
+.badge_icon {
+	position: absolute;
+	top: -12px;
+	left: -12px;
+	width: 24px;
+}
+
+.parameters_div {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	margin-top: 4px;
+}
+
+.parameters {
+	font-size: 6px;
+	font-weight: 400;
+	color: #bdbdbd;
+}
+
+.parameters_ratio {
+	font-size: 10px;
+	font-weight: 500;
+}
+
+.low :global .ui_progressbar_progress {
+	color: #ee3425;
+	background: #ee3425;
+}
+
+.medium :global .ui_progressbar_progress {
+	color: #f68b21 !important;
+	background: #f68b21;
+}
+
+.complete :global .ui_progressbar_progress {
+	color: #849e4c;
+	background: #849e4c;
+}
+
+.quest_title {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+
+.date_range {
+	display: flex;
+	justify-content: flex-start;
+	font-size: 12px;
+	color: #808080;
+}
+
+.quest_row {
+	max-width: 40%;
+}
+
+.quest_name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

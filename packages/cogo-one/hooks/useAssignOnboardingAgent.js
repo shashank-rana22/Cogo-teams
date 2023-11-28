@@ -12,6 +12,7 @@ const getPayload = ({
 	requestedAt = '',
 	previousAgents = '',
 	metadata = {},
+	isAssignedManually = false,
 }) => ({
 	source,
 	source_id                : sourceId || undefined,
@@ -20,6 +21,7 @@ const getPayload = ({
 	requested_at             : requestedAt || undefined,
 	previous_assigned_agents : [previousAgents],
 	metadata,
+	is_assigned_manually   	 : isAssignedManually,
 });
 
 const useAssignOnboardingAgent = ({ setAssignModal }) => {
@@ -49,6 +51,7 @@ const useAssignOnboardingAgent = ({ setAssignModal }) => {
 					requestedAt,
 					previousAgents,
 					metadata,
+					isAssignedManually: true,
 				}),
 			});
 			Toast.success('Successfully Assigned !!');

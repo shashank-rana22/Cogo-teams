@@ -1,9 +1,9 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	gap: 15%;
 	width: 50%;
-	height: 70vh;
+	height: 75vh;
 	padding: 0 32px;
 
 	@media (min-width: 2560px) {
@@ -30,7 +30,6 @@
 
 .period_selector {
 	width: 200px;
-	margin-bottom: 20px;
 
 	:global {
 		.ui_select_option_item span {
@@ -45,4 +44,20 @@
 	@media (min-width: 2560px) {
 		margin-bottom: 50px;
 	}
+}
+
+.inner_container_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.inner_container_heading {
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.inner_container_heading_span {
+	font-weight: 100;
 }

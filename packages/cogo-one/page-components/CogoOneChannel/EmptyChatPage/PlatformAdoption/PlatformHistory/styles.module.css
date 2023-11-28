@@ -40,6 +40,13 @@
 	fill: #4f4f4f;
 }
 
+.refresh {
+	width: 14px;
+	height: 14px;
+	margin: 0 8px;
+	fill: #4f4f4f;
+}
+
 .title {
 	font-weight: 500;
 	color: #4f4f4f;

@@ -558,9 +558,11 @@ const GLOBAL_CONSTANTS = {
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/performance-leaderboard.svg',
 		airline_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png',
-		wider_arrow                     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/wide-arrow',
-		public_leaderboard_winner_icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/winner_icon.svg',
-		public_leaderboard_announcement : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/announcement.svg',
+		wider_arrow                    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/wide-arrow',
+		public_leaderboard_winner_icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/winner_icon.svg',
+		public_leaderboard_quest_winner_icon:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/rank-badge.svg',
+		public_leaderboard_announcement: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/announcement.svg',
 		kpi:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rectangle_126.svg',
 		cogo_lite:

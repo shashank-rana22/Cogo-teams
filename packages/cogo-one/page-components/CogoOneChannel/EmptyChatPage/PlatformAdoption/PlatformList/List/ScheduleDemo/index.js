@@ -58,7 +58,8 @@ function ScheduleDemo({ scheduleDemo = {}, setScheduleDemo = () => {}, onboardin
 				val,
 				metadata,
 				requestId,
-				requestStatus: 'completed',
+				requestStatus : 'completed',
+				agentId       : performedById,
 			});
 		} else {
 			meetingAgent({

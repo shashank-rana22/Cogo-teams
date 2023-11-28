@@ -1,7 +1,7 @@
 import { Pagination, Table, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMArrowRight, IcMHome } from '@cogoport/icons-react';
+import { IcMArrowRight, IcMHome, IcMRefresh } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 
@@ -13,11 +13,11 @@ const COLUMNS = [
 	{
 		id       : 'id',
 		Header   : 'Id',
-		accessor : (item) => <div>{item?.serial_id}</div>,
+		accessor : (item) => <div>{item?.task_id}</div>,
 	},
 	{
-		id       : 'request_by',
-		Header   : 'Request By',
+		id       : 'performed_by',
+		Header   : 'PERFORMED BY',
 		accessor : (item) => (
 			<div className={styles.label}>
 				{startCase(item?.request_submitted_by?.name) || '-'}
@@ -28,8 +28,16 @@ const COLUMNS = [
 	},
 	{
 		id       : 'organization_name',
-		Header   : 'ORGANIZATION NAME',
-		accessor : (item) => <div className={styles.label}>{startCase(item?.organization?.business_name) || '-'}</div>,
+		Header   : 'ORGANIZATION/USER',
+		accessor : (item) => (
+			<div className={styles.label}>
+				{startCase(item?.organization?.business_name)
+				|| startCase(item?.lead_organization?.business_name)
+				|| startCase(item?.user?.name)
+				|| startCase(item?.lead_user?.name)
+				|| '-'}
+			</div>
+		),
 	},
 	{
 		id       : 'request_type',
@@ -47,8 +55,8 @@ const COLUMNS = [
 		accessor : (item) => <div className={styles.label}>{startCase(item?.request_completed_by?.name) || '-'}</div>,
 	},
 	{
-		id       : 'request_on',
-		Header   : 'REQUEST ON',
+		id       : 'performed_at',
+		Header   : 'PERFORMED AT',
 		accessor : (item) => (
 			<div className={styles.date_content}>
 				<div>
@@ -106,6 +114,7 @@ function PlatformHistory({
 						</div>
 						<IcMArrowRight className={styles.side_arrow} />
 						<div className={styles.title}>Task History</div>
+						<IcMRefresh className={styles.refresh} onClick={() => onboardingRequest({ page: 1 })} />
 					</div>
 					<AdoptionFilter
 						setFilterValues={setFilterValues}

@@ -1,4 +1,5 @@
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback, useMemo, useState } from 'react';
 
 import ScrollAnnouncement from '../../common/ScrollAnouncement';
@@ -24,6 +25,7 @@ function PublicDashboard() {
 	const [nextReloadAt, setNextReloadAt] = useState(100);
 	const [duration, setDuration] = useState('today');
 	const [officeLocation, setOfficeLocation] = useState(location);
+	const [quest, setQuest] = useState({});
 
 	const [dateRange, setDateRange] = useState({
 		startDate : getTodayStartDate(),
@@ -44,7 +46,7 @@ function PublicDashboard() {
 
 	const { reloadCounter } = useReloadCounter({ seconds: nextReloadAt, functionToCall: switchScreen });
 
-	const { list, loading: questLoading } = useGetQuests();
+	const { list, loading: questLoading } = useGetQuests({ setQuest });
 
 	const contextValues = useMemo(() => ({
 		countdown,
@@ -83,6 +85,10 @@ function PublicDashboard() {
 					duration={duration}
 					setDuration={setDuration}
 					setNextReloadAt={setNextReloadAt}
+					quest={quest}
+					setQuest={setQuest}
+					officeLocation={officeLocation}
+					isQuestPresent={!isEmpty(list)}
 				/>
 			</div>
 		</PublicLeaderBoardContext.Provider>

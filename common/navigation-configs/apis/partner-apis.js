@@ -13563,6 +13563,24 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'trade_party',
+		},
+		{
+			api          : 'create_organization_trade_party',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'trade_party',
+		},
+		{
+			api          : 'create_organization_trade_party_poc',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'trade_party',
+		},
+		{
 			api          : 'update_channel_partner_document',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -13610,6 +13628,11 @@ const partner = {
 		},
 		{
 			api          : 'list_omnichannel_onboarding_requests',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_omnichannel_onboarding_timelines',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
