@@ -46,3 +46,10 @@
 	height: 2px;
 	background-color: #f00;
 }
+
+.job_number {
+	margin-top: 8px;
+	font-size: var(--font-size-lg);
+	font-weight: 600;
+	color: #4f4f4f;
+}

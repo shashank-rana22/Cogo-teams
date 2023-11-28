@@ -44,16 +44,27 @@ const useGetShipmentCostSheet = ({
 		{ manual: true },
 	);
 
+	const [{ data:jobData, jobLoading }, triggerJob] = useRequestBf(
+		{
+			url     : '/common/job/job-with-quotations',
+			method  : 'get',
+			authKey : 'get_common_job_job_with_quotations',
+			params  : { jobType, jobSource, jobNumber },
+		},
+		{ manual: true },
+	);
+
 	const apiTrigger = useCallback(async () => {
 		try {
 			await sellTrigger();
 			await buyTrigger();
 			postTaxFetch();
 			preTaxFetch();
+			triggerJob();
 		} catch (error) {
-			console.error(error);
+			Promise.reject(error);
 		}
-	}, [sellTrigger, buyTrigger, postTaxFetch, preTaxFetch]);
+	}, [sellTrigger, buyTrigger, postTaxFetch, preTaxFetch, triggerJob]);
 
 	useEffect(() => {
 		apiTrigger();
@@ -69,11 +80,13 @@ const useGetShipmentCostSheet = ({
 		buydata    : formattedBuyData,
 		sellData,
 		buyData,
+		jobData,
 		apiloading : sellLoading || buyLoading,
 		postTaxData,
 		preTaxData,
 		preTaxLoading,
 		postTaxLoading,
+		jobLoading,
 	};
 };
 
