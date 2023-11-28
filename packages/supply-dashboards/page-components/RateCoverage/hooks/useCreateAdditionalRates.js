@@ -3,6 +3,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useConfiguration from '../components/ListData/ListCard/AddRate/AddAdditionalRate/configurations';
@@ -71,15 +72,18 @@ const getPayload = ({ values, payload, charge, chargeName }) => {
 const useCreateAdditionalRates = ({
 	payload,
 	charge,
-	setAdditionalCharge,
 	additionalService,
-	setChargeAdded,
-	message,
 	containerDetails,
 	filter,
 	data,
 	source,
 	triggeredFrom = '',
+	setFeebBackModal,
+	feedbackModal,
+	setChargeAdded,
+	setAdditionalCharge,
+	feedbackData,
+	message,
 }) => {
 	const [errors, setErrors] = useState({});
 
@@ -164,8 +168,12 @@ const useCreateAdditionalRates = ({
 				Toast.error('Unable to Add');
 			}
 			Toast.success(' Updated Successfully');
-			setChargeAdded((prev) => [...prev, `${charge}${message}`]);
-			setAdditionalCharge(null);
+			if (!isEmpty(feedbackData)) {
+				setFeebBackModal(!feedbackModal);
+			} else {
+				setChargeAdded((prev) => [...prev, `${charge}${message}`]);
+				setAdditionalCharge(null);
+			}
 			reset();
 		} catch (err) {
 			Toast.error(err.data);

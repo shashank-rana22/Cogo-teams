@@ -1,20 +1,31 @@
-import { IcMAttach } from '@cogoport/icons-react';
+import { Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from '../styles.module.css';
 
 function ViewFiles({ urlList = [] }) {
 	return (
 		<div>
-			{urlList?.length === 0 ? <>No Data Found</>
+			{isEmpty(urlList) ? <>No Data Found</>
 				: (
 					<>
-						{urlList.map((url) => (
-							<div className={styles.styled_link} key={url} target="_blank" href={url}>
-								<IcMAttach />
-								{url.split('/').pop()}
-							</div>
-						))}
+						{
+							(urlList || []).map((url) => (
+								<div key={url}>
+									<Button
+										className={styles.url_link}
+										themeType="linkUi"
+										onClick={() => {
+											window.open(url);
+										}}
+									>
+										{decodeURIComponent(url?.split('/')?.pop())}
+									</Button>
+								</div>
+							))
+						}
 					</>
+
 				)}
 		</div>
 	);
