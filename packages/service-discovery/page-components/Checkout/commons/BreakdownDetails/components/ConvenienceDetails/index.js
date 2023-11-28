@@ -64,7 +64,7 @@ function ConvenienceDetails({
 		detail,
 	});
 
-	const { handleUpdateBillingService } = useUpdateConvenienceFeeBillingService({
+	const { handleUpdateBillingService, loading: billedWithLoading = false } = useUpdateConvenienceFeeBillingService({
 		convenienceDetails,
 		refetch : getCheckout,
 		id      : checkout_id,
@@ -178,7 +178,7 @@ function ConvenienceDetails({
 
 							</div>
 
-							{loading ? <Spinner width="24px" height="24px" /> : null}
+							{loading || billedWithLoading ? <Spinner width="24px" height="24px" /> : null}
 
 							<div className={styles.select_container}>
 								<Select
@@ -188,7 +188,7 @@ function ConvenienceDetails({
 										value : option.unit,
 									}))}
 									value={unit}
-									disabled={!shouldEditConvenienceFee || loading}
+									disabled={!shouldEditConvenienceFee || loading || billedWithLoading}
 									style={{ width: '180px' }}
 									onChange={(val) => {
 										if (val) {
@@ -204,7 +204,7 @@ function ConvenienceDetails({
 									size="sm"
 									options={CURRENCY_OPTIONS}
 									value={currency}
-									disabled={!shouldEditConvenienceFee || loading}
+									disabled={!shouldEditConvenienceFee || loading || billedWithLoading}
 									style={{ marginLeft: '12px' }}
 									onChange={(val) => onChangeCurrency(
 										val,
@@ -226,7 +226,7 @@ function ConvenienceDetails({
 									})}
 									type="number"
 									style={{ marginLeft: '12px' }}
-									disabled={!shouldEditConvenienceFee || loading}
+									disabled={!shouldEditConvenienceFee || loading || billedWithLoading}
 								/>
 							</div>
 						</div>

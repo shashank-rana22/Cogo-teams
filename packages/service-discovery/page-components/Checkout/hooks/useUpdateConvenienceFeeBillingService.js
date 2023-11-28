@@ -1,15 +1,12 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
 
 const useUpdateConvenienceFeeBillingService = ({
 	convenienceDetails,
 	refetch,
 	id = '',
 }) => {
-	const [value, setValue] = useState('');
-
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_checkout',
 		method : 'POST',
@@ -28,7 +25,6 @@ const useUpdateConvenienceFeeBillingService = ({
 				},
 			});
 
-			setValue(selectedValue);
 			setShowPopover(false);
 			Toast.success('Updated succesfully');
 			refetch();
@@ -39,7 +35,6 @@ const useUpdateConvenienceFeeBillingService = ({
 
 	return {
 		handleUpdateBillingService,
-		value,
 		loading,
 	};
 };
