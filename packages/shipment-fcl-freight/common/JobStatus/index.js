@@ -47,7 +47,7 @@ function JobStatus({ shipment_data = {} }) {
 						setShowModal(true);
 					}}
 				>
-					Financially-re-open
+					Fin-open-request
 				</Button>
 
 				<Pill className={styles.job_closed_pill} size="lg">Financially Closed</Pill>
