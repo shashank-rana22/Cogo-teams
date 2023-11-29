@@ -232,6 +232,7 @@
     "criteria_required_message": "Criteria is required",
     "shipment_re_open_request": "Shipment Re-Open Request",
     "job_open_label": "Job Open",
+    "job_open_fin_label":"Job Open Financially",
     "total_buy_label": "Total Buy",
     "total_sell_label": "Total Sell",
     "profit_margin_label" : "Profit Margin"

@@ -55,9 +55,8 @@ const getControls = (t = () => {}) => [
 			},
 			{
 				value : 'JOB_OPEN_FINANCIALLY',
-				label : 'JOB OPEN FINANCIALLY',
+				label : t('incidentManagement:job_open_fin_label'),
 			},
-			// todo :: add to translatin
 		],
 		rules: { required: t('incidentManagement:incident_type_required_message') },
 	},
