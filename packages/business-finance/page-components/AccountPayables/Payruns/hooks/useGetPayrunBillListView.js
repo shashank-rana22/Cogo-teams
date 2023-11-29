@@ -17,7 +17,7 @@ const getListofInvoicePayload = ({
 		pageIndex,
 		pageSize,
 		state             : activePayrunTab,
-		q                 : isEmpty(query) ? query : undefined,
+		q                 : !isEmpty(query) ? query : undefined,
 		type              : overseasData,
 		startDate         : selectFromDate || undefined,
 		endDate           : selectToDate || undefined,
