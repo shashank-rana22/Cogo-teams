@@ -14,6 +14,7 @@ function RateCard({
 	isSelectedCard = false,
 	index = 0,
 	setRouterLoading = () => {},
+	refetch = () => {},
 }) {
 	if (rate?.source === 'contract') {
 		return (
@@ -37,6 +38,7 @@ function RateCard({
 			<Header
 				detail={detail}
 				rate={rate}
+				refetch={refetch}
 			/>
 
 			<Body

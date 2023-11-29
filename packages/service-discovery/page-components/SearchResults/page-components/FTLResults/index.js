@@ -39,6 +39,7 @@ function FTLResults({
 			props     : {
 				setRouterLoading,
 				isMobile,
+				refetch,
 			},
 		},
 	};

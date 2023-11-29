@@ -1,5 +1,10 @@
-const formatFclRate = (data, user_id) => {
-	const isEmpty = data?.weight_slabs.every((slab) => (
+const formatFclRate = ({
+	data,
+	user_id,
+	storeLocalImportData,
+	storeLocalExportData,
+}) => {
+	const isEmpty = data?.weight_slabs?.every((slab) => (
 		slab.lower_limit === '' && slab.upper_limit === '' && slab.currency === '' && slab.price === ''
 	));
 	const weightSlabs = isEmpty ? [] : data?.weight_slabs?.map((slab) => ({
@@ -10,8 +15,8 @@ const formatFclRate = (data, user_id) => {
 	}));
 
 	const payload = {
-		origin_port_id           : data?.origin_location_id,
-		destination_port_id      : data?.destination_location_id,
+		origin_port_id           : data?.origin_location_id || data?.origin_port_id,
+		destination_port_id      : data?.destination_location_id || data?.destination_port_id,
 		origin_main_port_id      : data?.origin_main_port_id || undefined,
 		destination_main_port_id : data?.destination_main_port_id || undefined,
 		container_size           : data?.container_size,
@@ -30,7 +35,7 @@ const formatFclRate = (data, user_id) => {
 			...charge,
 			price: Number(charge.price),
 			slabs:
-				data?.container_slabs.length && charge.code === 'BAS'
+				data?.container_slabs?.length && charge.code === 'BAS'
 					? (data?.container_slabs || [])?.map((slab) => ({
 						...slab,
 						price       : Number(slab.price),
@@ -40,16 +45,28 @@ const formatFclRate = (data, user_id) => {
 					: undefined,
 			remarks: charge.remarks ? [charge.remarks] : undefined,
 		})),
+		origin_local: {
+			line_items: storeLocalImportData?.line_items?.map((charges) => ({
+				...charges,
+				price  : Number(charges.price),
+				remark : charges?.remark ? [charges.remark] : undefined,
+			})),
+		},
+
 		weight_limit: data?.free_weight ? {
 			free_limit : Number(data?.free_weight),
 			slabs      : weightSlabs,
 		} : undefined,
-		destination_local: data?.detention_free_days
-			? {
-				detention: { free_limit: Number(data?.detention_free_days) },
-			}
-			: undefined,
+		destination_local: {
+			line_items: storeLocalExportData?.line_items?.map((charges) => ({
+				...charges,
+				price  : Number(charges.price),
+				remark : charges?.remark ? [charges.remark] : undefined,
+			})),
+			detention: { free_limit: Number(data?.detention_free_days) },
+		},
 	};
+
 	return payload;
 };
 

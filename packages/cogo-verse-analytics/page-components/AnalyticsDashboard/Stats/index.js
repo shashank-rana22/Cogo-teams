@@ -14,8 +14,8 @@ import styles from './styles.module.css';
 
 function Stats(props = {}) {
 	const { userStats = {}, getUserSats, firebaseLoading = false } = useGetUsersStats();
-	const { token } = useSelector(({ general }) => ({
-		token: general.firestoreToken,
+	const { token } = useSelector(({ profile }) => ({
+		token: profile?.user?.firestore_custom_token,
 	}));
 
 	useEffect(() => {

@@ -5,7 +5,8 @@ import {
 	useGetAsyncOptions, asyncFieldsLocations,
 } from '@cogoport/forms';
 import getCommodityList from '@cogoport/globalization/utils/getCommodityList';
-import { merge, startCase } from '@cogoport/utils';
+import { isEmpty, merge, startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
 import useGetMainPortsOptions from '../../../RfqEnquiries/hooks/useGetMainPortsOptions';
 import {
@@ -16,10 +17,17 @@ import {
 import { cargoHandlingOptions, COMMODITY_TYPE_OPTIONS } from './constants';
 
 function FieldMutation({
-	fields, values, filter, chargeCodes, fclCfsChargeCodes,
+	fields, values, filter, chargeCodes, fclCfsChargeCodes, setValue,
 }) {
 	let finalFilteredOptions = [];
 	const dataTradeType = values?.trade_type;
+	const detentionSlabs = values?.detention_days;
+	const freeDetentionDays = values?.detention_free_days;
+	const demurrageSlabs = values?.demurrage_days;
+	const freeDemurrageDays = values?.demurrage_free_days;
+	const freeDaysSlabs = values?.add_slabs;
+	const freeDaysLimit = values?.free_limit_days;
+
 	const organizationUsers = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganizationUsers(),
@@ -30,6 +38,17 @@ function FieldMutation({
 
 	const mainPortOptions2 = useGetMainPortsOptions({ location_id: values?.destination_location_id });
 
+	const filterService = () => {
+		if (['haulage', 'trailer']?.includes(filter.service)) {
+			return `${filter.service}_freight`;
+		}
+		if (['fcl_freight_local', 'air_freight_local']?.includes(filter.service)) {
+			return filter.service?.replace('_local', '');
+		}
+		return filter.service;
+	};
+
+	const service = filterService();
 	const serviceProviders = useGetAsyncOptions(
 		merge(
 			asyncFieldsOrganization(),
@@ -39,8 +58,7 @@ function FieldMutation({
 						status       : 'active',
 						kyc_status   : 'verified',
 						account_type : 'service_provider',
-						service      : `${filter?.service}${['haulage',
-							'trailer'].includes(filter.service) ? '_freight' : ''}`,
+						service,
 					},
 				},
 			},
@@ -97,7 +115,11 @@ function FieldMutation({
 			newControl = { ...newControl, options: CommodityOptions };
 		}
 		if (name === 'commodity_type') {
-			newControl = { ...newControl, options: COMMODITY_TYPE_OPTIONS[values?.air_commodity] };
+			newControl = {
+				...newControl,
+				options: isEmpty(newControl?.options)
+					? COMMODITY_TYPE_OPTIONS[values?.air_commodity] : newControl?.options,
+			};
 		}
 		if (name === 'commodity_sub_type') {
 			newControl = {
@@ -108,7 +130,7 @@ function FieldMutation({
 		}
 
 		if (control?.controls) {
-			control.controls.forEach((childCtrl) => {
+			control.controls?.forEach((childCtrl) => {
 				if (childCtrl.name === 'unit') {
 					const UNIT_OPTIONS = {};
 					const chargeValues = values[control.name];
@@ -127,14 +149,14 @@ function FieldMutation({
 
 				if (childCtrl.name === 'code') {
 					const OPTIONS = [];
-					Object.keys(chargeCodes || {}).forEach((code) => {
+					Object.keys(chargeCodes || {})?.forEach((code) => {
 						OPTIONS.push({ label: `${code} ${chargeCodes[code]?.name}`, value: code });
 					});
 					childCtrl.options =	OPTIONS;
 				}
 				if (childCtrl.name === 'cfs_line_items') {
 					const OPTIONS = [];
-					Object.keys(fclCfsChargeCodes || {}).forEach((code) => {
+					Object.keys(fclCfsChargeCodes || {})?.forEach((code) => {
 						OPTIONS.push({ label: `${code} ${fclCfsChargeCodes[code]?.name}`, value: code });
 					});
 					childCtrl.options =	OPTIONS;
@@ -144,6 +166,51 @@ function FieldMutation({
 
 		return { ...newControl };
 	});
+
+	useEffect(() => {
+		if (freeDetentionDays) {
+			detentionSlabs?.forEach((obj, index) => {
+				if (!index) {
+					setValue(
+						'detention_days.0.lower_limit',
+						Number(freeDetentionDays) + 1,
+					);
+				} else {
+					setValue(
+						`detention_days.${index}.lower_limit`,
+						Number(detentionSlabs[index - 1].upper_limit) + 1,
+					);
+				}
+			});
+		}
+		if (freeDemurrageDays) {
+			demurrageSlabs?.forEach((obj, index) => {
+				if (!index) {
+					setValue(
+						'demurrage_days.0.lower_limit',
+						Number(freeDemurrageDays) + 1,
+					);
+				} else {
+					setValue(
+						`demurrage_days.${index}.lower_limit`,
+						Number(demurrageSlabs[index - 1].upper_limit) + 1,
+					);
+				}
+			});
+		}
+		if (freeDaysSlabs) {
+			freeDaysSlabs?.forEach((obj, index) => {
+				if (index === 0) {
+					setValue('add_slabs.0.lower_limit', Number(freeDaysLimit) + 1 || 0);
+				} else {
+					setValue(
+						`add_slabs.${index}.lower_limit`,
+						Number(freeDaysSlabs?.[index - 1].upper_limit) + 1,
+					);
+				}
+			});
+		}
+	}, [freeDetentionDays, freeDemurrageDays, detentionSlabs, setValue, demurrageSlabs, freeDaysSlabs, freeDaysLimit]);
 
 	return {
 		finalFields,

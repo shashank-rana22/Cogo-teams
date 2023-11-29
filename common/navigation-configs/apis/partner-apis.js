@@ -4294,6 +4294,16 @@ const partner = {
 			service_name : 'air_customs_rate',
 		},
 		{
+			api          : 'get_fcl_freight_rate_local',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate_',
+		},
+		{
+			api          : 'get_air_freight_rate_local',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
 			api          : 'update_spot_negotiation_rate',
 			access_type  : 'private',
 			service_name : 'spot_negotiation',
@@ -4476,6 +4486,18 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'air_customs_rate',
 			feature      : 'rate_density',
+		},
+		{
+			api          : 'create_fcl_freight_rate_local',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'create_air_freight_rate_local',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+			feature      : 'disliked_rates',
 		},
 		{
 			api          : 'get_fcl_freight_rate_visibility',
@@ -4720,6 +4742,18 @@ const partner = {
 			feature      : 'disliked_rates',
 		},
 		{
+			api          : 'list_air_freight_rate_local_feedbacks',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'list_fcl_freight_rate_local_feedbacks',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
 			api          : 'get_rate_feedbacks_stats',
 			access_type  : 'private',
 			service_name : 'spot_search',
@@ -4803,9 +4837,39 @@ const partner = {
 			feature      : 'disliked_rates',
 		},
 		{
+			api          : 'delete_fcl_freight_rate_local_feedback',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'delete_air_freight_rate_local_feedback',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
 			api          : 'list_ltl_freight_rate_feedbacks',
 			access_type  : 'private',
 			service_name : 'ltl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'list_fcl_cfs_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'fcl_cfs_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'list_fcl_freight_rate_local_feedbacks',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'list_air_freight_rate_local_feedbacks',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
 			feature      : 'disliked_rates',
 		},
 		{
@@ -4819,9 +4883,22 @@ const partner = {
 			feature     : 'disliked_rates',
 		},
 		{
-			api         : 'delete_fcl_cfs_rate_feedback',
-			access_type : 'private',
-			feature     : 'disliked_rates',
+			api          : 'delete_fcl_cfs_rate_feedback',
+			access_type  : 'private',
+			service_name : 'fcl_cfs_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'delete_fcl_freight_rate_local_feedback',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'delete_air_freight_rate_local_feedback',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+			feature      : 'disliked_rates',
 		},
 		{
 			api          : 'get_expertise_locations_for_rate',
@@ -5031,6 +5108,16 @@ const partner = {
 			service_name : 'fcl_cfs_rate',
 		},
 		{
+			api          : 'delete_fcl_freight_rate_local_job',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'delete_air_freight_rate_local_job',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
 			api          : 'list_fcl_freight_rate_jobs',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
@@ -5091,6 +5178,16 @@ const partner = {
 			service_name : 'fcl_cfs_rate',
 		},
 		{
+			api          : 'list_fcl_freight_rate_local_jobs',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'list_air_freight_rate_local_jobs',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
 			api          : 'get_fcl_freight_rate_job_stats',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
@@ -5145,6 +5242,16 @@ const partner = {
 			api          : 'get_fcl_cfs_rate_job_stats',
 			access_type  : 'private',
 			service_name : 'fcl_cfs_rate',
+		},
+		{
+			api          : 'get_fcl_freight_rate_local_job_stats',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'get_air_freight_rate_local_job_stats',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
 		},
 		{
 			api          : 'get_shipment',

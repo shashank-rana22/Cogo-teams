@@ -33,7 +33,6 @@ function FCLResults({
 	isGuideViewed = false,
 	setRouterLoading = () => {},
 	setScheduleLoading = () => {},
-	scheduleLoading = false,
 	setSelectedSchedule = () => {},
 	selectedSchedule = () => {},
 	isMobile = false,
@@ -68,7 +67,6 @@ function FCLResults({
 			marketplaceRates,
 			setRouterLoading,
 			setScheduleLoading,
-			scheduleLoading,
 			setSelectedSchedule,
 			selectedSchedule,
 			isMobile,
@@ -88,6 +86,7 @@ function FCLResults({
 			cogoAssuredRates,
 			setRouterLoading,
 			isMobile,
+			refetchSearch,
 		},
 		spot_booking: {
 			setScreen,

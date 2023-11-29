@@ -5,7 +5,8 @@ import { IcMCopy } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import { DEFAULT_VALUE, INCO_TERM_MAPPING, LOADER_COUNT } from '../../../../../configurations/helpers/constants';
+import { DEFAULT_VALUE, INCO_TERM_MAPPING, LOADER_COUNT, UNIT_MAPPING }
+	from '../../../../../configurations/helpers/constants';
 import copyToClipboard from '../../../../../utilis/copyToClipboard';
 import NewServiceProviderModal from '../ServiceProviderModal';
 import styles from '../styles.module.css';
@@ -50,6 +51,7 @@ function ServiceDetailsContent({
 		filter,
 		shipment_data,
 	});
+
 	const tradeType = INCO_TERM_MAPPING[inco_term_trade_type] || startCase(trade_type);
 
 	const { rate_card } = booking_params || {};
@@ -62,9 +64,16 @@ function ServiceDetailsContent({
 	|| (Array.isArray(airLineName) ? airLineName.join(', ') : ''));
 
 	const formattedDislikeRates = rate_card?.line_items[DEFAULT_VALUE]?.buy_price
-	&& `${rate_card?.line_items[DEFAULT_VALUE]?.currency} 
-		${rate_card?.line_items[DEFAULT_VALUE]?.buy_price} 
-		${['air_freight', 'air_customs']?.includes(filter?.service) ? 'per kg' : ''}`;
+	&& `${formatAmount({
+		amount   : rate_card?.line_items[DEFAULT_VALUE]?.buy_price,
+		currency : rate_card?.line_items[DEFAULT_VALUE]?.currency,
+		options  : {
+			style                 : 'currency',
+			currencyDisplay       : 'symbol',
+			maximumFractionDigits : 0,
+		},
+	})}
+		${UNIT_MAPPING[rate_card?.line_items[DEFAULT_VALUE]?.service_name]}`;
 
 	const handelNewServiceProvider = () => {
 		setServiceModal(!serviceModal);
@@ -91,6 +100,7 @@ function ServiceDetailsContent({
 			volume,
 			commodity_sub_type,
 			cargo_handling_type,
+			spot_search_serial_id,
 		} = val;
 
 		const formatLine = (label, value) => (value ? `${label} ${startCase(value)}\n` : '');
@@ -126,6 +136,7 @@ function ServiceDetailsContent({
 		textToCopy += formatLine('OPERATION TYPE:', operation_type);
 		textToCopy += formatLine('VOL WEIGHT:', formatVolume);
 		textToCopy += formatLine('CARGO HANDLING TYPE:', cargo_handling_type);
+		textToCopy += formatLine('SPOT SEARCH SERIAL ID:', spot_search_serial_id);
 		textToCopy += formatLine('No of Packages:', !isEmpty(bookingParams) ? (bookingParams || []).map((item) => {
 			const { length = 0, width = 0, height = 0 } = item || {};
 			const dimension = length
@@ -259,6 +270,42 @@ function ServiceDetailsContent({
 												</div>
 											</div>
 										)}
+
+									{!isEmpty(feedbackData?.spot_search_serial_id) && (
+										<div className={styles.content}>
+											<div className={styles.label}> Spot Search Serial Id : </div>
+											<Pill
+												size="md"
+												color="#F8F2E7"
+											>
+												{feedbackData?.spot_search_serial_id}
+											</Pill>
+										</div>
+									)}
+									{feedbackData?.preferred_free_days?.origin_detention && (
+										<div className={styles.content}>
+											<div className={styles.label}> Preferred Origin Detention </div>
+											<Pill
+												size="md"
+												color="#F8F2E7"
+											>
+												{feedbackData?.preferred_free_days?.origin_detention}
+											</Pill>
+										</div>
+									)}
+
+									{feedbackData?.preferred_free_days?.destination_detention && (
+										<div className={styles.content}>
+											<div className={styles.label}> Preferred Destination Detention </div>
+											<Pill
+												size="md"
+												color="#F8F2E7"
+											>
+												{feedbackData?.preferred_free_days?.destination_detention}
+											</Pill>
+										</div>
+									)}
+
 									{(resultLineName)
 										&& (
 											<div className={styles.content}>
@@ -281,20 +328,8 @@ function ServiceDetailsContent({
 												<div className={styles.label}>
 													Disliked Rate:
 													<div className={styles.price_value}>
-														{formatAmount({
-															amount   : rate_card?.line_items[0]?.buy_price,
-															currency : rate_card?.line_items[0]?.currency,
-															options  : {
-																style                 : 'currency',
-																currencyDisplay       : 'symbol',
-																maximumFractionDigits : 0,
-															},
-														})}
+														{formattedDislikeRates}
 													</div>
-													{' '}
-													{' '}
-													{['air_freight', 'air_customs']?.includes(filter?.service)
-													&& 'Per Kg' }
 												</div>
 											</div>
 										)}

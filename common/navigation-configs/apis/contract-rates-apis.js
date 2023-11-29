@@ -860,6 +860,36 @@ const apis = [
 		service_name : 'organization',
 		feature      : 'shipment_plan',
 	},
+	{
+		api          : 'list_contract_shipment_plans',
+		access_type  : 'private',
+		service_name : 'contract',
+		feature      : 'shipment_plan',
+	},
+	{
+		api          : 'list_nominated_contracts',
+		access_type  : 'private',
+		service_name : 'contract',
+		feature      : 'shipment_plan',
+	},
+	{
+		api          : 'list_nominated_contract_fcl_freight_services',
+		access_type  : 'private',
+		service_name : 'contract',
+		feature      : 'shipment_plan',
+	},
+	{
+		api          : 'list_nominated_contract_lcl_freight_services',
+		access_type  : 'private',
+		service_name : 'contract',
+		feature      : 'shipment_plan',
+	},
+	{
+		api          : 'list_nominated_contract_air_freight_services',
+		access_type  : 'private',
+		service_name : 'contract',
+		feature      : 'shipment_plan',
+	},
 ];
 
 export default apis;

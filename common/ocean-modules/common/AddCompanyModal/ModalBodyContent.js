@@ -19,6 +19,7 @@ function ModalBodyContent({
 	organization_id = '',
 	shipment_data = {},
 	primary_service = {},
+	poc_required = false,
 }, formRef) {
 	return (
 		<div className={styles.modal_body_container}>
@@ -59,6 +60,7 @@ function ModalBodyContent({
 				organization_id={organization_id}
 				shipment_data={shipment_data}
 				primary_service={primary_service}
+				poc_required={poc_required}
 			/>
 		</div>
 	);
