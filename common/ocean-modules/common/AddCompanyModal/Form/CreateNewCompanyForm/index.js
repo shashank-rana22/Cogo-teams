@@ -113,8 +113,6 @@ function CreateNewCompanyForm({ tradePartyType = '', primary_service = {}, poc_r
 
 	const workScopeOptions = convertObjectMappingToArray(POC_WORKSCOPE_MAPPING);
 
-	console.log({ errors, formValues });
-
 	return (
 		<div>
 			<form>
