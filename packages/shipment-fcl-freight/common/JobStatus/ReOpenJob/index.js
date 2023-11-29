@@ -19,6 +19,7 @@ function ReOpenJob({
 	setShowModal = () => {},
 	shipmentData = {},
 	incidentStatusRefetch = () => {},
+	financiallyOpen = false,
 }) {
 	const { user_name = '' } = useSelector(({ profile }) => ({
 		user_name: profile?.user?.name,
@@ -37,6 +38,7 @@ function ReOpenJob({
 
 	const { loading = false, onReOpenJob = () => {} } = useIncidentReOpenJob({
 		shipmentData,
+		financiallyOpen,
 		refetch,
 	});
 
