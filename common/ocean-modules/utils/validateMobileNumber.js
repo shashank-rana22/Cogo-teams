@@ -6,6 +6,16 @@ const validateMobileNumber = (val) => {
 		return 'Mobile number is required';
 	}
 
+	let isValue = true;
+
+	keys.forEach((key) => {
+		if (!val?.[key] && isValue) { isValue = false; }
+	});
+
+	if (!isValue) {
+		return 'Mobile number is required';
+	}
+
 	return true;
 };
 export default validateMobileNumber;
