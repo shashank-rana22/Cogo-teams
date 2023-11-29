@@ -5,8 +5,9 @@ import toastApiError from '../../commons/toastApiError';
 
 const useGetServiceWiseDetails = ({ organizationId = '', entityCode = '' }) => {
 	const [{ data, loading }, trigger] = useRequestBf({
-		url    : '/payments/outstanding/service-wise-outstanding',
-		method : 'get',
+		url     : '/payments/outstanding/service-wise-outstanding',
+		method  : 'get',
+		authKey : 'get_payments_outstanding_service_wise_outstanding',
 	}, { manual: true });
 
 	const getServiceWiseDetails = useCallback(async () => {
