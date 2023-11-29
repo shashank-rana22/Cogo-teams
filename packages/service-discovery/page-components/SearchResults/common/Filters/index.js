@@ -1,33 +1,32 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMFtick } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, isSameDay } from '@cogoport/utils';
+import { useState } from 'react';
 
-import { FILTERS_DEFAULT_VALUES } from './FilterContent/extra-filter-controls';
-import getFilterControls from './FilterContent/getControls';
 import FilterModal from './FilterModal';
+import getControls from './getControls';
 import styles from './styles.module.css';
 
-const SERVICE_KEY = 'search_type';
-
-const getDefaultValues = (controls) => Object.values(controls).reduce((acc, controlObj) => (
-	{ ...acc, [controlObj.name]: FILTERS_DEFAULT_VALUES[controlObj.name] }), {});
-
-const checkIfFiltersChanged = (defaultValues, finalValues) => {
-	let isApplied = false;
+const getFiltersCount = (defaultValues, finalValues) => {
+	let count = 0;
 
 	Object.entries(defaultValues).forEach(([key, value]) => {
-		if (key === 'shipping_line_id') {
+		if (['shipping_line_id', 'airline_id'].includes(key)) {
 			if (!isEmpty(finalValues[key])) {
-				isApplied = true;
+				count += 1;
 			}
-		} else if ((value && !finalValues[key]) || (!value && finalValues[key])
-		|| (value && value !== finalValues[key])) {
-			isApplied = true;
+		} else if (key === 'cargo_readiness_date') {
+			if (value && finalValues[key] && !isSameDay(value, finalValues[key])) {
+				count += 1;
+			}
+		} else if (key in finalValues && (value !== finalValues[key])
+		&& JSON.stringify(value) !== JSON.stringify(finalValues[key])) {
+			count += 1;
 		}
 	});
 
-	return isApplied;
+	return count;
 };
 
 function Filters({
@@ -39,12 +38,29 @@ function Filters({
 	setOpenAccordian = () => {},
 	showFilterModal = false,
 	setShowFilterModal = () => {},
+	airlines = [],
+	// transitTime = {},
+	setScheduleLoading = () => {},
+	isMobile = false,
 }) {
-	const controls = getFilterControls({ data, service_key: SERVICE_KEY });
+	const [airlineParams, setAirlineParams] = useState({
+		filters: {
+			id: airlines,
+		},
+	});
 
-	const DEFAULT_VALUES = getDefaultValues(controls);
+	const { service_type = '', spot_search_id = '' } = data;
 
-	const filtersApplied = checkIfFiltersChanged(DEFAULT_VALUES, filters);
+	const { controls = [], defaultValues = {} } = getControls({
+		service_type,
+		spot_search_id,
+		airlines,
+		airlineParams,
+		setAirlineParams,
+		// transitTime,
+	});
+
+	const filtersCount = getFiltersCount(defaultValues, filters);
 
 	const onClickButton = () => {
 		setShowFilterModal(true);
@@ -55,7 +71,7 @@ function Filters({
 		<div className={styles.container}>
 			<Button
 				type="button"
-				size="lg"
+				size={isMobile ? 'md' : 'lg'}
 				themeType="link"
 				onClick={onClickButton}
 				className={styles.filter_button}
@@ -69,8 +85,19 @@ function Filters({
 					style={{ marginRight: 12 }}
 				/>
 				Filters
-				{filtersApplied ? <IcMFtick className={styles.tick_icon} /> : null}
+				{filtersCount ? <IcMFtick className={styles.tick_icon} /> : null}
 			</Button>
+
+			{filtersCount ? (
+				<span className={styles.count}>
+					{filtersCount}
+					{' '}
+					filter
+					{filtersCount > 1 ? 's' : ''}
+					{' '}
+					applied
+				</span>
+			) : null}
 
 			{showFilterModal ? (
 				<FilterModal
@@ -78,11 +105,12 @@ function Filters({
 					setShow={setShowFilterModal}
 					filters={filters}
 					setFilters={setFilters}
-					showFiltersOnly
 					loading={loading}
-					DEFAULT_VALUES={DEFAULT_VALUES}
-					controls={controls}
 					openAccordian={openAccordian}
+					airlines={airlines}
+					defaultValues={defaultValues}
+					controls={controls}
+					setScheduleLoading={setScheduleLoading}
 				/>
 			) : null}
 		</div>

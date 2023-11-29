@@ -41,11 +41,13 @@ function Settlement() {
 		};
 	});
 
-	const tabMapping = tabPanelMapping(entityCode, entity);
+	const tabMapping = tabPanelMapping(entityCode);
 
 	const [activeTab, setActiveTab] = useState(query?.active_tab);
 
 	const handleChange = (tab) => {
+		setEntityCode(entity);
+
 		if (['ap-ar-settlement', 'JournalVoucher', 'tds-settlement', 'onAccountCollection', 'history'].includes(tab)) {
 			setActiveTab(tab);
 			push(

@@ -22,12 +22,16 @@
 		.ui_accordion_content {
 			width: 100%;
 			padding: 8px 0 !important;
-			overflow: unset !important;
+			overflow: scroll !important;
 			background-color: #f3f3f3 !important;
 		}
 
 		.ui_accordion_header {
 			background-color: #f3f3f3 !important;
+
+			@media (max-width: 768px) {
+				padding: 12px 0;
+			}
 		}
 
 		.ui_accordion_title {
@@ -87,4 +91,13 @@
 			font-weight: 600;
 		}
 	}
+}
+
+.info_text {
+	display: flex;
+	align-items: center;
+	margin-left: 12px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #ee3425;
 }

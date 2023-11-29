@@ -11,10 +11,10 @@ import { startCase } from '@cogoport/utils';
 import { currencyOptions } from '../configurations/helpers/constants';
 
 const COMMODITY_MAPPINGS = {
-	freight     : FREIGHT_CONTAINER_COMMODITY_MAPPINGS,
-	lcl_freight : LCL_FRIEGHT_COMMODITIES,
-	fcl_customs : FCL_CUSTOMS_CONTAINER_COMMODITY_MAPPING,
-	air_local   : AIR_LOCAL_COMMODITIES,
+	freight           : FREIGHT_CONTAINER_COMMODITY_MAPPINGS,
+	lcl_freight       : LCL_FRIEGHT_COMMODITIES,
+	fcl_customs       : FCL_CUSTOMS_CONTAINER_COMMODITY_MAPPING,
+	air_freight_local : AIR_LOCAL_COMMODITIES,
 };
 
 const TRADE_TYPES = ['import', 'export'];

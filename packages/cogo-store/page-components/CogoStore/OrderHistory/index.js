@@ -59,7 +59,7 @@ function OrderHistory() {
 
 	return (
 		<div className={styles.order_history_page}>
-			<Header />
+			<Header productData={productData} />
 			<div className={styles.order_details_container}>
 				<div className={styles.order_details_header}>
 					<IcMClock />

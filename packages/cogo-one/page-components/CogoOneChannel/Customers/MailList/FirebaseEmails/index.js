@@ -28,6 +28,7 @@ function FirebaseEmails(messageProps) {
 		workPrefernceLoading = false,
 		mailsToBeShown = [],
 		throttledGetCount = () => {},
+		isMobile = false,
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
@@ -163,6 +164,7 @@ function FirebaseEmails(messageProps) {
 				setActiveAttachmentData={setActiveAttachmentData}
 				urlType="urlBased"
 				handleDownload={getDownloadFiles}
+				isMobile={isMobile}
 			/>
 		</div>
 	);

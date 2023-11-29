@@ -185,13 +185,13 @@ function ServicesDetails({
 				)}
 			</div>
 
-			{source === 'rate_request'
+			{source === 'rate_feedback'
 			&& (
 				<div>
 					<Popover
 						theme="light"
 						render={<ViewFiles urlList={feedbackData?.list?.[0]?.attachment_file_urls || []} />}
-						interactive
+						interactivexw
 						maxWidth="none"
 						animation="shift-away"
 						placement="bottom-end"

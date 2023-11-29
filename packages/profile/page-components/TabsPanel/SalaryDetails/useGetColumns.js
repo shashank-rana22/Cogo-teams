@@ -2,38 +2,38 @@ import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-const useGetColumns = () => (
+const useGetColumns = (setTaxShow) => (
 	[
 		{
 			Header   : 'Sl. NO',
-			accessor : (item) => (<div className={styles.table_item}>{item.slno}</div>),
+			accessor : () => (<div className={styles.table_item}>0</div>),
 			id       : 'slno',
 		},
 		{
 			Header   : 'CTC EFFECTIVE FROM',
-			accessor : (item) => (<div className={styles.table_item}>{item.ctc_effective_from}</div>),
+			accessor : (item) => (<div className={styles.table_item}>{item?.ctc_effective}</div>),
 			id       : 'ctc_effective_from',
 		},
 		{
 			Header   : 'CTC EFFECTIVE TO',
-			accessor : (item) => (<div className={styles.table_item}>{item.ctc_effective_to}</div>),
+			accessor : (item) => (<div className={styles.table_item}>{item?.ctc_effective_to}</div>),
 			id       : 'ctc_effective_to',
 		},
 		{
 			Header   : 'MONTHLY GROSS',
-			accessor : (item) => (<div className={styles.table_item}>{item.monthly_gross}</div>),
+			accessor : (item) => (<div className={styles.table_item}>{`₹${item?.monthly_gross}`}</div>),
 			id       : 'monthly_gross',
 		},
 		{
 			Header   : 'MONTHLY CTC',
-			accessor : (item) => (<div className={styles.table_item}>{item.monthly_ctc}</div>),
+			accessor : (item) => (<div className={styles.table_item}>{`₹${item?.monthly_ctc}`}</div>),
 			id       : 'monthly_ctc',
 		},
 		{
 			Header   : 'ACTION',
-			accessor : (item) => (
+			accessor : () => (
 				<div className={styles.table_item}>
-					<Button size="md" themeType="accent">{item.action}</Button>
+					<Button size="md" themeType="secondary" onClick={() => setTaxShow(true)}>View</Button>
 				</div>
 			),
 			id: 'action',

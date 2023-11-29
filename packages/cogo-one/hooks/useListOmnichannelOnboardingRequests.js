@@ -6,17 +6,42 @@ import { useCallback, useEffect } from 'react';
 const DEFAULT_PAGE_LIMIT = 6;
 const LIST_PAGE_LIMIT = 10;
 
-const getParams = ({ agentId = '', showHistory = false, page = 1, initialViewType = '' }) => ({
+const getParams = ({
+	agentId = '', showHistory = false, page = 1, initialViewType = '',
+	assignTo = '', requestStatus = '', escalationCycle = '', requestType = '',
+	end = null, requestCompleted = '', start = null, taskId = '',
+}) => ({
 	page_limit : !showHistory ? DEFAULT_PAGE_LIMIT : LIST_PAGE_LIMIT,
 	filters    : {
-		agent_id       : initialViewType !== 'cogoone_admin' ? agentId : undefined,
-		status         : !showHistory ? 'active' : undefined,
-		request_status : !showHistory ? 'pending' : undefined,
+		agent_id                : initialViewType !== 'cogoone_admin' ? agentId : assignTo || undefined,
+		status                  : !showHistory ? 'active' : undefined,
+		request_status          : !showHistory ? 'pending' : requestStatus || undefined,
+		request_type            : requestType || undefined,
+		escalation_cycle        : escalationCycle || undefined,
+		request_completed_by    : requestCompleted || undefined,
+		created_at_greater_than : start || undefined,
+		created_at_less_than    : end || undefined,
+		serial_id           				: taskId || undefined,
 	},
 	page,
+
 });
 
-const useListOmnichannelOnboardingRequests = ({ showHistory = false, initialViewType = '' }) => {
+const useListOmnichannelOnboardingRequests = ({
+	showHistory = false, initialViewType = '',
+	filterValues = {}, setFilterValues = () => {},
+}) => {
+	const {
+		requestType = '',
+		assignTo = '',
+		escalationCycle = '',
+		requestStatus = '',
+		start = null,
+		end = null,
+		requestCompleted = '',
+		taskId = '',
+	} = filterValues || {};
+
 	const { agentId = '', requestApi = false } = useSelector(({ profile }) => ({
 		agentId    : profile?.user?.id,
 		requestApi : profile?.refetchRequestApi,
@@ -30,10 +55,25 @@ const useListOmnichannelOnboardingRequests = ({ showHistory = false, initialView
 	}, { manual: true });
 
 	const onboardingRequest = useCallback(({ page = 1 }) => {
+		if (showHistory) return;
 		try {
 			trigger({
-				params: getParams({ agentId, showHistory, page, initialViewType }),
+				params: getParams({
+					agentId,
+					showHistory,
+					page,
+					initialViewType,
+					requestStatus,
+					requestCompleted,
+					requestType,
+					assignTo,
+					escalationCycle,
+					start,
+					end,
+					taskId,
+				}),
 			});
+			setFilterValues((prev) => ({ ...prev, show: false }));
 		} catch (error) {
 			console.error('error:', error);
 		} finally {
@@ -43,7 +83,8 @@ const useListOmnichannelOnboardingRequests = ({ showHistory = false, initialView
 				}),
 			);
 		}
-	}, [trigger, agentId, showHistory, dispatch, initialViewType]);
+	}, [trigger, agentId, showHistory, initialViewType, requestStatus, requestCompleted,
+		requestType, assignTo, escalationCycle, start, end, dispatch, setFilterValues, taskId]);
 
 	useEffect(() => {
 		onboardingRequest({ page: 1 });

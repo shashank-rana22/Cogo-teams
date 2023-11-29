@@ -9,9 +9,9 @@ const getPayload = ({
 	defaultTypeId = '',
 	is_critical = false,
 	category = '',
-	finalUrl = '',
-	id,
-	subCatId = null,
+	finalUrl = '', id_type = '', service_type = '',
+	id = '', serial_id = '', trade_type = '',
+	subCatId = null, service = '',
 }) => ({
 	UserID        : id || undefined,
 	PerformedByID : id || undefined,
@@ -23,6 +23,10 @@ const getPayload = ({
 		Category         : category || undefined,
 		RequestType      : 'feedback',
 		Attachment       : [finalUrl] || [],
+		SerialID         : serial_id || undefined,
+		TradeType        : trade_type || undefined,
+		Service          : service || service_type || undefined,
+		IDType           : id_type || undefined,
 	},
 	TicketCategoryID    : subCatId || undefined,
 	Type                : issue_type || undefined,
@@ -52,6 +56,11 @@ const useAddFeedback = ({
 			file_url,
 			category,
 			is_critical,
+			serial_id,
+			service,
+			trade_type,
+			id_type,
+			service_type,
 		} = val || {};
 
 		const additionalFields = Object.fromEntries(
@@ -72,6 +81,11 @@ const useAddFeedback = ({
 					category,
 					finalUrl,
 					subCatId,
+					serial_id,
+					service,
+					trade_type,
+					id_type,
+					service_type,
 				}),
 			});
 

@@ -13,6 +13,7 @@
     "roles_and_permission_select_role_functions_select_operations": "运营",
     "roles_and_permission_select_role_functions_select_finance": "财务",
     "roles_and_permission_select_role_functions_select_external": "外部",
+    "roles_and_permission_select_role_functions_select_public":"公共",
     "roles_and_permission_select_sub_function_placeholder": "选择子功能",
     "roles_and_permission_select_sales_customer_success": "客户成功",
     "roles_and_permission_select_sales_field_sales": "外勤销售",

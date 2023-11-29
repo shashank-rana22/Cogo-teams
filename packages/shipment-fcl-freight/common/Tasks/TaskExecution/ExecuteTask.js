@@ -1,5 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { ThreeDotLoader } from '@cogoport/ocean-modules';
+import ShipmentInsurance from '@cogoport/shipment-insurance';
 import { useContext } from 'react';
 
 import { CUSTOM_TASKS } from '../../../constants/custom-tasks';
@@ -14,7 +15,6 @@ import {
 	UploadSI,
 	MarkIgmShipmentConfirm,
 } from './CustomTasks';
-import CargoInsurance from './CustomTasks/CargoInsurance';
 import ConfirmFreightBooking from './CustomTasks/ConfirmFreightBooking';
 import ExecuteStep from './ExecuteStep';
 import getCustomTaskComponent from './getCustomTaskComponent';
@@ -144,7 +144,7 @@ function ExecuteTask({
 	}
 
 	if (task?.task === 'generate_cargo_insurance' && SERVICES_FOR_INSURANCE.includes(primary_service?.service_type)) {
-		return <CargoInsurance task={task} onCancel={onCancel} refetch={taskListRefetch} />;
+		return <ShipmentInsurance onCancel={onCancel} refetch={taskListRefetch} servicesList={servicesList} />;
 	}
 
 	if (task.task === 'mark_confirmed' && task.service_type === 'fcl_freight_service'

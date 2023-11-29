@@ -7,6 +7,12 @@
 	}
 }
 
+.info_button {
+	position: relative;
+	top: -258px;
+	right: -836px;
+}
+
 .tab_content > :first-child {
 	margin-right: 13px;
 }

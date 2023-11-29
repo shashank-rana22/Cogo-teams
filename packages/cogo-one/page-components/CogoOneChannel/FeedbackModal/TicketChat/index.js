@@ -3,8 +3,10 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
 
 import useCreateTicketActivity from '../../../../hooks/useCreateTicketActivity';
+import useGetListShipments from '../../../../hooks/useGetListShipments';
 import useGetTicketActivity from '../../../../hooks/useGetTicketActivity';
 import useGetTicketDetails from '../../../../hooks/useGetTicketDetails';
+import useListServiceTypeShipment from '../../../../hooks/useListServiceShipment';
 import useUpdateTicketActivity from '../../../../hooks/useUpdateTicketActivity';
 
 import ChatBody from './ChatBody';
@@ -36,7 +38,7 @@ const getChatBodyHeight = ({ doesTicketsExists, status, file, uploading }) => {
 
 function TicketChat({
 	modalData = {}, setModalData = () => {}, showReassign = false,
-	setShowReassign = () => {},
+	setShowReassign = () => {}, partnerId = '',
 }) {
 	const { ticketId = '' } = modalData || {};
 
@@ -68,7 +70,8 @@ function TicketChat({
 	});
 
 	const { Ticket: ticket = {}, IsCurrentReviewer: isCurrentReviewer = false } = ticketData || {};
-	const { Status: status = '' } = ticket || {};
+	const { Status: status = '', Data: data = {}, Category: category = '' } = ticket || {};
+	const { SerialID: serialId, Service: service, IDType: idType } = data || {};
 
 	const {
 		listData = {},
@@ -77,6 +80,14 @@ function TicketChat({
 		setListData = () => {},
 	} = useGetTicketActivity({
 		ticketId: ticketId || '',
+	});
+	const { shipmentData = {}, listLoading = false } = useGetListShipments({ ticketId, serialId, idType });
+	const { serviceLoading = false, serviceData = {} } = useListServiceTypeShipment({
+		idType,
+		serialId,
+		ticketId,
+		category,
+		service,
 	});
 
 	const isEmptyChat = isEmpty(listData?.items);
@@ -113,6 +124,8 @@ function TicketChat({
 	const doesTicketsExists = !isEmpty(ticketData);
 
 	const loading = chatLoading || createLoading;
+	const updateShipmentData = category?.toLowerCase() === 'rates' ? serviceData : shipmentData;
+	const updateShipmentLoading = category?.toLowerCase() === 'rates' ? serviceLoading : listLoading;
 
 	const handleSendComment = async () => {
 		if ((message || !isEmpty(file)) && !createLoading) {
@@ -198,7 +211,13 @@ function TicketChat({
 
 				{doesTicketsExists && (
 					<div className={styles.sub_modal_container}>
-						<TicketSummary {...ticketData} detailsLoading={detailsLoading} />
+						<TicketSummary
+							{...ticketData}
+							detailsLoading={detailsLoading}
+							updateShipmentData={updateShipmentData}
+							updateShipmentLoading={updateShipmentLoading}
+							partnerId={partnerId}
+						/>
 					</div>
 				)}
 

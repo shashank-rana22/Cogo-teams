@@ -1,6 +1,8 @@
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback, useMemo, useState } from 'react';
 
+import ScrollAnnouncement from '../../common/ScrollAnouncement';
 import SCREEN_CONSTANTS from '../../constants/screen-constants';
 import { getTodayStartDate } from '../../utils/start-date-functions';
 
@@ -10,6 +12,7 @@ import PublicLeaderBoardContext from './context/PublicLeaderBoardContext';
 import useCountDown from './hooks/useCountDown';
 import useReloadCounter from './hooks/useReloadCounter';
 import styles from './styles.module.css';
+import useGetQuests from './useGetQuests';
 
 const { OVERALL, COMPARISION } = SCREEN_CONSTANTS;
 
@@ -22,6 +25,7 @@ function PublicDashboard() {
 	const [nextReloadAt, setNextReloadAt] = useState(100);
 	const [duration, setDuration] = useState('today');
 	const [officeLocation, setOfficeLocation] = useState(location);
+	const [quest, setQuest] = useState({});
 
 	const [dateRange, setDateRange] = useState({
 		startDate : getTodayStartDate(),
@@ -41,6 +45,8 @@ function PublicDashboard() {
 	const { countdown } = useCountDown({ updatedAt });
 
 	const { reloadCounter } = useReloadCounter({ seconds: nextReloadAt, functionToCall: switchScreen });
+
+	const { list, loading: questLoading } = useGetQuests({ setQuest });
 
 	const contextValues = useMemo(() => ({
 		countdown,
@@ -67,6 +73,8 @@ function PublicDashboard() {
 					setOfficeLocation={setOfficeLocation}
 				/>
 
+				<ScrollAnnouncement style={{ margin: '0 16px' }} loading={questLoading} list={list} />
+
 				<Body
 					screen={screen}
 					view={view}
@@ -77,6 +85,10 @@ function PublicDashboard() {
 					duration={duration}
 					setDuration={setDuration}
 					setNextReloadAt={setNextReloadAt}
+					quest={quest}
+					setQuest={setQuest}
+					officeLocation={officeLocation}
+					isQuestPresent={!isEmpty(list)}
 				/>
 			</div>
 		</PublicLeaderBoardContext.Provider>

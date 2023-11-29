@@ -2,32 +2,22 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
+import { PARAM_MAPPING } from '../payload/jobs_and_stats_paramsMapping';
+
 const API_NAME = {
-	fcl_freight : 'list_fcl_freight_rate_jobs',
-	lcl_freight : 'list_lcl_freight_rate_jobs',
-	lcl_customs : 'list_lcl_customs_rate_jobs',
-	air_customs : 'list_air_customs_rate_jobs',
-	trailer     : 'list_trailer_freight_rate_jobs',
-	ltl_freight : 'list_ltl_freight_rate_jobs',
-	air_freight : 'list_air_freight_rate_jobs',
-	haulage     : 'list_haulage_freight_rate_jobs',
-	fcl_customs : 'list_fcl_customs_rate_jobs',
-	ftl_freight : 'list_ftl_freight_rate_jobs',
-	fcl_cfs     : 'list_fcl_cfs_rate_jobs',
-};
-
-const FCL_PARAMS_MAPPING = {
-	origin_location      : 'origin_port_id',
-	destination_location : 'destination_port_id',
-	operater_type        : 'shipping_line_id',
-
-};
-
-const AIR_PARAMS_MAPPING = {
-	origin_location      : 'origin_airport_id',
-	destination_location : 'destination_airport_id',
-	operater_type        : 'airline_id',
-
+	fcl_freight       : 'list_fcl_freight_rate_jobs',
+	lcl_freight       : 'list_lcl_freight_rate_jobs',
+	lcl_customs       : 'list_lcl_customs_rate_jobs',
+	air_customs       : 'list_air_customs_rate_jobs',
+	trailer           : 'list_trailer_freight_rate_jobs',
+	ltl_freight       : 'list_ltl_freight_rate_jobs',
+	air_freight       : 'list_air_freight_rate_jobs',
+	haulage           : 'list_haulage_freight_rate_jobs',
+	fcl_customs       : 'list_fcl_customs_rate_jobs',
+	ftl_freight       : 'list_ftl_freight_rate_jobs',
+	fcl_cfs           : 'list_fcl_cfs_rate_jobs',
+	fcl_freight_local : 'list_fcl_freight_rate_local_jobs',
+	air_freight_local : 'list_air_freight_rate_local_jobs',
 };
 
 const DEFAULT_PAGE = 1;
@@ -53,6 +43,8 @@ const useGetListCoverage = ({ userService }) => {
 		cogo_entity_id            : '',
 		shipment_id               : '',
 		trade_type                : '',
+		start_date                : '',
+		end_date                  : '',
 	});
 	const endPoint = API_NAME[filter?.service || 'fcl_freight'];
 
@@ -61,14 +53,12 @@ const useGetListCoverage = ({ userService }) => {
 		method : 'GET',
 	}, { manual: true });
 
-	const getListCoverage = useCallback(async (sid) => {
+	const getListCoverage = useCallback(async (serial_id, source_serial_id) => {
 		const { assign_to_id, releventToMeValue, daily_stats, start_date, end_date, ...restFilters } = filter;
 
 		const FINAL_FILTERS = {};
 
-		const paramsMapping = ['air_freight', 'air_customs']?.includes(filter?.service)
-			? AIR_PARAMS_MAPPING : FCL_PARAMS_MAPPING;
-
+		const paramsMapping = PARAM_MAPPING[filter?.service];
 		Object.keys(restFilters).forEach((ele) => {
 			if (restFilters[ele]) {
 				if (ele in paramsMapping) {
@@ -82,10 +72,6 @@ const useGetListCoverage = ({ userService }) => {
 		const isTodayDateRequired = filter?.status === 'completed';
 
 		const DATE_PARAMS = {};
-
-		const idToUse = source === 'live_booking' ? 'shipment_serial_id' : 'serial_id';
-
-		const idValue = sid ? parseInt(sid, 10) : undefined;
 
 		if (isTodayDateRequired) {
 			DATE_PARAMS.start_date = new Date();
@@ -101,16 +87,16 @@ const useGetListCoverage = ({ userService }) => {
 			if (filter?.is_flash_booking_reverted) {
 				is_flash_booking_reverted = filter?.is_flash_booking_reverted === 'reverted';
 			}
-
 			await trigger({
 				params: {
 					filters: {
 						...FINAL_FILTERS,
-						status         : filter?.status === 'completed' ? ['completed', 'aborted'] : filter?.status,
-						[idToUse]      : idValue || undefined,
-						source         : source || undefined,
-						user_id        : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
-						cogo_entity_id : filter?.cogo_entity_id === 'cogo_entity_id'
+						status           : filter?.status === 'completed' ? ['completed', 'aborted'] : filter?.status,
+						source_serial_id : source_serial_id || undefined,
+						serial_id        : serial_id || undefined,
+						source           : source || undefined,
+						user_id          : releventToMeValue ? user_id : FINAL_FILTERS?.user_id,
+						cogo_entity_id   : filter?.cogo_entity_id === 'cogo_entity_id'
 							? user_data?.partner?.id : undefined,
 						is_flash_booking_reverted,
 						...DATE_PARAMS,

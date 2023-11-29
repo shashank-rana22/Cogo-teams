@@ -51,6 +51,7 @@ function MarkAsClosed({ data = {}, loading = false }) {
 							return (
 								<div
 									role="presentation"
+									key={value}
 									className={cl`${styles.pills} ${(selectPill === value) ? styles.active_pill : ''}`}
 									onClick={() => handleSelect(value)}
 								>

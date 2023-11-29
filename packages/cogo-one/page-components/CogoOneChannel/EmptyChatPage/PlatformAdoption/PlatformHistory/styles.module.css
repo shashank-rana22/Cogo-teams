@@ -10,9 +10,15 @@
 .header_section {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	width: 100%;
 	padding: 16px 16px 10px;
 	margin-bottom: 18px;
+}
+
+.home_section {
+	display: flex;
+	align-items: center;
 }
 
 .back {
@@ -30,6 +36,13 @@
 .side_arrow {
 	width: 20px;
 	height: 20px;
+	margin: 0 8px;
+	fill: #4f4f4f;
+}
+
+.refresh {
+	width: 14px;
+	height: 14px;
 	margin: 0 8px;
 	fill: #4f4f4f;
 }

@@ -1,4 +1,4 @@
-import { Button, Popover } from '@cogoport/components';
+import { Button, Checkbox, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMOverflowDot } from '@cogoport/icons-react';
@@ -15,7 +15,7 @@ import ToolTipWrapper from './ToolTipWrapper';
 
 const STATUS = ['APPROVED', 'POSTING_FAILED'];
 
-function ColumnCard({ item, refetch }) {
+function ColumnCard({ item = {}, refetch = () => {}, selectedJV = [], setSelectedJV = () => {} }) {
 	const [showDetails, setShowDetails] = useState(false);
 
 	const [showConfirm, setShowConfirm] = useState(false);
@@ -50,9 +50,29 @@ function ColumnCard({ item, refetch }) {
 		</div>
 	);
 
+	const onSelect = () => {
+		if (selectedJV.includes(item?.jvNum)) {
+			const updatedIds = selectedJV.filter((jvNum) => jvNum !== item.jvNum);
+			setSelectedJV(updatedIds);
+		} else {
+			setSelectedJV((pv) => [
+				...pv,
+				item?.jvNum,
+			]);
+		}
+	};
+
 	return (
 		<div className={styles.column}>
 			<div className={styles.flex}>
+				<div className={styles.checkbox}>
+					{(item?.status !== 'POSTED') ? (
+						<Checkbox
+							checked={selectedJV.includes(item?.jvNum)}
+							onChange={onSelect}
+						/>
+					) : null}
+				</div>
 				<div className={styles.jvnumb}><ToolTipWrapper text={item?.jvNum} maxlength={16} /></div>
 				<div className={styles.jvtype}>{item?.category || ''}</div>
 				<div className={styles.accdate}>

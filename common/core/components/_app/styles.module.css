@@ -1,0 +1,8 @@
+.body_container {
+	padding: 24px 20px;
+	margin: 0;
+
+	@media (max-width: 576px) {
+		padding: 24px 10px;
+	}
+}

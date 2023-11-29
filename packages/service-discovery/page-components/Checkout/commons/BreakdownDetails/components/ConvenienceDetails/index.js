@@ -1,10 +1,14 @@
+/* eslint-disable max-lines-per-function */
 import { Input, Select, Accordion, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
-import currencies from '../../../../helpers/currencies';
+import getCurrencyOptions from '../../../../../../helpers/getCurrencyOptions';
+import useUpdateConvenienceFeeBillingService from '../../../../hooks/useUpdateConvenienceFeeBillingService';
 import Promocodes from '../../../Promocodes';
 import Spinner from '../../../Spinner';
+import StyledSelect from '../../../StyledSelect';
 
 import ExchangeRate from './ExchangeRate';
 import ServiceChargesTitle from './ServiceChargesTitle';
@@ -25,12 +29,22 @@ function ConvenienceDetails({
 	checkout_id = '',
 	otherCharges = [],
 	showTaxes = true,
+	handlingFeeDetails = {},
+	setHandlingFeeDetails = () => {},
 }) {
 	const { convenience_rate = {} } = convenienceDetails || {};
+
+	const convenience_fee_billing_service =	rate?.booking_charges?.convenience_rate?.line_items?.[
+		GLOBAL_CONSTANTS.zeroth_index]?.convenience_fee_billing_service;
 
 	const { unit = '', currency = '', price = '' } = convenience_rate;
 
 	const { promotions = {} } = rate;
+
+	const { handling_fees = {}, is_available = false } = handlingFeeDetails;
+
+	const billingServicesOptions = detail?.convenience_rate_configurations
+		?.convenience_rate_billing_services || [];
 
 	const {
 		onChangeCurrency = () => {},
@@ -47,9 +61,21 @@ function ConvenienceDetails({
 		total,
 		convenienceRateOptions,
 		rate,
-		setConvenienceDetails,
 		detail,
 	});
+
+	const { handleUpdateBillingService, loading: billedWithLoading = false } = useUpdateConvenienceFeeBillingService({
+		convenienceDetails,
+		refetch : getCheckout,
+		id      : checkout_id,
+	});
+
+	const ALLOWED_CURRENCY = GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
+		.common.services.convenience_fee_checkout.allowed_currency;
+
+	const CURRENCY_OPTIONS = getCurrencyOptions({ ALLOWED_CURRENCY });
+
+	const finalOptions = billingServicesOptions.map((item) => ({ label: startCase(item), value: item }));
 
 	return (
 		<Accordion
@@ -73,6 +99,7 @@ function ConvenienceDetails({
 						checkout_id={checkout_id}
 						refetch={getCheckout}
 						promotions={promotions.promocodes}
+						source={detail?.source}
 					/>
 
 					<ExchangeRate
@@ -90,7 +117,7 @@ function ConvenienceDetails({
 								Sub Total
 								{' '}
 								<span style={{ fontSize: '12px' }}>
-									(excl service charges and taxes)
+									(excl service charges, taxes and discounts)
 								</span>
 							</div>
 							<div className={styles.amount}>{subTotalDisplay}</div>
@@ -102,7 +129,7 @@ function ConvenienceDetails({
 							name = '',
 							code = '',
 							total_price_discounted = 0,
-							currency:otherChargesCurrency = '',
+							currency: otherChargesCurrency = '',
 						} = item;
 
 						const chargesDisplay = formatAmount({
@@ -126,10 +153,32 @@ function ConvenienceDetails({
 					})}
 
 					<div className={styles.item_container}>
-						<div className={styles.convenience_container}>
-							<div className={styles.text}>Convenience Fee</div>
+						<div className={cl`${styles.convenience_container} ${styles.convenience}`}>
+							<div className={styles.text}>
+								Convenience Fee
 
-							{loading ? <Spinner width="24px" height="24px" /> : null}
+								{!isEmpty(billingServicesOptions) && (
+									<div className={styles.bill_with_flex}>
+										<div className={styles.content}>Bill With: </div>
+
+										{source === 'contract' ? (
+											<div className={styles.styled_text}>
+												{startCase(convenience_fee_billing_service)}
+											</div>
+										) : (
+											<StyledSelect
+												defaultValue={convenience_fee_billing_service}
+												onChange={handleUpdateBillingService}
+												options={finalOptions}
+												size="xsm"
+											/>
+										)}
+									</div>
+								)}
+
+							</div>
+
+							{loading || billedWithLoading ? <Spinner width="24px" height="24px" /> : null}
 
 							<div className={styles.select_container}>
 								<Select
@@ -139,12 +188,13 @@ function ConvenienceDetails({
 										value : option.unit,
 									}))}
 									value={unit}
-									disabled={!shouldEditConvenienceFee || loading}
+									disabled={!shouldEditConvenienceFee || loading || billedWithLoading}
 									style={{ width: '180px' }}
 									onChange={(val) => {
 										if (val) {
 											setConvenienceDetails({
-												convenience_rate: convenienceRateMapping[startCase(val)],
+												convenience_rate:
+													convenienceRateMapping[startCase(val)],
 											});
 										}
 									}}
@@ -152,23 +202,84 @@ function ConvenienceDetails({
 
 								<Select
 									size="sm"
-									options={currencies}
+									options={CURRENCY_OPTIONS}
 									value={currency}
-									disabled={!shouldEditConvenienceFee || loading}
+									disabled={!shouldEditConvenienceFee || loading || billedWithLoading}
 									style={{ marginLeft: '12px' }}
-									onChange={onChangeCurrency}
+									onChange={(val) => onChangeCurrency(
+										val,
+										price,
+										currency,
+										setConvenienceDetails,
+										'convenience_rate',
+									)}
 								/>
 
 								<Input
 									value={price}
 									size="sm"
-									onChange={(val) => onChange({ value: val, itemKey: 'price' })}
+									onChange={(val) => onChange({
+										value    : val,
+										itemKey  : 'price',
+										stateFun : setConvenienceDetails,
+										stateKey : 'convenience_rate',
+									})}
+									type="number"
 									style={{ marginLeft: '12px' }}
-									disabled={!shouldEditConvenienceFee || loading}
+									disabled={!shouldEditConvenienceFee || loading || billedWithLoading}
 								/>
 							</div>
 						</div>
 					</div>
+
+					{is_available ? (
+						<div className={styles.item_container}>
+							<div className={styles.convenience_container}>
+								<div className={styles.text}>Handling Fees</div>
+
+								{loading ? <Spinner width="24px" height="24px" /> : null}
+
+								<div className={styles.select_container}>
+									<Select
+										size="sm"
+										options={[{ value: handling_fees.unit, label: startCase(handling_fees.unit) }]}
+										value={handling_fees.unit}
+										style={{ width: '180px' }}
+										disabled={!shouldEditConvenienceFee || loading}
+									/>
+
+									<Select
+										size="sm"
+										options={CURRENCY_OPTIONS}
+										value={handling_fees?.currency}
+										disabled={!shouldEditConvenienceFee || loading}
+										style={{ marginLeft: '12px' }}
+										onChange={(val) => onChangeCurrency(
+											val,
+											handling_fees?.price,
+											handling_fees?.currency,
+											setHandlingFeeDetails,
+											'handling_fees',
+										)}
+									/>
+
+									<Input
+										value={handling_fees?.price}
+										size="sm"
+										type="number"
+										onChange={(val) => onChange({
+											value    : val,
+											itemKey  : 'price',
+											stateFun : setHandlingFeeDetails,
+											stateKey : 'handling_fees',
+										})}
+										style={{ marginLeft: '12px' }}
+										disabled={!shouldEditConvenienceFee || loading}
+									/>
+								</div>
+							</div>
+						</div>
+					) : null}
 
 					{discount ? (
 						<div className={styles.item_container}>

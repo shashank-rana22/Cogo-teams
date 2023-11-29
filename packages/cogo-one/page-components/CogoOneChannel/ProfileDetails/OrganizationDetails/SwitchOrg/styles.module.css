@@ -24,6 +24,14 @@
 			padding: 0 !important;
 		}
 	}
+
+	@media (max-width: 576px) {
+		:global {
+			.ui_button_container {
+				font-size: 8px !important;
+			}
+		}
+	}
 }
 
 .title {

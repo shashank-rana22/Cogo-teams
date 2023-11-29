@@ -8,6 +8,16 @@
 	display: flex;
 }
 
+.checkbox {
+	flex: 0.1;
+
+	:global {
+		.ui_checkbox_container {
+			padding: 0;
+		}
+	}
+}
+
 .jvnumb {
 	flex: 1.6;
 	width: calc(1.6*(100 / 12));

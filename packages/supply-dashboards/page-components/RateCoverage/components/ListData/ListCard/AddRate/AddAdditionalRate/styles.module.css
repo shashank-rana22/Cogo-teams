@@ -34,7 +34,6 @@
 	align-items: center;
 	padding: 12px 24px;
 	font-size: 13;
-	font-weight: 400;
 	font-weight: 500;
 	line-height: 150%;
 	color: #000;
@@ -47,4 +46,23 @@
 		font-weight: 400;
 		color: #ee3425;
 	}
+}
+
+.delete_button {
+	display: flex;
+	justify-content: center;
+}
+
+.modal_body {
+	text-align: center;
+}
+
+.font_style {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.icon {
+	margin-top: 10px;
+	cursor: pointer;
 }

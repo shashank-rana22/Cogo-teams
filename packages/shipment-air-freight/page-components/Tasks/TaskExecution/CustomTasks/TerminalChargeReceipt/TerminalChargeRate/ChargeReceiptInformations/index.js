@@ -1,15 +1,48 @@
 import Layout from '@cogoport/air-modules/components/Layout';
+import { Button } from '@cogoport/components';
 import { useEffect } from 'react';
 
+import useCreateShipmentAirFreightConsolidatedInvoice
+	from '../../../../../../../hooks/useCreateShipmentAirFreightConsolidatedInvoice';
+
 import controls from './controls';
+import styles from './styles.module.css';
 
 function ChargeReceiptInformations({
 	index = 0,
+	type = 'terminal',
 	control = {},
 	errors = {},
 	setValue = () => {},
 	csr_data = {},
+	handleSubmit = () => {},
+	mainServicesData = {},
+	sheetData = {},
+	entityData = {},
+	collectionPartyData = {},
+	setTerminalChargeState = () => {},
+	setInvoiceData = () => {},
+	setTcValues = () => {},
 }) {
+	const {
+		loading: consolidatedInvoiceLoading,
+		createShipmentAirFreightConsolidatedInvoice,
+	} = useCreateShipmentAirFreightConsolidatedInvoice({
+		type,
+		index,
+		mainServicesData,
+		sheetData,
+		entityData,
+		collectionPartyData,
+		setTerminalChargeState,
+		setInvoiceData,
+	});
+
+	const handleUpload = (values) => {
+		setTcValues(values);
+		createShipmentAirFreightConsolidatedInvoice(values);
+	};
+
 	useEffect(() => {
 		const { ocr_data = {} } = csr_data || {};
 		const { amount = 0, tax = 0, total_amount = 0, invoice_number = 0 } = ocr_data || {};
@@ -20,11 +53,24 @@ function ChargeReceiptInformations({
 	}, [csr_data, index, setValue]);
 
 	return (
-		<Layout
-			fields={controls({ index })}
-			control={control}
-			errors={errors}
-		/>
+		<div>
+			<Layout
+				fields={controls({ index })}
+				control={control}
+				errors={errors}
+			/>
+			<div className={styles.button_container}>
+				<Button
+					size="md"
+					themeType="accent"
+					onClick={handleSubmit(handleUpload)}
+					disabled={consolidatedInvoiceLoading}
+				>
+					Initiate Invoice
+
+				</Button>
+			</div>
+		</div>
 	);
 }
 export default ChargeReceiptInformations;

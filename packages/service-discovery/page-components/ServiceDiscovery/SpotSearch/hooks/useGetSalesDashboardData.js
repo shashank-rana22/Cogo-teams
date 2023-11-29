@@ -18,7 +18,7 @@ const getKeyName = ({ type, serviceType }) => {
 		saved_for_later : { primary_service: serviceType || undefined },
 	};
 
-	return mapping[type] || null;
+	return mapping[type] || {};
 };
 
 const useGetSalesDashboardData = ({
@@ -77,12 +77,11 @@ const useGetSalesDashboardData = ({
 			page_limit,
 			page,
 		},
-		api,
-		user_id,
 		user_profile,
-	), [activeStat?.filter, api, bucketParams, destination_location_id, extraParams,
-		importer_exporter_id, origin_location_id, page, page_limit, rest.defaultFilters,
-		rest.type, restFilters, serviceType, user_id, user_profile]);
+		user_id,
+	), [activeStat?.filter, bucketParams, destination_location_id,
+		extraParams, importer_exporter_id, origin_location_id, page, user_id,
+		page_limit, rest.defaultFilters, rest.type, restFilters, serviceType, user_profile]);
 
 	const getList = async () => {
 		try {

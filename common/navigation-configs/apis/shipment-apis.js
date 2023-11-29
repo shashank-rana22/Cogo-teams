@@ -1870,6 +1870,21 @@ const apis = [
 		api         : 'get_common_job_get_remaining_days_to_job_closure',
 		access_type : 'private',
 	},
+	{
+		api          : 'create_shipment_plan',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_air_csr_sheet',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_air_freight_consolidated_invoices',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

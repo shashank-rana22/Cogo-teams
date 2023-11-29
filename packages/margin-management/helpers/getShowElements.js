@@ -1,5 +1,3 @@
-import { isEmpty } from '@cogoport/utils';
-
 import conditions from '../utils/condition-constants';
 
 const notMandatoryControls = [
@@ -10,8 +8,8 @@ const notMandatoryControls = [
 	'organization_id',
 	'organization_type',
 	'service',
-
 ];
+
 const AGENT_ARRAY = ['sales_agent_view', 'supply_agent_view', 'sales_team_members_view', 'supply_team_members_view'];
 const TWO = 2;
 
@@ -34,13 +32,6 @@ const getShowElements = ({
 	Object.keys(formValues).forEach((key) => { (NEW_VALUES[key] = (formValues?.[key] || item?.[key])); });
 	notMandatoryControls.forEach((key) => { (SHOW_ELEMENTS[key] = true); });
 
-	SHOW_ELEMENTS.trade_type = (!isEmpty(NEW_VALUES?.service));
-	SHOW_ELEMENTS.origin_location_id = (!isEmpty(NEW_VALUES?.trade_type));
-	SHOW_ELEMENTS.destination_location_id = (!isEmpty(NEW_VALUES?.origin_location_id));
-	SHOW_ELEMENTS.shipping_line_id = (!isEmpty(NEW_VALUES?.destination_location_id));
-	SHOW_ELEMENTS.transport_mode = (!isEmpty(NEW_VALUES?.destination_location_id));
-	SHOW_ELEMENTS.container_size = (!isEmpty(NEW_VALUES?.shipping_line_id || NEW_VALUES?.location_id));
-	SHOW_ELEMENTS.container_type = (!isEmpty(NEW_VALUES?.container_size));
 	allPresentControls.forEach((control) => {
 		if (control?.name === 'addition_type') {
 			if (isConditionMatches(conditions?.ADD_CHANNEL_PARTNER_MARGIN)) {
@@ -68,16 +59,17 @@ const getShowElements = ({
 			}
 		}
 
-		if (
-			control?.name === 'shipping_line_id'
-			&& NEW_VALUES?.service === 'haulage_freight'
-		) {
-			if (NEW_VALUES?.haulage_type === 'carrier') {
-				SHOW_ELEMENTS.shipping_line_id = true;
-			} else {
-				SHOW_ELEMENTS.shipping_line_id = false;
-			}
-		}
+		// if (
+		// 	control?.name === 'shipping_line_id'
+		// 	&& NEW_VALUES?.service === 'haulage_freight'
+		// ) {
+		// 	if (NEW_VALUES?.haulage_type === 'carrier') {
+		// 		SHOW_ELEMENTS.shipping_line_id = true;
+		// 	} else {
+		// 		SHOW_ELEMENTS.shipping_line_id = false;
+		// 	}
+		// }
+
 		if (control.name === 'transport_mode') {
 			if (NEW_VALUES?.haulage_type) {
 				SHOW_ELEMENTS.transport_mode = true;
@@ -109,6 +101,29 @@ const getShowElements = ({
 			} else {
 				SHOW_ELEMENTS[control.name] = false;
 			}
+		}
+
+		if (control.name === 'margin_values' && formValues?.margin_values) {
+			SHOW_ELEMENTS[control.name] = formValues.margin_values.map((itemValue) => {
+				if (itemValue?.type === 'percentage') {
+					return {
+						code      : formValues.margin_applied_on !== 'service_wise',
+						type      : true,
+						value     : true,
+						currency  : true,
+						min_value : true,
+						max_value : true,
+					};
+				}
+				return {
+					code      : formValues.margin_applied_on !== 'service_wise',
+					type      : true,
+					value     : true,
+					currency  : true,
+					min_value : false,
+					max_value : false,
+				};
+			});
 		}
 	});
 

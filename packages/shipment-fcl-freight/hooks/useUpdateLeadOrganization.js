@@ -4,8 +4,6 @@ import { useRequest } from '@cogoport/request';
 
 import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
 
-const ONE = '1';
-
 const getFormattedPayload = ({ values = {}, leadsData = {} }) => {
 	const payload = {
 		account_type        : 'importer_exporter',
@@ -43,7 +41,7 @@ function useUpdateLeadOrganization({
 			if (res?.data?.organization_id) {
 				const updatePendingTaskPayload = {
 					id     : task?.id,
-					tags   : [ONE],
+					tags   : ['0'],
 					status : 'pending',
 					data   : {
 						shipment: {
@@ -61,7 +59,7 @@ function useUpdateLeadOrganization({
 
 				setConsigneeId(res?.data?.organization_id);
 
-				setStep(ONE);
+				setStep(0);
 			} else {
 				refetchList();
 			}

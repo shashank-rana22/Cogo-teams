@@ -146,3 +146,17 @@
 	justify-content: flex-end;
 	padding: 12px 26px;
 }
+
+.button_container {
+	position: relative;
+}
+
+.filter_dot {
+	position: absolute;
+	top: 3px;
+	left: 1px;
+	width: 7px;
+	height: 7px;
+	background-color: white;
+	border-radius: 50%;
+}

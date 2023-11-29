@@ -1,0 +1,128 @@
+.container {
+	margin-top: 24px;
+
+	@media (max-width: 768px) {
+		margin-top: 0;
+	}
+}
+
+.service_div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 8px;
+	margin-right: 65px;
+
+	@media (max-width: 768px) {
+		margin: 0 0 4px;
+	}
+}
+
+.service {
+	margin-right: 8px;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 28px;
+	color: #000;
+
+	@media (max-width: 768px) {
+		margin: 0;
+		font-size: 12px;
+		line-height: 20px;
+	}
+}
+
+.container_details {
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 28px;
+	color: #000;
+	background-color: #fffcfa;
+}
+
+.table_container {
+	border: none;
+
+	:global {
+		margin-bottom: 0 !important;
+		background-color: #ffff;
+
+		.ui_table_container {
+			border: none;
+		}
+
+		.ui_table_body_cell {
+			padding: 12px 8px;
+			font-size: 12px;
+			font-weight: 500;
+			text-align: left;
+		}
+
+		.ui_table_body_cell:first-child {
+			width: 35%;
+		}
+
+		.ui_table_body_cell:nth-child(2) {
+			width: 33%;
+		}
+
+		.ui_table_body_row {
+			position: relative;
+			background-color: #fbffff;
+			border: 1px solid #e8f6f6 !important;
+			border-radius: 6px;
+		}
+
+		.ui_table_body_row:hover {
+			background-color: #e8f6f6;
+		}
+
+		.ui_table_head_cell {
+			font-size: 12px;
+			font-weight: 600;
+			color: #333;
+			text-align: left;
+		}
+
+		.ui_pill_container {
+			font-size: 10px;
+			color: rgb(102 172 247);
+			background-color: #fff;
+			border: 1px solid rgb(102 172 247);
+			border-radius: 10px;
+		}
+	}
+}
+
+.total_price {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 8px;
+	margin-top: 24px;
+	margin-right: 60px;
+
+	@media (max-width: 768px) {
+		margin: 12px 0 0;
+	}
+}
+
+.column {
+	height: 100%;
+}
+
+.info_icon {
+	margin-left: 4px;
+	color: #ee3425;
+}
+
+.table {
+	margin-bottom: 24px;
+	overflow-x: scroll;
+}
+
+.service_info_pill {
+	@media (max-width: 768px) {
+		display: none;
+	}
+}

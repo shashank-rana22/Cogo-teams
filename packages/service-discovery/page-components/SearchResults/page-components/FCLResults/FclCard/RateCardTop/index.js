@@ -1,11 +1,10 @@
 import { Checkbox, Popover, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import InfoBannerContent from '../../../../../../common/InfoBannerContent';
-import ShareToUsers from '../../../../common/ShareToUsers';
-import LikeDislike from '../LikeDislike';
+import LikeDislike from '../../../../common/LikeDislike';
 
 import styles from './styles.module.css';
 
@@ -17,21 +16,6 @@ const RATE_SOURCE_MAPPING = {
 };
 
 const MAX_COMPARABLE_RATE_CARD_INDEX = 3;
-
-function ShareRate({ showShareModal, rateCardData, detail, setShowShareModal }) {
-	if (showShareModal) {
-		return (
-			<ShareToUsers
-				rate={rateCardData}
-				show={showShareModal}
-				onClose={() => setShowShareModal(false)}
-				source="spot_search"
-				org_id={detail?.importer_exporter_id}
-			/>
-		);
-	}
-	return null;
-}
 
 function RenderCheckbox({
 	isSelectedCard = false,
@@ -99,9 +83,10 @@ function RateCardTop({
 	setInfoBanner = () => {},
 	showGuide = false,
 	cogoAssuredRates = [],
+	isMobile = false,
+	refetchSearch = () => {},
 }) {
 	const { shipping_line = {}, id: card_id, source = '' } = rateCardData;
-	const [showShareModal, setShowShareModal] = useState(false);
 
 	const selectedCardIDs = Object.keys(comparisonRates);
 	const selectedCardValues = Object.values(comparisonRates);
@@ -158,7 +143,7 @@ function RateCardTop({
 						src={imageUrl || defaultShippingLineIcon}
 						alt={rateCardData?.shipping_line?.short_name || rateCardData?.airline?.short_name}
 						className={cl`${styles.shipping_line_logo} ${!imageUrl && styles.default_icon}`}
-						height={28}
+						height={20}
 					/>
 
 					{source !== 'cogo_assured_rate' ? (
@@ -175,16 +160,14 @@ function RateCardTop({
 				) : null}
 			</div>
 
-			<div style={{ display: 'flex', marginRight: 20, alignItems: 'center' }}>
-				<LikeDislike rateCardData={rateCardData} detail={detail} />
+			<div className={styles.right_section}>
+				<LikeDislike
+					rateCardData={rateCardData}
+					detail={detail}
+					isMobile={isMobile}
+					refetchSearch={refetchSearch}
+				/>
 			</div>
-
-			<ShareRate
-				showShareModal={showShareModal}
-				rateCardData={rateCardData}
-				detail={detail}
-				setShowShareModal={setShowShareModal}
-			/>
 		</div>
 	);
 }

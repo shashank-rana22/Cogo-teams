@@ -1,0 +1,38 @@
+.type_container {
+	position: absolute;
+	padding: 0 10px;
+	background: #f3fafa;
+	border-color: #e2e2e2;
+	border-style: solid;
+	border-right: 2px;
+	border-bottom: 2px;
+	border-radius: 10px 0;
+}
+
+.card_container {
+	padding: 30px 20px 10px;
+	border: 2px solid  #e2e2e2;
+	border-radius: 10px;
+}
+
+.loop_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.container {
+	padding-bottom: 20px;
+	margin-bottom: 10px;
+}
+
+.created_at_container {
+	position: absolute;
+	right: 20px;
+	padding: 0 10px;
+	background-color: #fffce6;
+	border-color: #e2e2e2;
+	border-style: solid;
+	border-bottom: 2px;
+	border-left: 2px;
+	border-radius: 0 10px;
+}

@@ -1,0 +1,62 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.title {
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.services_tiles {
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 8px;
+}
+
+.tile_container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: max-content;
+	padding: 8px 16px 8px 26px;
+	margin-right: 12px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	background-color: #fff;
+	border: 1px solid #f2f2f2;
+	border-radius: 8px;
+	transition: 0.5s;
+
+	&:hover {
+		transform: scale(1.04);
+	}
+
+	&.active {
+		background: #fde74d;
+
+		&.added {
+			background: #ddebc0;
+		}
+	}
+
+	&.added {
+		border: 1px solid #ddebc0;
+	}
+}
+
+.service_name {
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.price {
+	margin-top: 2px;
+	font-size: 11px;
+}
+
+.icon {
+	position: absolute;
+	top: 11px;
+	left: 8px;
+}

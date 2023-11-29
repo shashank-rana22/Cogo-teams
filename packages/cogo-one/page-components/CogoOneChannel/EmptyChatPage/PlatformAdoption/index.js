@@ -5,11 +5,14 @@ import { useState } from 'react';
 import useGetUnreadMailsCount from '../../../../hooks/useGetUnreadMailsCount';
 import useGetUnreadMessagesCount from '../../../../hooks/useGetUnreadMessagesCount';
 import useListOmnichannelOnboardingRequests from '../../../../hooks/useListOmnichannelOnboardingRequests';
+import useListOmnichannelOnboardingTimelines from '../../../../hooks/useListOmnichannelOnboardingTimelines';
 
 import FilterSection from './FilterSection';
 import PlatformHistory from './PlatformHistory';
 import PlatformList from './PlatformList';
 import styles from './styles.module.css';
+
+const MIN_COUNT = 0;
 
 function PlatformAdoption({
 	mailProps = {}, firestore = {}, viewType = '', userId = '',
@@ -26,6 +29,16 @@ function PlatformAdoption({
 		accountType        : '',
 	});
 	const [showHistory, setShowHistory] = useState(false);
+	const [filterValues, setFilterValues] = useState({
+		show             : false,
+		requestType      : '',
+		assignTo         : '',
+		escalationCycle  : '',
+		requestStatus    : '',
+		start            : null,
+		end              : null,
+		requestCompleted : '',
+	});
 
 	const { unReadChatsCount } = useGetUnreadMessagesCount({
 		firestore,
@@ -42,23 +55,51 @@ function PlatformAdoption({
 		userSharedMails,
 	});
 
+	const timeline_data = useListOmnichannelOnboardingTimelines(
+		{ showHistory, initialViewType, filterValues, setFilterValues },
+	);
+
+	const request_data = useListOmnichannelOnboardingRequests(
+		{ showHistory, initialViewType, filterValues, setFilterValues },
+	);
+
 	const {
-		loading = false, data = {},
+		loading = false,
+		data = {},
 		onboardingRequest = () => {},
-	} = useListOmnichannelOnboardingRequests({ showHistory, initialViewType });
+	} = showHistory
+		? timeline_data
+		: request_data;
 
 	const { list, ...rest } = data || {};
 	const { page, page_limit, total_count } = rest || {};
+
+	const handleViewHistory = () => {
+		setFilterValues({
+			show             : false,
+			requestType      : '',
+			assignTo         : '',
+			escalationCycle  : '',
+			requestStatus    : '',
+			start            : null,
+			end              : null,
+			requestCompleted : '',
+		});
+		setShowHistory((p) => !p);
+	};
 
 	return (
 		<div className={styles.container}>
 			{showHistory ? (
 				<PlatformHistory
-					setShowHistory={setShowHistory}
 					rest={rest}
 					list={list}
 					loading={loading}
 					onboardingRequest={onboardingRequest}
+					setFilterValues={setFilterValues}
+					filterValues={filterValues}
+					initialViewType={initialViewType}
+					handleViewHistory={handleViewHistory}
 				/>
 			) : (
 				<>
@@ -66,14 +107,14 @@ function PlatformAdoption({
 						<div className={styles.title}>
 							Task for the Day
 							{' '}
-							<span>{`(${total_count})`}</span>
+							<span>{`(${total_count || MIN_COUNT})`}</span>
 							{' '}
 							<IcMRefresh className={styles.refresh} onClick={() => onboardingRequest({ page: 1 })} />
 						</div>
 						<div
 							role="presentation"
 							className={styles.history_title}
-							onClick={() => setShowHistory((p) => !p)}
+							onClick={handleViewHistory}
 						>
 							<IcMPlansExpiring fill="#034afd" />
 							View History
@@ -83,6 +124,9 @@ function PlatformAdoption({
 						unReadChatsCount={unReadChatsCount}
 						unReadMailsCount={unReadMailsCount}
 						setActiveTab={setActiveTab}
+						setFilterValues={setFilterValues}
+						filterValues={filterValues}
+						initialViewType={initialViewType}
 					/>
 					<PlatformList
 						list={list}
@@ -92,6 +136,7 @@ function PlatformAdoption({
 						setVerifyAccount={setVerifyAccount}
 						verifyAccount={verifyAccount}
 						mailProps={mailProps}
+						initialViewType={initialViewType}
 					/>
 					{page >= 1 ? (
 						<div className={styles.pagination_info}>

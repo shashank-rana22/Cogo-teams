@@ -45,6 +45,31 @@ const performance_and_incentives = {
 			access_type  : 'private',
 			service_name : 'agent_scoring',
 		},
+		{
+			api          : 'get_agent_scoring_quests',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
+		{
+			api          : 'get_agent_scoring_quest',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
+		{
+			api          : 'post_agent_scoring_quest',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
+		{
+			api          : 'post_agent_scoring_quest_configuration',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
+		{
+			api          : 'post_agent_scoring_quest_attributes',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
 	],
 	performance_and_incentives_leaderboard: [
 		{
@@ -72,6 +97,11 @@ const performance_and_incentives = {
 			access_type  : 'private',
 			service_name : 'agent_scoring',
 		},
+		{
+			api          : 'get_agent_scoring_quests',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
 	],
 	performance_public_leaderboard: [
 		{
@@ -81,6 +111,16 @@ const performance_and_incentives = {
 		},
 		{
 			api          : 'get_agent_scoring_report_stats',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
+		{
+			api          : 'get_agent_scoring_quests',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
+		{
+			api          : 'get_agent_scoring_quest_winner',
 			access_type  : 'private',
 			service_name : 'agent_scoring',
 		},

@@ -4294,6 +4294,16 @@ const partner = {
 			service_name : 'air_customs_rate',
 		},
 		{
+			api          : 'get_fcl_freight_rate_local',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate_',
+		},
+		{
+			api          : 'get_air_freight_rate_local',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
 			api          : 'update_spot_negotiation_rate',
 			access_type  : 'private',
 			service_name : 'spot_negotiation',
@@ -4476,6 +4486,18 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'air_customs_rate',
 			feature      : 'rate_density',
+		},
+		{
+			api          : 'create_fcl_freight_rate_local',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'create_air_freight_rate_local',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+			feature      : 'disliked_rates',
 		},
 		{
 			api          : 'get_fcl_freight_rate_visibility',
@@ -4720,6 +4742,18 @@ const partner = {
 			feature      : 'disliked_rates',
 		},
 		{
+			api          : 'list_air_freight_rate_local_feedbacks',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'list_fcl_freight_rate_local_feedbacks',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
 			api          : 'get_rate_feedbacks_stats',
 			access_type  : 'private',
 			service_name : 'spot_search',
@@ -4803,9 +4837,39 @@ const partner = {
 			feature      : 'disliked_rates',
 		},
 		{
+			api          : 'delete_fcl_freight_rate_local_feedback',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'delete_air_freight_rate_local_feedback',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
 			api          : 'list_ltl_freight_rate_feedbacks',
 			access_type  : 'private',
 			service_name : 'ltl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'list_fcl_cfs_rate_feedbacks',
+			access_type  : 'private',
+			service_name : 'fcl_cfs_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'list_fcl_freight_rate_local_feedbacks',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'list_air_freight_rate_local_feedbacks',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
 			feature      : 'disliked_rates',
 		},
 		{
@@ -4819,9 +4883,22 @@ const partner = {
 			feature     : 'disliked_rates',
 		},
 		{
-			api         : 'delete_fcl_cfs_rate_feedback',
-			access_type : 'private',
-			feature     : 'disliked_rates',
+			api          : 'delete_fcl_cfs_rate_feedback',
+			access_type  : 'private',
+			service_name : 'fcl_cfs_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'delete_fcl_freight_rate_local_feedback',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'delete_air_freight_rate_local_feedback',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+			feature      : 'disliked_rates',
 		},
 		{
 			api          : 'get_expertise_locations_for_rate',
@@ -4897,6 +4974,12 @@ const partner = {
 		},
 		{
 			api          : 'create_rfq_supply_agent_preference',
+			access_type  : 'private',
+			service_name : 'rfq',
+			feature      : 'rfq',
+		},
+		{
+			api          : 'list_rfq_shipment_plans',
 			access_type  : 'private',
 			service_name : 'rfq',
 			feature      : 'rfq',
@@ -5025,6 +5108,16 @@ const partner = {
 			service_name : 'fcl_cfs_rate',
 		},
 		{
+			api          : 'delete_fcl_freight_rate_local_job',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'delete_air_freight_rate_local_job',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
 			api          : 'list_fcl_freight_rate_jobs',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
@@ -5085,6 +5178,16 @@ const partner = {
 			service_name : 'fcl_cfs_rate',
 		},
 		{
+			api          : 'list_fcl_freight_rate_local_jobs',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'list_air_freight_rate_local_jobs',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
 			api          : 'get_fcl_freight_rate_job_stats',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
@@ -5139,6 +5242,16 @@ const partner = {
 			api          : 'get_fcl_cfs_rate_job_stats',
 			access_type  : 'private',
 			service_name : 'fcl_cfs_rate',
+		},
+		{
+			api          : 'get_fcl_freight_rate_local_job_stats',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'get_air_freight_rate_local_job_stats',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
 		},
 		{
 			api          : 'get_shipment',
@@ -5365,6 +5478,21 @@ const partner = {
 		},
 		{
 			api          : 'get_service_wise_booking_insights',
+			access_type  : 'private',
+			service_name : 'margin',
+		},
+		{
+			api          : 'create_entity_margin',
+			access_type  : 'private',
+			service_name : 'margin',
+		},
+		{
+			api          : 'get_cogo_entity_margin',
+			access_type  : 'private',
+			service_name : 'margin',
+		},
+		{
+			api          : 'list_entity_margins',
 			access_type  : 'private',
 			service_name : 'margin',
 		},
@@ -8988,6 +9116,22 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api          : 'send_cc_outstanding_report',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'sage',
+
+		},
+		{
+			api          : 'sync_sage_ar_outstanding',
+			access_type  : 'private',
+			module       : 'outstanding',
+			feature      : 'outstanding',
+			service_name : 'sage',
+
+		},
+		{
 			api          : 'list_cogo_entities',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -9500,6 +9644,12 @@ const partner = {
 		},
 		{
 			api         : 'get_payments_outstanding_overall_customer_outstanding',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
+			api         : 'put_payments_outstanding_bulk_update_account_taggings',
 			access_type : 'private',
 			module      : 'outstanding',
 			feature     : 'outstanding',
@@ -10091,6 +10241,12 @@ const partner = {
 			api          : 'get_exchange_rate',
 			access_type  : 'private',
 			service_name : 'exchange_rate',
+		},
+		{
+			api         : 'post_payments_parent_jv_bulk_post_jv',
+			access_type : 'private',
+			module      : 'JournalVoucher',
+			feature     : 'JournalVoucher',
 		},
 	],
 	tracking: [
@@ -13246,6 +13402,11 @@ const partner = {
 	],
 	contracts: [
 		{
+			api          : 'get_contract_service_shipment_data',
+			access_type  : 'private',
+			service_name : 'contract',
+		},
+		{
 			api          : 'get_contract_projected_stats',
 			access_type  : 'private',
 			service_name : 'contract',
@@ -13397,6 +13558,29 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'assign_meeting_agent',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'trade_party',
+		},
+		{
+			api          : 'create_organization_trade_party',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'trade_party',
+		},
+		{
+			api          : 'create_organization_trade_party_poc',
+			access_type  : 'private',
+			service_name : 'organization',
+			feature      : 'trade_party',
+		},
+		{
 			api          : 'update_channel_partner_document',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -13444,6 +13628,11 @@ const partner = {
 		},
 		{
 			api          : 'list_omnichannel_onboarding_requests',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_omnichannel_onboarding_timelines',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
@@ -15259,6 +15448,38 @@ const partner = {
 		},
 		{
 			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+	],
+	cogo_one_sme_dashboard: [
+		{
+			api          : 'list_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'get_partner_user_rm_mapping',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'get_omnichannel_sme_dashboard',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'get_agent_scoring_reports',
+			access_type  : 'private',
+			service_name : 'agent_scoring',
+		},
+		{
+			api          : 'list_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'list_partner_addresses',
 			access_type  : 'private',
 			service_name : 'partner',
 		},

@@ -28,6 +28,7 @@ function OrganizationDetails({
 	viewType = '',
 	setActiveTab = () => {},
 	firestore = {},
+	isMobile = false,
 }) {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
@@ -208,6 +209,7 @@ function OrganizationDetails({
 				total_redeemable={total_redeemable}
 				promoLoading={promoLoading}
 				list={list}
+				isMobile={isMobile}
 			/>
 		</div>
 	);

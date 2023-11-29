@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Button, Toast } from '@cogoport/components';
+import { Tabs, TabPanel, Button, Toast, Breadcrumb } from '@cogoport/components';
 import { IcMLiveChat } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
@@ -19,11 +19,14 @@ const MANAGER = true;
 function AttendanceLeaveDashboard() {
 	const router = useRouter();
 
-	const [activeTab, setActiveTab] = useState('attendance');
 	const { query } = useSelector((state) => state.general);
+
+	const [activeTab, setActiveTab] = useState('attendance');
+
 	const [showInbox, setShowInbox] = useState(query?.showInbox || false);
 
 	const [coords, setCoords] = useState(null);
+
 	const handleShowInbox = () => {
 		setShowInbox(true);
 		router.push('/attendance-leave-management?showInbox=true');
@@ -44,8 +47,30 @@ function AttendanceLeaveDashboard() {
 
 	const { is_manager, is_policy_view_allowed } = data || {};
 
+	const handleTabs = (tab) => {
+		setActiveTab(tab);
+		router.push(`/attendance-leave-management?activeTab=${tab}`);
+	};
+
+	useEffect(() => {
+		setActiveTab(query.activeTab || 'attendance');
+	}, [query?.activeTab]);
+
 	return (
 		<div>
+			<Breadcrumb className={styles.bread}>
+				<Breadcrumb.Item label={(
+					<div
+						aria-hidden
+						onClick={() => router.push('/hrms')}
+						style={{ cursor: 'pointer' }}
+					>
+						HRMS
+					</div>
+				)}
+				/>
+				<Breadcrumb.Item label="Attendance & Leaves Management" />
+			</Breadcrumb>
 			<div className={styles.heading}>
 				<h1 className={styles.title}>
 					Attendance & Leaves
@@ -67,7 +92,7 @@ function AttendanceLeaveDashboard() {
 					<Tabs
 						activeTab={activeTab}
 						themeType="secondary"
-						onChange={setActiveTab}
+						onChange={handleTabs}
 					>
 						<TabPanel name="attendance" title="Attendance">
 							<div className={styles.tab_panel}>

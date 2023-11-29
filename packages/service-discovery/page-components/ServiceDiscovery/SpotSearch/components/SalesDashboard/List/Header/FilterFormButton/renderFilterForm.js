@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import getElementController from '../../../../../../../../configs/getElementController';
 
@@ -16,6 +17,7 @@ function FilterForm({
 	handleApply = () => {},
 	handleReset = () => {},
 	control = () => {},
+	showElements = {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -23,11 +25,11 @@ function FilterForm({
 				<div className={styles.heading}>Search</div>
 
 				<div className={styles.button_container}>
-					<Button size="sm" themeType="primary" style={{ marginRight: 12 }} onClick={handleReset}>
+					<Button size="sm" themeType="secondary" style={{ marginRight: 12 }} onClick={handleReset}>
 						Reset
 					</Button>
 
-					<Button size="sm" themeType="secondary" onClick={handleSubmit(handleApply)}>
+					<Button size="sm" themeType="primary" onClick={handleSubmit(handleApply)}>
 						Apply
 					</Button>
 				</div>
@@ -35,11 +37,18 @@ function FilterForm({
 
 			<div className={styles.form}>
 				{controls.map((controlItem, index) => {
-					const { label, type, name, span } = controlItem;
+					const { label, type, name, span, show } = controlItem;
 
 					const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENT_FACTOR - FLEX_OFFSET;
 
 					const Element = getElementController(type);
+
+					if (show === false
+						|| (!isEmpty(Object.keys(showElements || {}))
+							&& showElements?.[name] === false)
+					) {
+						return null;
+					}
 
 					return (
 						<div

@@ -19,6 +19,7 @@ function InactiveModal({
 	setOpenModal = () => {},
 	loading = false,
 	userId = '',
+	isMobile = false,
 }) {
 	const {
 		control = {},
@@ -66,7 +67,7 @@ function InactiveModal({
 			size="sm"
 			show
 			onClose={handleClose}
-			placement="top"
+			placement={isMobile ? 'bottom' : 'top'}
 			className={styles.styled_modal}
 		>
 			<Modal.Header title="Offline Status" />

@@ -24,6 +24,7 @@ function ServiceWiseDetails({
 	priceData = [],
 	setShowDetailPage = () => {},
 	revenueDeskDecisionsData = [],
+	isSpotLineBooking = false,
 }) {
 	const { services_with_preferences_set: servicesWithPreferenceSet = [] } = revenueDeskDecisionsData;
 	const GROUPED_SERVICES = {};
@@ -165,6 +166,7 @@ function ServiceWiseDetails({
 						othertext={othertext}
 						setOthertext={setOthertext}
 						supplierPayload={supplierPayload}
+						isSpotLineBooking={isSpotLineBooking}
 					/>
 				) : null}
 		</div>

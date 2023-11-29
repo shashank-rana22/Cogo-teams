@@ -1,0 +1,19 @@
+.container {
+	display: flex;
+	justify-content: center;
+	padding: 3px;
+	cursor: pointer;
+	background: #fef1df;
+	border-radius: 0 0 2px 2px;
+}
+
+.text {
+	font-size: 10px;
+	font-weight: 400;
+	color: #333;
+	text-align: center;
+
+	@media (max-width: 768px) {
+		font-size: 8px;
+	}
+}

@@ -5,11 +5,18 @@ const MIN_PRICE = 0;
 export const getlineItemControls = (
 	CHARGE_CODE_DATA,
 	unitValue,
+	addedLineItems = [],
 ) => {
-	const codeOptions = Object.keys(CHARGE_CODE_DATA).map((charges) => ({
-		label : `${charges}`,
-		value : `${charges}`,
-	}));
+	const codeOptions = Object.entries(CHARGE_CODE_DATA).reduce((acc, [charge, { code }]) => {
+		if (addedLineItems.includes(code)) {
+			return acc;
+		}
+
+		return [...acc, {
+			label : `${charge}`,
+			value : `${charge}`,
+		}];
+	}, []);
 
 	const controls = [
 		{

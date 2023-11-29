@@ -106,6 +106,15 @@ const tabPayload = {
 					},
 				],
 			},
+			confirm_cargo_readiness: {
+				import: [
+					{
+						task                 : 'confirm_cargo_readiness',
+						status               : ['pending'],
+						assigned_stakeholder : 'origin_booking_agent',
+					},
+				],
+			},
 			document_approval: {
 				state               : ['in_progress', 'confirmed_by_importer_exporter'],
 				bl_approval_pending : true,

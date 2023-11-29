@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useAllocationRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
-import getFormattedDate from '../../../utils/get-formatted-date';
+import { getFormattedDate } from '../../../utils/get-formatted-date';
 import getRankFromScore from '../configurations/getRankFromScore';
 import PublicLeaderBoardContext from '../context/PublicLeaderBoardContext';
 import LEADERBOARD_LOCATIONS from '../utils/leaderboard-locations';
@@ -76,7 +76,7 @@ function useGetLeaderbordList(props) {
 
 	useEffect(() => {
 		setUpdatedAt(report_synced_at);
-		setNextReloadAt(reload_duration);
+		setNextReloadAt(reload_duration || 300);
 		if (office_location_id) setScore((p) => ({ ...p, [office_location_id]: additional_stats?.total_score }));
 	}, [report_synced_at,
 		setUpdatedAt,

@@ -14,6 +14,7 @@ import business from './config/business';
 import businessFinance from './config/business-finance';
 import byodDashboard from './config/byod-dashboard';
 import cancellationPolicies from './config/cancellation-policies';
+import cargoInsurance from './config/cargo-insurance';
 import centralisedCustomerService from './config/centralised-customer-service';
 import chakravyuh from './config/chakravyuh';
 import chro from './config/chro';
@@ -32,11 +33,13 @@ import employeeDashboard from './config/employee-dashboard';
 import employeeDirectory from './config/employee-directory';
 import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
+import financePayroll from './config/finance-payroll';
 import ftlAdmin from './config/ftl-admin';
 import ftlFieldSreviceOps from './config/ftl_field_service_ops_app';
 import governanceManager from './config/governance-manager';
 import groundOps from './config/ground-ops';
 import handlingFees from './config/handling-fees';
+import hrmsDashboard from './config/hrms-dashboard';
 import igmDesk from './config/igm-desk';
 import ihls from './config/ihls';
 import ingestion from './config/ingestion';
@@ -54,6 +57,8 @@ import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
 import notifications from './config/notifications';
 import partners from './config/partners';
+import payment from './config/payments';
+import payroll from './config/payroll';
 import performanceAndIncentives from './config/performance-and-incentives';
 import PERFORMANCE_MANAGEMENT from './config/performance-management';
 import printingDesk from './config/printing-desk';
@@ -91,6 +96,7 @@ import supplyTools from './config/supply-tools';
 import termsAndConditions from './config/terms-and-conditions';
 import ticketManagement from './config/ticket-management';
 import tradeParties from './config/trade-parties';
+import transactionSettings from './config/transaction-settings';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
 import warehouseManagement from './config/warehouse-management';
@@ -192,8 +198,14 @@ const routeConfig = {
 	...margins,
 	...saas,
 	...serviceManagement,
+	...transactionSettings,
+	...payroll,
+	...financePayroll,
+	...payment,
+	...cargoInsurance,
 	...cogoStore,
 	...handlingFees,
+	...hrmsDashboard,
 	...partners,
 };
 

@@ -18,29 +18,30 @@ export const getOrgId = ({ orgData = {} }) => ({
 	trade_party : orgData?.trade_party?.id,
 });
 
-export const getCpSpPayload = ({ orgId = '', type = '', accountType = '', rejectReason = '' }) => ({
-	id                   : orgId || undefined,
-	kyc_status           : type,
-	account_type         : ACCOUNT_TYPE?.[accountType],
-	kyc_rejection_reason : rejectReason || undefined,
+export const getCpSpPayload = ({ orgId = '', type = '', accountType = '', rejectReason = [], otherReason = '' }) => ({
+	id                      : orgId || undefined,
+	kyc_status              : type,
+	account_type            : ACCOUNT_TYPE?.[accountType],
+	kyc_rejection_reason    : otherReason || undefined,
+	kyc_rejection_feedbacks : rejectReason || undefined,
 });
 
-export const getIePayload = ({ orgId = '', type = '', rejectReason = '' }) => ({
+export const getIePayload = ({ orgId = '', type = '', otherReason = '' }) => ({
 	id                   : orgId || undefined,
 	kyc_status           : type,
-	kyc_rejection_reason : rejectReason || undefined,
+	kyc_rejection_reason : otherReason || undefined,
 });
 
-export const getTradePartyPayload = ({ orgId = '', type = '', rejectReason = '' }) => ({
+export const getTradePartyPayload = ({ orgId = '', type = '', otherReason = '' }) => ({
 	id                  : orgId || undefined,
 	verification_status : type,
-	rejection_reason    : rejectReason || undefined,
+	rejection_reason    : otherReason || undefined,
 });
 
 export const getPayload = ({
 	description = '', end_date = '', end_time = '', start_date = '',
 	start_time = '', subject = '', lead_organization_id = '',
-	lead_user_id = '', user_id = '', organization_id = '',
+	lead_user_id = '', user_id = '', organization_id = '', agentId = '',
 }) => ({
 	subject,
 	description,
@@ -51,16 +52,16 @@ export const getPayload = ({
 		lead_organization_id,
 		organization_id,
 	},
-	frequency       : 'daily',
+	frequency       : 'one_time',
 	tags            : ['demo_request'],
-	recurrence_rule : {
-		type         : 'normal',
-		repeat_after : 1,
-		unit         : 'day',
-	},
-	validity_start : start_date,
+	recurrence_rule : { type: 'normal' },
+	validity_start  : start_date,
 	start_time,
-	validity_end   : end_date,
+	validity_end    : end_date,
 	end_time,
-
+	agent_id        : agentId,
+	participants   	: {
+		user_ids      : user_id ? [user_id] : [],
+		lead_user_ids : lead_user_id ? [lead_user_id] : [],
+	},
 });

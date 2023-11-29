@@ -1,6 +1,5 @@
 import { Input } from '@cogoport/components';
 import { IcMSearchlight, IcMCross } from '@cogoport/icons-react';
-import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -11,21 +10,32 @@ function SearchInput({
 	placeholder = '',
 	size = 'md',
 	onReset = () => {},
+	showPrefix = false,
+	...rest
 }) {
 	return (
 		<section className={styles.container} style={style}>
 			<Input
-				prefix={<IcMSearchlight />}
+				{...rest}
+				{...(showPrefix && {
+					prefix: <IcMSearchlight
+						className={styles.icon}
+					/>,
+				})}
 				value={value}
 				onChange={(val) => onSearch(val)}
 				size={size}
 				placeholder={placeholder}
-				{...(value ? {
-					suffix: <IcMCross
-						className={styles.cross_icon}
+				suffix={value ? (
+					<IcMCross
+						className={styles.icon}
 						onClick={onReset}
-					/>,
-				} : {})}
+					/>
+				) : (
+					<IcMSearchlight
+						className={styles.icon}
+					/>
+				)}
 			/>
 		</section>
 	);

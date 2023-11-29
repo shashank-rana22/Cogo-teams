@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 6px 12px;
+	padding: 4px 12px;
 	margin-left: auto;
 	color: #4f4f4f;
 	background-color: #fef199;
@@ -52,5 +52,14 @@
 	@media (min-width: 2560px) {
 		margin: 0 10px;
 		font-size: 24px;
+	}
+}
+
+.last_updated_at {
+	font-size: 8px;
+	color: #828282;
+
+	@media (min-width: 2560px) {
+		font-size: 30px;
 	}
 }

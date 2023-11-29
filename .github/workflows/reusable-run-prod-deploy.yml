@@ -1,33 +1,44 @@
-name: Prod Deploy - New Admin
+# This is a basic workflow to help you get started.
+# It will take the following action when it is manually triggered.
+name: Prod Deploy New - admin.cogoport.com
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 jobs:
-  deploy:
-    if: ${{ contains('prashantp01,Kgarg28,Rajatuba-Cogoport,maytan-cogo,vinodtalapa,ssngurjar',github.actor) }}
-    name: Deploying Servers via SSH
+  demo:
+    if: ${{ contains('prashantp01,Rajatuba-Cogoport,ssngurjar',github.actor) }}
+    permissions:
+      # The "id-token: write" permission is required or Machine ID will not be able to authenticate with the cluster.
+      id-token: write
+      contents: read
+    # The name of the workflow, and the Linux distro to be used to perform the required steps.
+    name: Deploy Production
     runs-on: ubuntu-latest
     steps:
-      - name: Deploying Admin Frontend
-        uses: appleboy/ssh-action@master
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Fetch Teleport binaries
+        uses: teleport-actions/setup@v1
         with:
-          host: ${{ secrets.PROD_SERVER_SSH_HOST }}
-          sync: true
-          username: ubuntu
-          key: ${{ secrets.PROD_SERVER_SSH_KEY }}
-          script_stop: true
-          command_timeout: 60m
-          script: |
-            cd cogo-admin
-            git pull
-            pnpm install
-            pnpm run deploy
-      
-      - name: Notify Team
-        if: ${{ success() }}
-        run: |
-          curl -X POST -H "Content-Type: application/json" -d '{
-          "text": "Deployment on ${{ github.repository }} was completed!. Deployment was triggerd by ${{ github.actor }}."
-          }' "https://cogofreight.webhook.office.com/webhookb2/2b4cef02-485b-4109-a57a-bdb242bee56d@fcbc2156-6b46-42c3-8745-0acb9d2dd22d/IncomingWebhook/745b829e328b4b2db27314c830e8fc38/b92c97ef-b062-4398-83c4-2d4b6ad67585"
-            
+          version: 13.1.0
+      - name: Fetch credentials using Machine ID
+        id: auth
+        uses: teleport-actions/auth@v1
+        with:
+          # Use the address of the auth/proxy server for your own cluster.
+          proxy: teleport.cogoport.com:443
+          # Use the name of the join token resource you created in step 1.
+          token: teleport-in-action
+          # Specify the length of time that the generated credentials should be
+          # valid for. This is optional and defaults to "1h"
+          certificate-ttl: 2h
+          # Enable the submission of anonymous usage telemetry.
+          anonymous-telemetry: 1
+      - name: List nodes
+        # Enters a command from the cluster, in this case "tsh ls" using Machine ID credentials to list remote SSH nodes.
+        run: tsh -i ${{ steps.auth.outputs.identity-file }} ls
+      - name: Write file to remote
+        # Enters a command from the cluster, in this case "tsh ssh" using Machine ID credentials to gain SSH access to an SSH node, and then write the commit hash to the "github_run_log" file.
+        # Ensure that `username` matches the username of a remote SSH username, and that hostname matches an SSH host name that is a part of the Teleport cluster configured for access.
+        run: tsh -i ${{ steps.auth.outputs.identity-file }} ssh ${{ secrets.TELEPORT_USERNAME }}@${{ secrets.TELEPORT_HOSTNAME }} "cd cogo-admin && git pull && pnpm install && pnpm run deploy"

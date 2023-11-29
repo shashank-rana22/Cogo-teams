@@ -1,0 +1,10 @@
+.title {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+}
+
+.title_value {
+	margin-left: 6px;
+	font-weight: 600;
+}

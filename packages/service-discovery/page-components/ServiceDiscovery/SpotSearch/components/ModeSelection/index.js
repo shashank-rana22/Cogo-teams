@@ -1,15 +1,15 @@
-import React from 'react';
-
 import MODES from '../../configurations/modes.json';
 
 import ModeItem from './ModeItem';
 import styles from './styles.module.css';
 
 function ModeSelection({
-	selectedMode = {},
+	selectedMode = '',
 	setSelectedMode = () => {},
 	setSelectedService = () => {},
 	setLocation = () => {},
+	bookable_services = {},
+	newly_added_services = {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -24,6 +24,8 @@ function ModeSelection({
 						setSelectedMode={setSelectedMode}
 						setSelectedService={setSelectedService}
 						setLocation={setLocation}
+						bookable_services={bookable_services}
+						newly_added_services={newly_added_services}
 					/>
 				))}
 			</div>

@@ -109,7 +109,7 @@ const injectValues = ({
 			? 'draft_house_bill_of_lading' : 'draft_bill_of_lading';
 
 		(controls || []).forEach((control, index) => {
-			if (control.name === 'bl_detail') {
+			if (control.name === 'bl_details') {
 				const shipment_bl_details = getApisData?.list_shipment_bl_details?.filter(
 					(i) => i?.bl_document_type === doc_type,
 				);

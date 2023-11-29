@@ -83,6 +83,10 @@ import {
 	asyncListEnrichmentSources,
 	asyncListIncidentTypes,
 	asyncAllocationEligibleRoles,
+	asyncAgentScoringConfigs,
+	asyncAgentScoringBlocks,
+	asyncAgentScoringParameters,
+	asyncAgentScoringQuests,
 	asyncListFclFreightRate,
 	asyncListLclFreightRate,
 	asyncListAirFreightRate,
@@ -104,6 +108,10 @@ import {
 	asyncListTrailerRateFeedback,
 	asyncListHaulageRateFeedback,
 	asyncListAirCustomFeedback,
+	asyncInsuranceHsCode,
+	asyncListSalaryBands,
+	asyncListTransactionType,
+	asyncListSalaryConfigurations,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -205,6 +213,10 @@ const keyAsyncFieldsParamsMapping = {
 	list_enrichment_sources              : asyncListEnrichmentSources,
 	list_incident_types                  : asyncListIncidentTypes,
 	agent_scoring_eligible_roles         : asyncAllocationEligibleRoles,
+	agent_scoring_configs                : asyncAgentScoringConfigs,
+	agent_scoring_blocks                 : asyncAgentScoringBlocks,
+	agent_scoring_parameters             : asyncAgentScoringParameters,
+	agent_scoring_quests                 : asyncAgentScoringQuests,
 	list_fcl_freight_rate_requests       : asyncListFclFreightRate,
 	list_lcl_freight_rate_requests       : asyncListLclFreightRate,
 	list_air_freight_rate_requests       : asyncListAirFreightRate,
@@ -226,6 +238,10 @@ const keyAsyncFieldsParamsMapping = {
 	list_trailer_freight_rate_feedbacks  : asyncListTrailerRateFeedback,
 	list_haulage_freight_rate_feedbacks  : asyncListHaulageRateFeedback,
 	list_air_customs_rate_feedbacks      : asyncListAirCustomFeedback,
+	list_insurance_hs_code               : asyncInsuranceHsCode,
+	list_salary_bands                    : asyncListSalaryBands,
+	list_transaction_type                : asyncListTransactionType,
+	list_salary_configurations           : asyncListSalaryConfigurations,
 };
 
 const SINGLE_ENTITY = 1;
@@ -257,6 +273,7 @@ function AsyncSelect(props) {
 		microService = '',
 		onOptionsChange,
 		isSingleEntity,
+		onSearch,
 		type,
 		...rest
 	} = props;
@@ -272,6 +289,7 @@ function AsyncSelect(props) {
 		getModifiedOptions,
 		initialCall,
 		onOptionsChange,
+		onSearch,
 		params       : params || defaultParams.params,
 		labelKey     : rest.labelKey || defaultParams.labelKey,
 		valueKey     : rest.valueKey || defaultParams.valueKey,

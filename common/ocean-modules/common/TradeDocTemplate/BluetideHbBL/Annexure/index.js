@@ -29,7 +29,7 @@ function Annexure({
 	return (
 		<main className={styles.main}>
 			{watermark
-				? <Watermark text="draft" /> : null}
+				? <Watermark text={watermark || 'draft'} /> : null}
 			<section className={styles.section}>
 				<div className={styles.secondary_header}>
 					<div>

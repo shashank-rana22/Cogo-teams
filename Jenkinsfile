@@ -32,7 +32,7 @@ pipeline {
                 echo "Branch name: ${BRANCH_NAME}"
                 echo "Commit id: ${COMMIT_ID}"
                 echo "Commit message: ${COMMIT_MESSAGE}"
-                checkout scmGit(branches: [[name: "${BRANCH_NAME}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'cogo-dev-github-app', url: 'https://github.com/Cogoport/cogo-admin.git']])
+                checkout scmGit(branches: [[name: "${BRANCH_NAME}"]], extensions: [], userRemoteConfigs: [[credentialsId: 'cogo-dev-github-app', url: 'https://github.com/cogouniverse/cogo-admin.git']])
             }
         }
         stage("Acquire lock"){ //avoid concurrent deployments

@@ -1,5 +1,6 @@
 import {
 	AsyncSelectController,
+	ChipsController,
 	InputController,
 	RadioGroupController,
 	SelectController,
@@ -15,6 +16,7 @@ const controlTypeControllerMapping = {
 	asyncSelect : AsyncSelectController,
 	textarea    : TextAreaController,
 	toggle      : ToggleController,
+	chips       : ChipsController,
 };
 
 export const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;

@@ -16,7 +16,7 @@ const air_lines = {
 	commodityType : 'air_freight',
 	rules         : { required: 'Air Line Details is Required' },
 };
-const getServiceProvider = ({ serviceType = '' }) => ({
+const getServiceProvider = () => ({
 	name        : 'service_provider_id',
 	type        : 'async-select',
 	asyncKey    : 'organizations',
@@ -28,7 +28,6 @@ const getServiceProvider = ({ serviceType = '' }) => ({
 			account_type : 'service_provider',
 			status       : 'active',
 			kyc_status   : 'verified',
-			service      : serviceType === 'subsidiary_service' ? 'air_freight' : serviceType,
 		},
 	},
 	rules: {
@@ -36,8 +35,6 @@ const getServiceProvider = ({ serviceType = '' }) => ({
 	},
 	renderLabel: CustomOptions,
 });
-
-const SPLIT_SERVICE_TEXT = 2;
 
 const getControls = ({
 	service_type = '',
@@ -51,15 +48,13 @@ const getControls = ({
 
 	let subsidiary_service_rendered = {};
 
-	const serviceType = service_type?.split('_', SPLIT_SERVICE_TEXT)?.join('_');
-
 	if (service_type === 'subsidiary_service') {
 		subsidiary_service_rendered = (service_rendered || []).find(
 			(service) => service?.code === subsidiaryService?.code,
 		);
 	}
 
-	const service_provider = getServiceProvider({ serviceType });
+	const service_provider = getServiceProvider();
 	service_provider.value = subsidiary_service_rendered?.service_provider?.id
 		|| service_rendered?.[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id
 		|| '';

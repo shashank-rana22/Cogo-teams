@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { cl } from '@cogoport/components';
 import { useRouter, dynamic } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
@@ -15,12 +16,14 @@ import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useGetAgentPreference from '../../hooks/useGetAgentPreference';
 import useGetAgentTimeline from '../../hooks/useGetAgentTimeline';
+import useGetIsMobile from '../../hooks/useGetIsMobile';
 import useGetSignature from '../../hooks/useGetSignature';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 import useListCogooneGroupMembers from '../../hooks/useListCogooneGroupMembers';
 import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
+import Calender from './Calendar';
 import Conversations from './Conversations';
 import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
@@ -33,10 +36,10 @@ const PortPairOrgFilters = dynamic(() => import('./PortPairOrgFilters'));
 
 function CogoOne() {
 	const { query: { assigned_chat = '', channel_type = '' } } = useRouter();
-	const { userId = '', token = '', userEmailAddress = '', userName = '' } = useSelector(({ profile, general }) => ({
+	const { userId = '', token = '', userEmailAddress = '', userName = '' } = useSelector(({ profile }) => ({
 		userId           : profile?.user?.id,
 		userName         : profile?.user?.name,
-		token            : general.firestoreToken,
+		token            : profile?.user?.firestore_custom_token,
 		userEmailAddress : profile?.user?.email,
 	}));
 
@@ -70,7 +73,7 @@ function CogoOne() {
 	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
-
+	const { isMobile = false } = useGetIsMobile();
 	const { group_id = '' } = activeTab?.data || {};
 
 	const {
@@ -112,6 +115,9 @@ function CogoOne() {
 		selectedAutoAssign,
 		setAutoAssignChats,
 		queryAssignedChat: assigned_chat,
+		isMobile,
+		setSelectedAutoAssign,
+		viewType,
 	};
 
 	const teamsSideBarCheck = (activeTab?.tab === 'teams' && (!!activeTab?.data?.id || !!activeTab?.data?.group_id));
@@ -136,32 +142,31 @@ function CogoOne() {
 		}
 	}, [token]);
 
-	useEffect(
-		() => { setViewType(initialViewType); },
-		[initialViewType],
-	);
+	useEffect(() => setViewType(initialViewType), [initialViewType]);
 
 	return (
 		<>
 			<HeaderBar
+				isMobile={isMobile}
 				firestore={firestore}
-				viewType={viewType}
 				fetchWorkStatus={fetchWorkStatus}
 				agentStatus={agentWorkStatus}
 				data={data}
 				agentTimeline={agentTimeline}
-				preferenceLoading={preferenceLoading}
 				timelineLoading={timelineLoading}
 				userId={userId}
 				initialViewType={initialViewType}
 				setViewType={setViewType}
+				{...commonProps}
 			/>
 			<div className={styles.layout_container}>
-				<div className={styles.customers_layout}>
+				<div
+					style={(!isMobile || isEmpty(activeTab?.data)) ? {} : { display: 'none' }}
+					className={isMobile ? styles.mobile_customer_layout : styles.customers_layout}
+				>
 					<Customers
 						setIsBotSession={setIsBotSession}
 						isBotSession={isBotSession}
-						viewType={viewType}
 						activeTab={activeTab}
 						userId={userId}
 						setModalType={setModalType}
@@ -175,22 +180,21 @@ function CogoOne() {
 						agentStatus={agentWorkStatus}
 						fetchworkPrefernce={fetchWorkStatus}
 						agentTimeline={agentTimeline}
-						setSelectedAutoAssign={setSelectedAutoAssign}
 						autoAssignChats={autoAssignChats}
 						{...commonProps}
 					/>
 				</div>
 				{sendBulkTemplates ? (
 					<PortPairOrgFilters
-						setSelectedAutoAssign={setSelectedAutoAssign}
 						sendBulkTemplates={sendBulkTemplates}
-						viewType={viewType}
 						{...commonProps}
 					/>
 				) : null}
 				{isEmpty(activeTab?.data)
 					? (
-						<div className={styles.empty_page}>
+						<div
+							className={styles.empty_page}
+						>
 							<EmptyChatPage
 								activeTab={activeTab}
 								viewType={viewType}
@@ -202,36 +206,41 @@ function CogoOne() {
 								initialViewType={initialViewType}
 							/>
 						</div>
-					) : (
-						<>
-							<div
-								className={cl`${styles.chat_body} ${expandedSideBar ? styles.chats_layout : ''} 
-								${collapsedSideBar ? styles.mail_layout : ''} 
-								${!expandedSideBar && !collapsedSideBar ? styles.nosidebar_layout : ''}`}
-							>
-								<Conversations
-									activeTab={activeTab}
-									firestore={firestore}
-									userId={userId}
-									setRaiseTicketModal={setRaiseTicketModal}
-									viewType={viewType}
-									setActiveRoomLoading={setActiveRoomLoading}
-									mailProps={mailProps}
-									setActiveTab={setActiveTab}
-									suggestions={suggestions}
-									setModalType={setModalType}
-									listCogooneGroupMembers={listCogooneGroupMembers}
-									membersList={membersList}
-								/>
-							</div>
-							{(
-								ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
+					) : null}
+				{isEmpty(activeTab?.data) ? null : (
+					<>
+						<div
+							style={(!isMobile || !activeTab?.showSidebar) ? {} : { display: 'none' }}
+							className={cl`${styles.chat_body} ${expandedSideBar ? styles.chats_layout : ''} 
+									${collapsedSideBar ? styles.mail_layout : ''} 
+								${!expandedSideBar && !collapsedSideBar ? styles.nosidebar_layout : ''}
+								${isMobile ? styles.mobile_nosidebar_layout : ''}`}
+						>
+							<Conversations
+								activeTab={activeTab}
+								firestore={firestore}
+								userId={userId}
+								setRaiseTicketModal={setRaiseTicketModal}
+								setActiveRoomLoading={setActiveRoomLoading}
+								mailProps={mailProps}
+								suggestions={suggestions}
+								setModalType={setModalType}
+								listCogooneGroupMembers={listCogooneGroupMembers}
+								membersList={membersList}
+								{...commonProps}
+							/>
+						</div>
+
+						{((ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
 								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
-								|| teamsSideBarCheck
-							) ? (
-								<div className={cl`${styles.user_profile_layout} 
+								|| teamsSideBarCheck))
+							? (
+								<div
+									className={cl`${styles.user_profile_layout} 
 								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}
-								${expandedSideBar ? styles.expanded_side_bar : styles.collapsed_side_bar}`}
+								${expandedSideBar ? styles.expanded_side_bar : styles.collapsed_side_bar}
+								${isMobile ? styles.mobile_user_profile_layout : null}`}
+									style={(!isMobile || activeTab?.showSidebar) ? {} : { display: 'none' }}
 								>
 									<ProfileDetails
 										activeMessageCard={activeTab?.data}
@@ -242,10 +251,8 @@ function CogoOne() {
 										activeRoomLoading={activeRoomLoading}
 										setRaiseTicketModal={setRaiseTicketModal}
 										zippedTicketsData={zippedTicketsData}
-										viewType={viewType}
 										firestore={firestore}
 										userId={userId}
-										setActiveTab={setActiveTab}
 										formattedMessageData={formattedMessageData}
 										orgId={orgId}
 										mailProps={mailProps}
@@ -254,14 +261,16 @@ function CogoOne() {
 										teamsSideBarCheck={teamsSideBarCheck}
 										groupMembersLoading={groupMembersLoading}
 										userName={userName}
+										{...commonProps}
 									/>
 									{(hasNoFireBaseRoom && !user_id && !lead_user_id)
 									&& <div className={styles.overlay_div} />}
 								</div>
-								) : null}
-						</>
-					)}
+							) : null}
+					</>
+				)}
 			</div>
+			{!isMobile ? <Calender firestore={firestore} /> : null}
 			<ModalComp
 				raiseTicketModal={raiseTicketModal}
 				setRaiseTicketModal={setRaiseTicketModal}
@@ -270,9 +279,8 @@ function CogoOne() {
 				userId={userId}
 				openKamContacts={openKamContacts}
 				setOpenKamContacts={setOpenKamContacts}
-				setActiveTab={setActiveTab}
 				orgId={orgId}
-				viewType={viewType}
+				{...commonProps}
 			/>
 		</>
 	);

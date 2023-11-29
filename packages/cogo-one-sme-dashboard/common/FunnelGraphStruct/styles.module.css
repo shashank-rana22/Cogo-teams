@@ -1,0 +1,113 @@
+.graph_container {
+	width: 100%;
+	padding-top: 30px;
+
+	:global {
+		.svg-funnel-js {
+			width: 100%;
+			height: 200px;
+			overflow-y: hidden;
+		}
+
+		.svg-funnel-js__container {
+			svg {
+				width: 100%;
+				height: 200px;
+				overflow-y: hidden;
+			}
+		}
+
+		.svg-funnel-js__labels,
+		.svg-funnel-js__subLabels {
+			display: none;
+		}
+	}
+}
+
+.segregation_container {
+	position: relative;
+	padding-top: unset;
+
+	:global {
+		.svg-funnel-js {
+			position: absolute;
+			bottom: 0;
+		}
+	}
+}
+
+.graph_labels {
+	position: relative;
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+}
+
+.graph_data {
+	position: relative;
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
+	padding-top: 10px;
+}
+
+.graph_labels_item {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 280px;
+	padding: 10px 4px 0;
+	font-size: 12px;
+	text-align: center;
+	border-right: 0.5px solid #dbdbdb;
+	border-left: 0.5px solid #dbdbdb;
+
+	&:hover {
+		cursor: pointer;
+		border-right: 1px solid #909190;
+		border-left: 1px solid #909190;
+
+		.upper_container {
+			font-weight: 600;
+		}
+	}
+}
+
+.graph_data_item {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: 10px 4px 0;
+	font-size: 12px;
+	text-align: center;
+	border-left: 1px solid #909190;
+
+	&:first-child {
+		border-left: unset;
+	}
+}
+
+.graph_values {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 6px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.lower_container {
+	width: 100%;
+	padding: 10px 2px;
+	font-size: 10px;
+	background: #fef199;
+	border-radius: 10px;
+}
+
+.sub_label {
+	span {
+		margin-left: 4px;
+		font-weight: 600;
+	}
+}

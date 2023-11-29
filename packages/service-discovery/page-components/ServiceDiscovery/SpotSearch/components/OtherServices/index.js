@@ -1,5 +1,3 @@
-import React from 'react';
-
 import OTHER_SERVICES from '../../configurations/other-services';
 
 import ServiceItem from './ServiceItem';
@@ -9,6 +7,8 @@ function OtherServices({
 	selectedService = {},
 	setSelectedService = () => {},
 	setSelectedMode = () => {},
+	bookable_services = {},
+	newly_added_services = {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -22,6 +22,8 @@ function OtherServices({
 						selectedService={selectedService}
 						setSelectedService={setSelectedService}
 						setSelectedMode={setSelectedMode}
+						bookable_services={bookable_services}
+						newly_added_services={newly_added_services}
 					/>
 				))}
 			</div>

@@ -200,7 +200,7 @@ function asyncFieldsListAgents() {
 		initialCall : true,
 		params      : {
 			page_limit : 20,
-			sort_by    : 'active_assigned_chats',
+			sort_by    : 'chat_assigned_at',
 			sort_type  : 'asc',
 		},
 	};
@@ -925,6 +925,50 @@ function asyncAllocationEligibleRoles() {
 	};
 }
 
+function asyncAgentScoringConfigs() {
+	return {
+		labelKey     : 'display_name',
+		valueKey     : 'id',
+		endpoint     : '/configs',
+		authkey      : 'get_agent_scoring_configs',
+		microService : 'agent_scoring',
+		initialCall  : true,
+	};
+}
+
+function asyncAgentScoringBlocks() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/blocks',
+		authkey      : 'get_agent_scoring_blocks',
+		microService : 'agent_scoring',
+		initialCall  : true,
+	};
+}
+
+function asyncAgentScoringParameters() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/parameters',
+		authkey      : 'get_agent_scoring_parameters',
+		microService : 'agent_scoring',
+		initialCall  : true,
+	};
+}
+
+function asyncAgentScoringQuests() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : '/quests',
+		authkey      : 'get_agent_scoring_quests',
+		microService : 'agent_scoring',
+		initialCall  : true,
+	};
+}
+
 function asyncListUserShipments() {
 	return {
 		labelKey    : 'serial_id',
@@ -1310,6 +1354,45 @@ function asyncListAirCustomFeedback() {
 	};
 }
 
+function asyncInsuranceHsCode() {
+	return {
+		labelKey     : 'hsCode',
+		valueKey     : 'id',
+		endpoint     : '/saas/insurance/v2/hs-code',
+		authkey      : 'get_saas_insurance_v2_hs_code',
+		microService : 'business_finance',
+		searchByq    : true,
+		qFilterKey   : 'query',
+	};
+}
+
+function asyncListSalaryBands() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'name',
+		endpoint    : 'list_salary_bands',
+		initialCall : true,
+	};
+}
+
+function asyncListTransactionType() {
+	return {
+		valueKey    : 'name',
+		labelKey    : 'name',
+		endpoint    : 'list_transaction_type',
+		initialCall : true,
+	};
+}
+function asyncListSalaryConfigurations() {
+	return {
+		initialCall : true,
+		valueKey    : 'id',
+		labelKey    : 'description',
+		endpoint    : 'list_salary_configurations',
+
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocationsTwo as asyncFieldsLocations2,
@@ -1386,6 +1469,10 @@ export {
 	asyncListTruckTypes,
 	asyncListLeadOrganizationUsers,
 	asyncAllocationEligibleRoles,
+	asyncAgentScoringConfigs,
+	asyncAgentScoringBlocks,
+	asyncAgentScoringParameters,
+	asyncAgentScoringQuests,
 	asyncListUserShipments,
 	asyncFieldsOrganizationOnCall,
 	asyncListSaasHsCodes,
@@ -1418,4 +1505,8 @@ export {
 	asyncListTrailerRateFeedback,
 	asyncListHaulageRateFeedback,
 	asyncListAirCustomFeedback,
+	asyncInsuranceHsCode,
+	asyncListSalaryConfigurations,
+	asyncListSalaryBands,
+	asyncListTransactionType,
 };

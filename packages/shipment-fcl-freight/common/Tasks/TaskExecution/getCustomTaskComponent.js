@@ -1,10 +1,10 @@
 import { AddCompanyModal } from '@cogoport/ocean-modules';
+import ShipmentInsurance from '@cogoport/shipment-insurance';
 
 import { CUSTOM_TASK_MAPPING } from '../../../constants/custom-tasks';
 
 import {
 	AmendDraftBl,
-	CargoInsurance,
 	ChooseServiceProvider,
 	GenerateFreightCertificate,
 	NominationTask,
@@ -13,6 +13,7 @@ import {
 	UploadComplianceDocs,
 	UploadContainerDetails,
 	ConfirmWithShipper,
+	ConfirmCargoReadiness,
 } from './CustomTasks';
 
 const TRADE_PARTY_TYPE = {
@@ -33,6 +34,7 @@ const {
 	UPLOAD_BOOKING_NOTE,
 	ADD_CONSIGNEE_DETAILS,
 	ADD_SHIPPER_DETAILS,
+	CONFIRM_CARGO_READINESS,
 } = CUSTOM_TASK_MAPPING;
 
 const COMPONENT_MAPPING = {
@@ -43,11 +45,12 @@ const COMPONENT_MAPPING = {
 	[CONFIRM_WITH_SHIPPER]            : ConfirmWithShipper,
 	[UPDATE_NOMINATION_DETAILS]       : NominationTask,
 	[GENERATE_FREIGHT_CERTIFICATE]    : GenerateFreightCertificate,
-	[GENERATE_CARGO_INSURANCE]        : CargoInsurance,
+	[GENERATE_CARGO_INSURANCE]        : ShipmentInsurance,
 	[UPLOAD_COMPLIANCE_DOCUMENTS]     : UploadComplianceDocs,
 	[UPLOAD_BOOKING_NOTE]             : UploadBookingNote,
 	[ADD_CONSIGNEE_DETAILS]           : AddCompanyModal,
 	[ADD_SHIPPER_DETAILS]             : AddCompanyModal,
+	[CONFIRM_CARGO_READINESS]         : ConfirmCargoReadiness,
 };
 
 const getCustomTaskComponent = ({
@@ -111,8 +114,8 @@ const getCustomTaskComponent = ({
 			refetch: taskListRefetch,
 		},
 		[GENERATE_CARGO_INSURANCE]: {
-			task,
 			onCancel,
+			servicesList,
 			refetch: taskListRefetch,
 		},
 		[UPLOAD_COMPLIANCE_DOCUMENTS]: {
@@ -146,6 +149,11 @@ const getCustomTaskComponent = ({
 			withModal            : false,
 			setAddCompany        : onCancel,
 			getShipmentRefetch,
+		},
+		[CONFIRM_CARGO_READINESS]: {
+			task,
+			onCancel,
+			refetch: taskListRefetch,
 		},
 	};
 

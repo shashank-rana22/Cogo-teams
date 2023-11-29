@@ -2,31 +2,41 @@ import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 
-import useUpdateShipmentPendingTask from './useUpdateShipmentPendingTask';
+const INCREMENT_BY_ONE = 1;
 
 const useUpdateShipmentAirFreightConsolidatedInvoice = ({
-	refetch = () => {}, onCancel = () => {}, task_id,
-	invoiceData = [],
+	invoiceData = [], createShipmentAdditionalService = () => {}, index = 0,
+	listLength = 0, terminalChargeState = {}, setTerminalChargeState = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_air_freight_consolidated_invoice',
 		method : 'POST',
 	}, { manual: true });
 
-	const {
-		apiTrigger = () => {},
-		loading:updateLoading = false,
-	} = 		useUpdateShipmentPendingTask({ refetch, onCancel });
-
-	const updateShipmentAirFreightConsolidatedInvoice = async () => {
+	const updateShipmentAirFreightConsolidatedInvoice = async ({ values = {}, status = '' }) => {
 		try {
 			await trigger({
 				params: {
-					status : 'finance_approved',
-					id     : invoiceData[GLOBAL_CONSTANTS.zeroth_index],
+					status,
+					id: invoiceData[GLOBAL_CONSTANTS.zeroth_index],
 				},
 			});
-			apiTrigger(task_id);
+			if (status === 'inactive') {
+				const newObj = { ...terminalChargeState };
+				delete newObj[index];
+				const SHIFTED_OBJ = {};
+				let newIndex = listLength;
+
+				Object.keys(newObj).forEach((key) => {
+					SHIFTED_OBJ[newIndex] = newObj[key];
+					newIndex += INCREMENT_BY_ONE;
+				});
+
+				setTerminalChargeState(SHIFTED_OBJ);
+			} else {
+				createShipmentAdditionalService(values, index);
+				setTerminalChargeState((prev) => ({ ...prev, [index]: 'irn_success' }));
+			}
 		} catch (err) {
 			toastApiError(err);
 		}
@@ -35,8 +45,6 @@ const useUpdateShipmentAirFreightConsolidatedInvoice = ({
 	return {
 		loading,
 		updateShipmentAirFreightConsolidatedInvoice,
-		updateLoading,
-
 	};
 };
 export default useUpdateShipmentAirFreightConsolidatedInvoice;

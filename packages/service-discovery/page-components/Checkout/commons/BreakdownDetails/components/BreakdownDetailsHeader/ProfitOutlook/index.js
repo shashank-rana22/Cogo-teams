@@ -11,12 +11,10 @@ function ProfitOutlook({
 	profitPercent = 0,
 	latestDemandMargin = 0,
 	condition = {},
+	isMobile = false,
+	convertCurrencyValue = () => {},
 }) {
-	const {
-		supply = 0,
-		cogoport = 0,
-		currency = '',
-	} = rate?.total_margins || {};
+	const { supply = 0, cogoport = 0, currency = '' } = rate?.total_margins || {};
 
 	const toalProfitDisplay = formatAmount({
 		amount   : latestDemandMargin,
@@ -24,20 +22,34 @@ function ProfitOutlook({
 		options  : {
 			style                 : 'currency',
 			currencyDisplay       : 'symbol',
-			maximumFractionDigits : 0,
+			maximumFractionDigits : 2,
 		},
 	});
+
+	const cogoportMargin = convertCurrencyValue(
+		cogoport,
+		currency,
+		geo.country.currency.code,
+	);
+
+	const supplyMargin = convertCurrencyValue(
+		supply,
+		currency,
+		geo.country.currency.code,
+	);
 
 	const MAPPING = [
 		{
 			label : 'Sales',
 			value : formatAmount({
-				amount  : condition.isSuperAdmin ? latestDemandMargin - cogoport - supply : latestDemandMargin,
-				currency,
-				options : {
+				amount: condition.isSuperAdmin
+					? latestDemandMargin - cogoportMargin - supplyMargin
+					: latestDemandMargin,
+				currency : geo.country.currency.code,
+				options  : {
 					style                 : 'currency',
 					currencyDisplay       : 'symbol',
-					maximumFractionDigits : 0,
+					maximumFractionDigits : 2,
 				},
 			}),
 			visible: true,
@@ -45,12 +57,12 @@ function ProfitOutlook({
 		{
 			label : 'Supply',
 			value : formatAmount({
-				amount  : supply,
-				currency,
-				options : {
+				amount   : supplyMargin,
+				currency : geo.country.currency.code,
+				options  : {
 					style                 : 'currency',
 					currencyDisplay       : 'symbol',
-					maximumFractionDigits : 0,
+					maximumFractionDigits : 2,
 				},
 			}),
 			visible: condition.isSuperAdmin,
@@ -58,17 +70,21 @@ function ProfitOutlook({
 		{
 			label : 'Cogoport',
 			value : formatAmount({
-				amount  : cogoport,
-				currency,
-				options : {
+				amount   : cogoportMargin,
+				currency : geo.country.currency.code,
+				options  : {
 					style                 : 'currency',
 					currencyDisplay       : 'symbol',
-					maximumFractionDigits : 0,
+					maximumFractionDigits : 2,
 				},
 			}),
 			visible: condition.isSuperAdmin,
 		},
 	];
+
+	if (isMobile) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container}>
@@ -76,31 +92,39 @@ function ProfitOutlook({
 
 			<div className={styles.amount}>{toalProfitDisplay}</div>
 
-			<div style={{ marginRight: '12px' }}>
-				(
-				{profitPercent}
-				% )
-			</div>
+			{profitPercent ? (
+				<>
+					(
+					{profitPercent}
+					% )
+				</>
+			) : null}
 
 			<Tags
+				style={{ marginLeft: '12px' }}
 				items={[
 					{
 						key      : 'margin',
 						disabled : false,
 						children : (
 							<div className={styles.flex}>
-								{MAPPING.map(({ label = '', value = 0, visible = true }, index) => {
-									if (visible) {
-										return (
-											<div key={label} className={cl`${styles.flex} ${index && styles.item}`}>
-												<div>{label}</div>
-												<div className={styles.amount}>{value}</div>
-											</div>
-										);
-									}
+								{MAPPING.map(
+									({ label = '', value = 0, visible = true }, index) => {
+										if (visible) {
+											return (
+												<div
+													key={label}
+													className={cl`${styles.flex} ${index && styles.item}`}
+												>
+													<div>{label}</div>
+													<div className={styles.amount}>{value}</div>
+												</div>
+											);
+										}
 
-									return null;
-								})}
+										return null;
+									},
+								)}
 							</div>
 						),
 						color    : '#e0e0e0',

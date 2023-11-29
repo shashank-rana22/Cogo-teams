@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import CANCELLATION_MAPPINGS from './cancellationMappings';
 import styles from './styles.module.css';

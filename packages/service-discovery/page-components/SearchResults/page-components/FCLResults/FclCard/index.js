@@ -3,27 +3,17 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import FreightPriceDetail from '../../../common/BasicFreightDetail';
+import PromoCode from '../../../common/Promocode';
+import getPromotion from '../../../utils/getPromotion';
 
 import DetailFooter from './DetailFooter';
 import HaulageText from './HaulageText';
 import IcdRoute from './IcdRoute';
-import PromoCode from './Promocode';
 import QuotationDetails from './QuotationDetails';
 import RateCardTop from './RateCardTop';
 import Route from './Route';
 import SailingWeek from './SailingWeek';
 import styles from './styles.module.css';
-
-const ONE = 1;
-
-const getPromotion = ({ promocodes = [] }) => {
-	const promotion = promocodes.find((promocode) => {
-		const { is_applicable, is_eligible } = promocode.eligibility_checks || {};
-		return is_applicable && is_eligible;
-	}) || {};
-
-	return promotion;
-};
 
 function RateCardTopSection({
 	rateCardData = {},
@@ -39,6 +29,8 @@ function RateCardTopSection({
 	selectedCogoAssuredCard = {},
 	showGuide = false,
 	cogoAssuredRates = [],
+	isMobile = false,
+	refetchSearch = () => {},
 }) {
 	return (
 		<div className={styles.top}>
@@ -56,6 +48,8 @@ function RateCardTopSection({
 				selectedCogoAssuredCard={selectedCogoAssuredCard}
 				showGuide={showGuide}
 				cogoAssuredRates={cogoAssuredRates}
+				isMobile={isMobile}
+				refetchSearch={refetchSearch}
 			/>
 		</div>
 	);
@@ -119,7 +113,6 @@ function MiddleSection({
 
 			<div className={styles.rate_details}>
 				<div className={styles.amount_container}>
-
 					<div className={styles.price_item}>
 						<div className={styles.freight_text}>
 							{primaryServiceRates.length > 1 ? 'Avg. ' : ''}
@@ -189,7 +182,7 @@ function FclCard({
 	detail = {},
 	isSelectedCard = false,
 	setScreen = () => {},
-	comparisonRates = () => {},
+	comparisonRates = {},
 	setComparisonRates = {},
 	refetchSearch = () => {},
 	infoBanner = {},
@@ -200,6 +193,7 @@ function FclCard({
 	showGuide = false,
 	cogoAssuredRates = [],
 	setRouterLoading = () => {},
+	isMobile = false,
 }) {
 	const {
 		service_rates = {},
@@ -245,8 +239,6 @@ function FclCard({
 		schedule_type,
 	};
 
-	const isCogoAssured = rateCardData.source === 'cogo_assured_rate';
-
 	const isOriginHaulageRates = Object.values(service_rates).some(
 		(service) => service?.is_rate_available
 			&& service?.service_type === 'haulage_freight'
@@ -258,20 +250,20 @@ function FclCard({
 			&& service?.trade_type === 'import',
 	);
 
-	const isMultiContainer = primaryServiceRates.length > ONE;
+	const isCogoAssured = rateCardData.source === 'cogo_assured_rate';
 
-	let subStyleClassname = '';
+	const isMultiContainer = primaryServiceRates.length > GLOBAL_CONSTANTS.one;
 
-	if (isCogoAssured) {
-		subStyleClassname = 'cogo_assured';
-	}
-	if (isSelectedCard) {
-		subStyleClassname = 'selected_card';
-	}
+	const selectedForComparison = rateCardData?.id in comparisonRates;
 
 	return (
 		<div
-			className={cl`${styles.container} ${styles[subStyleClassname]}`}
+			className={cl`
+				${styles.container} 
+				${isSelectedCard && styles.selected_card}
+				${isCogoAssured && styles.cogo_assured}
+				${selectedForComparison && !isCogoAssured && styles.compared_rate}
+			`}
 			style={(!index && !isSelectedCard) ? { marginTop: 0 } : {}}
 		>
 			<RateCardTopSection
@@ -288,6 +280,8 @@ function FclCard({
 				selectedCogoAssuredCard={selectedCogoAssuredCard}
 				showGuide={showGuide}
 				cogoAssuredRates={cogoAssuredRates}
+				isMobile={isMobile}
+				refetchSearch={refetchSearch}
 			/>
 
 			<MiddleSection

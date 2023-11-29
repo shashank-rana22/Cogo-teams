@@ -60,8 +60,8 @@ function useMailEditorFunctions({
 		}
 	}
 
-	const handlePayload = () => {
-		const emailBody = getRenderEmailBody({ html: `${rteContent}<br/>${body}` });
+	const handlePayload = async (isUploadFile = false) => {
+		const emailBody = await getRenderEmailBody({ html: `${rteContent}<br/>${body}`, isUploadFile });
 
 		return {
 			sender    : from_mail || activeMailAddress,
@@ -82,9 +82,9 @@ function useMailEditorFunctions({
 		firestore,
 		draftMessageData,
 		buttonType,
-		rteEditorPayload  : handlePayload(),
-		roomData          : formattedData,
-		parentMessageData : eachMessage,
+		getRteEditorPayload : handlePayload,
+		roomData            : formattedData,
+		parentMessageData   : eachMessage,
 		setEmailState,
 		body,
 		emailState,
@@ -106,7 +106,7 @@ function useMailEditorFunctions({
 		setMailAttachments,
 	});
 
-	const handleSend = () => {
+	const handleSend = async () => {
 		if (replyLoading || mailLoading || sendLoading) {
 			return;
 		}
@@ -126,7 +126,7 @@ function useMailEditorFunctions({
 			return;
 		}
 
-		const payload = handlePayload();
+		const payload = await handlePayload(true);
 
 		if (emailVia === 'firebase_emails') {
 			sendMail({
@@ -141,6 +141,7 @@ function useMailEditorFunctions({
 			});
 			return;
 		}
+
 		replyMailApi({
 			payload,
 			bodyPreview: rawRTEContent?.slice(

@@ -1,16 +1,10 @@
-import { useRouter } from '@cogoport/next';
-
 import getTableColumnFunction from './get-table-column-function';
 
 const useGetTableColumns = ({
 	activeTab = 'spot_searches',
 	fields = [],
-	organization = {},
-	createSearch = () => {},
-	createSearchLoading = false,
+	serviceType = '',
 }) => {
-	const router = useRouter();
-
 	const columns = fields.map((field) => ({
 		Header   : field.label,
 		id       : field.key,
@@ -29,11 +23,7 @@ const useGetTableColumns = ({
 				data = { ...quotationData };
 			}
 
-			if (field.func === 'renderButton') {
-				return func(data, field, router, organization, createSearch, createSearchLoading);
-			}
-
-			return func(data, field);
+			return func(data, field, serviceType);
 		},
 	}));
 

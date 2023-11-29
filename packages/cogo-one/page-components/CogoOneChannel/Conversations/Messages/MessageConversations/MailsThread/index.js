@@ -28,6 +28,7 @@ function MailsThread(
 		mailProps = {},
 		deleteMessage = () => {},
 		roomId = '',
+		isMobile = false,
 	},
 ) {
 	const {
@@ -71,6 +72,7 @@ function MailsThread(
 						deleteMessage={deleteMessage}
 						firestore={firestore}
 						roomId={roomId}
+						isMobile={isMobile}
 						{...(mailContentProps || {})}
 					/>
 				);

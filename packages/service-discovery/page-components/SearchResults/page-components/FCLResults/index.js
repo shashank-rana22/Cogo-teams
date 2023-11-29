@@ -2,11 +2,13 @@ import Comparison from '../../common/Comparison';
 
 import ListRateCards from './ListRateCards';
 import SelectedCardScreen from './SelectedCardScreen';
+import SpotBooking from './SpotBooking';
 
 const SCREEN_MAPPING = {
 	listRateCard       : ListRateCards,
 	selectedCardScreen : SelectedCardScreen,
 	comparison         : Comparison,
+	spot_booking       : SpotBooking,
 };
 
 function FCLResults({
@@ -22,8 +24,6 @@ function FCLResults({
 	setFilters = () => {},
 	headerProps = {},
 	setHeaderProps = () => {},
-	selectedWeek = {},
-	setSelectedWeek = () => {},
 	refetchSearch = () => {},
 	paginationProps = {},
 	loading = false,
@@ -31,8 +31,11 @@ function FCLResults({
 	infoBanner = {},
 	setInfoBanner = () => {},
 	isGuideViewed = false,
-	routerLoading = false,
 	setRouterLoading = () => {},
+	setScheduleLoading = () => {},
+	setSelectedSchedule = () => {},
+	selectedSchedule = () => {},
+	isMobile = false,
 }) {
 	const { cogoAssuredRates, marketplaceRates } = rates.reduce((acc, rate) => {
 		if (rate.source === 'cogo_assured_rate') {
@@ -56,22 +59,24 @@ function FCLResults({
 			setFilters,
 			paginationProps,
 			loading,
-			selectedWeek,
-			setSelectedWeek,
 			refetchSearch,
 			infoBanner,
 			setInfoBanner,
 			isGuideViewed,
 			cogoAssuredRates,
 			marketplaceRates,
-			routerLoading,
 			setRouterLoading,
+			setScheduleLoading,
+			setSelectedSchedule,
+			selectedSchedule,
+			isMobile,
 		},
 		comparison: {
 			detail,
 			setScreen,
 			comparisonRates,
 			setComparisonRates,
+			isMobile,
 		},
 		selectedCardScreen: {
 			headerProps,
@@ -80,10 +85,18 @@ function FCLResults({
 			setScreen,
 			cogoAssuredRates,
 			setRouterLoading,
+			isMobile,
+			refetchSearch,
+		},
+		spot_booking: {
+			setScreen,
+			detail,
 		},
 	};
 
 	const RateCardsComponent = SCREEN_MAPPING[screen] || null;
+
+	if (!RateCardsComponent) return null;
 
 	return (
 		<RateCardsComponent {...SCREEN_PROPS_MAPPING[screen]} />

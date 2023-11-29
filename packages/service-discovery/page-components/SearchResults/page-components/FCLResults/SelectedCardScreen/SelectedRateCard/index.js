@@ -2,12 +2,12 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 // import ShippingLineModal from '../../../../../../common/ShippingLineModal';
+import CargoModal from '../../../../common/CargoModal';
+import DetentionDemurrage from '../../../../common/D&D';
+import LoadingState from '../../../../common/Loading';
 import useCreateCheckout from '../../../../hooks/useCreateCheckout';
 import FclCard from '../../FclCard';
 
-import CargoModal from './CargoModal';
-import Header from './Header';
-import LoadingState from './loadingState';
 import Services from './Services';
 import styles from './styles.module.css';
 
@@ -21,6 +21,8 @@ function SelectedRateCard({
 	// showShippingLineModal = false,
 	// setShowShippingLineModal = () => {},  // will be used in future
 	setRouterLoading = () => {},
+	isMobile = false,
+	refetchSearch = () => {},
 }) {
 	const [cargoModal, setCargoModal] = useState('pending'); // pending,progress,success
 
@@ -44,11 +46,9 @@ function SelectedRateCard({
 
 	return (
 		<div className={styles.container}>
-			<Header
-				detail={detail}
-				rateCardData={rateCardData}
-				refetch={refetch}
-			/>
+			<div className={styles.dnd_container}>
+				<DetentionDemurrage details={detail} refetch={refetch} isMobile={isMobile} />
+			</div>
 
 			<FclCard
 				rateCardData={rateCardData}
@@ -56,6 +56,7 @@ function SelectedRateCard({
 				isSelectedCard
 				setScreen={setScreen}
 				setRouterLoading={setRouterLoading}
+				refetchSearch={refetchSearch}
 			/>
 
 			{source === 'cogo_assured_rate' ? (
@@ -84,6 +85,7 @@ function SelectedRateCard({
 					setCargoModal={setCargoModal}
 					detail={detail}
 					goToCheckout={handleBook}
+					isMobile={isMobile}
 				/>
 			) : null}
 

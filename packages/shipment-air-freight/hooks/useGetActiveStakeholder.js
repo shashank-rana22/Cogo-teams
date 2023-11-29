@@ -21,7 +21,7 @@ const useGetActiveStakeholder = () => {
 		{ role_ids: geo.uuid.account_receivable_executive, stakeholder: 'account_receivable_executive' },
 		{ role_ids: [geo.uuid.so1_so2_ops_role_id, geo.uuid.so1_so2_role_id], stakeholder: 'so1_so2_ops' },
 		{ role_ids: geo.uuid.service_ops1_role_ids, stakeholder: 'booking_desk' },
-		{ role_ids: geo.uuid.air_so_1_manager, stakeholder: 'booking_desk_manager' },
+		{ role_ids: [geo.uuid.air_so_1_manager, geo.uuid.so_1_manager], stakeholder: 'booking_desk_manager' },
 		{
 			role_ids: [...geo.uuid.service_ops2_role_id,
 				geo.uuid.costbooking_ops_role_ids],
@@ -59,6 +59,7 @@ const useGetActiveStakeholder = () => {
 		{ role_ids: geo.uuid.operation_manager, stakeholder: 'operation_manager' },
 		{ role_ids: geo.uuid.so1_revenue_desk, stakeholder: 'so1_revenue_desk' },
 		{ role_ids: geo.uuid.cogo_auditor_id, stakeholder: 'cogo_auditor_id' },
+		{ role_ids: geo.uuid.prod_data_operations_associate, stakeholder: 'data_associate' },
 	];
 	const matchingStakeholders = stakeholderMap
 		.filter(({ role_ids: ids }) => (role_ids || [])

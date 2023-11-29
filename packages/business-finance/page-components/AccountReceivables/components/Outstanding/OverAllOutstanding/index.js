@@ -1,5 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import { Button, Pagination, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty, startOfMonth } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
@@ -15,6 +17,7 @@ import useGetKamWiseOutstandingsStats from '../../../hooks/useGetKamWiseOutstand
 import useGetOrgOutstanding from '../../../hooks/useGetOrgOutstanding';
 import useGetSageArOutstandingsStats from '../../../hooks/useGetSageArOustandingStats';
 import useGetServiceWiseOutstandingsStats from '../../../hooks/useGetServiceWiseOutstandingsStats';
+import useSyncSageArOutstanding from '../../../hooks/useSyncSageArOutstanding';
 
 import CcCallList from './CcCallList';
 import Filters from './Filters';
@@ -23,24 +26,31 @@ import OutstandingFilter from './OutstandingFilter';
 import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
 import OverallOutstandingStats from './OverallOutstandingStats';
+import ReportModal from './ReportModal';
 import ResponsivePieChart from './ResponsivePieChart';
 import ScrollBar from './ScrollBar';
 import styles from './styles.module.css';
+import SyncModal from './SyncModal';
 
 const LOADER_LEN = 7;
 const ONLY_LEFT = true;
-
+const AUTHORISED_USER_IDS = [GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id,
+	GLOBAL_CONSTANTS.uuid.abhishek_kumar_user_id,
+	'd058d879-8cb2-4071-8bd3-c5807f534dd4',
+	'438de4d8-c9b2-4835-a23b-0b871b18d434'];
 function OverAllOutstanding({
 	entityCode = '',
 	setSelectedOrgId = () => {},
 }) {
+	const { profile } = useSelector((state) => state);
 	const [formFilters, setFormFilters] = useState({
 		kamId              : '',
 		salesAgentId       : '',
 		creditControllerId : '',
 		companyType        : '',
 	});
-
+	const [show, setShow] = useState(false);
+	const [syncShow, setSyncShow] = useState(false);
 	const {
 		outStandingData,
 		outstandingLoading,
@@ -52,7 +62,13 @@ function OverAllOutstanding({
 		refetch,
 		filters,
 		setFilters,
+		filtersApplied,
 	} = useGetOrgOutstanding({ entityCode });
+	const {
+		syncSageArOutstanding = () => {}, data = {},
+		loading:sageArOutstandingloading = false,
+	}	= useSyncSageArOutstanding({});
+	const { include_defaulters = false } = filters || {};
 
 	const [dateFilter, setDateFilter] = useState({
 		startDate : startOfMonth(new Date()),
@@ -60,7 +76,7 @@ function OverAllOutstanding({
 	});
 	const [range, setRange] = useState('this_month');
 	const { statsData, statsLoading } = useGetSageArOutstandingsStats({
-		entityCode,
+		entityCode, include_defaulters,
 	});
 	const [viewGraphStats, setViewGraphStats] = useState(false);
 	const ref = useRef(null);
@@ -78,6 +94,12 @@ function OverAllOutstanding({
 
 	const handleChange = (val) => {
 		setoutStandingFilters({ ...outStandingFilters, search: val });
+	};
+	const onSubmit = async () => {
+		try {
+			await syncSageArOutstanding(false);
+			setSyncShow(true);
+		} catch { setSyncShow(false); }
 	};
 
 	const clearFilter = () => {
@@ -158,12 +180,38 @@ function OverAllOutstanding({
 	const controls = overAllOutstandingcontrols();
 	return (
 		<>
+			{show ? <ReportModal show={show} setShow={setShow} /> : null}
+			{syncShow ? <SyncModal show={syncShow} setShow={setSyncShow} data={data} /> : null}
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				{AUTHORISED_USER_IDS.includes(profile?.user?.id)
+					? (
+						<Button
+							onClick={() => setShow(true)}
+							themeType="secondary"
+							size="lg"
+							style={{ marginRight: 10 }}
+						>
+							Send OS Report
+						</Button>
+					) : null}
+				{AUTHORISED_USER_IDS.includes(profile?.user?.id)
+					? (
+						<Button
+							onClick={onSubmit}
+							themeType="secondary"
+							size="lg"
+							loading={sageArOutstandingloading}
+							style={{ marginRight: 10 }}
+						>
+							Sync Data
+						</Button>
+					) : null}
 				<Filters
 					controls={controls}
 					filters={filters}
 					setFilters={setFilters}
 					clearFilter={clearFilter}
+					filtersApplied={filtersApplied}
 				/>
 
 			</div>

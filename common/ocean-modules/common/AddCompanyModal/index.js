@@ -103,7 +103,7 @@ function AddCompanyModal({
 
 	return (
 		<div>
-			<ModalBodyContent {...modalBodyProps} ref={formRef} />
+			<ModalBodyContent {...modalBodyProps} ref={formRef} poc_required />
 
 			<div className={styles.footer}>
 				<ModalFooterContent formSubmit={formSubmit} onClose={onClose} createLoading={createLoading} />

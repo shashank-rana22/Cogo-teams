@@ -25,6 +25,7 @@ function HeaderBar({
 	userId = '',
 	initialViewType = '',
 	setViewType = () => {},
+	isMobile = false,
 }) {
 	const {
 		flash_revert_logs : flashRevertLogs = false,
@@ -100,7 +101,7 @@ function HeaderBar({
 							)}
 					</div>
 
-					{(isPunchPresent && !preferenceLoading) ? (
+					{(isPunchPresent && !preferenceLoading && !isMobile) ? (
 						<PunchInOut
 							timelineLoading={timelineLoading}
 							preferenceLoading={preferenceLoading}
@@ -119,7 +120,7 @@ function HeaderBar({
 					) : null}
 
 					<div className={cl`${styles.configs} ${showDetails ? styles.hide_section : ''}`}>
-						{flashRevertLogs ? (
+						{(flashRevertLogs && !isMobile) ? (
 							<FlashRevertLogs />
 						) : null}
 
@@ -132,13 +133,14 @@ function HeaderBar({
 								viewType={viewType}
 								showDetails={showDetails}
 								activeCard={activeCard}
+								isMobile={isMobile}
 								setActiveCard={setActiveCard}
 							/>
 						) : null}
 					</div>
 				</div>
 			</div>
-			{!showFeedback && (
+			{!showFeedback && !isMobile && (
 				<div
 					role="presentation"
 					className={styles.feedback}

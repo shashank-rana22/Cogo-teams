@@ -18,6 +18,9 @@ function ContainerDetails({
 	setInfoBanner = () => {},
 	setRouterLoading = () => {},
 	isGuideViewed = false,
+	createLoading = false,
+	createSearch = () => {},
+	isMobile = false,
 }) {
 	const [showModal, setShowModal] = useState(false);
 
@@ -53,6 +56,7 @@ function ContainerDetails({
 				showPopover={showPopover}
 				popoverComponentData={popoverComponentData}
 				setShowModal={setShowModal}
+				isMobile={isMobile}
 			/>
 
 			{!isEmpty(load) ? (
@@ -75,6 +79,7 @@ function ContainerDetails({
 										showPopover={showPopover}
 										popoverComponentData={popoverComponentData}
 										setShowModal={setShowModal}
+										isMobile={isMobile}
 									/>
 								);
 							})}
@@ -91,6 +96,9 @@ function ContainerDetails({
 					data={data}
 					setShow={setShowModal}
 					setRouterLoading={setRouterLoading}
+					createLoading={createLoading}
+					createSearch={createSearch}
+					isMobile={isMobile}
 				/>
 			) : null}
 		</div>

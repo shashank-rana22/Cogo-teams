@@ -72,6 +72,70 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'saas',
 	},
+	{
+		api          : 'create_organization_address',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_billing_address',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api         : 'post_saas_insurance_v2_send_checkout',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'post_saas_insurance_v2_draft',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'get_saas_insurance_v2_details',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'get_saas_insurance_v2_search_rate',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'post_saas_insurance_v2_send_quote',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'post_saas_insurance_v2_search_rate',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'get_saas_insurance_v2_rate',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'get_saas_insurance_v2_hs_code',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'get_saas_insurance_v2_country_supported',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
 ];
 
 export default apis;
