@@ -232,6 +232,7 @@
   "criteria_required_message": "Yêu cầu tiêu chí",
   "shipment_re_open_request": "Yêu cầu mở lại lô hàng",
   "job_open_label": "Việc làm đang mở",
+  "job_open_fin_label":"Việc làm mở về mặt tài chính",
   "total_buy_label": "Tổng số tiền mua",
   "total_sell_label": "Tổng số bán",
   "profit_margin_label" : "Tỷ suất lợi nhuận"

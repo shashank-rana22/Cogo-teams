@@ -1,6 +1,7 @@
 const ROUTES_MAPPING = {
 	fcl_freight : 'fcl',
 	air_freight : 'air-freight',
+	ftl_freight : 'ftl',
 };
 
 export const handleRouteBooking = ({ e, id = '', service = '', partnerId = '' }) => {

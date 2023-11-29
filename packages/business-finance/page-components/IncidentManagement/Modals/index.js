@@ -10,6 +10,8 @@ function CommonDetailsModal({
 	detailsModal = {},
 	refetch = () => {},
 }) {
+	const isJobOpenRequest = ['JOB_OPEN', 'JOB_OPEN_FINANCIALLY'].includes(detailsModal?.type);
+
 	return (
 		<div className={styles.containerDisplay}>
 			<Button
@@ -21,7 +23,7 @@ function CommonDetailsModal({
 				Go Back
 			</Button>
 
-			{detailsModal?.type === 'JOB_OPEN' ? (
+			{isJobOpenRequest ? (
 				<JobOpenDetailsModal
 					row={detailsModal}
 					setDetailsModal={setDetailsModal}

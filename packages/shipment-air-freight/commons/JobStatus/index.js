@@ -30,6 +30,26 @@ function JobStatus({
 		return (
 			<div className={styles.job_closed_container}>
 				<Pill className={styles.job_closed_pill} size="lg">Financially Closed</Pill>
+				<Button
+					className={styles.job_reopen_button}
+					themeType="link"
+					size="md"
+					onClick={() => {
+						setShowModal(true);
+					}}
+				>
+					Fin-open-request
+				</Button>
+
+				{showModal ? (
+					<ReOpenJob
+						shipmentData={shipment_data}
+						showModal={showModal}
+						setShowModal={setShowModal}
+						incidentStatusRefetch={incidentStatusRefetch}
+						financiallyOpen
+					/>
+				) : null}
 			</div>
 		);
 	}

@@ -53,6 +53,10 @@ const getControls = (t = () => {}) => [
 				value : 'JOB_OPEN',
 				label : t('incidentManagement:job_open_label'),
 			},
+			{
+				value : 'JOB_OPEN_FINANCIALLY',
+				label : t('incidentManagement:job_open_fin_label'),
+			},
 		],
 		rules: { required: t('incidentManagement:incident_type_required_message') },
 	},
