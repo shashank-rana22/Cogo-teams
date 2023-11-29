@@ -1,0 +1,15 @@
+.main_container {
+	display: flex;
+	flex-direction: column;
+}
+
+.content {
+	display: flex;
+	background-color: black;
+}
+
+.loader {
+	display: flex;
+	align-items: center;
+	padding: 80px 0;
+}
