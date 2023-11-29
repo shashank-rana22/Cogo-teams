@@ -8,6 +8,7 @@ import getIncidentReOpenJobPayload from '../utils/getIncidentReOpenJobPayload';
 const useIncidentReOpenJob = ({
 	shipmentData = {},
 	refetch = () => {},
+	financiallyOpen = false,
 }) => {
 	const { user_id = '' } = useSelector(({ profile }) => ({
 		user_id: profile?.user?.id,
@@ -24,7 +25,10 @@ const useIncidentReOpenJob = ({
 			const payload = getIncidentReOpenJobPayload({ values, shipmentData, user_id });
 
 			await trigger({
-				data: payload,
+				data: {
+					...payload,
+					type: financiallyOpen ? 'JOB_OPEN_FINANCIALLY' : 'JOB_OPEN',
+				},
 			});
 
 			Toast.success('Request Submitted!');
