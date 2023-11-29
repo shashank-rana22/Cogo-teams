@@ -6,13 +6,13 @@
 .winner_container {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 16px;
+	gap: 12px;
 }
 
 .winner_item {
 	position: relative;
-	width: calc((100% - 32px) / 3);
-	padding: 16px 16px 10px;
+	width: calc((100% - 24px) / 3);
+	padding: 8px 8px 2px;
 	border: 1px solid #f2f2f2;
 	border-radius: 8px;
 }
@@ -42,8 +42,7 @@
 }
 
 .score {
-	margin-top: 2px;
-	font-size: 12px;
+	font-size: 10px;
 }
 
 .score_heading {
@@ -71,7 +70,7 @@
 
 .badge_icon {
 	position: absolute;
-	top: -12px;
+	top: -16px;
 	left: -12px;
 	width: 24px;
 }
