@@ -14,7 +14,7 @@ const useGetMappingFunctions = ({ activePayrunTab, overseasData, query, globalFi
 	const {
 		getPayrunListView, billListViewData,
 		billListViewLoading,
-	} = useGetPayrunBillListView({ activePayrunTab, sort, query, globalFilters });
+	} = useGetPayrunBillListView({ activePayrunTab, sort, query, globalFilters, overseasData });
 	const {
 		getViewInvoice,
 		viewInvoiceDataList,
