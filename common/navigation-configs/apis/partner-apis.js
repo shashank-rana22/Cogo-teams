@@ -9124,6 +9124,12 @@ const partner = {
 
 		},
 		{
+			api         : 'get_payments_outstanding_service_wise_outstanding',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
+		},
+		{
 			api          : 'sync_sage_ar_outstanding',
 			access_type  : 'private',
 			module       : 'outstanding',

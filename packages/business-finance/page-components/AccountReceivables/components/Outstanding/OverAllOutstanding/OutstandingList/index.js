@@ -88,6 +88,10 @@ function OutstandingList({
 		communication: {
 			orgData: item,
 		},
+		service_details: {
+			organizationId,
+			entityCode,
+		},
 	};
 
 	function Content({ types = [], head = '' }) {
