@@ -3,11 +3,6 @@
 	flex-direction: column;
 }
 
-.content {
-	display: flex;
-	background-color: black;
-}
-
 .loader {
 	display: flex;
 	align-items: center;
