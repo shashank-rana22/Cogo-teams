@@ -16,8 +16,8 @@ function ServiceDetails({
 	} = useGetServiceWiseDetails({ organizationId, entityCode });
 
 	return (
-		<div className={cl`${styles.main_container} ${!serviceWiseDetailsLoading ? styles.loader : null}`}>
-			{serviceWiseDetailsLoading
+		<div className={cl`${styles.main_container} ${serviceWiseDetailsLoading ? styles.loader : null}`}>
+			{!serviceWiseDetailsLoading
 				? serviceWiseData?.map((item) => <ServiceWiseCard key={item?.serviceType} item={item} />)
 				: <Loader />}
 		</div>
