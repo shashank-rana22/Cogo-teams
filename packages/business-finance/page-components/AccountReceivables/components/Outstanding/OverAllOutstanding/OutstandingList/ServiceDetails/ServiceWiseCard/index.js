@@ -15,7 +15,7 @@ function ServiceWiseCard({
 				<Pill>{startCase(item?.serviceType)}</Pill>
 			</span>
 
-			<Table columns={serviceWiseColumns} data={[item]} className={styles.table} />
+			<Table columns={serviceWiseColumns || []} data={[item || {}]} className={styles.table} />
 
 		</div>
 	);
