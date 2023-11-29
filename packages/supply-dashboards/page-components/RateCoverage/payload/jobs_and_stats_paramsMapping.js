@@ -46,13 +46,9 @@ export const PARAM_MAPPING = {
 		location: 'location_id',
 	},
 	fcl_freight_local: {
-		origin_location      : 'origin_port_id',
-		destination_location : 'destination_port_id',
-		operater_type        : 'shipping_line_id',
+		location: 'port_id',
 	},
 	air_freight_local: {
-		origin_location      : 'origin_airport_id',
-		destination_location : 'destination_airport_id',
-		operater_type        : 'airline_id',
+		location: 'airport_id',
 	},
 };
