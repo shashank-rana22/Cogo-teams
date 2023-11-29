@@ -232,6 +232,7 @@
     "criteria_required_message": "Kriteria dibutuhkan",
     "shipment_re_open_request": "Permintaan Pembukaan Kembali Pengiriman",
     "job_open_label": "Pekerjaan Terbuka",
+    "job_open_fin_label":"Pekerjaan Terbuka Secara Finansial",
     "total_buy_label": "Jumlah Pembelian",
     "total_sell_label": "Jual Total",
     "profit_margin_label" : "Margin Keuntungan"
