@@ -1,11 +1,8 @@
 import { cl, Placeholder } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { getAuth, signInWithCustomToken } from 'firebase/auth';
 import React, { useEffect } from 'react';
 
 import { imgURL } from '../../../constants/image-urls';
-import useFetchFirebaseCustomToken from '../../../hooks/useFetchFirebaseCustomToken';
 import useGetUsersStats from '../../../hooks/useGetUsersStats';
 
 import LeaderBoard from './LeaderBoard';
@@ -16,31 +13,9 @@ import styles from './styles.module.css';
 function Stats(props = {}) {
 	const { userStats = {}, getUserSats, firebaseLoading = false } = useGetUsersStats();
 
-	const { token = '', userEmailAddress = '' } = useSelector(({ profile }) => ({
-		token            : profile?.user?.firestore_custom_token,
-		userEmailAddress : profile?.user?.email,
-
-	}));
-
-	const {
-		fetchFirebaseCustomToken = () => {},
-	} = useFetchFirebaseCustomToken();
-
 	useEffect(() => {
 		getUserSats();
-
-		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
-			const auth = getAuth();
-
-			if (isEmpty(auth?.currentUser)) {
-				signInWithCustomToken(auth, token)
-					.catch((error) => {
-						console.log('firestore_auth_error:', error.message);
-						fetchFirebaseCustomToken({ auth, userEmailAddress });
-					});
-			}
-		}
-	}, [fetchFirebaseCustomToken, getUserSats, token, userEmailAddress]);
+	}, [getUserSats]);
 
 	const {
 		statsLoading,

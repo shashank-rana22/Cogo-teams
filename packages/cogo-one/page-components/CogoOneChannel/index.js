@@ -4,7 +4,6 @@ import { useRouter, dynamic } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
-import { getAuth, signInWithCustomToken } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
@@ -14,7 +13,6 @@ import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import { getInitialData } from '../../helpers/getInitialData';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
-import useFetchFirebaseCustomToken from '../../hooks/useFetchFirebaseCustomToken';
 import useGetAgentPreference from '../../hooks/useGetAgentPreference';
 import useGetAgentTimeline from '../../hooks/useGetAgentTimeline';
 import useGetIsMobile from '../../hooks/useGetIsMobile';
@@ -37,10 +35,9 @@ const PortPairOrgFilters = dynamic(() => import('./PortPairOrgFilters'));
 
 function CogoOne() {
 	const { query: { assigned_chat = '', channel_type = '' } } = useRouter();
-	const { userId = '', token = '', userEmailAddress = '', userName = '' } = useSelector(({ profile }) => ({
+	const { userId = '', userEmailAddress = '', userName = '' } = useSelector(({ profile }) => ({
 		userId           : profile?.user?.id,
 		userName         : profile?.user?.name,
-		token            : profile?.user?.firestore_custom_token,
 		userEmailAddress : profile?.user?.email,
 	}));
 
@@ -76,10 +73,6 @@ function CogoOne() {
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const { isMobile = false } = useGetIsMobile();
 	const { group_id = '' } = activeTab?.data || {};
-
-	const {
-		fetchFirebaseCustomToken = () => {},
-	} = useFetchFirebaseCustomToken();
 
 	const {
 		listCogooneGroupMembers = () => {},
@@ -138,18 +131,6 @@ function CogoOne() {
 		) || teamsSideBarCheck) && activeTab?.expandSideBar));
 	const collapsedSideBar = (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type) || teamsSideBarCheck)
 								&& !activeTab?.expandSideBar;
-	useEffect(() => {
-		// if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
-		const auth = getAuth();
-
-		if (isEmpty(auth?.currentUser)) {
-			signInWithCustomToken(auth, token).catch((error) => {
-				console.error('firebase_sign_in_error', error.message);
-				fetchFirebaseCustomToken({ auth, userEmailAddress });
-			});
-		}
-		// }
-	}, [fetchFirebaseCustomToken, token, userEmailAddress]);
 
 	useEffect(() => setViewType(initialViewType), [initialViewType]);
 
