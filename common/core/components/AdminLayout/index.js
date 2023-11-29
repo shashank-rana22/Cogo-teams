@@ -137,6 +137,7 @@ function AdminLayout({
 				videoCallRecipientData={video_call_recipient_data}
 				inVideoCall={inVideoCall}
 				videoCallId={videoCallId}
+				firestore={firestore}
 			/>
 			<AnnouncementModal data={announcements} />
 

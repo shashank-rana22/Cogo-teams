@@ -13558,6 +13558,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'get_firestore_custom_token',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'assign_meeting_agent',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -14968,6 +14973,11 @@ const partner = {
 		},
 	],
 	cogo_one_dashboard: [
+		{
+			api          : 'get_firestore_custom_token',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 		{
 			api          : 'get_omnichannel_agent_stats',
 			access_type  : 'private',

@@ -14,6 +14,7 @@ import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import { getInitialData } from '../../helpers/getInitialData';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
+import useFetchFirebaseCustomToken from '../../hooks/useFetchFirebaseCustomToken';
 import useGetAgentPreference from '../../hooks/useGetAgentPreference';
 import useGetAgentTimeline from '../../hooks/useGetAgentTimeline';
 import useGetIsMobile from '../../hooks/useGetIsMobile';
@@ -77,6 +78,10 @@ function CogoOne() {
 	const { group_id = '' } = activeTab?.data || {};
 
 	const {
+		fetchFirebaseCustomToken = () => {},
+	} = useFetchFirebaseCustomToken();
+
+	const {
 		listCogooneGroupMembers = () => {},
 		membersList = [], groupMembersLoading,
 	} = useListCogooneGroupMembers({ globalGroupId: group_id });
@@ -134,13 +139,17 @@ function CogoOne() {
 	const collapsedSideBar = (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type) || teamsSideBarCheck)
 								&& !activeTab?.expandSideBar;
 	useEffect(() => {
-		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
-			const auth = getAuth();
+		// if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
+		const auth = getAuth();
+
+		if (isEmpty(auth?.currentUser)) {
 			signInWithCustomToken(auth, token).catch((error) => {
-				console.error(error.message);
+				console.error('firebase_sign_in_error', error.message);
+				fetchFirebaseCustomToken({ auth, userEmailAddress });
 			});
 		}
-	}, [token]);
+		// }
+	}, [fetchFirebaseCustomToken, token, userEmailAddress]);
 
 	useEffect(() => setViewType(initialViewType), [initialViewType]);
 
