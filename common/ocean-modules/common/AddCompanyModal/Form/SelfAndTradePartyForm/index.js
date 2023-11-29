@@ -18,6 +18,7 @@ import getTradePartiesDefaultParams from '../../../../components/Poc/helpers/get
 import POC_WORKSCOPE_MAPPING from '../../../../constants/POC_WORKSCOPE_MAPPING';
 import useListOrganizationTradeParties from '../../../../hooks/useListOrganizationTradeParties';
 import { convertObjectMappingToArray } from '../../../../utils/convertObjectMappingToArray';
+import validateMobileNumber from '../../../../utils/validateMobileNumber';
 import { getAddressRespectivePincodeAndPoc } from '../../helpers/getBillingAddressFromRegNum';
 
 import styles from './styles.module.css';
@@ -234,7 +235,7 @@ function SelfAndTradePartyForm({
 										size="sm"
 										rules={{
 											pattern: { value: geo.regex.EMAIL, message: 'Enter valid email' },
-											...(poc_required ? { required: 'POC Name is required' } : {}),
+											...(poc_required ? { required: 'POC Email is required' } : {}),
 										}}
 										placeholder="Enter Email Address"
 									/>
@@ -247,6 +248,10 @@ function SelfAndTradePartyForm({
 										size="sm"
 										control={control}
 										name="mobile_number"
+										rules={poc_required ? {
+											required : 'Mobile Number is required',
+											validate : validateMobileNumber,
+										} : {}}
 									/>
 									{Error('mobile_number', errors)}
 								</div>

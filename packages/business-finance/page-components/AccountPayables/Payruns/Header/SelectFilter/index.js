@@ -44,14 +44,7 @@ function SelectFilters({
 					{isEmpty(selectedPayrun)
 						? (
 							<div className={styles.filter}>
-								<Filter
-									filters={globalFilters}
-									setFilters={setGlobalFilters}
-									controls={getChooseFilterControls(
-										{ activePayrunTab, overseasData, isInvoiceView, entityBank },
-									)}
-								/>
-								{((TAB_NAME).includes(activePayrunTab) && !isInvoiceView)
+								{((TAB_NAME).includes(activePayrunTab))
 									? (
 										<Tabs themeType="tertiary" activeTab={overseasData} onChange={setOverseasData}>
 											{INNER_TAB_MAPPING.map((tab) => (
@@ -100,6 +93,13 @@ function SelectFilters({
 					/>
 
 				</div>
+				<Filter
+					filters={globalFilters}
+					setFilters={setGlobalFilters}
+					controls={getChooseFilterControls(
+						{ activePayrunTab, overseasData, isInvoiceView, entityBank },
+					)}
+				/>
 			</div>
 			<PaidInnerTab
 				activePayrunTab={activePayrunTab}

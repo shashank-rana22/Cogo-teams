@@ -3,6 +3,7 @@ import InvoiceTable from '../../../../commons/InvoiceTable';
 import Communication from './Communication';
 import OrganizationUsers from './OrganizationUsers';
 import PaymentsTable from './PaymentTable';
+import ServiceDetails from './ServiceDetails';
 import SettlementTable from './SettlementTable';
 
 const TabsOptions = [
@@ -30,6 +31,11 @@ const TabsOptions = [
 		key       : 'communication',
 		name      : 'Communication',
 		component : Communication,
+	},
+	{
+		key       : 'service_details',
+		name      : 'Service Details',
+		component : ServiceDetails,
 	},
 ];
 
