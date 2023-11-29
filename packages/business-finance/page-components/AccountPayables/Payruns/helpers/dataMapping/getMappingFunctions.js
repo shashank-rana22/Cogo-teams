@@ -4,7 +4,7 @@ import useGetPayrun from '../../hooks/useGetPayrun';
 import useGetPayrunBillListView from '../../hooks/useGetPayrunBillListView';
 import useGetViewInvoices from '../../hooks/useGetViewInvoices';
 
-const useGetMappingFunctions = ({ activePayrunTab, overseasData, query, globalFilters, sort, selectedPayrun }) => {
+const useGetMappingFunctions = ({ activePayrunTab = '', overseasData, query, globalFilters, sort, selectedPayrun }) => {
 	const { payrunData, payrunLoading, payrunStats, getPayrunList } = useGetPayrun({
 		activePayrunTab,
 		overseasData,

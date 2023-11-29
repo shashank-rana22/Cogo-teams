@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback } from 'react';
 
 import { dateFormatter } from '../helpers';
@@ -16,7 +17,7 @@ const getListofInvoicePayload = ({
 		pageIndex,
 		pageSize,
 		state             : activePayrunTab,
-		q                 : query !== '' ? query : undefined,
+		q                 : isEmpty(query) ? query : undefined,
 		type              : overseasData,
 		startDate         : selectFromDate || undefined,
 		endDate           : selectToDate || undefined,
@@ -26,7 +27,7 @@ const getListofInvoicePayload = ({
 		entityCode        : activeEntity,
 	});
 
-const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters, overseasData }) => {
+const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters, overseasData = 'NORMAL' }) => {
 	const { pageIndex, pageSize, createdAt, activeEntity = '' } = globalFilters || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
