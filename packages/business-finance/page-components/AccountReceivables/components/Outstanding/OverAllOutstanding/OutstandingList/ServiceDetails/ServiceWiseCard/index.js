@@ -2,7 +2,8 @@ import { Pill, Table } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import serviceWiseColumns from './get-service-wise-columns';
+import serviceWiseColumns from '../../../../../../configs/get-service-wise-columns';
+
 import styles from './styles.module.css';
 
 function ServiceWiseCard({
