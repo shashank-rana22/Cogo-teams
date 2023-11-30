@@ -1,18 +1,10 @@
 import { Button, Modal, RadioGroup } from '@cogoport/components';
 import { AsyncSelectController, useForm } from '@cogoport/forms';
-import { isEmpty } from '@cogoport/utils';
 
+import { taggedState } from '../../../../../constants/index';
 import useUpdateAccountTagging from '../../../../../hooks/useUpdateAccountTagging';
 
 import styles from './styles.module.css';
-
-const accountStatusOption = [
-	{ label: 'Credit Controller', value: 'credit_controller' },
-	{ label: 'Collection Agency', value: 'collection_agency' },
-	{ label: 'Field Collection', value: 'field_collection' },
-	{ label: 'Legal', value: 'legal' },
-	{ label: 'Other', value: 'others_probable_legal' },
-];
 
 function ChangeStatus({
 	item = {}, currentStatus = '', refetch = () => {},
@@ -26,18 +18,6 @@ function ChangeStatus({
 		apiTrigger({ formValues, currentStatus, refetch, setChangeStatus });
 	};
 
-	let filtredOptions = [];
-
-	if (isEmpty(item?.taggedState)) {
-		filtredOptions = accountStatusOption.filter(
-			(ele) => ele.value !== 'credit_controller',
-		);
-	} else {
-		filtredOptions = accountStatusOption.filter(
-			(ele) => ele.value !== item?.taggedState,
-		);
-	}
-
 	return (
 		<Modal show={changeStatus} onClose={() => setChangeStatus(false)}>
 			<Modal.Header title="Change Current Account Status" />
@@ -45,8 +25,8 @@ function ChangeStatus({
 			<Modal.Body>
 				<RadioGroup
 					className={styles.radio_grp}
-					options={filtredOptions}
-					value={currentStatus}
+					options={taggedState}
+					value={item?.taggedState}
 					onChange={(val) => setCurrentStatus(val)}
 				/>
 

@@ -66,18 +66,11 @@ function InvoiceDetails({
 			{showDetailsCard && (
 				<>
 					<div className={styles.invoice_details_container_bg} />
-
 					<div
 						className={styles.invoice_details_container}
 						style={{ width: '35vw' }}
 					>
-						<div
-							className={
-								showDetailsCard
-									? styles.enter_left
-									: styles.exit_left
-							}
-						>
+						<div className={showDetailsCard ? styles.enter_left : styles.exit_left}>
 							<div className={styles.content_caret}>
 								<div
 									className={styles.icon_container}
@@ -89,14 +82,9 @@ function InvoiceDetails({
 								>
 									<IcMArrowRotateLeft />
 								</div>
-
 								<div className={styles.header_details}>
 									INVOICE DETAILS -
-									<span
-										style={{
-											textDecorationLine: 'underline',
-										}}
-									>
+									<span style={{ textDecorationLine: 'underline' }}>
 										{item?.invoiceNumber}
 									</span>
 									{' '}
@@ -110,24 +98,14 @@ function InvoiceDetails({
 
 							<div className={styles.body_details}>
 								{loading ? (
-									<Placeholder
-										className={styles.placeholder_container}
-									/>
+									<Placeholder className={styles.placeholder_container} />
 								) : (
 									<div className={styles.body_details_card}>
 										<div
 											className={styles.invoice_card_data}
 										>
-											<div
-												className={
-													styles.supplier_data_header
-												}
-											>
-												<span
-													style={{
-														fontWeight: '600',
-													}}
-												>
+											<div className={styles.supplier_data_header}>
+												<span style={{ fontWeight: '600' }}>
 													{item?.organizationName}
 												</span>
 												<div
@@ -157,7 +135,7 @@ function InvoiceDetails({
 															?.grandTotal,
 														currency:
 															data?.summary
-																?.currency,
+																?.invoiceCurrency,
 														options: {
 															currencyDisplay:
 																'code',
@@ -179,40 +157,24 @@ function InvoiceDetails({
 													}}
 												>
 													{formatAmount({
-														amount: data?.summary
-															?.ledgerTotal,
-														currency:
-															data?.summary
-																?.ledgerCurrency,
-														options: {
-															currencyDisplay:
-																'code',
+														amount   : data?.summary?.ledgerTotal,
+														currency : data?.summary?.ledgerCurrency,
+														options  : {
+															currencyDisplay       : 'code',
 															maximumFractionDigits : 0,
 															style                 : 'currency',
 														},
 													})}
 												</span>
 											</div>
-											<div
-												className={
-													styles.supplier_data_body
-												}
-											>
+											<div className={styles.supplier_data_body}>
 												Balance Amount -
-												<span
-													style={{
-														marginLeft: '4px',
-													}}
-												>
+												<span style={{ marginLeft: '4px' }}>
 													{formatAmount({
-														amount: data?.summary
-															?.balanceAmount,
-														currency:
-															data?.summary
-																?.currency,
-														options: {
-															currencyDisplay:
-																'code',
+														amount   : data?.summary?.balanceAmount,
+														currency : data?.summary?.currency,
+														options  : {
+															currencyDisplay       : 'code',
 															maximumFractionDigits : 0,
 															style                 : 'currency',
 														},
@@ -224,123 +186,71 @@ function InvoiceDetails({
 								)}
 								{loading ? (
 									<>
-										<Placeholder
-											className={
-												styles.placeholder_container
-											}
-										/>
-										<Placeholder
-											className={
-												styles.placeholder_container
-											}
-										/>
-										<Placeholder
-											className={
-												styles.placeholder_container
-											}
-										/>
+										<Placeholder className={styles.placeholder_container} />
+										<Placeholder className={styles.placeholder_container} />
+										<Placeholder className={styles.placeholder_container} />
 									</>
 								) : (
 									(INVOICE_DATA_MAPPING || [{}]).map(
 										(items) => {
 											const { id, label } = items;
-
 											return (
-												<div
-													className={
-														styles.information
-													}
-													key={id}
-												>
+												<div className={styles.information} key={id}>
 													<div
-														className={
-															styles.data_container
-														}
+														className={styles.data_container}
 														onClick={() => {
 															handleDropdown(id);
 														}}
 														role="presentation"
 													>
 														{label}
-														<div
-															className={
-																styles.dropdown_container
-															}
-														>
-															{dropDownData[
-																id
-															] ? (
+														<div className={styles.dropdown_container}>
+															{dropDownData[id] ? (
 																<IcMArrowRotateUp
 																	width={15}
 																	height={15}
 																/>
-																) : (
-																	<IcMArrowRotateDown
-																		width={15}
-																		height={15}
-																	/>
-																)}
+															) : (
+																<IcMArrowRotateDown
+																	width={15}
+																	height={15}
+																/>
+															)}
 														</div>
 													</div>
 
-													{dropDownData[id] && (
-														<div
-															className={
-																styles.hr
-															}
-														/>
-													)}
+													{dropDownData[id] && (<div className={styles.hr} />)}
 
 													{dropDownData[id] && (
 														<div
 															className={
-																dropDownData
-																	? styles.enter_down
-																	: styles.exit_down
+																dropDownData ? styles.enter_down : styles.exit_down
 															}
 														>
 															<div
-																className={
-																	styles.information_data
-																}
+																className={styles.information_data}
 															>
-																{label
-																	=== 'POC' && (
-																		<Poc
-																			data={
-																			data
-																		}
-																		/>
+																{label === 'POC' && (
+																	<Poc
+																		data={data}
+																	/>
 																)}
-																{label
-																	=== 'Timeline' && (
-																		<Timeline
-																			data={
-																			data
-																		}
-																			loading={
-																			loading
-																		}
-																			entityCode={
-																			entityCode
-																		}
-																		/>
+																{label === 'Timeline' && (
+																	<Timeline
+																		data={data}
+																		loading={loading}
+																		entityCode={entityCode}
+																	/>
 																)}
-																{label
-																	=== 'UTR Number' && (
-																		<UtrNumber
-																			eventData={
-																			data
-																		}
-																		/>
+																{label === 'UTR Number' && (
+																	<UtrNumber
+																		eventData={data}
+																	/>
 																)}
-																{label
-																	=== 'Cancellation Agreement'
+																{label === 'Cancellation Agreement'
 																	&& !isEmpty(cancelledEInvoiceDetails) && (
 																		<CancellationAgreement
-																			data={
-																			data
-																		}
+																			data={data}
 																		/>
 																)}
 															</div>
