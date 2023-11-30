@@ -3,20 +3,13 @@ import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { format } from '@cogoport/utils';
+import { format, isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 const useGetIncidentMangement = ({ activeTab, payload }) => {
-	const {
-		user_data:UserData,
-	} = useSelector(({ profile }) => ({
-		user_data: profile || {},
-	}));
+	const { user_data:UserData } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 
-	const [
-		{ data, loading },
-		trigger,
-	] = useRequestBf(
+	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/incident-management/incident/list-my-incident',
 			method  : 'get',
@@ -41,11 +34,14 @@ const useGetIncidentMangement = ({ activeTab, payload }) => {
 	const { search, type, request_type:requestType, urgency, rejectedStatus, Date, ...rest } = globalFilters;
 
 	const { startDate, endDate } = Date || {};
+
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	useEffect(() => {
 		debounceQuery(search);
 	}, [search]);
+
+	// todo :: create mapping
 
 	let activeStatus = [];
 	if (payload?.[0] === 'raisedPayload') {
@@ -58,6 +54,7 @@ const useGetIncidentMangement = ({ activeTab, payload }) => {
 		activeStatus = ['PENDING_ACTION', 'RAISED_AGAIN', 'CLOSED', 'DELETED', 'REJECTED'];
 	}
 
+	// todo :: rewamp params
 	const refetch = async () => {
 		try {
 			await trigger({
@@ -92,7 +89,7 @@ const useGetIncidentMangement = ({ activeTab, payload }) => {
 	const filtervalue = Object.values(globalFilters);
 
 	const filterClear = filtervalue.filter((item) => {
-		if (Array.isArray(item) && item.length === 0) {
+		if (Array.isArray(item) && isEmpty(item)) {
 			return false;
 		}
 		return item !== undefined && item !== '';

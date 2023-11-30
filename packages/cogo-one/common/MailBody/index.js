@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 import { getRecipientData } from '../../helpers/getRecipientData';
 import useGetSignature from '../../hooks/useGetSignature';
+import useSyncRpaEmail from '../../hooks/useSyncRpaEmail';
 import MailAttachments from '../../page-components/CogoOneChannel/Conversations/MailConversation/MailAttachment';
 
 import MailActions from './mailActions';
@@ -82,6 +83,11 @@ function MailBody({
 		email_status: emailStatus = '',
 		id = '',
 		conversation_type = '',
+		communication_id = '',
+		response: {
+			internet_message_id = '',
+			sender: email_id = '',
+		},
 	} = eachMessage || {};
 
 	const {
@@ -96,6 +102,15 @@ function MailBody({
 	} = response || {};
 
 	const { signature } = useGetSignature({ viewType });
+
+	const {
+		syncRpaEmail = () => {},
+		syncLoading = false,
+	} = useSyncRpaEmail({
+		internet_message_id,
+		communication_id,
+		email_id,
+	});
 
 	const date = created_at ? formatDate({
 		date       : new Date(created_at),
@@ -156,12 +171,13 @@ function MailBody({
 					handleExpandClick={handleExpandClick}
 					isDraft={isDraft}
 					emailStatus={emailStatus}
-					loading={loading}
+					loading={loading || syncLoading}
 					setModalData={setModalData}
 					modalData={modalData}
 					activeMessageCard={activeMessageCard}
 					viewType={viewType}
 					isMobile={isMobile}
+					syncRpaEmail={syncRpaEmail}
 				/>
 
 				{(!isDraft && expandedState && !isSentFromPlatform)
@@ -197,10 +213,12 @@ function MailBody({
 					<MailActions
 						handleClick={handleClick}
 						isDraft={isDraft}
-						loading={loading}
+						loading={loading || syncLoading}
 						emailStatus={emailStatus}
 						isMobile={isMobile}
 						isDraftAlreadySent={!!eachMessage?.communication_id}
+						eachMessage={eachMessage}
+						syncRpaEmail={syncRpaEmail}
 					/>
 				) : null}
 

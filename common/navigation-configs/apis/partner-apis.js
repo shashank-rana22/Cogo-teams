@@ -9071,6 +9071,8 @@ const partner = {
 			module      : 'Expenses',
 		},
 	],
+
+	// ? why in partner api's
 	my_incident: [
 		{
 			api         : 'get_incident_management_incident_list',
@@ -13573,6 +13575,11 @@ const partner = {
 		},
 	],
 	cogo_one: [
+		{
+			api          : 'sync_rpa_email',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 		{
 			api          : 'assign_meeting_agent',
 			access_type  : 'private',
