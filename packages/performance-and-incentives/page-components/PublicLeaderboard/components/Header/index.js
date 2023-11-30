@@ -1,6 +1,4 @@
 import { Select, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
@@ -102,23 +100,8 @@ function Header(props) {
 					className={styles.user_selector}
 				/>
 
-				<div>
-					<CountDownTimer updatedAt={updatedAt} countdown={countdown} />
+				<CountDownTimer updatedAt={updatedAt} countdown={countdown} />
 
-					{updatedAt ? (
-						<p className={styles.last_updated_at}>
-							Last updated:
-							{' '}
-							{formatDate({
-								date       : updatedAt,
-								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-								formatType : 'dateTime',
-								separator  : '; ',
-							})}
-						</p>
-					) : null}
-				</div>
 			</div>
 
 		</div>

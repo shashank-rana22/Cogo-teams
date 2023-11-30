@@ -44,8 +44,8 @@ function ListCard({
 		destination_location = '',
 		shipment_id = '',
 		reverted_status = '',
-		shipment_serial_id = '',
 		serial_id = '',
+		source_serial_id = '',
 		assigned_to = {},
 		service_provider = {},
 		reverted_count,
@@ -68,13 +68,20 @@ function ListCard({
 		loadingSpotSearch,
 	} = useGetSpoetSearches({ feedbackData, requestData, showPopover });
 
+	let filterServiceList = serviceList.filter(
+		(item) => item.service_type === filter?.service,
+	);
+	filterServiceList = ['fcl_freight', 'air_freight'].includes(filter?.service)
+		? serviceList
+		: filterServiceList;
+
 	const originCode = (origin_port || origin_airport || port || origin_location || location)?.port_code;
 
 	const originName = (origin_port || origin_airport || port || origin_location || location || airport)?.name;
 
-	const destinationCode = (destination_port || destination_airport || port || destination_location)?.port_code;
+	const destinationCode = (destination_port || destination_airport || destination_location)?.port_code;
 
-	const destinationName = (destination_port || destination_airport || port || destination_location)?.name;
+	const destinationName = (destination_port || destination_airport || destination_location)?.name;
 
 	const service = filter?.service;
 
@@ -118,11 +125,10 @@ function ListCard({
 					<div className={styles.head}>
 						{data?.updated_at && (
 							<div style={{ display: 'flex' }}>
-								{!isEmpty(shipment_serial_id) && 	(
+								{!isEmpty(source_serial_id) && 	(
 									<div className={styles.pill}>
-										Shipment Id:
-										{' '}
-										{shipment_serial_id}
+										{`${source === 'live_booking' ? 'Shipment Id: ' : 'Serial Id: '}
+										${source_serial_id}`}
 									</div>
 								)}
 								<div className={styles.pill}>
@@ -173,10 +179,11 @@ function ListCard({
 							{(data?.shipping_line?.short_name || data?.airline?.short_name) && (
 								<div>
 									<Pill size="md" color="orange">
-										{(filter?.service === 'air_freight' || filter?.service === 'air_customs')
-											? 'Preferred Air Line :' : ' Preferred Shipping Line :'}
+										{source === 'live_booking' && 'Preferred '}
+										{['air_freight', 'air_customs', 'air_freight_local'].includes(filter?.service)
+											? 'Air Line :' : 'Shipping Line :'}
 										{' '}
-										{filter?.service === 'air_freight' || filter?.service === 'air_customs'
+										{['air_freight', 'air_customs', 'air_freight_local'].includes(filter?.service)
 											? data?.airline?.short_name : data?.shipping_line?.short_name }
 									</Pill>
 								</div>
@@ -322,7 +329,7 @@ function ListCard({
 							setServiceIdPresent={setServiceIdPresent}
 							getRequest={getRequest}
 							requestData={requestData}
-							serviceList={serviceList}
+							serviceList={filterServiceList}
 							loadingSpotSearch={loadingSpotSearch}
 							spot_data={spot_data}
 							showServicePopover={showPopover}

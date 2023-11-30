@@ -29,6 +29,7 @@ const TYPE_COMPONENT_MAPPING = {
 	RECURRING_EXPENSE_APPROVAL             : RecuringModal,
 	OVERHEAD_APPROVAL                      : NonRecuringModal,
 	JOB_OPEN                               : JobOpenModal,
+	JOB_OPEN_FINANCIALLY                   : JobOpenModal,
 };
 
 function ViewRequested({ itemData = {}, name = '', refetch = () => {} }) {

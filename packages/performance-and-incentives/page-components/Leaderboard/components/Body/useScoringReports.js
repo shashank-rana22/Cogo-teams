@@ -5,14 +5,18 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import LEADERBOARD_REPORT_TYPE_CONSTANTS from '../../../../constants/leaderboard-reporttype-constants';
+import REPORTEE_TYPE from '../../../../constants/leaderboard-reportee-type';
+import LEADERBOARD_REPORT_TYPE_CONSTANTS, { MANAGER_KAM_REPORT }
+	from '../../../../constants/leaderboard-reporttype-constants';
 import LEADERBOARD_VIEWTYPE_CONSTANTS from '../../../../constants/leaderboard-viewtype-constants';
-import getFormattedDate from '../../../../utils/get-formatted-date';
+import { getFormattedDate } from '../../../../utils/get-formatted-date';
 import getReportViewType from '../../helpers/getReportViewType';
 
 const { ADMIN } = LEADERBOARD_VIEWTYPE_CONSTANTS;
 
 const { ADMIN_REPORT, OWNER_REPORT, MANAGER_REPORT, AGENT_REPORT } = LEADERBOARD_REPORT_TYPE_CONSTANTS;
+
+const { MANAGER, KAM } = REPORTEE_TYPE;
 
 const getReportTypeFilter = ({ currLevel }) => {
 	if (currLevel.report_type === ADMIN_REPORT || !isEmpty(currLevel.user)) {
@@ -22,10 +26,22 @@ const getReportTypeFilter = ({ currLevel }) => {
 	return currLevel.report_type;
 };
 
+const getReporteeType = ({ currLevel }) => {
+	if (currLevel?.report_type === OWNER_REPORT && !isEmpty(currLevel.user)) {
+		return MANAGER;
+	}
+
+	if (currLevel?.report_type === MANAGER_KAM_REPORT && !isEmpty(currLevel.user)) return KAM;
+
+	return undefined;
+};
+
 const getUserRmIdsFilter = ({ currLevel, levelStack }) => {
 	if (currLevel.isExpanded) {
 		return [levelStack[GLOBAL_CONSTANTS.zeroth_index]?.user?.id, ...(currLevel.user_rm_ids || [])];
 	}
+
+	if (currLevel?.report_type === MANAGER_KAM_REPORT) return currLevel.user_rm_ids;
 
 	return [currLevel.user?.id, ...(currLevel.user_rm_ids || [])];
 };
@@ -71,6 +87,7 @@ const useScoringReports = (props) => {
 				...previousParams,
 				is_expanded_view         : (currLevel.isExpanded && isEmpty(currLevel.user)) ? true : undefined,
 				add_user_kam_report_data : [OWNER_REPORT, MANAGER_REPORT].includes(getReportTypeFilter({ currLevel })),
+				reportee_type            : getReporteeType({ currLevel }),
 				filters                  : {
 					...(previousParams.filters || {}),
 					report_view_type   : getReportViewType({ currLevel, isChannel }),

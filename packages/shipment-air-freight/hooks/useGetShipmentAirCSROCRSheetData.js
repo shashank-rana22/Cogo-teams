@@ -6,7 +6,7 @@ const useGetShipmentAirCSROCRSheetData = ({ index = 0, setTerminalChargeState = 
 		method       : 'GET',
 		service_name : 'shipment',
 		params       : {
-			sheet_id    : sheetData?.[index]?.id,
+			sheet_id    : sheetData?.id,
 			sheet_index : 1,
 		},
 	}, { manual: true });
@@ -14,7 +14,7 @@ const useGetShipmentAirCSROCRSheetData = ({ index = 0, setTerminalChargeState = 
 	const getCSROCRData = async () => {
 		try {
 			await trigger({
-				sheet_id    : sheetData?.[index]?.id,
+				sheet_id    : sheetData?.id,
 				sheet_index : 1,
 			});
 		} catch (err) {

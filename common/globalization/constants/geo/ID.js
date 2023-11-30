@@ -610,7 +610,7 @@ export default {
 					invoicing: {
 						request_cancel_invoice  : false,
 						request_replace_invoice : false,
-						request_credit_note     : false,
+						request_credit_note     : true,
 					},
 				},
 				common: {

@@ -94,6 +94,7 @@ function getColumns({
 				const { creditNoteRequest, jobOpenRequest } = data || {};
 				const { jobNumber } = jobOpenRequest || {};
 				const { revoked } = creditNoteRequest || {};
+				const isJobOpenRequest = ['JOB_OPEN', 'JOB_OPEN_FINANCIALLY'].includes(requestType);
 				return (
 					<div className={styles.credit}>
 						<div className={cl`${styles.type_request} ${styles.common}`}>
@@ -122,7 +123,7 @@ function getColumns({
 									)}
 								</div>
 							)}
-							{requestType === 'JOB_OPEN' ? (
+							{isJobOpenRequest ? (
 								<div className={styles.job_open}>
 									SID-
 									{jobNumber || ''}

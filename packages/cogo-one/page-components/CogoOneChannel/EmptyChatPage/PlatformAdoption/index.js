@@ -5,6 +5,7 @@ import { useState } from 'react';
 import useGetUnreadMailsCount from '../../../../hooks/useGetUnreadMailsCount';
 import useGetUnreadMessagesCount from '../../../../hooks/useGetUnreadMessagesCount';
 import useListOmnichannelOnboardingRequests from '../../../../hooks/useListOmnichannelOnboardingRequests';
+import useListOmnichannelOnboardingTimelines from '../../../../hooks/useListOmnichannelOnboardingTimelines';
 
 import FilterSection from './FilterSection';
 import PlatformHistory from './PlatformHistory';
@@ -54,10 +55,21 @@ function PlatformAdoption({
 		userSharedMails,
 	});
 
+	const timeline_data = useListOmnichannelOnboardingTimelines(
+		{ showHistory, initialViewType, filterValues, setFilterValues },
+	);
+
+	const request_data = useListOmnichannelOnboardingRequests(
+		{ showHistory, initialViewType, filterValues, setFilterValues },
+	);
+
 	const {
-		loading = false, data = {},
+		loading = false,
+		data = {},
 		onboardingRequest = () => {},
-	} = useListOmnichannelOnboardingRequests({ showHistory, initialViewType, filterValues, setFilterValues });
+	} = showHistory
+		? timeline_data
+		: request_data;
 
 	const { list, ...rest } = data || {};
 	const { page, page_limit, total_count } = rest || {};

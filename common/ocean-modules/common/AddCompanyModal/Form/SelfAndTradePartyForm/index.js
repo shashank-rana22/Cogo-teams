@@ -18,6 +18,7 @@ import getTradePartiesDefaultParams from '../../../../components/Poc/helpers/get
 import POC_WORKSCOPE_MAPPING from '../../../../constants/POC_WORKSCOPE_MAPPING';
 import useListOrganizationTradeParties from '../../../../hooks/useListOrganizationTradeParties';
 import { convertObjectMappingToArray } from '../../../../utils/convertObjectMappingToArray';
+import validateMobileNumber from '../../../../utils/validateMobileNumber';
 import { getAddressRespectivePincodeAndPoc } from '../../helpers/getBillingAddressFromRegNum';
 
 import styles from './styles.module.css';
@@ -29,6 +30,7 @@ function SelfAndTradePartyForm({
 	tradePartyType = '',
 	importer_exporter_id = '',
 	organization_id = '',
+	poc_required = false,
 }, ref) {
 	const [addressData, setAddressData] = useState([]);
 	const [id, setId] = useState('');
@@ -208,7 +210,9 @@ function SelfAndTradePartyForm({
 										name="name"
 										placeholder="Enter your POC Name"
 										options={pocNameOptions}
+										rules={poc_required ? { required: 'POC Name is required' } : {}}
 									/>
+									{Error('name', errors)}
 								</div>
 								<div className={styles.form_item_container}>
 									<label className={styles.form_label}>Workscopes</label>
@@ -231,10 +235,11 @@ function SelfAndTradePartyForm({
 										size="sm"
 										rules={{
 											pattern: { value: geo.regex.EMAIL, message: 'Enter valid email' },
+											...(poc_required ? { required: 'POC Email is required' } : {}),
 										}}
 										placeholder="Enter Email Address"
 									/>
-									{Error('email')}
+									{Error('email', errors)}
 								</div>
 
 								<div className={cl`${styles.form_item_container}  ${styles.mobile_number_controller}`}>
@@ -243,8 +248,12 @@ function SelfAndTradePartyForm({
 										size="sm"
 										control={control}
 										name="mobile_number"
+										rules={poc_required ? {
+											required : 'Mobile Number is required',
+											validate : validateMobileNumber,
+										} : {}}
 									/>
-									{Error('mobile_number')}
+									{Error('mobile_number', errors)}
 								</div>
 							</div>
 

@@ -13,13 +13,14 @@ function FilterContent({
 	const { control, handleSubmit, reset, watch } = useForm();
 	const {
 		request_type = '', requested_by = '', assigned_to = '', escalation_cycle = '',
-		request_status = '', requested_completed_by = '', dateRange = {},
+		request_status = '', requested_completed_by = '', dateRange = {}, task_id = '',
 	} = watch();
 
 	const controls = getAdoptionControls({ initialViewType, pageType });
 
 	const handleFilter = (val) => {
 		setFilterValues(() => ({
+			taskId       			 : val?.task_id,
 			requestType      : val?.request_type,
 			assignTo         : val?.assigned_to,
 			escalationCycle  : val?.escalation_cycle,
@@ -41,11 +42,12 @@ function FilterContent({
 			end              : null,
 			requestCompleted : '',
 			show             : false,
+			taskId       			 : '',
 		}));
 	};
 
 	const disableButton = !request_type && !assigned_to && !requested_by && !escalation_cycle && !request_status
-	&& !requested_completed_by && isEmpty(dateRange);
+	&& !requested_completed_by && isEmpty(dateRange) && !task_id;
 
 	return (
 		<div className={styles.container}>

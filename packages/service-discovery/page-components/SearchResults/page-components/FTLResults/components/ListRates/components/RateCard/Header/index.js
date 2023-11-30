@@ -26,6 +26,7 @@ const RATE_SOURCE_MAPPING = {
 function Header({
 	rate = {},
 	detail = {},
+	refetch = () => {},
 }) {
 	const { source = '' } = rate;
 
@@ -50,7 +51,7 @@ function Header({
 			</div>
 
 			<div className={styles.right_section}>
-				<LikeDislike rateCardData={rate} detail={detail} />
+				<LikeDislike rateCardData={rate} detail={detail} refetchSearch={refetch} />
 			</div>
 		</div>
 	);

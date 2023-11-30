@@ -6,8 +6,12 @@
                 "label":"Confirm Booking"
             },
             {
-                "label":"Confirm with Shipper",
+                "label":"Onboard Shipper And Upsell Locals",
                 "value":"confirm_with_shipper"
+            },
+            {
+                "label":"Confirm Cargo Readiness",
+                "value":"confirm_cargo_readiness"
             },
             {
                 "value":"upload_booking_note",

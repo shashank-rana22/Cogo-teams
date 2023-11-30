@@ -1,21 +1,28 @@
 import { ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import useGetShipmentAirCSROCRSheetData from '../../../../../../../hooks/useGetShipmentAirCSROCRSheetData';
 import UploadTerminalCharge from '../../UploadTerminalCharge';
 import ChargeReceiptInformations from '../ChargeReceiptInformations';
+import GenerateIRN from '../GenerateIRN';
+import IRNSuccess from '../IRNSuccess';
 
 import styles from './styles.module.css';
 
 const TIME_TO_FETCH_CSR_DATA = 15000;
 const INCREMENT_BY_ONE = 1;
+const DELETE_STATES = ['create', 'fetching_data', 'data_fetched'];
 
 function ChargeInformations({
-	index = 0, type = 'terminal', sheetData = {}, control = {}, errors = {}, setValue = () => {},
+	index = 0, type = 'terminal', sheetData = {}, control = {}, errors = {}, setValue = () => {}, entityData = {},
 	setSheetData = () => {}, mainServicesData = {}, terminalChargeState = {}, setTerminalChargeState = () => {},
+	handleSubmit = () => {}, collectionPartyData = {}, createShipmentAdditionalService = () => {}, list = [],
 }) {
+	const [invoiceData, setInvoiceData] = useState([]);
+	const [tcValues, setTcValues] = useState({});
+
 	const {
 		getCSROCRData = () => {},
 		data = {},
@@ -25,7 +32,7 @@ function ChargeInformations({
 		const newObj = { ...terminalChargeState };
 		delete newObj[keyToDelete];
 		const SHIFTED_OBJ = {};
-		let newIndex = 0;
+		let newIndex = list?.length;
 
 		Object.keys(newObj).forEach((key) => {
 			SHIFTED_OBJ[newIndex] = newObj[key];
@@ -44,43 +51,74 @@ function ChargeInformations({
 	}, [getCSROCRData, index, terminalChargeState]);
 
 	return (
-		<div>
-			<h3 className={styles.heading}>
-				{type === 'terminal' ? 'Terminal' : 'Gatepass'}
-				{' '}
-				Charge Informations
-				{' '}
-				{index + INCREMENT_BY_ONE}
-			</h3>
-			{terminalChargeState[index] === 'create'
-				? (
-					<UploadTerminalCharge
-						index={index}
+		<div className={styles.charge_container}>
+			<fieldset>
+				<legend>
+					{type === 'terminal' ? 'Terminal' : 'Gatepass'}
+					{' '}
+					Charge Informations
+					{' '}
+					{index + INCREMENT_BY_ONE}
+				</legend>
+				{terminalChargeState[index] === 'create'
+					? (
+						<UploadTerminalCharge
+							index={index}
+							type={type}
+							setTerminalChargeState={setTerminalChargeState}
+							mainServicesData={mainServicesData}
+							setSheetData={setSheetData}
+							sheetData={sheetData}
+						/>
+					)
+					: null}
+				{terminalChargeState[index] === 'fetching_data'
+					? <div> Wait for 15 seconds to fetch the data</div>
+					: null}
+				{terminalChargeState[index] === 'data_fetched' ? (
+					<ChargeReceiptInformations
 						type={type}
-						setTerminalChargeState={setTerminalChargeState}
-						mainServicesData={mainServicesData}
-						setSheetData={setSheetData}
+						index={index}
+						control={control}
+						errors={errors}
+						setValue={setValue}
+						csr_data={data}
 						sheetData={sheetData}
+						handleSubmit={handleSubmit}
+						mainServicesData={mainServicesData}
+						entityData={entityData}
+						collectionPartyData={collectionPartyData}
+						setTerminalChargeState={setTerminalChargeState}
+						setInvoiceData={setInvoiceData}
+						setTcValues={setTcValues}
 					/>
-				)
-				: null}
-			{terminalChargeState[index] === 'fetching_data'
-				? <div> Wait for 15 seconds to fetch the data</div>
-				: null}
-			{terminalChargeState[index] === 'data_fetched' ? (
-				<ChargeReceiptInformations
-					index={index}
-					control={control}
-					errors={errors}
-					setValue={setValue}
-					csr_data={data}
-				/>
-			) : null}
-			{index > GLOBAL_CONSTANTS.zeroth_index ? (
-				<div className={styles.delete_button}>
-					<ButtonIcon size="xl" icon={<IcMDelete />} themeType="primary" onClick={() => deleteItem(index)} />
-				</div>
-			) : null}
+				) : null}
+				{terminalChargeState[index] === 'irn_generate' ? (
+					<GenerateIRN
+						invoiceData={invoiceData}
+						tcValues={tcValues}
+						createShipmentAdditionalService={createShipmentAdditionalService}
+						terminalChargeState={terminalChargeState}
+						setTerminalChargeState={setTerminalChargeState}
+						index={index}
+						sheetId={sheetData?.id}
+						listLength={list?.length}
+					/>
+				) : null}
+				{terminalChargeState[index] === 'irn_success' ? (
+					<IRNSuccess />
+				) : null}
+				{index > GLOBAL_CONSTANTS.zeroth_index && DELETE_STATES.includes(terminalChargeState[index]) ? (
+					<div className={styles.delete_button}>
+						<ButtonIcon
+							size="xl"
+							icon={<IcMDelete />}
+							themeType="primary"
+							onClick={() => deleteItem(index)}
+						/>
+					</div>
+				) : null}
+			</fieldset>
 		</div>
 	);
 }

@@ -2,7 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-import { FETCH_API_FOR_REQUEST } from '../constants';
+import { CATEGORY_SID_TYPES, FETCH_API_FOR_REQUEST } from '../constants';
 
 const getParams = ({ serialId }) => ({
 	filters: {
@@ -22,7 +22,8 @@ function useListShipments({ serialId = 0, ticketId = 0, idType = '', requestType
 				return;
 			}
 
-			if (requestType === 'feedback' && category?.toLowerCase() !== 'shipment') {
+			if (!FETCH_API_FOR_REQUEST.includes(requestType)
+			&& !CATEGORY_SID_TYPES.includes(category?.toLowerCase())) {
 				return;
 			}
 

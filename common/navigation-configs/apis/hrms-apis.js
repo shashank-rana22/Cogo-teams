@@ -846,6 +846,11 @@ const HRMS = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'list_company_branches',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 	profile: [
 		{

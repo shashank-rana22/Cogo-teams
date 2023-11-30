@@ -2,68 +2,22 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect } from 'react';
 
+import { PARAM_MAPPING } from '../payload/jobs_and_stats_paramsMapping';
+
 const API_END_POINT_MAPPING = {
-	fcl_freight : 'get_fcl_freight_rate_job_stats',
-	air_freight : 'get_air_freight_rate_job_stats',
-	fcl_customs : 'get_fcl_customs_rate_job_stats',
-	haulage     : 'get_haulage_freight_rate_job_stats',
-	lcl_freight : 'get_lcl_freight_rate_job_stats',
-	lcl_customs : 'get_lcl_customs_rate_job_stats',
-	air_customs : 'get_air_customs_rate_job_stats',
-	trailer     : 'get_trailer_freight_rate_job_stats',
-	ltl_freight : 'get_ltl_freight_rate_job_stats',
-	ftl_freight : 'get_ftl_freight_rate_job_stats',
-	fcl_cfs     : 'get_fcl_cfs_rate_job_stats',
-};
-
-const PARAM_MAPPING = {
-	fcl_freight: {
-		origin_location      : 'origin_port_id',
-		destination_location : 'destination_port_id',
-		operater_type        : 'shipping_line_id',
-
-	},
-	lcl_freight: {
-		origin_location      : 'origin_port_id',
-		destination_location : 'destination_port_id',
-	},
-	lcl_customs: {
-		location: 'location_id',
-	},
-	air_customs: {
-		location: 'airport_id',
-	},
-	trailer: {
-		origin_location      : 'origin_location_id',
-		destination_location : 'destination_location_id',
-		operater_type        : 'shipping_line_id',
-	},
-	ltl_freight: {
-		origin_location      : 'origin_location_id',
-		destination_location : 'destination_location_id',
-	},
-	air_freight: {
-		origin_location      : 'origin_airport_id',
-		destination_location : 'destination_airport_id',
-		operater_type        : 'airline_id',
-
-	},
-	haulage: {
-		origin_location      : 'origin_location_id',
-		destination_location : 'destination_location_id',
-		operater_type        : 'shipping_line_id',
-	},
-	fcl_customs: {
-		location: 'location_id',
-	},
-	ftl_freight: {
-		origin_location      : 'origin_location_id',
-		destination_location : 'destination_location_id',
-	},
-	fcl_cfs: {
-		location: 'location_id',
-	},
-
+	fcl_freight       : 'get_fcl_freight_rate_job_stats',
+	air_freight       : 'get_air_freight_rate_job_stats',
+	fcl_customs       : 'get_fcl_customs_rate_job_stats',
+	haulage           : 'get_haulage_freight_rate_job_stats',
+	lcl_freight       : 'get_lcl_freight_rate_job_stats',
+	lcl_customs       : 'get_lcl_customs_rate_job_stats',
+	air_customs       : 'get_air_customs_rate_job_stats',
+	trailer           : 'get_trailer_freight_rate_job_stats',
+	ltl_freight       : 'get_ltl_freight_rate_job_stats',
+	ftl_freight       : 'get_ftl_freight_rate_job_stats',
+	fcl_cfs           : 'get_fcl_cfs_rate_job_stats',
+	fcl_freight_local : 'get_fcl_freight_rate_local_job_stats',
+	air_freight_local : 'get_air_freight_rate_local_job_stats',
 };
 
 const useGetCoverageStats = ({ filter, source, showWeekData }) => {

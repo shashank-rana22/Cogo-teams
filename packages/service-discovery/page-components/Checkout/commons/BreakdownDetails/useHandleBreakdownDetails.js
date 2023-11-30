@@ -2,13 +2,11 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useContext, useMemo, useCallback } from 'react';
 
+import reorderServiceRates from '../../../../helpers/reorderServiceRates';
 import { CheckoutContext } from '../../context';
 import useUpdateCheckoutService from '../../hooks/useUpdateCheckoutService';
 
 const DEFAULT_VALUE = 0;
-
-const POSITIVE_VALUE = 1;
-const NEGATIVE_VALUE = -1;
 
 const useHandleBreakdownDetails = ({
 	rate,
@@ -30,63 +28,12 @@ const useHandleBreakdownDetails = ({
 	const [editLineItemData, setEditLineItemData] = useState({});
 
 	const updatedServiceRates = useMemo(
-		() => Object.entries(services || {})
-			.map(([key, value]) => ({ ...value, key }))
-			.sort(
-				(
-					{
-						trade_type: firstElementTradeType = '',
-						service_type: firstElementServiceType,
-					},
-					{
-						trade_type: secondElementTradeType = '',
-						service_type: secondElementServiceType,
-					},
-				) => {
-					const tradeTypeOrder = ['export', 'main', 'import', 'other'];
-
-					let firstElementFinalTradeType = firstElementServiceType === primary_service
-						? 'main'
-						: firstElementTradeType;
-
-					let secondElementFinalTradeType = secondElementServiceType === primary_service
-						? 'main'
-						: secondElementTradeType;
-
-					if (['subsidiary', 'cargo_insurance', 'warehouse'].includes(firstElementServiceType)) {
-						firstElementFinalTradeType = 'other';
-					}
-
-					if (['subsidiary', 'cargo_insurance', 'warehouse'].includes(secondElementServiceType)) {
-						secondElementFinalTradeType = 'other';
-					}
-
-					if (
-						tradeTypeOrder.findIndex(
-							(item) => firstElementFinalTradeType === item,
-						)
-							> tradeTypeOrder.findIndex(
-								(item) => secondElementFinalTradeType === item,
-							)
-					) {
-						return POSITIVE_VALUE;
-					}
-
-					if (
-						tradeTypeOrder.findIndex(
-							(item) => firstElementFinalTradeType === item,
-						)
-							< tradeTypeOrder.findIndex(
-								(item) => secondElementFinalTradeType === item,
-							)
-					) {
-						return NEGATIVE_VALUE;
-					}
-
-					return DEFAULT_VALUE;
-				},
-			),
-		[primary_service, services],
+		() => reorderServiceRates({
+			service_type   : primary_service,
+			service_rates  : services,
+			tradeTypeOrder : ['export', 'main', 'import', 'other'],
+		}),
+		[services, primary_service],
 	);
 
 	const { handleDeleteRate, deleteRateLoading } = useUpdateCheckoutService({

@@ -1,4 +1,5 @@
 import { Placeholder, Pagination, Input, Button } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import { IcMFilter } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState } from 'react';
@@ -14,6 +15,8 @@ import Card from '../TasksOverview/OverviewContent/Card';
 import FilterTags from './filterTags';
 import ListCard from './ListCard';
 import styles from './styles.module.css';
+
+const SID_FILTER_TABS = ['live_booking', 'rate_request', 'rate_feedback'];
 
 function ListData({
 	data = {},
@@ -34,12 +37,13 @@ function ListData({
 	const [shipmentId, setShipmentId] = useState('');
 	const [showFilters, setShowFilters] = useState(false);
 
+	const { query:sourceSerialIdq, debounceQuery:setSourceSerialIdq } = useDebounceQuery();
+	const { query:serialIdq, debounceQuery:setSerialIdq } = useDebounceQuery();
+
 	const { statistics = {} } = statsData;
 	const { list = [] } = data;
 
 	const { dynamic_statistics = {} } = statsData;
-
-	const idToUse = source === 'live_booking' ? shipmentId : serialId;
 
 	const handleClick = (card) => {
 		setSource(card);
@@ -47,21 +51,17 @@ function ListData({
 		setSerialId('');
 	};
 
-	const handelFilter = (val) => {
-		if (source === 'live_booking') {
-			setShipmentId(val);
-		} else {
-			setSerialId(val);
-		}
-	};
+	useEffect(() => {
+		getListCoverage(serialIdq, sourceSerialIdq);
+	}, [getListCoverage, serialIdq, sourceSerialIdq, source]);
 
 	useEffect(() => {
-		if (source === 'live_booking') {
-			getListCoverage(shipmentId);
-		} else {
-			getListCoverage(serialId);
-		}
-	}, [getListCoverage, serialId, shipmentId, source]);
+		setSourceSerialIdq(shipmentId);
+	}, [setSourceSerialIdq, shipmentId]);
+
+	useEffect(() => {
+		setSerialIdq(serialId);
+	}, [setSerialIdq, serialId]);
 
 	return (
 		<div className={styles.main_container}>
@@ -90,11 +90,21 @@ function ListData({
 						{HEADINGS[source] || 'Critical Port Pairs'}
 					</span>
 				)}
+					{SID_FILTER_TABS.includes(source)
+						&& (
+							<Input
+								size="sm"
+								value={shipmentId}
+								onChange={(val) => setShipmentId(val)}
+								placeholder="Search by SID"
+								style={{ width: '200px', marginLeft: '10px' }}
+							/>
+						)}
 					<Input
 						size="sm"
-						value={idToUse}
-						onChange={(val) => handelFilter(val)}
-						placeholder={source === 'live_booking' ? 'Search by SID' : 'Search by TID'}
+						value={serialId}
+						onChange={(val) => setSerialId(val)}
+						placeholder="Search by TID"
 						style={{ width: '200px', marginLeft: '10px' }}
 					/>
 				</div>

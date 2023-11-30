@@ -1,4 +1,7 @@
-.buttons_container {
-	display: flex;
-	align-items: flex-end;
+.modal_container {
+	:global {
+		.ui_modal_body_container {
+			max-height: 500px;
+		}
+	}
 }

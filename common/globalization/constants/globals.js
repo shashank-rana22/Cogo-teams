@@ -229,6 +229,7 @@ const GLOBAL_CONSTANTS = {
 		manoj_mahapatra_user_id : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		santram_gurjar_user_id 	: '039a0141-e6f3-43b0-9c51-144b22b9fc84',
 		abhishek_kumar_user_id  : 'fa0dcd74-4b68-4783-a2f9-81dfab26008a',
+		rishi_user_id           :	'7f6f97fd-c17b-4760-a09f-d70b6ad963e8',
 		local_charge_providers  : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 			GB : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
@@ -557,9 +558,11 @@ const GLOBAL_CONSTANTS = {
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/performance-leaderboard.svg',
 		airline_default_icon:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/0bb3e81c809850057f301c39d8584d4c.png',
-		wider_arrow                     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/wide-arrow',
-		public_leaderboard_winner_icon  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/winner_icon.svg',
-		public_leaderboard_announcement : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/announcement.svg',
+		wider_arrow                    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/wide-arrow',
+		public_leaderboard_winner_icon : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/winner_icon.svg',
+		public_leaderboard_quest_winner_icon:
+		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/rank-badge.svg',
+		public_leaderboard_announcement: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/announcement.svg',
 		kpi:
 		'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/Rectangle_126.svg',
 		cogo_lite:

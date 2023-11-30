@@ -1,0 +1,30 @@
+.container {
+	padding: 12px;
+	margin-top: 16px;
+	background: #fcfcfc;
+	border-radius: 8px;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	margin-bottom: 12px;
+}
+
+.number {
+	align-items: flex-start;
+	width: 16px;
+	height: 16px;
+	background-color: #fde74d;
+	border-radius: 50%;
+}
+
+.number_div {
+	font-size: 10px;
+	text-align: center;
+}
+
+.label {
+	margin-left: 8px;
+	font-weight: 700;
+}

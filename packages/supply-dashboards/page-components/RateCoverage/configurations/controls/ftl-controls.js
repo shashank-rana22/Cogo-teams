@@ -56,7 +56,6 @@ const ftlControls = ({
 			label       : 'Origin Main port',
 			placeholder : 'Origin Main port',
 			span        : 4,
-			rules       : { required: 'origin main port is required' },
 		},
 		{
 			name        : 'destination_location_id',
@@ -75,7 +74,6 @@ const ftlControls = ({
 			label       : 'Destination main port',
 			span        : 4,
 			placeholder : 'Destination main port',
-			rules       : { required: 'destination main port is required' },
 		},
 		{
 			name        : 'truck_type',

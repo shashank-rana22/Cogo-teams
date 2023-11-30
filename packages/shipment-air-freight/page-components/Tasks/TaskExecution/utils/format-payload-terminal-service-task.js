@@ -1,15 +1,15 @@
 import { Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import { isEmpty } from '@cogoport/utils';
 
 const DEFAULT_VALUE_FOR_TERMINAL_CHARGE = 0;
 const DEFAULT_VALUE_FOR_SHEET_INDEX = 1;
 
 const getPayload = ({
-	type: taskType = 'terminal', task_id = '', values = {}, mainServicesData = {}, sheetData = {},
-	entityData = {}, collectionPartyData = {}, localServiceId = '',
+	type: taskType = 'terminal', task_id = '', values = {}, mainServicesData = {},
+	entityData = {}, collectionPartyData = {}, localServiceId = '', index = 0, sheetData = {},
 }) => {
 	const geo = getGeoConstants();
+	const { id = '' } = sheetData || {};
 	const {
 		business_name = '', cin = '',
 		entity_code = '', registration_number = '', tan_no = '', country = {},
@@ -40,24 +40,30 @@ const getPayload = ({
 		destination_airport_id = '', booking_reference_number = '',
 	} = mainServicesData || {};
 
-	const CSR_FILE_DATA = [];
+	const csr_data = [
+		{
+			airline_id,
+			invoice_type : 'purchase_invoice',
+			awb_number   : booking_reference_number,
+			origin_airport_id,
+			destination_airport_id,
+			line_items   : [
+				{
+					total_price     : Number(values?.[`price_${index}`]),
+					other_price     : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
+					discount        : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
+					commission      : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
+					total_tax       : Number(values?.[`tax_price_${index}`]),
+					weight          : chargeable_weight,
+					currency,
+					tax_total_price : Number(values?.[`total_tax_price_${index}`]),
+				},
+			],
+			receipt_reference_no: values?.[`csr_reference_number_${index}`],
+		},
+	];
 
-	(Object.keys(sheetData) || []).forEach((i) => {
-		const data = {
-			csr_sheet_id    : sheetData[i]?.id,
-			currency,
-			weight          : Number(chargeable_weight),
-			total_price     : Number(values?.[`price_${i}`]),
-			discount        : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
-			other_price     : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
-			total_tax       : Number(values?.[`tax_price_${i}`]),
-			commission      : DEFAULT_VALUE_FOR_TERMINAL_CHARGE,
-			tax_total_price : Number(values?.[`total_tax_price_${i}`]),
-		};
-		CSR_FILE_DATA.push(data);
-	});
-
-	if (isEmpty(CSR_FILE_DATA)) {
+	if (index < 0) {
 		Toast.error(`Add atleast one ${taskType === 'terminal' ? 'Terminal' : 'Gatepass'} Information`);
 		return null;
 	}
@@ -65,10 +71,11 @@ const getPayload = ({
 	const payload = {
 		shipment_id,
 		airline_id,
-		csr_file_data        : CSR_FILE_DATA,
+		csr_data,
 		organization_id      : geo.uuid.freight_force_org_id,
 		service              : 'air_freight_local_service',
 		sheet_index          : DEFAULT_VALUE_FOR_SHEET_INDEX,
+		csr_sheet_id         : id,
 		billing_party_detail : {
 			organization_id : cogo_entity_id,
 			cin,
@@ -104,9 +111,10 @@ const getPayload = ({
 		invoice_type_line_item : taskType === 'terminal' ? 'thc' : 'gic',
 		service_id             : localServiceId,
 		pending_task_id        : task_id,
-		name                   : taskType === 'terminal' ? 'Terminal HandlingCharges' : 'Gatepass Charges',
+		name                   : taskType === 'terminal' ? 'Terminal Handling Charges' : 'Gatepass Charges',
 		code                   : taskType === 'terminal' ? 'THC' : 'GIC',
 	};
+
 	return payload;
 };
 export default getPayload;

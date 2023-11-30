@@ -9,7 +9,7 @@ import getOptions from '../../utilis/get-options';
 const INCREMENT_VALUE = 1;
 
 const useFieldMutation = ({
-	fields, values, chargeCodesAll, cfsCharges, service_type, mandatoryChargeCnt, setValue,
+	fields, values, chargeCodesAll, cfsCharges, service_type, setValue,
 }) => {
 	const serviceProviderOptions = useGetAsyncOptions(
 		merge(
@@ -31,6 +31,37 @@ const useFieldMutation = ({
 	const demurrageSlabs = values?.demurrage_days;
 	const freeDemurrageDays = values?.demurrage_free_days;
 
+	useEffect(() => {
+		let prefillFreightCodes = [];
+		const { line_items = [] } = fields;
+		prefillFreightCodes = line_items;
+
+		let mandatoryFreightCodes = [];
+		Object?.values(chargeCodesAll || cfsCharges || {}).forEach((chargeItem) => {
+			if (chargeItem?.tags?.includes('mandatory')) {
+				let flag = {};
+				prefillFreightCodes.forEach((charge) => {
+					if (charge.code === chargeItem?.code) {
+						flag = charge;
+					}
+				});
+
+				if (Object.keys(flag).length) {
+					prefillFreightCodes = prefillFreightCodes.filter((item) => item.code !== flag.code);
+					mandatoryFreightCodes = [...mandatoryFreightCodes,
+						{ code: chargeItem?.code, price: flag?.price, unit: flag?.unit, currency: flag?.currency }];
+				} else {
+					mandatoryFreightCodes = [...mandatoryFreightCodes,
+						{ code: chargeItem?.code, price: '', unit: '', currency: '' }];
+				}
+			}
+		});
+
+		if (mandatoryFreightCodes.length || prefillFreightCodes.length) {
+			setValue('line_items', [...mandatoryFreightCodes, ...prefillFreightCodes]);
+		}
+	}, [JSON.stringify(chargeCodesAll) || JSON.stringify(cfsCharges)]);
+
 	const newfields = fields.map((control) => {
 		const { name, type, optionsListKey } = control;
 		let newControl = { ...control };
@@ -51,6 +82,13 @@ const useFieldMutation = ({
 
 		if (type === 'fieldArray' && name.includes('line_items')) {
 			const codeMapping = name === 'fcl_customs_cfs_line_items' ? cfsCharges : chargeCodesAll || {};
+			let count = 0;
+			Object.values(chargeCodesAll || cfsCharges || {}).forEach((code) => {
+				if (code?.tags?.includes('mandatory')) {
+					count += 1;
+				}
+			});
+			newControl.noDeleteButtonTill = count;
 
 			newControl.controls = newControl.controls.map((childCtrl) => {
 				const newChildCtrl = { ...childCtrl };
@@ -77,7 +115,7 @@ const useFieldMutation = ({
 				if (service_type === 'fcl_cfs' && childCtrl.name === 'code') {
 					newChildCtrl.options = cfsCharges.map((code) => ({ ...code, value: code.code }));
 				}
-				newControl.noDeleteButtonTill = mandatoryChargeCnt;
+
 				return newChildCtrl;
 			});
 		}

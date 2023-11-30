@@ -238,7 +238,7 @@
             "consignee"
         ],
         "can_edit": ["notifying_party", "collection_party"],
-        "edit_internal_poc": ["collection_desk", "release_desk"],
+        "edit_internal_poc": ["collection_desk", "release_desk", "bl_release_desk", "bl_collection_desk","do_release_desk", "do_collection_desk"],
         "can_add_service_provider_poc": true
     },
     "document_control_manager": {

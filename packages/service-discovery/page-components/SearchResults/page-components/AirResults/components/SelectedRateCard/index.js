@@ -15,6 +15,7 @@ function SelectedRateCard({
 	setHeaderProps = () => {},
 	headerProps = {},
 	setRouterLoading = () => {},
+	refetch: refetchSearch = () => {},
 }) {
 	const { query = {} } = useSelector(({ general }) => ({
 		query: general?.query,
@@ -51,6 +52,7 @@ function SelectedRateCard({
 				rate={selectedRate}
 				detail={detail}
 				setRouterLoading={setRouterLoading}
+				refetch={refetchSearch}
 			/>
 
 			<Services

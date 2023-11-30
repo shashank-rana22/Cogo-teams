@@ -6,17 +6,19 @@ import { useState } from 'react';
 import { HEADINGS } from '../configurations/helpers/constants';
 
 const END_POINT_MAPPING = {
-	fcl_freight : 'get_fcl_freight_rate_job_csv_url',
-	air_freight : 'get_air_freight_rate_job_csv_url',
-	lcl_freight : 'get_lcl_freight_rate_job_csv_url',
-	lcl_customs : 'get_lcl_customs_rate_job_csv_url',
-	air_customs : 'get_air_customs_rate_job_csv_url',
-	trailer     : 'get_trailer_freight_rate_job_csv_url',
-	ltl_freight : 'get_ltl_freight_rate_job_csv_url',
-	haulage     : 'get_haulage_freight_rate_job_csv_url',
-	fcl_customs : 'get_fcl_customs_rate_job_csv_url',
-	ftl_freight : 'get_ftl_freight_rate_job_csv_url',
-	fcl_cfs     : 'get_fcl_cfs_rate_job_csv_url',
+	fcl_freight       : 'get_fcl_freight_rate_job_csv_url',
+	air_freight       : 'get_air_freight_rate_job_csv_url',
+	lcl_freight       : 'get_lcl_freight_rate_job_csv_url',
+	lcl_customs       : 'get_lcl_customs_rate_job_csv_url',
+	air_customs       : 'get_air_customs_rate_job_csv_url',
+	trailer           : 'get_trailer_freight_rate_job_csv_url',
+	ltl_freight       : 'get_ltl_freight_rate_job_csv_url',
+	haulage           : 'get_haulage_freight_rate_job_csv_url',
+	fcl_customs       : 'get_fcl_customs_rate_job_csv_url',
+	ftl_freight       : 'get_ftl_freight_rate_job_csv_url',
+	fcl_cfs           : 'get_fcl_cfs_rate_job_csv_url',
+	fcl_freight_local : 'get_fcl_freight_rate_local_job_csv_url',
+	air_freight_local : 'get_air_freight_rate_local_job_csv_url',
 };
 
 const sources = Object.keys(HEADINGS);
@@ -27,6 +29,7 @@ const useGetCsvFile = (filter, activeCard) => {
 	}));
 	const [urlList, setUrlList] = useState([]);
 	const { user: { id: user_id = '' } = {} } = user_data;
+
 	const [{ loading }, trigger] = useRequest({
 		url    : END_POINT_MAPPING[filter?.service],
 		method : 'GET',
