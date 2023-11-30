@@ -61,14 +61,14 @@ const getFormatterValues = ({ values = {} }) => {
 	});
 
 	return {
-		partner_id      : type === 'cogoport' ? partner_id : undefined,
+		partner_id        : type === 'cogoport' ? partner_id : undefined,
 		service,
-		organization_id : organization_id || undefined,
-		margin_type     : type,
-		rate_type       : rateType,
-		margin_slabs    : MARGINS_ARR,
-		margin_applied_on,
-		filters         : { ...allFilters, rate_type: rateType },
+		organization_id   : organization_id || undefined,
+		margin_type       : type,
+		rate_type         : rateType,
+		margin_slabs      : MARGINS_ARR,
+		margin_applied_on : margin_applied_on || 'line_items',
+		filters           : { ...allFilters, rate_type: rateType },
 		is_sales_discount_allowed,
 		is_marketing_discount_allowed,
 	};
