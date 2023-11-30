@@ -16,6 +16,7 @@ import PdaApproval from './PdaApproval';
 import RequestCN from './RequestCN/index';
 import RevokeInvoiceDetails from './RevokeInvoiceDetails';
 import SettlementModal from './SettlementModal/index';
+import SezApproval from './SezApproval';
 import TdsDeviationModal from './TdsDeviationModal/index';
 
 const TYPE_COMPONENT_MAPPING = {
@@ -34,6 +35,7 @@ const TYPE_COMPONENT_MAPPING = {
 	JOB_OPEN_FINANCIALLY                   : JobOpenModal,
 	CONCOR_PDA_APPROVAL                    : PdaApproval,
 	REVOKE_INVOICE                         : RevokeInvoiceDetails,
+	SEZ_APPROVAL                           : SezApproval,
 };
 
 function ViewRequested({ itemData = {}, name = '', refetch = () => {} }) {

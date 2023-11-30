@@ -51,6 +51,10 @@ export const filterControls = (activeTab) => {
 							value : 'REVOKE_INVOICE',
 							label : 'Revoke Invoice',
 						},
+						{
+							value : 'SEZ_APPROVAL',
+							label : 'SEZ Approval',
+						},
 					],
 				},
 				{
@@ -125,6 +129,10 @@ export const filterControls = (activeTab) => {
 							value : 'REVOKE_INVOICE',
 							label : 'Revoke Invoice',
 						},
+						{
+							value : 'SEZ_APPROVAL',
+							label : 'SEZ Approval',
+						},
 					],
 				},
 				{
@@ -198,6 +206,10 @@ export const filterControls = (activeTab) => {
 						{
 							value : 'REVOKE_INVOICE',
 							label : 'Revoke Invoice',
+						},
+						{
+							value : 'SEZ_APPROVAL',
+							label : 'SEZ Approval',
 						},
 					],
 				},
