@@ -45,7 +45,7 @@ const useDeleteFreightRateFeedbacks = (service) => {
 		const keyToSend = KEY_TO_SEND[service];
 		try {
 			const body = {
-				[keyToSend]     : id,
+				[keyToSend]     : [id]?.flat(),
 				closing_remarks : [checkboxValue || closing_remarks || 'Rate Created'],
 				remarks         : remarks || undefined,
 			};

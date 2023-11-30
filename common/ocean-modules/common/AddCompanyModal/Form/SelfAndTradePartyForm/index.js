@@ -18,6 +18,7 @@ import getTradePartiesDefaultParams from '../../../../components/Poc/helpers/get
 import POC_WORKSCOPE_MAPPING from '../../../../constants/POC_WORKSCOPE_MAPPING';
 import useListOrganizationTradeParties from '../../../../hooks/useListOrganizationTradeParties';
 import { convertObjectMappingToArray } from '../../../../utils/convertObjectMappingToArray';
+import validateMobileNumber from '../../../../utils/validateMobileNumber';
 import { getAddressRespectivePincodeAndPoc } from '../../helpers/getBillingAddressFromRegNum';
 
 import styles from './styles.module.css';
@@ -36,7 +37,6 @@ function SelfAndTradePartyForm({
 	const [pocNameOptions, setPocNameOptions] = useState([]);
 	const [countryId, setCountryId] = useState('');
 	const [registrationNumber, setRegistrationNumber] = useState('');
-
 	const {
 		data:{ list = [] } = {},
 		loading,
@@ -44,16 +44,10 @@ function SelfAndTradePartyForm({
 		...getTradePartiesDefaultParams({ companyType, tradePartyType }),
 		organization_id: organization_id || importer_exporter_id,
 	});
-
 	const geo = getGeoConstants();
 
 	const {
-		control,
-		watch,
-		resetField,
-		handleSubmit,
-		formState:{ errors = {} },
-		setValue,
+		control, watch, resetField, handleSubmit, formState:{ errors = {} }, setValue,
 	} = useForm();
 
 	const { trade_party_id, address, name } = watch();
@@ -128,7 +122,6 @@ function SelfAndTradePartyForm({
 	function Error(key) {
 		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 	}
-
 	const countryValidation = getCountryConstants({ country_id: countryId, isDefaultData: false });
 
 	useEffect(() => {
@@ -182,9 +175,9 @@ function SelfAndTradePartyForm({
 										placeholder="Select Address"
 										control={control}
 										options={address_options[trade_party_id] || []}
-										rules={{ required: { value: true, message: 'Address is required' } }}
+										// rules={{ required: { value: true, message: 'Address is required' } }}
 									/>
-									{Error('address')}
+									{/* {Error('address')} */}
 								</div>
 
 								<div className={styles.form_item_container}>
@@ -194,9 +187,14 @@ function SelfAndTradePartyForm({
 										name="pincode"
 										placeholder="Enter Pincode"
 										size="sm"
-										rules={{ required: { value: true, message: 'Pincode / Zip Code is required' } }}
+										// rules={{
+										// 	required: {
+										// 		value   : true,
+										// 		message : 'Pincode / Zip Code is required',
+										// 	},
+										// }}
 									/>
-									{Error('pincode')}
+									{/* {Error('pincode')} */}
 								</div>
 							</div>
 
@@ -234,7 +232,7 @@ function SelfAndTradePartyForm({
 										size="sm"
 										rules={{
 											pattern: { value: geo.regex.EMAIL, message: 'Enter valid email' },
-											...(poc_required ? { required: 'POC Name is required' } : {}),
+											...(poc_required ? { required: 'POC Email is required' } : {}),
 										}}
 										placeholder="Enter Email Address"
 									/>
@@ -247,6 +245,10 @@ function SelfAndTradePartyForm({
 										size="sm"
 										control={control}
 										name="mobile_number"
+										rules={poc_required ? {
+											required : 'Mobile Number is required',
+											validate : validateMobileNumber,
+										} : {}}
 									/>
 									{Error('mobile_number', errors)}
 								</div>

@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback } from 'react';
 
 import { dateFormatter } from '../helpers';
@@ -7,23 +8,26 @@ import { dateFormatter } from '../helpers';
 const getListofInvoicePayload = ({
 	pageIndex, pageSize,
 	activePayrunTab, query,
+	overseasData,
 	selectFromDate, selectToDate,
 	sort,
 	activeEntity = '',
-}) => ({
-	pageIndex,
-	pageSize,
-	state             : activePayrunTab,
-	q                 : query !== '' ? query : undefined,
-	startDate         : selectFromDate || undefined,
-	endDate           : selectToDate || undefined,
-	dueDateSortType   : 'asc',
-	createdAtSortType : 'desc',
-	...sort,
-	entityCode        : activeEntity,
-});
+}) => (
+	{
+		pageIndex,
+		pageSize,
+		state             : activePayrunTab,
+		q                 : !isEmpty(query) ? query : undefined,
+		type              : overseasData,
+		startDate         : selectFromDate || undefined,
+		endDate           : selectToDate || undefined,
+		dueDateSortType   : 'asc',
+		createdAtSortType : 'desc',
+		...sort,
+		entityCode        : activeEntity,
+	});
 
-const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters }) => {
+const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters, overseasData = 'NORMAL' }) => {
 	const { pageIndex, pageSize, createdAt, activeEntity = '' } = globalFilters || {};
 
 	const [{ data, loading }, trigger] = useRequestBf(
@@ -34,7 +38,6 @@ const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters 
 		},
 		{ manual: true, autoCancel: false },
 	);
-
 	const { selectFromDate, selectToDate } = dateFormatter(createdAt);
 
 	const getPayrunListView = useCallback(() => {
@@ -43,6 +46,7 @@ const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters 
 			pageSize,
 			activePayrunTab,
 			query,
+			overseasData,
 			selectFromDate,
 			selectToDate,
 			sort,
@@ -56,7 +60,8 @@ const useGetPayrunBillListView = ({ activePayrunTab, query, sort, globalFilters 
 		} catch (err) {
 			Toast.error(err.message);
 		}
-	}, [activePayrunTab, pageIndex, pageSize, query, selectFromDate, selectToDate, sort, trigger, activeEntity]);
+	}, [pageIndex, pageSize, activePayrunTab, query,
+		overseasData, selectFromDate, selectToDate, sort, activeEntity, trigger]);
 
 	return {
 		getPayrunListView,

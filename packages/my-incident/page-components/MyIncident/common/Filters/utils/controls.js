@@ -39,6 +39,10 @@ export const filterControls = (activeTab) => {
 							value : 'JOB_OPEN',
 							label : 'Job Open',
 						},
+						{
+							value : 'JOB_OPEN_FINANCIALLY',
+							label : 'Job Open Financially',
+						},
 					],
 				},
 				{
@@ -101,6 +105,10 @@ export const filterControls = (activeTab) => {
 							value : 'JOB_OPEN',
 							label : 'Job Open',
 						},
+						{
+							value : 'JOB_OPEN_FINANCIALLY',
+							label : 'Job Open Financially',
+						},
 					],
 				},
 				{
@@ -162,6 +170,10 @@ export const filterControls = (activeTab) => {
 						{
 							value : 'JOB_OPEN',
 							label : 'Job Open',
+						},
+						{
+							value : 'JOB_OPEN_FINANCIALLY',
+							label : 'Job Open Financially',
 						},
 					],
 				},

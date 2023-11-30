@@ -1,6 +1,7 @@
 import { Popover, Toggle, Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMProfile, IcMCross } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -17,7 +18,15 @@ function Header({
 	showImpMsg = false,
 	setShowImpMsg = () => {},
 }) {
-	const { serial_id } = channelData || {};
+	const { push } = useRouter();
+
+	const { serial_id, shipment_type, id: shipment_id } = channelData || {};
+	const shipmentType = shipment_type?.split('_')?.[GLOBAL_CONSTANTS.zeroth_index];
+
+	const handleClick = () => {
+		push(`/booking/${shipmentType}/[shipment_id]`, `/booking/${shipmentType}/${shipment_id}`);
+		setShow(false);
+	};
 
 	const groupChatUsers = isStakeholder
 		? stakeholderMappings[channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index] || 'default']
@@ -31,6 +40,7 @@ function Header({
 					<Button
 						className={styles.serial_id}
 						themeType="link"
+						onClick={() => handleClick()}
 					>
 						{`Shipment ID #${serial_id}`}
 					</Button>

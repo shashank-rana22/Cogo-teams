@@ -14,7 +14,9 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
+}
 
+.sub_container {
 	:global {
 		.react-datepicker__input-container {
 			display: flex;

@@ -232,6 +232,7 @@
     "criteria_required_message": "必须填写标准",
     "shipment_re_open_request": "货件重新打开请求",
     "job_open_label": "职位空缺",
+    "job_open_fin_label":"财务职位空缺",
     "total_buy_label": "总购买量",
     "total_sell_label": "总销售",
     "profit_margin_label" : "利润率"

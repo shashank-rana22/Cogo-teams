@@ -14,6 +14,7 @@ import { useImperativeHandle, forwardRef, useEffect, useState, useCallback } fro
 import POC_WORKSCOPE_MAPPING from '../../../../constants/POC_WORKSCOPE_MAPPING';
 import useListOrganizationTradeParties from '../../../../hooks/useListOrganizationTradeParties';
 import { convertObjectMappingToArray } from '../../../../utils/convertObjectMappingToArray';
+import validateMobileNumber from '../../../../utils/validateMobileNumber';
 import getBillingAddressFromRegNum, { getAddressRespectivePincodeAndPoc } from
 	'../../helpers/getBillingAddressFromRegNum';
 
@@ -242,7 +243,10 @@ function CreateNewCompanyForm({ tradePartyType = '', primary_service = {}, poc_r
 							size="sm"
 							control={control}
 							name="mobile_number"
-							rules={poc_required ? { required: 'Mobile Number is required' } : {}}
+							rules={poc_required ? {
+								required : 'Mobile Number is required',
+								validate : validateMobileNumber,
+							} : {}}
 
 						/>
 						{Error('mobile_number', errors)}

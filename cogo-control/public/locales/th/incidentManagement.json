@@ -232,6 +232,7 @@
   "criteria_required_message": "ต้องระบุเกณฑ์",
   "shipment_re_open_request": "คำขอเปิดการจัดส่งอีกครั้ง",
   "job_open_label": "เปิดรับสมัคร",
+  "job_open_fin_label":"เปิดรับสมัคร การเงิน",
   "total_buy_label": "ยอดซื้อทั้งหมด",
   "total_sell_label": "ขายรวม",
   "profit_margin_label" : "อัตรากำไรขั้นต้น"

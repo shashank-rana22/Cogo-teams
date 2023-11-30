@@ -6,7 +6,7 @@
                 "label":"Confirm Booking"
             },
             {
-                "label":"Confirm with Shipper",
+                "label":"Onboard Shipper And Upsell Locals",
                 "value":"confirm_with_shipper"
             },
             {

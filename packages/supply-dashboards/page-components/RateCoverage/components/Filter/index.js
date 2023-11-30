@@ -202,7 +202,6 @@ function Filter({
 					)}
 					{['fcl_customs', 'fcl_cfs', 'lcl_customs', 'air_customs',
 						'air_freight_local', 'fcl_freight_local'].includes(filter?.service) && (
-
 							<div>
 								<p>Location</p>
 								<Select
@@ -210,6 +209,7 @@ function Filter({
 									{...destinationLocationOptions}
 									value={filter?.location}
 									isClearable
+									style={{ width: '250px' }}
 									onChange={(val) => {
 										setFilter((prevFilters) => ({
 											...prevFilters,

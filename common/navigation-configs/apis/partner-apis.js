@@ -5053,6 +5053,16 @@ const partner = {
 			service_name : 'fcl_cfs_rate',
 		},
 		{
+			api          : 'get_fcl_freight_rate_local_job_csv_url',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'get_air_freight_rate_local_job_csv_url',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
+		{
 			api          : 'delete_fcl_freight_rate_job',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
@@ -9122,6 +9132,12 @@ const partner = {
 			feature      : 'outstanding',
 			service_name : 'sage',
 
+		},
+		{
+			api         : 'get_payments_outstanding_service_wise_outstanding',
+			access_type : 'private',
+			module      : 'outstanding',
+			feature     : 'outstanding',
 		},
 		{
 			api          : 'sync_sage_ar_outstanding',
