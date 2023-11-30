@@ -1,9 +1,9 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-const getFormatDate = (newdate) => {
-	const [date, time] = newdate?.split(' ') || [];
-	const [day, month, year] = date.split('-');
+const getFormatDate = (newdate = '') => {
+	const [date = '', time = ''] = newdate?.split(' ') || [];
+	const [day = '', month = '', year = ''] = date?.split('-') || [];
 	const reversedDate = `${month}-${day}-${year} ${time}`;
 
 	return formatDate(
@@ -60,12 +60,12 @@ const getComponentMapping = ({ data = {} }) => [
 			{
 				subLabel : 'Document Date',
 				subKey   : 'doc_date',
-				value    : getFormatDate(data?.documentDate || ''),
+				value    : data?.documentDate ? getFormatDate(data?.documentDate || '') || '' : '',
 			},
 			{
 				subLabel : 'Due Date',
 				subKey   : 'due_date',
-				value    : getFormatDate(data?.dueDate || ''),
+				value    : data?.documentDate ? getFormatDate(data?.dueDate || '') || '' : null,
 			},
 		],
 	},
