@@ -2,9 +2,6 @@ import { cl } from '@cogoport/components';
 import getSideBarConfigs from '@cogoport/navigation-configs/side-bar';
 import { useGetPermission } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
-import { initializeApp, getApp, getApps } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
@@ -15,12 +12,12 @@ import GroupCall from './GroupCall';
 import useGetUnreadMessagesCount from './helpers/useGetUnreadMessageCount';
 import LeadFeedBackVoiceCallForm from './LeadFeedBackVoiceCallForm';
 import { LockScreen } from './LockScreen';
-import { FIREBASE_CONFIG } from './LockScreen/configurations/firebase-config';
 import Navbar from './Navbar';
 import TnC from './newTnC';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
 import useFetchPinnedNavs from './useFetchPinnedNavs';
+import useFireBase from './useFireBase';
 import useGetUnreadTicketCount from './useGetUnreadTicketCount';
 import VideoCall from './VideoCall';
 import VoiceCall from './VoiceCall';
@@ -71,15 +68,16 @@ function AdminLayout({
 		pinListLoading = false,
 	} = useFetchPinnedNavs({ user_id, partner_id, setPinnedNavKeys, setAnnouncements });
 
+	const {
+		firestore = {},
+	} = useFireBase({ user_data });
+
 	const { permissions_navigations } = useGetPermission();
 
 	const allPermissions = Object.keys(permissions_navigations || {});
 	const isTicketAllowed = allPermissions.includes('ticket_management-my_tickets');
 
 	const { data = 0 } = useGetUnreadTicketCount({ isTicketAllowed });
-
-	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
-	const firestore = getFirestore(app);
 
 	const configs = getSideBarConfigs({ userData: user_data, pinnedNavKeys, t });
 
@@ -137,6 +135,7 @@ function AdminLayout({
 				videoCallRecipientData={video_call_recipient_data}
 				inVideoCall={inVideoCall}
 				videoCallId={videoCallId}
+				firestore={firestore}
 			/>
 			<AnnouncementModal data={announcements} />
 

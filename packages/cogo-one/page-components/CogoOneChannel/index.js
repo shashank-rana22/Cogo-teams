@@ -4,7 +4,6 @@ import { useRouter, dynamic } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
-import { getAuth, signInWithCustomToken } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
@@ -36,10 +35,9 @@ const PortPairOrgFilters = dynamic(() => import('./PortPairOrgFilters'));
 
 function CogoOne() {
 	const { query: { assigned_chat = '', channel_type = '' } } = useRouter();
-	const { userId = '', token = '', userEmailAddress = '', userName = '' } = useSelector(({ profile }) => ({
+	const { userId = '', userEmailAddress = '', userName = '' } = useSelector(({ profile }) => ({
 		userId           : profile?.user?.id,
 		userName         : profile?.user?.name,
-		token            : profile?.user?.firestore_custom_token,
 		userEmailAddress : profile?.user?.email,
 	}));
 
@@ -133,14 +131,6 @@ function CogoOne() {
 		) || teamsSideBarCheck) && activeTab?.expandSideBar));
 	const collapsedSideBar = (ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type) || teamsSideBarCheck)
 								&& !activeTab?.expandSideBar;
-	useEffect(() => {
-		if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
-			const auth = getAuth();
-			signInWithCustomToken(auth, token).catch((error) => {
-				console.error(error.message);
-			});
-		}
-	}, [token]);
 
 	useEffect(() => setViewType(initialViewType), [initialViewType]);
 

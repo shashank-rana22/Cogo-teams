@@ -15,7 +15,7 @@
 
 .basic_details {
 	display: flex;
-	justify-content: start;
+	justify-content: flex-start;
 }
 
 .basic_details_item_container {
