@@ -6,7 +6,7 @@ import PaginationBar from '../common/PaginationBar';
 import { TAB_MAPPING } from '../configs/TAB_MAPPING';
 import useGetIncidentMangement from '../hooks/useGetIncidentManagement';
 import SelectFilter from '../SelectFilters';
-import { COLUMNS_MAPPING } from '../utils/getColumns';
+import getTableColumns from '../utils/getColumns';
 
 import List from './List';
 import styles from './styles.module.css';
@@ -29,7 +29,7 @@ function Dashboard() {
 		setPayload(null);
 	}, [activeTab]);
 
-	const columns = COLUMNS_MAPPING(
+	const columns = getTableColumns(
 		{
 			setActiveTab,
 			isSortActive,
