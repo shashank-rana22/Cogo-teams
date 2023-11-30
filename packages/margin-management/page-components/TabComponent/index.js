@@ -1,6 +1,8 @@
 import { Tabs, TabPanel, Button, Modal, Select } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMUpwardGraph } from '@cogoport/icons-react';
 import { useGetPermission } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useMemo, useCallback, useState, useEffect } from 'react';
 
 import conditions from '../../utils/condition-constants';
@@ -31,11 +33,20 @@ function TabComponent({
 	setActivetab = () => { }, refetch = () => { },
 	activeService = '', setActiveService = () => { },
 }) {
+	const { permissions_navigations } = useSelector(({ profile }) => ({
+		permissions_navigations: profile?.permissions_navigations,
+
+	}));
+	const nav = permissions_navigations?.margin || {};
+	const viewTypeForListMargin = nav?.list_margins[GLOBAL_CONSTANTS.zeroth_index]?.view_type || '';
+
 	const { isConditionMatches } = useGetPermission();
 
 	const [showFunnelModal, setShowFunnelModal] = useState(false);
 
 	const [isMobile, setIsMobile] = useState(false);
+
+	const toShowCogoAndMultiEntityMargin = viewTypeForListMargin === 'across_all';
 
 	useEffect(() => {
 		function handleResize() {
@@ -58,10 +69,10 @@ function TabComponent({
 		// 	[...conditions.SEE_ALL_MARGINS, ...conditions.SEE_SUPPLY_MARGIN],
 		// 	'or',
 		// ),
-		cogoport            : isConditionMatches(conditions.SEE_ALL_MARGINS, 'or'),
+		cogoport            : toShowCogoAndMultiEntityMargin,
 		// approval_pending    : isConditionMatches(conditions.SEE_PENDING_APPROVAL, 'or'),
-		multi_entity_margin : true,
-	}), [isConditionMatches]);
+		multi_entity_margin : toShowCogoAndMultiEntityMargin,
+	}), [isConditionMatches, toShowCogoAndMultiEntityMargin]);
 
 	const condition = useMemo(() => checkConditions(), [checkConditions]);
 
@@ -100,11 +111,20 @@ function TabComponent({
 						activeTab={activeTab}
 						onChange={setActive}
 					>
-						{Object.values(COMPONENT_MAPPING).map((item) => {
-							const { title = '', name = '' } = item;
-							return condition[activeTab]
-								? <TabPanel themeType="primary" key={name} name={name} title={title} /> : null;
-						})}
+						{(Object.values(COMPONENT_MAPPING)
+							.filter((item) => condition[item?.name]))
+							.map((item) => {
+								const { title = '', name = '' } = item;
+								return condition[activeTab]
+									? (
+										<TabPanel
+											themeType="primary"
+											key={name}
+											name={name}
+											title={title}
+										/>
+									) : null;
+							})}
 					</Tabs>
 					<Search
 						activeTab={activeTab}

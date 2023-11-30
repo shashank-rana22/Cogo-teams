@@ -1,7 +1,7 @@
 import { Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../common/EmptyState';
+import EmptyState from '../../common/EmptyStateMargins';
 
 import getColumns from './getColumns';
 import Statistics from './Statistics';
