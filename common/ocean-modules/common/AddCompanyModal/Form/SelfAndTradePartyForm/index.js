@@ -37,7 +37,6 @@ function SelfAndTradePartyForm({
 	const [pocNameOptions, setPocNameOptions] = useState([]);
 	const [countryId, setCountryId] = useState('');
 	const [registrationNumber, setRegistrationNumber] = useState('');
-
 	const {
 		data:{ list = [] } = {},
 		loading,
@@ -45,16 +44,10 @@ function SelfAndTradePartyForm({
 		...getTradePartiesDefaultParams({ companyType, tradePartyType }),
 		organization_id: organization_id || importer_exporter_id,
 	});
-
 	const geo = getGeoConstants();
 
 	const {
-		control,
-		watch,
-		resetField,
-		handleSubmit,
-		formState:{ errors = {} },
-		setValue,
+		control, watch, resetField, handleSubmit, formState:{ errors = {} }, setValue,
 	} = useForm();
 
 	const { trade_party_id, address, name } = watch();
@@ -129,7 +122,6 @@ function SelfAndTradePartyForm({
 	function Error(key) {
 		return errors?.[key] ? <div className={styles.errors}>{errors?.[key]?.message}</div> : null;
 	}
-
 	const countryValidation = getCountryConstants({ country_id: countryId, isDefaultData: false });
 
 	useEffect(() => {
@@ -183,9 +175,9 @@ function SelfAndTradePartyForm({
 										placeholder="Select Address"
 										control={control}
 										options={address_options[trade_party_id] || []}
-										rules={{ required: { value: true, message: 'Address is required' } }}
+										// rules={{ required: { value: true, message: 'Address is required' } }}
 									/>
-									{Error('address')}
+									{/* {Error('address')} */}
 								</div>
 
 								<div className={styles.form_item_container}>
@@ -195,9 +187,14 @@ function SelfAndTradePartyForm({
 										name="pincode"
 										placeholder="Enter Pincode"
 										size="sm"
-										rules={{ required: { value: true, message: 'Pincode / Zip Code is required' } }}
+										// rules={{
+										// 	required: {
+										// 		value   : true,
+										// 		message : 'Pincode / Zip Code is required',
+										// 	},
+										// }}
 									/>
-									{Error('pincode')}
+									{/* {Error('pincode')} */}
 								</div>
 							</div>
 
