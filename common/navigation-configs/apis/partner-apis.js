@@ -13574,6 +13574,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'sync_rpa_email',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'assign_meeting_agent',
 			access_type  : 'private',
 			service_name : 'communication',
