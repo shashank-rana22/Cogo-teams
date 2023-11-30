@@ -1,0 +1,50 @@
+.sub_title {
+	font-family: monospace;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.sub_items_container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	width: 598px;
+}
+
+.sub_item {
+	width: 30%;
+	margin-top: 8px;
+}
+
+.sub_value {
+	font-size: 10px;
+}
+
+.remarks_style {
+	margin-top: 8px;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.text_area {
+	min-height: 80px;
+	padding: 4px;
+	margin-top: 6px;
+}
+
+.document_container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	width: 598px;
+	margin: 8px 0;
+
+	& a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 30%;
+		margin-right: 12px;
+		color: var(--color-accent-orange-2);
+	}
+}

@@ -12,6 +12,7 @@ import IcJvApproval from './IcJvApproval/index';
 import JobOpenModal from './JobOpenModal/index';
 import JournalVoucher from './JournalVoucher/index';
 import PaymentConfirmation from './PaymentConfirmation/index';
+import PdaApproval from './PdaApproval';
 import RequestCN from './RequestCN/index';
 import SettlementModal from './SettlementModal/index';
 import TdsDeviationModal from './TdsDeviationModal/index';
@@ -30,6 +31,7 @@ const TYPE_COMPONENT_MAPPING = {
 	OVERHEAD_APPROVAL                      : NonRecuringModal,
 	JOB_OPEN                               : JobOpenModal,
 	JOB_OPEN_FINANCIALLY                   : JobOpenModal,
+	CONCOR_PDA_APPROVAL                    : PdaApproval,
 };
 
 function ViewRequested({ itemData = {}, name = '', refetch = () => {} }) {

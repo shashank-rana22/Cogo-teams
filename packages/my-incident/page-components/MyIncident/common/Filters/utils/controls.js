@@ -43,6 +43,10 @@ export const filterControls = (activeTab) => {
 							value : 'JOB_OPEN_FINANCIALLY',
 							label : 'Job Open Financially',
 						},
+						{
+							value : 'CONCOR_PDA_APPROVAL',
+							label : 'CONCOR PDA Approval',
+						},
 					],
 				},
 				{
@@ -109,6 +113,10 @@ export const filterControls = (activeTab) => {
 							value : 'JOB_OPEN_FINANCIALLY',
 							label : 'Job Open Financially',
 						},
+						{
+							value : 'CONCOR_PDA_APPROVAL',
+							label : 'CONCOR PDA Approval',
+						},
 					],
 				},
 				{
@@ -174,6 +182,10 @@ export const filterControls = (activeTab) => {
 						{
 							value : 'JOB_OPEN_FINANCIALLY',
 							label : 'Job Open Financially',
+						},
+						{
+							value : 'CONCOR_PDA_APPROVAL',
+							label : 'CONCOR PDA Approval',
 						},
 					],
 				},
