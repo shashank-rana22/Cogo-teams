@@ -4,21 +4,35 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
+function getUniqueData(dataArray) {
+	const mutatedArray = [...new Set((dataArray || []).map((ele) => ele?.email))].map((email) => {
+		const item = dataArray.find((it) => it.email === email);
+		return { email, name: item?.name };
+	});
+
+	return mutatedArray;
+}
+
 function UserDetails({ item = {} }) {
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
-	const { kam = {}, creditController = {}, salesAgent = {}, portfolioManager = {} } = item || {};
+	const { kam = [], creditController = [], salesAgent = [], portfolioManager = [] } = item || [];
+
+	const kamData = getUniqueData(kam);
+	const agentData = getUniqueData(salesAgent);
+	const ccData = getUniqueData(creditController);
+	const portfolioManagerData = getUniqueData(portfolioManager);
 
 	return (
 		<>
-			{(!isEmpty(kam) || !isEmpty(salesAgent) || !isEmpty(creditController)
-			|| !isEmpty(portfolioManager)) ? (
-				<div className={styles.download_icon_div}>
-					<IcMProfile
-						onClick={() => setShowDetailsCard(true)}
-						fill="black"
-					/>
-				</div>
-				) : null}
+			{(!isEmpty(kamData) || !isEmpty(agentData) || !isEmpty(ccData)
+            || !isEmpty(portfolioManagerData)) && (
+	<div className={styles.download_icon_div}>
+		<IcMProfile
+			onClick={() => setShowDetailsCard(true)}
+			fill="black"
+		/>
+	</div>
+			)}
 			{showDetailsCard ? (
 				<>
 					<div className={styles.invoice_details_container_bg} />
@@ -38,64 +52,73 @@ function UserDetails({ item = {} }) {
 									DETAILS
 								</div>
 							</div>
-							{!isEmpty(kam) ? (
+							{!isEmpty(kamData) ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
 										{startCase('KAM OWNER')}
 									</div>
-									<div key={kam?.name} className={styles.containers}>
-										<div className={styles.email}>
-											{kam?.email || '-'}
+									{(kamData || []).map((singleagent) => (
+										<div key={singleagent?.name} className={styles.containers}>
+											<div className={styles.email}>
+												{singleagent?.email || '-'}
+											</div>
+											<div className={styles.name}>
+												{singleagent?.name || '-'}
+											</div>
 										</div>
-										<div className={styles.name}>
-											{kam?.name || '-'}
-										</div>
-									</div>
+									))}
 								</div>
 							) : null}
-							{!isEmpty(salesAgent) ? (
+							{!isEmpty(agentData) ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
 										{startCase('AGENT')}
 									</div>
-									<div key={salesAgent?.name} className={styles.containers}>
-										<div className={styles.email}>
-											{salesAgent?.email || '-'}
+									{(agentData || []).map((singleagent) => (
+										<div key={singleagent?.name} className={styles.containers}>
+											<div className={styles.email}>
+												{singleagent?.email || '-'}
+											</div>
+											<div className={styles.name}>
+												{singleagent?.name || '-'}
+											</div>
 										</div>
-										<div className={styles.name}>
-											{salesAgent?.name || '-'}
-										</div>
-									</div>
+									))}
 								</div>
 							) : null}
-							{!isEmpty(creditController) ? (
+							{!isEmpty(ccData) ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
 										{startCase('CC')}
 									</div>
-									<div key={creditController?.name} className={styles.containers}>
-										<div className={styles.email}>
-											{creditController?.email || '-'}
+									{(ccData || []).map((singleagent) => (
+										<div key={singleagent?.name} className={styles.containers}>
+											<div className={styles.email}>
+												{singleagent?.email || '-'}
+											</div>
+											<div className={styles.name}>
+												{singleagent?.name || '-'}
+											</div>
 										</div>
-										<div className={styles.name}>
-											{creditController?.name || '-'}
-										</div>
-									</div>
+									))}
 								</div>
 							) : null}
-							{!isEmpty(portfolioManager) ? (
+							{!isEmpty(portfolioManagerData) ? (
 								<div className={styles.body_details}>
 									<div className={styles.stakeholder}>
 										{startCase('Portfolio Manager')}
+
 									</div>
-									<div key={portfolioManager?.name} className={styles.containers}>
-										<div className={styles.email}>
-											{portfolioManager?.email || '-'}
+									{(portfolioManagerData || []).map((singleagent) => (
+										<div key={singleagent?.name} className={styles.containers}>
+											<div className={styles.email}>
+												{singleagent?.email || '-'}
+											</div>
+											<div className={styles.name}>
+												{singleagent?.name || '-'}
+											</div>
 										</div>
-										<div className={styles.name}>
-											{portfolioManager?.name || '-'}
-										</div>
-									</div>
+									))}
 								</div>
 							) : null}
 						</div>
