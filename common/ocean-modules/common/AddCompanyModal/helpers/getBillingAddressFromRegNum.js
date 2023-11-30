@@ -26,7 +26,7 @@ export const getTradeLevelPoc = ({ list = [] }) => {
 			mobile_country_code : item?.mobile_country_code,
 			mobile_number       : item?.mobile_number,
 			work_scopes         : item?.work_scopes,
-		}))).flat(2);
+		})))?.flat(2);
 
 	return { pocNameOptions };
 };

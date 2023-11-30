@@ -24,7 +24,7 @@ const MARGIN_VALUES = {
 
 const getShowElements = ({
 	allPresentControls = [], formValues = {}, item = {}, agent_view = [],
-	isConditionMatches = () => {},
+	isConditionMatches = () => {}, toShowCogoAndMultiEntityMargin = false,
 }) => {
 	const SHOW_ELEMENTS = {};
 	const NEW_VALUES = {};
@@ -95,8 +95,8 @@ const getShowElements = ({
 			}
 		}
 
-		if (control.name === 'organization_type') {
-			if (formValues?.margin_type === 'cogoport') {
+		if (control.name === 'margin_applied_on') {
+			if (toShowCogoAndMultiEntityMargin && formValues?.margin_type === 'cogoport') {
 				SHOW_ELEMENTS[control.name] = true;
 			} else {
 				SHOW_ELEMENTS[control.name] = false;
@@ -124,6 +124,14 @@ const getShowElements = ({
 					max_value : false,
 				};
 			});
+		}
+
+		if (control?.name === 'organization_sub_type') {
+			if (formValues?.margin_type === 'cogoport') {
+				SHOW_ELEMENTS[control.name] = true;
+			} else {
+				SHOW_ELEMENTS[control.name] = false;
+			}
 		}
 	});
 

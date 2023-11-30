@@ -1,6 +1,24 @@
 import ORGANIZATION_SUBTYPE_OPTIONS from './organization-subtype-oprions';
 
-function getModifiedControls({ controls, formValues }) {
+const getOptions = (fns, toShowCogoportOptions = false) => {
+	const OPTIONS = [];
+
+	if (fns.includes('supply')) {
+		OPTIONS.push({ label: 'Supply', value: 'supply' });
+	}
+
+	if (fns.includes('sales')) {
+		OPTIONS.push({ label: 'Sales', value: 'demand' });
+	}
+
+	if (toShowCogoportOptions) {
+		OPTIONS.push({ label: 'Cogoport', value: 'cogoport' });
+	}
+
+	return OPTIONS;
+};
+
+function getModifiedControls({ controls, formValues, roleFunctions = [], toShowCogoAndMultiEntityMargin = false }) {
 	const newControls = controls.map((ctl) => {
 		if (ctl.name === 'organization_sub_type') {
 			return {
@@ -39,6 +57,13 @@ function getModifiedControls({ controls, formValues }) {
 						? [{ label: 'Cogo Assured Rate', value: 'cogo_assured_rate' }]
 						: []),
 				],
+			};
+		}
+
+		if (ctl.name === 'margin_type') {
+			return {
+				...ctl,
+				options: getOptions(roleFunctions, toShowCogoAndMultiEntityMargin),
 			};
 		}
 

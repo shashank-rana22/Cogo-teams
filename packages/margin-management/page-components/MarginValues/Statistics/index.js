@@ -2,7 +2,7 @@ import { Loader, Toggle } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
-import EmptyState from '../../../common/EmptyState';
+import EmptyState from '../../../common/EmptyStateMargins';
 import useGetMarginBookingInsights from '../../../hooks/useGetMarginBookingInsights';
 
 import styles from './styles.module.css';
@@ -43,7 +43,7 @@ function Statistics({ marginId = '' }) {
 				) : (
 					<div className={styles.tiles_container}>
 						{!loading && isEmpty(data) ? (
-							<EmptyState />
+							<EmptyState emptyDataText="No insight data present" />
 						) : (
 							<>
 								{(data || []).map((statsType) => {
