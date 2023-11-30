@@ -162,9 +162,9 @@ function CreateNewCompanyForm({ tradePartyType = '', primary_service = {}, poc_r
 						name="address"
 						placeholder="Enter Address"
 						options={addressOptions}
-						rules={{ required: 'Address is required' }}
+						// rules={{ required: 'Address is required' }}
 					/>
-					{Error('address', errors)}
+					{/* {Error('address', errors)} */}
 				</div>
 
 				<div className={styles.form_item_container}>
@@ -187,9 +187,9 @@ function CreateNewCompanyForm({ tradePartyType = '', primary_service = {}, poc_r
 							size="sm"
 							control={control}
 							name="pincode"
-							rules={{ required: 'Pincode is required' }}
+							// rules={{ required: 'Pincode is required' }}
 						/>
-						{Error('pincode', errors)}
+						{/* {Error('pincode', errors)} */}
 					</div>
 
 					<div className={styles.form_item_container}>
