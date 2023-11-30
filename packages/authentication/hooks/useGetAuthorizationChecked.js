@@ -9,6 +9,8 @@ import { useEffect, useState } from 'react';
 
 import redirections from '../utils/redirections';
 
+import useAuthenticateFirebase from './useAuthenticateFirebase';
+
 const UNAUTHENTICATED_PATHS = [
 	'/login',
 	'/signup',
@@ -26,6 +28,8 @@ const useGetAuthorizationChecked = () => {
 
 	const dispatch = useDispatch();
 	const [sessionInitialized, setSessionInitialized] = useState(false);
+
+	const { signInFirebase = () => {} } = useAuthenticateFirebase();
 
 	const { source = '' } = query || {};
 
@@ -89,11 +93,19 @@ const useGetAuthorizationChecked = () => {
 
 					await push(`/login${redirectPath}`);
 				}
+
+				if (isProfilePresent && !isUnauthenticatedPath) {
+					await signInFirebase({
+						customToken      : profile?.user?.firebase_custom_token,
+						userEmailAddress : profile?.user?.email,
+					});
+				}
+
 				setSessionInitialized(true);
 			}
 		})();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [_initialized, isProfilePresent, isUnauthenticatedPath, sessionInitialized]);
+	}, [_initialized, isProfilePresent, isUnauthenticatedPath, sessionInitialized, signInFirebase]);
 
 	return { sessionInitialized, setSessionInitialized };
 };
