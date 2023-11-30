@@ -1,18 +1,9 @@
-import { Button, Textarea, Modal } from '@cogoport/components';
-import { IcMEyeopen } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { Button, Modal } from '@cogoport/components';
+
+import Body from '../../../common/ViewModal/Body';
+import Header from '../../../common/ViewModal/Header';
 
 import getComponentMapping from './MAPPING';
-import styles from './styles.module.css';
-
-function Header({ title = '', subTitle = '' }) {
-	return (
-		<>
-			<h4>{title}</h4>
-			<div className={styles.sub_title}>{subTitle}</div>
-		</>
-	);
-}
 
 function PdaApproval({
 	itemData = {},
@@ -25,11 +16,9 @@ function PdaApproval({
 }) {
 	const onClose = () => setShowModal(false);
 
-	const { beneficiaryName = '', bookingProof = [] } = itemData?.data?.concorPdaApprovalRequest || {};
+	const { beneficiaryName = '', documentUrls = [] } = itemData?.data?.concorPdaApprovalRequest || {};
 
 	const MAPPING = getComponentMapping({ data: itemData?.data?.concorPdaApprovalRequest });
-
-	// todo :: which document to show ??
 
 	return (
 		<>
@@ -49,53 +38,12 @@ function PdaApproval({
 					/>
 
 					<Modal.Body>
-						{MAPPING?.map((section) => {
-							const { label = '', key = '', subItems = [] } = section || {};
-							return (
-								<>
-									<h4 key={key}>{label}</h4>
-									<div className={styles.sub_items_container}>
-										{subItems.map((subSection) => {
-											const { subLabel = '', value = '', subKey = '' } = subSection || {};
-											return (
-												<div className={styles.sub_item} key={subKey}>
-													<h6>{subLabel}</h6>
-													<p className={styles.sub_value}>{value}</p>
-												</div>
-											);
-										})}
-									</div>
-								</>
-							);
-						})}
-
-						{!isEmpty(bookingProof) ? (
-							<div className={styles.document_container}>
-
-								<h4> Documents : </h4>
-
-								{(bookingProof || []).map((url) => (
-									<a key={url} href={url} target="_blank" rel="noreferrer">
-										View Document
-										<IcMEyeopen className={styles.icon} />
-									</a>
-								))}
-
-							</div>
-						) : null}
-
-						<div className={styles.remarks_style}>
-							<h4> Notes (only visible to self) </h4>
-
-							<Textarea
-								name="remarks"
-								className={styles.text_area}
-								size="lg"
-								placeholder="Enter here..."
-								onChange={setRemarks}
-								defaultValue={itemData?.userNotes}
-							/>
-						</div>
+						<Body
+							MAPPING={MAPPING}
+							documentUrl={documentUrls}
+							setRemarks={setRemarks}
+							userNotes={itemData?.userNotes}
+						/>
 					</Modal.Body>
 
 					<Modal.Footer>
