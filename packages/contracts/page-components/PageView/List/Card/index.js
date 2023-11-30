@@ -21,22 +21,22 @@ function Card({ item, filters }) {
 		importer_exporter = {}, requested_by = '', requester_name = '',
 		is_bidding_contract = false, contract_proof = '', bidding_proof = [],
 	} = item || {};
-	const { business_name = '' } = importer_exporter;
+	const { business_name = '' } = importer_exporter || {};
 
 	const router = useRouter();
 	const formattedData = formatPortPair({ item });
-	const newFormattedData = [];
+	const NEW_FORMATTED_DATA = [];
 	if (formattedData?.length) {
 		(formattedData || []).forEach((pair, i) => {
 			if (i <= 1 && Object.keys(pair || {})) {
-				newFormattedData.push(pair);
+				NEW_FORMATTED_DATA.push(pair);
 			}
 		});
 	}
 
-	const services = {};
+	const SERVICES = {};
 	item.services.forEach((service) => {
-		services[`${service}_services`] = (item[`${service}_services`] || []).length;
+		SERVICES[`${service}_services`] = (item[`${service}_services`] || []).length;
 	});
 
 	return (
@@ -134,8 +134,8 @@ function Card({ item, filters }) {
 			<div className={styles.body}>
 				<div className={styles.sub_container}>
 					<div className={styles.port_pair}>
-						{(newFormattedData || []).map((portPair) => (
-							<PortPair portPair={portPair} />
+						{(NEW_FORMATTED_DATA || []).map((portPair) => (
+							<PortPair key={portPair?.id} portPair={portPair} />
 						))}
 					</div>
 					{formattedData?.length > 2 ? (
