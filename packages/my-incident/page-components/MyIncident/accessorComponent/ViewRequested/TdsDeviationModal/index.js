@@ -1,8 +1,9 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
 import React from 'react';
+
+import FormattedDate from '../../../common/FormattedDate';
 
 import styles from './styles.module.css';
 
@@ -70,9 +71,7 @@ function TdsDeviationModal({
 										{updatedByName}
 										{' '}
 										At :
-										{format(updatedAt, 'dd MMM YYYY hh:mm a', {}, false)}
-										{' '}
-										{}
+										<FormattedDate dateTime={updatedAt} />
 									</div>
 								</div>
 								<div className={status === 'APPROVED' ? styles.hr : styles.rejected_hr} />
@@ -166,13 +165,13 @@ function TdsDeviationModal({
 						</div>
 						<div className={styles.value}>
 							{documentUrls?.map((url) => (url !== '' ? (
-								<div className={styles.link}>
+								<div key={url} className={styles.link}>
 									<a href={url} target="_blank" rel="noreferrer">
 										{url?.split('/')?.pop() || '-'}
 									</a>
 								</div>
 							) : (
-								<span>No document available</span>
+								<span key={url}>No document available</span>
 							)))}
 						</div>
 					</div>

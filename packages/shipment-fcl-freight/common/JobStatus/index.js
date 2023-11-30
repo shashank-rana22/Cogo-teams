@@ -47,7 +47,7 @@ function JobStatus({ shipment_data = {} }) {
 						setShowModal(true);
 					}}
 				>
-					Fin-open-request
+					Fin-reopen-request
 				</Button>
 
 				<Pill className={styles.job_closed_pill} size="lg">Financially Closed</Pill>
@@ -102,7 +102,7 @@ function JobStatus({ shipment_data = {} }) {
 						size="md"
 						onClick={() => setShowModal(true)}
 					>
-						Re-open
+						Op-reopen-request
 					</Button>
 				) : null}
 

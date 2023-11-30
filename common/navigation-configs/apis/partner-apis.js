@@ -9071,6 +9071,8 @@ const partner = {
 			module      : 'Expenses',
 		},
 	],
+
+	// ? why in partner api's
 	my_incident: [
 		{
 			api         : 'get_incident_management_incident_list',
