@@ -35,8 +35,8 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 	const [filters, setFilters] = useState({});
 	const [filtersApplied, setFiltersApplied] = useState(false);
 	const {
-		salesAgentId = '', portfolioManagerId = '', portfolioManagerRmId = '',
-		salesAgentRmId = '', kamId = '', creditControllerId = '', companyType = '', include_defaulters = false,
+		salesAgentId = '', portfolioManagerId = '', portfolioManagerRmId = '', salesAgentRmId = '',
+		kamId = '', creditControllerId = '', companyType = '', include_defaulters = false, taggedState = '',
 	} = filters || {};
 
 	const getFilterApplied = useCallback(() => {
@@ -95,6 +95,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 						tradePartySerialId   : tradePartySerialId || undefined,
 						q                    : q || undefined,
 						excludeDefaulters    : !include_defaulters,
+						taggedState          : taggedState || undefined,
 					},
 				});
 
@@ -104,7 +105,7 @@ const useGetOrgOutstanding = ({ entityCode = '' }) => {
 				Toast.error(e?.message);
 			}
 		},
-		[trigger, key, order, page, pageLimit,
+		[trigger, key, order, page, pageLimit, taggedState,
 			salesAgentId, portfolioManagerId, portfolioManagerRmId,
 			salesAgentRmId, creditControllerId, selectedAgentId, kamId, companyType,
 			entityCode, organizationSerialId, sageId, tradePartySerialId, q, include_defaulters, getFilterApplied],

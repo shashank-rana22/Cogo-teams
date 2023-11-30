@@ -9,10 +9,11 @@ import {
 import { useState } from 'react';
 
 import { SORTBY_OPTION } from '../../../../constants/index';
+import FiltersPopOver from '../Filters';
+import overAllOutstandingcontrols from '../Filters/overAllOutstandingcontrols';
 
 import BulkPostModal from './BulkPostModal';
 import CallPriorityModal from './CallPriorityModal';
-import FilterpopOver from './FilterpopOver/index';
 import styles from './styles.module.css';
 
 function Filters({
@@ -21,10 +22,11 @@ function Filters({
 	setOrderBy = () => {},
 	orderBy = { key: '', order: '', label: '' },
 	setParams = () => {},
-	params = {},
-	formFilters = {},
-	setFormFilters = () => {},
+	filters = {},
+	setFilters = () => {},
 	clearFilter = () => {},
+	filtersApplied = false,
+	params = {},
 	queryKey = '',
 	entityCode = '',
 	refetch = () => {},
@@ -36,6 +38,7 @@ function Filters({
 	const [showBulkPostModal, setShowBulkPostModal] = useState(false);
 
 	const sortStyleAsc = orderBy.order === 'Asc' ? '#303B67' : '#BDBDBD';
+	const controls = overAllOutstandingcontrols();
 
 	const sortStyleDesc = orderBy.order === 'Desc' ? '#303B67' : '#BDBDBD';
 
@@ -128,11 +131,12 @@ function Filters({
 						<IcMArrowRotateDown style={{ color: sortStyleDesc }} />
 					</div>
 
-					<FilterpopOver
-						filters={formFilters}
-						setFilters={setFormFilters}
+					<FiltersPopOver
+						controls={controls}
+						filters={filters}
+						setFilters={setFilters}
 						clearFilter={clearFilter}
-						refetch={refetch}
+						filtersApplied={filtersApplied}
 					/>
 
 					<Button
