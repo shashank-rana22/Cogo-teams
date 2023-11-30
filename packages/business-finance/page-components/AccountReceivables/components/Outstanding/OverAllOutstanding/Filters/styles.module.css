@@ -3,15 +3,17 @@
 }
 
 .action_buttons {
+	position: sticky;
+	z-index: 100;
 	display: flex;
 	gap: 6px;
+	align-items: flex-end;
 	justify-content: flex-end;
+	margin-bottom: 10px;
 }
 
 .filter_container {
 	width: 350px;
-	max-height: 500px;
-	overflow-y: scroll;
 
 	b {
 		font-size: var(--font-size-md);
@@ -19,7 +21,8 @@
 
 	:global {
 		.ui_radiogroup_container {
-			flex-direction: column;
+			display: flex;
+			flex-flow: wrap;
 			font-size: var(--font-size-md);
 		}
 
@@ -49,4 +52,10 @@
 	background: #ee3425;
 	border: 1px solid #fff;
 	border-radius: 100%;
+}
+
+.controls_container {
+	max-height: 500px;
+	padding-right: 15px;
+	overflow-y: scroll;
 }

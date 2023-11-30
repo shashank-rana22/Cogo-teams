@@ -1,12 +1,9 @@
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { getApp, getApps, initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 
 import IncomingCall from './components/IncomingCall';
 import VideoCallScreen from './components/VideoCallScreen';
-import { FIREBASE_CONFIG } from './configurations/firebase-config';
 import { CALL_RING_TIME_LIMIT } from './constants';
 import useComingCall from './hooks/useComingCall';
 import useUpdateVideoCallTimeline from './hooks/useUpdateVideoCallTimeline';
@@ -17,6 +14,7 @@ function VideoCall({
 	videoCallRecipientData = {},
 	inVideoCall = false,
 	videoCallId = '',
+	firestore = {},
 }) {
 	const { user_data } = useSelector((state) => ({
 		user_data: state?.profile?.user,
@@ -47,8 +45,6 @@ function VideoCall({
 		isMinimize          : false,
 	});
 
-	const app = isEmpty(getApps()) ? initializeApp(FIREBASE_CONFIG) : getApp();
-	const firestore = getFirestore(app);
 	const { updateVideoCallTimeline = () => {} } = useUpdateVideoCallTimeline({ callDetails });
 
 	const { handleOutgoingCall = () => {}, handleCallEnd = () => {} } = useVideoCallFirebase({

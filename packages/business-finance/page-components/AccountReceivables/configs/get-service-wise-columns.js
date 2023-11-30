@@ -60,6 +60,12 @@ const serviceWiseColumns = [
 			<ShowAmount item={row} amountKey="invoiceThreeSixtyFiveAmount" currencyKey="ledCurrency" />
 		),
 	},
+	{
+		Header   : '365+ DAYS',
+		accessor : (row) => (
+			<ShowAmount item={row} amountKey="invoiceThreeSixtyFivePlusAmount" currencyKey="ledCurrency" />
+		),
+	},
 ];
 
 export default serviceWiseColumns;
