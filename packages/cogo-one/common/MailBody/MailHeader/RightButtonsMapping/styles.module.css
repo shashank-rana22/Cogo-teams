@@ -32,6 +32,30 @@
 	}
 }
 
+.sync_icon {
+	display: flex;
+	align-items: center;
+	color: #424242;
+	cursor: pointer;
+	transition: 0.5s ease-in-out;
+
+	&:hover {
+		transition: 0.3s ease-in-out;
+		transform: scale(1.2);
+	}
+}
+
+.mobile_sync_icon {
+	padding: 4px 8px;
+	font-size: 10px;
+	border: 1px solid #bdbdbd;
+	border-radius: 8px;
+
+	svg {
+		margin-right: 4px;
+	}
+}
+
 .icon_styles {
 	margin-left: 14px;
 	color: #424242;

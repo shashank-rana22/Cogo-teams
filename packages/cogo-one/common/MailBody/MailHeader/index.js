@@ -23,6 +23,7 @@ function MailHeader({
 	activeMessageCard = {},
 	viewType = '',
 	isMobile = false,
+	syncRpaEmail = () => {},
 }) {
 	const {
 		response, send_by = '',
@@ -105,6 +106,8 @@ function MailHeader({
 							emailStatus={emailStatus}
 							isDraftAlreadySent={!!communication_id}
 							loading={loading}
+							eachMessage={eachMessage}
+							syncRpaEmail={syncRpaEmail}
 						/>
 					) : null}
 

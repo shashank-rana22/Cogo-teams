@@ -13,8 +13,12 @@ function MailActions({
 	loading = false,
 	isDraftAlreadySent = false,
 	emailStatus = '',
+	eachMessage = {},
+	syncRpaEmail = () => {},
 }) {
-	if (isMobile) {
+	const { outlook_draft = false } = eachMessage;
+
+	if (isMobile || outlook_draft) {
 		return (
 			<div className={styles.buttons_flex}>
 				<RightButtonsMapping
@@ -24,6 +28,9 @@ function MailActions({
 					isDraftAlreadySent={isDraftAlreadySent}
 					loading={loading}
 					isMobile={isMobile}
+					eachMessage={eachMessage}
+					showSync={outlook_draft}
+					syncRpaEmail={syncRpaEmail}
 				/>
 			</div>
 		);
