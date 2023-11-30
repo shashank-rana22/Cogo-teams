@@ -45,7 +45,11 @@ export const filterControls = (activeTab) => {
 						},
 						{
 							value : 'CONCOR_PDA_APPROVAL',
-							label : 'CONCOR PDA Approval',
+							label : 'Concor PDA Approval',
+						},
+						{
+							value : 'REVOKE_INVOICE',
+							label : 'Revoke Invoice',
 						},
 					],
 				},
@@ -115,7 +119,11 @@ export const filterControls = (activeTab) => {
 						},
 						{
 							value : 'CONCOR_PDA_APPROVAL',
-							label : 'CONCOR PDA Approval',
+							label : 'Concor PDA Approval',
+						},
+						{
+							value : 'REVOKE_INVOICE',
+							label : 'Revoke Invoice',
 						},
 					],
 				},
@@ -185,7 +193,11 @@ export const filterControls = (activeTab) => {
 						},
 						{
 							value : 'CONCOR_PDA_APPROVAL',
-							label : 'CONCOR PDA Approval',
+							label : 'Concor PDA Approval',
+						},
+						{
+							value : 'REVOKE_INVOICE',
+							label : 'Revoke Invoice',
 						},
 					],
 				},
