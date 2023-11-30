@@ -6,19 +6,19 @@ import styles from './styles.module.css';
 
 function UserDetails({ item = {} }) {
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
-	const { kam = {}, creditController = {}, salesAgent = {}, portfolioManager = {} } = item || [];
+	const { kam = {}, creditController = {}, salesAgent = {}, portfolioManager = {} } = item || {};
 
 	return (
 		<>
 			{(!isEmpty(kam) || !isEmpty(salesAgent) || !isEmpty(creditController)
-			|| !isEmpty(portfolioManager)) && (
+			|| !isEmpty(portfolioManager)) ? (
 				<div className={styles.download_icon_div}>
 					<IcMProfile
 						onClick={() => setShowDetailsCard(true)}
 						fill="black"
 					/>
 				</div>
-			)}
+				) : null}
 			{showDetailsCard ? (
 				<>
 					<div className={styles.invoice_details_container_bg} />
