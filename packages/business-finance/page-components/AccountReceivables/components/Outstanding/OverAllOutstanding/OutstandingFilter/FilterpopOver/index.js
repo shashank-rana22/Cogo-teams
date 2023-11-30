@@ -9,7 +9,7 @@ import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { IcMFilter } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { companyType, taggedState } from '../../../../../constants/index';
+import { companyType } from '../../../../../constants/index';
 
 import styles from './styles.module.css';
 
@@ -122,16 +122,6 @@ function FilterpopOver({
 									options={companyType}
 									value={filters?.companyType}
 									onChange={(val) => onChange(val, 'companyType')}
-									className={styles.style_radio}
-								/>
-							</div>
-						</TabPanel>
-						<TabPanel name="taggedState" title="Tagged State">
-							<div>
-								<RadioGroup
-									options={taggedState}
-									value={filters?.taggedState}
-									onChange={(val) => onChange(val, 'taggedState')}
 									className={styles.style_radio}
 								/>
 							</div>
