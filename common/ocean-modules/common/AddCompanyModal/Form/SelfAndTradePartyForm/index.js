@@ -10,7 +10,7 @@ import {
 import getGeoConstants, { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useImperativeHandle, forwardRef, useState, useCallback } from 'react';
+import { useEffect, useImperativeHandle, forwardRef, useState, useCallback, useMemo } from 'react';
 
 import getCompanyAddressOptions from '../../../../components/Poc/helpers/getCompanyAddressOptions';
 import getCompanyNameOptions from '../../../../components/Poc/helpers/getCompanyNameOptions';
@@ -19,7 +19,7 @@ import POC_WORKSCOPE_MAPPING from '../../../../constants/POC_WORKSCOPE_MAPPING';
 import useListOrganizationTradeParties from '../../../../hooks/useListOrganizationTradeParties';
 import { convertObjectMappingToArray } from '../../../../utils/convertObjectMappingToArray';
 import validateMobileNumber from '../../../../utils/validateMobileNumber';
-import { getAddressRespectivePincodeAndPoc } from '../../helpers/getBillingAddressFromRegNum';
+import { getAddressRespectivePincodeAndPoc, getTradeLevelPoc } from '../../helpers/getBillingAddressFromRegNum';
 
 import styles from './styles.module.css';
 
@@ -45,6 +45,8 @@ function SelfAndTradePartyForm({
 		organization_id: organization_id || importer_exporter_id,
 	});
 	const geo = getGeoConstants();
+
+	const { pocNameOptions: tradeLevelPoc } = useMemo(() => getTradeLevelPoc({ list }), [list]);
 
 	const {
 		control, watch, resetField, handleSubmit, formState:{ errors = {} }, setValue,
@@ -93,11 +95,11 @@ function SelfAndTradePartyForm({
 			id,
 		});
 
-		setPocNameOptions(nameOptions);
-	}, [address, addressData, setValue, resetMultipleFields, id]);
+		setPocNameOptions([...(nameOptions || []), ...(tradeLevelPoc || [])]);
+	}, [address, addressData, setValue, resetMultipleFields, id, tradeLevelPoc]);
 
 	useEffect(() => {
-		resetMultipleFields(['work_scopes', 'email']);
+		resetMultipleFields(['work_scopes', 'email', 'mobile_number']);
 
 		if (name) {
 			const { work_scopes, email, mobile_number, mobile_country_code } = (pocNameOptions || []).find(
