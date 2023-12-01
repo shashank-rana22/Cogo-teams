@@ -3,6 +3,7 @@
 	top: 12px;
 	right: 12px;
 	display: flex;
+	gap: 20px;
 	align-items: center;
 
 	:global {
@@ -14,6 +15,5 @@
 }
 
 .icon {
-	margin-left: 20px;
 	cursor: pointer;
 }
