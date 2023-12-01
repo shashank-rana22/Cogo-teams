@@ -72,12 +72,9 @@ const requestedColumn = ({
 					<div className={styles.time}>
 						{date
 							? formatDate({
-								date: reversedDate,
-								dateFormat:
-										GLOBAL_CONSTANTS.formats.date[
-											'dd MMM yyyy'
-										],
-								formatType: 'date',
+								date       : reversedDate,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+								formatType : 'date',
 							})
 							: '_'}
 					</div>

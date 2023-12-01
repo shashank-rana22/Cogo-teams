@@ -1,7 +1,5 @@
 import { cl, Placeholder } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { getAuth, signInWithCustomToken } from 'firebase/auth';
 import React, { useEffect } from 'react';
 
 import { imgURL } from '../../../constants/image-urls';
@@ -14,20 +12,10 @@ import styles from './styles.module.css';
 
 function Stats(props = {}) {
 	const { userStats = {}, getUserSats, firebaseLoading = false } = useGetUsersStats();
-	const { token } = useSelector(({ profile }) => ({
-		token: profile?.user?.firestore_custom_token,
-	}));
 
 	useEffect(() => {
 		getUserSats();
-		if (process.env.NODE_ENV === 'production') {
-			const auth = getAuth();
-			signInWithCustomToken(auth, token)
-				.catch((error) => {
-					console.log('firestore_auth_error:', error.message);
-				});
-		}
-	}, [getUserSats, token]);
+	}, [getUserSats]);
 
 	const {
 		statsLoading,

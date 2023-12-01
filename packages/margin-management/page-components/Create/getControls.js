@@ -28,13 +28,9 @@ const getControls = ({ type = '', marginType = '', partnerId = '', item = {}, se
 			watch    : true,
 			span     : 2,
 			disabled : type === 'edit',
-			options  : [
-				{ label: 'Sales', value: 'demand' },
-				{ label: 'Supply', value: 'supply' },
-				{ label: 'Cogoport', value: 'cogoport' },
-			],
-			rules : { required: 'Margin type is required' },
-			value : item?.margin_type,
+			options  : [],
+			rules    : { required: 'Margin type is required' },
+			value    : item?.margin_type,
 		},
 		{
 			name        : 'service',

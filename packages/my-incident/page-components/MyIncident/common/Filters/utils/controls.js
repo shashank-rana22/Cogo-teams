@@ -43,6 +43,18 @@ export const filterControls = (activeTab) => {
 							value : 'JOB_OPEN_FINANCIALLY',
 							label : 'Job Open Financially',
 						},
+						{
+							value : 'CONCOR_PDA_APPROVAL',
+							label : 'Concor PDA Approval',
+						},
+						{
+							value : 'REVOKE_INVOICE',
+							label : 'Revoke Invoice',
+						},
+						{
+							value : 'SEZ_APPROVAL',
+							label : 'SEZ Approval',
+						},
 					],
 				},
 				{
@@ -109,6 +121,18 @@ export const filterControls = (activeTab) => {
 							value : 'JOB_OPEN_FINANCIALLY',
 							label : 'Job Open Financially',
 						},
+						{
+							value : 'CONCOR_PDA_APPROVAL',
+							label : 'Concor PDA Approval',
+						},
+						{
+							value : 'REVOKE_INVOICE',
+							label : 'Revoke Invoice',
+						},
+						{
+							value : 'SEZ_APPROVAL',
+							label : 'SEZ Approval',
+						},
 					],
 				},
 				{
@@ -174,6 +198,18 @@ export const filterControls = (activeTab) => {
 						{
 							value : 'JOB_OPEN_FINANCIALLY',
 							label : 'Job Open Financially',
+						},
+						{
+							value : 'CONCOR_PDA_APPROVAL',
+							label : 'Concor PDA Approval',
+						},
+						{
+							value : 'REVOKE_INVOICE',
+							label : 'Revoke Invoice',
+						},
+						{
+							value : 'SEZ_APPROVAL',
+							label : 'SEZ Approval',
 						},
 					],
 				},

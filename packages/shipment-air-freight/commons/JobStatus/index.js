@@ -38,7 +38,7 @@ function JobStatus({
 						setShowModal(true);
 					}}
 				>
-					Fin-open-request
+					Fin-reopen-request
 				</Button>
 
 				{showModal ? (
@@ -87,7 +87,7 @@ function JobStatus({
 						size="md"
 						onClick={() => setShowModal(true)}
 					>
-						Re-open
+						Op-reopen-request
 					</Button>
 				) : null}
 

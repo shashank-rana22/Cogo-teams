@@ -38,9 +38,15 @@ let initialCall = false;
 function Create({ type = 'create', item = {} }) {
 	const { filters = {}, ...rest } = item;
 	const router = useRouter();
-	const { agent_id } = useSelector(({ profile }) => ({
-		agent_id: profile?.user?.id,
+	const { agent_id, roleFunctions, permissions_navigations } = useSelector(({ profile }) => ({
+		agent_id                : profile?.user?.id,
+		roleFunctions           : profile?.auth_role_data?.role_functions || [],
+		permissions_navigations : profile?.permissions_navigations,
 	}));
+
+	const nav = permissions_navigations?.margin || {};
+	const viewTypeForListMargin = nav?.list_margins[GLOBAL_CONSTANTS.zeroth_index]?.view_type || '';
+	const toShowCogoAndMultiEntityMargin = viewTypeForListMargin === 'across_all';
 
 	const { isConditionMatches } = useGetPermission();
 	const [activeKey, setActiveKey] = useState(isEmpty(item) ? 'customize' : 'add');
@@ -97,7 +103,7 @@ function Create({ type = 'create', item = {} }) {
 		[initialControls, extraControls],
 	);
 
-	const newControls = getModifiedControls({ controls, formValues });
+	const newControls = getModifiedControls({ controls, formValues, roleFunctions, toShowCogoAndMultiEntityMargin });
 
 	const showElements = getShowElements({
 		allPresentControls : [...newControls, ...marginControls],
@@ -105,6 +111,7 @@ function Create({ type = 'create', item = {} }) {
 		item               : { ...(item || {}), ...(item?.filters || {}) },
 		isConditionMatches,
 		agent_view,
+		toShowCogoAndMultiEntityMargin,
 	});
 
 	const { margin_slabs = [] } = formValues;

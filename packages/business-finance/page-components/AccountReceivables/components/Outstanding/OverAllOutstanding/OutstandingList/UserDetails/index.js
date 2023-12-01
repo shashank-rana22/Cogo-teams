@@ -25,13 +25,13 @@ function UserDetails({ item = {} }) {
 	return (
 		<>
 			{(!isEmpty(kamData) || !isEmpty(agentData) || !isEmpty(ccData)
-			|| !isEmpty(portfolioManagerData)) && (
-				<div className={styles.download_icon_div}>
-					<IcMProfile
-						onClick={() => setShowDetailsCard(true)}
-						fill="black"
-					/>
-				</div>
+            || !isEmpty(portfolioManagerData)) && (
+	<div className={styles.download_icon_div}>
+		<IcMProfile
+			onClick={() => setShowDetailsCard(true)}
+			fill="black"
+		/>
+	</div>
 			)}
 			{showDetailsCard ? (
 				<>

@@ -7,17 +7,16 @@ import styles from './styles.module.css';
 import { filterControls } from './utils/controls';
 
 function Filters({
-	filters,
+	filters = {},
 	onChangeFilters = (v) => v,
-	activeTab,
+	activeTab = 'requested',
 }) {
 	const { search } = filters || {};
 
 	return (
 		<section className={styles.container} id="filters">
 			<div className={styles.select_container}>
-				{filterControls(activeTab).map((control) => {
-					// const Element: any = getElements(control.type);
+				{filterControls(activeTab)?.map((control) => {
 					const Element = ELEMENTS_MAPPING[control.type];
 					return (
 						<Element

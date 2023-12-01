@@ -72,6 +72,29 @@ export const companyType = [
 	},
 ];
 
+export const taggedState = [
+	{
+		label : 'Credit Controller',
+		value : 'credit_controller',
+	},
+	{
+		label : 'Collection Agency',
+		value : 'collection_agency',
+	},
+	{
+		label : 'Field Collection',
+		value : 'field_collection',
+	},
+	{
+		label : 'Legal',
+		value : 'legal',
+	},
+	{
+		label : 'Other',
+		value : 'others_probable_legal',
+	},
+];
+
 export const SALES_AGENT = [
 	{
 		label : 'Total Outstanding Amount',

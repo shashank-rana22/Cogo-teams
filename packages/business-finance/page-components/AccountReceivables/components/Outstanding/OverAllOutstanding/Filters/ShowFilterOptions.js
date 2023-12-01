@@ -46,46 +46,50 @@ function ShowFilterOptions({
 
 			</div>
 
-			{controls.map((item) => {
-				switch (item?.type) {
-					case 'asyncSelect':
-						return (
-							<div style={{ marginTop: '10px' }}>
-								<b>{item.label}</b>
-								<AsyncSelectController
-									key={item?.name}
-									{...item}
-									control={control}
-								/>
-							</div>
-						);
-					case 'radio':
-						return (
-							<div style={{ marginTop: '10px' }}>
-								<b>{item.label}</b>
-								<RadioGroupController
-									key={item?.name}
-									{...item}
-									control={control}
-								/>
-							</div>
-						);
-					case 'toggle':
-						return (
-							<div className="toggle">
-								<b>{item.label}</b>
-								<ToggleController
-									key={item?.name}
-									{...item}
-									control={control}
-								/>
-							</div>
-						);
-					default:
+			<div className={styles.controls_container}>
 
-						return null;
-				}
-			})}
+				{controls.map((item) => {
+					switch (item?.type) {
+						case 'asyncSelect':
+							return (
+								<div style={{ marginTop: '10px' }}>
+									<b>{item.label}</b>
+									<AsyncSelectController
+										key={item?.name}
+										{...item}
+										control={control}
+									/>
+								</div>
+							);
+						case 'radio':
+							return (
+								<div style={{ marginTop: '10px' }}>
+									<b>{item.label}</b>
+									<RadioGroupController
+										key={item?.name}
+										{...item}
+										control={control}
+									/>
+								</div>
+							);
+						case 'toggle':
+							return (
+								<div className="toggle">
+									<b>{item.label}</b>
+									<ToggleController
+										key={item?.name}
+										{...item}
+										control={control}
+									/>
+								</div>
+							);
+						default:
+
+							return null;
+					}
+				})}
+
+			</div>
 
 		</div>
 
