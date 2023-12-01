@@ -1,3 +1,4 @@
+import cargo_incurance from './cargo-incurance.json';
 import fcl_cfs from './fcl-cfs.json';
 import fcl_customs from './fcl-customs.json';
 import fcl_freight from './fcl-freight.json';
@@ -23,6 +24,7 @@ const getConfigs = (service_type) => {
 		ltl_freight_service     : ltl_freight,
 		fcl_freight_local_service,
 		fcl_cfs_service         : fcl_cfs,
+		cargo_insurance_service : cargo_incurance,
 	};
 
 	return configs[service_type] || fcl_freight;
