@@ -56,6 +56,7 @@ import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import newEmployeeDashboard from './config/new-employee-dashboard';
 import notifications from './config/notifications';
+import partners from './config/partners';
 import payment from './config/payments';
 import payroll from './config/payroll';
 import performanceAndIncentives from './config/performance-and-incentives';
@@ -205,6 +206,7 @@ const routeConfig = {
 	...cogoStore,
 	...handlingFees,
 	...hrmsDashboard,
+	...partners,
 };
 
 export default routeConfig;

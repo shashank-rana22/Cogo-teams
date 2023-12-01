@@ -1,7 +1,7 @@
 import { Checkbox, Pill, Tooltip, ButtonIcon } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
+import { IcMEyeopen } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { getByKey, startCase } from '@cogoport/utils';
 import React from 'react';

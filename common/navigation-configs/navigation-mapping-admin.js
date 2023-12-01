@@ -151,8 +151,8 @@ const navigationMapping = ({ t = () => {} }) => {
 		partner: {
 			key           : 'partner',
 			title         : t('common:partners_cogoport'),
-			href          : '/partners',
-			as            : '/partners',
+			href          : '/v2/partners',
+			as            : '/v2/partners',
 			type          : 'link',
 			possible_apis : [...apis.partner, ...apis.product_pricing],
 			icon          : IcMPartnersCogoport,

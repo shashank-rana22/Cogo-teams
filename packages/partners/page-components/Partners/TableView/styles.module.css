@@ -1,0 +1,16 @@
+.table {
+	font-size: 14px;
+	font-weight: 500;
+	background-color: rgb(255 255 255);
+
+	:global {
+		.ui_table_body_row {
+			height: 50px;
+			margin-bottom: 20px;
+		}
+	}
+}
+
+.status {
+	text-transform: capitalize;
+}

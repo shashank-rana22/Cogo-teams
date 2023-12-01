@@ -1,0 +1,55 @@
+.error {
+	color: #cb6464;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	width: 95%;
+}
+
+.add_btn {
+	margin-top: 8px;
+}
+
+.element {
+	padding: 4px;
+}
+
+.label {
+	margin-bottom: 6px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.row_flex {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 100%;
+	padding-block: 4px;
+	border-bottom: 1px dotted black;
+}
+
+.child,
+.field_array {
+	width: 100%;
+}
+
+.delete_icon {
+	display: flex;
+	align-items: flex-end;
+}
+
+.heading {
+	font-weight: 500;
+}
+
+.lower_label {
+	display: inline-block;
+	margin-top: 4px;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 20px;
+	color: rgb(173 173 173);
+}
