@@ -1,8 +1,11 @@
+import { Tooltip } from '@cogoport/components';
+import { IcMInfo } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import SecureNow from '../../../../common/SecureNow';
 
 import shippingLine from './shippingLine';
+import styles from './styles.module.css';
 
 const getServiceType = (item, service_details) => {
 	const serviceName = item.service_name
@@ -54,10 +57,23 @@ function RenderServiceType({ item, service_details }) {
 
 	if (service_type === 'cargo_insurance') {
 		return (
-			<>
-				{serviceName}
-				<SecureNow />
-			</>
+			<div className={styles.cargo_insurance_container}>
+				<Tooltip
+					placement="top"
+					interactive
+					maxWidth={400}
+					content="The payment link for Cargo Insurance will be sent separately once our CCS agent
+					collects the required documents from the customer.
+					Insurance policy will be generated only after the payment is successful."
+				>
+					<IcMInfo width={16} height={16} style={{ marginTop: '4px' }} />
+				</Tooltip>
+
+				<div className={styles.cargo_service_container}>
+					{serviceName}
+					<SecureNow />
+				</div>
+			</div>
 		);
 	}
 

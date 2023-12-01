@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { Button, Modal } from '@cogoport/components';
 import { useDebounceQuery, useForm } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
@@ -13,6 +14,7 @@ import useGetInsuranceCountrySupported from './hooks/useGetInsuranceCountrySuppo
 import useGetInsuranceRate from './hooks/useGetInsuranceRate';
 import InvalidInvoicingPartyEmptyState from './InvalidInvoicingPartyEmptyState';
 import Loading from './Loading';
+import TermsAndConditions from './TermsAndConditions';
 import POLICY_TYPE_MAPPING from './utils/policy-type-mapping.json';
 import TRANSIT_MODE_MAPPING from './utils/transit-mode-mapping.json';
 
@@ -38,6 +40,7 @@ function CargoInsuranceModal({
 }) {
 	const [commodity, setCommodity] = useState('');
 	const [rateData, setRateData] = useState({});
+	const [showTandC, setShowTandC] = useState(false);
 
 	const { query = '', debounceQuery } = useDebounceQuery();
 
@@ -174,11 +177,17 @@ function CargoInsuranceModal({
 				formValues: watch(),
 			},
 		},
+		insurance_terms: {
+			Component : TermsAndConditions,
+			props     : {},
+		},
 	};
 
 	const getComponent = () => {
 		let key = 'allowed';
-		if (countrySupportedLoading) {
+		if (showTandC) {
+			key = 'insurance_terms';
+		} else if (countrySupportedLoading) {
 			key = 'loading';
 		} else if (isEmpty(isEligible)) {
 			key = 'something_went_wrong';
@@ -212,7 +221,7 @@ function CargoInsuranceModal({
 				<ActiveComponent {...props} />
 			</Modal.Body>
 
-			{activeComponent === 'allowed' ? (
+			{activeComponent === 'allowed' && !showTandC ? (
 				<Modal.Footer>
 					<Button
 						type="button"
@@ -221,6 +230,30 @@ function CargoInsuranceModal({
 						onClick={() => setAddCargoInsurance(false)}
 					>
 						Cancel
+					</Button>
+
+					<Button
+						type="button"
+						style={{ marginLeft: 12 }}
+						themeType="primary"
+						loading={addCargoLoading}
+						disabled={isEmpty(rateData) || loading || addCargoLoading}
+						onClick={() => setShowTandC(true)}
+					>
+						Next
+					</Button>
+				</Modal.Footer>
+			) : null}
+
+			{showTandC ? (
+				<Modal.Footer>
+					<Button
+						type="button"
+						themeType="secondary"
+						disabled={loading || addCargoLoading}
+						onClick={() => setShowTandC(false)}
+					>
+						Back
 					</Button>
 
 					<Button
