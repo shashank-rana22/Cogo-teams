@@ -36,7 +36,7 @@ function Review({ payroll_data = {} }) {
 					<span className={styles.sub_heading_section2}>
 						₹
 						{' '}
-						{parseFloat(payroll_data && payroll_data.total_net_payout.toFixed(2))}
+						{payroll_data?.total_net_payout}
 					</span>
 					<span className={styles.sub_heading2_section2}>
 						{payroll_data?.employee_count}
