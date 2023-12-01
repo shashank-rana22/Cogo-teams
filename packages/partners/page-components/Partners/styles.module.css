@@ -1,0 +1,50 @@
+.body {
+	display: flex;
+	height: 1000px;
+}
+
+.table {
+	width: calc(100% - 400px);
+}
+
+.side_bar {
+	position: fixed;
+	top: 68px;
+	right: 16px;
+	width: 385px;
+	margin-top: 24px;
+}
+
+.filters {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+
+	:global {
+		.ui_input_container {
+			width: fit-content;
+		}
+	}
+}
+
+.create_btn {
+	margin-left: 8px;
+}
+
+.filter_button {
+	margin-right: 4px;
+}
+
+.filter_div {
+	display: flex;
+	flex-direction: row;
+}
+
+.filter_icon {
+	margin-left: 4px;
+}
+
+.scope_select {
+	margin-right: 8px;
+	margin-left: 4px;
+}
