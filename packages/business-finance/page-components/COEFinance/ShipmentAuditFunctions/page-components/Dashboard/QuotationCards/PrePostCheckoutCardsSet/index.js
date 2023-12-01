@@ -1,4 +1,8 @@
+import { Button } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMRefresh } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 
 import useGetPrePostShipmentQuotation from '../../../../../hook/useGetPrePostShipmentQuotation';
@@ -6,17 +10,27 @@ import useGetPrePostShipmentQuotation from '../../../../../hook/useGetPrePostShi
 import PrePostCheckoutCards from './PrePostCheckoutCards';
 import styles from './styles.module.css';
 
+const geo = getGeoConstants();
+
 function PrePostCheckoutCardsSet({
 	jobId = '',
 	setQuotationsData = () => {},
 	shipment_id = '',
 }, ref) {
+	const { role_ids = [], user_id = '' } = useSelector(({ profile }) => (
+		{
+			role_ids : profile?.partner?.user_role_ids,
+			user_id  : profile?.user?.id,
+		}));
+
 	const [accordionState, setAccordionState] = useState({});
 	const {
 		data: quoteData = {},
 		loading: quoteLoading = false,
+		syncLoading = false,
 		getPrePostShipmentQuotes = () => {},
-	} = useGetPrePostShipmentQuotation({ jobId });
+		getRealtimeShipmentQuotes = () => {},
+	} = useGetPrePostShipmentQuotation({ jobId, shipment_id });
 
 	const toggleAccordion = (key) => {
 		setAccordionState((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -38,6 +52,11 @@ function PrePostCheckoutCardsSet({
 		setQuotationsData((prev) => ({ ...prev, prePostCheckoutData: quoteData }));
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(quoteData)]);
+
+	const isSyncAllowed = role_ids?.some((ele) => [
+		geo.uuid.cogo_auditor_id,
+		geo.uuid.corporate_owner_finance_id,
+	].includes(ele)) || user_id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id;
 
 	return (
 		<div className={styles.task_specific_container}>
@@ -63,6 +82,23 @@ function PrePostCheckoutCardsSet({
 				category="BUY"
 				getPrePostShipmentQuotes={getPrePostShipmentQuotes}
 			/>
+
+			{isSyncAllowed ? (
+				<div className={styles.sync_container}>
+					<Button
+						themeType="accent"
+						type="button"
+						loading={syncLoading}
+						onClick={getRealtimeShipmentQuotes}
+					>
+						Sync
+						<div>
+							<IcMRefresh height="10px" width="10px" style={{ marginLeft: 4 }} />
+						</div>
+					</Button>
+				</div>
+			) : null}
+
 		</div>
 	);
 }

@@ -5,6 +5,7 @@ import toastApiError from '../../commons/toastApiError';
 
 const useGetPrePostShipmentQuotation = ({
 	jobId = '',
+	shipment_id = '',
 }) => {
 	const [{ data = {}, loading = false }, trigger] = useRequestBf(
 		{
@@ -14,6 +15,32 @@ const useGetPrePostShipmentQuotation = ({
 		},
 		{ manual: true },
 	);
+
+	const [{ loading:syncLoading }, triggerSync] = useRequestBf(
+		{
+			url     : 'common/job/sync-quotations',
+			method  : 'post',
+			authKey : 'post_common_job_sync_quotations',
+		},
+		{ manual: true },
+	);
+
+	const getRealtimeShipmentQuotes = async () => {
+		try {
+			await triggerSync({
+				params: {
+					shipmentId: shipment_id,
+				},
+			});
+			await trigger({
+				params: {
+					jobId,
+				},
+			});
+		} catch (err) {
+			toastApiError(err);
+		}
+	};
 
 	const getPrePostShipmentQuotes = useCallback(async () => {
 		try {
@@ -35,6 +62,8 @@ const useGetPrePostShipmentQuotation = ({
 		data,
 		loading,
 		getPrePostShipmentQuotes,
+		syncLoading,
+		getRealtimeShipmentQuotes,
 	};
 };
 
