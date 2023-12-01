@@ -13581,6 +13581,11 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
+			api          : 'get_firestore_custom_token',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'assign_meeting_agent',
 			access_type  : 'private',
 			service_name : 'communication',
