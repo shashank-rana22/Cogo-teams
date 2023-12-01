@@ -6,7 +6,8 @@ import { useContext, useState } from 'react';
 import BookingRequirements from './BookingRequirements';
 import styles from './styles.module.css';
 
-const BOOKING_REQUIREMENTS_ROLES = ['superadmin', 'booking_desk', 'booking_desk_manager', 'so1_so2_ops'];
+const BOOKING_REQUIREMENTS_ROLES = ['superadmin', 'booking_desk', 'booking_desk_manager', 'so1_so2_ops',
+	'so2_executive'];
 const SUPPLY_REMARKS_ROLES = ['superadmin', 'admin', 'prod_process_owner', 'document_desk', 'document_desk_manager'];
 
 function Header({
