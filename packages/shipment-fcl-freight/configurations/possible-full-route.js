@@ -31,6 +31,18 @@ export const possibleServices = [
 		is_main       : false,
 	},
 	{
+		service_type  : 'cargo_insurance_service',
+		display_label : 'Cargo Insurance',
+		trade_type    : 'export',
+		is_main       : false,
+	},
+	{
+		service_type  : 'cargo_insurance_service',
+		display_label : 'Cargo Insurance',
+		trade_type    : 'import',
+		is_main       : false,
+	},
+	{
 		service_type  : 'fcl_freight_local_service',
 		display_label : 'Origin FCL Locals',
 		trade_type    : 'export',

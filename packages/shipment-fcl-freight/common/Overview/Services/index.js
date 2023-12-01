@@ -42,6 +42,7 @@ function Services() {
 		origin      : !isEmpty(serviceObj.originServices),
 		destination : !isEmpty(serviceObj.destinationServices),
 		main        : true,
+		insurance   : !isEmpty(serviceObj.insuranceServices),
 	});
 
 	const canUpsell = !!stakeholderConfig?.overview?.can_upsell;
@@ -74,7 +75,7 @@ function Services() {
 							{ isOtherServiceOperations ? null
 								: (
 									<div className={styles.upselling}>
-										{(upsellServices[serviceCategory]).map((service) => (
+										{(upsellServices[serviceCategory])?.map((service) => (
 											<AddNewService
 												key={`${service?.trade_type}_${service?.service_type}`}
 												upsellableService={service}

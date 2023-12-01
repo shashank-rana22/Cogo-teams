@@ -68,7 +68,7 @@ function AddNewService({
 	const showAddServiceBox = !cancelUpsell
 	&& isUpsellable && canUpsellForTradeType && upsellableService?.service_type !== 'fcl_freight_service';
 
-	const { origin, destination, main } = showTradeHeading;
+	const { origin, destination, main, insurance } = showTradeHeading;
 
 	useEffect(() => {
 		if (showAddServiceBox) {
@@ -76,9 +76,10 @@ function AddNewService({
 				origin      : origin || upsellableService.trade_type === 'export',
 				destination : destination || upsellableService.trade_type === 'import',
 				main,
+				insurance,
 			});
 		}
-	}, [showAddServiceBox, upsellableService.trade_type, setShowTradeHeading, origin, destination, main]);
+	}, [showAddServiceBox, upsellableService.trade_type, setShowTradeHeading, origin, destination, main, insurance]);
 
 	return (
 		<>

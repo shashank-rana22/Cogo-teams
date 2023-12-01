@@ -13,7 +13,8 @@ import styles from './styles.module.css';
 function Header({ serviceData = [], containerDetails = [], activeStakeholder = '' }) {
 	const { stakeholderConfig } = useContext(ShipmentDetailContext);
 
-	const can_edit_cancel_service = !!stakeholderConfig?.overview?.can_edit_cancel_service;
+	const can_edit_cancel_service = !!stakeholderConfig?.overview?.can_edit_cancel_service
+	&& serviceData?.[GLOBAL_CONSTANTS.zeroth_index]?.service_type !== 'cargo_insurance_service';
 
 	const SERVICE_DATA_FIRST = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
