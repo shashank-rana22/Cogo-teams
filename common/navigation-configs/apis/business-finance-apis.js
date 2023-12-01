@@ -146,7 +146,7 @@ const business_finance = {
 			feature     : 'shipmentAuditFunction',
 		},
 		{
-			api         : 'get_common_job_job_with_quotations',
+			api         : 'post_common_job_update_quotations',
 			access_type : 'private',
 			feature     : 'shipmentAuditFunction',
 		},

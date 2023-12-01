@@ -1,4 +1,6 @@
+import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMRefresh } from '@cogoport/icons-react';
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 
 import useGetPrePostShipmentQuotation from '../../../../../hook/useGetPrePostShipmentQuotation';
@@ -15,8 +17,10 @@ function PrePostCheckoutCardsSet({
 	const {
 		data: quoteData = {},
 		loading: quoteLoading = false,
+		syncLoading = false,
 		getPrePostShipmentQuotes = () => {},
-	} = useGetPrePostShipmentQuotation({ jobId });
+		getRealtimeShipmentQuotes = () => {},
+	} = useGetPrePostShipmentQuotation({ jobId, shipment_id });
 
 	const toggleAccordion = (key) => {
 		setAccordionState((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -63,6 +67,21 @@ function PrePostCheckoutCardsSet({
 				category="BUY"
 				getPrePostShipmentQuotes={getPrePostShipmentQuotes}
 			/>
+
+			<div className={styles.sync_container}>
+
+				<Button
+					themeType="accent"
+					type="button"
+					loading={syncLoading}
+					onClick={getRealtimeShipmentQuotes}
+				>
+					Sync
+					<div>
+						<IcMRefresh height="10px" width="10px" style={{ marginLeft: 4 }} />
+					</div>
+				</Button>
+			</div>
 		</div>
 	);
 }

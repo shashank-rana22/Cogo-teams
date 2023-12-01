@@ -9796,6 +9796,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_common_job_job_with_quotations',
+			access_type : 'private',
+		},
+		{
 			api         : 'get_incident_management_incident_list_incident_types',
 			access_type : 'private',
 		},
