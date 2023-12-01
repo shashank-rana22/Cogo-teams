@@ -34,14 +34,11 @@ const useGetIncidentMangement = ({ activeTab, payload }) => {
 	const { search, type, request_type:requestType, urgency, rejectedStatus, Date, ...rest } = globalFilters;
 
 	const { startDate, endDate } = Date || {};
-
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	useEffect(() => {
 		debounceQuery(search);
 	}, [search]);
-
-	// todo :: create mapping
 
 	let activeStatus = [];
 	if (payload?.[0] === 'raisedPayload') {
@@ -54,7 +51,6 @@ const useGetIncidentMangement = ({ activeTab, payload }) => {
 		activeStatus = ['PENDING_ACTION', 'RAISED_AGAIN', 'CLOSED', 'DELETED', 'REJECTED'];
 	}
 
-	// todo :: rewamp params
 	const refetch = async () => {
 		try {
 			await trigger({
