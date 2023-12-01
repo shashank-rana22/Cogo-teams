@@ -18,9 +18,9 @@ const useGetPrePostShipmentQuotation = ({
 
 	const [{ loading:syncLoading }, triggerSync] = useRequestBf(
 		{
-			url     : 'common/job/update-quotations',
+			url     : 'common/job/sync-quotations',
 			method  : 'post',
-			authKey : 'post_common_job_update_quotations',
+			authKey : 'post_common_job_sync_quotations',
 		},
 		{ manual: true },
 	);
