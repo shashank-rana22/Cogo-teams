@@ -26,6 +26,7 @@ function HandleButtons({
 	paymentModeValues = {},
 	updateLoading = false,
 	isFclInvoice = false,
+	editInvoice = {},
 }) {
 	const { primaryService = {} } = useContext(CheckoutContext);
 
@@ -98,6 +99,8 @@ function HandleButtons({
 		updateCheckoutInvoice({ values: payload, toastMessage: 'updated' });
 	};
 
+	const isAnyInvoiceOnEdit = !!Object.values(editInvoice).filter((item) => item).length;
+
 	const MAPPING = [
 		{
 			key       : 'delete',
@@ -113,7 +116,7 @@ function HandleButtons({
 				/>
 			),
 			type    : 'icon',
-			visible : !isEditMode && length > ONE,
+			visible : length > ONE,
 		},
 		{
 			key       : 'save',
@@ -160,7 +163,7 @@ function HandleButtons({
 				/>
 			),
 			type    : 'icon',
-			visible : true,
+			visible : !isAnyInvoiceOnEdit || isEditMode,
 		},
 	];
 

@@ -43,6 +43,8 @@ export const STAKEHOLDER_CAN_BE_ADDED = {
 	costbooking_ops           : 'Cost Booking Ops',
 	origin_booking_agent      : 'Origin KAM',
 	destination_booking_agent : 'Destination KAM',
+	release_desk              : 'Release Desk',
+	collection_desk           : 'Collection Desk',
 };
 
 export const SERVICE_LEVEL_STATKEHOLDERS = [

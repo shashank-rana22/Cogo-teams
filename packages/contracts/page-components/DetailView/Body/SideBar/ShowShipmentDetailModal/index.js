@@ -56,7 +56,7 @@ function ShipmentDataModal({
 				)}
 				{!loading && !isEmpty(shipment_plan_data) && (shipment_plan_data || []).map((value) => (
 					<div className={styles.plan_card} key={value?.id}>
-						<div className={styles.heading}>{value?.trade_party_data?.display_name}</div>
+						<div className={styles.heading}>{value?.trade_party_data?.business_name}</div>
 						<Table columns={columns} data={value?.plan_details} />
 					</div>
 				))}

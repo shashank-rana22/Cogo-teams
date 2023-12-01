@@ -117,6 +117,7 @@ function CurrentInvoicingParty({
 				editInvoiceDetails={editInvoiceDetails}
 				setEditInvoice={setEditInvoice}
 				setEditInvoiceDetails={setEditInvoiceDetails}
+				editInvoice={editInvoice}
 				paymentModeValues={paymentModeValues}
 				updateLoading={updateLoading}
 				isFclInvoice={isFclInvoice}

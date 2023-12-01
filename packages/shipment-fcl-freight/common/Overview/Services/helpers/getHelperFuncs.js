@@ -15,12 +15,14 @@ const helperFuncs = (servicesList, possibleServices) => {
 		originServices      : {},
 		mainServices        : {},
 		destinationServices : {},
+		insuranceServices   : {},
 	};
 
 	const upsellServices = {
 		originServices      : [],
 		mainServices        : [],
 		destinationServices : [],
+		insuranceServices   : [],
 	};
 
 	const classifyTradeTypeBasedService = (serviceToIterate) => {
@@ -33,7 +35,24 @@ const helperFuncs = (servicesList, possibleServices) => {
 				|| (service_type === 'fcl_freight_service'))) {
 				isServiceAlreadyAdded = true;
 
-				if (trade_type === 'export' && !serviceToIterate.is_main) {
+				if (service_type === 'cargo_insurance_service') {
+					isServiceAlreadyAdded = true;
+					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.insuranceServices, service);
+
+					if (canPushService) {
+						if (service_type in serviceObj.insuranceServices) {
+							(serviceObj.insuranceServices[service_type]).push({
+								...service,
+								display_label: serviceToIterate.display_label,
+							});
+						} else {
+							serviceObj.insuranceServices[service_type] = [{
+								...service,
+								display_label: serviceToIterate.display_label,
+							}];
+						}
+					}
+				} else if (trade_type === 'export' && !serviceToIterate.is_main) {
 					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.originServices, service);
 
 					if (canPushService) {

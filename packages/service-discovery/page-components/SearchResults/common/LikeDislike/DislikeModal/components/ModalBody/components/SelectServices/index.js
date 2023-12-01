@@ -149,7 +149,7 @@ function SelectServices({
 			${container_size ? `${container_size} Ft` : ''}`;
 
 			if (trade_type) {
-				label = `${TRADE_TYPE_MAPPING[trade_type]} ${label}`;
+				label = `${TRADE_TYPE_MAPPING[trade_type] || ''} ${label}`;
 			}
 
 			const finalPrice = getFreightprice({
