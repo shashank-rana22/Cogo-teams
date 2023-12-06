@@ -1,8 +1,0 @@
-.globe_container {
-	cursor: grab;
-	border-radius: 600px;
-}
-
-.globe_container:active {
-	cursor: grabbing;
-}

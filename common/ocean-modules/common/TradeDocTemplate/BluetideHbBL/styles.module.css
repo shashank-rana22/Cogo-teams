@@ -1,7 +1,0 @@
-.page_break {
-	margin: 24px;
-
-	@media print {
-		page-break-before: always;
-	}
-}

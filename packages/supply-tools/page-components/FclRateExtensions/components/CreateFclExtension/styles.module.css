@@ -1,7 +1,0 @@
-.modal {
-	:global {
-		.ui_modal_body_container {
-			overflow-x: visible;
-		}
-	}
-}

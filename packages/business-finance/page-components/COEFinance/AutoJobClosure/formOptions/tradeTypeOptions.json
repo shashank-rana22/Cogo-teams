@@ -1,6 +1,0 @@
-[
-	{ "label": "IMPORT",  "value": "IMPORT" },
-	{ "label": "EXPORT",  "value": "EXPORT" },
-	{ "label": "LOCAL",   "value": "LOCAL" },
-	{ "label": "DOMESTIC","value": "DOMESTIC" }
-]

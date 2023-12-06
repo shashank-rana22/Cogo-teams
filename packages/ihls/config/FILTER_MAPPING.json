@@ -1,9 +1,0 @@
-{
-    "uploaded": "uploaded",
-    "processing": "processing",
-    "raw_record_created": "raw_record_created",
-    "lead_created": "lead_created",
-    "shipment_record_created": "shipment_record_created",
-    "success": "success",
-    "failure": "failure"
-}

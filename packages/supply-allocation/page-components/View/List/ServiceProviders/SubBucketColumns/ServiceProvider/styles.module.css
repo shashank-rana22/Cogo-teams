@@ -1,7 +1,0 @@
-.rating_container {
-	:global {
-		.ui_star_rating {
-			pointer-events: none;
-		}
-	}
-}

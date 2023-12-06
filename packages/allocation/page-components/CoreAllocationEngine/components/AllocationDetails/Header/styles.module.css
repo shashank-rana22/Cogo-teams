@@ -1,9 +1,0 @@
-.header_container {
-	display: flex;
-	align-items: center;
-}
-
-.search_container {
-	flex: 0 1 50%;
-	margin-right: 8px;
-}

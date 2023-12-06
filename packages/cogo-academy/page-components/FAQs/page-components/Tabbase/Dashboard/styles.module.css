@@ -1,7 +1,0 @@
-.search_container {
-	margin-top: 12px;
-
-	@media (max-width: 768px) {
-		margin-top: 18px;
-	}
-}

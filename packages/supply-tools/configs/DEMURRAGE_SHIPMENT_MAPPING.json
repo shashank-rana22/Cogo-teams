@@ -1,8 +1,0 @@
-{
-    "shipment_types": [
-        {"label":"Ocean","value":"ocean"},
-        {"label":"Rail Domestic","value":"rail"}
-    ],
-    "rail":["active","inactive","invoice"],
-    "ocean":["active","inactive"]
-}

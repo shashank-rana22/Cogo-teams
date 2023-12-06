@@ -1,8 +1,0 @@
-.empty_state {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 150px;
-	font-size: 23px;
-	font-weight: 500;
-}

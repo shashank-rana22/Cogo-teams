@@ -1,6 +1,0 @@
-.container {
-	display: flex;
-	height: calc(100vh - 48px);
-	margin-top: 16px;
-	box-shadow: 0 0 10px rgb(0 0 0 / 5%);
-}

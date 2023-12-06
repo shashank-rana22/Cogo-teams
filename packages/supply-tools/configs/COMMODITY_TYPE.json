@@ -1,7 +1,0 @@
-{
-    "rail":[
-        { "label": "General", "value": "general" },
-        { "label": "Dangerous", "value": "dangerous" },
-        { "label": "Temprature Controlled", "value": "temp_controlled" }
-    ]
-}

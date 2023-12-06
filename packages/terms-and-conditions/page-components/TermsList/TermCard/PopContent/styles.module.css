@@ -1,9 +1,0 @@
-.pop_content {
-	display: flex;
-	flex-direction: column;
-	align-content: space-between;
-}
-
-.pop_content button {
-	margin-bottom: 5px;
-}

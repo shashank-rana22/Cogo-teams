@@ -1,9 +1,0 @@
-.partner_roles {
-	margin-top: 20px;
-}
-
-.modal_container {
-	@media (max-width: 768px) {
-		width: 300px !important;
-	}
-}
