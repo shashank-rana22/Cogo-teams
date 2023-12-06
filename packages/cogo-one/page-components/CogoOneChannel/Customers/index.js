@@ -4,27 +4,27 @@ import { Image } from '@cogoport/next';
 import React, { useEffect } from 'react';
 
 import getTabMappings from '../../../configurations/getTabMappings';
-import { getUserActiveMails } from '../../../configurations/mail-configuration';
+// import { getUserActiveMails } from '../../../configurations/mail-configuration';
 import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useGetUnreadCallsCount from '../../../hooks/useGetUnreadCallsCount';
-import useGetUnreadMailsCount from '../../../hooks/useGetUnreadMailsCount';
-import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
+// import useGetUnreadMailsCount from '../../../hooks/useGetUnreadMailsCount';
+// import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
 import useGetUnreadTeamsCount from '../../../hooks/useGetUnreadTeamsCount';
 
 import AgentSettings from './AgentSettings';
 import CommunicationModals from './CommunicationModals';
-import MailsList from './MailList';
-import MessageList from './MessageList';
+// import MailsList from './MailList';
+// import MessageList from './MessageList';
 import styles from './styles.module.css';
 import Teams from './Teams';
-import VoiceList from './VoiceList';
+// import VoiceList from './VoiceList';
 
 const COMPONENT_MAPPING = {
-	message         : MessageList,
-	voice           : VoiceList,
-	outlook         : MailsList,
-	firebase_emails : MailsList,
-	teams           : Teams,
+	// message         : MessageList,
+	// voice           : VoiceList,
+	// outlook         : MailsList,
+	// firebase_emails : MailsList,
+	teams: Teams,
 };
 
 const DEFAULT_PADDING_NOT_REQUIRED = ['outlook', 'firebase_emails', 'teams'];
@@ -35,92 +35,92 @@ function Customers({
 	userId = '',
 	setModalType = () => {},
 	modalType = {},
-	tagOptions = [],
+	// tagOptions = [],
 	mailProps = {},
 	firestore = {},
 	viewType = '',
-	workPrefernceLoading = false,
+	// workPrefernceLoading = false,
 	setOpenKamContacts = () => {},
 	agentStatus = {},
 	fetchworkPrefernce = () => {},
 	agentTimeline = () => {},
 	setSendBulkTemplates = () => {},
-	setSelectedAutoAssign = () => {},
-	selectedAutoAssign = {},
-	autoAssignChats = {},
-	setAutoAssignChats = () => {},
+	// setSelectedAutoAssign = () => {},
+	// selectedAutoAssign = {},
+	// autoAssignChats = {},
+	// setAutoAssignChats = () => {},
 	preferenceLoading = false,
 	setIsBotSession = () => {},
 	isBotSession = false,
 	isMobile = false,
 }) {
-	const {
-		userEmailAddress = '',
-		userSharedMails = [],
-	} = mailProps || {};
+	// const {
+	// userEmailAddress = '',
+	// userSharedMails = [],
+	// } = mailProps || {};
 
-	const userActiveMails = getUserActiveMails({ viewType, userEmailAddress });
+	// const userActiveMails = getUserActiveMails({ viewType, userEmailAddress });
 
-	const { unReadChatsCount } = useGetUnreadMessagesCount({
-		firestore,
-		viewType,
-		agentId: userId,
-		isBotSession,
-	});
+	// const { unReadChatsCount } = useGetUnreadMessagesCount({
+	// 	firestore,
+	// 	viewType,
+	// 	agentId: userId,
+	// 	isBotSession,
+	// });
 
-	const { unReadMailsCount = 0, throttledGetCount = () => {} } = useGetUnreadMailsCount({
-		firestore,
-		viewType,
-		agentId: userId,
-		isBotSession,
-		userSharedMails,
-	});
+	// const { unReadMailsCount = 0, throttledGetCount = () => {} } = useGetUnreadMailsCount({
+	// 	firestore,
+	// 	viewType,
+	// 	agentId: userId,
+	// 	isBotSession,
+	// 	userSharedMails,
+	// });
 
 	const { unreadTeamsCount = 0 } = useGetUnreadTeamsCount({ firestore });
 
-	const { data = {}, fetchUnreadCall = () => {} } = useGetUnreadCallsCount({ activeTab });
+	const { fetchUnreadCall = () => {} } = useGetUnreadCallsCount({ activeTab });
 
-	const unReadMissedCallCount = data?.total_missed_call_count;
+	// const unReadMissedCallCount = data?.total_missed_call_count;
 
 	const componentPropsMapping = {
-		message: {
-			userId,
-			firestore,
-			viewType,
-			isBotSession,
-			setIsBotSession,
-			tagOptions,
-			setModalType,
-			selectedAutoAssign,
-			setSelectedAutoAssign,
-			autoAssignChats,
-			setAutoAssignChats,
-			workPrefernceLoading,
-			setSendBulkTemplates,
-			mailsToBeShown: userSharedMails,
-		},
-		voice: {
-			setActiveVoiceCard: (val) => {
-				setActiveTab((prev) => ({ ...prev, data: val }));
-			},
-			activeVoiceCard : activeTab?.data || {},
-			activeTab       : activeTab?.tab,
-			viewType,
-		},
-		outlook: {
-			mailProps,
-			viewType,
-			mailsToBeShown: userActiveMails,
-		},
-		firebase_emails: {
-			mailProps,
-			viewType,
-			mailsToBeShown: userSharedMails,
-			firestore,
-			userId,
-			isBotSession,
-			throttledGetCount,
-		},
+		// message: {
+		// 	userId,
+		// 	firestore,
+		// 	viewType,
+		// 	isBotSession,
+		// 	setIsBotSession,
+		// 	tagOptions,
+		// 	setModalType,
+		// 	selectedAutoAssign,
+		// 	setSelectedAutoAssign,
+		// 	autoAssignChats,
+		// 	setAutoAssignChats,
+		// 	workPrefernceLoading,
+		// 	setSendBulkTemplates,
+		// 	mailsToBeShown: userSharedMails,
+		// },
+		// voice: {
+		// 	setActiveVoiceCard: (val) => {
+		// 		setActiveTab((prev) => ({ ...prev, data: val }));
+		// 	},
+		// 	activeVoiceCard : activeTab?.data || {},
+		// 	activeTab       : activeTab?.tab,
+		// 	viewType,
+		// },
+		// outlook: {
+		// 	mailProps,
+		// 	viewType,
+		// 	mailsToBeShown: userActiveMails,
+		// },
+		// firebase_emails: {
+		// 	mailProps,
+		// 	viewType,
+		// 	mailsToBeShown: userSharedMails,
+		// 	firestore,
+		// 	userId,
+		// 	isBotSession,
+		// 	throttledGetCount,
+		// },
 		teams: {
 			setActiveTeamCard: (val) => {
 				setActiveTab((prev) => ({
@@ -138,9 +138,6 @@ function Customers({
 	};
 
 	const tabMappings = getTabMappings({
-		unReadChatsCount,
-		unReadMissedCallCount,
-		unReadMailsCount,
 		viewType,
 		unreadTeamsCount,
 	});

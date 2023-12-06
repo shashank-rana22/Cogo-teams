@@ -1,7 +1,7 @@
 const CHANNEL_TYPE_MAPPING = {
 	email         : 'firebase_emails',
 	internal_chat : 'teams',
-	default       : 'message',
+	default       : 'teams',
 };
 
 function getInitialData({ assigned_chat = '', channel_type = '' }) {
