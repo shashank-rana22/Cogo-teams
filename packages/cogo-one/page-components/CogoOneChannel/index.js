@@ -1,6 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import { cl } from '@cogoport/components';
-import { useRouter, dynamic } from '@cogoport/next';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
@@ -26,12 +26,12 @@ import Calender from './Calendar';
 import Conversations from './Conversations';
 import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
-import HeaderBar from './HeaderBar';
+// import HeaderBar from './HeaderBar';
 import ModalComp from './ModalComps';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
-const PortPairOrgFilters = dynamic(() => import('./PortPairOrgFilters'));
+// const PortPairOrgFilters = dynamic(() => import('./PortPairOrgFilters'));
 
 function CogoOne() {
 	const { query: { assigned_chat = '', channel_type = '' } } = useRouter();
@@ -68,7 +68,8 @@ function CogoOne() {
 	} = useAgentWorkPrefernce();
 	const { fetchWorkStatus = () => {}, agentWorkStatus = {}, preferenceLoading = false } = useGetAgentPreference();
 	const { signature } = useGetSignature({ viewType });
-	const { agentTimeline = () => {}, data = {}, timelineLoading = false } = useGetAgentTimeline({ viewType });
+	// , data = {}, timelineLoading = false
+	const { agentTimeline = () => {} } = useGetAgentTimeline({ viewType });
 	const { suggestions = [] } = useListChatSuggestions();
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const { isMobile = false } = useGetIsMobile();
@@ -133,10 +134,11 @@ function CogoOne() {
 								&& !activeTab?.expandSideBar;
 
 	useEffect(() => setViewType(initialViewType), [initialViewType]);
+	console.log(sendBulkTemplates, 'Send Bulk Templates');
 
 	return (
 		<>
-			<HeaderBar
+			{/* <HeaderBar
 				isMobile={isMobile}
 				firestore={firestore}
 				fetchWorkStatus={fetchWorkStatus}
@@ -148,7 +150,7 @@ function CogoOne() {
 				initialViewType={initialViewType}
 				setViewType={setViewType}
 				{...commonProps}
-			/>
+			/> */}
 			<div className={styles.layout_container}>
 				<div
 					style={(!isMobile || isEmpty(activeTab?.data)) ? {} : { display: 'none' }}
@@ -174,12 +176,6 @@ function CogoOne() {
 						{...commonProps}
 					/>
 				</div>
-				{sendBulkTemplates ? (
-					<PortPairOrgFilters
-						sendBulkTemplates={sendBulkTemplates}
-						{...commonProps}
-					/>
-				) : null}
 				{isEmpty(activeTab?.data)
 					? (
 						<div

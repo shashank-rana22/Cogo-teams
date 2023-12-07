@@ -14,6 +14,7 @@ function Teams(teamsProps) {
 		activeTeamCard = {},
 		loggedInAgentId = '',
 		setActiveTab = () => {},
+		openSearch = false,
 	} = teamsProps;
 
 	const [searchValue, setSearchValue] = useState('');
@@ -33,11 +34,14 @@ function Teams(teamsProps) {
 
 	return (
 		<div className={styles.container}>
-			<TeamsHeader
-				searchValue={searchValue}
-				setSearchValue={setSearchValue}
-				setActiveTeamCard={setActiveTeamCard}
-			/>
+			{openSearch
+				? (
+					<TeamsHeader
+						searchValue={searchValue}
+						setSearchValue={setSearchValue}
+						setActiveTeamCard={setActiveTeamCard}
+					/>
+				) : null}
 			<div
 				className={styles.list_container}
 				onScroll={handleScroll}

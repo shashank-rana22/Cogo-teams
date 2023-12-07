@@ -1,18 +1,19 @@
-import { Tabs, TabPanel } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { Image } from '@cogoport/next';
-import React, { useEffect } from 'react';
+// import { Tabs, TabPanel } from '@cogoport/components';
+// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMUnread } from '@cogoport/icons-react';
+// import { Image } from '@cogoport/next';
+import React, { useState } from 'react';
 
-import getTabMappings from '../../../configurations/getTabMappings';
+// import getTabMappings from '../../../configurations/getTabMappings';
 // import { getUserActiveMails } from '../../../configurations/mail-configuration';
-import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
+// import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
 import useGetUnreadCallsCount from '../../../hooks/useGetUnreadCallsCount';
 // import useGetUnreadMailsCount from '../../../hooks/useGetUnreadMailsCount';
 // import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
-import useGetUnreadTeamsCount from '../../../hooks/useGetUnreadTeamsCount';
+// import useGetUnreadTeamsCount from '../../../hooks/useGetUnreadTeamsCount';
 
-import AgentSettings from './AgentSettings';
-import CommunicationModals from './CommunicationModals';
+// import AgentSettings from './AgentSettings';
+// import CommunicationModals from './CommunicationModals';
 // import MailsList from './MailList';
 // import MessageList from './MessageList';
 import styles from './styles.module.css';
@@ -33,27 +34,28 @@ function Customers({
 	setActiveTab = () => {},
 	activeTab = {},
 	userId = '',
-	setModalType = () => {},
-	modalType = {},
+	// setModalType = () => {},
+	// modalType = {},
 	// tagOptions = [],
-	mailProps = {},
+	// mailProps = {},
 	firestore = {},
 	viewType = '',
 	// workPrefernceLoading = false,
-	setOpenKamContacts = () => {},
-	agentStatus = {},
-	fetchworkPrefernce = () => {},
-	agentTimeline = () => {},
-	setSendBulkTemplates = () => {},
+	// setOpenKamContacts = () => {},
+	// agentStatus = {},
+	// fetchworkPrefernce = () => {},
+	// agentTimeline = () => {},
+	// setSendBulkTemplates = () => {},
 	// setSelectedAutoAssign = () => {},
 	// selectedAutoAssign = {},
 	// autoAssignChats = {},
 	// setAutoAssignChats = () => {},
-	preferenceLoading = false,
-	setIsBotSession = () => {},
-	isBotSession = false,
+	// preferenceLoading = false,
+	// setIsBotSession = () => {},
+	// isBotSession = false,
 	isMobile = false,
 }) {
+	const [openSearch, setOpenSearch] =	useState(false);
 	// const {
 	// userEmailAddress = '',
 	// userSharedMails = [],
@@ -76,7 +78,7 @@ function Customers({
 	// 	userSharedMails,
 	// });
 
-	const { unreadTeamsCount = 0 } = useGetUnreadTeamsCount({ firestore });
+	// const { unreadTeamsCount = 0 } = useGetUnreadTeamsCount({ firestore });
 
 	const { fetchUnreadCall = () => {} } = useGetUnreadCallsCount({ activeTab });
 
@@ -137,27 +139,27 @@ function Customers({
 		},
 	};
 
-	const tabMappings = getTabMappings({
-		viewType,
-		unreadTeamsCount,
-	});
+	// const tabMappings = getTabMappings({
+	// 	// viewType,
+	// 	unreadTeamsCount,
+	// });
 
 	const Component = COMPONENT_MAPPING[activeTab?.tab] || null;
 
-	const handleChangeTab = (val) => {
-		setActiveTab((prev) => ({ ...prev, tab: val, data: {}, subTab: 'all' }));
-	};
+	// const handleChangeTab = (val) => {
+	// 	setActiveTab((prev) => ({ ...prev, tab: val, data: {}, subTab: 'all' }));
+	// };
 
-	useEffect(() => {
-		const chatTabsActive = VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.chat_tabs_to_be_shown || [];
+	// useEffect(() => {
+	// 	const chatTabsActive = VIEW_TYPE_GLOBAL_MAPPING?.[viewType]?.chat_tabs_to_be_shown || [];
 
-		if (!chatTabsActive?.includes(activeTab?.tab) && viewType) {
-			setActiveTab((prev) => ({
-				...prev,
-				tab: chatTabsActive?.[GLOBAL_CONSTANTS.zeroth_index] || 'message',
-			}));
-		}
-	}, [activeTab?.tab, setActiveTab, viewType]);
+	// 	if (!chatTabsActive?.includes(activeTab?.tab) && viewType) {
+	// 		setActiveTab((prev) => ({
+	// 			...prev,
+	// 			tab: chatTabsActive?.[GLOBAL_CONSTANTS.zeroth_index] || 'message',
+	// 		}));
+	// 	}
+	// }, [activeTab?.tab, setActiveTab, viewType]);
 
 	return (
 		<div
@@ -165,7 +167,7 @@ function Customers({
 			style={DEFAULT_PADDING_NOT_REQUIRED.includes(activeTab?.tab)
 				? { padding: 0 } : {}}
 		>
-			<div
+			{/* <div
 				className={styles.filters_container}
 				style={DEFAULT_PADDING_NOT_REQUIRED.includes(activeTab?.tab)
 					? { padding: '10px 10px 0 10px' } : {}}
@@ -194,18 +196,18 @@ function Customers({
 					preferenceLoading={preferenceLoading}
 					isMobile={isMobile}
 				/>
-			</div>
+			</div> */}
 
 			<div
 				className={styles.tabs}
-				style={DEFAULT_PADDING_NOT_REQUIRED.includes(activeTab?.tab)
-					? { padding: '0 10px' } : {}}
+				// style={DEFAULT_PADDING_NOT_REQUIRED.includes(activeTab?.tab)
+				// 	? { padding: '0 10px' } : {}}
 			>
-				<Tabs
+				{/* <Tabs
 					activeTab={activeTab?.tab}
 					fullWidth
-					themeType="secondary"
-					onChange={handleChangeTab}
+					// themeType="secondary"
+					// onChange={handleChangeTab}
 				>
 					{tabMappings.map((eachTab) => {
 						if (!eachTab.show) {
@@ -221,7 +223,16 @@ function Customers({
 							/>
 						);
 					})}
-				</Tabs>
+				</Tabs> */}
+				<div className={styles.teams_chat}>Chat</div>
+				<div
+					style={{ cursor: 'pointer' }}
+					aria-hidden
+					onClick={() => setOpenSearch(!openSearch)}
+				>
+					<IcMUnread />
+
+				</div>
 			</div>
 
 			{Component && (
@@ -232,10 +243,11 @@ function Customers({
 					activeTab={activeTab}
 					fetchUnreadCall={fetchUnreadCall}
 					isMobile={isMobile}
+					openSearch={openSearch}
 				/>
 			)}
 
-			<CommunicationModals
+			{/* <CommunicationModals
 				mailProps={mailProps}
 				setModalType={setModalType}
 				modalType={modalType}
@@ -246,7 +258,7 @@ function Customers({
 				firestore={firestore}
 				activeSelect={activeTab?.tab || ''}
 				isMobile={isMobile}
-			/>
+			/> */}
 		</div>
 	);
 }
