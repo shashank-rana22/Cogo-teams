@@ -14,7 +14,7 @@ function Teams(teamsProps) {
 		activeTeamCard = {},
 		loggedInAgentId = '',
 		setActiveTab = () => {},
-		openSearch = false,
+		// openSearch = false,
 	} = teamsProps;
 
 	const [searchValue, setSearchValue] = useState('');
@@ -25,6 +25,7 @@ function Teams(teamsProps) {
 		pinnedChats = [],
 		loading,
 	} = useFetchTeamsRoom({ firestore, searchValue });
+	console.log(useFetchTeamsRoom({ firestore, searchValue }), 'fetchTeamsRoom');
 	const { readTeamsMessage = () => {} } = useUpdateLocalTeamRooms({ firestore });
 
 	const setActiveCard = (card) => {
@@ -34,14 +35,12 @@ function Teams(teamsProps) {
 
 	return (
 		<div className={styles.container}>
-			{openSearch
-				? (
-					<TeamsHeader
-						searchValue={searchValue}
-						setSearchValue={setSearchValue}
-						setActiveTeamCard={setActiveTeamCard}
-					/>
-				) : null}
+
+			<TeamsHeader
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
+				setActiveTeamCard={setActiveTeamCard}
+			/>
 			<div
 				className={styles.list_container}
 				onScroll={handleScroll}

@@ -117,9 +117,10 @@ function MessagesThread({
 			<div>
 				{(messages || []).map((eachMessage) => {
 					const conversationType = eachMessage?.send_by_id === loggedInUserId ? 'sent' : 'received';
+					console.log(eachMessage, 'each-message');
 
 					const modifiedConvType = eachMessage?.type === 'timeline' ? 'timeline' : conversationType;
-
+					console.log(modifiedConvType, 'modifiedConvType');
 					const Component = CONVERSATION_TYPE_MAPPING[modifiedConvType];
 
 					if (!Component) {

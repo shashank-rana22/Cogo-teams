@@ -56,6 +56,7 @@ function Customers({
 	isMobile = false,
 }) {
 	const [openSearch, setOpenSearch] =	useState(false);
+	console.log(firestore, 'firestore');
 	// const {
 	// userEmailAddress = '',
 	// userSharedMails = [],

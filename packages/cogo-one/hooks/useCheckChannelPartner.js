@@ -77,6 +77,7 @@ const useCheckChannelPartner = ({
 	orgId = null, activeCardId = null,
 	activeTab: activeConversationTab = '', formattedMessageData = {},
 }) => {
+	console.log(formattedMessageData, 'checkChannelPartner');
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 	const userId = formattedMessageData?.user_id;
 

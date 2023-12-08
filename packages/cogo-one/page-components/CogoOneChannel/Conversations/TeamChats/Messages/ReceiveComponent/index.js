@@ -23,13 +23,6 @@ function ReceiveComponent({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.sender_details}>
-				<span className={styles.sender_name}>
-					{startCase(send_by)}
-				</span>
-				{date || ''}
-			</div>
-
 			<div className={styles.message}>
 				<Avatar
 					personName={send_by}
@@ -45,7 +38,12 @@ function ReceiveComponent({
 					/>
 				</div>
 			</div>
-
+			<div className={styles.sender_details}>
+				<span className={styles.sender_name}>
+					{startCase(send_by)}
+				</span>
+				{date || ''}
+			</div>
 		</div>
 	);
 }

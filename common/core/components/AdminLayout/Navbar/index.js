@@ -1,16 +1,16 @@
-import { Input, cl } from '@cogoport/components';
-import { IcMSearchdark } from '@cogoport/icons-react';
-import { useTranslation } from 'next-i18next';
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+import { cl } from '@cogoport/components';
+// import { IcMSearchdark } from '@cogoport/icons-react';
+// import { useTranslation } from 'next-i18next';
+import React, { useState, useRef, useEffect } from 'react';
 
 import { LOGO } from '../../../constants/logo';
-import { applyFilter } from '../../../helpers/applyFilter';
+// import { applyFilter } from '../../../helpers/applyFilter';
 import formatUserBasedNavView from '../../../helpers/formatUserBasedNavView';
-import { sortNavs } from '../../../helpers/sortItems';
+// import { sortNavs } from '../../../helpers/sortItems';
 import useGetUserSessionMappings from '../../../hooks/useGetUserSessionMappings';
 import Items from '../Items';
 
-import Notification from './Notification';
+// import Notification from './Notification';
 import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
 import SwitchAccounts from './SwitchAccounts';
@@ -30,7 +30,7 @@ function Navbar({
 }) {
 	const ref = useRef(null);
 	const navRef = useRef(null);
-	const { t } = useTranslation(['common']);
+	// const { t } = useTranslation(['common']);
 	const userBasedNavView = formatUserBasedNavView(nav);
 
 	// eslint-disable-next-line no-undef
@@ -50,26 +50,28 @@ function Navbar({
 	const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [openPopover, setOpenPopover] = useState(false);
 	const [notificationPopover, setNotificationPopover] = useState(false);
-	const [searchString, setSearchString] = useState('');
+	// const [searchString, setSearchString] = useState('');
 
-	const filterdList = searchString
-		? applyFilter(searchString, userBasedNavView, 'title', ['key', 'href', 'title'])
-		: userBasedNavView;
+	// const filterdList = searchString
+	// 	? applyFilter(searchString, userBasedNavView, 'title', ['key', 'href', 'title'])
+	// 	: userBasedNavView;
 
-	const listItems = sortNavs(filterdList);
+	// const listItems = sortNavs(filterdList);
 
-	const filterdPinnedNavList = searchString
-		? applyFilter(searchString, pinnedNavs, 'title', ['key', 'href', 'title'])
-		: pinnedNavs;
+	// const filterdPinnedNavList = searchString
+	// 	? applyFilter(searchString, pinnedNavs, 'title', ['key', 'href', 'title'])
+	// 	: pinnedNavs;
 
-	const pinnedListItems = sortNavs(filterdPinnedNavList);
+	// const pinnedListItems = sortNavs(filterdPinnedNavList);
 
-	const setSearchFunc = useCallback(
-		(value) => {
-			setSearchString(value);
-		},
-		[],
-	);
+	// const setSearchFunc = useCallback(
+	// 	(value) => {
+	// 		setSearchString(value);
+	// 	},
+	// 	[],
+	// );
+
+	// console.log(pinnedNavs, userBasedNavView, 'nav-view');
 
 	const handleLeave = () => {
 		if (openPopover || notificationPopover) {
@@ -130,7 +132,7 @@ function Navbar({
 						unReadChatsCount={unReadChatsCount}
 					/>
 
-					<div className={styles.search_container}>
+					{/* <div className={styles.search_container}>
 						<Input
 							value={searchString}
 							placeholder={t('common:search_bar')}
@@ -138,12 +140,12 @@ function Navbar({
 							prefix={<IcMSearchdark width={16} height={16} />}
 							onChange={setSearchFunc}
 						/>
-					</div>
+					</div> */}
 
 					<div className={styles.line} />
 					<ul ref={ref} className={styles.list_container}>
 						<div className={styles.pinned_list}>
-							{(pinnedListItems || []).map((item) => (
+							{(pinnedNavs || []).map((item) => (
 								<Items
 									key={item.key}
 									item={item}
@@ -159,7 +161,7 @@ function Navbar({
 							))}
 						</div>
 						<div className={styles.unpinned_list}>
-							{(listItems || []).map((item) => (
+							{(userBasedNavView || []).map((item) => (
 								<Items
 									key={item.key}
 									item={item}
@@ -207,8 +209,8 @@ function Navbar({
 						)
 				}
 
-				{
-					notificationPopover
+				{/* {
+					// notificationPopover
 						? (
 							<Notification
 								notificationPopover={notificationPopover}
@@ -216,7 +218,7 @@ function Navbar({
 								setResetSubnavs={setResetSubnavs}
 							/>
 						) : null
-				}
+				} */}
 
 			</div>
 

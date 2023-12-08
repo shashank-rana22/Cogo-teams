@@ -16,7 +16,7 @@ function ProfileDetails({
 	activeTab = '',
 	activeVoiceCard = {},
 	activeCardId = '',
-	setModalType = () => {},
+	// setModalType = () => {},
 	activeRoomLoading = false,
 	setRaiseTicketModal = () => {},
 	zippedTicketsData = {},
@@ -42,7 +42,7 @@ function ProfileDetails({
 	);
 
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
-
+	console.log(ActiveComp, 'teamsProfile');
 	const {
 		organizationData = {},
 		openNewTab,
@@ -78,6 +78,7 @@ function ProfileDetails({
 			${activeSelect === 'add_on_services' ? styles.add_on_services_tab : ''}`}
 				>
 					{ActiveComp && (
+						// <div>Hellp</div>
 						<ActiveComp
 							customerId={customerId}
 							activeMessageCard={activeMessageCard}
@@ -91,7 +92,7 @@ function ProfileDetails({
 							orgId={orgId}
 							disableQuickActions={disableQuickActions}
 							documents_count={documents_count}
-							setModalType={setModalType}
+							// setModalType={setModalType}
 							hideCpButton={hideCpButton}
 							getOrgDetails={getOrgDetails}
 							activeRoomLoading={activeRoomLoading}

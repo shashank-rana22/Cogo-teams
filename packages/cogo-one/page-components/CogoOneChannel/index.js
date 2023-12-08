@@ -8,30 +8,27 @@ import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
 import { firebaseConfig } from '../../configurations/firebase-config';
-import { ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR, FIREBASE_TABS } from '../../constants';
+import {
+	ENABLE_EXPAND_SIDE_BAR, ENABLE_SIDE_BAR,
+	// FIREBASE_TABS
+} from '../../constants';
 import { DEFAULT_EMAIL_STATE } from '../../constants/mailConstants';
 import { getInitialData } from '../../helpers/getInitialData';
-import useGetTicketsData from '../../helpers/useGetTicketsData';
+// import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
-import useGetAgentPreference from '../../hooks/useGetAgentPreference';
-import useGetAgentTimeline from '../../hooks/useGetAgentTimeline';
 import useGetIsMobile from '../../hooks/useGetIsMobile';
 import useGetSignature from '../../hooks/useGetSignature';
-import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
 import useListChatSuggestions from '../../hooks/useListChatSuggestions';
 import useListCogooneGroupMembers from '../../hooks/useListCogooneGroupMembers';
-import getActiveCardDetails from '../../utils/getActiveCardDetails';
+// import getActiveCardDetails from '../../utils/getActiveCardDetails';
 
 import Calender from './Calendar';
 import Conversations from './Conversations';
 import Customers from './Customers';
 import EmptyChatPage from './EmptyChatPage';
-// import HeaderBar from './HeaderBar';
-import ModalComp from './ModalComps';
-import ProfileDetails from './ProfileDetails';
+// import ModalComp from './ModalComps';
+// import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
-
-// const PortPairOrgFilters = dynamic(() => import('./PortPairOrgFilters'));
 
 function CogoOne() {
 	const { query: { assigned_chat = '', channel_type = '' } } = useRouter();
@@ -43,41 +40,38 @@ function CogoOne() {
 
 	const [activeTab, setActiveTab] = useState(getInitialData({ assigned_chat, channel_type }));
 	const [viewType, setViewType] = useState('');
-	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
-	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
+	// const [activeRoomLoading, setActiveRoomLoading] = useState(false);
+	// const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [modalType, setModalType] = useState({ type: null, data: {} });
 	const [buttonType, setButtonType] = useState('');
 	const [activeMailAddress, setActiveMailAddress] = useState('');
 	const [emailState, setEmailState] = useState(DEFAULT_EMAIL_STATE);
-	const [openKamContacts, setOpenKamContacts] = useState(false);
-	const [sendBulkTemplates, setSendBulkTemplates] = useState(false);
+	// const [openKamContacts, setOpenKamContacts] = useState(false);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
-	const [autoAssignChats, setAutoAssignChats] = useState(true);
 	const [mailAttachments, setMailAttachments] = useState([]);
-	const [isBotSession, setIsBotSession] = useState(false);
 
-	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
-		activeMessageCard : activeTab?.data,
-		activeVoiceCard   : activeTab?.data,
-		activeTab         : activeTab?.tab,
-		setRaiseTicketModal,
-		agentId           : userId,
-	});
+	// const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
+	// 	activeMessageCard : activeTab?.data,
+	// 	activeVoiceCard   : activeTab?.data,
+	// 	activeTab         : activeTab?.tab,
+	// 	setRaiseTicketModal,
+	// 	agentId           : userId,
+	// });
 	const {
-		viewType: initialViewType = '', loading: workPrefernceLoading = false, userSharedMails = [],
+		viewType: initialViewType = '', userSharedMails = [],
 	} = useAgentWorkPrefernce();
-	const { fetchWorkStatus = () => {}, agentWorkStatus = {}, preferenceLoading = false } = useGetAgentPreference();
+
 	const { signature } = useGetSignature({ viewType });
-	// , data = {}, timelineLoading = false
-	const { agentTimeline = () => {} } = useGetAgentTimeline({ viewType });
+
 	const { suggestions = [] } = useListChatSuggestions();
-	const { tagOptions = [] } = useListAssignedChatTags();
+
 	const { isMobile = false } = useGetIsMobile();
 	const { group_id = '' } = activeTab?.data || {};
 
 	const {
 		listCogooneGroupMembers = () => {},
-		membersList = [], groupMembersLoading,
+		membersList = [],
+		// groupMembersLoading,
 	} = useListCogooneGroupMembers({ globalGroupId: group_id });
 
 	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
@@ -108,11 +102,8 @@ function CogoOne() {
 		mailAttachments,
 	};
 	const commonProps = {
-		setSendBulkTemplates,
-		preferenceLoading,
 		setActiveTab,
 		selectedAutoAssign,
-		setAutoAssignChats,
 		queryAssignedChat: assigned_chat,
 		isMobile,
 		setSelectedAutoAssign,
@@ -120,12 +111,12 @@ function CogoOne() {
 	};
 
 	const teamsSideBarCheck = (activeTab?.tab === 'teams' && (!!activeTab?.data?.id || !!activeTab?.data?.group_id));
-	const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
-	const { user_id = '', lead_user_id = '' } = tabData || {};
-	const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
-	const orgId = FIREBASE_TABS.includes(activeTab?.tab)
-		? formattedMessageData?.organization_id
-		: activeTab?.data?.organization_id;
+	// const { hasNoFireBaseRoom = false, data:tabData } = activeTab || {};
+	// const { user_id = '', lead_user_id = '' } = tabData || {};
+	// const formattedMessageData = getActiveCardDetails(activeTab?.data) || {};
+	// const orgId = FIREBASE_TABS.includes(activeTab?.tab)
+	// 	? formattedMessageData?.organization_id
+	// 	: activeTab?.data?.organization_id;
 	const expandedSideBar = (ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
 		|| ((ENABLE_EXPAND_SIDE_BAR.includes(
 			activeTab?.data?.channel_type,
@@ -134,45 +125,30 @@ function CogoOne() {
 								&& !activeTab?.expandSideBar;
 
 	useEffect(() => setViewType(initialViewType), [initialViewType]);
-	console.log(sendBulkTemplates, 'Send Bulk Templates');
+	console.log(activeTab?.showSidebar, 'Send Bulk Templates');
 
 	return (
 		<>
-			{/* <HeaderBar
-				isMobile={isMobile}
-				firestore={firestore}
-				fetchWorkStatus={fetchWorkStatus}
-				agentStatus={agentWorkStatus}
-				data={data}
-				agentTimeline={agentTimeline}
-				timelineLoading={timelineLoading}
-				userId={userId}
-				initialViewType={initialViewType}
-				setViewType={setViewType}
-				{...commonProps}
-			/> */}
 			<div className={styles.layout_container}>
 				<div
 					style={(!isMobile || isEmpty(activeTab?.data)) ? {} : { display: 'none' }}
 					className={isMobile ? styles.mobile_customer_layout : styles.customers_layout}
 				>
 					<Customers
-						setIsBotSession={setIsBotSession}
-						isBotSession={isBotSession}
 						activeTab={activeTab}
 						userId={userId}
 						setModalType={setModalType}
 						modalType={modalType}
-						tagOptions={tagOptions}
-						mailProps={mailProps}
+						// tagOptions={tagOptions}
+						// mailProps={mailProps}
 						firestore={firestore}
-						suggestions={suggestions}
-						workPrefernceLoading={workPrefernceLoading}
-						setOpenKamContacts={setOpenKamContacts}
-						agentStatus={agentWorkStatus}
-						fetchworkPrefernce={fetchWorkStatus}
-						agentTimeline={agentTimeline}
-						autoAssignChats={autoAssignChats}
+						// suggestions={suggestions}
+						// workPrefernceLoading={workPrefernceLoading}
+						// setOpenKamContacts={setOpenKamContacts}
+						// agentStatus={agentWorkStatus}
+						// fetchworkPrefernce={fetchWorkStatus}
+						// agentTimeline={agentTimeline}
+						// autoAssignChats={autoAssignChats}
 						{...commonProps}
 					/>
 				</div>
@@ -183,20 +159,20 @@ function CogoOne() {
 						>
 							<EmptyChatPage
 								activeTab={activeTab}
-								viewType={viewType}
-								setActiveTab={setActiveTab}
-								mailProps={mailProps}
-								isBotSession={isBotSession}
-								firestore={firestore}
-								userId={userId}
-								initialViewType={initialViewType}
+								// viewType={viewType}
+								// setActiveTab={setActiveTab}
+								// mailProps={mailProps}
+								// isBotSession={isBotSession}
+								// firestore={firestore}
+								// userId={userId}
+								// initialViewType={initialViewType}
 							/>
 						</div>
 					) : null}
 				{isEmpty(activeTab?.data) ? null : (
 					<>
 						<div
-							style={(!isMobile || !activeTab?.showSidebar) ? {} : { display: 'none' }}
+							style={(!isMobile || !activeTab?.expandSideBar) ? {} : { display: 'none' }}
 							className={cl`${styles.chat_body} ${expandedSideBar ? styles.chats_layout : ''} 
 									${collapsedSideBar ? styles.mail_layout : ''} 
 								${!expandedSideBar && !collapsedSideBar ? styles.nosidebar_layout : ''}
@@ -206,23 +182,23 @@ function CogoOne() {
 								activeTab={activeTab}
 								firestore={firestore}
 								userId={userId}
-								setRaiseTicketModal={setRaiseTicketModal}
-								setActiveRoomLoading={setActiveRoomLoading}
+								// setRaiseTicketModal={setRaiseTicketModal}
+								// setActiveRoomLoading={setActiveRoomLoading}
 								mailProps={mailProps}
 								suggestions={suggestions}
-								setModalType={setModalType}
+								// setModalType={setModalType}
 								listCogooneGroupMembers={listCogooneGroupMembers}
 								membersList={membersList}
 								{...commonProps}
 							/>
 						</div>
 
-						{((ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
+						{/* {((ENABLE_SIDE_BAR.includes(activeTab?.data?.channel_type)
 								|| ENABLE_EXPAND_SIDE_BAR.includes(activeTab?.data?.channel_type)
 								|| teamsSideBarCheck))
 							? (
 								<div
-									className={cl`${styles.user_profile_layout} 
+									className={cl`${styles.user_profile_layout}
 								${(hasNoFireBaseRoom && !user_id && !lead_user_id) ? styles.disable_user_profile : ''}
 								${expandedSideBar ? styles.expanded_side_bar : styles.collapsed_side_bar}
 								${isMobile ? styles.mobile_user_profile_layout : null}`}
@@ -252,12 +228,12 @@ function CogoOne() {
 									{(hasNoFireBaseRoom && !user_id && !lead_user_id)
 									&& <div className={styles.overlay_div} />}
 								</div>
-							) : null}
+							) : null} */}
 					</>
 				)}
 			</div>
 			{!isMobile ? <Calender firestore={firestore} /> : null}
-			<ModalComp
+			{/* <ModalComp
 				raiseTicketModal={raiseTicketModal}
 				setRaiseTicketModal={setRaiseTicketModal}
 				refetchTickets={refetchTickets}
@@ -267,7 +243,7 @@ function CogoOne() {
 				setOpenKamContacts={setOpenKamContacts}
 				orgId={orgId}
 				{...commonProps}
-			/>
+			/> */}
 		</>
 	);
 }

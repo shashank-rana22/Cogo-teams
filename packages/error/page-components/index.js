@@ -7,7 +7,7 @@ function NotFound() {
 	const router = useRouter();
 
 	const handleBack = () => {
-		router.push('/welcome');
+		router.push('/cogo-one/omni-channel');
 	};
 
 	return (

@@ -3,7 +3,7 @@
 }
 
 .list_container {
-	height: calc(100% - 44px);
+	height: calc(100% - 4px);
 	padding: 6px 10px;
 	overflow-x: hidden;
 	overflow-y: auto;

@@ -55,6 +55,8 @@ function RightSideNav({
 		isMobile,
 	}) || [];
 
+	console.log(ICON_MAPPING, 'ICON_MAPPING');
+
 	const check = () => {
 		dispatch(
 			setProfileState({
@@ -105,14 +107,18 @@ function RightSideNav({
 		}
 	};
 
+	console.log(activeSelect, 'activeSelect');
+
 	return (
 		<>
 			<div className={styles.right_container}>
 				{ICON_MAPPING.map((item) => {
+					console.log(item, 'mao-item');
 					const { icon, name, content } = item || {};
 
 					const showDocumentCount = activeSelect !== 'documents' && name === 'documents'
 				&& !!documentsCount && !checkConditions;
+					console.log(showDocumentCount, 'showDocumentCount');
 
 					const showQuotationSentData = orgId && activeSelect !== 'organization'
 				&& name === 'organization' && !!quotationEmailSentAt;

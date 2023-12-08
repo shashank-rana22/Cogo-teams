@@ -5,7 +5,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMSearchlight,
 } from '@cogoport/icons-react';
-import { Image } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
@@ -32,14 +31,24 @@ function TeamsHeader({
 				/>
 			</div>
 
-			<Image
+			<img
+				className={styles.edit_icon}
+				src={GLOBAL_CONSTANTS.image_url.edit_square}
+				alt="newConversation"
+				onClick={newConversation}
+				width={20}
+				height={20}
+				aria-hidden
+			/>
+
+			{/* <Image
 				className={styles.edit_icon}
 				width={20}
 				height={20}
 				alt="new"
 				src={GLOBAL_CONSTANTS.image_url.edit_square}
 				onClick={newConversation}
-			/>
+			/> */}
 		</div>
 	);
 }

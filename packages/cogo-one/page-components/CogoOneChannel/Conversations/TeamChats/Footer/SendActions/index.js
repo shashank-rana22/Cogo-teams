@@ -109,7 +109,7 @@ function SendActions({
 			<div className={styles.send_messages}>
 				{!messageLoading ? (
 					<IcMSend
-						fill="#EE3425"
+						fill="#221F20"
 						style={{ cursor: canSendMessage ? 'pointer' : 'not-allowed' }}
 						onClick={() => {
 							if (canSendMessage) {

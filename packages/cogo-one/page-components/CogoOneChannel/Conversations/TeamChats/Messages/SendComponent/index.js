@@ -22,14 +22,14 @@ function SentComponent({
 	return (
 		<div className={styles.container}>
 			<div className={styles.details}>
-				<div className={styles.sent_date}>
-					{date}
-				</div>
 				<div className={styles.message_card}>
 					<MessageBody
 						response={response}
 						message_type={response?.message_type || 'text'}
 					/>
+				</div>
+				<div className={styles.sent_date}>
+					{date}
 				</div>
 			</div>
 

@@ -8,6 +8,8 @@ import {
 	IcMCrossInCircle,
 	IcMArrowDoubleLeft,
 	IcMEmail,
+	IcMNotifications,
+	IcMLiveChat,
 } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 
@@ -147,6 +149,16 @@ const iconMapping = ({ expandSideBar = false }) => [
 		content : 'teams Profile',
 		icon    : <IcMProfile width={20} height={20} />,
 	},
+	{
+		name    : 'notifications',
+		content : 'Notifications',
+		icon    : <IcMNotifications width={20} height={20} />,
+	},
+	{
+		name    : 'chats',
+		content : 'Chats',
+		icon    : <IcMLiveChat width={20} height={20} />,
+	},
 ];
 
 const getIconMapping = ({
@@ -156,12 +168,13 @@ const getIconMapping = ({
 	isTeams = false,
 	isMobile = false,
 }) => {
+	console.log(isTeams, 'boolean');
 	const COMMON_NAVIGATIONS = COMMON_ACCESIBLE_NAVIGATIONS?.filter(
 		(eachNav) => (!isMobile ? eachNav : !HIDE_CONTROLS_FOR_MOBILE.includes(eachNav)),
 	);
 
 	const CHANNEL_WISE_NAV_MAPPING = isTeams
-		? [...(isMobile ? MOBILE_CONTROLS : []), 'teams_profile']
+		? [...(isMobile ? MOBILE_CONTROLS : []), 'teams_profile', 'notifications', 'chats', 'user_mails']
 		: [
 			...COMMON_NAVIGATIONS,
 			...(VIEW_TYPE_GLOBAL_MAPPING[viewType]?.extra_side_bar_navs_access || []),

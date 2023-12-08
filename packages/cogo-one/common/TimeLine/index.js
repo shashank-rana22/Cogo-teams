@@ -46,6 +46,8 @@ function TimeLine({
 		isSameAgent     : presentAgentId === prevAgentId,
 	});
 
+	// console.log(eachMessage, timelineText, 'message-showHideOption');
+
 	if (!timelineText) {
 		return null;
 	}

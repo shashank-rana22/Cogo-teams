@@ -32,7 +32,7 @@
 }
 
 .mail_layout {
-	width: calc(75% - 50px);
+	width: calc(85% - 50px);
 	padding-right: 10px;
 	overflow: hidden;
 }

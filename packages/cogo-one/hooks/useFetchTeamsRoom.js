@@ -47,6 +47,7 @@ function useFetchTeamsRoom({ firestore = {}, searchValue = '' }) {
 			return {};
 		}
 		const userCollectionPath = `users/${activeAgent}/groups`;
+		console.log(userCollectionPath, 'userCollectionPath');
 		return collection(firestore, userCollectionPath);
 	}, [activeAgent, firestore]);
 
@@ -60,6 +61,7 @@ function useFetchTeamsRoom({ firestore = {}, searchValue = '' }) {
 	}, [activeAgent, filterQuery, listData, loading?.unpinnedLoading, roomsCollection]);
 
 	const { messagesListData = {} } = listData;
+	console.log(messagesListData, 'messagesListData');
 
 	useEffect(() => {
 		setActiveAgent(loggedInUserId);

@@ -4,7 +4,8 @@
 	height: 100%;
 	padding: 10px;
 	background: #fff;
-	border-radius: 8px;
+
+	/* border-radius: 8px; */
 
 	:global {
 		.ui_tabs_list_badge {
@@ -62,7 +63,7 @@
 	padding: 10px;
 }
 
-.teams_chat{
+.teams_chat {
 	font-size: 20px;
 	font-weight: 600;
 }

@@ -37,12 +37,12 @@ function GroupCard({
 	const activeCard = id === activeTeamCard?.id;
 
 	const lastActive = new Date(new_message_sent_at);
-
 	const mediaText = last_message_document?.response?.message_type === 'media' ? 'media' : '';
 
 	const lastMessage = last_message_document?.response?.message || mediaText;
 
 	const isDraftName = !isEmpty(search_name?.match(groupNameRegex));
+	console.log(search_name, groupNameRegex, isDraftName, 'search_name');
 
 	const { renderTime } = dateTimeConverter(
 		Date.now() - Number(lastActive),

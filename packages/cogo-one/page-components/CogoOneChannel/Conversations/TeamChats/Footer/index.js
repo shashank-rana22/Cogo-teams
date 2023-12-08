@@ -83,12 +83,14 @@ function Footer({
 			/>
 			<div className={cl`${styles.text_area_div} ${!hasPermissionToEdit ? styles.disabled : ''}`}>
 				<Textarea
-					rows={5}
+					rows={3}
 					placeholder={hasPermissionToEdit
 						? 'Type your message here...' : 'You don\'t have permission to chat'}
 					className={styles.text_area}
 					value={draftMessage || ''}
-					onChange={(val) => setDraftMessages((prev) => ({ ...prev, [activeId]: val }))}
+					onChange={(val) => {
+						setDraftMessages((prev) => ({ ...prev, [activeId]: val }));
+					}}
 					style={{ cursor: hasPermissionToEdit ? 'text' : 'not-allowed' }}
 					onKeyDown={handleKeyPress}
 				/>
