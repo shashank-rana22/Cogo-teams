@@ -30,7 +30,10 @@ function newMessageSnapShot({
 	setFirstLoadingMessages = () => {},
 	scrollToLastMessage = () => {},
 	getCogooneTimeline = () => {},
+	starMessage = false,
 }) {
+	const starFilterQuery = starMessage ? where('is_star_marked', '==', true) : undefined;
+
 	if (isEmpty(chatCollection)) {
 		return;
 	}
@@ -38,6 +41,7 @@ function newMessageSnapShot({
 	try {
 		const chatCollectionQuery = query(
 			chatCollection,
+			starFilterQuery,
 			orderBy('created_at', 'desc'),
 			limit(PAGE_LIMIT),
 		);
@@ -90,8 +94,11 @@ async function getNextData({
 	setMessagesState = () => {},
 	prevLastDocumentTimeStamp = Date.now(),
 	getCogooneTimeline = () => {},
+	starMessage = false,
 }) {
 	const prevTimeStamp = Number(prevLastDocumentTimeStamp);
+
+	const starFilterQuery = starMessage ? where('is_star_marked', '==', true) : undefined;
 
 	if (isEmpty(chatCollection)) {
 		return;
@@ -100,6 +107,7 @@ async function getNextData({
 	try {
 		const chatCollectionQuery = query(
 			chatCollection,
+			starFilterQuery,
 			where(
 				'created_at',
 				'<',
@@ -144,6 +152,7 @@ const useGetTeamsMessages = ({
 	firestore = {},
 	scrollToLastMessage = () => {},
 	lastGroupUpdatedAt = 0,
+	starMessage = false,
 }) => {
 	const loggedInUserId = useSelector(({ profile }) => profile.user.id);
 
@@ -188,6 +197,7 @@ const useGetTeamsMessages = ({
 			setMessagesState,
 			prevLastDocumentTimeStamp,
 			getCogooneTimeline,
+			starMessage,
 		});
 	};
 
@@ -211,6 +221,7 @@ const useGetTeamsMessages = ({
 			setFirstLoadingMessages,
 			scrollToLastMessage,
 			getCogooneTimeline,
+			starMessage,
 		});
 
 		const unSubscribe = newMessagesRef.current;
@@ -218,7 +229,7 @@ const useGetTeamsMessages = ({
 		return () => {
 			unSubscribe?.();
 		};
-	}, [chatCollection, getCogooneTimeline, roomId, scrollToLastMessage]);
+	}, [chatCollection, getCogooneTimeline, roomId, scrollToLastMessage, starMessage]);
 
 	return {
 		messages: sortedMessageData,
@@ -229,6 +240,7 @@ const useGetTeamsMessages = ({
 		refetch,
 		loggedInUserId,
 		messagesState,
+		setMessagesState,
 	};
 };
 

@@ -6,7 +6,7 @@ export { default } from '@cogoport/cogo-one/page-components/CogoOneChannel';
 export async function getServerSideProps({ locale }) {
 	return {
 		props: {
-			...(await serverSideTranslations(locale, ['common', 'myTickets'])),
+			...(await serverSideTranslations(locale, ['common'])),
 		},
 	};
 }

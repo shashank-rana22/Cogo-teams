@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 // import getTabMappings from '../../../configurations/getTabMappings';
 // import { getUserActiveMails } from '../../../configurations/mail-configuration';
 // import { VIEW_TYPE_GLOBAL_MAPPING } from '../../../constants/viewTypeMapping';
-import useGetUnreadCallsCount from '../../../hooks/useGetUnreadCallsCount';
+// import useGetUnreadCallsCount from '../../../hooks/useGetUnreadCallsCount';
 // import useGetUnreadMailsCount from '../../../hooks/useGetUnreadMailsCount';
 // import useGetUnreadMessagesCount from '../../../hooks/useGetUnreadMessagesCount';
 // import useGetUnreadTeamsCount from '../../../hooks/useGetUnreadTeamsCount';
@@ -81,7 +81,7 @@ function Customers({
 
 	// const { unreadTeamsCount = 0 } = useGetUnreadTeamsCount({ firestore });
 
-	const { fetchUnreadCall = () => {} } = useGetUnreadCallsCount({ activeTab });
+	// const { fetchUnreadCall = () => {} } = useGetUnreadCallsCount({ activeTab });
 
 	// const unReadMissedCallCount = data?.total_missed_call_count;
 
@@ -242,7 +242,7 @@ function Customers({
 					{...(componentPropsMapping[activeTab?.tab] || {})}
 					setActiveTab={setActiveTab}
 					activeTab={activeTab}
-					fetchUnreadCall={fetchUnreadCall}
+					// fetchUnreadCall={fetchUnreadCall}
 					isMobile={isMobile}
 					openSearch={openSearch}
 				/>
