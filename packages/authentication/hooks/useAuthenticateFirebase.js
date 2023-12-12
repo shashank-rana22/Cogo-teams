@@ -33,7 +33,6 @@ const useAuthenticateFirebase = () => {
 
 	const signInFirebase = useCallback(
 		async ({ customToken, userEmailAddress }) => {
-			// if (process.env.NEXT_PUBLIC_REST_BASE_API_URL.includes('api.cogoport.com')) {
 			const auth = await getAuth(app);
 
 			if (isEmpty(auth?.currentUser)) {
@@ -44,7 +43,6 @@ const useAuthenticateFirebase = () => {
 						await fetchFirebaseCustomToken({ auth, userEmailAddress });
 					},
 				);
-				// }
 			}
 		},
 		[app, fetchFirebaseCustomToken],

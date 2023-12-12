@@ -417,6 +417,7 @@ const GLOBAL_CONSTANTS = {
 		call_not_connected   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/call_not_connected.png',
 		preloader            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/preloader.gif',
 		cogoport_short_logo  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo_analytics.svg',
+		change_text_editor   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/change_text_editor_grey.png',
 		awb_docs_images      : {
 			original_3:
 			'https://cogoport-production.sgp1.digitaloceanspaces.com/1fcd0257b396ea304a7aebfeaceaee76/original_3.png',

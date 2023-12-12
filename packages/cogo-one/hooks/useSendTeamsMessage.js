@@ -54,11 +54,14 @@ function useSendTeamsMessage({
 				attachments,
 			});
 
+			console.log(payload, 'pdfghjklayload');
+
 			await trigger({
 				data: payload,
 			});
 			cleanUpFunc();
 		} catch (error) {
+			console.log(error, 'error');
 			Toast.error(getApiErrorString(error?.response?.data) || 'Something Went Wrong');
 		} finally {
 			setLoading(false);

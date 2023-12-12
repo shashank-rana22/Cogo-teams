@@ -1,36 +1,59 @@
-.text_area {
-	width: 100%;
-	overflow: auto;
-	resize: none;
-	border: none !important;
-	outline: none;
-
-	>div {
-		border: none !important;
-	}
-
-	&:focus {
-		outline: none !important;
-	}
-
-	&:focus-visible {
-		outline: none !important;
-	}
-}
-
 .text_area_div {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
 	width: 100%;
 	height: fit-content;
-	padding: 0 10px;
 	background: #fff;
 	border-radius: 4px;
 
 	textarea {
 		font-family: Poppins, sans-serif;
 		font-size: 12px !important;
+	}
+
+	:global {
+		.sun-editor {
+			position: relative !important;
+			max-height: 55vh;
+			border: unset;
+		}
+
+		.se-container {
+			max-height: 55vh !important;
+		}
+
+		.se-wrapper {
+			max-height: calc(55vh - 47px) !important;
+		}
+
+		.se-wrapper-inner {
+			padding: 8px 4px 0;
+		}
+	}
+}
+
+.edit_text_area {
+	:global {
+		.sun-editor {
+			max-height: 47vh;
+		}
+
+		.se-container {
+			max-height: 47vh !important;
+		}
+
+		.se-wrapper {
+			max-height: calc(47vh - 90px) !important;
+		}
+	}
+}
+
+.simple_text_format {
+	:global {
+		.sun-editor-common {
+			display: none !important;
+		}
 	}
 }
 
@@ -60,4 +83,8 @@
 	height: 100%;
 	background: rgb(255 255 255 / 10%);
 	backdrop-filter: blur(0.8px);
+}
+
+.edit_option_control {
+	border-top: 1px solid #fbd1a6;
 }

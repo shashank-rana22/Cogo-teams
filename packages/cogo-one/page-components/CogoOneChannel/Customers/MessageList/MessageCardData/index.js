@@ -8,7 +8,7 @@ import UserAvatar from '../../../../../common/UserAvatar';
 import { PLATFORM_MAPPING } from '../../../../../constants';
 import updatePin from '../../../../../helpers/updatePin';
 import dateTimeConverter from '../../../../../utils/dateTimeConverter';
-import formatLastMessage from '../../../../../utils/formatLastMessage';
+import FormatLastMessage from '../../../../../utils/formatLastMessage';
 import getActiveCardDetails from '../../../../../utils/getActiveCardDetails';
 
 import styles from './styles.module.css';
@@ -149,10 +149,10 @@ function MessageCardData({
 					</div>
 
 					<div className={styles.content_div}>
-						{formatLastMessage({
-							lastMessage: channelType === 'email' ? last_message : lastMessageVar,
-							viewType,
-						})}
+						<FormatLastMessage
+							lastMessage={channelType === 'email' ? last_message : lastMessageVar}
+							viewType={viewType}
+						/>
 
 						<div className={styles.flex_div}>
 							{new_message_count > DEFAULT_UNREAD_MESSAGES && (

@@ -13,6 +13,9 @@ function Messages({
 	isGroup = false,
 	lastGroupUpdatedAt = 0,
 	loadingDraft = false,
+	activeId = '',
+	isMobile = false,
+	activeTab = {},
 }) {
 	if (loadingDraft) {
 		return (
@@ -54,6 +57,9 @@ function Messages({
 			key={internalRoomId}
 			isGroup={isGroup}
 			lastGroupUpdatedAt={lastGroupUpdatedAt}
+			activeId={activeId}
+			activeTab={activeTab}
+			isMobile={isMobile}
 		/>
 	);
 }

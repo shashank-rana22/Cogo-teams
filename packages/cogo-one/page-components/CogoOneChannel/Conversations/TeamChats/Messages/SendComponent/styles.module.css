@@ -11,6 +11,10 @@
 	margin-bottom: 4px;
 	font-size: 10px;
 	text-align: right;
+
+	span {
+		color: #9f9f9f;
+	}
 }
 
 .message_card {
@@ -19,11 +23,45 @@
 	max-width: 90%;
 	padding: 6px 8px;
 	padding: 12px;
+	overflow: auto;
 	font-size: 13px;
 	overflow-wrap: break-word;
 	background: #fbf7ec;
 	background: #ddebc0;
 	border-radius: 10px 10px 0;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	:global {
+		td {
+			box-sizing: border-box;
+			padding: 4px;
+			background-clip: padding-box;
+			border: 1px solid #e1e1e1;
+		}
+
+		table {
+			border-spacing: 0;
+			border-collapse: collapse;
+		}
+
+		blockquote {
+			display: block;
+			padding: 0 5px 0 20px;
+			margin-block-start: 16px;
+			margin-block-end: 16px;
+			margin-inline-start: 0;
+			margin-inline-end: 0;
+			color: #999;
+			border-left: 5px solid #b1b1b1;
+		}
+
+		.ui_popover_container {
+			min-width: unset !important;
+		}
+	}
 }
 
 .details {
@@ -31,4 +69,19 @@
 	flex-direction: column;
 	align-items: flex-end;
 	width: 100%;
+}
+
+.popover_styles {
+	min-height: unset !important;
+	padding: 0 !important;
+
+	:global {
+		.tippy-content {
+			padding: 8px 16px 4px;
+		}
+	}
+}
+
+.edit_message_footer {
+	width: 90%;
 }

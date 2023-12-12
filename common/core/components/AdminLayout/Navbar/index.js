@@ -1,7 +1,7 @@
 import { cl } from '@cogoport/components';
 // import { IcMSearchdark } from '@cogoport/icons-react';
 // import { useTranslation } from 'next-i18next';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { LOGO } from '../../../constants/logo';
 // import { applyFilter } from '../../../helpers/applyFilter';
@@ -13,7 +13,7 @@ import Items from '../Items';
 // import Notification from './Notification';
 import ProfileManager from './ProfileManager';
 import styles from './styles.module.css';
-import SwitchAccounts from './SwitchAccounts';
+// import SwitchAccounts from './SwitchAccounts';
 // import ThemeToggle from './ThemeToggle';
 
 function Navbar({
@@ -37,7 +37,7 @@ function Navbar({
 	// const [activeTheme, setActiveTheme] = useState(document.body.dataset.theme);
 
 	const {
-		data,
+		// data,
 		refetch = () => {},
 		timeLeft,
 		loading,
@@ -47,7 +47,7 @@ function Navbar({
 
 	const showPin = userBasedNavView === nav;
 
-	const [resetSubnavs, setResetSubnavs] = useState(false);
+	// const [resetSubnavs, setResetSubnavs] = useState(false);
 	const [openPopover, setOpenPopover] = useState(false);
 	const [notificationPopover, setNotificationPopover] = useState(false);
 	// const [searchString, setSearchString] = useState('');
@@ -73,53 +73,47 @@ function Navbar({
 
 	// console.log(pinnedNavs, userBasedNavView, 'nav-view');
 
-	const handleLeave = () => {
-		if (openPopover || notificationPopover) {
-			setResetSubnavs(true);
-		} else {
-			setResetSubnavs(false);
-		}
-	};
+	// const handleLeave = () => {
+	// 	if (openPopover || notificationPopover) {
+	// 		setResetSubnavs(true);
+	// 	} else {
+	// 		setResetSubnavs(false);
+	// 	}
+	// };
 
-	const handleClickOutside = (event) => {
-		if (navRef.current && !navRef.current.contains(event.target)) {
-			setNotificationPopover(false);
-			setResetSubnavs(false);
-		}
-	};
+	// const handleClickOutside = (event) => {
+	// 	if (navRef.current && !navRef.current.contains(event.target)) {
+	// 		setNotificationPopover(false);
+	// 		setResetSubnavs(false);
+	// 	}
+	// };
 
-	useEffect(() => {
-		document.addEventListener('click', handleClickOutside);
-		return () => {
-			document.removeEventListener('click', handleClickOutside);
-		};
-	}, []);
+	// useEffect(() => {
+	// 	document.addEventListener('click', handleClickOutside);
+	// 	return () => {
+	// 		document.removeEventListener('click', handleClickOutside);
+	// 	};
+	// }, []);
 
 	return (
 		<div
 			style={style}
-			className={cl`${mobileShow ? styles.mobile_container : styles.container}${className}
-			${notificationPopover ? ` ${styles.expanded}` : ''}`}
+			className={cl`${mobileShow ? styles.mobile_container : styles.container}${className}`}
 			ref={navRef}
 		>
-			<nav
-				onMouseEnter={() => setResetSubnavs(true)}
-				onMouseLeave={handleLeave}
-			>
-				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}
-				${notificationPopover ? ` ${styles.notification_popover_bg_nav}` : ''}`}
-				/>
+			<nav>
+				<div className={cl`${mobileShow ? styles.mobile_bg_nav : styles.bg_nav}`} />
 				<div className={styles.inner_container}>
 					<div className={styles.brand_logo}>
 						<img
 							className={styles.logo}
-							src={resetSubnavs || notificationPopover ? LOGO.LARGE : LOGO.SMALL}
+							src={LOGO.SMALL}
 							alt="Logo Cogoport"
 						/>
 					</div>
 
 					<ProfileManager
-						resetSubnavs={resetSubnavs}
+						// resetSubnavs={resetSubnavs}
 						setOpenPopover={setOpenPopover}
 						checkIfSessionExpiring={checkIfSessionExpiring}
 						loading={loading}
@@ -149,7 +143,7 @@ function Navbar({
 								<Items
 									key={item.key}
 									item={item}
-									resetSubnavs={resetSubnavs}
+									// resetSubnavs={resetSubnavs}
 									isPinned
 									partner_user_id={partner_user_id}
 									setPinnedNavKeys={setPinnedNavKeys}
@@ -165,7 +159,7 @@ function Navbar({
 								<Items
 									key={item.key}
 									item={item}
-									resetSubnavs={resetSubnavs}
+									// resetSubnavs={resetSubnavs}
 									isPinned={false}
 									partner_user_id={partner_user_id}
 									setPinnedNavKeys={setPinnedNavKeys}
@@ -192,9 +186,7 @@ function Navbar({
 				</div>
 			</nav>
 
-			<div
-				onMouseLeave={() => setResetSubnavs(false)}
-			>
+			{/* <div>
 				{
 					openPopover
 						&& (
@@ -207,9 +199,9 @@ function Navbar({
 								timeLeft={timeLeft}
 							/>
 						)
-				}
+				} */}
 
-				{/* {
+			{/* {
 					// notificationPopover
 						? (
 							<Notification
@@ -220,7 +212,7 @@ function Navbar({
 						) : null
 				} */}
 
-			</div>
+			{/* </div> */}
 
 		</div>
 

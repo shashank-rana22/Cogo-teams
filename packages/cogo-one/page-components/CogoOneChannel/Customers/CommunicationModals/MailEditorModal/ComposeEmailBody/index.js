@@ -3,11 +3,10 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
 
-import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
-import useImageUploader from '../../../../../../hooks/useImageUploader';
+import CustomSunEditor from '../../../../../../common/CustomSunEditor';
+import { RTE_TOOL_BAR_CONFIG } from '../../../../../../constants/rteToolBarConfig';
 
 import EmailTemplates from './EmailTemplates';
 import Recipients from './Recipients';
@@ -15,11 +14,6 @@ import ShipmentSubject from './ShipmentSubject';
 import styles from './styles.module.css';
 // eslint-disable-next-line custom-eslint/import-from-react, import/no-unresolved
 import 'suneditor/dist/css/suneditor.min.css';
-
-// eslint-disable-next-line import/no-unresolved
-const SunEditor = dynamic(() => import('suneditor-react'), {
-	ssr: false,
-});
 
 function ComposeEmailBody(props) {
 	const {
@@ -50,7 +44,6 @@ function ComposeEmailBody(props) {
 		isMobile = false,
 	} = props || {};
 
-	const { onImageUploadBefore, disableRTE } = useImageUploader();
 	const sunEditorRef = useRef();
 
 	const userActiveMailOptions = (userActiveMails || []).map(
@@ -182,9 +175,8 @@ function ComposeEmailBody(props) {
 						/>
 					)
 					: (
-						<SunEditor
+						<CustomSunEditor
 							key={emailState?.reloadKey}
-							onImageUploadBefore={onImageUploadBefore}
 							defaultValue={emailState?.rteContent}
 							onChange={handleRTEChange}
 							setOptions={{
@@ -193,7 +185,6 @@ function ComposeEmailBody(props) {
 								minHeight     : '300px',
 								showPathLabel : false,
 							}}
-							disable={disableRTE}
 							autoFocus
 							getSunEditorInstance={getSunEditorInstance}
 						/>

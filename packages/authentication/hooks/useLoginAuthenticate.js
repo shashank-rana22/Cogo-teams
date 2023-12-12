@@ -10,9 +10,9 @@ import { getCookie, setCookie, isEmpty } from '@cogoport/utils';
 import { useTranslation } from 'next-i18next';
 import { useEffect } from 'react';
 
-import redirections from '../utils/redirections';
+// import redirections from '../utils/redirections';
 
-const EMPTY_PATH = '/empty';
+// const EMPTY_PATH = '/empty';
 
 const COOKIE_EXPIRY = -1;
 const getFormattedPayload = ({ mobileNumber = {}, otpId = '', otpValue = '' }) => ({
@@ -37,7 +37,7 @@ const useLoginAuthenticate = ({
 	const { _initialized, ...profile } = useSelector((s) => s.profile);
 
 	const dispatch = useDispatch();
-	const { source = '', redirect_path = '' } = router.query || {};
+	const { source = '' } = router.query || {};
 
 	const cogo_admin_auth_token = getCookie(process.env.NEXT_PUBLIC_ADMIN_AUTH_TOKEN_NAME);
 
@@ -92,21 +92,22 @@ const useLoginAuthenticate = ({
 	}, []);
 
 	const redirectFunction = async () => {
-		const configs = redirections(profile);
-		const redirectPath = decodeURIComponent(redirect_path);
+		// const configs = redirections(profile);
+		// const redirectPath = decodeURIComponent(redirect_path);
 
-		if (redirectPath) {
-			window.location.href = `/v2/${profile?.partner?.id}${redirectPath || EMPTY_PATH}`;
-		} else if (configs?.href?.includes('/v2')) {
-			const replaceHref = configs?.href?.replace('/v2', '');
+		// if (redirectPath) {
+		// 	window.location.href = `/v2/${profile?.partner?.id}${redirectPath || EMPTY_PATH}`;
+		// } else if (configs?.href?.includes('/v2')) {
+		// 	const replaceHref = configs?.href?.replace('/v2', '');
 
-			window.location.href = `/v2/${profile?.partner?.id}${replaceHref || EMPTY_PATH}`;
-		} else if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
-			// eslint-disable-next-line no-undef
-			window.location.href = `/${profile?.partner?.id}${configs?.href || EMPTY_PATH}`;
-		} else {
-			await router.push(configs?.href || EMPTY_PATH, configs?.as || EMPTY_PATH);
-		}
+		// 	window.location.href = `/v2/${profile?.partner?.id}${replaceHref || EMPTY_PATH}`;
+		// } else if (!configs?.href?.includes('/v2') && process.env.NODE_ENV === 'production') {
+		// 	// eslint-disable-next-line no-undef
+		// 	window.location.href = `/${profile?.partner?.id}${configs?.href || EMPTY_PATH}`;
+		// } else {
+		// 	await router.push(configs?.href || EMPTY_PATH, configs?.as || EMPTY_PATH);
+		// }
+		await router.push('/cogo-one/omni-channel');
 	};
 
 	useEffect(() => {

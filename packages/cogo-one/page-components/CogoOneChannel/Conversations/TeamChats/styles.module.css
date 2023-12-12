@@ -12,6 +12,10 @@
 .messages {
 	flex: 1;
 	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .header {

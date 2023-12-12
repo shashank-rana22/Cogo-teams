@@ -2,7 +2,7 @@ import { IcMDocument, IcMImage, IcMTick } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-const formatLastMessage = ({ lastMessage, viewType }) => {
+function FormatLastMessage({ lastMessage = '', viewType = '' }) {
 	if (typeof lastMessage === 'string') {
 		return (
 			<div
@@ -41,6 +41,6 @@ const formatLastMessage = ({ lastMessage, viewType }) => {
 			/>
 		</div>
 	);
-};
+}
 
-export default formatLastMessage;
+export default FormatLastMessage;

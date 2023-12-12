@@ -3,14 +3,13 @@ import { useState } from 'react';
 
 import useSendCommunicationTemplate from '../../hooks/useSendCommunicationTemplate';
 import useSendUserWhatsappTemplate from '../../hooks/useSendUserWhatsappTemplate';
-import ComposeEmail from '../ComposeEmail';
+// import ComposeEmail from '../ComposeEmail';
 import Templates from '../Templates';
 
 import styles from './styles.module.css';
 
 const COMPONENT_MAPPING = {
-	email    : ComposeEmail,
-	whatsapp : Templates,
+	whatsapp: Templates,
 };
 
 const COUNTRY_CODE_INDEX = 1;
@@ -76,6 +75,10 @@ function CommunicationModal({
 		communicationLoading: loading,
 	};
 
+	if (!ActiveModalComp) {
+		return null;
+	}
+
 	return (
 		<Modal
 			show
@@ -94,17 +97,15 @@ function CommunicationModal({
 				)}
 			/>
 
-			{ActiveModalComp && (
-				<ActiveModalComp
-					closeModal={closeModal}
-					openCreateReply={openCreateReply}
-					setOpenCreateReply={setOpenCreateReply}
-					userData={userData}
-					sendQuickCommuncation={sendQuickCommuncation}
-					data={whatsappTemplatesData}
-					loading={loading || whatsappLoading}
-				/>
-			)}
+			<ActiveModalComp
+				closeModal={closeModal}
+				openCreateReply={openCreateReply}
+				setOpenCreateReply={setOpenCreateReply}
+				userData={userData}
+				sendQuickCommuncation={sendQuickCommuncation}
+				data={whatsappTemplatesData}
+				loading={loading || whatsappLoading}
+			/>
 		</Modal>
 	);
 }

@@ -1,21 +1,22 @@
 // import logout from '@cogoport/authentication/utils/getLogout';
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMLogout, IcMProfile, IcMReactivatedUsers, IcMHelp } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
-import { useTranslation } from 'next-i18next';
-import { useEffect, useState } from 'react';
+// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMLogout } from '@cogoport/icons-react';
+// import { useRouter } from '@cogoport/next';
+// import { useTranslation } from 'next-i18next';
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import useGetAllActions from '../../../../hooks/useGetAllActions';
-import useRemoveUserSessions from '../../../../hooks/useRemoveUserSessions';
+// import useRemoveUserSessions from '../../../../hooks/useRemoveUserSessions';
 
 import Items from './Items';
 import styles from './styles.module.css';
 
-const ZERO = 0;
+// const ZERO = 0;
 
 function ProfileManager({
-	resetSubnavs = false,
+	// resetSubnavs = false,
 	setOpenPopover = () => {},
 	openPopover = false,
 	notificationPopover = false,
@@ -27,20 +28,20 @@ function ProfileManager({
 	mobileShow = false,
 	unReadChatsCount = 0,
 }) {
-	const router = useRouter();
-	const { t } = useTranslation(['common', 'notifications']);
+	// const router = useRouter();
+	const { t } = useTranslation(['common', 'logout']);
 
-	let audio = null;
+	// let audio = null;
 
-	const isProdMode = process.env.NEXT_PUBLIC_REST_BASE_API_URL?.includes('https://api.cogoport.com/');
+	// const isProdMode = process.env.NEXT_PUBLIC_REST_BASE_API_URL?.includes('https://api.cogoport.com/');
 
-	if (typeof window !== 'undefined' && isProdMode) {
-		const url = `${process.env.STATIC_ASSETS_URL}/mp3/notification.mp3`;
+	// if (typeof window !== 'undefined' && isProdMode) {
+	// 	const url = `${process.env.STATIC_ASSETS_URL}/mp3/notification.mp3`;
 
-		audio = new Audio(url.replace(GLOBAL_CONSTANTS.regex_patterns.static_url, '$1'));
-	}
+	// 	audio = new Audio(url.replace(GLOBAL_CONSTANTS.regex_patterns.static_url, '$1'));
+	// }
 
-	const [currentNotSeen, setCurrentNotSeen] = useState(unReadChatsCount);
+	// const [currentNotSeen, setCurrentNotSeen] = useState(unReadChatsCount);
 
 	useEffect(() => {
 		try {
@@ -52,60 +53,60 @@ function ProfileManager({
 		}
 	}, []);
 
-	useEffect(() => {
-		try {
-			if (unReadChatsCount < currentNotSeen) {
-				setCurrentNotSeen(unReadChatsCount);
-			}
+	// useEffect(() => {
+	// 	try {
+	// 		if (unReadChatsCount < currentNotSeen) {
+	// 			setCurrentNotSeen(unReadChatsCount);
+	// 		}
 
-			if (audio && unReadChatsCount > currentNotSeen && unReadChatsCount !== ZERO) {
-				audio?.play();
-				setCurrentNotSeen(unReadChatsCount);
-			}
-		} catch (err) {
-			Toast.error(err, { hideAfter: 3 });
-		}
-	}, [audio, unReadChatsCount, currentNotSeen, t]);
+	// 		if (audio && unReadChatsCount > currentNotSeen && unReadChatsCount !== ZERO) {
+	// 			audio?.play();
+	// 			setCurrentNotSeen(unReadChatsCount);
+	// 		}
+	// 	} catch (err) {
+	// 		Toast.error(err, { hideAfter: 3 });
+	// 	}
+	// }, [audio, unReadChatsCount, currentNotSeen, t]);
 
-	const routerFunction = () => {
-		router.push('/my-profile');
-	};
+	// const routerFunction = () => {
+	// 	router.push('/my-profile');
+	// };
 
-	const { logoutOfAllAccounts = () => {} } = useRemoveUserSessions();
+	// const { logoutOfAllAccounts = () => {} } = useRemoveUserSessions();
 
 	const { removeProfile = () => {} } = useGetAllActions({ refetch, profile: 'default' });
 
 	const profileComponents = [
 
-		{
-			title : t('common:my_profile'),
-			name  : 'my_profile',
-			fun   : routerFunction,
-			icon  : IcMProfile,
-		},
-		{
-			title : t('common:switch_account'),
-			name  : 'switch_account',
-			icon  : IcMReactivatedUsers,
-		},
-		{
-			title : t('common:help'),
-			name  : 'help',
-			href  : 'https://www.cogoport.com/en/contact-us/',
-			icon  : IcMHelp,
-		},
+		// {
+		// 	title : t('common:my_profile'),
+		// 	name  : 'my_profile',
+		// 	fun   : routerFunction,
+		// 	icon  : IcMProfile,
+		// },
+		// {
+		// 	title : t('common:switch_account'),
+		// 	name  : 'switch_account',
+		// 	icon  : IcMReactivatedUsers,
+		// },
+		// {
+		// 	title : t('common:help'),
+		// 	name  : 'help',
+		// 	href  : 'https://www.cogoport.com/en/contact-us/',
+		// 	icon  : IcMHelp,
+		// },
 		{
 			title : t('common:logout'),
 			name  : 'logout',
 			fun   : removeProfile,
 			icon  : IcMLogout,
 		},
-		{
-			title : t('common:logout_all_accounts'),
-			name  : 'logout_all_accounts',
-			fun   : logoutOfAllAccounts,
-			icon  : IcMLogout,
-		},
+		// {
+		// 	title : t('common:logout_all_accounts'),
+		// 	name  : 'logout_all_accounts',
+		// 	fun   : logoutOfAllAccounts,
+		// 	icon  : IcMLogout,
+		// },
 
 	];
 
@@ -113,7 +114,7 @@ function ProfileManager({
 		<ul className={styles.list_container}>
 			<Items
 				item={profileComponents}
-				resetSubnavs={resetSubnavs}
+				// resetSubnavs={resetSubnavs}
 				timeLeft={timeLeft}
 				loading={loading}
 				refetch={refetch}

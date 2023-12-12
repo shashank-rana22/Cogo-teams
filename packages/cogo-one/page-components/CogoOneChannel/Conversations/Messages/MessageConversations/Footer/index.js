@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef, useEffect } from 'react';
 
-import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
+// import RTE_TOOL_BAR_CONFIG from '../../../../../../constants/rteToolBarConfig';
 import useSendChat from '../../../../../../hooks/useSendChat';
 import { formatFileAttributes } from '../../../../../../utils/getFileAttributes';
 
@@ -12,10 +12,10 @@ import FooterHead from './FooterHead';
 import SendActions from './SendActions';
 import styles from './styles.module.css';
 
-const TEXTBOX_COMPONENT_MAPPING = {
-	whatsapp : Textarea,
-	default  : Textarea,
-};
+// const TEXTBOX_COMPONENT_MAPPING = {
+// 	whatsapp : Textarea,
+// 	default  : Textarea,
+// };
 
 function Footer({
 	canMessageOnBotSession = false,
@@ -114,7 +114,7 @@ function Footer({
 		});
 	};
 
-	const TextAreaComponent = TEXTBOX_COMPONENT_MAPPING[channel_type] || TEXTBOX_COMPONENT_MAPPING.default;
+	// const TextAreaComponent = TEXTBOX_COMPONENT_MAPPING[channel_type] || TEXTBOX_COMPONENT_MAPPING.default;
 
 	useEffect(() => {
 		setDraftMessages((prev) => ({ ...prev, [id]: '' }));
@@ -172,7 +172,7 @@ function Footer({
 						</div>
 					</div>
 				) : null}
-				<TextAreaComponent
+				<Textarea
 					rows={5}
 					placeholder={getPlaceHolder({ hasPermissionToEdit, canMessageOnBotSession })}
 					className={styles.text_area}
@@ -181,7 +181,7 @@ function Footer({
 					disabled={!hasPermissionToEdit}
 					style={{ cursor: hasPermissionToEdit ? 'text' : 'not-allowed' }}
 					onKeyDown={handleKeyPress}
-					modules={{ toolbar: RTE_TOOL_BAR_CONFIG }}
+					// modules={{ toolbar: RTE_TOOL_BAR_CONFIG }}
 					showToolbar={false}
 				/>
 				<div className={styles.flex_space_between}>

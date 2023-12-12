@@ -55,6 +55,9 @@ function MessagesThread({
 	scrollToLastMessage = () => {},
 	isGroup = false,
 	lastGroupUpdatedAt = 0,
+	activeId = '',
+	isMobile = false,
+	activeTab = {},
 }) {
 	const {
 		firstLoadingMessages,
@@ -131,6 +134,10 @@ function MessagesThread({
 						<Component
 							key={eachMessage?.created_at}
 							eachMessage={eachMessage}
+							activeId={activeId}
+							activeTab={activeTab}
+							internalRoomId={activeId}
+							isMobile={isMobile}
 						/>
 					);
 				})}

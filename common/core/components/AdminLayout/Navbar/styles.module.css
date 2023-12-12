@@ -291,9 +291,9 @@
 	}
 }
 
-.expanded {
+/* .expanded {
 	width: var(--layout-navbar);
-}
+} */
 
 .mobile_container {
 	position: fixed;

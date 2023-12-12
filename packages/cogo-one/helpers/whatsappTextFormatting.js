@@ -1,16 +1,17 @@
-import { URL_MATCH_REGEX, ENDS_WITH_STAR_SPACE, ENDS_WITH_STAR_CHAR } from '../constants';
+// import { URL_MATCH_REGEX, ENDS_WITH_STAR_SPACE, ENDS_WITH_STAR_CHAR } from '../constants';
+import linkifyHtml from 'linkify-html';
+
+import { ENDS_WITH_STAR_SPACE, ENDS_WITH_STAR_CHAR } from '../constants';
+
+const LINKIFY_OPTIONS = {
+
+};
 
 const whatsappTextFormatting = () => {
-	const URLRegex = new RegExp(URL_MATCH_REGEX);
 	const endWithStarSpace = new RegExp(ENDS_WITH_STAR_SPACE);
 	const endWithStarChar = new RegExp(ENDS_WITH_STAR_CHAR);
 
-	const renderURLText = (txt = '') => (
-		(txt?.split(' ') || [])
-			.map((part) => (URLRegex.test(part) ? (
-				`<a href=${part} target="_blank">${part} </a>`
-			) : `${part} `))
-	).join(' ');
+	const renderURLText = (txt = '') => linkifyHtml(txt, LINKIFY_OPTIONS);
 
 	const replaceStarSpace = (txt = '') => (
 		txt.split(endWithStarSpace).map((str, i) => {

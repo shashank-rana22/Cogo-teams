@@ -1,6 +1,6 @@
 import { Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMSend, IcMAttach, IcMHappy } from '@cogoport/icons-react';
+import { IcMSend, IcMAttach, IcMHappy, IcMTick, IcMCross } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import { forwardRef } from 'react';
@@ -11,6 +11,47 @@ import { ACCEPT_FILE_MAPPING } from '../../../../../../constants';
 import useGetEmojiList from '../../../../../../hooks/useGetEmojis';
 
 import styles from './styles.module.css';
+
+function MessageSendOptions({
+	isEditMessage = false,
+	canSendMessage = false,
+	sendMessage = () => {},
+	cleanUpFunc = () => {},
+}) {
+	if (!isEditMessage) {
+		return (
+			<IcMSend
+				fill="#221F20"
+				style={{ cursor: canSendMessage ? 'pointer' : 'not-allowed' }}
+				onClick={() => {
+					if (canSendMessage) {
+						sendMessage();
+					}
+				}}
+			/>
+		);
+	}
+
+	return (
+		<>
+			<IcMCross
+				className={styles.cancel_icon}
+				onClick={cleanUpFunc}
+			/>
+
+			<IcMTick
+				fill="#EE3425"
+				className={styles.confirm_icon}
+				style={{ cursor: canSendMessage ? 'pointer' : 'not-allowed' }}
+				onClick={() => {
+					if (canSendMessage) {
+						sendMessage();
+					}
+				}}
+			/>
+		</>
+	);
+}
 
 function SendActions({
 	hasPermissionToEdit = false,
@@ -25,6 +66,11 @@ function SendActions({
 	hasUploadedFiles = false,
 	draftRoomId = '',
 	isMobile = false,
+	setEditorType = () => {},
+	cleanUpFunc = () => {},
+	isEditMessage = false,
+	sunEditorRef = {},
+	uploadedFiles = [],
 }, ref) {
 	const hasNoPermissionToSend = (
 		!hasPermissionToEdit
@@ -43,10 +89,15 @@ function SendActions({
 
 	const handleUpdateMessage = (val) => {
 		setDraftMessages(
-			(prev) => ({
-				...prev,
-				[roomId]: prev?.[roomId] ? prev?.[roomId]?.concat(val) : val,
-			}),
+			(prev) => {
+				sunEditorRef.current?.setContents(prev?.[roomId]
+					? prev?.[roomId]?.concat(val) : val);
+
+				return {
+					...prev,
+					[roomId]: prev?.[roomId] ? prev?.[roomId]?.concat(val) : val,
+				};
+			},
 		);
 	};
 
@@ -62,6 +113,7 @@ function SendActions({
 						showProgress={false}
 						draggable
 						multiple
+						value={uploadedFiles}
 						accept={ACCEPT_FILE_MAPPING.default}
 						className="file_uploader"
 						uploadIcon={(
@@ -75,47 +127,56 @@ function SendActions({
 					/>
 				)}
 				{isMobile ? null : (
-					<Popover
-						placement="top"
-						render={(
-							<EmojisBody
-								emojisList={emojisList}
-								setOnClicked={setOnClicked}
-								updateMessage={handleUpdateMessage}
-								onClicked={onClicked}
-							/>
-						)}
-						visible={onClicked}
-						maxWidth={355}
-						onClickOutside={() => {
-							if (hasPermissionToEdit) {
-								setOnClicked(false);
-							}
-						}}
-					>
-						<IcMHappy
-							fill="#828282"
-							style={{ cursor: hasPermissionToEdit ? 'pointer' : 'not-allowed' }}
-							onClick={() => {
+					<>
+						<Image
+							src={GLOBAL_CONSTANTS.image_url.change_text_editor}
+							alt="text_editor"
+							width={20}
+							height={20}
+							onClick={() => setEditorType(
+								(prev) => (prev === 'text'
+									? 'html' : 'text'),
+							)}
+						/>
+						<Popover
+							placement="top"
+							render={(
+								<EmojisBody
+									emojisList={emojisList}
+									setOnClicked={setOnClicked}
+									updateMessage={handleUpdateMessage}
+									onClicked={onClicked}
+								/>
+							)}
+							visible={onClicked}
+							maxWidth={355}
+							onClickOutside={() => {
 								if (hasPermissionToEdit) {
-									setOnClicked((prev) => !prev);
+									setOnClicked(false);
 								}
 							}}
-						/>
-					</Popover>
+						>
+							<IcMHappy
+								fill="#828282"
+								style={{ cursor: hasPermissionToEdit ? 'pointer' : 'not-allowed' }}
+								onClick={() => {
+									if (hasPermissionToEdit) {
+										setOnClicked((prev) => !prev);
+									}
+								}}
+							/>
+						</Popover>
+					</>
 				)}
 			</div>
 
 			<div className={styles.send_messages}>
 				{!messageLoading ? (
-					<IcMSend
-						fill="#221F20"
-						style={{ cursor: canSendMessage ? 'pointer' : 'not-allowed' }}
-						onClick={() => {
-							if (canSendMessage) {
-								sendMessage();
-							}
-						}}
+					<MessageSendOptions
+						isEditMessage={isEditMessage}
+						canSendMessage={canSendMessage}
+						sendMessage={sendMessage}
+						cleanUpFunc={cleanUpFunc}
 					/>
 				) :	(
 					<Image

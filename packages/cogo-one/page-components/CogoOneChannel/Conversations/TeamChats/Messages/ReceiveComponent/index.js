@@ -11,7 +11,12 @@ import styles from './styles.module.css';
 function ReceiveComponent({
 	eachMessage = {},
 }) {
-	const { created_at = {}, send_by = '', response = {} } = eachMessage || {};
+	const {
+		created_at = {},
+		send_by = '',
+		response = {},
+		is_edited = false,
+	} = eachMessage || {};
 
 	const date = created_at ? formatDate({
 		date       : new Date(created_at),
@@ -43,6 +48,10 @@ function ReceiveComponent({
 					{startCase(send_by)}
 				</span>
 				{date || ''}
+
+				<span className={styles.edited_color}>
+					{is_edited ? '(Edited)' : ''}
+				</span>
 			</div>
 		</div>
 	);

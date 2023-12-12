@@ -29,8 +29,13 @@ const sendTeamsNotification = async ({
 
 		const lastMessage = last_message_document?.response?.message || mediaText;
 
+		const tempElement = document.createElement('div');
+		tempElement.innerHTML = lastMessage;
+
+		const textContent = tempElement.textContent || tempElement.innerText;
+
 		const notification = new Notification(search_name, {
-			body : lastMessage,
+			body : textContent || 'Document',
 			icon : GLOBAL_CONSTANTS.image_url.cogoport_logo,
 		});
 

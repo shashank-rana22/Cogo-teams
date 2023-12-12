@@ -56,6 +56,7 @@ const useGetAuthorizationChecked = () => {
 
 					dispatch(setProfileState({ _initialized: true, ...res.data }));
 				} catch (err) {
+					console.log(err, 'error-check');
 					console.error(err.response?.data.error);
 				}
 			}
@@ -92,6 +93,7 @@ const useGetAuthorizationChecked = () => {
 					}
 
 					await push(`/login${redirectPath}`);
+					console.log(redirectPath, 'redirectPath');
 				}
 
 				if (isProfilePresent && !isUnauthenticatedPath) {

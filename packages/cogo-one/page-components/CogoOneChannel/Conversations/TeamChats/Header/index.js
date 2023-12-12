@@ -1,12 +1,14 @@
-import { Popover, Avatar } from '@cogoport/components';
+import { Popover, Avatar, Tabs, TabPanel } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMAppDelete, IcMArrowLeft, IcMHome } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import { deleteDraftDoc } from '../../../../../helpers/teamsPinChatHelpers';
 
 import EditName from './EditName';
+import getTabMapping from './getTabMapping';
 import Members from './Members';
 import styles from './styles.module.css';
 import ToUser from './ToUsers';
@@ -25,6 +27,7 @@ function Header({
 	loadingDraft = false,
 	isMobile = false,
 }) {
+	const [activeTabChange, setActiveTabChange] = useState({});
 	const {
 		is_draft = false,
 		is_group: isGroup = false,
@@ -61,6 +64,8 @@ function Header({
 			/>
 		);
 	}
+
+	const tabMapping = getTabMapping({ isGroup });
 
 	return (
 		<div className={styles.container}>
@@ -116,6 +121,27 @@ function Header({
 						activeTab={activeTab}
 						isDraft={is_draft}
 					/>
+					<Tabs
+						activeTab={activeTabChange}
+						fullWidth
+						themeType="secondary"
+						onChange={setActiveTabChange}
+					>
+						{tabMapping.map((eachTab) => {
+							if (!eachTab.show) {
+								return null;
+							}
+
+							return (
+								<TabPanel
+									key={eachTab?.value}
+									name={eachTab?.value}
+									title={eachTab?.label}
+									badge={eachTab?.badge || null}
+								/>
+							);
+						})}
+					</Tabs>
 				</div>
 			</div>
 

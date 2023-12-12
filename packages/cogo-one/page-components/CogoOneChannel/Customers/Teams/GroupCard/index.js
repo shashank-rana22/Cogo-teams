@@ -113,7 +113,13 @@ function GroupCard({
 				</div>
 				<div className={styles.description}>
 					<div className={cl`${styles.label} ${is_draft ? styles.draft_styles : ''}`}>
-						{is_draft ? 'draft' : lastMessage}
+						<div
+							className={styles.content}
+							dangerouslySetInnerHTML={{
+								__html: (is_draft
+									? 'draft' : lastMessage) || '',
+							}}
+						/>
 					</div>
 					<div className={styles.activity_duration}>
 						{renderTime}

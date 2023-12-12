@@ -16,7 +16,7 @@ import { messagesFormatter } from '../helpers/formatTeamsList';
 
 import useListTeamsTimeline from './useListTeamsTimeline';
 
-const BUFFER_FOR_INTIAL_START_TIME = 600000;
+const BUFFER_FOR_INITIAL_START_TIME = 600000;
 
 const PAGE_LIMIT = 10;
 const LAST_INDEX_FROM_END = 1;
@@ -66,7 +66,7 @@ function newMessageSnapShot({
 
 				getCogooneTimeline({
 					endDate   : Date.now(),
-					startDate : Number(lastDocumentTimeStamp - BUFFER_FOR_INTIAL_START_TIME),
+					startDate : Number(lastDocumentTimeStamp - BUFFER_FOR_INITIAL_START_TIME),
 					groupId   : roomId,
 				});
 

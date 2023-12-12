@@ -1,8 +1,11 @@
-import { Textarea, cl } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
+import CustomSunEditor from '../../../../../common/CustomSunEditor';
+import { RTE_TEAMS_BAR_CONFIG } from '../../../../../constants/rteToolBarConfig';
 import useSendTeamsMessage from '../../../../../hooks/useSendTeamsMessage';
+import useUpdateTeamsMessage from '../../../../../hooks/useUpdateTeamsMessage';
 import { formatFileAttributes } from '../../../../../utils/getFileAttributes';
 
 import FooterHead from './FooterHead';
@@ -11,27 +14,39 @@ import styles from './styles.module.css';
 
 function Footer({
 	hasPermissionToEdit = false,
-	activeTeamCard = {},
 	activeTab = {},
-	firestore = {},
 	scrollToLastMessage = () => {},
-	internalRoomId = '',
 	isMobile = false,
+	draftMessages = {},
+	setDraftMessages = () => {},
+	draftUploadedFiles = {},
+	setDraftUploadedFiles = () => {},
+	communicationData = {},
+	callbackFunc = () => {},
+	communicationLoading = false,
 }) {
 	const uploaderRef = useRef(null);
+	const sunEditorRef = useRef();
 
-	const [draftMessages, setDraftMessages] = useState({});
-	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
-	const { group_id = '', id: draftId = '' } = activeTeamCard;
+	const [editorType, setEditorType] = useState('text');
+	const { group_id = '', id: draftId = '' } = activeTab?.data || {};
 
 	const activeId = group_id || draftId;
+	const isEditMessage = !isEmpty(communicationData);
+
+	const getSunEditorInstance = (sunEditor) => {
+		sunEditorRef.current = sunEditor;
+	};
 
 	const cleanUpFunc = () => {
 		setDraftMessages((prev) => ({ ...prev, [activeId]: '' }));
+		sunEditorRef.current?.setContents('');
+		setEditorType('text');
 		setDraftUploadedFiles((prev) => ({ ...prev, [activeId]: [] }));
 		uploaderRef?.current?.externalHandleDelete?.([]);
 		scrollToLastMessage();
+		callbackFunc();
 	};
 
 	const {
@@ -39,9 +54,17 @@ function Footer({
 		sendTeamsMessage = () => {},
 	} = useSendTeamsMessage({
 		activeTab,
-		firestore,
 		cleanUpFunc,
 		draftRoomId: draftId,
+	});
+
+	const {
+		updateMessageLoading = false,
+		updateTeamsMessage = () => {},
+	} = useUpdateTeamsMessage({
+		cleanUpFunc,
+		communicationData,
+		activeId,
 	});
 
 	const draftMessage = draftMessages?.[activeId] || '';
@@ -53,13 +76,27 @@ function Footer({
 	const hasUploadedFiles = !isEmpty(draftUploadedFiles?.[activeId]);
 
 	const sendMessage = () => {
+		console.log('dfghjklhgfghj');
+		if (isEditMessage) {
+			console.log('edit=true');
+			updateTeamsMessage({
+				draftMessage : sunEditorRef.current?.getContents() || draftMessage,
+				attachments  : uploadedFiles,
+			});
+			return;
+		}
+
 		sendTeamsMessage({
-			draftMessage,
-			attachments: uploadedFiles,
+			draftMessage : sunEditorRef.current?.getContents() || draftMessage,
+			attachments  : uploadedFiles,
 		});
 	};
 
 	const handleKeyPress = (event) => {
+		if (isEditMessage) {
+			return;
+		}
+
 		if (event.key === 'Enter' && !event.shiftKey && hasPermissionToEdit) {
 			event.preventDefault();
 			sendMessage();
@@ -81,24 +118,42 @@ function Footer({
 				uploaderRef={uploaderRef}
 				hasPermissionToEdit={hasPermissionToEdit}
 			/>
-			<div className={cl`${styles.text_area_div} ${!hasPermissionToEdit ? styles.disabled : ''}`}>
-				<Textarea
-					rows={3}
+			<div className={cl`${styles.text_area_div} 
+				${isEditMessage ? styles.edit_text_area : ''}
+				${!hasPermissionToEdit ? styles.disabled : ''}
+				${editorType === 'text' ? styles.simple_text_format : ''}
+				`}
+			>
+				<CustomSunEditor
+					key={`${activeId}_${editorType}`}
+					defaultValue={draftMessage || ''}
+					onChange={(val) => setDraftMessages(
+						(prev) => ({ ...prev, [activeId]: val }),
+					)}
+					setOptions={{
+						buttonList : RTE_TEAMS_BAR_CONFIG,
+						defaultTag : 'div',
+						minHeight  : '70px',
+						maxHeight  : isEditMessage
+							? 'calc(47vh - 90px)' : 'calc(55vh - 46px)',
+						popupDisplay  : 'local',
+						showPathLabel : false,
+						resizingBar   : false,
+					}}
+					autoFocus
+					onKeyDown={handleKeyPress}
+					messageLoading={sendMessageLoading || updateMessageLoading || communicationLoading}
+					getSunEditorInstance={getSunEditorInstance}
 					placeholder={hasPermissionToEdit
 						? 'Type your message here...' : 'You don\'t have permission to chat'}
-					className={styles.text_area}
-					value={draftMessage || ''}
-					onChange={(val) => {
-						setDraftMessages((prev) => ({ ...prev, [activeId]: val }));
-					}}
-					style={{ cursor: hasPermissionToEdit ? 'text' : 'not-allowed' }}
-					onKeyDown={handleKeyPress}
 				/>
-				<div className={styles.flex_space_between}>
+				<div className={cl`${styles.flex_space_between} 
+					${isEditMessage ? styles.edit_option_control : ''}`}
+				>
 					<SendActions
 						hasPermissionToEdit={hasPermissionToEdit}
 						sendMessage={sendMessage}
-						messageLoading={sendMessageLoading}
+						messageLoading={sendMessageLoading || updateMessageLoading || communicationLoading}
 						draftMessage={draftMessage}
 						uploading={uploading}
 						roomId={activeId}
@@ -108,9 +163,13 @@ function Footer({
 						hasUploadedFiles={hasUploadedFiles}
 						draftUploadedFiles={draftUploadedFiles}
 						ref={uploaderRef}
-						internalRoomId={internalRoomId}
 						draftRoomId={draftId}
 						isMobile={isMobile}
+						setEditorType={setEditorType}
+						isEditMessage={isEditMessage}
+						cleanUpFunc={cleanUpFunc}
+						sunEditorRef={sunEditorRef}
+						uploadedFiles={uploadedFiles}
 					/>
 				</div>
 				{!hasPermissionToEdit ? <div className={styles.overlay_div} /> : null}

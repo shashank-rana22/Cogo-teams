@@ -1,4 +1,6 @@
 .styled_ui_modal_dialog {
+	width: 67vw !important;
+
 	@media (max-width: 576px) {
 		width: 100% !important;
 		height: 84vh;
@@ -31,7 +33,7 @@
 		.ui_modal_body_container {
 			display: flex;
 			flex-direction: column;
-			width: 100%;
+			width: 99%;
 			max-height: unset !important;
 			padding-top: 0;
 			overflow-y: auto;

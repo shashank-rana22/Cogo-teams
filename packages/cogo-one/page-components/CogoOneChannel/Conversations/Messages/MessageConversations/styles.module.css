@@ -32,6 +32,10 @@
 .message_container {
 	flex: 1;
 	overflow-y: auto;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .flex_div {

@@ -11,6 +11,10 @@
 	align-items: center;
 	height: fit-content;
 
+	img {
+		margin: 0 5px 12px !important;
+	}
+
 	:global {
 		.file_uploader {
 			height: fit-content !important;
@@ -33,4 +37,16 @@
 
 .upload_icon {
 	fill: #000;
+}
+
+.confirm_icon {
+	width: 24px !important;
+	height: 24px !important;
+	margin: 2px 4px 0 2px !important;
+}
+
+.cancel_icon {
+	width: 20px !important;
+	height: 20px !important;
+	margin: 2px 2px 0 px !important;
 }

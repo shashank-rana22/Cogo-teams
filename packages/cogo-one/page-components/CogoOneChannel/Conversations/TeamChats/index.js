@@ -27,6 +27,8 @@ function TeamChats(props) {
 	const conversationsDivRef = useRef(null);
 
 	const [loadingDraft, setLoadingDraft] = useState(false);
+	const [draftMessages, setDraftMessages] = useState({});
+	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 
 	const { data = {}, groupData = {} } = activeTab || {};
 
@@ -34,6 +36,8 @@ function TeamChats(props) {
 		group_id = '',
 		id = '',
 	} = data || {};
+
+	const activeId = group_id || id;
 
 	const { group_members_ids = [], last_group_updated_at = 0, is_group = false } = groupData || {};
 
@@ -86,17 +90,22 @@ function TeamChats(props) {
 					isGroup={isGroup}
 					lastGroupUpdatedAt={last_group_updated_at}
 					loadingDraft={loadingDraft}
+					activeId={activeId}
+					isMobile={isMobile}
+					activeTab={activeTab}
 				/>
 			</div>
 			<div className={styles.footer}>
 				<Footer
 					hasPermissionToEdit={hasPermissionToEdit}
-					activeTeamCard={activeTeamCard}
 					activeTab={activeTab}
-					firestore={firestore}
 					internalRoomId={group_id}
 					scrollToLastMessage={scrollToLastMessage}
 					isMobile={isMobile}
+					draftMessages={draftMessages}
+					setDraftMessages={setDraftMessages}
+					draftUploadedFiles={draftUploadedFiles}
+					setDraftUploadedFiles={setDraftUploadedFiles}
 				/>
 			</div>
 		</div>

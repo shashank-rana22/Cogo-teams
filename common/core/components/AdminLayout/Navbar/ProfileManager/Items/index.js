@@ -1,9 +1,9 @@
-import { Button } from '@cogoport/components';
+// import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMArrowRotateDown, IcMNotifications } from '@cogoport/icons-react';
+import { IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
-import { useTranslation } from 'next-i18next';
-import React, { useEffect, useState } from 'react';
+// import { useTranslation } from 'next-i18next';
+import React, { useState } from 'react';
 
 import SwitchAccounts from '../../SwitchAccounts';
 
@@ -13,7 +13,7 @@ const SESSION_DISABLED = ['logout', 'logout_all_accounts'];
 
 const TOTAL_TIME = 1000;
 const THIRTY_SECONDS = 30;
-const MAX_NOTIFICATION_COUNT = 99;
+// const MAX_NOTIFICATION_COUNT = 99;
 const ZERO = 0;
 const ONE = 1;
 const TWO = 2;
@@ -56,7 +56,7 @@ function SingleNav({
 
 function Items({
 	item = [],
-	resetSubnavs = false,
+	// resetSubnavs = false,
 	setOpenPopover = () => {},
 	timeLeft = '',
 	loading = false,
@@ -64,30 +64,30 @@ function Items({
 	refetch = () => {},
 	checkIfSessionExpiring = false,
 	notificationCount = ZERO,
-	notificationPopover = false,
+	// notificationPopover = false,
 	setNotificationPopover = () => {},
-	mobileShow = false,
+	// mobileShow = false,
 }) {
-	const { t } = useTranslation(['common']);
+	// const { t } = useTranslation(['common']);
 
 	const {
 		user_data,
 		userSessionMappings,
-		query,
+		// query,
 	} = useSelector(({ profile, general }) => ({
 		user_data           : profile?.user || {},
 		userSessionMappings : profile?.user_session_mappings || [],
 		query               : general?.query || {},
 	}));
 
-	const { partner_id = '' } = query || {};
+	// const { partner_id = '' } = query || {};
 
 	const [showSubNav, setShowSubNav] = useState(false);
 
-	const redirect = () => {
-		// eslint-disable-next-line no-undef
-		window.location.href = '/v2/login?source=add_account';
-	};
+	// const redirect = () => {
+	// 	// eslint-disable-next-line no-undef
+	// 	window.location.href = '/v2/login?source=add_account';
+	// };
 
 	const { picture = '', name = '' } = user_data;
 
@@ -96,14 +96,14 @@ function Items({
 		setNotificationPopover(false);
 	};
 
-	const handleNotificationClick = () => {
-		if (mobileShow) {
-			window.location.href = `/v2/${partner_id}/notifications`;
-		} else {
-			setOpenPopover(false);
-			setNotificationPopover(!notificationPopover);
-		}
-	};
+	// const handleNotificationClick = () => {
+	// 	if (mobileShow) {
+	// 		window.location.href = `/v2/${partner_id}/notifications`;
+	// 	} else {
+	// 		setOpenPopover(false);
+	// 		setNotificationPopover(!notificationPopover);
+	// 	}
+	// };
 
 	let activeUser = {};
 	(userSessionMappings || []).forEach((user) => {
@@ -119,11 +119,11 @@ function Items({
 
 	const loadingState = checkIfSessionExpiring || lessThan30Seconds || loading;
 
-	useEffect(() => {
-		setShowSubNav(false);
-		setOpenPopover(false);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [resetSubnavs]);
+	// useEffect(() => {
+	// 	setShowSubNav(false);
+	// 	setOpenPopover(false);
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [resetSubnavs]);
 
 	return (
 		<>
@@ -209,7 +209,7 @@ function Items({
 				})}
 			</div>
 
-			{showSubNav && (
+			{/* {showSubNav && (
 				<div className={styles.button_container}>
 					<Button
 						size="md"
@@ -221,9 +221,9 @@ function Items({
 						{t('common:add_account')}
 					</Button>
 				</div>
-			)}
+			)} */}
 
-			<div className={styles.button_container}>
+			{/* <div className={styles.button_container}>
 				<Button
 					size="md"
 					className={styles.button_styles}
@@ -232,7 +232,7 @@ function Items({
 					disabled={loadingState}
 				>
 					{resetSubnavs || notificationPopover ? (
-						`${t('common:you_have')} ${!notificationCount ? 'no' : notificationCount} 
+						`${t('common:you_have')} ${!notificationCount ? 'no' : notificationCount}
 						${t('common:new')} ${
 							notificationCount > ONE ? t('common:notifications') : t('common:notification')
 						}`
@@ -250,7 +250,7 @@ function Items({
 						</div>
 					)}
 				</Button>
-			</div>
+			</div> */}
 		</>
 	);
 }
