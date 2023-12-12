@@ -76,9 +76,7 @@ function Footer({
 	const hasUploadedFiles = !isEmpty(draftUploadedFiles?.[activeId]);
 
 	const sendMessage = () => {
-		console.log('dfghjklhgfghj');
 		if (isEditMessage) {
-			console.log('edit=true');
 			updateTeamsMessage({
 				draftMessage : sunEditorRef.current?.getContents() || draftMessage,
 				attachments  : uploadedFiles,

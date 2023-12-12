@@ -50,7 +50,6 @@ function useUpdateTeamsMessage({
 		draftMessage = '',
 		attachments = [],
 	}) => {
-		console.log('draftMessage:', draftMessage, attachments);
 		try {
 			if ((!draftMessage && isEmpty(attachments)) || loading) {
 				return;
